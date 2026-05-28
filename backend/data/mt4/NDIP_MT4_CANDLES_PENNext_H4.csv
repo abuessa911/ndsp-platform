@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+PENN.ext,H4,2026.05.01 20:00:00,17.33000,17.39000,17.06000,17.20000,1297,17.18000,17.31000,13.00,0,0

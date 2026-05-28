@@ -1,0 +1,46 @@
+from __future__ import annotations
+
+
+def _num(value, default=0.0) -> float:
+    try:
+        if value is None:
+            return default
+        return float(value)
+    except Exception:
+        return default
+
+
+def run_phase_layer(tdl: dict) -> dict:
+    """
+    NDIP Phase Layer.
+
+    RULE:
+    IF total > 0 AND change > 0: NDIP_GOLDEN_SIGNAL
+    IF total > 0 AND change < 0: PULLBACK
+    IF total < 0 AND change > 0: REVERSAL_POTENTIAL
+    ELSE: RANGE
+    """
+    tdl = tdl if isinstance(tdl, dict) else {}
+
+    total = _num(
+        tdl.get("tdl_lm_score_total", tdl.get("tdl_lm_score", 0))
+    )
+    change = _num(
+        tdl.get("tdl_lm_score_change", tdl.get("tdl_lm_change", 0))
+    )
+
+    if total > 0 and change > 0:
+        phase = "NDIP_GOLDEN_SIGNAL"
+    elif total > 0 and change < 0:
+        phase = "PULLBACK"
+    elif total < 0 and change > 0:
+        phase = "REVERSAL_POTENTIAL"
+    else:
+        phase = "RANGE"
+
+    return {
+        "phase": phase,
+        "tdl_lm_score_total": total,
+        "tdl_lm_score_change": change,
+        "source": "tdl_only",
+    }

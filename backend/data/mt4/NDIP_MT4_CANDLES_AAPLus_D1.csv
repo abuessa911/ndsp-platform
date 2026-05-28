@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+AAPL.us,D1,2026.05.01 00:00:00,278.36000,287.05000,278.00000,280.52000,49875,280.56000,280.80000,24.00,0,0

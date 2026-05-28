@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+JPN225,D1,2026.05.01 00:00:00,59757.73000,59882.23000,59067.72000,59457.22000,31067,59457.22000,59467.22000,1000.00,0,0

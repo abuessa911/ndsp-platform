@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+JPYBasket,D1,2026.05.01 00:00:00,5203.00000,5298.00000,5135.00000,5168.00000,26386,5168.00000,5171.00000,3.00,0,0

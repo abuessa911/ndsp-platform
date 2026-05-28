@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بوابة تجربة NDSP</title>
+    <style>
+        body {
+            background-color: #0b111e;
+            color: #f8fafc;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .ndsp-container {
+            max-width: 900px;
+            width: 100%;
+            background: rgba(17, 24, 39, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        .badge-container {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .ndsp-badge-title {
+            background: rgba(251, 191, 36, 0.1);
+            color: #fbbf24;
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .ndsp-badge-duration {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+        .ndsp-main-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin: 0 0 16px 0;
+        }
+        .ndsp-description {
+            color: #94a3b8;
+            line-height: 1.7;
+            font-size: 1.05rem;
+            margin-bottom: 24px;
+        }
+        .api-code {
+            background: rgba(255, 255, 255, 0.08);
+            color: #38bdf8;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        .ndsp-actions {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+        .btn-primary {
+            background: #0076ff;
+            color: #ffffff;
+            border: none;
+            padding: 12px 32px;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(0, 118, 255, 0.4);
+            transition: all 0.2s ease;
+        }
+        .btn-primary:hover {
+            background: #005ecb;
+            transform: translateY(-1px);
+        }
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.03);
+            color: #94a3b8;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px 24px;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.25);
+        }
+        .section-title {
+            font-size: 1.25rem;
+            margin-bottom: 16px;
+        }
+        .seats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+        .seat-card {
+            background: rgba(13, 20, 32, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            padding: 20px;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .card-label { color: #64748b; font-size: 0.9rem; }
+        .card-value { font-size: 1.8rem; font-weight: 700; }
+        .highlight-value { color: #34d399; }
+        
+        .quotas-visual-section {
+            background: rgba(10, 15, 26, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 24px;
+        }
+        .quota-item { margin-bottom: 20px; }
+        .quota-info { display: flex; justify-content: space-between; color: #cbd5e1; font-size: 0.9rem; margin-bottom: 8px; }
+        .progress-bar-bg { background: rgba(255, 255, 255, 0.05); border-radius: 6px; height: 8px; }
+        .progress-bar-fill { height: 100%; border-radius: 6px; width: 0%; transition: width 0.6s ease-in-out; }
+        .progress-bar-fill.academic { background: #38bdf8; }
+        .progress-bar-fill.beginner { background: #fbbf24; }
+        .progress-bar-fill.premium  { background: #a855f7; }
+        
+        .developer-toggle { margin-top: 24px; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 16px; }
+        .btn-toggle-json { background: transparent; border: none; color: #475569; cursor: pointer; font-size: 0.85rem; text-decoration: underline; }
+        #raw-json-block { background: #050811; border: 1px solid rgba(255, 255, 255, 0.05); padding: 16px; border-radius: 8px; font-family: monospace; font-size: 0.85rem; color: #34d399; overflow-x: auto; margin-top: 12px; direction: ltr; text-align: left; }
+    </style>
+</head>
+<body>
+
+<div class="ndsp-container">
+    <div class="ndsp-hero-section">
+        <div class="badge-container">
+            <span class="ndsp-badge-title">NDSP — منصة نواف لدعم القرار</span>
+            <span class="ndsp-badge-duration">تجربة محدودة — 16 يوم</span>
+        </div>
+        <h1 class="ndsp-main-title">بوابة تجربة NDSP</h1>
+        <p class="ndsp-description">
+            سجّل في تجربة منصة NDSP وفق السياسة المعتمدة: 
+            <strong>مسار المبتدئين</strong>، 
+            <strong>المسار الأكاديمي والمهني</strong>، أو 
+            <strong>الدعوات الخاصة</strong>. 
+            جميع عمليات البوابة تعتمد على المسار الرسمي الموحد <code class="api-code">api/</code>.
+        </p>
+        <div class="ndsp-actions">
+            <button class="btn-primary" onclick="startRegistration()">ابدأ التسجيل</button>
+            <button class="btn-secondary" onclick="refreshStatus()">تحديث الحالة</button>
+        </div>
+    </div>
+
+    <h2 class="section-title">حالة المقاعد الإجمالية</h2>
+    <div class="seats-grid">
+        <div class="seat-card"><span class="card-label">الإجمالي</span><span class="card-value" id="ui-total">--</span></div>
+        <div class="seat-card"><span class="card-label">المقاعد المحجوزة</span><span class="card-value" id="ui-used">--</span></div>
+        <div class="seat-card"><span class="card-label">دعوات مميزة</span><span class="card-value">2</span></div>
+        <div class="seat-card"><span class="card-label">المتبقي</span><span class="card-value highlight-value" id="ui-remaining">--</span></div>
+    </div>
+
+    <div class="quotas-visual-section">
+        <h2 class="section-title">توزيع المقاعد والمسارات الحية</h2>
+        <div class="quota-progress-wrapper">
+            <div class="quota-item">
+                <div class="quota-info"><span>المسار الأكاديمي والمهني (Specialist / Academic)</span><span id="text-academic">--</span></div>
+                <div class="progress-bar-bg"><div id="bar-academic" class="progress-bar-fill academic"></div></div>
+            </div>
+            <div class="quota-item">
+                <div class="quota-info"><span>مسار المبتدئين (Normal Beginner)</span><span id="text-beginner">--</span></div>
+                <div class="progress-bar-bg"><div id="bar-beginner" class="progress-bar-fill beginner"></div></div>
+            </div>
+            <div class="quota-item">
+                <div class="quota-info"><span>الدعوات الخاصة (Premium Invite Only)</span><span id="text-premium">--</span></div>
+                <div class="progress-bar-bg"><div id="bar-premium" class="progress-bar-fill premium"></div></div>
+            </div>
+        </div>
+        <div class="developer-toggle">
+            <button class="btn-toggle-json" onclick="toggleJsonView()">عرض بيانات الـ API الخام (JSON)</button>
+            <pre id="raw-json-block" style="display: none;"></pre>
+        </div>
+    </div>
+</div>
+
+<script>
+    const mockApiResponse = {
+        "seats": {
+            "ok": true,
+            "source": "fastapi",
+            "policy": "50 trial seats: 10 specialist/academic, 25 normal beginner, 15 premium invite-only",
+            "quotas": { "specialist_academic": 10, "normal_beginner": 25, "premium_invite_only": 15, "total": 50 },
+            "used": { "specialist_academic": 0, "normal_beginner": 3, "premium_invite_only": 0 }
+        }
+    };
+
+    function updateUIWithData(data) {
+        const seats = data.seats;
+        const totalUsed = seats.used.specialist_academic + seats.used.normal_beginner + seats.used.premium_invite_only;
+        const totalSeats = seats.quotas.total;
+        
+        document.getElementById('ui-total').innerText = totalSeats;
+        document.getElementById('ui-used').innerText = totalUsed;
+        document.getElementById('ui-remaining').innerText = totalSeats - totalUsed;
+
+        document.getElementById('text-academic').innerText = `${seats.used.specialist_academic} من ${seats.quotas.specialist_academic} مقاعد`;
+        document.getElementById('bar-academic').style.width = `${(seats.used.specialist_academic / seats.quotas.specialist_academic) * 100}%`;
+
+        document.getElementById('text-beginner').innerText = `${seats.used.normal_beginner} من ${seats.quotas.normal_beginner} مقاعد`;
+        document.getElementById('bar-beginner').style.width = `${(seats.used.normal_beginner / seats.quotas.normal_beginner) * 100}%`;
+
+        document.getElementById('text-premium').innerText = `${seats.used.premium_invite_only} من ${seats.quotas.premium_invite_only} مقاعد`;
+        document.getElementById('bar-premium').style.width = `${(seats.used.premium_invite_only / seats.quotas.premium_invite_only) * 100}%`;
+
+        document.getElementById('raw-json-block').textContent = JSON.stringify(data, null, 2);
+    }
+
+    function refreshStatus() { updateUIWithData(mockApiResponse); }
+    function startRegistration() { alert("جاري الانتقال لمسار التسجيل الآمن لـ NDSP..."); }
+    function toggleJsonView() {
+        const block = document.getElementById('raw-json-block');
+        block.style.display = block.style.display === 'none' ? 'block' : 'none';
+    }
+    window.onload = function() { updateUIWithData(mockApiResponse); };
+</script>
+</body>
+</html>

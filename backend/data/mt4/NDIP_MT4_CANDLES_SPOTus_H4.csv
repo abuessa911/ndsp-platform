@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+SPOT.us,H4,2026.05.01 20:30:00,442.00000,445.39000,440.93000,443.59000,1389,443.58000,444.17000,59.00,0,0

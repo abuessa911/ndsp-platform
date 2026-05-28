@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+C.us,D1,2026.05.01 00:00:00,127.56000,130.36000,126.70000,127.45000,20806,127.45000,127.70000,25.00,0,0

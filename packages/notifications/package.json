@@ -1,0 +1,6 @@
+{
+  "name": "@ndsp/notifications",
+  "version": "1.0.0",
+  "main": "src/telegram.ts",
+  "types": "src/telegram.ts"
+}

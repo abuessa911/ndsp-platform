@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+PLUG.ext,H4,2026.05.01 20:00:00,3.08000,3.12000,3.02000,3.04000,568,3.03000,3.16000,13.00,0,0

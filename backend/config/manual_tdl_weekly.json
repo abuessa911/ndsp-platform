@@ -1,0 +1,28 @@
+{
+  "XAUUSD": {
+    "report_type": "legacy",
+    "valid_from": "2026-04-27",
+    "valid_to": "2026-05-04",
+    "current": {
+      "commercial": {
+        "long": 106694,
+        "short": 307938
+      },
+      "non_commercial": {
+        "long": 208123,
+        "short": 182878
+      }
+    },
+    "previous": {
+      "commercial": {
+        "long": 107020,
+        "short": 307708
+      },
+      "non_commercial": {
+        "long": 208164,
+        "short": 47045
+      }
+    },
+    "note": "manual test"
+  }
+}

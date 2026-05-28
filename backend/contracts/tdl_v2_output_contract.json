@@ -1,0 +1,13 @@
+{
+  "tdl": {
+    "version": "2.0",
+    "model": "weekly_scalping",
+    "macro": {"lm_direction": "bullish|bearish|neutral", "s_direction": "bullish|bearish|neutral"},
+    "weekly": {"lm_direction": "bullish|bearish|neutral", "s_direction": "bullish|bearish|neutral"},
+    "state": "TDL_ALIGNMENT|TDL_CORRECTION|TDL_CONFLICT|TDL_NEUTRAL|TDL_GOLDEN_STRUCTURAL|TDL_GOLDEN_EXECUTION|TDL_PREMIUM_GOLDEN_ALIGNMENT|TDL_CONTEXT_ONLY|TDL_BLOCKED",
+    "classification": "weekly_execution_alignment|structural_continuation|correction|conflict|neutral|context_only|blocked",
+    "execution_basis": "weekly_partial_direction",
+    "macro_role": "context_only",
+    "holding_policy": "no_next_week_carry"
+  }
+}

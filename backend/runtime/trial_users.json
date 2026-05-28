@@ -1,0 +1,79 @@
+[
+  {
+    "email": "ndsp.app@gmail.com",
+    "name": "NDSP OWNER",
+    "token": "248d1dca544fec76cae58a96ca14c39f",
+    "plan": "Elite",
+    "active": true
+  },
+  {
+    "email": "ndsp.app@gmail.com",
+    "name": "NDSP OWNER",
+    "token": "d5dca50cdbc7d986a70adeccb793ee00",
+    "plan": "Elite",
+    "active": true
+  },
+  {
+    "email": "ndsp.app@gmail.com",
+    "name": "NDSP OWNER TEST",
+    "token": "fc00928aa683f4c6b1c387351cc99230",
+    "plan": "Elite",
+    "active": true
+  },
+  {
+    "email": "ndsp.app@gmail.com",
+    "name": "NDSP OWNER",
+    "token": "32af419459b2205aff4fcdac06c5fbe7",
+    "plan": "Elite",
+    "active": true
+  },
+  {
+    "email": "ndsp.app@gmail.com",
+    "name": "NDSP OWNER",
+    "token": "9b1d11ccb9c497fe5999f4d361acff1e",
+    "plan": "Elite",
+    "active": true
+  },
+  {
+    "email": "debug-1778420828@example.com",
+    "name": "NDSP Debug",
+    "token": "123781642431600768023d209bdf9a19",
+    "plan": "Elite",
+    "active": true
+  },
+  {
+    "email": "final-1778421684@example.com",
+    "name": "NDSP Final Test",
+    "token": "8417fba0d52f36f2e6981c2c08458724",
+    "plan": "Elite",
+    "active": true
+  },
+  {
+    "email": "ndsp.app@gmail.com",
+    "name": "Nawaf",
+    "token": "1f9116681e146343fdc13d42f1ad6ca9",
+    "plan": "Elite",
+    "active": true
+  },
+  {
+    "email": "ndsp.app@gmail.com",
+    "name": "Nawaf",
+    "token": "ee5e4cb574dfee0c74c40faafc84cc00",
+    "plan": "Elite",
+    "active": true
+  },
+  {
+    "email": "fathi25899999@gmail.com",
+    "name": "Fathi",
+    "token": "264dea5454df280789de852d170293a5",
+    "plan": "Elite",
+    "active": true
+  },
+  {
+    "email": "fathi2589999@gmail.com",
+    "name": "Fathi",
+    "token": "a2614e84ea02a2757d1727f774d5e856",
+    "plan": "Elite",
+    "active": true
+  }
+]

@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+JPYBasket,H4,2026.05.01 20:00:00,5168.00000,5178.00000,5163.00000,5168.00000,1695,5168.00000,5171.00000,3.00,0,0

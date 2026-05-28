@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+PDD.ext,D1,2026.05.01 00:00:00,99.62000,100.10000,98.48000,99.60000,8255,99.60000,99.85000,25.00,0,0

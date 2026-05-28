@@ -1,0 +1,956 @@
+import "dotenv/config";
+import express from "express";
+import cors from "cors";
+import helmet from "helmet";
+import { pool, query } from "./db.js";
+
+const app = express();
+
+const PORT = Number(process.env.PORT || 8088);
+const HOST = "127.0.0.1";
+const CORS_ORIGIN = process.env.CORS_ORIGIN || "*";
+const ADMIN_KEY = process.env.NDSP_ADMIN_KEY || "";
+
+app.use(helmet({
+  crossOriginResourcePolicy: false
+}));
+app.use(cors({ origin: CORS_ORIGIN === "*" ? true : CORS_ORIGIN }));
+app.use(express.json({ limit: "1mb" }));
+
+function normalizeEmail(email) {
+  return String(email || "").trim().toLowerCase();
+}
+
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function isValidPlanCode(code) {
+  return /^[a-z0-9_-]{2,40}$/.test(String(code || ""));
+}
+
+function getClientIp(req) {
+  const forwarded = req.headers["x-forwarded-for"];
+  if (typeof forwarded === "string" && forwarded.length > 0) {
+    return forwarded.split(",")[0].trim();
+  }
+  return req.socket.remoteAddress || null;
+}
+
+function requireAdmin(req, res, next) {
+  const incoming = req.header("x-admin-key") || "";
+
+  if (!ADMIN_KEY) {
+    return res.status(500).json({
+      ok: false,
+      error: "admin_key_not_configured"
+    });
+  }
+
+  if (incoming !== ADMIN_KEY) {
+    return res.status(401).json({
+      ok: false,
+      error: "unauthorized"
+    });
+  }
+
+  return next();
+}
+
+function publicPlanPayload(plan) {
+  if (!plan) return null;
+
+  return {
+    code: plan.code,
+    name_ar: plan.name_ar,
+    name_en: plan.name_en,
+    description_ar: plan.description_ar,
+    description_en: plan.description_en,
+    price_usd: plan.price_usd,
+    currency: plan.currency,
+    billing_period: plan.billing_period,
+    trial_days: plan.trial_days,
+    features: plan.features || [],
+    limits: plan.limits || {},
+    metadata: {
+      public_label: plan.metadata?.public_label || plan.name_en || plan.code,
+      payment_currency: plan.metadata?.payment_currency || "USDT",
+      supported_networks: plan.metadata?.supported_networks || ["TRC20", "BEP20"],
+      manual_activation: true
+    }
+  };
+}
+
+function publicSubscriptionPayload(subscription, plan) {
+  if (!subscription) {
+    return {
+      active: false,
+      status: "none",
+      plan_code: null,
+      plan: null,
+      features: [],
+      limits: {}
+    };
+  }
+
+  const expired = subscription.expires_at
+    ? new Date(subscription.expires_at).getTime() <= Date.now()
+    : false;
+
+  const active = subscription.status === "active" && !expired;
+
+  return {
+    active,
+    status: expired ? "expired" : subscription.status,
+    plan_code: subscription.plan_code,
+    customer_email: subscription.customer_email,
+    started_at: subscription.started_at,
+    expires_at: subscription.expires_at,
+    source_checkout_ref: subscription.source_checkout_ref,
+    plan: active ? publicPlanPayload(plan) : null,
+    features: active ? (plan?.features || []) : [],
+    limits: active ? (plan?.limits || {}) : {}
+  };
+}
+
+app.get("/health", (req, res) => {
+  res.json({
+    ok: true,
+    service: "ndsp-checkout-plans-express",
+    version: "2.0.0-clean",
+    host: HOST,
+    port: PORT,
+    subscriptions: true
+  });
+});
+
+app.get("/api/v1/plans", async (req, res) => {
+  try {
+    const result = await query(`
+      SELECT
+        code,
+        name_ar,
+        name_en,
+        description_ar,
+        description_en,
+        price_usd,
+        currency,
+        billing_period,
+        trial_days,
+        sort_order,
+        features,
+        limits,
+        metadata
+      FROM ndsp_plans
+      WHERE is_active = TRUE
+        AND is_public = TRUE
+      ORDER BY sort_order ASC, price_usd ASC
+    `);
+
+    return res.json({
+      ok: true,
+      plans: result.rows
+    });
+  } catch (error) {
+    console.error("GET_PLANS_ERROR", error);
+    return res.status(500).json({
+      ok: false,
+      error: "failed_to_load_plans"
+    });
+  }
+});
+
+app.post("/api/v1/checkout", async (req, res) => {
+  const planCode = String(req.body?.plan_code || "").trim().toLowerCase();
+  const email = normalizeEmail(req.body?.email);
+  const telegramId = String(req.body?.telegram_id || "").trim() || null;
+  const network = String(req.body?.network || "TRC20").trim().toUpperCase();
+
+  if (!isValidPlanCode(planCode)) {
+    return res.status(400).json({ ok: false, error: "invalid_plan_code" });
+  }
+
+  if (!isValidEmail(email)) {
+    return res.status(400).json({ ok: false, error: "invalid_email" });
+  }
+
+  if (!["TRC20", "BEP20"].includes(network)) {
+    return res.status(400).json({
+      ok: false,
+      error: "unsupported_network",
+      supported_networks: ["TRC20", "BEP20"]
+    });
+  }
+
+  try {
+    const planResult = await query(
+      `
+      SELECT
+        code,
+        name_ar,
+        name_en,
+        price_usd,
+        currency,
+        billing_period,
+        trial_days,
+        features,
+        limits,
+        metadata
+      FROM ndsp_plans
+      WHERE code = $1::text
+        AND is_active = TRUE
+        AND is_public = TRUE
+      LIMIT 1
+      `,
+      [planCode]
+    );
+
+    if (planResult.rowCount === 0) {
+      return res.status(404).json({
+        ok: false,
+        error: "plan_not_available"
+      });
+    }
+
+    const plan = planResult.rows[0];
+
+    const insertResult = await query(
+      `
+      INSERT INTO ndsp_checkout_requests (
+        plan_code,
+        customer_email,
+        telegram_id,
+        amount_usd,
+        payment_currency,
+        payment_network,
+        status,
+        public_note,
+        request_ip,
+        user_agent,
+        metadata
+      )
+      VALUES (
+        $1::text,
+        $2::text,
+        $3::text,
+        $4::numeric,
+        'USDT',
+        $5::text,
+        'pending_review',
+        $6::text,
+        $7::inet,
+        $8::text,
+        $9::jsonb
+      )
+      RETURNING
+        id,
+        checkout_ref,
+        plan_code,
+        customer_email,
+        amount_usd,
+        payment_currency,
+        payment_network,
+        status,
+        expires_at,
+        created_at
+      `,
+      [
+        plan.code,
+        email,
+        telegramId,
+        plan.price_usd,
+        network,
+        "Checkout request received and pending manual review.",
+        getClientIp(req),
+        req.header("user-agent") || null,
+        JSON.stringify({
+          source: "vite_checkout",
+          plan_snapshot: plan,
+          manual_activation: true,
+          governance: {
+            mode: "decision_active",
+            execution_policy: "execution_sanitized"
+          }
+        })
+      ]
+    );
+
+    return res.status(201).json({
+      ok: true,
+      checkout: insertResult.rows[0],
+      message_ar: "تم إنشاء طلب الاشتراك. التفعيل لا يتم تلقائيًا وسيخضع للمراجعة.",
+      message_en: "Checkout request created. Activation is not automatic and requires review."
+    });
+  } catch (error) {
+    console.error("CREATE_CHECKOUT_ERROR", error);
+    return res.status(500).json({
+      ok: false,
+      error: "failed_to_create_checkout"
+    });
+  }
+});
+
+app.get("/api/v1/admin/plans", requireAdmin, async (req, res) => {
+  try {
+    const result = await query(`
+      SELECT
+        id,
+        code,
+        name_ar,
+        name_en,
+        description_ar,
+        description_en,
+        price_usd,
+        currency,
+        billing_period,
+        trial_days,
+        sort_order,
+        is_active,
+        is_public,
+        features,
+        limits,
+        metadata,
+        created_at,
+        updated_at
+      FROM ndsp_plans
+      ORDER BY sort_order ASC, price_usd ASC
+    `);
+
+    return res.json({
+      ok: true,
+      plans: result.rows
+    });
+  } catch (error) {
+    console.error("ADMIN_GET_PLANS_ERROR", error);
+    return res.status(500).json({
+      ok: false,
+      error: "failed_to_load_admin_plans"
+    });
+  }
+});
+
+app.patch("/api/v1/admin/plans/:code", requireAdmin, async (req, res) => {
+  const code = String(req.params.code || "").trim().toLowerCase();
+
+  if (!isValidPlanCode(code)) {
+    return res.status(400).json({
+      ok: false,
+      error: "invalid_plan_code"
+    });
+  }
+
+  const allowedFields = {
+    name_ar: "name_ar",
+    name_en: "name_en",
+    description_ar: "description_ar",
+    description_en: "description_en",
+    price_usd: "price_usd",
+    currency: "currency",
+    billing_period: "billing_period",
+    trial_days: "trial_days",
+    sort_order: "sort_order",
+    is_active: "is_active",
+    is_public: "is_public",
+    features: "features",
+    limits: "limits",
+    metadata: "metadata"
+  };
+
+  const body = req.body || {};
+  const entries = Object.entries(body).filter(([key]) => allowedFields[key]);
+
+  if (entries.length === 0) {
+    return res.status(400).json({
+      ok: false,
+      error: "no_allowed_fields_to_update"
+    });
+  }
+
+  if (body.billing_period && !["monthly", "yearly", "one_time"].includes(body.billing_period)) {
+    return res.status(400).json({
+      ok: false,
+      error: "invalid_billing_period"
+    });
+  }
+
+  if (body.price_usd !== undefined && Number(body.price_usd) < 0) {
+    return res.status(400).json({
+      ok: false,
+      error: "invalid_price_usd"
+    });
+  }
+
+  if (body.trial_days !== undefined && Number(body.trial_days) < 0) {
+    return res.status(400).json({
+      ok: false,
+      error: "invalid_trial_days"
+    });
+  }
+
+  const client = await pool.connect();
+
+  try {
+    await client.query("BEGIN");
+
+    const beforeResult = await client.query(
+      "SELECT * FROM ndsp_plans WHERE code = $1::text LIMIT 1",
+      [code]
+    );
+
+    if (beforeResult.rowCount === 0) {
+      await client.query("ROLLBACK");
+      return res.status(404).json({
+        ok: false,
+        error: "plan_not_found"
+      });
+    }
+
+    const setParts = [];
+    const values = [];
+    let index = 1;
+
+    for (const [key, rawValue] of entries) {
+      const column = allowedFields[key];
+
+      if (["features", "limits", "metadata"].includes(key)) {
+        setParts.push(`${column} = $${index}::jsonb`);
+        values.push(JSON.stringify(rawValue));
+      } else if (["price_usd"].includes(key)) {
+        setParts.push(`${column} = $${index}::numeric`);
+        values.push(rawValue);
+      } else if (["trial_days", "sort_order"].includes(key)) {
+        setParts.push(`${column} = $${index}::integer`);
+        values.push(rawValue);
+      } else if (["is_active", "is_public"].includes(key)) {
+        setParts.push(`${column} = $${index}::boolean`);
+        values.push(rawValue);
+      } else {
+        setParts.push(`${column} = $${index}::text`);
+        values.push(rawValue);
+      }
+
+      index += 1;
+    }
+
+    values.push(code);
+
+    const updateSql = `
+      UPDATE ndsp_plans
+      SET ${setParts.join(", ")}
+      WHERE code = $${index}::text
+      RETURNING *
+    `;
+
+    const updateResult = await client.query(updateSql, values);
+    const updated = updateResult.rows[0];
+
+    await client.query(
+      `
+      INSERT INTO ndsp_plan_audit_logs (
+        plan_code,
+        action,
+        actor,
+        before_data,
+        after_data
+      )
+      VALUES (
+        $1::text,
+        'update_plan',
+        'admin',
+        $2::jsonb,
+        $3::jsonb
+      )
+      `,
+      [
+        code,
+        JSON.stringify(beforeResult.rows[0]),
+        JSON.stringify(updated)
+      ]
+    );
+
+    await client.query("COMMIT");
+
+    return res.json({
+      ok: true,
+      plan: updated
+    });
+  } catch (error) {
+    await client.query("ROLLBACK");
+    console.error("ADMIN_UPDATE_PLAN_ERROR", error);
+    return res.status(500).json({
+      ok: false,
+      error: "failed_to_update_plan"
+    });
+  } finally {
+    client.release();
+  }
+});
+
+app.get("/api/v1/subscription/status", async (req, res) => {
+  const email = normalizeEmail(req.query?.email);
+
+  if (!isValidEmail(email)) {
+    return res.status(400).json({
+      ok: false,
+      error: "invalid_email"
+    });
+  }
+
+  try {
+    const result = await query(
+      `
+      SELECT
+        s.*,
+        p.code AS plan_code_joined,
+        p.name_ar,
+        p.name_en,
+        p.description_ar,
+        p.description_en,
+        p.price_usd,
+        p.currency,
+        p.billing_period,
+        p.trial_days,
+        p.features,
+        p.limits,
+        p.metadata AS plan_metadata
+      FROM ndsp_user_subscriptions s
+      JOIN ndsp_plans p ON p.code = s.plan_code
+      WHERE s.customer_email = $1::text
+      ORDER BY s.updated_at DESC
+      LIMIT 1
+      `,
+      [email]
+    );
+
+    if (result.rowCount === 0) {
+      return res.json({
+        ok: true,
+        subscription: publicSubscriptionPayload(null, null)
+      });
+    }
+
+    const row = result.rows[0];
+
+    await query(
+      `
+      UPDATE ndsp_user_subscriptions
+      SET last_status_check_at = now()
+      WHERE id = $1::uuid
+      `,
+      [row.id]
+    );
+
+    const subscription = {
+      id: row.id,
+      customer_email: row.customer_email,
+      plan_code: row.plan_code,
+      status: row.status,
+      source_checkout_ref: row.source_checkout_ref,
+      started_at: row.started_at,
+      expires_at: row.expires_at,
+      metadata: row.metadata
+    };
+
+    const plan = {
+      code: row.plan_code_joined,
+      name_ar: row.name_ar,
+      name_en: row.name_en,
+      description_ar: row.description_ar,
+      description_en: row.description_en,
+      price_usd: row.price_usd,
+      currency: row.currency,
+      billing_period: row.billing_period,
+      trial_days: row.trial_days,
+      features: row.features,
+      limits: row.limits,
+      metadata: row.plan_metadata
+    };
+
+    return res.json({
+      ok: true,
+      subscription: publicSubscriptionPayload(subscription, plan)
+    });
+  } catch (error) {
+    console.error("SUBSCRIPTION_STATUS_ERROR", error);
+    return res.status(500).json({
+      ok: false,
+      error: "failed_to_load_subscription_status"
+    });
+  }
+});
+
+app.get("/api/v1/admin/checkout/requests", requireAdmin, async (req, res) => {
+  const status = String(req.query?.status || "").trim();
+  const limit = Math.min(Number(req.query?.limit || 50) || 50, 200);
+
+  const allowedStatuses = [
+    "pending_review",
+    "manual_review_required",
+    "waiting_payment",
+    "paid_pending_activation",
+    "activated",
+    "rejected",
+    "expired",
+    "cancelled"
+  ];
+
+  if (status && !allowedStatuses.includes(status)) {
+    return res.status(400).json({
+      ok: false,
+      error: "invalid_status"
+    });
+  }
+
+  try {
+    const params = [];
+    let where = "";
+
+    if (status) {
+      params.push(status);
+      where = `WHERE c.status = $${params.length}::text`;
+    }
+
+    params.push(limit);
+
+    const result = await query(
+      `
+      SELECT
+        c.id,
+        c.checkout_ref,
+        c.plan_code,
+        c.customer_email,
+        c.telegram_id,
+        c.amount_usd,
+        c.payment_currency,
+        c.payment_network,
+        c.provider,
+        c.provider_payment_id,
+        c.provider_invoice_url,
+        c.status,
+        c.admin_note,
+        c.public_note,
+        c.expires_at,
+        c.reviewed_at,
+        c.created_at,
+        c.updated_at,
+        c.activated_subscription_id,
+        p.name_ar,
+        p.name_en,
+        p.features,
+        p.limits
+      FROM ndsp_checkout_requests c
+      JOIN ndsp_plans p ON p.code = c.plan_code
+      ${where}
+      ORDER BY c.created_at DESC
+      LIMIT $${params.length}::integer
+      `,
+      params
+    );
+
+    return res.json({
+      ok: true,
+      requests: result.rows
+    });
+  } catch (error) {
+    console.error("ADMIN_CHECKOUT_REQUESTS_ERROR", error);
+    return res.status(500).json({
+      ok: false,
+      error: "failed_to_load_checkout_requests"
+    });
+  }
+});
+
+app.post("/api/v1/admin/checkout/:checkout_ref/approve", requireAdmin, async (req, res) => {
+  const checkoutRef = String(req.params.checkout_ref || "").trim();
+  const adminNote = String(req.body?.admin_note || "Approved by admin").trim();
+  const expiresAt = req.body?.expires_at ? String(req.body.expires_at) : null;
+
+  if (!/^NDSP-[A-Z0-9]{8,32}$/.test(checkoutRef)) {
+    return res.status(400).json({
+      ok: false,
+      error: "invalid_checkout_ref"
+    });
+  }
+
+  const client = await pool.connect();
+
+  try {
+    await client.query("BEGIN");
+
+    const checkoutResult = await client.query(
+      `
+      SELECT
+        c.*,
+        p.features,
+        p.limits,
+        p.metadata AS plan_metadata
+      FROM ndsp_checkout_requests c
+      JOIN ndsp_plans p ON p.code = c.plan_code
+      WHERE c.checkout_ref = $1::text
+      FOR UPDATE
+      `,
+      [checkoutRef]
+    );
+
+    if (checkoutResult.rowCount === 0) {
+      await client.query("ROLLBACK");
+      return res.status(404).json({
+        ok: false,
+        error: "checkout_request_not_found"
+      });
+    }
+
+    const checkout = checkoutResult.rows[0];
+    const normalizedEmail = normalizeEmail(checkout.customer_email);
+
+    if (["rejected", "cancelled", "expired"].includes(checkout.status)) {
+      await client.query("ROLLBACK");
+      return res.status(409).json({
+        ok: false,
+        error: "checkout_request_not_approvable",
+        status: checkout.status
+      });
+    }
+
+    const beforeSub = await client.query(
+      `
+      SELECT *
+      FROM ndsp_user_subscriptions
+      WHERE customer_email = $1::text
+      LIMIT 1
+      `,
+      [normalizedEmail]
+    );
+
+    const subscriptionMetadata = {
+      approved_from_checkout_ref: checkout.checkout_ref,
+      payment_currency: checkout.payment_currency,
+      payment_network: checkout.payment_network,
+      amount_usd: checkout.amount_usd,
+      admin_note: adminNote,
+      governance: {
+        mode: "decision_active",
+        execution_policy: "execution_sanitized"
+      }
+    };
+
+    const subscriptionResult = await client.query(
+      `
+      INSERT INTO ndsp_user_subscriptions (
+        customer_email,
+        plan_code,
+        status,
+        source_checkout_ref,
+        activation_mode,
+        started_at,
+        expires_at,
+        metadata
+      )
+      VALUES (
+        $1::text,
+        $2::text,
+        'active',
+        $3::text,
+        'admin_approved',
+        now(),
+        $4::timestamptz,
+        $5::jsonb
+      )
+      ON CONFLICT (customer_email)
+      DO UPDATE SET
+        plan_code = EXCLUDED.plan_code,
+        status = 'active',
+        source_checkout_ref = EXCLUDED.source_checkout_ref,
+        activation_mode = 'admin_approved',
+        started_at = now(),
+        expires_at = EXCLUDED.expires_at,
+        metadata = EXCLUDED.metadata,
+        updated_at = now()
+      RETURNING *
+      `,
+      [
+        normalizedEmail,
+        String(checkout.plan_code),
+        String(checkout.checkout_ref),
+        expiresAt,
+        JSON.stringify(subscriptionMetadata)
+      ]
+    );
+
+    const subscription = subscriptionResult.rows[0];
+
+    const updatedCheckout = await client.query(
+      `
+      UPDATE ndsp_checkout_requests
+      SET
+        customer_email = $1::text,
+        status = 'activated',
+        reviewed_at = now(),
+        admin_note = $2::text,
+        public_note = 'Subscription activated after admin review.',
+        activated_subscription_id = $3::uuid
+      WHERE checkout_ref = $4::text
+      RETURNING *
+      `,
+      [
+        normalizedEmail,
+        adminNote,
+        subscription.id,
+        checkout.checkout_ref
+      ]
+    );
+
+    await client.query(
+      `
+      INSERT INTO ndsp_subscription_audit_logs (
+        customer_email,
+        plan_code,
+        action,
+        actor,
+        before_data,
+        after_data
+      )
+      VALUES (
+        $1::text,
+        $2::text,
+        'approve_checkout_activate_subscription',
+        'admin',
+        $3::jsonb,
+        $4::jsonb
+      )
+      `,
+      [
+        subscription.customer_email,
+        subscription.plan_code,
+        beforeSub.rowCount ? JSON.stringify(beforeSub.rows[0]) : null,
+        JSON.stringify(subscription)
+      ]
+    );
+
+    await client.query("COMMIT");
+
+    return res.json({
+      ok: true,
+      checkout: updatedCheckout.rows[0],
+      subscription
+    });
+  } catch (error) {
+    await client.query("ROLLBACK");
+
+    console.error("ADMIN_APPROVE_CHECKOUT_ERROR", {
+      message: error.message,
+      code: error.code,
+      detail: error.detail,
+      hint: error.hint,
+      position: error.position,
+      constraint: error.constraint,
+      checkout_ref: checkoutRef
+    });
+
+    return res.status(500).json({
+      ok: false,
+      error: "failed_to_approve_checkout",
+      detail: error.message
+    });
+  } finally {
+    client.release();
+  }
+});
+
+app.post("/api/v1/admin/checkout/:checkout_ref/reject", requireAdmin, async (req, res) => {
+  const checkoutRef = String(req.params.checkout_ref || "").trim();
+  const adminNote = String(req.body?.admin_note || "Rejected by admin").trim();
+
+  if (!/^NDSP-[A-Z0-9]{8,32}$/.test(checkoutRef)) {
+    return res.status(400).json({
+      ok: false,
+      error: "invalid_checkout_ref"
+    });
+  }
+
+  try {
+    const result = await query(
+      `
+      UPDATE ndsp_checkout_requests
+      SET
+        status = 'rejected',
+        reviewed_at = now(),
+        admin_note = $1::text,
+        public_note = 'Subscription request rejected after review.'
+      WHERE checkout_ref = $2::text
+        AND status <> 'activated'
+      RETURNING *
+      `,
+      [adminNote, checkoutRef]
+    );
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({
+        ok: false,
+        error: "checkout_request_not_found_or_already_activated"
+      });
+    }
+
+    await query(
+      `
+      INSERT INTO ndsp_subscription_audit_logs (
+        customer_email,
+        plan_code,
+        action,
+        actor,
+        before_data,
+        after_data
+      )
+      VALUES (
+        $1::text,
+        $2::text,
+        'reject_checkout_request',
+        'admin',
+        NULL,
+        $3::jsonb
+      )
+      `,
+      [
+        normalizeEmail(result.rows[0].customer_email),
+        result.rows[0].plan_code,
+        JSON.stringify(result.rows[0])
+      ]
+    );
+
+    return res.json({
+      ok: true,
+      checkout: result.rows[0]
+    });
+  } catch (error) {
+    console.error("ADMIN_REJECT_CHECKOUT_ERROR", error);
+    return res.status(500).json({
+      ok: false,
+      error: "failed_to_reject_checkout"
+    });
+  }
+});
+
+app.use((req, res) => {
+  res.status(404).json({
+    ok: false,
+    error: "not_found"
+  });
+});
+
+const server = app.listen(PORT, HOST, () => {
+  console.log(`NDSP checkout/plans Express API listening on http://${HOST}:${PORT}`);
+});
+
+server.on("error", (error) => {
+  console.error("SERVER_LISTEN_ERROR", error);
+  process.exit(1);
+});
+
+process.on("unhandledRejection", (reason) => {
+  console.error("UNHANDLED_REJECTION", reason);
+});
+
+process.on("uncaughtException", (error) => {
+  console.error("UNCAUGHT_EXCEPTION", error);
+  process.exit(1);
+});

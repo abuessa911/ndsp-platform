@@ -1,0 +1,20 @@
+{
+  "symbol": "XAUUSD",
+  "tdl_ml_direction": "BEARISH",
+  "tdl_lm_direction": "bearish",
+  "tdl_s_direction": "bullish",
+  "golden_signal": false,
+  "golden_name": null,
+  "dominant": "L&M_S_CONFLICT",
+  "raw": {
+    "tdl_lm_score": 0.0,
+    "tdl_s_score": 0.0,
+    "tdl_lm_direction": "bearish",
+    "tdl_s_direction": "bullish",
+    "golden_signal": false,
+    "golden_name": null,
+    "dominant": "L&M_S_CONFLICT",
+    "model": "crypto_hybrid_time_dimension_logic",
+    "version": "1.0.0-ndsp-golden"
+  }
+}

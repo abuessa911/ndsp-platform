@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+AlumSpot,M15,2026.05.01 20:45:00,3507.80000,3509.60000,3503.40000,3506.60000,98,3506.60000,3516.60000,1000.00,0,0

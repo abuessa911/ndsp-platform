@@ -1,0 +1,258 @@
+[
+  {
+    "id": "f0e1046d-e043-4af7-8930-d284f8bb8387",
+    "timestamp": "2026-05-11T21:52:36.811263+00:00",
+    "system": "NDSP",
+    "version": "1.0.0",
+    "governance_version": "6.1.0",
+    "event": "payment_confirm",
+    "payload": {
+      "payment_id": "np_live_bridge_pending_001",
+      "plan": "Pro",
+      "email": "pending-user@ndsp.app",
+      "result_status": "confirmed",
+      "source": "admin_console",
+      "admin_key_exposed": false
+    }
+  },
+  {
+    "id": "fb5e6bfa-f50d-4085-83ac-2c0260d528d7",
+    "timestamp": "2026-05-11T21:48:10.993091+00:00",
+    "system": "NDSP",
+    "version": "1.0.0",
+    "governance_version": "6.1.0",
+    "event": "payment_confirm",
+    "payload": {
+      "payment_id": "np_live_bridge_pending_001",
+      "plan": "Pro",
+      "email": "pending-user@ndsp.app",
+      "result_status": "confirmed",
+      "source": "admin_console",
+      "admin_key_exposed": false
+    }
+  },
+  {
+    "id": "6d508d6b-6fa1-4394-8c2c-922699dadf17",
+    "timestamp": "2026-05-11T21:47:56.244661+00:00",
+    "system": "NDSP",
+    "version": "1.0.0",
+    "governance_version": "6.1.0",
+    "event": "payment_confirm",
+    "payload": {
+      "payment_id": "np_live_bridge_pending_001",
+      "plan": "Pro",
+      "email": "pending-user@ndsp.app",
+      "result_status": "confirmed",
+      "source": "admin_console",
+      "admin_key_exposed": false
+    }
+  },
+  {
+    "id": "75503363-dbf1-4910-94bb-f15afcf4b62f",
+    "timestamp": "2026-05-11T21:47:18.617203+00:00",
+    "system": "NDSP",
+    "version": "1.0.0",
+    "governance_version": "6.1.0",
+    "event": "payment_confirm",
+    "payload": {
+      "payment_id": "np_live_bridge_pending_001",
+      "plan": "Pro",
+      "email": "pending-user@ndsp.app",
+      "result_status": "confirmed",
+      "source": "admin_console",
+      "admin_key_exposed": false
+    }
+  },
+  {
+    "id": "0e4370ca-3672-468d-abe2-7c56a0e63db0",
+    "timestamp": "2026-05-11T21:46:37.361616+00:00",
+    "system": "NDSP",
+    "version": "1.0.0",
+    "governance_version": "6.1.0",
+    "event": "payment_confirm",
+    "payload": {
+      "payment_id": "np_live_bridge_pending_001",
+      "plan": "Pro",
+      "email": "pending-user@ndsp.app",
+      "result_status": "confirmed",
+      "source": "admin_console",
+      "admin_key_exposed": false
+    }
+  },
+  {
+    "id": "16ef3887-9e89-41ed-8869-c67848ea8b0d",
+    "timestamp": "2026-05-11T21:44:22.715619+00:00",
+    "system": "NDSP",
+    "version": "1.0.0",
+    "governance_version": "6.1.0",
+    "event": "payment_confirm",
+    "payload": {
+      "payment_id": "np_live_bridge_pending_001",
+      "plan": "Pro",
+      "email": "pending-user@ndsp.app",
+      "result_status": "confirmed",
+      "source": "admin_console",
+      "admin_key_exposed": false
+    }
+  },
+  {
+    "id": "3b2d23cd-3a69-4ab9-a5bd-e093e6947ea6",
+    "timestamp": "2026-05-11T21:43:30.366601+00:00",
+    "system": "NDSP",
+    "version": "1.0.0",
+    "governance_version": "6.1.0",
+    "event": "payment_confirm",
+    "payload": {
+      "payment_id": "np_live_bridge_pending_001",
+      "plan": "Pro",
+      "email": "pending-user@ndsp.app",
+      "result_status": "confirmed",
+      "source": "admin_console",
+      "admin_key_exposed": false
+    }
+  },
+  {
+    "id": "1f754fae-2f2d-48c6-8346-b62c980301eb",
+    "timestamp": "2026-05-11T21:43:29.355958+00:00",
+    "system": "NDSP",
+    "version": "1.0.0",
+    "governance_version": "6.1.0",
+    "event": "payment_confirm",
+    "payload": {
+      "payment_id": "np_live_bridge_pending_001",
+      "plan": "Pro",
+      "email": "pending-user@ndsp.app",
+      "result_status": "confirmed",
+      "source": "admin_console",
+      "admin_key_exposed": false
+    }
+  },
+  {
+    "id": "b919f277-4d99-4a2d-9dc5-775d6d779ab2",
+    "timestamp": "2026-05-11T21:43:12.263560+00:00",
+    "system": "NDSP",
+    "version": "1.0.0",
+    "governance_version": "6.1.0",
+    "event": "payment_confirm",
+    "payload": {
+      "payment_id": "np_live_bridge_pending_001",
+      "plan": "Pro",
+      "email": "pending-user@ndsp.app",
+      "result_status": "confirmed",
+      "source": "admin_console",
+      "admin_key_exposed": false
+    }
+  },
+  {
+    "id": "64ef4e55-f761-405b-895d-c6b6610902eb",
+    "timestamp": "2026-05-11T21:43:09.668271+00:00",
+    "system": "NDSP",
+    "version": "1.0.0",
+    "governance_version": "6.1.0",
+    "event": "payment_confirm",
+    "payload": {
+      "payment_id": "np_live_bridge_pending_001",
+      "plan": "Pro",
+      "email": "pending-user@ndsp.app",
+      "result_status": "confirmed",
+      "source": "admin_console",
+      "admin_key_exposed": false
+    }
+  },
+  {
+    "id": "ccc7507e-0ab5-4d92-9f5f-25a57650455f",
+    "timestamp": "2026-05-11T21:43:08.346328+00:00",
+    "system": "NDSP",
+    "version": "1.0.0",
+    "governance_version": "6.1.0",
+    "event": "payment_confirm",
+    "payload": {
+      "payment_id": "np_live_bridge_pending_001",
+      "plan": "Pro",
+      "email": "pending-user@ndsp.app",
+      "result_status": "confirmed",
+      "source": "admin_console",
+      "admin_key_exposed": false
+    }
+  },
+  {
+    "id": "75b6394d-c83f-433b-9e24-fbdfb7956703",
+    "timestamp": "2026-05-11T21:42:56.246381+00:00",
+    "system": "NDSP",
+    "version": "1.0.0",
+    "governance_version": "6.1.0",
+    "event": "payment_confirm",
+    "payload": {
+      "payment_id": "np_live_bridge_pending_001",
+      "plan": "Pro",
+      "email": "pending-user@ndsp.app",
+      "result_status": "confirmed",
+      "source": "admin_console",
+      "admin_key_exposed": false
+    }
+  },
+  {
+    "id": "7f362686-3d94-4bb6-bb08-134e245093d5",
+    "timestamp": "2026-05-11T21:42:55.259703+00:00",
+    "system": "NDSP",
+    "version": "1.0.0",
+    "governance_version": "6.1.0",
+    "event": "payment_confirm",
+    "payload": {
+      "payment_id": "np_live_bridge_pending_001",
+      "plan": "Pro",
+      "email": "pending-user@ndsp.app",
+      "result_status": "confirmed",
+      "source": "admin_console",
+      "admin_key_exposed": false
+    }
+  },
+  {
+    "id": "3b9108ba-fbbe-4cf8-913f-99190707dc87",
+    "timestamp": "2026-05-11T21:42:54.271790+00:00",
+    "system": "NDSP",
+    "version": "1.0.0",
+    "governance_version": "6.1.0",
+    "event": "payment_confirm",
+    "payload": {
+      "payment_id": "np_live_bridge_pending_001",
+      "plan": "Pro",
+      "email": "pending-user@ndsp.app",
+      "result_status": "confirmed",
+      "source": "admin_console",
+      "admin_key_exposed": false
+    }
+  },
+  {
+    "id": "b749e592-3cec-4cb1-ac8b-fa82e85f9a74",
+    "timestamp": "2026-05-11T21:42:53.227951+00:00",
+    "system": "NDSP",
+    "version": "1.0.0",
+    "governance_version": "6.1.0",
+    "event": "payment_confirm",
+    "payload": {
+      "payment_id": "np_live_bridge_pending_001",
+      "plan": "Pro",
+      "email": "pending-user@ndsp.app",
+      "result_status": "confirmed",
+      "source": "admin_console",
+      "admin_key_exposed": false
+    }
+  },
+  {
+    "id": "ba57032b-3808-4b12-92d0-74c7e52f810a",
+    "timestamp": "2026-05-11T21:42:50.492918+00:00",
+    "system": "NDSP",
+    "version": "1.0.0",
+    "governance_version": "6.1.0",
+    "event": "payment_confirm",
+    "payload": {
+      "payment_id": "np_live_bridge_pending_001",
+      "plan": "Pro",
+      "email": "pending-user@ndsp.app",
+      "result_status": "confirmed",
+      "source": "admin_console",
+      "admin_key_exposed": false
+    }
+  }
+]

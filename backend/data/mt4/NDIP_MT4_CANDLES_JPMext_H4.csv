@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+JPM.ext,H4,2026.05.01 20:00:00,312.09000,314.31000,311.99000,313.44000,4942,313.62000,314.26000,64.00,0,0

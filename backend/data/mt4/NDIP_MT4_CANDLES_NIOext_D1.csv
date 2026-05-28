@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+NIO.ext,D1,2026.05.01 00:00:00,6.32000,6.37000,5.74000,5.87000,2540,5.86000,5.99000,13.00,0,0

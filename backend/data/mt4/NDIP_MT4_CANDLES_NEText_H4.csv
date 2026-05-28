@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+NET.ext,H4,2026.05.01 20:00:00,215.77000,218.11000,214.88000,216.68000,1802,216.43000,217.12000,69.00,0,0

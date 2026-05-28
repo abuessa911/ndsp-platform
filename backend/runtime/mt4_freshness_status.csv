@@ -1,0 +1,6 @@
+checked_at,symbol,ok,state,age_seconds,file
+2026-05-28T22:36:35.615937+00:00,EURUSD,False,stale,2238763,/home/nawaf511/empire-core-new/backend/data/mt4/NDIP_MT4_CANDLES_EURUSD_M1.csv
+2026-05-28T22:36:35.615937+00:00,GBPUSD,False,stale,2342739,/home/nawaf511/empire-core-new/backend/data/mt4/NDIP_MT4_CANDLES_GBPUSD_M1.csv
+2026-05-28T22:36:35.615937+00:00,XAUUSD,False,stale,2342737,/home/nawaf511/empire-core-new/backend/data/mt4/NDIP_MT4_CANDLES_XAUUSD_M1.csv
+2026-05-28T22:36:35.615937+00:00,USOIL,False,stale,2342736,/home/nawaf511/empire-core-new/backend/data/mt4/NDIP_MT4_CANDLES_USOilSpot_M1.csv
+2026-05-28T22:36:35.615937+00:00,UKOIL,False,stale,2342736,/home/nawaf511/empire-core-new/backend/data/mt4/NDIP_MT4_CANDLES_UKOilSpot_M1.csv

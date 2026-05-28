@@ -1,0 +1,90 @@
+[
+  {
+    "symbol": "BTCUSDT",
+    "decision": "bullish",
+    "confidence": 0.75,
+    "score": 75,
+    "timestamp": 1776445191,
+    "result": "loss"
+  },
+  {
+    "symbol": "BTCUSDT",
+    "decision": "bullish",
+    "confidence": 0.75,
+    "score": 75,
+    "timestamp": 1776445387,
+    "result": "loss"
+  },
+  {
+    "symbol": "BTCUSDT",
+    "decision": "bullish",
+    "confidence": 0.75,
+    "score": 75,
+    "timestamp": 1776446212,
+    "result": "loss"
+  },
+  {
+    "symbol": "BTCUSDT",
+    "decision": "bullish",
+    "confidence": 0.85,
+    "score": 85,
+    "timestamp": 1776448476,
+    "result": "win"
+  },
+  {
+    "symbol": "BTCUSDT",
+    "decision": "bullish",
+    "confidence": 0.85,
+    "score": 85,
+    "timestamp": 1776448768,
+    "result": "loss"
+  },
+  {
+    "symbol": "BTCUSDT",
+    "decision": "bullish",
+    "confidence": 0.85,
+    "score": 85,
+    "timestamp": 1776449019,
+    "result": "loss"
+  },
+  {
+    "symbol": "BTCUSDT",
+    "decision": "bullish",
+    "confidence": 0.85,
+    "score": 85,
+    "timestamp": 1776449655,
+    "result": "loss"
+  },
+  {
+    "symbol": "BTCUSDT",
+    "decision": "bullish",
+    "confidence": 0.85,
+    "score": 85,
+    "timestamp": 1776450048,
+    "result": "loss"
+  },
+  {
+    "symbol": "BTCUSDT",
+    "decision": "bullish",
+    "confidence": 0.85,
+    "score": 85,
+    "timestamp": 1776450253,
+    "result": "win"
+  },
+  {
+    "symbol": "BTCUSDT",
+    "decision": "bullish",
+    "confidence": 0.8,
+    "score": 80,
+    "timestamp": 1776450358,
+    "result": "loss"
+  },
+  {
+    "symbol": "BTCUSDT",
+    "decision": "weak_bullish",
+    "confidence": 0.8,
+    "score": 80,
+    "timestamp": 1776450451,
+    "result": "neutral"
+  }
+]

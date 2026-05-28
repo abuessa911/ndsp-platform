@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+FRA40,M15,2026.04.30 22:45:00,8149.97000,8151.98000,8139.61000,8143.37000,402,8143.37000,8144.57000,120.00,0,0

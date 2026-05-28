@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+BATS.uk,D1,2026.05.01 00:00:00,4255.50000,4347.51000,4254.51000,4337.51000,2956,4337.51000,4359.51000,2200.00,0,0

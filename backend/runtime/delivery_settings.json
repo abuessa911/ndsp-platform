@@ -1,0 +1,11 @@
+{
+  "email": {
+    "enabled": false
+  },
+  "push": {
+    "enabled": false
+  },
+  "telegram": {
+    "enabled": false
+  }
+}

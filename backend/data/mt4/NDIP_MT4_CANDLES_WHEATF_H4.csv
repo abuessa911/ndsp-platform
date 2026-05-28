@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+WHEATF,H4,2026.05.01 20:30:00,639.94000,640.57000,635.69000,636.44000,342,636.44000,636.80000,36.00,0,0

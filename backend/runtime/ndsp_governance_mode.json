@@ -1,0 +1,17 @@
+{
+  "system": "NDSP",
+  "governance_version": "6.1.0",
+  "mode": "DECISION_ACTIVE",
+  "execution_policy": "EXECUTION_SANITIZED",
+  "decision_active": true,
+  "execution_sanitized": true,
+  "all_layers_participate": true,
+  "no_layer_disabled": true,
+  "tdl_direction_authority": true,
+  "timing_layer_enabled": true,
+  "direct_trade_execution": false,
+  "public_buy_sell_commands": false,
+  "public_tp_sl": false,
+  "raw_logic_public": false,
+  "updated_at": "2026-05-12T08:12:13.444176+00:00"
+}

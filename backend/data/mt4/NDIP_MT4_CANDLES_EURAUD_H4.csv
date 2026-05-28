@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+EURAUD,H4,2026.05.01 20:00:00,1.62761,1.62770,1.62597,1.62620,20177,1.62619,1.62648,29.00,0,0

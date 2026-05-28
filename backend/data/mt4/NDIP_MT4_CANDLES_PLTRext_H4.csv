@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+PLTR.ext,H4,2026.05.01 20:00:00,144.11000,145.19000,143.49000,144.40000,14045,144.41000,144.76000,35.00,0,0

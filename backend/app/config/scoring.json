@@ -1,0 +1,9 @@
+{
+  "weights": {
+    "state": 30,
+    "momentum": 25,
+    "liquidity": 20,
+    "risk": 15,
+    "confidence": 10
+  }
+}

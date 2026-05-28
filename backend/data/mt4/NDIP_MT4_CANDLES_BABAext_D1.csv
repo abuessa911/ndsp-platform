@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+BABA.ext,D1,2026.05.01 00:00:00,131.94000,132.98000,131.00000,131.40000,11832,131.39000,131.62000,23.00,0,0

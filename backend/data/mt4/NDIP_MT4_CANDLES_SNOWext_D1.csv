@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+SNOW.ext,D1,2026.05.01 00:00:00,138.20000,144.27000,136.96000,141.52000,8193,141.60000,141.99000,39.00,0,0

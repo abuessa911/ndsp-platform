@@ -1,0 +1,58 @@
+# Python virtual environments
+venv/
+.venv/
+env/
+ENV/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Node dependencies/builds
+node_modules/
+.next/
+dist/
+build/
+coverage/
+.cache/
+.vite/
+
+# Env/secrets - exclude all for Codex safety
+.env
+.env.*
+*.env
+.env.example
+**/.env.example
+*.key
+*.pem
+*.crt
+*.p12
+*.pfx
+secrets.txt
+*_secret*
+*_secrets*
+*secret*
+*secrets*
+
+# Governance docs that mention secret policy; keep out of Codex upload for now
+governance/security/ENV_AND_SECRET_GOVERNANCE.md
+governance/**/ENV_AND_SECRET_GOVERNANCE.md
+
+# Dumps, backups, snapshots, reports
+*.sql
+*.dump
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+*.bak
+*.backup
+ndsp_backups/
+ndsp_snapshots/
+ndsp_launch_reports/
+_audit_*/
+
+# OS/editor
+.DS_Store
+.idea/
+.vscode/

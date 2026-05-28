@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+PG.ext,H4,2026.05.01 20:00:00,147.03000,147.41000,146.26000,147.37000,5886,147.33000,147.72000,39.00,0,0

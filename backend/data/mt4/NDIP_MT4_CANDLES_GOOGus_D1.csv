@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+GOOG.us,D1,2026.05.01 00:00:00,375.29000,383.08000,375.03000,382.60000,47566,382.61000,382.93000,32.00,0,0

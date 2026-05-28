@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+DASH.ext,D1,2026.05.01 00:00:00,167.83000,176.70000,167.32000,175.46000,5514,175.13000,176.16000,103.00,0,0

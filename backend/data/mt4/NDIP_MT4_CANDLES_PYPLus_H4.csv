@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+PYPL.us,H4,2026.05.01 20:30:00,50.64000,50.77000,50.41000,50.42000,3700,50.40000,50.56000,16.00,0,0

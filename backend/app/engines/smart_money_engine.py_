@@ -1,0 +1,131 @@
+# /opt/empire-core/backend/app/services/smart_money_engine.py
+
+import numpy as np
+
+########################################
+# 💀 MARKET STRUCTURE
+########################################
+
+def detect_structure(closes):
+
+    if len(closes) < 20:
+        return "neutral"
+
+    highs = closes[-10:]
+    lows = closes[-10:]
+
+    hh = max(highs)
+    ll = min(lows)
+
+    last = closes[-1]
+    prev = closes[-2]
+
+    # Higher High
+    if last > prev and last >= hh:
+        return "bullish"
+
+    # Lower Low
+    if last < prev and last <= ll:
+        return "bearish"
+
+    return "range"
+
+########################################
+# 💧 LIQUIDITY SWEEP
+########################################
+
+def detect_liquidity_sweep(closes):
+
+    if len(closes) < 20:
+        return "none"
+
+    recent_high = max(closes[-20:])
+    recent_low = min(closes[-20:])
+
+    last = closes[-1]
+
+    if last > recent_high:
+        return "sweep_high"
+
+    if last < recent_low:
+        return "sweep_low"
+
+    return "none"
+
+########################################
+# 💣 FAKE BREAKOUT
+########################################
+
+def detect_fake_breakout(closes):
+
+    if len(closes) < 10:
+        return False
+
+    last = closes[-1]
+    prev = closes[-2]
+    prev2 = closes[-3]
+
+    # fake breakout up
+    if prev > prev2 and last < prev:
+        return True
+
+    # fake breakout down
+    if prev < prev2 and last > prev:
+        return True
+
+    return False
+
+########################################
+# 🧠 SMART MONEY SCORE
+########################################
+
+def run_smart_money(closes):
+
+    if not closes:
+        return {
+            "score": 0.5,
+            "sm_state": "neutral"
+        }
+
+    structure = detect_structure(closes)
+    sweep = detect_liquidity_sweep(closes)
+    fake = detect_fake_breakout(closes)
+
+    score = 0.5
+
+    ########################################
+    # 📈 STRUCTURE IMPACT
+    ########################################
+    if structure == "bullish":
+        score += 0.2
+    elif structure == "bearish":
+        score -= 0.2
+
+    ########################################
+    # 💧 SWEEP LOGIC
+    ########################################
+    if sweep == "sweep_low":
+        score += 0.15   # bullish reversal
+    elif sweep == "sweep_high":
+        score -= 0.15   # bearish reversal
+
+    ########################################
+    # 💣 FAKE BREAKOUT PENALTY
+    ########################################
+    if fake:
+        score -= 0.2
+
+    ########################################
+    # 🎯 NORMALIZE
+    ########################################
+    score = max(0, min(score, 1))
+
+    ########################################
+    # 📦 OUTPUT
+    ########################################
+    return {
+        "score": round(score, 2),
+        "sm_state": structure,
+        "sweep": sweep,
+        "fake_breakout": fake
+    }

@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+EURCHF,H4,2026.05.01 20:00:00,0.91608,0.91617,0.91569,0.91599,11197,0.91599,0.91631,32.00,0,0

@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+AMZN.ext,D1,2026.05.01 00:00:00,264.67000,273.18000,261.48000,267.65000,49499,267.68000,267.92000,24.00,0,0

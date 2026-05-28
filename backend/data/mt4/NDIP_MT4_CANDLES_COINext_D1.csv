@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+COIN.ext,D1,2026.05.01 00:00:00,187.38000,194.19000,185.75000,190.82000,30058,190.74000,191.51000,77.00,0,0

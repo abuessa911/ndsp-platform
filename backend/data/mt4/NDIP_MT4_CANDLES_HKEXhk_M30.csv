@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+HKEX.hk,M30,2026.04.30 10:30:00,410.87000,411.07000,410.47000,410.57000,70,410.57000,411.62000,105.00,0,0

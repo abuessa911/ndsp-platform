@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+CHN50,H4,2026.05.01 20:00:00,15705.67000,15718.17000,15698.16000,15702.18000,1267,15702.18000,15713.18000,1100.00,0,0

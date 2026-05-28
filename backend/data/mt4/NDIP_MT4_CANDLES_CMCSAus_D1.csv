@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+CMCSA.us,D1,2026.05.01 00:00:00,27.01000,27.41000,26.92000,27.23000,8006,27.23000,27.36000,13.00,0,0

@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+AUDCHF,H4,2026.05.01 20:00:00,0.56274,0.56322,0.56257,0.56315,7233,0.56315,0.56351,36.00,0,0

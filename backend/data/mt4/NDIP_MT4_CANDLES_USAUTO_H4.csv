@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+US.AUTO,H4,2026.05.01 20:30:00,4860.44000,4886.50000,4848.20000,4848.20000,22411,4848.20000,4850.33000,213.00,0,0

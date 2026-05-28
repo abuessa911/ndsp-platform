@@ -1,0 +1,10 @@
+{
+  "momentum": {"enabled": true, "variant": "C"},
+  "liquidity": {"enabled": true, "variant": "A"},
+  "regime": {"enabled": true, "variant": "A"},
+  "divergence": {"enabled": true, "variant": "A"},
+  "zones": {"enabled": true, "variant": "A"},
+  "orderflow": {"enabled": true, "variant": "A"},
+  "volatility": {"enabled": true, "variant": "A"},
+  "ai_layer": {"enabled": true, "variant": "A"}
+}

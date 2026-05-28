@@ -1,0 +1,359 @@
+from __future__ import annotations
+
+import hashlib
+import hmac
+import json
+import os
+from typing import Optional
+
+from fastapi import APIRouter, Body, Depends, Header, HTTPException, Request
+
+from app.governance.admin_only import require_admin_role
+from app.api.admin.payments_admin_v6 import admin_confirm_payment
+from app.integrations.crypto.nowpayments_v6 import create_payment
+from app.alerts.telegram_sender import send_telegram_to_chat
+
+router = APIRouter(prefix="/api/v6/payments/nowpayments", tags=["nowpayments-v6"])
+
+
+def ipn_secret() -> str:
+    return os.getenv("NOWPAYMENTS_IPN_SECRET", "")
+
+
+def verify_ipn_signature(raw_body: bytes, signature: Optional[str]) -> bool:
+    secret = ipn_secret()
+
+    if not secret:
+        return False
+
+    if not signature:
+        return False
+
+    digest = hmac.new(
+        secret.encode("utf-8"),
+        raw_body,
+        hashlib.sha512,
+    ).hexdigest()
+
+    return hmac.compare_digest(digest, str(signature))
+
+
+
+
+def parse_ndsp_order_id(order_id: str) -> dict:
+    data = {}
+
+    if not order_id:
+        return data
+
+    for part in str(order_id).split("|"):
+        if "=" in part:
+            key, value = part.split("=", 1)
+            data[key.strip()] = value.strip()
+
+    return data
+
+
+def is_confirmed_status(status: str) -> bool:
+    return status.lower() in {
+        "finished",
+        "confirmed",
+        "sending",
+        "paid",
+        "partially_paid",
+    }
+
+
+@router.post("/create", dependencies=[Depends(require_admin_role)])
+def admin_create_nowpayments_payment(payload: dict = Body(default={})):
+    telegram_id = payload.get("telegram_id") or payload.get("telegram_user_id")
+    lead_id = payload.get("lead_id")
+    plan = payload.get("plan", "elite")
+    days = int(payload.get("days", 30))
+    amount = str(payload.get("amount", "99"))
+    currency = payload.get("currency", "usd")
+    pay_currency = payload.get("pay_currency", "usdttrc20")
+
+    if not telegram_id:
+        raise HTTPException(status_code=400, detail="telegram_id is required")
+
+    order_id = payload.get("order_id") or f"ndsp|tg={telegram_id}|plan={plan}|days={days}|lead={lead_id or ''}"
+
+    payment = create_payment(
+        price_amount=amount,
+        price_currency=currency,
+        pay_currency=pay_currency,
+        order_id=order_id,
+        order_description=f"NDSP {plan} subscription",
+        telegram_id=str(telegram_id),
+        plan=str(plan),
+        days=days,
+        lead_id=str(lead_id) if lead_id else None,
+    )
+
+    payment_delivery = None
+
+    try:
+        pay_amount = payment.get("pay_amount")
+        pay_currency = payment.get("pay_currency")
+        pay_address = payment.get("pay_address")
+        network = payment.get("network")
+        valid_until = payment.get("valid_until")
+        payment_id = payment.get("payment_id")
+
+        if pay_address:
+            message = "\n".join(
+                [
+                    "💳 NDSP USDT Payment Created",
+                    "",
+                    f"Plan: {plan}",
+                    f"Days: {days}",
+                    "",
+                    f"Amount: {pay_amount} {pay_currency}",
+                    f"Network: {network}",
+                    "",
+                    "Payment address:",
+                    str(pay_address),
+                    "",
+                    f"Payment ID: {payment_id}",
+                    f"Valid until: {valid_until}",
+                    "",
+                    "After payment is confirmed, your subscription will activate automatically.",
+                ]
+            )
+
+            send_telegram_to_chat(str(telegram_id), message)
+
+            payment_delivery = {
+                "status": "sent",
+                "telegram_id": str(telegram_id),
+            }
+
+    except Exception as exc:
+        payment_delivery = {
+            "status": "failed",
+            "telegram_id": str(telegram_id),
+            "error": str(exc),
+        }
+
+    return {
+        "status": "ok",
+        "provider": "nowpayments",
+        "payment": payment,
+        "payment_delivery": payment_delivery,
+    }
+
+
+@router.post("/webhook")
+async def nowpayments_webhook(
+    request: Request,
+    x_nowpayments_sig: Optional[str] = Header(default=None, alias="x-nowpayments-sig"),
+):
+    raw_body = await request.body()
+
+    if not verify_ipn_signature(raw_body, x_nowpayments_sig):
+        raise HTTPException(status_code=401, detail="Invalid NOWPayments signature")
+
+    payload = json.loads(raw_body.decode("utf-8"))
+
+    payment_status = str(payload.get("payment_status") or payload.get("status") or "")
+
+    if not is_confirmed_status(payment_status):
+        return {
+            "status": "ignored",
+            "provider": "nowpayments",
+            "payment_status": payment_status,
+            "reason": "payment not confirmed",
+        }
+
+    metadata = payload.get("metadata") or {}
+    order_data = parse_ndsp_order_id(str(payload.get("order_id") or ""))
+
+    telegram_id = (
+        payload.get("telegram_id")
+        or payload.get("telegram_user_id")
+        or metadata.get("telegram_id")
+        or metadata.get("telegram_user_id")
+        or order_data.get("tg")
+        or order_data.get("telegram_id")
+    )
+
+    lead_id = payload.get("lead_id") or metadata.get("lead_id") or order_data.get("lead")
+    plan = payload.get("plan") or metadata.get("plan") or order_data.get("plan") or "elite"
+    days = int(payload.get("days") or metadata.get("days") or order_data.get("days") or 30)
+
+    payment_ref = (
+        payload.get("payment_id")
+        or payload.get("invoice_id")
+        or payload.get("order_id")
+        or payload.get("id")
+    )
+
+    if not telegram_id:
+        raise HTTPException(status_code=400, detail="telegram_id is required")
+
+    if not payment_ref:
+        raise HTTPException(status_code=400, detail="payment_ref is required")
+
+    result = admin_confirm_payment(
+        {
+            "telegram_id": str(telegram_id),
+            "plan": str(plan),
+            "days": days,
+            "payment_ref": str(payment_ref),
+            "provider": "nowpayments",
+            "amount": str(payload.get("price_amount") or payload.get("actually_paid") or ""),
+            "currency": str(payload.get("price_currency") or payload.get("pay_currency") or "USD").upper(),
+            "create_invite": True,
+            "lead_id": lead_id,
+            "source": "nowpayments_webhook_v6",
+        }
+    )
+
+    return {
+        "status": "ok",
+        "provider": "nowpayments",
+        "payment_status": payment_status,
+        "result": result,
+    }
+
+# ============================================================
+# NDSP Public NOWPayments Create - Email-first Beta Payment
+# Policy:
+# - USDT only
+# - TRC20 + BEP20 only
+# - Pro / Elite / SaaS only
+# - Email required
+# - Telegram optional
+# - No auto activation from this endpoint
+# - Webhook + manual admin review remains required
+# ============================================================
+
+from pydantic import BaseModel, EmailStr
+from typing import Literal
+
+
+class PublicNowPaymentRequest(BaseModel):
+    email: EmailStr
+    telegram_id: str | None = None
+    plan: Literal["pro", "elite", "saas"]
+    network: Literal["TRC20", "BEP20"] = "TRC20"
+
+
+PUBLIC_PLAN_PRICES_USD = {
+    "pro": 29,
+    "elite": 99,
+    "saas": 499,
+}
+
+PUBLIC_PLAN_DAYS = {
+    "pro": 30,
+    "elite": 30,
+    "saas": 30,
+}
+
+
+def _public_pay_currency(network: str) -> str:
+    n = str(network or "").upper().strip()
+    if n == "TRC20":
+        return "usdttrc20"
+    if n == "BEP20":
+        return "usdtbsc"
+    raise HTTPException(status_code=400, detail="unsupported network")
+
+
+@router.post("/public-create")
+def public_create_nowpayments_payment(payload: PublicNowPaymentRequest):
+    email = str(payload.email).strip().lower()
+    telegram_id = str(payload.telegram_id or "").strip() or None
+    plan = str(payload.plan).lower().strip()
+    network = str(payload.network).upper().strip()
+
+    if plan not in PUBLIC_PLAN_PRICES_USD:
+        raise HTTPException(status_code=400, detail="unsupported plan")
+
+    amount = PUBLIC_PLAN_PRICES_USD[plan]
+    days = PUBLIC_PLAN_DAYS[plan]
+    pay_currency = _public_pay_currency(network)
+
+    order_parts = [
+        "ndsp_public",
+        f"email={email}",
+        f"tg={telegram_id or ''}",
+        f"plan={plan}",
+        f"days={days}",
+        f"network={network}",
+    ]
+    order_id = "|".join(order_parts)
+
+    payment = create_payment(
+        price_amount=amount,
+        price_currency="usd",
+        pay_currency=pay_currency,
+        order_id=order_id,
+        order_description=f"NDSP {plan.upper()} Beta Subscription",
+        ipn_callback_url=os.getenv(
+            "NOWPAYMENTS_IPN_CALLBACK_URL",
+            "https://api.ndsp.app/api/v6/payments/nowpayments/webhook",
+        ),
+        customer_email=email,
+    )
+
+    public_payment = {
+        "payment_id": payment.get("payment_id"),
+        "payment_status": payment.get("payment_status"),
+        "pay_address": payment.get("pay_address"),
+        "price_amount": payment.get("price_amount"),
+        "price_currency": payment.get("price_currency"),
+        "pay_amount": payment.get("pay_amount"),
+        "pay_currency": payment.get("pay_currency"),
+        "network": payment.get("network") or network,
+        "order_id": payment.get("order_id"),
+        "expiration_estimate_date": payment.get("expiration_estimate_date"),
+        "valid_until": payment.get("valid_until"),
+        "purchase_id": payment.get("purchase_id"),
+    }
+
+    save_audit_event(
+        event_type="payment_request_created",
+        entity_type="nowpayments_public_payment",
+        entity_id=str(payment.get("payment_id") or ""),
+        actor_type="user",
+        actor_id=email,
+        message="Public NOWPayments payment request created",
+        payload_json=json.dumps(
+            {
+                "email": email,
+                "telegram_id": telegram_id,
+                "plan": plan,
+                "network": network,
+                "amount": amount,
+                "currency": "USD",
+                "payment_id": payment.get("payment_id"),
+                "status": payment.get("payment_status"),
+                "source": "public_nowpayments_create",
+            },
+            ensure_ascii=False,
+        ),
+    )
+
+    return {
+        "status": "ok",
+        "provider": "nowpayments",
+        "mode": "beta_manual_review",
+        "activation": "manual_review_required",
+        "policy": {
+            "currency": "USDT only",
+            "networks": ["TRC20", "BEP20"],
+            "confirmation": "webhook_verification_plus_manual_admin_review",
+            "auto_activation": False,
+        },
+        "request": {
+            "email": email,
+            "telegram_id": telegram_id,
+            "plan": plan,
+            "network": network,
+            "days": days,
+        },
+        "payment": public_payment,
+    }

@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+GOOG.us,H4,2026.05.01 20:30:00,382.49000,382.98000,378.89000,382.60000,13535,382.61000,382.93000,32.00,0,0

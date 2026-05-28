@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+PFE.ext,H4,2026.05.01 20:00:00,26.36000,26.45000,26.30000,26.30000,889,26.30000,26.44000,14.00,0,0

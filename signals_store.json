@@ -1,0 +1,18 @@
+{
+  "signals": [
+    {
+      "symbol": "EURUSDT",
+      "type": "BUY",
+      "entry": 1.087,
+      "tp": 1.095,
+      "sl": 1.081,
+      "confidence": 92,
+      "tag": "GOLDEN",
+      "zone_low": 1.0855,
+      "zone_high": 1.0885,
+      "interval": "1h",
+      "id": "eurusdt-buy-1774221593",
+      "time": 1774221540
+    }
+  ]
+}

@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+NickelSpot,H4,2026.05.01 19:00:00,19260.75000,19356.75000,19246.50000,19293.25000,337,19293.25000,19495.50000,20225.00,0,0

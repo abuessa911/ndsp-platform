@@ -1,0 +1,35 @@
+import asyncio
+import websockets
+import json
+
+STATE = {
+    "prices": {},
+    "last_update": None
+}
+
+STREAMS = [
+    "btcusdt@trade",
+    "ethusdt@trade"
+]
+
+URL = "wss://stream.binance.com:9443/stream?streams=" + "/".join(STREAMS)
+
+async def run():
+    while True:
+        try:
+            async with websockets.connect(URL) as ws:
+                while True:
+                    msg = await ws.recv()
+                    data = json.loads(msg)
+
+                    symbol = data["data"]["s"]
+                    price = float(data["data"]["p"])
+
+                    STATE["prices"][symbol] = price
+
+        except Exception as e:
+            print("WS ERROR:", e)
+            await asyncio.sleep(3)
+
+if __name__ == "__main__":
+    asyncio.run(run())

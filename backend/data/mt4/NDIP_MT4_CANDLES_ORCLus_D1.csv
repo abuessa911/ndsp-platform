@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+ORCL.us,D1,2026.05.01 00:00:00,166.08000,174.23000,166.05000,172.18000,25618,172.09000,172.27000,18.00,0,0

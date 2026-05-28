@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+MSFT.us,H4,2026.05.01 20:30:00,413.95000,416.53000,413.37000,415.58000,9753,415.58000,416.66000,108.00,0,0

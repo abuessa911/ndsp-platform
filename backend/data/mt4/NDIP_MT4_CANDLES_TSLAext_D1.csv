@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+TSLA.ext,D1,2026.05.01 00:00:00,380.73000,397.68000,379.49000,391.51000,77797,391.45000,391.76000,31.00,0,0

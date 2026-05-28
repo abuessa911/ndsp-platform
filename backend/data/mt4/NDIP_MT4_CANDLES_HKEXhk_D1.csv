@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+HKEX.hk,D1,2026.04.30 00:00:00,421.27000,426.89000,410.47000,410.57000,1538,410.57000,411.62000,105.00,0,0

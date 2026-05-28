@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+COST.ext,H4,2026.05.01 20:00:00,1014.05000,1015.50000,1005.69000,1010.60000,1976,1010.60000,1011.86000,126.00,0,0

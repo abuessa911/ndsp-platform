@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+US.BANKS,D1,2026.05.01 00:00:00,5737.88000,5801.71000,5710.10000,5727.49000,45216,5728.13000,5729.59000,146.00,0,0

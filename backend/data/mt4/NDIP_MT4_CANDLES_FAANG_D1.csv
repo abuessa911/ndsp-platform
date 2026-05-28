@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+FAANG,D1,2026.05.01 00:00:00,10305.22000,10446.53000,10299.65000,10340.43000,105166,10340.55000,10342.57000,202.00,0,0

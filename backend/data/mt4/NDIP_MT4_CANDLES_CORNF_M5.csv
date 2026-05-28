@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+CORNF,M5,2026.05.01 21:15:00,479.42000,479.42000,478.79000,479.17000,13,479.17000,480.33000,116.00,0,0

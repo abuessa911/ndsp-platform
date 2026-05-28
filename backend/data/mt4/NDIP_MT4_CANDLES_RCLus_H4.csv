@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+RCL.us,H4,2026.05.01 20:30:00,270.68000,271.51000,264.01000,264.01000,1855,264.01000,264.90000,89.00,0,0

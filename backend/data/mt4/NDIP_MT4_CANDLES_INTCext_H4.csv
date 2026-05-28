@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+INTC.ext,H4,2026.05.01 20:00:00,98.66000,100.05000,98.03000,99.99000,17615,99.98000,100.14000,16.00,0,0

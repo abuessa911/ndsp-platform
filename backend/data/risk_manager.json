@@ -1,0 +1,9 @@
+{
+    "balance_peak": 10000,
+    "daily_loss": 0,
+    "weekly_loss": 0,
+    "trades_today": 0,
+    "last_day": "",
+    "last_week": "",
+    "blocked_until": null
+}

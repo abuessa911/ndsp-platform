@@ -1,0 +1,21 @@
+services:
+  ndsp_postgres:
+    image: postgres:16
+    container_name: ndsp_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ndsp
+      POSTGRES_USER: ndsp_user
+      POSTGRES_PASSWORD: 8c75ea29efcfbeb008a70b0c4d3f812fa5bfc0a9ff3a51a84a4b5ac5d96f8b9c
+    ports:
+      - "5433:5432"
+    volumes:
+      - ndsp_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ndsp_user -d ndsp"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  ndsp_postgres_data:

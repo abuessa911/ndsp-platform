@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+MCD.ext,H4,2026.05.01 20:00:00,289.62000,289.82000,286.16000,286.54000,5264,286.60000,287.08000,48.00,0,0

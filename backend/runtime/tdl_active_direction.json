@@ -1,0 +1,34 @@
+{
+  "symbol": "XAUUSD",
+  "day": "thursday",
+  "active_layer": "LM",
+  "active_direction": "BEARISH",
+  "active_action": "SHORT",
+  "entry_scope": "WEEKLY_CONTROL",
+  "lm_direction": "BEARISH",
+  "s_direction": "BULLISH",
+  "golden_signal": false,
+  "golden_name": "",
+  "dominant": "L&M_S_CONFLICT",
+  "confidence_tag": "CONTROL_DAY",
+  "policy": {
+    "mode": "control_day",
+    "allow_entries_all_week": true,
+    "default_control": "S",
+    "golden_boost": true,
+    "days": {
+      "monday": "S",
+      "tuesday": "S",
+      "wednesday": "S",
+      "thursday": "LM",
+      "friday": "LM",
+      "saturday": "S",
+      "sunday": "S"
+    },
+    "notes": {
+      "S": "Partial / short-term TDL control",
+      "LM": "Weekly / long-medium TDL control",
+      "golden": "When LM and S agree, confidence is boosted"
+    }
+  }
+}

@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+TXN.us,D1,2026.05.01 00:00:00,277.84000,281.64000,276.37000,281.53000,7681,281.58000,282.11000,53.00,0,0

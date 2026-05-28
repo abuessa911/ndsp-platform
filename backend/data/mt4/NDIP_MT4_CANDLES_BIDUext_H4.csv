@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+BIDU.ext,H4,2026.05.01 20:00:00,126.48000,126.52000,125.59000,125.89000,641,125.87000,126.40000,53.00,0,0

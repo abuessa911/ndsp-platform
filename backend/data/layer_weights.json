@@ -1,0 +1,9 @@
+{
+  "momentum": 30,
+  "liquidity": 15,
+  "regime": 20,
+  "divergence": 10,
+  "zones": 10,
+  "orderflow": 10,
+  "volatility": 5
+}

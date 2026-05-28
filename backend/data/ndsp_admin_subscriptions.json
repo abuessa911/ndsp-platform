@@ -1,0 +1,11 @@
+[
+  {
+    "email": "pending-user@ndsp.app",
+    "plan": "Pro",
+    "status": "active",
+    "source": "nowpayments_subscription_status",
+    "active": true,
+    "updated_at": "2026-05-11T21:52:36.809201+00:00",
+    "last_payment_id": "np_live_bridge_pending_001"
+  }
+]

@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+MSFT.us,D1,2026.05.01 00:00:00,411.72000,416.53000,409.88000,415.58000,33170,415.58000,416.66000,108.00,0,0

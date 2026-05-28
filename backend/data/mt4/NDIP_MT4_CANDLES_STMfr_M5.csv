@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+STM.fr,M5,2026.04.30 18:25:00,45.75000,45.88000,45.74000,45.85000,240,45.85000,45.98000,130.00,0,0

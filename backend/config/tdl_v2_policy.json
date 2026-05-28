@@ -1,0 +1,11 @@
+{
+  "tdl_v2_enabled": true,
+  "timing_layer_enabled": true,
+  "timing_mode": "control_days",
+  "mon_wed_controller": "S",
+  "thu_fri_controller": "L&M",
+  "sunday_mode": "neutral_review",
+  "output_policy": "tdl_v2_only",
+  "updated_at": "2026-05-12T22:56:36.421077+00:00",
+  "updated_by": "admin"
+}

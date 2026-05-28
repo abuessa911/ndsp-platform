@@ -1,0 +1,1105 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NDSP Checkout & Admin Plans</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/App.jsx"></script>
+  
+<!-- NDSP_TRIAL_WELCOME_MODAL_V1 -->
+<style id="ndsp-trial-welcome-style">
+  #ndsp-trial-welcome-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2147483000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 22px;
+    background:
+      radial-gradient(circle at top left, rgba(56,189,248,.16), transparent 34%),
+      radial-gradient(circle at bottom right, rgba(245,158,11,.14), transparent 34%),
+      rgba(2,6,23,.78);
+    backdrop-filter: blur(14px);
+  }
+
+  #ndsp-trial-welcome-overlay.ndsp-open {
+    display: flex;
+  }
+
+  .ndsp-trial-welcome-card {
+    width: min(760px, 100%);
+    border: 1px solid rgba(148,163,184,.28);
+    border-radius: 28px;
+    background:
+      linear-gradient(180deg, rgba(15,23,42,.98), rgba(15,23,42,.92)),
+      radial-gradient(circle at top, rgba(56,189,248,.10), transparent 45%);
+    color: #f8fafc;
+    box-shadow: 0 32px 110px rgba(0,0,0,.55);
+    overflow: hidden;
+    direction: rtl;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  .ndsp-trial-welcome-top {
+    padding: 26px 28px 18px;
+    border-bottom: 1px solid rgba(148,163,184,.18);
+  }
+
+  .ndsp-trial-welcome-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 13px;
+    border-radius: 999px;
+    background: rgba(14,165,233,.10);
+    color: #67e8f9;
+    border: 1px solid rgba(103,232,249,.22);
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+
+  .ndsp-trial-welcome-card h2 {
+    margin: 0;
+    font-size: clamp(24px, 4vw, 36px);
+    line-height: 1.25;
+    letter-spacing: -.02em;
+  }
+
+  .ndsp-trial-welcome-card p {
+    margin: 12px 0 0;
+    color: #cbd5e1;
+    line-height: 1.9;
+    font-size: 15px;
+  }
+
+  .ndsp-trial-welcome-body {
+    padding: 22px 28px 26px;
+  }
+
+  .ndsp-trial-welcome-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin: 18px 0 20px;
+  }
+
+  .ndsp-trial-welcome-item {
+    border: 1px solid rgba(148,163,184,.18);
+    border-radius: 18px;
+    padding: 15px;
+    background: rgba(15,23,42,.72);
+  }
+
+  .ndsp-trial-welcome-item strong {
+    display: block;
+    color: #fef3c7;
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+
+  .ndsp-trial-welcome-item span {
+    color: #cbd5e1;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  .ndsp-trial-welcome-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .ndsp-trial-welcome-btn {
+    border: 0;
+    cursor: pointer;
+    padding: 13px 18px;
+    border-radius: 15px;
+    font-weight: 800;
+    font-size: 14px;
+  }
+
+  .ndsp-trial-welcome-primary {
+    background: linear-gradient(135deg, #f59e0b, #fde68a);
+    color: #111827;
+  }
+
+  .ndsp-trial-welcome-secondary {
+    background: rgba(148,163,184,.12);
+    color: #e2e8f0;
+    border: 1px solid rgba(148,163,184,.22);
+  }
+
+  .ndsp-trial-welcome-note {
+    margin-top: 14px;
+    color: #94a3b8;
+    font-size: 12px;
+    line-height: 1.8;
+  }
+
+  @media (max-width: 640px) {
+    .ndsp-trial-welcome-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .ndsp-trial-welcome-top,
+    .ndsp-trial-welcome-body {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .ndsp-trial-welcome-actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .ndsp-trial-welcome-btn {
+      width: 100%;
+    }
+  }
+</style>
+
+<div id="ndsp-trial-welcome-overlay" aria-hidden="true">
+  <div class="ndsp-trial-welcome-card" role="dialog" aria-modal="true" aria-labelledby="ndsp-trial-welcome-title">
+    <div class="ndsp-trial-welcome-top">
+      <div class="ndsp-trial-welcome-badge">NDSP Elite Trial • تجربة مؤسسية محدودة</div>
+      <h2 id="ndsp-trial-welcome-title">مرحبًا بك في تجربة NDSP لمدة 16 يوم</h2>
+      <p>
+        هذه المرحلة مخصصة لاختبار المنصة قبل الإطلاق المدفوع. خلال فترة التجربة سيتم تفعيل باقة Trial
+        للوصول إلى بيئة دعم القرار المؤسسية، مع متابعة الاستقرار، وضوح المخرجات، وتجربة المستخدم.
+      </p>
+    </div>
+
+    <div class="ndsp-trial-welcome-body">
+      <div class="ndsp-trial-welcome-grid">
+        <div class="ndsp-trial-welcome-item">
+          <strong>مدة التجربة</strong>
+          <span>16 يومًا من تاريخ تفعيل الحساب التجريبي.</span>
+        </div>
+
+        <div class="ndsp-trial-welcome-item">
+          <strong>الباقة الحالية</strong>
+          <span>Trial Plan — وصول تجريبي منظم قبل الإطلاق المدفوع.</span>
+        </div>
+
+        <div class="ndsp-trial-welcome-item">
+          <strong>مميزات التجربة</strong>
+          <span>دخول أساسي، أصول محددة، ومخرجات مبسطة بدون كشف المنطق الداخلي.</span>
+        </div>
+
+        <div class="ndsp-trial-welcome-item">
+          <strong>استبيان نهاية الفترة</strong>
+          <span>الاستبيان مطلوب لتقييم التجربة وتحسين المنصة قبل التوسع.</span>
+        </div>
+
+        <div class="ndsp-trial-welcome-item">
+          <strong>المقاعد المحدودة</strong>
+          <span>المقاعد التجريبية محدودة وتخضع للمراجعة والتفعيل الإداري.</span>
+        </div>
+
+        <div class="ndsp-trial-welcome-item">
+          <strong>الدفع الحالي</strong>
+          <span>الدفع مقفل مؤقتًا حتى اكتمال مرحلة التجربة.</span>
+        </div>
+      </div>
+
+      <div class="ndsp-trial-welcome-actions">
+        <button class="ndsp-trial-welcome-btn ndsp-trial-welcome-primary" id="ndsp-trial-welcome-start">
+          فهمت، ابدأ التجربة
+        </button>
+        <button class="ndsp-trial-welcome-btn ndsp-trial-welcome-secondary" id="ndsp-trial-welcome-close">
+          إغلاق
+        </button>
+      </div>
+
+      <div class="ndsp-trial-welcome-note">
+        تنبيه: NDSP منصة دعم قرار وتحليل سياقي. لا تقدم توصيات مالية، ولا تنفذ أوامر، ولا تدير رأس مال المستخدم.
+      </div>
+    </div>
+  </div>
+</div>
+
+<script id="ndsp-trial-welcome-script">
+(function () {
+  var MARKER = "NDSP_TRIAL_WELCOME_MODAL_V1";
+  var STORAGE_KEY = "ndsp_trial_welcome_seen_v1";
+
+  function openModal() {
+    var overlay = document.getElementById("ndsp-trial-welcome-overlay");
+    if (!overlay) return;
+    overlay.classList.add("ndsp-open");
+    overlay.setAttribute("aria-hidden", "false");
+  }
+
+  function closeModal() {
+    var overlay = document.getElementById("ndsp-trial-welcome-overlay");
+    if (!overlay) return;
+    overlay.classList.remove("ndsp-open");
+    overlay.setAttribute("aria-hidden", "true");
+    try { sessionStorage.setItem(STORAGE_KEY, "1"); } catch (e) {}
+  }
+
+  function boot() {
+    var overlay = document.getElementById("ndsp-trial-welcome-overlay");
+    if (!overlay) return;
+
+    var startBtn = document.getElementById("ndsp-trial-welcome-start");
+    var closeBtn = document.getElementById("ndsp-trial-welcome-close");
+
+    if (startBtn) startBtn.addEventListener("click", closeModal);
+    if (closeBtn) closeBtn.addEventListener("click", closeModal);
+
+    overlay.addEventListener("click", function (e) {
+      if (e.target === overlay) closeModal();
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeModal();
+    });
+
+    var seen = "0";
+    try { seen = sessionStorage.getItem(STORAGE_KEY) || "0"; } catch (e) {}
+
+    if (seen !== "1") {
+      setTimeout(openModal, 450);
+    }
+
+    window.NDSP_TRIAL_WELCOME_MODAL_V1 = {
+      marker: MARKER,
+      open: openModal,
+      close: closeModal,
+      reset: function () {
+        try { sessionStorage.removeItem(STORAGE_KEY); } catch (e) {}
+        openModal();
+      }
+    };
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot);
+  } else {
+    boot();
+  }
+})();
+</script>
+<!-- /NDSP_TRIAL_WELCOME_MODAL_V1 -->
+
+
+
+
+<!-- NDSP_STRICT_ELITE_ONLY_BUTTONS_V2 -->
+<style id="ndsp-strict-elite-only-style">
+  .ndsp-non-elite-plan-button-hidden {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+  .ndsp-non-elite-plan-locked-note {
+    margin-top: 14px !important;
+    padding: 12px 14px !important;
+    border-radius: 14px !important;
+    border: 1px solid rgba(245, 158, 11, .22) !important;
+    background: rgba(245, 158, 11, .08) !important;
+    color: #fef3c7 !important;
+    font-size: 13px !important;
+    line-height: 1.8 !important;
+    text-align: center !important;
+    direction: rtl !important;
+  }
+
+  .ndsp-non-elite-plan-locked-note small {
+    display: block !important;
+    margin-top: 4px !important;
+    color: #94a3b8 !important;
+    font-size: 11px !important;
+  }
+</style>
+
+<script id="ndsp-strict-elite-only-script">
+(function () {
+  var MARKER = "NDSP_STRICT_ELITE_ONLY_BUTTONS_V2";
+
+  function norm(value) {
+    return String(value || "")
+      .replace(/\s+/g, " ")
+      .trim()
+      .toLowerCase();
+  }
+
+  function isChoosePlanButton(el) {
+    if (!el) return false;
+
+    var text = norm(el.innerText || el.textContent || "");
+    var href = norm(el.getAttribute && el.getAttribute("href"));
+    var aria = norm(el.getAttribute && el.getAttribute("aria-label"));
+    var title = norm(el.getAttribute && el.getAttribute("title"));
+
+    return (
+      text === "اختيار الباقة" ||
+      text.indexOf("اختيار الباقة") !== -1 ||
+      text.indexOf("اختر الباقة") !== -1 ||
+      text.indexOf("choose plan") !== -1 ||
+      text.indexOf("select plan") !== -1 ||
+      aria.indexOf("اختيار الباقة") !== -1 ||
+      title.indexOf("اختيار الباقة") !== -1 ||
+      href.indexOf("checkout") !== -1 ||
+      href.indexOf("plan=") !== -1
+    );
+  }
+
+  function hasEliteIdentity(text) {
+    text = norm(text);
+
+    return (
+      text.indexOf("elite") !== -1 ||
+      text.indexOf("إيليت") !== -1 ||
+      text.indexOf("ايليت") !== -1 ||
+      text.indexOf("النخبة") !== -1
+    );
+  }
+
+  function hasOtherPlanIdentity(text) {
+    text = norm(text);
+
+    return (
+      text.indexOf("basic") !== -1 ||
+      text.indexOf("pro") !== -1 ||
+      text.indexOf("sovereign") !== -1 ||
+      text.indexOf("trial") !== -1 ||
+      text.indexOf("التجربة") !== -1 ||
+      text.indexOf("تجربة مجانية") !== -1 ||
+      text.indexOf("أساسية") !== -1 ||
+      text.indexOf("احترافية") !== -1 ||
+      text.indexOf("سيادية") !== -1
+    );
+  }
+
+  function scoreAsPlanCard(node, button) {
+    if (!node || node === document.body || node === document.documentElement) return -9999;
+
+    var text = norm(node.innerText || node.textContent || "");
+    var rect;
+
+    try {
+      rect = node.getBoundingClientRect();
+    } catch (e) {
+      rect = { width: 0, height: 0 };
+    }
+
+    var score = 0;
+
+    if (node.contains(button)) score += 30;
+    if (text.indexOf("اختيار الباقة") !== -1) score += 20;
+    if (text.indexOf("المخفي عنها") !== -1) score += 12;
+    if (text.indexOf("hidden") !== -1) score += 6;
+    if (hasEliteIdentity(text)) score += 20;
+    if (hasOtherPlanIdentity(text)) score += 8;
+
+    if (rect.width >= 180 && rect.width <= 520) score += 15;
+    if (rect.height >= 220 && rect.height <= 1200) score += 15;
+
+    if (text.length > 2500) score -= 80;
+    if (text.length > 5000) score -= 200;
+
+    return score;
+  }
+
+  function findNearestPlanCard(button) {
+    var best = null;
+    var bestScore = -9999;
+    var node = button;
+    var depth = 0;
+
+    while (node && node !== document.body && depth < 12) {
+      var score = scoreAsPlanCard(node, button);
+
+      if (score > bestScore) {
+        bestScore = score;
+        best = node;
+      }
+
+      node = node.parentElement;
+      depth += 1;
+    }
+
+    return best || button.parentElement || button;
+  }
+
+  function addLockedNote(card) {
+    if (!card || !card.appendChild) return;
+    if (card.querySelector && card.querySelector(".ndsp-non-elite-plan-locked-note")) return;
+
+    var note = document.createElement("div");
+    note.className = "ndsp-non-elite-plan-locked-note";
+    note.innerHTML =
+      "هذه الباقة مقفلة أثناء مرحلة التجربة الحالية." +
+      "<small>سيتم تفعيل أزرار الاختيار والدفع بعد انتهاء فترة التجربة الرسمية.</small>";
+
+    card.appendChild(note);
+  }
+
+  function hideNonEliteButtons() {
+    var buttons = Array.prototype.slice.call(
+      document.querySelectorAll("a, button, [role='button']")
+    ).filter(isChoosePlanButton);
+
+    var total = 0;
+    var hidden = 0;
+    var kept = 0;
+
+    buttons.forEach(function (button) {
+      total += 1;
+
+      var card = findNearestPlanCard(button);
+      var cardText = norm(card && (card.innerText || card.textContent || ""));
+
+      var isElite = hasEliteIdentity(cardText);
+
+      if (isElite) {
+        button.classList.remove("ndsp-non-elite-plan-button-hidden");
+        button.removeAttribute("data-ndsp-non-elite-hidden");
+        button.removeAttribute("aria-disabled");
+        button.style.display = "";
+        button.style.visibility = "";
+        button.style.pointerEvents = "";
+        kept += 1;
+      } else {
+        button.classList.add("ndsp-non-elite-plan-button-hidden");
+        button.setAttribute("data-ndsp-non-elite-hidden", "true");
+        button.setAttribute("aria-disabled", "true");
+        button.style.display = "none";
+        button.style.visibility = "hidden";
+        button.style.pointerEvents = "none";
+
+        button.onclick = function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          return false;
+        };
+
+        addLockedNote(card);
+        hidden += 1;
+      }
+    });
+
+    window.NDSP_STRICT_ELITE_ONLY_BUTTONS_V2 = {
+      marker: MARKER,
+      totalChooseButtons: total,
+      hiddenNonEliteButtons: hidden,
+      keptEliteButtons: kept,
+      rerun: hideNonEliteButtons
+    };
+
+    return { total: total, hidden: hidden, kept: kept };
+  }
+
+  function boot() {
+    hideNonEliteButtons();
+
+    var tries = 0;
+    var timer = setInterval(function () {
+      tries += 1;
+      hideNonEliteButtons();
+
+      if (tries >= 40) {
+        clearInterval(timer);
+      }
+    }, 250);
+
+    try {
+      var observer = new MutationObserver(function () {
+        hideNonEliteButtons();
+      });
+
+      observer.observe(document.documentElement, {
+        childList: true,
+        subtree: true,
+        characterData: true
+      });
+    } catch (e) {}
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot);
+  } else {
+    boot();
+  }
+})();
+</script>
+<!-- /NDSP_STRICT_ELITE_ONLY_BUTTONS_V2 -->
+
+
+<!-- NDSP_CLEAN_LANGUAGE_ENGINE_V1 -->
+<style id="ndsp-clean-language-engine-style">
+  #ndsp-lang-switcher {
+    position: fixed;
+    top: 74px;
+    inset-inline-end: 18px;
+    z-index: 999998;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, .24);
+    background: rgba(2, 6, 23, .88);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 16px 42px rgba(0,0,0,.28);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    direction: ltr;
+  }
+
+  #ndsp-lang-switcher button {
+    border: 0;
+    cursor: pointer;
+    padding: 7px 11px;
+    border-radius: 999px;
+    background: transparent;
+    color: #cbd5e1;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: .04em;
+    line-height: 1;
+  }
+
+  #ndsp-lang-switcher button[aria-pressed="true"] {
+    background: linear-gradient(135deg, rgba(34,211,238,.20), rgba(245,158,11,.18));
+    color: #f8fafc;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.10);
+  }
+
+  body.ndsp-lang-en { direction: ltr; }
+  body.ndsp-lang-ar { direction: rtl; }
+
+  body.ndsp-lang-en main,
+  body.ndsp-lang-en section,
+  body.ndsp-lang-en header,
+  body.ndsp-lang-en footer,
+  body.ndsp-lang-en article,
+  body.ndsp-lang-en div,
+  body.ndsp-lang-en p,
+  body.ndsp-lang-en h1,
+  body.ndsp-lang-en h2,
+  body.ndsp-lang-en h3,
+  body.ndsp-lang-en h4,
+  body.ndsp-lang-en li {
+    direction: ltr;
+  }
+
+  body.ndsp-lang-ar main,
+  body.ndsp-lang-ar section,
+  body.ndsp-lang-ar header,
+  body.ndsp-lang-ar footer,
+  body.ndsp-lang-ar article {
+    direction: rtl;
+  }
+
+  body.ndsp-language-debug [data-ndsp-untranslated="true"] {
+    outline: 1px dashed #f59e0b !important;
+    outline-offset: 3px;
+  }
+
+  @media (max-width: 720px) {
+    #ndsp-lang-switcher {
+      top: auto;
+      bottom: 16px;
+      inset-inline-end: 14px;
+    }
+  }
+</style>
+
+<script id="ndsp-clean-language-engine-script">
+(function () {
+  "use strict";
+
+  var MARKER = "NDSP_CLEAN_LANGUAGE_ENGINE_V1";
+  var STORAGE_KEY = "ndsp_language";
+  var applying = false;
+  var observerTimer = null;
+
+  var AR_SAFE_DESC = "منصة دعم قرار آمنة لا تقدم توصيات مالية مباشرة، بل تعرض سياقًا تحليليًا، حالة المخاطر، جودة القرار، ورؤية منظمة تساعد المستخدم على الفهم.";
+  var EN_SAFE_DESC = "NDSP is a secure decision-support platform. It does not provide direct financial recommendations; instead, it presents analytical context, risk status, decision quality, and structured insight to help users understand the market.";
+
+  var AR_TO_EN = {
+    "NDSP — منصة نواف لدعم القرار": "NDSP — Institutional Decision Support Platform",
+    "افهم السياق السوقي • قيّم السيناريوهات • اتخذ قرارات أكثر وعياً": "Understand market context • Assess scenarios • Make more informed decisions",
+    "⚠️ ليست توصيات تداول — أداة تحليل تعليمية محكومة": "⚠️ Not trading signals — a governed educational analysis tool",
+    "منصة دعم قرار آمنة لا تقدم توصيات مالية مباشرة، بل تعرض سياقًا تحليليًا، حالة المخاطر، جودة القرار، ورؤية منظمة تساعد المستخدم على الفهم.": EN_SAFE_DESC,
+
+    "رسالة الترحيب": "Welcome Message",
+    "من حرصنا على إرضائك ومنحك فرصة عادلة للاطلاع على قوة المنظومة، نقدم لك تجربة تعريفية لمدة 16 يومًا تدريجيًا قبل أي التزام NDSP تتعرف خلالها على": "To ensure a fair and useful evaluation, NDSP provides a 16-day guided trial so you can explore the platform capabilities before making any commitment.",
+    "ابدأ التجربة": "Start Trial",
+    "إبدأ التجربة": "Start Trial",
+    "استعراض رحلة 16 يوم": "Explore the 16-Day Journey",
+
+    "الحالة": "Status",
+    "زائر": "Visitor",
+    "سجّل لديك تجربة 16 يوم.": "You have a 16-day trial available.",
+    "متصل عبر API": "Connected via API",
+    "التسجيل والدخول والاستبيان متصلون بالـ PostgreSQL.": "Registration, login, and survey are connected to PostgreSQL.",
+    "التواصل": "Contact",
+    "البريد الرسمي للاستفسار والدعم.": "Official email for inquiries and support.",
+
+    "مقاعد تجربة NDSP محدودة": "NDSP Trial Seats Are Limited",
+    "تم تقسيم مقاعد التجربة لضمان جودة التقييم وتنوع الملاحظات قبل الإطلاق المدفوع.": "Trial seats are divided to ensure high-quality evaluation and diverse feedback before paid launch.",
+    "متخصص / أكاديمي": "Academic / Specialist",
+    "مستخدم عادي / مبتدئ": "Ordinary / Beginner User",
+    "خاص / مميز": "Premium / Private",
+    "مخصصة للمراجعين ذوي الخبرة، المختصين، والمهتمين بالتقييم المنهجي.": "For experienced reviewers, specialists, and structured evaluators.",
+    "مخصصة لاختبار وضوح التجربة للمستخدمين الجدد وغير المتخصصين.": "For validating clarity and usability with new and non-specialist users.",
+    "مخصصة للمستخدمين المميزين أو ذوي الاستخدام المتقدم والملاحظات النوعية.": "For selected premium users, advanced usage, and high-value feedback.",
+    "إجمالي مقاعد التجربة: 50 مقعدًا": "Total trial seats: 50",
+
+    "الباقات ومزاياها": "Plans & Features",
+    "Plans ومزاياها": "Plans & Features",
+    "المميزات": "Features",
+    "المخفي عنها": "Hidden",
+    "المخفي عنه": "Hidden",
+    "اختيار الباقة": "Select Plan",
+    "اختر الباقة": "Select Plan",
+
+    "للمستخدم الجديد الذي يريد تجربة المنظومة وفهم الفكرة العامة.": "For new users who want to experience the platform and understand the general concept.",
+    "للمستخدم الجاد الذي يريد فهم أعمق للسياق والسيولة والمحاكاة.": "For serious users who want deeper understanding of context, liquidity, and simulation.",
+    "للمستخدم المتقدم الذي يريد تجربة تحليلية أوسع داخل المنظومة.": "For advanced users who want a broader analytical experience inside the platform.",
+    "للشركات والجهات التي تحتاج ربط NDSP داخل أنظمتها.": "For companies and organizations that need NDSP integration within their systems.",
+
+    "رؤية عامة لحالة السوق": "General market context view",
+    "استبيان اليوم السادس عشر": "Day-16 survey",
+    "FAQ الأمان والخصوصية": "Security and privacy FAQ",
+    "تنبيه قانوني واضح": "Clear legal disclosure",
+    "تحليل مخاطر وسياق متقدم": "Advanced risk and context analysis",
+    "تقارير تفسيرية أوضح": "Clearer explanatory reports",
+    "مستويات مخاطر وسياق أوسع": "Broader risk and context levels",
+    "تجربة 16 يوم كاملة": "Full 16-day trial",
+    "أولوية في الخصومات والعروض": "Priority discounts and offers",
+    "أولوية في تحديثات المنظومة": "Priority in platform updates",
+
+    "API Keys مؤسسية": "Institutional API Keys",
+    "Webhooks للإشارات العامة المنظمة": "Webhooks for governed public alerts",
+    "Rate Limits مخصصة": "Custom rate limits",
+    "ربط مع أنظمة داخلية": "Integration with internal systems",
+    "دعم فني ومراجعة تشغيلية": "Technical support and operational review",
+
+    "الخوارزميات الخام": "Raw algorithms",
+    "الطبقات المحمية بالكامل": "Fully protected layers",
+    "أسرار الترجيح الداخلي": "Internal weighting secrets",
+    "صلاحيات مالك النظام": "System owner permissions",
+    "خمس طبقات سيادية محمية": "Five protected sovereign layers",
+    "المنطق الخام": "Raw logic",
+    "صلاحيات الإدارة": "Admin permissions",
+    "مفاتيح API المؤسسية": "Institutional API keys",
+
+    "⚠️ تنبيه: NDSP أداة تحليل ودعم قرار تعليمية. لا تقدم نصائح استثمارية أو توصيات شراء/بيع أو إشارات تداول.": "⚠️ IMPORTANT: NDSP is an educational decision-support tool. It does NOT provide investment advice, buy/sell recommendations, or trading signals.",
+    "قراءة الإخلاء الكامل": "Full Disclaimer →",
+
+    "أخبار السوق المباشرة": "Live Market News",
+    "الرئيسية": "Home",
+    "التسجيل": "Register",
+    "الدخول": "Login",
+    "الباقات": "Plans",
+    "رحلة 16 يوم": "16-Day Journey",
+    "الاستبيان": "Survey",
+    "الدعم": "Support"
+  };
+
+  var EN_TO_AR = {};
+  Object.keys(AR_TO_EN).forEach(function (ar) {
+    EN_TO_AR[AR_TO_EN[ar]] = ar;
+  });
+
+  EN_TO_AR["NDSP — Institutional Decision Support Platform"] = "NDSP — منصة نواف لدعم القرار";
+  EN_TO_AR["Understand market context • Assess scenarios • Make more informed decisions"] = "افهم السياق السوقي • قيّم السيناريوهات • اتخذ قرارات أكثر وعياً";
+  EN_TO_AR["⚠️ Not trading signals — a governed educational analysis tool"] = "⚠️ ليست توصيات تداول — أداة تحليل تعليمية محكومة";
+  EN_TO_AR[EN_SAFE_DESC] = AR_SAFE_DESC;
+
+  function normalize(value) {
+    return String(value || "").replace(/\s+/g, " ").trim();
+  }
+
+  function hasArabic(value) {
+    return /[\u0600-\u06FF]/.test(String(value || ""));
+  }
+
+  function getLangFromUrl() {
+    try {
+      var params = new URLSearchParams(window.location.search);
+      var lang = String(params.get("lang") || params.get("locale") || "").toLowerCase();
+      if (lang === "ar" || lang === "en") return lang;
+    } catch (e) {}
+    return null;
+  }
+
+  function getLang() {
+    var fromUrl = getLangFromUrl();
+    if (fromUrl) return fromUrl;
+
+    try {
+      var saved = localStorage.getItem(STORAGE_KEY);
+      if (saved === "ar" || saved === "en") return saved;
+    } catch (e) {}
+
+    var htmlLang = String(document.documentElement.getAttribute("lang") || "").toLowerCase();
+    if (htmlLang.indexOf("en") === 0) return "en";
+    return "ar";
+  }
+
+  function shouldSkipElement(el) {
+    if (!el) return true;
+    var tag = (el.tagName || "").toLowerCase();
+    if (["script", "style", "noscript", "textarea", "code", "pre", "svg", "canvas"].indexOf(tag) !== -1) return true;
+    if (el.closest && el.closest("[data-no-i18n], .no-i18n, code, pre, script, style, .ndsp-live-news-track")) return true;
+    return false;
+  }
+
+  function isSafeDescription(text) {
+    var n = normalize(text);
+    return (
+      n.indexOf("منصة دعم قرار آمنة") !== -1 ||
+      n.indexOf("secure decision-support platform") !== -1 ||
+      n.indexOf("direct financial recommendations") !== -1
+    );
+  }
+
+  function translateValue(value, lang) {
+    var raw = String(value || "");
+    var n = normalize(raw);
+    if (!n) return raw;
+
+    if (lang === "en") {
+      if (/^P\s+—\s+Institutional Decision Support Platform$/i.test(n)) return "NDSP — Institutional Decision Support Platform";
+      if (isSafeDescription(n)) return EN_SAFE_DESC;
+      if (AR_TO_EN[n]) return AR_TO_EN[n];
+
+      var out = raw;
+      Object.keys(AR_TO_EN).sort(function (a, b) { return b.length - a.length; }).forEach(function (ar) {
+        if (ar.length < 8) return;
+        if (out.indexOf(ar) !== -1) out = out.split(ar).join(AR_TO_EN[ar]);
+      });
+
+      if (isSafeDescription(out)) return EN_SAFE_DESC;
+      return out;
+    }
+
+    if (lang === "ar") {
+      if (isSafeDescription(n)) return AR_SAFE_DESC;
+      if (EN_TO_AR[n]) return EN_TO_AR[n];
+
+      var arOut = raw;
+      Object.keys(EN_TO_AR).sort(function (a, b) { return b.length - a.length; }).forEach(function (en) {
+        if (en.length < 8) return;
+        if (arOut.indexOf(en) !== -1) arOut = arOut.split(en).join(EN_TO_AR[en]);
+      });
+
+      if (isSafeDescription(arOut)) return AR_SAFE_DESC;
+      return arOut;
+    }
+
+    return raw;
+  }
+
+  function translateTextNodes(root, lang) {
+    root = root || document.body;
+    if (!root) return;
+
+    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    var node;
+
+    while ((node = walker.nextNode())) {
+      if (!node.parentElement || shouldSkipElement(node.parentElement)) continue;
+
+      var current = node.nodeValue || "";
+      if (!normalize(current)) continue;
+
+      var translated = translateValue(current, lang);
+      if (translated !== current) node.nodeValue = translated;
+    }
+  }
+
+  function translateAttributes(root, lang) {
+    root = root || document;
+
+    var nodes = root.querySelectorAll
+      ? root.querySelectorAll("[title], [aria-label], [placeholder], [alt], input[type='button'], input[type='submit'], input[type='reset']")
+      : [];
+
+    nodes.forEach(function (el) {
+      if (!el || shouldSkipElement(el)) return;
+
+      ["title", "aria-label", "placeholder", "alt", "value"].forEach(function (attr) {
+        if (attr === "value") {
+          var tag = (el.tagName || "").toLowerCase();
+          var type = String(el.getAttribute("type") || "").toLowerCase();
+          if (!(tag === "input" && ["button", "submit", "reset"].indexOf(type) !== -1)) return;
+        }
+
+        if (!el.hasAttribute || !el.hasAttribute(attr)) return;
+
+        var current = el.getAttribute(attr);
+        if (!current || !normalize(current)) return;
+
+        var translated = translateValue(current, lang);
+        if (translated !== current) el.setAttribute(attr, translated);
+      });
+    });
+  }
+
+  function forceKnownSections(lang) {
+    document.querySelectorAll("h1").forEach(function (h) {
+      var t = normalize(h.textContent);
+      if (
+        t.indexOf("NDSP") !== -1 ||
+        t.indexOf("Institutional Decision Support") !== -1 ||
+        t.indexOf("دعم القرار") !== -1 ||
+        /^P\s+—\s+Institutional/i.test(t)
+      ) {
+        h.textContent = lang === "en"
+          ? "NDSP — Institutional Decision Support Platform"
+          : "NDSP — منصة نواف لدعم القرار";
+      }
+    });
+
+    document.querySelectorAll("p, .hero-description, .hero-disclaimer").forEach(function (el) {
+      var t = normalize(el.textContent);
+      if (isSafeDescription(t)) {
+        el.textContent = lang === "en" ? EN_SAFE_DESC : AR_SAFE_DESC;
+      }
+    });
+
+    var heroDesc = document.querySelector(".hero-description");
+    if (heroDesc) {
+      heroDesc.textContent = lang === "en"
+        ? "Understand market context • Assess scenarios • Make more informed decisions"
+        : "افهم السياق السوقي • قيّم السيناريوهات • اتخذ قرارات أكثر وعياً";
+    }
+
+    var heroDisclaimer = document.querySelector(".hero-disclaimer");
+    if (heroDisclaimer) {
+      heroDisclaimer.textContent = lang === "en"
+        ? "⚠️ Not trading signals — a governed educational analysis tool"
+        : "⚠️ ليست توصيات تداول — أداة تحليل تعليمية محكومة";
+    }
+
+    var legal = document.querySelector("#ndsp-legal-banner");
+    if (legal) {
+      var arSpan = legal.querySelector(".ndsp-legal-ar");
+      var enSpan = legal.querySelector(".ndsp-legal-en");
+      var linkAr = legal.querySelector(".ndsp-legal-link .ndsp-legal-ar");
+      var linkEn = legal.querySelector(".ndsp-legal-link .ndsp-legal-en");
+
+      if (arSpan) {
+        arSpan.textContent = "⚠️ تنبيه: NDSP أداة تحليل ودعم قرار تعليمية. لا تقدم نصائح استثمارية أو توصيات شراء/بيع أو إشارات تداول.";
+        arSpan.style.display = lang === "ar" ? "inline" : "none";
+      }
+
+      if (enSpan) {
+        enSpan.textContent = "⚠️ IMPORTANT: NDSP is an educational decision-support tool. It does NOT provide investment advice, buy/sell recommendations, or trading signals.";
+        enSpan.style.display = lang === "en" ? "inline" : "none";
+      }
+
+      if (linkAr) {
+        linkAr.textContent = "قراءة الإخلاء الكامل";
+        linkAr.style.display = lang === "ar" ? "inline" : "none";
+      }
+
+      if (linkEn) {
+        linkEn.textContent = "Full Disclaimer →";
+        linkEn.style.display = lang === "en" ? "inline" : "none";
+      }
+    }
+  }
+
+  function ensureSwitcher() {
+    var switcher = document.querySelector("#ndsp-lang-switcher");
+
+    if (!switcher) {
+      switcher = document.createElement("div");
+      switcher.id = "ndsp-lang-switcher";
+      switcher.setAttribute("role", "group");
+      switcher.setAttribute("aria-label", "Language switcher");
+      switcher.innerHTML =
+        '<button type="button" data-ndsp-lang="ar">عربي</button>' +
+        '<button type="button" data-ndsp-lang="en">EN</button>';
+      document.body.appendChild(switcher);
+    }
+
+    return switcher;
+  }
+
+  function bindLanguageButtons() {
+    var controls = Array.prototype.slice.call(document.querySelectorAll("button, a, [role='button'], [data-ndsp-lang], [data-lang], [data-language]"));
+    var bound = 0;
+
+    controls.forEach(function (el) {
+      var data = String(el.getAttribute("data-ndsp-lang") || el.getAttribute("data-lang") || el.getAttribute("data-language") || "").toLowerCase();
+      var text = normalize((el.textContent || "") + " " + (el.getAttribute("aria-label") || "") + " " + (el.getAttribute("title") || "")).toLowerCase();
+
+      var lang = null;
+      if (data === "ar" || text === "عربي" || text.indexOf("arabic") !== -1 || text.indexOf("العربية") !== -1) lang = "ar";
+      if (data === "en" || text === "en" || text === "english" || text.indexOf("english") !== -1) lang = "en";
+
+      if (!lang) return;
+
+      el.setAttribute("data-ndsp-lang", lang);
+      el.setAttribute("data-ndsp-language-bound", "true");
+
+      if (el.getAttribute("data-ndsp-clean-bound") !== "true") {
+        el.setAttribute("data-ndsp-clean-bound", "true");
+
+        el.addEventListener("click", function (event) {
+          event.preventDefault();
+          event.stopPropagation();
+          setLanguage(lang, true);
+        }, true);
+      }
+
+      bound++;
+    });
+
+    updateButtonState(getLang());
+    return bound;
+  }
+
+  function updateButtonState(lang) {
+    document.querySelectorAll("[data-ndsp-lang]").forEach(function (btn) {
+      btn.setAttribute("aria-pressed", btn.getAttribute("data-ndsp-lang") === lang ? "true" : "false");
+    });
+  }
+
+  function scanUntranslated(lang) {
+    var list = [];
+
+    if (lang !== "en") {
+      window.NDSP_LANGUAGE_AUDIT = { language: lang, untranslatedCount: 0, untranslated: [] };
+      return window.NDSP_LANGUAGE_AUDIT;
+    }
+
+    var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    var node;
+
+    while ((node = walker.nextNode())) {
+      if (!node.parentElement || shouldSkipElement(node.parentElement)) continue;
+
+      var text = normalize(node.nodeValue);
+      if (!text) continue;
+
+      if (hasArabic(text)) {
+        node.parentElement.setAttribute("data-ndsp-untranslated", "true");
+        list.push({
+          text: text.slice(0, 260),
+          tag: node.parentElement.tagName || "",
+          className: String(node.parentElement.className || "").slice(0, 160)
+        });
+      } else {
+        node.parentElement.removeAttribute("data-ndsp-untranslated");
+      }
+    }
+
+    window.NDSP_LANGUAGE_AUDIT = {
+      language: lang,
+      untranslatedCount: list.length,
+      untranslated: list.slice(0, 120)
+    };
+
+    return window.NDSP_LANGUAGE_AUDIT;
+  }
+
+  function setLanguage(lang, persist) {
+    if (lang !== "ar" && lang !== "en") lang = "ar";
+
+    if (persist) {
+      try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) {}
+    }
+
+    applying = true;
+
+    document.documentElement.setAttribute("lang", lang);
+    document.documentElement.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
+
+    if (document.body) {
+      document.body.classList.toggle("ndsp-lang-ar", lang === "ar");
+      document.body.classList.toggle("ndsp-lang-en", lang === "en");
+      document.body.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
+    }
+
+    ensureSwitcher();
+    bindLanguageButtons();
+    translateTextNodes(document.body, lang);
+    translateAttributes(document, lang);
+    forceKnownSections(lang);
+    updateButtonState(lang);
+    scanUntranslated(lang);
+
+    window.NDSP_LANGUAGE = {
+      marker: MARKER,
+      version: "1.0.0-forensic-clean",
+      language: lang,
+      dir: lang === "ar" ? "rtl" : "ltr",
+      setLanguage: function (nextLang) { return setLanguage(nextLang, true); },
+      rerun: function () { return setLanguage(getLang(), false); },
+      scan: function () { return scanUntranslated(getLang()); },
+      status: function () {
+        return {
+          marker: MARKER,
+          version: "1.0.0-forensic-clean",
+          language: document.documentElement.getAttribute("lang"),
+          dir: document.documentElement.getAttribute("dir"),
+          boundControls: document.querySelectorAll("[data-ndsp-language-bound='true']").length,
+          untranslatedCount: (window.NDSP_LANGUAGE_AUDIT && window.NDSP_LANGUAGE_AUDIT.untranslatedCount) || 0,
+          untranslated: (window.NDSP_LANGUAGE_AUDIT && window.NDSP_LANGUAGE_AUDIT.untranslated) || []
+        };
+      }
+    };
+
+    setTimeout(function () { applying = false; }, 120);
+    return lang;
+  }
+
+  function boot() {
+    ensureSwitcher();
+    bindLanguageButtons();
+    setLanguage(getLang(), false);
+
+    setTimeout(function () { setLanguage(getLang(), false); }, 150);
+    setTimeout(function () { setLanguage(getLang(), false); }, 500);
+    setTimeout(function () { setLanguage(getLang(), false); }, 1200);
+    setTimeout(function () { setLanguage(getLang(), false); }, 2500);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot);
+  } else {
+    boot();
+  }
+
+  try {
+    var observer = new MutationObserver(function () {
+      if (applying) return;
+
+      clearTimeout(observerTimer);
+      observerTimer = setTimeout(function () {
+        setLanguage(getLang(), false);
+      }, 180);
+    });
+
+    observer.observe(document.documentElement, {
+      childList: true,
+      subtree: true,
+      characterData: true,
+      attributes: true,
+      attributeFilter: ["title", "aria-label", "placeholder", "alt", "value"]
+    });
+  } catch (e) {}
+})();
+</script>
+<!-- /NDSP_CLEAN_LANGUAGE_ENGINE_V1 -->
+
+</body>
+</html>

@@ -1,0 +1,7 @@
+{
+  "brand_code": "NDSP",
+  "brand_name_en": "Nawaf Decision Support Platform",
+  "brand_name_ar": "منصة نواف لدعم القرار",
+  "public_short_name": "NDSP",
+  "operational_note": "Legacy service names and root folders are preserved temporarily to avoid production breakage."
+}

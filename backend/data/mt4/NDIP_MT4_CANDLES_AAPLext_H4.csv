@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+AAPL.ext,H4,2026.05.01 20:00:00,283.01000,283.34000,279.62000,280.54000,16146,280.42000,280.68000,26.00,0,0

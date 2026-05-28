@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+TRAVEL,D1,2026.05.01 00:00:00,6027.07000,6119.09000,5976.10000,5978.54000,35624,5974.50000,5987.75000,1325.00,0,0

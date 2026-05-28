@@ -1,0 +1,30 @@
+TDL:
+  enabled: true
+  weight: 0.5
+
+NMP:
+  enabled: true
+  weight: 0.5
+
+GOLDEN:
+  enabled: true
+  weight: 1.0
+
+RSI:
+  enabled: true
+  weight: 0.5
+
+Momentum:
+  enabled: true
+  weight: 0.5
+
+MTF:
+  enabled: true
+
+RISK:
+  enabled: true
+
+PORTFOLIO:
+  enabled: true
+  capital: 1000
+  risk_per_trade: 0.02

@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+SOYF,M15,2026.05.01 21:15:00,1202.26000,1202.26000,1200.99000,1200.99000,24,1200.99000,1202.25000,126.00,0,0

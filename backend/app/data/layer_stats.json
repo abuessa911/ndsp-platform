@@ -1,0 +1,9 @@
+{
+    "momentum": {"win": 0, "loss": 0},
+    "liquidity": {"win": 0, "loss": 0},
+    "regime": {"win": 0, "loss": 0},
+    "divergence": {"win": 0, "loss": 0},
+    "zones": {"win": 0, "loss": 0},
+    "orderflow": {"win": 0, "loss": 0},
+    "volatility": {"win": 0, "loss": 0}
+}

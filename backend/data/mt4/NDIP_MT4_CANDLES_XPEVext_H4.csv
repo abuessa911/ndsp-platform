@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+XPEV.ext,H4,2026.05.01 20:00:00,15.96000,16.02000,15.76000,15.80000,1349,15.80000,15.93000,13.00,0,0

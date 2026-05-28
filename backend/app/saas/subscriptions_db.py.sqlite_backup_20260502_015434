@@ -1,0 +1,822 @@
+from __future__ import annotations
+
+import sqlite3
+from pathlib import Path
+from datetime import datetime, timezone, timedelta
+
+
+def get_conn():
+    import sqlite3
+    from pathlib import Path
+
+    db_path = Path(__file__).resolve().parents[2] / "data" / "ndip_saas.sqlite3"
+    db_path.parent.mkdir(parents=True, exist_ok=True)
+
+    conn = sqlite3.connect(str(db_path))
+    conn.row_factory = sqlite3.Row
+    return conn
+
+
+DB_PATH = Path("data/ndip_saas.sqlite3")
+
+
+def _now() -> str:
+    return datetime.now(timezone.utc).isoformat()
+
+
+def _connect():
+    DB_PATH.parent.mkdir(parents=True, exist_ok=True)
+    return sqlite3.connect(DB_PATH)
+
+
+def init_db() -> None:
+    with _connect() as conn:
+        conn.execute("""
+        CREATE TABLE IF NOT EXISTS subscriptions (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            email TEXT,
+            telegram_id TEXT,
+            plan TEXT NOT NULL DEFAULT 'free',
+            status TEXT NOT NULL DEFAULT 'active',
+            expires_at TEXT,
+            created_at TEXT NOT NULL,
+            updated_at TEXT NOT NULL
+        )
+        """)
+        conn.execute("CREATE INDEX IF NOT EXISTS idx_sub_email ON subscriptions(email)")
+        conn.execute("CREATE INDEX IF NOT EXISTS idx_sub_telegram_id ON subscriptions(telegram_id)")
+        conn.commit()
+
+
+def upsert_subscription(
+    email: str | None = None,
+    telegram_id: str | None = None,
+    plan: str = "free",
+    status: str = "active",
+    days: int = 30,
+) -> dict:
+    init_db()
+
+    if not email and not telegram_id:
+        raise ValueError("email or telegram_id is required")
+
+    now = _now()
+    expires_at = (datetime.now(timezone.utc) + timedelta(days=days)).isoformat()
+
+    with _connect() as conn:
+        existing = None
+
+        if telegram_id:
+            existing = conn.execute(
+                "SELECT id FROM subscriptions WHERE telegram_id = ? LIMIT 1",
+                (telegram_id,),
+            ).fetchone()
+
+        if not existing and email:
+            existing = conn.execute(
+                "SELECT id FROM subscriptions WHERE email = ? LIMIT 1",
+                (email,),
+            ).fetchone()
+
+        if existing:
+            sub_id = existing[0]
+            conn.execute(
+                """
+                UPDATE subscriptions
+                SET email = COALESCE(?, email),
+                    telegram_id = COALESCE(?, telegram_id),
+                    plan = ?,
+                    status = ?,
+                    expires_at = ?,
+                    updated_at = ?
+                WHERE id = ?
+                """,
+                (email, telegram_id, plan, status, expires_at, now, sub_id),
+            )
+        else:
+            cur = conn.execute(
+                """
+                INSERT INTO subscriptions
+                (email, telegram_id, plan, status, expires_at, created_at, updated_at)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+                """,
+                (email, telegram_id, plan, status, expires_at, now, now),
+            )
+            sub_id = cur.lastrowid
+
+        conn.commit()
+
+    return get_subscription_by_id(sub_id)
+
+
+def get_subscription_by_id(sub_id: int) -> dict | None:
+    init_db()
+
+    with _connect() as conn:
+        conn.row_factory = sqlite3.Row
+        row = conn.execute(
+            "SELECT * FROM subscriptions WHERE id = ?",
+            (sub_id,),
+        ).fetchone()
+
+    return dict(row) if row else None
+
+
+def get_subscription(email: str | None = None, telegram_id: str | None = None) -> dict | None:
+    init_db()
+
+    if not email and not telegram_id:
+        return None
+
+    with _connect() as conn:
+        conn.row_factory = sqlite3.Row
+
+        if telegram_id:
+            row = conn.execute(
+                "SELECT * FROM subscriptions WHERE telegram_id = ? LIMIT 1",
+                (telegram_id,),
+            ).fetchone()
+            if row:
+                return dict(row)
+
+        if email:
+            row = conn.execute(
+                "SELECT * FROM subscriptions WHERE email = ? LIMIT 1",
+                (email,),
+            ).fetchone()
+            if row:
+                return dict(row)
+
+    return None
+
+
+def list_subscriptions() -> list[dict]:
+    init_db()
+
+    with _connect() as conn:
+        conn.row_factory = sqlite3.Row
+        rows = conn.execute(
+            "SELECT * FROM subscriptions ORDER BY id DESC"
+        ).fetchall()
+
+    return [dict(row) for row in rows]
+
+
+def cancel_subscription(email: str | None = None, telegram_id: str | None = None) -> dict | None:
+    init_db()
+
+    sub = get_subscription(email=email, telegram_id=telegram_id)
+    if not sub:
+        return None
+
+    now = _now()
+
+    with _connect() as conn:
+        conn.execute(
+            "UPDATE subscriptions SET status = 'cancelled', updated_at = ? WHERE id = ?",
+            (now, sub["id"]),
+        )
+        conn.commit()
+
+    return get_subscription_by_id(sub["id"])
+
+
+def is_active_subscription(sub: dict | None) -> bool:
+    if not sub:
+        return False
+
+    if sub.get("status") != "active":
+        return False
+
+    expires_at = sub.get("expires_at")
+    if not expires_at:
+        return False
+
+    try:
+        exp = datetime.fromisoformat(expires_at)
+        if exp.tzinfo is None:
+            exp = exp.replace(tzinfo=timezone.utc)
+        return exp > datetime.now(timezone.utc)
+    except Exception:
+        return False
+
+
+def init_invites_table() -> None:
+    init_db()
+    with _connect() as conn:
+        conn.execute("""
+        CREATE TABLE IF NOT EXISTS subscription_invites (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            subscription_id INTEGER NOT NULL,
+            channel TEXT NOT NULL,
+            invite_link TEXT NOT NULL,
+            status TEXT NOT NULL DEFAULT 'active',
+            created_at TEXT NOT NULL,
+            revoked_at TEXT,
+            raw TEXT
+        )
+        """)
+        conn.execute("CREATE INDEX IF NOT EXISTS idx_invites_sub_id ON subscription_invites(subscription_id)")
+        conn.execute("CREATE INDEX IF NOT EXISTS idx_invites_link ON subscription_invites(invite_link)")
+        conn.commit()
+
+
+def save_invite(
+    subscription_id: int,
+    channel: str,
+    invite_link: str,
+    raw: str | None = None,
+) -> dict:
+    init_invites_table()
+    now = _now()
+
+    with _connect() as conn:
+        cur = conn.execute(
+            """
+            INSERT INTO subscription_invites
+            (subscription_id, channel, invite_link, status, created_at, raw)
+            VALUES (?, ?, ?, 'active', ?, ?)
+            """,
+            (subscription_id, channel, invite_link, now, raw),
+        )
+        invite_id = cur.lastrowid
+        conn.commit()
+
+    return get_invite_by_id(invite_id)
+
+
+def get_invite_by_id(invite_id: int) -> dict | None:
+    init_invites_table()
+
+    with _connect() as conn:
+        conn.row_factory = sqlite3.Row
+        row = conn.execute(
+            "SELECT * FROM subscription_invites WHERE id = ?",
+            (invite_id,),
+        ).fetchone()
+
+    return dict(row) if row else None
+
+
+def list_invites(subscription_id: int | None = None) -> list[dict]:
+    init_invites_table()
+
+    with _connect() as conn:
+        conn.row_factory = sqlite3.Row
+
+        if subscription_id:
+            rows = conn.execute(
+                "SELECT * FROM subscription_invites WHERE subscription_id = ? ORDER BY id DESC",
+                (subscription_id,),
+            ).fetchall()
+        else:
+            rows = conn.execute(
+                "SELECT * FROM subscription_invites ORDER BY id DESC"
+            ).fetchall()
+
+    return [dict(row) for row in rows]
+
+
+def mark_invite_revoked(invite_link: str) -> dict | None:
+    init_invites_table()
+    now = _now()
+
+    with _connect() as conn:
+        conn.execute(
+            """
+            UPDATE subscription_invites
+            SET status = 'revoked',
+                revoked_at = ?
+            WHERE invite_link = ?
+            """,
+            (now, invite_link),
+        )
+        conn.commit()
+
+        conn.row_factory = sqlite3.Row
+        row = conn.execute(
+            "SELECT * FROM subscription_invites WHERE invite_link = ? ORDER BY id DESC LIMIT 1",
+            (invite_link,),
+        ).fetchone()
+
+    return dict(row) if row else None
+
+
+def init_telegram_users_table() -> None:
+    init_db()
+    with _connect() as conn:
+        conn.execute("""
+        CREATE TABLE IF NOT EXISTS telegram_users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            telegram_user_id TEXT NOT NULL UNIQUE,
+            username TEXT,
+            first_name TEXT,
+            last_name TEXT,
+            chat_id TEXT,
+            created_at TEXT NOT NULL,
+            updated_at TEXT NOT NULL
+        )
+        """)
+        conn.commit()
+
+
+def upsert_telegram_user(
+    telegram_user_id: str,
+    username: str | None = None,
+    first_name: str | None = None,
+    last_name: str | None = None,
+    chat_id: str | None = None,
+) -> dict:
+    init_telegram_users_table()
+    now = _now()
+
+    with _connect() as conn:
+        existing = conn.execute(
+            "SELECT id FROM telegram_users WHERE telegram_user_id = ? LIMIT 1",
+            (telegram_user_id,),
+        ).fetchone()
+
+        if existing:
+            user_id = existing[0]
+            conn.execute(
+                """
+                UPDATE telegram_users
+                SET username = ?,
+                    first_name = ?,
+                    last_name = ?,
+                    chat_id = ?,
+                    updated_at = ?
+                WHERE id = ?
+                """,
+                (username, first_name, last_name, chat_id, now, user_id),
+            )
+        else:
+            cur = conn.execute(
+                """
+                INSERT INTO telegram_users
+                (telegram_user_id, username, first_name, last_name, chat_id, created_at, updated_at)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+                """,
+                (telegram_user_id, username, first_name, last_name, chat_id, now, now),
+            )
+            user_id = cur.lastrowid
+
+        conn.commit()
+
+    return get_telegram_user(telegram_user_id)
+
+
+def get_telegram_user(telegram_user_id: str) -> dict | None:
+    init_telegram_users_table()
+
+    with _connect() as conn:
+        conn.row_factory = sqlite3.Row
+        row = conn.execute(
+            "SELECT * FROM telegram_users WHERE telegram_user_id = ? LIMIT 1",
+            (telegram_user_id,),
+        ).fetchone()
+
+    return dict(row) if row else None
+
+
+def list_telegram_users() -> list[dict]:
+    init_telegram_users_table()
+
+    with _connect() as conn:
+        conn.row_factory = sqlite3.Row
+        rows = conn.execute(
+            "SELECT * FROM telegram_users ORDER BY id DESC"
+        ).fetchall()
+
+    return [dict(row) for row in rows]
+
+
+def mark_active_invites_revoked_for_other_channels(
+    subscription_id: int,
+    keep_channel: str,
+) -> list[dict]:
+    init_invites_table()
+    now = _now()
+
+    with _connect() as conn:
+        conn.row_factory = sqlite3.Row
+
+        rows = conn.execute(
+            """
+            SELECT * FROM subscription_invites
+            WHERE subscription_id = ?
+              AND status = 'active'
+              AND channel != ?
+            ORDER BY id DESC
+            """,
+            (subscription_id, keep_channel),
+        ).fetchall()
+
+        conn.execute(
+            """
+            UPDATE subscription_invites
+            SET status = 'revoked',
+                revoked_at = ?
+            WHERE subscription_id = ?
+              AND status = 'active'
+              AND channel != ?
+            """,
+            (now, subscription_id, keep_channel),
+        )
+        conn.commit()
+
+    return [dict(row) for row in rows]
+
+
+def mark_active_invites_revoked_for_channel(
+    subscription_id: int,
+    channel: str,
+) -> list[dict]:
+    init_invites_table()
+    now = _now()
+
+    with _connect() as conn:
+        conn.row_factory = sqlite3.Row
+
+        rows = conn.execute(
+            """
+            SELECT * FROM subscription_invites
+            WHERE subscription_id = ?
+              AND status = 'active'
+              AND channel = ?
+            ORDER BY id DESC
+            """,
+            (subscription_id, channel),
+        ).fetchall()
+
+        conn.execute(
+            """
+            UPDATE subscription_invites
+            SET status = 'revoked',
+                revoked_at = ?
+            WHERE subscription_id = ?
+              AND status = 'active'
+              AND channel = ?
+            """,
+            (now, subscription_id, channel),
+        )
+        conn.commit()
+
+    return [dict(row) for row in rows]
+
+
+def init_payments_table() -> None:
+    init_db()
+    with _connect() as conn:
+        conn.execute("""
+        CREATE TABLE IF NOT EXISTS payments (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            payment_ref TEXT NOT NULL,
+            provider TEXT NOT NULL DEFAULT 'manual',
+            email TEXT,
+            telegram_id TEXT,
+            plan TEXT NOT NULL,
+            amount TEXT,
+            currency TEXT,
+            status TEXT NOT NULL DEFAULT 'confirmed',
+            subscription_id INTEGER,
+            created_at TEXT NOT NULL,
+            raw TEXT
+        )
+        """)
+        conn.execute("CREATE INDEX IF NOT EXISTS idx_payments_ref ON payments(payment_ref)")
+        conn.execute("CREATE INDEX IF NOT EXISTS idx_payments_sub_id ON payments(subscription_id)")
+        conn.commit()
+
+
+def save_payment(
+    payment_ref: str,
+    provider: str,
+    email: str | None,
+    telegram_id: str | None,
+    plan: str,
+    amount: str | None = None,
+    currency: str | None = None,
+    status: str = "confirmed",
+    subscription_id: int | None = None,
+    raw: str | None = None,
+) -> dict:
+    init_payments_table()
+    now = _now()
+
+    with _connect() as conn:
+        cur = conn.execute(
+            """
+            INSERT INTO payments
+            (payment_ref, provider, email, telegram_id, plan, amount, currency, status, subscription_id, created_at, raw)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            (payment_ref, provider, email, telegram_id, plan, amount, currency, status, subscription_id, now, raw),
+        )
+        payment_id = cur.lastrowid
+        conn.commit()
+
+    return get_payment_by_id(payment_id)
+
+
+def get_payment_by_id(payment_id: int) -> dict | None:
+    init_payments_table()
+
+    with _connect() as conn:
+        conn.row_factory = sqlite3.Row
+        row = conn.execute(
+            "SELECT * FROM payments WHERE id = ?",
+            (payment_id,),
+        ).fetchone()
+
+    return dict(row) if row else None
+
+
+def list_payments() -> list[dict]:
+    init_payments_table()
+
+    with _connect() as conn:
+        conn.row_factory = sqlite3.Row
+        rows = conn.execute(
+            "SELECT * FROM payments ORDER BY id DESC"
+        ).fetchall()
+
+    return [dict(row) for row in rows]
+
+
+def init_subscription_leads_table() -> None:
+    init_db()
+    with _connect() as conn:
+        conn.execute("""
+        CREATE TABLE IF NOT EXISTS subscription_leads (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            telegram_user_id TEXT NOT NULL,
+            username TEXT,
+            first_name TEXT,
+            plan TEXT NOT NULL,
+            status TEXT NOT NULL DEFAULT 'pending',
+            source TEXT NOT NULL DEFAULT 'telegram_start',
+            created_at TEXT NOT NULL,
+            updated_at TEXT NOT NULL
+        )
+        """)
+        conn.execute("CREATE INDEX IF NOT EXISTS idx_subscription_leads_tg ON subscription_leads(telegram_user_id)")
+        conn.execute("CREATE INDEX IF NOT EXISTS idx_subscription_leads_status ON subscription_leads(status)")
+        conn.commit()
+
+
+def upsert_subscription_lead(
+    telegram_user_id: str,
+    plan: str,
+    username: str | None = None,
+    first_name: str | None = None,
+    status: str = "pending",
+    source: str = "telegram_start",
+) -> dict:
+    init_subscription_leads_table()
+    now = _now()
+
+    with _connect() as conn:
+        conn.row_factory = sqlite3.Row
+
+        row = conn.execute(
+            """
+            SELECT id FROM subscription_leads
+            WHERE telegram_user_id = ?
+              AND plan = ?
+              AND status = 'pending'
+            LIMIT 1
+            """,
+            (telegram_user_id, plan),
+        ).fetchone()
+
+        if row:
+            lead_id = row["id"]
+            conn.execute(
+                """
+                UPDATE subscription_leads
+                SET username = ?,
+                    first_name = ?,
+                    source = ?,
+                    updated_at = ?
+                WHERE id = ?
+                """,
+                (username, first_name, source, now, lead_id),
+            )
+        else:
+            cur = conn.execute(
+                """
+                INSERT INTO subscription_leads
+                (telegram_user_id, username, first_name, plan, status, source, created_at, updated_at)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (telegram_user_id, username, first_name, plan, status, source, now, now),
+            )
+            lead_id = cur.lastrowid
+
+        conn.commit()
+
+    return get_subscription_lead_by_id(lead_id)
+
+
+def get_subscription_lead_by_id(lead_id: int) -> dict | None:
+    init_subscription_leads_table()
+
+    with _connect() as conn:
+        conn.row_factory = sqlite3.Row
+        row = conn.execute(
+            "SELECT * FROM subscription_leads WHERE id = ?",
+            (lead_id,),
+        ).fetchone()
+
+    return dict(row) if row else None
+
+
+def list_subscription_leads(status: str | None = None) -> list[dict]:
+    init_subscription_leads_table()
+
+    with _connect() as conn:
+        conn.row_factory = sqlite3.Row
+
+        if status:
+            rows = conn.execute(
+                "SELECT * FROM subscription_leads WHERE status = ? ORDER BY id DESC",
+                (status,),
+            ).fetchall()
+        else:
+            rows = conn.execute(
+                "SELECT * FROM subscription_leads ORDER BY id DESC"
+            ).fetchall()
+
+    return [dict(row) for row in rows]
+
+
+def mark_subscription_lead_status(lead_id: int, status: str) -> dict | None:
+    init_subscription_leads_table()
+    now = _now()
+
+    with _connect() as conn:
+        conn.execute(
+            """
+            UPDATE subscription_leads
+            SET status = ?,
+                updated_at = ?
+            WHERE id = ?
+            """,
+            (status, now, lead_id),
+        )
+        conn.commit()
+
+    return get_subscription_lead_by_id(lead_id)
+
+
+def list_subscriptions(limit: int = 200) -> list[dict]:
+    with get_conn() as conn:
+        rows = conn.execute(
+            """
+            SELECT *
+            FROM subscriptions
+            ORDER BY updated_at DESC
+            LIMIT ?
+            """,
+            (limit,),
+        ).fetchall()
+
+    return [dict(row) for row in rows]
+
+
+def list_subscription_invites(limit: int = 200) -> list[dict]:
+    with get_conn() as conn:
+        rows = conn.execute(
+            """
+            SELECT *
+            FROM subscription_invites
+            ORDER BY created_at DESC
+            LIMIT ?
+            """,
+            (limit,),
+        ).fetchall()
+
+    return [dict(row) for row in rows]
+
+
+def get_payment_by_ref(provider: str, payment_ref: str) -> dict | None:
+    with get_conn() as conn:
+        row = conn.execute(
+            """
+            SELECT *
+            FROM payments
+            WHERE provider = ?
+              AND payment_ref = ?
+            ORDER BY id DESC
+            LIMIT 1
+            """,
+            (provider, payment_ref),
+        ).fetchone()
+
+    return dict(row) if row else None
+
+
+def init_audit_events_table() -> None:
+    with get_conn() as conn:
+        conn.execute(
+            """
+            CREATE TABLE IF NOT EXISTS audit_events (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                event_type TEXT NOT NULL,
+                entity_type TEXT,
+                entity_id TEXT,
+                actor_type TEXT NOT NULL DEFAULT 'system',
+                actor_id TEXT,
+                message TEXT,
+                payload_json TEXT,
+                created_at TEXT NOT NULL
+            )
+            """
+        )
+        conn.execute(
+            """
+            CREATE INDEX IF NOT EXISTS idx_audit_events_type
+            ON audit_events(event_type)
+            """
+        )
+        conn.execute(
+            """
+            CREATE INDEX IF NOT EXISTS idx_audit_events_created
+            ON audit_events(created_at)
+            """
+        )
+        conn.commit()
+
+
+def save_audit_event(
+    event_type: str,
+    entity_type: str | None = None,
+    entity_id: str | None = None,
+    actor_type: str = "system",
+    actor_id: str | None = None,
+    message: str | None = None,
+    payload_json: str | None = None,
+) -> dict:
+    from datetime import datetime, timezone
+
+    init_audit_events_table()
+
+    now = datetime.now(timezone.utc).isoformat()
+
+    with get_conn() as conn:
+        cur = conn.execute(
+            """
+            INSERT INTO audit_events (
+                event_type,
+                entity_type,
+                entity_id,
+                actor_type,
+                actor_id,
+                message,
+                payload_json,
+                created_at
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            (
+                event_type,
+                entity_type,
+                entity_id,
+                actor_type,
+                actor_id,
+                message,
+                payload_json,
+                now,
+            ),
+        )
+
+        row = conn.execute(
+            """
+            SELECT *
+            FROM audit_events
+            WHERE id = ?
+            """,
+            (cur.lastrowid,),
+        ).fetchone()
+
+        conn.commit()
+
+    return dict(row)
+
+
+def list_audit_events(limit: int = 200) -> list[dict]:
+    init_audit_events_table()
+
+    with get_conn() as conn:
+        rows = conn.execute(
+            """
+            SELECT *
+            FROM audit_events
+            ORDER BY id DESC
+            LIMIT ?
+            """,
+            (limit,),
+        ).fetchall()
+
+    return [dict(row) for row in rows]

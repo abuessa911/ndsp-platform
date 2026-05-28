@@ -1,0 +1,12 @@
+{
+  "enabled": true,
+  "plan": "Elite",
+  "trial_days": 14,
+  "ordinary_limit": 30,
+  "analyst_manual_limit": 10,
+  "ordinary_auto_open": true,
+  "analyst_manual_only": true,
+  "after_expiry_status": "closed",
+  "public_message_ar": "الإطلاق الحالي مخصص لمجموعة محدودة من المستخدمين والمحللين وبكامل ميزات Elite.",
+  "public_message_en": "The current launch is limited to selected users and analysts with full Elite features."
+}

@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+AUDCAD,H4,2026.05.01 20:00:00,0.97969,0.98009,0.97875,0.97899,8799,0.97899,0.97928,29.00,0,0

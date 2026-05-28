@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+CRM.ext,H4,2026.05.01 20:00:00,182.25000,184.09000,182.25000,183.83000,5400,183.72000,184.51000,79.00,0,0

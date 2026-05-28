@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+NickelSpot,M15,2026.05.01 20:45:00,19291.00000,19356.75000,19264.75000,19293.25000,70,19293.25000,19495.50000,20225.00,0,0

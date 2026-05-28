@@ -1,0 +1,51 @@
+{
+  "EURUSD": {
+    "hash": "81a21e926790f1bd1b6d1356f15f54d48cbc5f77846ca8922842b96d69051943",
+    "last_sent": 1777766050.3454847,
+    "sent": true,
+    "reason": "free=True:-1003918395339:ok | pro=True:-1003491841685:ok | vip=True:-1003793881886:ok",
+    "updated_at": "2026-05-02T23:54:10.345489+00:00"
+  },
+  "GBPUSD": {
+    "hash": "8e05d34d4fbf72301bfc3ec1c5af6e6a1a6d018fb964926dfa0da995b88597ec",
+    "last_sent": 1777766050.966986,
+    "sent": true,
+    "reason": "free=True:-1003918395339:ok | pro=True:-1003491841685:ok | vip=True:-1003793881886:ok",
+    "updated_at": "2026-05-02T23:54:10.966991+00:00"
+  },
+  "USDJPY": {
+    "hash": "df6353285b7a5058c29e52b68a36991233bb362450bc9a6ed904676f084720d5",
+    "last_sent": 1777766051.411763,
+    "sent": true,
+    "reason": "free=True:-1003918395339:ok | pro=True:-1003491841685:ok | vip=True:-1003793881886:ok",
+    "updated_at": "2026-05-02T23:54:11.411769+00:00"
+  },
+  "XAUUSD": {
+    "hash": "dab1609277596c7d79ed3c577341c2a11119a310bb57e5b784b36fd9631a30ba",
+    "last_sent": 1777766051.8889031,
+    "sent": true,
+    "reason": "free=True:-1003918395339:ok | pro=True:-1003491841685:ok | vip=True:-1003793881886:ok",
+    "updated_at": "2026-05-02T23:54:11.888908+00:00"
+  },
+  "BTCUSDT": {
+    "hash": "365da1d82b438822a8f48d939e0715688945274880bcd3f4c22da700017e58ce",
+    "last_sent": 1778821293.789343,
+    "sent": true,
+    "reason": "free=True:-1003918395339:ok | pro=True:-1003491841685:ok | vip=True:-1003793881886:ok",
+    "updated_at": "2026-05-15T05:01:33.789347+00:00"
+  },
+  "ETHUSDT": {
+    "hash": "e8e4f505ad6883908f9273bdc9c2a467922345cca3dc864e749b89edff7a9b4c",
+    "last_sent": 1778821294.933939,
+    "sent": true,
+    "reason": "free=True:-1003918395339:ok | pro=True:-1003491841685:ok | vip=True:-1003793881886:ok",
+    "updated_at": "2026-05-15T05:01:34.933946+00:00"
+  },
+  "SOLUSDT": {
+    "hash": "3118404709b32c2a8a6983a2e1e447d27fd3ce0697d40233091d7f03095e3a4f",
+    "last_sent": 1778821295.9750977,
+    "sent": true,
+    "reason": "free=True:-1003918395339:ok | pro=True:-1003491841685:ok | vip=True:-1003793881886:ok",
+    "updated_at": "2026-05-15T05:01:35.975112+00:00"
+  }
+}

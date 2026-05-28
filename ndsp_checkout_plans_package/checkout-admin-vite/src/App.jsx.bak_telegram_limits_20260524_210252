@@ -1,0 +1,696 @@
+import React, { useEffect, useMemo, useState } from "react";
+import { createRoot } from "react-dom/client";
+import { apiGet, apiPost, apiPatch } from "./api.js";
+import "./styles.css";
+
+function useHashRoute() {
+  const [route, setRoute] = useState(window.location.hash || "#/checkout");
+
+  useEffect(() => {
+    const handler = () => setRoute(window.location.hash || "#/checkout");
+    window.addEventListener("hashchange", handler);
+    return () => window.removeEventListener("hashchange", handler);
+  }, []);
+
+  return route;
+}
+
+function Notice({ type = "", children }) {
+  if (!children) return null;
+  return <div className={`notice ${type}`}>{children}</div>;
+}
+
+function Checkout() {
+  const [plans, setPlans] = useState([]);
+  const [selectedCode, setSelectedCode] = useState("");
+  const [email, setEmail] = useState("");
+  const [telegramId, setTelegramId] = useState("");
+  const [network, setNetwork] = useState("TRC20");
+  const [loading, setLoading] = useState(true);
+  const [creating, setCreating] = useState(false);
+  const [error, setError] = useState("");
+  const [checkout, setCheckout] = useState(null);
+
+  useEffect(() => {
+    async function loadPlans() {
+      try {
+        setLoading(true);
+        setError("");
+        const data = await apiGet("/api/v1/plans");
+        const loadedPlans = data.plans || [];
+        setPlans(loadedPlans);
+        setSelectedCode(loadedPlans[0]?.code || "");
+      } catch (err) {
+        setError(err.message || "failed_to_load_plans");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadPlans();
+  }, []);
+
+  const selectedPlan = useMemo(() => {
+    return plans.find((plan) => plan.code === selectedCode) || null;
+  }, [plans, selectedCode]);
+
+  async function submitCheckout(event) {
+    event.preventDefault();
+
+    try {
+      setCreating(true);
+      setError("");
+      setCheckout(null);
+
+      const data = await apiPost("/api/v1/checkout", {
+        plan_code: selectedCode,
+        email,
+        telegram_id: telegramId,
+        network
+      });
+
+      setCheckout(data.checkout);
+    } catch (err) {
+      setError(err.message || "failed_to_create_checkout");
+    } finally {
+      setCreating(false);
+    }
+  }
+
+  return (
+    <main className="page-shell">
+      <section className="hero-card">
+        <div>
+          <p className="eyebrow">NDSP Checkout</p>
+          <h1>اختيار الباقة وطلب التفعيل</h1>
+          <p className="hero-text">
+            اختر الباقة المناسبة. التفعيل لا يتم تلقائيًا، وكل طلب يخضع لمراجعة إدارية قبل فتح الوصول.
+          </p>
+        </div>
+        <div className="hero-badge">Decision Active / Execution Sanitized</div>
+      </section>
+
+      <Notice>{loading ? "جاري تحميل الباقات..." : ""}</Notice>
+      <Notice type="error">{error ? `خطأ: ${error}` : ""}</Notice>
+
+      {!loading && plans.length > 0 && (
+        <section className="checkout-grid">
+          <div className="plans-grid">
+            {plans.map((plan) => (
+              <button
+                key={plan.code}
+                className={`plan-card ${selectedCode === plan.code ? "selected" : ""}`}
+                onClick={() => setSelectedCode(plan.code)}
+                type="button"
+              >
+                <span className="plan-code">{plan.name_en}</span>
+                <strong>${Number(plan.price_usd).toFixed(2)}</strong>
+                <small>{plan.billing_period}</small>
+                <p>{plan.description_ar}</p>
+                <ul>
+                  {(plan.features || []).slice(0, 6).map((feature) => (
+                    <li key={feature}>{translateFeature(feature)}</li>
+                  ))}
+                </ul>
+                {plan.trial_days > 0 && (
+                  <span className="trial-badge">{plan.trial_days} يوم تجربة</span>
+                )}
+              </button>
+            ))}
+          </div>
+
+          <form className="checkout-form" onSubmit={submitCheckout}>
+            <h2>بيانات الطلب</h2>
+
+            <label>
+              الباقة
+              <input value={selectedPlan?.name_en || ""} readOnly />
+            </label>
+
+            <label>
+              البريد الإلكتروني
+              <input
+                type="email"
+                placeholder="name@example.com"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                required
+              />
+            </label>
+
+            <label>
+              Telegram ID اختياري
+              <input
+                placeholder="@username أو ID"
+                value={telegramId}
+                onChange={(event) => setTelegramId(event.target.value)}
+              />
+            </label>
+
+            <label>
+              شبكة الدفع
+              <select value={network} onChange={(event) => setNetwork(event.target.value)}>
+                <option value="TRC20">USDT TRC20</option>
+                <option value="BEP20">USDT BEP20</option>
+              </select>
+            </label>
+
+            <div className="summary-box">
+              <span>المبلغ</span>
+              <strong>
+                ${selectedPlan ? Number(selectedPlan.price_usd).toFixed(2) : "0.00"} / USDT
+              </strong>
+            </div>
+
+            <button className="primary-btn" disabled={creating || !selectedCode}>
+              {creating ? "جاري إنشاء الطلب..." : "إنشاء طلب الاشتراك"}
+            </button>
+
+            <p className="safe-note">
+              لا يتم عرض أي منطق داخلي حساس. الواجهة تعرض نتيجة مؤسسية مبسطة فقط.
+            </p>
+          </form>
+        </section>
+      )}
+
+      {checkout && (
+        <section className="result-card">
+          <h2>تم إنشاء الطلب</h2>
+          <p>رقم الطلب: <strong>{checkout.checkout_ref}</strong></p>
+          <p>الحالة: <strong>{checkout.status}</strong></p>
+          <p>الباقة: <strong>{checkout.plan_code}</strong></p>
+          <p>المبلغ: <strong>{checkout.amount_usd} {checkout.payment_currency}</strong></p>
+          <p>الشبكة: <strong>{checkout.payment_network}</strong></p>
+          <p className="safe-note">
+            بعد الموافقة الإدارية ستظهر مزايا الباقة في صفحة My Access.
+          </p>
+        </section>
+      )}
+    </main>
+  );
+}
+
+
+function translateFeature(feature) {
+  const dictionary = {
+    "Market context overview": "عرض سياق السوق",
+    "Decision-support dashboard": "لوحة دعم القرار",
+    "Public sanitized output": "مخرجات مبسطة وآمنة للعرض",
+    "Core assets coverage": "تغطية الأصول الأساسية",
+    "Advanced market interpretation": "تفسير متقدم لحالة السوق",
+    "Expanded asset coverage": "تغطية موسعة للأصول",
+    "Elite decision surface": "واجهة قرار متقدمة",
+    "Scenario explanation": "شرح السيناريوهات",
+    "Sanitized multi-layer output": "مخرجات متعددة الطبقات بصياغة عامة",
+    "Institutional workspace": "مساحة عمل مؤسسية",
+    "Team-oriented access": "وصول مناسب للفرق",
+    "Extended reporting": "تقارير موسعة",
+    "Priority review": "مراجعة ذات أولوية",
+    "Governance-safe output": "مخرجات متوافقة مع الحوكمة"
+  };
+
+  return dictionary[feature] || feature;
+}
+
+function readableDecisionDepth(value) {
+  const dictionary = {
+    standard: "قياسي",
+    advanced: "متقدم",
+    institutional: "مؤسسي"
+  };
+
+  return dictionary[value] || value || "غير محدد";
+}
+
+function AccessLimitCards({ limits }) {
+  const safeLimits = limits || {};
+
+  const items = [
+    {
+      label: "عدد الأصول المتاحة",
+      value: safeLimits.max_assets ? `حتى ${safeLimits.max_assets} أصل` : "حسب الباقة"
+    },
+    {
+      label: "عمق التحليل",
+      value: readableDecisionDepth(safeLimits.decision_depth)
+    }
+  ];
+
+  if (safeLimits.trial_days) {
+    items.push({
+      label: "مدة التجربة",
+      value: `${safeLimits.trial_days} يوم`
+    });
+  }
+
+  if (safeLimits.team_access) {
+    items.push({
+      label: "وصول الفرق",
+      value: "متاح"
+    });
+  }
+
+  return (
+    <div className="access-limits-grid">
+      {items.map((item) => (
+        <article className="access-limit-card" key={item.label}>
+          <span>{item.label}</span>
+          <strong>{item.value}</strong>
+        </article>
+      ))}
+    </div>
+  );
+}
+
+function MyAccess() {
+  const [email, setEmail] = useState("");
+  const [subscription, setSubscription] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  async function checkAccess(event) {
+    event.preventDefault();
+
+    try {
+      setLoading(true);
+      setError("");
+      setSubscription(null);
+
+      const data = await apiGet(`/api/v1/subscription/status?email=${encodeURIComponent(email)}`);
+      setSubscription(data.subscription);
+    } catch (err) {
+      setError(err.message || "failed_to_load_subscription");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return (
+    <main className="page-shell">
+      <section className="hero-card">
+        <div>
+          <p className="eyebrow">NDSP Access</p>
+          <h1>مزايا الباقة الحالية</h1>
+          <p className="hero-text">
+            أدخل بريدك لمعرفة حالة تفعيلك والمزايا المتاحة لك بعد الموافقة الإدارية.
+          </p>
+        </div>
+        <div className="hero-badge">User Entitlements</div>
+      </section>
+
+      <form className="admin-key-card" onSubmit={checkAccess}>
+        <label>
+          البريد الإلكتروني
+          <input
+            type="email"
+            value={email}
+            placeholder="name@example.com"
+            onChange={(event) => setEmail(event.target.value)}
+            required
+          />
+        </label>
+        <button className="primary-btn" disabled={loading}>
+          {loading ? "جاري الفحص..." : "فحص الوصول"}
+        </button>
+      </form>
+
+      <Notice type="error">{error ? `خطأ: ${error}` : ""}</Notice>
+
+      {subscription && (
+        <section className="access-card">
+          <h2>{subscription.active ? "الاشتراك مفعل" : "لا يوجد اشتراك مفعل"}</h2>
+          <div className="status-pills">
+            <span>{subscription.status}</span>
+            {subscription.plan_code && <span>{subscription.plan_code}</span>}
+          </div>
+
+          {subscription.active && subscription.plan && (
+            <>
+              <p className="safe-note">
+                الباقة الحالية: <strong>{subscription.plan.name_en}</strong>
+              </p>
+
+              <h3>المزايا المتاحة</h3>
+              <ul className="feature-list">
+                {(subscription.features || []).map((feature) => (
+                  <li key={feature}>{translateFeature(feature)}</li>
+                ))}
+              </ul>
+              <h3>حدود الباقة</h3>
+              <AccessLimitCards limits={subscription.limits || {}} />
+            </>
+          )}
+        </section>
+      )}
+    </main>
+  );
+}
+
+function AdminConsole() {
+  const [adminKey, setAdminKey] = useState(() => localStorage.getItem("NDSP_ADMIN_KEY") || "");
+  const [plans, setPlans] = useState([]);
+  const [requests, setRequests] = useState([]);
+  const [editing, setEditing] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [savingCode, setSavingCode] = useState("");
+  const [actionRef, setActionRef] = useState("");
+  const [error, setError] = useState("");
+  const [okMessage, setOkMessage] = useState("");
+
+  const adminHeaders = useMemo(() => ({ "x-admin-key": adminKey }), [adminKey]);
+
+  async function loadAll() {
+    try {
+      setLoading(true);
+      setError("");
+      setOkMessage("");
+
+      const [plansData, requestsData] = await Promise.all([
+        apiGet("/api/v1/admin/plans", { headers: adminHeaders }),
+        apiGet("/api/v1/admin/checkout/requests?limit=50", { headers: adminHeaders })
+      ]);
+
+      const loadedPlans = plansData.plans || [];
+      setPlans(loadedPlans);
+      setRequests(requestsData.requests || []);
+
+      const nextEditing = {};
+      for (const plan of loadedPlans) {
+        nextEditing[plan.code] = {
+          name_ar: plan.name_ar || "",
+          name_en: plan.name_en || "",
+          description_ar: plan.description_ar || "",
+          description_en: plan.description_en || "",
+          price_usd: plan.price_usd || 0,
+          billing_period: plan.billing_period || "monthly",
+          trial_days: plan.trial_days || 0,
+          sort_order: plan.sort_order || 100,
+          is_active: Boolean(plan.is_active),
+          is_public: Boolean(plan.is_public),
+          features: JSON.stringify(plan.features || [], null, 2),
+          limits: JSON.stringify(plan.limits || {}, null, 2),
+          metadata: JSON.stringify(plan.metadata || {}, null, 2)
+        };
+      }
+
+      setEditing(nextEditing);
+      localStorage.setItem("NDSP_ADMIN_KEY", adminKey);
+    } catch (err) {
+      setError(err.message || "failed_to_load_admin_data");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  function updateField(code, field, value) {
+    setEditing((current) => ({
+      ...current,
+      [code]: {
+        ...(current[code] || {}),
+        [field]: value
+      }
+    }));
+  }
+
+  function safeJson(value, fallback) {
+    try {
+      return JSON.parse(value);
+    } catch {
+      return fallback;
+    }
+  }
+
+  async function savePlan(code) {
+    const draft = editing[code];
+    if (!draft) return;
+
+    try {
+      setSavingCode(code);
+      setError("");
+      setOkMessage("");
+
+      await apiPatch(`/api/v1/admin/plans/${code}`, {
+        name_ar: draft.name_ar,
+        name_en: draft.name_en,
+        description_ar: draft.description_ar,
+        description_en: draft.description_en,
+        price_usd: Number(draft.price_usd),
+        billing_period: draft.billing_period,
+        trial_days: Number(draft.trial_days),
+        sort_order: Number(draft.sort_order),
+        is_active: Boolean(draft.is_active),
+        is_public: Boolean(draft.is_public),
+        features: safeJson(draft.features, []),
+        limits: safeJson(draft.limits, {}),
+        metadata: safeJson(draft.metadata, {})
+      }, {
+        headers: adminHeaders
+      });
+
+      setOkMessage(`تم تحديث الباقة: ${code}`);
+      await loadAll();
+    } catch (err) {
+      setError(err.message || "failed_to_save_plan");
+    } finally {
+      setSavingCode("");
+    }
+  }
+
+  async function approveRequest(checkoutRef) {
+    try {
+      setActionRef(checkoutRef);
+      setError("");
+      setOkMessage("");
+
+      await apiPost(`/api/v1/admin/checkout/${checkoutRef}/approve`, {
+        admin_note: "Approved from NDSP Admin Plans console"
+      }, {
+        headers: adminHeaders
+      });
+
+      setOkMessage(`تم تفعيل الطلب: ${checkoutRef}`);
+      await loadAll();
+    } catch (err) {
+      setError(err.message || "failed_to_approve_request");
+    } finally {
+      setActionRef("");
+    }
+  }
+
+  async function rejectRequest(checkoutRef) {
+    try {
+      setActionRef(checkoutRef);
+      setError("");
+      setOkMessage("");
+
+      await apiPost(`/api/v1/admin/checkout/${checkoutRef}/reject`, {
+        admin_note: "Rejected from NDSP Admin Plans console"
+      }, {
+        headers: adminHeaders
+      });
+
+      setOkMessage(`تم رفض الطلب: ${checkoutRef}`);
+      await loadAll();
+    } catch (err) {
+      setError(err.message || "failed_to_reject_request");
+    } finally {
+      setActionRef("");
+    }
+  }
+
+  return (
+    <main className="page-shell">
+      <section className="hero-card">
+        <div>
+          <p className="eyebrow">NDSP Admin</p>
+          <h1>إدارة الباقات والتفعيلات</h1>
+          <p className="hero-text">
+            تعديل الباقات، مراجعة طلبات الاشتراك، وتفعيل وصول المستخدمين بعد الموافقة الإدارية.
+          </p>
+        </div>
+        <div className="hero-badge">Admin Protected</div>
+      </section>
+
+      <section className="admin-key-card">
+        <label>
+          Admin Key
+          <input
+            dir="ltr"
+            type="password"
+            value={adminKey}
+            onChange={(event) => setAdminKey(event.target.value)}
+            placeholder="x-admin-key"
+          />
+        </label>
+        <button className="primary-btn" onClick={loadAll} disabled={!adminKey || loading}>
+          {loading ? "جاري التحميل..." : "تحميل البيانات"}
+        </button>
+      </section>
+
+      <Notice type="error">{error ? `خطأ: ${error}` : ""}</Notice>
+      <Notice type="success">{okMessage}</Notice>
+
+      <section className="admin-plan-card">
+        <header>
+          <div>
+            <p className="eyebrow">Activation Queue</p>
+            <h2>طلبات التفعيل</h2>
+          </div>
+          <div className="status-pills">
+            <span>{requests.length} requests</span>
+          </div>
+        </header>
+
+        <div className="requests-grid">
+          {requests.map((request) => (
+            <article className="mini-card" key={request.checkout_ref}>
+              <span className="plan-code">{request.checkout_ref}</span>
+              <h3>{request.plan_code} — {request.status}</h3>
+              <p>{request.customer_email}</p>
+              <p>{request.amount_usd} {request.payment_currency} / {request.payment_network}</p>
+              <div className="row-actions">
+                <button
+                  className="primary-btn"
+                  disabled={actionRef === request.checkout_ref || request.status === "activated"}
+                  onClick={() => approveRequest(request.checkout_ref)}
+                >
+                  {request.status === "activated" ? "مفعل" : "Approve"}
+                </button>
+                <button
+                  className="danger-btn"
+                  disabled={actionRef === request.checkout_ref || request.status === "activated"}
+                  onClick={() => rejectRequest(request.checkout_ref)}
+                >
+                  Reject
+                </button>
+              </div>
+            </article>
+          ))}
+          {requests.length === 0 && <p className="safe-note">لا توجد طلبات حالية.</p>}
+        </div>
+      </section>
+
+      <section className="admin-plans-list">
+        {plans.map((plan) => {
+          const draft = editing[plan.code] || {};
+
+          return (
+            <article className="admin-plan-card" key={plan.code}>
+              <header>
+                <div>
+                  <span className="plan-code">{plan.code}</span>
+                  <h2>{plan.name_en}</h2>
+                </div>
+                <div className="status-pills">
+                  <span>{plan.is_active ? "Active" : "Inactive"}</span>
+                  <span>{plan.is_public ? "Public" : "Hidden"}</span>
+                </div>
+              </header>
+
+              <div className="admin-form-grid">
+                <label>
+                  الاسم عربي
+                  <input value={draft.name_ar || ""} onChange={(event) => updateField(plan.code, "name_ar", event.target.value)} />
+                </label>
+
+                <label>
+                  الاسم English
+                  <input dir="ltr" value={draft.name_en || ""} onChange={(event) => updateField(plan.code, "name_en", event.target.value)} />
+                </label>
+
+                <label>
+                  السعر USD
+                  <input type="number" step="0.01" value={draft.price_usd} onChange={(event) => updateField(plan.code, "price_usd", event.target.value)} />
+                </label>
+
+                <label>
+                  Billing Period
+                  <select value={draft.billing_period || "monthly"} onChange={(event) => updateField(plan.code, "billing_period", event.target.value)}>
+                    <option value="monthly">monthly</option>
+                    <option value="yearly">yearly</option>
+                    <option value="one_time">one_time</option>
+                  </select>
+                </label>
+
+                <label>
+                  Trial Days
+                  <input type="number" value={draft.trial_days} onChange={(event) => updateField(plan.code, "trial_days", event.target.value)} />
+                </label>
+
+                <label>
+                  Sort Order
+                  <input type="number" value={draft.sort_order} onChange={(event) => updateField(plan.code, "sort_order", event.target.value)} />
+                </label>
+
+                <label className="check-row">
+                  <input type="checkbox" checked={Boolean(draft.is_active)} onChange={(event) => updateField(plan.code, "is_active", event.target.checked)} />
+                  Active
+                </label>
+
+                <label className="check-row">
+                  <input type="checkbox" checked={Boolean(draft.is_public)} onChange={(event) => updateField(plan.code, "is_public", event.target.checked)} />
+                  Public
+                </label>
+              </div>
+
+              <label>
+                الوصف عربي
+                <textarea value={draft.description_ar || ""} onChange={(event) => updateField(plan.code, "description_ar", event.target.value)} />
+              </label>
+
+              <label>
+                Description English
+                <textarea dir="ltr" value={draft.description_en || ""} onChange={(event) => updateField(plan.code, "description_en", event.target.value)} />
+              </label>
+
+              <div className="json-grid">
+                <label>
+                  features JSON
+                  <textarea dir="ltr" value={draft.features || "[]"} onChange={(event) => updateField(plan.code, "features", event.target.value)} />
+                </label>
+
+                <label>
+                  limits JSON
+                  <textarea dir="ltr" value={draft.limits || "{}"} onChange={(event) => updateField(plan.code, "limits", event.target.value)} />
+                </label>
+
+                <label>
+                  metadata JSON
+                  <textarea dir="ltr" value={draft.metadata || "{}"} onChange={(event) => updateField(plan.code, "metadata", event.target.value)} />
+                </label>
+              </div>
+
+              <button className="primary-btn" onClick={() => savePlan(plan.code)} disabled={savingCode === plan.code}>
+                {savingCode === plan.code ? "جاري الحفظ..." : "حفظ التعديل"}
+              </button>
+            </article>
+          );
+        })}
+      </section>
+    </main>
+  );
+}
+
+function App() {
+  const route = useHashRoute();
+
+  return (
+    <>
+      <nav className="top-nav">
+        <a href="#/checkout">Checkout</a>
+        <a href="#/access">My Access</a>
+        <a href="#/admin/plans">Admin Plans</a>
+      </nav>
+
+      {route === "#/admin/plans" ? (
+        <AdminConsole />
+      ) : route === "#/access" ? (
+        <MyAccess />
+      ) : (
+        <Checkout />
+      )}
+    </>
+  );
+}
+
+createRoot(document.getElementById("root")).render(<App />);

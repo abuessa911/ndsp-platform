@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+ZincSpot,D1,2026.05.01 00:00:00,3372.15000,3396.19000,3331.92000,3340.52000,15071,3340.52000,3345.52000,500.00,0,0

@@ -1,0 +1,11 @@
+{
+  "runtime_mode": "production",
+  "manual_tdl_required": false,
+  "market_data_required": true,
+  "allow_degraded_market_data": true,
+  "block_raw_internal_output": true,
+  "tdl_is_direction_authority": true,
+  "nmp_context_only": true,
+  "black_layer_context_only": true,
+  "public_output_only": true
+}

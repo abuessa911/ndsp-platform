@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+MCD.us,D1,2026.05.01 00:00:00,293.90000,295.03000,286.16000,286.52000,12137,286.50000,287.03000,53.00,0,0

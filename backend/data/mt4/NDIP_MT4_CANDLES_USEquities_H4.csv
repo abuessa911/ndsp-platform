@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+USEquities,H4,2026.05.01 21:00:00,5728.50000,5729.60000,5712.60000,5721.60000,12176,5721.60000,5723.60000,200.00,0,0

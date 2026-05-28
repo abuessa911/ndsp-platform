@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+NZDCAD,D1,2026.05.01 00:00:00,0.80120,0.80357,0.79891,0.80140,74819,0.80140,0.80194,54.00,0,0

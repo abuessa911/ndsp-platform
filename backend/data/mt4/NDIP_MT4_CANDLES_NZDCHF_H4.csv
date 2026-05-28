@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+NZDCHF,H4,2026.05.01 20:00:00,0.46107,0.46112,0.46067,0.46097,4964,0.46097,0.46152,55.00,0,0

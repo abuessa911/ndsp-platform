@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+EUSTX50,M1,2026.04.30 22:59:00,5894.66000,5896.17000,5890.67000,5891.20000,43,5891.20000,5893.00000,180.00,0,0

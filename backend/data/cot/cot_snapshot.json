@@ -1,0 +1,16 @@
+{
+  "BTCUSDT": {
+    "macro": {
+      "Asset Manager": {"long": 120000, "short": 40000},
+      "Other Reportables": {"long": 40000, "short": 15000},
+      "Leveraged Funds": {"long": 30000, "short": 90000},
+      "Dealer Intermediary": {"long": 15000, "short": 50000}
+    },
+    "weekly": {
+      "Asset Manager": {"long": 130000, "short": 35000},
+      "Other Reportables": {"long": 45000, "short": 12000},
+      "Leveraged Funds": {"long": 28000, "short": 95000},
+      "Dealer Intermediary": {"long": 14000, "short": 52000}
+    }
+  }
+}

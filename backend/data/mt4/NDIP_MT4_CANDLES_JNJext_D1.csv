@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+JNJ.ext,D1,2026.05.01 00:00:00,230.09000,230.49000,226.95000,227.68000,6821,227.65000,227.87000,22.00,0,0

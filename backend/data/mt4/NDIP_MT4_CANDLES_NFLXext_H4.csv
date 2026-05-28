@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+NFLX.ext,H4,2026.05.01 20:00:00,93.00000,93.02000,91.84000,92.00000,5693,91.97000,92.10000,13.00,0,0

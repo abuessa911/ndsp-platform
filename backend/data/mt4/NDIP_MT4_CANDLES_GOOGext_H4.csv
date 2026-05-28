@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+GOOG.ext,H4,2026.05.01 20:00:00,381.17000,382.98000,378.89000,382.60000,15981,382.63000,382.90000,27.00,0,0

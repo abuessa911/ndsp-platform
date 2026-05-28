@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+UK100,H4,2026.05.01 19:00:00,10379.05000,10395.30000,10366.06000,10377.56000,2718,10376.55000,10379.05000,250.00,0,0

@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+EMBasket,H4,2026.05.01 20:00:00,7800.00000,7801.00000,7786.00000,7787.00000,474,7787.00000,7790.00000,3.00,0,0

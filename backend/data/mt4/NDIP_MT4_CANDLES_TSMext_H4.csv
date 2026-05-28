@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+TSM.ext,H4,2026.05.01 20:00:00,397.92000,400.03000,397.18000,398.05000,5090,398.14000,398.64000,50.00,0,0

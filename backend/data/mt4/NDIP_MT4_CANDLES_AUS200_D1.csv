@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+AUS200,D1,2026.05.01 00:00:00,8756.73000,8766.71000,8706.91000,8716.92000,13194,8716.92000,8720.72000,380.00,0,0

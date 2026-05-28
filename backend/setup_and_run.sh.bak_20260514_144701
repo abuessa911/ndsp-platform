@@ -1,0 +1,108 @@
+cat > ~/fix_setup_and_run_format.sh <<'SH'
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+FILE="${1:-setup_and_run.sh}"
+TS="$(date +%Y%m%d_%H%M%S)"
+BACKUP="${FILE}.bak_${TS}"
+
+echo "============================================================"
+echo "Fix malformed bash script"
+echo "============================================================"
+echo "FILE=$FILE"
+echo "BACKUP=$BACKUP"
+
+if [ ! -f "$FILE" ]; then
+  echo "ERROR: file not found: $FILE"
+  exit 1
+fi
+
+cp -a "$FILE" "$BACKUP"
+
+python3 - "$FILE" <<'PY'
+import re
+import sys
+from pathlib import Path
+
+path = Path(sys.argv[1])
+lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
+
+valid_prefixes = (
+    "#!", "#",
+    "echo ", "printf ", "cat ", "rm ", "cp ", "mv ", "mkdir ", "touch ",
+    "chmod ", "chown ", "sudo ", "python ", "python3 ", "pip ", "pip3 ",
+    "source ", ". ", "export ", "cd ", "pwd", "ls ", "find ", "grep ",
+    "sed ", "awk ", "curl ", "wget ", "npm ", "node ", "uvicorn ",
+    "gunicorn ", "systemctl ", "service ", "sleep ", "test ", "[",
+    "if ", "then", "else", "elif ", "fi", "for ", "do", "done",
+    "while ", "case ", "esac", "function ", "return ", "exit ",
+    "set ", "trap ", "read ", "which ", "command ", "poetry ",
+    "pytest ", "alembic ", "docker ", "docker-compose ", "tar ",
+    "gzip ", "zip ", "unzip ", "tee ", "date", "whoami", "id ",
+)
+
+assignment_re = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*=.*$")
+section_re = re.compile(r"^\s*[0-9]+[.)]\s+")
+
+out = []
+for i, line in enumerate(lines):
+    stripped = line.strip()
+
+    if i == 0:
+        if stripped.startswith("#!"):
+            out.append("#!/usr/bin/env bash")
+        else:
+            out.append("#!/usr/bin/env bash")
+            if stripped:
+                out.append("# " + line)
+        continue
+
+    if stripped == "":
+        out.append("")
+        continue
+
+    if stripped.startswith(valid_prefixes) or assignment_re.match(stripped):
+        out.append(line)
+        continue
+
+    if stripped in {"{", "}", ";;"}:
+        out.append(line)
+        continue
+
+    if section_re.match(stripped):
+        out.append("")
+        out.append('echo ""')
+        out.append(f'echo "{stripped}"')
+        out.append('echo "------------------------------------------------------------"')
+        continue
+
+    if set(stripped) <= {"=", "-", "_", "*"}:
+        out.append(f'echo "{stripped}"')
+        continue
+
+    out.append("# " + line)
+
+text = "\n".join(out) + "\n"
+path.write_text(text, encoding="utf-8")
+PY
+
+chmod +x "$FILE"
+
+echo ""
+echo "1) Syntax check"
+echo "------------------------------------------------------------"
+bash -n "$FILE"
+
+echo ""
+echo "2) Preview first 40 lines"
+echo "------------------------------------------------------------"
+sed -n '1,40p' "$FILE"
+
+echo ""
+echo "DONE"
+echo "Now run:"
+echo "./$FILE"
+SH
+
+chmod +x ~/fix_setup_and_run_format.sh
+bash ~/fix_setup_and_run_format.sh setup_and_run.sh

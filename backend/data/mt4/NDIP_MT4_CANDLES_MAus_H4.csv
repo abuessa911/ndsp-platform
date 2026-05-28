@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+MA.us,H4,2026.05.01 20:30:00,496.14000,497.84000,491.85000,494.64000,3602,494.76000,495.58000,82.00,0,0

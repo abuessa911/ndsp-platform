@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+SHOP.ext,D1,2026.05.01 00:00:00,121.10000,127.77000,120.19000,127.62000,7064,127.38000,128.06000,68.00,0,0

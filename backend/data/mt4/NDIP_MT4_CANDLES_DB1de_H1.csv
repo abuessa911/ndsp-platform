@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+DB1.de,H1,2026.04.30 18:00:00,260.09000,260.90000,259.98000,260.59000,189,260.59000,261.31000,720.00,0,0

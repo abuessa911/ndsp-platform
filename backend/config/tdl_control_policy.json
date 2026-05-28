@@ -1,0 +1,10 @@
+{
+  "policy_name": "NDSP TDL Control Policy",
+  "direction_authority": "TDL_ONLY",
+  "nmp_role": "CONTEXT_ONLY",
+  "black_layer_role": "PROTECTIVE_CONTEXT_ONLY",
+  "entry_scope_default": "GOVERNED_CONTEXT",
+  "allow_execution_language": false,
+  "allow_tp_sl_output": false,
+  "allow_raw_indicator_leak": false
+}

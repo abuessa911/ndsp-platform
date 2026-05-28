@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+GER30,M5,2026.04.30 22:55:00,24354.20000,24357.22000,24328.96000,24329.96000,466,24329.96000,24331.46000,150.00,0,0

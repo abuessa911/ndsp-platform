@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+AMD.ext,H4,2026.05.01 20:00:00,358.14000,362.57000,357.07000,359.63000,11178,359.62000,360.13000,51.00,0,0

@@ -1,0 +1,224 @@
+#!/bin/bash
+
+# ============================================
+# 💀 NDIP FULL PIPELINE ENGINE (FINAL STABLE)
+# ============================================
+
+INPUT_FILE="$1"
+CACHE_FILE="/tmp/ndsp_tdl_cache.json"
+
+if [ -z "$INPUT_FILE" ]; then
+  echo "Usage: ./decision_pipeline.sh input.json"
+  exit 1
+fi
+
+if [ ! -f "$INPUT_FILE" ]; then
+  echo "❌ Input file not found"
+  exit 1
+fi
+
+# ============================================
+# 📦 STEP 1: DETECT ASSET TYPE (SMART ROUTER)
+# ============================================
+
+symbol=$(jq -r '.symbol' "$INPUT_FILE" 2>/dev/null)
+
+if [ -z "$symbol" ] || [ "$symbol" == "null" ]; then
+  echo "❌ Invalid symbol in input"
+  exit 1
+fi
+
+if [[ "$symbol" =~ (EUR|USD|GBP|JPY|AUD|NZD|CHF) ]]; then
+  asset_type="forex"
+elif [[ "$symbol" =~ (BTC|ETH|SOL|BNB) ]]; then
+  asset_type="crypto"
+elif [[ "$symbol" =~ (SPX|NAS|DJI) ]]; then
+  asset_type="indices"
+else
+  asset_type="commodities"
+fi
+
+echo "🧠 Asset Type: $asset_type"
+
+# ============================================
+# 📊 STEP 2: TDL LAYER
+# ============================================
+
+case $asset_type in
+  forex)
+    tdl_output=$(./tdl_forex.sh "$INPUT_FILE")
+    ;;
+  crypto)
+    tdl_output=$(./tdl_crypto.sh "$INPUT_FILE")
+    ;;
+  indices)
+    tdl_output=$(./tdl_indices.sh "$INPUT_FILE")
+    ;;
+  commodities)
+    tdl_output=$(./tdl_commodities.sh "$INPUT_FILE")
+    ;;
+  *)
+    echo "❌ Unknown asset type"
+    exit 1
+    ;;
+esac
+
+# تحقق من JSON
+echo "$tdl_output" | jq . >/dev/null 2>&1
+if [ $? -ne 0 ]; then
+  echo "❌ Invalid JSON from TDL"
+  exit 1
+fi
+
+echo "$tdl_output" > /tmp/tdl.json
+
+# ============================================
+# 🧠 STEP 3: COMPUTE TDL CHANGE (REAL)
+# ============================================
+
+current_total=$(jq '.tdl_lm_score' /tmp/tdl.json)
+
+if [ -z "$current_total" ] || [ "$current_total" == "null" ]; then
+  echo "❌ Failed reading TDL total"
+  exit 1
+fi
+
+if [ ! -f "$CACHE_FILE" ]; then
+  echo "{ \"last_tdl\": $current_total }" > "$CACHE_FILE"
+fi
+
+last_total=$(jq '.last_tdl' "$CACHE_FILE" 2>/dev/null)
+
+if [ -z "$last_total" ]; then
+  last_total=$current_total
+fi
+
+tdl_change=$((current_total - last_total))
+
+echo "{ \"last_tdl\": $current_total }" > "$CACHE_FILE"
+
+echo "{ \"tdl_lm_score_total\": $current_total, \"tdl_lm_score_change\": $tdl_change }" > /tmp/phase_input.json
+
+# ============================================
+# 🧠 STEP 4: PHASE LAYER
+# ============================================
+
+phase_output=$(./phase_engine.sh /tmp/phase_input.json)
+
+echo "$phase_output" | jq . >/dev/null 2>&1
+if [ $? -ne 0 ]; then
+  echo "❌ Invalid JSON from Phase"
+  exit 1
+fi
+
+echo "$phase_output" > /tmp/phase.json
+
+# ============================================
+# 🧠 STEP 5: DECISION LAYER
+# ============================================
+
+decision_output=$(./decision_engine.sh /tmp/phase.json)
+
+echo "$decision_output" | jq . >/dev/null 2>&1
+if [ $? -ne 0 ]; then
+  echo "❌ Invalid JSON from Decision"
+  exit 1
+fi
+
+echo "$decision_output" > /tmp/decision.json
+
+# ============================================
+# ⏱ STEP 6: TIMING LAYER
+# ============================================
+
+day=$(date +%A)
+
+echo "{ \"phase\": \"$(jq -r '.phase' /tmp/phase.json)\", \"day\": \"$day\" }" > /tmp/timing.json
+
+# ============================================
+# 🎯 STEP 7: ENTRY LAYER
+# ============================================
+
+entry_output=$(./entry_engine.sh /tmp/timing.json)
+
+echo "$entry_output" | jq . >/dev/null 2>&1
+if [ $? -ne 0 ]; then
+  echo "❌ Invalid JSON from Entry"
+  exit 1
+fi
+
+echo "$entry_output" > /tmp/entry.json
+
+# ============================================
+# 🧠 STEP 8: COMPLIANCE LAYER
+# ============================================
+
+raw_decision=$(jq -r '.decision' /tmp/decision.json)
+phase=$(jq -r '.phase' /tmp/phase.json)
+entry=$(jq -r '.entry_signal' /tmp/entry.json)
+
+case $raw_decision in
+  BUY)
+    state="bullish"
+    ;;
+  WAIT_FOR_ENTRY)
+    state="neutral"
+    ;;
+  CAUTION)
+    state="warning"
+    ;;
+  NO_TRADE)
+    state="no_trade"
+    ;;
+  *)
+    echo "❌ Invalid decision state"
+    exit 1
+    ;;
+esac
+
+# ============================================
+# 📊 STEP 9: CONFIDENCE ENGINE
+# ============================================
+
+confidence=0.5
+
+if [ "$state" == "bullish" ] && [ "$entry" == "CONFIRMED_ENTRY" ]; then
+  confidence=0.85
+elif [ "$state" == "bullish" ] && [ "$entry" == "EARLY_ENTRY" ]; then
+  confidence=0.7
+elif [ "$state" == "neutral" ]; then
+  confidence=0.4
+elif [ "$state" == "no_trade" ]; then
+  confidence=0.2
+fi
+
+# ============================================
+# 📢 STEP 10: EXPLAINABILITY
+# ============================================
+
+reason="TDL → Phase ($phase) → Entry ($entry)"
+
+# ============================================
+# 📦 STEP 11: OUTPUT
+# ============================================
+
+timestamp=$(date -Iseconds)
+
+echo "{"
+echo "  \"version\": \"1.0.0\","
+echo "  \"symbol\": \"$symbol\","
+echo "  \"decision\": {"
+echo "    \"state\": \"$state\","
+echo "    \"confidence\": $confidence"
+echo "  },"
+echo "  \"context\": {"
+echo "    \"phase\": \"$phase\","
+echo "    \"entry\": \"$entry\""
+echo "  },"
+echo "  \"meta\": {"
+echo "    \"tdl_total\": $current_total,"
+echo "    \"tdl_change\": $tdl_change"
+echo "  },"
+echo "  \"reason\": \"$reason\","
+echo "  \"timestamp\": \"$timestamp\""
+echo "}"

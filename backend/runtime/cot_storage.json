@@ -1,0 +1,190 @@
+{
+  "manual_override": {},
+  "auto_cftc": {
+    "EURUSD": {
+      "symbol": "EURUSD",
+      "report_date": "2026-05-12",
+      "report_family": "TFF",
+      "asset_class": "forex",
+      "positions": [
+        {
+          "category": "Asset Manager/Institutional",
+          "long": 110000.0,
+          "short": 95000.0,
+          "net": 15000.0
+        },
+        {
+          "category": "Other Reportables",
+          "long": 43000.0,
+          "short": 39000.0,
+          "net": 4000.0
+        },
+        {
+          "category": "Leveraged Funds",
+          "long": 80000.0,
+          "short": 90000.0,
+          "net": -10000.0
+        },
+        {
+          "category": "Dealer/Intermediary",
+          "long": 60000.0,
+          "short": 65000.0,
+          "net": -5000.0
+        }
+      ],
+      "source": "auto_demo_cftc_placeholder",
+      "source_type": "auto_cftc",
+      "created_at_utc": "2026-05-14T14:56:54.133531+00:00",
+      "context_only": true,
+      "execution_allowed": false,
+      "net_formula": "net = long - short"
+    },
+    "XAUUSD": {
+      "symbol": "XAUUSD",
+      "report_date": "2026-05-12",
+      "report_family": "DISAGGREGATED",
+      "asset_class": "metals",
+      "positions": [
+        {
+          "category": "Producer/Merchant/Processor/User",
+          "long": 72000.0,
+          "short": 100000.0,
+          "net": -28000.0
+        },
+        {
+          "category": "Swap Dealers",
+          "long": 50000.0,
+          "short": 47000.0,
+          "net": 3000.0
+        },
+        {
+          "category": "Other Reportables",
+          "long": 44000.0,
+          "short": 30000.0,
+          "net": 14000.0
+        },
+        {
+          "category": "Managed Money",
+          "long": 120000.0,
+          "short": 80000.0,
+          "net": 40000.0
+        }
+      ],
+      "source": "auto_demo_cftc_placeholder",
+      "source_type": "auto_cftc",
+      "created_at_utc": "2026-05-14T14:56:56.570717+00:00",
+      "context_only": true,
+      "execution_allowed": false,
+      "net_formula": "net = long - short"
+    },
+    "USOIL": {
+      "symbol": "USOIL",
+      "report_date": "2026-05-12",
+      "report_family": "DISAGGREGATED",
+      "asset_class": "energy",
+      "positions": [
+        {
+          "category": "Commercials",
+          "long": 5000.0,
+          "short": 5500.0,
+          "net": -500.0
+        },
+        {
+          "category": "Noncommercials",
+          "long": 11000.0,
+          "short": 9500.0,
+          "net": 1500.0
+        }
+      ],
+      "source": "auto_demo_cftc_placeholder",
+      "source_type": "auto_cftc",
+      "created_at_utc": "2026-05-14T14:56:58.947966+00:00",
+      "context_only": true,
+      "execution_allowed": false,
+      "net_formula": "net = long - short"
+    },
+    "BTCUSDT": {
+      "symbol": "BTCUSDT",
+      "report_date": "2026-05-12",
+      "report_family": "LEGACY",
+      "asset_class": "crypto",
+      "positions": [
+        {
+          "category": "Commercials",
+          "long": 5000.0,
+          "short": 5500.0,
+          "net": -500.0
+        },
+        {
+          "category": "Noncommercials",
+          "long": 11000.0,
+          "short": 9500.0,
+          "net": 1500.0
+        }
+      ],
+      "source": "auto_demo_cftc_placeholder",
+      "source_type": "auto_cftc",
+      "created_at_utc": "2026-05-14T14:57:01.357508+00:00",
+      "context_only": true,
+      "execution_allowed": false,
+      "net_formula": "net = long - short"
+    },
+    "ETHUSDT": {
+      "symbol": "ETHUSDT",
+      "report_date": "2026-05-12",
+      "report_family": "LEGACY",
+      "asset_class": "crypto",
+      "positions": [
+        {
+          "category": "Commercials",
+          "long": 5000.0,
+          "short": 5500.0,
+          "net": -500.0
+        },
+        {
+          "category": "Noncommercials",
+          "long": 11000.0,
+          "short": 9500.0,
+          "net": 1500.0
+        }
+      ],
+      "source": "auto_demo_cftc_placeholder",
+      "source_type": "auto_cftc",
+      "created_at_utc": "2026-05-14T15:01:57.100491+00:00",
+      "context_only": true,
+      "execution_allowed": false,
+      "net_formula": "net = long - short"
+    },
+    "US30": {
+      "symbol": "US30",
+      "report_date": "2026-05-12",
+      "report_family": "TFF",
+      "asset_class": "indices",
+      "positions": [
+        {
+          "category": "Commercials",
+          "long": 5000.0,
+          "short": 5500.0,
+          "net": -500.0
+        },
+        {
+          "category": "Noncommercials",
+          "long": 11000.0,
+          "short": 9500.0,
+          "net": 1500.0
+        }
+      ],
+      "source": "auto_demo_cftc_placeholder",
+      "source_type": "auto_cftc",
+      "created_at_utc": "2026-05-14T15:02:08.255321+00:00",
+      "context_only": true,
+      "execution_allowed": false,
+      "net_formula": "net = long - short"
+    }
+  },
+  "metadata": {
+    "schema_version": "v6.1",
+    "net_formula": "net = long - short",
+    "execution_allowed": false
+  }
+}

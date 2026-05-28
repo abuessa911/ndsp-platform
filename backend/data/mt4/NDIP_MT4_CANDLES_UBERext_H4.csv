@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+UBER.ext,H4,2026.05.01 20:00:00,74.83000,75.31000,74.82000,75.05000,4795,75.03000,75.28000,25.00,0,0

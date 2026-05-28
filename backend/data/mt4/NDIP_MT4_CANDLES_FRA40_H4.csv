@@ -1,0 +1,2 @@
+symbol,timeframe,time,open,high,low,close,volume,bid,ask,spread,nmp_low,nmp_high
+FRA40,H4,2026.04.30 21:00:00,8140.47000,8152.22000,8137.96000,8143.37000,2387,8143.37000,8144.57000,120.00,0,0
