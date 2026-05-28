@@ -56,3 +56,10 @@ _audit_*/
 .DS_Store
 .idea/
 .vscode/
+
+# Runtime logs/state - do not commit
+backend/logs/
+backend/runtime/*.csv
+backend/runtime/*.json
+*.log
+*.log.*
