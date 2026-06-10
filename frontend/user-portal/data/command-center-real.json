@@ -1,0 +1,61 @@
+{
+  "ok": true,
+  "updated_at": "2026-06-10T13:13:09.857059+00:00",
+  "source": "Frankfurter / ECB public FX data",
+  "source_type": "real_public_market_data_daily",
+  "decision_engine_connected": false,
+  "decision_status_ar": "محرك القرار غير متصل",
+  "decision_status_en": "Decision engine disconnected",
+  "assets": [
+    {
+      "symbol": "USD/CHF",
+      "name_ar": "دولار / فرنك",
+      "price": 0.79547,
+      "market": "FX",
+      "status": "real"
+    },
+    {
+      "symbol": "USD/CAD",
+      "name_ar": "دولار / كندي",
+      "price": 1.3921,
+      "market": "FX",
+      "status": "real"
+    },
+    {
+      "symbol": "AUD/USD",
+      "name_ar": "أسترالي / دولار",
+      "price": 0.70607,
+      "market": "FX",
+      "status": "real"
+    },
+    {
+      "symbol": "NZD/USD",
+      "name_ar": "نيوزلندي / دولار",
+      "price": 0.58421,
+      "market": "FX",
+      "status": "real"
+    },
+    {
+      "symbol": "EUR/USD",
+      "name_ar": "يورو / دولار",
+      "price": 1.1573,
+      "market": "FX",
+      "status": "real"
+    },
+    {
+      "symbol": "GBP/USD",
+      "name_ar": "باوند / دولار",
+      "price": 1.34039,
+      "market": "FX",
+      "status": "real"
+    },
+    {
+      "symbol": "USD/JPY",
+      "name_ar": "دولار / ين",
+      "price": 160.16,
+      "market": "FX",
+      "status": "real"
+    }
+  ],
+  "fx_date": "2026-06-09"
+}

@@ -1,0 +1,858 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="google" content="notranslate" />
+<title>NDSP — منصة نواف لدعم القرار | احجز مقعدك في التجربة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Sora:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#070A10; --ink:#0B0F17;
+  --panel:rgba(18,24,36,.6); --line:rgba(201,162,39,.18); --line-soft:rgba(255,255,255,.07);
+  --gold:#D9B65A; --gold-bright:#F2D27A; --gold-deep:#9A7A22;
+  --teal:#3FD3C6; --rose:#E0607A;
+  --txt:#EAEEF6; --txt-2:#9AA6BC; --txt-3:#5E6A82;
+  --up:#56D6A0; --down:#E2657E;
+  --shadow:0 40px 90px -30px rgba(0,0,0,.85); --r:20px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--void);color:var(--txt);overflow-x:hidden;
+  font-family:"IBM Plex Sans Arabic","Sora",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+body[dir="ltr"]{font-family:"Sora","IBM Plex Sans Arabic",sans-serif}
+.mono{font-family:"IBM Plex Mono",monospace;font-feature-settings:"tnum" 1}
+h1,h2,h3,.kufi{font-family:"Reem Kufi",serif}
+body[dir="ltr"] h1,body[dir="ltr"] h2,body[dir="ltr"] h3{font-family:"Sora",sans-serif;letter-spacing:-.02em}
+
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.bg .glow{position:absolute;border-radius:50%;filter:blur(130px)}
+.bg .g1{width:64vw;height:64vw;top:-26vw;inset-inline-end:-16vw;background:radial-gradient(circle,rgba(217,182,90,.22),transparent 64%)}
+.bg .g2{width:50vw;height:50vw;bottom:-22vw;inset-inline-start:-14vw;background:radial-gradient(circle,rgba(63,211,198,.12),transparent 64%)}
+.bg .grid{position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);
+  background-size:48px 48px;mask-image:radial-gradient(ellipse 120% 80% at 50% 0%,#000 30%,transparent 78%)}
+.seal-wm{position:fixed;z-index:0;inset-inline-end:-8vw;top:14vh;width:58vw;max-width:820px;opacity:.045;pointer-events:none;
+  filter:drop-shadow(0 0 40px rgba(217,182,90,.4))}
+
+.wrap{position:relative;z-index:2;max-width:1180px;margin:0 auto;padding:0 24px}
+
+/* nav */
+nav{position:sticky;top:0;z-index:40;backdrop-filter:blur(16px);
+  background:linear-gradient(180deg,rgba(7,10,16,.9),rgba(7,10,16,.4));border-bottom:1px solid var(--line)}
+nav .in{max-width:1180px;margin:0 auto;padding:13px 24px;display:flex;align-items:center;gap:18px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand svg{width:40px;height:40px;filter:drop-shadow(0 4px 14px rgba(217,182,90,.4))}
+.brand b{font-family:"Reem Kufi";font-size:20px;letter-spacing:.5px;
+  background:linear-gradient(180deg,var(--gold-bright),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+.brand span{display:block;font-size:9.5px;color:var(--txt-3);letter-spacing:3px;font-family:"IBM Plex Mono";text-transform:uppercase}
+nav .links{flex:1;display:flex;gap:24px;justify-content:center}
+nav .links a{color:var(--txt-2);text-decoration:none;font-size:13.5px;transition:.2s}
+nav .links a:hover{color:var(--gold-bright)}
+@media(max-width:840px){nav .links{display:none}}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;cursor:pointer;font-family:inherit;font-parameter:600;
+  padding:11px 20px;border-radius:12px;font-size:13.5px;text-decoration:none;transition:.2s}
+.btn-gold{background:linear-gradient(135deg,var(--gold-bright),var(--gold-deep));color:#1a1303;box-shadow:0 8px 24px -6px rgba(217,182,90,.5)}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 12px 30px -6px rgba(217,182,90,.6)}
+.btn-ghost{background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--txt-2)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold-bright)}
+
+/* ===== disclaimer modal ===== */
+.ndsp-modal{position:fixed;inset:0;z-index:300;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(4,7,12,.74);backdrop-filter:blur(9px)}
+.ndsp-modal.show{display:flex;animation:mfade .3s}
+@keyframes mfade{from{opacity:0}to{opacity:1}}
+.ndsp-modal .box{width:100%;max-width:540px;max-height:90vh;overflow-y:auto;background:var(--panel2,rgba(14,19,29,.94));border:1px solid var(--line);border-radius:20px;box-shadow:0 40px 90px -30px rgba(0,0,0,.9);padding:28px 26px;animation:mrise .35s cubic-bezier(.2,.8,.2,1)}
+@keyframes mrise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.ndsp-modal .box::-webkit-scrollbar{width:6px}.ndsp-modal .box::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px}
+.ndsp-modal .mic{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;margin:0 auto 16px;font-size:30px;background:rgba(217,182,90,.1);border:1px solid var(--line);color:var(--gold-bright)}
+.ndsp-modal h2{text-align:center;font-size:23px;margin:0 0 12px}
+.ndsp-disc-text{font-size:12.5px;color:var(--txt-2);line-height:1.9;padding:15px 16px;border-radius:13px;border:1px dashed var(--line);background:rgba(0,0,0,.25);margin-bottom:16px;text-align:start}
+.ndsp-disc-text b{color:var(--gold-bright)}
+.ndsp-check{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--txt-2);cursor:pointer;margin-bottom:16px;line-height:1.6}
+.ndsp-check input{margin-top:3px;width:17px;height:17px;accent-color:var(--gold);flex:none}
+.ndsp-modal .actions{display:flex;flex-direction:column;gap:10px}
+.ndsp-modal .btn[disabled]{opacity:.45;cursor:not-allowed;transform:none}
+.ndsp-modal .mgov{font-size:10.5px;color:var(--txt-3);text-align:center;margin-top:14px;line-height:1.7}
+.ndsp-modal .mgov a{color:var(--gold)}
+.lang{cursor:pointer;user-select:none;padding:9px 13px;border-radius:10px;border:1px solid var(--line);color:var(--txt-2);font-size:12.5px}
+.lang:hover{color:var(--gold-bright);border-color:var(--gold)}
+.langsel{cursor:pointer;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel2,rgba(14,19,29,.9));color:var(--txt-2);font-size:12.5px;font-family:inherit;max-width:160px}
+.langsel:hover,.langsel:focus{color:var(--gold-bright);border-color:var(--gold);outline:none}
+.langsel option{background:#0B0F17;color:var(--txt)}
+
+/* hero */
+.hero{padding:72px 0 40px;text-align:center;position:relative}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;padding:8px 16px;border-radius:999px;border:1px solid var(--line);
+  background:rgba(217,182,90,.06);font-size:12.5px;color:var(--gold-bright);margin-bottom:26px}
+.eyebrow .pulse{width:7px;height:7px;border-radius:50%;background:var(--up);box-shadow:0 0 10px var(--up);animation:bl 1.8s infinite}
+@keyframes bl{50%{opacity:.3}}
+.hero h1{font-size:clamp(34px,6vw,62px);line-height:1.08;margin:0 0 20px;letter-spacing:-.5px}
+.hero h1 .hl{background:linear-gradient(180deg,var(--gold-bright),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.lead{font-size:clamp(15px,2.2vw,19px);color:var(--txt-2);max-width:680px;margin:0 auto 30px;line-height:1.85}
+.hero .cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.hero .micro{margin-top:18px;font-size:12px;color:var(--txt-3)}
+
+/* trial counter strip */
+.seats{margin:48px auto;max-width:880px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:680px){.seats{grid-template-columns:repeat(2,1fr)}}
+.seat-card{background:var(--panel);border:1px solid var(--line-soft);border-radius:16px;padding:18px;text-align:center;position:relative;overflow:hidden;backdrop-filter:blur(12px)}
+.seat-card.total{border-color:var(--line);background:linear-gradient(135deg,rgba(217,182,90,.1),rgba(0,0,0,.2))}
+.seat-card .num{font-family:"IBM Plex Mono";font-size:32px;font-parameter:600;color:var(--gold-bright);line-height:1}
+.seat-card .num .of{color:var(--txt-3);font-size:18px}
+.seat-card .lbl{font-size:11.5px;color:var(--txt-2);margin-top:8px}
+.seat-card .bar{height:5px;border-radius:3px;background:rgba(255,255,255,.08);margin-top:12px;overflow:hidden}
+.seat-card .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold-deep),var(--gold-bright));border-radius:3px}
+
+/* section */
+section{padding:56px 0;position:relative}
+.sec-head{text-align:center;max-width:680px;margin:0 auto 42px}
+.sec-head .tag{font-family:"IBM Plex Mono";font-size:11px;letter-spacing:3px;color:var(--gold);text-transform:uppercase}
+.sec-head h2{font-size:clamp(26px,4vw,40px);margin:12px 0 14px;letter-spacing:-.3px}
+.sec-head p{color:var(--txt-2);font-size:15px;line-height:1.8}
+
+/* layers grid */
+.layers{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+@media(max-width:760px){.layers{grid-template-columns:1fr}}
+.layer{background:var(--panel);border:1px solid var(--line-soft);border-radius:18px;padding:24px;position:relative;overflow:hidden;
+  backdrop-filter:blur(12px);transition:.25s}
+.layer:hover{transform:translateY(-4px);border-color:var(--line)}
+.layer .ic{width:50px;height:50px;border-radius:14px;display:grid;place-items:center;font-size:22px;margin-bottom:16px}
+.layer h3{font-size:19px;margin:0 0 4px}
+.layer .sub{font-family:"IBM Plex Mono";font-size:11px;color:var(--txt-3);letter-spacing:1px;margin-bottom:12px}
+.layer p{color:var(--txt-2);font-size:13.5px;line-height:1.8;margin:0}
+.l1 .ic{background:rgba(63,211,198,.12);color:var(--teal);border:1px solid rgba(63,211,198,.3)}
+.l2 .ic{background:rgba(120,160,255,.12);color:#88A6FF;border:1px solid rgba(120,160,255,.3)}
+.l3 .ic{background:rgba(226,101,126,.12);color:var(--rose);border:1px solid rgba(226,101,126,.3)}
+.l4 .ic{background:rgba(217,182,90,.14);color:var(--gold-bright);border:1px solid rgba(217,182,90,.4)}
+.hidden-note{margin-top:30px;text-align:center;padding:22px;border-radius:16px;border:1px dashed var(--line);
+  background:rgba(0,0,0,.25);color:var(--txt-2);font-size:14px;line-height:1.8}
+.hidden-note b{color:var(--gold-bright)}
+
+/* value props */
+.props{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:760px){.props{grid-template-columns:1fr}}
+.prop{background:var(--panel);border:1px solid var(--line-soft);border-radius:16px;padding:22px;backdrop-filter:blur(12px)}
+.prop .ic{font-size:24px;color:var(--gold);margin-bottom:12px}
+.prop h3{font-size:16px;margin:0 0 8px}
+.prop p{color:var(--txt-2);font-size:13px;line-height:1.7;margin:0}
+
+/* comparison */
+.compare{background:var(--panel);border:1px solid var(--line-soft);border-radius:20px;overflow:hidden;backdrop-filter:blur(12px)}
+.compare table{width:100%;border-collapse:collapse}
+.compare th,.compare td{padding:16px 18px;text-align:start;font-size:13.5px;border-bottom:1px solid var(--line-soft)}
+.compare th{font-family:"Reem Kufi";font-size:14px;color:var(--txt)}
+body[dir="ltr"] .compare th{font-family:"Sora"}
+.compare thead th{color:var(--txt-3);font-family:"IBM Plex Mono";font-size:11px;letter-spacing:1px;text-transform:uppercase}
+.compare .ndsp{color:var(--gold-bright);font-parameter:600}
+.compare .yes{color:var(--up)} .compare .no{color:var(--txt-3)}
+.compare tr:last-child td{border-bottom:0}
+.compare td:first-child{color:var(--txt-2)}
+
+/* packages */
+.pkgs{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:920px){.pkgs{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.pkgs{grid-template-columns:1fr}}
+.pkg{background:var(--panel);border:1px solid var(--line-soft);border-radius:18px;padding:22px;backdrop-filter:blur(12px);position:relative}
+.pkg.elite{border-color:var(--line);background:linear-gradient(160deg,rgba(217,182,90,.1),rgba(0,0,0,.2))}
+.pkg .badge{position:absolute;top:-10px;inset-inline-end:18px;background:linear-gradient(135deg,var(--gold-bright),var(--gold-deep));
+  color:#1a1303;font-size:10px;font-parameter:700;padding:4px 10px;border-radius:8px}
+.pkg h3{font-size:18px;margin:0 0 4px}
+.pkg .price{font-family:"IBM Plex Mono";color:var(--gold-bright);font-size:14px;margin-bottom:16px}
+.pkg ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:9px}
+.pkg li{font-size:12.5px;color:var(--txt-2);display:flex;gap:8px;align-items:flex-start;line-height:1.5}
+.pkg li::before{content:"◆";color:var(--gold);font-size:9px;margin-top:3px}
+
+/* register */
+#register{scroll-margin-top:80px}
+.reg-card{background:var(--panel);border:1px solid var(--line);border-radius:22px;overflow:hidden;backdrop-filter:blur(14px);box-shadow:var(--shadow)}
+.reg-grid{display:grid;grid-template-columns:1fr 1.1fr}
+@media(max-width:820px){.reg-grid{grid-template-columns:1fr}}
+.reg-side{padding:34px;background:linear-gradient(160deg,rgba(217,182,90,.1),rgba(0,0,0,.25));border-inline-end:1px solid var(--line-soft)}
+.reg-side h3{font-size:24px;margin:0 0 14px}
+.reg-side .item{display:flex;gap:12px;margin-bottom:16px;font-size:13.5px;color:var(--txt-2);line-height:1.7}
+.reg-side .item .n{flex:none;width:28px;height:28px;border-radius:9px;display:grid;place-items:center;
+  background:rgba(217,182,90,.14);color:var(--gold-bright);font-family:"IBM Plex Mono";font-size:13px;font-parameter:600}
+.reg-form{padding:34px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:12.5px;color:var(--txt-2);margin-bottom:7px}
+.field input,.field select{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--line-soft);
+  background:rgba(0,0,0,.3);color:var(--txt);font-family:inherit;font-size:13.5px;transition:.2s}
+.field input:focus,.field select:focus{outline:0;border-color:var(--gold);background:rgba(0,0,0,.45)}
+.field input.err,.field select.err{border-color:var(--down)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:520px){.row2{grid-template-columns:1fr}}
+.ack{display:flex;gap:10px;align-items:flex-start;padding:14px;border-radius:12px;border:1px solid var(--line-soft);
+  background:rgba(0,0,0,.25);font-size:12px;color:var(--txt-2);line-height:1.7;margin-bottom:16px}
+.ack input{margin-top:3px;accent-color:var(--gold);width:16px;height:16px;flex:none}
+.ack b{color:var(--txt)}
+.reg-form .btn-gold{width:100%;justify-content:center;padding:14px}
+.note{font-size:11px;color:var(--txt-3);margin-top:12px;line-height:1.6;text-align:center}
+.reg-success{display:none;padding:40px;text-align:center}
+.reg-success.show{display:block}
+.reg-success .seal-ok{width:74px;height:74px;border-radius:50%;display:grid;place-items:center;margin:0 auto 18px;
+  background:rgba(86,214,160,.12);border:1px solid rgba(86,214,160,.4);font-size:34px;color:var(--up)}
+.reg-success h3{font-size:24px;margin:0 0 10px}
+.reg-success p{color:var(--txt-2);font-size:14px;line-height:1.8;max-width:420px;margin:0 auto 8px}
+.reg-success .ref{font-family:"IBM Plex Mono";color:var(--gold-bright);font-size:14px;margin-top:14px}
+.statebox{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:8px 14px;border-radius:999px;
+  border:1px solid rgba(217,182,90,.4);background:rgba(217,182,90,.08);color:var(--gold-bright);font-size:12.5px}
+
+/* footer */
+footer{padding:46px 0 30px;border-top:1px solid var(--line-soft);margin-top:40px;position:relative;z-index:2}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.foot .gov{font-family:"Reem Kufi";color:var(--gold);font-size:14px}
+body[dir="ltr"] .foot .gov{font-family:"Sora"}
+.disclaimer{margin-top:24px;font-size:11px;color:var(--txt-3);line-height:1.8;text-align:center;
+  padding:16px;border-radius:14px;border:1px dashed var(--line);background:rgba(0,0,0,.2)}
+.disclaimer b{color:var(--txt-2)}
+
+.fade{opacity:0;transform:translateY(20px)}
+.fade.in{opacity:1;transform:none;transition:all .8s cubic-bezier(.2,.8,.2,1)}
+</style>
+</head>
+<body dir="ltr">
+
+<div class="bg"><div class="glow g1"></div><div class="glow g2"></div><div class="grid"></div></div>
+<svg class="seal-wm" viewBox="0 0 240 240" aria-hidden="true"><use href="#hunterSeal"/></svg>
+
+<!-- Hunter_KSA1 emblem def -->
+<svg width="0" height="0" style="position:absolute"><defs><g id="hunterSeal">
+  <circle cx="120" cy="120" r="116" fill="none" stroke="#D9B65A" stroke-width="2"/>
+  <circle cx="120" cy="120" r="106" fill="none" stroke="#D9B65A" stroke-width="1" stroke-dasharray="2 6"/>
+  <path d="M120 56 C150 60 168 80 170 108 C171 122 165 134 154 142 L172 150 L150 152 C146 168 132 180 118 182 C128 172 130 162 128 156 C112 162 96 158 86 146 C100 148 110 144 114 138 C96 134 84 120 84 102 C84 76 100 60 120 56 Z" fill="#D9B65A"/>
+  <circle cx="138" cy="98" r="6.5" fill="#070A10"/><circle cx="140" cy="96" r="2" fill="#F2D27A"/>
+  <path d="M170 108 C184 110 190 118 184 126 C180 120 174 118 168 120 Z" fill="#9A7A22"/>
+  <path d="M96 116 C108 124 120 128 134 126" fill="none" stroke="#070A10" stroke-width="2" opacity=".5"/>
+  <path d="M100 128 C112 134 122 136 132 134" fill="none" stroke="#070A10" stroke-width="2" opacity=".4"/>
+  <path d="M120 30 l3 7 7 1 -5 5 1 7 -6 -3 -6 3 1 -7 -5 -5 7 -1 z" fill="#F2D27A"/>
+  <path id="arcTop" d="M40 120 A80 80 0 0 1 200 120" fill="none"/>
+  <path id="arcBot" d="M44 124 A76 76 0 0 0 196 124" fill="none"/>
+  <text font-family="IBM Plex Mono,monospace" font-size="15" letter-spacing="6" fill="#D9B65A"><textPath href="#arcTop" startOffset="50%" text-anchor="middle">HUNTER</textPath></text>
+  <text font-family="IBM Plex Mono,monospace" font-size="13" letter-spacing="5" fill="#D9B65A"><textPath href="#arcBot" startOffset="50%" text-anchor="middle">KSA · 1</textPath></text>
+</g></defs></svg>
+
+<!-- NAV -->
+<nav><div class="in">
+  <div class="brand">
+    <svg viewBox="0 0 240 240"><use href="#hunterSeal"/></svg>
+    <div><b>NDSP</b><span data-i="brandSub">منصة نواف لدعم القرار</span></div>
+  </div>
+  <div class="links">
+    <a href="#layers" data-i="navLayers">الطبقات</a>
+    <a href="#why" data-i="navWhy">لماذا NDSP</a>
+    <a href="#packages" data-i="navPkgs">الباقات</a>
+    <a href="#register" data-i="navTrial">التجربة</a>
+  </div>
+  <a href="NDSP_Login.html" class="lang" style="text-decoration:none" data-i="navSignin">دخول</a>
+  <select class="langsel" id="langSel" aria-label="Language">
+    <option value="ar">العربية</option>
+    <option value="en">English</option>
+    <option value="fr">Français</option>
+    <option value="es">Español</option>
+    <option value="de">Deutsch</option>
+    <option value="tr">Türkçe</option>
+    <option value="ru">Русский</option>
+    <option value="pt">Português</option>
+    <option value="id">Bahasa Indonesia</option>
+    <option value="hi">हिन्दी</option>
+    <option value="zh">中文</option>
+    <option value="ur">اردو</option>
+  </select>
+  <a href="#register" class="btn btn-gold" data-i="navCta">احجز مقعدك</a>
+</div></nav>
+
+<div class="wrap">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="eyebrow"><span class="pulse"></span><span data-i="eyebrow">قبل الإطلاق المدفوع · مقاعد محدودة</span></div>
+    <h1><span data-i="h1a">قرار محكوم،</span> <span class="hl" data-i="h1b">لا توصية ولا ضوضاء</span></h1>
+    <p class="lead" data-i="lead">منصة نواف لدعم القرار تجمع ١٦ طبقة تحليلية تشارك في كل قراءة لتمنحك قيمة قرار منقّحة — اتجاه سياقي، أفق متابعة، وجودة قرار — بدون أوامر تنفيذ ولا وعود مضمونة. أنت تقرر، ونحن ندعم القرار.</p>
+    <div class="cta">
+      <a href="#register" class="btn btn-gold"><span data-i="ctaMain">ابدأ تجربة ١٦ يوم</span> →</a>
+      <a href="#layers" class="btn btn-ghost" data-i="ctaSec">اكتشف الطبقات</a>
+    </div>
+    <div class="micro" data-i="micro">١٦ يوم · ١٦ طبقة · بدون بطاقة دفع · إلغاء مسؤولية كامل</div>
+  </header>
+
+  <!-- SEATS -->
+  <div class="seats">
+    <div class="seat-card total">
+      <div class="num" id="seatTotal">50</div>
+      <div class="lbl" data-i="seatTotalL">إجمالي مقاعد التجربة</div>
+    </div>
+    <div class="seat-card">
+      <div class="num"><span id="s1">0</span><span class="of" id="t1">/25</span></div>
+      <div class="lbl" data-i="s1L">مبتدئ عادي</div>
+      <div class="bar"><i id="b1" style="width:0%"></i></div>
+    </div>
+    <div class="seat-card">
+      <div class="num"><span id="s2">0</span><span class="of" id="t2">/10</span></div>
+      <div class="lbl" data-i="s2L">متخصص / أكاديمي</div>
+      <div class="bar"><i id="b2" style="width:0%"></i></div>
+    </div>
+    <div class="seat-card">
+      <div class="num"><span id="s3">0</span><span class="of" id="t3">/15</span></div>
+      <div class="lbl" data-i="s3L">خاص / مميّز</div>
+      <div class="bar"><i id="b3" style="width:0%"></i></div>
+    </div>
+  </div>
+
+  <!-- LAYERS -->
+  <section id="layers">
+    <div class="sec-head fade">
+      <div class="tag">DECISION LAYERS</div>
+      <h2 data-i="layersH">أربع طبقات ظاهرة بالاسم</h2>
+      <p data-i="layersP">من أصل ١٦ طبقة تشارك في كل قرار، نكشف لك أربعًا بأسمائها الصريحة. الباقي يعمل خلف الكواليس — تحصل على القيمة، لا الوصفة.</p>
+    </div>
+    <div class="layers">
+      <div class="layer l1 fade"><div class="ic">◷</div><h3 data-i="tdlN">منطق البُعد الزمني</h3><div class="sub">TDL — TIMED DIRECTION LOGIC</div><p data-i="tdlP">يحدّد أفق المتابعة — ممتد أو قصير — بمواءمة القراءة الأسبوعية مع القصيرة، ويترجمها إلى قوة أفق واضحة بدون كشف المعادلة.</p></div>
+      <div class="layer l2 fade"><div class="ic">⬡</div><h3 data-i="nmpN">نقطة التقاء نواف</h3><div class="sub">NMP — NAWAF MEETING POINT</div><p data-i="nmpP">تقيس جودة التقارب والاتفاق بين القراءات لتمنحك تأكيدًا سياقيًا على وضوح الاتجاه ومتانة القرار.</p></div>
+      <div class="layer l3 fade"><div class="ic">⚔</div><h3 data-i="devN">محامي الشيطان</h3><div class="sub">DEVIL'S ADVOCATE</div><p data-i="devP">يتحدّى القراءة عمدًا: يبرز نقاط الضعف وأسباب التحفّظ والتناقضات قبل أن تتخذ قرارك — درعك ضد الحماس الزائد.</p></div>
+      <div class="layer l4 fade"><div class="ic">✦</div><h3 data-i="goldN">إشارة نواف الذهبية</h3><div class="sub">NAWAF GOLDEN ALIGNMENT</div><p data-i="goldP">تضيء عند تحقّق شرط محاذاة عالية الجودة بين الطبقات — معزّز سياقي للجودة، لا ضمان ولا وعد بربح.</p></div>
+    </div>
+    <div class="hidden-note fade" data-i="hiddenNote"><b>١٢ طبقة مخفية</b> تشارك في كل مخرجة دون كشف أسمائها أو ترتيبها أو طرق حساب داخليةها. هذا ليس غموضًا — بل حماية لجوهر المنصة، تمامًا كما تحمي البنوك الكبرى نماذجها.</div>
+  </section>
+
+  <!-- WHY -->
+  <section id="why">
+    <div class="sec-head fade">
+      <div class="tag">WHY NDSP</div>
+      <h2 data-i="whyH">مبنية على مبدأ واحد صارم</h2>
+      <p data-i="whyP">اعرض قيمة القرار. أخفِ الوصفة الداخلية. كل شيء في NDSP يخدم هذا المبدأ.</p>
+    </div>
+    <div class="props">
+      <div class="prop fade"><div class="ic">◈</div><h3 data-i="p1H">جودة قرار مرئية</h3><p data-i="p1P">مؤشر واحد يلخّص متانة القراءة بعد مرور كل الطبقات — تعرف فورًا متى تثق ومتى تتحفّظ.</p></div>
+      <div class="prop fade"><div class="ic">⟁</div><h3 data-i="p2H">مستويات سيناريو مرجعية</h3><p data-i="p2P">تفعيل · وصول · مراجعة · إلغاء — مراجع سياقية تؤطّر المتابعة، وليست أوامر دخول أو خروج.</p></div>
+      <div class="prop fade"><div class="ic">⛨</div><h3 data-i="p3H">حوكمة وأمان</h3><p data-i="p3P">القرار في الخادم، الواجهة عرض فقط. بيانات التشغيل تبقى محمية في الخادم، لا طرق حساب داخلية خام، حماية كاملة من إساءة الاستخدام.</p></div>
+      <div class="prop fade"><div class="ic">⚖</div><h3 data-i="p4H">صريحة فيما ليست عليه</h3><p data-i="p4P">ليست بوت تداول، ولا مزوّد توصيات، ولا مدير محافظ، ولا تضمن نتائج. منصة دعم قرار محكومة — ووضوحها قوّتها.</p></div>
+      <div class="prop fade"><div class="ic">◷</div><h3 data-i="p5H">أفق وقوة لكل أصل</h3><p data-i="p5P">لكل أصل أفق متابعة وقوة أفق وحالة سوق وسبب تحفّظ — مشهد كامل في لمحة واحدة.</p></div>
+      <div class="prop fade"><div class="ic">⌘</div><h3 data-i="p6H">عربي أولاً · ثنائية اللغة</h3><p data-i="p6P">واجهة عربية أصيلة (RTL) وإنجليزية كاملة (LTR)، بمخرجات منقّحة متطابقة في اللغتين.</p></div>
+    </div>
+  </section>
+
+  <!-- COMPARISON -->
+  <section id="compare">
+    <div class="sec-head fade">
+      <div class="tag">THE DIFFERENCE</div>
+      <h2 data-i="cmpH">منهج مختلف عن الطرفيات التقليدية</h2>
+      <p data-i="cmpP">الطرفيات الكبرى تغرقك بالبيانات الخام. NDSP تمنحك القرار المنقّح.</p>
+    </div>
+    <div class="compare fade">
+      <table>
+        <thead><tr><th data-i="cmpC0">المعيار</th><th class="ndsp">NDSP</th><th data-i="cmpC2">الطرفيات التقليدية</th></tr></thead>
+        <tbody id="cmpBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- PACKAGES -->
+  <section id="packages">
+    <div class="sec-head fade">
+      <div class="tag">PACKAGES</div>
+      <h2 data-i="pkgH">باقات تنمو معك</h2>
+      <p data-i="pkgP">ابدأ بالتجربة، ثم اختر ما يناسب عمق قرارك.</p>
+    </div>
+    <div class="pkgs">
+      <div class="pkg fade"><h3 data-i="pkFreeN">المجانية</h3><div class="price" data-i="pkFreeP">Free</div>
+        <ul><li data-i="pkFree1">سوق واحد · ٣ أصول</li><li data-i="pkFree2">٥ تحاليل أسبوعيًا</li><li data-i="pkFree3">جودة قرار مبسّطة + موجز مقصوص</li><li data-i="pkFree4">تنبيه واحد</li></ul></div>
+      <div class="pkg fade"><h3 data-i="pkProN">برو</h3><div class="price" data-i="pkProP">Pro</div>
+        <ul><li data-i="pkPro1">سوقان · ٢٠ أصلًا</li><li data-i="pkPro2">١٥ تحليلًا يوميًا</li><li data-i="pkPro3">TDL + NMP ظاهرتان</li><li data-i="pkPro4">تنبيهات أساسية</li></ul></div>
+      <div class="pkg elite fade"><div class="badge" data-i="pkBadge">الأكثر طلبًا</div><h3 data-i="pkEliteN">النخبة</h3><div class="price" data-i="pkEliteP">Elite</div>
+        <ul><li data-i="pkElite1">كل الأسواق · ١٠٠ أصل</li><li data-i="pkElite2">٢٥٠ تحليلًا يوميًا</li><li data-i="pkElite3">الطبقات الأربع كاملة</li><li data-i="pkElite4">تنبيهات تيليجرام متقدمة</li><li data-i="pkElite5">يوميات قرار + مقارنة</li></ul></div>
+      <div class="pkg fade"><h3 data-i="pkInstN">المؤسسية</h3><div class="price" data-i="pkInstP">Institutional</div>
+        <ul><li data-i="pkInst1">٢٥٠+ أصل بالعقد</li><li data-i="pkInst2">API مخرجات القرار</li><li data-i="pkInst3">Webhooks + فرق عمل</li><li data-i="pkInst4">تقارير مخصّصة</li></ul></div>
+    </div>
+  </section>
+
+  <!-- REGISTER -->
+  <section id="register">
+    <div class="reg-card fade">
+      <div class="reg-grid" id="regGrid">
+        <div class="reg-side">
+          <h3 data-i="regSideH">تجربة ١٦ يوم — باقة Elite كاملة</h3>
+          <div class="item"><div class="n">١</div><div data-i="regS1">خلال التجربة ترى <b>باقة Elite كاملة</b> كأنك مشترك بها: كل الطبقات الأربع وجودة القرار الكاملة طوال الـ١٦ يومًا.</div></div>
+          <div class="item"><div class="n">٢</div><div data-i="regS2">٥٠ مقعدًا فقط، موزّعة: ٢٥ مبتدئ · ١٠ متخصص · ١٥ خاص.</div></div>
+          <div class="item"><div class="n">٣</div><div data-i="regS3">بدون بطاقة دفع. التحويل للباقة المدفوعة اختياري بعد الإطلاق.</div></div>
+          <div class="item"><div class="n">٤</div><div data-i="regS4">مراجعة تسجيل آلية لحماية المقاعد من الإساءة والتكرار.</div></div>
+        </div>
+
+        <div class="reg-form" id="regForm">
+          <div class="row2">
+            <div class="field"><label data-i="fName">الاسم الكامل</label><input id="f_name" type="text" autocomplete="name"></div>
+            <div class="field"><label data-i="fPhone">رقم الجوال</label><input id="f_phone" type="tel" inputmode="tel" dir="ltr" placeholder="+966 5x xxx xxxx"></div>
+          </div>
+          <div class="field"><label data-i="fEmail">البريد الإلكتروني</label><input id="f_email" type="email" autocomplete="email" dir="ltr"></div>
+          <div class="row2">
+            <div class="field"><label data-i="fType">نوع المستخدم</label>
+              <select id="f_type">
+                <option value="ordinary" data-i="fTypeOrd">مبتدئ عادي</option>
+                <option value="specialist" data-i="fTypeSpec">متخصص / أكاديمي</option>
+                <option value="private" data-i="fTypePriv">خاص / مميّز</option>
+              </select></div>
+            <div class="field"><label data-i="fInvite">رمز الدعوة (اختياري)</label><input id="f_invite" type="text" dir="ltr" placeholder="NDSP-XXXX"></div>
+          </div>
+
+          <label class="ack">
+            <input type="checkbox" id="f_ack">
+            <span data-i="ackTxt"><b>أُقرّ بأنّ NDSP</b> منصة دعم قرار وتحليل سياقي، وليست شركة استثمار، ولا تقدّم توصيات مالية ملزمة، ولا تدير أموالًا، ولا تضمن أرباحًا أو نتائج. فترة التجربة ١٦ يومًا، وأوافق على الإشعار القانوني صراحةً.</span>
+          </label>
+
+          <button class="btn btn-gold" id="submitBtn"><span data-i="submitTxt">احجز مقعدي في التجربة</span> →</button>
+          <div class="note" data-i="formNote">نجمع إشارات آمنة فقط للتحقق (بيانات تحقق آمنة فقط). القرار النهائي للقبول يتم في الخادم.</div>
+        </div>
+
+        <div class="reg-success" id="regSuccess">
+          <div class="seal-ok">✓</div>
+          <h3 data-i="okH">تم استلام طلبك</h3>
+          <p id="okBody" data-i="okBody">طلبك قيد المراجعة الآلية للتحقق من المقعد. ستصلك رسالة تفعيل على بريدك — وتجربتك تبدأ من لحظة تفعيلك للحساب، لا من الآن، فلا تخسر أي يوم من الـ١٦.</p>
+          <div class="statebox"><span class="dot" style="width:7px;height:7px;border-radius:50%;background:var(--gold-bright)"></span><span id="okState">PENDING_REVIEW · قيد المراجعة</span></div>
+          <div class="ref" id="okRef">REF: NDSP-T-————</div>
+          <a href="NDSP_Activation.html" class="btn btn-ghost" style="margin-top:20px;text-decoration:none;display:inline-flex" data-i="okContinue">متابعة لشاشة التفعيل (تجريبي) →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="foot">
+      <div class="brand">
+        <svg viewBox="0 0 240 240" style="width:34px;height:34px"><use href="#hunterSeal"/></svg>
+        <div><b style="font-size:16px">NDSP</b><span>Hunter_KSA1 · © 2026</span>
+          <div style="margin-top:8px;font-size:11.5px"><a href="NDSP_Terms_Privacy.html" style="color:var(--txt-2);text-decoration:none" data-i="fTerms">الشروط</a> · <a href="NDSP_Terms_Privacy.html#privacy" style="color:var(--txt-2);text-decoration:none" data-i="fPrivacy">الخصوصية</a></div>
+        </div>
+      </div>
+      <div class="gov" data-i="govRule">اعرض قيمة القرار · أخفِ الوصفة الداخلية</div>
+    </div>
+    <div class="disclaimer" id="disclaimer">
+      <b data-i="discT">إخلاء مسؤولية</b><br>
+      <span data-i="discBody">مستويات السيناريو ومخرجات NDSP هي مراجع سياقية لدعم القرار فقط، وليست نصيحة مالية أو أمر تداول أو توجيه تنفيذ أو ضمانًا للنتائج. NDSP ليست شركة استثمار ولا تدير أموالًا.</span>
+    </div>
+  </footer>
+
+</div>
+
+<!-- ===== DISCLAIMER MODAL (on page open) ===== -->
+<div class="ndsp-modal" id="discModal">
+  <div class="box">
+    <div class="mic"><svg viewBox="0 0 240 240" width="40" height="40"><use href="#hunterSeal"/></svg></div>
+    <h2 data-i="dmTitle">إخلاء مسؤولية</h2>
+    <div class="ndsp-disc-text" data-i="dmBody"><b>NDSP منصّة لدعم القرار.</b> مستويات السيناريو ومخرجات NDSP مراجع سياقية لدعم القرار فقط، وليست نصيحة مالية أو أمر تداول أو توجيه تنفيذ أو ضمانًا للنتائج. NDSP ليست شركة استثمار ولا تدير أموالًا. القرار النهائي ومسؤوليته عليك وحدك.</div>
+    <label class="ndsp-check"><input type="checkbox" id="discAgree"><span data-i="dmCheck">أقرّ بأنني قرأت إخلاء المسؤولية وأوافق عليه.</span></label>
+    <div class="actions">
+      <button class="btn btn-gold" id="discBtn" disabled><span data-i="dmBtn">أوافق وأدخل</span></button>
+    </div>
+    <div class="mgov"><span data-i="dmGov">للاطّلاع الكامل:</span> <a href="NDSP_Terms_Privacy.html" data-i="dmTerms">الشروط والخصوصية</a></div>
+  </div>
+</div>
+<script>
+const I18N={
+ ar:{dir:"rtl",lang:"ar",
+  dmTitle:"إخلاء مسؤولية",dmBody:"<b>NDSP منصّة لدعم القرار.</b> مستويات السيناريو ومخرجات NDSP مراجع سياقية لدعم القرار فقط، وليست نصيحة مالية أو أمر تداول أو توجيه تنفيذ أو ضمانًا للنتائج. NDSP ليست شركة استثمار ولا تدير أموالًا. القرار النهائي ومسؤوليته عليك وحدك.",dmCheck:"أقرّ بأنني قرأت إخلاء المسؤولية وأوافق عليه.",dmBtn:"أوافق وأدخل",dmGov:"للاطّلاع الكامل:",dmTerms:"الشروط والخصوصية",
+  brandSub:"منصة نواف لدعم القرار",navLayers:"الطبقات",navWhy:"لماذا NDSP",navPkgs:"الباقات",navTrial:"التجربة",navCta:"احجز مقعدك",navSignin:"دخول",fTerms:"الشروط",fPrivacy:"الخصوصية",
+  eyebrow:"قبل الإطلاق المدفوع · مقاعد محدودة",h1a:"قرار محكوم،",h1b:"لا توصية ولا ضوضاء",
+  lead:"منصة نواف لدعم القرار تجمع ١٦ طبقة تحليلية تشارك في كل قراءة لتمنحك قيمة قرار منقّحة — اتجاه سياقي، أفق متابعة، وجودة قرار — بدون أوامر تنفيذ ولا وعود مضمونة. أنت تقرر، ونحن ندعم القرار.",
+  ctaMain:"ابدأ تجربة ١٦ يوم",ctaSec:"اكتشف الطبقات",micro:"١٦ يوم · ١٦ طبقة · بدون بطاقة دفع · إخلاء مسؤولية كامل",
+  seatTotalL:"إجمالي مقاعد التجربة",s1L:"مبتدئ عادي",s2L:"متخصص / أكاديمي",s3L:"خاص / مميّز",
+  layersH:"أربع طبقات ظاهرة بالاسم",layersP:"من أصل ١٦ طبقة تشارك في كل قرار، نكشف لك أربعًا بأسمائها الصريحة. الباقي يعمل خلف الكواليس — تحصل على القيمة، لا الوصفة.",
+  tdlN:"منطق البُعد الزمني",tdlP:"يحدّد أفق المتابعة — ممتد أو قصير — بمواءمة القراءة الأسبوعية مع القصيرة، ويترجمها إلى قوة أفق واضحة بدون كشف المعادلة.",
+  nmpN:"نقطة التقاء نواف",nmpP:"تقيس جودة التقارب والاتفاق بين القراءات لتمنحك تأكيدًا سياقيًا على وضوح الاتجاه ومتانة القرار.",
+  devN:"محامي الشيطان",devP:"يتحدّى القراءة عمدًا: يبرز نقاط الضعف وأسباب التحفّظ والتناقضات قبل أن تتخذ قرارك — درعك ضد الحماس الزائد.",
+  goldN:"إشارة نواف الذهبية",goldP:"تضيء عند تحقّق شرط محاذاة عالية الجودة بين الطبقات — معزّز سياقي للجودة، لا ضمان ولا وعد بربح.",
+  hiddenNote:"١٢ طبقة مخفية تشارك في كل مخرجة دون كشف أسمائها أو ترتيبها أو طرق حساب داخليةها. هذا ليس غموضًا — بل حماية لجوهر المنصة، تمامًا كما تحمي البنوك الكبرى نماذجها.",
+  whyH:"مبنية على مبدأ واحد صارم",whyP:"اعرض قيمة القرار. أخفِ الوصفة الداخلية. كل شيء في NDSP يخدم هذا المبدأ.",
+  p1H:"جودة قرار مرئية",p1P:"مؤشر واحد يلخّص متانة القراءة بعد مرور كل الطبقات — تعرف فورًا متى تثق ومتى تتحفّظ.",
+  p2H:"مستويات سيناريو مرجعية",p2P:"تفعيل · وصول · مراجعة · إلغاء — مراجع سياقية تؤطّر المتابعة، وليست أوامر دخول أو خروج.",
+  p3H:"حوكمة وأمان",p3P:"القرار في الخادم، الواجهة عرض فقط. بيانات التشغيل تبقى محمية في الخادم، لا طرق حساب داخلية خام، حماية كاملة من إساءة الاستخدام.",
+  p4H:"صريحة فيما ليست عليه",p4P:"ليست بوت تداول، ولا مزوّد توصيات، ولا مدير محافظ، ولا تضمن نتائج. منصة دعم قرار محكومة — ووضوحها قوّتها.",
+  p5H:"أفق وقوة لكل أصل",p5P:"لكل أصل أفق متابعة وقوة أفق وحالة سوق وسبب تحفّظ — مشهد كامل في لمحة واحدة.",
+  p6H:"عربي أولاً · ثنائية اللغة",p6P:"واجهة عربية أصيلة (RTL) وإنجليزية كاملة (LTR)، بمخرجات منقّحة متطابقة في اللغتين.",
+  cmpH:"منهج مختلف عن الطرفيات التقليدية",cmpP:"الطرفيات الكبرى تغرقك بالبيانات الخام. NDSP تمنحك القرار المنقّح.",
+  cmpC0:"المعيار",cmpC2:"الطرفيات التقليدية",
+  pkgH:"باقات تنمو معك",pkgP:"ابدأ بالتجربة، ثم اختر ما يناسب عمق قرارك.",
+  pkFreeN:"المجانية",pkFree1:"سوق واحد · ٣ أصول",pkFree2:"٥ تحاليل أسبوعيًا",pkFree3:"جودة قرار مبسّطة + موجز مقصوص",pkFree4:"تنبيه واحد",
+  pkProN:"برو",pkPro1:"سوقان · ٢٠ أصلًا",pkPro2:"١٥ تحليلًا يوميًا",pkPro3:"TDL + NMP ظاهرتان",pkPro4:"تنبيهات أساسية",
+  pkBadge:"الأكثر طلبًا",pkEliteN:"النخبة",pkElite1:"كل الأسواق · ١٠٠ أصل",pkElite2:"٢٥٠ تحليلًا يوميًا",pkElite3:"الطبقات الأربع كاملة",pkElite4:"تنبيهات تيليجرام متقدمة",pkElite5:"يوميات قرار + مقارنة",
+  pkInstN:"المؤسسية",pkInst1:"٢٥٠+ أصل بالعقد",pkInst2:"API مخرجات القرار",pkInst3:"Webhooks + فرق عمل",pkInst4:"تقارير مخصّصة",
+  regSideH:"تجربة ١٦ يوم — باقة Elite كاملة",
+  regS1:"خلال التجربة ترى <b>باقة Elite كاملة</b> كأنك مشترك بها: كل الطبقات الأربع وجودة القرار الكاملة طوال الـ١٦ يومًا.",regS2:"٥٠ مقعدًا فقط، موزّعة: ٢٥ مبتدئ · ١٠ متخصص · ١٥ خاص.",
+  regS3:"بدون بطاقة دفع. التحويل للباقة المدفوعة اختياري بعد الإطلاق.",regS4:"مراجعة تسجيل آلية لحماية المقاعد من الإساءة والتكرار.",
+  fName:"الاسم الكامل",fPhone:"رقم الجوال",fEmail:"البريد الإلكتروني",fType:"نوع المستخدم",fTypeOrd:"مبتدئ عادي",fTypeSpec:"متخصص / أكاديمي",fTypePriv:"خاص / مميّز",fInvite:"رمز الدعوة (اختياري)",
+  ackTxt:"أُقرّ بأنّ NDSP منصة دعم قرار وتحليل سياقي، وليست شركة استثمار، ولا تقدّم توصيات مالية ملزمة، ولا تدير أموالًا، ولا تضمن أرباحًا أو نتائج. فترة التجربة ١٦ يومًا، وأوافق على الإشعار القانوني صراحةً.",
+  submitTxt:"احجز مقعدي في التجربة",formNote:"نجمع إشارات آمنة فقط للتحقق (بيانات تحقق آمنة فقط). القرار النهائي للقبول يتم في الخادم.",
+  okContinue:"متابعة لشاشة التفعيل (تجريبي) →",okH:"تم استلام طلبك",okBody:"طلبك قيد المراجعة الآلية للتحقق من المقعد. ستصلك رسالة تفعيل على بريدك — وتجربتك تبدأ من لحظة تفعيلك للحساب، لا من الآن، فلا تخسر أي يوم من الـ١٦.",
+  govRule:"اعرض قيمة القرار · أخفِ الوصفة الداخلية",discT:"إخلاء مسؤولية",
+  discBody:"مستويات السيناريو ومخرجات NDSP هي مراجع سياقية لدعم القرار فقط، وليست نصيحة مالية أو أمر تداول أو توجيه تنفيذ أو ضمانًا للنتائج. NDSP ليست شركة استثمار ولا تدير أموالًا.",
+  errFill:"يرجى تعبئة الحقول المطلوبة بشكل صحيح.",errAck:"يجب الموافقة على الإقرار القانوني للمتابعة.",
+  cmp:[["مخرجات","قرار منقّح + جودة قرار","بيانات خام تحتاج خبرة"],["أفق المتابعة","واضح ومصنّف","تستنتجه بنفسك"],["تحدّي القرار","محامي شيطان مدمج","غير موجود"],["اللغة العربية","أصيلة RTL","محدودة أو غائبة"],["وضوح الحدود","يعلن أنه ليس توصية","يوحي بالكثير"],["حماية النموذج","١٢ طبقة محمية","—"]]
+ },
+ en:{dir:"ltr",lang:"en",
+  dmTitle:"Disclaimer",dmBody:"<b>NDSP is a decision-support platform.</b> NDSP scenario levels and outputs are contextual decision-support references only — not financial advice, a trade instruction, an execution directive, or a guarantee of results. NDSP is not an investment firm and manages no funds. The final decision and its responsibility are yours alone.",dmCheck:"I confirm I have read and agree to this disclaimer.",dmBtn:"I Agree & Enter",dmGov:"Full details:",dmTerms:"Terms & Privacy",
+  brandSub:"Nawaf Decision Support Platform",navLayers:"Layers",navWhy:"Why NDSP",navPkgs:"Packages",navTrial:"Trial",navCta:"Reserve seat",navSignin:"Sign in",fTerms:"Terms",fPrivacy:"Privacy",
+  eyebrow:"Before the paid launch · Limited seats",h1a:"Governed decisions,",h1b:"no signals, no noise",
+  lead:"NDSP runs 16 analytical layers on every reading to give you a sanitized decision value — contextual direction, follow-up horizon, and decision quality — with no execution orders and no guaranteed outcomes. You decide; we support the decision.",
+  ctaMain:"Start your 16-day trial",ctaSec:"Explore the layers",micro:"16 days · 16 layers · no payment card · full disclaimer",
+  seatTotalL:"Total trial seats",s1L:"Ordinary beginner",s2L:"Specialist / academic",s3L:"Private / premium",
+  layersH:"Four layers named in the open",layersP:"Of 16 layers active in every decision, four are revealed by name. The rest work behind the scenes — you get the value, not the recipe.",
+  tdlN:"Timed Direction Logic",tdlP:"Sets your follow-up horizon — extended or short — by aligning weekly and short readings, expressed as clear horizon strength without exposing the internal method.",
+  nmpN:"Nawaf Meeting Point",nmpP:"Measures convergence and agreement quality across readings to give contextual confirmation of direction clarity and decision robustness.",
+  devN:"Devil's Advocate",devP:"Deliberately challenges the reading: surfaces weaknesses, caution reasons and contradictions before you decide — your shield against over-confidence.",
+  goldN:"Nawaf Golden Alignment",goldP:"Lights up when a high-quality alignment condition is met across layers — a contextual quality enhancer, never a guarantee or profit promise.",
+  hiddenNote:"12 hidden layers contribute to every output without exposing their names, order or internal methods. This isn't obscurity — it's protection of the platform's core, just as major banks protect their models.",
+  whyH:"Built on one strict principle",whyP:"Expose the decision value. Hide the internal recipe. Everything in NDSP serves this.",
+  p1H:"Visible decision quality",p1P:"One index summarizes the robustness of a reading after all layers — instantly know when to trust and when to hold back.",
+  p2H:"Scenario reference levels",p2P:"Activation · arrival · review · invalidation — contextual references that frame follow-up, not entry or exit orders.",
+  p3H:"Governance & security",p3P:"Decisions live on the server, the frontend only displays. Protected operational details remain server-side, no raw internal methods, full anti-abuse protection.",
+  p4H:"Honest about what it isn't",p4P:"Not a trading bot, signal provider, fund manager, and it guarantees nothing. A governed decision-support platform — clarity is its strength.",
+  p5H:"Horizon & strength per asset",p5P:"Every asset gets a follow-up horizon, horizon strength, market state and caution reason — the full picture at a glance.",
+  p6H:"Arabic-first · bilingual",p6P:"Authentic Arabic (RTL) and full English (LTR), with identical sanitized outputs in both languages.",
+  cmpH:"A different approach to terminals",cmpP:"Big terminals drown you in raw data. NDSP hands you the sanitized decision.",
+  cmpC0:"Criterion",cmpC2:"Traditional terminals",
+  pkgH:"Packages that grow with you",pkgP:"Start with the trial, then pick the depth your decisions need.",
+  pkFreeN:"Free",pkFree1:"1 market · 3 assets",pkFree2:"5 analyses / week",pkFree3:"Simplified quality + trimmed brief",pkFree4:"1 alert",
+  pkProN:"Pro",pkPro1:"2 markets · 20 assets",pkPro2:"15 daily analyses",pkPro3:"TDL + NMP visible",pkPro4:"Basic alerts",
+  pkBadge:"Most popular",pkEliteN:"Elite",pkElite1:"All markets · 100 assets",pkElite2:"250 daily analyses",pkElite3:"All four layers",pkElite4:"Advanced Telegram alerts",pkElite5:"Journal + comparison",
+  pkInstN:"Institutional",pkInst1:"250+ assets by contract",pkInst2:"Decision-output API",pkInst3:"Webhooks + teams",pkInst4:"Custom reports",
+  regSideH:"16-day trial — full Elite package",
+  regS1:"During the trial you see the <b>full Elite package</b> as if subscribed: all four layers and full decision quality for the entire 16 days.",regS2:"Only 50 seats: 25 beginner · 10 specialist · 15 private.",
+  regS3:"No payment card. Converting to a paid package after launch is optional.",regS4:"Automated registration review protects seats from abuse and duplicates.",
+  fName:"Full name",fPhone:"Mobile number",fEmail:"Email address",fType:"User type",fTypeOrd:"Ordinary beginner",fTypeSpec:"Specialist / academic",fTypePriv:"Private / premium",fInvite:"Invite code (optional)",
+  ackTxt:"I acknowledge that NDSP is a decision-support and contextual-analysis platform, not an investment firm; it provides no binding financial recommendations, manages no funds, and guarantees no profits or results. The trial is 16 days, and I explicitly accept the legal notice.",
+  submitTxt:"Reserve my trial seat",formNote:"We collect safe verification signals only (verification-only data). The final acceptance decision is made on the server.",
+  okContinue:"Continue to activation →",okH:"Request received",okBody:"Your request is in automated review to verify the seat. You'll get an activation email — and your trial begins the moment you activate your account, not now, so you lose none of the 16 days.",
+  govRule:"Expose decision value · Hide the recipe",discT:"Disclaimer",
+  discBody:"Scenario levels and NDSP outputs are contextual decision-support references only. They are not financial advice, trade instructions, execution orders, or guaranteed outcomes. NDSP is not an investment firm and manages no funds.",
+  errFill:"Please complete the required fields correctly.",errAck:"You must accept the legal acknowledgment to continue.",
+  cmp:[["Output","Sanitized decision + quality","Raw data needing expertise"],["Follow-up horizon","Clear and classified","You infer it yourself"],["Decision challenge","Built-in Devil's Advocate","Absent"],["Arabic language","Native RTL","Limited or absent"],["Boundary clarity","States it isn't advice","Implies a lot"],["Model protection","12 protected layers","—"]]
+ },
+ fr:{dir:"ltr",lang:"fr",dmTitle:"Avis de non-responsabilité",dmBody:"<b>NDSP est une plateforme d'aide à la décision.</b> Les niveaux de scénario et les résultats de NDSP sont des références contextuelles d'aide à la décision uniquement — pas un conseil financier, ni une instruction de trading, ni un ordre d'exécution, ni une garantie de résultat. NDSP n'est pas une société d'investissement et ne gère aucun fonds. La décision finale et sa responsabilité vous appartiennent seul.",dmCheck:"Je confirme avoir lu et accepté cet avis.",dmBtn:"J'accepte et j'entre",dmGov:"Détails complets :",dmTerms:"Conditions & Confidentialité",brandSub:"Plateforme Nawaf d'aide à la décision",navLayers:"Couches",navWhy:"Pourquoi NDSP",navPkgs:"Forfaits",navTrial:"Essai",navCta:"Réserver une place",navSignin:"Connexion",fTerms:"Conditions",fPrivacy:"Confidentialité",eyebrow:"Avant le lancement payant · Places limitées",h1a:"Décisions gouvernées,",h1b:"sans signaux, sans bruit",lead:"NDSP exécute 16 couches analytiques sur chaque lecture pour vous livrer une valeur de décision épurée — direction contextuelle, horizon de suivi et qualité de décision — sans ordres d'exécution et sans résultats garantis. Vous décidez ; nous soutenons la décision.",ctaMain:"Démarrer votre essai de 16 jours",ctaSec:"Explorer les couches",micro:"16 jours · 16 couches · sans carte bancaire · avis complet",seatTotalL:"Total des places d'essai",s1L:"Débutant ordinaire",s2L:"Spécialiste / académique",s3L:"Privé / premium",layersH:"Quatre couches nommées ouvertement",layersP:"Sur 16 couches actives dans chaque décision, quatre sont dévoilées par leur nom. Les autres travaillent en coulisses — vous obtenez la valeur, pas la recette.",tdlN:"Timed Direction Logic",tdlP:"Définit votre horizon de suivi — étendu ou court — en alignant les lectures hebdomadaires et courtes, exprimées comme une force d'horizon claire sans exposer la formule.",nmpN:"Nawaf Meeting Point",nmpP:"Mesure la convergence et la qualité d'accord entre les lectures pour fournir une confirmation contextuelle de la clarté directionnelle et de la robustesse de décision.",devN:"Devil's Advocate",devP:"Conteste délibérément la lecture : fait remonter les faiblesses, raisons de prudence et contradictions avant que vous ne décidiez — votre bouclier contre l'excès de confiance.",reading:"Lecture",goldN:"Nawaf Golden Alignment",goldP:"S'allume lorsqu'une condition d'alignement de haute qualité est remplie à travers les couches — un amplificateur contextuel de qualité, jamais une garantie ni une promesse de profit.",hiddenNote:"12 couches cachées contribuent à chaque résultat sans exposer leurs noms, leur ordre ni leurs méthodes internes. Ce n'est pas de l'obscurité — c'est la protection du cœur de la plateforme, comme les grandes banques protègent leurs modèles.",whyH:"Bâtie sur un principe strict",whyP:"Exposer la valeur de la décision. Cacher la recette interne. Tout dans NDSP sert cela.",p1H:"Qualité de décision visible",p1P:"Un indice résume la robustesse d'une lecture après toutes les couches — sachez instantanément quand faire confiance et quand vous abstenir.",p2H:"Niveaux de référence de scénario",p2P:"Activation · arrivée · révision · invalidation — des références contextuelles qui encadrent le suivi, pas des ordres d'entrée ou de sortie.",p3H:"Gouvernance & sécurité",p3P:"Les décisions vivent sur le serveur, le front-end ne fait qu'afficher. Aucun protected exposé, aucune formule brute, protection complète anti-abus.",p4H:"Honnête sur ce qu'elle n'est pas",p4P:"Pas un bot de trading, ni fournisseur de signaux, ni gestionnaire de fonds, et elle ne garantit rien. Une plateforme d'aide à la décision gouvernée — sa clarté est sa force.",p5H:"Horizon & force par actif",p5P:"Chaque actif obtient un horizon de suivi, une force d'horizon, un état de marché et une raison de prudence — l'image complète en un coup d'œil.",p6H:"Arabe d'abord · bilingue",p6P:"Arabe authentique (RTL) et anglais complet (LTR), avec des sorties épurées identiques dans les deux langues.",cmpH:"Une approche différente des terminaux",cmpP:"Les grands terminaux vous noient dans les données brutes. NDSP vous tend la décision épurée.",cmpC0:"Critère",cmpC2:"Terminaux traditionnels",cmp:[["Sortie","Décision épurée + qualité","Données brutes nécessitant expertise"],["Horizon de suivi","Clair et classé","Vous l'inférez vous-même"],["Contestation de décision","Devil's Advocate intégré","Absent"],["Langue arabe","RTL natif","Limité ou absent"],["Clarté des limites","Indique que ce n'est pas un conseil","Sous-entend beaucoup"],["Protection du modèle","12 couches protégées","—"]],pkgH:"Des forfaits qui grandissent avec vous",pkgP:"Commencez par l'essai, puis choisissez la profondeur dont vos décisions ont besoin.",pkFreeN:"Free",pkFree1:"1 marché · 3 actifs",pkFree2:"5 analyses / semaine",pkFree3:"Qualité simplifiée + bref allégé",pkFree4:"1 alerte",pkProN:"Pro",pkPro1:"2 marchés · 20 actifs",pkPro2:"15 analyses quotidiennes",pkPro3:"TDL + NMP visibles",pkPro4:"Alertes de base",pkBadge:"Le plus populaire",pkEliteN:"Elite",pkElite1:"Tous les marchés · 100 actifs",pkElite2:"250 analyses quotidiennes",pkElite3:"Les quatre couches",pkElite4:"Alertes Telegram avancées",pkElite5:"Journal + comparaison",pkInstN:"Institutional",pkInst1:"250+ actifs sur contrat",pkInst2:"API de sortie de décision",pkInst3:"Webhooks + équipes",pkInst4:"Rapports personnalisés",regSideH:"Essai de 16 jours — forfait Elite complet",regS1:"Pendant l'essai, vous voyez le <b>forfait Elite complet</b> comme si vous y étiez abonné : les quatre couches et la qualité de décision complète pendant les 16 jours.",regS2:"Seulement 50 places : 25 débutants · 10 spécialistes · 15 privées.",regS3:"Pas de carte bancaire. La conversion vers un forfait payant après le lancement est facultative.",regS4:"L'examen automatisé de l'inscription protège les places contre les abus et les doublons.",subscribed:"abonné",seats:"places",fName:"Nom complet",fPhone:"Numéro de mobile",fEmail:"Adresse e-mail",fType:"Type d'utilisateur",fTypeOrd:"Débutant ordinaire",fTypeSpec:"Spécialiste / académique",fTypePriv:"Privé / premium",fInvite:"Code d'invitation (facultatif)",ackTxt:"Je reconnais que NDSP est une plateforme d'aide à la décision et d'analyse contextuelle, et non une société d'investissement ; elle ne fournit aucune recommandation financière contraignante, ne gère aucun fonds et ne garantit aucun profit ni résultat. L'essai dure 16 jours, et j'accepte explicitement l'avis légal.",submitTxt:"Réserver ma place d'essai",formNote:"Nous ne collectons que des signaux de vérification sécurisés (aucun mot de passe, aucun protected). La décision finale d'acceptation est prise sur le serveur.",okContinue:"Continuer vers l'activation →",okH:"Demande reçue",okBody:"Votre demande est en examen automatisé pour vérifier la place. Vous recevrez un e-mail d'activation — et votre essai commence à l'instant où vous activez votre compte, pas maintenant, afin de ne perdre aucun des 16 jours.",govRule:"Exposer la valeur de décision · Cacher la recette",discT:"Avis",discBody:"Les niveaux de scénario et les résultats de NDSP sont des références contextuelles d'aide à la décision uniquement. Ils ne sont pas un conseil financier, des instructions de trading, des ordres d'exécution ni des résultats garantis. NDSP n'est pas une société d'investissement et ne gère aucun fonds.",details:"Détails complets :",errFill:"Veuillez compléter correctement les champs requis.",errAck:"Vous devez accepter la mention légale pour continuer."},
+ es:{dir:"ltr",lang:"es",dmTitle:"Aviso legal",dmBody:"<b>NDSP es una plataforma de apoyo a la decisión.</b> Los niveles de escenario y los resultados de NDSP son referencias contextuales de apoyo a la decisión únicamente — no son asesoramiento financiero, ni una instrucción de operación, ni una directiva de ejecución, ni una garantía de resultados. NDSP no es una empresa de inversión y no gestiona fondos. La decisión final y su responsabilidad recaen solo en usted.",dmCheck:"Confirmo que he leído y acepto este aviso.",dmBtn:"Acepto y entro",dmGov:"Detalles completos:",dmTerms:"Términos y privacidad",brandSub:"Plataforma Nawaf de apoyo a la decisión",navLayers:"Capas",navWhy:"Por qué NDSP",navPkgs:"Planes",navTrial:"Prueba",navCta:"Reservar plaza",navSignin:"Iniciar sesión",fTerms:"Términos",fPrivacy:"Privacidad",eyebrow:"Antes del lanzamiento de pago · Plazas limitadas",h1a:"Decisiones gobernadas,",h1b:"sin señales, sin ruido",lead:"NDSP ejecuta 16 capas analíticas sobre cada lectura para entregarte un valor de decisión depurado — dirección contextual, horizonte de seguimiento y calidad de decisión — sin órdenes de ejecución y sin resultados garantizados. Tú decides; nosotros apoyamos la decisión.",ctaMain:"Iniciar tu prueba de 16 días",ctaSec:"Explorar las capas",micro:"16 días · 16 capas · sin tarjeta de pago · aviso completo",seatTotalL:"Total de plazas de prueba",s1L:"Principiante ordinario",s2L:"Especialista / académico",s3L:"Privado / premium",layersH:"Cuatro capas nombradas abiertamente",layersP:"De 16 capas activas en cada decisión, cuatro se revelan por nombre. Las demás trabajan tras el telón — obtienes el valor, no la receta.",tdlN:"Timed Direction Logic",tdlP:"Define tu horizonte de seguimiento — extendido o corto — alineando lecturas semanales y cortas, expresadas como fuerza de horizonte clara sin exponer la fórmula.",nmpN:"Nawaf Meeting Point",nmpP:"Mide la convergencia y la calidad de acuerdo entre lecturas para ofrecer una confirmación contextual de la claridad direccional y la robustez de la decisión.",devN:"Devil's Advocate",devP:"Desafía deliberadamente la lectura: saca a la luz debilidades, razones de cautela y contradicciones antes de que decidas — tu escudo contra el exceso de confianza.",reading:"Lectura",goldN:"Nawaf Golden Alignment",goldP:"Se enciende cuando se cumple una condición de alineación de alta calidad entre las capas — un potenciador contextual de calidad, nunca una garantía ni promesa de beneficio.",hiddenNote:"12 capas ocultas contribuyen a cada salida sin exponer sus nombres, orden ni métodos internos. Esto no es oscuridad — es protección del núcleo de la plataforma, igual que los grandes bancos protegen sus modelos.",whyH:"Construida sobre un principio estricto",whyP:"Exponer el valor de la decisión. Ocultar la receta interna. Todo en NDSP sirve a esto.",p1H:"Calidad de decisión visible",p1P:"Un índice resume la robustez de una lectura tras todas las capas — sabe al instante cuándo confiar y cuándo abstenerse.",p2H:"Niveles de referencia de escenario",p2P:"Activación · llegada · revisión · invalidación — referencias contextuales que enmarcan el seguimiento, no órdenes de entrada o salida.",p3H:"Gobernanza y seguridad",p3P:"Las decisiones viven en el servidor, el front-end solo muestra. Sin datos protegidos expuestos, sin métodos internos crudas, protección antiabuso completa.",p4H:"Honesta sobre lo que no es",p4P:"No es un bot de trading, ni proveedor de señales, ni gestor de fondos, y no garantiza nada. Una plataforma de apoyo a la decisión gobernada — la claridad es su fuerza.",p5H:"Horizonte y fuerza por activo",p5P:"Cada activo recibe un horizonte de seguimiento, fuerza de horizonte, estado de mercado y razón de cautela — la imagen completa de un vistazo.",p6H:"Árabe primero · bilingüe",p6P:"Árabe auténtico (RTL) e inglés completo (LTR), con salidas depuradas idénticas en ambos idiomas.",cmpH:"Un enfoque diferente a las terminales",cmpP:"Las grandes terminales te ahogan en datos brutos. NDSP te entrega la decisión depurada.",cmpC0:"Criterio",cmpC2:"Terminales tradicionales",cmp:[["Salida","Decisión depurada + calidad","Datos brutos que requieren experiencia"],["Horizonte de seguimiento","Claro y clasificado","Lo deduces tú mismo"],["Desafío a la decisión","Devil's Advocate integrado","Ausente"],["Idioma árabe","RTL nativo","Limitado o ausente"],["Claridad de límites","Declara que no es asesoramiento","Insinúa mucho"],["Protección del modelo","12 capas protegidas","—"]],pkgH:"Planes que crecen contigo",pkgP:"Empieza con la prueba, luego elige la profundidad que tus decisiones necesitan.",pkFreeN:"Free",pkFree1:"1 mercado · 3 activos",pkFree2:"5 análisis / semana",pkFree3:"Calidad simplificada + brief recortado",pkFree4:"1 alerta",pkProN:"Pro",pkPro1:"2 mercados · 20 activos",pkPro2:"15 análisis diarios",pkPro3:"TDL + NMP visibles",pkPro4:"Alertas básicas",pkBadge:"Más popular",pkEliteN:"Elite",pkElite1:"Todos los mercados · 100 activos",pkElite2:"250 análisis diarios",pkElite3:"Las cuatro capas",pkElite4:"Alertas avanzadas de Telegram",pkElite5:"Diario + comparación",pkInstN:"Institutional",pkInst1:"250+ activos por contrato",pkInst2:"API de salida de decisión",pkInst3:"Webhooks + equipos",pkInst4:"Informes personalizados",regSideH:"Prueba de 16 días — plan Elite completo",regS1:"Durante la prueba ves el <b>plan Elite completo</b> como si estuvieras suscrito: las cuatro capas y la calidad de decisión completa durante los 16 días.",regS2:"Solo 50 plazas: 25 principiante · 10 especialista · 15 privado.",regS3:"Sin tarjeta de pago. Convertir a un plan de pago tras el lanzamiento es opcional.",regS4:"La revisión automatizada del registro protege las plazas contra abusos y duplicados.",subscribed:"suscrito",seats:"plazas",fName:"Nombre completo",fPhone:"Número de móvil",fEmail:"Correo electrónico",fType:"Tipo de usuario",fTypeOrd:"Principiante ordinario",fTypeSpec:"Especialista / académico",fTypePriv:"Privado / premium",fInvite:"Código de invitación (opcional)",ackTxt:"Reconozco que NDSP es una plataforma de apoyo a la decisión y análisis contextual, no una empresa de inversión; no proporciona recomendaciones financieras vinculantes, no gestiona fondos y no garantiza beneficios ni resultados. La prueba dura 16 días, y acepto explícitamente el aviso legal.",submitTxt:"Reservar mi plaza de prueba",formNote:"Solo recopilamos señales de verificación seguras (sin contraseñas, sin datos protegidos). La decisión final de aceptación se toma en el servidor.",okContinue:"Continuar a activación →",okH:"Solicitud recibida",okBody:"Su solicitud está en revisión automatizada para verificar la plaza. Recibirá un correo de activación — y su prueba comienza en el momento en que activa su cuenta, no ahora, así no pierde ninguno de los 16 días.",govRule:"Exponer el valor de la decisión · Ocultar la receta",discT:"Aviso",discBody:"Los niveles de escenario y los resultados de NDSP son referencias contextuales de apoyo a la decisión únicamente. No son asesoramiento financiero, instrucciones de operación, órdenes de ejecución ni resultados garantizados. NDSP no es una empresa de inversión y no gestiona fondos.",details:"Detalles completos:",errFill:"Por favor, complete los campos requeridos correctamente.",errAck:"Debe aceptar el aviso legal para continuar."},
+ de:{dir:"ltr",lang:"de",dmTitle:"Haftungsausschluss",dmBody:"<b>NDSP ist eine Plattform zur Entscheidungsunterstützung.</b> Die Szenariostufen und Ausgaben von NDSP sind ausschließlich kontextuelle Referenzen zur Entscheidungsunterstützung — keine Finanzberatung, keine Handelsanweisung, keine Ausführungsanordnung und keine Ergebnisgarantie. NDSP ist kein Investmentunternehmen und verwaltet keine Mittel. Die endgültige Entscheidung und deren Verantwortung liegen allein bei Ihnen.",dmCheck:"Ich bestätige, dass ich diesen Hinweis gelesen und akzeptiert habe.",dmBtn:"Akzeptieren & Eintreten",dmGov:"Vollständige Details:",dmTerms:"Bedingungen & Datenschutz",brandSub:"Nawaf Entscheidungs-Support-Plattform",navLayers:"Schichten",navWhy:"Warum NDSP",navPkgs:"Pakete",navTrial:"Testphase",navCta:"Platz reservieren",navSignin:"Anmelden",fTerms:"Bedingungen",fPrivacy:"Datenschutz",eyebrow:"Vor dem bezahlten Start · Begrenzte Plätze",h1a:"Gesteuerte Entscheidungen,",h1b:"keine Signale, kein Rauschen",lead:"NDSP führt 16 analytische Schichten auf jeder Lesung aus, um Ihnen einen bereinigten Entscheidungswert zu liefern — kontextuelle Richtung, Folgehorizont und Entscheidungsqualität — ohne Ausführungsbefehle und ohne garantierte Ergebnisse. Sie entscheiden; wir unterstützen die Entscheidung.",ctaMain:"Starten Sie Ihre 16-tägige Testphase",ctaSec:"Schichten erkunden",micro:"16 Tage · 16 Schichten · keine Zahlungskarte · vollständiger Hinweis",seatTotalL:"Gesamtanzahl der Testplätze",s1L:"Gewöhnlicher Anfänger",s2L:"Spezialist / Akademiker",s3L:"Privat / Premium",layersH:"Vier offen benannte Schichten",layersP:"Von 16 in jeder Entscheidung aktiven Schichten werden vier namentlich offengelegt. Die übrigen arbeiten hinter den Kulissen — Sie erhalten den Wert, nicht das Rezept.",tdlN:"Timed Direction Logic",tdlP:"Legt Ihren Folgehorizont fest — erweitert oder kurz — durch Abgleich wöchentlicher und kurzer Lesungen, ausgedrückt als klare Horizontstärke ohne Offenlegung der Formel.",nmpN:"Nawaf Meeting Point",nmpP:"Misst Konvergenz und Übereinstimmungsqualität zwischen Lesungen, um eine kontextuelle Bestätigung der Richtungsklarheit und Entscheidungsrobustheit zu liefern.",devN:"Devil's Advocate",devP:"Fordert die Lesung gezielt heraus: bringt Schwächen, Vorsichtsgründe und Widersprüche an die Oberfläche, bevor Sie entscheiden — Ihr Schutz vor Überheblichkeit.",reading:"Lesung",goldN:"Nawaf Golden Alignment",goldP:"Leuchtet auf, wenn eine hochwertige Ausrichtungsbedingung über die Schichten hinweg erfüllt ist — ein kontextueller Qualitätsverstärker, niemals eine Garantie oder ein Gewinnversprechen.",hiddenNote:"12 verborgene Schichten tragen zu jeder Ausgabe bei, ohne ihre Namen, Reihenfolge oder Formeln offenzulegen. Das ist keine Verschleierung — es ist der Schutz des Plattformkerns, so wie Großbanken ihre Modelle schützen.",whyH:"Auf einem strengen Prinzip aufgebaut",whyP:"Den Entscheidungswert offenlegen. Das interne Rezept verbergen. Alles in NDSP dient diesem Zweck.",p1H:"Sichtbare Entscheidungsqualität",p1P:"Ein Index fasst die Robustheit einer Lesung nach allen Schichten zusammen — wissen Sie sofort, wann zu vertrauen und wann zurückzuhalten ist.",p2H:"Szenario-Referenzstufen",p2P:"Aktivierung · Ankunft · Überprüfung · Invalidierung — kontextuelle Referenzen, die das Follow-up rahmen, keine Ein- oder Ausstiegsbefehle.",p3H:"Governance & Sicherheit",p3P:"Entscheidungen leben auf dem Server, das Frontend zeigt nur an. Keine offengelegten Geheimnisse, keine Rohformeln, voller Missbrauchsschutz.",p4H:"Ehrlich darüber, was sie nicht ist",p4P:"Kein Handelsbot, kein Signalanbieter, kein Fondsmanager — und sie garantiert nichts. Eine gesteuerte Entscheidungsunterstützungs-Plattform — Klarheit ist ihre Stärke.",p5H:"Horizont & Stärke pro Asset",p5P:"Jedes Asset erhält einen Folgehorizont, Horizontstärke, Marktzustand und Vorsichtsgrund — das vollständige Bild auf einen Blick.",p6H:"Arabisch zuerst · zweisprachig",p6P:"Authentisches Arabisch (RTL) und vollständiges Englisch (LTR), mit identischen bereinigten Ausgaben in beiden Sprachen.",cmpH:"Ein anderer Ansatz für Terminals",cmpP:"Große Terminals ertränken Sie in Rohdaten. NDSP reicht Ihnen die bereinigte Entscheidung.",cmpC0:"Kriterium",cmpC2:"Traditionelle Terminals",cmp:[["Ausgabe","Bereinigte Entscheidung + Qualität","Rohdaten, die Expertise erfordern"],["Folgehorizont","Klar und klassifiziert","Sie schließen selbst"],["Entscheidungs-Challenge","Eingebauter Devil's Advocate","Fehlt"],["Arabische Sprache","Natives RTL","Begrenzt oder fehlend"],["Grenzklarheit","Erklärt, dass es keine Beratung ist","Impliziert vieles"],["Modellschutz","12 geschützte Schichten","—"]],pkgH:"Pakete, die mit Ihnen wachsen",pkgP:"Beginnen Sie mit der Testphase, wählen Sie dann die Tiefe, die Ihre Entscheidungen brauchen.",pkFreeN:"Free",pkFree1:"1 Markt · 3 Assets",pkFree2:"5 Analysen / Woche",pkFree3:"Vereinfachte Qualität + gekürztes Briefing",pkFree4:"1 Alarm",pkProN:"Pro",pkPro1:"2 Märkte · 20 Assets",pkPro2:"15 tägliche Analysen",pkPro3:"TDL + NMP sichtbar",pkPro4:"Basis-Alarme",pkBadge:"Am beliebtesten",pkEliteN:"Elite",pkElite1:"Alle Märkte · 100 Assets",pkElite2:"250 tägliche Analysen",pkElite3:"Alle vier Schichten",pkElite4:"Erweiterte Telegram-Alarme",pkElite5:"Journal + Vergleich",pkInstN:"Institutional",pkInst1:"250+ Assets per Vertrag",pkInst2:"Entscheidungs-Ausgabe-API",pkInst3:"Webhooks + Teams",pkInst4:"Individuelle Berichte",regSideH:"16-tägige Testphase — vollständiges Elite-Paket",regS1:"Während der Testphase sehen Sie das <b>vollständige Elite-Paket</b>, als wären Sie abonniert: alle vier Schichten und volle Entscheidungsqualität für die gesamten 16 Tage.",regS2:"Nur 50 Plätze: 25 Anfänger · 10 Spezialisten · 15 Privat.",regS3:"Keine Zahlungskarte. Der Wechsel zu einem kostenpflichtigen Paket nach dem Start ist optional.",regS4:"Die automatisierte Registrierungsprüfung schützt Plätze vor Missbrauch und Duplikaten.",subscribed:"abonniert",seats:"Plätze",fName:"Vollständiger Name",fPhone:"Mobilnummer",fEmail:"E-Mail-Adresse",fType:"Benutzertyp",fTypeOrd:"Gewöhnlicher Anfänger",fTypeSpec:"Spezialist / Akademiker",fTypePriv:"Privat / Premium",fInvite:"Einladungscode (optional)",ackTxt:"Ich erkenne an, dass NDSP eine Plattform zur Entscheidungsunterstützung und Kontextanalyse ist und kein Investmentunternehmen; sie gibt keine verbindlichen Finanzempfehlungen, verwaltet keine Mittel und garantiert keine Gewinne oder Ergebnisse. Die Testphase dauert 16 Tage, und ich akzeptiere ausdrücklich den rechtlichen Hinweis.",submitTxt:"Meinen Testplatz reservieren",formNote:"Wir erfassen nur sichere Verifizierungssignale (keine Passwörter, keine Geheimnisse). Die endgültige Annahmeentscheidung wird auf dem Server getroffen.",okContinue:"Weiter zur Aktivierung (Preview) →",okH:"Anfrage erhalten",okBody:"Ihre Anfrage befindet sich in der automatisierten Prüfung zur Verifizierung des Platzes. Sie erhalten eine Aktivierungs-E-Mail — und Ihre Testphase beginnt in dem Moment, in dem Sie Ihr Konto aktivieren, nicht jetzt, sodass Sie keinen der 16 Tage verlieren.",govRule:"Entscheidungswert offenlegen · Rezept verbergen",discT:"Haftungsausschluss",discBody:"Szenariostufen und NDSP-Ausgaben sind ausschließlich kontextuelle Referenzen zur Entscheidungsunterstützung. Sie sind keine Finanzberatung, keine Handelsanweisungen, keine Ausführungsbefehle und keine garantierten Ergebnisse. NDSP ist kein Investmentunternehmen und verwaltet keine Mittel.",details:"Vollständige Details:",errFill:"Bitte füllen Sie die erforderlichen Felder korrekt aus.",errAck:"Sie müssen den rechtlichen Hinweis akzeptieren, um fortzufahren."},
+ tr:{dir:"ltr",lang:"tr",dmTitle:"Yasal Uyarı",dmBody:"<b>NDSP bir karar destek platformudur.</b> NDSP senaryo seviyeleri ve çıktıları yalnızca bağlamsal karar destek referanslarıdır — finansal tavsiye, işlem talimatı, yürütme emri veya sonuç garantisi değildir. NDSP bir yatırım şirketi değildir ve hiçbir fon yönetmez. Nihai karar ve sorumluluğu yalnızca size aittir.",dmCheck:"Bu uyarıyı okuduğumu ve kabul ettiğimi onaylıyorum.",dmBtn:"Kabul Ediyorum & Giriş",dmGov:"Tam ayrıntılar:",dmTerms:"Şartlar & Gizlilik",brandSub:"Nawaf Karar Destek Platformu",navLayers:"Katmanlar",navWhy:"Neden NDSP",navPkgs:"Paketler",navTrial:"Deneme",navCta:"Koltuk ayır",navSignin:"Giriş yap",fTerms:"Şartlar",fPrivacy:"Gizlilik",eyebrow:"Ücretli lansman öncesi · Sınırlı koltuk",h1a:"Yönetilen kararlar,",h1b:"sinyal yok, gürültü yok",lead:"NDSP, her okuma üzerinde 16 analitik katman çalıştırarak size arıtılmış bir karar değeri sunar — bağlamsal yön, takip ufku ve karar kalitesi — yürütme emri yok ve garanti edilen sonuç yok. Siz karar verirsiniz; biz kararı destekleriz.",ctaMain:"16 günlük denemenizi başlatın",ctaSec:"Katmanları keşfedin",micro:"16 gün · 16 katman · ödeme kartı yok · tam uyarı",seatTotalL:"Toplam deneme koltuğu",s1L:"Sıradan başlangıç",s2L:"Uzman / akademik",s3L:"Özel / premium",layersH:"Açıkça adlandırılmış dört katman",layersP:"Her kararda etkin olan 16 katmandan dördü adıyla açıklanır. Diğerleri perde arkasında çalışır — değeri alırsınız, tarifi değil.",tdlN:"Timed Direction Logic",tdlP:"Takip ufkunuzu — uzun veya kısa — haftalık ve kısa okumaları hizalayarak belirler, iç yöntemler açığa çıkarmadan net ufuk gücü olarak ifade edilir.",nmpN:"Nawaf Meeting Point",nmpP:"Okumalar arasındaki yakınsama ve mutabakat kalitesini ölçerek yön netliği ve karar sağlamlığı için bağlamsal teyit sunar.",devN:"Devil's Advocate",devP:"Okumaya kasıtlı olarak meydan okur: siz karar vermeden önce zayıflıkları, ihtiyat nedenlerini ve çelişkileri gün yüzüne çıkarır — aşırı özgüvene karşı kalkanınız.",reading:"Okuma",goldN:"Nawaf Golden Alignment",goldP:"Katmanlar arasında yüksek kaliteli bir hizalama koşulu karşılandığında ışık verir — bağlamsal bir kalite arttırıcı, asla bir garanti veya kâr vaadi değil.",hiddenNote:"12 gizli katman, adlarını, sırasını veya formüllerini açığa çıkarmadan her çıktıya katkı sağlar. Bu bir gizemli yaklaşım değil — büyük bankaların modellerini koruduğu gibi platformun çekirdeğinin korunmasıdır.",whyH:"Tek katı bir ilke üzerine inşa edilmiştir",whyP:"Karar değerini açığa çıkar. İç tarifi gizle. NDSP'deki her şey buna hizmet eder.",p1H:"Görünür karar kalitesi",p1P:"Tüm katmanlardan sonra bir okumanın sağlamlığını tek bir endeks özetler — ne zaman güveneceğinizi ve ne zaman geri çekileceğinizi anında bilirsiniz.",p2H:"Senaryo referans seviyeleri",p2P:"Aktivasyon · varış · gözden geçirme · geçersiz kılma — takibi çerçeveleyen bağlamsal referanslar, giriş veya çıkış emirleri değil.",p3H:"Yönetişim ve güvenlik",p3P:"Kararlar sunucuda yaşar, ön uç yalnızca gösterir. Açığa çıkmış sır yok, ham iç yöntemler yok, tam kötüye kullanım koruması.",p4H:"Ne olmadığı konusunda dürüst",p4P:"İşlem botu, sinyal sağlayıcısı veya fon yöneticisi değildir ve hiçbir şey garanti etmez. Yönetilen bir karar destek platformu — netlik onun gücüdür.",p5H:"Varlık başına ufuk ve güç",p5P:"Her varlık bir takip ufku, ufuk gücü, piyasa durumu ve ihtiyat nedeni alır — tüm tablo bir bakışta.",p6H:"Arapça önce · iki dilli",p6P:"Otantik Arapça (RTL) ve tam İngilizce (LTR), her iki dilde de aynı arıtılmış çıktılar.",cmpH:"Terminallere farklı bir yaklaşım",cmpP:"Büyük terminaller sizi ham veride boğar. NDSP size arıtılmış kararı uzatır.",cmpC0:"Kriter",cmpC2:"Geleneksel terminaller",cmp:[["Çıktı","Arıtılmış karar + kalite","Uzmanlık gerektiren ham veri"],["Takip ufku","Açık ve sınıflandırılmış","Kendiniz çıkarırsınız"],["Karar sorgulaması","Yerleşik Devil's Advocate","Yok"],["Arapça dili","Doğal RTL","Sınırlı veya yok"],["Sınır netliği","Tavsiye olmadığını belirtir","Çok şey ima eder"],["Model koruması","12 korumalı katman","—"]],pkgH:"Sizinle büyüyen paketler",pkgP:"Denemeyle başlayın, ardından kararlarınızın ihtiyaç duyduğu derinliği seçin.",pkFreeN:"Free",pkFree1:"1 pazar · 3 varlık",pkFree2:"5 analiz / hafta",pkFree3:"Basitleştirilmiş kalite + kısaltılmış brifing",pkFree4:"1 uyarı",pkProN:"Pro",pkPro1:"2 pazar · 20 varlık",pkPro2:"15 günlük analiz",pkPro3:"TDL + NMP görünür",pkPro4:"Temel uyarılar",pkBadge:"En popüler",pkEliteN:"Elite",pkElite1:"Tüm pazarlar · 100 varlık",pkElite2:"250 günlük analiz",pkElite3:"Dört katmanın tümü",pkElite4:"Gelişmiş Telegram uyarıları",pkElite5:"Günlük + karşılaştırma",pkInstN:"Institutional",pkInst1:"Sözleşmeye bağlı 250+ varlık",pkInst2:"Karar çıktı API'si",pkInst3:"Webhook + ekipler",pkInst4:"Özel raporlar",regSideH:"16 günlük deneme — tam Elite paketi",regS1:"Deneme süresince <b>tam Elite paketini</b> abone gibi görürsünüz: dört katmanın tümü ve 16 günün tamamı boyunca tam karar kalitesi.",regS2:"Sadece 50 koltuk: 25 başlangıç · 10 uzman · 15 özel.",regS3:"Ödeme kartı yok. Lansman sonrasında ücretli pakete geçiş isteğe bağlıdır.",regS4:"Otomatik kayıt incelemesi koltukları kötüye kullanım ve mükerrerden korur.",subscribed:"abone",seats:"koltuk",fName:"Tam ad",fPhone:"Cep numarası",fEmail:"E-posta adresi",fType:"Kullanıcı türü",fTypeOrd:"Sıradan başlangıç",fTypeSpec:"Uzman / akademik",fTypePriv:"Özel / premium",fInvite:"Davet kodu (isteğe bağlı)",ackTxt:"NDSP'nin bir karar destek ve bağlamsal analiz platformu olduğunu, yatırım şirketi olmadığını; bağlayıcı finansal tavsiyede bulunmadığını, fon yönetmediğini ve kâr veya sonuç garantisi vermediğini kabul ediyorum. Deneme 16 gündür ve yasal uyarıyı açıkça kabul ediyorum.",submitTxt:"Deneme koltuğumu ayır",formNote:"Yalnızca güvenli doğrulama sinyalleri topluyoruz (parola yok, sır yok). Nihai kabul kararı sunucuda alınır.",okContinue:"Aktivasyona devam →",okH:"Talep alındı",okBody:"Talebiniz koltuğu doğrulamak için otomatik incelemededir. Bir aktivasyon e-postası alacaksınız — denemeniz hesabınızı aktive ettiğiniz anda başlar, şimdi değil, böylece 16 günün hiçbirini kaybetmezsiniz.",govRule:"Karar değerini açığa çıkar · Tarifi gizle",discT:"Yasal Uyarı",discBody:"Senaryo seviyeleri ve NDSP çıktıları yalnızca bağlamsal karar destek referanslarıdır. Finansal tavsiye, işlem talimatı, yürütme emri veya garanti edilen sonuç değildir. NDSP bir yatırım şirketi değildir ve hiçbir fon yönetmez.",details:"Tam ayrıntılar:",errFill:"Lütfen gerekli alanları doğru şekilde doldurun.",errAck:"Devam etmek için yasal uyarıyı kabul etmelisiniz."},
+ ru:{dir:"ltr",lang:"ru",dmTitle:"Отказ от ответственности",dmBody:"<b>NDSP — это платформа поддержки принятия решений.</b> Уровни сценариев и результаты NDSP являются исключительно контекстными ориентирами для поддержки решений — это не финансовый совет, не торговая инструкция, не указание к исполнению и не гарантия результата. NDSP не является инвестиционной компанией и не управляет средствами. Окончательное решение и ответственность за него полностью лежат на вас.",dmCheck:"Подтверждаю, что прочитал(а) и принимаю этот отказ от ответственности.",dmBtn:"Принимаю и вхожу",dmGov:"Подробности:",dmTerms:"Условия и Конфиденциальность",brandSub:"Платформа Nawaf для поддержки принятия решений",navLayers:"Слои",navWhy:"Почему NDSP",navPkgs:"Пакеты",navTrial:"Пробный период",navCta:"Забронировать место",navSignin:"Войти",fTerms:"Условия",fPrivacy:"Конфиденциальность",eyebrow:"До платного запуска · Ограниченное число мест",h1a:"Управляемые решения,",h1b:"без сигналов, без шума",lead:"NDSP запускает 16 аналитических слоёв при каждом считывании, чтобы предоставить вам очищенную ценность решения — контекстное направление, горизонт сопровождения и качество решения — без приказов на исполнение и без гарантированных результатов. Вы решаете; мы поддерживаем решение.",ctaMain:"Начать пробный период на 16 дней",ctaSec:"Изучить слои",micro:"16 дней · 16 слоёв · без карты оплаты · полный отказ от ответственности",seatTotalL:"Всего мест на пробный период",s1L:"Обычный начинающий",s2L:"Специалист / академик",s3L:"Частный / премиум",layersH:"Четыре слоя, названных открыто",layersP:"Из 16 активных в каждом решении слоёв четыре раскрываются по названию. Остальные работают за кулисами — вы получаете ценность, а не рецепт.",tdlN:"Timed Direction Logic",tdlP:"Определяет ваш горизонт сопровождения — расширенный или короткий — согласуя недельные и краткие считывания, выраженные как ясная сила горизонта без раскрытия формулы.",nmpN:"Nawaf Meeting Point",nmpP:"Измеряет схождение и качество согласия между считываниями, обеспечивая контекстное подтверждение ясности направления и устойчивости решения.",devN:"Devil's Advocate",devP:"Намеренно оспаривает считывание: вытаскивает на поверхность слабости, причины осторожности и противоречия до того, как вы примете решение — ваш щит от чрезмерной уверенности.",reading:"Считывание",goldN:"Nawaf Golden Alignment",goldP:"Загорается, когда выполнено условие высококачественного выравнивания между слоями — контекстный усилитель качества, никогда не гарантия и не обещание прибыли.",hiddenNote:"12 скрытых слоёв вносят вклад в каждый результат, не раскрывая своих имён, порядка или формул. Это не безвестность — это защита ядра платформы, как крупные банки защищают свои модели.",whyH:"Построено на одном строгом принципе",whyP:"Раскрыть ценность решения. Скрыть внутренний рецепт. Всё в NDSP служит этому.",p1H:"Видимое качество решения",p1P:"Один индекс резюмирует устойчивость считывания после всех слоёв — мгновенно знайте, когда доверять и когда воздержаться.",p2H:"Уровни сценария",p2P:"Активация · прибытие · пересмотр · аннулирование — контекстные ориентиры, обрамляющие сопровождение, а не приказы на вход или выход.",p3H:"Управление и безопасность",p3P:"Решения живут на сервере, фронтенд только отображает. Никаких раскрытых секретов, никаких сырых формул, полная защита от злоупотреблений.",p4H:"Честно о том, чем она не является",p4P:"Не торговый бот, не поставщик сигналов, не управляющий фондами — и она ничего не гарантирует. Управляемая платформа поддержки решений — её сила в ясности.",p5H:"Горизонт и сила по активу",p5P:"Каждый актив получает горизонт сопровождения, силу горизонта, состояние рынка и причину осторожности — полная картина с первого взгляда.",p6H:"Арабский в первую очередь · двуязычная",p6P:"Подлинный арабский (RTL) и полный английский (LTR), с идентичными очищенными выводами на обоих языках.",cmpH:"Другой подход к терминалам",cmpP:"Большие терминалы топят вас в сырых данных. NDSP вручает вам очищенное решение.",cmpC0:"Критерий",cmpC2:"Традиционные терминалы",cmp:[["Вывод","Очищенное решение + качество","Сырые данные, требующие экспертизы"],["Горизонт сопровождения","Ясный и классифицированный","Вы выводите сами"],["Оспаривание решения","Встроенный Devil's Advocate","Отсутствует"],["Арабский язык","Нативный RTL","Ограниченный или отсутствует"],["Ясность границ","Заявляет, что это не совет","Подразумевает многое"],["Защита модели","12 защищённых слоёв","—"]],pkgH:"Пакеты, растущие вместе с вами",pkgP:"Начните с пробного периода, затем выберите глубину, нужную вашим решениям.",pkFreeN:"Free",pkFree1:"1 рынок · 3 актива",pkFree2:"5 анализов / неделя",pkFree3:"Упрощённое качество + сокращённая сводка",pkFree4:"1 уведомление",pkProN:"Pro",pkPro1:"2 рынка · 20 активов",pkPro2:"15 ежедневных анализов",pkPro3:"TDL + NMP видимы",pkPro4:"Базовые уведомления",pkBadge:"Самый популярный",pkEliteN:"Elite",pkElite1:"Все рынки · 100 активов",pkElite2:"250 ежедневных анализов",pkElite3:"Все четыре слоя",pkElite4:"Продвинутые уведомления Telegram",pkElite5:"Журнал + сравнение",pkInstN:"Institutional",pkInst1:"250+ активов по договору",pkInst2:"API вывода решений",pkInst3:"Webhooks + команды",pkInst4:"Индивидуальные отчёты",regSideH:"Пробный период 16 дней — полный пакет Elite",regS1:"Во время пробного периода вы видите <b>полный пакет Elite</b>, как если бы подписались: все четыре слоя и полное качество решения на все 16 дней.",regS2:"Только 50 мест: 25 начинающих · 10 специалистов · 15 частных.",regS3:"Без карты оплаты. Переход на платный пакет после запуска необязателен.",regS4:"Автоматизированная проверка регистрации защищает места от злоупотреблений и дубликатов.",subscribed:"подписан",seats:"мест",fName:"Полное имя",fPhone:"Номер мобильного",fEmail:"Адрес электронной почты",fType:"Тип пользователя",fTypeOrd:"Обычный начинающий",fTypeSpec:"Специалист / академик",fTypePriv:"Частный / премиум",fInvite:"Код приглашения (необязательно)",ackTxt:"Я признаю, что NDSP — это платформа поддержки принятия решений и контекстного анализа, а не инвестиционная компания; она не даёт обязательных финансовых рекомендаций, не управляет средствами и не гарантирует прибыли или результатов. Пробный период составляет 16 дней, и я явно принимаю юридическое уведомление.",submitTxt:"Забронировать моё пробное место",formNote:"Мы собираем только безопасные сигналы верификации (без паролей, без секретов). Окончательное решение о принятии принимается на сервере.",okContinue:"Продолжить к активации (демо) →",okH:"Запрос получен",okBody:"Ваш запрос находится на автоматизированной проверке для верификации места. Вы получите письмо активации — и ваш пробный период начнётся в момент активации аккаунта, не сейчас, чтобы вы не потеряли ни одного из 16 дней.",govRule:"Раскрыть ценность решения · Скрыть рецепт",discT:"Отказ от ответственности",discBody:"Уровни сценариев и результаты NDSP являются исключительно контекстными ориентирами для поддержки решений. Это не финансовый совет, не торговые инструкции, не приказы на исполнение и не гарантированные результаты. NDSP не является инвестиционной компанией и не управляет средствами.",details:"Подробности:",errFill:"Пожалуйста, корректно заполните обязательные поля.",errAck:"Чтобы продолжить, необходимо принять юридическое уведомление."},
+ pt:{dir:"ltr",lang:"pt",dmTitle:"Aviso legal",dmBody:"<b>NDSP é uma plataforma de apoio à decisão.</b> Os níveis de cenário e resultados do NDSP são apenas referências contextuais de apoio à decisão — não são aconselhamento financeiro, instrução de negociação, ordem de execução ou garantia de resultados. NDSP não é uma empresa de investimento e não gere fundos. A decisão final e sua responsabilidade são apenas suas.",dmCheck:"Confirmo que li e aceito este aviso.",dmBtn:"Aceito e entro",dmGov:"Detalhes completos:",dmTerms:"Termos & Privacidade",brandSub:"Plataforma Nawaf de Apoio à Decisão",navLayers:"Camadas",navWhy:"Porquê NDSP",navPkgs:"Planos",navTrial:"Teste",navCta:"Reservar lugar",navSignin:"Entrar",fTerms:"Termos",fPrivacy:"Privacidade",eyebrow:"Antes do lançamento pago · Lugares limitados",h1a:"Decisões governadas,",h1b:"sem sinais, sem ruído",lead:"NDSP executa 16 camadas analíticas em cada leitura para entregar um valor de decisão depurado — direção contextual, horizonte de acompanhamento e qualidade de decisão — sem ordens de execução e sem resultados garantidos. Você decide; nós apoiamos a decisão.",ctaMain:"Iniciar seu teste de 16 dias",ctaSec:"Explorar as camadas",micro:"16 dias · 16 camadas · sem cartão de pagamento · aviso completo",seatTotalL:"Total de lugares de teste",s1L:"Iniciante comum",s2L:"Especialista / acadêmico",s3L:"Privado / premium",layersH:"Quatro camadas nomeadas abertamente",layersP:"De 16 camadas ativas em cada decisão, quatro são reveladas pelo nome. As demais trabalham nos bastidores — você obtém o valor, não a receita.",tdlN:"Timed Direction Logic",tdlP:"Define seu horizonte de acompanhamento — estendido ou curto — alinhando leituras semanais e curtas, expressas como força de horizonte clara sem expor a fórmula.",nmpN:"Nawaf Meeting Point",nmpP:"Mede convergência e qualidade de acordo entre leituras para fornecer confirmação contextual de clareza direcional e robustez de decisão.",devN:"Devil's Advocate",devP:"Desafia deliberadamente a leitura: traz à tona fraquezas, razões de cautela e contradições antes que você decida — seu escudo contra excesso de confiança.",reading:"Leitura",goldN:"Nawaf Golden Alignment",goldP:"Acende quando uma condição de alinhamento de alta qualidade é atendida entre as camadas — um amplificador contextual de qualidade, nunca uma garantia ou promessa de lucro.",hiddenNote:"12 camadas ocultas contribuem para cada saída sem expor seus nomes, ordem ou métodos internos. Isto não é obscuridade — é proteção do núcleo da plataforma, assim como os grandes bancos protegem seus modelos.",whyH:"Construída sobre um princípio rigoroso",whyP:"Expor o valor da decisão. Esconder a receita interna. Tudo no NDSP serve a isso.",p1H:"Qualidade de decisão visível",p1P:"Um índice resume a robustez de uma leitura após todas as camadas — saiba instantaneamente quando confiar e quando se conter.",p2H:"Níveis de referência de cenário",p2P:"Ativação · chegada · revisão · invalidação — referências contextuais que enquadram o acompanhamento, não ordens de entrada ou saída.",p3H:"Governança e segurança",p3P:"Decisões vivem no servidor, o front-end apenas exibe. Sem dados protegidos expostos, sem métodos internos brutas, proteção antiabuso completa.",p4H:"Honesta sobre o que não é",p4P:"Não é um bot de negociação, fornecedor de sinais ou gestor de fundos, e não garante nada. Uma plataforma de apoio à decisão governada — clareza é sua força.",p5H:"Horizonte e força por ativo",p5P:"Cada ativo recebe um horizonte de acompanhamento, força de horizonte, estado de mercado e razão de cautela — a imagem completa de relance.",p6H:"Árabe primeiro · bilíngue",p6P:"Árabe autêntico (RTL) e inglês completo (LTR), com saídas depuradas idênticas em ambos os idiomas.",cmpH:"Uma abordagem diferente aos terminais",cmpP:"Grandes terminais o afogam em dados brutos. NDSP entrega a você a decisão depurada.",cmpC0:"Critério",cmpC2:"Terminais tradicionais",cmp:[["Saída","Decisão depurada + qualidade","Dados brutos exigindo expertise"],["Horizonte de acompanhamento","Claro e classificado","Você infere sozinho"],["Desafio à decisão","Devil's Advocate integrado","Ausente"],["Idioma árabe","RTL nativo","Limitado ou ausente"],["Clareza de limites","Declara que não é conselho","Insinua muito"],["Proteção de modelo","12 camadas protegidas","—"]],pkgH:"Planos que crescem com você",pkgP:"Comece com o teste, depois escolha a profundidade que suas decisões precisam.",pkFreeN:"Free",pkFree1:"1 mercado · 3 ativos",pkFree2:"5 análises / semana",pkFree3:"Qualidade simplificada + briefing reduzido",pkFree4:"1 alerta",pkProN:"Pro",pkPro1:"2 mercados · 20 ativos",pkPro2:"15 análises diárias",pkPro3:"TDL + NMP visíveis",pkPro4:"Alertas básicos",pkBadge:"Mais popular",pkEliteN:"Elite",pkElite1:"Todos os mercados · 100 ativos",pkElite2:"250 análises diárias",pkElite3:"As quatro camadas",pkElite4:"Alertas avançados de Telegram",pkElite5:"Diário + comparação",pkInstN:"Institutional",pkInst1:"250+ ativos por contrato",pkInst2:"API de saída de decisão",pkInst3:"Webhooks + equipes",pkInst4:"Relatórios personalizados",regSideH:"Teste de 16 dias — plano Elite completo",regS1:"Durante o teste, você vê o <b>plano Elite completo</b> como se estivesse inscrito: as quatro camadas e qualidade de decisão completa durante os 16 dias.",regS2:"Apenas 50 lugares: 25 iniciante · 10 especialista · 15 privado.",regS3:"Sem cartão de pagamento. Converter para um plano pago após o lançamento é opcional.",regS4:"A revisão automatizada do registro protege os lugares contra abusos e duplicatas.",subscribed:"inscrito",seats:"lugares",fName:"Nome completo",fPhone:"Número de celular",fEmail:"Endereço de e-mail",fType:"Tipo de usuário",fTypeOrd:"Iniciante comum",fTypeSpec:"Especialista / acadêmico",fTypePriv:"Privado / premium",fInvite:"Código de convite (opcional)",ackTxt:"Reconheço que NDSP é uma plataforma de apoio à decisão e análise contextual, não uma empresa de investimento; não fornece recomendações financeiras vinculantes, não gere fundos e não garante lucros ou resultados. O teste dura 16 dias, e aceito explicitamente o aviso legal.",submitTxt:"Reservar meu lugar de teste",formNote:"Coletamos apenas sinais de verificação seguros (sem senhas, sem dados protegidos). A decisão final de aceitação é tomada no servidor.",okContinue:"Continuar para ativação →",okH:"Solicitação recebida",okBody:"Sua solicitação está em revisão automatizada para verificar o lugar. Você receberá um e-mail de ativação — e seu teste começa no momento em que ativa sua conta, não agora, para não perder nenhum dos 16 dias.",govRule:"Expor o valor da decisão · Esconder a receita",discT:"Aviso",discBody:"Os níveis de cenário e resultados do NDSP são apenas referências contextuais de apoio à decisão. Não são aconselhamento financeiro, instruções de negociação, ordens de execução ou resultados garantidos. NDSP não é uma empresa de investimento e não gere fundos.",details:"Detalhes completos:",errFill:"Por favor, preencha os campos obrigatórios corretamente.",errAck:"Você deve aceitar o aviso legal para continuar."},
+ id:{dir:"ltr",lang:"id",dmTitle:"Penafian",dmBody:"<b>NDSP adalah platform pendukung keputusan.</b> Tingkat skenario dan output NDSP hanyalah referensi kontekstual pendukung keputusan — bukan nasihat keuangan, instruksi perdagangan, perintah eksekusi, atau jaminan hasil. NDSP bukan perusahaan investasi dan tidak mengelola dana. Keputusan akhir dan tanggung jawabnya sepenuhnya milik Anda.",dmCheck:"Saya mengonfirmasi telah membaca dan menyetujui penafian ini.",dmBtn:"Saya Setuju & Masuk",dmGov:"Detail lengkap:",dmTerms:"Ketentuan & Privasi",brandSub:"Platform Pendukung Keputusan Nawaf",navLayers:"Lapisan",navWhy:"Mengapa NDSP",navPkgs:"Paket",navTrial:"Uji coba",navCta:"Pesan kursi",navSignin:"Masuk",fTerms:"Ketentuan",fPrivacy:"Privasi",eyebrow:"Sebelum peluncuran berbayar · Kursi terbatas",h1a:"Keputusan yang diatur,",h1b:"tanpa sinyal, tanpa kebisingan",lead:"NDSP menjalankan 16 lapisan analitis pada setiap pembacaan untuk memberikan nilai keputusan yang dibersihkan — arah kontekstual, horizon tindak lanjut, dan kualitas keputusan — tanpa perintah eksekusi dan tanpa hasil yang dijamin. Anda yang memutuskan; kami mendukung keputusan.",ctaMain:"Mulai uji coba 16 hari Anda",ctaSec:"Jelajahi lapisan",micro:"16 hari · 16 lapisan · tanpa kartu pembayaran · penafian lengkap",seatTotalL:"Total kursi uji coba",s1L:"Pemula biasa",s2L:"Spesialis / akademisi",s3L:"Privat / premium",layersH:"Empat lapisan dinamai secara terbuka",layersP:"Dari 16 lapisan yang aktif dalam setiap keputusan, empat diungkap dengan nama. Sisanya bekerja di belakang layar — Anda mendapatkan nilainya, bukan resepnya.",tdlN:"Timed Direction Logic",tdlP:"Menetapkan horizon tindak lanjut Anda — diperpanjang atau singkat — dengan menyelaraskan pembacaan mingguan dan singkat, diekspresikan sebagai kekuatan horizon yang jelas tanpa mengekspos rumus.",nmpN:"Nawaf Meeting Point",nmpP:"Mengukur konvergensi dan kualitas kesepakatan antar pembacaan untuk memberikan konfirmasi kontekstual atas kejelasan arah dan kekokohan keputusan.",devN:"Devil's Advocate",devP:"Sengaja menantang pembacaan: memunculkan kelemahan, alasan kehati-hatian dan kontradiksi sebelum Anda memutuskan — perisai Anda terhadap kepercayaan diri berlebih.",reading:"Pembacaan",goldN:"Nawaf Golden Alignment",goldP:"Menyala ketika kondisi penyelarasan berkualitas tinggi terpenuhi di seluruh lapisan — penguat kualitas kontekstual, bukan jaminan atau janji keuntungan.",hiddenNote:"12 lapisan tersembunyi berkontribusi pada setiap output tanpa mengekspos nama, urutan, atau rumusnya. Ini bukan kekaburan — ini perlindungan inti platform, seperti bank-bank besar melindungi model mereka.",whyH:"Dibangun di atas satu prinsip ketat",whyP:"Mengekspos nilai keputusan. Menyembunyikan resep internal. Semua di NDSP melayani ini.",p1H:"Kualitas keputusan yang terlihat",p1P:"Satu indeks merangkum kekokohan suatu pembacaan setelah semua lapisan — segera ketahui kapan harus percaya dan kapan harus menahan diri.",p2H:"Tingkat referensi skenario",p2P:"Aktivasi · kedatangan · peninjauan · invalidasi — referensi kontekstual yang membingkai tindak lanjut, bukan perintah masuk atau keluar.",p3H:"Tata kelola & keamanan",p3P:"Keputusan hidup di server, front-end hanya menampilkan. Tanpa rahasia yang terbuka, tanpa rumus mentah, perlindungan anti-penyalahgunaan penuh.",p4H:"Jujur tentang apa yang bukan dirinya",p4P:"Bukan bot perdagangan, penyedia sinyal, atau manajer dana — dan tidak menjamin apa pun. Platform pendukung keputusan yang diatur — kejelasan adalah kekuatannya.",p5H:"Horizon & kekuatan per aset",p5P:"Setiap aset mendapatkan horizon tindak lanjut, kekuatan horizon, keadaan pasar, dan alasan kehati-hatian — gambaran lengkap sekilas.",p6H:"Arab pertama · dwibahasa",p6P:"Arab autentik (RTL) dan Inggris lengkap (LTR), dengan output bersih yang identik dalam kedua bahasa.",cmpH:"Pendekatan berbeda terhadap terminal",cmpP:"Terminal besar menenggelamkan Anda dalam data mentah. NDSP menyerahkan kepada Anda keputusan yang sudah dibersihkan.",cmpC0:"Kriteria",cmpC2:"Terminal tradisional",cmp:[["Output","Keputusan bersih + kualitas","Data mentah memerlukan keahlian"],["Horizon tindak lanjut","Jelas dan terklasifikasi","Anda menyimpulkannya sendiri"],["Tantangan keputusan","Devil's Advocate bawaan","Tidak ada"],["Bahasa Arab","RTL asli","Terbatas atau tidak ada"],["Kejelasan batas","Menyatakan ini bukan nasihat","Banyak menyiratkan"],["Perlindungan model","12 lapisan terlindungi","—"]],pkgH:"Paket yang tumbuh bersama Anda",pkgP:"Mulai dengan uji coba, lalu pilih kedalaman yang dibutuhkan keputusan Anda.",pkFreeN:"Free",pkFree1:"1 pasar · 3 aset",pkFree2:"5 analisis / minggu",pkFree3:"Kualitas disederhanakan + ringkasan dipangkas",pkFree4:"1 peringatan",pkProN:"Pro",pkPro1:"2 pasar · 20 aset",pkPro2:"15 analisis harian",pkPro3:"TDL + NMP terlihat",pkPro4:"Peringatan dasar",pkBadge:"Paling populer",pkEliteN:"Elite",pkElite1:"Semua pasar · 100 aset",pkElite2:"250 analisis harian",pkElite3:"Keempat lapisan",pkElite4:"Peringatan Telegram lanjutan",pkElite5:"Jurnal + perbandingan",pkInstN:"Institutional",pkInst1:"250+ aset per kontrak",pkInst2:"API output keputusan",pkInst3:"Webhook + tim",pkInst4:"Laporan khusus",regSideH:"Uji coba 16 hari — paket Elite lengkap",regS1:"Selama uji coba, Anda melihat <b>paket Elite lengkap</b> seolah-olah berlangganan: keempat lapisan dan kualitas keputusan penuh untuk seluruh 16 hari.",regS2:"Hanya 50 kursi: 25 pemula · 10 spesialis · 15 privat.",regS3:"Tanpa kartu pembayaran. Beralih ke paket berbayar setelah peluncuran bersifat opsional.",regS4:"Tinjauan pendaftaran otomatis melindungi kursi dari penyalahgunaan dan duplikat.",subscribed:"berlangganan",seats:"kursi",fName:"Nama lengkap",fPhone:"Nomor ponsel",fEmail:"Alamat email",fType:"Tipe pengguna",fTypeOrd:"Pemula biasa",fTypeSpec:"Spesialis / akademisi",fTypePriv:"Privat / premium",fInvite:"Kode undangan (opsional)",ackTxt:"Saya mengakui bahwa NDSP adalah platform pendukung keputusan dan analisis kontekstual, bukan perusahaan investasi; tidak memberikan rekomendasi keuangan yang mengikat, tidak mengelola dana, dan tidak menjamin keuntungan atau hasil. Uji coba berlangsung 16 hari, dan saya secara eksplisit menerima pemberitahuan hukum.",submitTxt:"Pesan kursi uji coba saya",formNote:"Kami hanya mengumpulkan sinyal verifikasi yang aman (tanpa kata sandi, tanpa rahasia). Keputusan penerimaan akhir dibuat di server.",okContinue:"Lanjut ke aktivasi →",okH:"Permintaan diterima",okBody:"Permintaan Anda sedang ditinjau otomatis untuk memverifikasi kursi. Anda akan menerima email aktivasi — dan uji coba Anda dimulai saat Anda mengaktifkan akun, bukan sekarang, sehingga Anda tidak kehilangan satu pun dari 16 hari.",govRule:"Ekspos nilai keputusan · Sembunyikan resep",discT:"Penafian",discBody:"Tingkat skenario dan output NDSP hanyalah referensi kontekstual pendukung keputusan. Bukan nasihat keuangan, instruksi perdagangan, perintah eksekusi, atau hasil yang dijamin. NDSP bukan perusahaan investasi dan tidak mengelola dana.",details:"Detail lengkap:",errFill:"Mohon isi kolom yang diperlukan dengan benar.",errAck:"Anda harus menerima pemberitahuan hukum untuk melanjutkan."},
+ hi:{dir:"ltr",lang:"hi",dmTitle:"अस्वीकरण",dmBody:"<b>NDSP एक निर्णय-समर्थन प्लेटफ़ॉर्म है।</b> NDSP के परिदृश्य स्तर और आउटपुट केवल प्रासंगिक निर्णय-समर्थन संदर्भ हैं — यह वित्तीय सलाह, व्यापार निर्देश, निष्पादन आदेश, या परिणाम की गारंटी नहीं है। NDSP एक निवेश फर्म नहीं है और कोई धन प्रबंधित नहीं करती है। अंतिम निर्णय और उसकी जिम्मेदारी केवल आपकी है।",dmCheck:"मैं पुष्टि करता/करती हूँ कि मैंने इस अस्वीकरण को पढ़ा और स्वीकार किया है।",dmBtn:"मैं सहमत हूँ और प्रवेश करूँ",dmGov:"पूरा विवरण:",dmTerms:"शर्तें और गोपनीयता",brandSub:"नवाफ़ निर्णय-समर्थन प्लेटफ़ॉर्म",navLayers:"परतें",navWhy:"NDSP क्यों",navPkgs:"पैकेज",navTrial:"परीक्षण",navCta:"सीट बुक करें",navSignin:"साइन इन",fTerms:"शर्तें",fPrivacy:"गोपनीयता",eyebrow:"भुगतान लॉन्च से पहले · सीमित सीटें",h1a:"शासित निर्णय,",h1b:"बिना संकेत, बिना शोर",lead:"NDSP प्रत्येक रीडिंग पर 16 विश्लेषणात्मक परतें चलाता है ताकि आपको एक स्वच्छ निर्णय मूल्य मिल सके — प्रासंगिक दिशा, अनुवर्ती क्षितिज, और निर्णय गुणवत्ता — बिना निष्पादन आदेशों के और बिना गारंटीशुदा परिणामों के। आप निर्णय लेते हैं; हम निर्णय का समर्थन करते हैं।",ctaMain:"अपना 16-दिवसीय परीक्षण शुरू करें",ctaSec:"परतों का अन्वेषण करें",micro:"16 दिन · 16 परतें · कोई भुगतान कार्ड नहीं · पूर्ण अस्वीकरण",seatTotalL:"कुल परीक्षण सीटें",s1L:"सामान्य शुरुआती",s2L:"विशेषज्ञ / शैक्षणिक",s3L:"निजी / प्रीमियम",layersH:"चार परतें खुले तौर पर नामित",layersP:"प्रत्येक निर्णय में सक्रिय 16 परतों में से चार को नाम से प्रकट किया जाता है। बाकी पर्दे के पीछे काम करती हैं — आपको मूल्य मिलता है, नुस्खा नहीं।",tdlN:"Timed Direction Logic",tdlP:"साप्ताहिक और छोटी रीडिंग को संरेखित करके आपके अनुवर्ती क्षितिज को निर्धारित करता है — विस्तारित या छोटा — सूत्र को उजागर किए बिना स्पष्ट क्षितिज शक्ति के रूप में व्यक्त।",nmpN:"Nawaf Meeting Point",nmpP:"रीडिंग के बीच अभिसरण और सहमति की गुणवत्ता को मापता है ताकि दिशात्मक स्पष्टता और निर्णय मजबूती की प्रासंगिक पुष्टि प्रदान की जा सके।",devN:"Devil's Advocate",devP:"रीडिंग को जानबूझकर चुनौती देता है: कमजोरियाँ, सावधानी के कारण और विरोधाभास सतह पर लाता है इससे पहले कि आप निर्णय लें — अति-आत्मविश्वास के खिलाफ आपकी ढाल।",reading:"रीडिंग",goldN:"Nawaf Golden Alignment",goldP:"जब परतों में उच्च-गुणवत्ता संरेखण स्थिति पूरी होती है तो प्रकाशित होता है — एक प्रासंगिक गुणवत्ता वर्धक, कभी गारंटी या लाभ का वादा नहीं।",hiddenNote:"12 छिपी हुई परतें प्रत्येक आउटपुट में योगदान करती हैं, उनके नाम, क्रम, या सूत्र को उजागर किए बिना। यह अस्पष्टता नहीं है — यह प्लेटफ़ॉर्म के मूल की सुरक्षा है, जैसे बड़े बैंक अपने मॉडल की सुरक्षा करते हैं।",whyH:"एक सख़्त सिद्धांत पर बना",whyP:"निर्णय मूल्य को उजागर करें। आंतरिक नुस्खा छिपाएँ। NDSP में सब कुछ इसी की सेवा करता है।",p1H:"दृश्यमान निर्णय गुणवत्ता",p1P:"एक सूचकांक सभी परतों के बाद रीडिंग की मजबूती को सारांशित करता है — तुरंत जानें कि कब विश्वास करना है और कब रुकना है।",p2H:"परिदृश्य संदर्भ स्तर",p2P:"सक्रियण · आगमन · समीक्षा · अमान्यकरण — प्रासंगिक संदर्भ जो अनुवर्ती को फ्रेम करते हैं, प्रवेश या निकास आदेश नहीं।",p3H:"शासन और सुरक्षा",p3P:"निर्णय सर्वर पर रहते हैं, फ्रंट-एंड केवल प्रदर्शित करता है। कोई उजागर रहस्य नहीं, कोई कच्चे सूत्र नहीं, पूर्ण दुरुपयोग-विरोधी सुरक्षा।",p4H:"ईमानदार है कि यह क्या नहीं है",p4P:"यह व्यापार बॉट, सिग्नल प्रदाता, या फंड मैनेजर नहीं है, और कुछ भी गारंटी नहीं देता है। एक शासित निर्णय-समर्थन प्लेटफ़ॉर्म — स्पष्टता इसकी ताकत है।",p5H:"प्रति परिसंपत्ति क्षितिज और शक्ति",p5P:"प्रत्येक परिसंपत्ति को एक अनुवर्ती क्षितिज, क्षितिज शक्ति, बाजार स्थिति और सावधानी का कारण मिलता है — एक नज़र में पूरी तस्वीर।",p6H:"अरबी-पहले · द्विभाषी",p6P:"प्रामाणिक अरबी (RTL) और पूर्ण अंग्रेज़ी (LTR), दोनों भाषाओं में समान स्वच्छ आउटपुट के साथ।",cmpH:"टर्मिनलों के लिए एक अलग दृष्टिकोण",cmpP:"बड़े टर्मिनल आपको कच्चे डेटा में डुबो देते हैं। NDSP आपको स्वच्छ निर्णय सौंपता है।",cmpC0:"मानदंड",cmpC2:"पारंपरिक टर्मिनल",cmp:[["आउटपुट","स्वच्छ निर्णय + गुणवत्ता","विशेषज्ञता की आवश्यकता वाला कच्चा डेटा"],["अनुवर्ती क्षितिज","स्पष्ट और वर्गीकृत","आप स्वयं अनुमान लगाते हैं"],["निर्णय चुनौती","अंतर्निहित Devil's Advocate","अनुपस्थित"],["अरबी भाषा","मूल RTL","सीमित या अनुपस्थित"],["सीमा स्पष्टता","कहता है कि यह सलाह नहीं है","बहुत कुछ निहित करता है"],["मॉडल सुरक्षा","12 संरक्षित परतें","—"]],pkgH:"पैकेज जो आपके साथ बढ़ते हैं",pkgP:"परीक्षण से शुरू करें, फिर वह गहराई चुनें जिसकी आपके निर्णयों को आवश्यकता है।",pkFreeN:"Free",pkFree1:"1 बाजार · 3 परिसंपत्तियाँ",pkFree2:"5 विश्लेषण / सप्ताह",pkFree3:"सरलीकृत गुणवत्ता + संक्षिप्त ब्रीफ",pkFree4:"1 अलर्ट",pkProN:"Pro",pkPro1:"2 बाजार · 20 परिसंपत्तियाँ",pkPro2:"15 दैनिक विश्लेषण",pkPro3:"TDL + NMP दृश्यमान",pkPro4:"बुनियादी अलर्ट",pkBadge:"सबसे लोकप्रिय",pkEliteN:"Elite",pkElite1:"सभी बाजार · 100 परिसंपत्तियाँ",pkElite2:"250 दैनिक विश्लेषण",pkElite3:"सभी चार परतें",pkElite4:"उन्नत Telegram अलर्ट",pkElite5:"जर्नल + तुलना",pkInstN:"Institutional",pkInst1:"250+ परिसंपत्तियाँ अनुबंध द्वारा",pkInst2:"निर्णय-आउटपुट API",pkInst3:"Webhooks + टीमें",pkInst4:"कस्टम रिपोर्ट",regSideH:"16-दिवसीय परीक्षण — पूर्ण Elite पैकेज",regS1:"परीक्षण के दौरान आप <b>पूर्ण Elite पैकेज</b> देखते हैं जैसे कि सदस्यता ली हो: सभी चार परतें और पूरे 16 दिनों के लिए पूर्ण निर्णय गुणवत्ता।",regS2:"केवल 50 सीटें: 25 शुरुआती · 10 विशेषज्ञ · 15 निजी।",regS3:"कोई भुगतान कार्ड नहीं। लॉन्च के बाद भुगतान पैकेज में परिवर्तित होना वैकल्पिक है।",regS4:"स्वचालित पंजीकरण समीक्षा सीटों को दुरुपयोग और डुप्लिकेट से बचाती है।",subscribed:"सदस्यता",seats:"सीटें",fName:"पूरा नाम",fPhone:"मोबाइल नंबर",fEmail:"ईमेल पता",fType:"उपयोगकर्ता प्रकार",fTypeOrd:"सामान्य शुरुआती",fTypeSpec:"विशेषज्ञ / शैक्षणिक",fTypePriv:"निजी / प्रीमियम",fInvite:"आमंत्रण कोड (वैकल्पिक)",ackTxt:"मैं स्वीकार करता/करती हूँ कि NDSP एक निर्णय-समर्थन और प्रासंगिक-विश्लेषण प्लेटफ़ॉर्म है, निवेश फर्म नहीं; यह कोई बाध्यकारी वित्तीय सिफारिशें प्रदान नहीं करता, कोई धन प्रबंधित नहीं करता, और किसी लाभ या परिणाम की गारंटी नहीं देता। परीक्षण 16 दिनों का है, और मैं स्पष्ट रूप से कानूनी सूचना स्वीकार करता/करती हूँ।",submitTxt:"मेरी परीक्षण सीट बुक करें",formNote:"हम केवल सुरक्षित सत्यापन संकेत एकत्र करते हैं (कोई पासवर्ड नहीं, कोई रहस्य नहीं)। अंतिम स्वीकृति निर्णय सर्वर पर लिया जाता है।",okContinue:"सक्रियण की ओर जारी रखें (डेमो) →",okH:"अनुरोध प्राप्त हुआ",okBody:"आपका अनुरोध सीट सत्यापित करने के लिए स्वचालित समीक्षा में है। आपको एक सक्रियण ईमेल मिलेगा — और आपका परीक्षण उस क्षण से शुरू होता है जब आप अपना खाता सक्रिय करते हैं, अभी नहीं, ताकि आप 16 दिनों में से कोई भी न खोएँ।",govRule:"निर्णय मूल्य उजागर करें · नुस्खा छिपाएँ",discT:"अस्वीकरण",discBody:"परिदृश्य स्तर और NDSP आउटपुट केवल प्रासंगिक निर्णय-समर्थन संदर्भ हैं। यह वित्तीय सलाह, व्यापार निर्देश, निष्पादन आदेश, या गारंटीशुदा परिणाम नहीं हैं। NDSP एक निवेश फर्म नहीं है और कोई धन प्रबंधित नहीं करती है।",details:"पूरा विवरण:",errFill:"कृपया आवश्यक फ़ील्ड सही ढंग से भरें।",errAck:"जारी रखने के लिए आपको कानूनी सूचना स्वीकार करनी होगी।"},
+ zh:{dir:"ltr",lang:"zh",dmTitle:"免责声明",dmBody:"<b>NDSP 是一个决策支持平台。</b>NDSP 的情景级别和输出仅是情境性决策支持参考——不是财务建议、交易指示、执行指令或结果保证。NDSP 不是投资公司,也不管理任何资金。最终决定及其责任完全由您自己承担。",dmCheck:"我确认已阅读并同意本免责声明。",dmBtn:"我同意并进入",dmGov:"完整详情:",dmTerms:"条款与隐私",brandSub:"Nawaf 决策支持平台",navLayers:"层",navWhy:"为什么选 NDSP",navPkgs:"套餐",navTrial:"试用",navCta:"预约席位",navSignin:"登录",fTerms:"条款",fPrivacy:"隐私",eyebrow:"付费发布前 · 席位有限",h1a:"受治理的决策,",h1b:"无信号、无噪音",lead:"NDSP 在每次读取上运行 16 个分析层,为您提供经过净化的决策价值——情境方向、跟进时间范围和决策质量——没有执行指令,也没有保证结果。您来决定;我们支持决策。",ctaMain:"开始您的 16 天试用",ctaSec:"探索各层",micro:"16 天 · 16 层 · 无需付款卡 · 完整免责声明",seatTotalL:"试用席位总数",s1L:"普通初学者",s2L:"专家 / 学者",s3L:"私人 / 高级",layersH:"四层公开命名",layersP:"在每次决策中活跃的 16 层中,有四层以名称揭示。其余在幕后工作——您获得价值,而非配方。",tdlN:"Timed Direction Logic",tdlP:"通过对齐每周和短期读取来设定您的跟进时间范围——延长或短期——以清晰的时间范围强度表达,而不暴露公式。",nmpN:"Nawaf Meeting Point",nmpP:"测量读取之间的收敛和一致性质量,为方向清晰度和决策稳健性提供情境性确认。",devN:"Devil's Advocate",devP:"故意挑战读取:在您做出决定之前浮现弱点、谨慎理由和矛盾——您抵御过度自信的护盾。",reading:"读取",goldN:"Nawaf Golden Alignment",goldP:"当跨层满足高质量对齐条件时亮起——情境性质量增强器,绝非保证或利润承诺。",hiddenNote:"12 个隐藏层为每个输出做出贡献,而不暴露其名称、顺序或公式。这不是模糊——这是对平台核心的保护,就像大银行保护其模型一样。",whyH:"建立在一个严格原则之上",whyP:"暴露决策价值。隐藏内部配方。NDSP 中的一切都为此服务。",p1H:"可见的决策质量",p1P:"一个指数总结了所有层之后读取的稳健性——立即知道何时信任、何时保留。",p2H:"情景参考级别",p2P:"激活 · 抵达 · 复核 · 失效——构建跟进的情境参考,而非进入或退出指令。",p3H:"治理与安全",p3P:"决策驻留在服务器上,前端只显示。无暴露秘密,无原始公式,完整的反滥用保护。",p4H:"诚实地说明它不是什么",p4P:"不是交易机器人、信号提供商或基金经理,且不保证任何事。一个受治理的决策支持平台——清晰是它的力量。",p5H:"每项资产的时间范围与强度",p5P:"每项资产都获得跟进时间范围、时间范围强度、市场状态和谨慎理由——一目了然的完整图景。",p6H:"阿拉伯语优先 · 双语",p6P:"地道的阿拉伯语(RTL)和完整的英语(LTR),两种语言中相同的净化输出。",cmpH:"对终端的不同方法",cmpP:"大型终端用原始数据淹没您。NDSP 递给您净化后的决策。",cmpC0:"标准",cmpC2:"传统终端",cmp:[["输出","净化决策 + 质量","需要专业知识的原始数据"],["跟进时间范围","清晰且分类","您自己推断"],["决策挑战","内置 Devil's Advocate","缺失"],["阿拉伯语","原生 RTL","有限或缺失"],["边界清晰度","声明这不是建议","暗示很多"],["模型保护","12 个受保护层","—"]],pkgH:"与您一起成长的套餐",pkgP:"从试用开始,然后选择您的决策所需的深度。",pkFreeN:"Free",pkFree1:"1 个市场 · 3 项资产",pkFree2:"5 次分析 / 周",pkFree3:"简化质量 + 精简简报",pkFree4:"1 个警报",pkProN:"Pro",pkPro1:"2 个市场 · 20 项资产",pkPro2:"每日 15 次分析",pkPro3:"TDL + NMP 可见",pkPro4:"基本警报",pkBadge:"最受欢迎",pkEliteN:"Elite",pkElite1:"所有市场 · 100 项资产",pkElite2:"每日 250 次分析",pkElite3:"全部四层",pkElite4:"高级 Telegram 警报",pkElite5:"日志 + 对比",pkInstN:"Institutional",pkInst1:"按合同 250+ 项资产",pkInst2:"决策输出 API",pkInst3:"Webhooks + 团队",pkInst4:"定制报告",regSideH:"16 天试用 — 完整 Elite 套餐",regS1:"试用期间,您会看到 <b>完整 Elite 套餐</b>,就像已订阅一样:全部四层和完整决策质量,持续整个 16 天。",regS2:"仅 50 个席位:25 个初学者 · 10 个专家 · 15 个私人。",regS3:"无需付款卡。发布后转换为付费套餐是可选的。",regS4:"自动注册审查保护席位免受滥用和重复。",subscribed:"已订阅",seats:"席位",fName:"全名",fPhone:"手机号码",fEmail:"电子邮件地址",fType:"用户类型",fTypeOrd:"普通初学者",fTypeSpec:"专家 / 学者",fTypePriv:"私人 / 高级",fInvite:"邀请码(可选)",ackTxt:"我承认 NDSP 是一个决策支持和情境分析平台,而非投资公司;它不提供具有约束力的财务建议,不管理资金,也不保证利润或结果。试用为 16 天,我明确接受法律声明。",submitTxt:"预约我的试用席位",formNote:"我们只收集安全验证信号(无密码、无秘密)。最终接受决定在服务器上做出。",okContinue:"继续激活(演示)→",okH:"请求已收到",okBody:"您的请求正在进行自动审查以验证席位。您将收到一封激活邮件——您的试用从您激活账户的那一刻开始,而不是现在,因此您不会失去 16 天中的任何一天。",govRule:"暴露决策价值 · 隐藏配方",discT:"免责声明",discBody:"情景级别和 NDSP 输出仅是情境性决策支持参考。它们不是财务建议、交易指示、执行指令或保证结果。NDSP 不是投资公司,也不管理任何资金。",details:"完整详情:",errFill:"请正确填写必填字段。",errAck:"您必须接受法律声明才能继续。"},
+ ur:{dir:"rtl",lang:"ur",dmTitle:"دستبرداری",dmBody:"<b>NDSP فیصلہ سازی کی معاونت کا پلیٹ فارم ہے۔</b> NDSP کے سیناریو لیولز اور آؤٹ پُٹ صرف سیاق و سباق کے فیصلہ سازی کی معاون حوالے ہیں — مالی مشورہ، تجارتی ہدایت، نفاذی حکم یا نتیجے کی ضمانت نہیں۔ NDSP کوئی سرمایہ کاری کا ادارہ نہیں ہے اور کوئی فنڈ نہیں چلاتا۔ آخری فیصلہ اور اس کی ذمہ داری صرف آپ کی ہے۔",dmCheck:"میں تصدیق کرتا ہوں کہ میں نے یہ اعلان پڑھا اور قبول کیا۔",dmBtn:"میں متفق ہوں اور داخل ہوں",dmGov:"مکمل تفصیلات:",dmTerms:"شرائط و رازداری",brandSub:"نواف فیصلہ سازی معاونتی پلیٹ فارم",navLayers:"پرتیں",navWhy:"NDSP کیوں",navPkgs:"پیکجز",navTrial:"آزمائش",navCta:"نشست محفوظ کریں",navSignin:"سائن ان",fTerms:"شرائط",fPrivacy:"رازداری",eyebrow:"ادائیگی شدہ آغاز سے پہلے · محدود نشستیں",h1a:"قابلِ نظم فیصلے،",h1b:"سگنل نہیں، شور نہیں",lead:"NDSP ہر پڑھائی پر 16 تجزیاتی پرتیں چلاتا ہے تاکہ آپ کو ایک صاف فیصلہ قدر فراہم کرے — سیاقی سمت، پیروی کا افق، اور فیصلہ کی معیار — بغیر نفاذی احکامات اور بغیر یقینی نتائج کے۔ آپ فیصلہ کرتے ہیں؛ ہم فیصلے کی حمایت کرتے ہیں۔",ctaMain:"اپنا 16 دن کا آزمائشی دور شروع کریں",ctaSec:"پرتوں کا کھوج",micro:"16 دن · 16 پرتیں · ادائیگی کارڈ نہیں · مکمل دستبرداری",seatTotalL:"کل آزمائشی نشستیں",s1L:"عام ابتدائی",s2L:"ماہر / تعلیمی",s3L:"نجی / پریمیم",layersH:"چار پرتیں کھلے عام نامزد",layersP:"ہر فیصلے میں فعال 16 پرتوں میں سے چار کا نام ظاہر کیا جاتا ہے۔ باقی پردے کے پیچھے کام کرتی ہیں — آپ کو قدر ملتی ہے، نسخہ نہیں۔",tdlN:"Timed Direction Logic",tdlP:"ہفتہ وار اور مختصر پڑھائیوں کو سیدھ میں لا کر آپ کا پیروی افق طے کرتا ہے — توسیعی یا مختصر — فارمولا ظاہر کیے بغیر واضح افق طاقت کے طور پر۔",nmpN:"Nawaf Meeting Point",nmpP:"پڑھائیوں کے درمیان ہم آہنگی اور اتفاق رائے کی معیار کو ناپتا ہے تاکہ سمت کی وضاحت اور فیصلے کی مضبوطی کی سیاقی تصدیق فراہم کرے۔",devN:"Devil's Advocate",devP:"جان بوجھ کر پڑھائی کو چیلنج کرتا ہے: آپ کے فیصلہ کرنے سے پہلے کمزوریوں، احتیاط کی وجوہات اور تضادات کو سامنے لاتا ہے — اعتمادِ نفس کی زیادتی کے خلاف آپ کی ڈھال۔",reading:"پڑھائی",goldN:"Nawaf Golden Alignment",goldP:"جب پرتوں کے درمیان اعلیٰ معیار کی سیدھ کی شرط پوری ہوتی ہے تو روشن ہوتا ہے — ایک سیاقی معیار بڑھانے والا، کبھی ضمانت یا نفع کا وعدہ نہیں۔",hiddenNote:"12 خفیہ پرتیں ہر آؤٹ پُٹ میں اپنا نام، ترتیب یا فارمولا ظاہر کیے بغیر حصہ ڈالتی ہیں۔ یہ گمنامی نہیں — یہ پلیٹ فارم کے بنیادی حصے کی حفاظت ہے، جیسے بڑے بینک اپنے ماڈلز کی حفاظت کرتے ہیں۔",whyH:"ایک سخت اصول پر تعمیر",whyP:"فیصلے کی قدر کو ظاہر کریں۔ اندرونی نسخہ چھپائیں۔ NDSP میں سب کچھ اسی کی خدمت کرتا ہے۔",p1H:"قابلِ مشاہدہ فیصلہ معیار",p1P:"ایک اشاریہ تمام پرتوں کے بعد پڑھائی کی مضبوطی کو خلاصہ کرتا ہے — فوری طور پر جانیں کہ کب اعتماد کرنا ہے اور کب رکنا ہے۔",p2H:"سیناریو حوالہ سطحیں",p2P:"فعالیت · آمد · نظرثانی · رد — سیاقی حوالے جو پیروی کا فریم تشکیل دیتے ہیں، داخلے یا اخراج کے احکامات نہیں۔",p3H:"نظم و نسق اور سلامتی",p3P:"فیصلے سرور پر رہتے ہیں، فرنٹ اینڈ صرف دکھاتا ہے۔ کوئی ظاہر شدہ راز نہیں، کوئی خام فارمولا نہیں، مکمل بدسلوکی سے حفاظت۔",p4H:"اس کے بارے میں ایماندار جو یہ نہیں ہے",p4P:"یہ تجارتی بوٹ، سگنل فراہم کنندہ یا فنڈ مینیجر نہیں ہے، اور کسی چیز کی ضمانت نہیں دیتا۔ ایک قابلِ نظم فیصلہ معاونتی پلیٹ فارم — وضاحت اس کی طاقت ہے۔",p5H:"فی اثاثہ افق اور طاقت",p5P:"ہر اثاثہ کو پیروی کا افق، افق طاقت، مارکیٹ کی حالت اور احتیاط کی وجہ ملتی ہے — ایک نظر میں مکمل تصویر۔",p6H:"عربی پہلے · دو لسانی",p6P:"اصل عربی (RTL) اور مکمل انگریزی (LTR)، دونوں زبانوں میں یکساں صاف آؤٹ پُٹ کے ساتھ۔",cmpH:"ٹرمینلز کے لیے مختلف نقطہ نظر",cmpP:"بڑے ٹرمینلز آپ کو خام ڈیٹا میں ڈبو دیتے ہیں۔ NDSP آپ کو صاف فیصلہ تھما دیتا ہے۔",cmpC0:"معیار",cmpC2:"روایتی ٹرمینلز",cmp:[["آؤٹ پُٹ","صاف فیصلہ + معیار","مہارت درکار خام ڈیٹا"],["پیروی افق","واضح اور درجہ بند","آپ خود اخذ کرتے ہیں"],["فیصلے کی چیلنج","انضمام شدہ Devil's Advocate","موجود نہیں"],["عربی زبان","اصلی RTL","محدود یا غیر موجود"],["حدود کی وضاحت","بتاتا ہے یہ مشورہ نہیں","بہت کچھ مضمر"],["ماڈل کی حفاظت","12 محفوظ پرتیں","—"]],pkgH:"پیکجز جو آپ کے ساتھ بڑھتے ہیں",pkgP:"آزمائش سے شروع کریں، پھر وہ گہرائی چنیں جس کی آپ کے فیصلوں کو ضرورت ہے۔",pkFreeN:"Free",pkFree1:"1 مارکیٹ · 3 اثاثے",pkFree2:"5 تجزیے / ہفتہ",pkFree3:"سادہ معیار + مختصر بریف",pkFree4:"1 الرٹ",pkProN:"Pro",pkPro1:"2 مارکیٹیں · 20 اثاثے",pkPro2:"روزانہ 15 تجزیے",pkPro3:"TDL + NMP نظر آنے والے",pkPro4:"بنیادی الرٹس",pkBadge:"سب سے مقبول",pkEliteN:"Elite",pkElite1:"تمام مارکیٹیں · 100 اثاثے",pkElite2:"روزانہ 250 تجزیے",pkElite3:"چاروں پرتیں",pkElite4:"اعلیٰ Telegram الرٹس",pkElite5:"جریدہ + موازنہ",pkInstN:"Institutional",pkInst1:"معاہدے کے تحت 250+ اثاثے",pkInst2:"فیصلہ آؤٹ پُٹ API",pkInst3:"Webhooks + ٹیمیں",pkInst4:"اپنی مرضی کی رپورٹس",regSideH:"16 دن کی آزمائش — مکمل Elite پیکج",regS1:"آزمائش کے دوران آپ <b>مکمل Elite پیکج</b> دیکھتے ہیں جیسے آپ سبسکرائب کیے ہوں: چاروں پرتیں اور پورے 16 دن مکمل فیصلہ معیار۔",regS2:"صرف 50 نشستیں: 25 ابتدائی · 10 ماہر · 15 نجی۔",regS3:"ادائیگی کارڈ نہیں۔ آغاز کے بعد ادائیگی پیکج میں منتقل ہونا اختیاری ہے۔",regS4:"خودکار رجسٹریشن جائزہ نشستوں کو بدسلوکی اور نقل سے بچاتا ہے۔",subscribed:"سبسکرائب",seats:"نشستیں",fName:"مکمل نام",fPhone:"موبائل نمبر",fEmail:"ای میل پتا",fType:"صارف کی قسم",fTypeOrd:"عام ابتدائی",fTypeSpec:"ماہر / تعلیمی",fTypePriv:"نجی / پریمیم",fInvite:"دعوت کوڈ (اختیاری)",ackTxt:"میں تسلیم کرتا ہوں کہ NDSP فیصلہ سازی کی معاونت اور سیاقی تجزیہ کا پلیٹ فارم ہے، سرمایہ کاری کا ادارہ نہیں؛ یہ کوئی پابند مالی سفارشات فراہم نہیں کرتا، کوئی فنڈ نہیں چلاتا، اور کسی منافع یا نتیجے کی ضمانت نہیں دیتا۔ آزمائش 16 دن کی ہے، اور میں واضح طور پر قانونی نوٹس قبول کرتا ہوں۔",submitTxt:"میری آزمائشی نشست محفوظ کریں",formNote:"ہم صرف محفوظ تصدیق کے سگنلز جمع کرتے ہیں (کوئی پاس ورڈ نہیں، کوئی راز نہیں)۔ آخری قبولیت کا فیصلہ سرور پر کیا جاتا ہے۔",okContinue:"فعالیت کی طرف جاری رکھیں (ڈیمو) →",okH:"درخواست موصول ہوگئی",okBody:"آپ کی درخواست نشست کی تصدیق کے لیے خودکار جائزے میں ہے۔ آپ کو فعالیت کا ای میل ملے گا — اور آپ کی آزمائش اس لمحے شروع ہوتی ہے جب آپ اپنا اکاؤنٹ فعال کرتے ہیں، ابھی نہیں، تاکہ آپ 16 دنوں میں سے کوئی نہ کھوئیں۔",govRule:"فیصلے کی قدر ظاہر کریں · نسخہ چھپائیں",discT:"دستبرداری",discBody:"سیناریو لیولز اور NDSP کے آؤٹ پُٹ صرف سیاقی فیصلہ سازی کی معاون حوالے ہیں۔ یہ مالی مشورہ، تجارتی ہدایات، نفاذی احکامات یا یقینی نتائج نہیں ہیں۔ NDSP کوئی سرمایہ کاری کا ادارہ نہیں ہے اور کوئی فنڈ نہیں چلاتا۔",details:"مکمل تفصیلات:",errFill:"براہِ کرم مطلوبہ خانے درست طریقے سے پُر کریں۔",errAck:"جاری رکھنے کے لیے آپ کو قانونی نوٹس قبول کرنا ہوگا۔"}
+};
+
+const AR=s=>String(s).replace(/[0-9]/g,d=>"٠١٢٣٤٥٦٧٨٩"[d]);
+let LANG="en";
+const __ndspStub=new Proxy(function(){},{get:(t,p)=>{if(p==='style'||p==='dataset'||p==='classList')return new Proxy({},{get:()=>()=>{}});if(p==='value'||p==='textContent'||p==='innerHTML'||p==='placeholder')return '';return __ndspStub;},set:()=>true,apply:()=>__ndspStub});const __q=(s)=>{try{return document.querySelector(s)||__ndspStub;}catch(e){return __ndspStub;}};const $=s=>__q(s);
+
+function buildCompare(){
+  const b=$("#cmpBody"); if(!b)return; b.innerHTML="";
+  const rows=(I18N[LANG]&&I18N[LANG].cmp)?I18N[LANG].cmp:I18N.en.cmp;
+  rows.forEach(r=>{
+    b.innerHTML+=`<tr><td>${r[0]}</td><td class="ndsp">✦ ${r[1]}</td><td class="no">${r[2]}</td></tr>`;
+  });
+}
+
+const RTL_LANGS=new Set(["ar","ur","fa","he","iw"]);
+function applyLang(){
+  if(LANG==="he"||LANG==="iw"||LANG==="he-IL")LANG="en";   // Hebrew is blocked — never rendered
+  const base=I18N.en, d=I18N[LANG]||base;
+  const dir=d.dir||(RTL_LANGS.has(LANG)?"rtl":"ltr");
+  document.documentElement.lang=d.lang||LANG;document.documentElement.dir=dir;document.body.dir=dir;
+  document.querySelectorAll("[data-i]").forEach(el=>{const k=el.getAttribute("data-i");const v=(d[k]!=null?d[k]:base[k]);if(v!=null)el.innerHTML=v;});
+  const sel=$("#langSel");if(sel)sel.value=LANG;
+  // seat numbers + totals localized (Arabic-Indic digits only for ar)
+  // Start at ZERO for a fresh trial; live counts come from the server when available.
+  const caps={t1:25,t2:10,t3:15};
+  let taken={s1:0,s2:0,s3:0,seatTotal:50};
+  function paintSeats(){
+    for(const id in taken){const el=$("#"+id);if(el)el.textContent=LANG==="ar"?AR(taken[id]):taken[id];}
+    for(const id in caps){const el=$("#"+id);if(el)el.textContent="/"+(LANG==="ar"?AR(caps[id]):caps[id]);}
+    // progress bars (taken / cap)
+    const bmap={s1:["b1","t1"],s2:["b2","t2"],s3:["b3","t3"]};
+    for(const s in bmap){const bar=$("#"+bmap[s][0]);if(bar){const pct=Math.min(100,Math.round((taken[s]/caps[bmap[s][1]])*100))||0;bar.style.width=pct+"%";}}
+  }
+  paintSeats();
+  // Pull live seat counts from the platform (governed: display only). Zero stays if API is absent.
+  (function loadSeats(){
+    try{
+      fetch("/api/trial/seats",{headers:{"Accept":"application/json"}})
+        .then(r=>r.ok?r.json():null)
+        .then(d=>{
+          if(!d)return;
+          // accept either {ordinary,specialist,private,total} or {s1,s2,s3,seatTotal}
+          const o=(d.ordinary!=null?d.ordinary:d.s1);
+          const sp=(d.specialist!=null?d.specialist:d.s2);
+          const pv=(d.private!=null?d.private:d.s3);
+          const tot=(d.total!=null?d.total:d.seatTotal);
+          taken={s1:(o||0),s2:(sp||0),s3:(pv||0),seatTotal:(tot!=null?tot:50)};
+          paintSeats();
+        })
+        .catch(()=>{});
+    }catch(e){}
+  })();
+  buildCompare();
+  try{localStorage.setItem("ndsp_lang",LANG);}catch(e){}
+}
+
+/* form */
+const _submitBtn=$("#submitBtn");
+if(_submitBtn) _submitBtn.onclick=()=>{
+  const d=I18N[LANG];
+  const name=$("#f_name"),email=$("#f_email"),phone=$("#f_phone"),ack=$("#f_ack");
+  if(!name||!email||!phone||!ack) return;
+  [name,email,phone].forEach(f=>f.classList.remove("err"));
+  let ok=true;
+  if(!name.value.trim()){name.classList.add("err");ok=false;}
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value)){email.classList.add("err");ok=false;}
+  if(phone.value.replace(/\D/g,"").length<8){phone.classList.add("err");ok=false;}
+  if(!ok){alert(d.errFill);return;}
+  if(!ack.checked){alert(d.errAck);return;}
+  // simulate backend anti-abuse decision (frontend display only)
+  const tEl=$("#f_type"); const invEl=$("#f_invite");
+  const ref="NDSP-T-"+Math.random().toString(36).slice(2,7).toUpperCase();
+  const okRef=$("#okRef"); if(okRef) okRef.textContent="REF: "+ref;
+  const allowed = invEl ? invEl.value.trim().toUpperCase().startsWith("NDSP-") : false;
+  const okState=$("#okState");
+  if(okState) okState.textContent = allowed
+    ? (LANG==="ar"?"ALLOW · مقبول مبدئيًا":"ALLOW · provisionally accepted")
+    : (LANG==="ar"?"PENDING_REVIEW · قيد المراجعة":"PENDING_REVIEW · under review");
+  const rf=$("#regForm"); if(rf) rf.style.display="none";
+  const rs=document.querySelector(".reg-side"); if(rs) rs.style.display="none";
+  const rsuc=$("#regSuccess"); if(rsuc) rsuc.classList.add("show");
+  const rg=$("#regGrid"); if(rg) rg.style.gridTemplateColumns="1fr";
+  const rsec=$("#register"); if(rsec) rsec.scrollIntoView({behavior:"smooth"});
+};
+
+const langSel=$("#langSel");
+if(langSel){
+  try{const saved=localStorage.getItem("ndsp_lang");if(saved&&I18N[saved])LANG=saved;}catch(e){}
+  langSel.value=LANG;
+  langSel.onchange=()=>{let v=langSel.value;if(v==="he"||v==="iw")v="en";LANG=I18N[v]?v:"en";applyLang();};
+}
+
+/* reveal on scroll */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}}),{threshold:.12});
+document.querySelectorAll(".fade").forEach((el,i)=>{el.style.transitionDelay=(i%6*0.06)+"s";io.observe(el);});
+
+/* ===== disclaimer on page open ===== */
+const DISC_KEY="ndsp_disc_ok_v1";
+function discSeen(){try{return localStorage.getItem(DISC_KEY)==="1";}catch(e){return false;}}
+function discSave(){try{localStorage.setItem(DISC_KEY,"1");}catch(e){}}
+const dm=document.getElementById("discModal");
+const dchk=document.getElementById("discAgree");
+const dbtn=document.getElementById("discBtn");
+if(dchk&&dbtn){dchk.addEventListener("change",()=>{dbtn.disabled=!dchk.checked;});}
+if(dbtn){dbtn.onclick=()=>{discSave();dm.classList.remove("show");};}
+const forceDisc=new URLSearchParams(location.search).get("disc")==="1";
+if(dm&&(forceDisc||!discSeen())){dm.classList.add("show");}
+
+applyLang();
+</script>
+<!-- NDSP_REGISTER_PASSWORD_BIND_START -->
+<style>
+  .ndsp-password-bind-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+    margin-top:14px;
+  }
+  .ndsp-password-bind-field{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .ndsp-password-bind-field label{
+    color:#aeb8cc;
+    font-size:15px;
+    font-weight:700;
+  }
+  .ndsp-password-bind-field input{
+    width:100%;
+    border:1px solid rgba(255,255,255,.10);
+    background:#070b13;
+    color:#eef3ff;
+    border-radius:14px;
+    padding:14px 16px;
+    outline:none;
+    font-size:16px;
+  }
+  .ndsp-password-bind-field input:focus{
+    border-color:rgba(226,190,82,.65);
+    box-shadow:0 0 0 3px rgba(226,190,82,.10);
+  }
+  .ndsp-password-bind-hint{
+    margin-top:8px;
+    color:#8f9bb2;
+    font-size:13px;
+    line-height:1.7;
+  }
+  @media (max-width:720px){
+    .ndsp-password-bind-row{grid-template-columns:1fr}
+  }
+</style>
+
+<script>
+(function(){
+  "use strict";
+
+  function arAlert(msg){
+    try { alert(msg); } catch(e) {}
+  }
+
+  function findRegisterForm(){
+    var forms = Array.prototype.slice.call(document.querySelectorAll("form"));
+    var scored = forms.map(function(f){
+      var txt = (f.innerText || "") + " " + (f.id || "") + " " + (f.className || "");
+      var html = f.innerHTML || "";
+      var score = 0;
+      if (/البريد|email/i.test(txt + html)) score++;
+      if (/الجوال|الهاتف|phone|mobile/i.test(txt + html)) score++;
+      if (/الدعوة|invite|نوع المستخدم|segment|ordinary|professional/i.test(txt + html)) score++;
+      return {form:f, score:score};
+    }).sort(function(a,b){return b.score-a.score});
+    return scored.length && scored[0].score > 0 ? scored[0].form : null;
+  }
+
+  function getRegisterContainer(){
+    var form = findRegisterForm();
+    if (form) return form;
+
+    var candidates = Array.prototype.slice.call(document.querySelectorAll("section, main, div"));
+    var best = null, bestScore = 0;
+    candidates.forEach(function(el){
+      var txt = el.innerText || "";
+      var score = 0;
+      if (/البريد الإلكتروني|email/i.test(txt)) score++;
+      if (/رقم الجوال|phone|mobile/i.test(txt)) score++;
+      if (/نوع المستخدم|رمز الدعوة|invite/i.test(txt)) score++;
+      if (score > bestScore) { bestScore = score; best = el; }
+    });
+    return best;
+  }
+
+  function existingPasswordInput(){
+    return document.querySelector(
+      'input[name="password"], input[name="confirm_password"], input[name="password_confirm"], input[type="password"]'
+    );
+  }
+
+  function addPasswordFields(){
+    if (existingPasswordInput()) return;
+
+    var container = getRegisterContainer();
+    if (!container) return;
+
+    var wrap = document.createElement("div");
+    wrap.className = "ndsp-password-bind-wrap";
+    wrap.innerHTML = ''
+      + '<div class="ndsp-password-bind-row">'
+      + '  <div class="ndsp-password-bind-field">'
+      + '    <label for="ndsp_register_password">كلمة المرور</label>'
+      + '    <input id="ndsp_register_password" name="password" type="password" autocomplete="new-password" minlength="8" required placeholder="8 أحرف على الأقل">'
+      + '  </div>'
+      + '  <div class="ndsp-password-bind-field">'
+      + '    <label for="ndsp_register_confirm_password">تأكيد كلمة المرور</label>'
+      + '    <input id="ndsp_register_confirm_password" name="confirm_password" type="password" autocomplete="new-password" minlength="8" required placeholder="أعد كتابة كلمة المرور">'
+      + '  </div>'
+      + '</div>'
+      + '<div class="ndsp-password-bind-hint">ستستخدم هذه الكلمة لاحقًا للدخول إلى بوابة المستخدم بعد قبول التسجيل وتفعيل الحساب.</div>';
+
+    var anchor =
+      container.querySelector('input[name="invite_code"], input[id*="invite"], select, textarea') ||
+      container.querySelector('input[type="checkbox"]') ||
+      container.lastElementChild;
+
+    if (anchor && anchor.parentElement) {
+      var parent = anchor.closest("label, div, p") || anchor.parentElement;
+      parent.insertAdjacentElement("afterend", wrap);
+    } else {
+      container.appendChild(wrap);
+    }
+  }
+
+  function getPasswordValues(){
+    var p = document.querySelector('#ndsp_register_password, input[name="password"], input[type="password"]');
+    var c = document.querySelector('#ndsp_register_confirm_password, input[name="confirm_password"], input[name="password_confirm"]');
+    return {
+      password: p ? String(p.value || "") : "",
+      confirm: c ? String(c.value || "") : ""
+    };
+  }
+
+  function validatePassword(){
+    var v = getPasswordValues();
+    if (!v.password || v.password.length < 8) {
+      arAlert("كلمة المرور مطلوبة ويجب ألا تقل عن 8 أحرف.");
+      return false;
+    }
+    if (v.password !== v.confirm) {
+      arAlert("كلمة المرور وتأكيدها غير متطابقين.");
+      return false;
+    }
+    return true;
+  }
+
+  document.addEventListener("DOMContentLoaded", function(){
+    addPasswordFields();
+
+    document.addEventListener("submit", function(e){
+      var f = e.target;
+      var text = (f && (f.innerText || f.innerHTML || "")) || "";
+      if (/email|البريد|phone|الجوال|invite|الدعوة/i.test(text)) {
+        if (!validatePassword()) {
+          e.preventDefault();
+          e.stopPropagation();
+          return false;
+        }
+      }
+    }, true);
+  });
+
+  var originalFetch = window.fetch;
+  window.fetch = function(input, init){
+    try {
+      var url = typeof input === "string" ? input : (input && input.url) || "";
+      var method = String((init && init.method) || "GET").toUpperCase();
+
+      if (method === "POST" && /\/api\/trial\/register\//.test(url)) {
+        addPasswordFields();
+
+        if (!validatePassword()) {
+          return Promise.resolve(new Response(
+            JSON.stringify({ok:false,error:"PASSWORD_REQUIRED_CLIENT"}),
+            {status:400,headers:{"Content-Type":"application/json"}}
+          ));
+        }
+
+        var vals = getPasswordValues();
+        init = init || {};
+        var headers = init.headers || {};
+        var body = init.body;
+
+        if (typeof body === "string") {
+          try {
+            var json = JSON.parse(body);
+            json.password = vals.password;
+            json.confirm_password = vals.confirm;
+            json.password_confirm = vals.confirm;
+            init.body = JSON.stringify(json);
+          } catch(e) {}
+        } else if (body instanceof FormData) {
+          body.set("password", vals.password);
+          body.set("confirm_password", vals.confirm);
+          body.set("password_confirm", vals.confirm);
+          init.body = body;
+        }
+
+        init.headers = headers;
+      }
+    } catch(e) {}
+
+    return originalFetch.apply(this, arguments);
+  };
+})();
+</script>
+<!-- NDSP_REGISTER_PASSWORD_BIND_END -->
+
+</body>
+</html>

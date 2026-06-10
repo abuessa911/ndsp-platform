@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="google" content="notranslate" />
+<title>DSP — تفعيل الحساب وبدء التجربة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Sora:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#070A10;--ink:#0B0F17;--panel:rgba(18,24,36,.62);--panel2:rgba(14,19,29,.82);
+  --line:rgba(201,162,39,.17);--line-soft:rgba(255,255,255,.07);
+  --gold:#D9B65A;--gold-bright:#F2D27A;--gold-deep:#9A7A22;
+  --teal:#3FD3C6;--rose:#E0607A;--blue:#88A6FF;
+  --txt:#EAEEF6;--txt-2:#9AA6BC;--txt-3:#5E6A82;
+  --up:#56D6A0;--down:#E2657E;--warn:#E8B964;
+  --shadow:0 30px 70px -30px rgba(0,0,0,.85);--r:18px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--void);color:var(--txt);overflow-x:hidden;min-height:100vh;
+  font-family:"IBM Plex Sans Arabic","Sora",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+body[dir="ltr"]{font-family:"Sora","IBM Plex Sans Arabic",sans-serif}
+.mono{font-family:"IBM Plex Mono",monospace;font-feature-settings:"tnum" 1}
+h1,h2,h3,.kufi{font-family:"Reem Kufi",serif}
+body[dir="ltr"] h1,body[dir="ltr"] h2,body[dir="ltr"] h3{font-family:"Sora",sans-serif;letter-spacing:-.01em}
+
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.bg .glow{position:absolute;border-radius:50%;filter:blur(140px);opacity:.55}
+.bg .g1{width:56vw;height:56vw;top:-26vw;inset-inline-end:-14vw;background:radial-gradient(circle,rgba(217,182,90,.2),transparent 64%)}
+.bg .g2{width:44vw;height:44vw;bottom:-22vw;inset-inline-start:-12vw;background:radial-gradient(circle,rgba(63,211,198,.11),transparent 64%)}
+.bg .grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:46px 46px;mask-image:radial-gradient(ellipse 120% 80% at 50% 10%,#000 30%,transparent 78%)}
+.seal-wm{position:fixed;z-index:0;inset-inline-end:-8vw;bottom:-10vw;width:50vw;max-width:680px;opacity:.045;pointer-events:none}
+
+nav{position:relative;z-index:5;backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+nav .in{max-width:760px;margin:0 auto;padding:13px 22px;display:flex;align-items:center;gap:14px}
+.brand{display:flex;align-items:center;gap:11px}
+.brand svg{width:38px;height:38px;filter:drop-shadow(0 4px 12px rgba(217,182,90,.4))}
+.brand b{font-family:"Reem Kufi";font-size:18px;background:linear-gradient(180deg,var(--gold-bright),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;display:block;line-height:1}
+.brand span{font-size:9px;color:var(--txt-3);letter-spacing:2px;font-family:"IBM Plex Mono"}
+.spacer{flex:1}
+.lang{cursor:pointer;user-select:none;padding:8px 13px;border-radius:10px;border:1px solid var(--line);color:var(--txt-2);font-size:12.5px}
+.lang:hover{color:var(--gold-bright);border-color:var(--gold)}
+
+.wrap{position:relative;z-index:2;max-width:620px;margin:0 auto;padding:42px 22px 60px}
+
+.seal-top{width:88px;height:88px;border-radius:50%;display:grid;place-items:center;margin:0 auto 22px;font-size:40px;
+  background:rgba(86,214,160,.1);border:1px solid rgba(86,214,160,.4);color:var(--up);position:relative}
+.seal-top::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:1px dashed rgba(86,214,160,.3)}
+.statebox{display:flex;justify-content:center;margin-bottom:16px}
+.statebox span{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;border:1px solid rgba(86,214,160,.35);background:rgba(86,214,160,.08);color:var(--up);font-size:12px;font-family:"IBM Plex Mono"}
+.statebox .d{width:7px;height:7px;border-radius:50%;background:var(--up);box-shadow:0 0 8px var(--up)}
+
+h1.title{text-align:center;font-size:clamp(26px,5vw,38px);margin:0 0 12px;line-height:1.12}
+.lead{text-align:center;color:var(--txt-2);font-size:15px;line-height:1.85;margin:0 auto 26px;max-width:480px}
+.lead b{color:var(--gold-bright)}
+
+.card{background:var(--panel);border:1px solid var(--line-soft);border-radius:var(--r);padding:24px;backdrop-filter:blur(12px);box-shadow:var(--shadow)}
+
+/* clock-not-started highlight */
+.clock-info{display:flex;align-items:center;gap:14px;padding:16px;border-radius:14px;border:1px solid var(--line);background:linear-gradient(135deg,rgba(217,182,90,.1),rgba(0,0,0,.2));margin-bottom:20px}
+.clock-info .cic{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;font-size:22px;background:rgba(217,182,90,.14);color:var(--gold-bright);flex:none}
+.clock-info .cx b{display:block;font-size:14px;margin-bottom:3px}
+.clock-info .cx span{font-size:12.5px;color:var(--txt-2);line-height:1.6}
+
+.benefits{display:flex;flex-direction:column;gap:12px;margin-bottom:8px}
+.bf{display:flex;gap:12px;align-items:flex-start;font-size:13.5px;color:var(--txt-2);line-height:1.6}
+.bf .n{flex:none;width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:rgba(217,182,90,.12);color:var(--gold-bright);font-family:"IBM Plex Mono";font-size:13px}
+.bf b{color:var(--txt)}
+
+.acct{display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:18px;border-top:1px solid var(--line-soft);font-size:12.5px;color:var(--txt-3)}
+.acct .v{color:var(--txt);font-family:"IBM Plex Mono"}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;cursor:pointer;font-family:inherit;font-parameter:600;padding:15px 22px;border-radius:13px;font-size:15px;transition:.2s;width:100%}
+.btn-gold{background:linear-gradient(135deg,var(--gold-bright),var(--gold-deep));color:#1a1303;box-shadow:0 8px 24px -6px rgba(217,182,90,.5);margin-top:22px}
+.btn-gold:hover{transform:translateY(-2px)}
+.btn-ghost{background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--txt-2)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold-bright)}
+.micro{text-align:center;font-size:11.5px;color:var(--txt-3);margin-top:12px;line-height:1.6}
+
+.gov-note{font-size:11px;color:var(--txt-3);line-height:1.7;margin-top:16px;padding:13px;border-radius:12px;border:1px dashed var(--line-soft);background:rgba(0,0,0,.15)}
+.gov-note b{color:var(--gold)}
+
+/* started view */
+.started{display:none}.started.show{display:block;animation:fade .45s}
+@keyframes fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.daybig{text-align:center;margin:6px 0 18px}
+.daybig .ring{position:relative;width:140px;height:140px;margin:0 auto}
+.daybig .ring svg{transform:rotate(-90deg)}
+.daybig .ring .mid{position:absolute;inset:0;display:grid;place-items:center;text-align:center}
+.daybig .ring .mid .d{font-family:"IBM Plex Mono";font-size:42px;font-parameter:600;color:var(--gold-bright);line-height:1}
+.daybig .ring .mid .of{font-size:11px;color:var(--txt-3);margin-top:3px}
+.dates{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0}
+.datebox{padding:14px;border-radius:13px;border:1px solid var(--line-soft);background:rgba(0,0,0,.18);text-align:center}
+.datebox .k{font-size:11px;color:var(--txt-3)}
+.datebox .v{font-family:"IBM Plex Mono";font-size:15px;color:var(--txt);margin-top:6px}
+.datebox.end .v{color:var(--gold-bright)}
+
+.gov{text-align:center;margin-top:22px;font-family:"Reem Kufi";color:var(--gold);font-size:13px;opacity:.8}
+body[dir="ltr"] .gov{font-family:"Sora"}
+.disclaimer{margin-top:14px;font-size:11px;color:var(--txt-3);line-height:1.8;text-align:center;padding:14px;border-radius:14px;border:1px dashed var(--line);background:rgba(0,0,0,.2)}
+.disclaimer b{color:var(--txt-2)}
+
+/* ===== survey modal ===== */
+.ndsp-modal{position:fixed;inset:0;z-index:300;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(4,7,12,.74);backdrop-filter:blur(9px)}
+.ndsp-modal.show{display:flex;animation:mfade .3s}
+@keyframes mfade{from{opacity:0}to{opacity:1}}
+.ndsp-modal .box{width:100%;max-width:540px;max-height:90vh;overflow-y:auto;background:var(--panel2);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);padding:28px 26px;animation:mrise .35s cubic-bezier(.2,.8,.2,1)}
+@keyframes mrise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.ndsp-modal .box::-webkit-scrollbar{width:6px}.ndsp-modal .box::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px}
+.ndsp-modal .mic{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;margin:0 auto 16px;font-size:30px;background:rgba(86,214,160,.1);border:1px solid rgba(86,214,160,.4);color:var(--up)}
+.ndsp-modal h2{text-align:center;font-size:23px;margin:0 0 10px}
+.ndsp-modal .msg{text-align:center;color:var(--txt-2);font-size:14px;line-height:1.85;margin:0 auto 20px;max-width:440px}
+.ndsp-modal .msg b{color:var(--gold-bright)}
+.q{margin-bottom:17px}
+.q .ql{font-size:13.5px;color:var(--txt);margin-bottom:9px;font-parameter:600}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{padding:8px 14px;border-radius:10px;border:1px solid var(--line-soft);background:rgba(255,255,255,.03);color:var(--txt-2);font-size:12.5px;cursor:pointer;transition:.15s;font-family:inherit}
+.opt:hover{border-color:var(--gold)}
+.opt.sel{background:rgba(217,182,90,.16);border-color:var(--gold);color:var(--gold-bright)}
+.ndsp-modal .actions{display:flex;flex-direction:column;gap:10px;margin-top:4px}
+.ndsp-modal .mgov{font-size:10.5px;color:var(--txt-3);text-align:center;margin-top:14px;line-height:1.7}
+.ndsp-modal .done-ic{color:var(--up)}
+
+.langsel{background:rgba(0,0,0,.35);border:1px solid var(--line,rgba(201,162,39,.16));color:var(--txt,#EAEEF6);border-radius:999px;padding:7px 12px;font-family:inherit;font-size:12px;cursor:pointer;outline:none}
+.langsel:hover{border-color:var(--gold,#D9B65A)}
+.langsel option{background:#0B0F17;color:#EAEEF6}
+</style>
+</head>
+<body dir="ltr">
+
+<div class="bg"><div class="glow g1"></div><div class="glow g2"></div><div class="grid"></div></div>
+<svg class="seal-wm" viewBox="0 0 240 240" aria-hidden="true"><use href="#hunterSeal"/></svg>
+
+<svg width="0" height="0" style="position:absolute"><defs><g id="hunterSeal">
+  <circle cx="120" cy="120" r="116" fill="none" stroke="#D9B65A" stroke-width="2"/>
+  <circle cx="120" cy="120" r="106" fill="none" stroke="#D9B65A" stroke-width="1" stroke-dasharray="2 6"/>
+  <path d="M120 56 C150 60 168 80 170 108 C171 122 165 134 154 142 L172 150 L150 152 C146 168 132 180 118 182 C128 172 130 162 128 156 C112 162 96 158 86 146 C100 148 110 144 114 138 C96 134 84 120 84 102 C84 76 100 60 120 56 Z" fill="#D9B65A"/>
+  <circle cx="138" cy="98" r="6.5" fill="#070A10"/><circle cx="140" cy="96" r="2" fill="#F2D27A"/>
+  <path d="M170 108 C184 110 190 118 184 126 C180 120 174 118 168 120 Z" fill="#9A7A22"/>
+  <path d="M120 30 l3 7 7 1 -5 5 1 7 -6 -3 -6 3 1 -7 -5 -5 7 -1 z" fill="#F2D27A"/>
+  <path id="arcTop" d="M40 120 A80 80 0 0 1 200 120" fill="none"/>
+  <path id="arcBot" d="M44 124 A76 76 0 0 0 196 124" fill="none"/>
+  <text font-family="IBM Plex Mono,monospace" font-size="15" letter-spacing="6" fill="#D9B65A"><textPath href="#arcTop" startOffset="50%" text-anchor="middle">HUNTER</textPath></text>
+  <text font-family="IBM Plex Mono,monospace" font-size="13" letter-spacing="5" fill="#D9B65A"><textPath href="#arcBot" startOffset="50%" text-anchor="middle">KSA · 1</textPath></text>
+</g></defs></svg>
+
+<nav><div class="in">
+  <div class="brand"><svg viewBox="0 0 240 240"><use href="#hunterSeal"/></svg>
+    <div><b>DSP</b><span data-i="activation">ACCOUNT ACTIVATION</span></div></div>
+  <div class="spacer"></div>
+  <select class="langsel" id="langSel" aria-label="Language"><option value="ar">العربية</option><option value="en">English</option><option value="fr">Français</option><option value="es">Español</option><option value="de">Deutsch</option><option value="tr">Türkçe</option><option value="ru">Русский</option><option value="pt">Português</option><option value="id">Indonesia</option><option value="hi">हिन्दी</option><option value="zh">中文</option><option value="ur">اردو</option></select>
+</div></nav>
+
+<div class="wrap">
+
+  <!-- ACTIVATE VIEW -->
+  <div id="activateView">
+    <div class="seal-top">✓</div>
+    <div class="statebox"><span><span class="d"></span>ACCOUNT_APPROVED · <span data-i="approved">تم الاعتماد</span></span></div>
+    <h1 class="title" data-i="title">حسابك جاهز يا خالد</h1>
+    <p class="lead" data-i="lead">تمّت مراجعة طلبك واعتماد مقعدك. <b>تجربتك لم تبدأ بعد</b> — تبدأ من اللحظة التي تضغط فيها «ابدأ التجربة»، وتستمر ١٦ يومًا كاملة. فلا تخسر أي يوم.</p>
+
+    <div class="card">
+      <div class="clock-info">
+        <div class="cic">◷</div>
+        <div class="cx"><b data-i="clockH">العدّاد يبدأ عند التفعيل — لا قبله</b><span data-i="clockP">حتى لو سجّلت اليوم وفعّلت بعد أيام، تبدأ الـ١٦ يومًا من لحظة تفعيلك أنت تحديدًا.</span></div>
+      </div>
+
+      <div class="benefits">
+        <div class="bf"><div class="n">◈</div><div data-i="bf1"><b>وصول كامل بمستوى باقة Elite</b> — كل الطبقات الأربع وجودة القرار طوال الـ١٦ يومًا كأنك مشترك بها.</div></div>
+        <div class="bf"><div class="n">⬡</div><div data-i="bf2"><b>تفتّح تدريجي</b> للطبقات على أربع مراحل عبر أيام رحلتك.</div></div>
+        <div class="bf"><div class="n">✦</div><div data-i="bf3"><b>بدون بطاقة دفع</b> — والترقية بسعر المؤسِّس تبقى اختيارية في النهاية.</div></div>
+      </div>
+
+      <div class="acct">
+        <span data-i="acctSeat">نوع المقعد</span>
+        <span class="v" data-i="acctSeatV">خاص / مميّز</span>
+      </div>
+      <div class="acct" style="border-top:0;padding-top:8px">
+        <span data-i="acctEmail">الحساب</span>
+        <span class="v">khalid@***.com</span>
+      </div>
+
+      <button class="btn btn-gold" id="activateBtn"><span data-i="activateBtn">ابدأ تجربة الـ١٦ يوم الآن</span> →</button>
+      <div class="micro" data-i="activateMicro">بالضغط، يبدأ عدّاد الـ١٦ يومًا فورًا ويُسجَّل تاريخ التفعيل في حسابك.</div>
+
+      <div class="gov-note" data-i="govNote"><b>الحوكمة:</b> تاريخ التفعيل ونهاية التجربة يُسجَّلان ويُفرضان في الخادم. لكل مستخدم عدّاده الخاص — لا ساعة عامة ولا تمديد تلقائي.</div>
+    </div>
+  </div>
+
+  <!-- STARTED VIEW -->
+  <div class="started" id="startedView">
+    <div class="seal-top" style="background:rgba(217,182,90,.1);border-color:rgba(217,182,90,.4);color:var(--gold-bright)">🦅</div>
+    <h1 class="title" data-i="startedH">بدأت تجربتك!</h1>
+    <p class="lead" data-i="startedP">عدّاد الـ١٦ يومًا يعمل الآن. هذا يومك الأول — استثمر كل يوم، فالقيمة كاملة بين يديك.</p>
+
+    <div class="card">
+      <div class="daybig">
+        <div class="ring">
+          <svg width="140" height="140" viewBox="0 0 140 140">
+            <circle cx="70" cy="70" r="60" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="9"/>
+            <circle id="ringArc" cx="70" cy="70" r="60" fill="none" stroke="url(#rg)" stroke-width="9" stroke-linecap="round" stroke-dasharray="377" stroke-dashoffset="377"/>
+            <defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9A7A22"/><stop offset="1" stop-color="#F2D27A"/></linearGradient></defs>
+          </svg>
+          <div class="mid"><div><div class="d" id="dayNum">١</div><div class="of" data-i="ofSixteen">من ١٦ يوم</div></div></div>
+        </div>
+      </div>
+
+      <div class="dates">
+        <div class="datebox"><div class="k" data-i="startedOn">بدأت في</div><div class="v" id="startDate">—</div></div>
+        <div class="datebox end"><div class="k" data-i="endsOn">تنتهي في</div><div class="v" id="endDate">—</div></div>
+      </div>
+
+      <button class="btn btn-gold" id="enterBtn"><span data-i="enterBtn">ادخل إلى رحلتك</span> →</button>
+      <button class="btn btn-ghost" id="cmdBtn" style="margin-top:10px" data-i="cmdBtn">أو اذهب مباشرة لمركز القرار</button>
+    </div>
+  </div>
+
+  <div class="gov" data-i="govRule">اعرض قيمة القرار · أخفِ الوصفة الداخلية</div>
+  <div class="disclaimer">
+    <b data-i="discT">إخلاء مسؤولية</b><br>
+    <span data-i="discBody">التجربة تمنح وصولًا لأدوات دعم القرار فقط. مخرجات DSP مراجع سياقية وليست نصيحة مالية أو أمر تداول أو ضمانًا للنتائج. DSP ليست شركة استثمار ولا تدير أموالًا.</span>
+  </div>
+</div>
+
+<script>
+const AR=s=>String(s).replace(/[0-9]/g,d=>"٠١٢٣٤٥٦٧٨٩"[d]);
+let LANG="en";
+const __ndspStub=new Proxy(function(){},{get:(t,p)=>{if(p==='style'||p==='dataset'||p==='classList')return new Proxy({},{get:()=>()=>{}});if(p==='value'||p==='textContent'||p==='innerHTML'||p==='placeholder')return '';return __ndspStub;},set:()=>true,apply:()=>__ndspStub});const __q=(s)=>{try{return document.querySelector(s)||__ndspStub;}catch(e){return __ndspStub;}};const $=s=>__q(s),$$=s=>document.querySelectorAll(s);
+const TOTAL=16;
+let startAt=null;
+
+const I18N={
+ ar:{dir:"rtl",lang:"ar",
+  svTitle:"مرحبًا بك في تجربتك",svMsg:"بدأت رحلتك في DSP. <b>٣ أسئلة سريعة</b> تساعدنا نهيّئ تجربتك خلال الـ١٦ يومًا — اختيارية بالكامل.",
+  svQ1:"ما مستوى خبرتك في الأسواق؟",svQ1a:"مبتدئ",svQ1b:"متوسط",svQ1c:"متقدّم",
+  svQ2:"أي الأسواق تهمّك؟ (اختر ما يناسبك)",svQ2a:"العملات",svQ2b:"السلع",svQ2c:"المؤشرات",svQ2d:"الرقمية",
+  svQ3:"ماذا تريد من DSP؟",svQ3a:"قراءة سياقية أوضح",svQ3b:"متابعة سيناريوهات",svQ3c:"فهم المخاطر",svQ3d:"تنظيم قراراتي",
+  svSubmit:"ابدأ التجربة",svSkip:"تخطّي",svGov:"إجاباتك تُحسّن تهيئة تجربتك فقط — وليست نصيحة مالية. يمكنك تغييرها لاحقًا من الإعدادات.",
+  svThanksT:"تم — استمتع برحلتك",svThanksM:"هيّأنا تجربتك. الـ١٦ يومًا بين يديك — استثمر كل يوم.",svGo:"ادخل إلى رحلتي",
+  activation:"تفعيل الحساب",approved:"تم الاعتماد",
+  title:"حسابك جاهز يا خالد",
+  lead:"تمّت مراجعة طلبك واعتماد مقعدك. <b>تجربتك لم تبدأ بعد</b> — تبدأ من اللحظة التي تضغط فيها «ابدأ التجربة»، وتستمر ١٦ يومًا كاملة. فلا تخسر أي يوم.",
+  clockH:"العدّاد يبدأ عند التفعيل — لا قبله",
+  clockP:"حتى لو سجّلت اليوم وفعّلت بعد أيام، تبدأ الـ١٦ يومًا من لحظة تفعيلك أنت تحديدًا.",
+  bf1:"<b>وصول كامل بمستوى باقة Elite</b> — كل الطبقات الأربع وجودة القرار طوال الـ١٦ يومًا كأنك مشترك بها.",
+  bf2:"<b>تفتّح تدريجي</b> للطبقات على أربع مراحل عبر أيام رحلتك.",
+  bf3:"<b>بدون بطاقة دفع</b> — والترقية بسعر المؤسِّس تبقى اختيارية في النهاية.",
+  acctSeat:"نوع المقعد",acctSeatV:"خاص / مميّز",acctEmail:"الحساب",
+  activateBtn:"ابدأ تجربة الـ١٦ يوم الآن",
+  activateMicro:"بالضغط، يبدأ عدّاد الـ١٦ يومًا فورًا ويُسجَّل تاريخ التفعيل في حسابك.",
+  govNote:"<b>الحوكمة:</b> تاريخ التفعيل ونهاية التجربة يُسجَّلان ويُفرضان في الخادم. لكل مستخدم عدّاده الخاص — لا ساعة عامة ولا تمديد تلقائي.",
+  startedH:"بدأت تجربتك!",
+  startedP:"عدّاد الـ١٦ يومًا يعمل الآن. هذا يومك الأول — استثمر كل يوم، فالقيمة كاملة بين يديك.",
+  ofSixteen:"من ١٦ يوم",startedOn:"بدأت في",endsOn:"تنتهي في",
+  enterBtn:"ادخل إلى رحلتك",cmdBtn:"أو اذهب مباشرة لمركز القرار",
+  govRule:"اعرض قيمة القرار · أخفِ الوصفة الداخلية",discT:"إخلاء مسؤولية",
+  discBody:"التجربة تمنح وصولًا لأدوات دعم القرار فقط. مخرجات DSP مراجع سياقية وليست نصيحة مالية أو أمر تداول أو ضمانًا للنتائج. DSP ليست شركة استثمار ولا تدير أموالًا.",
+  locale:"ar-SA-u-nu-latn"
+ },
+ en:{dir:"ltr",lang:"en",
+  svTitle:"Welcome to your trial",svMsg:"Your DSP journey has started. <b>3 quick questions</b> help us tailor your 16 days — entirely optional.",
+  svQ1:"Your experience level in the markets?",svQ1a:"Beginner",svQ1b:"Intermediate",svQ1c:"Advanced",
+  svQ2:"Which markets interest you? (pick any)",svQ2a:"FX",svQ2b:"Commodities",svQ2c:"Indices",svQ2d:"Crypto",
+  svQ3:"What do you want from DSP?",svQ3a:"Clearer contextual reads",svQ3b:"Scenario follow-up",svQ3c:"Understanding risk",svQ3d:"Organizing my decisions",
+  svSubmit:"Start the trial",svSkip:"Skip",svGov:"Your answers only tailor your experience — not financial advice. You can change them later in Settings.",
+  svThanksT:"Done — enjoy your journey",svThanksM:"Your trial is tailored. The 16 days are yours — make every day count.",svGo:"Enter my journey",
+  activation:"ACCOUNT ACTIVATION",approved:"Approved",
+  title:"Your account is ready, Khalid",
+  lead:"Your request was reviewed and your seat approved. <b>Your trial hasn't started yet</b> — it begins the moment you press “Start trial,” and runs a full 16 days. So you lose no time.",
+  clockH:"The clock starts at activation — not before",
+  clockP:"Even if you registered today and activate days later, your 16 days begin from your own activation moment.",
+  bf1:"<b>Full Elite-package access</b> — all four layers and decision quality for the whole 16 days, as if subscribed.",
+  bf2:"<b>Progressive unlock</b> of the layers across four phases through your journey.",
+  bf3:"<b>No payment card</b> — and the founder-price upgrade stays optional at the end.",
+  acctSeat:"Seat type",acctSeatV:"Private / premium",acctEmail:"Account",
+  activateBtn:"Start your 16-day trial now",
+  activateMicro:"On press, the 16-day clock starts immediately and your activation date is recorded.",
+  govNote:"<b>Governance:</b> Activation and trial-end dates are recorded and enforced server-side. Each user has their own clock — no global clock, no auto-extension.",
+  startedH:"Your trial has started!",
+  startedP:"The 16-day clock is now running. This is your day one — make every day count; the full value is yours.",
+  ofSixteen:"of 16 days",startedOn:"Started on",endsOn:"Ends on",
+  enterBtn:"Enter your journey",cmdBtn:"Or go straight to the Command Center",
+  govRule:"Expose decision value · Hide the recipe",discT:"Disclaimer",
+  discBody:"The trial grants access to decision-support tools only. DSP outputs are contextual references, not financial advice, trade instructions, or guaranteed outcomes. DSP is not an investment firm and manages no funds.",
+  locale:"en-GB"
+ },
+ fr:{dir:"ltr",lang:"fr",svTitle:"Bienvenue dans votre essai",svMsg:"Votre parcours DSP a commencé. <b>3 questions rapides</b> nous aident à personnaliser vos 16 jours — entièrement facultatif.",svQ1:"Votre niveau d'expérience sur les marchés ?",svQ1a:"Débutant",svQ1b:"Intermédiaire",svQ1c:"Avancé",svQ2:"Quels marchés vous intéressent ? (plusieurs choix)",svQ2a:"Forex",svQ2b:"Matières",svQ2c:"Indices",svQ2d:"Crypto",svQ3:"Qu'attendez-vous de DSP ?",svQ3a:"Des lectures contextuelles plus claires",svQ3b:"Le suivi de scénario",svQ3c:"Comprendre le risque",svQ3d:"Organiser mes décisions",svSubmit:"Démarrer l'essai",svSkip:"Passer",svGov:"Vos réponses ne font que personnaliser votre expérience — ce n'est pas un conseil financier. Vous pouvez les modifier plus tard dans les Paramètres.",svThanksT:"Terminé — profitez de votre parcours",svThanksM:"Votre essai est personnalisé. Les 16 jours sont à vous — faites compter chaque jour.",svGo:"Entrer dans mon parcours",activation:"ACTIVATION DU COMPTE",approved:"Approuvé",title:"Votre compte est prêt, Khalid",lead:"Votre demande a été examinée et votre place approuvée. <b>Votre essai n'a pas encore commencé</b> — il débute au moment où vous appuyez sur « Démarrer l'essai » et dure 16 jours complets. Vous ne perdez ainsi aucun temps.",clockH:"Le compteur démarre à l'activation — pas avant",clockP:"Même si vous vous êtes inscrit aujourd'hui et activez quelques jours plus tard, vos 16 jours commencent à votre propre moment d'activation.",bf1:"<b>Accès complet au forfait Elite</b> — les quatre couches et la qualité de décision pendant les 16 jours, comme un abonné.",bf2:"<b>Déblocage progressif</b> des couches en quatre phases tout au long de votre parcours.",bf3:"<b>Aucune carte de paiement</b> — et la mise à niveau au prix fondateur reste facultative à la fin.",acctSeat:"Type de place",acctSeatV:"Privé / premium",acctEmail:"Compte",activateBtn:"Démarrer mon essai de 16 jours maintenant",activateMicro:"À la pression, le compteur de 16 jours démarre immédiatement et votre date d'activation est enregistrée.",govNote:"<b>Gouvernance :</b> Les dates d'activation et de fin d'essai sont enregistrées et appliquées côté serveur. Chaque utilisateur a son propre compteur — pas de compteur global, pas de prolongation automatique.",startedH:"Votre essai a commencé !",startedP:"Le compteur de 16 jours tourne maintenant. C'est votre premier jour — faites compter chaque jour ; toute la valeur est à vous.",ofSixteen:"sur 16 jours",startedOn:"Commencé le",endsOn:"Se termine le",enterBtn:"Entrer dans votre parcours",cmdBtn:"Ou aller directement au Centre de commande",govRule:"Exposer la valeur de décision · Cacher la recette",discT:"Avis",discBody:"L'essai donne accès uniquement aux outils d'aide à la décision. Les sorties de DSP sont des références contextuelles, pas un conseil financier, des instructions de trading ni des résultats garantis. DSP n'est pas une société d'investissement et ne gère aucun fonds.",locale:"fr-FR"},
+ es:{dir:"ltr",lang:"es",svTitle:"Bienvenido a tu prueba",svMsg:"Tu viaje DSP ha comenzado. <b>3 preguntas rápidas</b> nos ayudan a personalizar tus 16 días — totalmente opcional.",svQ1:"¿Tu nivel de experiencia en los mercados?",svQ1a:"Principiante",svQ1b:"Intermedio",svQ1c:"Avanzado",svQ2:"¿Qué mercados te interesan? (elige varios)",svQ2a:"Forex",svQ2b:"Materias",svQ2c:"Índices",svQ2d:"Cripto",svQ3:"¿Qué quieres de DSP?",svQ3a:"Lecturas contextuales más claras",svQ3b:"Seguimiento de escenario",svQ3c:"Entender el riesgo",svQ3d:"Organizar mis decisiones",svSubmit:"Iniciar la prueba",svSkip:"Omitir",svGov:"Tus respuestas solo personalizan tu experiencia — no son asesoramiento financiero. Puedes cambiarlas luego en Ajustes.",svThanksT:"Listo — disfruta tu viaje",svThanksM:"Tu prueba está personalizada. Los 16 días son tuyos — haz que cada día cuente.",svGo:"Entrar a mi viaje",activation:"ACTIVACIÓN DE CUENTA",approved:"Aprobado",title:"Tu cuenta está lista, Khalid",lead:"Tu solicitud fue revisada y tu plaza aprobada. <b>Tu prueba aún no ha comenzado</b> — empieza en el momento en que pulsas «Iniciar prueba» y dura 16 días completos. Así no pierdes tiempo.",clockH:"El reloj empieza en la activación — no antes",clockP:"Aunque te registraras hoy y actives días después, tus 16 días comienzan desde tu propio momento de activación.",bf1:"<b>Acceso completo al paquete Elite</b> — las cuatro capas y la calidad de decisión durante los 16 días, como suscriptor.",bf2:"<b>Desbloqueo progresivo</b> de las capas en cuatro fases a lo largo de tu viaje.",bf3:"<b>Sin tarjeta de pago</b> — y la mejora al precio fundador queda opcional al final.",acctSeat:"Tipo de plaza",acctSeatV:"Privado / premium",acctEmail:"Cuenta",activateBtn:"Iniciar mi prueba de 16 días ahora",activateMicro:"Al pulsar, el reloj de 16 días empieza de inmediato y se registra tu fecha de activación.",govNote:"<b>Gobernanza:</b> Las fechas de activación y fin de prueba se registran y aplican en el servidor. Cada usuario tiene su propio reloj — sin reloj global, sin extensión automática.",startedH:"¡Tu prueba ha comenzado!",startedP:"El reloj de 16 días ya corre. Este es tu día uno — haz que cada día cuente; todo el valor es tuyo.",ofSixteen:"de 16 días",startedOn:"Comenzó el",endsOn:"Termina el",enterBtn:"Entrar a tu viaje",cmdBtn:"O ir directo al Centro de Comando",govRule:"Exponer el valor de la decisión · Ocultar la receta",discT:"Aviso",discBody:"La prueba otorga acceso únicamente a herramientas de apoyo a la decisión. Las salidas de DSP son referencias contextuales, no asesoramiento financiero, instrucciones de operación ni resultados garantizados. DSP no es una empresa de inversión y no gestiona fondos.",locale:"es-ES"},
+ de:{dir:"ltr",lang:"de",svTitle:"Willkommen zu Ihrem Test",svMsg:"Ihre DSP-Reise hat begonnen. <b>3 schnelle Fragen</b> helfen uns, Ihre 16 Tage anzupassen — völlig optional.",svQ1:"Ihr Erfahrungsniveau an den Märkten?",svQ1a:"Anfänger",svQ1b:"Fortgeschritten",svQ1c:"Profi",svQ2:"Welche Märkte interessieren Sie? (Mehrfachauswahl)",svQ2a:"Forex",svQ2b:"Rohstoffe",svQ2c:"Indizes",svQ2d:"Krypto",svQ3:"Was möchten Sie von DSP?",svQ3a:"Klarere kontextuelle Lesungen",svQ3b:"Szenario-Nachverfolgung",svQ3c:"Risiko verstehen",svQ3d:"Meine Entscheidungen ordnen",svSubmit:"Test starten",svSkip:"Überspringen",svGov:"Ihre Antworten personalisieren nur Ihre Erfahrung — keine Finanzberatung. Sie können sie später in den Einstellungen ändern.",svThanksT:"Fertig — genießen Sie Ihre Reise",svThanksM:"Ihr Test ist personalisiert. Die 16 Tage gehören Ihnen — machen Sie jeden Tag zählbar.",svGo:"In meine Reise eintreten",activation:"KONTOAKTIVIERUNG",approved:"Genehmigt",title:"Ihr Konto ist bereit, Khalid",lead:"Ihre Anfrage wurde geprüft und Ihr Platz genehmigt. <b>Ihr Test hat noch nicht begonnen</b> — er beginnt in dem Moment, in dem Sie „Test starten“ drücken, und läuft volle 16 Tage. So verlieren Sie keine Zeit.",clockH:"Der Zähler startet bei der Aktivierung — nicht vorher",clockP:"Selbst wenn Sie sich heute registriert und Tage später aktiviert haben, beginnen Ihre 16 Tage ab Ihrem eigenen Aktivierungsmoment.",bf1:"<b>Voller Elite-Paketzugang</b> — alle vier Schichten und Entscheidungsqualität für die gesamten 16 Tage, wie ein Abonnent.",bf2:"<b>Progressive Freischaltung</b> der Schichten in vier Phasen während Ihrer Reise.",bf3:"<b>Keine Zahlungskarte</b> — und das Upgrade zum Gründerpreis bleibt am Ende optional.",acctSeat:"Platztyp",acctSeatV:"Privat / Premium",acctEmail:"Konto",activateBtn:"Meinen 16-Tage-Test jetzt starten",activateMicro:"Beim Drücken startet der 16-Tage-Zähler sofort und Ihr Aktivierungsdatum wird aufgezeichnet.",govNote:"<b>Governance:</b> Aktivierungs- und Testende-Daten werden serverseitig aufgezeichnet und durchgesetzt. Jeder Nutzer hat seinen eigenen Zähler — kein globaler Zähler, keine automatische Verlängerung.",startedH:"Ihr Test hat begonnen!",startedP:"Der 16-Tage-Zähler läuft jetzt. Dies ist Ihr erster Tag — machen Sie jeden Tag zählbar; der volle Wert gehört Ihnen.",ofSixteen:"von 16 Tagen",startedOn:"Begonnen am",endsOn:"Endet am",enterBtn:"In Ihre Reise eintreten",cmdBtn:"Oder direkt zur Kommandozentrale",govRule:"Entscheidungswert offenlegen · Rezept verbergen",discT:"Haftungsausschluss",discBody:"Der Test gewährt ausschließlich Zugang zu Entscheidungsunterstützungs-Werkzeugen. DSP-Ausgaben sind kontextuelle Referenzen, keine Finanzberatung, Handelsanweisungen oder garantierten Ergebnisse. DSP ist kein Investmentunternehmen und verwaltet keine Mittel.",locale:"de-DE"},
+ tr:{dir:"ltr",lang:"tr",svTitle:"Denemenize hoş geldiniz",svMsg:"DSP yolculuğunuz başladı. <b>3 hızlı soru</b> 16 gününüzü kişiselleştirmemize yardımcı olur — tamamen isteğe bağlı.",svQ1:"Piyasalardaki deneyim seviyeniz?",svQ1a:"Başlangıç",svQ1b:"Orta",svQ1c:"İleri",svQ2:"Hangi piyasalar ilginizi çekiyor? (birden çok seçin)",svQ2a:"Forex",svQ2b:"Emtialar",svQ2c:"Endeksler",svQ2d:"Kripto",svQ3:"DSP'den ne istiyorsunuz?",svQ3a:"Daha net bağlamsal okumalar",svQ3b:"Senaryo takibi",svQ3c:"Riski anlamak",svQ3d:"Kararlarımı düzenlemek",svSubmit:"Denemeyi başlat",svSkip:"Atla",svGov:"Cevaplarınız yalnızca deneyiminizi kişiselleştirir — finansal tavsiye değildir. Daha sonra Ayarlar'dan değiştirebilirsiniz.",svThanksT:"Tamam — yolculuğunuzun tadını çıkarın",svThanksM:"Denemeniz kişiselleştirildi. 16 gün sizin — her günü değerlendirin.",svGo:"Yolculuğuma gir",activation:"HESAP ETKİNLEŞTİRME",approved:"Onaylandı",title:"Hesabınız hazır, Khalid",lead:"Talebiniz incelendi ve yeriniz onaylandı. <b>Denemeniz henüz başlamadı</b> — «Denemeyi başlat»a bastığınız anda başlar ve tam 16 gün sürer. Böylece zaman kaybetmezsiniz.",clockH:"Sayaç etkinleştirmede başlar — öncesinde değil",clockP:"Bugün kaydolsanız ve günler sonra etkinleştirseniz bile, 16 gününüz kendi etkinleştirme anınızdan başlar.",bf1:"<b>Tam Elite paketi erişimi</b> — dört katmanın tümü ve karar kalitesi, abone gibi tüm 16 gün boyunca.",bf2:"<b>Aşamalı açılış</b> — katmanlar yolculuğunuz boyunca dört aşamada açılır.",bf3:"<b>Ödeme kartı yok</b> — ve kurucu fiyatına yükseltme sonunda isteğe bağlı kalır.",acctSeat:"Yer türü",acctSeatV:"Özel / premium",acctEmail:"Hesap",activateBtn:"16 günlük denememi şimdi başlat",activateMicro:"Basıldığında 16 günlük sayaç hemen başlar ve etkinleştirme tarihiniz kaydedilir.",govNote:"<b>Yönetişim:</b> Etkinleştirme ve deneme bitiş tarihleri sunucu tarafında kaydedilir ve uygulanır. Her kullanıcının kendi sayacı vardır — küresel sayaç yok, otomatik uzatma yok.",startedH:"Denemeniz başladı!",startedP:"16 günlük sayaç şimdi çalışıyor. Bu sizin birinci gününüz — her günü değerlendirin; tüm değer sizindir.",ofSixteen:"/ 16 gün",startedOn:"Başlangıç",endsOn:"Bitiş",enterBtn:"Yolculuğunuza girin",cmdBtn:"Veya doğrudan Komuta Merkezine gidin",govRule:"Karar değerini açığa çıkar · Tarifi gizle",discT:"Yasal Uyarı",discBody:"Deneme yalnızca karar destek araçlarına erişim sağlar. DSP çıktıları bağlamsal referanslardır; finansal tavsiye, işlem talimatı veya garanti edilen sonuç değildir. DSP bir yatırım şirketi değildir ve hiçbir fon yönetmez.",locale:"tr-TR"},
+ ru:{dir:"ltr",lang:"ru",svTitle:"Добро пожаловать в ваш пробный период",svMsg:"Ваше путешествие DSP началось. <b>3 быстрых вопроса</b> помогут нам настроить ваши 16 дней — полностью по желанию.",svQ1:"Ваш уровень опыта на рынках?",svQ1a:"Начинающий",svQ1b:"Средний",svQ1c:"Продвинутый",svQ2:"Какие рынки вас интересуют? (выберите любые)",svQ2a:"Форекс",svQ2b:"Сырьё",svQ2c:"Индексы",svQ2d:"Крипто",svQ3:"Что вы хотите от DSP?",svQ3a:"Более ясные контекстные чтения",svQ3b:"Сопровождение сценария",svQ3c:"Понимание риска",svQ3d:"Организацию моих решений",svSubmit:"Начать пробный период",svSkip:"Пропустить",svGov:"Ваши ответы лишь настраивают ваш опыт — это не финансовый совет. Вы можете изменить их позже в Настройках.",svThanksT:"Готово — наслаждайтесь путешествием",svThanksM:"Ваш пробный период настроен. 16 дней — ваши, используйте каждый день.",svGo:"Войти в моё путешествие",activation:"АКТИВАЦИЯ АККАУНТА",approved:"Одобрено",title:"Ваш аккаунт готов, Халид",lead:"Ваша заявка рассмотрена, а место одобрено. <b>Ваш пробный период ещё не начался</b> — он начинается в момент нажатия «Начать пробный период» и длится полные 16 дней. Так вы не теряете время.",clockH:"Отсчёт начинается при активации — не раньше",clockP:"Даже если вы зарегистрировались сегодня и активируете через несколько дней, ваши 16 дней начинаются с вашего собственного момента активации.",bf1:"<b>Полный доступ к пакету Elite</b> — все четыре слоя и качество решений на все 16 дней, как у подписчика.",bf2:"<b>Постепенное открытие</b> слоёв в четыре этапа на протяжении вашего путешествия.",bf3:"<b>Без платёжной карты</b> — а повышение по цене основателя остаётся опциональным в конце.",acctSeat:"Тип места",acctSeatV:"Частный / премиум",acctEmail:"Аккаунт",activateBtn:"Начать мой 16-дневный пробный период сейчас",activateMicro:"При нажатии 16-дневный отсчёт начинается немедленно, а дата активации записывается.",govNote:"<b>Управление:</b> Даты активации и окончания пробного периода записываются и применяются на сервере. У каждого пользователя свой отсчёт — нет глобального отсчёта, нет автопродления.",startedH:"Ваш пробный период начался!",startedP:"16-дневный отсчёт теперь идёт. Это ваш первый день — используйте каждый день; вся ценность ваша.",ofSixteen:"из 16 дней",startedOn:"Начат",endsOn:"Заканчивается",enterBtn:"Войти в ваше путешествие",cmdBtn:"Или сразу в Командный центр",govRule:"Раскрыть ценность решения · Скрыть рецепт",discT:"Отказ от ответственности",discBody:"Пробный период предоставляет доступ только к инструментам поддержки решений. Результаты DSP являются контекстными ориентирами, а не финансовым советом, торговыми инструкциями или гарантированными результатами. DSP не является инвестиционной компанией и не управляет средствами.",locale:"ru-RU"},
+ pt:{dir:"ltr",lang:"pt",svTitle:"Bem-vindo ao seu teste",svMsg:"Sua jornada DSP começou. <b>3 perguntas rápidas</b> nos ajudam a personalizar seus 16 dias — totalmente opcional.",svQ1:"Seu nível de experiência nos mercados?",svQ1a:"Iniciante",svQ1b:"Intermediário",svQ1c:"Avançado",svQ2:"Quais mercados te interessam? (escolha vários)",svQ2a:"Forex",svQ2b:"Commodities",svQ2c:"Índices",svQ2d:"Cripto",svQ3:"O que você quer do DSP?",svQ3a:"Leituras contextuais mais claras",svQ3b:"Acompanhamento de cenário",svQ3c:"Entender o risco",svQ3d:"Organizar minhas decisões",svSubmit:"Iniciar o teste",svSkip:"Pular",svGov:"Suas respostas apenas personalizam sua experiência — não são aconselhamento financeiro. Você pode alterá-las depois nas Configurações.",svThanksT:"Pronto — aproveite sua jornada",svThanksM:"Seu teste está personalizado. Os 16 dias são seus — faça cada dia valer.",svGo:"Entrar na minha jornada",activation:"ATIVAÇÃO DA CONTA",approved:"Aprovado",title:"Sua conta está pronta, Khalid",lead:"Sua solicitação foi revisada e sua vaga aprovada. <b>Seu teste ainda não começou</b> — ele começa no momento em que você pressiona «Iniciar teste» e dura 16 dias completos. Assim você não perde tempo.",clockH:"O relógio começa na ativação — não antes",clockP:"Mesmo que você tenha se registrado hoje e ative dias depois, seus 16 dias começam a partir do seu próprio momento de ativação.",bf1:"<b>Acesso completo ao pacote Elite</b> — as quatro camadas e a qualidade de decisão durante os 16 dias, como assinante.",bf2:"<b>Desbloqueio progressivo</b> das camadas em quatro fases ao longo da sua jornada.",bf3:"<b>Sem cartão de pagamento</b> — e o upgrade ao preço fundador permanece opcional no final.",acctSeat:"Tipo de vaga",acctSeatV:"Privado / premium",acctEmail:"Conta",activateBtn:"Iniciar meu teste de 16 dias agora",activateMicro:"Ao pressionar, o relógio de 16 dias começa imediatamente e sua data de ativação é registrada.",govNote:"<b>Governança:</b> As datas de ativação e fim do teste são registradas e aplicadas no servidor. Cada usuário tem seu próprio relógio — sem relógio global, sem extensão automática.",startedH:"Seu teste começou!",startedP:"O relógio de 16 dias agora está correndo. Este é seu dia um — faça cada dia valer; todo o valor é seu.",ofSixteen:"de 16 dias",startedOn:"Começou em",endsOn:"Termina em",enterBtn:"Entrar na sua jornada",cmdBtn:"Ou ir direto à Central de Comando",govRule:"Expor o valor da decisão · Esconder a receita",discT:"Aviso",discBody:"O teste concede acesso apenas a ferramentas de apoio à decisão. As saídas do DSP são referências contextuais, não aconselhamento financeiro, instruções de negociação ou resultados garantidos. DSP não é uma empresa de investimento e não gere fundos.",locale:"pt-BR"},
+ id:{dir:"ltr",lang:"id",svTitle:"Selamat datang di uji coba Anda",svMsg:"Perjalanan DSP Anda telah dimulai. <b>3 pertanyaan singkat</b> membantu kami menyesuaikan 16 hari Anda — sepenuhnya opsional.",svQ1:"Tingkat pengalaman Anda di pasar?",svQ1a:"Pemula",svQ1b:"Menengah",svQ1c:"Mahir",svQ2:"Pasar mana yang menarik bagi Anda? (pilih beberapa)",svQ2a:"Forex",svQ2b:"Komoditas",svQ2c:"Indeks",svQ2d:"Kripto",svQ3:"Apa yang Anda inginkan dari DSP?",svQ3a:"Pembacaan kontekstual yang lebih jelas",svQ3b:"Tindak lanjut skenario",svQ3c:"Memahami risiko",svQ3d:"Mengatur keputusan saya",svSubmit:"Mulai uji coba",svSkip:"Lewati",svGov:"Jawaban Anda hanya menyesuaikan pengalaman Anda — bukan nasihat keuangan. Anda dapat mengubahnya nanti di Pengaturan.",svThanksT:"Selesai — nikmati perjalanan Anda",svThanksM:"Uji coba Anda disesuaikan. 16 hari adalah milik Anda — manfaatkan setiap hari.",svGo:"Masuk ke perjalanan saya",activation:"AKTIVASI AKUN",approved:"Disetujui",title:"Akun Anda siap, Khalid",lead:"Permintaan Anda ditinjau dan kursi Anda disetujui. <b>Uji coba Anda belum dimulai</b> — dimulai saat Anda menekan «Mulai uji coba» dan berjalan penuh 16 hari. Jadi Anda tidak kehilangan waktu.",clockH:"Jam dimulai saat aktivasi — bukan sebelumnya",clockP:"Meskipun Anda mendaftar hari ini dan mengaktifkan beberapa hari kemudian, 16 hari Anda dimulai dari momen aktivasi Anda sendiri.",bf1:"<b>Akses penuh paket Elite</b> — keempat lapisan dan kualitas keputusan selama 16 hari, seperti pelanggan.",bf2:"<b>Pembukaan bertahap</b> lapisan dalam empat fase sepanjang perjalanan Anda.",bf3:"<b>Tanpa kartu pembayaran</b> — dan peningkatan dengan harga pendiri tetap opsional di akhir.",acctSeat:"Jenis kursi",acctSeatV:"Pribadi / premium",acctEmail:"Akun",activateBtn:"Mulai uji coba 16 hari saya sekarang",activateMicro:"Saat ditekan, jam 16 hari dimulai segera dan tanggal aktivasi Anda dicatat.",govNote:"<b>Tata kelola:</b> Tanggal aktivasi dan akhir uji coba dicatat dan ditegakkan di sisi server. Setiap pengguna memiliki jamnya sendiri — tidak ada jam global, tidak ada perpanjangan otomatis.",startedH:"Uji coba Anda telah dimulai!",startedP:"Jam 16 hari sekarang berjalan. Ini hari pertama Anda — manfaatkan setiap hari; seluruh nilainya milik Anda.",ofSixteen:"dari 16 hari",startedOn:"Dimulai pada",endsOn:"Berakhir pada",enterBtn:"Masuk ke perjalanan Anda",cmdBtn:"Atau langsung ke Pusat Komando",govRule:"Ekspos nilai keputusan · Sembunyikan resep",discT:"Penafian",discBody:"Uji coba memberikan akses hanya ke alat pendukung keputusan. Output DSP adalah referensi kontekstual, bukan nasihat keuangan, instruksi perdagangan, atau hasil yang dijamin. DSP bukan perusahaan investasi dan tidak mengelola dana.",locale:"id-ID"},
+ hi:{dir:"ltr",lang:"hi",svTitle:"आपके परीक्षण में स्वागत है",svMsg:"आपकी DSP यात्रा शुरू हो गई है। <b>3 त्वरित प्रश्न</b> आपके 16 दिनों को अनुकूलित करने में हमारी मदद करते हैं — पूरी तरह वैकल्पिक।",svQ1:"बाजारों में आपका अनुभव स्तर?",svQ1a:"शुरुआती",svQ1b:"मध्यम",svQ1c:"उन्नत",svQ2:"कौन से बाजार आपकी रुचि में हैं? (कोई भी चुनें)",svQ2a:"फ़ॉरेक्स",svQ2b:"जिंस",svQ2c:"सूचकांक",svQ2d:"क्रिप्टो",svQ3:"आप DSP से क्या चाहते हैं?",svQ3a:"स्पष्ट प्रासंगिक रीडिंग",svQ3b:"परिदृश्य अनुवर्तन",svQ3c:"जोखिम समझना",svQ3d:"अपने निर्णय व्यवस्थित करना",svSubmit:"परीक्षण शुरू करें",svSkip:"छोड़ें",svGov:"आपके उत्तर केवल आपके अनुभव को अनुकूलित करते हैं — वित्तीय सलाह नहीं। आप उन्हें बाद में सेटिंग्स में बदल सकते हैं।",svThanksT:"हो गया — अपनी यात्रा का आनंद लें",svThanksM:"आपका परीक्षण अनुकूलित है। 16 दिन आपके हैं — हर दिन को सार्थक बनाएँ।",svGo:"मेरी यात्रा में प्रवेश करें",activation:"खाता सक्रियण",approved:"स्वीकृत",title:"आपका खाता तैयार है, खालिद",lead:"आपके अनुरोध की समीक्षा हुई और आपकी सीट स्वीकृत हुई। <b>आपका परीक्षण अभी शुरू नहीं हुआ</b> — यह उसी क्षण शुरू होता है जब आप «परीक्षण शुरू करें» दबाते हैं, और पूरे 16 दिन चलता है। इसलिए आप कोई समय नहीं खोते।",clockH:"घड़ी सक्रियण पर शुरू होती है — उससे पहले नहीं",clockP:"भले ही आपने आज पंजीकरण किया हो और कुछ दिन बाद सक्रिय करें, आपके 16 दिन आपके अपने सक्रियण क्षण से शुरू होते हैं।",bf1:"<b>पूर्ण Elite-पैकेज पहुँच</b> — सभी चार परतें और निर्णय गुणवत्ता पूरे 16 दिनों के लिए, जैसे सब्सक्राइबर।",bf2:"<b>क्रमिक अनलॉक</b> — आपकी यात्रा के दौरान चार चरणों में परतें।",bf3:"<b>कोई भुगतान कार्ड नहीं</b> — और अंत में संस्थापक-मूल्य अपग्रेड वैकल्पिक रहता है।",acctSeat:"सीट प्रकार",acctSeatV:"निजी / प्रीमियम",acctEmail:"खाता",activateBtn:"अभी मेरा 16-दिन परीक्षण शुरू करें",activateMicro:"दबाने पर, 16-दिन की घड़ी तुरंत शुरू होती है और आपकी सक्रियण तिथि दर्ज होती है।",govNote:"<b>शासन:</b> सक्रियण और परीक्षण-अंत तिथियाँ सर्वर पर दर्ज और लागू होती हैं। प्रत्येक उपयोगकर्ता की अपनी घड़ी होती है — कोई वैश्विक घड़ी नहीं, कोई स्वतः-विस्तार नहीं।",startedH:"आपका परीक्षण शुरू हो गया!",startedP:"16-दिन की घड़ी अब चल रही है। यह आपका पहला दिन है — हर दिन को सार्थक बनाएँ; पूरा मूल्य आपका है।",ofSixteen:"16 दिनों में से",startedOn:"शुरू हुआ",endsOn:"समाप्त होता है",enterBtn:"अपनी यात्रा में प्रवेश करें",cmdBtn:"या सीधे कमांड सेंटर जाएँ",govRule:"निर्णय मूल्य उजागर करें · नुस्खा छिपाएँ",discT:"अस्वीकरण",discBody:"परीक्षण केवल निर्णय-समर्थन उपकरणों तक पहुँच प्रदान करता है। DSP आउटपुट प्रासंगिक संदर्भ हैं, वित्तीय सलाह, व्यापार निर्देश या गारंटीशुदा परिणाम नहीं। DSP एक निवेश फर्म नहीं है और कोई धन प्रबंधित नहीं करती है।",locale:"hi-IN"},
+ zh:{dir:"ltr",lang:"zh",svTitle:"欢迎参加您的试用",svMsg:"您的 DSP 旅程已经开始。<b>3 个快速问题</b>帮助我们定制您的 16 天——完全可选。",svQ1:"您在市场中的经验水平?",svQ1a:"初级",svQ1b:"中级",svQ1c:"高级",svQ2:"您对哪些市场感兴趣?(可多选)",svQ2a:"外汇",svQ2b:"大宗商品",svQ2c:"指数",svQ2d:"加密货币",svQ3:"您想从 DSP 获得什么?",svQ3a:"更清晰的情境读数",svQ3b:"情景跟进",svQ3c:"理解风险",svQ3d:"组织我的决策",svSubmit:"开始试用",svSkip:"跳过",svGov:"您的回答仅用于定制您的体验——并非财务建议。您可以稍后在设置中更改。",svThanksT:"完成——享受您的旅程",svThanksM:"您的试用已定制。这 16 天属于您——让每一天都有价值。",svGo:"进入我的旅程",activation:"账户激活",approved:"已批准",title:"您的账户已就绪,Khalid",lead:"您的申请已审核,席位已批准。<b>您的试用尚未开始</b>——它在您按下「开始试用」的那一刻开始,并持续完整的 16 天。这样您不会浪费时间。",clockH:"计时从激活时开始——而非之前",clockP:"即使您今天注册并在几天后激活,您的 16 天也从您自己的激活时刻开始。",bf1:"<b>完整 Elite 套餐访问权限</b>——整整 16 天的全部四层和决策质量,如同订阅者。",bf2:"<b>渐进式解锁</b>——在您的旅程中分四个阶段解锁各层。",bf3:"<b>无需支付卡</b>——而创始人价格升级在最后仍为可选。",acctSeat:"席位类型",acctSeatV:"私人 / 高级",acctEmail:"账户",activateBtn:"立即开始我的 16 天试用",activateMicro:"按下时,16 天计时立即开始,并记录您的激活日期。",govNote:"<b>治理:</b>激活和试用结束日期在服务器端记录并执行。每位用户都有自己的计时——没有全局计时,没有自动延期。",startedH:"您的试用已开始!",startedP:"16 天计时现已运行。这是您的第一天——让每一天都有价值;全部价值属于您。",ofSixteen:"/ 16 天",startedOn:"开始于",endsOn:"结束于",enterBtn:"进入您的旅程",cmdBtn:"或直接前往指挥中心",govRule:"暴露决策价值 · 隐藏配方",discT:"免责声明",discBody:"试用仅授予对决策支持工具的访问权限。DSP 输出是情境参考,而非财务建议、交易指示或保证结果。DSP 不是投资公司,也不管理任何资金。",locale:"zh-CN"},
+ ur:{dir:"rtl",lang:"ur",svTitle:"آپ کی آزمائش میں خوش آمدید",svMsg:"آپ کا DSP سفر شروع ہو گیا ہے۔ <b>3 فوری سوالات</b> ہمیں آپ کے 16 دن کو ترتیب دینے میں مدد کرتے ہیں — مکمل طور پر اختیاری۔",svQ1:"مارکیٹوں میں آپ کا تجربہ کی سطح؟",svQ1a:"ابتدائی",svQ1b:"درمیانہ",svQ1c:"ماہر",svQ2:"کون سی مارکیٹیں آپ کی دلچسپی ہیں؟ (کوئی بھی چنیں)",svQ2a:"فاریکس",svQ2b:"اجناس",svQ2c:"اشاریے",svQ2d:"کرپٹو",svQ3:"آپ DSP سے کیا چاہتے ہیں؟",svQ3a:"واضح تر سیاقی پڑھائیاں",svQ3b:"سیناریو کی پیروی",svQ3c:"خطرہ سمجھنا",svQ3d:"اپنے فیصلوں کو منظم کرنا",svSubmit:"آزمائش شروع کریں",svSkip:"چھوڑیں",svGov:"آپ کے جوابات صرف آپ کے تجربے کو ترتیب دیتے ہیں — مالی مشورہ نہیں۔ آپ انہیں بعد میں ترتیبات میں تبدیل کر سکتے ہیں۔",svThanksT:"ہو گیا — اپنے سفر سے لطف اٹھائیں",svThanksM:"آپ کی آزمائش ترتیب دی گئی۔ 16 دن آپ کے ہیں — ہر دن کو قیمتی بنائیں۔",svGo:"میرے سفر میں داخل ہوں",activation:"اکاؤنٹ فعالیت",approved:"منظور شدہ",title:"آپ کا اکاؤنٹ تیار ہے، خالد",lead:"آپ کی درخواست کا جائزہ لیا گیا اور آپ کی نشست منظور ہوئی۔ <b>آپ کی آزمائش ابھی شروع نہیں ہوئی</b> — یہ اسی لمحے شروع ہوتی ہے جب آپ «آزمائش شروع کریں» دباتے ہیں، اور پورے 16 دن چلتی ہے۔ تو آپ کوئی وقت نہیں کھوتے۔",clockH:"گھڑی فعالیت پر شروع ہوتی ہے — اس سے پہلے نہیں",clockP:"چاہے آپ نے آج رجسٹر کیا ہو اور دنوں بعد فعال کریں، آپ کے 16 دن آپ کے اپنے فعالیت کے لمحے سے شروع ہوتے ہیں۔",bf1:"<b>مکمل Elite پیکج رسائی</b> — تمام چار پرتیں اور فیصلہ معیار پورے 16 دن کے لیے، جیسے سبسکرائبر۔",bf2:"<b>بتدریج کھلنا</b> — آپ کے سفر کے دوران چار مراحل میں پرتیں۔",bf3:"<b>کوئی ادائیگی کارڈ نہیں</b> — اور بانی قیمت پر اپ گریڈ آخر میں اختیاری رہتا ہے۔",acctSeat:"نشست کی قسم",acctSeatV:"نجی / پریمیم",acctEmail:"اکاؤنٹ",activateBtn:"ابھی میری 16 دن کی آزمائش شروع کریں",activateMicro:"دبانے پر، 16 دن کی گھڑی فوراً شروع ہوتی ہے اور آپ کی فعالیت کی تاریخ ریکارڈ ہوتی ہے۔",govNote:"<b>نظم و نسق:</b> فعالیت اور آزمائش کے اختتام کی تاریخیں سرور کی طرف ریکارڈ اور نافذ ہوتی ہیں۔ ہر صارف کی اپنی گھڑی ہے — کوئی عالمی گھڑی نہیں، کوئی خودکار توسیع نہیں۔",startedH:"آپ کی آزمائش شروع ہو گئی!",startedP:"16 دن کی گھڑی اب چل رہی ہے۔ یہ آپ کا پہلا دن ہے — ہر دن کو قیمتی بنائیں؛ پوری قدر آپ کی ہے۔",ofSixteen:"16 دن میں سے",startedOn:"شروع ہوا",endsOn:"ختم ہوتا ہے",enterBtn:"اپنے سفر میں داخل ہوں",cmdBtn:"یا سیدھے کمانڈ سینٹر جائیں",govRule:"فیصلے کی قدر ظاہر کریں · نسخہ چھپائیں",discT:"دستبرداری",discBody:"آزمائش صرف فیصلہ سازی کے معاون آلات تک رسائی دیتی ہے۔ DSP کے آؤٹ پُٹ سیاقی حوالے ہیں، مالی مشورہ، تجارتی ہدایات یا یقینی نتائج نہیں۔ DSP کوئی سرمایہ کاری کا ادارہ نہیں اور کوئی فنڈ نہیں چلاتا۔",locale:"ur-PK"}
+};
+
+const N=v=>LANG==="ar"?AR(v):v;
+function fmtDate(d){
+  return new Intl.DateTimeFormat(I18N[LANG].locale,{day:"numeric",month:"short",year:"numeric"}).format(d);
+}
+
+$("#activateBtn").onclick=()=>{
+  startAt=new Date();                       // activation = trial day 1 (recorded server-side in production)
+  const end=new Date(startAt.getTime()+TOTAL*24*3600*1000);
+  $("#startDate").textContent=fmtDate(startAt);
+  $("#endDate").textContent=fmtDate(end);
+  $("#dayNum").textContent=N(1);
+  $("#activateView").style.display="none";
+  $("#startedView").classList.add("show");
+  // animate ring to day 1/16
+  const c=377,off=c-(1/TOTAL)*c;
+  setTimeout(()=>{$("#ringArc").style.transition="stroke-dashoffset 1.1s cubic-bezier(.2,.8,.2,1)";$("#ringArc").style.strokeDashoffset=off;},80);
+  window.scrollTo({top:0,behavior:"smooth"});
+  setTimeout(()=>{$("#surveyModal").classList.add("show");},700);   // trial-start survey
+};
+
+/* survey: option selection (single / multi) */
+$$('#surveyModal .opts').forEach(group=>{
+  const multi=group.dataset.multi==="1";
+  group.querySelectorAll('.opt').forEach(btn=>{
+    btn.onclick=()=>{
+      if(multi){btn.classList.toggle('sel');}
+      else{group.querySelectorAll('.opt').forEach(b=>b.classList.remove('sel'));btn.classList.add('sel');}
+    };
+  });
+});
+function closeSurvey(){
+  // In production: POST selections to the backend (preferences only). Here: thank + close.
+  const box=$('#surveyModal .box');
+  box.innerHTML='<div class="mic done-ic">✓</div><h2>'+I18N[LANG].svThanksT+'</h2><p class="msg">'+I18N[LANG].svThanksM+'</p><div class="actions"><button class="btn btn-gold" id="svGoBtn">'+I18N[LANG].svGo+' →</button></div>';
+  $('#svGoBtn').onclick=()=>{location.href="DSP_Trial_Journey.html";};
+}
+$("#svSubmit").onclick=closeSurvey;
+$("#svSkip").onclick=()=>{$("#surveyModal").classList.remove("show");};
+$("#enterBtn").onclick=()=>{location.href="DSP_Trial_Journey.html";};
+$("#cmdBtn").onclick=()=>{location.href="DSP_Command_Center.html";};
+function flash(b){b.style.opacity=".55";setTimeout(()=>b.style.opacity="1",400);}
+
+function applyLang(){
+  const d=I18N[LANG];
+  document.documentElement.lang=d.lang;document.documentElement.dir=d.dir;document.body.dir=d.dir;
+  const base=I18N.en;$$('[data-i]').forEach(el=>{const k=el.getAttribute('data-i');const v=(d[k]!=null)?d[k]:base[k];if(v!=null)el.innerHTML=v;});
+  const _ls=$("#langSel");if(_ls)_ls.value=LANG;
+  if(startAt){
+    const end=new Date(startAt.getTime()+TOTAL*24*3600*1000);
+    $("#startDate").textContent=fmtDate(startAt);$("#endDate").textContent=fmtDate(end);
+    $("#dayNum").textContent=N(1);
+  }
+}
+const RTL_LANGS={ar:1,ur:1,fa:1,he:1,iw:1};function ndspSetLang(v){if(v==="he"||v==="iw"||v==="he-IL")v="en";if(!I18N[v])v="en";LANG=v;try{localStorage.setItem("ndsp_lang",v);}catch(e){}applyLang();}const _langSel=$("#langSel");if(_langSel)_langSel.onchange=()=>ndspSetLang(_langSel.value);
+try{let _sv=localStorage.getItem("ndsp_lang");if(_sv&&_sv!=="he"&&_sv!=="iw"&&_sv!=="he-IL"&&I18N[_sv])LANG=_sv;}catch(e){}
+applyLang();
+</script><!-- ===== TRIAL-START SURVEY (right after activation) ===== -->
+<div class="ndsp-modal" id="surveyModal">
+  <div class="box">
+    <div class="mic">🦅</div>
+    <h2 data-i="svTitle">مرحبًا بك في تجربتك</h2>
+    <p class="msg" data-i="svMsg">بدأت رحلتك في DSP. <b>٣ أسئلة سريعة</b> تساعدنا نهيّئ تجربتك خلال الـ١٦ يومًا — اختيارية بالكامل.</p>
+
+    <div class="q">
+      <div class="ql" data-i="svQ1">ما مستوى خبرتك في الأسواق؟</div>
+      <div class="opts" data-group="exp">
+        <button class="opt" data-i="svQ1a">مبتدئ</button>
+        <button class="opt" data-i="svQ1b">متوسط</button>
+        <button class="opt" data-i="svQ1c">متقدّم</button>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="ql" data-i="svQ2">أي الأسواق تهمّك؟ (اختر ما يناسبك)</div>
+      <div class="opts" data-group="mkt" data-multi="1">
+        <button class="opt" data-i="svQ2a">العملات</button>
+        <button class="opt" data-i="svQ2b">السلع</button>
+        <button class="opt" data-i="svQ2c">المؤشرات</button>
+        <button class="opt" data-i="svQ2d">الرقمية</button>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="ql" data-i="svQ3">ماذا تريد من DSP؟</div>
+      <div class="opts" data-group="goal">
+        <button class="opt" data-i="svQ3a">قراءة سياقية أوضح</button>
+        <button class="opt" data-i="svQ3b">متابعة سيناريوهات</button>
+        <button class="opt" data-i="svQ3c">فهم المخاطر</button>
+        <button class="opt" data-i="svQ3d">تنظيم قراراتي</button>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-gold" id="svSubmit"><span data-i="svSubmit">ابدأ التجربة</span> →</button>
+      <button class="btn btn-ghost" id="svSkip" data-i="svSkip">تخطّي</button>
+    </div>
+    <div class="mgov" data-i="svGov">إجاباتك تُحسّن تهيئة تجربتك فقط — وليست نصيحة مالية. يمكنك تغييرها لاحقًا من الإعدادات.</div>
+  </div>
+</div>
+
+</body>
+</html>

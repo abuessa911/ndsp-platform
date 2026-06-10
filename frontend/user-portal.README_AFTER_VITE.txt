@@ -1,0 +1,12 @@
+NDSP User Portal has moved to Vite.
+
+Active source:
+/home/nawaf511/empire-core-new/apps/user-portal-vite
+
+Active deploy root:
+/var/www/ndsp-my
+
+Old static source quarantine:
+/home/nawaf511/ndsp_quarantine/user-portal-old-static-after-vite-success_20260610_003207
+
+Do not recreate apps/user-portal unless intentionally rolling back.

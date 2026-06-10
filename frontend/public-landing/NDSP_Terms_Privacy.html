@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="google" content="notranslate" />
+<title>DSP — الشروط والخصوصية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Sora:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#070A10;--ink:#0B0F17;--panel:rgba(18,24,36,.62);--panel2:rgba(14,19,29,.82);
+  --line:rgba(201,162,39,.17);--line-soft:rgba(255,255,255,.07);
+  --gold:#D9B65A;--gold-bright:#F2D27A;--gold-deep:#9A7A22;
+  --teal:#3FD3C6;--rose:#E0607A;--blue:#88A6FF;
+  --txt:#EAEEF6;--txt-2:#9AA6BC;--txt-3:#5E6A82;
+  --up:#56D6A0;--down:#E2657E;--warn:#E8B964;
+  --shadow:0 30px 70px -30px rgba(0,0,0,.85);--r:18px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--void);color:var(--txt);overflow-x:hidden;
+  font-family:"IBM Plex Sans Arabic","Sora",system-ui,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.85}
+body[dir="ltr"]{font-family:"Sora","IBM Plex Sans Arabic",sans-serif}
+.mono{font-family:"IBM Plex Mono",monospace}
+h1,h2,h3,.kufi{font-family:"Reem Kufi",serif}
+body[dir="ltr"] h1,body[dir="ltr"] h2,body[dir="ltr"] h3{font-family:"Sora",sans-serif;letter-spacing:-.01em}
+
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.bg .glow{position:absolute;border-radius:50%;filter:blur(140px);opacity:.45}
+.bg .g1{width:50vw;height:50vw;top:-24vw;inset-inline-end:-14vw;background:radial-gradient(circle,rgba(217,182,90,.15),transparent 64%)}
+.bg .g2{width:42vw;height:42vw;bottom:-20vw;inset-inline-start:-12vw;background:radial-gradient(circle,rgba(63,211,198,.09),transparent 64%)}
+.bg .grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:46px 46px;mask-image:radial-gradient(ellipse 120% 70% at 50% 0%,#000 30%,transparent 78%)}
+.seal-wm{position:fixed;z-index:0;inset-inline-start:-6vw;bottom:-8vw;width:42vw;max-width:600px;opacity:.035;pointer-events:none}
+
+nav{position:sticky;top:0;z-index:40;backdrop-filter:blur(16px);background:linear-gradient(180deg,rgba(7,10,16,.92),rgba(7,10,16,.55));border-bottom:1px solid var(--line)}
+nav .in{max-width:860px;margin:0 auto;padding:12px 22px;display:flex;align-items:center;gap:14px}
+.brand{display:flex;align-items:center;gap:11px}
+.brand svg{width:38px;height:38px;filter:drop-shadow(0 4px 12px rgba(217,182,90,.4))}
+.brand b{font-family:"Reem Kufi";font-size:18px;background:linear-gradient(180deg,var(--gold-bright),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;display:block;line-height:1}
+.brand span{font-size:9px;color:var(--txt-3);letter-spacing:2px;font-family:"IBM Plex Mono"}
+.back{display:inline-flex;align-items:center;gap:7px;color:var(--txt-2);text-decoration:none;font-size:12.5px;padding:7px 12px;border-radius:10px;border:1px solid var(--line-soft);cursor:pointer}
+.back:hover{border-color:var(--gold);color:var(--gold-bright)}
+.spacer{flex:1}
+.lang{cursor:pointer;user-select:none;padding:8px 13px;border-radius:10px;border:1px solid var(--line);color:var(--txt-2);font-size:12.5px}
+.lang:hover{color:var(--gold-bright);border-color:var(--gold)}
+
+.wrap{position:relative;z-index:2;max-width:860px;margin:0 auto;padding:30px 22px 60px}
+.head{text-align:center;margin-bottom:22px}
+.head h1{font-size:clamp(26px,4vw,36px);margin:0 0 8px}
+.head .upd{font-size:12px;color:var(--txt-3);font-family:"IBM Plex Mono"}
+
+/* tab switch */
+.tabs{display:flex;justify-content:center;margin:22px 0 26px;position:sticky;top:62px;z-index:30}
+.tabs .t-in{display:inline-flex;background:rgba(10,14,22,.9);border:1px solid var(--line-soft);border-radius:12px;padding:4px;gap:4px;backdrop-filter:blur(10px)}
+.tabs button{border:0;background:transparent;color:var(--txt-2);font-family:inherit;font-size:13px;padding:10px 20px;border-radius:9px;cursor:pointer;transition:.2s;display:inline-flex;align-items:center;gap:8px}
+.tabs button.on{background:linear-gradient(135deg,var(--gold-bright),var(--gold-deep));color:#1a1303;font-parameter:600}
+
+.section{display:none}.section.on{display:block;animation:fade .35s}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* governance banner */
+.gban{display:flex;gap:15px;align-items:flex-start;padding:18px;border-radius:16px;border:1px solid var(--line);
+  background:linear-gradient(135deg,rgba(217,182,90,.1),rgba(0,0,0,.22));margin-bottom:24px}
+.gban .gi{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-size:21px;background:rgba(217,182,90,.14);color:var(--gold-bright);flex:none}
+.gban .gx b{display:block;font-size:14px;margin-bottom:4px}
+.gban .gx p{font-size:12.5px;color:var(--txt-2);line-height:1.7;margin:0}
+.gban .gx p .gold{color:var(--gold-bright)}
+
+/* clause cards */
+.clause{background:var(--panel);border:1px solid var(--line-soft);border-radius:15px;padding:18px 20px;margin-bottom:13px;backdrop-filter:blur(12px)}
+.clause h3{font-size:15.5px;margin:0 0 9px;display:flex;align-items:center;gap:10px}
+.clause h3 .num{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;font-family:"IBM Plex Mono";font-size:12px;background:rgba(217,182,90,.12);color:var(--gold-bright);border:1px solid var(--line-soft);flex:none}
+.clause p{font-size:13px;color:var(--txt-2);margin:0 0 8px}
+.clause p:last-child{margin-bottom:0}
+.clause b{color:var(--txt)}
+.clause .gold{color:var(--gold-bright)}
+.clause ul{margin:6px 0 0;padding-inline-start:20px;font-size:12.5px;color:var(--txt-2)}
+.clause ul li{margin-bottom:5px}
+.clause.flag{border-color:rgba(226,101,126,.28);background:linear-gradient(135deg,rgba(226,101,126,.07),rgba(0,0,0,.2))}
+.clause.flag h3 .num{background:rgba(226,101,126,.14);color:var(--rose)}
+
+.gov{text-align:center;margin-top:26px;font-family:"Reem Kufi";color:var(--gold);font-size:13px;opacity:.8}
+body[dir="ltr"] .gov{font-family:"Sora"}
+.disclaimer{margin-top:14px;font-size:11px;color:var(--txt-3);line-height:1.8;text-align:center;padding:16px;border-radius:14px;border:1px dashed var(--line);background:rgba(0,0,0,.2)}
+.disclaimer b{color:var(--txt-2)}
+.contact-foot{text-align:center;font-size:12px;color:var(--txt-3);margin-top:18px}
+.contact-foot .v{font-family:"IBM Plex Mono";color:var(--gold-bright)}
+</style>
+</head>
+<body dir="ltr">
+
+<div class="bg"><div class="glow g1"></div><div class="glow g2"></div><div class="grid"></div></div>
+<svg class="seal-wm" viewBox="0 0 240 240" aria-hidden="true"><use href="#hunterSeal"/></svg>
+
+<svg width="0" height="0" style="position:absolute"><defs><g id="hunterSeal">
+  <circle cx="120" cy="120" r="116" fill="none" stroke="#D9B65A" stroke-width="2"/>
+  <circle cx="120" cy="120" r="106" fill="none" stroke="#D9B65A" stroke-width="1" stroke-dasharray="2 6"/>
+  <path d="M120 56 C150 60 168 80 170 108 C171 122 165 134 154 142 L172 150 L150 152 C146 168 132 180 118 182 C128 172 130 162 128 156 C112 162 96 158 86 146 C100 148 110 144 114 138 C96 134 84 120 84 102 C84 76 100 60 120 56 Z" fill="#D9B65A"/>
+  <circle cx="138" cy="98" r="6.5" fill="#070A10"/><circle cx="140" cy="96" r="2" fill="#F2D27A"/>
+  <path d="M170 108 C184 110 190 118 184 126 C180 120 174 118 168 120 Z" fill="#9A7A22"/>
+  <path d="M120 30 l3 7 7 1 -5 5 1 7 -6 -3 -6 3 1 -7 -5 -5 7 -1 z" fill="#F2D27A"/>
+  <path id="arcTop" d="M40 120 A80 80 0 0 1 200 120" fill="none"/>
+  <path id="arcBot" d="M44 124 A76 76 0 0 0 196 124" fill="none"/>
+  <text font-family="IBM Plex Mono,monospace" font-size="15" letter-spacing="6" fill="#D9B65A"><textPath href="#arcTop" startOffset="50%" text-anchor="middle">HUNTER</textPath></text>
+  <text font-family="IBM Plex Mono,monospace" font-size="13" letter-spacing="5" fill="#D9B65A"><textPath href="#arcBot" startOffset="50%" text-anchor="middle">KSA · 1</textPath></text>
+</g></defs></svg>
+
+<nav><div class="in">
+  <div class="brand"><svg viewBox="0 0 240 240"><use href="#hunterSeal"/></svg>
+    <div><b>DSP</b><span data-i="legal">LEGAL</span></div></div>
+  <a class="back" id="backBtn"><span data-i="backBtn">رجوع</span></a>
+  <div class="spacer"></div>
+  <span class="lang" id="langBtn">EN</span>
+</div></nav>
+
+<div class="wrap">
+  <div class="head">
+    <h1 data-i="title">الشروط والخصوصية</h1>
+    <div class="upd" data-i="updated">آخر تحديث: يناير ٢٠٢٦ · Hunter_KSA1</div>
+  </div>
+
+  <div class="tabs"><div class="t-in">
+    <button class="on" id="tabTerms" data-i="tabTerms">⚖ شروط الاستخدام</button>
+    <button id="tabPrivacy" data-i="tabPrivacy">⛨ سياسة الخصوصية</button>
+  </div></div>
+
+  <!-- ===== TERMS ===== -->
+  <section class="section on" id="secTerms">
+    <div class="gban">
+      <div class="gi">⚖</div>
+      <div class="gx"><b data-i="termsBanH">جوهر الاتفاقية</b>
+        <p data-i="termsBanP">DSP منصة <span class="gold">دعم قرار وتحليل سياقي</span>. باستخدامك المنصة فأنت تقرّ بأنها <b>ليست شركة استثمار</b>، ولا تدير أموالًا، ولا تقدّم نصيحة مالية أو أوامر تنفيذ أو ضمانًا للنتائج. القرار قرارك والمسؤولية عليك.</p></div>
+    </div>
+    <div id="termsList"></div>
+  </section>
+
+  <!-- ===== PRIVACY ===== -->
+  <section class="section" id="secPrivacy">
+    <div class="gban">
+      <div class="gi">⛨</div>
+      <div class="gx"><b data-i="privBanH">مبدأ الخصوصية</b>
+        <p data-i="privBanP">نجمع <span class="gold">إشارات آمنة فقط</span> بالقدر اللازم لتشغيل المنصة وحماية المقاعد. لا نبيع بياناتك، ولا نعرض بيانات تشغيل محمية، ولا نكشف طرق الحساب الداخلية أو أسماء الطبقات أو البصمات المحمية. اعتمادات الدخول مجزّأة لا تُخزّن كنص.</p></div>
+    </div>
+    <div id="privacyList"></div>
+  </section>
+
+  <div class="gov" data-i="govRule">اعرض قيمة القرار · أخفِ الوصفة الداخلية</div>
+  <div class="disclaimer">
+    <b data-i="discT">إخلاء مسؤولية</b><br>
+    <span data-i="discBody">مخرجات DSP ومستويات السيناريو مراجع سياقية لدعم القرار فقط، وليست نصيحة مالية أو أمر تداول أو توجيه تنفيذ أو ضمانًا للنتائج. DSP ليست شركة استثمار ولا تدير أموالًا.</span>
+  </div>
+  <div class="contact-foot"><span data-i="contactFoot">لأي استفسار قانوني:</span> <span class="v">legal@ndsp.app</span></div>
+</div>
+
+<script>
+const AR=s=>String(s).replace(/[0-9]/g,d=>"٠١٢٣٤٥٦٧٨٩"[d]);
+let LANG="en";
+const __ndspStub=new Proxy(function(){},{get:(t,p)=>{if(p==='style'||p==='dataset'||p==='classList')return new Proxy({},{get:()=>()=>{}});if(p==='value'||p==='textContent'||p==='innerHTML'||p==='placeholder')return '';return __ndspStub;},set:()=>true,apply:()=>__ndspStub});const __q=(s)=>{try{return document.querySelector(s)||__ndspStub;}catch(e){return __ndspStub;}};const $=s=>__q(s),$$=s=>document.querySelectorAll(s);
+
+// each clause: {n, h:[ar,en], body:[[ar,en],...], flag?}
+const TERMS=[
+ {n:"١",h:["طبيعة الخدمة","Nature of the service"],body:[
+   ["DSP أداة دعم قرار وتحليل سياقي تعرض: انحيازًا اتجاهيًا، أفق متابعة، جودة قرار، حالة سوق، وأسباب تحفّظ — كلها <b>قيمة منقّحة</b>.","DSP is a decision-support and contextual-analysis tool that shows directional bias, follow-up horizon, decision quality, market state, and caution reasons — all <b>sanitized value</b>."],
+   ["المنصة <b>ليست</b>: شركة استثمار، مستشارًا ماليًا، مزوّد توصيات أو إشارات، ولا بوت تداول، ولا تدير أي أموال.","The platform is <b>not</b>: an investment firm, a financial advisor, a recommendation or signal provider, a trading bot, and it manages no funds."]]},
+ {n:"٢",h:["لا نصيحة مالية ولا ضمانات","No financial advice, no guarantees"],flag:true,body:[
+   ["لا تُشكّل أي مخرجة نصيحةً مالية أو دعوة للتداول أو أمر تنفيذ. <b>مستويات السيناريو</b> (تفعيل/وصول/مراجعة/إلغاء) مراجع سياقية للفهم، لا تعليمات دخول أو خروج.","No output constitutes financial advice, a solicitation to trade, or an execution order. <b>Scenario levels</b> (activation/arrival/review/invalidation) are contextual references for understanding, not entry/exit instructions."],
+   ["الأسواق تنطوي على مخاطر قد تؤدي لخسارة رأس المال. <b>لا أحد يضمن النتائج</b>، وأنت وحدك مسؤول عن قراراتك. حتى «إشارة نواف الذهبية» معزّز سياقي للجودة لا وعد بربح.","Markets carry risk that may lead to loss of capital. <b>No one guarantees outcomes</b>, and you alone are responsible for your decisions. Even 'Nawaf Golden Alignment' is a contextual quality enhancer, not a profit promise."]]},
+ {n:"٣",h:["الأهلية والحساب","Eligibility & account"],body:[
+   ["يجب أن تكون مؤهلًا قانونيًا في بلدك لاستخدام أدوات تحليل الأسواق. أنت مسؤول عن سرية بيانات دخولك وكل النشاط على حسابك.","You must be legally eligible in your jurisdiction to use market-analysis tools. You are responsible for the confidentiality of your credentials and all activity on your account."],
+   ["نستخدم تحقّقًا آمنًا ومراجعة تسجيل لحماية المقاعد من الإساءة والتكرار؛ قد نرفض أو نوقف أي حساب مشتبه به.","We use secure verification and registration review to protect seats from abuse and duplication; we may reject or suspend any suspicious account."]]},
+ {n:"٤",h:["التجربة والمقاعد","Trial & seats"],body:[
+   ["تمنح التجربة وصولًا مؤقتًا لأدوات دعم القرار. مدتها <b>١٦ يومًا تبدأ من لحظة تفعيل حسابك</b> — لكل مستخدم عدّاده الخاص المُسجَّل في الخادم، بلا ساعة عامة ولا تمديد تلقائي.","The trial grants temporary access to decision-support tools. It lasts <b>16 days starting at your account's activation</b> — each user has their own server-recorded clock, with no global clock or auto-extension."],
+   ["عدد المقاعد محدود قبل الإطلاق المدفوع، والقبول النهائي يُنفّذ في الخادم.","Seats are limited before the paid launch, and final acceptance is enforced server-side."]]},
+ {n:"٥",h:["الباقات والدفع","Packages & payment"],body:[
+   ["تُفرض حدود كل باقة في الخادم؛ الواجهة تعرض الحالة فقط. <b>لا تفعيل تلقائي</b> — يُعتمد الاشتراك بعد التحقّق من الدفع.","Each package's limits are enforced server-side; the frontend shows state only. <b>No auto-activation</b> — a subscription is approved after payment verification."],
+   ["تُعالج المدفوعات عبر مزوّدين خارجيين (مثل NOWPayments والتحويل البنكي). يمكنك الإلغاء وفق السياسة المعلنة وقت الشراء.","Payments are processed via third-party providers (such as NOWPayments and bank transfer). You may cancel per the policy disclosed at purchase."]]},
+ {n:"٦",h:["الاستخدام المقبول","Acceptable use"],body:[
+   ["تمتنع عن: إساءة استخدام المنصة، محاولة استخراج المنطق الداخلي أو طرق الحساب الداخلية أو هندستها العكسية، الوصول غير المصرّح، أو إعادة بيع المخرجات كتوصيات.","You agree not to: abuse the platform, attempt to extract or reverse-engineer the internal logic or internal methods, gain unauthorized access, or resell outputs as recommendations."],
+   ["أي استخدام يخالف الأنظمة المحلية أو يحوّل المنصة لأداة تنفيذ آلي أو توصية مالية ممنوع.","Any use that violates local laws or turns the platform into an automated-execution or financial-recommendation tool is prohibited."]]},
+ {n:"٧",h:["الملكية الفكرية","Intellectual property"],body:[
+   ["المحرّك، الطبقات التحليلية الست عشرة، التصاميم، والعلامة (Hunter_KSA1) مملوكة لـ DSP ومحميّة. لا تُكشف طرق الحساب الداخلية أو المعاملات الداخلية أو أسماء الطبقات المخفية أو ترتيبها.","The engine, the sixteen analytical layers, the designs, and the mark (Hunter_KSA1) are owned by DSP and protected. Internal methods, internal parameters, hidden layer names, and their order are never disclosed."]]},
+ {n:"٨",h:["حدود المسؤولية","Limitation of liability"],flag:true,body:[
+   ["إلى الحد الذي يسمح به النظام، لا تتحمّل DSP أي مسؤولية عن خسائر أو أضرار ناتجة عن قرارات اتخذتها بالاعتماد على المخرجات. الخدمة تُقدَّم «كما هي» دون ضمانات ضمنية.","To the extent permitted by law, DSP bears no liability for losses or damages arising from decisions you made relying on the outputs. The service is provided 'as is' without implied warranties."]]},
+ {n:"٩",h:["التعديلات والقانون الحاكم","Changes & governing law"],body:[
+   ["قد نحدّث هذه الشروط، ويسري التحديث عند نشره. تخضع هذه الشروط للأنظمة المعمول بها في المملكة العربية السعودية.","We may update these terms, effective upon posting. These terms are governed by the applicable laws of the Kingdom of Saudi Arabia."]]},
+];
+
+const PRIVACY=[
+ {n:"١",h:["ما الذي نجمعه","What we collect"],body:[
+   ["بيانات الحساب الأساسية (بريد، اسم اختياري)، وتفضيلاتك، وإشارات أمان آمنة: <b>بصمة جهاز/IP مجزّأة</b> وسرعة التسجيل لمكافحة الإساءة، وإشارات استخدام عامة (مشاهدات، تنقّل، إكمال نماذج).","Basic account data (email, optional name), your preferences, and safe security signals: <b>hashed device/IP</b> and registration velocity for anti-abuse, plus general usage signals (views, navigation, form completion)."]]},
+ {n:"٢",h:["ما الذي لا نعرضه ولا نخزّنه أبدًا","What we never show or store"],flag:true,body:[
+   ["لا تُعرض ولا تُسجَّل في الواجهة: <b>طرق الحساب الداخلية، المعاملات الداخلية، الدرجات الداخلية، أسماء الطبقات المخفية أو ترتيبها، والبصمات المحمية</b>.","Never shown or logged in the frontend: <b>internal methods, internal parameters, internal scores, hidden layer names or their order, and protected fingerprints</b>."],
+   ["اعتمادات الدخول <b>مجزّأة (hashed)</b> ولا تُخزّن كنص. بيانات تشغيل محمية القنوات (اعتماد تيليجرام محمي، اعتماد SMTP محمي، اعتمادات بوابة الدفع المحمية) تبقى في الخادم ولا تظهر إطلاقًا.","Credentials are <b>hashed</b> and never stored as text. Channel protected credentials (Telegram protected credential, SMTP protected credential, payment gateway protected credentials) stay on the server and are never shown."]]},
+ {n:"٣",h:["كيف نستخدم البيانات","How we use data"],body:[
+   ["لتشغيل حسابك وتقديم المخرجات المنقّحة، حماية المقاعد ومنع الإساءة، تحسين تجربة الاستخدام، وإرسال التنبيهات التي فعّلتها.","To run your account and deliver sanitized outputs, protect seats and prevent abuse, improve the experience, and send the alerts you enabled."],
+   ["<b>لا نبيع بياناتك</b> ولا نؤجّرها لأطراف إعلانية.","<b>We do not sell your data</b> or rent it to advertisers."]]},
+ {n:"٤",h:["التنبيهات والقنوات","Alerts & channels"],body:[
+   ["إذا ربطت تيليجرام، يتم ذلك عبر <b>رمز لمرة واحدة</b> يُتحقّق منه في الخادم؛ لا نطّلع على محادثاتك. البريد يُستخدم للتنبيهات والإشعارات التشغيلية فقط.","If you link Telegram, it's done via a <b>one-time code</b> verified server-side; we don't access your chats. Email is used for alerts and operational notices only."]]},
+ {n:"٥",h:["مزوّدون خارجيون","Third-party providers"],body:[
+   ["نستعين بمزوّدين لتشغيل البنية (استضافة، قاعدة بيانات، بوابة دفع، رسائل). يصلهم الحد الأدنى اللازم فقط، ويلتزمون بحماية البيانات.","We use providers to run the infrastructure (hosting, database, payment gateway, messaging). They receive only the minimum necessary and are bound to protect the data."]]},
+ {n:"٦",h:["الاحتفاظ والحماية","Retention & protection"],body:[
+   ["نحتفظ بالبيانات للمدة اللازمة للخدمة والالتزامات النظامية، ثم تُحذف أو تُجهَّل. نطبّق تحديد المعدّل، تسجيل التدقيق، ونسخًا احتياطية قبل أي تعديل.","We retain data for as long as needed for the service and legal obligations, then delete or anonymize it. We apply rate limiting, audit logging, and backups before any change."]]},
+ {n:"٧",h:["حقوقك","Your rights"],body:[
+   ["يمكنك طلب الوصول لبياناتك أو تصحيحها أو حذف حسابك، وسحب الموافقة على التنبيهات في أي وقت من الإعدادات.","You may request access to or correction of your data or deletion of your account, and withdraw alert consent anytime from Settings."]]},
+ {n:"٨",h:["اللغات والترجمة","Languages & translation"],body:[
+   ["المنصة بالعربية والإنجليزية بمخرجات منقّحة متطابقة. <b>العبرية محجوبة بالكامل</b> على مستوى المنصة (لا محدّد لغة، لا توجيه، لا مخرجات).","The platform is in Arabic and English with identical sanitized outputs. <b> is fully blocked</b> at the platform level (no selector, no routing, no output)."]]},
+];
+
+const I18N={
+ ar:{dir:"rtl",lang:"ar",
+  legal:"LEGAL",backBtn:"رجوع",title:"الشروط والخصوصية",updated:"آخر تحديث: يناير ٢٠٢٦ · Hunter_KSA1",
+  tabTerms:"⚖ شروط الاستخدام",tabPrivacy:"⛨ سياسة الخصوصية",
+  termsBanH:"جوهر الاتفاقية",
+  termsBanP:"DSP منصة <span class='gold'>دعم قرار وتحليل سياقي</span>. باستخدامك المنصة فأنت تقرّ بأنها <b>ليست شركة استثمار</b>، ولا تدير أموالًا، ولا تقدّم نصيحة مالية أو أوامر تنفيذ أو ضمانًا للنتائج. القرار قرارك والمسؤولية عليك.",
+  privBanH:"مبدأ الخصوصية",
+  privBanP:"نجمع <span class='gold'>إشارات آمنة فقط</span> بالقدر اللازم لتشغيل المنصة وحماية المقاعد. لا نبيع بياناتك، ولا نعرض بيانات تشغيل محمية، ولا نكشف طرق الحساب الداخلية أو أسماء الطبقات أو البصمات المحمية. اعتمادات الدخول مجزّأة لا تُخزّن كنص.",
+  govRule:"اعرض قيمة القرار · أخفِ الوصفة الداخلية",discT:"إخلاء مسؤولية",
+  discBody:"مخرجات DSP ومستويات السيناريو مراجع سياقية لدعم القرار فقط، وليست نصيحة مالية أو أمر تداول أو توجيه تنفيذ أو ضمانًا للنتائج. DSP ليست شركة استثمار ولا تدير أموالًا.",
+  contactFoot:"لأي استفسار قانوني:"
+ },
+ en:{dir:"ltr",lang:"en",
+  legal:"LEGAL",backBtn:"Back",title:"Terms & Privacy",updated:"Last updated: January 2026 · Hunter_KSA1",
+  tabTerms:"⚖ Terms of Use",tabPrivacy:"⛨ Privacy Policy",
+  termsBanH:"The core of the agreement",
+  termsBanP:"DSP is a <span class='gold'>decision-support and contextual-analysis</span> platform. By using it you acknowledge it is <b>not an investment firm</b>, manages no funds, and provides no financial advice, execution orders, or guaranteed outcomes. The decision is yours, and so is the responsibility.",
+  privBanH:"The privacy principle",
+  privBanP:"We collect <span class='gold'>safe signals only</span>, to the extent needed to run the platform and protect seats. We don't sell your data, show any protecteds, or reveal internal methods, layer names, or protected fingerprints. Credentials are hashed, never stored as text.",
+  govRule:"Expose decision value · Hide the recipe",discT:"Disclaimer",
+  discBody:"DSP outputs and scenario levels are contextual decision-support references only. They are not financial advice, trade instructions, execution orders, or guaranteed outcomes. DSP is not an investment firm and manages no funds.",
+  contactFoot:"For any legal inquiry:"
+ }
+};
+const T=a=>a[LANG==="ar"?0:1];
+
+function renderClauses(){
+  const build=(arr)=>arr.map(c=>`<div class="clause ${c.flag?'flag':''}">
+    <h3><span class="num">${LANG==="ar"?c.n:''}</span>${T(c.h)}</h3>
+    ${c.body.map(p=>`<p>${T(p)}</p>`).join("")}</div>`).join("");
+  $("#termsList").innerHTML=build(TERMS);
+  $("#privacyList").innerHTML=build(PRIVACY);
+}
+function switchTab(which){
+  $("#secTerms").classList.toggle('on',which==="terms");
+  $("#secPrivacy").classList.toggle('on',which==="privacy");
+  $("#tabTerms").classList.toggle('on',which==="terms");
+  $("#tabPrivacy").classList.toggle('on',which==="privacy");
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+$("#tabTerms").onclick=()=>switchTab("terms");
+$("#tabPrivacy").onclick=()=>switchTab("privacy");
+$("#backBtn").onclick=()=>{$("#backBtn").style.opacity=".55";setTimeout(()=>$("#backBtn").style.opacity="1",400);};
+
+function applyLang(){
+  const d=I18N[LANG];
+  document.documentElement.lang=d.lang;document.documentElement.dir=d.dir;document.body.dir=d.dir;
+  $$('[data-i]').forEach(el=>{const k=el.getAttribute('data-i');if(d[k]!=null)el.innerHTML=d[k];});
+  $("#langBtn").textContent=LANG==="ar"?"EN":"ع";
+  renderClauses();
+}
+$("#langBtn").onclick=()=>{LANG=LANG==="ar"?"en":"ar";applyLang();};
+
+// open to a section if hash present (#privacy)
+if(location.hash==="#privacy"){switchTab("privacy");}
+applyLang();
+</script>
+</body>
+</html>

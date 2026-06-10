@@ -1,0 +1,751 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="google" content="notranslate" />
+  <title>NDSP — منصة نواف لدعم القرار</title>
+  <style>
+    :root{
+      --bg:#05070b;
+      --panel:#0f172a;
+      --panel2:#111827;
+      --gold:#d4af37;
+      --gold2:#f3d36b;
+      --text:#e5e7eb;
+      --muted:#94a3b8;
+      --line:rgba(212,175,55,.28);
+      --ok:#22c55e;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      min-height:100vh;
+      background:
+        radial-gradient(circle at 82% 20%,rgba(212,175,55,.16),transparent 34%),
+        radial-gradient(circle at 8% 86%,rgba(20,184,166,.10),transparent 32%),
+        linear-gradient(135deg,#05070b,#020617 62%,#04070c);
+      color:var(--text);
+      font-family:Tahoma,Arial,sans-serif;
+      overflow-x:hidden;
+    }
+    body:before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.26;
+      background-image:
+        linear-gradient(rgba(148,163,184,.08) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(148,163,184,.08) 1px,transparent 1px);
+      background-size:72px 72px;
+      mask-image:linear-gradient(to bottom,#000,transparent 88%);
+    }
+    a{color:inherit;text-decoration:none}
+    .nav{
+      height:84px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 7vw;
+      border-bottom:1px solid var(--line);
+      background:rgba(2,6,23,.84);
+      backdrop-filter:blur(14px);
+      position:sticky;
+      top:0;
+      z-index:30;
+    }
+    .brand{display:flex;gap:14px;align-items:center}
+    .logo{
+      width:50px;
+      height:50px;
+      border-radius:50%;
+      border:1px solid var(--line);
+      background:rgba(212,175,55,.12);
+      display:grid;
+      place-items:center;
+      color:var(--gold);
+      font-parameter:900;
+      box-shadow:0 0 30px rgba(212,175,55,.12);
+    }
+    .brand b{display:block;color:var(--gold2);font-size:26px;letter-spacing:.5px}
+    .brand small{display:block;color:var(--muted);font-size:12px;margin-top:3px;letter-spacing:2px}
+    .navlinks{display:flex;gap:28px;align-items:center;color:#cbd5e1}
+    .navlinks a{opacity:.9}
+    .actions{display:flex;gap:12px;align-items:center}
+    .btn{
+      border:1px solid var(--line);
+      background:rgba(15,23,42,.76);
+      color:var(--text);
+      border-radius:15px;
+      padding:13px 20px;
+      cursor:pointer;
+      font-parameter:700;
+    }
+    .btn.gold{
+      background:linear-gradient(135deg,var(--gold2),var(--gold));
+      color:#111827;
+      border:0;
+      box-shadow:0 12px 34px rgba(212,175,55,.28);
+      font-parameter:900;
+    }
+    .hero{
+      min-height:calc(100vh - 84px);
+      display:grid;
+      place-items:center;
+      padding:80px 7vw 90px;
+      position:relative;
+    }
+    .watermark{
+      position:absolute;
+      right:-150px;
+      top:40px;
+      width:620px;
+      height:620px;
+      border-radius:50%;
+      border:7px solid rgba(212,175,55,.06);
+      opacity:.8;
+      pointer-events:none;
+    }
+    .watermark:after{
+      content:"HUNTER";
+      position:absolute;
+      top:80px;
+      left:160px;
+      color:rgba(212,175,55,.06);
+      font-size:72px;
+      letter-spacing:16px;
+      transform:rotate(-12deg);
+      font-parameter:900;
+    }
+    .hero-inner{
+      max-width:1080px;
+      width:100%;
+      text-align:center;
+      position:relative;
+      z-index:2;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:9px;
+      color:var(--gold2);
+      border:1px solid var(--line);
+      background:rgba(212,175,55,.08);
+      border-radius:999px;
+      padding:10px 18px;
+      margin-bottom:26px;
+      font-parameter:800;
+    }
+    .dot{
+      width:9px;
+      height:9px;
+      border-radius:50%;
+      background:var(--ok);
+      box-shadow:0 0 18px var(--ok);
+    }
+    h1{
+      margin:0;
+      font-size:clamp(42px,7vw,82px);
+      line-height:1.16;
+      letter-spacing:-1px;
+    }
+    h1 span{color:var(--gold2)}
+    .subtitle{
+      max-width:860px;
+      margin:24px auto 0;
+      color:#cbd5e1;
+      font-size:clamp(18px,2vw,25px);
+      line-height:2;
+    }
+    .hero-actions{
+      margin-top:34px;
+      display:flex;
+      justify-content:center;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+    .small-note{
+      margin-top:18px;
+      color:#64748b;
+      font-size:14px;
+    }
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:16px;
+      margin:42px auto 0;
+      max-width:900px;
+    }
+    .stat{
+      border:1px solid rgba(148,163,184,.17);
+      background:rgba(15,23,42,.76);
+      border-radius:18px;
+      padding:18px;
+      min-height:118px;
+    }
+    .stat strong{
+      display:block;
+      color:var(--gold2);
+      font-size:30px;
+      margin-bottom:8px;
+    }
+    .stat span{color:var(--muted)}
+    section.block{
+      padding:80px 7vw;
+      position:relative;
+      z-index:2;
+    }
+    .section-title{
+      text-align:center;
+      margin:0 0 34px;
+      font-size:34px;
+      color:var(--gold2);
+    }
+    .grid{
+      max-width:1120px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:18px;
+    }
+    .feature{
+      background:rgba(15,23,42,.70);
+      border:1px solid rgba(148,163,184,.17);
+      border-radius:22px;
+      padding:24px;
+      min-height:180px;
+    }
+    .feature b{
+      display:block;
+      color:var(--text);
+      font-size:20px;
+      margin-bottom:12px;
+    }
+    .feature p{
+      color:var(--muted);
+      line-height:1.9;
+      margin:0;
+    }
+    .disclaimer{
+      max-width:1120px;
+      margin:0 auto 70px;
+      border:1px dashed var(--line);
+      background:rgba(2,6,23,.54);
+      border-radius:22px;
+      padding:24px;
+      color:#94a3b8;
+      text-align:center;
+      line-height:1.9;
+    }
+    footer{
+      border-top:1px solid rgba(148,163,184,.14);
+      padding:36px 7vw;
+      color:#64748b;
+      display:flex;
+      justify-content:space-between;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+    footer b{color:var(--gold2)}
+    @media(max-width:900px){
+      .nav{padding:0 18px}
+      .navlinks{display:none}
+      .cards,.grid{grid-template-columns:1fr}
+      .hero{padding:60px 18px 70px}
+      .actions .btn:not(.gold){display:none}
+      .watermark{right:-290px;top:120px}
+    }
+  </style>
+
+
+
+
+<style>
+/* NDSP_PUBLIC_LANGUAGE_SELECTOR_V1 */
+#ndsp-lang-select{
+  border:1px solid rgba(212,175,55,.28);
+  background:rgba(15,23,42,.76);
+  color:#e5e7eb;
+  border-radius:14px;
+  padding:12px 16px;
+  min-width:132px;
+  outline:none;
+  cursor:pointer;
+  font-parameter:700;
+}
+#ndsp-lang-select:focus{
+  border-color:#d4af37;
+  box-shadow:0 0 0 3px rgba(212,175,55,.12);
+}
+</style>
+
+</head>
+<body>
+  <header class="nav">
+    <a class="brand" href="/">
+      <div class="logo">N</div>
+      <div>
+        <b>NDSP</b>
+        <small>منصة نواف لدعم القرار</small>
+      </div>
+    </a>
+
+    <nav class="navlinks">
+      <a href="#features">الطبقات</a>
+      <a href="#why">لماذا NDSP</a>
+      <a href="#plans">الباقات</a>
+      <a href="/register.html">التجربة</a>
+    </nav>
+
+    <div class="actions">
+      <select id="ndsp-lang-select" aria-label="Language"><option value="ar">العربية</option><option value="en">English</option></select>
+      
+      <a class="btn" href="https://my.ndsp.app/login">دخول</a>
+      <a class="btn gold" href="/register.html">احجز مقعدك</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="watermark"></div>
+      <div class="hero-inner">
+        <div class="pill"><span class="dot"></span> قبل الإطلاق المدفوع · مقاعد محدودة</div>
+
+        <h1>قرار محكوم، <span>لا توصية ولا ضوضاء</span></h1>
+
+        <p class="subtitle">
+          منصة نواف لدعم القرار تجمع طبقات تحليلية متعددة لتقديم قراءة واضحة:
+          اتجاه سياقي، أفق متابعة، وجودة قرار — بدون أوامر تنفيذ ولا وعود مضمونة.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn gold" href="/register.html">ابدأ تجربة 16 يوم ←</a>
+          <a class="btn" href="#features">اكتشف الطبقات</a>
+        </div>
+
+        <div class="small-note">16 يوم · 16 طبقة · بدون بطاقة دفع · إخلاء مسؤولية كامل</div>
+
+        <div class="cards" id="trial-cards">
+          <div class="stat"><strong id="totalSeats">50</strong><span>إجمالي مقاعد التجربة</span></div>
+          <div class="stat"><strong id="ordinarySeats">25</strong><span>مبتدئ عادي</span></div>
+          <div class="stat"><strong id="proSeats">10</strong><span>متخصص / أكاديمي</span></div>
+          <div class="stat"><strong id="privateSeats">15</strong><span>خاص / مميز</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="features">
+      <h2 class="section-title">قيمة القرار في NDSP</h2>
+      <div class="grid">
+        <div class="feature">
+          <b>جودة قرار مرئية</b>
+          <p>مؤشر واحد يختصر متانة القراءة بعد مرور الطبقات، لتعرف متى تثق ومتى تتحفظ.</p>
+        </div>
+        <div class="feature">
+          <b>مستويات سيناريو مرجعية</b>
+          <p>تفعيل، وصول، مراجعة، وإلغاء — كمراجع متابعة وليست أوامر دخول أو خروج.</p>
+        </div>
+        <div class="feature">
+          <b>حوكمة وأمان</b>
+          <p>القرار في الخادم، الواجهة عرض فقط، ولا يتم كشف بيانات تشغيل محمية أو طرق حساب داخلية خام.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="why">
+      <h2 class="section-title">لماذا NDSP؟</h2>
+      <div class="grid">
+        <div class="feature">
+          <b>تجربة موجهة</b>
+          <p>التجربة مصممة لفهم قيمة النظام قبل الإطلاق المدفوع، مع مقاعد محدودة.</p>
+        </div>
+        <div class="feature">
+          <b>فصل القرار عن التنفيذ</b>
+          <p>NDSP لا تنفذ ولا تدير الأموال. دورها دعم القرار وتحسين وضوح القراءة.</p>
+        </div>
+        <div class="feature">
+          <b>مخرجات آمنة</b>
+          <p>لا تظهر الطبقات الداخلية الحساسة ولا المعاملات الداخلية ولا المنطق الداخلي في الواجهة العامة.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="plans">
+      <h2 class="section-title">الباقات بعد التجربة</h2>
+      <div class="grid">
+        <div class="feature"><b>Free</b><p>مدخل محدود للتعرف على المنصة.</p></div>
+        <div class="feature"><b>Pro</b><p>أصول وأسواق أكثر مع ظهور آمن لبعض الأسماء المسموحة.</p></div>
+        <div class="feature"><b>Elite / Institutional</b><p>نطاق أوسع، حدود أعلى، وخيارات مؤسسية حسب العقد.</p></div>
+      </div>
+    </section>
+
+    <div class="disclaimer">
+      <b>إخلاء مسؤولية</b><br>
+      NDSP ليست شركة استثمار ولا تدير أموالًا، وليست نصيحة مالية أو أوامر تداول أو توصية تنفيذ.
+      هي مراجع سياقية لدعم القرار فقط. أنت تقرر، ونحن ندعم القرار.
+    </div>
+  </main>
+
+  <footer>
+    <div><b>NDSP</b> · HUNTER_KSA1 · © 2026</div>
+    <div>الشروط · الخصوصية</div>
+  </footer>
+
+  
+
+
+
+
+<script>
+/* NDSP_PUBLIC_SINGLE_SAFE_SCRIPT_V1 */
+(function(){
+  function goRegister(){
+    window.location.href = "/register.html";
+  }
+
+  if(location.hash === "#register"){
+    goRegister();
+    return;
+  }
+
+  document.addEventListener("click", function(ev){
+    var el = ev.target && ev.target.closest ? ev.target.closest("a,button") : null;
+    if(!el) return;
+
+    var text = (el.textContent || "").trim();
+    var href = el.getAttribute && (el.getAttribute("href") || "");
+
+    if(href === "#register" || href === "/#register" || /احجز مقعدك|ابدأ تجربة|التجربة/i.test(text)){
+      ev.preventDefault();
+      goRegister();
+    }
+  }, true);
+
+  async function loadTrialStatus(){
+    try{
+      var r = await fetch("/api/trial/status", {cache:"no-store"});
+      if(!r.ok) return;
+
+      var d = await r.json();
+      if(!d) return;
+
+      var total =
+        Number(d.total_capacity || 0) ||
+        Number(d.ordinary_limit || 0) +
+        Number(d.professional_limit || 0) +
+        Number(d.private_invite_limit || 0);
+
+      var map = {
+        totalSeats: total,
+        ordinarySeats: d.ordinary_limit,
+        proSeats: d.professional_limit,
+        privateSeats: d.private_invite_limit
+      };
+
+      Object.keys(map).forEach(function(id){
+        var el = document.getElementById(id);
+        var val = map[id];
+        if(el && val !== undefined && val !== null && val !== ""){
+          el.textContent = String(val);
+        }
+      });
+    }catch(e){}
+  }
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", loadTrialStatus);
+  }else{
+    loadTrialStatus();
+  }
+})();
+</script>
+
+
+
+
+
+<script>
+/* NDSP_PUBLIC_LANGUAGE_SELECTOR_V1 */
+(function(){
+  var dict = {
+    en: {
+      "الطبقات":"Layers",
+      "لماذا NDSP":"Why NDSP",
+      "الباقات":"Packages",
+      "التجربة":"Trial",
+      "دخول":"Login",
+      "احجز مقعدك":"Reserve your seat",
+      "قبل الإطلاق المدفوع · مقاعد محدودة":"Before paid launch · Limited seats",
+      "قرار محكوم، لا توصية ولا ضوضاء":"Governed decision, no recommendation, no noise",
+      "منصة نواف لدعم القرار تجمع طبقات تحليلية متعددة لتقديم قراءة واضحة: اتجاه سياقي، أفق متابعة، وجودة قرار — بدون أوامر تنفيذ ولا وعود مضمونة.":"Nawaf Decision Support Platform combines multiple analytical layers to provide a clearer reading: contextual direction, follow-up horizon, and decision quality — without execution orders or guaranteed promises.",
+      "ابدأ تجربة 16 يوم ←":"Start 16-day trial →",
+      "اكتشف الطبقات":"Explore layers",
+      "منصة نواف لدعم القرار":"Nawaf Decision Support Platform"
+    },
+    ar: {
+      "Layers":"الطبقات",
+      "Why NDSP":"لماذا NDSP",
+      "Packages":"الباقات",
+      "Trial":"التجربة",
+      "Login":"دخول",
+      "Reserve your seat":"احجز مقعدك",
+      "Before paid launch · Limited seats":"قبل الإطلاق المدفوع · مقاعد محدودة",
+      "Governed decision, no recommendation, no noise":"قرار محكوم، لا توصية ولا ضوضاء",
+      "Nawaf Decision Support Platform combines multiple analytical layers to provide a clearer reading: contextual direction, follow-up horizon, and decision quality — without execution orders or guaranteed promises.":"منصة نواف لدعم القرار تجمع طبقات تحليلية متعددة لتقديم قراءة واضحة: اتجاه سياقي، أفق متابعة، وجودة قرار — بدون أوامر تنفيذ ولا وعود مضمونة.",
+      "Start 16-day trial →":"ابدأ تجربة 16 يوم ←",
+      "Explore layers":"اكتشف الطبقات",
+      "Nawaf Decision Support Platform":"منصة نواف لدعم القرار"
+    }
+  };
+
+  function applyLang(lang){
+    if(lang !== "en") lang = "ar";
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+    try{ localStorage.setItem("ndsp_lang", lang); }catch(e){}
+
+    var map = dict[lang] || {};
+    Array.prototype.slice.call(document.querySelectorAll("a,button,span,b,small,p,h1,h2,h3,div")).forEach(function(el){
+      if(el.children && el.children.length > 0) return;
+      var t = (el.textContent || "").replace(/\s+/g," ").trim();
+      if(map[t]){
+        el.textContent = map[t];
+      }
+    });
+
+    var sel = document.getElementById("ndsp-lang-select");
+    if(sel) sel.value = lang;
+  }
+
+  function init(){
+    var sel = document.getElementById("ndsp-lang-select");
+    if(!sel) return;
+
+    var saved = "ar";
+    try{ saved = localStorage.getItem("ndsp_lang") || "ar"; }catch(e){}
+    applyLang(saved);
+
+    sel.addEventListener("change", function(){
+      applyLang(sel.value);
+    });
+  }
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", init);
+  }else{
+    init();
+  }
+})();
+</script>
+
+
+<!-- NDSP_REGISTER_PASSWORD_BIND_START -->
+<style>
+  .ndsp-password-bind-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+    margin-top:14px;
+  }
+  .ndsp-password-bind-field{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .ndsp-password-bind-field label{
+    color:#aeb8cc;
+    font-size:15px;
+    font-weight:700;
+  }
+  .ndsp-password-bind-field input{
+    width:100%;
+    border:1px solid rgba(255,255,255,.10);
+    background:#070b13;
+    color:#eef3ff;
+    border-radius:14px;
+    padding:14px 16px;
+    outline:none;
+    font-size:16px;
+  }
+  .ndsp-password-bind-field input:focus{
+    border-color:rgba(226,190,82,.65);
+    box-shadow:0 0 0 3px rgba(226,190,82,.10);
+  }
+  .ndsp-password-bind-hint{
+    margin-top:8px;
+    color:#8f9bb2;
+    font-size:13px;
+    line-height:1.7;
+  }
+  @media (max-width:720px){
+    .ndsp-password-bind-row{grid-template-columns:1fr}
+  }
+</style>
+
+<script>
+(function(){
+  "use strict";
+
+  function arAlert(msg){
+    try { alert(msg); } catch(e) {}
+  }
+
+  function findRegisterForm(){
+    var forms = Array.prototype.slice.call(document.querySelectorAll("form"));
+    var scored = forms.map(function(f){
+      var txt = (f.innerText || "") + " " + (f.id || "") + " " + (f.className || "");
+      var html = f.innerHTML || "";
+      var score = 0;
+      if (/البريد|email/i.test(txt + html)) score++;
+      if (/الجوال|الهاتف|phone|mobile/i.test(txt + html)) score++;
+      if (/الدعوة|invite|نوع المستخدم|segment|ordinary|professional/i.test(txt + html)) score++;
+      return {form:f, score:score};
+    }).sort(function(a,b){return b.score-a.score});
+    return scored.length && scored[0].score > 0 ? scored[0].form : null;
+  }
+
+  function getRegisterContainer(){
+    var form = findRegisterForm();
+    if (form) return form;
+
+    var candidates = Array.prototype.slice.call(document.querySelectorAll("section, main, div"));
+    var best = null, bestScore = 0;
+    candidates.forEach(function(el){
+      var txt = el.innerText || "";
+      var score = 0;
+      if (/البريد الإلكتروني|email/i.test(txt)) score++;
+      if (/رقم الجوال|phone|mobile/i.test(txt)) score++;
+      if (/نوع المستخدم|رمز الدعوة|invite/i.test(txt)) score++;
+      if (score > bestScore) { bestScore = score; best = el; }
+    });
+    return best;
+  }
+
+  function existingPasswordInput(){
+    return document.querySelector(
+      'input[name="password"], input[name="confirm_password"], input[name="password_confirm"], input[type="password"]'
+    );
+  }
+
+  function addPasswordFields(){
+    if (existingPasswordInput()) return;
+
+    var container = getRegisterContainer();
+    if (!container) return;
+
+    var wrap = document.createElement("div");
+    wrap.className = "ndsp-password-bind-wrap";
+    wrap.innerHTML = ''
+      + '<div class="ndsp-password-bind-row">'
+      + '  <div class="ndsp-password-bind-field">'
+      + '    <label for="ndsp_register_password">كلمة المرور</label>'
+      + '    <input id="ndsp_register_password" name="password" type="password" autocomplete="new-password" minlength="8" required placeholder="8 أحرف على الأقل">'
+      + '  </div>'
+      + '  <div class="ndsp-password-bind-field">'
+      + '    <label for="ndsp_register_confirm_password">تأكيد كلمة المرور</label>'
+      + '    <input id="ndsp_register_confirm_password" name="confirm_password" type="password" autocomplete="new-password" minlength="8" required placeholder="أعد كتابة كلمة المرور">'
+      + '  </div>'
+      + '</div>'
+      + '<div class="ndsp-password-bind-hint">ستستخدم هذه الكلمة لاحقًا للدخول إلى بوابة المستخدم بعد قبول التسجيل وتفعيل الحساب.</div>';
+
+    var anchor =
+      container.querySelector('input[name="invite_code"], input[id*="invite"], select, textarea') ||
+      container.querySelector('input[type="checkbox"]') ||
+      container.lastElementChild;
+
+    if (anchor && anchor.parentElement) {
+      var parent = anchor.closest("label, div, p") || anchor.parentElement;
+      parent.insertAdjacentElement("afterend", wrap);
+    } else {
+      container.appendChild(wrap);
+    }
+  }
+
+  function getPasswordValues(){
+    var p = document.querySelector('#ndsp_register_password, input[name="password"], input[type="password"]');
+    var c = document.querySelector('#ndsp_register_confirm_password, input[name="confirm_password"], input[name="password_confirm"]');
+    return {
+      password: p ? String(p.value || "") : "",
+      confirm: c ? String(c.value || "") : ""
+    };
+  }
+
+  function validatePassword(){
+    var v = getPasswordValues();
+    if (!v.password || v.password.length < 8) {
+      arAlert("كلمة المرور مطلوبة ويجب ألا تقل عن 8 أحرف.");
+      return false;
+    }
+    if (v.password !== v.confirm) {
+      arAlert("كلمة المرور وتأكيدها غير متطابقين.");
+      return false;
+    }
+    return true;
+  }
+
+  document.addEventListener("DOMContentLoaded", function(){
+    addPasswordFields();
+
+    document.addEventListener("submit", function(e){
+      var f = e.target;
+      var text = (f && (f.innerText || f.innerHTML || "")) || "";
+      if (/email|البريد|phone|الجوال|invite|الدعوة/i.test(text)) {
+        if (!validatePassword()) {
+          e.preventDefault();
+          e.stopPropagation();
+          return false;
+        }
+      }
+    }, true);
+  });
+
+  var originalFetch = window.fetch;
+  window.fetch = function(input, init){
+    try {
+      var url = typeof input === "string" ? input : (input && input.url) || "";
+      var method = String((init && init.method) || "GET").toUpperCase();
+
+      if (method === "POST" && /\/api\/trial\/register\//.test(url)) {
+        addPasswordFields();
+
+        if (!validatePassword()) {
+          return Promise.resolve(new Response(
+            JSON.stringify({ok:false,error:"PASSWORD_REQUIRED_CLIENT"}),
+            {status:400,headers:{"Content-Type":"application/json"}}
+          ));
+        }
+
+        var vals = getPasswordValues();
+        init = init || {};
+        var headers = init.headers || {};
+        var body = init.body;
+
+        if (typeof body === "string") {
+          try {
+            var json = JSON.parse(body);
+            json.password = vals.password;
+            json.confirm_password = vals.confirm;
+            json.password_confirm = vals.confirm;
+            init.body = JSON.stringify(json);
+          } catch(e) {}
+        } else if (body instanceof FormData) {
+          body.set("password", vals.password);
+          body.set("confirm_password", vals.confirm);
+          body.set("password_confirm", vals.confirm);
+          init.body = body;
+        }
+
+        init.headers = headers;
+      }
+    } catch(e) {}
+
+    return originalFetch.apply(this, arguments);
+  };
+})();
+</script>
+<!-- NDSP_REGISTER_PASSWORD_BIND_END -->
+
+</body>
+</html>

@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="google" content="notranslate" />
+<title>DSP — مقارنة الباقات</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Sora:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#070A10;--ink:#0B0F17;--panel:rgba(18,24,36,.62);--panel2:rgba(14,19,29,.82);
+  --line:rgba(201,162,39,.17);--line-soft:rgba(255,255,255,.07);
+  --gold:#D9B65A;--gold-bright:#F2D27A;--gold-deep:#9A7A22;
+  --teal:#3FD3C6;--rose:#E0607A;--blue:#88A6FF;
+  --txt:#EAEEF6;--txt-2:#9AA6BC;--txt-3:#5E6A82;
+  --up:#56D6A0;--down:#E2657E;--warn:#E8B964;
+  --shadow:0 30px 70px -30px rgba(0,0,0,.85);--r:18px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--void);color:var(--txt);overflow-x:hidden;
+  font-family:"IBM Plex Sans Arabic","Sora",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+body[dir="ltr"]{font-family:"Sora","IBM Plex Sans Arabic",sans-serif}
+.mono{font-family:"IBM Plex Mono",monospace;font-feature-settings:"tnum" 1}
+h1,h2,h3,.kufi{font-family:"Reem Kufi",serif}
+body[dir="ltr"] h1,body[dir="ltr"] h2,body[dir="ltr"] h3{font-family:"Sora",sans-serif;letter-spacing:-.01em}
+
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.bg .glow{position:absolute;border-radius:50%;filter:blur(140px);opacity:.5}
+.bg .g1{width:50vw;height:50vw;top:-24vw;inset-inline-end:-14vw;background:radial-gradient(circle,rgba(217,182,90,.16),transparent 64%)}
+.bg .g2{width:42vw;height:42vw;bottom:-20vw;inset-inline-start:-12vw;background:radial-gradient(circle,rgba(63,211,198,.1),transparent 64%)}
+.bg .grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:46px 46px;mask-image:radial-gradient(ellipse 120% 80% at 50% 0%,#000 30%,transparent 78%)}
+.seal-wm{position:fixed;z-index:0;inset-inline-end:-6vw;bottom:-8vw;width:44vw;max-width:620px;opacity:.04;pointer-events:none}
+
+nav{position:sticky;top:0;z-index:40;backdrop-filter:blur(16px);background:linear-gradient(180deg,rgba(7,10,16,.92),rgba(7,10,16,.4));border-bottom:1px solid var(--line)}
+nav .in{max-width:1080px;margin:0 auto;padding:12px 22px;display:flex;align-items:center;gap:14px}
+.brand{display:flex;align-items:center;gap:11px}
+.brand svg{width:38px;height:38px;filter:drop-shadow(0 4px 12px rgba(217,182,90,.4))}
+.brand b{font-family:"Reem Kufi";font-size:18px;background:linear-gradient(180deg,var(--gold-bright),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;display:block;line-height:1}
+.brand span{font-size:9px;color:var(--txt-3);letter-spacing:2px;font-family:"IBM Plex Mono"}
+.back{display:inline-flex;align-items:center;gap:7px;color:var(--txt-2);text-decoration:none;font-size:12.5px;padding:7px 12px;border-radius:10px;border:1px solid var(--line-soft);cursor:pointer}
+.back:hover{border-color:var(--gold);color:var(--gold-bright)}
+.spacer{flex:1}
+.lang{cursor:pointer;user-select:none;padding:8px 13px;border-radius:10px;border:1px solid var(--line);color:var(--txt-2);font-size:12.5px}
+.lang:hover{color:var(--gold-bright);border-color:var(--gold)}
+
+.wrap{position:relative;z-index:2;max-width:1080px;margin:0 auto;padding:30px 22px 60px}
+.head{text-align:center;margin-bottom:8px}
+.head .tag{font-family:"IBM Plex Mono";font-size:11px;letter-spacing:3px;color:var(--gold);text-transform:uppercase}
+.head h1{font-size:clamp(26px,4vw,38px);margin:12px 0 12px}
+.head p{color:var(--txt-2);font-size:14px;max-width:520px;margin:0 auto;line-height:1.7}
+
+.toggle{display:flex;justify-content:center;margin:24px 0}
+.toggle .t-in{display:inline-flex;background:rgba(0,0,0,.3);border:1px solid var(--line-soft);border-radius:12px;padding:4px;gap:4px}
+.toggle button{border:0;background:transparent;color:var(--txt-2);font-family:inherit;font-size:12.5px;padding:9px 18px;border-radius:9px;cursor:pointer;transition:.2s}
+.toggle button.on{background:linear-gradient(135deg,var(--gold-bright),var(--gold-deep));color:#1a1303;font-parameter:600}
+.toggle .save{font-size:10px;color:var(--up);margin-inline-start:6px}
+
+/* matrix */
+.matrix{overflow-x:auto;border-radius:20px;border:1px solid var(--line-soft);background:var(--panel);backdrop-filter:blur(12px);box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;min-width:720px}
+thead th{position:sticky;top:0;padding:0}
+.phead{padding:20px 16px 18px;text-align:center;border-bottom:1px solid var(--line-soft);position:relative;background:var(--panel2)}
+.phead.feat{text-align:start;background:transparent}
+.phead.elite{background:linear-gradient(180deg,rgba(217,182,90,.14),rgba(217,182,90,.03))}
+.phead .pn{font-family:"Reem Kufi";font-size:18px}
+body[dir="ltr"] .phead .pn{font-family:"Sora"}
+.phead .price{font-family:"IBM Plex Mono";margin-top:8px}
+.phead .price .now{font-size:24px;font-parameter:600;color:var(--gold-bright)}
+.phead .price .cur{font-size:11px;color:var(--txt-3)}
+.phead .price .was{font-size:12px;color:var(--txt-3);text-decoration:line-through;margin-inline-end:6px}
+.phead .price .free{font-size:20px;color:var(--txt)}
+.phead .badge{position:absolute;top:-1px;inset-inline:0;margin:auto;width:max-content;transform:translateY(-50%);background:linear-gradient(135deg,var(--gold-bright),var(--gold-deep));color:#1a1303;font-size:10px;font-parameter:700;padding:4px 12px;border-radius:8px}
+.phead .cta{margin-top:14px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:0;cursor:pointer;font-family:inherit;font-parameter:600;padding:10px 16px;border-radius:11px;font-size:12.5px;transition:.2s;width:100%}
+.btn-gold{background:linear-gradient(135deg,var(--gold-bright),var(--gold-deep));color:#1a1303}
+.btn-gold:hover{transform:translateY(-2px)}
+.btn-ghost{background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--txt-2)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold-bright)}
+
+tbody td{padding:13px 16px;text-align:center;border-bottom:1px solid var(--line-soft);font-size:12.5px}
+tbody td.feat{text-align:start;color:var(--txt-2);font-parameter:500}
+tbody td.elite{background:rgba(217,182,90,.04)}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover td{background:rgba(255,255,255,.015)}
+tbody tr:hover td.elite{background:rgba(217,182,90,.06)}
+.val{font-family:"IBM Plex Mono";color:var(--txt)}
+.yes{color:var(--up);font-size:15px}
+.no{color:var(--txt-3)}
+.grp td{background:rgba(0,0,0,.2);font-family:"IBM Plex Mono";font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--txt-3);text-align:start;padding:10px 16px}
+
+.note{font-size:11px;color:var(--txt-3);line-height:1.7;margin-top:16px;padding:13px;border-radius:12px;border:1px dashed var(--line-soft);background:rgba(0,0,0,.15)}
+.note b{color:var(--gold)}
+.gov{text-align:center;margin-top:22px;font-family:"Reem Kufi";color:var(--gold);font-size:13px;opacity:.8}
+body[dir="ltr"] .gov{font-family:"Sora"}
+.disclaimer{margin-top:14px;font-size:11px;color:var(--txt-3);line-height:1.8;text-align:center;padding:16px;border-radius:14px;border:1px dashed var(--line);background:rgba(0,0,0,.2)}
+.disclaimer b{color:var(--txt-2)}
+
+.langsel{background:rgba(0,0,0,.35);border:1px solid var(--line,rgba(201,162,39,.16));color:var(--txt,#EAEEF6);border-radius:999px;padding:7px 12px;font-family:inherit;font-size:12px;cursor:pointer;outline:none}
+.langsel:hover{border-color:var(--gold,#D9B65A)}
+.langsel option{background:#0B0F17;color:#EAEEF6}
+</style>
+</head>
+<body dir="ltr">
+
+<div class="bg"><div class="glow g1"></div><div class="glow g2"></div><div class="grid"></div></div>
+<svg class="seal-wm" viewBox="0 0 240 240" aria-hidden="true"><use href="#hunterSeal"/></svg>
+
+<svg width="0" height="0" style="position:absolute"><defs><g id="hunterSeal">
+  <circle cx="120" cy="120" r="116" fill="none" stroke="#D9B65A" stroke-width="2"/>
+  <circle cx="120" cy="120" r="106" fill="none" stroke="#D9B65A" stroke-width="1" stroke-dasharray="2 6"/>
+  <path d="M120 56 C150 60 168 80 170 108 C171 122 165 134 154 142 L172 150 L150 152 C146 168 132 180 118 182 C128 172 130 162 128 156 C112 162 96 158 86 146 C100 148 110 144 114 138 C96 134 84 120 84 102 C84 76 100 60 120 56 Z" fill="#D9B65A"/>
+  <circle cx="138" cy="98" r="6.5" fill="#070A10"/><circle cx="140" cy="96" r="2" fill="#F2D27A"/>
+  <path d="M170 108 C184 110 190 118 184 126 C180 120 174 118 168 120 Z" fill="#9A7A22"/>
+  <path d="M120 30 l3 7 7 1 -5 5 1 7 -6 -3 -6 3 1 -7 -5 -5 7 -1 z" fill="#F2D27A"/>
+  <path id="arcTop" d="M40 120 A80 80 0 0 1 200 120" fill="none"/>
+  <path id="arcBot" d="M44 124 A76 76 0 0 0 196 124" fill="none"/>
+  <text font-family="IBM Plex Mono,monospace" font-size="15" letter-spacing="6" fill="#D9B65A"><textPath href="#arcTop" startOffset="50%" text-anchor="middle">HUNTER</textPath></text>
+  <text font-family="IBM Plex Mono,monospace" font-size="13" letter-spacing="5" fill="#D9B65A"><textPath href="#arcBot" startOffset="50%" text-anchor="middle">KSA · 1</textPath></text>
+</g></defs></svg>
+
+<nav><div class="in">
+  <div class="brand"><svg viewBox="0 0 240 240"><use href="#hunterSeal"/></svg>
+    <div><b>DSP</b><span data-i="compare">COMPARE PACKAGES</span></div></div>
+  <a class="back" id="backBtn"><span data-i="backBtn">رجوع</span></a>
+  <div class="spacer"></div>
+  <select class="langsel" id="langSel" aria-label="Language"><option value="ar">العربية</option><option value="en">English</option><option value="fr">Français</option><option value="es">Español</option><option value="de">Deutsch</option><option value="tr">Türkçe</option><option value="ru">Русский</option><option value="pt">Português</option><option value="id">Indonesia</option><option value="hi">हिन्दी</option><option value="zh">中文</option><option value="ur">اردو</option></select>
+</div></nav>
+
+<div class="wrap">
+  <div class="head">
+    <div class="tag">PACKAGES</div>
+    <h1 data-i="title">اختر العمق المناسب لقرارك</h1>
+    <p data-i="subt">كل الباقات تشترك في نفس المحرّك المحكوم. الفرق في الاتساع: عدد الأسواق والأصول والتحليلات والطبقات الظاهرة وقنوات التنبيه.</p>
+  </div>
+
+  <div class="toggle">
+    <div class="t-in">
+      <button class="on" id="tgMonthly" data-i="monthly">شهري</button>
+      <button id="tgAnnual"><span data-i="annual">سنوي</span><span class="save" data-i="save">وفّر ٢٠٪</span></button>
+    </div>
+  </div>
+
+  <div class="matrix">
+    <table>
+      <thead><tr id="planHead"></tr></thead>
+      <tbody id="matrixBody"></tbody>
+    </table>
+  </div>
+
+  <div class="note" data-i="note"><b>الحوكمة:</b> كل الحدود تُفرض في الخادم — الواجهة تعرض الحالة فقط. لا تفعيل ولا ترقية بلا اعتماد خلفي. كل الباقات ملتزمة بعقد المخرجات: قيمة قرار منقّحة فقط، بلا أوامر تنفيذ أو كشف للطرق حساب داخلية.</div>
+
+  <div class="gov" data-i="govRule">اعرض قيمة القرار · أخفِ الوصفة الداخلية</div>
+  <div class="disclaimer">
+    <b data-i="discT">إخلاء مسؤولية</b><br>
+    <span data-i="discBody">جميع الباقات تمنح وصولًا لأدوات دعم القرار فقط. مخرجات DSP مراجع سياقية وليست نصيحة مالية أو أمر تداول أو ضمانًا للنتائج. DSP ليست شركة استثمار ولا تدير أموالًا.</span>
+  </div>
+</div>
+
+<script>
+const AR=s=>String(s).replace(/[0-9]/g,d=>"٠١٢٣٤٥٦٧٨٩"[d]);
+let LANG="en";
+const __ndspStub=new Proxy(function(){},{get:(t,p)=>{if(p==='style'||p==='dataset'||p==='classList')return new Proxy({},{get:()=>()=>{}});if(p==='value'||p==='textContent'||p==='innerHTML'||p==='placeholder')return '';return __ndspStub;},set:()=>true,apply:()=>__ndspStub});const __q=(s)=>{try{return document.querySelector(s)||__ndspStub;}catch(e){return __ndspStub;}};const $=s=>__q(s),$$=s=>document.querySelectorAll(s);
+let cycle="monthly";
+
+const PLANS=[
+ {id:"free",nm:["المجانية","Free"],m:0,a:0,badge:null,cta:["ابدأ مجانًا","Start free"]},
+ {id:"pro",nm:["برو","Pro"],m:124,a:99,badge:null,cta:["اختر برو","Choose Pro"]},
+ {id:"elite",nm:["النخبة","Elite"],m:312,a:249,badge:["الأكثر طلبًا","Most popular"],cta:["اختر النخبة","Choose Elite"]},
+ {id:"inst",nm:["المؤسسية","Institutional"],m:null,a:null,badge:null,cta:["تواصل","Contact"]},
+];
+
+// matrix: groups + rows. value per [free,pro,elite,inst]; "Y"=check, "N"=dash, else text[ar,en]
+const MATRIX=[
+ {grp:["النطاق","Scope"],rows:[
+   {f:["الأسواق","Markets"],v:["1","2",["الكل","All"],["الكل","All"]]},
+   {f:["الأصول","Assets"],v:["3","20","100","250+"]},
+   {f:["التحليلات","Analyses"],v:[["٥/أسبوع","5/wk"],["١٥/يوم","15/day"],["٢٥٠/يوم","250/day"],["بالعقد","Contract"]]},
+ ]},
+ {grp:["القرار والطبقات","Decision & layers"],rows:[
+   {f:["الطبقات الظاهرة","Visible layers"],v:[["—","—"],"TDL · NMP","×4","×4"]},
+   {f:["جودة القرار","Decision quality"],v:[["مبسّطة","Simplified"],"Y","Y","Y"]},
+   {f:["مستويات سيناريو مرجعية","Scenario reference levels"],v:["N","Y","Y","Y"]},
+   {f:["محامي الشيطان","Devil's Advocate"],v:["N","Y","Y","Y"]},
+   {f:["إشارة نواف الذهبية","Nawaf Golden Alignment"],v:["N","N","Y","Y"]},
+ ]},
+ {grp:["الواجهات والأدوات","Surfaces & tools"],rows:[
+   {f:["الموجز اليومي","Daily brief"],v:[["مقصوص","Trimmed"],"Y","Y","Y"]},
+   {f:["قراءة الأصل العميقة","Asset deep-view"],v:["N",["محدودة","Limited"],"Y","Y"]},
+   {f:["يوميات القرار + مقارنة","Decision journal + comparison"],v:["N","N","Y","Y"]},
+ ]},
+ {grp:["التنبيهات والتكامل","Alerts & integration"],rows:[
+   {f:["التنبيهات","Alerts"],v:[["تنبيه واحد","1 alert"],["أساسية","Basic"],["تيليجرام","Telegram"],["متعددة","Multi"]]},
+   {f:["API مخرجات القرار","Decision-output API"],v:["N","N","N","Y"]},
+   {f:["Webhooks","Webhooks"],v:["N","N","N","Y"]},
+   {f:["فرق عمل وصلاحيات","Teams & roles"],v:["N","N","N","Y"]},
+ ]},
+ {grp:["الدعم","Support"],rows:[
+   {f:["مستوى الدعم","Support level"],v:[["مجتمعي","Community"],["بريد","Email"],["أولوية","Priority"],["مخصّص","Dedicated"]]},
+ ]},
+];
+
+const I18N={
+ ar:{dir:"rtl",lang:"ar",
+  compare:"مقارنة الباقات",backBtn:"رجوع",
+  title:"اختر العمق المناسب لقرارك",
+  subt:"كل الباقات تشترك في نفس المحرّك المحكوم. الفرق في الاتساع: عدد الأسواق والأصول والتحليلات والطبقات الظاهرة وقنوات التنبيه.",
+  monthly:"شهري",annual:"سنوي",save:"وفّر ٢٠٪",
+  note:"<b>الحوكمة:</b> كل الحدود تُفرض في الخادم — الواجهة تعرض الحالة فقط. لا تفعيل ولا ترقية بلا اعتماد خلفي. كل الباقات ملتزمة بعقد المخرجات: قيمة قرار منقّحة فقط، بلا أوامر تنفيذ أو كشف للطرق حساب داخلية.",
+  govRule:"اعرض قيمة القرار · أخفِ الوصفة الداخلية",discT:"إخلاء مسؤولية",
+  discBody:"جميع الباقات تمنح وصولًا لأدوات دعم القرار فقط. مخرجات DSP مراجع سياقية وليست نصيحة مالية أو أمر تداول أو ضمانًا للنتائج. DSP ليست شركة استثمار ولا تدير أموالًا.",
+  perMo:"/شهر",perYr:"/سنة",sar:"ر.س",free:"مجانًا",custom:"بالعقد"
+ },
+ en:{dir:"ltr",lang:"en",
+  compare:"COMPARE PACKAGES",backBtn:"Back",
+  title:"Choose the depth your decision needs",
+  subt:"All packages share the same governed engine. The difference is breadth: markets, assets, analyses, visible layers, and alert channels.",
+  monthly:"Monthly",annual:"Annual",save:"Save 20%",
+  note:"<b>Governance:</b> All limits are enforced server-side — the frontend shows state only. No activation or upgrade without backend approval. Every package honors the output contract: sanitized decision value only, no execution orders or internal method exposure.",
+  govRule:"Expose decision value · Hide the recipe",discT:"Disclaimer",
+  discBody:"All packages grant access to decision-support tools only. DSP outputs are contextual references, not financial advice, trade instructions, or guaranteed outcomes. DSP is not an investment firm and manages no funds.",
+  perMo:"/mo",perYr:"/yr",sar:"SAR",free:"Free",custom:"By contract"
+ },
+ fr:{dir:"ltr",lang:"fr",compare:"COMPARER LES FORFAITS",backBtn:"Retour",title:"Choisissez la profondeur dont votre décision a besoin",subt:"Tous les forfaits partagent le même moteur gouverné. La différence est l'étendue : marchés, actifs, analyses, couches visibles et canaux d'alerte.",monthly:"Mensuel",annual:"Annuel",save:"Économisez 20 %",note:"<b>Gouvernance :</b> Toutes les limites sont appliquées côté serveur — le front-end n'affiche que l'état. Aucune activation ou mise à niveau sans approbation du backend. Chaque forfait respecte le contrat de sortie : valeur de décision épurée uniquement, sans ordres d'exécution ni exposition de méthodes internes.",govRule:"Exposer la valeur de décision · Cacher la recette",discT:"Avis",discBody:"Tous les forfaits donnent accès uniquement aux outils d'aide à la décision. Les sorties de DSP sont des références contextuelles, pas un conseil financier, des instructions de trading ni des résultats garantis. DSP n'est pas une société d'investissement et ne gère aucun fonds.",perMo:"/mois",perYr:"/an",sar:"SAR",free:"Gratuit",custom:"Sur contrat"},
+ es:{dir:"ltr",lang:"es",compare:"COMPARAR PLANES",backBtn:"Atrás",title:"Elige la profundidad que tu decisión necesita",subt:"Todos los planes comparten el mismo motor gobernado. La diferencia es la amplitud: mercados, activos, análisis, capas visibles y canales de alerta.",monthly:"Mensual",annual:"Anual",save:"Ahorra 20 %",note:"<b>Gobernanza:</b> Todos los límites se aplican en el servidor — el front-end solo muestra el estado. Sin activación ni mejora sin aprobación del backend. Cada plan respeta el contrato de salida: solo valor de decisión depurado, sin órdenes de ejecución ni exposición de métodos internos.",govRule:"Exponer el valor de la decisión · Ocultar la receta",discT:"Aviso",discBody:"Todos los planes otorgan acceso únicamente a herramientas de apoyo a la decisión. Las salidas de DSP son referencias contextuales, no asesoramiento financiero, instrucciones de operación ni resultados garantizados. DSP no es una empresa de inversión y no gestiona fondos.",perMo:"/mes",perYr:"/año",sar:"SAR",free:"Gratis",custom:"Por contrato"},
+ de:{dir:"ltr",lang:"de",compare:"PAKETE VERGLEICHEN",backBtn:"Zurück",title:"Wählen Sie die Tiefe, die Ihre Entscheidung braucht",subt:"Alle Pakete teilen dieselbe gesteuerte Engine. Der Unterschied ist die Breite: Märkte, Assets, Analysen, sichtbare Schichten und Alarmkanäle.",monthly:"Monatlich",annual:"Jährlich",save:"20 % sparen",note:"<b>Governance:</b> Alle Limits werden serverseitig durchgesetzt — das Frontend zeigt nur den Status. Keine Aktivierung oder Aufwertung ohne Backend-Genehmigung. Jedes Paket hält den Ausgabevertrag ein: nur bereinigter Entscheidungswert, keine Ausführungsbefehle oder Formel-Offenlegung.",govRule:"Entscheidungswert offenlegen · Rezept verbergen",discT:"Haftungsausschluss",discBody:"Alle Pakete gewähren ausschließlich Zugang zu Entscheidungsunterstützungs-Werkzeugen. DSP-Ausgaben sind kontextuelle Referenzen, keine Finanzberatung, Handelsanweisungen oder garantierten Ergebnisse. DSP ist kein Investmentunternehmen und verwaltet keine Mittel.",perMo:"/Mon.",perYr:"/Jahr",sar:"SAR",free:"Free",custom:"Auf Vertrag"},
+ tr:{dir:"ltr",lang:"tr",compare:"PAKETLERİ KARŞILAŞTIR",backBtn:"Geri",title:"Kararınızın ihtiyaç duyduğu derinliği seçin",subt:"Tüm paketler aynı yönetilen motoru paylaşır. Fark genişliktedir: pazarlar, varlıklar, analizler, görünür katmanlar ve uyarı kanalları.",monthly:"Aylık",annual:"Yıllık",save:"%20 tasarruf",note:"<b>Yönetişim:</b> Tüm sınırlar sunucu tarafında uygulanır — ön uç yalnızca durumu gösterir. Arka uç onayı olmadan etkinleştirme veya yükseltme yok. Her paket çıktı sözleşmesine uyar: yalnızca arıtılmış karar değeri, yürütme emri veya iç yöntemler ifşası yok.",govRule:"Karar değerini açığa çıkar · Tarifi gizle",discT:"Yasal Uyarı",discBody:"Tüm paketler yalnızca karar destek araçlarına erişim sağlar. DSP çıktıları bağlamsal referanslardır; finansal tavsiye, işlem talimatı veya garanti edilen sonuç değildir. DSP bir yatırım şirketi değildir ve hiçbir fon yönetmez.",perMo:"/ay",perYr:"/yıl",sar:"SAR",free:"Ücretsiz",custom:"Sözleşmeyle"},
+ ru:{dir:"ltr",lang:"ru",compare:"СРАВНИТЬ ПАКЕТЫ",backBtn:"Назад",title:"Выберите глубину, нужную вашему решению",subt:"Все пакеты используют один и тот же управляемый движок. Разница в широте: рынки, активы, анализы, видимые слои и каналы уведомлений.",monthly:"Ежемесячно",annual:"Ежегодно",save:"Скидка 20 %",note:"<b>Управление:</b> Все лимиты применяются на сервере — фронтенд только отображает состояние. Никакой активации или повышения без одобрения бэкенда. Каждый пакет соблюдает контракт вывода: только очищенная ценность решения, без приказов на исполнение и раскрытия формул.",govRule:"Раскрыть ценность решения · Скрыть рецепт",discT:"Отказ от ответственности",discBody:"Все пакеты предоставляют доступ только к инструментам поддержки решений. Результаты DSP являются контекстными ориентирами, а не финансовым советом, торговыми инструкциями или гарантированными результатами. DSP не является инвестиционной компанией и не управляет средствами.",perMo:"/мес",perYr:"/год",sar:"SAR",free:"Бесплатно",custom:"По договору"},
+ pt:{dir:"ltr",lang:"pt",compare:"COMPARAR PLANOS",backBtn:"Voltar",title:"Escolha a profundidade que sua decisão precisa",subt:"Todos os planos compartilham o mesmo motor governado. A diferença é a amplitude: mercados, ativos, análises, camadas visíveis e canais de alerta.",monthly:"Mensal",annual:"Anual",save:"Economize 20%",note:"<b>Governança:</b> Todos os limites são aplicados no servidor — o front-end apenas mostra o estado. Sem ativação ou upgrade sem aprovação do backend. Cada plano respeita o contrato de saída: apenas valor de decisão depurado, sem ordens de execução ou exposição de métodos internos.",govRule:"Expor o valor da decisão · Esconder a receita",discT:"Aviso",discBody:"Todos os planos concedem acesso apenas a ferramentas de apoio à decisão. As saídas do DSP são referências contextuais, não aconselhamento financeiro, instruções de negociação ou resultados garantidos. DSP não é uma empresa de investimento e não gere fundos.",perMo:"/mês",perYr:"/ano",sar:"SAR",free:"Grátis",custom:"Por contrato"},
+ id:{dir:"ltr",lang:"id",compare:"BANDINGKAN PAKET",backBtn:"Kembali",title:"Pilih kedalaman yang dibutuhkan keputusan Anda",subt:"Semua paket berbagi mesin terkelola yang sama. Perbedaannya pada keluasan: pasar, aset, analisis, lapisan terlihat, dan saluran peringatan.",monthly:"Bulanan",annual:"Tahunan",save:"Hemat 20%",note:"<b>Tata kelola:</b> Semua batas ditegakkan di sisi server — front-end hanya menampilkan status. Tidak ada aktivasi atau peningkatan tanpa persetujuan backend. Setiap paket mematuhi kontrak output: hanya nilai keputusan yang dibersihkan, tanpa perintah eksekusi atau pengungkapan rumus.",govRule:"Ekspos nilai keputusan · Sembunyikan resep",discT:"Penafian",discBody:"Semua paket memberikan akses hanya ke alat pendukung keputusan. Output DSP adalah referensi kontekstual, bukan nasihat keuangan, instruksi perdagangan, atau hasil yang dijamin. DSP bukan perusahaan investasi dan tidak mengelola dana.",perMo:"/bln",perYr:"/thn",sar:"SAR",free:"Gratis",custom:"Per kontrak"},
+ hi:{dir:"ltr",lang:"hi",compare:"पैकेजों की तुलना करें",backBtn:"वापस",title:"वह गहराई चुनें जिसकी आपके निर्णय को आवश्यकता है",subt:"सभी पैकेज एक ही शासित इंजन साझा करते हैं। अंतर विस्तार में है: बाजार, परिसंपत्तियाँ, विश्लेषण, दृश्यमान परतें और अलर्ट चैनल।",monthly:"मासिक",annual:"वार्षिक",save:"20% बचाएँ",note:"<b>शासन:</b> सभी सीमाएँ सर्वर पर लागू होती हैं — फ्रंट-एंड केवल स्थिति दिखाता है। बैकएंड की मंजूरी के बिना कोई सक्रियण या अपग्रेड नहीं। प्रत्येक पैकेज आउटपुट अनुबंध का सम्मान करता है: केवल स्वच्छ निर्णय मूल्य, कोई निष्पादन आदेश या सूत्र प्रकटीकरण नहीं।",govRule:"निर्णय मूल्य उजागर करें · नुस्खा छिपाएँ",discT:"अस्वीकरण",discBody:"सभी पैकेज केवल निर्णय-समर्थन उपकरणों तक पहुँच प्रदान करते हैं। DSP आउटपुट प्रासंगिक संदर्भ हैं, वित्तीय सलाह, व्यापार निर्देश या गारंटीशुदा परिणाम नहीं। DSP एक निवेश फर्म नहीं है और कोई धन प्रबंधित नहीं करती है।",perMo:"/माह",perYr:"/वर्ष",sar:"SAR",free:"मुफ़्त",custom:"अनुबंध द्वारा"},
+ zh:{dir:"ltr",lang:"zh",compare:"比较套餐",backBtn:"返回",title:"选择您的决策所需的深度",subt:"所有套餐共享同一个受治理引擎。区别在于广度:市场、资产、分析、可见层和警报渠道。",monthly:"按月",annual:"按年",save:"节省 20%",note:"<b>治理:</b>所有限制均在服务器端执行——前端仅显示状态。未经后端批准不得激活或升级。每个套餐都遵守输出契约:仅净化后的决策价值,无执行指令或公式暴露。",govRule:"暴露决策价值 · 隐藏配方",discT:"免责声明",discBody:"所有套餐仅授予对决策支持工具的访问权限。DSP 输出是情境参考,而非财务建议、交易指示或保证结果。DSP 不是投资公司,也不管理任何资金。",perMo:"/月",perYr:"/年",sar:"SAR",free:"Free",custom:"按合同"},
+ ur:{dir:"rtl",lang:"ur",compare:"پیکجز کا موازنہ",backBtn:"واپس",title:"وہ گہرائی چنیں جس کی آپ کے فیصلے کو ضرورت ہے",subt:"تمام پیکجز ایک ہی منظم انجن کا اشتراک کرتے ہیں۔ فرق وسعت میں ہے: مارکیٹیں، اثاثے، تجزیے، نظر آنے والی پرتیں اور الرٹ چینلز۔",monthly:"ماہانہ",annual:"سالانہ",save:"20% بچائیں",note:"<b>نظم و نسق:</b> تمام حدود سرور کی طرف نافذ ہوتی ہیں — فرنٹ اینڈ صرف حالت دکھاتا ہے۔ بیک اینڈ کی منظوری کے بغیر کوئی فعالیت یا اپ گریڈ نہیں۔ ہر پیکج آؤٹ پُٹ معاہدے کا احترام کرتا ہے: صرف صاف فیصلہ قدر، کوئی نفاذی احکامات یا فارمولا کا انکشاف نہیں۔",govRule:"فیصلے کی قدر ظاہر کریں · نسخہ چھپائیں",discT:"دستبرداری",discBody:"تمام پیکجز صرف فیصلہ سازی کے معاون آلات تک رسائی دیتے ہیں۔ DSP کے آؤٹ پُٹ سیاقی حوالے ہیں، مالی مشورہ، تجارتی ہدایات یا یقینی نتائج نہیں۔ DSP کوئی سرمایہ کاری کا ادارہ نہیں اور کوئی فنڈ نہیں چلاتا۔",perMo:"/ماہ",perYr:"/سال",sar:"SAR",free:"مفت",custom:"معاہدے پر"}
+};
+const T=a=>a[LANG==="ar"?0:1], N=v=>LANG==="ar"?AR(v):v;
+
+function priceCell(p){
+  const d=I18N[LANG];
+  if(p.m===0)return `<div class="price"><span class="free">${d.free}</span></div>`;
+  if(p.m==null)return `<div class="price"><span class="now" style="font-size:15px">${d.custom}</span></div>`;
+  const now=cycle==="monthly"?p.a:Math.round(p.a*12*0.8);
+  const was=cycle==="monthly"?p.m:Math.round(p.m*12*0.8);
+  const per=cycle==="monthly"?d.perMo:d.perYr;
+  return `<div class="price"><span class="was">${N(was)}</span><span class="now">${N(now)}</span> <span class="cur">${d.sar} ${per}</span></div>`;
+}
+function buildHead(){
+  const d=I18N[LANG];
+  $("#planHead").innerHTML=`<th class="phead feat"></th>`+PLANS.map(p=>`
+    <th class="phead ${p.id==='elite'?'elite':''}">
+      ${p.badge?`<span class="badge">${T(p.badge)}</span>`:''}
+      <div class="pn">${T(p.nm)}</div>
+      ${priceCell(p)}
+      <div class="cta"><button class="btn ${p.id==='elite'?'btn-gold':'btn-ghost'}" data-plan="${p.id}">${T(p.cta)} →</button></div>
+    </th>`).join("");
+  $$('[data-plan]').forEach(b=>b.onclick=()=>{location.href="DSP_Upgrade_Checkout.html";});
+}
+function cell(v){
+  if(v==="Y")return `<span class="yes">✓</span>`;
+  if(v==="N")return `<span class="no">—</span>`;
+  return `<span class="val">${Array.isArray(v)?T(v):v}</span>`;
+}
+function buildMatrix(){
+  let html="";
+  MATRIX.forEach(g=>{
+    html+=`<tr class="grp"><td colspan="5">${T(g.grp)}</td></tr>`;
+    g.rows.forEach(r=>{
+      html+=`<tr><td class="feat">${T(r.f)}</td>`+
+        r.v.map((v,i)=>`<td class="${i===2?'elite':''}">${cell(v)}</td>`).join("")+`</tr>`;
+    });
+  });
+  $("#matrixBody").innerHTML=html;
+}
+function setCycle(c){
+  cycle=c;
+  $("#tgMonthly").classList.toggle('on',c==="monthly");
+  $("#tgAnnual").classList.toggle('on',c==="annual");
+  buildHead();
+}
+$("#tgMonthly").onclick=()=>setCycle("monthly");
+$("#tgAnnual").onclick=()=>setCycle("annual");
+function flash(b){b.style.opacity=".55";setTimeout(()=>b.style.opacity="1",400);}
+$("#backBtn").onclick=()=>{location.href="DSP_Trial_Journey.html";};
+
+function applyLang(){
+  const d=I18N[LANG];
+  document.documentElement.lang=d.lang;document.documentElement.dir=d.dir;document.body.dir=d.dir;
+  const base=I18N.en;$$('[data-i]').forEach(el=>{const k=el.getAttribute('data-i');const v=(d[k]!=null)?d[k]:base[k];if(v!=null)el.innerHTML=v;});
+  const _ls=$("#langSel");if(_ls)_ls.value=LANG;
+  buildHead();buildMatrix();
+}
+const RTL_LANGS={ar:1,ur:1,fa:1,he:1,iw:1};function ndspSetLang(v){if(v==="he"||v==="iw"||v==="he-IL")v="en";if(!I18N[v])v="en";LANG=v;try{localStorage.setItem("ndsp_lang",v);}catch(e){}applyLang();}const _langSel=$("#langSel");if(_langSel)_langSel.onchange=()=>ndspSetLang(_langSel.value);
+try{let _sv=localStorage.getItem("ndsp_lang");if(_sv&&_sv!=="he"&&_sv!=="iw"&&_sv!=="he-IL"&&I18N[_sv])LANG=_sv;}catch(e){}
+applyLang();
+</script>
+</body>
+</html>
