@@ -1,0 +1,456 @@
+{
+  "ok": true,
+  "source": "postgres_ndsp_decision_ledger_from_live_api",
+  "items": [
+    {
+      "symbol": "BTCUSDT",
+      "completed_at": "2026-06-25 15:05:12",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 85,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 61244.01,
+      "provider": "binance"
+    },
+    {
+      "symbol": "ETHUSDT",
+      "completed_at": "2026-06-25 15:05:12",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 87,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 1635.81,
+      "provider": "binance"
+    },
+    {
+      "symbol": "SOLUSDT",
+      "completed_at": "2026-06-25 15:05:12",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 83,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 68.29,
+      "provider": "binance"
+    },
+    {
+      "symbol": "BNBUSDT",
+      "completed_at": "2026-06-25 15:05:12",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 78,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 563.06,
+      "provider": "binance"
+    },
+    {
+      "symbol": "XRPUSDT",
+      "completed_at": "2026-06-25 15:05:12",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 87,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 1.0749,
+      "provider": "binance"
+    },
+    {
+      "symbol": "ADAUSDT",
+      "completed_at": "2026-06-25 15:05:12",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 87,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 0.1483,
+      "provider": "binance"
+    },
+    {
+      "symbol": "DOGEUSDT",
+      "completed_at": "2026-06-25 15:05:12",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 82,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 0.07604,
+      "provider": "binance"
+    },
+    {
+      "symbol": "BTCUSDT",
+      "completed_at": "2026-06-25 15:04:11",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 85,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 61244.01,
+      "provider": "binance"
+    },
+    {
+      "symbol": "ETHUSDT",
+      "completed_at": "2026-06-25 15:04:11",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 87,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 1635.81,
+      "provider": "binance"
+    },
+    {
+      "symbol": "SOLUSDT",
+      "completed_at": "2026-06-25 15:04:11",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 83,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 68.29,
+      "provider": "binance"
+    },
+    {
+      "symbol": "BNBUSDT",
+      "completed_at": "2026-06-25 15:04:11",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 78,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 563.06,
+      "provider": "binance"
+    },
+    {
+      "symbol": "XRPUSDT",
+      "completed_at": "2026-06-25 15:04:11",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 87,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 1.0749,
+      "provider": "binance"
+    },
+    {
+      "symbol": "ADAUSDT",
+      "completed_at": "2026-06-25 15:04:11",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 87,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 0.1483,
+      "provider": "binance"
+    },
+    {
+      "symbol": "DOGEUSDT",
+      "completed_at": "2026-06-25 15:04:11",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 82,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 0.07604,
+      "provider": "binance"
+    },
+    {
+      "symbol": "BTCUSDT",
+      "completed_at": "2026-06-25 15:03:10",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 85,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 61244.01,
+      "provider": "binance"
+    },
+    {
+      "symbol": "ETHUSDT",
+      "completed_at": "2026-06-25 15:03:10",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 87,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 1635.81,
+      "provider": "binance"
+    },
+    {
+      "symbol": "SOLUSDT",
+      "completed_at": "2026-06-25 15:03:10",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 83,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 68.29,
+      "provider": "binance"
+    },
+    {
+      "symbol": "BNBUSDT",
+      "completed_at": "2026-06-25 15:03:10",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 78,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 563.06,
+      "provider": "binance"
+    },
+    {
+      "symbol": "XRPUSDT",
+      "completed_at": "2026-06-25 15:03:10",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 87,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 1.0749,
+      "provider": "binance"
+    },
+    {
+      "symbol": "ADAUSDT",
+      "completed_at": "2026-06-25 15:03:10",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 87,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 0.1483,
+      "provider": "binance"
+    },
+    {
+      "symbol": "DOGEUSDT",
+      "completed_at": "2026-06-25 15:03:10",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 82,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 0.07604,
+      "provider": "binance"
+    },
+    {
+      "symbol": "BTCUSDT",
+      "completed_at": "2026-06-25 15:02:11",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 85,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 61244.01,
+      "provider": "binance"
+    },
+    {
+      "symbol": "ETHUSDT",
+      "completed_at": "2026-06-25 15:02:11",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 87,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 1635.81,
+      "provider": "binance"
+    },
+    {
+      "symbol": "SOLUSDT",
+      "completed_at": "2026-06-25 15:02:11",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 83,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 68.29,
+      "provider": "binance"
+    },
+    {
+      "symbol": "BNBUSDT",
+      "completed_at": "2026-06-25 15:02:11",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 78,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 563.06,
+      "provider": "binance"
+    },
+    {
+      "symbol": "XRPUSDT",
+      "completed_at": "2026-06-25 15:02:11",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 87,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 1.0749,
+      "provider": "binance"
+    },
+    {
+      "symbol": "ADAUSDT",
+      "completed_at": "2026-06-25 15:02:11",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 87,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 0.1483,
+      "provider": "binance"
+    },
+    {
+      "symbol": "DOGEUSDT",
+      "completed_at": "2026-06-25 15:02:11",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 82,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 0.07604,
+      "provider": "binance"
+    },
+    {
+      "symbol": "BTCUSDT",
+      "completed_at": "2026-06-25 15:01:15",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 85,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 61244.01,
+      "provider": "binance"
+    },
+    {
+      "symbol": "ETHUSDT",
+      "completed_at": "2026-06-25 15:01:15",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 87,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 1635.81,
+      "provider": "binance"
+    },
+    {
+      "symbol": "SOLUSDT",
+      "completed_at": "2026-06-25 15:01:15",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 83,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 68.29,
+      "provider": "binance"
+    },
+    {
+      "symbol": "BNBUSDT",
+      "completed_at": "2026-06-25 15:01:15",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 78,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 563.06,
+      "provider": "binance"
+    },
+    {
+      "symbol": "XRPUSDT",
+      "completed_at": "2026-06-25 15:01:15",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 87,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 1.0749,
+      "provider": "binance"
+    },
+    {
+      "symbol": "ADAUSDT",
+      "completed_at": "2026-06-25 15:01:15",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 87,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 0.1483,
+      "provider": "binance"
+    },
+    {
+      "symbol": "DOGEUSDT",
+      "completed_at": "2026-06-25 15:01:15",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 82,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 0.07604,
+      "provider": "binance"
+    },
+    {
+      "symbol": "BTCUSDT",
+      "completed_at": "2026-06-25 15:00:19",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 85,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 61244.01,
+      "provider": "binance"
+    },
+    {
+      "symbol": "ETHUSDT",
+      "completed_at": "2026-06-25 15:00:19",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 87,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 1635.81,
+      "provider": "binance"
+    },
+    {
+      "symbol": "SOLUSDT",
+      "completed_at": "2026-06-25 15:00:19",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 83,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 68.29,
+      "provider": "binance"
+    },
+    {
+      "symbol": "BNBUSDT",
+      "completed_at": "2026-06-25 15:00:19",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 78,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 563.06,
+      "provider": "binance"
+    },
+    {
+      "symbol": "XRPUSDT",
+      "completed_at": "2026-06-25 15:00:19",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 87,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 1.0749,
+      "provider": "binance"
+    },
+    {
+      "symbol": "ADAUSDT",
+      "completed_at": "2026-06-25 15:00:19",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 87,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 0.1483,
+      "provider": "binance"
+    },
+    {
+      "symbol": "DOGEUSDT",
+      "completed_at": "2026-06-25 15:00:19",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 82,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 0.07604,
+      "provider": "binance"
+    },
+    {
+      "symbol": "BTCUSDT",
+      "completed_at": "2026-06-25 14:59:11",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 85,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 61282.01,
+      "provider": "binance"
+    },
+    {
+      "symbol": "ETHUSDT",
+      "completed_at": "2026-06-25 14:59:11",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 87,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 1633.27,
+      "provider": "binance"
+    },
+    {
+      "symbol": "SOLUSDT",
+      "completed_at": "2026-06-25 14:59:11",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 83,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 68.18,
+      "provider": "binance"
+    },
+    {
+      "symbol": "BNBUSDT",
+      "completed_at": "2026-06-25 14:59:11",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 78,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 562.7,
+      "provider": "binance"
+    },
+    {
+      "symbol": "XRPUSDT",
+      "completed_at": "2026-06-25 14:59:11",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 87,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 1.0721,
+      "provider": "binance"
+    },
+    {
+      "symbol": "ADAUSDT",
+      "completed_at": "2026-06-25 14:59:11",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 87,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 0.1476,
+      "provider": "binance"
+    },
+    {
+      "symbol": "DOGEUSDT",
+      "completed_at": "2026-06-25 14:59:11",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 82,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 0.07596,
+      "provider": "binance"
+    },
+    {
+      "symbol": "BTCUSDT",
+      "completed_at": "2026-06-25 14:58:11",
+      "final_state": "UNDER_MONITORING",
+      "quality_score": 85,
+      "completion_reason": "قراءة أسبوعي · ضغط هابط",
+      "price": 61282.01,
+      "provider": "binance"
+    }
+  ]
+}

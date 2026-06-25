@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
+<title>NDSP TERMINAL V5</title>
+<style>
+:root{
+--bg:#050505;--panel:#0b0b0c;--panel2:#101012;--line:#3b2d09;--gold:#d4af37;
+--green:#23d36b;--red:#ff4d4d;--yellow:#ffbf22;--gray:#8a8f98;--text:#f2f2f2;--muted:#a7a7a7;
+}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at 50% 20%,#171104 0,#050505 45%,#000 100%);color:var(--text);font-family:Arial,Tahoma,sans-serif;overflow:auto}
+.app{width:1920px;height:1080px;margin:0 auto;display:grid;grid-template-columns:315px 1fr 665px;grid-template-rows:78px 1fr 72px;gap:10px;padding:14px;transform-origin:top center}
+@media(max-width:1920px){.app{transform:scale(calc(100vw / 1920));margin:0 auto;height:1080px}}
+.header{grid-column:1/4;display:grid;grid-template-columns:315px 1fr 430px;gap:10px;align-items:center;border-bottom:1px solid rgba(212,175,55,.25)}
+.logo{display:flex;align-items:center;gap:14px;color:var(--gold);font-weight:900;font-size:36px}
+.logo .mark{width:54px;height:54px;border:2px solid var(--gold);border-radius:50%;display:grid;place-items:center;font-size:20px}
+.topbar{display:flex;align-items:center;justify-content:center;gap:22px}
+.pill{border:1px solid rgba(212,175,55,.28);background:#0c0c0e;border-radius:14px;padding:13px 22px;font-weight:800}
+.value{color:var(--green)}
+.brand{text-align:right}
+.brand b{font-size:22px}.brand div{color:var(--gold);letter-spacing:3px;margin-top:6px}
+.side{grid-row:2/4;background:linear-gradient(180deg,#090909,#050505);border-left:1px solid rgba(212,175,55,.25);padding:12px}
+.menu{display:flex;flex-direction:column;gap:10px}.mi{height:54px;border:1px solid #242424;background:#0c0c0d;border-radius:12px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;color:#ddd;font-weight:700}.mi.active{border-color:var(--gold);background:linear-gradient(90deg,rgba(212,175,55,.22),#0c0c0d);color:var(--gold)}
+.main{display:grid;grid-template-rows:610px 165px 230px;gap:10px}
+.right{display:grid;grid-template-rows:335px 325px 350px;gap:10px}
+.panel{background:linear-gradient(145deg,rgba(18,18,20,.96),rgba(4,4,4,.96));border:1px solid rgba(212,175,55,.55);border-radius:14px;box-shadow:0 0 30px rgba(0,0,0,.6);padding:18px;overflow:hidden}
+.title{text-align:center;font-size:23px;font-weight:900;margin:0 0 8px}.sub{text-align:center;color:#ddd;font-size:15px}
+.radar{position:relative;height:520px;margin-top:10px}
+.ring{position:absolute;inset:35px 115px;border:2px solid rgba(212,175,55,.45);border-radius:50%;box-shadow:inset 0 0 40px rgba(212,175,55,.08)}
+.ring:before,.ring:after{content:"";position:absolute;inset:70px;border:1px dashed rgba(212,175,55,.25);border-radius:50%}.ring:after{inset:145px}
+.center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:210px;height:210px;border-radius:50%;border:3px solid var(--gold);display:grid;place-items:center;text-align:center;background:radial-gradient(circle,#211601,#090909 70%);box-shadow:0 0 45px rgba(212,175,55,.45)}
+.center b{font-size:33px;color:var(--yellow)}.center span{display:block;color:#fff;font-size:14px}.center em{display:block;color:var(--red);font-style:normal;font-size:22px;margin-top:12px}
+.node{position:absolute;width:92px;height:92px;border-radius:50%;background:#0b0b0d;border:4px solid var(--gray);display:grid;place-items:center;text-align:center;font-weight:900;box-shadow:0 0 22px rgba(0,0,0,.7)}
+.node small{display:block;color:#fff;font-size:13px;margin-top:5px}.ok{border-color:var(--green);color:#7dffa9}.bad{border-color:var(--red);color:#ff7777}.warn{border-color:var(--yellow);color:#ffd45b}
+.n1{left:50%;top:15px;transform:translateX(-50%)}.n2{right:185px;top:70px}.n3{right:105px;top:210px}.n4{right:135px;bottom:80px}.n5{left:50%;bottom:25px;transform:translateX(-50%)}.n6{left:135px;bottom:80px}.n7{left:105px;top:210px}.n8{left:185px;top:70px}.n9{left:75px;top:330px}.n10{left:260px;top:365px}.n11{right:260px;top:365px}
+.legend{position:absolute;bottom:0;left:50%;transform:translateX(-50%);display:flex;gap:25px;font-size:14px}.dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-left:6px}.g{background:var(--green)}.y{background:var(--yellow)}.r{background:var(--red)}.x{background:var(--gray)}
+.qwrap{display:grid;grid-template-columns:250px 1fr;gap:20px;align-items:center}.circle{width:210px;height:210px;border-radius:50%;background:conic-gradient(var(--yellow) 43%,#2d333b 0);display:grid;place-items:center;margin:auto}.circle div{width:145px;height:145px;border-radius:50%;background:#101014;display:grid;place-items:center;text-align:center}.circle b{font-size:42px;color:#ff7b22}.bars div{margin:18px 0}.bar{height:7px;background:#202020;border-radius:8px;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),#ff8c00)}
+.row{display:flex;justify-content:space-between;border-bottom:1px solid #202020;padding:13px 0;font-size:17px}.redtxt{color:var(--red);font-weight:900}.gold{color:var(--gold);font-weight:900}.banner{border:1px solid rgba(212,175,55,.45);background:rgba(212,175,55,.09);border-radius:9px;padding:13px;text-align:center;color:var(--gold);font-size:18px;font-weight:900}
+.frames{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.frame{text-align:center;background:#0b0b0d;border:1px solid #242424;border-radius:12px;padding:14px}.frame b{font-size:21px}.frame .st{color:var(--yellow);font-weight:900;margin:9px 0}.cross{color:var(--red);font-weight:900}
+.health{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.hc{background:#0b0b0d;border:1px solid #242424;border-radius:10px;padding:10px;text-align:center;font-size:14px}.hc b{display:block}.hc .st{color:var(--yellow);font-weight:900}.hc.okc .st{color:var(--green)}
+.guide .step{display:grid;grid-template-columns:45px 1fr;gap:12px;border:1px solid #222;background:#0c0c0d;border-radius:10px;padding:12px;margin:9px 0}.num{font-weight:900;color:var(--gold)}
+.footer{grid-column:2/4;display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.foot{border:1px solid rgba(212,175,55,.35);border-radius:11px;background:#0b0b0d;padding:12px;text-align:center;color:#aaa}.foot b{color:var(--gold)}
+</style>
+<meta name="NDSP_V5_BASELINE_LOCK" content="true-20260625_144016">
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+
+<style>
+/* NDSP_V5_MOBILE_SCALE_ONLY */
+html, body {
+  margin: 0 !important;
+  background: #050505 !important;
+  overflow-x: auto !important;
+}
+body {
+  min-width: 1280px !important;
+}
+@media (max-width: 900px) {
+  body {
+    width: 1280px !important;
+    min-width: 1280px !important;
+    transform: scale(calc(100vw / 1280));
+    transform-origin: top left;
+  }
+}
+</style>
+
+</head>
+<body>
+<div class="app">
+<header class="header">
+  <div class="logo"><div class="mark">ن</div><div>NDSP</div></div>
+  <div class="topbar">
+    <div class="pill">₿ BTCUSDT</div><div>السعر الحالي<br><b class="value" id="price">NOT_READY</b></div>
+    <div>آخر تحديث<br><b class="value" id="updated">NOT_READY</b></div>
+    <div>الزمن<br><b id="time">--</b></div>
+    <div class="pill">AR</div>
+  </div>
+  <div class="brand"><b>منصة نواف لدعم القرار 🛡</b><div>NDSP TERMINAL V5</div></div>
+</header>
+
+<aside class="side">
+  <div class="menu">
+    <div class="mi"><span>الأسواق والأصول</span><b>01</b></div><div class="mi"><span>مركز القيادة</span><b>02</b></div>
+    <div class="mi"><span>القراءات الحية</span><b>03</b></div><div class="mi"><span>جودة البيانات</span><b>04</b></div>
+    <div class="mi"><span>الأخبار المؤثرة</span><b>05</b></div><div class="mi"><span>الماكرو وقوة الدولار</span><b>06</b></div>
+    <div class="mi"><span>التقويم الاقتصادي</span><b>07</b></div><div class="mi"><span>خريطة السوق</span><b>08</b></div>
+    <div class="mi active"><span>دعم القرار</span><b>09</b></div><div class="mi"><span>سجل الشفافية</span><b>10</b></div>
+    <div class="mi"><span>التنبيهات</span><b>11</b></div><div class="mi"><span>الحساب</span><b>12</b></div>
+    <div class="mi active"><span>دليل قراءة القرار</span><b>📖</b></div>
+  </div>
+</aside>
+
+<main class="main">
+<section class="panel">
+  <h2 class="title">رادار سلامة القرار</h2><div class="sub">يكشف اكتمال البيانات وصحة جميع المحركات قبل اعتماد القرار</div>
+  <div class="radar">
+    <div class="ring"></div><div class="center"><div><span>حالة القرار</span><b id="state">WATCH</b><span>ACTION_REQUIRED</span><em id="dir">SHORT ↓</em></div></div>
+    <div class="node ok n1">COT<small>تحديث COT</small></div><div class="node ok n2">TDL<small>التحليل الزمني</small></div>
+    <div class="node ok n3">SCN<small>السيناريو</small></div><div class="node warn n4">NMP<small>نماذج السعر</small></div>
+    <div class="node warn n5">MOM<small>المومنتم</small></div><div class="node bad n6">DIV<small>الاختلاف</small></div>
+    <div class="node bad n7">HDV<small>الاختلاف الخفي</small></div><div class="node ok n8">USD<small>قوة الدولار</small></div>
+    <div class="node bad n9">NEWS<small>الأخبار</small></div><div class="node bad n10">RISK<small>المخاطر</small></div><div class="node warn n11">GOV<small>حوكمة البيانات</small></div>
+    <div class="legend"><span><i class="dot g"></i>OK</span><span><i class="dot y"></i>ACTION_REQUIRED</span><span><i class="dot r"></i>BLOCKED</span><span><i class="dot x"></i>NOT_READY</span></div>
+  </div>
+</section>
+
+<section class="panel frames">
+  <div class="frame"><b>WEEKLY</b><div class="st">ACTION_REQUIRED</div>NMP: <span class="cross">×</span> MOM: <span class="cross">×</span><br>DIV: <span class="cross">×</span> HDV: <span class="cross">×</span><br><small>بيانات غير مكتملة</small></div>
+  <div class="frame"><b>DAILY</b><div class="st">ACTION_REQUIRED</div>NMP: <span class="cross">×</span> MOM: <span class="cross">×</span><br>DIV: <span class="cross">×</span> HDV: <span class="cross">×</span><br><small>بيانات غير مكتملة</small></div>
+  <div class="frame"><b>4H</b><div class="st">ACTION_REQUIRED</div>NMP: <span class="cross">×</span> MOM: <span class="cross">×</span><br>DIV: <span class="cross">×</span> HDV: <span class="cross">×</span><br><small>بيانات غير مكتملة</small></div>
+  <div class="frame"><b>1H</b><div class="st">ACTION_REQUIRED</div>NMP: <span class="cross">×</span> MOM: <span class="cross">×</span><br>DIV: <span class="cross">×</span> HDV: <span class="cross">×</span><br><small>بيانات غير مكتملة</small></div>
+  <div class="frame"><b>15M</b><div class="st">ACTION_REQUIRED</div>NMP: <span class="cross">×</span> MOM: <span class="cross">×</span><br>DIV: <span class="cross">×</span> HDV: <span class="cross">×</span><br><small>بيانات غير مكتملة</small></div>
+</section>
+
+<section class="panel">
+  <h2 class="title">صحة المحركات</h2>
+  <div class="health">
+    <div class="hc okc"><b>COT تحديث</b><div class="st">OK</div><small>تم الحساب</small></div><div class="hc okc"><b>TDL</b><div class="st">OK</div><small>تم الحساب</small></div>
+    <div class="hc okc"><b>مستويات السيناريو</b><div class="st">OK</div><small>تم الحساب</small></div><div class="hc"><b>توافق الفرضيات</b><div class="st">ACTION_REQUIRED</div><small>لم يكتمل الحساب</small></div>
+    <div class="hc"><b>NMP</b><div class="st">ACTION_REQUIRED</div><small>لم تحسب كل الفرضيات</small></div><div class="hc"><b>المومنتم</b><div class="st">ACTION_REQUIRED</div><small>لم تحسب كل الفرضيات</small></div>
+    <div class="hc"><b>الأخبار</b><div class="st">ACTION_REQUIRED</div><small>لم تحسب كل الفرضيات</small></div><div class="hc"><b>الاختلاف الخفي</b><div class="st">ACTION_REQUIRED</div><small>لم تحسب كل الفرضيات</small></div>
+    <div class="hc okc"><b>قوة الدولار</b><div class="st">OK</div><small>تم الحساب</small></div><div class="hc"><b>الأخبار الاقتصادية</b><div class="st">ACTION_REQUIRED</div><small>لم يكتمل التحليل</small></div>
+    <div class="hc"><b>المخاطر</b><div class="st">ACTION_REQUIRED</div><small>لم يكتمل التقييم</small></div><div class="hc"><b>طبقة الشيطان</b><div class="st">PENDING</div><small>بانتظار اكتمال البيانات</small></div>
+    <div class="hc"><b>تكامل البيانات</b><div class="st">ACTION_REQUIRED</div><small>بيانات ناقصة في بعض المحركات</small></div><div class="hc"><b>حوكمة البيانات</b><div class="st">ACTION_REQUIRED</div><small>المحركات غير مكتملة</small></div>
+  </div>
+</section>
+</main>
+
+<aside class="right">
+<section class="panel">
+  <h2 class="title">جودة القرار</h2>
+  <div class="qwrap"><div class="circle"><div><b>43%</b><small>التقييم<br>ACTION_REQUIRED</small></div></div>
+  <div class="bars"><div>سلامة البيانات 52%<div class="bar"><i style="width:52%"></i></div></div><div>سلامة التحليل 38%<div class="bar"><i style="width:38%"></i></div></div><div>سلامة القرار 41%<div class="bar"><i style="width:41%"></i></div></div><div>طبقة الشيطان <b>PENDING</b></div></div></div>
+  <div class="banner">WATCH — القرار يحتاج معالجة بيانات</div>
+</section>
+<section class="panel">
+  <h2 class="title">ملخص تفسير القرار</h2>
+  <div class="row"><span>الاتجاه المرجح حسب TDL</span><b class="redtxt">SHORT ↓</b></div>
+  <div class="row"><span>السيناريو الحالي</span><span>تحت المراقبة — كسر أسبوعي هابط</span></div>
+  <div class="row"><span>أهم المستويات</span><span id="levels">NOT_READY</span></div>
+  <div class="row"><span>المحركات التي تحتاج معالجة</span><span>NMP - Momentum - Divergence - Hidden Divergence - Risk - News</span></div>
+  <div class="row"><span>الإجراء المطلوب</span><span>إكمال حسابات المحركات قبل اعتماد القرار</span></div>
+  <div class="banner">القرار ظاهر بشفافية، لكنه غير مكتمل الأركان.</div>
+</section>
+<section class="panel guide">
+  <h2 class="title">دليل قراءة القرار</h2>
+  <div class="step"><div class="num">01</div><div><b>تحقق من سلامة البيانات</b><br><small>يجب أن تكون جميع مصادر البيانات محدثة وصحيحة.</small></div></div>
+  <div class="step"><div class="num">02</div><div><b>راجع صحة المحركات</b><br><small>أي محرك بحالة ACTION_REQUIRED يؤثر على جودة القرار.</small></div></div>
+  <div class="step"><div class="num">03</div><div><b>افحص الأطر الزمنية</b><br><small>لا يكتمل القرار إذا كان أي فريم غير محسوب بالكامل.</small></div></div>
+  <div class="step"><div class="num">04</div><div><b>افهم تفسير القرار</b><br><small>اقرأ ملخص التفسير لفهم سبب الاتجاه المتوقع.</small></div></div>
+  <div class="step"><div class="num">05</div><div><b>لا تعتمد القرار</b><br><small>لا تعتمد القرار النهائي إلا إذا كانت الحالة VERIFIED.</small></div></div>
+</section>
+</aside>
+
+<footer class="footer">
+  <div class="foot"><b>التنبيه</b><br>ACTION_REQUIRED تعني أن هناك محركات تحتاج إكمال.</div>
+  <div class="foot"><b>الأطر الزمنية</b><br>لا تعتمد القرار قبل اكتمال الفريمات.</div>
+  <div class="foot"><b>الحلقة الوسطى</b><br>تعرض صحة منظومة القرار.</div>
+  <div class="foot"><b>المركز</b><br>يعرض حالة القرار النهائية.</div>
+  <div class="foot"><b>طبقة الشيطان</b><br>آخر طبقة تحقق قبل الاعتماد.</div>
+</footer>
+</div>
+
+<script>
+const API="https://api.ndsp.app/api/decision/quality-live?symbol=BTCUSDT";
+document.getElementById("time").textContent=new Date().toLocaleString("ar-SA");
+fetch(API,{cache:"no-store"}).then(r=>r.json()).then(d=>{
+ const p=d?.instrument?.live_price;
+ if(p) document.getElementById("price").textContent=Number(p).toLocaleString("en-US");
+ document.getElementById("updated").textContent=d?.scenario?.scenario_last_updated || new Date().toLocaleTimeString("ar-SA");
+ document.getElementById("state").textContent=(d?.scenario?.scenario_state||"WATCH").replaceAll("_"," ");
+ document.getElementById("dir").textContent=d?.scenario?.scenario_directional_context?.includes("هابط")?"SHORT ↓":"NOT_READY";
+ document.getElementById("levels").textContent=[
+  d?.scenario?.scenario_activation_level,
+  d?.scenario?.scenario_arrival_level,
+  d?.scenario?.scenario_review_zone,
+  d?.scenario?.scenario_invalidation_level
+ ].filter(Boolean).join(" - ") || "NOT_READY";
+}).catch(()=>{});
+</script>
+</body>
+</html>

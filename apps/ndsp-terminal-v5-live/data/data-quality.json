@@ -1,0 +1,26 @@
+{
+  "ok": true,
+  "source": "real_binding_status",
+  "items": [
+    {
+      "name": "Live Decision API",
+      "status": "connected",
+      "note": "مرتبط فعلياً عبر 127.0.0.1:9057"
+    },
+    {
+      "name": "Decision Ledger DB",
+      "status": "connected",
+      "note": "عدد القراءات المخزنة الآن: 50"
+    },
+    {
+      "name": "Impact News",
+      "status": "missing_provider",
+      "note": "لا يوجد مزود أخبار حقيقي مربوط حالياً"
+    },
+    {
+      "name": "Economic Calendar",
+      "status": "missing_provider",
+      "note": "لا يوجد مزود تقويم اقتصادي حقيقي مربوط حالياً"
+    }
+  ]
+}
