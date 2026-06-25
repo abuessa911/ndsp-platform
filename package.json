@@ -1,7 +1,6 @@
 {
   "name": "ndsp-platform",
   "version": "1.0.0",
-  "private": true,
   "type": "module",
   "scripts": {
     "build": "node -e \"console.log('NDSP Alpic build OK')\"",
