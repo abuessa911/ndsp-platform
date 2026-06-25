@@ -1,0 +1,3 @@
+INSTALL_COMMAND="npm install --no-audit --no-fund --legacy-peer-deps"
+BUILD_COMMAND="npm run build"
+START_COMMAND="npm run --silent start"
