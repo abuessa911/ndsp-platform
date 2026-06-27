@@ -1,0 +1,71 @@
+{
+  "policy": "NDSP_SAAS_PACKAGES_POLICY",
+  "status": "authoritative",
+  "packages": {
+    "free": {
+      "name": "Free",
+      "markets_limit": 1,
+      "assets_limit": 2,
+      "daily_analysis_limit": 1,
+      "visible_named_layers": [],
+      "hidden_named_layers_count": 16,
+      "alerts": "none",
+      "api": false,
+      "webhooks": false,
+      "teams": false,
+      "reports": false
+    },
+    "pro": {
+      "name": "Pro",
+      "markets_limit": 2,
+      "assets_limit": 20,
+      "daily_analysis_limit": 15,
+      "visible_named_layers": ["TDL", "NMP"],
+      "hidden_by_name_but_outputs_allowed": ["Devil's Advocate", "Nawaf Golden Alignment"],
+      "alerts": "basic_limited",
+      "api": false,
+      "webhooks": false,
+      "teams": false,
+      "reports": "limited"
+    },
+    "elite": {
+      "name": "Elite",
+      "markets_limit": "all",
+      "assets_limit": 100,
+      "daily_analysis_limit": 250,
+      "visible_named_layers": ["TDL", "NMP", "Devil's Advocate", "Nawaf Golden Alignment"],
+      "alerts": "advanced_telegram",
+      "comparison": true,
+      "decision_journal": true,
+      "scenario_followup": true,
+      "api": false,
+      "webhooks": false,
+      "teams": false,
+      "reports": "advanced_user"
+    },
+    "institutional_suite": {
+      "name": "Institutional Suite",
+      "markets_limit": "all",
+      "assets_limit": "250+ or contract",
+      "daily_analysis_limit": "contract",
+      "visible_named_layers": ["TDL", "NMP", "Devil's Advocate", "Nawaf Golden Alignment"],
+      "alerts": "multi_channel",
+      "api": true,
+      "webhooks": true,
+      "teams": true,
+      "reports": true,
+      "custom_assets": true,
+      "contract_based": true
+    }
+  },
+  "global_rules": {
+    "hidden_internal_layer_names_always_hidden": true,
+    "hidden_layer_outputs_allowed": true,
+    "raw_logic_exposed": false,
+    "weights_exposed": false,
+    "formulas_exposed": false,
+    "internal_scoring_exposed": false,
+    "source_logic_exposed": false,
+    "public_output_sanitized": true
+  }
+}

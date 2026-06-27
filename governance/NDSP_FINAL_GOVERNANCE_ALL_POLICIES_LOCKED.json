@@ -1,0 +1,308 @@
+{
+  "policy": "NDSP_FINAL_GOVERNANCE_ALL_POLICIES_LOCKED",
+  "status": "authoritative_final_locked",
+  "project": "NDSP — Nawaf Decision Support Platform",
+  "project_arabic": "NDSP — منصة نواف لدعم القرار",
+  "operating_mode": {
+    "MODE": "DECISION_ACTIVE",
+    "EXECUTION_POLICY": "EXECUTION_SANITIZED",
+    "ALL_LAYERS_PARTICIPATE": true,
+    "NO_LAYER_DISABLED": true,
+    "DIRECT_TRADE_EXECUTION": false,
+    "PUBLIC_OUTPUT_SANITIZED": true,
+    "NO_FINANCIAL_ADVICE": true,
+    "NO_GUARANTEED_RESULTS": true,
+    "NO_SECRET_EXPOSURE": true,
+    "FRONTEND_IS_DISPLAY_ONLY": true,
+    "BACKEND_IS_DECISION_AUTHORITY": true
+  },
+  "official_paths": {
+    "root": "/home/nawaf511/empire-core-new",
+    "backend": "/home/nawaf511/empire-core-new/backend",
+    "governance": "/home/nawaf511/empire-core-new/governance",
+    "frontend_sources": {
+      "public_landing": "/home/nawaf511/empire-core-new/apps/public-landing",
+      "user_portal": "/home/nawaf511/empire-core-new/apps/user-portal",
+      "admin_console": "/home/nawaf511/empire-core-new/apps/admin-console"
+    },
+    "published_outputs": {
+      "public_landing": "/var/www/ndsp",
+      "user_portal": "/var/www/ndsp-my",
+      "admin_console": "/var/www/ndsp-admin"
+    },
+    "reports": "/home/nawaf511/ndsp_launch_reports",
+    "backups": "/home/nawaf511/ndsp_backups",
+    "snapshots": "/home/nawaf511/ndsp_snapshots"
+  },
+  "domains": {
+    "ndsp.app": "public_landing_only",
+    "my.ndsp.app": "user_portal_only",
+    "admin.ndsp.app": "admin_operations_center_only",
+    "api.ndsp.app": "backend_api_only"
+  },
+  "trial": {
+    "days": 16,
+    "mode_when_active": "TRIAL_EXPERIENCE",
+    "mode_after_expiry": "PACKAGE_BASED_EXPERIENCE",
+    "final_seat_distribution": {
+      "total": 50,
+      "ordinary_beginner": 25,
+      "specialist_academic": 10,
+      "private_premium": 15
+    },
+    "old_distribution_cancelled": {
+      "ordinary": 20,
+      "specialist": 10,
+      "featured": 20
+    }
+  },
+  "packages": {
+    "free": {
+      "markets": 1,
+      "assets": 2,
+      "daily_analyses": 1,
+      "visible_named_layers": [],
+      "alerts": "none",
+      "api": false,
+      "webhooks": false
+    },
+    "pro": {
+      "markets": 2,
+      "assets": 20,
+      "daily_analyses": 15,
+      "visible_named_layers": [
+        "TDL",
+        "NMP"
+      ],
+      "hidden_by_name_outputs_allowed": [
+        "Devil's Advocate",
+        "Nawaf Golden Alignment"
+      ],
+      "alerts": "basic_limited",
+      "api": false,
+      "webhooks": false
+    },
+    "elite": {
+      "markets": "all_supported",
+      "assets": 100,
+      "daily_analyses": 250,
+      "visible_named_layers": [
+        "TDL",
+        "NMP",
+        "Devil's Advocate",
+        "Nawaf Golden Alignment"
+      ],
+      "telegram_alerts": "advanced",
+      "comparison": true,
+      "decision_journal": true,
+      "scenario_followup": true
+    },
+    "institutional_suite": {
+      "markets": "all_supported",
+      "assets": "250+ or contract",
+      "daily_analyses": "contract",
+      "visible_named_layers": [
+        "TDL",
+        "NMP",
+        "Devil's Advocate",
+        "Nawaf Golden Alignment"
+      ],
+      "api_decision_output": true,
+      "webhooks": true,
+      "teams": true,
+      "reports": true,
+      "custom_assets": true
+    }
+  },
+  "layers": {
+    "total_internal_layers": 16,
+    "visible_named_layers": [
+      {
+        "name": "TDL",
+        "arabic": "منطق البعد الزمني"
+      },
+      {
+        "name": "NMP",
+        "arabic": "نقطة التقاء نواف"
+      },
+      {
+        "name": "Devil's Advocate",
+        "arabic": "محامي الشيطان"
+      },
+      {
+        "name": "Nawaf Golden Alignment",
+        "arabic": "إشارة نواف الذهبية"
+      }
+    ],
+    "hidden_named_layers_count": 12,
+    "hide_internal_names": true,
+    "hide_internal_ids": true,
+    "hide_order": true,
+    "hide_formulas": true,
+    "hide_weights": true,
+    "hide_raw_logic": true,
+    "sanitized_outputs_allowed": true
+  },
+  "tdl_v2": {
+    "visible_name": "TDL",
+    "arabic": "منطق البعد الزمني",
+    "lm_authority": {
+      "primary": [
+        "Asset Managers"
+      ],
+      "fallback": [
+        "Commercials"
+      ],
+      "days": [
+        "Monday",
+        "Friday"
+      ]
+    },
+    "s_authority": {
+      "primary": [
+        "Leveraged Funds"
+      ],
+      "fallback": [
+        "Non-Commercials"
+      ],
+      "days": [
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Saturday",
+        "Sunday"
+      ]
+    },
+    "addon_01_trade_horizon_alignment": {
+      "enabled": true,
+      "if_lm_and_s_agree": "SWING",
+      "if_lm_and_s_disagree": "SCALPING",
+      "public_agree_ar": "أفق متابعة ممتد",
+      "public_disagree_ar": "أفق متابعة قصير"
+    },
+    "addon_02_strength_filter": {
+      "enabled": true,
+      "if_buy_sign_similar_to_sell_sign": "WEAK",
+      "if_buy_sign_different_from_sell_sign": "STRONG",
+      "public_weak_ar": "الأفق قصير",
+      "public_strong_ar": "الأفق ممتد"
+    },
+    "raw_logic_exposed": false,
+    "primary_source_revision": {
+      "revision_id": "TDL_PRIMARY_SOURCE_REVISION_20260603",
+      "lm_primary": [
+        "Asset Managers"
+      ],
+      "lm_fallback": [
+        "Commercials"
+      ],
+      "s_primary": [
+        "Leveraged Funds"
+      ],
+      "s_fallback": [
+        "Non-Commercials"
+      ],
+      "other_reportables_primary": false,
+      "dealer_intermediary_primary": false,
+      "public_output_sanitized": true,
+      "raw_source_names_exposed": false
+    }
+  },
+  "scenario_reference_levels": {
+    "allowed": true,
+    "fields": [
+      "scenario_activation_level",
+      "scenario_arrival_level",
+      "scenario_invalidation_level",
+      "scenario_review_zone",
+      "scenario_time_horizon",
+      "scenario_confidence_band",
+      "scenario_follow_up_note"
+    ],
+    "required_disclaimer_ar": "مستويات السيناريو هي مراجع سياقية لدعم القرار فقط، وليست نصيحة مالية أو أمر تداول أو توجيه تنفيذ أو ضمانًا للنتائج.",
+    "required_disclaimer_en": "Scenario levels are contextual decision-support references only. They are not financial advice, trade instructions, execution orders, or guaranteed outcomes.",
+    "execution_terms_forbidden": true
+  },
+  "backend_feature_audit": {
+    "enabled": true,
+    "classifications": [
+      "VISIBLE_BY_PACKAGE",
+      "INTERNAL_PROTECTED",
+      "ROADMAP_DEFERRED",
+      "NEEDS_FRONTEND_BINDING",
+      "ADMIN_ONLY",
+      "LEGAL_ONLY",
+      "DEPRECATED",
+      "QUARANTINED"
+    ]
+  },
+  "registration_anti_abuse": {
+    "enabled": true,
+    "email_unique": true,
+    "phone_unique": true,
+    "device_fingerprint_hash": true,
+    "ip_hash": true,
+    "ip_risk_score": true,
+    "invite_token_validation": true,
+    "backend_enforced": true
+  },
+  "security": {
+    "flexible_maximum_security": true,
+    "server_side_secrets_only": true,
+    "admin_gateway_only": true,
+    "no_admin_key_localstorage": true,
+    "no_public_tokens": true,
+    "audit_logs": true,
+    "safe_errors": true,
+    "public_output_sanitized": true
+  },
+  "translation": {
+    "arabic": true,
+    "english": true,
+    "global_languages_allowed": true,
+    "hebrew_blocked": true,
+    "blocked_codes": [
+      "he",
+      "he-IL",
+      "iw",
+      "Hebrew"
+    ],
+    "external_auto_translation_defense_attempt": true
+  },
+  "final_exclusions": {
+    "cancelled": [
+      "old_trial_seat_distribution_20_10_20",
+      "/my/elite-trial",
+      "/my/elite-feedback",
+      "/my/elite-discount",
+      "/my/elite-lab",
+      "/elite-trial",
+      "Elite Trial Intelligence Center",
+      "in_trial_feedback_governance",
+      "Post-Trial Operations governance",
+      "detailed UI design system requirement",
+      "Elite Trial API routes",
+      "Post-Trial API routes",
+      "proposed Elite Trial and Post-Trial database schemas",
+      "Incident Response section from previous list"
+    ],
+    "everything_else_remains_active": true
+  },
+  "final_rule": "Expose governed decision value. Hide the internal recipe.",
+  "frontend_source_enforcement": {
+    "status": "AUTHORITATIVE_LOCKED_ADDENDUM",
+    "source_of_truth": {
+      "public_landing": "/home/nawaf511/empire-core-new/apps/public-landing",
+      "user_portal": "/home/nawaf511/empire-core-new/apps/user-portal",
+      "admin_console": "/home/nawaf511/empire-core-new/apps/admin-console"
+    },
+    "var_www_policy": "SYMLINK_ONLY_TO_OFFICIAL_APPS_SOURCES",
+    "var_www_mappings": {
+      "/var/www/ndsp": "/home/nawaf511/empire-core-new/apps/public-landing",
+      "/var/www/ndsp-my": "/home/nawaf511/empire-core-new/apps/user-portal",
+      "/var/www/ndsp-admin": "/home/nawaf511/empire-core-new/apps/admin-console"
+    },
+    "old_standalone_var_www_files_forbidden": true,
+    "frontend_edits_must_be_applied_to_apps_first": true
+  }
+}

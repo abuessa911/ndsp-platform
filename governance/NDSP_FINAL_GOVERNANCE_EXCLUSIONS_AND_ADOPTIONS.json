@@ -1,0 +1,44 @@
+{
+  "policy": "NDSP_FINAL_GOVERNANCE_EXCLUSIONS_AND_ADOPTIONS",
+  "status": "authoritative_final_delta",
+  "final_trial_seat_distribution": {
+    "total": 50,
+    "ordinary_beginner": 25,
+    "specialist_academic": 10,
+    "private_premium": 15
+  },
+  "old_distribution_cancelled": {
+    "ordinary": 20,
+    "specialist": 10,
+    "featured": 20
+  },
+  "cancelled": [
+    "/my/elite-trial",
+    "/my/elite-feedback",
+    "/my/elite-discount",
+    "/my/elite-lab",
+    "/elite-trial",
+    "Elite Trial Intelligence Center",
+    "in_trial_feedback_governance",
+    "Post-Trial Operations governance",
+    "detailed UI design system requirement",
+    "Elite Trial API routes",
+    "Post-Trial API routes",
+    "proposed Elite Trial and Post-Trial database schemas",
+    "Incident Response section from previous list"
+  ],
+  "cancelled_schema_names": [
+    "elite_trial_applications",
+    "elite_trial_users",
+    "elite_trial_feedback",
+    "elite_trial_discount",
+    "elite_trial_activity",
+    "elite_trial_audit_log",
+    "post_trial_status",
+    "subscription_conversion",
+    "post_trial_discount_review",
+    "retention_events",
+    "post_trial_audit_log"
+  ],
+  "everything_else_remains_active": true
+}
