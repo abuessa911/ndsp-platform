@@ -1,0 +1,10 @@
+{
+  "enabled": true,
+  "plan": "Elite",
+  "trial_days": 16,
+  "ordinary_limit": 30,
+  "analyst_manual_limit": 10,
+  "ordinary_auto_open": true,
+  "analyst_manual_only": true,
+  "after_expiry_status": "closed"
+}

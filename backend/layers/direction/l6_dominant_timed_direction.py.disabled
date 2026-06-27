@@ -1,0 +1,209 @@
+"""
+NDSP Layer 6: Dominant Timed Direction / Direction Authority
+
+Purpose:
+    Combines direction bias and Layer 3 timing authority into the dominant
+    timed direction used by the decision engine.
+
+This is executable backend code, not documentation.
+
+Public functions:
+    - evaluate_direction_authority(payload)
+    - compute_direction_authority(payload)
+    - evaluate(payload)
+    - run(payload)
+
+Input payload example:
+{
+    "direction_bias": "bullish",
+    "timing": {"controlling_group": "ASSET_MANAGERS", "confidence": 86, "allowed": true},
+    "macro_pressure": "supportive",
+    "risk_pressure_score": 28,
+    "decision_quality_score": 87
+}
+"""
+
+from __future__ import annotations
+
+from dataclasses import asdict, dataclass
+from datetime import datetime, timezone
+from typing import Any, Mapping
+
+
+@dataclass(frozen=True)
+class DirectionAuthorityResult:
+    layer_id: int
+    layer_name: str
+    short_name: str
+    status: str
+    dominant_direction: str
+    direction_authority: str
+    confidence: int
+    score: int
+    reason: str
+    blocking_factors: list[str]
+    supporting_factors: list[str]
+    generated_at: str
+
+
+def _norm(value: Any, default: str = "neutral") -> str:
+    if value is None:
+        return default
+    return str(value).strip().lower()
+
+
+def _as_int(value: Any, default: int = 0) -> int:
+    try:
+        return int(float(value))
+    except Exception:
+        return default
+
+
+def _direction_score(direction_bias: str) -> tuple[int, str]:
+    bullish = {"bullish", "up", "long", "صاعد", "شراء", "supportive"}
+    bearish = {"bearish", "down", "short", "هابط", "بيع", "negative"}
+    neutral = {"neutral", "range", "flat", "محايد", "جانبي"}
+
+    if direction_bias in bullish:
+        return 30, "BULLISH"
+    if direction_bias in bearish:
+        return -30, "BEARISH"
+    if direction_bias in neutral:
+        return 0, "NEUTRAL"
+    return 0, "UNKNOWN"
+
+
+def evaluate_direction_authority(payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+    payload = payload or {}
+
+    timing = payload.get("timing") or payload.get("l3_timing") or {}
+    if not isinstance(timing, Mapping):
+        timing = {}
+
+    direction_bias_raw = _norm(
+        payload.get("direction_bias")
+        or payload.get("institutional_bias")
+        or payload.get("tdl_bias")
+        or payload.get("bias")
+    )
+
+    base_score, base_direction = _direction_score(direction_bias_raw)
+
+    timing_allowed = bool(timing.get("allowed", payload.get("timing_allowed", True)))
+    timing_confidence = _as_int(timing.get("confidence", payload.get("timing_confidence", 50)), 50)
+    controlling_group = str(timing.get("controlling_group", payload.get("controlling_group", "UNKNOWN")))
+
+    macro_pressure = _norm(payload.get("macro_pressure"), "neutral")
+    risk_pressure_score = _as_int(payload.get("risk_pressure_score", payload.get("risk", 50)), 50)
+    decision_quality_score = _as_int(payload.get("decision_quality_score", payload.get("quality", 70)), 70)
+
+    score = base_score
+    blocking_factors: list[str] = []
+    supporting_factors: list[str] = []
+
+    if not timing_allowed:
+        score -= 25
+        blocking_factors.append("Timing authority is not allowed.")
+    else:
+        score += 12
+        supporting_factors.append(f"Timing authority allowed by {controlling_group}.")
+
+    if timing_confidence >= 80:
+        score += 12
+        supporting_factors.append("Timing confidence is high.")
+    elif timing_confidence < 55:
+        score -= 10
+        blocking_factors.append("Timing confidence is weak.")
+
+    if macro_pressure in {"supportive", "positive", "macro_support", "داعم"}:
+        score += 10
+        supporting_factors.append("Macro context supports the direction.")
+    elif macro_pressure in {"negative", "pressure", "bearish", "سلبي", "ضغط"}:
+        score -= 10
+        blocking_factors.append("Macro pressure conflicts with direction.")
+
+    if risk_pressure_score >= 70:
+        score -= 15
+        blocking_factors.append("Risk pressure is elevated.")
+    elif risk_pressure_score <= 35:
+        score += 8
+        supporting_factors.append("Risk pressure is low.")
+
+    if decision_quality_score >= 80:
+        score += 10
+        supporting_factors.append("Decision quality is high.")
+    elif decision_quality_score < 60:
+        score -= 12
+        blocking_factors.append("Decision quality is weak.")
+
+    if base_direction == "BULLISH":
+        dominant_direction = "BULLISH" if score >= 20 else "NEUTRAL"
+    elif base_direction == "BEARISH":
+        dominant_direction = "BEARISH" if score <= -20 else "NEUTRAL"
+    else:
+        if score >= 35:
+            dominant_direction = "BULLISH"
+        elif score <= -35:
+            dominant_direction = "BEARISH"
+        else:
+            dominant_direction = "NEUTRAL"
+
+    abs_score = min(100, abs(score))
+
+    if abs_score >= 70 and not blocking_factors:
+        authority = "STRONG"
+        status = "ACTIVE"
+    elif abs_score >= 45:
+        authority = "MEDIUM"
+        status = "ACTIVE_WITH_CAUTION"
+    elif abs_score >= 20:
+        authority = "WEAK"
+        status = "LOW_AUTHORITY"
+    else:
+        authority = "NONE"
+        status = "BLOCKED_OR_NEUTRAL"
+
+    confidence = max(0, min(100, int((timing_confidence * 0.35) + (decision_quality_score * 0.35) + (max(0, 100 - risk_pressure_score) * 0.30))))
+
+    reason = (
+        f"Dominant timed direction={dominant_direction}, authority={authority}, "
+        f"base_direction={base_direction}, score={score}, timing_group={controlling_group}."
+    )
+
+    result = DirectionAuthorityResult(
+        layer_id=6,
+        layer_name="Dominant Timed Direction",
+        short_name="L6_DIRECTION_AUTHORITY",
+        status=status,
+        dominant_direction=dominant_direction,
+        direction_authority=authority,
+        confidence=confidence,
+        score=score,
+        reason=reason,
+        blocking_factors=blocking_factors,
+        supporting_factors=supporting_factors,
+        generated_at=datetime.now(timezone.utc).isoformat(),
+    )
+
+    return asdict(result)
+
+
+def compute_direction_authority(payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+    return evaluate_direction_authority(payload)
+
+
+def evaluate(payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+    return evaluate_direction_authority(payload)
+
+
+def run(payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+    return evaluate_direction_authority(payload)
+
+
+if __name__ == "__main__":
+    import json
+    import sys
+
+    raw = sys.stdin.read().strip()
+    payload = json.loads(raw) if raw else {}
+    print(json.dumps(evaluate_direction_authority(payload), ensure_ascii=False, indent=2))
