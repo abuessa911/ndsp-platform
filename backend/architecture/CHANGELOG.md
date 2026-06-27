@@ -87,3 +87,16 @@ Added:
 - systemd service ndsp-ctl-001-workspace-identity.service
 - CTL-001 API contract
 - CTL-001 service registry entry
+
+## 20260627_235837
+
+DEV-001 created NDSP Developer Toolkit.
+
+Added:
+- backend/sdk/devtoolkit
+- backend/tools/ndsp
+- backend/templates/service
+- ndsp create service
+- ndsp validate
+- ndsp doctor
+- ndsp registry

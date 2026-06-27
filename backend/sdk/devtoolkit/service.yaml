@@ -1,0 +1,12 @@
+component_id: DEV-001
+component_name: NDSP Developer Toolkit
+product: SYS-001
+domain: Developer Platform
+owner: NDSP Engineering
+version: 1.0.0
+status: active
+release: REL-1.1
+sprint: SPR-003
+task: TSK-DEV-001
+type: developer_toolkit
+entrypoint: backend/tools/ndsp
