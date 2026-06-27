@@ -1,0 +1,12 @@
+service_id: ENG-001
+service_name: NDSP Service Framework
+product: SYS-001
+domain: Engineering Core
+owner: NDSP Engineering
+version: 1.0.0
+status: active
+release: REL-1.1
+sprint: SPR-002
+task: TSK-2.1A
+health_endpoint: /health
+type: internal_framework
