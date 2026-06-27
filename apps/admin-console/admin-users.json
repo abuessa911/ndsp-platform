@@ -1,0 +1,63 @@
+{
+  "ok": true,
+  "source": "postgresql_ndsp_auth",
+  "generated_at": "2026-06-11T18:52:13.089Z",
+  "count": 5,
+  "users": [
+    {
+      "id": "16fef973-bfb6-4aa0-ac0f-f1c0bf59e062",
+      "name": "NDSP Snapshot Cookie User",
+      "email": "ndsp.snapshot.cookie.20260611_205205@example.com",
+      "plan": "Elite",
+      "role": "user",
+      "status": "active",
+      "category": "normal_beginner",
+      "created_at": "2026-06-11T18:52:12.996Z",
+      "updated_at": null
+    },
+    {
+      "id": "b539e4ac-66ba-47b4-9856-dce0d3eb2a15",
+      "name": "NDSP Snapshot Verify User",
+      "email": "ndsp.snapshot.verify.20260611_205205@example.com",
+      "plan": "Elite",
+      "role": "user",
+      "status": "active",
+      "category": "",
+      "created_at": "2026-06-11T18:52:11.849Z",
+      "updated_at": null
+    },
+    {
+      "id": "b553f1b2-73f2-410b-a8ec-ddfb396e5dba",
+      "name": "Otaibah User",
+      "email": "otai9.1983@gmail.com",
+      "plan": "Elite",
+      "role": "USER",
+      "status": "active",
+      "category": "ordinary",
+      "created_at": "2026-06-10T08:08:50.379Z",
+      "updated_at": null
+    },
+    {
+      "id": "ee55d2d3-4992-4d0f-a97f-a0409983fbaf",
+      "name": "Nawaf",
+      "email": "nawaf.barrak.911@gmail.com",
+      "plan": "Elite",
+      "role": "user",
+      "status": "active",
+      "category": "normal_beginner",
+      "created_at": "2026-06-09T06:17:37.999Z",
+      "updated_at": null
+    },
+    {
+      "id": "f03ddfc4-fffa-4fd3-9b3d-5848ae46abe9",
+      "name": "12345678",
+      "email": "ndsp.app@gmail.com",
+      "plan": "Elite",
+      "role": "ADMIN",
+      "status": "active",
+      "category": "private",
+      "created_at": "2026-06-04T20:30:35.628Z",
+      "updated_at": null
+    }
+  ]
+}

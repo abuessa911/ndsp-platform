@@ -1,0 +1,1670 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="google" content="notranslate" />
+<title>DSP — مركز العمليات | Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#070A10;--ink:#0B0F17;--panel:rgba(18,24,36,.62);--panel2:rgba(14,19,29,.8);
+  --line:rgba(201,162,39,.16);--line-soft:rgba(255,255,255,.06);
+  --gold:#D9B65A;--gold-bright:#F2D27A;--gold-deep:#9A7A22;
+  --teal:#3FD3C6;--rose:#E0607A;--blue:#88A6FF;
+  --txt:#EAEEF6;--txt-2:#9AA6BC;--txt-3:#5E6A82;
+  --up:#56D6A0;--down:#E2657E;--warn:#E8B964;
+  --shadow:0 24px 60px -28px rgba(0,0,0,.85);--r:16px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--void);color:var(--txt);overflow-x:hidden;
+  font-family:"IBM Plex Sans Arabic","Sora",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+body[dir="ltr"]{font-family:"Sora","IBM Plex Sans Arabic",sans-serif}
+.mono{font-family:"IBM Plex Mono",monospace;font-feature-settings:"tnum" 1}
+h1,h2,h3,.kufi{font-family:"Reem Kufi",serif}
+body[dir="ltr"] h1,body[dir="ltr"] h2,body[dir="ltr"] h3{font-family:"Sora",sans-serif}
+
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.bg .glow{position:absolute;border-radius:50%;filter:blur(140px);opacity:.5}
+.bg .g1{width:50vw;height:50vw;top:-22vw;inset-inline-end:-12vw;background:radial-gradient(circle,rgba(217,182,90,.16),transparent 65%)}
+.bg .g2{width:42vw;height:42vw;bottom:-20vw;inset-inline-start:-12vw;background:radial-gradient(circle,rgba(63,211,198,.1),transparent 65%)}
+.bg .grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:46px 46px;mask-image:radial-gradient(ellipse 120% 90% at 50% 20%,#000 30%,transparent 80%)}
+.seal-wm{position:fixed;z-index:0;inset-inline-start:30%;bottom:-12vw;width:44vw;max-width:620px;opacity:.04;pointer-events:none}
+
+/* layout */
+.app{position:relative;z-index:2;display:grid;grid-template-columns:248px 1fr;min-height:100vh}
+@media(max-width:920px){.app{grid-template-columns:1fr}.side{position:fixed;inset-inline-start:-260px;top:0;bottom:0;transition:.3s;z-index:60}.side.open{inset-inline-start:0}}
+
+/* sidebar */
+.side{background:var(--panel2);border-inline-end:1px solid var(--line);backdrop-filter:blur(16px);padding:18px 14px;display:flex;flex-direction:column;gap:6px;position:sticky;top:0;height:100vh;overflow-y:auto}
+.side::-webkit-scrollbar{width:6px}.side::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px}
+.side .brand{display:flex;align-items:center;gap:11px;padding:6px 8px 16px;border-bottom:1px solid var(--line-soft);margin-bottom:10px}
+.side .brand svg{width:38px;height:38px;filter:drop-shadow(0 4px 12px rgba(217,182,90,.4))}
+.side .brand b{font-family:"Reem Kufi";font-size:18px;background:linear-gradient(180deg,var(--gold-bright),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;display:block;line-height:1}
+.side .brand span{font-size:9px;color:var(--txt-3);letter-spacing:2px;font-family:"IBM Plex Mono"}
+.navitem{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:11px;cursor:pointer;color:var(--txt-2);font-size:13px;transition:.16s;border:1px solid transparent}
+.navitem:hover{background:rgba(255,255,255,.03);color:var(--txt)}
+.navitem.on{background:linear-gradient(135deg,rgba(217,182,90,.14),rgba(217,182,90,.03));color:var(--gold-bright);border-color:var(--line)}
+.navitem .ic{width:20px;text-align:center;font-size:14px}
+.navitem .bdg{margin-inline-start:auto;font-family:"IBM Plex Mono";font-size:10px;background:rgba(226,101,126,.18);color:var(--rose);padding:1px 6px;border-radius:6px}
+.navgrp{font-size:9.5px;letter-spacing:2px;color:var(--txt-3);text-transform:uppercase;padding:14px 12px 6px;font-family:"IBM Plex Mono"}
+
+/* main */
+.main{padding:20px 26px 50px;min-width:0}
+.topbar{display:flex;align-items:center;gap:14px;margin-bottom:22px;flex-wrap:wrap}
+.burger{display:none;cursor:pointer;font-size:20px;color:var(--txt-2)}
+@media(max-width:920px){.burger{display:block}}
+.topbar h1{font-size:24px;margin:0;flex:1}
+.topbar .sub{font-size:12px;color:var(--txt-3);margin-top:3px;font-parameter:400;font-family:"IBM Plex Sans Arabic"}
+.pill{display:inline-flex;align-items:center;gap:7px;padding:8px 13px;border-radius:999px;border:1px solid var(--line);background:var(--panel);font-size:12px;color:var(--txt-2)}
+.pill .dot{width:7px;height:7px;border-radius:50%}
+.dot-ok{background:var(--up);box-shadow:0 0 8px var(--up)}.dot-warn{background:var(--warn)}.dot-bad{background:var(--down)}
+.lang{cursor:pointer;user-select:none}.lang:hover{border-color:var(--gold);color:var(--gold-bright)}
+
+/* cards */
+.card{background:var(--panel);border:1px solid var(--line-soft);border-radius:var(--r);backdrop-filter:blur(12px);box-shadow:var(--shadow);overflow:hidden}
+.card .pad{padding:18px}
+.card-h{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
+.card-h .t{display:flex;align-items:center;gap:9px;font-family:"Reem Kufi";font-size:15px}
+body[dir="ltr"] .card-h .t{font-family:"Sora"}
+.card-h .t .ic{width:26px;height:26px;display:grid;place-items:center;border-radius:8px;background:rgba(217,182,90,.1);border:1px solid var(--line);color:var(--gold)}
+.tag{font-size:10px;font-family:"IBM Plex Mono";letter-spacing:1px;text-transform:uppercase;color:var(--txt-3);padding:3px 8px;border:1px solid var(--line-soft);border-radius:6px}
+
+/* KPIs */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
+@media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}}
+.kpi{background:var(--panel);border:1px solid var(--line-soft);border-radius:14px;padding:16px;position:relative;overflow:hidden;backdrop-filter:blur(12px)}
+.kpi .k{font-size:11.5px;color:var(--txt-3);display:flex;align-items:center;gap:7px}
+.kpi .v{font-family:"IBM Plex Mono";font-size:28px;font-parameter:600;margin-top:8px;color:var(--txt)}
+.kpi .d{font-size:11px;margin-top:6px;display:flex;align-items:center;gap:5px}
+.kpi .d.up{color:var(--up)}.kpi .d.down{color:var(--down)}.kpi .d.flat{color:var(--txt-3)}
+.kpi.gold .v{color:var(--gold-bright)}
+.kpi .spark{position:absolute;inset-inline-end:14px;top:16px;opacity:.5}
+
+/* grid sections */
+.cols{display:grid;grid-template-columns:1.4fr 1fr;gap:16px}
+@media(max-width:980px){.cols{grid-template-columns:1fr}}
+
+/* table */
+table{width:100%;border-collapse:collapse}
+th,td{text-align:start;padding:11px 12px;font-size:12.5px;border-bottom:1px solid var(--line-soft)}
+th{color:var(--txt-3);font-family:"IBM Plex Mono";font-size:10px;letter-spacing:.5px;text-transform:uppercase;font-parameter:500}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:rgba(255,255,255,.02)}
+td .u{display:flex;align-items:center;gap:9px}
+td .av{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-family:"IBM Plex Mono";font-size:11px;font-parameter:600;background:rgba(217,182,90,.1);color:var(--gold-bright);border:1px solid var(--line-soft)}
+td .u .n{font-parameter:600;color:var(--txt)}td .u .e{font-size:10.5px;color:var(--txt-3);font-family:"IBM Plex Mono"}
+.badge{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-parameter:600;padding:4px 9px;border-radius:999px}
+.b-ok{background:rgba(86,214,160,.14);color:var(--up)}
+.b-warn{background:rgba(232,185,100,.14);color:var(--warn)}
+.b-bad{background:rgba(226,101,126,.14);color:var(--down)}
+.b-info{background:rgba(63,211,198,.14);color:var(--teal)}
+.b-gold{background:rgba(217,182,90,.16);color:var(--gold-bright)}
+.b-muted{background:rgba(255,255,255,.05);color:var(--txt-3)}
+.b-blue{background:rgba(120,160,255,.14);color:var(--blue)}
+.act{display:inline-flex;gap:6px}
+.act button{border:1px solid var(--line-soft);background:rgba(255,255,255,.03);color:var(--txt-2);border-radius:8px;padding:5px 10px;font-size:11px;cursor:pointer;font-family:inherit;transition:.15s}
+.act button:hover{border-color:var(--gold);color:var(--gold-bright)}
+.act button.ok:hover{border-color:var(--up);color:var(--up)}
+.act button.bad:hover{border-color:var(--down);color:var(--down)}
+
+/* seats */
+.seatbars{display:flex;flex-direction:column;gap:14px}
+.seatbar .top{display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:7px}
+.seatbar .top b{font-family:"IBM Plex Mono";color:var(--gold-bright)}
+.seatbar .bar{height:9px;border-radius:5px;background:rgba(255,255,255,.07);overflow:hidden}
+.seatbar .bar i{display:block;height:100%;border-radius:5px;background:linear-gradient(90deg,var(--gold-deep),var(--gold-bright));transition:width 1s cubic-bezier(.2,.8,.2,1)}
+
+/* layer governance */
+.lg{display:flex;flex-direction:column;gap:9px}
+.lgrow{display:flex;align-items:center;gap:11px;padding:10px;border-radius:11px;border:1px solid var(--line-soft);background:rgba(0,0,0,.18)}
+.lgrow .gl{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;flex:none}
+.lgrow .nm{flex:1}.lgrow .nm b{display:block;font-size:13px}.lgrow .nm span{font-size:10px;color:var(--txt-3);font-family:"IBM Plex Mono"}
+.gl-t{background:rgba(63,211,198,.12);color:var(--teal)}.gl-b{background:rgba(120,160,255,.12);color:var(--blue)}
+.gl-r{background:rgba(226,101,126,.12);color:var(--rose)}.gl-g{background:rgba(217,182,90,.14);color:var(--gold-bright)}
+.hidden-strip{margin-top:12px;padding:13px;border-radius:11px;border:1px dashed var(--line);background:rgba(0,0,0,.2);font-size:12px;color:var(--txt-2);line-height:1.7;text-align:center}
+.hidden-strip b{color:var(--gold-bright);font-family:"IBM Plex Mono"}
+
+/* protecteds / config */
+.cfg{display:flex;flex-direction:column;gap:10px}
+.cfgrow{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:11px;border:1px solid var(--line-soft);background:rgba(0,0,0,.18)}
+.cfgrow .ic{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;background:rgba(255,255,255,.04);color:var(--txt-2)}
+.cfgrow .nm{flex:1}.cfgrow .nm b{display:block;font-size:13px}.cfgrow .nm .protected{font-family:"IBM Plex Mono";font-size:11px;color:var(--txt-3);letter-spacing:1px}
+.cfgrow .meta{text-align:end;font-size:10.5px;color:var(--txt-3);font-family:"IBM Plex Mono"}
+
+/* health */
+.health{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:680px){.health{grid-template-columns:repeat(2,1fr)}}
+.hcell{background:rgba(0,0,0,.2);border:1px solid var(--line-soft);border-radius:12px;padding:13px;text-align:center}
+.hcell .k{font-size:11px;color:var(--txt-3)}
+.hcell .v{font-family:"IBM Plex Mono";font-size:18px;margin-top:7px;color:var(--txt)}
+.hcell .st{margin-top:8px}
+
+/* analytics bars */
+.funnel{display:flex;flex-direction:column;gap:11px}
+.frow{display:flex;align-items:center;gap:12px;font-size:12.5px}
+.frow .lbl{width:130px;color:var(--txt-2);flex:none}
+.frow .track{flex:1;height:22px;border-radius:7px;background:rgba(255,255,255,.05);overflow:hidden;position:relative}
+.frow .track i{display:block;height:100%;border-radius:7px;background:linear-gradient(90deg,var(--gold-deep),var(--gold-bright));transition:width 1s}
+.frow .val{width:48px;text-align:end;font-family:"IBM Plex Mono";color:var(--gold-bright);flex:none}
+
+/* sections visibility */
+.view{display:none}.view.on{display:block;animation:fade .4s}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.mb{margin-bottom:16px}
+.muted-note{font-size:11px;color:var(--txt-3);margin-top:12px;line-height:1.7;padding:12px;border-radius:11px;border:1px dashed var(--line-soft);background:rgba(0,0,0,.15)}
+.muted-note b{color:var(--gold)}
+.toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.toolbar input{background:rgba(0,0,0,.3);border:1px solid var(--line-soft);border-radius:10px;padding:9px 12px;color:var(--txt);font-family:inherit;font-size:12.5px;flex:1;min-width:160px}
+.toolbar input:focus{outline:0;border-color:var(--gold)}
+.chip-f{padding:7px 12px;border-radius:9px;border:1px solid var(--line-soft);background:transparent;color:var(--txt-2);font-size:12px;cursor:pointer;font-family:inherit}
+.chip-f.on{background:rgba(217,182,90,.14);color:var(--gold-bright);border-color:var(--line)}
+</style>
+<meta http-equiv="Cache-Control" content="no-store" />
+<link rel="stylesheet" href="ndsp-hud-theme.css">
+</head>
+<body dir="ltr"><div style="margin:16px 0"><a href="NDSP_Admin_Operations_Center.html" style="color:#d4af37;font-weight:800">فتح مركز عمليات الإدارة الجديد</a></div>
+
+<div class="bg"><div class="glow g1"></div><div class="glow g2"></div><div class="grid"></div></div>
+<svg class="seal-wm" viewBox="0 0 240 240" aria-hidden="true"><use href="#hunterSeal"/></svg>
+
+<svg width="0" height="0" style="position:absolute"><defs><g id="hunterSeal">
+  <circle cx="120" cy="120" r="116" fill="none" stroke="#D9B65A" stroke-width="2"/>
+  <circle cx="120" cy="120" r="106" fill="none" stroke="#D9B65A" stroke-width="1" stroke-dasharray="2 6"/>
+  <path d="M120 56 C150 60 168 80 170 108 C171 122 165 134 154 142 L172 150 L150 152 C146 168 132 180 118 182 C128 172 130 162 128 156 C112 162 96 158 86 146 C100 148 110 144 114 138 C96 134 84 120 84 102 C84 76 100 60 120 56 Z" fill="#D9B65A"/>
+  <circle cx="138" cy="98" r="6.5" fill="#070A10"/><circle cx="140" cy="96" r="2" fill="#F2D27A"/>
+  <path d="M170 108 C184 110 190 118 184 126 C180 120 174 118 168 120 Z" fill="#9A7A22"/>
+  <path d="M120 30 l3 7 7 1 -5 5 1 7 -6 -3 -6 3 1 -7 -5 -5 7 -1 z" fill="#F2D27A"/>
+  <path id="arcTop" d="M40 120 A80 80 0 0 1 200 120" fill="none"/>
+  <path id="arcBot" d="M44 124 A76 76 0 0 0 196 124" fill="none"/>
+  <text font-family="IBM Plex Mono,monospace" font-size="15" letter-spacing="6" fill="#D9B65A"><textPath href="#arcTop" startOffset="50%" text-anchor="middle">HUNTER</textPath></text>
+  <text font-family="IBM Plex Mono,monospace" font-size="13" letter-spacing="5" fill="#D9B65A"><textPath href="#arcBot" startOffset="50%" text-anchor="middle">KSA · 1</textPath></text>
+</g></defs></svg>
+
+<div class="app">
+  <!-- SIDEBAR -->
+  <aside class="side" id="side">
+    <div class="brand">
+      <svg viewBox="0 0 240 240"><use href="#hunterSeal"/></svg>
+      <div><b>DSP</b><span data-i="opsCenter">OPERATIONS CENTER</span></div>
+    </div>
+    <div class="navgrp" data-i="grpMain">الرئيسية</div>
+    <div class="navitem on" data-v="overview"><span class="ic">◈</span><span data-i="nOverview">نظرة عامة</span></div>
+    <div class="navitem" data-v="users"><span class="ic">◎</span><span data-i="nUsers">المستخدمون</span></div>
+    <div class="navitem" data-v="trials"><span class="ic">◷</span><span data-i="nTrials">التجارب</span></div>
+    <div class="navitem" data-v="review"><span class="ic">⚑</span><span data-i="nReview">مراجعة التسجيل</span><span class="bdg" id="reviewCount">5</span></div>
+    <div class="navgrp" data-i="grpBiz">الأعمال</div>
+    <div class="navitem" data-v="packages"><span class="ic">◆</span><span data-i="nPackages">الباقات</span></div>
+    <div class="navitem" data-v="payments"><span class="ic">₪</span><span data-i="nPayments">المدفوعات</span><span class="bdg" id="payCount">3</span></div>
+    <div class="navgrp" data-i="grpEngine">المحرّك والحوكمة</div>
+    <div class="navitem" data-v="layers"><span class="ic">⬡</span><span data-i="nLayers">حوكمة الطبقات</span></div>
+    <div class="navitem" data-v="markets"><span class="ic">⟁</span><span data-i="nMarkets">الأسواق والأصول</span></div>
+    <div class="navitem" data-v="alerts"><span class="ic">✉</span><span data-i="nAlerts">التنبيهات والإعدادات</span></div>
+    <div class="navgrp" data-i="grpOps">التشغيل</div>
+    <div class="navitem" data-v="health"><span class="ic">♥</span><span data-i="nHealth">الصحة والنسخ</span></div>
+    <div class="navitem" data-v="analytics"><span class="ic">≣</span><span data-i="nAnalytics">تحليلات التجربة</span></div>
+    <div class="navitem" data-v="security"><span class="ic">⛨</span><span data-i="nSecurity">الأمان والترجمة</span></div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="topbar">
+      <span class="burger" id="burger">☰</span>
+      <div style="flex:1">
+        <h1 id="viewTitle">نظرة عامة</h1>
+        <div class="sub" id="viewSub">مركز عمليات DSP — لوحة الحوكمة والتشغيل</div>
+      </div>
+      <span class="pill"><span class="dot dot-ok"></span><span data-i="sysOk">كل الأنظمة تعمل</span></span>
+      <span class="pill"><span data-i="adminRole">مشرف عام</span> · <b style="color:var(--txt)">Nawaf</b></span>
+      <span class="pill lang" id="langBtn">EN</span>
+    </div>
+
+    <!-- ===== OVERVIEW ===== -->
+    <section class="view on" data-view="overview">
+      <div class="kpis">
+        <div class="kpi gold"><div class="k">◎ <span data-i="kActive">مستخدمون نشطون</span></div><div class="v">٣٤٨</div><div class="d up">▲ ١٢٪ <span data-i="kWeek">هذا الأسبوع</span></div></div>
+        <div class="kpi"><div class="k">◷ <span data-i="kTrial">مقاعد التجربة</span></div><div class="v">٤٠<span style="color:var(--txt-3);font-size:18px">/٥٠</span></div><div class="d flat" data-i="kSeatsLeft">١٠ مقاعد متبقية</div></div>
+        <div class="kpi"><div class="k">₪ <span data-i="kPending">مدفوعات معلّقة</span></div><div class="v">٣</div><div class="d down" data-i="kNeedReview">تحتاج مراجعة</div></div>
+        <div class="kpi"><div class="k">♥ <span data-i="kHealth">صحة النظام</span></div><div class="v">٩٩.٩٪</div><div class="d up" data-i="kUptime">آخر ٣٠ يوم</div></div>
+      </div>
+
+      <div class="cols mb">
+        <div class="card"><div class="pad">
+          <div class="card-h"><div class="t"><span class="ic">◷</span><span data-i="seatDist">توزيع مقاعد التجربة</span></div><span class="tag">50 SEATS</span></div>
+          <div class="seatbars" id="seatBars"></div>
+          <div class="muted-note" data-i="seatNote"><b>الحوكمة:</b> التوزيع النهائي ٢٥ مبتدئ · ١٠ متخصص · ١٥ خاص. القبول النهائي يُنفّذ في الخادم.</div>
+        </div></div>
+
+        <div class="card"><div class="pad">
+          <div class="card-h"><div class="t"><span class="ic">⬡</span><span data-i="layerStatus">حالة حوكمة الطبقات</span></div></div>
+          <div class="health">
+            <div class="hcell"><div class="k" data-i="lcTotal">إجمالي الطبقات</div><div class="v">١٦</div><div class="st"><span class="badge b-info" data-i="lcActive">كلها تشارك</span></div></div>
+            <div class="hcell"><div class="k" data-i="lcVisible">ظاهرة بالاسم</div><div class="v">٤</div><div class="st"><span class="badge b-gold" data-i="lcGoverned">محكومة</span></div></div>
+            <div class="hcell"><div class="k" data-i="lcHidden">مخفيّة</div><div class="v">١٢</div><div class="st"><span class="badge b-ok" data-i="lcProtected">محميّة</span></div></div>
+          </div>
+          <div class="muted-note" data-i="layerNote"><b>قاعدة:</b> لا كشف للأسماء أو الترتيب أو طرق الحساب الداخلية أو المعاملات الداخلية. العرض = قيمة منقّحة فقط.</div>
+        </div></div>
+      </div>
+
+      <div class="card"><div class="pad">
+        <div class="card-h"><div class="t"><span class="ic">✦</span><span data-i="recentReg">أحدث طلبات التسجيل</span></div><span class="tag">ANTI-ABUSE</span></div>
+        <table><thead><tr>
+          <th data-i="thUser">المستخدم</th><th data-i="thType">النوع</th><th data-i="thRisk">درجة الخطر</th><th data-i="thDecision">قرار النظام</th><th data-i="thTime">الوقت</th>
+        </tr></thead><tbody id="ovRegBody"></t
+
+
+</
+
+
+</
+<!-- DSP_ADMIN_ARABIC_FINAL_BEGIN -->
+<style>
+#dspAdminLangFinal{position:fixed;top:12px;right:12px;z-index:999999;display:flex;gap:6px;padding:6px;border-radius:999px;background:rgba(7,10,16,.94);border:1px solid rgba(217,182,90,.45)}
+#dspAdminLangFinal button{border:0;border-radius:999px;padding:8px 12px;font-parameter:900;background:transparent;color:#9AA6BC}
+#dspAdminLangFinal button.on{background:linear-gradient(135deg,#F2D27A,#D9B65A);color:#151006}
+</style>
+<script>
+(function(){
+const AR={
+"OPERATIONS CENTER":"مركز العمليات","MAIN":"الرئيسية","Overview":"نظرة عامة","Users":"المستخدمون","Trials":"التجارب",
+"Registration Review":"مراجعة التسجيل","BUSINESS":"الأعمال","Packages":"الباقات","Payments":"المدفوعات",
+"ENGINE & GOVERNANCE":"المحركات والحوكمة","Layer Governance":"حوكمة الطبقات","NMP Research Lab":"مختبر أبحاث NMP",
+"Alerts & Config":"التنبيهات والإعدادات","Email":"البريد","Telegram":"تيليجرام","Health":"الصحة التشغيلية","Reports":"التقارير",
+"Backups":"النسخ الاحتياطية","Status":"الحالة","Active":"نشط","Pending":"قيد الانتظار","Approved":"مقبول","Rejected":"مرفوض"
+};
+const EN={}; Object.keys(AR).forEach(k=>EN[AR[k]]=k);
+function walk(fn){let w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let n,a=[];while(n=w.nextNode())a.push(n);a.forEach(n=>{if(n.parentElement&& !n.parentElement.closest("#dspAdminLangFinal"))fn(n)});}
+function apply(lang){
+ localStorage.setItem("dsp_admin_lang",lang);
+ document.documentElement.lang=lang; document.documentElement.dir=lang==="ar"?"rtl":"ltr"; document.body.dir=document.documentElement.dir;
+ let map=lang==="ar"?AR:EN;
+ walk(n=>{let t=n.nodeValue;Object.keys(map).forEach(k=>t=t.split(k).join(map[k]));n.nodeValue=t;});
+ document.getElementById("adAR")?.classList.toggle("on",lang==="ar");
+ document.getElementById("adEN")?.classList.toggle("on",lang==="en");
+}
+function boot(){
+ if(!document.getElementById("dspAdminLangFinal")){
+  let b=document.createElement("div"); b.id="dspAdminLangFinal";
+  b.innerHTML='<button id="adAR">AR</button><button id="adEN">EN</button>';
+  document.body.appendChild(b);
+  document.getElementById("adAR").onclick=()=>apply("ar");
+  document.getElementById("adEN").onclick=()=>apply("en");
+ }
+ apply(localStorage.getItem("dsp_admin_lang")||"ar");
+}
+document.readyState==="loading"?document.addEventListener("DOMContentLoaded",boot):boot();
+})();
+</script>
+<!-- DSP_ADMIN_ARABIC_FINAL_END -->
+
+</
+
+
+</
+<!-- DSP_ADMIN_MOBILE_HARD_DRAWER_BEGIN -->
+<style>
+@media(max-width:900px){
+  #dspHardMenuBtn{
+    position:fixed!important;
+    top:12px!important;
+    left:12px!important;
+    z-index:2147483647!important;
+    width:46px!important;
+    height:46px!important;
+    border-radius:14px!important;
+    border:1px solid rgba(217,182,90,.55)!important;
+    background:#070A10!important;
+    color:#F2D27A!important;
+    font-size:24px!important;
+    font-parameter:900!important;
+  }
+  #dspHardBackdrop{
+    position:fixed!important;
+    inset:0!important;
+    z-index:2147483645!important;
+    display:none!important;
+    background:rgba(0,0,0,.72)!important;
+    backdrop-filter:blur(6px)!important;
+  }
+  body.dspHardOpen #dspHardBackdrop{display:block!important}
+  body.dspHardOpen .dspHardSidebar{
+    transform:translateX(0)!important;
+    opacity:1!important;
+    pointer-events:auto!important;
+  }
+  .dspHardSidebar{
+    position:fixed!important;
+    top:0!important;
+    left:0!important;
+    bottom:0!important;
+    width:min(86vw,360px)!important;
+    height:100vh!important;
+    max-height:100vh!important;
+    overflow-y:auto!important;
+    z-index:2147483646!important;
+    background:#0B0F17!important;
+    transform:translateX(-115%)!important;
+    opacity:1!important;
+    pointer-events:none!important;
+    transition:transform .22s ease!important;
+    box-shadow:32px 0 90px rgba(0,0,0,.65)!important;
+  }
+  body:not(.dspHardOpen) .dspHardSidebar *{
+    pointer-events:none!important;
+  }
+}
+</style>
+
+<script>
+(function(){
+  function mobile(){ return window.matchMedia("(max-width:900px)").matches; }
+
+  function isSidebar(el){
+    var t=(el.innerText||"").trim();
+    if(t.length<40) return false;
+    var hits=0;
+    ["Overview","Users","Trials","Registration Review","Packages","Payments","Layer Governance","NMP Research Lab","Health","Reports","Backups","نظرة عامة","المستخدمون","التجارب","الباقات","المدفوعات"].forEach(function(x){
+      if(t.indexOf(x)>=0) hits++;
+    });
+    return hits>=4;
+  }
+
+  function findSidebar(){
+    var all=[].slice.call(document.querySelectorAll("aside,nav,div,section"));
+    var c=all.filter(isSidebar);
+    c.sort(function(a,b){
+      var aw=a.getBoundingClientRect().width || 9999;
+      var bw=b.getBoundingClientRect().width || 9999;
+      return aw-bw;
+    });
+    return c[0] || null;
+  }
+
+  function boot(){
+    document.querySelectorAll("#dspAdminDrawerBtn,#dspAdminDrawerBackdrop,#dspAdminMobileBackdrop").forEach(function(x){x.remove();});
+    document.body.classList.remove("dspDrawerOpen","dsp-admin-menu-open");
+
+    var side=findSidebar();
+    if(!side) return;
+
+    side.classList.add("dspHardSidebar");
+
+    if(!document.getElementById("dspHardBackdrop")){
+      var back=document.createElement("div");
+      back.id="dspHardBackdrop";
+      document.body.appendChild(back);
+      back.onclick=function(){document.body.classList.remove("dspHardOpen");};
+    }
+
+    if(!document.getElementById("dspHardMenuBtn")){
+      var btn=document.createElement("button");
+      btn.id="dspHardMenuBtn";
+      btn.type="button";
+      btn.textContent="☰";
+      document.body.appendChild(btn);
+      btn.onclick=function(){document.body.classList.toggle("dspHardOpen");};
+    }
+
+    side.querySelectorAll("a,button").forEach(function(el){
+      if(!el.dataset.hardClose){
+        el.dataset.hardClose="1";
+        el.addEventListener("click",function(){
+          if(mobile()) setTimeout(function(){document.body.classList.remove("dspHardOpen");},120);
+        });
+      }
+    });
+
+    if(mobile()) document.body.classList.remove("dspHardOpen");
+  }
+
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",boot);
+  else boot();
+
+  setTimeout(boot,300);
+  setTimeout(boot,1000);
+  window.addEventListener("resize",boot);
+})();
+</script>
+<!-- DSP_ADMIN_MOBILE_HARD_DRAWER_END -->
+
+
+
+
+
+
+
+
+<script src="/ndsp-admin-live-data-override.js?v=live-db-1" defer></script>
+<script src="ndsp-hud-theme.js" defer></script>
+
+<!-- NDSP_AR_EN_ONLY_CLEAN_FINAL_START -->
+<script>
+(function(){
+  "use strict";
+
+  function n(v){ return String(v || "").trim().toLowerCase(); }
+
+  function allowed(v){
+    v = n(v);
+    return v === "ar" || v === "en" || v.indexOf("ar-") === 0 || v.indexOf("en-") === 0 ||
+           v === "arabic" || v === "english" || v === "العربية";
+  }
+
+  function isLangSelect(sel){
+    var meta = n((sel.id || "") + " " + (sel.name || "") + " " + (sel.className || "") + " " + (sel.getAttribute("aria-label") || ""));
+    var text = n(sel.textContent || "");
+    return /lang|language|locale|لغة|لسان/.test(meta) || /العربية|english|arabic/.test(text);
+  }
+
+  function cleanSelect(sel){
+    if (!sel || !sel.options || !isLangSelect(sel)) return;
+
+    Array.prototype.slice.call(sel.options).forEach(function(o){
+      var v = n(o.value || "");
+      var t = n(o.textContent || "");
+      if (!allowed(v) && !allowed(t)) o.remove();
+    });
+
+    var opts = Array.prototype.slice.call(sel.options);
+    var hasAr = opts.some(function(o){ return n(o.value) === "ar" || n(o.textContent).indexOf("العربية") >= 0; });
+    var hasEn = opts.some(function(o){ return n(o.value) === "en" || n(o.textContent).indexOf("english") >= 0; });
+
+    if (!hasAr) {
+      var ar = document.createElement("option");
+      ar.value = "ar";
+      ar.textContent = "العربية";
+      sel.appendChild(ar);
+    }
+
+    if (!hasEn) {
+      var en = document.createElement("option");
+      en.value = "en";
+      en.textContent = "English";
+      sel.appendChild(en);
+    }
+  }
+
+  function enforce(){
+    window.NDSP_ALLOWED_LANGUAGES = ["ar","en"];
+    document.documentElement.setAttribute("data-allowed-languages", "ar,en");
+    Array.prototype.slice.call(document.querySelectorAll("select")).forEach(cleanSelect);
+
+    Array.prototype.slice.call(document.querySelectorAll("[data-lang], [data-language], [data-locale]")).forEach(function(el){
+      var v = n(el.getAttribute("data-lang") || el.getAttribute("data-language") || el.getAttribute("data-locale") || "");
+      if (v && !allowed(v)) el.remove();
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", enforce);
+  setTimeout(enforce, 300);
+  setTimeout(enforce, 1200);
+})();
+</script>
+<!-- NDSP_AR_EN_ONLY_CLEAN_FINAL_END -->
+
+</body></table>
+      </div></div>
+    </section>
+
+    <!-- ===== USERS ===== -->
+    <section class="view" data-view="users">
+      <div class="card"><div class="pad">
+        <div class="toolbar">
+          <input id="userSearch" placeholder="بحث بالاسم أو البريد…" data-ph="userSearch">
+          <button class="chip-f on" data-uf="all" data-i="ufAll">الكل</button>
+          <button class="chip-f" data-uf="trial" data-i="ufTrial">تجربة</button>
+          <button class="chip-f" data-uf="paid" data-i="ufPaid">مشترك</button>
+        </div>
+        <table><thead><tr>
+          <th data-i="thUser">المستخدم</th><th data-i="thPlan">الباقة</th><th data-i="thStatus">الحالة</th><th data-i="thMode">وضع اللوحة</th><th data-i="thLast">آخر دخول</th><th></th>
+        </tr></thead><tbody id="usersBody"></t</</</</
+
+
+
+
+
+<script src="/ndsp-admin-live-data-override.js?v=live-db-1" defer></script>
+
+<!-- NDSP_AR_EN_ONLY_CLEAN_FINAL_START -->
+<script>
+(function(){
+  "use strict";
+
+  function n(v){ return String(v || "").trim().toLowerCase(); }
+
+  function allowed(v){
+    v = n(v);
+    return v === "ar" || v === "en" || v.indexOf("ar-") === 0 || v.indexOf("en-") === 0 ||
+           v === "arabic" || v === "english" || v === "العربية";
+  }
+
+  function isLangSelect(sel){
+    var meta = n((sel.id || "") + " " + (sel.name || "") + " " + (sel.className || "") + " " + (sel.getAttribute("aria-label") || ""));
+    var text = n(sel.textContent || "");
+    return /lang|language|locale|لغة|لسان/.test(meta) || /العربية|english|arabic/.test(text);
+  }
+
+  function cleanSelect(sel){
+    if (!sel || !sel.options || !isLangSelect(sel)) return;
+
+    Array.prototype.slice.call(sel.options).forEach(function(o){
+      var v = n(o.value || "");
+      var t = n(o.textContent || "");
+      if (!allowed(v) && !allowed(t)) o.remove();
+    });
+
+    var opts = Array.prototype.slice.call(sel.options);
+    var hasAr = opts.some(function(o){ return n(o.value) === "ar" || n(o.textContent).indexOf("العربية") >= 0; });
+    var hasEn = opts.some(function(o){ return n(o.value) === "en" || n(o.textContent).indexOf("english") >= 0; });
+
+    if (!hasAr) {
+      var ar = document.createElement("option");
+      ar.value = "ar";
+      ar.textContent = "العربية";
+      sel.appendChild(ar);
+    }
+
+    if (!hasEn) {
+      var en = document.createElement("option");
+      en.value = "en";
+      en.textContent = "English";
+      sel.appendChild(en);
+    }
+  }
+
+  function enforce(){
+    window.NDSP_ALLOWED_LANGUAGES = ["ar","en"];
+    document.documentElement.setAttribute("data-allowed-languages", "ar,en");
+    Array.prototype.slice.call(document.querySelectorAll("select")).forEach(cleanSelect);
+
+    Array.prototype.slice.call(document.querySelectorAll("[data-lang], [data-language], [data-locale]")).forEach(function(el){
+      var v = n(el.getAttribute("data-lang") || el.getAttribute("data-language") || el.getAttribute("data-locale") || "");
+      if (v && !allowed(v)) el.remove();
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", enforce);
+  setTimeout(enforce, 300);
+  setTimeout(enforce, 1200);
+})();
+</script>
+<!-- NDSP_AR_EN_ONLY_CLEAN_FINAL_END -->
+
+</body></table>
+      </div></div>
+    </section>
+
+    <!-- ===== TRIALS ===== -->
+    <section class="view" data-view="trials">
+      <div class="kpis mb">
+        <div class="kpi gold"><div class="k" data-i="tActive">تجارب نشطة</div><div class="v">٤٠</div><div class="d up">١٦ <span data-i="tDays">يوم لكل تجربة</span></div></div>
+        <div class="kpi"><div class="k" data-i="tEnding">تنتهي خلال ٣ أيام</div><div class="v">٦</div><div class="d flat" data-i="tFollow">تحتاج متابعة</div></div>
+        <div class="kpi"><div class="k" data-i="tConv">نية الترقية</div><div class="v">٠</div><div class="d up">٠٪</div></div>
+        <div class="kpi"><div class="k" data-i="tExpired">منتهية</div><div class="v">٢</div><div class="d flat">—</div></div>
+      </div>
+      <div class="card"><div class="pad">
+        <div class="card-h"><div class="t"><span class="ic">◷</span><span data-i="trialList">التجارب النشطة</span></div><span class="tag">PER-USER CLOCK</span></div>
+        <table><thead><tr>
+          <th data-i="thUser">المستخدم</th><th data-i="thType">النوع</th><th data-i="thDay">يوم التجربة</th><th data-i="thStarted">بدأت</th><th data-i="thEnds">تنتهي</th><th data-i="thRemain">المتبقي</th><th data-i="thIntent">نية الترقية</th>
+        </tr></thead><tbody id="trialsBody"></t</</</</
+
+
+
+
+
+<script src="/ndsp-admin-live-data-override.js?v=live-db-1" defer></script>
+
+<!-- NDSP_AR_EN_ONLY_CLEAN_FINAL_START -->
+<script>
+(function(){
+  "use strict";
+
+  function n(v){ return String(v || "").trim().toLowerCase(); }
+
+  function allowed(v){
+    v = n(v);
+    return v === "ar" || v === "en" || v.indexOf("ar-") === 0 || v.indexOf("en-") === 0 ||
+           v === "arabic" || v === "english" || v === "العربية";
+  }
+
+  function isLangSelect(sel){
+    var meta = n((sel.id || "") + " " + (sel.name || "") + " " + (sel.className || "") + " " + (sel.getAttribute("aria-label") || ""));
+    var text = n(sel.textContent || "");
+    return /lang|language|locale|لغة|لسان/.test(meta) || /العربية|english|arabic/.test(text);
+  }
+
+  function cleanSelect(sel){
+    if (!sel || !sel.options || !isLangSelect(sel)) return;
+
+    Array.prototype.slice.call(sel.options).forEach(function(o){
+      var v = n(o.value || "");
+      var t = n(o.textContent || "");
+      if (!allowed(v) && !allowed(t)) o.remove();
+    });
+
+    var opts = Array.prototype.slice.call(sel.options);
+    var hasAr = opts.some(function(o){ return n(o.value) === "ar" || n(o.textContent).indexOf("العربية") >= 0; });
+    var hasEn = opts.some(function(o){ return n(o.value) === "en" || n(o.textContent).indexOf("english") >= 0; });
+
+    if (!hasAr) {
+      var ar = document.createElement("option");
+      ar.value = "ar";
+      ar.textContent = "العربية";
+      sel.appendChild(ar);
+    }
+
+    if (!hasEn) {
+      var en = document.createElement("option");
+      en.value = "en";
+      en.textContent = "English";
+      sel.appendChild(en);
+    }
+  }
+
+  function enforce(){
+    window.NDSP_ALLOWED_LANGUAGES = ["ar","en"];
+    document.documentElement.setAttribute("data-allowed-languages", "ar,en");
+    Array.prototype.slice.call(document.querySelectorAll("select")).forEach(cleanSelect);
+
+    Array.prototype.slice.call(document.querySelectorAll("[data-lang], [data-language], [data-locale]")).forEach(function(el){
+      var v = n(el.getAttribute("data-lang") || el.getAttribute("data-language") || el.getAttribute("data-locale") || "");
+      if (v && !allowed(v)) el.remove();
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", enforce);
+  setTimeout(enforce, 300);
+  setTimeout(enforce, 1200);
+})();
+</script>
+<!-- NDSP_AR_EN_ONLY_CLEAN_FINAL_END -->
+
+</body></table>
+        <div class="muted-note" data-i="trialClockNote"><b>الحوكمة:</b> تبدأ الـ١٦ يومًا من لحظة تفعيل كل حساب — لكل مستخدم عدّاده الخاص المُسجَّل في الخادم. لا ساعة عامة ولا تمديد تلقائي.</div>
+      </div></div>
+    </section>
+
+    <!-- ===== REGISTRATION REVIEW ===== -->
+    <section class="view" data-view="review">
+      <div class="card"><div class="pad">
+        <div class="card-h"><div class="t"><span class="ic">⚑</span><span data-i="reviewQueue">طابور المراجعة اليدوية</span></div><span class="tag">PENDING_REVIEW</span></div>
+        <table><thead><tr>
+          <th data-i="thUser">المستخدم</th><th data-i="thSignals">إشارات آمنة</th><th data-i="thRisk">درجة الخطر</th><th data-i="thDecision">قرار النظام</th><th data-i="thAction">إجراء</th>
+        </tr></thead><tbody id="reviewBody"></t</</</</
+
+
+
+
+
+<script src="/ndsp-admin-live-data-override.js?v=live-db-1" defer></script>
+
+<!-- NDSP_AR_EN_ONLY_CLEAN_FINAL_START -->
+<script>
+(function(){
+  "use strict";
+
+  function n(v){ return String(v || "").trim().toLowerCase(); }
+
+  function allowed(v){
+    v = n(v);
+    return v === "ar" || v === "en" || v.indexOf("ar-") === 0 || v.indexOf("en-") === 0 ||
+           v === "arabic" || v === "english" || v === "العربية";
+  }
+
+  function isLangSelect(sel){
+    var meta = n((sel.id || "") + " " + (sel.name || "") + " " + (sel.className || "") + " " + (sel.getAttribute("aria-label") || ""));
+    var text = n(sel.textContent || "");
+    return /lang|language|locale|لغة|لسان/.test(meta) || /العربية|english|arabic/.test(text);
+  }
+
+  function cleanSelect(sel){
+    if (!sel || !sel.options || !isLangSelect(sel)) return;
+
+    Array.prototype.slice.call(sel.options).forEach(function(o){
+      var v = n(o.value || "");
+      var t = n(o.textContent || "");
+      if (!allowed(v) && !allowed(t)) o.remove();
+    });
+
+    var opts = Array.prototype.slice.call(sel.options);
+    var hasAr = opts.some(function(o){ return n(o.value) === "ar" || n(o.textContent).indexOf("العربية") >= 0; });
+    var hasEn = opts.some(function(o){ return n(o.value) === "en" || n(o.textContent).indexOf("english") >= 0; });
+
+    if (!hasAr) {
+      var ar = document.createElement("option");
+      ar.value = "ar";
+      ar.textContent = "العربية";
+      sel.appendChild(ar);
+    }
+
+    if (!hasEn) {
+      var en = document.createElement("option");
+      en.value = "en";
+      en.textContent = "English";
+      sel.appendChild(en);
+    }
+  }
+
+  function enforce(){
+    window.NDSP_ALLOWED_LANGUAGES = ["ar","en"];
+    document.documentElement.setAttribute("data-allowed-languages", "ar,en");
+    Array.prototype.slice.call(document.querySelectorAll("select")).forEach(cleanSelect);
+
+    Array.prototype.slice.call(document.querySelectorAll("[data-lang], [data-language], [data-locale]")).forEach(function(el){
+      var v = n(el.getAttribute("data-lang") || el.getAttribute("data-language") || el.getAttribute("data-locale") || "");
+      if (v && !allowed(v)) el.remove();
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", enforce);
+  setTimeout(enforce, 300);
+  setTimeout(enforce, 1200);
+})();
+</script>
+<!-- NDSP_AR_EN_ONLY_CLEAN_FINAL_END -->
+
+</body></table>
+        <div class="muted-note" data-i="reviewNote"><b>الحوكمة:</b> الواجهة تجمع إشارات آمنة فقط (بصمة جهاز/IP مجزّأة، سرعة تسجيل). لا تُعرض معادلة الخطر الخام ولا درجة الإساءة غير المقنّعة.</div>
+      </div></div>
+    </section>
+
+    <!-- ===== PACKAGES ===== -->
+    <section class="view" data-view="packages">
+      <div class="card"><div class="pad">
+        <div class="card-h"><div class="t"><span class="ic">◆</span><span data-i="pkgMatrix">مصفوفة الباقات والحدود</span></div></div>
+        <table><thead><tr>
+          <th data-i="thFeature">الميزة</th><th>Free</th><th>Pro</th><th class="b-gold" style="color:var(--gold-bright)">Elite</th><th data-i="thInst">Institutional</th>
+        </tr></thead><tbody id="pkgBody"></t</</</</
+
+
+
+
+
+<script src="/ndsp-admin-live-data-override.js?v=live-db-1" defer></script>
+
+<!-- NDSP_AR_EN_ONLY_CLEAN_FINAL_START -->
+<script>
+(function(){
+  "use strict";
+
+  function n(v){ return String(v || "").trim().toLowerCase(); }
+
+  function allowed(v){
+    v = n(v);
+    return v === "ar" || v === "en" || v.indexOf("ar-") === 0 || v.indexOf("en-") === 0 ||
+           v === "arabic" || v === "english" || v === "العربية";
+  }
+
+  function isLangSelect(sel){
+    var meta = n((sel.id || "") + " " + (sel.name || "") + " " + (sel.className || "") + " " + (sel.getAttribute("aria-label") || ""));
+    var text = n(sel.textContent || "");
+    return /lang|language|locale|لغة|لسان/.test(meta) || /العربية|english|arabic/.test(text);
+  }
+
+  function cleanSelect(sel){
+    if (!sel || !sel.options || !isLangSelect(sel)) return;
+
+    Array.prototype.slice.call(sel.options).forEach(function(o){
+      var v = n(o.value || "");
+      var t = n(o.textContent || "");
+      if (!allowed(v) && !allowed(t)) o.remove();
+    });
+
+    var opts = Array.prototype.slice.call(sel.options);
+    var hasAr = opts.some(function(o){ return n(o.value) === "ar" || n(o.textContent).indexOf("العربية") >= 0; });
+    var hasEn = opts.some(function(o){ return n(o.value) === "en" || n(o.textContent).indexOf("english") >= 0; });
+
+    if (!hasAr) {
+      var ar = document.createElement("option");
+      ar.value = "ar";
+      ar.textContent = "العربية";
+      sel.appendChild(ar);
+    }
+
+    if (!hasEn) {
+      var en = document.createElement("option");
+      en.value = "en";
+      en.textContent = "English";
+      sel.appendChild(en);
+    }
+  }
+
+  function enforce(){
+    window.NDSP_ALLOWED_LANGUAGES = ["ar","en"];
+    document.documentElement.setAttribute("data-allowed-languages", "ar,en");
+    Array.prototype.slice.call(document.querySelectorAll("select")).forEach(cleanSelect);
+
+    Array.prototype.slice.call(document.querySelectorAll("[data-lang], [data-language], [data-locale]")).forEach(function(el){
+      var v = n(el.getAttribute("data-lang") || el.getAttribute("data-language") || el.getAttribute("data-locale") || "");
+      if (v && !allowed(v)) el.remove();
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", enforce);
+  setTimeout(enforce, 300);
+  setTimeout(enforce, 1200);
+})();
+</script>
+<!-- NDSP_AR_EN_ONLY_CLEAN_FINAL_END -->
+
+</body></table>
+        <div class="muted-note" data-i="pkgNote"><b>الحوكمة:</b> الحدود تُفرض في الخادم. الواجهة تعرض الحالة فقط. التفعيل بلا موافقة خلفية ممنوع.</div>
+      </div></div>
+    </section>
+
+    <!-- ===== PAYMENTS ===== -->
+    <section class="view" data-view="payments">
+      <div class="card"><div class="pad">
+        <div class="card-h"><div class="t"><span class="ic">₪</span><span data-i="payQueue">المدفوعات والاشتراكات</span></div><span class="tag">SERVER-SIDE</span></div>
+        <table><thead><tr>
+          <th data-i="thUser">المستخدم</th><th data-i="thPlan">الباقة</th><th data-i="thMethod">الطريقة</th><th data-i="thAmount">المبلغ</th><th data-i="thState">الحالة</th><th data-i="thAction">إجراء</th>
+        </tr></thead><tbody id="payBody"></t</</</</
+
+
+
+
+
+<script src="/ndsp-admin-live-data-override.js?v=live-db-1" defer></script>
+
+<!-- NDSP_AR_EN_ONLY_CLEAN_FINAL_START -->
+<script>
+(function(){
+  "use strict";
+
+  function n(v){ return String(v || "").trim().toLowerCase(); }
+
+  function allowed(v){
+    v = n(v);
+    return v === "ar" || v === "en" || v.indexOf("ar-") === 0 || v.indexOf("en-") === 0 ||
+           v === "arabic" || v === "english" || v === "العربية";
+  }
+
+  function isLangSelect(sel){
+    var meta = n((sel.id || "") + " " + (sel.name || "") + " " + (sel.className || "") + " " + (sel.getAttribute("aria-label") || ""));
+    var text = n(sel.textContent || "");
+    return /lang|language|locale|لغة|لسان/.test(meta) || /العربية|english|arabic/.test(text);
+  }
+
+  function cleanSelect(sel){
+    if (!sel || !sel.options || !isLangSelect(sel)) return;
+
+    Array.prototype.slice.call(sel.options).forEach(function(o){
+      var v = n(o.value || "");
+      var t = n(o.textContent || "");
+      if (!allowed(v) && !allowed(t)) o.remove();
+    });
+
+    var opts = Array.prototype.slice.call(sel.options);
+    var hasAr = opts.some(function(o){ return n(o.value) === "ar" || n(o.textContent).indexOf("العربية") >= 0; });
+    var hasEn = opts.some(function(o){ return n(o.value) === "en" || n(o.textContent).indexOf("english") >= 0; });
+
+    if (!hasAr) {
+      var ar = document.createElement("option");
+      ar.value = "ar";
+      ar.textContent = "العربية";
+      sel.appendChild(ar);
+    }
+
+    if (!hasEn) {
+      var en = document.createElement("option");
+      en.value = "en";
+      en.textContent = "English";
+      sel.appendChild(en);
+    }
+  }
+
+  function enforce(){
+    window.NDSP_ALLOWED_LANGUAGES = ["ar","en"];
+    document.documentElement.setAttribute("data-allowed-languages", "ar,en");
+    Array.prototype.slice.call(document.querySelectorAll("select")).forEach(cleanSelect);
+
+    Array.prototype.slice.call(document.querySelectorAll("[data-lang], [data-language], [data-locale]")).forEach(function(el){
+      var v = n(el.getAttribute("data-lang") || el.getAttribute("data-language") || el.getAttribute("data-locale") || "");
+      if (v && !allowed(v)) el.remove();
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", enforce);
+  setTimeout(enforce, 300);
+  setTimeout(enforce, 1200);
+})();
+</script>
+<!-- NDSP_AR_EN_ONLY_CLEAN_FINAL_END -->
+
+</body></table>
+        <div class="muted-note" data-i="payNote"><b>الحوكمة:</b> منطق الدفع في الخادم. لا تفعيل تلقائي بلا اعتماد. بيانات تشغيل محمية البوابة (NOWPayments) لا تُعرض إطلاقًا.</div>
+      </div></div>
+    </section>
+
+    <!-- ===== LAYER GOVERNANCE ===== -->
+    <section class="view" data-view="layers">
+      <div class="cols">
+        <div class="card"><div class="pad">
+          <div class="card-h"><div class="t"><span class="ic">⬡</span><span data-i="visibleLayers">الطبقات الأربع الظاهرة</span></div></div>
+          <div class="lg" id="lgVisible"></div>
+        </div></div>
+        <div class="card"><div class="pad">
+          <div class="card-h"><div class="t"><span class="ic">⛨</span><span data-i="hiddenLayers">الطبقات المخفية</span></div><span class="tag">PROTECTED</span></div>
+          <div class="lg" id="lgHidden"></div>
+          <div class="hidden-strip" data-i="hiddenStrip"><b>12 LAYERS · MASKED</b><br>تشارك في كل مخرجة دون كشف الأسماء أو الترتيب أو طرق الحساب الداخلية أو المعاملات الداخلية.</div>
+        </div></div>
+      </div>
+      <div class="card mb" style="margin-top:16px"><div class="pad">
+        <div class="card-h"><div class="t"><span class="ic">✓</span><span data-i="outputContract">عقد المخرجات العامة</span></div></div>
+        <div style="display:flex;gap:20px;flex-wrap:wrap">
+          <div style="flex:1;min-width:240px">
+            <div style="font-size:12px;color:var(--up);font-family:'IBM Plex Mono';margin-bottom:10px">✓ <span data-i="allowed">مسموح عرضه</span></div>
+            <div id="allowedList" style="display:flex;flex-wrap:wrap;gap:7px"></div>
+          </div>
+          <div style="flex:1;min-width:240px">
+            <div style="font-size:12px;color:var(--down);font-family:'IBM Plex Mono';margin-bottom:10px">✕ <span data-i="forbidden">ممنوع عرضه</span></div>
+            <div id="forbiddenList" style="display:flex;flex-wrap:wrap;gap:7px"></div>
+          </div>
+        </div>
+      </div></div>
+    </section>
+
+    <!-- ===== MARKETS ===== -->
+    <section class="view" data-view="markets">
+      <div class="card"><div class="pad">
+        <div class="card-h"><div class="t"><span class="ic">⟁</span><span data-i="marketsEngine">الأسواق والأصول والمحرّك</span></div></div>
+        <div class="health mb">
+          <div class="hcell"><div class="k" data-i="meMarkets">الأسواق المدعومة</div><div class="v">٤</div><div class="st"><span class="badge b-ok" data-i="meLive">حيّ</span></div></div>
+          <div class="hcell"><div class="k" data-i="meAssets">الأصول المفعّلة</div><div class="v">١٢٤</div><div class="st"><span class="badge b-info" data-i="meGoverned">محكومة</span></div></div>
+          <div class="hcell"><div class="k" data-i="meEngine">محرّك القرار</div><div class="v">OK</div><div class="st"><span class="badge b-ok">RUNNING</span></div></div>
+          <div class="hcell"><div class="k" data-i="meData">مصدر البيانات</div><div class="v">PG</div><div class="st"><span class="badge b-gold">PostgreSQL</span></div></div>
+          <div class="hcell"><div class="k" data-i="meSanitizer">المنقّح العام</div><div class="v">ON</div><div class="st"><span class="badge b-ok" data-i="meEnforced">مُفعّل</span></div></div>
+          <div class="hcell"><div class="k" data-i="meWs">بث لحظي</div><div class="v">WS</div><div class="st"><span class="badge b-ok">CONNECTED</span></div></div>
+        </div>
+        <table><thead><tr>
+          <th data-i="thMarket">السوق</th><th data-i="thAssetsN">عدد الأصول</th><th data-i="thStateC">الحالة</th><th data-i="thAudit">تصنيف التدقيق</th>
+        </tr></thead><tbody id="marketsBody"></t</</</</
+
+
+
+
+
+<script src="/ndsp-admin-live-data-override.js?v=live-db-1" defer></script>
+
+<!-- NDSP_AR_EN_ONLY_CLEAN_FINAL_START -->
+<script>
+(function(){
+  "use strict";
+
+  function n(v){ return String(v || "").trim().toLowerCase(); }
+
+  function allowed(v){
+    v = n(v);
+    return v === "ar" || v === "en" || v.indexOf("ar-") === 0 || v.indexOf("en-") === 0 ||
+           v === "arabic" || v === "english" || v === "العربية";
+  }
+
+  function isLangSelect(sel){
+    var meta = n((sel.id || "") + " " + (sel.name || "") + " " + (sel.className || "") + " " + (sel.getAttribute("aria-label") || ""));
+    var text = n(sel.textContent || "");
+    return /lang|language|locale|لغة|لسان/.test(meta) || /العربية|english|arabic/.test(text);
+  }
+
+  function cleanSelect(sel){
+    if (!sel || !sel.options || !isLangSelect(sel)) return;
+
+    Array.prototype.slice.call(sel.options).forEach(function(o){
+      var v = n(o.value || "");
+      var t = n(o.textContent || "");
+      if (!allowed(v) && !allowed(t)) o.remove();
+    });
+
+    var opts = Array.prototype.slice.call(sel.options);
+    var hasAr = opts.some(function(o){ return n(o.value) === "ar" || n(o.textContent).indexOf("العربية") >= 0; });
+    var hasEn = opts.some(function(o){ return n(o.value) === "en" || n(o.textContent).indexOf("english") >= 0; });
+
+    if (!hasAr) {
+      var ar = document.createElement("option");
+      ar.value = "ar";
+      ar.textContent = "العربية";
+      sel.appendChild(ar);
+    }
+
+    if (!hasEn) {
+      var en = document.createElement("option");
+      en.value = "en";
+      en.textContent = "English";
+      sel.appendChild(en);
+    }
+  }
+
+  function enforce(){
+    window.NDSP_ALLOWED_LANGUAGES = ["ar","en"];
+    document.documentElement.setAttribute("data-allowed-languages", "ar,en");
+    Array.prototype.slice.call(document.querySelectorAll("select")).forEach(cleanSelect);
+
+    Array.prototype.slice.call(document.querySelectorAll("[data-lang], [data-language], [data-locale]")).forEach(function(el){
+      var v = n(el.getAttribute("data-lang") || el.getAttribute("data-language") || el.getAttribute("data-locale") || "");
+      if (v && !allowed(v)) el.remove();
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", enforce);
+  setTimeout(enforce, 300);
+  setTimeout(enforce, 1200);
+})();
+</script>
+<!-- NDSP_AR_EN_ONLY_CLEAN_FINAL_END -->
+
+</body></table>
+      </div></div>
+    </section>
+
+    <!-- ===== ALERTS & CONFIG ===== -->
+    <section class="view" data-view="alerts">
+      <div class="card"><div class="pad">
+        <div class="card-h"><div class="t"><span class="ic">✉</span><span data-i="integrations">قنوات التنبيه والإعدادات</span></div><span class="tag">SECRETS MASKED</span></div>
+        <div class="cfg" id="cfgList"></div>
+        <div class="muted-note" data-i="cfgNote"><b>الحوكمة:</b> تُعرض الحالة (مُعدّ / غير مُعدّ) وآخر اختبار فقط. الرمز قناة محميات والبيانات تشغيل محمية (بوت تيليجرام، SMTP، البوابة) لا تُعرض أبدًا.</div>
+      </div></div>
+    </section>
+
+    <!-- ===== HEALTH ===== -->
+    <section class="view" data-view="health">
+      <div class="kpis mb">
+        <div class="kpi gold"><div class="k" data-i="hUptime">زمن التشغيل</div><div class="v">٩٩.٩٪</div><div class="d up">30d</div></div>
+        <div class="kpi"><div class="k" data-i="hLatency">زمن الاستجابة</div><div class="v">٨٤ms</div><div class="d up" data-i="hStable">مستقر</div></div>
+        <div class="kpi"><div class="k" data-i="hBackup">آخر نسخة احتياطية</div><div class="v">2h</div><div class="d up" data-i="hAuto">آلي</div></div>
+        <div class="kpi"><div class="k" data-i="hSnapshot">آخر لقطة</div><div class="v">6h</div><div class="d flat">snapshot</div></div>
+      </div>
+      <div class="card"><div class="pad">
+        <div class="card-h"><div class="t"><span class="ic">♥</span><span data-i="healthChecks">فحوصات الصحة</span></div></div>
+        <table><thead><tr><th data-i="thService">الخدمة</th><th data-i="thStateC">الحالة</th><th data-i="thLatency">زمن الاستجابة</th><th data-i="thChecked">آخر فحص</th></tr></thead><tbody id="healthBody"></t</</</</
+
+
+
+
+
+<script src="/ndsp-admin-live-data-override.js?v=live-db-1" defer></script>
+
+<!-- NDSP_AR_EN_ONLY_CLEAN_FINAL_START -->
+<script>
+(function(){
+  "use strict";
+
+  function n(v){ return String(v || "").trim().toLowerCase(); }
+
+  function allowed(v){
+    v = n(v);
+    return v === "ar" || v === "en" || v.indexOf("ar-") === 0 || v.indexOf("en-") === 0 ||
+           v === "arabic" || v === "english" || v === "العربية";
+  }
+
+  function isLangSelect(sel){
+    var meta = n((sel.id || "") + " " + (sel.name || "") + " " + (sel.className || "") + " " + (sel.getAttribute("aria-label") || ""));
+    var text = n(sel.textContent || "");
+    return /lang|language|locale|لغة|لسان/.test(meta) || /العربية|english|arabic/.test(text);
+  }
+
+  function cleanSelect(sel){
+    if (!sel || !sel.options || !isLangSelect(sel)) return;
+
+    Array.prototype.slice.call(sel.options).forEach(function(o){
+      var v = n(o.value || "");
+      var t = n(o.textContent || "");
+      if (!allowed(v) && !allowed(t)) o.remove();
+    });
+
+    var opts = Array.prototype.slice.call(sel.options);
+    var hasAr = opts.some(function(o){ return n(o.value) === "ar" || n(o.textContent).indexOf("العربية") >= 0; });
+    var hasEn = opts.some(function(o){ return n(o.value) === "en" || n(o.textContent).indexOf("english") >= 0; });
+
+    if (!hasAr) {
+      var ar = document.createElement("option");
+      ar.value = "ar";
+      ar.textContent = "العربية";
+      sel.appendChild(ar);
+    }
+
+    if (!hasEn) {
+      var en = document.createElement("option");
+      en.value = "en";
+      en.textContent = "English";
+      sel.appendChild(en);
+    }
+  }
+
+  function enforce(){
+    window.NDSP_ALLOWED_LANGUAGES = ["ar","en"];
+    document.documentElement.setAttribute("data-allowed-languages", "ar,en");
+    Array.prototype.slice.call(document.querySelectorAll("select")).forEach(cleanSelect);
+
+    Array.prototype.slice.call(document.querySelectorAll("[data-lang], [data-language], [data-locale]")).forEach(function(el){
+      var v = n(el.getAttribute("data-lang") || el.getAttribute("data-language") || el.getAttribute("data-locale") || "");
+      if (v && !allowed(v)) el.remove();
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", enforce);
+  setTimeout(enforce, 300);
+  setTimeout(enforce, 1200);
+})();
+</script>
+<!-- NDSP_AR_EN_ONLY_CLEAN_FINAL_END -->
+
+</body></table>
+        <div class="muted-note" data-i="healthNote"><b>الحوكمة:</b> نسخة احتياطية قبل أي تعديل، وتقرير بعده. كل المسارات الرسمية فقط.</div>
+      </div></div>
+    </section>
+
+    <!-- ===== ANALYTICS ===== -->
+    <section class="view" data-view="analytics">
+      <div class="cols">
+        <div class="card"><div class="pad">
+          <div class="card-h"><div class="t"><span class="ic">≣</span><span data-i="funnelT">مسار التجربة</span></div><span class="tag">SAFE SIGNALS</span></div>
+          <div class="funnel" id="funnel"></div>
+        </div></div>
+        <div class="card"><div class="pad">
+          <div class="card-h"><div class="t"><span class="ic">◈</span><span data-i="frictionT">نقاط الاحتكاك</span></div></div>
+          <table><thead><tr><th data-i="thSignal">الإشارة</th><th data-i="thCount">العدد</th><th data-i="thTrend">الاتجاه</th></tr></thead><tbody id="frictionBody"></t</</</</
+
+
+
+
+
+<script src="/ndsp-admin-live-data-override.js?v=live-db-1" defer></script>
+
+<!-- NDSP_AR_EN_ONLY_CLEAN_FINAL_START -->
+<script>
+(function(){
+  "use strict";
+
+  function n(v){ return String(v || "").trim().toLowerCase(); }
+
+  function allowed(v){
+    v = n(v);
+    return v === "ar" || v === "en" || v.indexOf("ar-") === 0 || v.indexOf("en-") === 0 ||
+           v === "arabic" || v === "english" || v === "العربية";
+  }
+
+  function isLangSelect(sel){
+    var meta = n((sel.id || "") + " " + (sel.name || "") + " " + (sel.className || "") + " " + (sel.getAttribute("aria-label") || ""));
+    var text = n(sel.textContent || "");
+    return /lang|language|locale|لغة|لسان/.test(meta) || /العربية|english|arabic/.test(text);
+  }
+
+  function cleanSelect(sel){
+    if (!sel || !sel.options || !isLangSelect(sel)) return;
+
+    Array.prototype.slice.call(sel.options).forEach(function(o){
+      var v = n(o.value || "");
+      var t = n(o.textContent || "");
+      if (!allowed(v) && !allowed(t)) o.remove();
+    });
+
+    var opts = Array.prototype.slice.call(sel.options);
+    var hasAr = opts.some(function(o){ return n(o.value) === "ar" || n(o.textContent).indexOf("العربية") >= 0; });
+    var hasEn = opts.some(function(o){ return n(o.value) === "en" || n(o.textContent).indexOf("english") >= 0; });
+
+    if (!hasAr) {
+      var ar = document.createElement("option");
+      ar.value = "ar";
+      ar.textContent = "العربية";
+      sel.appendChild(ar);
+    }
+
+    if (!hasEn) {
+      var en = document.createElement("option");
+      en.value = "en";
+      en.textContent = "English";
+      sel.appendChild(en);
+    }
+  }
+
+  function enforce(){
+    window.NDSP_ALLOWED_LANGUAGES = ["ar","en"];
+    document.documentElement.setAttribute("data-allowed-languages", "ar,en");
+    Array.prototype.slice.call(document.querySelectorAll("select")).forEach(cleanSelect);
+
+    Array.prototype.slice.call(document.querySelectorAll("[data-lang], [data-language], [data-locale]")).forEach(function(el){
+      var v = n(el.getAttribute("data-lang") || el.getAttribute("data-language") || el.getAttribute("data-locale") || "");
+      if (v && !allowed(v)) el.remove();
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", enforce);
+  setTimeout(enforce, 300);
+  setTimeout(enforce, 1200);
+})();
+</script>
+<!-- NDSP_AR_EN_ONLY_CLEAN_FINAL_END -->
+
+</body></table>
+        </div></div>
+      </div>
+      <div class="muted-note" data-i="analyticsNote" style="margin-top:16px"><b>الحوكمة:</b> إشارات UX آمنة فقط (مشاهدات، تنقّل، إكمال نماذج). لا كلمات مرور، لا بيانات تشغيل محمية، لا أسماء طبقات مخفية، لا بصمات خام معروضة.</div>
+    </section>
+
+    <!-- ===== SECURITY & TRANSLATION ===== -->
+    <section class="view" data-view="security">
+      <div class="cols">
+        <div class="card"><div class="pad">
+          <div class="card-h"><div class="t"><span class="ic">⛨</span><span data-i="secChecks">الأمان المرن الأقصى</span></div></div>
+          <div class="cfg" id="secList"></div>
+        </div></div>
+        <div class="card"><div class="pad">
+          <div class="card-h"><div class="t"><span class="ic">⌘</span><span data-i="transCtrl">ضوابط الترجمة</span></div></div>
+          <div class="cfg">
+            <div class="cfgrow"><div class="ic">ع</div><div class="nm"><b data-i="langAr">العربية (RTL)</b><span class="protected" data-i="primaryLang">لغة أساسية</span></div><div class="meta"><span class="badge b-ok" data-i="enabled">مفعّلة</span></div></div>
+            <div class="cfgrow"><div class="ic">EN</div><div class="nm"><b data-i="langEn">الإنجليزية (LTR)</b><span class="protected" data-i="primaryLang">لغة أساسية</span></div><div class="meta"><span class="badge b-ok" data-i="enabled">مفعّلة</span></div></div>
+            <div class="cfgrow" style="border-color:rgba(226,101,126,.3)"><div class="ic" style="color:var(--down)">✕</div><div class="nm"><b data-i="langHe">العبرية</b><span class="protected">he · iw · he-IL</span></div><div class="meta"><span class="badge b-bad" data-i="blocked">محجوبة</span></div></div>
+          </div>
+          <div class="muted-note" data-i="transNote"><b>الحوكمة:</b> العبرية محجوبة بالكامل — لا محدّد لغة، لا ملفات لغة، لا توجيه، لا مخرجات عامة. حماية translate=no + notranslate.</div>
+        </div></div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+const AR=s=>String(s).replace(/[0-9]/g,d=>"٠١٢٣٤٥٦٧٨٩"[d]);
+let LANG="en";
+const __ndspStub=new Proxy(function(){},{get:(t,p)=>{if(p==='style'||p==='dataset'||p==='classList')return new Proxy({},{get:()=>()=>{}});if(p==='value'||p==='textContent'||p==='innerHTML'||p==='placeholder')return '';return __ndspStub;},set:()=>true,apply:()=>__ndspStub});const __q=(s)=>{try{return document.querySelector(s)||__ndspStub;}catch(e){return __ndspStub;}};const $=s=>__q(s), $$=s=>document.querySelectorAll(s);
+
+const I18N={
+ ar:{dir:"rtl",lang:"ar",
+  opsCenter:"OPERATIONS CENTER",grpMain:"الرئيسية",grpBiz:"الأعمال",grpEngine:"المحرّك والحوكمة",grpOps:"التشغيل",
+  nOverview:"نظرة عامة",nUsers:"المستخدمون",nTrials:"التجارب",nReview:"مراجعة التسجيل",nPackages:"الباقات",nPayments:"المدفوعات",
+  nLayers:"حوكمة الطبقات",nMarkets:"الأسواق والأصول",nAlerts:"التنبيهات والإعدادات",nHealth:"الصحة والنسخ",nAnalytics:"تحليلات التجربة",nSecurity:"الأمان والترجمة",
+  sysOk:"كل الأنظمة تعمل",adminRole:"مشرف عام",
+  kActive:"مستخدمون نشطون",kWeek:"هذا الأسبوع",kTrial:"مقاعد التجربة",kSeatsLeft:"١٠ مقاعد متبقية",kPending:"مدفوعات معلّقة",kNeedReview:"تحتاج مراجعة",kHealth:"صحة النظام",kUptime:"آخر ٣٠ يوم",
+  seatDist:"توزيع مقاعد التجربة",seatNote:"<b>الحوكمة:</b> التوزيع النهائي ٢٥ مبتدئ · ١٠ متخصص · ١٥ خاص. القبول النهائي يُنفّذ في الخادم.",
+  layerStatus:"حالة حوكمة الطبقات",lcTotal:"إجمالي الطبقات",lcActive:"كلها تشارك",lcVisible:"ظاهرة بالاسم",lcGoverned:"محكومة",lcHidden:"مخفيّة",lcProtected:"محميّة",
+  layerNote:"<b>قاعدة:</b> لا كشف للأسماء أو الترتيب أو طرق الحساب الداخلية أو المعاملات الداخلية. العرض = قيمة منقّحة فقط.",
+  recentReg:"أحدث طلبات التسجيل",thUser:"المستخدم",thType:"النوع",thRisk:"درجة الخطر",thDecision:"قرار النظام",thTime:"الوقت",
+  thPlan:"الباقة",thStatus:"الحالة",thMode:"وضع اللوحة",thLast:"آخر دخول",thProgress:"التقدّم",thRemain:"المتبقي",thIntent:"نية الترقية",
+  thDay:"يوم التجربة",thStarted:"بدأت",thEnds:"تنتهي",
+  trialClockNote:"<b>الحوكمة:</b> تبدأ الـ١٦ يومًا من لحظة تفعيل كل حساب — لكل مستخدم عدّاده الخاص المُسجَّل في الخادم. لا ساعة عامة ولا تمديد تلقائي.",
+  thSignals:"إشارات آمنة",thAction:"إجراء",thFeature:"الميزة",thInst:"المؤسسية",thMethod:"الطريقة",thAmount:"المبلغ",thState:"الحالة",
+  thMarket:"السوق",thAssetsN:"عدد الأصول",thStateC:"الحالة",thAudit:"تصنيف التدقيق",thService:"الخدمة",thLatency:"زمن الاستجابة",thChecked:"آخر فحص",
+  thSignal:"الإشارة",thCount:"العدد",thTrend:"الاتجاه",
+  ufAll:"الكل",ufTrial:"تجربة",ufPaid:"مشترك",userSearch:"بحث بالاسم أو البريد…",
+  tActive:"تجارب نشطة",tDays:"يوم لكل تجربة",tEnding:"تنتهي خلال ٣ أيام",tFollow:"تحتاج متابعة",tConv:"نية الترقية",tExpired:"منتهية",
+  trialList:"التجارب النشطة",reviewQueue:"طابور المراجعة اليدوية",
+  reviewNote:"<b>الحوكمة:</b> الواجهة تجمع إشارات آمنة فقط (بصمة جهاز/IP مجزّأة، سرعة تسجيل). لا تُعرض معادلة الخطر الخام ولا درجة الإساءة غير المقنّعة. عند «قبول» الطلب يُفعَّل الحساب، ومن لحظة التفعيل يبدأ عدّاد الـ١٦ يومًا الخاص بهذا المستخدم.",
+  pkgMatrix:"مصفوفة الباقات والحدود",pkgNote:"<b>الحوكمة:</b> الحدود تُفرض في الخادم. الواجهة تعرض الحالة فقط. التفعيل بلا موافقة خلفية ممنوع.",
+  payQueue:"المدفوعات والاشتراكات",payNote:"<b>الحوكمة:</b> منطق الدفع في الخادم. لا تفعيل تلقائي بلا اعتماد. بيانات تشغيل محمية البوابة (NOWPayments) لا تُعرض إطلاقًا.",
+  visibleLayers:"الطبقات الأربع الظاهرة",hiddenLayers:"الطبقات المخفية",
+  hiddenStrip:"<b>12 LAYERS · MASKED</b><br>تشارك في كل مخرجة دون كشف الأسماء أو الترتيب أو طرق الحساب الداخلية أو المعاملات الداخلية.",
+  outputContract:"عقد المخرجات العامة",allowed:"مسموح عرضه",forbidden:"ممنوع عرضه",
+  marketsEngine:"الأسواق والأصول والمحرّك",meMarkets:"الأسواق المدعومة",meLive:"حيّ",meAssets:"الأصول المفعّلة",meGoverned:"محكومة",meEngine:"محرّك القرار",meData:"مصدر البيانات",meSanitizer:"المنقّح العام",meEnforced:"مُفعّل",meWs:"بث لحظي",
+  integrations:"قنوات التنبيه والإعدادات",cfgNote:"<b>الحوكمة:</b> تُعرض الحالة (مُعدّ / غير مُعدّ) وآخر اختبار فقط. الرمز قناة محميات والبيانات تشغيل محمية (بوت تيليجرام، SMTP، البوابة) لا تُعرض أبدًا.",
+  hUptime:"زمن التشغيل",hLatency:"زمن الاستجابة",hStable:"مستقر",hBackup:"آخر نسخة احتياطية",hAuto:"آلي",hSnapshot:"آخر لقطة",
+  healthChecks:"فحوصات الصحة",healthNote:"<b>الحوكمة:</b> نسخة احتياطية قبل أي تعديل، وتقرير بعده. كل المسارات الرسمية فقط.",
+  funnelT:"مسار التجربة",frictionT:"نقاط الاحتكاك",
+  analyticsNote:"<b>الحوكمة:</b> إشارات UX آمنة فقط (مشاهدات، تنقّل، إكمال نماذج). لا كلمات مرور، لا بيانات تشغيل محمية، لا أسماء طبقات مخفية، لا بصمات خام معروضة.",
+  secChecks:"الأمان المرن الأقصى",transCtrl:"ضوابط الترجمة",langAr:"العربية (RTL)",langEn:"الإنجليزية (LTR)",langHe:"العبرية",primaryLang:"لغة أساسية",enabled:"مفعّلة",blocked:"محجوبة",
+  transNote:"<b>الحوكمة:</b> العبرية محجوبة بالكامل — لا محدّد لغة، لا ملفات لغة، لا توجيه، لا مخرجات عامة. حماية translate=no + notranslate.",
+  titles:{overview:["نظرة عامة","مركز عمليات DSP — لوحة الحوكمة والتشغيل"],users:["المستخدمون","إدارة الحسابات والباقات وأوضاع اللوحة"],trials:["التجارب","متابعة تجارب الـ١٦ يومًا ونية الترقية"],review:["مراجعة التسجيل","قرارات مكافحة الإساءة والمراجعة اليدوية"],packages:["الباقات","حدود الباقات المفروضة من الخادم"],payments:["المدفوعات","حالات الاشتراك والاعتماد اليدوي"],layers:["حوكمة الطبقات","١٦ طبقة · ٤ ظاهرة · ١٢ محميّة"],markets:["الأسواق والأصول","حالة المحرّك ومصدر البيانات والتدقيق"],alerts:["التنبيهات والإعدادات","حالة القنوات — البيانات تشغيل محمية مقنّعة دائمًا"],health:["الصحة والنسخ","التشغيل والنسخ الاحتياطي واللقطات"],analytics:["تحليلات التجربة","إشارات UX آمنة فقط"],security:["الأمان والترجمة","الأمان المرن وحجب العبرية"]}
+ },
+ en:{dir:"ltr",lang:"en",
+  opsCenter:"OPERATIONS CENTER",grpMain:"Main",grpBiz:"Business",grpEngine:"Engine & Governance",grpOps:"Operations",
+  nOverview:"Overview",nUsers:"Users",nTrials:"Trials",nReview:"Registration Review",nPackages:"Packages",nPayments:"Payments",
+  nLayers:"Layer Governance",nMarkets:"Markets & Assets",nAlerts:"Alerts & Config",nHealth:"Health & Backups",nAnalytics:"Trial Analytics",nSecurity:"Security & Translation",
+  sysOk:"All systems operational",adminRole:"Super admin",
+  kActive:"Active users",kWeek:"this week",kTrial:"Trial seats",kSeatsLeft:"10 seats remaining",kPending:"Pending payments",kNeedReview:"need review",kHealth:"System health",kUptime:"last 30 days",
+  seatDist:"Trial Seat Distribution",seatNote:"<b>Governance:</b> Final split 25 beginner · 10 specialist · 15 private. Final acceptance is enforced server-side.",
+  layerStatus:"Layer Governance Status",lcTotal:"Total layers",lcActive:"all participate",lcVisible:"named visible",lcGoverned:"governed",lcHidden:"hidden",lcProtected:"protected",
+  layerNote:"<b>Rule:</b> No exposure of names, order, internal methods or internal parameters. Display = sanitized value only.",
+  recentReg:"Latest Registration Requests",thUser:"User",thType:"Type",thRisk:"Risk score",thDecision:"System decision",thTime:"Time",
+  thPlan:"Plan",thStatus:"Status",thMode:"Dashboard mode",thLast:"Last login",thProgress:"Progress",thRemain:"Remaining",thIntent:"Upgrade intent",
+  thDay:"Trial day",thStarted:"Started",thEnds:"Ends",
+  trialClockNote:"<b>Governance:</b> The 16 days start at each account's activation — every user has their own clock, recorded server-side. No global clock, no auto-extension.",
+  thSignals:"Safe signals",thAction:"Action",thFeature:"Feature",thInst:"Institutional",thMethod:"Method",thAmount:"Amount",thState:"State",
+  thMarket:"Market",thAssetsN:"Assets",thStateC:"State",thAudit:"Audit class",thService:"Service",thLatency:"Latency",thChecked:"Last check",
+  thSignal:"Signal",thCount:"Count",thTrend:"Trend",
+  ufAll:"All",ufTrial:"Trial",ufPaid:"Paid",userSearch:"Search by name or email…",
+  tActive:"Active trials",tDays:"days per trial",tEnding:"Ending within 3 days",tFollow:"need follow-up",tConv:"Upgrade intent",tExpired:"Expired",
+  trialList:"Active Trials",reviewQueue:"Manual Review Queue",
+  reviewNote:"<b>Governance:</b> The frontend collects safe signals only (hashed device/IP, registration velocity). Raw risk internal method and unmasked abuse score are never shown. Pressing “Allow” activates the account, and that user's own 16-day clock starts at activation.",
+  pkgMatrix:"Package Limits Matrix",pkgNote:"<b>Governance:</b> Limits enforced server-side. Frontend shows state only. No activation without backend approval.",
+  payQueue:"Payments & Subscriptions",payNote:"<b>Governance:</b> Payment logic stays server-side. No auto-activation without approval. Gateway protecteds (NOWPayments) never shown.",
+  visibleLayers:"The Four Visible Layers",hiddenLayers:"Hidden Layers",
+  hiddenStrip:"<b>12 LAYERS · MASKED</b><br>Contribute to every output without exposing names, order, internal methods or internal parameters.",
+  outputContract:"Public Output Contract",allowed:"Allowed to expose",forbidden:"Forbidden to expose",
+  marketsEngine:"Markets, Assets & Engine",meMarkets:"Supported markets",meLive:"live",meAssets:"Active assets",meGoverned:"governed",meEngine:"Decision engine",meData:"Data source",meSanitizer:"Public sanitizer",meEnforced:"enabled",meWs:"Live stream",
+  integrations:"Alert Channels & Config",cfgNote:"<b>Governance:</b> Only state (configured / not) and last test shown. Protected credentials & protecteds (Telegram bot, SMTP, gateway) are never shown.",
+  hUptime:"Uptime",hLatency:"Latency",hStable:"stable",hBackup:"Last backup",hAuto:"auto",hSnapshot:"Last snapshot",
+  healthChecks:"Health Checks",healthNote:"<b>Governance:</b> Backup before any patch, report after. Official paths only.",
+  funnelT:"Trial Funnel",frictionT:"Friction Points",
+  analyticsNote:"<b>Governance:</b> Safe UX signals only (views, navigation, form completion). No passwords, protecteds, hidden layer names, or protected fingerprints shown.",
+  secChecks:"Flexible Maximum Security",transCtrl:"Translation Controls",langAr:"Arabic (RTL)",langEn:"English (LTR)",langHe:"",primaryLang:"Primary language",enabled:"Enabled",blocked:"Blocked",
+  transNote:"<b>Governance:</b>  fully blocked — no selector, no locale files, no routing, no public output. translate=no + notranslate defense.",
+  titles:{overview:["Overview","DSP Operations Center — governance & operations"],users:["Users","Manage accounts, packages and dashboard modes"],trials:["Trials","Track 16-day trials and upgrade intent"],review:["Registration Review","Anti-abuse decisions and manual review"],packages:["Packages","Server-enforced package limits"],payments:["Payments","Subscription states and manual approval"],layers:["Layer Governance","16 layers · 4 visible · 12 protected"],markets:["Markets & Assets","Engine, data source and audit status"],alerts:["Alerts & Config","Channel status — protecteds always masked"],health:["Health & Backups","Uptime, backups and snapshots"],analytics:["Trial Analytics","Safe UX signals only"],security:["Security & Translation","Flexible security and  block"]}
+ }
+};
+
+// ---------- data ----------
+const seats=[{k:["مبتدئ عادي","Ordinary beginner"],t:22,c:25},{k:["متخصص / أكاديمي","Specialist / academic"],t:7,c:10},{k:["خاص / مميّز","Private / premium"],t:11,c:15}];
+const TYPE={ordinary:["مبتدئ","Beginner"],specialist:["متخصص","Specialist"],private:["خاص","Private"]};
+const reg=[
+];
+const users=[];
+const trials=[];
+const pkgRows=[
+ [["الأسواق","Markets"],"1","2","All","All"],
+ [["الأصول","Assets"],"3","20","100","250+"],
+ [["التحليلات","Analyses"],["٥/أسبوع","5/wk"],["١٥/يوم","15/day"],["٢٥٠/يوم","250/day"],["بالعقد","Contract"]],
+ [["الطبقات الظاهرة","Visible layers"],"—","TDL · NMP","×4","×4"],
+ [["تنبيهات","Alerts"],["تنبيه واحد","1 alert"],["أساسي","Basic"],["تيليجرام","Telegram"],["متعدد","Multi"]],
+ [["API","API"],["لا","No"],["لا","No"],["لا","No"],["نعم","Yes"]],
+ [["Webhooks","Webhooks"],["لا","No"],["لا","No"],["لا","No"],["نعم","Yes"]],
+];
+const pays=[
+
+];
+const PAYC={confirmed:"b-ok",pending:"b-warn",pending_review:"b-warn",manual_review_required:"b-info",rejected:"b-bad",expired:"b-muted",refunded:"b-blue"};
+const visLayers=[
+ {gl:"gl-t",ic:"◷",nm:["منطق البُعد الزمني","Timed Direction Logic"],sub:"TDL",st:"b-ok",sl:["محكوم","Governed"]},
+ {gl:"gl-b",ic:"⬡",nm:["نقطة التقاء نواف","Nawaf Meeting Point"],sub:"NMP",st:"b-ok",sl:["محكوم","Governed"]},
+ {gl:"gl-r",ic:"⚔",nm:["محامي الشيطان","Devil's Advocate"],sub:"DEVIL'S ADVOCATE",st:"b-ok",sl:["محكوم","Governed"]},
+ {gl:"gl-g",ic:"✦",nm:["إشارة نواف الذهبية","Nawaf Golden Alignment"],sub:"GOLDEN ALIGNMENT",st:"b-gold",sl:["محكوم","Governed"]},
+];
+const allowedCats=[["انحياز اتجاهي","Directional bias"],["أفق القراءة","Reading horizon"],["قوة الأفق","Horizon strength"],["حالة السوق","Market state"],["السيولة","Liquidity"],["المخاطر","Risk"],["التقلب","Volatility"],["الميول","Sentiment"],["جودة القرار","Decision quality"],["متابعة السيناريو","Scenario follow-up"],["سبب التحفّظ","Caution reason"],["ملخّص منقّح","Sanitized summary"]];
+const forbiddenCats=[["شراء/بيع الآن","Buy/sell now"],["دخول","Entry"],["جني ربح","Take profit"],["وقف خسارة","Stop loss"],["طرق حساب داخلية خام","Raw internal methods"],["معاملات داخلية","Parameters"],["تسجيل داخلي","Internal scoring"],["أسماء مخفية","Hidden names"],["هدف مضمون","Guaranteed target"],["نصيحة مالية","Financial advice"]];
+const markets=[
+ {m:["العملات","FX"],a:42,st:"b-ok",sl:["حيّ","Live"],au:"VISIBLE_BY_PACKAGE"},
+ {m:["السلع","Commodities"],a:28,st:"b-ok",sl:["حيّ","Live"],au:"VISIBLE_BY_PACKAGE"},
+ {m:["المؤشرات","Indices"],a:31,st:"b-ok",sl:["حيّ","Live"],au:"VISIBLE_BY_PACKAGE"},
+ {m:["العملات الرقمية","Crypto"],a:23,st:"b-warn",sl:["مراقبة","Watch"],au:"NEEDS_FRONTEND_BINDING"},
+];
+const cfg=[
+ {ic:"✈",nm:["بوت تيليجرام","Telegram bot"],protected:"TOKEN ••••••••",st:"b-ok",sl:["مُعدّ","Configured"],meta:["آخر اختبار: ناجح","Last test: OK"]},
+ {ic:"✉",nm:["SMTP بريد","SMTP email"],protected:"PASS ••••••••",st:"b-ok",sl:["مُعدّ","Configured"],meta:["آخر إرسال: قبل ٣س","Last sent: 3h"]},
+ {ic:"₪",nm:["بوابة الدفع","Payment gateway"],protected:"NOWPAYMENTS KEY ••••",st:"b-ok",sl:["مُعدّ","Configured"],meta:["webhook: متصل","webhook: connected"]},
+ {ic:"⇄",nm:["Webhooks مؤسسية","Institutional webhooks"],protected:"SECRET ••••••••",st:"b-warn",sl:["بالعقد","By contract"],meta:["—","—"]},
+];
+const health=[
+ {s:["واجهة API","API gateway"],st:"b-ok",sl:"OK",lat:"84ms",t:["قبل ١٠ث","10s"]},
+ {s:["محرّك القرار","Decision engine"],st:"b-ok",sl:"OK",lat:"120ms",t:["قبل ١٠ث","10s"]},
+ {s:["قاعدة البيانات","PostgreSQL"],st:"b-ok",sl:"OK",lat:"12ms",t:["قبل ١٠ث","10s"]},
+ {s:["المنقّح العام","Public sanitizer"],st:"b-ok",sl:"OK",lat:"6ms",t:["قبل ١٠ث","10s"]},
+ {s:["بث WebSocket","WebSocket"],st:"b-ok",sl:"OK",lat:"40ms",t:["قبل ١٠ث","10s"]},
+ {s:["خدمة التنبيهات","Alerts service"],st:"b-warn",sl:["تأخّر بسيط","Minor lag"],lat:"310ms",t:["قبل ٢٠ث","20s"]},
+];
+const funnel=[
+ {l:["زيارة الصفحة","Page visit"],v:100},{l:["بدء التسجيل","Started reg."],v:62},
+ {l:["إكمال النموذج","Completed form"],v:48},{l:["قبول الإقرار","Accepted legal"],v:46},
+ {l:["تفعيل التجربة","Trial activated"],v:40},{l:["نية الترقية","Upgrade intent"],v:18},
+];
+const friction=[
+ {s:["حدّ الباقة","Plan limit"],c:34,tr:["▲","up"]},{s:["تعثّر التسجيل","Reg. drop-off"],c:21,tr:["▼","down"]},
+ {s:["خطأ تحليل","Analyze error"],c:7,tr:["▼","down"]},{s:["إعداد التنبيهات","Alert setup"],c:12,tr:["▲","up"]},
+];
+const secItems=[
+ {ic:"⛨",nm:["بيانات تشغيل محمية في الخادم فقط","Server-side protecteds only"],st:"b-ok",sl:["مُفعّل","On"]},
+ {ic:"⛨",nm:["بوابة الأدمن فقط","Admin gateway only"],st:"b-ok",sl:["مُفعّل","On"]},
+ {ic:"⚡",nm:["تحديد المعدّل","Rate limiting"],st:"b-ok",sl:["مُفعّل","On"]},
+ {ic:"◉",nm:["تسجيل التدقيق","Audit logs"],st:"b-ok",sl:["مُفعّل","On"]},
+ {ic:"⛒",nm:["تقنيع المخرجات العامة","Public output sanitization"],st:"b-ok",sl:["مُفعّل","On"]},
+ {ic:"⛁",nm:["نسخة قبل التعديل","Backup before patch"],st:"b-ok",sl:["مُفعّل","On"]},
+];
+
+// ---------- renderers ----------
+const T=(arr)=>arr[LANG==="ar"?0:1];
+const N=(v)=>LANG==="ar"?AR(v):v;
+
+function renderAll(){
+  // seats
+  $("#seatBars").innerHTML=seats.map(s=>`
+    <div class="seatbar"><div class="top"><span>${T(s.k)}</span><b>${N(s.t)} / ${N(s.c)}</b></div>
+    <div class="bar"><i style="width:0%" data-w="${s.t/s.c*100}"></i></div></div>`).join("");
+  requestAnimationFrame(()=>setTimeout(()=>$$('.seatbar .bar i').forEach(i=>i.style.width=i.dataset.w+"%"),60));
+
+  // overview reg
+  $("#ovRegBody").innerHTML=reg.map(r=>`<tr>
+    <td><div class="u"><div class="av">${(r.n[0]||"·")}</div><div><div class="n">${r.n}</div><div class="e">${r.e}</div></div></div></td>
+    <td><span class="badge b-muted">${T(TYPE[r.type])}</span></td>
+    <td><span class="mono" style="color:${r.risk>60?'var(--down)':r.risk>30?'var(--warn)':'var(--up)'}">${N(r.risk)}</span></td>
+    <td><span class="badge ${DEC[r.d]}">${r.d}</span></td>
+    <td class="mono" style="color:var(--txt-3)">${T(r.t)}</td></tr>`).join("");
+
+  // users
+  renderUsers();
+
+  // trials
+  $("#trialsBody").innerHTML=trials.map(t=>{
+    const TRIAL=16, msDay=864e5;
+    const start=new Date(Date.now()-(t.day-1)*msDay);
+    const end=new Date(start.getTime()+TRIAL*msDay);
+    const loc=LANG==="ar"?"ar-SA-u-nu-latn":"en-GB";
+    const fmt=dt=>new Intl.DateTimeFormat(loc,{day:"numeric",month:"short"}).format(dt);
+    const pct=Math.round(t.day/TRIAL*100);
+    return `<tr>
+    <td><div class="u"><div class="av">${t.n[0]}</div><div class="n">${t.n}</div></div></td>
+    <td><span class="badge b-muted">${T(TYPE[t.type])}</span></td>
+    <td><div style="display:flex;align-items:center;gap:9px"><span class="mono" style="color:var(--gold-bright);font-size:11px;white-space:nowrap">${N(t.day)}/${N(TRIAL)}</span><div class="bar" style="height:6px;border-radius:5px;background:rgba(255,255,255,.07);overflow:hidden;width:78px"><i style="display:block;height:100%;width:${pct}%;background:linear-gradient(90deg,var(--gold-deep),var(--gold-bright))"></i></div></div></td>
+    <td class="mono" style="color:var(--txt-3);font-size:11px">${fmt(start)}</td>
+    <td class="mono" style="color:var(--gold-bright);font-size:11px">${fmt(end)}</td>
+    <td class="mono">${T(t.rem)}</td>
+    <td><span class="badge ${t.ic}">${T(t.intent)}</span></td></tr>`;
+  }).join("");
+
+  // review
+  $("#reviewBody").innerHTML=reg.map(r=>`<tr>
+    <td><div class="u"><div class="av">${(r.n[0]||"·")}</div><div><div class="n">${r.n}</div><div class="e">${r.e}</div></div></div></td>
+    <td class="mono" style="color:var(--txt-3);font-size:11px">device# · ip# · vel:${N(r.risk>50?3:1)}</td>
+    <td><span class="mono" style="color:${r.risk>60?'var(--down)':r.risk>30?'var(--warn)':'var(--up)'}">${N(r.risk)}</span></td>
+    <td><span class="badge ${DEC[r.d]}">${r.d}</span></td>
+    <td><span class="act"><button class="ok">${LANG==='ar'?'قبول':'Allow'}</button><button class="bad">${LANG==='ar'?'حظر':'Block'}</button></span></td></tr>`).join("");
+
+  // packages
+  $("#pkgBody").innerHTML=pkgRows.map(row=>`<tr>
+    <td>${T(row[0])}</td>
+    ${[1,2,3,4].map(i=>{const c=row[i];const v=Array.isArray(c)?T(c):c;const gold=i===3?' style="color:var(--gold-bright)"':'';return `<td class="mono"${gold}>${v}</td>`;}).join("")}
+  </tr>`).join("");
+
+  // payments
+  $("#payBody").innerHTML=pays.map(p=>`<tr>
+    <td><div class="u"><div class="av">${p.n[0]}</div><div class="n">${p.n}</div></div></td>
+    <td><span class="mono">${p.plan}</span></td>
+    <td>${Array.isArray(p.m)?T(p.m):p.m}</td>
+    <td class="mono" style="color:var(--txt-3)">${p.amt}</td>
+    <td><span class="badge ${PAYC[p.state]}">${p.state}</span></td>
+    <td><span class="act"><button class="ok">${LANG==='ar'?'اعتماد':'Confirm'}</button><button class="bad">${LANG==='ar'?'رفض':'Reject'}</button></span></td></tr>`).join("");
+
+  // layers
+  $("#lgVisible").innerHTML=visLayers.map(l=>`<div class="lgrow">
+    <div class="gl ${l.gl}">${l.ic}</div><div class="nm"><b>${T(l.nm)}</b><span>${l.sub}</span></div>
+    <span class="badge ${l.st}">${T(l.sl)}</span></div>`).join("");
+  $("#lgHidden").innerHTML=Array.from({length:6}).map((_,i)=>`<div class="lgrow" style="opacity:${.9-i*.07}">
+    <div class="gl" style="background:rgba(255,255,255,.04);color:var(--txt-3)">⛨</div>
+    <div class="nm"><b style="color:var(--txt-3);letter-spacing:3px">••••••</b><span>LAYER #${N(i+5)} · MASKED</span></div>
+    <span class="badge b-muted">${LANG==='ar'?'محميّة':'Protected'}</span></div>`).join("");
+  $("#allowedList").innerHTML=allowedCats.map(c=>`<span class="badge b-ok">${T(c)}</span>`).join("");
+  $("#forbiddenList").innerHTML=forbiddenCats.map(c=>`<span class="badge b-bad">${T(c)}</span>`).join("");
+
+  // markets
+  $("#marketsBody").innerHTML=markets.map(m=>`<tr>
+    <td><b>${T(m.m)}</b></td><td class="mono">${N(m.a)}</td>
+    <td><span class="badge ${m.st}">${T(m.sl)}</span></td>
+    <td><span class="mono" style="font-size:10.5px;color:var(--txt-3)">${m.au}</span></td></tr>`).join("");
+
+  // config
+  $("#cfgList").innerHTML=cfg.map(c=>`<div class="cfgrow">
+    <div class="ic">${c.ic}</div><div class="nm"><b>${T(c.nm)}</b><span class="protected">${c.protected}</span></div>
+    <div class="meta"><span class="badge ${c.st}">${T(c.sl)}</span><div style="margin-top:5px">${T(c.meta)}</div></div></div>`).join("");
+
+  // health
+  $("#healthBody").innerHTML=health.map(h=>`<tr>
+    <td><b>${T(h.s)}</b></td><td><span class="badge ${h.st}">${Array.isArray(h.sl)?T(h.sl):h.sl}</span></td>
+    <td class="mono">${h.lat}</td><td class="mono" style="color:var(--txt-3)">${T(h.t)}</td></tr>`).join("");
+
+  // funnel
+  $("#funnel").innerHTML=funnel.map(f=>`<div class="frow"><span class="lbl">${T(f.l)}</span>
+    <div class="track"><i style="width:0%" data-w="${f.v}"></i></div><span class="val">${N(f.v)}٪</span></div>`).join("");
+  requestAnimationFrame(()=>setTimeout(()=>$$('.frow .track i').forEach(i=>i.style.width=i.dataset.w+"%"),60));
+
+  // friction
+  $("#frictionBody").innerHTML=friction.map(f=>`<tr><td>${T(f.s)}</td><td class="mono">${N(f.c)}</td>
+    <td style="color:${f.tr[1]==='up'?'var(--down)':'var(--up)'}">${f.tr[0]}</td></tr>`).join("");
+
+  // security
+  $("#secList").innerHTML=secItems.map(s=>`<div class="cfgrow">
+    <div class="ic">${s.ic}</div><div class="nm"><b>${T(s.nm)}</b></div>
+    <span class="badge ${s.st}">${T(s.sl)}</span></div>`).join("");
+}
+
+let userFilter="all";
+function renderUsers(){
+  const q=($("#userSearch")?.value||"").toLowerCase();
+  $("#usersBody").innerHTML=users.filter(u=>(userFilter==="all"||u.kind===userFilter)&&(u.n.toLowerCase().includes(q)||u.e.toLowerCase().includes(q))).map(u=>`<tr>
+    <td><div class="u"><div class="av">${u.n[0]}</div><div><div class="n">${u.n}</div><div class="e">${u.e}</div></div></div></td>
+    <td><span class="badge ${u.pc}">${u.plan}</span></td>
+    <td><span class="badge ${u.sc}">${T(u.status)}</span></td>
+    <td><span class="mono" style="font-size:11px;color:var(--txt-3)">${T(u.mode)}</span></td>
+    <td class="mono" style="color:var(--txt-3)">${T(u.last)}</td>
+    <td><span class="act"><button>${LANG==='ar'?'عرض':'View'}</button></span></td></tr>`).join("");
+}
+
+// ---------- nav ----------
+function showView(v){
+  $$('.view').forEach(s=>s.classList.toggle('on',s.dataset.view===v));
+  $$('.navitem').forEach(n=>n.classList.toggle('on',n.dataset.v===v));
+  const tt=I18N[LANG].titles[v];
+  $("#viewTitle").textContent=tt[0];$("#viewSub").textContent=tt[1];
+  $("#side").classList.remove('open');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+$$('.navitem').forEach(n=>n.onclick=()=>showView(n.dataset.v));
+const _burger=$("#burger");if(_burger)_burger.onclick=()=>$("#side").classList.toggle('open');
+
+// ---------- filters/search ----------
+document.addEventListener('input',e=>{if(e.target.id==='userSearch')renderUsers();});
+document.addEventListener('click',e=>{
+  if(e.target.matches('[data-uf]')){$$('[data-uf]').forEach(b=>b.classList.remove('on'));e.target.classList.add('on');userFilter=e.target.dataset.uf;renderUsers();}
+});
+
+// ---------- action buttons (governance: UI signals only; server decides) ----------
+function adminToast(msg){
+  let t=document.getElementById('adminToast');
+  if(!t){t=document.createElement('div');t.id='adminToast';
+    t.style.cssText='position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(40px);z-index:200;background:var(--panel2);border:1px solid var(--line);border-radius:13px;padding:12px 20px;font-size:13px;color:var(--gold-bright);box-shadow:var(--shadow);opacity:0;transition:.35s;pointer-events:none;backdrop-filter:blur(14px)';
+    document.body.appendChild(t);}
+  t.textContent=msg;
+  requestAnimationFrame(()=>{t.style.opacity='1';t.style.transform='translateX(-50%) translateY(0)';});
+  clearTimeout(t._h);t._h=setTimeout(()=>{t.style.opacity='0';t.style.transform='translateX(-50%) translateY(40px)';},2600);
+}
+const ACT={
+  ar:{allow:"أُرسل طلب القبول للخادم — التفعيل بعد اعتماد الخادم",block:"أُرسل طلب الحظر للخادم للمراجعة",confirm:"أُرسل اعتماد الدفعة للخادم — لا تفعيل تلقائي",reject:"أُرسل رفض الدفعة للخادم",view:"فتح ملف المستخدم (عرض فقط)",done:"تمّ تسجيل الإجراء — القرار النهائي في الخادم"},
+  en:{allow:"Allow request sent to server — activates after server approval",block:"Block request sent to server for review",confirm:"Payment confirmation sent to server — no auto-activation",reject:"Payment rejection sent to server",view:"Opening user profile (view only)",done:"Action recorded — final decision on the server"}
+};
+document.addEventListener('click',e=>{
+  const b=e.target.closest('.act button');
+  if(!b)return;
+  const L=ACT[LANG]||ACT.en;
+  const txt=(b.textContent||'').trim().toLowerCase();
+  let key='done';
+  if(b.classList.contains('ok')){ key = (txt.includes('confirm')||txt.includes('اعتماد'))?'confirm':'allow'; }
+  else if(b.classList.contains('bad')){ key = (txt.includes('reject')||txt.includes('رفض'))?'reject':'block'; }
+  else { key='view'; }
+  // visual feedback on the row action
+  b.style.opacity='.55';b.disabled=true;
+  setTimeout(()=>{b.style.opacity='';b.disabled=false;},1400);
+  adminToast(L[key]||L.done);
+});
+
+// ---------- lang ----------
+function applyLang(){
+  const d=I18N[LANG];
+  document.documentElement.lang=d.lang;document.documentElement.dir=d.dir;document.body.dir=d.dir;
+  $$('[data-i]').forEach(el=>{const k=el.getAttribute('data-i');if(d[k]!=null)el.innerHTML=d[k];});
+  $$('[data-ph]').forEach(el=>{const k=el.getAttribute('data-ph');if(d[k]!=null)el.placeholder=d[k];});
+  const _lb=$("#langBtn");if(_lb)_lb.textContent=LANG==="ar"?"EN":"ع";
+  const cur=document.querySelector('.navitem.on')?.dataset.v||"overview";
+  const tt=d.titles[cur];$("#viewTitle").textContent=tt[0];$("#viewSub").textContent=tt[1];
+  renderAll();
+}
+const _langBtn=$("#langBtn");if(_langBtn)_langBtn.onclick=()=>{LANG=LANG==="ar"?"en":"ar";applyLang();};
+
+applyLang();
+</script>
+
+
+
+
+
+
+</</</</</
+
+
+
+
+
+<script src="/ndsp-admin-live-data-override.js?v=live-db-1" defer></script>
+
+<!-- NDSP_AR_EN_ONLY_CLEAN_FINAL_START -->
+<script>
+(function(){
+  "use strict";
+
+  function n(v){ return String(v || "").trim().toLowerCase(); }
+
+  function allowed(v){
+    v = n(v);
+    return v === "ar" || v === "en" || v.indexOf("ar-") === 0 || v.indexOf("en-") === 0 ||
+           v === "arabic" || v === "english" || v === "العربية";
+  }
+
+  function isLangSelect(sel){
+    var meta = n((sel.id || "") + " " + (sel.name || "") + " " + (sel.className || "") + " " + (sel.getAttribute("aria-label") || ""));
+    var text = n(sel.textContent || "");
+    return /lang|language|locale|لغة|لسان/.test(meta) || /العربية|english|arabic/.test(text);
+  }
+
+  function cleanSelect(sel){
+    if (!sel || !sel.options || !isLangSelect(sel)) return;
+
+    Array.prototype.slice.call(sel.options).forEach(function(o){
+      var v = n(o.value || "");
+      var t = n(o.textContent || "");
+      if (!allowed(v) && !allowed(t)) o.remove();
+    });
+
+    var opts = Array.prototype.slice.call(sel.options);
+    var hasAr = opts.some(function(o){ return n(o.value) === "ar" || n(o.textContent).indexOf("العربية") >= 0; });
+    var hasEn = opts.some(function(o){ return n(o.value) === "en" || n(o.textContent).indexOf("english") >= 0; });
+
+    if (!hasAr) {
+      var ar = document.createElement("option");
+      ar.value = "ar";
+      ar.textContent = "العربية";
+      sel.appendChild(ar);
+    }
+
+    if (!hasEn) {
+      var en = document.createElement("option");
+      en.value = "en";
+      en.textContent = "English";
+      sel.appendChild(en);
+    }
+  }
+
+  function enforce(){
+    window.NDSP_ALLOWED_LANGUAGES = ["ar","en"];
+    document.documentElement.setAttribute("data-allowed-languages", "ar,en");
+    Array.prototype.slice.call(document.querySelectorAll("select")).forEach(cleanSelect);
+
+    Array.prototype.slice.call(document.querySelectorAll("[data-lang], [data-language], [data-locale]")).forEach(function(el){
+      var v = n(el.getAttribute("data-lang") || el.getAttribute("data-language") || el.getAttribute("data-locale") || "");
+      if (v && !allowed(v)) el.remove();
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", enforce);
+  setTimeout(enforce, 300);
+  setTimeout(enforce, 1200);
+})();
+</script>
+<!-- NDSP_AR_EN_ONLY_CLEAN_FINAL_END -->
+
+</body>
+</html>

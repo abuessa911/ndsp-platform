@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="google" content="notranslate" />
+<title>DSP — مركز المساعدة والأسئلة الشائعة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Sora:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#070A10;--ink:#0B0F17;--panel:rgba(18,24,36,.62);--panel2:rgba(14,19,29,.82);
+  --line:rgba(201,162,39,.17);--line-soft:rgba(255,255,255,.07);
+  --gold:#D9B65A;--gold-bright:#F2D27A;--gold-deep:#9A7A22;
+  --teal:#3FD3C6;--rose:#E0607A;--blue:#88A6FF;
+  --txt:#EAEEF6;--txt-2:#9AA6BC;--txt-3:#5E6A82;
+  --up:#56D6A0;--down:#E2657E;--warn:#E8B964;
+  --shadow:0 30px 70px -30px rgba(0,0,0,.85);--r:18px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--void);color:var(--txt);overflow-x:hidden;
+  font-family:"IBM Plex Sans Arabic","Sora",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+body[dir="ltr"]{font-family:"Sora","IBM Plex Sans Arabic",sans-serif}
+.mono{font-family:"IBM Plex Mono",monospace;font-feature-settings:"tnum" 1}
+h1,h2,h3,.kufi{font-family:"Reem Kufi",serif}
+body[dir="ltr"] h1,body[dir="ltr"] h2,body[dir="ltr"] h3{font-family:"Sora",sans-serif;letter-spacing:-.01em}
+
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.bg .glow{position:absolute;border-radius:50%;filter:blur(140px);opacity:.5}
+.bg .g1{width:50vw;height:50vw;top:-24vw;inset-inline-end:-14vw;background:radial-gradient(circle,rgba(217,182,90,.16),transparent 64%)}
+.bg .g2{width:42vw;height:42vw;bottom:-20vw;inset-inline-start:-12vw;background:radial-gradient(circle,rgba(63,211,198,.1),transparent 64%)}
+.bg .grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:46px 46px;mask-image:radial-gradient(ellipse 120% 80% at 50% 0%,#000 30%,transparent 78%)}
+.seal-wm{position:fixed;z-index:0;inset-inline-end:-6vw;bottom:-8vw;width:44vw;max-width:620px;opacity:.04;pointer-events:none}
+
+nav{position:sticky;top:0;z-index:40;backdrop-filter:blur(16px);background:linear-gradient(180deg,rgba(7,10,16,.92),rgba(7,10,16,.4));border-bottom:1px solid var(--line)}
+nav .in{max-width:920px;margin:0 auto;padding:12px 22px;display:flex;align-items:center;gap:14px}
+.brand{display:flex;align-items:center;gap:11px}
+.brand svg{width:38px;height:38px;filter:drop-shadow(0 4px 12px rgba(217,182,90,.4))}
+.brand b{font-family:"Reem Kufi";font-size:18px;background:linear-gradient(180deg,var(--gold-bright),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;display:block;line-height:1}
+.brand span{font-size:9px;color:var(--txt-3);letter-spacing:2px;font-family:"IBM Plex Mono"}
+.back{display:inline-flex;align-items:center;gap:7px;color:var(--txt-2);text-decoration:none;font-size:12.5px;padding:7px 12px;border-radius:10px;border:1px solid var(--line-soft);cursor:pointer}
+.back:hover{border-color:var(--gold);color:var(--gold-bright)}
+.spacer{flex:1}
+.lang{cursor:pointer;user-select:none;padding:8px 13px;border-radius:10px;border:1px solid var(--line);color:var(--txt-2);font-size:12.5px}
+.lang:hover{color:var(--gold-bright);border-color:var(--gold)}
+
+.wrap{position:relative;z-index:2;max-width:920px;margin:0 auto;padding:30px 22px 60px}
+
+/* hero search */
+.hero{text-align:center;margin-bottom:26px}
+.hero h1{font-size:clamp(26px,4vw,36px);margin:0 0 10px}
+.hero p{color:var(--txt-2);font-size:14px;margin:0 auto 22px;max-width:480px;line-height:1.7}
+.search{position:relative;max-width:520px;margin:0 auto}
+.search input{width:100%;padding:15px 48px 15px 18px;border-radius:14px;border:1px solid var(--line);background:var(--panel);color:var(--txt);font-family:inherit;font-size:14.5px;backdrop-filter:blur(12px)}
+body[dir="ltr"] .search input{padding:15px 18px 15px 48px}
+.search input:focus{outline:0;border-color:var(--gold)}
+.search .si{position:absolute;inset-inline-end:16px;top:50%;transform:translateY(-50%);color:var(--gold);font-size:17px}
+body[dir="ltr"] .search .si{inset-inline-end:auto;inset-inline-start:16px}
+
+/* category chips */
+.cats{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:22px 0}
+.cat{padding:8px 14px;border-radius:11px;border:1px solid var(--line-soft);background:transparent;color:var(--txt-2);font-size:12.5px;cursor:pointer;font-family:inherit;transition:.18s;display:inline-flex;align-items:center;gap:7px}
+.cat:hover{border-color:var(--line);color:var(--txt)}
+.cat.on{background:rgba(217,182,90,.14);color:var(--gold-bright);border-color:var(--line)}
+
+/* governance callout */
+.gov-callout{display:flex;gap:16px;align-items:flex-start;padding:20px;border-radius:18px;border:1px solid var(--line);
+  background:linear-gradient(135deg,rgba(217,182,90,.1),rgba(0,0,0,.22));backdrop-filter:blur(12px);margin-bottom:22px}
+.gov-callout .gi{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;font-size:22px;background:rgba(217,182,90,.14);color:var(--gold-bright);flex:none}
+.gov-callout .gx b{display:block;font-size:15px;margin-bottom:5px}
+.gov-callout .gx p{font-size:13px;color:var(--txt-2);line-height:1.75;margin:0}
+
+/* faq accordion */
+.faq{display:flex;flex-direction:column;gap:10px}
+.qa{background:var(--panel);border:1px solid var(--line-soft);border-radius:14px;overflow:hidden;backdrop-filter:blur(12px);transition:.2s}
+.qa.open{border-color:var(--line)}
+.q{display:flex;align-items:center;gap:12px;padding:16px 18px;cursor:pointer;font-size:14px;font-parameter:500}
+.q .qcat{font-size:9px;font-family:"IBM Plex Mono";letter-spacing:.5px;padding:3px 7px;border-radius:6px;background:rgba(255,255,255,.05);color:var(--txt-3);flex:none}
+.q .qt{flex:1}
+.q .chev{color:var(--gold);transition:.25s;flex:none;font-size:13px}
+.qa.open .chev{transform:rotate(180deg)}
+.a{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.a .inner{padding:0 18px 18px;font-size:13px;color:var(--txt-2);line-height:1.85}
+.a .inner b{color:var(--txt)}
+.a .inner .gold{color:var(--gold-bright)}
+.qa.open .a{max-height:420px}
+.noresult{text-align:center;color:var(--txt-3);font-size:13px;padding:30px;display:none}
+
+/* contact */
+.contact{margin-top:26px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:600px){.contact{grid-template-columns:1fr}}
+.cc{background:var(--panel);border:1px solid var(--line-soft);border-radius:16px;padding:20px;backdrop-filter:blur(12px);display:flex;align-items:center;gap:14px}
+.cc .ci{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-size:20px;flex:none}
+.ci-tg{background:rgba(63,211,198,.12);color:var(--teal)}.ci-mail{background:rgba(120,160,255,.12);color:var(--blue)}
+.cc .cx b{display:block;font-size:13.5px}.cc .cx span{font-size:11.5px;color:var(--txt-3)}
+.cc .cx .v{font-family:"IBM Plex Mono";color:var(--gold-bright);font-size:12px;margin-top:3px}
+
+.gov{text-align:center;margin-top:24px;font-family:"Reem Kufi";color:var(--gold);font-size:13px;opacity:.8}
+body[dir="ltr"] .gov{font-family:"Sora"}
+.disclaimer{margin-top:14px;font-size:11px;color:var(--txt-3);line-height:1.8;text-align:center;padding:16px;border-radius:14px;border:1px dashed var(--line);background:rgba(0,0,0,.2)}
+.disclaimer b{color:var(--txt-2)}
+
+.langsel{background:rgba(0,0,0,.35);border:1px solid var(--line,rgba(201,162,39,.16));color:var(--txt,#EAEEF6);border-radius:999px;padding:7px 12px;font-family:inherit;font-size:12px;cursor:pointer;outline:none}
+.langsel:hover{border-color:var(--gold,#D9B65A)}
+.langsel option{background:#0B0F17;color:#EAEEF6}
+</style>
+<meta http-equiv="Cache-Control" content="no-store" />
+<link rel="stylesheet" href="ndsp-hud-theme.css">
+</head>
+<body dir="ltr">
+
+<div class="bg"><div class="glow g1"></div><div class="glow g2"></div><div class="grid"></div></div>
+<svg class="seal-wm" viewBox="0 0 240 240" aria-hidden="true"><use href="#hunterSeal"/></svg>
+
+<svg width="0" height="0" style="position:absolute"><defs><g id="hunterSeal">
+  <circle cx="120" cy="120" r="116" fill="none" stroke="#D9B65A" stroke-width="2"/>
+  <circle cx="120" cy="120" r="106" fill="none" stroke="#D9B65A" stroke-width="1" stroke-dasharray="2 6"/>
+  <path d="M120 56 C150 60 168 80 170 108 C171 122 165 134 154 142 L172 150 L150 152 C146 168 132 180 118 182 C128 172 130 162 128 156 C112 162 96 158 86 146 C100 148 110 144 114 138 C96 134 84 120 84 102 C84 76 100 60 120 56 Z" fill="#D9B65A"/>
+  <circle cx="138" cy="98" r="6.5" fill="#070A10"/><circle cx="140" cy="96" r="2" fill="#F2D27A"/>
+  <path d="M170 108 C184 110 190 118 184 126 C180 120 174 118 168 120 Z" fill="#9A7A22"/>
+  <path d="M120 30 l3 7 7 1 -5 5 1 7 -6 -3 -6 3 1 -7 -5 -5 7 -1 z" fill="#F2D27A"/>
+  <path id="arcTop" d="M40 120 A80 80 0 0 1 200 120" fill="none"/>
+  <path id="arcBot" d="M44 124 A76 76 0 0 0 196 124" fill="none"/>
+  <text font-family="IBM Plex Mono,monospace" font-size="15" letter-spacing="6" fill="#D9B65A"><textPath href="#arcTop" startOffset="50%" text-anchor="middle">HUNTER</textPath></text>
+  <text font-family="IBM Plex Mono,monospace" font-size="13" letter-spacing="5" fill="#D9B65A"><textPath href="#arcBot" startOffset="50%" text-anchor="middle">KSA · 1</textPath></text>
+</g></defs></svg>
+
+<nav><div class="in">
+  <div class="brand"><svg viewBox="0 0 240 240"><use href="#hunterSeal"/></svg>
+    <div><b>DSP</b><span data-i="helpCenter">HELP CENTER</span></div></div>
+  <a class="back" id="backBtn"><span data-i="backBtn">رجوع</span></a>
+  <div class="spacer"></div>
+  <select class="langsel" id="langSel" aria-label="Language"><option value="ar">العربية</option><option value="en">English</option><option value="hi">हिन्दी</option><option value="ur">اردو</option></select>
+</div></nav>
+
+<div class="wrap">
+  <div class="hero">
+    <h1 data-i="heroH">كيف نقدر نساعدك؟</h1>
+    <p data-i="heroP">إجابات واضحة عن المنصة والتجربة والحوكمة والأمان. ابحث أو تصفّح حسب الفئة.</p>
+    <div class="search"><input id="search" placeholder="ابحث في الأسئلة…" data-ph="searchPh"><span class="si">⌕</span></div>
+  </div>
+
+  <!-- governance callout -->
+  <div class="gov-callout">
+    <div class="gi">⚖</div>
+    <div class="gx"><b data-i="govCalloutH">قبل أي سؤال: ما هي DSP؟</b>
+      <p data-i="govCalloutP">DSP منصة <span class="gold">دعم قرار وتحليل سياقي</span> — تمنحك اتجاهًا سياقيًا وأفق متابعة وجودة قرار منقّحة. <b>ليست</b> شركة استثمار، ولا مزوّد توصيات، ولا بوت تداول، ولا تدير أموالًا، ولا تضمن نتائج. أنت تقرّر، ونحن ندعم القرار.</p></div>
+  </div>
+
+  <div class="cats" id="cats"></div>
+
+  <div class="faq" id="faq"></div>
+  <div class="noresult" id="noresult" data-i="noresult">لا توجد نتائج مطابقة. جرّب كلمة أخرى أو تواصل معنا.</div>
+
+  <!-- contact -->
+  <div class="contact">
+    <div class="cc"><div class="ci ci-tg">✈</div><div class="cx"><b data-i="ccTgH">الدعم عبر تيليجرام</b><span data-i="ccTgS">أسرع قناة للرد</span><div class="v">@DSP_Support</div></div></div>
+    <div class="cc"><div class="ci ci-mail">✉</div><div class="cx"><b data-i="ccMailH">البريد</b><span data-i="ccMailS">للاستفسارات التفصيلية</span><div class="v">support@ndsp.app</div></div></div>
+  </div>
+
+  <div class="gov" data-i="govRule">اعرض قيمة القرار · أخفِ الوصفة الداخلية</div>
+  <div class="disclaimer">
+    <b data-i="discT">إخلاء مسؤولية</b><br>
+    <span data-i="discBody">مخرجات DSP ومستويات السيناريو مراجع سياقية لدعم القرار فقط، وليست نصيحة مالية أو أمر تداول أو توجيه تنفيذ أو ضمانًا للنتائج. DSP ليست شركة استثمار ولا تدير أموالًا.</span>
+  </div>
+</div>
+
+<script>
+let LANG="en";
+const __ndspStub=new Proxy(function(){},{get:(t,p)=>{if(p==='style'||p==='dataset'||p==='classList')return new Proxy({},{get:()=>()=>{}});if(p==='value'||p==='textContent'||p==='innerHTML'||p==='placeholder')return '';return __ndspStub;},set:()=>true,apply:()=>__ndspStub});const __q=(s)=>{try{return document.querySelector(s)||__ndspStub;}catch(e){return __ndspStub;}};const $=s=>__q(s),$$=s=>document.querySelectorAll(s);
+
+const CATS=[
+ {id:"all",nm:["الكل","All"],ic:"◈"},
+ {id:"gov",nm:["الحوكمة والحدود","Governance & limits"],ic:"⚖"},
+ {id:"trial",nm:["التجربة","The trial"],ic:"◷"},
+ {id:"layers",nm:["الطبقات والقراءة","Layers & reads"],ic:"⬡"},
+ {id:"security",nm:["الأمان والبيانات","Security & data"],ic:"⛨"},
+ {id:"billing",nm:["الاشتراك والدفع","Billing"],ic:"₪"},
+ {id:"product",nm:["المنصة","The product"],ic:"◎"},
+];
+
+// q[ar,en], a[ar,en], cat
+const FAQ=[
+ {cat:"gov",q:["هل DSP تعطيني توصية بالشراء أو البيع؟","Does DSP give me buy or sell recommendations?"],
+  a:["لا. DSP لا تصدر أوامر تنفيذ ولا توصيات ملزمة. تعرض لك <b>قيمة قرار منقّحة</b>: اتجاه سياقي، أفق متابعة، جودة قرار، وأسباب تحفّظ. القرار النهائي قرارك أنت، والمسؤولية عليك.",
+     "No. DSP issues no execution orders or binding recommendations. It shows you a <b>sanitized decision value</b>: contextual direction, follow-up horizon, decision quality, and caution reasons. The final decision is yours, and so is the responsibility."]},
+ {cat:"gov",q:["ما الفرق بين «مستوى سيناريو مرجعي» و«أمر تداول»؟","What's the difference between a 'reference level' and a 'trade order'?"],
+  a:["مستوى السيناريو المرجعي (تفعيل/وصول/مراجعة/إلغاء) هو <b>إطار سياقي</b> لمتابعة القراءة — يقول «عند هذا النطاق يتغيّر السياق». لا يقول «ادخل هنا» أو «اخرج هناك». هو مرجع للفهم، لا تعليمات تنفيذ.",
+     "A scenario reference level (activation/arrival/review/invalidation) is a <b>contextual frame</b> for following a read — it says 'around this zone the context shifts.' It never says 'enter here' or 'exit there.' It's a reference for understanding, not execution instructions."]},
+ {cat:"gov",q:["هل النتائج مضمونة؟","Are results guaranteed?"],
+  a:["إطلاقًا لا. لا أحد يضمن نتائج الأسواق، ونحن لا ندّعي ذلك. حتى «إشارة نواف الذهبية» هي <b>معزّز سياقي للجودة</b> وليست وعدًا بربح. التحفّظ جزء أصيل من كل قراءة عبر «محامي الشيطان».",
+     "Absolutely not. No one guarantees market outcomes, and we make no such claim. Even 'Nawaf Golden Alignment' is a <b>contextual quality enhancer</b>, not a profit promise. Caution is built into every read via the Devil's Advocate."]},
+ {cat:"trial",q:["متى تبدأ تجربة الـ١٦ يوم بالضبط؟","When exactly does the 16-day trial start?"],
+  a:["تبدأ <b>من لحظة تفعيل حسابك</b> بعد اعتماد التسجيل — لا عند إرسال الطلب، ولا على ساعة عامة. لكل مستخدم عدّاده الخاص، فلا تخسر أي يوم حتى لو فعّلت متأخرًا.",
+     "It starts <b>the moment your account is activated</b> after registration approval — not when you submit, and not on a global clock. Each user has their own counter, so you lose no day even if you activate late."]},
+ {cat:"trial",q:["هل أحتاج بطاقة دفع للتجربة؟","Do I need a payment card for the trial?"],
+  a:["لا. التجربة بدون بطاقة دفع وبدون أي التزام. التحويل لباقة مدفوعة بسعر المؤسِّس يبقى <b>اختياريًا</b> في نهاية الـ١٦ يومًا.",
+     "No. The trial needs no payment card and no commitment. Upgrading to a paid package at the founder price stays <b>optional</b> at the end of the 16 days."]},
+ {cat:"trial",q:["ماذا أحصل عليه خلال التجربة؟","What do I get during the trial?"],
+  a:["وصول كامل للطبقات الأربع الظاهرة وجودة القرار الكاملة طوال المدة، مع تفتّح تدريجي للطبقات على أربع مراحل عبر أيام رحلتك.",
+     "Full access to the four visible layers and complete decision quality throughout, with a progressive unlock of the layers across four phases during your journey."]},
+ {cat:"trial",q:["كم عدد مقاعد التجربة؟","How many trial seats are there?"],
+  a:["٥٠ مقعدًا فقط قبل الإطلاق المدفوع، موزّعة: <b>٢٥ مبتدئ · ١٠ متخصص · ١٥ خاص</b>. القبول النهائي يُنفّذ في الخادم بعد مراجعة آمنة.",
+     "Only 50 seats before the paid launch, split: <b>25 beginner · 10 specialist · 15 private</b>. Final acceptance is enforced server-side after a safe review."]},
+ {cat:"layers",q:["ما هي الـ١٦ طبقة؟ ولماذا ٤ فقط ظاهرة؟","What are the 16 layers? Why are only 4 visible?"],
+  a:["١٦ طبقة تحليلية تشارك في كل قراءة. أربع ظاهرة بالاسم (<span class='gold'>منطق البُعد الزمني · نقطة التقاء نواف · محامي الشيطان · إشارة نواف الذهبية</span>)، و١٢ تعمل خلف الكواليس. إخفاؤها ليس غموضًا — بل حماية لجوهر المنصة، كما تحمي البنوك نماذجها. تحصل على القيمة، لا الوصفة.",
+     "16 analytical layers contribute to every read. Four are named (<span class='gold'>Timed Direction Logic · Nawaf Meeting Point · Devil's Advocate · Nawaf Golden Alignment</span>), and 12 work behind the scenes. Hiding them isn't obscurity — it's protecting the platform's core, like banks protect their models. You get the value, not the recipe."]},
+ {cat:"layers",q:["هل تكشفون طرق الحساب الداخلية أو المعاملات الداخلية؟","Do you reveal the internal methods or internal parameters?"],
+  a:["لا، أبدًا. لا تُعرض طرق الحساب الداخلية ولا المعاملات الداخلية ولا الدرجات الداخلية ولا أسماء الطبقات المخفية ولا ترتيبها. المعروض دائمًا <b>قيمة منقّحة</b> فقط.",
+     "No, never. No internal methods, internal parameters, internal scores, hidden layer names, or their order are shown. What's displayed is always a <b>sanitized value</b> only."]},
+ {cat:"layers",q:["ما معنى «جودة القرار»؟","What does 'decision quality' mean?"],
+  a:["مؤشر واحد يلخّص <b>متانة القراءة</b> بعد مرور كل الطبقات — يساعدك تعرف متى القراءة متماسكة ومتى تتحفّظ. ليس احتمال ربح ولا تنبؤًا مضمونًا.",
+     "A single index summarizing the <b>robustness of a read</b> after all layers — helping you tell when a read is coherent and when to hold back. It's not a win probability or a guaranteed forecast."]},
+ {cat:"security",q:["هل بياناتي وكلمة مروري آمنة؟","Are my data and password safe?"],
+  a:["المصادقة تتم في الخادم، واعتمادات الدخول <b>مجزّأة (hashed)</b> ولا تُخزّن كنص. التحقّق بخطوتين وتحديد المعدّل مفعّلان. لا تظهر أي بيانات تشغيل محمية في الواجهة إطلاقًا.",
+     "Authentication is server-side, and credentials are <b>hashed</b> — never stored as text. Two-factor and rate limiting are enabled. Protected operational details stay server-side."]},
+ {cat:"security",q:["كيف أربط تنبيهات تيليجرام بأمان؟","How do I link Telegram alerts safely?"],
+  a:["عبر <b>رمز ربط لمرة واحدة</b> ترسله لبوت DSP، ويتحقّق منه الخادم. رمز قناة محمي البوت لا يُعرض لك إطلاقًا — الربط بالرمز فقط.",
+     "Via a <b>one-time linking code</b> you send to the DSP bot, verified server-side. The protected bot credential is never shown to you — linking is by code only."]},
+ {cat:"security",q:["ما نوع التنبيهات التي أستقبلها؟","What kind of alerts do I receive?"],
+  a:["إشعارات قرار منقّحة فقط: تغيّر انحياز، عبور عتبة جودة، إضاءة محاذاة ذهبية، بلوغ نطاق سيناريو مرجعي، رفع تحفّظ. <b>لا توجد تنبيهات «اشترِ/بِع»</b> ولا أوامر تنفيذ.",
+     "Sanitized decision notifications only: bias change, quality-threshold crossing, golden alignment, scenario reference reached, caution raised. <b>There are no 'buy/sell' alerts</b> or execution orders."]},
+ {cat:"billing",q:["كيف تتم الترقية والدفع؟","How do upgrades and payments work?"],
+  a:["تختار باقتك وطريقة الدفع (دفع رقمي أو تحويل بنكي). <b>لا تفعيل تلقائي</b> — يُنشأ طلب اشتراك بحالة مراجعة، ويُفعّل وصولك بعد اعتماد الدفع في الخادم مع رسالة تأكيد.",
+     "You pick a package and method (crypto or bank transfer). <b>No auto-activation</b> — a subscription request is created in a review state, and access activates after server-side payment approval with a confirmation email."]},
+ {cat:"billing",q:["هل أقدر ألغي؟ وهل السعر يتغيّر؟","Can I cancel? Does the price change?"],
+  a:["تقدر تلغي في أي وقت. وسعر المؤسِّس لمشتركي التجربة <b>يبقى ثابتًا</b> ما دام اشتراكك فعّالًا.",
+     "You can cancel anytime. And the founder price for trial members <b>stays fixed</b> as long as your subscription is active."]},
+ {cat:"billing",q:["هل تظهر بيانات تشغيل محمية بوابة الدفع؟","Are payment-gateway protecteds exposed?"],
+  a:["لا إطلاقًا. منطق الدفع والتحقق في الخادم، واعتمادات محمية البوابة وأي بيانات تشغيل محمية لا تُعرض في الواجهة.",
+     "Never. Payment logic and verification are server-side, and gateway keys or any protecteds are not shown in the frontend."]},
+ {cat:"product",q:["ما الأسواق والأصول المدعومة؟","Which markets and assets are supported?"],
+  a:["عملات، سلع، مؤشرات، وعملات رقمية — ومجموعة أصول مفعّلة تتوسّع حسب باقتك. الأصول تظهر حسب الباقة بحوكمة كاملة.",
+     "FX, commodities, indices, and crypto — with an active asset set that expands by package. Assets are shown per package under full governance."]},
+ {cat:"product",q:["هل المنصة بالعربية؟ وماذا عن اللغات الأخرى؟","Is the platform in Arabic? What about other languages?"],
+  a:["نعم، عربية أصيلة (RTL) وإنجليزية كاملة (LTR) بمخرجات منقّحة متطابقة. <b>العبرية محجوبة بالكامل</b> على مستوى المنصة.",
+     "Yes — authentic Arabic (RTL) and full English (LTR) with identical sanitized outputs. <b> is fully blocked</b> at the platform level."]},
+ {cat:"product",q:["ما الموجز اليومي؟","What is the Daily Brief?"],
+  a:["ملخّص صباحي منقّح: «طقس السوق» العام، أبرز القراءات، بقعة الضوء الذهبية، وأبرز التحفّظات — يساعدك تبدأ يومك بنظرة قرار واحدة.",
+     "A sanitized morning summary: overall 'market weather,' top reads, the golden spotlight, and key cautions — helping you start your day with one decision-glance."]},
+];
+
+const I18N={
+ ar:{dir:"rtl",lang:"ar",
+  helpCenter:"مركز المساعدة",backBtn:"رجوع",
+  heroH:"كيف نقدر نساعدك؟",heroP:"إجابات واضحة عن المنصة والتجربة والحوكمة والأمان. ابحث أو تصفّح حسب الفئة.",
+  searchPh:"ابحث في الأسئلة…",
+  govCalloutH:"قبل أي سؤال: ما هي DSP؟",
+  govCalloutP:"DSP منصة <span class='gold'>دعم قرار وتحليل سياقي</span> — تمنحك اتجاهًا سياقيًا وأفق متابعة وجودة قرار منقّحة. <b>ليست</b> شركة استثمار، ولا مزوّد توصيات، ولا بوت تداول، ولا تدير أموالًا، ولا تضمن نتائج. أنت تقرّر، ونحن ندعم القرار.",
+  noresult:"لا توجد نتائج مطابقة. جرّب كلمة أخرى أو تواصل معنا.",
+  ccTgH:"الدعم عبر تيليجرام",ccTgS:"أسرع قناة للرد",ccMailH:"البريد",ccMailS:"للاستفسارات التفصيلية",
+  govRule:"اعرض قيمة القرار · أخفِ الوصفة الداخلية",discT:"إخلاء مسؤولية",
+  discBody:"مخرجات DSP ومستويات السيناريو مراجع سياقية لدعم القرار فقط، وليست نصيحة مالية أو أمر تداول أو توجيه تنفيذ أو ضمانًا للنتائج. DSP ليست شركة استثمار ولا تدير أموالًا."
+ },
+ en:{dir:"ltr",lang:"en",
+  helpCenter:"HELP CENTER",backBtn:"Back",
+  heroH:"How can we help?",heroP:"Clear answers about the platform, the trial, governance, and security. Search or browse by category.",
+  searchPh:"Search questions…",
+  govCalloutH:"Before any question: what is DSP?",
+  govCalloutP:"DSP is a <span class='gold'>decision-support and contextual-analysis</span> platform — it gives you contextual direction, a follow-up horizon, and sanitized decision quality. It is <b>not</b> an investment firm, a recommendation provider, a trading bot, it manages no funds, and guarantees no results. You decide; we support the decision.",
+  noresult:"No matching results. Try another term or contact us.",
+  ccTgH:"Telegram support",ccTgS:"Fastest channel",ccMailH:"Email",ccMailS:"For detailed inquiries",
+  govRule:"Expose decision value · Hide the recipe",discT:"Disclaimer",
+  discBody:"DSP outputs and scenario levels are contextual decision-support references only. They are not financial advice, trade instructions, execution orders, or guaranteed outcomes. DSP is not an investment firm and manages no funds."
+ }
+ es:{dir:"ltr",lang:"es",helpCenter:"CENTRO DE AYUDA",backBtn:"Atrás",heroH:"¿Cómo popreviews ayudar?",heroP:"Respuestas claras sobre la plataforma, la prueba, la gobernanza y la seguridad. Busca o explora por categoría.",searchPh:"Buscar preguntas…",govCalloutH:"Antes de cualquier pregunta: ¿qué es DSP?",govCalloutP:"DSP es una plataforma de <span class='gold'>apoyo a la decisión y análisis contextual</span> — te da dirección contextual, un horizonte de seguimiento y calidad de decisión depurada. <b>No</b> es una empresa de inversión, un proveedor de recomendaciones ni un bot de trading; no gestiona fondos y no garantiza resultados. Tú decides; nosotros apoyamos la decisión.",noresult:"No hay resultados coincidentes. Prueba otro término o contáctanos.",ccTgH:"Soporte por Telegram",ccTgS:"El canal más rápido",ccMailH:"Correo",ccMailS:"Para consultas detalladas",govRule:"Exponer el valor de la decisión · Ocultar la receta",discT:"Aviso",discBody:"Las salidas y niveles de escenario de DSP son únicamente referencias contextuales de apoyo a la decisión. No son asesoramiento financiero, instrucciones de operación, órdenes de ejecución ni resultados garantizados. DSP no es una empresa de inversión y no gestiona fondos."}
+ tr:{dir:"ltr",lang:"tr",helpCenter:"YARDIM MERKEZİ",backBtn:"Geri",heroH:"Nasıl yardımcı olabiliriz?",heroP:"Platform, deneme, yönetişim ve güvenlik hakkında net yanıtlar. Arayın veya kategoriye göre göz atın.",searchPh:"Soru ara…",govCalloutH:"Her sorudan önce: DSP nedir?",govCalloutP:"DSP bir <span class='gold'>karar destek ve bağlamsal analiz</span> platformudur — size bağlamsal yön, takip ufku ve arıtılmış karar kalitesi sunar. Bir yatırım şirketi, tavsiye sağlayıcısı veya işlem botu <b>değildir</b>; hiçbir fon yönetmez ve sonuç garanti etmez. Siz karar verirsiniz; biz kararı destekleriz.",noresult:"Eşleşen sonuç yok. Başka bir terim deneyin veya bize ulaşın.",ccTgH:"Telegram destek",ccTgS:"En hızlı kanal",ccMailH:"E-posta",ccMailS:"Ayrıntılı sorular için",govRule:"Karar değerini açığa çıkar · Tarifi gizle",discT:"Yasal Uyarı",discBody:"DSP çıktıları ve senaryo seviyeleri yalnızca bağlamsal karar destek referanslarıdır. Finansal tavsiye, işlem talimatı, yürütme emri veya garanti edilen sonuç değildir. DSP bir yatırım şirketi değildir ve hiçbir fon yönetmez."}
+ id:{dir:"ltr",lang:"id",helpCenter:"PUSAT BANTUAN",backBtn:"Kembali",heroH:"Bagaimana kami bisa membantu?",heroP:"Jawaban jelas tentang platform, uji coba, tata kelola, dan keamanan. Cari atau jelajahi berdasarkan kategori.",searchPh:"Cari pertanyaan…",govCalloutH:"Sebelum pertanyaan apa pun: apa itu DSP?",govCalloutP:"DSP adalah platform <span class='gold'>pendukung keputusan dan analisis kontekstual</span> — memberi Anda arah kontekstual, horizon tindak lanjut, dan kualitas keputusan yang dibersihkan. Ini <b>bukan</b> perusahaan investasi, penyedia rekomendasi, atau bot perdagangan; tidak mengelola dana dan tidak menjamin hasil. Anda yang memutuskan; kami mendukung keputusan.",noresult:"Tidak ada hasil yang cocok. Coba istilah lain atau hubungi kami.",ccTgH:"Dukungan Telegram",ccTgS:"Saluran tercepat",ccMailH:"Email",ccMailS:"Untuk pertanyaan terperinci",govRule:"Ekspos nilai keputusan · Sembunyikan resep",discT:"Penafian",discBody:"Output dan tingkat skenario DSP hanyalah referensi kontekstual pendukung keputusan. Bukan nasihat keuangan, instruksi perdagangan, perintah eksekusi, atau hasil yang dijamin. DSP bukan perusahaan investasi dan tidak mengelola dana."}
+ zh:{dir:"ltr",lang:"zh",helpCenter:"帮助中心",backBtn:"返回",heroH:"我们能帮您什么?",heroP:"关于平台、试用、治理和安全的清晰解答。搜索或按类别浏览。",searchPh:"搜索问题…",govCalloutH:"在任何问题之前:DSP 是什么?",govCalloutP:"DSP 是一个<span class='gold'>决策支持与情境分析</span>平台——它为您提供情境方向、跟进时间范围和净化后的决策质量。它<b>不是</b>投资公司、推荐提供商或交易机器人;它不管理任何资金,也不保证任何结果。您来决定;我们支持决策。",noresult:"没有匹配结果。请尝试其他词语或联系我们。",ccTgH:"Telegram 支持",ccTgS:"最快渠道",ccMailH:"电子邮件",ccMailS:"用于详细咨询",govRule:"暴露决策价值 · 隐藏配方",discT:"免责声明",discBody:"DSP 输出和情景级别仅为情境性决策支持参考。它们不是财务建议、交易指示、执行指令或保证结果。DSP 不是投资公司,也不管理任何资金。"}
+};
+const T=a=>a[LANG==="ar"?0:1];
+let curCat="all", q="";
+
+function buildCats(){
+  $("#cats").innerHTML=CATS.map(c=>`<button class="cat ${c.id===curCat?'on':''}" data-cat="${c.id}">${c.ic} ${T(c.nm)}</button>`).join("");
+  $$('[data-cat]').forEach(b=>b.onclick=()=>{curCat=b.dataset.cat;buildCats();render();});
+}
+function catName(id){const c=CATS.find(x=>x.id===id);return c?T(c.nm):id;}
+function render(){
+  const ql=q.trim().toLowerCase();
+  const items=FAQ.filter(f=>(curCat==="all"||f.cat===curCat)&&(!ql||T(f.q).toLowerCase().includes(ql)||T(f.a).toLowerCase().includes(ql)));
+  $("#faq").innerHTML=items.map((f,i)=>`<div class="qa" data-i="${i}">
+    <div class="q"><span class="qcat">${catName(f.cat)}</span><span class="qt">${T(f.q)}</span><span class="chev">▾</span></div>
+    <div class="a"><div class="inner">${T(f.a)}</div></div></div>`).join("");
+  $("#noresult").style.display=items.length?"none":"block";
+  $$('.qa').forEach(qa=>qa.querySelector('.q').onclick=()=>qa.classList.toggle('open'));
+}
+$("#search").oninput=e=>{q=e.target.value;render();};
+$("#backBtn").onclick=()=>{location.href="DSP_Command_Center.html";};
+
+function applyLang(){
+  const d=I18N[LANG];
+  document.documentElement.lang=d.lang;document.documentElement.dir=d.dir;document.body.dir=d.dir;
+  const base=I18N.en;$$('[data-i]').forEach(el=>{const k=el.getAttribute('data-i');const v=(d[k]!=null)?d[k]:base[k];if(v!=null)el.innerHTML=v;});
+  $$('[data-ph]').forEach(el=>{const k=el.getAttribute('data-ph');const v=(d[k]!=null)?d[k]:base[k];if(v!=null)el.placeholder=v;});
+  const _ls=$("#langSel");if(_ls)_ls.value=LANG;
+  buildCats();render();
+}
+const RTL_LANGS={ar:1,ur:1,fa:1,he:1,iw:1};function ndspSetLang(v){if(v==="he"||v==="iw"||v==="he-IL")v="en";if(!I18N[v])v="en";LANG=v;try{localStorage.setItem("ndsp_lang",v);}catch(e){}applyLang();}const _langSel=$("#langSel");if(_langSel)_langSel.onchange=()=>ndspSetLang(_langSel.value);
+try{let _sv=localStorage.getItem("ndsp_lang");if(_sv&&_sv!=="he"&&_sv!=="iw"&&_sv!=="he-IL"&&I18N[_sv])LANG=_sv;}catch(e){}
+applyLang();
+</script>
+</
+
+
+</
+
+
+</
+<!-- DSP_ADMIN_ARABIC_FINAL_BEGIN -->
+<style>
+#dspAdminLangFinal{position:fixed;top:12px;right:12px;z-index:999999;display:flex;gap:6px;padding:6px;border-radius:999px;background:rgba(7,10,16,.94);border:1px solid rgba(217,182,90,.45)}
+#dspAdminLangFinal button{border:0;border-radius:999px;padding:8px 12px;font-parameter:900;background:transparent;color:#9AA6BC}
+#dspAdminLangFinal button.on{background:linear-gradient(135deg,#F2D27A,#D9B65A);color:#151006}
+</style>
+<script>
+(function(){
+const AR={
+"OPERATIONS CENTER":"مركز العمليات","MAIN":"الرئيسية","Overview":"نظرة عامة","Users":"المستخدمون","Trials":"التجارب",
+"Registration Review":"مراجعة التسجيل","BUSINESS":"الأعمال","Packages":"الباقات","Payments":"المدفوعات",
+"ENGINE & GOVERNANCE":"المحركات والحوكمة","Layer Governance":"حوكمة الطبقات","NMP Research Lab":"مختبر أبحاث NMP",
+"Alerts & Config":"التنبيهات والإعدادات","Email":"البريد","Telegram":"تيليجرام","Health":"الصحة التشغيلية","Reports":"التقارير",
+"Backups":"النسخ الاحتياطية","Status":"الحالة","Active":"نشط","Pending":"قيد الانتظار","Approved":"مقبول","Rejected":"مرفوض"
+};
+const EN={}; Object.keys(AR).forEach(k=>EN[AR[k]]=k);
+function walk(fn){let w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let n,a=[];while(n=w.nextNode())a.push(n);a.forEach(n=>{if(n.parentElement&& !n.parentElement.closest("#dspAdminLangFinal"))fn(n)});}
+function apply(lang){
+ localStorage.setItem("dsp_admin_lang",lang);
+ document.documentElement.lang=lang; document.documentElement.dir=lang==="ar"?"rtl":"ltr"; document.body.dir=document.documentElement.dir;
+ let map=lang==="ar"?AR:EN;
+ walk(n=>{let t=n.nodeValue;Object.keys(map).forEach(k=>t=t.split(k).join(map[k]));n.nodeValue=t;});
+ document.getElementById("adAR")?.classList.toggle("on",lang==="ar");
+ document.getElementById("adEN")?.classList.toggle("on",lang==="en");
+}
+function boot(){
+ if(!document.getElementById("dspAdminLangFinal")){
+  let b=document.createElement("div"); b.id="dspAdminLangFinal";
+  b.innerHTML='<button id="adAR">AR</button><button id="adEN">EN</button>';
+  document.body.appendChild(b);
+  document.getElementById("adAR").onclick=()=>apply("ar");
+  document.getElementById("adEN").onclick=()=>apply("en");
+ }
+ apply(localStorage.getItem("dsp_admin_lang")||"ar");
+}
+document.readyState==="loading"?document.addEventListener("DOMContentLoaded",boot):boot();
+})();
+</script>
+<!-- DSP_ADMIN_ARABIC_FINAL_END -->
+
+</
+
+
+</
+<!-- DSP_ADMIN_MOBILE_HARD_DRAWER_BEGIN -->
+<style>
+@media(max-width:900px){
+  #dspHardMenuBtn{
+    position:fixed!important;
+    top:12px!important;
+    left:12px!important;
+    z-index:2147483647!important;
+    width:46px!important;
+    height:46px!important;
+    border-radius:14px!important;
+    border:1px solid rgba(217,182,90,.55)!important;
+    background:#070A10!important;
+    color:#F2D27A!important;
+    font-size:24px!important;
+    font-parameter:900!important;
+  }
+  #dspHardBackdrop{
+    position:fixed!important;
+    inset:0!important;
+    z-index:2147483645!important;
+    display:none!important;
+    background:rgba(0,0,0,.72)!important;
+    backdrop-filter:blur(6px)!important;
+  }
+  body.dspHardOpen #dspHardBackdrop{display:block!important}
+  body.dspHardOpen .dspHardSidebar{
+    transform:translateX(0)!important;
+    opacity:1!important;
+    pointer-events:auto!important;
+  }
+  .dspHardSidebar{
+    position:fixed!important;
+    top:0!important;
+    left:0!important;
+    bottom:0!important;
+    width:min(86vw,360px)!important;
+    height:100vh!important;
+    max-height:100vh!important;
+    overflow-y:auto!important;
+    z-index:2147483646!important;
+    background:#0B0F17!important;
+    transform:translateX(-115%)!important;
+    opacity:1!important;
+    pointer-events:none!important;
+    transition:transform .22s ease!important;
+    box-shadow:32px 0 90px rgba(0,0,0,.65)!important;
+  }
+  body:not(.dspHardOpen) .dspHardSidebar *{
+    pointer-events:none!important;
+  }
+}
+</style>
+
+<script>
+(function(){
+  function mobile(){ return window.matchMedia("(max-width:900px)").matches; }
+
+  function isSidebar(el){
+    var t=(el.innerText||"").trim();
+    if(t.length<40) return false;
+    var hits=0;
+    ["Overview","Users","Trials","Registration Review","Packages","Payments","Layer Governance","NMP Research Lab","Health","Reports","Backups","نظرة عامة","المستخدمون","التجارب","الباقات","المدفوعات"].forEach(function(x){
+      if(t.indexOf(x)>=0) hits++;
+    });
+    return hits>=4;
+  }
+
+  function findSidebar(){
+    var all=[].slice.call(document.querySelectorAll("aside,nav,div,section"));
+    var c=all.filter(isSidebar);
+    c.sort(function(a,b){
+      var aw=a.getBoundingClientRect().width || 9999;
+      var bw=b.getBoundingClientRect().width || 9999;
+      return aw-bw;
+    });
+    return c[0] || null;
+  }
+
+  function boot(){
+    document.querySelectorAll("#dspAdminDrawerBtn,#dspAdminDrawerBackdrop,#dspAdminMobileBackdrop").forEach(function(x){x.remove();});
+    document.body.classList.remove("dspDrawerOpen","dsp-admin-menu-open");
+
+    var side=findSidebar();
+    if(!side) return;
+
+    side.classList.add("dspHardSidebar");
+
+    if(!document.getElementById("dspHardBackdrop")){
+      var back=document.createElement("div");
+      back.id="dspHardBackdrop";
+      document.body.appendChild(back);
+      back.onclick=function(){document.body.classList.remove("dspHardOpen");};
+    }
+
+    if(!document.getElementById("dspHardMenuBtn")){
+      var btn=document.createElement("button");
+      btn.id="dspHardMenuBtn";
+      btn.type="button";
+      btn.textContent="☰";
+      document.body.appendChild(btn);
+      btn.onclick=function(){document.body.classList.toggle("dspHardOpen");};
+    }
+
+    side.querySelectorAll("a,button").forEach(function(el){
+      if(!el.dataset.hardClose){
+        el.dataset.hardClose="1";
+        el.addEventListener("click",function(){
+          if(mobile()) setTimeout(function(){document.body.classList.remove("dspHardOpen");},120);
+        });
+      }
+    });
+
+    if(mobile()) document.body.classList.remove("dspHardOpen");
+  }
+
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",boot);
+  else boot();
+
+  setTimeout(boot,300);
+  setTimeout(boot,1000);
+  window.addEventListener("resize",boot);
+})();
+</script>
+<!-- DSP_ADMIN_MOBILE_HARD_DRAWER_END -->
+
+<script src="ndsp-hud-theme.js" defer></script>
+
+<!-- NDSP_AR_EN_ONLY_CLEAN_FINAL_START -->
+<script>
+(function(){
+  "use strict";
+
+  function n(v){ return String(v || "").trim().toLowerCase(); }
+
+  function allowed(v){
+    v = n(v);
+    return v === "ar" || v === "en" || v.indexOf("ar-") === 0 || v.indexOf("en-") === 0 ||
+           v === "arabic" || v === "english" || v === "العربية";
+  }
+
+  function isLangSelect(sel){
+    var meta = n((sel.id || "") + " " + (sel.name || "") + " " + (sel.className || "") + " " + (sel.getAttribute("aria-label") || ""));
+    var text = n(sel.textContent || "");
+    return /lang|language|locale|لغة|لسان/.test(meta) || /العربية|english|arabic/.test(text);
+  }
+
+  function cleanSelect(sel){
+    if (!sel || !sel.options || !isLangSelect(sel)) return;
+
+    Array.prototype.slice.call(sel.options).forEach(function(o){
+      var v = n(o.value || "");
+      var t = n(o.textContent || "");
+      if (!allowed(v) && !allowed(t)) o.remove();
+    });
+
+    var opts = Array.prototype.slice.call(sel.options);
+    var hasAr = opts.some(function(o){ return n(o.value) === "ar" || n(o.textContent).indexOf("العربية") >= 0; });
+    var hasEn = opts.some(function(o){ return n(o.value) === "en" || n(o.textContent).indexOf("english") >= 0; });
+
+    if (!hasAr) {
+      var ar = document.createElement("option");
+      ar.value = "ar";
+      ar.textContent = "العربية";
+      sel.appendChild(ar);
+    }
+
+    if (!hasEn) {
+      var en = document.createElement("option");
+      en.value = "en";
+      en.textContent = "English";
+      sel.appendChild(en);
+    }
+  }
+
+  function enforce(){
+    window.NDSP_ALLOWED_LANGUAGES = ["ar","en"];
+    document.documentElement.setAttribute("data-allowed-languages", "ar,en");
+    Array.prototype.slice.call(document.querySelectorAll("select")).forEach(cleanSelect);
+
+    Array.prototype.slice.call(document.querySelectorAll("[data-lang], [data-language], [data-locale]")).forEach(function(el){
+      var v = n(el.getAttribute("data-lang") || el.getAttribute("data-language") || el.getAttribute("data-locale") || "");
+      if (v && !allowed(v)) el.remove();
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", enforce);
+  setTimeout(enforce, 300);
+  setTimeout(enforce, 1200);
+})();
+</script>
+<!-- NDSP_AR_EN_ONLY_CLEAN_FINAL_END -->
+
+</body>
+</html>

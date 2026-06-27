@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NDSP Admin Operations Center</title>
+<style>
+:root{
+  --bg:#050505;--panel:#0d0d0d;--panel2:#14120d;--gold:#d4af37;--gold2:#f1d77a;
+  --txt:#f5f0e6;--muted:#a99f8d;--line:rgba(212,175,55,.18);
+  --green:#22c55e;--red:#ef4444;--amber:#f59e0b;--blue:#60a5fa;
+}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at top,#171203 0,#050505 42%);color:var(--txt);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif}
+a{color:inherit;text-decoration:none}
+.shell{display:grid;grid-template-columns:280px 1fr;min-height:100vh}
+.side{border-left:1px solid var(--line);background:rgba(5,5,5,.92);padding:22px;position:sticky;top:0;height:100vh}
+.logo{display:flex;align-items:center;gap:12px;margin-bottom:28px}
+.mark{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,var(--gold2),var(--gold));color:#111;display:grid;place-items:center;font-weight:900}
+.logo b{display:block;color:var(--gold2);font-size:20px}
+.logo span{font-size:12px;color:var(--muted)}
+.nav{display:flex;flex-direction:column;gap:8px}
+.nav a{padding:12px 14px;border:1px solid transparent;border-radius:14px;color:var(--muted);font-weight:700}
+.nav a:hover,.nav a.active{border-color:var(--line);background:rgba(212,175,55,.08);color:var(--gold2)}
+.main{padding:24px;max-width:1500px;width:100%;margin:0 auto}
+.top{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:20px;flex-wrap:wrap}
+h1{margin:0;font-size:30px;color:var(--gold2)}
+.sub{color:var(--muted);font-size:14px;margin-top:6px}
+.badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:rgba(212,175,55,.08);color:var(--gold2);border-radius:999px;padding:9px 13px;font-weight:800;font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
+.card{background:linear-gradient(180deg,rgba(20,18,13,.96),rgba(9,9,9,.96));border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:0 18px 50px rgba(0,0,0,.28)}
+.card h2{font-size:18px;margin:0 0 12px;color:var(--gold2)}
+.metric{font-size:32px;font-weight:950}
+.label{color:var(--muted);font-size:13px;margin-top:4px}
+.section{margin:22px 0}
+.table-wrap{overflow:auto;border-radius:20px;border:1px solid var(--line)}
+table{width:100%;border-collapse:collapse;min-width:900px;background:rgba(10,10,10,.85)}
+th,td{padding:13px 14px;border-bottom:1px solid rgba(255,255,255,.06);text-align:right;font-size:14px}
+th{color:var(--gold2);background:rgba(212,175,55,.07)}
+td{color:#eee}
+.status{display:inline-flex;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:900}
+.ACTIVE{background:rgba(34,197,94,.14);color:#65e58e}
+.PENDING_REVIEW,.PENDING_SPECIALIST_REVIEW,.PENDING_PRIVATE_INVITE_APPROVAL{background:rgba(245,158,11,.14);color:#fbbf24}
+.REJECTED,.SUSPENDED{background:rgba(239,68,68,.14);color:#ff7272}
+.EXPIRED,.NEEDS_MORE_INFO{background:rgba(96,165,250,.14);color:#93c5fd}
+.btns{display:flex;gap:8px;flex-wrap:wrap}
+button{border:1px solid var(--line);background:rgba(212,175,55,.09);color:var(--gold2);padding:9px 12px;border-radius:12px;font-weight:800;cursor:pointer}
+button.danger{border-color:rgba(239,68,68,.25);color:#ff8585;background:rgba(239,68,68,.08)}
+button.ok{border-color:rgba(34,197,94,.25);color:#7bed9f;background:rgba(34,197,94,.08)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.list{display:grid;gap:10px}
+.item{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid rgba(255,255,255,.06);padding:10px 0;color:var(--muted)}
+.item b{color:var(--txt)}
+.safe{border:1px dashed rgba(34,197,94,.35);background:rgba(34,197,94,.06);padding:14px;border-radius:16px;color:#bdf7cd;line-height:1.8}
+.warn{border:1px dashed rgba(245,158,11,.35);background:rgba(245,158,11,.06);padding:14px;border-radius:16px;color:#ffe0a3;line-height:1.8}
+.footer{margin-top:28px;color:var(--muted);font-size:12px;text-align:center}
+@media(max-width:980px){
+ .shell{grid-template-columns:1fr}
+ .side{position:relative;height:auto;border-left:0;border-bottom:1px solid var(--line)}
+ .nav{display:grid;grid-template-columns:repeat(2,1fr)}
+ .grid{grid-template-columns:repeat(2,1fr)}
+ .two{grid-template-columns:1fr}
+}
+@media(max-width:560px){.grid{grid-template-columns:1fr}.nav{grid-template-columns:1fr}h1{font-size:24px}}
+</style>
+<link rel="stylesheet" href="/ndsp-admin-mobile-fix.css?v=mobile-final">
+<link rel="stylesheet" href="/ndsp-admin-force-actions-mobile.css?v=force_delete_visible_20260617"></head>
+<body>
+<div class="shell">
+<aside class="side">
+  <div class="logo"><div class="mark">N</div><div><b>NDSP</b><span>Admin Operations Center</span></div></div>
+  <nav class="nav">
+    <a class="active" href="#overview">نظرة عامة</a>
+    <a href="#registrations">مراجعة التسجيل</a>
+    <a href="#trials">التجارب والباقات</a>
+    <a href="#users">المستخدمون</a>
+    <a href="#payments">المدفوعات</a>
+    <a href="#alerts">التنبيهات</a>
+    <a href="#market">الأصول والسوق</a>
+    <a href="#decision">مراقبة المخرجات</a>
+    <a href="#governance">الحوكمة</a>
+    <a href="#reports">التقارير</a>
+    <a href="#deploy">النسخ والنشر</a>
+    <a href="#audit">سجل الإدارة</a>
+  </nav>
+</aside>
+
+<main class="main">
+  <div class="top">
+    <div>
+      <h1>مركز عمليات إدارة NDSP</h1>
+      <div class="sub">لوحة إدارة تشغيلية بدون كشف أي منطق داخلي أو أسرار نموذجية</div>
+    </div>
+    <div class="badge">● Admin Only · Sanitized</div>
+  </div>
+
+  <section id="overview" class="section">
+    <div class="grid">
+      <div class="card"><h2>إجمالي المستخدمين</h2><div class="metric">128</div><div class="label">مستخدم مسجل</div></div>
+      <div class="card"><h2>التجارب النشطة</h2><div class="metric">42</div><div class="label">Elite Trial · 16 يوم</div></div>
+      <div class="card"><h2>تسجيلات بانتظار المراجعة</h2><div class="metric">17</div><div class="label">PENDING_REVIEW</div></div>
+      <div class="card"><h2>حالة النظام</h2><div class="metric" style="color:var(--green)">OK</div><div class="label">API · Email · Frontend</div></div>
+    </div>
+  </section>
+
+  <section id="registrations" class="section card">
+    <h2>مراجعة التسجيل</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>الاسم</th><th>البريد</th><th>الجوال</th><th>تصنيف المستخدم</th><th>التاريخ</th><th>الحالة</th><th>مؤشر مخاطر التسجيل</th><th>إجراء</th></tr></thead>
+      <tbody>
+        <tr><td>مستخدم تجريبي</td><td>user@example.com</td><td>9665*******</td><td>مستخدم عام</td><td>2026-06-16</td><td><span class="status PENDING_REVIEW">PENDING_REVIEW</span></td><td>منخفض</td><td class="btns"><button class="ok">قبول</button><button>طلب معلومات</button><button class="danger">رفض</button></td></tr>
+        <tr><td>باحث أكاديمي</td><td>research@example.com</td><td>9665*******</td><td>أكاديمي / باحث</td><td>2026-06-16</td><td><span class="status PENDING_SPECIALIST_REVIEW">PENDING_SPECIALIST_REVIEW</span></td><td>متوسط</td><td class="btns"><button class="ok">قبول</button><button>مراجعة</button></td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section id="trials" class="section two">
+    <div class="card"><h2>إدارة التجربة</h2>
+      <div class="list">
+        <div class="item"><span>نموذج التجربة</span><b>16-Day Elite Trial</b></div>
+        <div class="item"><span>نشطة</span><b>42</b></div>
+        <div class="item"><span>منتهية</span><b>8</b></div>
+        <div class="item"><span>تمديد يدوي</span><b>متاح للإدارة فقط</b></div>
+      </div>
+    </div>
+    <div class="card"><h2>الباقات</h2>
+      <div class="list">
+        <div class="item"><span>Starter</span><b>مخرجات أساسية</b></div>
+        <div class="item"><span>Professional</span><b>سيناريوهات ومراقبة</b></div>
+        <div class="item"><span>Elite</span><b>التجربة الكاملة</b></div>
+        <div class="item"><span>Private</span><b>خاص بدعوة</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="users" class="section card">
+    <h2>المستخدمون</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>المستخدم</th><th>التصنيف</th><th>الباقة</th><th>التجربة</th><th>اللغة</th><th>التنبيهات</th><th>آخر نشاط</th><th>الحالة</th></tr></thead>
+      <tbody>
+        <tr><td>user@example.com</td><td>مستخدم عام</td><td>Elite Trial</td><td>اليوم 5 من 16</td><td>العربية</td><td>مفعلة</td><td>قبل 12 دقيقة</td><td><span class="status ACTIVE">ACTIVE</span></td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section id="payments" class="section card">
+    <h2>المدفوعات</h2>
+    <div class="grid">
+      <div class="card"><h2>مؤكدة</h2><div class="metric">12</div></div>
+      <div class="card"><h2>قيد المراجعة</h2><div class="metric">4</div></div>
+      <div class="card"><h2>مرفوضة</h2><div class="metric">1</div></div>
+      <div class="card"><h2>استرداد</h2><div class="metric">0</div></div>
+    </div>
+  </section>
+
+  <section id="alerts" class="section two">
+    <div class="card"><h2>مركز التنبيهات</h2>
+      <div class="list">
+        <div class="item"><span>Email</span><b style="color:var(--green)">OK</b></div>
+        <div class="item"><span>Telegram</span><b style="color:var(--green)">OK</b></div>
+        <div class="item"><span>Failed Alerts</span><b>0</b></div>
+      </div>
+    </div>
+    <div class="card"><h2>حماية الأسرار</h2><div class="safe">لا يتم عرض أي مفاتيح API أو رموز Telegram أو كلمات مرور SMTP أو روابط قواعد بيانات داخل الواجهة.</div></div>
+  </section>
+
+  <section id="market" class="section card">
+    <h2>الأصول والسوق</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>الأصل</th><th>السوق</th><th>حالة البيانات</th><th>آخر تحديث</th><th>النضارة</th><th>العرض</th></tr></thead>
+      <tbody>
+        <tr><td>GOLD</td><td>Commodities</td><td>Live</td><td>الآن</td><td>Fresh</td><td><span class="status ACTIVE">ACTIVE</span></td></tr>
+        <tr><td>BTCUSDT</td><td>Crypto</td><td>Live</td><td>قبل دقيقة</td><td>Fresh</td><td><span class="status ACTIVE">ACTIVE</span></td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section id="decision" class="section card">
+    <h2>مراقبة مخرجات القرار — Sanitized Only</h2>
+    <div class="grid">
+      <div class="card"><h2>جودة القرار</h2><div class="metric">87</div><div class="label">ممتاز</div></div>
+      <div class="card"><h2>حالة السيناريو</h2><div class="metric">نشط</div><div class="label">3 مسارات</div></div>
+      <div class="card"><h2>قوة الأفق</h2><div class="metric">قوي</div><div class="label">قريب / متوسط / بعيد</div></div>
+      <div class="card"><h2>المخاطر</h2><div class="metric">متوسطة</div><div class="label">دون كشف المنطق</div></div>
+    </div>
+    <div class="warn">هذه الشاشة تعرض مخرجات منقّحة فقط. لا تعرض معادلات أو أوزان أو أسماء طبقات مخفية أو منطق إشارة التوافق الذهبية.</div>
+  </section>
+
+  <section id="governance" class="section card">
+    <h2>مراقبة الحوكمة</h2>
+    <div class="list">
+      <div class="item"><span>إخلاء المسؤولية العام</span><b style="color:var(--green)">ACTIVE</b></div>
+      <div class="item"><span>حماية المنطق المخفي</span><b style="color:var(--green)">ACTIVE</b></div>
+      <div class="item"><span>Sanitization</span><b style="color:var(--green)">ACTIVE</b></div>
+      <div class="item"><span>No Trading Commands</span><b style="color:var(--green)">PASS</b></div>
+      <div class="item"><span>Hebrew Block</span><b style="color:var(--green)">ACTIVE</b></div>
+    </div>
+  </section>
+
+  <section id="reports" class="section card">
+    <h2>التقارير</h2>
+    <div class="btns">
+      <button>تقرير العمليات اليومي</button>
+      <button>تقرير التسجيل</button>
+      <button>تقرير التحويلات</button>
+      <button>تقرير الاشتراكات</button>
+      <button>تقرير صحة النظام</button>
+      <button>Export CSV</button>
+      <button>Export PDF</button>
+    </div>
+  </section>
+
+  <section id="deploy" class="section two">
+    <div class="card"><h2>النسخ الاحتياطي والنشر</h2>
+      <div class="list">
+        <div class="item"><span>آخر Backup</span><b>متاح في السيرفر</b></div>
+        <div class="item"><span>آخر Deployment</span><b>قيد المتابعة</b></div>
+        <div class="item"><span>Nginx</span><b style="color:var(--green)">OK</b></div>
+        <div class="item"><span>API Health</span><b style="color:var(--green)">OK</b></div>
+      </div>
+    </div>
+    <div class="card"><h2>نقاط الرجوع</h2><div class="safe">يجب تنفيذ أي تعديل مستقبلي مع Backup وReport قبل النشر.</div></div>
+  </section>
+
+  <section id="audit" class="section card">
+    <h2>سجل الإدارة</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>الوقت</th><th>المسؤول</th><th>الإجراء</th><th>الهدف</th><th>النتيجة</th></tr></thead>
+      <tbody>
+        <tr><td>الآن</td><td>admin</td><td>VIEW_DASHBOARD</td><td>Admin Operations Center</td><td><span class="status ACTIVE">ACTIVE</span></td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <div class="footer">NDSP Admin Operations Center · لا تعرض هذه اللوحة أي أسرار أو مفاتيح أو منطق داخلي.</div>
+</main>
+</div>
+<script src="/ndsp-admin-ops-real-data.js?v=1" defer></script>
+
+<script src="/ndsp-admin-delete-users.js?v=20260617_160100" defer></script>
+</html>

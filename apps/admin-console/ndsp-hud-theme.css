@@ -1,0 +1,32 @@
+:root{--hud-gold:#D9B65A;--hud-gold-bright:#F2D27A;--hud-teal:#3FD3C6;--hud-line:rgba(217,182,90,.34);--hud-line-dim:rgba(217,182,90,.14);--hud-mono:"IBM Plex Mono",monospace}
+.ndsp-hud-strip{position:relative;z-index:39;overflow:hidden;display:flex;align-items:center;gap:22px;padding:6px 24px;white-space:nowrap;font-family:var(--hud-mono);font-size:10.5px;letter-spacing:2.2px;color:rgba(217,182,90,.78);text-transform:uppercase;background:linear-gradient(180deg,rgba(10,13,20,.92),rgba(7,10,16,.75));border-bottom:1px solid var(--hud-line-dim)}
+.ndsp-hud-strip .in{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:22px;width:100%;overflow:hidden}
+.ndsp-hud-strip .it{display:inline-flex;align-items:center;gap:7px;flex:none}
+.ndsp-hud-strip .dot{width:6px;height:6px;border-radius:50%;background:var(--hud-teal);box-shadow:0 0 8px rgba(63,211,198,.8);animation:ndspPulse 2.4s ease-in-out infinite}
+.ndsp-hud-strip .sep{color:rgba(217,182,90,.25);flex:none}
+.ndsp-hud-strip .clock{margin-inline-start:auto;color:rgba(234,238,246,.55)}
+.ndsp-hud-strip::after{content:"";position:absolute;top:0;bottom:0;width:140px;background:linear-gradient(90deg,transparent,rgba(242,210,122,.10),transparent);inset-inline-start:-160px;animation:ndspSweep 7s linear infinite}
+@keyframes ndspSweep{to{inset-inline-start:calc(100% + 160px)}}
+@keyframes ndspPulse{0%,100%{opacity:1}50%{opacity:.35}}
+@media(max-width:640px){.ndsp-hud-strip{font-size:9.5px;letter-spacing:1.6px;gap:14px;padding:5px 14px}.ndsp-hud-strip .hide-m{display:none}}
+.ndsp-hud-frame{position:relative}
+.ndsp-hud-frame>.ndsp-c{position:absolute;width:14px;height:14px;pointer-events:none;opacity:.85;border:0 solid var(--hud-line);transform:scale(.4);transform-origin:center;transition:border-color .35s,opacity .35s}
+.ndsp-hud-frame>.ndsp-c.tl{top:-1px;inset-inline-start:-1px;border-top-width:1.5px;border-inline-start-width:1.5px;border-start-start-radius:4px}
+.ndsp-hud-frame>.ndsp-c.tr{top:-1px;inset-inline-end:-1px;border-top-width:1.5px;border-inline-end-width:1.5px;border-start-end-radius:4px}
+.ndsp-hud-frame>.ndsp-c.bl{bottom:-1px;inset-inline-start:-1px;border-bottom-width:1.5px;border-inline-start-width:1.5px;border-end-start-radius:4px}
+.ndsp-hud-frame>.ndsp-c.br{bottom:-1px;inset-inline-end:-1px;border-bottom-width:1.5px;border-inline-end-width:1.5px;border-end-end-radius:4px}
+.ndsp-hud-frame:hover>.ndsp-c{border-color:var(--hud-gold-bright);opacity:1}
+.ndsp-hud-frame.ndsp-in>.ndsp-c{transform:scale(1);transition:transform .5s cubic-bezier(.2,.9,.3,1.4),border-color .35s,opacity .35s}
+.ndsp-hud-scan{position:absolute;inset-inline:0;top:0;height:1.5px;pointer-events:none;z-index:3;background:linear-gradient(90deg,transparent,rgba(242,210,122,.55),transparent);filter:drop-shadow(0 0 6px rgba(242,210,122,.5));animation:ndspScanY 9s ease-in-out infinite;opacity:.5}
+@keyframes ndspScanY{0%,100%{transform:translateY(8px)}50%{transform:translateY(220px)}}
+.num,.price,.mono,[data-hud-num]{font-feature-settings:"tnum" 1;text-shadow:0 0 18px rgba(242,210,122,.22)}
+.ndsp-hud-ruler{position:fixed;top:0;bottom:0;width:7px;z-index:1;pointer-events:none;background-image:repeating-linear-gradient(to bottom,rgba(217,182,90,.22) 0 1px,transparent 1px 28px);mask-image:linear-gradient(to bottom,transparent,#000 18%,#000 82%,transparent)}
+.ndsp-hud-ruler.l{inset-inline-start:6px}.ndsp-hud-ruler.r{inset-inline-end:6px}
+@media(max-width:900px){.ndsp-hud-ruler{display:none}}
+@keyframes ndspOrbit{to{transform:rotate(360deg)}}
+nav .brand svg{overflow:visible}
+nav .brand svg circle[stroke-dasharray]{transform-origin:120px 120px;animation:ndspOrbit 40s linear infinite}
+.btn.btn-gold{position:relative;overflow:hidden}
+.btn.btn-gold::after{content:"";position:absolute;top:0;bottom:0;width:50%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent);inset-inline-start:-60%;transition:inset-inline-start .55s ease}
+.btn.btn-gold:hover::after{inset-inline-start:110%}
+@media(prefers-reduced-motion:reduce){.ndsp-hud-strip::after,.ndsp-hud-scan,.ndsp-hud-strip .dot,nav .brand svg circle[stroke-dasharray]{animation:none}.ndsp-hud-frame>.ndsp-c{transform:none;transition:none}}

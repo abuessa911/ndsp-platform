@@ -1,0 +1,159 @@
+{
+  "policy": "NDSP_OWNER_INTERNAL_16_LAYER_REGISTRY",
+  "status": "owner_internal_unmasked",
+  "visibility_model": {
+    "owner_backend_layers": "unmasked",
+    "owner_admin_audit": "unmasked",
+    "backend_folder": "unmasked",
+    "layers_folder": "unmasked",
+    "public_frontend": "masked",
+    "public_api": "sanitized"
+  },
+  "rule": "Layer names, logic, file paths, and source mapping are visible internally to the owner and admin audit. Public UI must still mask internal layer names unless explicitly approved.",
+  "layers": [
+    {
+      "id": 1,
+      "internal_name": "Temporal Decision Logic",
+      "short_name": "TDL",
+      "arabic_name": "منطق البعد الزمني",
+      "visibility": "public_allowed_and_owner_internal",
+      "logic": "Determines the governing temporal bias and separates short, medium, and long-horizon decision context.",
+      "primary_output": "governing_decision_bias"
+    },
+    {
+      "id": 2,
+      "internal_name": "Nawaf Meet Point",
+      "short_name": "NMP",
+      "arabic_name": "نقطة التقاء نواف",
+      "visibility": "public_allowed_and_owner_internal",
+      "logic": "Extracts spatial reference zones and critical convergence levels from market structure.",
+      "primary_output": "reference_price_zone"
+    },
+    {
+      "id": 3,
+      "internal_name": "Devil's Advocate",
+      "short_name": "DEVIL_ADVOCATE",
+      "arabic_name": "محامي الشيطان",
+      "visibility": "public_allowed_and_owner_internal",
+      "logic": "Tests the opposite case, objections, invalidation risks, and confidence blockers before final approval.",
+      "primary_output": "counter_argument_risk"
+    },
+    {
+      "id": 4,
+      "internal_name": "Nawaf Golden Alignment",
+      "short_name": "GOLDEN_ALIGNMENT",
+      "arabic_name": "إشارة نواف الذهبية",
+      "visibility": "public_allowed_and_owner_internal",
+      "logic": "Detects multi-layer agreement and publishes the golden alignment state when internal coherence is high.",
+      "primary_output": "golden_alignment_state"
+    },
+    {
+      "id": 5,
+      "internal_name": "Data Freshness And Source Integrity",
+      "short_name": "DATA_INTEGRITY",
+      "arabic_name": "سلامة وحداثة البيانات",
+      "visibility": "owner_internal_only",
+      "logic": "Checks whether the decision is based on fresh, connected, and reliable data sources.",
+      "primary_output": "data_freshness_status"
+    },
+    {
+      "id": 6,
+      "internal_name": "Live Market Feed Bridge",
+      "short_name": "LIVE_MARKET_FEED",
+      "arabic_name": "جسر الأسعار والبيانات الحية",
+      "visibility": "owner_internal_only",
+      "logic": "Connects live price, selected asset, and market feed into visible decision panels.",
+      "primary_output": "live_price_context"
+    },
+    {
+      "id": 7,
+      "internal_name": "Institutional Positioning Context",
+      "short_name": "INSTITUTIONAL_CONTEXT",
+      "arabic_name": "السياق المؤسسي وتموضع الفئات",
+      "visibility": "owner_internal_only",
+      "logic": "Reads institutional positioning context and maps it into supportive, neutral, or conflicting decision context.",
+      "primary_output": "institutional_context_state"
+    },
+    {
+      "id": 8,
+      "internal_name": "Macro And Dollar Pressure",
+      "short_name": "MACRO_USD_PRESSURE",
+      "arabic_name": "ضغط الدولار والمشهد الكلي",
+      "visibility": "owner_internal_only",
+      "logic": "Evaluates dollar pressure, macro events, and economic drivers against the selected asset.",
+      "primary_output": "macro_pressure_state"
+    },
+    {
+      "id": 9,
+      "internal_name": "Volatility And Risk Pressure",
+      "short_name": "VOLATILITY_RISK",
+      "arabic_name": "التذبذب وضغط المخاطر",
+      "visibility": "owner_internal_only",
+      "logic": "Measures volatility, pressure, shock risk, and whether the environment is calm or dangerous.",
+      "primary_output": "risk_pressure_score"
+    },
+    {
+      "id": 10,
+      "internal_name": "Liquidity And Market State",
+      "short_name": "LIQUIDITY_MARKET_STATE",
+      "arabic_name": "السيولة وحالة السوق",
+      "visibility": "owner_internal_only",
+      "logic": "Determines market liquidity, market condition, and whether current range supports follow-up.",
+      "primary_output": "market_state"
+    },
+    {
+      "id": 11,
+      "internal_name": "Scenario Engine",
+      "short_name": "SCENARIO_ENGINE",
+      "arabic_name": "محرك السيناريوهات",
+      "visibility": "owner_internal_only",
+      "logic": "Builds the base, optimistic, and conservative scenario paths and assigns scenario probabilities.",
+      "primary_output": "scenario_distribution"
+    },
+    {
+      "id": 12,
+      "internal_name": "Reference Levels Engine",
+      "short_name": "REFERENCE_LEVELS",
+      "arabic_name": "محرك المستويات المرجعية",
+      "visibility": "owner_internal_only",
+      "logic": "Calculates upper, pivot, and lower reference levels and distance from current price.",
+      "primary_output": "reference_levels_map"
+    },
+    {
+      "id": 13,
+      "internal_name": "Horizon Strength Engine",
+      "short_name": "HORIZON_STRENGTH",
+      "arabic_name": "قوة الأفق الزمني",
+      "visibility": "owner_internal_only",
+      "logic": "Scores short, medium, and long horizon strength and clarity.",
+      "primary_output": "horizon_strength_scores"
+    },
+    {
+      "id": 14,
+      "internal_name": "Decision Quality Engine",
+      "short_name": "DECISION_QUALITY",
+      "arabic_name": "جودة القرار",
+      "visibility": "owner_internal_only",
+      "logic": "Scores data clarity, model quality, source reliability, scenario consistency, and final quality.",
+      "primary_output": "decision_quality_score"
+    },
+    {
+      "id": 15,
+      "internal_name": "Alerts And Settings Orchestrator",
+      "short_name": "ALERTS_SETTINGS",
+      "arabic_name": "منسق الإعدادات والإنذارات",
+      "visibility": "owner_internal_only",
+      "logic": "Controls notification settings, alert preferences, and user-facing operational alerts.",
+      "primary_output": "alerts_settings_state"
+    },
+    {
+      "id": 16,
+      "internal_name": "Entitlement And Account Gate",
+      "short_name": "ENTITLEMENT_ACCOUNT",
+      "arabic_name": "بوابة الحساب والصلاحيات والباقة",
+      "visibility": "owner_internal_only",
+      "logic": "Controls package, trial state, permissions, account access, and feature availability.",
+      "primary_output": "account_entitlement_state"
+    }
+  ]
+}

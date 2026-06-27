@@ -109,3 +109,10 @@ _archive*/
 **/_archive*/
 _archive_*/
 **/_archive_*/
+
+# ---------- DEV-002H generated frontend artifacts ----------
+_next/
+**/_next/
+**/_next/static/
+**/.next/
+**/out/
