@@ -1,0 +1,47 @@
+{
+  "ok": true,
+  "engine": "TDL_RESEARCH_LAB_C",
+  "status": "READY_WAITING_FOR_COT_IMPORT",
+  "created_at": "2026-06-07T20:00:36.717481+00:00",
+  "day_logic_version": "TDL_WEEKLY_DAY_LOGIC_V2",
+  "day_logic": {
+    "monday": "ASSET_MANAGERS",
+    "tuesday": "LEVERAGED_FUNDS",
+    "wednesday": "LEVERAGED_FUNDS",
+    "thursday": "LEVERAGED_FUNDS",
+    "friday": "ASSET_MANAGERS",
+    "saturday": "LEVERAGED_FUNDS_CRYPTO_ONLY",
+    "sunday": "LEVERAGED_FUNDS_CRYPTO_ONLY"
+  },
+  "models": {
+    "M": {
+      "M1": "Asset Managers فقط",
+      "M2": "Asset Managers + Other Reportables",
+      "M3": "Asset Managers + Nonreportable",
+      "M4": "Asset Managers + Other Reportables + Nonreportable"
+    },
+    "S": {
+      "S1": "Leveraged Funds فقط",
+      "S2": "Leveraged Funds + Dealer/Intermediary",
+      "S3": "Leveraged Funds - Dealer/Intermediary",
+      "S4": "Leveraged Funds مع Dealer كفلتر تأكيد",
+      "S5": "Leveraged Funds مع Dealer كفلتر رفض"
+    },
+    "T": {
+      "T1": "منطق الأيام الجديد V2",
+      "T2": "Asset Managers طوال الأسبوع",
+      "T3": "Leveraged Funds طوال الأسبوع",
+      "T4": "Conflict Logic",
+      "T5": "Dealer Timing Filter"
+    }
+  },
+  "message_ar": "تم تركيب مختبر TDL. الخطوة التالية هي استيراد ملفات COT التاريخية وربطها بمحرك الاختبار.",
+  "metrics_ready": [
+    "Direction Authority",
+    "Temporal Authority",
+    "Conflict Win Rate",
+    "Dealer Influence",
+    "Weekly Structure",
+    "1W/2W/4W/8W/12W Horizons"
+  ]
+}

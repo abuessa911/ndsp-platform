@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <title>TDL Research Lab — DSP</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body{margin:0;background:#080b10;color:#f5f1df;font-family:Arial,Tahoma,sans-serif}
+    .wrap{max-width:1180px;margin:auto;padding:28px}
+    .card{background:rgba(255,255,255,.05);border:1px solid rgba(212,175,55,.35);border-radius:18px;padding:20px;margin:16px 0}
+    h1,h2{color:#d4af37}.muted{color:#b8b8b8}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+    .pill{padding:12px;border-radius:14px;background:rgba(0,188,212,.08);border:1px solid rgba(0,188,212,.25)}
+    button{background:#d4af37;color:#050505;border:0;border-radius:12px;padding:12px 18px;font-weight:700;cursor:pointer}
+    pre{white-space:pre-wrap;background:#05070a;border-radius:14px;padding:16px;overflow:auto;border:1px solid rgba(255,255,255,.12);direction:ltr;text-align:left}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>TDL Research Lab</h1>
+    <p class="muted">مختبر اختبار فرضيات TDL التاريخية — معزول عن الإنتاج.</p>
+
+    <div class="card">
+      <h2>منطق الأيام الحالي — V2</h2>
+      <div class="grid">
+        <div class="pill">الاثنين: مدراء الأصول</div>
+        <div class="pill">الثلاثاء: صناديق الرافعة</div>
+        <div class="pill">الأربعاء: صناديق الرافعة</div>
+        <div class="pill">الخميس: صناديق الرافعة</div>
+        <div class="pill">الجمعة: مدراء الأصول</div>
+        <div class="pill">السبت/الأحد: كريبتو فقط — صناديق الرافعة</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>مختبرات الاختبار</h2>
+      <div class="grid">
+        <div class="pill">Direction Authority Lab</div>
+        <div class="pill">Temporal Authority Lab</div>
+        <div class="pill">Conflict Lab</div>
+        <div class="pill">Dealer Influence Lab</div>
+        <div class="pill">Weekly Structure Lab</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>حالة المحرك</h2>
+      <button onclick="loadLab()">تحديث الحالة</button>
+      <pre id="out">اضغط تحديث الحالة...</pre>
+    </div>
+  </div>
+
+<script>
+async function loadLab(){
+  const out = document.getElementById('out');
+  out.textContent = 'جار التحميل...';
+  try {
+    const r = await fetch('/research/tdl-lab-latest.json?v=' + Date.now());
+    const j = await r.json();
+    out.textContent = JSON.stringify(j, null, 2);
+  } catch(e) {
+    out.textContent = 'تعذر تحميل حالة المختبر: ' + e.message;
+  }
+}
+loadLab();
+</script>
+</body>
+</html>

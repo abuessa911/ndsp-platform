@@ -116,3 +116,10 @@ _next/
 **/_next/static/
 **/.next/
 **/out/
+
+# ---------- DEV-002J runtime and local artifacts ----------
+*.env
+runtime/
+backend/runtime/
+ndsp_checkout_plans_package/
+run_local_ndsp.py

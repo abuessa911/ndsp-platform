@@ -1,0 +1,8 @@
+[
+  {
+    "file": "research/nmp-lab/data/NDIP_MT4_CANDLES_ETHUSD_M30.csv",
+    "result": "research/nmp-lab/results/NDIP_MT4_CANDLES_ETHUSD_M30_nmp_lab_results.csv",
+    "summary": "research/nmp-lab/results/NDIP_MT4_CANDLES_ETHUSD_M30_nmp_lab_summary.csv",
+    "ok": true
+  }
+]
