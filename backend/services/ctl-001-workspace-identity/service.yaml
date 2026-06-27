@@ -1,0 +1,16 @@
+service_id: CTL-001
+service_name: Workspace Identity
+product: SYS-001
+domain: Operating System
+owner: NDSP Engineering
+version: 1.0.0
+status: active
+release: REL-1.1
+sprint: SPR-002
+task: TSK-2.1B
+host: 127.0.0.1
+port: 9081
+health_endpoint: /health
+type: infrastructure_service
+framework: ENG-001
+systemd: ndsp-ctl-001-workspace-identity.service

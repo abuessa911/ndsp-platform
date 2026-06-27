@@ -76,3 +76,14 @@ Added:
 - framework tests
 - ADR-0003
 - ENG-001 service registry entry
+
+## 20260627_232733
+
+TSK-2.1B created CTL-001 Workspace Identity.
+
+Added:
+- services/ctl-001-workspace-identity
+- /identity endpoint
+- systemd service ndsp-ctl-001-workspace-identity.service
+- CTL-001 API contract
+- CTL-001 service registry entry

@@ -1,0 +1,12 @@
+{
+  "name": "ctl-001-workspace-identity",
+  "version": "1.0.0",
+  "description": "CTL-001 Workspace Identity Service for NDSP-OS",
+  "main": "main.cjs",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node main.cjs",
+    "test": "node tests/ctl001.test.cjs"
+  },
+  "dependencies": {}
+}

@@ -30,3 +30,9 @@ NDSP Bot consumes Completed Decision API only.
 | ID | Service | Port | Owner | Status |
 |---|---|---:|---|---|
 | ENG-001 | NDSP Service Framework | N/A | NDSP Engineering | Active / MVF |
+
+## NDSP-OS Services
+
+| ID | Service | Port | Owner | Status |
+|---|---|---:|---|---|
+| CTL-001 | Workspace Identity | 9081 | NDSP Engineering | Active |
