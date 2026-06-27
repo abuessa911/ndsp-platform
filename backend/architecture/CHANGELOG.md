@@ -100,3 +100,16 @@ Added:
 - ndsp validate
 - ndsp doctor
 - ndsp registry
+
+## 20260628_000901
+
+DEV-002 introduced repository hygiene.
+
+Added:
+- .gitignore policy
+- ADR-0005 repository hygiene
+- DEV-002 repository hygiene contract
+
+Rule:
+- Do not use git add .
+- Add only intentional paths.
