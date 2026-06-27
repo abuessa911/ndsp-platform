@@ -1,0 +1,17 @@
+[Unit]
+Description=NDSP BOT-001 NDSP Bot Execution Service
+After=network.target
+
+[Service]
+Type=simple
+User=nawaf511
+WorkingDirectory=/home/nawaf511/empire-core-new/backend/services/bot_execution
+Environment=NODE_ENV=production
+Environment=NDSP_PORT=9080
+Environment=NDSP_HOST=127.0.0.1
+ExecStart=/usr/bin/node /home/nawaf511/empire-core-new/backend/services/bot_execution/main.cjs
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

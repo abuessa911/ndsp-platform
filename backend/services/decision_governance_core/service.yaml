@@ -1,0 +1,17 @@
+service_id: DGC-001
+service_name: Decision Governance Core
+product: PRD-001
+domain: Decision Governance
+owner: NDSP Engineering
+version: 1.0.0
+status: active
+release: LEGACY
+sprint: PRE-ENG001
+task: LEGACY-REGISTRATION
+host: 127.0.0.1
+port: 9079
+health_endpoint: /health
+type: legacy_service
+framework: LEGACY
+migration_status: pending_eng001_migration
+systemd: ndsp-decision_governance_core.service

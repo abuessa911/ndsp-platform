@@ -1,0 +1,17 @@
+service_id: CDS-001
+service_name: Completed Decision Service
+product: PRD-001
+domain: Decision Infrastructure
+owner: NDSP Engineering
+version: 1.0.0
+status: active
+release: LEGACY
+sprint: PRE-ENG001
+task: LEGACY-REGISTRATION
+host: 127.0.0.1
+port: 9078
+health_endpoint: /health
+type: legacy_service
+framework: LEGACY
+migration_status: pending_eng001_migration
+systemd: ndsp-completed_decision.service

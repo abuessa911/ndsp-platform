@@ -36,3 +36,9 @@ NDSP Bot consumes Completed Decision API only.
 | ID | Service | Port | Owner | Status |
 |---|---|---:|---|---|
 | CTL-001 | Workspace Identity | 9081 | NDSP Engineering | Active |
+
+| CDS-001 | Completed Decision Service | 9078 | NDSP Engineering | Legacy Active |
+
+| DGC-001 | Decision Governance Core | 9079 | NDSP Engineering | Legacy Active |
+
+| BOT-001 | NDSP Bot Execution Service | 9080 | NDSP Engineering | Legacy Active |

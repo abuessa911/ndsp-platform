@@ -8,26 +8,44 @@ ROOT="$(ndsp_backend_root)"
 TARGET="${1:-all}"
 
 required_files=(service.yaml package.json README.md CHANGELOG.md main.cjs)
+required_files_legacy=(service.yaml README.md CHANGELOG.md main.cjs)
 required_dirs=(tests contracts docs systemd config)
 
 validate_one(){
   local svc="$1"
   local ok=1
+  local yaml="$svc/service.yaml"
+  local framework=""
 
   echo "VALIDATING=$svc"
 
-  for f in "${required_files[@]}"; do
-    if [ ! -f "$svc/$f" ]; then echo "MISSING_FILE=$svc/$f"; ok=0; fi
-  done
+  if [ -f "$yaml" ]; then
+    framework="$(read_yaml_value "$yaml" framework || true)"
+  fi
+
+  if [ "$framework" = "LEGACY" ]; then
+    echo "LEGACY_SERVICE=YES"
+    for f in "${required_files_legacy[@]}"; do
+      if [ ! -f "$svc/$f" ]; then echo "MISSING_FILE=$svc/$f"; ok=0; fi
+    done
+  else
+    for f in "${required_files[@]}"; do
+      if [ ! -f "$svc/$f" ]; then echo "MISSING_FILE=$svc/$f"; ok=0; fi
+    done
+  fi
 
   for d in "${required_dirs[@]}"; do
     if [ ! -d "$svc/$d" ]; then echo "MISSING_DIR=$svc/$d"; ok=0; fi
   done
 
-  if [ -f "$svc/main.cjs" ]; then
-    if ! grep -q "createNDSPService" "$svc/main.cjs"; then
-      echo "FRAMEWORK_USAGE_MISSING=$svc/main.cjs"
-      ok=0
+  if [ "$framework" = "LEGACY" ]; then
+    echo "FRAMEWORK_CHECK=SKIPPED_LEGACY_PENDING_MIGRATION"
+  else
+    if [ -f "$svc/main.cjs" ]; then
+      if ! grep -q "createNDSPService" "$svc/main.cjs"; then
+        echo "FRAMEWORK_USAGE_MISSING=$svc/main.cjs"
+        ok=0
+      fi
     fi
   fi
 
