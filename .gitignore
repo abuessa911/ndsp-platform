@@ -103,3 +103,9 @@ npm run build
 *.tgz
 *.7z
 *.rar
+
+# ---------- Local archives discovered by DEV-002B ----------
+_archive*/
+**/_archive*/
+_archive_*/
+**/_archive_*/
