@@ -6,6 +6,12 @@ BACKEND="$ROOT/backend"
 TS="$(date +%Y%m%d_%H%M%S)"
 REPORT="${1:-$ROOT/backend/architecture/reports/DEV-003-PROJECT-VALIDATOR-RUN-$TS.md}"
 
+# Normalize relative report path to absolute path from repo root
+case "$REPORT" in
+  /*) ;;
+  *) REPORT="$ROOT/$REPORT" ;;
+esac
+
 mkdir -p "$(dirname "$REPORT")"
 
 log(){ echo "$*" | tee -a "$REPORT"; }
@@ -52,10 +58,11 @@ fi
 
 log "== 3) LITERAL SECRET SCAN HEAD =="
 
+# Exclude this validator file because it necessarily contains the regex patterns used to detect secrets.
 SECRET_HITS="$(
   git grep -nE \
     '[0-9]{8,10}:[A-Za-z0-9_-]{30,}|ghp_[A-Za-z0-9_]{20,}|github_pat_[A-Za-z0-9_]{20,}|sk-[A-Za-z0-9_-]{20,}|BEGIN RSA|BEGIN OPENSSH|PRIVATE KEY' \
-    HEAD || true
+    HEAD -- . ':!backend/tools/ndsp_project_validator.sh' || true
 )"
 
 if [ -n "$SECRET_HITS" ]; then
