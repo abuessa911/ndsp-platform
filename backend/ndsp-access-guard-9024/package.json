@@ -1,0 +1,12 @@
+{
+  "name": "ndsp-access-guard-9024",
+  "version": "1.0.0",
+  "private": true,
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "dependencies": {
+    "cookie": "^0.6.0",
+    "pg": "^8.13.1"
+  }
+}
