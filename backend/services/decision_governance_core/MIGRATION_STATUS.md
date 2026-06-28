@@ -1,6 +1,6 @@
 # DGC-001 Migration Status
 
-Generated: 20260628_145720
+Generated: 20260628_150611
 
 Service: DGC-001 Decision Governance Core
 Path: backend/services/decision_governance_core
