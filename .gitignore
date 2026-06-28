@@ -123,3 +123,68 @@ runtime/
 backend/runtime/
 ndsp_checkout_plans_package/
 run_local_ndsp.py
+
+
+# BEGIN NDSP ENTERPRISE HYGIENE
+
+# Runtime / generated state - repo root only
+/runtime/
+/backend/runtime/
+/backend/_backups/
+*_backups/
+*_backup/
+*_backup_*/
+quarantine/
+tmp/
+temp/
+
+# Secrets / environment files
+.env
+.env.*
+!.env.example
+!*.env.example
+!*.env.*.example
+*.pem
+*.key
+*.crt
+*.p12
+
+# Node / frontend build artifacts
+node_modules/
+**/node_modules/
+.npm/
+.next/
+.vite/
+dist/
+build/
+coverage/
+
+# Python artifacts
+venv/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+
+# Logs / temporary files
+*.log
+*.tmp
+*.bak
+*.backup
+*.old
+*.swp
+*.swo
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+
+# Local archives and delivery bundles
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+
+# END NDSP ENTERPRISE HYGIENE

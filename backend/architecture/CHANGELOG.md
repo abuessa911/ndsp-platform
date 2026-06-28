@@ -113,3 +113,12 @@ Added:
 Rule:
 - Do not use git add .
 - Add only intentional paths.
+
+## 20260628_175219 — DEV-013Z Fix Guard And Close
+
+Fixed:
+- Repo Guard false positives for .env.example files
+- Repo Guard false positive for backend/app/runtime source files
+
+Closed:
+- DEV-013 Enterprise Hardening
