@@ -3,6 +3,7 @@
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
+const { attachFrameworkStandard } = require('./framework-adapter.cjs'); // createNDSPService ENG-001 adapter
 
 const PORT = Number(process.env.NDSP_BOT_EXECUTION_PORT || 9080);
 const HOST = process.env.NDSP_BOT_EXECUTION_HOST || '127.0.0.1';
@@ -12,6 +13,13 @@ const app = express();
 app.use(helmet({ contentSecurityPolicy:false }));
 app.use(cors({ origin:true, credentials:true }));
 app.use(express.json({ limit:'1mb' }));
+
+attachFrameworkStandard(app, {
+  serviceId: 'BOT-001',
+  serviceName: 'NDSP Bot Execution Service',
+  version: '1.0.0',
+  description: 'NDSP bot execution boundary service.'
+});
 
 function disclaimer(){
   return 'NDSP Bot Execution Service is currently in DRY_RUN mode. No real trade is executed.';

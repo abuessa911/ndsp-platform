@@ -12,6 +12,6 @@ host: 127.0.0.1
 port: 9080
 health_endpoint: /health
 type: legacy_service
-framework: LEGACY
-migration_status: pending_eng001_migration
+framework: ENG-001
+migration_status: eng001_adapter_migrated
 systemd: ndsp-bot_execution.service
