@@ -133,3 +133,10 @@ Added:
 - Disabled Nginx example
 
 No live Nginx route was installed.
+
+## 20260628_193248 — DEV-015 Public Gateway Controlled Activation
+
+Closed:
+- Public read-only gateway activation
+- Unified TLS verification
+- BOT-001 and CTL-001 remain internal only
