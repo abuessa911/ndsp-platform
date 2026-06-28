@@ -1,6 +1,6 @@
 # DGC-001 — ENG-001 Adapter Contract
 
-Generated: 20260628_145440
+Generated: 20260628_145720
 
 Purpose:
 DGC-001 is migrated from LEGACY compatibility toward ENG-001 using a transitional Express adapter.
