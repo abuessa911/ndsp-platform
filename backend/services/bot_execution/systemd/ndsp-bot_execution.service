@@ -13,5 +13,6 @@ ExecStart=/usr/bin/node /home/nawaf511/empire-core-new/backend/services/bot_exec
 Restart=always
 RestartSec=3
 
+EnvironmentFile=-/home/nawaf511/empire-core-new/backend/runtime/systemd-env/core-services.env
 [Install]
 WantedBy=multi-user.target
