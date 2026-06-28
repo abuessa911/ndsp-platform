@@ -122,3 +122,14 @@ Fixed:
 
 Closed:
 - DEV-013 Enterprise Hardening
+
+## 20260628_181658 — DEV-014 Gateway Readiness
+
+Added:
+- Public gateway contract
+- Public gateway readiness registry
+- Gateway readiness tool
+- Gateway route documentation
+- Disabled Nginx example
+
+No live Nginx route was installed.
