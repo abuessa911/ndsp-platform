@@ -219,3 +219,11 @@ Added:
 - Bot execution radar preview page
 - Premium experience launchpad
 - RC1 WOW radar UI spec
+
+## 20260629_093055 — DEV-018B Public Privacy Reset
+
+Changed:
+- Removed rejected WOW radar canary from public surface.
+- Removed bot preview and launchpad from public platform.
+- Added NDSP public platform bot privacy boundary.
+- Confirmed public NDSP must not mention private Telegram bot.
