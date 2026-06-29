@@ -1,26 +1,24 @@
 # RC1 Public Surface Contract
 
-## Allowed Public Routes
+## Allowed Public API Routes
 
-Only the following API routes are public in RC1:
+Only these routes are public in RC1:
 
 1. GET /api/completed/latest
 2. GET /api/governance/health
 
 ## Blocked Public Write Routes
 
-The following routes must remain blocked from the public gateway:
+These routes must remain blocked from the public gateway:
 
 1. POST /api/completed/ingest
 2. POST /api/governance/submit
 3. POST /api/governance/evaluate
 
-## Internal Services
+## Internal-Only Services
 
-The following services are not public execution surfaces:
-
-- CTL-001
-- BOT-001
+- CTL-001 Workspace Identity
+- BOT-001 Bot Execution
 
 ## Bot Rule
 

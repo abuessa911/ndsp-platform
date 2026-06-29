@@ -181,3 +181,14 @@ Closed:
 - TLS SAN verification
 - Service health snapshot
 - Production snapshot registry
+
+## 20260629_084803 — DEV-017 Auto Final Production Smoke + Snapshot
+
+Closed:
+- Final RC1 production smoke test
+- Public read-only API verification
+- Public write block verification
+- TLS SAN verification
+- Service health verification
+- Production snapshot final registry
+- RC1 public surface contract
