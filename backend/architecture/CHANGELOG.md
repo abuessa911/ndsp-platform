@@ -211,3 +211,11 @@ Added:
 - Bot execution radar preview page
 - Premium experience launchpad
 - RC1 WOW radar UI spec
+
+## 20260629_091945 — DEV-018 WOW Radar UI Canary
+
+Added:
+- Platform sovereign radar command page
+- Bot execution radar preview page
+- Premium experience launchpad
+- RC1 WOW radar UI spec

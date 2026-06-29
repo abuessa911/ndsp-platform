@@ -1,6 +1,6 @@
 # NDSP RC1 WOW Radar UI Spec
 
-Generated: 20260629_091747
+Generated: 20260629_091945
 
 ## Direction
 
