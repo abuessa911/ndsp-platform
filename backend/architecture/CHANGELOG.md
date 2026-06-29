@@ -203,3 +203,11 @@ Closed:
 - Service health verification
 - Production snapshot final registry
 - RC1 public surface contract
+
+## 20260629_091747 — DEV-018 WOW Radar UI Canary
+
+Added:
+- Platform sovereign radar command page
+- Bot execution radar preview page
+- Premium experience launchpad
+- RC1 WOW radar UI spec

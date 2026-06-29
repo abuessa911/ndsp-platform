@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="theme-color" content="#020204"/>
+<title>NDSP Bot — غرفة التنفيذ الجاف</title>
+
+<style>
+:root {
+  --bg: #020204;
+  --line: rgba(255,255,255,.11);
+  --text: #F4F1E8;
+  --muted: #A8A29A;
+  --gold: #D4AF37;
+  --green: #39D98A;
+  --yellow: #FFD166;
+  --blue: #7AB7FF;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 75% 10%, rgba(57,217,138,.14), transparent 31%),
+    radial-gradient(circle at 10% 25%, rgba(212,175,55,.13), transparent 32%),
+    #020204;
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Tahoma, Arial, sans-serif;
+}
+
+body::before {
+  content: "EXECUTION LAYER";
+  position: fixed;
+  left: -80px;
+  bottom: 13%;
+  font-size: 86px;
+  font-weight: 1000;
+  letter-spacing: 9px;
+  color: rgba(57,217,138,.035);
+  transform: rotate(18deg);
+  pointer-events: none;
+}
+
+.wrap { max-width: 1380px; margin: auto; padding: 22px; }
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr .85fr;
+  gap: 18px;
+}
+
+.card {
+  border: 1px solid var(--line);
+  border-radius: 30px;
+  background: linear-gradient(180deg, rgba(13,15,22,.86), rgba(4,5,8,.94));
+  box-shadow: 0 26px 90px rgba(0,0,0,.6);
+  padding: 21px;
+}
+
+.k {
+  color: var(--green);
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 1000;
+}
+
+h1 {
+  font-size: clamp(32px, 5.5vw, 66px);
+  line-height: 1;
+  margin: 10px 0;
+}
+
+p { color: var(--muted); line-height: 1.9; }
+
+.pills, .nav {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.pill, .nav a {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 10px 13px;
+  background: rgba(255,255,255,.045);
+  font-weight: 1000;
+  font-size: 12px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.ok { color: var(--green); }
+.gold { color: var(--gold); }
+.warn { color: var(--yellow); }
+
+.rings {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.ring {
+  min-height: 235px;
+  border: 1px solid var(--line);
+  border-radius: 26px;
+  background: radial-gradient(circle, rgba(57,217,138,.10), rgba(255,255,255,.025) 48%, rgba(0,0,0,.18));
+  display: grid;
+  place-items: center;
+}
+
+.core {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: conic-gradient(var(--c, var(--green)) calc(var(--p, 0) * 1%), rgba(255,255,255,.08) 0);
+  display: grid;
+  place-items: center;
+  position: relative;
+  box-shadow: 0 0 54px rgba(57,217,138,.14);
+}
+
+.core::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border-radius: 50%;
+  background: #05060A;
+  border: 1px solid rgba(255,255,255,.1);
+}
+
+.val { position: relative; text-align: center; }
+.val b { font-size: 34px; display: block; }
+.val span { font-size: 11px; color: var(--muted); }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.box {
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: rgba(255,255,255,.035);
+  padding: 14px;
+  min-height: 112px;
+}
+
+.box span { color: var(--muted); font-size: 12px; }
+.box b { display: block; font-size: 21px; margin-top: 10px; }
+
+.step {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 14px;
+  background: rgba(255,255,255,.035);
+  margin-bottom: 12px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 20px var(--green);
+  display: inline-block;
+  margin-left: 8px;
+}
+
+@media (max-width: 980px) {
+  .hero, .rings, .grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+  <section class="hero">
+    <div class="card">
+      <div class="k">NDSP Bot Execution Cockpit</div>
+      <h1>غرفة التنفيذ الجاف للبوت</h1>
+      <p>
+        البوت لا يحلل ولا يصنع قرارًا. يستقبل قرارًا مكتملًا من منصة NDSP فقط،
+        ثم يعرض جاهزية التنفيذ بشكل آمن ومحكوم.
+      </p>
+
+      <div class="pills">
+        <div class="pill ok">DRY_RUN مفعل</div>
+        <div class="pill gold">Completed Decision Only</div>
+        <div class="pill warn">لا توجد أوامر مباشرة</div>
+      </div>
+
+      <div class="rings">
+        <div class="ring"><div class="core" style="--p:92;--c:var(--green)"><div class="val"><b>92</b><span>جاهزية الجسر</span></div></div></div>
+        <div class="ring"><div class="core" style="--p:81;--c:var(--gold)"><div class="val"><b>81</b><span>سلامة الحزمة</span></div></div></div>
+        <div class="ring"><div class="core" style="--p:100;--c:var(--blue)"><div class="val"><b>ON</b><span>وضع الحماية</span></div></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="k">Execution Separation</div>
+      <h1 style="font-size:38px">الفصل الصارم</h1>
+
+      <div class="step"><b><i class="dot"></i>منصة NDSP</b><span>تصنع القرار المكتمل</span></div>
+      <div class="step"><b><i class="dot"></i>Completed Decision API</b><span>مصدر الحقيقة الوحيد</span></div>
+      <div class="step"><b><i class="dot"></i>NDSP Bot</b><span>تنفيذ فقط / جاف حاليًا</span></div>
+      <div class="step"><b><i class="dot"></i>Devil’s Advocate</b><span>آخر بوابة حماية</span></div>
+
+      <div class="nav">
+        <a href="/NDSP_Radar_Command.html">رادارات المنصة</a>
+        <a href="/NDSP_Experience_Launchpad.html">لوحة التجربة</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="grid">
+    <div class="box"><span>الحالة</span><b id="health">فحص...</b></div>
+    <div class="box"><span>آخر قرار مكتمل</span><b id="latest">—</b></div>
+    <div class="box"><span>حالة الحوكمة</span><b id="gov">فحص...</b></div>
+    <div class="box"><span>رسالة الحماية</span><b>Execution Sanitized</b></div>
+  </section>
+</div>
+
+<script>
+async function jsonFetch(url) {
+  try {
+    const response = await fetch(url, { cache: "no-store" });
+    return {
+      ok: response.ok,
+      code: response.status,
+      data: response.ok ? await response.json() : null
+    };
+  } catch (error) {
+    return { ok: false, code: 0, data: null };
+  }
+}
+
+(async () => {
+  const latest = await jsonFetch("https://api.ndsp.app/api/completed/latest");
+  const governance = await jsonFetch("https://api.ndsp.app/api/governance/health");
+
+  document.getElementById("health").textContent =
+    latest.ok && governance.ok ? "متصل" : "تحقق مطلوب";
+
+  document.getElementById("latest").textContent =
+    latest.ok ? "متاح" : "غير متاح";
+
+  document.getElementById("gov").textContent =
+    governance.ok ? "سليم" : "غير متاح";
+})();
+</script>
+</body>
+</html>

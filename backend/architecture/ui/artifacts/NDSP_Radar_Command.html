@@ -1,0 +1,657 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="theme-color" content="#020204"/>
+<title>NDSP — غرفة الرادارات السيادية</title>
+
+<style>
+:root {
+  --bg: #020204;
+  --panel: #090A0F;
+  --panel2: #11131B;
+  --line: rgba(255,255,255,.11);
+  --text: #F4F1E8;
+  --muted: #A9A29A;
+  --gold: #D4AF37;
+  --gold2: #FFE08A;
+  --green: #39D98A;
+  --yellow: #FFD166;
+  --red: #FF4D5E;
+  --blue: #7AB7FF;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Tahoma, Arial, sans-serif;
+  background:
+    radial-gradient(circle at 18% 8%, rgba(212,175,55,.16), transparent 30%),
+    radial-gradient(circle at 86% 18%, rgba(122,183,255,.12), transparent 31%),
+    linear-gradient(180deg, #020204, #06070C 46%, #020204);
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "HUNTER_KSA1";
+  position: fixed;
+  right: -70px;
+  bottom: 9%;
+  font-size: 86px;
+  font-weight: 1000;
+  letter-spacing: 9px;
+  color: rgba(212,175,55,.035);
+  transform: rotate(-18deg);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+a { color: inherit; text-decoration: none; }
+
+.wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 1480px;
+  margin: auto;
+  padding: 22px;
+}
+
+.top {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 16px;
+  align-items: stretch;
+}
+
+.card {
+  border: 1px solid var(--line);
+  border-radius: 30px;
+  background: linear-gradient(180deg, rgba(15,17,25,.86), rgba(5,6,10,.93));
+  box-shadow: 0 28px 90px rgba(0,0,0,.62);
+  padding: 20px;
+  overflow: hidden;
+  position: relative;
+  backdrop-filter: blur(16px);
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent, rgba(255,255,255,.035), transparent);
+  transform: translateX(-120%);
+  animation: sheen 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes sheen {
+  0%, 58% { transform: translateX(-120%); }
+  100% { transform: translateX(120%); }
+}
+
+.kicker {
+  color: var(--gold2);
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+h1 {
+  font-size: clamp(32px, 5.8vw, 72px);
+  line-height: 1;
+  margin: 10px 0 8px;
+}
+
+h2 {
+  margin: 0 0 14px;
+  font-size: 23px;
+}
+
+p {
+  color: var(--muted);
+  line-height: 1.85;
+  margin: 0;
+}
+
+.controls { display: flex; flex-direction: column; gap: 12px; }
+.row { display: flex; gap: 10px; flex-wrap: wrap; }
+
+select, button {
+  background: #07080C;
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 17px;
+  padding: 12px 13px;
+  font-weight: 900;
+  outline: none;
+}
+
+button { cursor: pointer; }
+
+button.primary {
+  background: linear-gradient(135deg, rgba(212,175,55,.30), rgba(212,175,55,.08));
+  border-color: rgba(212,175,55,.42);
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 9px 12px;
+  background: rgba(255,255,255,.045);
+  font-weight: 900;
+  font-size: 12px;
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 18px var(--green);
+}
+
+.ticker {
+  margin: 18px 0;
+  border: 1px solid rgba(212,175,55,.20);
+  border-radius: 22px;
+  background: rgba(212,175,55,.06);
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 10px 0;
+}
+
+.ticker span {
+  display: inline-block;
+  animation: move 32s linear infinite;
+  color: #EBDDAD;
+  font-weight: 900;
+}
+
+@keyframes move {
+  from { transform: translateX(-20%); }
+  to { transform: translateX(100%); }
+}
+
+.main {
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap: 18px;
+}
+
+.radarGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.radar {
+  min-height: 278px;
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at center, rgba(212,175,55,.11), rgba(255,255,255,.025) 46%, rgba(0,0,0,.22));
+  display: grid;
+  place-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.radar canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: .74;
+}
+
+.core {
+  width: 158px;
+  height: 158px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  position: relative;
+  background: conic-gradient(var(--c, var(--gold)) calc(var(--p, 0) * 1%), rgba(255,255,255,.08) 0);
+  box-shadow: 0 0 56px rgba(212,175,55,.18);
+}
+
+.core::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border-radius: 50%;
+  background: #05060A;
+  border: 1px solid rgba(255,255,255,.1);
+}
+
+.val { position: relative; text-align: center; }
+.val b { display: block; font-size: 36px; }
+.val span { font-size: 11px; color: var(--muted); }
+
+.rlabel {
+  position: absolute;
+  bottom: 15px;
+  left: 12px;
+  right: 12px;
+  text-align: center;
+}
+
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.kpi {
+  border: 1px solid var(--line);
+  border-radius: 23px;
+  background: rgba(255,255,255,.035);
+  padding: 14px;
+  min-height: 108px;
+}
+
+.kpi .l { color: var(--muted); font-size: 12px; }
+.kpi .v { font-size: 22px; font-weight: 1000; margin-top: 10px; }
+.kpi .n { color: var(--muted); font-size: 12px; margin-top: 7px; line-height: 1.55; }
+
+.levels {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.level {
+  border: 1px solid rgba(212,175,55,.2);
+  border-radius: 20px;
+  background: rgba(212,175,55,.045);
+  padding: 13px;
+  text-align: center;
+}
+
+.level span { color: var(--muted); font-size: 12px; }
+.level b { display: block; font-size: 20px; margin-top: 7px; }
+
+.lanes { display: grid; gap: 12px; margin-top: 16px; }
+
+.lane {
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 14px;
+  background: rgba(255,255,255,.035);
+}
+
+.ltop { display: flex; justify-content: space-between; gap: 10px; }
+
+.bar {
+  height: 10px;
+  background: rgba(255,255,255,.08);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-top: 12px;
+}
+
+.bar i {
+  display: block;
+  height: 100%;
+  width: var(--w);
+  background: linear-gradient(90deg, var(--gold), var(--gold2));
+  border-radius: 999px;
+}
+
+.adv { display: none; }
+.advanced .adv { display: block; }
+
+.advGrid {
+  display: none;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.advanced .advGrid { display: grid; }
+
+.footer {
+  margin-top: 18px;
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 26px;
+  background: rgba(255,255,255,.035);
+  padding: 14px;
+}
+
+.nav { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.nav a {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 10px 12px;
+  background: rgba(255,255,255,.04);
+  font-weight: 900;
+  font-size: 12px;
+}
+
+@media (max-width: 1000px) {
+  .top, .main { grid-template-columns: 1fr; }
+  .radarGrid, .kpis, .advGrid { grid-template-columns: 1fr; }
+  .levels { grid-template-columns: 1fr; }
+  .footer { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+  <section class="top">
+    <div class="card">
+      <div class="kicker">NDSP Sovereign Radar Room</div>
+      <h1>غرفة الرادارات السيادية</h1>
+      <p>
+        تجربة مؤسسية مبهرة: رادارات قرار، مخاطر، اتساق، مستويات مرجعية، وسياق سوق.
+        دعم قرار فقط — لا توصية مالية ولا أمر تنفيذ.
+      </p>
+    </div>
+
+    <div class="card controls">
+      <div class="row">
+        <select id="symbol">
+          <option>BTCUSDT</option>
+          <option>ETHUSDT</option>
+          <option>XAUUSD</option>
+          <option>DXY</option>
+          <option>USOIL</option>
+          <option>UKOIL</option>
+        </select>
+        <button class="primary" id="refresh">تحديث مباشر</button>
+        <button id="mode">متقدم</button>
+      </div>
+
+      <span class="pill">
+        <i class="dot"></i>
+        <b id="conn">فحص الاتصال...</b>
+      </span>
+
+      <p>Beginner-first مع وضع متقدم، بدون كشف الطبقات المحمية.</p>
+    </div>
+  </section>
+
+  <div class="ticker">
+    <span>
+      NDSP · Decision Support Only · رادارات سيادية · طبقات محمية · محامي الشيطان آخر بوابة · منصة منفصلة عن بوت التنفيذ ·
+    </span>
+  </div>
+
+  <main class="main">
+    <section class="card">
+      <h2>رادارات القرار</h2>
+
+      <div class="radarGrid">
+        <div class="radar">
+          <canvas></canvas>
+          <div class="core" id="qualityRing" style="--p:0;--c:var(--gold)">
+            <div class="val">
+              <b id="quality">—</b>
+              <span>جودة القرار</span>
+            </div>
+          </div>
+          <div class="rlabel">
+            <span class="pill"><i class="dot"></i><b id="state">بانتظار البيانات</b></span>
+          </div>
+        </div>
+
+        <div class="radar">
+          <canvas></canvas>
+          <div class="core" id="riskRing" style="--p:0;--c:var(--yellow)">
+            <div class="val">
+              <b id="riskScore">—</b>
+              <span>رادار المخاطر</span>
+            </div>
+          </div>
+          <div class="rlabel">
+            <span class="pill">
+              <i class="dot" style="background:var(--yellow);box-shadow:0 0 18px var(--yellow)"></i>
+              <b id="riskLabel">حذر</b>
+            </span>
+          </div>
+        </div>
+
+        <div class="radar">
+          <canvas></canvas>
+          <div class="core" id="syncRing" style="--p:0;--c:var(--blue)">
+            <div class="val">
+              <b id="syncScore">—</b>
+              <span>اتساق السياق</span>
+            </div>
+          </div>
+          <div class="rlabel">
+            <span class="pill">
+              <i class="dot" style="background:var(--blue);box-shadow:0 0 18px var(--blue)"></i>
+              <b>Context Sync</b>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="kpis">
+        <div class="kpi"><div class="l">الأصل المختار</div><div class="v" id="kSymbol">—</div><div class="n">مرتبط بمركز القرار.</div></div>
+        <div class="kpi"><div class="l">السعر الحي</div><div class="v" id="price">—</div><div class="n">يعرض عند توفر المصدر.</div></div>
+        <div class="kpi"><div class="l">السياق الاتجاهي</div><div class="v" id="direction">—</div><div class="n">قراءة سياقية فقط.</div></div>
+        <div class="kpi"><div class="l">أفق المتابعة</div><div class="v" id="horizon">—</div><div class="n">أفق القرار الحاكم.</div></div>
+      </div>
+
+      <div class="advGrid adv">
+        <div class="kpi"><div class="l">مصدر القرار</div><div class="v" id="sourceMode">—</div><div class="n">إظهار محدود.</div></div>
+        <div class="kpi"><div class="l">سبب الحذر</div><div class="v" id="caution">—</div><div class="n">رسالة مبسطة.</div></div>
+        <div class="kpi"><div class="l">آخر تحديث</div><div class="v" id="updated">—</div><div class="n">وقت الواجهة.</div></div>
+      </div>
+    </section>
+
+    <aside class="card">
+      <h2>خريطة المستويات المرجعية</h2>
+
+      <div class="levels">
+        <div class="level"><span>مراقبة</span><b id="activation">—</b></div>
+        <div class="level"><span>وصول</span><b id="arrival">—</b></div>
+        <div class="level"><span>مراجعة</span><b id="review">—</b></div>
+        <div class="level"><span>إلغاء</span><b id="invalid">—</b></div>
+      </div>
+
+      <h2 style="margin-top:20px">مسار الحوكمة</h2>
+
+      <div class="lanes">
+        <div class="lane"><div class="ltop"><b>TDL</b><span>النمط الحاكم</span></div><div class="bar"><i style="--w:86%"></i></div></div>
+        <div class="lane"><div class="ltop"><b>NMP</b><span>منطقة التقاء</span></div><div class="bar"><i style="--w:78%"></i></div></div>
+        <div class="lane"><div class="ltop"><b>زخم + مخاطر</b><span>فلترة قبل القرار</span></div><div class="bar"><i style="--w:72%"></i></div></div>
+        <div class="lane"><div class="ltop"><b>محامي الشيطان</b><span>آخر بوابة حماية</span></div><div class="bar"><i style="--w:64%"></i></div></div>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="footer">
+    <div>
+      <b>NDSP — منصة نواف لدعم القرار</b>
+      <p>Decision Support Only · ليس توصية مالية · ليس أمر تنفيذ · الطبقات المحمية لا تُكشف.</p>
+    </div>
+
+    <nav class="nav">
+      <a href="/NDSP_Command_Center.html">مركز القرار</a>
+      <a href="/NDSP_Asset_View.html">قراءة السوق</a>
+      <a href="/NDSP_Daily_Brief.html">اليوميات</a>
+      <a href="/NDSP_Bot_Execution_Radar_Preview.html">واجهة البوت</a>
+    </nav>
+  </footer>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const fmt = value => value === undefined || value === null || value === "" ? "—" : String(value);
+
+const num = value => {
+  const parsed = Number(String(value ?? "").replace(/,/g, ""));
+  return Number.isFinite(parsed) ? parsed : null;
+};
+
+const pct = value => Math.max(0, Math.min(100, Number(value) || 0));
+
+function ring(id, value, color) {
+  $(id).style.setProperty("--p", pct(value));
+  if (color) $(id).style.setProperty("--c", color);
+}
+
+function draw(canvas) {
+  const ctx = canvas.getContext("2d");
+  const dpr = devicePixelRatio || 1;
+  const rect = canvas.getBoundingClientRect();
+
+  canvas.width = rect.width * dpr;
+  canvas.height = rect.height * dpr;
+  ctx.scale(dpr, dpr);
+
+  const width = rect.width;
+  const height = rect.height;
+  const cx = width / 2;
+  const cy = height / 2;
+  const radius = Math.min(width, height) * 0.38;
+
+  ctx.clearRect(0, 0, width, height);
+  ctx.strokeStyle = "rgba(212,175,55,.16)";
+  ctx.lineWidth = 1;
+
+  for (let i = 1; i <= 4; i++) {
+    ctx.beginPath();
+    ctx.arc(cx, cy, radius * i / 4, 0, Math.PI * 2);
+    ctx.stroke();
+  }
+
+  for (let i = 0; i < 12; i++) {
+    const angle = i * Math.PI / 6;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(cx + Math.cos(angle) * radius, cy + Math.sin(angle) * radius);
+    ctx.stroke();
+  }
+
+  const sweep = Date.now() / 900;
+  ctx.strokeStyle = "rgba(249,217,118,.72)";
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(cx, cy);
+  ctx.lineTo(cx + Math.cos(sweep) * radius, cy + Math.sin(sweep) * radius);
+  ctx.stroke();
+}
+
+function animate() {
+  document.querySelectorAll("canvas").forEach(draw);
+  requestAnimationFrame(animate);
+}
+
+animate();
+
+async function load() {
+  const symbol = $("symbol").value;
+
+  $("kSymbol").textContent = symbol;
+  $("conn").textContent = "جاري الاتصال...";
+
+  const urls = [
+    `/api/decision/quality-live?symbol=${symbol}`,
+    `https://api.ndsp.app/api/decision/quality-live?symbol=${symbol}`,
+    "https://api.ndsp.app/api/completed/latest"
+  ];
+
+  let data = null;
+  let ok = false;
+
+  for (const url of urls) {
+    try {
+      const response = await fetch(url, { cache: "no-store" });
+      if (response.ok) {
+        data = await response.json();
+        ok = true;
+        break;
+      }
+    } catch (error) {
+      // Ignore and try next endpoint.
+    }
+  }
+
+  const scenario =
+    data?.scenario ||
+    data?.decision?.scenario ||
+    data?.payload?.scenario ||
+    {};
+
+  const quality =
+    num(data?.decision_quality) ??
+    num(data?.quality) ??
+    num(scenario?.decision_quality) ??
+    0;
+
+  const livePrice =
+    num(data?.instrument?.live_price) ??
+    num(data?.live_price) ??
+    num(data?.price);
+
+  $("quality").textContent = quality ? Math.round(quality) : "—";
+  ring("qualityRing", quality, "var(--gold)");
+
+  const risk = quality ? Math.max(15, 100 - quality) : 0;
+  $("riskScore").textContent = quality ? Math.round(risk) : "—";
+  ring("riskRing", risk, risk > 60 ? "var(--red)" : risk > 35 ? "var(--yellow)" : "var(--green)");
+
+  const sync = quality ? Math.min(100, Math.max(40, quality + 6)) : 0;
+  $("syncScore").textContent = quality ? Math.round(sync) : "—";
+  ring("syncRing", sync, "var(--blue)");
+
+  $("state").textContent = fmt(scenario.scenario_state || data?.decision_state || "تحت المراقبة");
+
+  $("price").textContent = livePrice
+    ? livePrice.toLocaleString("en-US", { maximumFractionDigits: 2 })
+    : "—";
+
+  $("direction").textContent = fmt(
+    scenario.scenario_directional_context ||
+    data?.directional_context ||
+    data?.directional_bias
+  );
+
+  $("horizon").textContent = fmt(
+    scenario.scenario_time_horizon ||
+    data?.reading_horizon ||
+    data?.horizon
+  );
+
+  $("activation").textContent = fmt(scenario.scenario_activation_level || data?.activation_level);
+  $("arrival").textContent = fmt(scenario.scenario_arrival_level || data?.arrival_level);
+  $("review").textContent = fmt(scenario.scenario_review_zone || data?.review_zone);
+  $("invalid").textContent = fmt(scenario.scenario_invalidation_level || data?.invalidation_level);
+  $("sourceMode").textContent = fmt(data?.source_mode || data?.source || "محكوم");
+  $("caution").textContent = fmt(data?.caution_reason || scenario.scenario_risk_note || "لا توجد رسالة معلنة");
+  $("updated").textContent = new Date().toLocaleString("ar-SA");
+  $("conn").textContent = ok ? "متصل" : "مصدر البيانات غير متاح";
+}
+
+$("refresh").onclick = load;
+$("symbol").onchange = load;
+
+$("mode").onclick = () => {
+  document.body.classList.toggle("advanced");
+  $("mode").textContent = document.body.classList.contains("advanced") ? "مبسط" : "متقدم";
+};
+
+load();
+setInterval(load, 45000);
+</script>
+</body>
+</html>
