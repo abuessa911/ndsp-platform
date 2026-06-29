@@ -171,3 +171,13 @@ Closed:
 - Final Git/service/gateway/TLS/API checks
 - Release candidate registry
 - Release candidate freeze policy
+
+## 20260629_083955 — DEV-017 RC1 Production Smoke Test + Snapshot
+
+Closed:
+- RC1 production smoke test
+- Public read-only API verification
+- Public write block verification
+- TLS SAN verification
+- Service health snapshot
+- Production snapshot registry
