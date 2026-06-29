@@ -140,3 +140,10 @@ Closed:
 - Public read-only gateway activation
 - Unified TLS verification
 - BOT-001 and CTL-001 remain internal only
+
+## 20260629_032831 — DEV-015 Public Gateway Controlled Activation
+
+Closed:
+- Public read-only gateway activation
+- Unified TLS verification
+- BOT-001 and CTL-001 remain internal only

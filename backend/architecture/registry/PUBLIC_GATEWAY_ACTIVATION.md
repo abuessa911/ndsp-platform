@@ -1,6 +1,6 @@
 # NDSP Public Gateway Activation Registry
 
-Generated: 20260628_193248
+Generated: 20260629_032831
 
 ## Active Public Read-only Routes
 
