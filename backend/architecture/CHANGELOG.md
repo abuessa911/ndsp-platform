@@ -234,3 +234,16 @@ Changed:
 - Forced rejected canary public routes to return non-public status.
 - Preserved core NDSP user pages.
 - Confirmed no forbidden wording on public HTML.
+
+## 20260629_095927 — DEV-019 Sovereign Command Interface Preview
+
+Added:
+- Premium NDSP Sovereign Command preview page.
+- Colored decision radar semantics.
+- Public no-execution language policy.
+- Sovereign command interface design spec.
+
+Scope:
+- Preview only.
+- No bot mention.
+- No backend or gateway change.
