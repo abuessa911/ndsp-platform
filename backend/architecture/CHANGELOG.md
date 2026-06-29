@@ -147,3 +147,11 @@ Closed:
 - Public read-only gateway activation
 - Unified TLS verification
 - BOT-001 and CTL-001 remain internal only
+
+## 20260629_035520 — DEV-016 Release Candidate Freeze
+
+Closed:
+- RC1 freeze
+- Final Git/service/gateway/TLS/API checks
+- Release candidate registry
+- Release candidate freeze policy
