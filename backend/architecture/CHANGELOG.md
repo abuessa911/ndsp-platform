@@ -155,3 +155,11 @@ Closed:
 - Final Git/service/gateway/TLS/API checks
 - Release candidate registry
 - Release candidate freeze policy
+
+## 20260629_082844 — DEV-016 Release Candidate Freeze
+
+Closed:
+- RC1 freeze
+- Final Git/service/gateway/TLS/API checks
+- Release candidate registry
+- Release candidate freeze policy
