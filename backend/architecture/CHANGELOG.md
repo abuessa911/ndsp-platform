@@ -192,3 +192,14 @@ Closed:
 - Service health verification
 - Production snapshot final registry
 - RC1 public surface contract
+
+## 20260629_085022 — DEV-017 Auto Final Production Smoke + Snapshot
+
+Closed:
+- Final RC1 production smoke test
+- Public read-only API verification
+- Public write block verification
+- TLS SAN verification
+- Service health verification
+- Production snapshot final registry
+- RC1 public surface contract

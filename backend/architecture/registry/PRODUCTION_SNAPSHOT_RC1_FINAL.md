@@ -1,12 +1,12 @@
 # NDSP Production Snapshot RC1 Final
 
-Generated: 20260629_084803
+Generated: 20260629_085022
 
 ## Git
 
 - Branch: feature/ndsp-os
-- Current Head: 77b6636 (HEAD -> feature/ndsp-os, tag: v0.3.6-ndsp-rc1-smoke, origin/feature/ndsp-os) test(DEV-017): production smoke test and snapshot
-- Current Head SHA: 77b6636e66c919aebbd9183905d587367572f0ee
+- Current Head: a3e30a6 (HEAD -> feature/ndsp-os, tag: v0.3.6-ndsp-rc1-smoke, origin/feature/ndsp-os) test(DEV-017): finalize rc1 production smoke snapshot
+- Current Head SHA: a3e30a654cbc1762286953726fde3a169593f39f
 - RC1 Tag: v0.3.5-ndsp-rc1
 - Smoke Tag: v0.3.6-ndsp-rc1-smoke
 
@@ -39,12 +39,12 @@ Unified certificate validated for:
 
 ## Server Snapshot
 
-- Date UTC: 2026-06-29 06:48:10 UTC
+- Date UTC: 2026-06-29 06:50:28 UTC
 - Hostname: vmi2934783
 - Kernel: Linux vmi2934783 6.8.0-124-generic #124-Ubuntu SMP PREEMPT_DYNAMIC Tue May 26 13:00:45 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
 - Disk Root: /dev/sda1       387G  229G  159G  60% /
-- Memory: Mem:            23Gi       1.9Gi        20Gi        45Mi       1.2Gi        21Gi
-- Load:  08:48:10 up 18:10,  2 users,  load average: 2.18, 2.30, 2.26
+- Memory: Mem:            23Gi       2.0Gi        20Gi        45Mi       1.2Gi        21Gi
+- Load:  08:50:28 up 18:12,  2 users,  load average: 2.05, 2.26, 2.25
 
 ## Decision
 
