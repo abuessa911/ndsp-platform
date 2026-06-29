@@ -1,12 +1,12 @@
 # NDSP Release Candidate RC1
 
-Generated: 20260629_082844
+Generated: 20260629_083105
 
 ## Release Candidate
 
 - RC: v0.3.5-ndsp-rc1
 - Branch: feature/ndsp-os
-- Base Head: e0b67d5 release(DEV-016): freeze release candidate rc1
+- Base Head: 3f75323 release(DEV-016): freeze release candidate rc1
 
 ## Frozen Scope
 
