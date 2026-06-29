@@ -247,3 +247,11 @@ Scope:
 - Preview only.
 - No bot mention.
 - No backend or gateway change.
+
+## 20260629_101120 — DEV-020C Sovereign Preview Repair
+
+Changed:
+- Restored live core NDSP pages.
+- Repaired Sovereign Command Preview navigation.
+- Added visible colored decision radar with user explanation.
+- Removed fake menu links from preview.

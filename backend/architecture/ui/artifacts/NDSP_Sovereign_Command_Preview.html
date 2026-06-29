@@ -5,789 +5,150 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
 <meta name="theme-color" content="#050505"/>
 <title>NDSP — واجهة القيادة السيادية</title>
-
 <style>
-:root {
-  --bg: #050505;
-  --bg2: #090907;
-  --panel: rgba(18, 18, 16, .88);
-  --panel2: rgba(26, 23, 17, .78);
-  --line: rgba(255, 255, 255, .095);
-  --line-gold: rgba(212, 175, 55, .30);
-  --text: #F6F0E2;
-  --muted: #A9A196;
-  --soft: #6F6A61;
-  --gold: #D4AF37;
-  --gold2: #F4D77D;
-  --green: #35D58A;
-  --yellow: #F4C84E;
-  --red: #FF4D5E;
-  --blue: #70B7FF;
-  --shadow: 0 28px 90px rgba(0,0,0,.58);
-  --radius: 28px;
+:root{
+  --bg:#050505;--panel:#11110f;--panel2:#181510;--line:rgba(255,255,255,.10);
+  --text:#F6F0E2;--muted:#A9A196;--gold:#D4AF37;--gold2:#F4D77D;
+  --green:#35D58A;--yellow:#F4C84E;--red:#FF4D5E;--blue:#70B7FF;
+  --state:#F4C84E;--state2:#FFE6A3;--state-bg:rgba(244,200,78,.10);
+  --state-line:rgba(244,200,78,.38);--state-glow:rgba(244,200,78,.18);
+  --shadow:0 28px 90px rgba(0,0,0,.58);--radius:28px;
 }
-
-* { box-sizing: border-box; }
-
-html, body {
-  min-height: 100%;
-}
-
-body {
-  margin: 0;
+*{box-sizing:border-box}
+body{
+  margin:0;min-height:100vh;color:var(--text);
+  font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;
   background:
-    radial-gradient(circle at 18% 8%, rgba(212,175,55,.12), transparent 34%),
-    radial-gradient(circle at 80% 16%, rgba(53,213,138,.06), transparent 30%),
-    radial-gradient(circle at 50% 90%, rgba(112,183,255,.055), transparent 38%),
-    linear-gradient(180deg, #030303 0%, #070706 42%, #030303 100%);
-  color: var(--text);
-  font-family: system-ui, -apple-system, "Segoe UI", Tahoma, Arial, sans-serif;
-  overflow-x: hidden;
-}
-
-body::before {
-  content: "HUNTER_KSA1";
-  position: fixed;
-  left: 8%;
-  bottom: 6%;
-  font-size: clamp(48px, 9vw, 128px);
-  font-weight: 1000;
-  letter-spacing: 12px;
-  color: rgba(212,175,55,.025);
-  pointer-events: none;
-  z-index: 0;
-}
-
-a { color: inherit; text-decoration: none; }
-
-.app {
-  position: relative;
-  z-index: 1;
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: 316px 1fr;
-}
-
-.sidebar {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  padding: 24px 18px;
-  border-left: 1px solid var(--line);
-  background:
-    linear-gradient(180deg, rgba(13,13,12,.96), rgba(5,5,5,.96)),
-    radial-gradient(circle at 50% 0%, rgba(212,175,55,.10), transparent 35%);
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 16px 14px 22px;
-}
-
-.logo-mark {
-  width: 52px;
-  height: 52px;
-  border-radius: 18px;
-  display: grid;
-  place-items: center;
-  color: var(--gold2);
-  border: 1px solid rgba(212,175,55,.42);
-  background: radial-gradient(circle at 50% 35%, rgba(212,175,55,.22), rgba(212,175,55,.06));
-  box-shadow: 0 0 28px rgba(212,175,55,.12);
-}
-
-.logo h1 {
-  margin: 0;
-  font-size: 21px;
-  line-height: 1.15;
-}
-
-.logo span {
-  display: block;
-  margin-top: 5px;
-  color: var(--gold2);
-  font-size: 11px;
-  letter-spacing: 1.5px;
-}
-
-.nav {
-  display: grid;
-  gap: 10px;
-  margin-top: 18px;
-}
-
-.nav a {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  padding: 15px 15px;
-  border: 1px solid transparent;
-  border-radius: 22px;
-  color: #D9D1C5;
-  background: rgba(255,255,255,.025);
-}
-
-.nav a.active {
-  border-color: rgba(212,175,55,.34);
-  background: linear-gradient(135deg, rgba(212,175,55,.17), rgba(212,175,55,.045));
-  box-shadow: inset 0 0 0 1px rgba(212,175,55,.05);
-}
-
-.nav small {
-  display: block;
-  color: var(--muted);
-  margin-top: 3px;
-  font-size: 11px;
-}
-
-.nav .ico {
-  min-width: 38px;
-  height: 38px;
-  border-radius: 14px;
-  display: grid;
-  place-items: center;
-  border: 1px solid var(--line);
-  color: var(--gold2);
-  background: rgba(255,255,255,.035);
-}
-
-.sidebar-footer {
-  position: absolute;
-  left: 18px;
-  right: 18px;
-  bottom: 22px;
-  border: 1px solid var(--line);
-  border-radius: 24px;
-  padding: 16px;
-  background: rgba(255,255,255,.035);
-}
-
-.sidebar-footer b {
-  color: var(--gold2);
-  font-size: 13px;
-}
-
-.sidebar-footer p {
-  margin: 8px 0 0;
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.7;
-}
-
-.main {
-  min-width: 0;
-  padding: 20px 28px 40px;
-}
-
-.topbar {
-  min-height: 74px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px;
-  border: 1px solid var(--line);
-  border-radius: 28px;
-  padding: 13px 16px;
-  background: rgba(10,10,9,.75);
-  backdrop-filter: blur(18px);
-  box-shadow: var(--shadow);
-}
-
-.brandline {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.brandline .seal {
-  width: 42px;
-  height: 42px;
-  border-radius: 16px;
-  display: grid;
-  place-items: center;
-  color: var(--gold2);
-  border: 1px solid rgba(212,175,55,.36);
-  background: rgba(212,175,55,.08);
-}
-
-.brandline b {
-  display: block;
-  font-size: 17px;
-}
-
-.brandline span {
-  display: block;
-  color: var(--muted);
-  font-size: 12px;
-  margin-top: 3px;
-}
-
-.actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-select, button {
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  background: #090909;
-  color: var(--text);
-  padding: 11px 13px;
-  font-weight: 800;
-  outline: none;
-}
-
-button {
-  cursor: pointer;
-}
-
-button.gold {
-  border-color: rgba(212,175,55,.38);
-  background: linear-gradient(135deg, rgba(212,175,55,.25), rgba(212,175,55,.06));
-  color: var(--gold2);
-}
-
-button.ghost {
-  color: var(--muted);
-}
-
-.pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 9px 12px;
-  background: rgba(255,255,255,.035);
-  font-weight: 900;
-  font-size: 12px;
-}
-
-.dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 999px;
-  background: var(--green);
-  box-shadow: 0 0 18px currentColor;
-  color: var(--green);
-}
-
-.hero {
-  margin-top: 18px;
-  display: grid;
-  grid-template-columns: minmax(0, 1.22fr) minmax(380px, .78fr);
-  gap: 18px;
-}
-
-.card {
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: linear-gradient(180deg, rgba(19,19,18,.88), rgba(8,8,8,.90));
-  box-shadow: var(--shadow);
-  position: relative;
-  overflow: hidden;
-}
-
-.card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(115deg, transparent, rgba(255,255,255,.027), transparent);
-  transform: translateX(-120%);
-  animation: sheen 8s ease-in-out infinite;
-  pointer-events: none;
-}
-
-@keyframes sheen {
-  0%, 62% { transform: translateX(-120%); }
-  100% { transform: translateX(120%); }
-}
-
-.command-card {
-  padding: 28px;
-  min-height: 390px;
-}
-
-.kicker {
-  color: var(--gold2);
-  font-weight: 900;
-  font-size: 12px;
-  letter-spacing: 1.4px;
-  text-transform: uppercase;
-}
-
-.title-row {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 18px;
-  margin-top: 10px;
-}
-
-.title h2 {
-  margin: 0;
-  font-size: clamp(34px, 4vw, 58px);
-  line-height: 1.05;
-  letter-spacing: -.5px;
-}
-
-.title p {
-  margin: 12px 0 0;
-  color: var(--muted);
-  line-height: 1.8;
-  max-width: 780px;
-}
-
-.status-badge {
-  border: 1px solid var(--state-line, rgba(212,175,55,.30));
-  border-radius: 24px;
-  background: var(--state-bg, rgba(212,175,55,.08));
-  color: var(--state, var(--gold2));
-  padding: 14px 16px;
-  min-width: 190px;
-  text-align: center;
-}
-
-.status-badge span {
-  display: block;
-  color: var(--muted);
-  font-size: 11px;
-  margin-bottom: 5px;
-}
-
-.status-badge b {
-  font-size: 22px;
-}
-
-.decision-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1.15fr;
-  gap: 14px;
-  margin-top: 28px;
-}
-
-.metric {
-  border: 1px solid var(--line);
-  border-radius: 24px;
-  padding: 18px;
-  background: rgba(255,255,255,.027);
-  min-height: 132px;
-}
-
-.metric.gold {
-  border-color: rgba(212,175,55,.32);
-  background: linear-gradient(135deg, rgba(212,175,55,.13), rgba(255,255,255,.02));
-}
-
-.metric .label {
-  color: var(--muted);
-  font-size: 12px;
-}
-
-.metric .value {
-  margin-top: 10px;
-  font-size: 28px;
-  font-weight: 1000;
-}
-
-.metric .note {
-  margin-top: 10px;
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.6;
-}
-
-.progress {
-  height: 10px;
-  border-radius: 999px;
-  background: rgba(255,255,255,.08);
-  overflow: hidden;
-  margin-top: 16px;
-}
-
-.progress i {
-  display: block;
-  height: 100%;
-  width: var(--w, 0%);
-  border-radius: 999px;
-  background: linear-gradient(90deg, var(--state, var(--gold)), var(--state2, var(--gold2)));
-}
-
-.message {
-  margin-top: 18px;
-  padding: 18px;
-  border: 1px solid rgba(212,175,55,.22);
-  border-radius: 24px;
-  background: linear-gradient(135deg, rgba(212,175,55,.10), rgba(255,255,255,.018));
-}
-
-.message b {
-  color: var(--gold2);
-}
-
-.message p {
-  margin-top: 8px;
-  color: #D8D0C3;
-  line-height: 1.75;
-}
-
-.radar-card {
-  padding: 24px;
-  display: grid;
-  gap: 18px;
-}
-
-.radar-top {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  align-items: flex-start;
-}
-
-.radar-title h3 {
-  margin: 6px 0 0;
-  font-size: 25px;
-}
-
-.radar-title p {
-  margin: 8px 0 0;
-  color: var(--muted);
-  line-height: 1.7;
-}
-
-.radar-box {
-  min-height: 250px;
-  border: 1px solid var(--state-line, rgba(212,175,55,.24));
-  border-radius: 28px;
-  background:
-    radial-gradient(circle at center, var(--state-glow, rgba(212,175,55,.14)), transparent 44%),
-    radial-gradient(circle at center, rgba(255,255,255,.028), rgba(0,0,0,.08));
-  display: grid;
-  place-items: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.radar-box canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  opacity: .78;
-}
-
-.radar-core {
-  width: 168px;
-  height: 168px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  position: relative;
-  background: conic-gradient(var(--state, var(--gold)) calc(var(--p, 0) * 1%), rgba(255,255,255,.08) 0);
-  box-shadow:
-    0 0 45px var(--state-shadow, rgba(212,175,55,.18)),
-    inset 0 0 25px rgba(255,255,255,.04);
-}
-
-.radar-core::before {
-  content: "";
-  position: absolute;
-  inset: 13px;
-  border-radius: 50%;
-  background: #070707;
-  border: 1px solid rgba(255,255,255,.10);
-}
-
-.radar-value {
-  position: relative;
-  text-align: center;
-}
-
-.radar-value b {
-  display: block;
-  font-size: 36px;
-}
-
-.radar-value span {
-  display: block;
-  margin-top: 4px;
-  color: var(--muted);
-  font-size: 11px;
-}
-
-.radar-explain {
-  border: 1px solid var(--line);
-  border-radius: 22px;
-  padding: 15px;
-  background: rgba(255,255,255,.028);
-}
-
-.radar-explain b {
-  color: var(--state, var(--gold2));
-}
-
-.radar-explain p {
-  margin: 8px 0 0;
-  color: var(--muted);
-  line-height: 1.7;
-  font-size: 13px;
-}
-
-.strip {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
-  margin-top: 18px;
-}
-
-.strip .mini {
-  border: 1px solid var(--line);
-  border-radius: 24px;
-  padding: 16px;
-  background: rgba(255,255,255,.027);
-  min-height: 112px;
-}
-
-.mini .label {
-  color: var(--muted);
-  font-size: 12px;
-}
-
-.mini .value {
-  margin-top: 10px;
-  font-size: 22px;
-  font-weight: 1000;
-}
-
-.mini .note {
-  margin-top: 8px;
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.6;
-}
-
-.lower {
-  margin-top: 18px;
-  display: grid;
-  grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
-  gap: 18px;
-}
-
-.panel {
-  padding: 22px;
-}
-
-.panel-head {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 16px;
-}
-
-.panel h3 {
-  margin: 0;
-  font-size: 24px;
-}
-
-.panel p {
-  margin: 6px 0 0;
-  color: var(--muted);
-  line-height: 1.7;
-  font-size: 13px;
-}
-
-.levels {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-}
-
-.level {
-  border: 1px solid rgba(212,175,55,.20);
-  border-radius: 22px;
-  background: rgba(212,175,55,.035);
-  padding: 16px;
-}
-
-.level span {
-  color: var(--muted);
-  font-size: 12px;
-}
-
-.level b {
-  display: block;
-  margin-top: 8px;
-  font-size: 22px;
-}
-
-.layers {
-  display: grid;
-  gap: 11px;
-}
-
-.layer {
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  padding: 14px 15px;
-  background: rgba(255,255,255,.026);
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 12px;
-  align-items: center;
-}
-
-.layer b {
-  font-size: 14px;
-}
-
-.layer span {
-  display: block;
-  color: var(--muted);
-  font-size: 12px;
-  margin-top: 4px;
-}
-
-.layer .tag {
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 7px 10px;
-  color: var(--gold2);
-  background: rgba(212,175,55,.06);
-  font-weight: 900;
-  font-size: 11px;
-}
-
-.advanced {
-  display: none;
-  margin-top: 18px;
-}
-
-body.show-advanced .advanced {
-  display: grid;
-}
-
-.footer-note {
-  margin-top: 18px;
-  border: 1px solid var(--line);
-  border-radius: 24px;
-  padding: 16px 18px;
-  background: rgba(255,255,255,.025);
-  color: var(--muted);
-  line-height: 1.75;
-  font-size: 13px;
-}
-
-@media (max-width: 1180px) {
-  .app { grid-template-columns: 1fr; }
-  .sidebar {
-    position: relative;
-    height: auto;
-    border-left: 0;
-    border-bottom: 1px solid var(--line);
-  }
-  .sidebar-footer { position: relative; left: auto; right: auto; bottom: auto; margin-top: 18px; }
-  .nav { grid-template-columns: repeat(2, 1fr); }
-  .hero, .lower { grid-template-columns: 1fr; }
-}
-
-@media (max-width: 760px) {
-  .main { padding: 14px; }
-  .topbar { align-items: stretch; flex-direction: column; }
-  .actions { width: 100%; }
-  select, button { flex: 1; min-width: 130px; }
-  .title-row, .radar-top { flex-direction: column; }
-  .status-badge { width: 100%; }
-  .decision-grid, .strip, .levels, .nav { grid-template-columns: 1fr; }
-  .command-card, .radar-card, .panel { padding: 18px; }
-}
+    radial-gradient(circle at 18% 8%,rgba(212,175,55,.13),transparent 34%),
+    radial-gradient(circle at 82% 16%,rgba(53,213,138,.06),transparent 30%),
+    linear-gradient(180deg,#030303,#080806 48%,#030303);
+  overflow-x:hidden;
+}
+body:before{
+  content:"HUNTER_KSA1";position:fixed;left:7%;bottom:6%;
+  font-size:clamp(46px,9vw,126px);font-weight:1000;letter-spacing:12px;
+  color:rgba(212,175,55,.026);pointer-events:none;z-index:0;
+}
+a{color:inherit;text-decoration:none}
+.app{position:relative;z-index:1;min-height:100vh;display:grid;grid-template-columns:312px 1fr}
+.sidebar{
+  position:sticky;top:0;height:100vh;padding:24px 18px;border-left:1px solid var(--line);
+  background:linear-gradient(180deg,rgba(13,13,12,.97),rgba(5,5,5,.97));
+}
+.logo{display:flex;align-items:center;gap:14px;padding:16px 14px 22px}
+.logo-mark{
+  width:52px;height:52px;border-radius:18px;display:grid;place-items:center;color:var(--gold2);
+  border:1px solid rgba(212,175,55,.42);background:rgba(212,175,55,.08);
+}
+.logo h1{margin:0;font-size:21px;line-height:1.15}
+.logo span{display:block;margin-top:5px;color:var(--gold2);font-size:11px;letter-spacing:1.5px}
+.nav{display:grid;gap:10px;margin-top:18px}
+.nav a{
+  display:flex;align-items:center;justify-content:space-between;gap:14px;padding:15px;
+  border:1px solid transparent;border-radius:22px;color:#D9D1C5;background:rgba(255,255,255,.025)
+}
+.nav a.active{
+  border-color:rgba(212,175,55,.34);
+  background:linear-gradient(135deg,rgba(212,175,55,.17),rgba(212,175,55,.045));
+}
+.nav small{display:block;color:var(--muted);margin-top:3px;font-size:11px}
+.ico{min-width:38px;height:38px;border-radius:14px;display:grid;place-items:center;border:1px solid var(--line);color:var(--gold2);background:rgba(255,255,255,.035)}
+.sidebar-footer{position:absolute;left:18px;right:18px;bottom:22px;border:1px solid var(--line);border-radius:24px;padding:16px;background:rgba(255,255,255,.035)}
+.sidebar-footer b{color:var(--gold2);font-size:13px}.sidebar-footer p{margin:8px 0 0;color:var(--muted);font-size:12px;line-height:1.7}
+.main{min-width:0;padding:20px 28px 40px}
+.topbar{
+  min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:18px;
+  border:1px solid var(--line);border-radius:28px;padding:13px 16px;background:rgba(10,10,9,.76);
+  backdrop-filter:blur(18px);box-shadow:var(--shadow)
+}
+.brandline{display:flex;align-items:center;gap:12px}
+.seal{width:42px;height:42px;border-radius:16px;display:grid;place-items:center;color:var(--gold2);border:1px solid rgba(212,175,55,.36);background:rgba(212,175,55,.08)}
+.brandline b{display:block;font-size:17px}.brandline span{display:block;color:var(--muted);font-size:12px;margin-top:3px}
+.actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+select,button{border:1px solid var(--line);border-radius:16px;background:#090909;color:var(--text);padding:11px 13px;font-weight:800;outline:none}
+button{cursor:pointer}button.gold{border-color:rgba(212,175,55,.38);background:linear-gradient(135deg,rgba(212,175,55,.25),rgba(212,175,55,.06));color:var(--gold2)}
+.pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:9px 12px;background:rgba(255,255,255,.035);font-weight:900;font-size:12px}
+.dot{width:9px;height:9px;border-radius:999px;background:var(--state);box-shadow:0 0 18px var(--state)}
+.hero{margin-top:18px;display:grid;grid-template-columns:minmax(0,1.16fr) minmax(420px,.84fr);gap:18px}
+.card{border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(180deg,rgba(19,19,18,.89),rgba(8,8,8,.92));box-shadow:var(--shadow);position:relative;overflow:hidden}
+.command-card{padding:28px;min-height:400px}.kicker{color:var(--gold2);font-weight:900;font-size:12px;letter-spacing:1.4px;text-transform:uppercase}
+.title-row{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-top:10px}
+.title h2{margin:0;font-size:clamp(34px,4vw,58px);line-height:1.05}.title p{margin:12px 0 0;color:var(--muted);line-height:1.8;max-width:800px}
+.status-badge{border:1px solid var(--state-line);border-radius:24px;background:var(--state-bg);color:var(--state);padding:14px 16px;min-width:190px;text-align:center}
+.status-badge span{display:block;color:var(--muted);font-size:11px;margin-bottom:5px}.status-badge b{font-size:22px}
+.decision-grid{display:grid;grid-template-columns:1fr 1fr 1.15fr;gap:14px;margin-top:28px}
+.metric{border:1px solid var(--line);border-radius:24px;padding:18px;background:rgba(255,255,255,.027);min-height:132px}
+.metric.gold{border-color:rgba(212,175,55,.32);background:linear-gradient(135deg,rgba(212,175,55,.13),rgba(255,255,255,.02))}
+.label{color:var(--muted);font-size:12px}.value{margin-top:10px;font-size:28px;font-weight:1000}.note{margin-top:10px;color:var(--muted);font-size:12px;line-height:1.6}
+.progress{height:10px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden;margin-top:16px}
+.progress i{display:block;height:100%;width:var(--w,0%);border-radius:999px;background:linear-gradient(90deg,var(--state),var(--state2))}
+.message{margin-top:18px;padding:18px;border:1px solid var(--state-line);border-radius:24px;background:var(--state-bg)}
+.message b{color:var(--state)}.message p{margin-top:8px;color:#D8D0C3;line-height:1.75}
+.radar-card{padding:24px;display:grid;gap:18px}
+.radar-top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}
+.radar-title h3{margin:6px 0 0;font-size:26px}.radar-title p{margin:8px 0 0;color:var(--muted);line-height:1.7}
+.radar-box{
+  min-height:288px;border:1px solid var(--state-line);border-radius:28px;
+  background:radial-gradient(circle at center,var(--state-glow),transparent 46%),rgba(255,255,255,.018);
+  display:grid;place-items:center;position:relative;overflow:hidden;
+}
+.radar-grid-bg{position:absolute;inset:18px;border-radius:50%;border:1px solid rgba(255,255,255,.09);box-shadow:inset 0 0 0 42px rgba(255,255,255,.012),inset 0 0 0 84px rgba(255,255,255,.012)}
+.radar-grid-bg:before,.radar-grid-bg:after{content:"";position:absolute;inset:50% 0 auto 0;height:1px;background:rgba(255,255,255,.09)}
+.radar-grid-bg:after{transform:rotate(90deg)}
+.radar-sweep{position:absolute;width:42%;height:2px;right:50%;top:50%;transform-origin:right center;background:linear-gradient(90deg,transparent,var(--state));animation:sweep 3.8s linear infinite;box-shadow:0 0 18px var(--state)}
+@keyframes sweep{to{transform:rotate(360deg)}}
+.radar-core{
+  width:176px;height:176px;border-radius:50%;display:grid;place-items:center;position:relative;
+  background:conic-gradient(var(--state) calc(var(--p,0)*1%),rgba(255,255,255,.08) 0);
+  box-shadow:0 0 46px var(--state-glow),inset 0 0 25px rgba(255,255,255,.04);z-index:2
+}
+.radar-core:before{content:"";position:absolute;inset:13px;border-radius:50%;background:#070707;border:1px solid rgba(255,255,255,.10)}
+.radar-value{position:relative;text-align:center}.radar-value b{display:block;font-size:40px}.radar-value span{display:block;margin-top:4px;color:var(--muted);font-size:11px}
+.legend{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.legend div{border:1px solid var(--line);border-radius:14px;padding:9px 8px;background:rgba(255,255,255,.025);font-size:11px;color:var(--muted);text-align:center}
+.legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-left:5px}
+.radar-explain{border:1px solid var(--state-line);border-radius:22px;padding:15px;background:var(--state-bg)}
+.radar-explain b{color:var(--state)}.radar-explain p{margin:8px 0 0;color:var(--muted);line-height:1.7;font-size:13px}
+.strip{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px}
+.mini{border:1px solid var(--line);border-radius:24px;padding:16px;background:rgba(255,255,255,.027);min-height:112px}
+.mini .value{font-size:22px}
+.lower{margin-top:18px;display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:18px}
+.panel{padding:22px}.panel h3{margin:6px 0 0;font-size:24px}.panel p{margin:6px 0 0;color:var(--muted);line-height:1.7;font-size:13px}
+.levels{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:16px}
+.level{border:1px solid rgba(212,175,55,.20);border-radius:22px;background:rgba(212,175,55,.035);padding:16px}.level span{color:var(--muted);font-size:12px}.level b{display:block;margin-top:8px;font-size:22px}
+.layers{display:grid;gap:11px;margin-top:16px}
+.layer{border:1px solid var(--line);border-radius:18px;padding:14px 15px;background:rgba(255,255,255,.026);display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center}
+.layer b{font-size:14px}.layer span{display:block;color:var(--muted);font-size:12px;margin-top:4px}.tag{border:1px solid var(--line);border-radius:999px;padding:7px 10px;color:var(--gold2);background:rgba(212,175,55,.06);font-weight:900;font-size:11px}
+.footer-note{margin-top:18px;border:1px solid var(--line);border-radius:24px;padding:16px 18px;background:rgba(255,255,255,.025);color:var(--muted);line-height:1.75;font-size:13px}
+@media(max-width:1180px){.app{grid-template-columns:1fr}.sidebar{position:relative;height:auto;border-left:0;border-bottom:1px solid var(--line)}.sidebar-footer{position:relative;left:auto;right:auto;bottom:auto;margin-top:18px}.nav{grid-template-columns:repeat(2,1fr)}.hero,.lower{grid-template-columns:1fr}}
+@media(max-width:760px){.main{padding:14px}.topbar{align-items:stretch;flex-direction:column}.actions{width:100%}select,button{flex:1;min-width:130px}.title-row,.radar-top{flex-direction:column}.status-badge{width:100%}.decision-grid,.strip,.levels,.nav,.legend{grid-template-columns:1fr}.command-card,.radar-card,.panel{padding:18px}}
 </style>
 </head>
-
 <body>
 <div class="app">
   <aside class="sidebar">
     <div class="logo">
       <div class="logo-mark">◆</div>
-      <div>
-        <h1>منصة نواف لدعم القرار</h1>
-        <span>NDSP COMMAND CENTER</span>
-      </div>
+      <div><h1>منصة نواف لدعم القرار</h1><span>NDSP COMMAND CENTER</span></div>
     </div>
-
     <nav class="nav">
-      <a class="active" href="#">
-        <div>
-          <b>مركز القيادة</b>
-          <small>نظرة شاملة</small>
-        </div>
-        <i class="ico">▦</i>
-      </a>
-
-      <a href="/NDSP_Asset_View.html">
-        <div>
-          <b>ذكاء السوق</b>
-          <small>تحليلات وإشارات</small>
-        </div>
-        <i class="ico">⌁</i>
-      </a>
-
-      <a href="/NDSP_Daily_Brief.html">
-        <div>
-          <b>الإيجاز اليومي</b>
-          <small>نشرة القرار</small>
-        </div>
-        <i class="ico">▤</i>
-      </a>
-
-      <a href="/NDSP_Settings_Alerts.html">
-        <div>
-          <b>الإعدادات والإنذارات</b>
-          <small>ضبط وتنبيهات</small>
-        </div>
-        <i class="ico">◌</i>
-      </a>
-
-      <a href="#">
-        <div>
-          <b>الحساب</b>
-          <small>الملف والصلاحيات</small>
-        </div>
-        <i class="ico">◇</i>
-      </a>
-
-      <a href="#">
-        <div>
-          <b>ترقية الباقة</b>
-          <small>التخطيط والمقارنة</small>
-        </div>
-        <i class="ico">♛</i>
-      </a>
+      <a class="active" href="/NDSP_Sovereign_Command_Preview.html"><div><b>مركز القيادة</b><small>واجهة القرار السيادي</small></div><i class="ico">▦</i></a>
+      <a href="/NDSP_Command_Center.html"><div><b>مركز القرار</b><small>الصفحة الأساسية</small></div><i class="ico">◈</i></a>
+      <a href="/NDSP_Asset_View.html"><div><b>ذكاء السوق</b><small>قراءة السوق والمستويات</small></div><i class="ico">⌁</i></a>
+      <a href="/NDSP_Daily_Brief.html"><div><b>الإيجاز اليومي</b><small>نشرة القرار</small></div><i class="ico">▤</i></a>
+      <a href="/NDSP_Settings_Alerts.html"><div><b>الإعدادات والإنذارات</b><small>ضبط وتنبيهات</small></div><i class="ico">◌</i></a>
     </nav>
-
     <div class="sidebar-footer">
-      <b>حالة المنظومة</b>
-      <p>تجربة Preview فقط. لا يوجد أي ذكر للتنفيذ أو البوت داخل منصة دعم القرار.</p>
+      <b>واجهة Preview محسّنة</b>
+      <p>تحتوي على رادار ملوّن واضح حسب حالة القرار، بدون روابط وهمية أو صفحات مكررة.</p>
     </div>
   </aside>
 
   <main class="main">
     <header class="topbar">
-      <div class="brandline">
-        <div class="seal">◆</div>
-        <div>
-          <b>مركز القرار السيادي</b>
-          <span>منصة ذكاء القرار المؤسسية</span>
-        </div>
-      </div>
-
+      <div class="brandline"><div class="seal">◆</div><div><b>مركز القرار السيادي</b><span>منصة ذكاء القرار المؤسسية</span></div></div>
       <div class="actions">
-        <span class="pill"><i class="dot"></i><b id="connectionState">بيانات مباشرة</b></span>
+        <span class="pill"><i class="dot"></i><b id="connectionState">فحص البيانات</b></span>
         <select id="symbol">
           <option value="XAUUSD">GOLD — الذهب</option>
           <option value="BTCUSDT">BTCUSDT</option>
@@ -797,123 +158,72 @@ body.show-advanced .advanced {
           <option value="UKOIL">UKOIL</option>
         </select>
         <button class="gold" id="refresh">تحديث</button>
-        <button class="ghost" id="advancedToggle">عرض متقدم</button>
       </div>
     </header>
 
     <section class="hero">
-      <article class="card command-card" id="commandCard">
+      <article class="card command-card">
         <div class="kicker">SOVEREIGN DECISION ROOM</div>
-
         <div class="title-row">
           <div class="title">
             <h2>القرار الحاكم</h2>
-            <p id="decisionSummary">
-              قراءة مؤسسية حيّة للأصل المختار. هذه الواجهة تعرض حالة القرار وسياقه، ولا تعرض أي أمر تنفيذ أو توصية مالية.
-            </p>
+            <p id="decisionSummary">واجهة مؤسسية تعرض حالة القرار وسياقه بلغة واضحة. لا توجد توصيات أو أوامر.</p>
           </div>
-
-          <div class="status-badge" id="stateBadge">
-            <span>حالة القرار</span>
-            <b id="decisionState">جارٍ الفحص</b>
-          </div>
+          <div class="status-badge"><span>حالة القرار</span><b id="decisionState">مراقبة</b></div>
         </div>
-
         <div class="decision-grid">
-          <div class="metric">
-            <div class="label">الأصل المختار</div>
-            <div class="value" id="assetName">—</div>
-            <div class="note" id="assetMeta">مرتبط بمركز القرار</div>
-          </div>
-
-          <div class="metric gold">
-            <div class="label">مستوى الثقة</div>
-            <div class="value" id="confidenceValue">—</div>
-            <div class="progress"><i id="confidenceBar" style="--w:0%"></i></div>
-          </div>
-
-          <div class="metric">
-            <div class="label">السياق المؤسسي الحالي</div>
-            <div class="value" id="directionContext">—</div>
-            <div class="note">قراءة سياقية لدعم القرار فقط</div>
-          </div>
+          <div class="metric"><div class="label">الأصل المختار</div><div class="value" id="assetName">—</div><div class="note" id="assetMeta">مرتبط بمركز القرار</div></div>
+          <div class="metric gold"><div class="label">مستوى الثقة</div><div class="value" id="confidenceValue">—</div><div class="progress"><i id="confidenceBar" style="--w:0%"></i></div></div>
+          <div class="metric"><div class="label">السياق المؤسسي الحالي</div><div class="value" id="directionContext">—</div><div class="note">قراءة سياقية لدعم القرار فقط</div></div>
         </div>
-
-        <div class="message">
-          <b id="goldenTitle">ختم التوافق الذهبي</b>
-          <p id="governanceMessage">
-            يتم فحص التوافق بين مكونات القرار، مستويات السيناريو، ورادار المخاطر قبل عرض الحالة للمستخدم.
-          </p>
-        </div>
+        <div class="message"><b id="governanceTitle">متابعة حذرة</b><p id="governanceMessage">الرادار يبدأ بحالة مراقبة حتى تصل بيانات القرار.</p></div>
       </article>
 
-      <aside class="card radar-card" id="radarCard">
+      <aside class="card radar-card">
         <div class="radar-top">
           <div class="radar-title">
             <div class="kicker">DECISION RADAR</div>
             <h3>رادار حالة القرار</h3>
-            <p>يتلوّن الرادار حسب حالة القرار ويوضح السبب بلغة أنيقة ومباشرة.</p>
+            <p>يتلوّن الرادار حسب حالة القرار، مع شرح السبب للمستخدم مباشرة.</p>
           </div>
-
-          <span class="pill" id="radarPill">
-            <i class="dot" id="radarDot"></i>
-            <b id="radarLabel">فحص</b>
-          </span>
+          <span class="pill"><i class="dot" id="radarDot"></i><b id="radarLabel">مراقبة</b></span>
         </div>
 
-        <div class="radar-box" id="radarBox">
-          <canvas id="radarCanvas"></canvas>
-          <div class="radar-core" id="radarCore" style="--p:0">
-            <div class="radar-value">
-              <b id="radarScore">—</b>
-              <span>مؤشر الحالة</span>
-            </div>
+        <div class="radar-box">
+          <div class="radar-grid-bg"></div>
+          <div class="radar-sweep"></div>
+          <div class="radar-core" id="radarCore" style="--p:58">
+            <div class="radar-value"><b id="radarScore">58</b><span>مؤشر الحالة</span></div>
           </div>
+        </div>
+
+        <div class="legend">
+          <div><i style="background:var(--green)"></i>داعم</div>
+          <div><i style="background:var(--gold)"></i>توافق</div>
+          <div><i style="background:var(--yellow)"></i>مراقبة</div>
+          <div><i style="background:var(--red)"></i>محجوب</div>
+          <div><i style="background:var(--blue)"></i>فحص</div>
         </div>
 
         <div class="radar-explain">
-          <b id="radarStatusText">حالة الرادار: جارٍ الفحص</b>
-          <p id="radarReason">يتم تحليل حالة القرار من البيانات الحية دون كشف الطبقات المحمية.</p>
+          <b id="radarStatusText">حالة الرادار: مراقبة</b>
+          <p id="radarReason">القرار لم يكتمل بعد، لذلك تظهر الحالة باللون الأصفر حتى تتضح القراءة.</p>
         </div>
       </aside>
     </section>
 
     <section class="strip">
-      <div class="mini">
-        <div class="label">السعر الحي</div>
-        <div class="value" id="livePrice">—</div>
-        <div class="note">يُعرض عند توفر المصدر</div>
-      </div>
-
-      <div class="mini">
-        <div class="label">أفق المتابعة</div>
-        <div class="value" id="timeHorizon">—</div>
-        <div class="note">أفق القراءة الحالي</div>
-      </div>
-
-      <div class="mini">
-        <div class="label">سبب الحذر</div>
-        <div class="value" id="cautionReason">—</div>
-        <div class="note">رسالة مختصرة للمستخدم</div>
-      </div>
-
-      <div class="mini">
-        <div class="label">آخر تحديث</div>
-        <div class="value" id="updatedAt">—</div>
-        <div class="note">وقت تحديث الواجهة</div>
-      </div>
+      <div class="mini"><div class="label">السعر الحي</div><div class="value" id="livePrice">—</div><div class="note">يُعرض عند توفر المصدر</div></div>
+      <div class="mini"><div class="label">أفق المتابعة</div><div class="value" id="timeHorizon">—</div><div class="note">أفق القراءة الحالي</div></div>
+      <div class="mini"><div class="label">سبب الحذر</div><div class="value" id="cautionReason">—</div><div class="note">رسالة مختصرة للمستخدم</div></div>
+      <div class="mini"><div class="label">آخر تحديث</div><div class="value" id="updatedAt">—</div><div class="note">وقت تحديث الواجهة</div></div>
     </section>
 
     <section class="lower">
       <article class="card panel">
-        <div class="panel-head">
-          <div>
-            <div class="kicker">REFERENCE LEVELS</div>
-            <h3>المستويات المرجعية</h3>
-            <p>مراقبة، وصول، مراجعة، وإلغاء. مستويات دعم قرار وليست أوامر تنفيذ.</p>
-          </div>
-        </div>
-
+        <div class="kicker">REFERENCE LEVELS</div>
+        <h3>المستويات المرجعية</h3>
+        <p>مراقبة، وصول، مراجعة، وإلغاء. مستويات دعم قرار وليست أوامر.</p>
         <div class="levels">
           <div class="level"><span>مستوى المراقبة</span><b id="activationLevel">—</b></div>
           <div class="level"><span>مستوى الوصول</span><b id="arrivalLevel">—</b></div>
@@ -923,14 +233,9 @@ body.show-advanced .advanced {
       </article>
 
       <article class="card panel">
-        <div class="panel-head">
-          <div>
-            <div class="kicker">GOVERNANCE LAYERS</div>
-            <h3>الطبقات المعلنة</h3>
-            <p>يتم عرض الطبقات المسموح بها فقط. بقية الطبقات تبقى محمية وغير معلنة.</p>
-          </div>
-        </div>
-
+        <div class="kicker">GOVERNANCE LAYERS</div>
+        <h3>الطبقات المعلنة</h3>
+        <p>يتم عرض الطبقات المسموح بها فقط. بقية الطبقات تبقى محمية وغير معلنة.</p>
         <div class="layers">
           <div class="layer"><div><b>TDL</b><span>النمط الحاكم للقرار</span></div><div class="tag">معلن</div></div>
           <div class="layer"><div><b>NMP</b><span>منطقة التقاء مرجعية</span></div><div class="tag">معلن</div></div>
@@ -941,379 +246,73 @@ body.show-advanced .advanced {
       </article>
     </section>
 
-    <section class="advanced lower">
-      <article class="card panel">
-        <div class="kicker">ADVANCED VIEW</div>
-        <h3>تفاصيل متقدمة</h3>
-        <div class="layers">
-          <div class="layer"><div><b>مصدر القراءة</b><span id="sourceMode">—</span></div><div class="tag">محكوم</div></div>
-          <div class="layer"><div><b>حزمة الحالة</b><span id="statePayload">—</span></div><div class="tag">محدود</div></div>
-        </div>
-      </article>
-
-      <article class="card panel">
-        <div class="kicker">USER MESSAGE CONTRACT</div>
-        <h3>لغة الواجهة</h3>
-        <p>
-          هذه المنصة تعرض دعم قرار وقراءات سياقية فقط. لا تعرض شراء أو بيع أو تنفيذ أو أي خدمة خاصة خارج منصة دعم القرار.
-        </p>
-      </article>
-    </section>
-
-    <div class="footer-note">
-      منصة نواف لدعم القرار — واجهة Preview فقط. لا توجد توصية مالية، ولا أمر تنفيذ، ولا كشف للطبقات المحمية.
-    </div>
+    <div class="footer-note">منصة نواف لدعم القرار — واجهة Preview فقط. لا توجد توصية، ولا أوامر، ولا كشف للطبقات المحمية.</div>
   </main>
 </div>
 
 <script>
-const $ = id => document.getElementById(id);
-
-const statePalette = {
-  green: {
-    color: "#35D58A",
-    color2: "#A7F3D0",
-    bg: "rgba(53,213,138,.105)",
-    line: "rgba(53,213,138,.33)",
-    glow: "rgba(53,213,138,.16)",
-    shadow: "rgba(53,213,138,.24)"
-  },
-  gold: {
-    color: "#D4AF37",
-    color2: "#F4D77D",
-    bg: "rgba(212,175,55,.11)",
-    line: "rgba(212,175,55,.34)",
-    glow: "rgba(212,175,55,.15)",
-    shadow: "rgba(212,175,55,.24)"
-  },
-  yellow: {
-    color: "#F4C84E",
-    color2: "#FFE6A3",
-    bg: "rgba(244,200,78,.105)",
-    line: "rgba(244,200,78,.34)",
-    glow: "rgba(244,200,78,.15)",
-    shadow: "rgba(244,200,78,.24)"
-  },
-  red: {
-    color: "#FF4D5E",
-    color2: "#FF9AA4",
-    bg: "rgba(255,77,94,.105)",
-    line: "rgba(255,77,94,.34)",
-    glow: "rgba(255,77,94,.15)",
-    shadow: "rgba(255,77,94,.24)"
-  },
-  blue: {
-    color: "#70B7FF",
-    color2: "#B8DAFF",
-    bg: "rgba(112,183,255,.105)",
-    line: "rgba(112,183,255,.32)",
-    glow: "rgba(112,183,255,.14)",
-    shadow: "rgba(112,183,255,.22)"
-  }
+const $=id=>document.getElementById(id);
+const palettes={
+  green:{s:"#35D58A",s2:"#A7F3D0",bg:"rgba(53,213,138,.105)",line:"rgba(53,213,138,.36)",glow:"rgba(53,213,138,.18)"},
+  gold:{s:"#D4AF37",s2:"#F4D77D",bg:"rgba(212,175,55,.11)",line:"rgba(212,175,55,.36)",glow:"rgba(212,175,55,.18)"},
+  yellow:{s:"#F4C84E",s2:"#FFE6A3",bg:"rgba(244,200,78,.105)",line:"rgba(244,200,78,.36)",glow:"rgba(244,200,78,.18)"},
+  red:{s:"#FF4D5E",s2:"#FF9AA4",bg:"rgba(255,77,94,.105)",line:"rgba(255,77,94,.36)",glow:"rgba(255,77,94,.18)"},
+  blue:{s:"#70B7FF",s2:"#B8DAFF",bg:"rgba(112,183,255,.105)",line:"rgba(112,183,255,.34)",glow:"rgba(112,183,255,.18)"}
 };
-
-function fmt(value) {
-  if (value === undefined || value === null || value === "") return "—";
-  return String(value);
+function fmt(v){return v===undefined||v===null||v===""?"—":String(v)}
+function num(v){const n=Number(String(v??"").replace(/,/g,""));return Number.isFinite(n)?n:null}
+function clamp(v){return Math.max(0,Math.min(100,Number(v)||0))}
+function apply(key){const p=palettes[key]||palettes.yellow;document.documentElement.style.setProperty("--state",p.s);document.documentElement.style.setProperty("--state2",p.s2);document.documentElement.style.setProperty("--state-bg",p.bg);document.documentElement.style.setProperty("--state-line",p.line);document.documentElement.style.setProperty("--state-glow",p.glow)}
+function scenario(d){return d?.scenario||d?.decision?.scenario||d?.payload?.scenario||{}}
+function quality(d,s){return num(d?.decision_quality)??num(d?.quality)??num(d?.decision?.quality)??num(s?.decision_quality)??58}
+function classify(d,s,q){
+  const t=[s.scenario_state,d?.decision_state,d?.state,d?.caution_reason,s.scenario_risk_note,s.scenario_directional_context].map(x=>String(x||"").toLowerCase()).join(" ");
+  if(/blocked|block|محجوب|ممنوع|منع|خطر|رفض|invalid/.test(t)) return {key:"red",label:"محجوب",title:"حالة الرادار: محجوب",reason:"محامي الشيطان أو قواعد الحوكمة رصدت تعارضًا يمنع اعتماد القراءة الحالية.",score:Math.max(18,Math.min(q,42))};
+  if(/under_monitoring|monitor|مراقبة|انتظار|pending|review|مراجعة|حذر|caution/.test(t)) return {key:"yellow",label:"مراقبة حذرة",title:"حالة الرادار: مراقبة حذرة",reason:"توجد قراءة قابلة للمتابعة، لكن القرار لم يكتمل بعد أو يحتاج تأكيدًا إضافيًا.",score:q};
+  if(q>=86) return {key:"green",label:"بيئة داعمة",title:"حالة الرادار: بيئة داعمة",reason:"مستوى الثقة مرتفع ولا توجد إشارة منع ظاهرة في القراءة الحالية.",score:q};
+  if(q>=70) return {key:"gold",label:"توافق ذهبي",title:"حالة الرادار: توافق ذهبي",reason:"القراءة تظهر توافقًا داخليًا جيدًا، مع الاستمرار في المتابعة المؤسسية.",score:q};
+  if(q>=45) return {key:"yellow",label:"مراقبة",title:"حالة الرادار: مراقبة",reason:"القراءة لم تصل إلى درجة كافية لاعتماد حالة داعمة.",score:q};
+  return {key:"blue",label:"فحص سياقي",title:"حالة الرادار: فحص سياقي",reason:"البيانات المتاحة لا تكفي لإعلان حالة داعمة أو حجب واضح.",score:q||41};
 }
-
-function asNumber(value) {
-  const n = Number(String(value ?? "").replace(/,/g, ""));
-  return Number.isFinite(n) ? n : null;
-}
-
-function clamp(value, min = 0, max = 100) {
-  return Math.max(min, Math.min(max, Number(value) || 0));
-}
-
-function getScenario(data) {
-  return data?.scenario || data?.decision?.scenario || data?.payload?.scenario || {};
-}
-
-function getQuality(data, scenario) {
-  return (
-    asNumber(data?.decision_quality) ??
-    asNumber(data?.quality) ??
-    asNumber(data?.decision?.quality) ??
-    asNumber(scenario?.decision_quality) ??
-    0
-  );
-}
-
-function classifyDecision(data, scenario, quality) {
-  const text = [
-    scenario?.scenario_state,
-    data?.decision_state,
-    data?.state,
-    data?.caution_reason,
-    scenario?.scenario_risk_note,
-    scenario?.scenario_directional_context
-  ].map(v => String(v || "").toLowerCase()).join(" ");
-
-  if (/blocked|block|محجوب|ممنوع|منع|خطر|رفض|invalid|invalidation/.test(text)) {
-    return {
-      key: "red",
-      label: "محجوب",
-      status: "حالة الرادار: محجوب",
-      reason: "محامي الشيطان أو قواعد الحوكمة رصدت تعارضًا يمنع اعتماد القراءة الحالية.",
-      score: Math.max(18, Math.min(quality || 28, 42))
-    };
-  }
-
-  if (/under_monitoring|monitor|مراقبة|انتظار|pending|review|مراجعة|حذر|caution/.test(text)) {
-    return {
-      key: "yellow",
-      label: "مراقبة حذرة",
-      status: "حالة الرادار: مراقبة حذرة",
-      reason: "توجد قراءة قابلة للمتابعة، لكن القرار لم يكتمل بعد أو يحتاج تأكيدًا إضافيًا.",
-      score: quality || 58
-    };
-  }
-
-  if (/allowed|داعمة|داعم|support|stable|مستقر|active|confirmed/.test(text) && quality >= 70) {
-    return {
-      key: quality >= 84 ? "green" : "gold",
-      label: quality >= 84 ? "بيئة داعمة" : "توافق ذهبي",
-      status: quality >= 84 ? "حالة الرادار: بيئة داعمة" : "حالة الرادار: توافق ذهبي",
-      reason: quality >= 84
-        ? "السياق المؤسسي والمستويات المرجعية متوافقة دون منع معلن."
-        : "يوجد توافق جيد بين مكونات القرار، مع بقاء القراءة ضمن نطاق دعم القرار.",
-      score: quality
-    };
-  }
-
-  if (quality >= 86) {
-    return {
-      key: "green",
-      label: "بيئة داعمة",
-      status: "حالة الرادار: بيئة داعمة",
-      reason: "مستوى الثقة مرتفع ولا توجد إشارة منع ظاهرة في القراءة الحالية.",
-      score: quality
-    };
-  }
-
-  if (quality >= 70) {
-    return {
-      key: "gold",
-      label: "توافق ذهبي",
-      status: "حالة الرادار: توافق ذهبي",
-      reason: "القراءة تظهر توافقًا داخليًا جيدًا، مع الاستمرار في المتابعة المؤسسية.",
-      score: quality
-    };
-  }
-
-  if (quality >= 45) {
-    return {
-      key: "yellow",
-      label: "مراقبة",
-      status: "حالة الرادار: مراقبة",
-      reason: "القراءة لم تصل إلى درجة كافية لاعتماد حالة داعمة.",
-      score: quality
-    };
-  }
-
-  return {
-    key: "blue",
-    label: "فحص سياقي",
-    status: "حالة الرادار: فحص سياقي",
-    reason: "البيانات المتاحة لا تكفي لإعلان حالة داعمة أو حجب واضح.",
-    score: quality || 41
-  };
-}
-
-function applyPalette(decision) {
-  const p = statePalette[decision.key] || statePalette.gold;
-
-  document.documentElement.style.setProperty("--state", p.color);
-  document.documentElement.style.setProperty("--state2", p.color2);
-  document.documentElement.style.setProperty("--state-bg", p.bg);
-  document.documentElement.style.setProperty("--state-line", p.line);
-  document.documentElement.style.setProperty("--state-glow", p.glow);
-  document.documentElement.style.setProperty("--state-shadow", p.shadow);
-
-  $("radarDot").style.background = p.color;
-  $("radarDot").style.color = p.color;
-  $("radarDot").style.boxShadow = `0 0 18px ${p.color}`;
-}
-
-function drawRadar() {
-  const canvas = $("radarCanvas");
-  const ctx = canvas.getContext("2d");
-  const rect = canvas.getBoundingClientRect();
-  const dpr = window.devicePixelRatio || 1;
-
-  canvas.width = rect.width * dpr;
-  canvas.height = rect.height * dpr;
-  ctx.scale(dpr, dpr);
-
-  const w = rect.width;
-  const h = rect.height;
-  const cx = w / 2;
-  const cy = h / 2;
-  const radius = Math.min(w, h) * 0.38;
-
-  const color = getComputedStyle(document.documentElement).getPropertyValue("--state").trim() || "#D4AF37";
-
-  ctx.clearRect(0, 0, w, h);
-
-  ctx.strokeStyle = "rgba(255,255,255,.08)";
-  ctx.lineWidth = 1;
-
-  for (let i = 1; i <= 4; i++) {
-    ctx.beginPath();
-    ctx.arc(cx, cy, radius * i / 4, 0, Math.PI * 2);
-    ctx.stroke();
-  }
-
-  for (let i = 0; i < 12; i++) {
-    const angle = i * Math.PI / 6;
-    ctx.beginPath();
-    ctx.moveTo(cx, cy);
-    ctx.lineTo(cx + Math.cos(angle) * radius, cy + Math.sin(angle) * radius);
-    ctx.stroke();
-  }
-
-  const t = Date.now() / 1200;
-  const gradient = ctx.createRadialGradient(cx, cy, 4, cx, cy, radius);
-  gradient.addColorStop(0, color);
-  gradient.addColorStop(1, "rgba(255,255,255,0)");
-
-  ctx.strokeStyle = color;
-  ctx.lineWidth = 2;
-  ctx.beginPath();
-  ctx.moveTo(cx, cy);
-  ctx.lineTo(cx + Math.cos(t) * radius, cy + Math.sin(t) * radius);
-  ctx.stroke();
-
-  ctx.fillStyle = gradient;
-  ctx.beginPath();
-  ctx.moveTo(cx, cy);
-  ctx.arc(cx, cy, radius, t - 0.28, t);
-  ctx.closePath();
-  ctx.fill();
-}
-
-function animateRadar() {
-  drawRadar();
-  requestAnimationFrame(animateRadar);
-}
-
-async function fetchDecision() {
-  const symbol = $("symbol").value;
-  const endpoints = [
-    `/api/decision/quality-live?symbol=${encodeURIComponent(symbol)}`,
-    `https://api.ndsp.app/api/decision/quality-live?symbol=${encodeURIComponent(symbol)}`,
-    "https://api.ndsp.app/api/completed/latest"
-  ];
-
-  for (const url of endpoints) {
-    try {
-      const response = await fetch(url, { cache: "no-store" });
-      if (response.ok) return await response.json();
-    } catch (error) {
-      // Try next endpoint.
-    }
-  }
-
+async function fetchDecision(){
+  const sym=$("symbol").value;
+  const urls=[`/api/decision/quality-live?symbol=${encodeURIComponent(sym)}`,`https://api.ndsp.app/api/decision/quality-live?symbol=${encodeURIComponent(sym)}`,"https://api.ndsp.app/api/completed/latest"];
+  for(const u of urls){try{const r=await fetch(u,{cache:"no-store"});if(r.ok)return await r.json()}catch(e){}}
   return null;
 }
-
-async function load() {
-  $("connectionState").textContent = "جاري الفحص";
-
-  const data = await fetchDecision();
-  const scenario = getScenario(data || {});
-  const quality = getQuality(data || {}, scenario);
-  const decision = classifyDecision(data || {}, scenario, quality);
-  const score = clamp(decision.score);
-
-  applyPalette(decision);
-
-  const symbol = $("symbol").value;
-  const livePrice =
-    asNumber(data?.instrument?.live_price) ??
-    asNumber(data?.live_price) ??
-    asNumber(data?.price);
-
-  $("connectionState").textContent = data ? "بيانات مباشرة" : "مصدر غير متاح";
-
-  $("assetName").textContent = symbol;
-  $("assetMeta").textContent = data?.instrument?.market ? `السوق: ${data.instrument.market}` : "مرتبط بمركز القرار";
-
-  $("decisionState").textContent = fmt(
-    scenario?.scenario_state ||
-    data?.decision_state ||
-    decision.label
-  );
-
-  $("confidenceValue").textContent = quality ? `${Math.round(quality)}%` : "—";
-  $("confidenceBar").style.setProperty("--w", `${clamp(quality)}%`);
-
-  $("directionContext").textContent = fmt(
-    scenario?.scenario_directional_context ||
-    data?.directional_context ||
-    data?.directional_bias ||
-    "قيد الفحص"
-  );
-
-  $("decisionSummary").textContent =
-    "قراءة مؤسسية حيّة للأصل المختار. الواجهة تعرض حالة القرار وسياقه بلغة واضحة دون توصية مالية أو أمر تنفيذ.";
-
-  $("goldenTitle").textContent =
-    decision.key === "green" ? "بيئة داعمة" :
-    decision.key === "gold" ? "ختم التوافق الذهبي" :
-    decision.key === "yellow" ? "متابعة حذرة" :
-    decision.key === "red" ? "منع حوكمي" :
-    "فحص سياقي";
-
-  $("governanceMessage").textContent = decision.reason;
-
-  $("radarLabel").textContent = decision.label;
-  $("radarStatusText").textContent = decision.status;
-  $("radarReason").textContent = decision.reason;
-  $("radarScore").textContent = Math.round(score);
-  $("radarCore").style.setProperty("--p", score);
-
-  $("livePrice").textContent = livePrice
-    ? livePrice.toLocaleString("en-US", { maximumFractionDigits: 2 })
-    : "—";
-
-  $("timeHorizon").textContent = fmt(
-    scenario?.scenario_time_horizon ||
-    data?.reading_horizon ||
-    data?.horizon ||
-    "قيد الفحص"
-  );
-
-  $("cautionReason").textContent = fmt(
-    data?.caution_reason ||
-    scenario?.scenario_risk_note ||
-    "لا توجد رسالة حذر معلنة"
-  );
-
-  $("updatedAt").textContent = new Date().toLocaleString("ar-SA");
-
-  $("activationLevel").textContent = fmt(scenario?.scenario_activation_level || data?.activation_level);
-  $("arrivalLevel").textContent = fmt(scenario?.scenario_arrival_level || data?.arrival_level);
-  $("reviewZone").textContent = fmt(scenario?.scenario_review_zone || data?.review_zone);
-  $("invalidationLevel").textContent = fmt(scenario?.scenario_invalidation_level || data?.invalidation_level);
-
-  $("sourceMode").textContent = fmt(data?.source_mode || data?.source || "محكوم");
-  $("statePayload").textContent = fmt(scenario?.scenario_state || data?.decision_state || data?.state || "قيد الفحص");
+async function load(){
+  $("connectionState").textContent="جاري الفحص";
+  const d=await fetchDecision(); const s=scenario(d||{}); const q=quality(d||{},s); const c=classify(d||{},s,q); const score=clamp(c.score);
+  apply(c.key);
+  $("connectionState").textContent=d?"بيانات مباشرة":"مصدر غير متاح";
+  $("assetName").textContent=$("symbol").value;
+  $("assetMeta").textContent=d?.instrument?.market?`السوق: ${d.instrument.market}`:"مرتبط بمركز القرار";
+  $("decisionState").textContent=fmt(s.scenario_state||d?.decision_state||c.label);
+  $("confidenceValue").textContent=q?`${Math.round(q)}%`:"—";
+  $("confidenceBar").style.setProperty("--w",`${clamp(q)}%`);
+  $("directionContext").textContent=fmt(s.scenario_directional_context||d?.directional_context||d?.directional_bias||"قيد الفحص");
+  $("governanceTitle").textContent=c.label;
+  $("governanceMessage").textContent=c.reason;
+  $("radarLabel").textContent=c.label;
+  $("radarStatusText").textContent=c.title;
+  $("radarReason").textContent=c.reason;
+  $("radarScore").textContent=Math.round(score);
+  $("radarCore").style.setProperty("--p",score);
+  const live=num(d?.instrument?.live_price)??num(d?.live_price)??num(d?.price);
+  $("livePrice").textContent=live?live.toLocaleString("en-US",{maximumFractionDigits:2}):"—";
+  $("timeHorizon").textContent=fmt(s.scenario_time_horizon||d?.reading_horizon||d?.horizon||"قيد الفحص");
+  $("cautionReason").textContent=fmt(d?.caution_reason||s.scenario_risk_note||"لا توجد رسالة حذر معلنة");
+  $("updatedAt").textContent=new Date().toLocaleString("ar-SA");
+  $("activationLevel").textContent=fmt(s.scenario_activation_level||d?.activation_level);
+  $("arrivalLevel").textContent=fmt(s.scenario_arrival_level||d?.arrival_level);
+  $("reviewZone").textContent=fmt(s.scenario_review_zone||d?.review_zone);
+  $("invalidationLevel").textContent=fmt(s.scenario_invalidation_level||d?.invalidation_level);
 }
-
-$("refresh").addEventListener("click", load);
-$("symbol").addEventListener("change", load);
-
-$("advancedToggle").addEventListener("click", () => {
-  document.body.classList.toggle("show-advanced");
-  $("advancedToggle").textContent =
-    document.body.classList.contains("show-advanced") ? "إخفاء المتقدم" : "عرض متقدم";
-});
-
-animateRadar();
+$("refresh").onclick=load;
+$("symbol").onchange=load;
+apply("yellow");
 load();
-setInterval(load, 45000);
+setInterval(load,45000);
 </script>
 </body>
 </html>
