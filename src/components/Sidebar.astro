@@ -1,0 +1,66 @@
+---
+import navigation from '../data/navigation.json';
+
+const sections = Array.isArray(navigation)
+  ? navigation
+  : Array.isArray(navigation.sections)
+    ? navigation.sections
+    : [];
+
+const currentPathRaw = Astro.url.pathname === '/' ? '/index.html' : Astro.url.pathname;
+
+function normalizePath(path) {
+  if (!path) return '/index.html';
+  const clean = path.startsWith('/') ? path : `/${path}`;
+  return clean === '/' ? '/index.html' : clean;
+}
+
+function isActive(href) {
+  const target = normalizePath(href);
+  const targetNoHtml = target.replace(/\.html$/, '');
+  const current = normalizePath(currentPathRaw);
+  const currentNoHtml = current.replace(/\.html$/, '');
+  return current === target || currentNoHtml === targetNoHtml;
+}
+---
+
+<aside class="ndsp-sidebar" aria-label="NDSP navigation">
+  <div class="ndsp-brand">
+    <a href="/index.html" class="ndsp-brand-mark" aria-label="NDSP Home">◇</a>
+    <div>
+      <strong>NDSP</strong>
+      <span class="lang-ar">منصة نواف لدعم القرار</span>
+      <span class="lang-en">Nawaf Decision Support Platform</span>
+    </div>
+  </div>
+
+  <button class="ndsp-lang-button" type="button" data-ndsp-lang-toggle>
+    <span class="lang-ar">English</span>
+    <span class="lang-en">العربية</span>
+  </button>
+
+  <nav class="ndsp-nav">
+    {sections.map((section) => (
+      <section class="ndsp-nav-section">
+        <h3>
+          <span class="lang-ar">{section.titleAr}</span>
+          <span class="lang-en">{section.titleEn}</span>
+        </h3>
+
+        <ol class="ndsp-nav-list">
+          {(section.items || []).map((item) => (
+            <li>
+              <a href={item.href} class:list={['ndsp-nav-link', isActive(item.href) ? 'is-active' : '']}>
+                <span class="ndsp-nav-number">{item.number}</span>
+                <span class="ndsp-nav-label">
+                  <span class="lang-ar">{item.labelAr}</span>
+                  <span class="lang-en">{item.labelEn}</span>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </section>
+    ))}
+  </nav>
+</aside>

@@ -1,0 +1,16 @@
+---
+import DecisionShell from '../layouts/DecisionShell.astro';
+---
+
+<DecisionShell titleAr="القراءات المكتملة" titleEn="Completed Readings">
+  <section class="ndsp-hero">
+    <span class="ndsp-kicker"><span class="lang-ar">أرشيف القراءة</span><span class="lang-en">Reading Archive</span></span>
+    <h2><span class="lang-ar">القراءات المكتملة</span><span class="lang-en">Completed Readings</span></h2>
+    <p><span class="lang-ar">هذه قراءات مكتملة وليست صفقات أو نتائج تنفيذ.</span><span class="lang-en">These are completed readings, not trades or execution results.</span></p>
+  </section>
+
+  <section class="ndsp-card">
+    <h3>الأرشيف</h3>
+    <ul class="ndsp-list" data-contract-list="monitoring.completed_readings"></ul>
+  </section>
+</DecisionShell>

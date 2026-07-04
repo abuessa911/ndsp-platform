@@ -1,0 +1,18 @@
+---
+import DecisionShell from '../layouts/DecisionShell.astro';
+---
+
+<DecisionShell titleAr="الإيجاز اليومي" titleEn="Daily Brief">
+  <section class="ndsp-hero">
+    <span class="ndsp-kicker"><span class="lang-ar">ملخص تنفيذي</span><span class="lang-en">Executive Summary</span></span>
+    <h2><span class="lang-ar">الإيجاز اليومي</span><span class="lang-en">Daily Brief</span></h2>
+    <p><span class="lang-ar">الإيجاز اليومي يلخص ما يستحق المتابعة، ولا يكرر كل بطاقات مركز القرار.</span><span class="lang-en">The daily brief summarizes what matters and does not repeat every Decision Center card.</span></p>
+  </section>
+
+  <section class="ndsp-grid">
+    <article class="ndsp-card ndsp-card-primary"><h3>العنوان</h3><p data-contract-text="daily_brief.headline">—</p></article>
+    <article class="ndsp-card"><h3>نقاط موجزة</h3><ul class="ndsp-list" data-contract-list="daily_brief.bullets"></ul></article>
+    <article class="ndsp-card"><h3>ما يجب مراقبته</h3><p data-contract-text="daily_brief.next_watch">—</p></article>
+    <article class="ndsp-card"><h3>الأصل الحالي</h3><p data-contract-text="identity.symbol">—</p></article>
+  </section>
+</DecisionShell>

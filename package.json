@@ -1,13 +1,14 @@
 {
-  "name": "ndsp-platform",
+  "name": "ndsp-clean-source",
   "version": "1.0.0",
+  "private": true,
   "type": "module",
   "scripts": {
-    "build": "node -e \"console.log('NDSP Alpic build OK')\"",
-    "start": "node server.js"
+    "dev": "astro dev --host 0.0.0.0",
+    "build": "astro build",
+    "preview": "astro preview --host 0.0.0.0"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "latest",
-    "express": "latest"
+    "astro": "^5.0.0"
   }
 }

@@ -1,0 +1,57 @@
+{
+  "sections": [
+    {
+      "titleAr": "الرئيسية",
+      "titleEn": "Home",
+      "items": [
+        {"number": 1, "labelAr": "اختيار السوق والأصل", "labelEn": "Asset Selector", "href": "/asset-selector.html"},
+        {"number": 2, "labelAr": "مركز القرار", "labelEn": "Decision Center", "href": "/decision-center.html"}
+      ]
+    },
+    {
+      "titleAr": "فهم القرار",
+      "titleEn": "Understand Decision",
+      "items": [
+        {"number": 3, "labelAr": "رادار القرار", "labelEn": "Decision Radar", "href": "/decision-radar.html"},
+        {"number": 4, "labelAr": "دليل فهم القرار", "labelEn": "Decision Guide", "href": "/decision-guide.html"},
+        {"number": 5, "labelAr": "دليل أنماط القرار", "labelEn": "Decision Modes Guide", "href": "/decision-modes-guide.html"}
+      ]
+    },
+    {
+      "titleAr": "مسار التحليل",
+      "titleEn": "Analysis Path",
+      "items": [
+        {"number": 6, "labelAr": "نقطة التقاء نواف NMP", "labelEn": "NMP — Nawaf Meet Point", "href": "/nmp.html"},
+        {"number": 7, "labelAr": "الإيجاز اليومي", "labelEn": "Daily Brief", "href": "/daily-brief.html"}
+      ]
+    },
+    {
+      "titleAr": "الماكرو والدولار",
+      "titleEn": "Macro & Dollar",
+      "items": [
+        {"number": 8, "labelAr": "نبض الدولار", "labelEn": "USD Pulse", "href": "/usd-pulse.html"},
+        {"number": 9, "labelAr": "أخبار الدولار", "labelEn": "Dollar News", "href": "/dollar-news.html"},
+        {"number": 10, "labelAr": "تأثير الدولار", "labelEn": "Dollar Impact", "href": "/dollar-impact.html"}
+      ]
+    },
+    {
+      "titleAr": "المتابعة",
+      "titleEn": "Monitoring",
+      "items": [
+        {"number": 11, "labelAr": "قائمة المتابعة", "labelEn": "Watchlist", "href": "/my-watchlist.html"},
+        {"number": 12, "labelAr": "سجل التنبيهات", "labelEn": "Alerts Log", "href": "/alerts-log.html"},
+        {"number": 13, "labelAr": "القراءات المكتملة", "labelEn": "Completed Readings", "href": "/completed-decisions.html"}
+      ]
+    },
+    {
+      "titleAr": "الأدلة والدعم",
+      "titleEn": "Guides & Support",
+      "items": [
+        {"number": 14, "labelAr": "دليل المستخدم", "labelEn": "User Guide", "href": "/user-guide.html"},
+        {"number": 15, "labelAr": "دليل المحترف", "labelEn": "Professional Guide", "href": "/pro-guide.html"},
+        {"number": 16, "labelAr": "الإعدادات", "labelEn": "Settings", "href": "/settings.html"},
+        {"number": 17, "labelAr": "مركز الدعم", "labelEn": "Support Center", "href": "/support-center.html"}
+      ]
+    }
+  ]
+}

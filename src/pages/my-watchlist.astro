@@ -1,0 +1,17 @@
+---
+import DecisionShell from '../layouts/DecisionShell.astro';
+---
+
+<DecisionShell titleAr="قائمة المتابعة" titleEn="Watchlist">
+  <section class="ndsp-hero">
+    <span class="ndsp-kicker"><span class="lang-ar">المتابعة</span><span class="lang-en">Monitoring</span></span>
+    <h2><span class="lang-ar">قائمة المتابعة</span><span class="lang-en">Watchlist</span></h2>
+    <p><span class="lang-ar">هذه الصفحة تحفظ الأصول التي تريد متابعتها، ولا تكرر قراءة مركز القرار.</span><span class="lang-en">This page stores assets to monitor and does not duplicate Decision Center readings.</span></p>
+  </section>
+
+  <section class="ndsp-card">
+    <h3>الأصول المحفوظة</h3>
+    <ul class="ndsp-list" data-contract-list="monitoring.watchlist"></ul>
+    <button type="button" data-watchlist-add>إضافة الأصل الحالي</button>
+  </section>
+</DecisionShell>

@@ -1,0 +1,40 @@
+---
+import DecisionShell from '../layouts/DecisionShell.astro';
+---
+
+<DecisionShell titleAr="اختيار السوق والأصل" titleEn="Asset Selector">
+  <section class="ndsp-hero">
+    <span class="ndsp-kicker"><span class="lang-ar">بداية رحلة القرار</span><span class="lang-en">Decision Journey Start</span></span>
+    <h2><span class="lang-ar">اختر الأصل الذي تريد قراءته</span><span class="lang-en">Choose the asset to read</span></h2>
+    <p><span class="lang-ar">هذه الصفحة تحدد الأصل فقط. القراءة الكاملة تظهر في مركز القرار حتى لا يتكرر التحليل في أكثر من مكان.</span><span class="lang-en">This page only selects the asset. The full reading belongs to Decision Center to avoid duplication.</span></p>
+  </section>
+
+  <section class="ndsp-grid">
+    <article class="ndsp-card">
+      <h3><span class="lang-ar">الأصل الحالي</span><span class="lang-en">Current Asset</span></h3>
+      <p><strong data-ndsp-symbol>BTCUSDT</strong></p>
+      <p><span class="lang-ar">اختيارك ينتقل إلى مركز القرار والرادار وNMP وصفحات الدولار.</span><span class="lang-en">Your selection flows into Decision Center, Radar, NMP, and USD pages.</span></p>
+    </article>
+
+    <article class="ndsp-card">
+      <h3><span class="lang-ar">أصول سريعة</span><span class="lang-en">Quick Assets</span></h3>
+      <div class="ndsp-action-row">
+        <button type="button" data-ndsp-symbol-option="BTCUSDT">BTCUSDT</button>
+        <button type="button" data-ndsp-symbol-option="ETHUSDT">ETHUSDT</button>
+        <button type="button" data-ndsp-symbol-option="XAUUSD">XAUUSD</button>
+        <button type="button" data-ndsp-symbol-option="DXY">DXY</button>
+      </div>
+    </article>
+
+    <article class="ndsp-card">
+      <h3><span class="lang-ar">الخطوة التالية</span><span class="lang-en">Next Step</span></h3>
+      <p><span class="lang-ar">بعد اختيار الأصل، افتح مركز القرار لمشاهدة الخلاصة والمخاطر والمستويات.</span><span class="lang-en">After choosing the asset, open Decision Center for summary, risk, and levels.</span></p>
+      <a class="ndsp-inline-link" href="/decision-center.html"><span class="lang-ar">فتح مركز القرار</span><span class="lang-en">Open Decision Center</span></a>
+    </article>
+
+    <article class="ndsp-card">
+      <h3><span class="lang-ar">تنبيه منهجي</span><span class="lang-en">Method Note</span></h3>
+      <p><span class="lang-ar">اختيار الأصل لا يعني قرارًا. القرار يبدأ بعد اكتمال قراءة المصدر.</span><span class="lang-en">Selecting an asset is not a decision. The reading starts after the source data is evaluated.</span></p>
+    </article>
+  </section>
+</DecisionShell>

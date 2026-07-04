@@ -1,0 +1,58 @@
+---
+import DecisionShell from '../layouts/DecisionShell.astro';
+---
+
+<DecisionShell titleAr="مركز القرار" titleEn="Decision Center">
+  <section class="ndsp-hero">
+    <span class="ndsp-kicker"><span class="lang-ar">القراءة النهائية</span><span class="lang-en">Final Reading</span></span>
+    <h2><span class="lang-ar">قراءة منظمة للأصل: <span data-contract-text="identity.symbol">—</span></span><span class="lang-en">Structured reading for: <span data-contract-text="identity.symbol">—</span></span></h2>
+    <p><span class="lang-ar">مركز القرار هو الصفحة الوحيدة التي تعرض الخلاصة النهائية والمخاطر والمستويات. بقية الصفحات تشرح أو تفصل جانبًا محددًا.</span><span class="lang-en">Decision Center is the only page that owns the final summary, risk, and levels. Other pages explain or detail a specific aspect.</span></p>
+
+    <div class="ndsp-mode-panel">
+      <div class="ndsp-mode-group">
+        <span class="ndsp-mini-label"><span class="lang-ar">طريقة العرض</span><span class="lang-en">Display Mode</span></span>
+        <div class="ndsp-action-row">
+          <button type="button" data-ndsp-display-mode="beginner"><span class="lang-ar">مبتدئ</span><span class="lang-en">Beginner</span></button>
+          <button type="button" data-ndsp-display-mode="professional"><span class="lang-ar">محترف</span><span class="lang-en">Professional</span></button>
+        </div>
+      </div>
+      <div class="ndsp-mode-group">
+        <span class="ndsp-mini-label"><span class="lang-ar">أفق القراءة</span><span class="lang-en">Reading Horizon</span></span>
+        <div class="ndsp-action-row">
+          <button type="button" data-ndsp-reading-horizon="investor"><span class="lang-ar">مستثمر</span><span class="lang-en">Investor</span></button>
+          <button type="button" data-ndsp-reading-horizon="tactical"><span class="lang-ar">تكتيكي</span><span class="lang-en">Tactical</span></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ndsp-note" data-contract-status>جاري تحديث القراءة من مصدر البيانات.</section>
+
+  <section class="ndsp-grid">
+    <article class="ndsp-card ndsp-card-primary">
+      <h3><span class="lang-ar">الخلاصة النهائية</span><span class="lang-en">Final Summary</span></h3>
+      <p><strong data-contract-text="decision.directional_context">—</strong></p>
+      <p data-contract-text="decision.sanitized_summary">—</p>
+    </article>
+
+    <article class="ndsp-card"><h3>حالة السيناريو</h3><p><strong data-contract-text="decision.scenario_state">—</strong></p><p>الحالة تصف القراءة، ولا تتحول إلى أمر تنفيذ.</p></article>
+    <article class="ndsp-card"><h3>سبب الحذر</h3><p data-contract-text="decision.caution_reason">—</p></article>
+    <article class="ndsp-card"><h3>جودة القرار</h3><p><strong data-contract-text="decision.decision_quality">—</strong></p><p>الجودة تقيس اكتمال القراءة، ولا تعني ضمانًا.</p></article>
+
+    <article class="ndsp-card">
+      <h3>المستويات المرجعية</h3>
+      <div class="ndsp-level-row"><span>مستوى التفعيل</span><strong data-contract-text="levels.activation">—</strong></div>
+      <div class="ndsp-level-row"><span>مستوى الوصول</span><strong data-contract-text="levels.arrival">—</strong></div>
+      <div class="ndsp-level-row"><span>منطقة المراجعة</span><strong data-contract-text="levels.review_zone">—</strong></div>
+      <div class="ndsp-level-row"><span>مستوى الإلغاء</span><strong data-contract-text="levels.invalidation">—</strong></div>
+    </article>
+
+    <article class="ndsp-card">
+      <h3>أثر الدولار المختصر</h3>
+      <p data-contract-text="usd_macro.usd_impact">—</p>
+      <a class="ndsp-inline-link" href="/usd-pulse.html">تفصيل الدولار</a>
+    </article>
+  </section>
+
+  <section class="ndsp-note" data-contract-text="disclaimers.decision_support_only">هذه قراءة دعم قرار وليست توصية مالية أو أمر تنفيذ.</section>
+</DecisionShell>

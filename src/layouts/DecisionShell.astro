@@ -1,0 +1,55 @@
+---
+import Sidebar from '../components/Sidebar.astro';
+import '../styles/ndsp-core.css';
+
+const {
+  titleAr = 'NDSP',
+  titleEn = 'NDSP'
+} = Astro.props;
+
+const pageTitle = `${titleAr} — NDSP`;
+---
+
+<!doctype html>
+<html lang="ar" dir="rtl" data-lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#050507" />
+    <title>{pageTitle}</title>
+    <meta
+      name="description"
+      content="NDSP — Nawaf Decision Support Platform. منصة دعم قرار وتحليل، وليست منصة توصيات أو تنفيذ."
+    />
+  </head>
+
+  <body>
+    <div class="ndsp-app-shell">
+      <Sidebar />
+
+      <main class="ndsp-main">
+        <header class="ndsp-topbar">
+          <div>
+            <span class="ndsp-kicker">
+              <span class="lang-ar">NDSP</span>
+              <span class="lang-en">NDSP</span>
+            </span>
+            <h1>
+              <span class="lang-ar">{titleAr}</span>
+              <span class="lang-en">{titleEn}</span>
+            </h1>
+          </div>
+
+          <a class="ndsp-topbar-action" href="/decision-center.html">
+            <span class="lang-ar">مركز القرار</span>
+            <span class="lang-en">Decision Center</span>
+          </a>
+        </header>
+
+        <slot />
+      </main>
+    </div>
+
+    <script src="/assets/ndsp-contract-runtime.js" defer></script>
+  </body>
+</html>

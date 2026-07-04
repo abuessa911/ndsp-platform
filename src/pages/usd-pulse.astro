@@ -1,0 +1,20 @@
+---
+import DecisionShell from '../layouts/DecisionShell.astro';
+---
+
+<DecisionShell titleAr="نبض الدولار" titleEn="USD Pulse">
+  <section class="ndsp-hero">
+    <span class="ndsp-kicker"><span class="lang-ar">الماكرو والدولار</span><span class="lang-en">Macro & Dollar</span></span>
+    <h2><span class="lang-ar">نبض الدولار</span><span class="lang-en">USD Pulse</span></h2>
+    <p><span class="lang-ar">هذه الصفحة تملك حالة الدولار العامة فقط. تأثيره التفصيلي على الأصول في صفحة تأثير الدولار.</span><span class="lang-en">This page owns the general dollar state only. Asset-class effects belong to Dollar Impact.</span></p>
+  </section>
+
+  <section class="ndsp-note" data-contract-status>جاري تحديث نبض الدولار.</section>
+
+  <section class="ndsp-grid">
+    <article class="ndsp-card"><h3>حالة الدولار</h3><p><strong data-contract-text="usd_macro.usd_state">—</strong></p></article>
+    <article class="ndsp-card"><h3>الأثر العام</h3><p data-contract-text="usd_macro.usd_impact">—</p></article>
+    <article class="ndsp-card"><h3>الأصل المرتبط</h3><p data-contract-text="identity.symbol">—</p></article>
+    <article class="ndsp-card"><h3>تنبيه منهجي</h3><p>الدولار عامل سياقي داعم أو ضاغط، وليس قرارًا مستقلًا.</p></article>
+  </section>
+</DecisionShell>

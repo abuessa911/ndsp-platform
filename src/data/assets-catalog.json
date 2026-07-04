@@ -1,0 +1,44 @@
+{
+  "markets": [
+    {
+      "key": "crypto",
+      "ar": "العملات الرقمية",
+      "en": "Crypto",
+      "assets": [
+        { "symbol": "BTCUSDT", "name": "Bitcoin" },
+        { "symbol": "ETHUSDT", "name": "Ethereum" },
+        { "symbol": "SOLUSDT", "name": "Solana" }
+      ]
+    },
+    {
+      "key": "forex",
+      "ar": "الفوركس",
+      "en": "Forex",
+      "assets": [
+        { "symbol": "EURUSD", "name": "Euro Dollar" },
+        { "symbol": "GBPUSD", "name": "Pound Dollar" },
+        { "symbol": "USDJPY", "name": "Dollar Yen" }
+      ]
+    },
+    {
+      "key": "metals_energy",
+      "ar": "المعادن والطاقة",
+      "en": "Metals & Energy",
+      "assets": [
+        { "symbol": "XAUUSD", "name": "Gold" },
+        { "symbol": "USOIL", "name": "WTI Oil" },
+        { "symbol": "UKOIL", "name": "Brent Oil" }
+      ]
+    },
+    {
+      "key": "indices_macro",
+      "ar": "المؤشرات والماكرو",
+      "en": "Indices & Macro",
+      "assets": [
+        { "symbol": "US100", "name": "Nasdaq 100" },
+        { "symbol": "SPX500", "name": "S&P 500" },
+        { "symbol": "DXY", "name": "Dollar Index" }
+      ]
+    }
+  ]
+}

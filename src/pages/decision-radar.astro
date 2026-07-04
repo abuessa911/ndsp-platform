@@ -1,0 +1,32 @@
+---
+import DecisionShell from '../layouts/DecisionShell.astro';
+---
+
+<DecisionShell titleAr="رادار القرار" titleEn="Decision Radar">
+  <section class="ndsp-hero">
+    <span class="ndsp-kicker"><span class="lang-ar">مساعد بصري</span><span class="lang-en">Visual Assistant</span></span>
+    <h2><span class="lang-ar">رادار القرار</span><span class="lang-en">Decision Radar</span></h2>
+    <p><span class="lang-ar">الرادار يختصر الحالة بصريًا، ولا يكرر الخلاصة النهائية الموجودة في مركز القرار.</span><span class="lang-en">Radar visualizes the state and does not repeat the final summary owned by Decision Center.</span></p>
+  </section>
+
+  <section class="ndsp-note" data-contract-status>جاري تحديث الرادار من عقد البيانات.</section>
+
+  <section class="ndsp-grid">
+    <article class="ndsp-card"><h3>حالة السوق</h3><p data-contract-text="radar.market_state">—</p></article>
+    <article class="ndsp-card"><h3>حالة المخاطر</h3><p data-contract-text="radar.risk_state">—</p></article>
+    <article class="ndsp-card"><h3>المستويات المرجعية</h3><p data-contract-text="radar.levels_state">—</p></article>
+    <article class="ndsp-card"><h3>NMP</h3><p data-contract-text="radar.nmp_state">—</p></article>
+    <article class="ndsp-card"><h3>قوة الأفق</h3><p data-contract-text="radar.horizon_state">—</p></article>
+    <article class="ndsp-card"><h3>محامي الشيطان</h3><p data-contract-text="radar.devil_state">—</p></article>
+  </section>
+
+  <section class="ndsp-card">
+    <h3>معنى الألوان</h3>
+    <div class="ndsp-legend">
+      <span><span class="ndsp-dot supportive"></span> داعم</span>
+      <span><span class="ndsp-dot caution"></span> يحتاج انتباه</span>
+      <span><span class="ndsp-dot danger"></span> ضغط أو عامل حجب</span>
+      <span><span class="ndsp-dot gold"></span> عامل قرار مهم</span>
+    </div>
+  </section>
+</DecisionShell>

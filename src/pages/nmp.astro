@@ -1,0 +1,18 @@
+---
+import DecisionShell from '../layouts/DecisionShell.astro';
+---
+
+<DecisionShell titleAr="نقطة التقاء نواف NMP" titleEn="NMP — Nawaf Meet Point">
+  <section class="ndsp-hero">
+    <span class="ndsp-kicker"><span class="lang-ar">مسار التحليل</span><span class="lang-en">Analysis Path</span></span>
+    <h2><span class="lang-ar">حالة NMP للأصل: <span data-contract-text="identity.symbol">—</span></span><span class="lang-en">NMP state for: <span data-contract-text="identity.symbol">—</span></span></h2>
+    <p><span class="lang-ar">NMP لا يخترع منطقة غير موجودة. يعرض الحالة والمنطقة فقط عند توفرها من عقد البيانات.</span><span class="lang-en">NMP never invents a zone. It shows state and zone only when available from the data contract.</span></p>
+  </section>
+
+  <section class="ndsp-grid">
+    <article class="ndsp-card"><h3>حالة NMP</h3><p><strong data-contract-text="nmp.state">—</strong></p></article>
+    <article class="ndsp-card"><h3>منطقة NMP</h3><p data-contract-text="nmp.zone">—</p></article>
+    <article class="ndsp-card"><h3>ملاحظة</h3><p data-contract-text="nmp.note">—</p></article>
+    <article class="ndsp-card"><h3>الربط مع القرار</h3><p>مركز القرار يبقى المرجع النهائي، وNMP يعرض طبقة تحقق فقط.</p></article>
+  </section>
+</DecisionShell>

@@ -1,0 +1,27 @@
+---
+const {
+  titleAr,
+  titleEn,
+  valueAr = 'تحت المتابعة',
+  valueEn = 'Under Monitoring',
+  textAr = 'هذه قراءة دعم قرار وليست توصية أو أمر تنفيذ.',
+  textEn = 'This is a decision-support reading, not advice or an execution order.'
+} = Astro.props;
+---
+
+<article class="ndsp-card">
+  <h3>
+    <span class="lang-ar">{titleAr}</span>
+    <span class="lang-en">{titleEn}</span>
+  </h3>
+  <p>
+    <strong>
+      <span class="lang-ar">{valueAr}</span>
+      <span class="lang-en">{valueEn}</span>
+    </strong>
+  </p>
+  <p>
+    <span class="lang-ar">{textAr}</span>
+    <span class="lang-en">{textEn}</span>
+  </p>
+</article>

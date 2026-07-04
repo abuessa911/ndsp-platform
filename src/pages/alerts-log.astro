@@ -1,0 +1,16 @@
+---
+import DecisionShell from '../layouts/DecisionShell.astro';
+---
+
+<DecisionShell titleAr="سجل التنبيهات" titleEn="Alerts Log">
+  <section class="ndsp-hero">
+    <span class="ndsp-kicker"><span class="lang-ar">المتابعة</span><span class="lang-en">Monitoring</span></span>
+    <h2><span class="lang-ar">سجل التنبيهات</span><span class="lang-en">Alerts Log</span></h2>
+    <p><span class="lang-ar">السجل يعرض التنبيهات المحفوظة فقط. التحليل الكامل يبقى في مركز القرار.</span><span class="lang-en">The log shows saved alerts only. Full analysis remains in Decision Center.</span></p>
+  </section>
+
+  <section class="ndsp-card">
+    <h3>التنبيهات</h3>
+    <ul class="ndsp-list" data-contract-list="monitoring.alerts"></ul>
+  </section>
+</DecisionShell>
