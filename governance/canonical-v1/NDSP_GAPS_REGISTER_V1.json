@@ -1,0 +1,431 @@
+{
+  "document_id": "NDSP-GAPS-REGISTER-001",
+  "version": "1.0.0",
+  "generated": "2026-07-30",
+  "commercial_status": "NO_GO",
+  "items": [
+    {
+      "id": "P0-01",
+      "severity": "P0",
+      "title": "عقد السيناريو المزدوج",
+      "status": "MISSING_CONFIRMED",
+      "area": "backend/api/ui",
+      "acceptance": [
+        "positive and negative objects",
+        "passes 9057/9082/9001",
+        "UI consumes live contract",
+        "regression tests"
+      ]
+    },
+    {
+      "id": "P0-02",
+      "severity": "P0",
+      "title": "عقد جودة البيانات العام",
+      "status": "MISSING_CONFIRMED",
+      "area": "data/backend/api/ui",
+      "acceptance": [
+        "public safe object",
+        "freshness and limitations",
+        "no hardcoded score",
+        "no secrets"
+      ]
+    },
+    {
+      "id": "P0-03",
+      "severity": "P0",
+      "title": "Normalizer الواجهة لا يحفظ العقدين",
+      "status": "MISSING_CONFIRMED",
+      "area": "frontend",
+      "acceptance": [
+        "source update",
+        "no minified patch",
+        "partial/stale/error states"
+      ]
+    },
+    {
+      "id": "P0-04",
+      "severity": "P0",
+      "title": "السيناريو البديل نص ثابت",
+      "status": "CONFIRMED",
+      "area": "frontend",
+      "acceptance": [
+        "API-bound alternative scenario",
+        "closed by default",
+        "switch conditions"
+      ]
+    },
+    {
+      "id": "P0-05",
+      "severity": "P0",
+      "title": "قيمة جودة بيانات ثابتة",
+      "status": "CONFIRMED",
+      "area": "frontend",
+      "acceptance": [
+        "remove 88%",
+        "live value only",
+        "unavailable when missing"
+      ]
+    },
+    {
+      "id": "P0-06",
+      "severity": "P0",
+      "title": "OHLC حي غير مثبت",
+      "status": "PARTIAL_UNVERIFIED",
+      "area": "market-data",
+      "acceptance": [
+        "real candles",
+        "closed-candle validation",
+        "source status"
+      ]
+    },
+    {
+      "id": "P0-07",
+      "severity": "P0",
+      "title": "الشارت التجاري غير مكتمل",
+      "status": "PARTIAL",
+      "area": "frontend/chart",
+      "acceptance": [
+        "candles",
+        "zoom/pan/crosshair",
+        "indicator panels"
+      ]
+    },
+    {
+      "id": "P0-08",
+      "severity": "P0",
+      "title": "المحفظة ليست Backend كاملًا",
+      "status": "PARTIAL_CONFIRMED",
+      "area": "portfolio",
+      "acceptance": [
+        "DB persistence",
+        "ownership",
+        "CRUD",
+        "multi-device"
+      ]
+    },
+    {
+      "id": "P0-09",
+      "severity": "P0",
+      "title": "التنبيهات غير مكتملة تجاريًا",
+      "status": "PARTIAL",
+      "area": "alerts",
+      "acceptance": [
+        "DB rules",
+        "real email/telegram/in-app",
+        "delivery log",
+        "dedup"
+      ]
+    },
+    {
+      "id": "P0-10",
+      "severity": "P0",
+      "title": "Entitlements Server-side غير مثبتة",
+      "status": "PARTIAL_UNVERIFIED",
+      "area": "commercial/security",
+      "acceptance": [
+        "middleware",
+        "API field filtering",
+        "plan tests"
+      ]
+    },
+    {
+      "id": "P0-11",
+      "severity": "P0",
+      "title": "الاشتراكات والفوترة",
+      "status": "INCOMPLETE",
+      "area": "commercial",
+      "acceptance": [
+        "checkout",
+        "webhooks",
+        "idempotency",
+        "invoices"
+      ]
+    },
+    {
+      "id": "P0-12",
+      "severity": "P0",
+      "title": "Source→Build→Release للواجهة غير مقفول",
+      "status": "UNVERIFIED",
+      "area": "release-engineering",
+      "acceptance": [
+        "canonical source",
+        "build hash",
+        "release path",
+        "nginx route"
+      ]
+    },
+    {
+      "id": "P0-13",
+      "severity": "P0",
+      "title": "فصل Live/Mock غير مكتمل",
+      "status": "PARTIAL",
+      "area": "frontend/data",
+      "acceptance": [
+        "no silent fallback",
+        "clear labels",
+        "no invented values"
+      ]
+    },
+    {
+      "id": "P0-14",
+      "severity": "P0",
+      "title": "قفل المصدر للطبقات 16 غير مكتمل",
+      "status": "PARTIAL",
+      "area": "governance",
+      "acceptance": [
+        "source/service/contracts/tests/commit per layer"
+      ]
+    },
+    {
+      "id": "P0-15",
+      "severity": "P0",
+      "title": "تضارب وثائق الحوكمة",
+      "status": "CONFIRMED_RISK",
+      "area": "governance",
+      "acceptance": [
+        "single precedence",
+        "superseded archive",
+        "rollback manifest"
+      ]
+    },
+    {
+      "id": "P0-16",
+      "severity": "P0",
+      "title": "Restore Drill حديث غير مثبت",
+      "status": "UNVERIFIED",
+      "area": "backup-restore",
+      "acceptance": [
+        "fresh backup",
+        "isolated restore",
+        "health checks",
+        "RTO/RPO"
+      ]
+    },
+    {
+      "id": "P0-17",
+      "severity": "P0",
+      "title": "Regression للعقدين الجديدين",
+      "status": "MISSING",
+      "area": "tests",
+      "acceptance": [
+        "9057/9082/9001/api/frontend/browser"
+      ]
+    },
+    {
+      "id": "P0-18",
+      "severity": "P0",
+      "title": "بوابات الإصدار غير مكتملة",
+      "status": "INCOMPLETE",
+      "area": "release",
+      "acceptance": [
+        "unit/integration/build/playwright/visual/rollback"
+      ]
+    },
+    {
+      "id": "P1-01",
+      "severity": "P1",
+      "title": "المؤشرات ليست سلاسل زمنية كاملة",
+      "status": "PARTIAL",
+      "area": "analytics",
+      "acceptance": [
+        "same timeframe series",
+        "timestamps",
+        "no invented data"
+      ]
+    },
+    {
+      "id": "P1-02",
+      "severity": "P1",
+      "title": "الانحراف غير مثبت في العرض",
+      "status": "PARTIAL",
+      "area": "analytics/frontend",
+      "acceptance": [
+        "explicit contract",
+        "type/direction/indicator",
+        "chart evidence"
+      ]
+    },
+    {
+      "id": "P1-03",
+      "severity": "P1",
+      "title": "الأخبار والسرد السوقي",
+      "status": "NOT_BOUND_TO_VERIFIED_RUNTIME",
+      "area": "context",
+      "acceptance": [
+        "reliable feed",
+        "entity mapping",
+        "readiness-only effect"
+      ]
+    },
+    {
+      "id": "P1-04",
+      "severity": "P1",
+      "title": "الأحداث الاقتصادية",
+      "status": "NOT_BOUND_TO_VERIFIED_RUNTIME",
+      "area": "context",
+      "acceptance": [
+        "calendar feed",
+        "impact windows",
+        "risk integration"
+      ]
+    },
+    {
+      "id": "P1-05",
+      "severity": "P1",
+      "title": "محرك التعارض",
+      "status": "NOT_BOUND_TO_VERIFIED_RUNTIME",
+      "area": "governance",
+      "acceptance": [
+        "conflict_state",
+        "reason codes",
+        "readiness impact"
+      ]
+    },
+    {
+      "id": "P1-06",
+      "severity": "P1",
+      "title": "محاكاة السيناريوهات",
+      "status": "NOT_BOUND_TO_VERIFIED_RUNTIME",
+      "area": "simulation",
+      "acceptance": [
+        "reproducible snapshot",
+        "separate from governing decision"
+      ]
+    },
+    {
+      "id": "P1-07",
+      "severity": "P1",
+      "title": "Provider reconciliation وlineage",
+      "status": "PARTIAL",
+      "area": "data",
+      "acceptance": [
+        "raw/accepted snapshot",
+        "trace id",
+        "accept/reject reason"
+      ]
+    },
+    {
+      "id": "P1-08",
+      "severity": "P1",
+      "title": "Evidence ledger وreplay",
+      "status": "PARTIAL_UNVERIFIED",
+      "area": "evidence",
+      "acceptance": [
+        "immutable record",
+        "replay",
+        "outcome separation"
+      ]
+    },
+    {
+      "id": "P1-09",
+      "severity": "P1",
+      "title": "Watchlist دائمة",
+      "status": "PARTIAL",
+      "area": "user-data",
+      "acceptance": [
+        "backend persistence",
+        "plan limits",
+        "multi-device"
+      ]
+    },
+    {
+      "id": "P1-10",
+      "severity": "P1",
+      "title": "مركز الدعم تجريبي",
+      "status": "PARTIAL",
+      "area": "support",
+      "acceptance": [
+        "real ticket",
+        "status",
+        "history"
+      ]
+    },
+    {
+      "id": "P1-11",
+      "severity": "P1",
+      "title": "الحساب والأمان",
+      "status": "PARTIAL",
+      "area": "account",
+      "acceptance": [
+        "sessions",
+        "2FA",
+        "export/delete",
+        "audit"
+      ]
+    },
+    {
+      "id": "P1-12",
+      "severity": "P1",
+      "title": "قرارات تجارية غير معتمدة",
+      "status": "OWNER_DECISION",
+      "area": "commercial",
+      "acceptance": [
+        "plans",
+        "prices",
+        "limits",
+        "grace policy"
+      ]
+    },
+    {
+      "id": "P1-13",
+      "severity": "P1",
+      "title": "اكتمال العربية والإنجليزية",
+      "status": "PARTIAL",
+      "area": "localization",
+      "acceptance": [
+        "central dictionary",
+        "RTL/LTR",
+        "long text tests"
+      ]
+    },
+    {
+      "id": "P1-14",
+      "severity": "P1",
+      "title": "Responsive matrix",
+      "status": "UNVERIFIED_COMPLETE",
+      "area": "frontend",
+      "acceptance": [
+        "9 viewports",
+        "125/150/200 zoom",
+        "AR/EN"
+      ]
+    },
+    {
+      "id": "P1-15",
+      "severity": "P1",
+      "title": "Accessibility",
+      "status": "PARTIAL",
+      "area": "frontend",
+      "acceptance": [
+        "keyboard",
+        "focus",
+        "ARIA",
+        "contrast",
+        "reduced motion"
+      ]
+    },
+    {
+      "id": "P1-16",
+      "severity": "P1",
+      "title": "Git والمصادر المهجورة",
+      "status": "RISK",
+      "area": "source-control",
+      "acceptance": [
+        "clean source/build separation",
+        "tracked canonical files"
+      ]
+    },
+    {
+      "id": "P1-17",
+      "severity": "P1",
+      "title": "تكرار الخدمات والأغلفة",
+      "status": "RISK",
+      "area": "runtime",
+      "acceptance": [
+        "classify services",
+        "consumer scan",
+        "deprecation plan"
+      ]
+    }
+  ]
+}
