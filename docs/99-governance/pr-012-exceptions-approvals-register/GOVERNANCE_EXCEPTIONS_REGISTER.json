@@ -1,0 +1,187 @@
+{
+  "schema_version": "1.0",
+  "document": "NDSP Governance Exceptions and Approvals Register",
+  "generated_at": "2026-07-31T14:09:16.772544+00:00",
+  "source_commit": "142e0067fa5de9ea1d58227e235b40d6386d3423",
+  "scope": "docs/99-governance",
+  "runtime_changes": "none",
+  "status": "ACTIVE",
+  "purpose": "Provide a canonical structure for recording governance exceptions, approvals, expiry conditions, evidence, and closure decisions.",
+  "register_state": {
+    "active_exceptions": 0,
+    "expired_exceptions": 0,
+    "closed_exceptions": 0,
+    "pending_approvals": 0,
+    "recorded_approvals": 0
+  },
+  "required_exception_fields": [
+    "exception_id",
+    "title",
+    "description",
+    "affected_scope",
+    "requested_by",
+    "owner",
+    "justification",
+    "risk_assessment",
+    "compensating_controls",
+    "approval_status",
+    "approved_by",
+    "approval_date",
+    "effective_date",
+    "expiry_date",
+    "review_date",
+    "evidence",
+    "closure_status",
+    "closure_date"
+  ],
+  "exception_statuses": [
+    "DRAFT",
+    "PENDING_APPROVAL",
+    "APPROVED",
+    "REJECTED",
+    "ACTIVE",
+    "EXPIRED",
+    "REVOKED",
+    "CLOSED"
+  ],
+  "approval_requirements": [
+    {
+      "change_type": "documentation_correction",
+      "required_approvers": [
+        "maintainer"
+      ]
+    },
+    {
+      "change_type": "governance_extension",
+      "required_approvers": [
+        "artifact_owner",
+        "maintainer"
+      ]
+    },
+    {
+      "change_type": "policy_exception",
+      "required_approvers": [
+        "governance_owner",
+        "maintainer"
+      ]
+    },
+    {
+      "change_type": "runtime_scope_exception",
+      "required_approvers": [
+        "runtime_owner",
+        "governance_owner",
+        "maintainer"
+      ]
+    }
+  ],
+  "control_rules": [
+    "Every exception must have a unique immutable identifier.",
+    "No exception may be approved without an owner.",
+    "Every exception must include an expiry or review date.",
+    "Compensating controls must be documented before approval.",
+    "Approval evidence must be preserved in the repository.",
+    "Expired exceptions must not remain active.",
+    "Closed exceptions must retain their complete decision history.",
+    "Runtime changes must not be hidden inside governance-only pull requests."
+  ],
+  "review_process": [
+    {
+      "step": 1,
+      "name": "submit",
+      "requirement": "Create the exception record with complete scope."
+    },
+    {
+      "step": 2,
+      "name": "assess",
+      "requirement": "Document risk and compensating controls."
+    },
+    {
+      "step": 3,
+      "name": "approve",
+      "requirement": "Collect all required named approvals."
+    },
+    {
+      "step": 4,
+      "name": "activate",
+      "requirement": "Set effective, expiry, and review dates."
+    },
+    {
+      "step": 5,
+      "name": "monitor",
+      "requirement": "Review evidence and controls before expiry."
+    },
+    {
+      "step": 6,
+      "name": "close",
+      "requirement": "Record closure status and final evidence."
+    }
+  ],
+  "exceptions": [],
+  "approvals": [],
+  "validated_governance_baseline": [
+    {
+      "pr": "PR-004",
+      "directory": "pr-004-runtime-dependency-map",
+      "primary_artifact": "FINAL_RUNTIME_DEPENDENCY_MAP.json",
+      "status": "PRESENT",
+      "file_count": 8,
+      "primary_artifact_sha256": "579336a09ee02b81a26ee6070decff87f83c96e9e6735c09e23ab670f5d84464"
+    },
+    {
+      "pr": "PR-005",
+      "directory": "pr-005-runtime-ownership-map",
+      "primary_artifact": "FINAL_RUNTIME_OWNERSHIP_MAP.json",
+      "status": "PRESENT",
+      "file_count": 5,
+      "primary_artifact_sha256": "11009cf78d6ce22629098db8f172beed92647dc6eaf24cd120350c6a6fca44cb"
+    },
+    {
+      "pr": "PR-006",
+      "directory": "pr-006-network-exposure-map",
+      "primary_artifact": "FINAL_NETWORK_EXPOSURE_MAP.json",
+      "status": "PRESENT",
+      "file_count": 5,
+      "primary_artifact_sha256": "4d672f5fd5313bc9ca3ab5cda21f0a89934b81ab6ecbb3cdd6ea620cae90fdc9"
+    },
+    {
+      "pr": "PR-007",
+      "directory": "pr-007-noncanonical-ownership",
+      "primary_artifact": "FINAL_NONCANONICAL_OWNERSHIP_MAP.json",
+      "status": "PRESENT",
+      "file_count": 5,
+      "primary_artifact_sha256": "5239677f1cdf01ad470167a5b0865378ae4d36e70ccc2aabe194d4b478a35b15"
+    },
+    {
+      "pr": "PR-008",
+      "directory": "pr-008-governance-closure",
+      "primary_artifact": "PR-008-COMMIT-MANIFEST.json",
+      "status": "PRESENT",
+      "file_count": 4,
+      "primary_artifact_sha256": "6f9934ec7bd8f2f08418be0bb2aafdf4d0d9a13e4c982c1f36b31d5d88761966"
+    },
+    {
+      "pr": "PR-009",
+      "directory": "pr-009-governance-index",
+      "primary_artifact": "GOVERNANCE_INDEX.json",
+      "status": "PRESENT",
+      "file_count": 4,
+      "primary_artifact_sha256": "06ef7c192129729f1d0573179572ad20f5b6adfe2992e5707ee3d00a79b18da8"
+    },
+    {
+      "pr": "PR-010",
+      "directory": "pr-010-integrity-audit",
+      "primary_artifact": "GOVERNANCE_INTEGRITY_AUDIT.json",
+      "status": "PRESENT",
+      "file_count": 4,
+      "primary_artifact_sha256": "2768a711a821f59982985bdec7a97e3a8145c94b7536e60fdc0b387e1a09087a"
+    },
+    {
+      "pr": "PR-011",
+      "directory": "pr-011-governance-update-policy",
+      "primary_artifact": "GOVERNANCE_UPDATE_POLICY.json",
+      "status": "PRESENT",
+      "file_count": 4,
+      "primary_artifact_sha256": "3ebdef8431149f478f45083f3e0f763ef0cd72f0704a6b56d8abd056d2b41d66"
+    }
+  ]
+}
