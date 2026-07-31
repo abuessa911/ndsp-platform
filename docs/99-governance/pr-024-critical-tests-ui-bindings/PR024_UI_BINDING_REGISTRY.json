@@ -1,0 +1,156 @@
+[
+  {
+    "capability_id": "CAP-235EF538DEF9",
+    "capability_name": "Auth Reset",
+    "recommended_screen": "AUTHENTICATION",
+    "recommended_feature": "Authentication and account access",
+    "required_binding": "Bind verified API response to visible component with loading, empty, stale, and error states",
+    "endpoint": "/admin/plan-features/:id",
+    "data_state": "REAL_LIVE|REAL_SNAPSHOT",
+    "source_path": "/home/nawaf511/empire-core-new/backend/app/api/v1/frontend_contract.py",
+    "binding_status": "ENDPOINT_AVAILABLE"
+  },
+  {
+    "capability_id": "CAP-2CD69A7EA838",
+    "capability_name": "Frontend Contract",
+    "recommended_screen": "AUTHENTICATION",
+    "recommended_feature": "Authentication and account access",
+    "required_binding": "Bind verified API response to visible component with loading, empty, stale, and error states",
+    "endpoint": "/admin/plan-features/:id",
+    "data_state": "REAL_LIVE|REAL_SNAPSHOT",
+    "source_path": "/home/nawaf511/empire-core-new/backend/app/api/v1/frontend_contract.py",
+    "binding_status": "ENDPOINT_AVAILABLE"
+  },
+  {
+    "capability_id": "CAP-C8C94E7A8122",
+    "capability_name": "Frontend Contract",
+    "recommended_screen": "AUTHENTICATION",
+    "recommended_feature": "Authentication and account access",
+    "required_binding": "Bind verified API response to visible component with loading, empty, stale, and error states",
+    "endpoint": "/admin/plan-features/:id",
+    "data_state": "REAL_LIVE|REAL_SNAPSHOT",
+    "source_path": "/home/nawaf511/empire-core-new/backend/app/api/v1/frontend_contract.py",
+    "binding_status": "ENDPOINT_AVAILABLE"
+  },
+  {
+    "capability_id": "CAP-D0B86CD5E331",
+    "capability_name": "Frontend Contract",
+    "recommended_screen": "AUTHENTICATION",
+    "recommended_feature": "Authentication and account access",
+    "required_binding": "Bind verified API response to visible component with loading, empty, stale, and error states",
+    "endpoint": "/admin/plan-features/:id",
+    "data_state": "REAL_LIVE|REAL_SNAPSHOT",
+    "source_path": "/home/nawaf511/empire-core-new/backend/app/api/v1/frontend_contract.py",
+    "binding_status": "ENDPOINT_AVAILABLE"
+  },
+  {
+    "capability_id": "CAP-862CD297F1FD",
+    "capability_name": "Frontend Contract",
+    "recommended_screen": "AUTHENTICATION",
+    "recommended_feature": "Authentication and account access",
+    "required_binding": "Bind verified API response to visible component with loading, empty, stale, and error states",
+    "endpoint": "/admin/plan-features/:id",
+    "data_state": "REAL_LIVE|REAL_SNAPSHOT",
+    "source_path": "/home/nawaf511/empire-core-new/backend/app/api/v1/frontend_contract.py",
+    "binding_status": "ENDPOINT_AVAILABLE"
+  },
+  {
+    "capability_id": "CAP-2B9AC68DB1D6",
+    "capability_name": "Assert No Decision Mutation",
+    "recommended_screen": "DECISION_ROOM",
+    "recommended_feature": "Decision intelligence workspace",
+    "required_binding": "Bind verified API response to visible component with loading, empty, stale, and error states",
+    "endpoint": "/admin/plan-features/:id",
+    "data_state": "REAL_LIVE|REAL_SNAPSHOT",
+    "source_path": "/home/nawaf511/empire-core-new/backend/app/support_layers/scenario/scenario_engine.py",
+    "binding_status": "ENDPOINT_AVAILABLE"
+  },
+  {
+    "capability_id": "CAP-3965B46743DE",
+    "capability_name": "Frontend Contract",
+    "recommended_screen": "DECISION_ROOM",
+    "recommended_feature": "Decision intelligence workspace",
+    "required_binding": "Bind verified API response to visible component with loading, empty, stale, and error states",
+    "endpoint": "/admin/plan-features/:id",
+    "data_state": "REAL_LIVE|REAL_SNAPSHOT",
+    "source_path": "/home/nawaf511/empire-core-new/backend/app/api/v1/frontend_contract.py",
+    "binding_status": "ENDPOINT_AVAILABLE"
+  },
+  {
+    "capability_id": "CAP-935E1E26D22F",
+    "capability_name": "Dqsrisk State",
+    "recommended_screen": "QUALITY_AND_RISK",
+    "recommended_feature": "Decision quality and risk controls",
+    "required_binding": "Bind verified API response to visible component with loading, empty, stale, and error states",
+    "endpoint": "/admin/plan-features/:id",
+    "data_state": "REAL_LIVE|REAL_SNAPSHOT",
+    "source_path": "/home/nawaf511/empire-core-new/backend/app/support_layers/quality/decision_quality_stack.py",
+    "binding_status": "ENDPOINT_AVAILABLE"
+  },
+  {
+    "capability_id": "CAP-B89CF4208B10",
+    "capability_name": "Grade From Score",
+    "recommended_screen": "QUALITY_AND_RISK",
+    "recommended_feature": "Decision quality and risk controls",
+    "required_binding": "Bind verified API response to visible component with loading, empty, stale, and error states",
+    "endpoint": "/admin/plan-features/:id",
+    "data_state": "REAL_LIVE|REAL_SNAPSHOT",
+    "source_path": "/home/nawaf511/empire-core-new/backend/app/support_layers/quality/decision_quality_stack.py",
+    "binding_status": "ENDPOINT_AVAILABLE"
+  },
+  {
+    "capability_id": "CAP-C84121300635",
+    "capability_name": "Tdl V2 Policy Admin",
+    "recommended_screen": "QUALITY_AND_RISK",
+    "recommended_feature": "Decision quality and risk controls",
+    "required_binding": "Bind verified API response to visible component with loading, empty, stale, and error states",
+    "endpoint": "/api/admin-actions/users/action/health",
+    "data_state": "REAL_LIVE|REAL_SNAPSHOT",
+    "source_path": "/home/nawaf511/empire-core-new/apps/ndsp-governance-bridge/policies/admin_snapshot/tdl_v2_policy_admin.py",
+    "binding_status": "ENDPOINT_AVAILABLE"
+  },
+  {
+    "capability_id": "CAP-4FF90CCC6DFE",
+    "capability_name": "Tdl V2 Policy Admin",
+    "recommended_screen": "QUALITY_AND_RISK",
+    "recommended_feature": "Decision quality and risk controls",
+    "required_binding": "Bind verified API response to visible component with loading, empty, stale, and error states",
+    "endpoint": "/api/admin-actions/users/action/health",
+    "data_state": "REAL_LIVE|REAL_SNAPSHOT",
+    "source_path": "/home/nawaf511/empire-core-new/apps/ndsp-governance-bridge/policies/admin_snapshot/tdl_v2_policy_admin.py",
+    "binding_status": "ENDPOINT_AVAILABLE"
+  },
+  {
+    "capability_id": "CAP-93DD0F3859D4",
+    "capability_name": "Tdl V2 Policy Admin",
+    "recommended_screen": "QUALITY_AND_RISK",
+    "recommended_feature": "Decision quality and risk controls",
+    "required_binding": "Bind verified API response to visible component with loading, empty, stale, and error states",
+    "endpoint": "/api/admin-actions/users/action/health",
+    "data_state": "REAL_LIVE|REAL_SNAPSHOT",
+    "source_path": "/home/nawaf511/empire-core-new/apps/ndsp-governance-bridge/policies/admin_snapshot/tdl_v2_policy_admin.py",
+    "binding_status": "ENDPOINT_AVAILABLE"
+  },
+  {
+    "capability_id": "CAP-8A9DD9B6E7D5",
+    "capability_name": "Tdl V2 Policy Admin",
+    "recommended_screen": "QUALITY_AND_RISK",
+    "recommended_feature": "Decision quality and risk controls",
+    "required_binding": "Bind verified API response to visible component with loading, empty, stale, and error states",
+    "endpoint": "/api/admin-actions/users/action/health",
+    "data_state": "REAL_LIVE|REAL_SNAPSHOT",
+    "source_path": "/home/nawaf511/empire-core-new/apps/ndsp-governance-bridge/policies/admin_snapshot/tdl_v2_policy_admin.py",
+    "binding_status": "ENDPOINT_AVAILABLE"
+  },
+  {
+    "capability_id": "CAP-AA4ECF6DF3F8",
+    "capability_name": "Tdl V2 Policy Admin",
+    "recommended_screen": "QUALITY_AND_RISK",
+    "recommended_feature": "Decision quality and risk controls",
+    "required_binding": "Bind verified API response to visible component with loading, empty, stale, and error states",
+    "endpoint": "/api/admin-actions/users/action/health",
+    "data_state": "REAL_LIVE|REAL_SNAPSHOT",
+    "source_path": "/home/nawaf511/empire-core-new/apps/ndsp-governance-bridge/policies/admin_snapshot/tdl_v2_policy_admin.py",
+    "binding_status": "ENDPOINT_AVAILABLE"
+  }
+]
