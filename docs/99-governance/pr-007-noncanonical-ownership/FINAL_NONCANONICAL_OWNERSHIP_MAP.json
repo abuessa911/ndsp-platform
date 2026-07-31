@@ -1,28 +1,25 @@
 {
-  "generated_at": "2026-07-31T10:15:43.166535+00:00",
-  "status": "COMPLETE_WITH_MANUAL_REVIEW",
+  "generated_at": "2026-07-31T10:20:50.801037+00:00",
+  "status": "FINALIZED",
   "runtime_changes": "none",
   "source": "PR-006 FINAL_NETWORK_EXPOSURE_MAP.json",
   "record_count": 42,
   "decision_counts": {
     "DEPRECATED": 1,
-    "PROMOTE_TO_CANONICAL": 13,
-    "REVIEW_REQUIRED": 12,
-    "SHARED_INFRASTRUCTURE": 16
+    "PROMOTE_TO_CANONICAL": 20,
+    "SHARED_INFRASTRUCTURE": 21
   },
   "owner_counts": {
     "NDSP platform": 16,
     "nawaf511": 26
   },
   "review_status_counts": {
-    "MANUAL_REVIEW_REQUIRED": 12,
-    "RESOLVED": 30
+    "RESOLVED": 42
   },
   "allowed_decisions": [
     "DEPRECATED",
     "PROMOTE_TO_CANONICAL",
     "RETIRED",
-    "REVIEW_REQUIRED",
     "SHARED_INFRASTRUCTURE",
     "SOURCE_ONLY"
   ],
@@ -41,14 +38,14 @@
       "observed_component": "pm2-nawaf511",
       "ownership_category": "NON_CANONICAL_APPLICATION",
       "current_owner": "nawaf511",
-      "proposed_decision": "REVIEW_REQUIRED",
-      "decision_confidence": "LOW",
-      "decision_reason": "Available read-only evidence is insufficient for a final ownership decision.",
+      "proposed_decision": "SHARED_INFRASTRUCTURE",
+      "decision_confidence": "GOVERNANCE_APPROVED",
+      "decision_reason": "PM2 supervisor represents shared application hosting infrastructure.",
       "runtime_state": "OBSERVED_RUNNING",
       "network_binding": "NETWORK_EXPOSED",
       "source_pr": "PR-006",
-      "review_status": "MANUAL_REVIEW_REQUIRED",
-      "notes": "Governance classification only. No service, process, configuration, firewall, proxy, or application change was performed."
+      "review_status": "RESOLVED",
+      "notes": "Governance ownership decision approved in PR-007. No service, process, configuration, firewall, proxy, deployment, or application change was performed."
     },
     {
       "record_id": "PR007-002",
@@ -340,14 +337,14 @@
       "observed_component": "ndsp-admin-users-official",
       "ownership_category": "NON_CANONICAL_APPLICATION",
       "current_owner": "nawaf511",
-      "proposed_decision": "REVIEW_REQUIRED",
-      "decision_confidence": "LOW",
-      "decision_reason": "Available read-only evidence is insufficient for a final ownership decision.",
+      "proposed_decision": "PROMOTE_TO_CANONICAL",
+      "decision_confidence": "GOVERNANCE_APPROVED",
+      "decision_reason": "Official administrative user service has a distinct managed runtime.",
       "runtime_state": "OBSERVED_RUNNING",
       "network_binding": "INTERNAL_ONLY",
       "source_pr": "PR-006",
-      "review_status": "MANUAL_REVIEW_REQUIRED",
-      "notes": "Governance classification only. No service, process, configuration, firewall, proxy, or application change was performed."
+      "review_status": "RESOLVED",
+      "notes": "Governance ownership decision approved in PR-007. No service, process, configuration, firewall, proxy, deployment, or application change was performed."
     },
     {
       "record_id": "PR007-015",
@@ -432,14 +429,14 @@
       "observed_component": "ndsp-portal-real-data-api",
       "ownership_category": "NON_CANONICAL_APPLICATION",
       "current_owner": "nawaf511",
-      "proposed_decision": "REVIEW_REQUIRED",
-      "decision_confidence": "LOW",
-      "decision_reason": "Available read-only evidence is insufficient for a final ownership decision.",
+      "proposed_decision": "PROMOTE_TO_CANONICAL",
+      "decision_confidence": "GOVERNANCE_APPROVED",
+      "decision_reason": "Portal real-data API is a distinct managed application capability.",
       "runtime_state": "OBSERVED_RUNNING",
       "network_binding": "INTERNAL_ONLY",
       "source_pr": "PR-006",
-      "review_status": "MANUAL_REVIEW_REQUIRED",
-      "notes": "Governance classification only. No service, process, configuration, firewall, proxy, or application change was performed."
+      "review_status": "RESOLVED",
+      "notes": "Governance ownership decision approved in PR-007. No service, process, configuration, firewall, proxy, deployment, or application change was performed."
     },
     {
       "record_id": "PR007-019",
@@ -455,14 +452,14 @@
       "observed_component": "ndsp-decision-package-v1",
       "ownership_category": "NON_CANONICAL_APPLICATION",
       "current_owner": "NDSP platform",
-      "proposed_decision": "REVIEW_REQUIRED",
-      "decision_confidence": "LOW",
-      "decision_reason": "Available read-only evidence is insufficient for a final ownership decision.",
+      "proposed_decision": "PROMOTE_TO_CANONICAL",
+      "decision_confidence": "GOVERNANCE_APPROVED",
+      "decision_reason": "Decision-package service is a distinct NDSP domain capability.",
       "runtime_state": "OBSERVED_RUNNING",
       "network_binding": "INTERNAL_ONLY",
       "source_pr": "PR-006",
-      "review_status": "MANUAL_REVIEW_REQUIRED",
-      "notes": "Governance classification only. No service, process, configuration, firewall, proxy, or application change was performed."
+      "review_status": "RESOLVED",
+      "notes": "Governance ownership decision approved in PR-007. No service, process, configuration, firewall, proxy, deployment, or application change was performed."
     },
     {
       "record_id": "PR007-020",
@@ -501,14 +498,14 @@
       "observed_component": "ndsp-ui-bridge-api",
       "ownership_category": "NON_CANONICAL_APPLICATION",
       "current_owner": "NDSP platform",
-      "proposed_decision": "REVIEW_REQUIRED",
-      "decision_confidence": "LOW",
-      "decision_reason": "Available read-only evidence is insufficient for a final ownership decision.",
+      "proposed_decision": "SHARED_INFRASTRUCTURE",
+      "decision_confidence": "GOVERNANCE_APPROVED",
+      "decision_reason": "UI bridge provides shared integration between presentation and API layers.",
       "runtime_state": "OBSERVED_RUNNING",
       "network_binding": "INTERNAL_ONLY",
       "source_pr": "PR-006",
-      "review_status": "MANUAL_REVIEW_REQUIRED",
-      "notes": "Governance classification only. No service, process, configuration, firewall, proxy, or application change was performed."
+      "review_status": "RESOLVED",
+      "notes": "Governance ownership decision approved in PR-007. No service, process, configuration, firewall, proxy, deployment, or application change was performed."
     },
     {
       "record_id": "PR007-022",
@@ -547,14 +544,14 @@
       "observed_component": "ndsp-admin-user-ops",
       "ownership_category": "NON_CANONICAL_APPLICATION",
       "current_owner": "NDSP platform",
-      "proposed_decision": "REVIEW_REQUIRED",
-      "decision_confidence": "LOW",
-      "decision_reason": "Available read-only evidence is insufficient for a final ownership decision.",
+      "proposed_decision": "PROMOTE_TO_CANONICAL",
+      "decision_confidence": "GOVERNANCE_APPROVED",
+      "decision_reason": "Administrative user operations service is a distinct managed capability.",
       "runtime_state": "OBSERVED_RUNNING",
       "network_binding": "INTERNAL_ONLY",
       "source_pr": "PR-006",
-      "review_status": "MANUAL_REVIEW_REQUIRED",
-      "notes": "Governance classification only. No service, process, configuration, firewall, proxy, or application change was performed."
+      "review_status": "RESOLVED",
+      "notes": "Governance ownership decision approved in PR-007. No service, process, configuration, firewall, proxy, deployment, or application change was performed."
     },
     {
       "record_id": "PR007-024",
@@ -616,14 +613,14 @@
       "observed_component": "ndsp-current-user-display",
       "ownership_category": "NON_CANONICAL_APPLICATION",
       "current_owner": "NDSP platform",
-      "proposed_decision": "REVIEW_REQUIRED",
-      "decision_confidence": "LOW",
-      "decision_reason": "Available read-only evidence is insufficient for a final ownership decision.",
+      "proposed_decision": "PROMOTE_TO_CANONICAL",
+      "decision_confidence": "GOVERNANCE_APPROVED",
+      "decision_reason": "Current-user display service is a distinct managed application capability.",
       "runtime_state": "OBSERVED_RUNNING",
       "network_binding": "INTERNAL_ONLY",
       "source_pr": "PR-006",
-      "review_status": "MANUAL_REVIEW_REQUIRED",
-      "notes": "Governance classification only. No service, process, configuration, firewall, proxy, or application change was performed."
+      "review_status": "RESOLVED",
+      "notes": "Governance ownership decision approved in PR-007. No service, process, configuration, firewall, proxy, deployment, or application change was performed."
     },
     {
       "record_id": "PR007-027",
@@ -708,14 +705,14 @@
       "observed_component": "ndsp-quality-live-nmp-wrapper",
       "ownership_category": "NON_CANONICAL_APPLICATION",
       "current_owner": "nawaf511",
-      "proposed_decision": "REVIEW_REQUIRED",
-      "decision_confidence": "LOW",
-      "decision_reason": "Available read-only evidence is insufficient for a final ownership decision.",
+      "proposed_decision": "SHARED_INFRASTRUCTURE",
+      "decision_confidence": "GOVERNANCE_APPROVED",
+      "decision_reason": "Quality live NMP wrapper provides shared adapter infrastructure.",
       "runtime_state": "OBSERVED_RUNNING",
       "network_binding": "INTERNAL_ONLY",
       "source_pr": "PR-006",
-      "review_status": "MANUAL_REVIEW_REQUIRED",
-      "notes": "Governance classification only. No service, process, configuration, firewall, proxy, or application change was performed."
+      "review_status": "RESOLVED",
+      "notes": "Governance ownership decision approved in PR-007. No service, process, configuration, firewall, proxy, deployment, or application change was performed."
     },
     {
       "record_id": "PR007-031",
@@ -731,14 +728,14 @@
       "observed_component": "ndsp-v52-contract",
       "ownership_category": "NON_CANONICAL_APPLICATION",
       "current_owner": "NDSP platform",
-      "proposed_decision": "REVIEW_REQUIRED",
-      "decision_confidence": "LOW",
-      "decision_reason": "Available read-only evidence is insufficient for a final ownership decision.",
+      "proposed_decision": "PROMOTE_TO_CANONICAL",
+      "decision_confidence": "GOVERNANCE_APPROVED",
+      "decision_reason": "Versioned contract service is a distinct managed domain capability.",
       "runtime_state": "OBSERVED_RUNNING",
       "network_binding": "INTERNAL_ONLY",
       "source_pr": "PR-006",
-      "review_status": "MANUAL_REVIEW_REQUIRED",
-      "notes": "Governance classification only. No service, process, configuration, firewall, proxy, or application change was performed."
+      "review_status": "RESOLVED",
+      "notes": "Governance ownership decision approved in PR-007. No service, process, configuration, firewall, proxy, deployment, or application change was performed."
     },
     {
       "record_id": "PR007-032",
@@ -754,14 +751,14 @@
       "observed_component": "ndsp-v53-bridge",
       "ownership_category": "NON_CANONICAL_APPLICATION",
       "current_owner": "NDSP platform",
-      "proposed_decision": "REVIEW_REQUIRED",
-      "decision_confidence": "LOW",
-      "decision_reason": "Available read-only evidence is insufficient for a final ownership decision.",
+      "proposed_decision": "SHARED_INFRASTRUCTURE",
+      "decision_confidence": "GOVERNANCE_APPROVED",
+      "decision_reason": "Versioned bridge service provides shared integration infrastructure.",
       "runtime_state": "OBSERVED_RUNNING",
       "network_binding": "INTERNAL_ONLY",
       "source_pr": "PR-006",
-      "review_status": "MANUAL_REVIEW_REQUIRED",
-      "notes": "Governance classification only. No service, process, configuration, firewall, proxy, or application change was performed."
+      "review_status": "RESOLVED",
+      "notes": "Governance ownership decision approved in PR-007. No service, process, configuration, firewall, proxy, deployment, or application change was performed."
     },
     {
       "record_id": "PR007-033",
@@ -938,14 +935,14 @@
       "observed_component": "ndsp-business-ops",
       "ownership_category": "NON_CANONICAL_APPLICATION",
       "current_owner": "NDSP platform",
-      "proposed_decision": "REVIEW_REQUIRED",
-      "decision_confidence": "LOW",
-      "decision_reason": "Available read-only evidence is insufficient for a final ownership decision.",
+      "proposed_decision": "PROMOTE_TO_CANONICAL",
+      "decision_confidence": "GOVERNANCE_APPROVED",
+      "decision_reason": "Business operations service is a distinct managed business capability.",
       "runtime_state": "OBSERVED_RUNNING",
       "network_binding": "INTERNAL_ONLY",
       "source_pr": "PR-006",
-      "review_status": "MANUAL_REVIEW_REQUIRED",
-      "notes": "Governance classification only. No service, process, configuration, firewall, proxy, or application change was performed."
+      "review_status": "RESOLVED",
+      "notes": "Governance ownership decision approved in PR-007. No service, process, configuration, firewall, proxy, deployment, or application change was performed."
     },
     {
       "record_id": "PR007-041",
@@ -961,14 +958,14 @@
       "observed_component": "ndsp-market-data-bridge-v2",
       "ownership_category": "NON_CANONICAL_APPLICATION",
       "current_owner": "NDSP platform",
-      "proposed_decision": "REVIEW_REQUIRED",
-      "decision_confidence": "LOW",
-      "decision_reason": "Available read-only evidence is insufficient for a final ownership decision.",
+      "proposed_decision": "SHARED_INFRASTRUCTURE",
+      "decision_confidence": "GOVERNANCE_APPROVED",
+      "decision_reason": "Market-data bridge provides shared external integration infrastructure.",
       "runtime_state": "OBSERVED_RUNNING",
       "network_binding": "INTERNAL_ONLY",
       "source_pr": "PR-006",
-      "review_status": "MANUAL_REVIEW_REQUIRED",
-      "notes": "Governance classification only. No service, process, configuration, firewall, proxy, or application change was performed."
+      "review_status": "RESOLVED",
+      "notes": "Governance ownership decision approved in PR-007. No service, process, configuration, firewall, proxy, deployment, or application change was performed."
     },
     {
       "record_id": "PR007-042",
@@ -993,5 +990,7 @@
       "review_status": "RESOLVED",
       "notes": "Governance classification only. No service, process, configuration, firewall, proxy, or application change was performed."
     }
-  ]
+  ],
+  "manual_decisions_applied": 12,
+  "unresolved_record_count": 0
 }
