@@ -1,0 +1,43 @@
+name: PR-028 Quick Wins Governance
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-quick-wins:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Fetch base branch
+        run: git fetch --no-tags origin main:refs/remotes/origin/main
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run quick-win contract tests
+        run: node --test backend/tests/pr028-quick-wins-contracts.test.cjs
+
+      - name: Validate PR-028 accounting
+        run: python3 scripts/governance/validate_pr028_quick_wins_closure.py
+
+      - name: Validate capability governance
+        run: |
+          python3 scripts/governance/validate_full_capability_ui.py \
+            --base-ref origin/main
