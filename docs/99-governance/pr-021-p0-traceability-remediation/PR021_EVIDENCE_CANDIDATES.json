@@ -1,0 +1,992 @@
+[
+  {
+    "capability_id": "CAP-235EF538DEF9",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-A5C181808EF6",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-2CD69A7EA838",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-1736E39D1CE4",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-C8C94E7A8122",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-55015F233F5A",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-D0B86CD5E331",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-862CD297F1FD",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-425426D4A96B",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-F19E055AF8D6",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-945D34B96341",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-2B9AC68DB1D6",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "RUNTIME_SOURCE_MATCH:{ path=/usr/bin/node ; argv[]=/usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp_scenario_levels_adapter.cjs ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+    "candidate_value": "ndsp-scenario-levels-adapter.service",
+    "confidence": "HIGH",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-6F83F74440AE",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-3965B46743DE",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-7A9637DD3A75",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-935E1E26D22F",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-F6B5F7A0A680",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-B89CF4208B10",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-3A5ED3DB0C0D",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "RUNTIME_SOURCE_MATCH:{ path=/usr/bin/node ; argv[]=/usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp_scenario_levels_adapter.cjs ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+    "candidate_value": "ndsp-scenario-levels-adapter.service",
+    "confidence": "HIGH",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-98156F574B28",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "RUNTIME_SOURCE_MATCH:{ path=/usr/bin/node ; argv[]=/usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp_scenario_levels_adapter.cjs ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+    "candidate_value": "ndsp-scenario-levels-adapter.service",
+    "confidence": "HIGH",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-70F625B28F63",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-C250957D114F",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-BD19C45FECD0",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-D8194AB79967",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-8BFCC7DDCBE0",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-F402D935EFF7",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-10D53C6D7918",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-9F3B6AAA223B",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-C514A0947E28",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-70C19D24087E",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-7AF5F3CAE976",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-29DCBEF0D49C",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-DBE4CDD3AB94",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-461745E841AB",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-329C5FE62399",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-4C3B7B99A4A6",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-033B90B3A316",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-EDF3F96EC14B",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-9EAA6B9BF2BC",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-F197D783C391",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-5F34508D1D07",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-3F9549B2B851",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-F150D0BAA604",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-E9D779AE5200",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-071618E88E83",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-0CE111E47411",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-538A80545E29",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-931E56E35D55",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-8BCDCDA9FCED",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-F0AA44F7E81A",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-A194414E26E2",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-EC53447FDEFA",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-45BEE5E5B9D6",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-8CF43007F5CD",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-22453668AACA",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-BC09A0EB4549",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-48F24BF885D7",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-FAAE9703FE61",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-D559FE326861",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-E50EE9CF3FD6",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-D054F1321201",
+    "gap_type": "OWNER_UNASSIGNED",
+    "evidence_type": "SYSTEMD_EXECUTION_USER",
+    "evidence_detail": "ndsp-user-login.service",
+    "candidate_value": "nawaf511",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-3B89863B2015",
+    "gap_type": "OWNER_UNASSIGNED",
+    "evidence_type": "SYSTEMD_EXECUTION_USER",
+    "evidence_detail": "ndsp-user-login.service",
+    "candidate_value": "nawaf511",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-C55DEBBD7CB7",
+    "gap_type": "OWNER_UNASSIGNED",
+    "evidence_type": "SYSTEMD_EXECUTION_USER",
+    "evidence_detail": "ndsp-user-login.service",
+    "candidate_value": "nawaf511",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-F139426B5341",
+    "gap_type": "OWNER_UNASSIGNED",
+    "evidence_type": "SYSTEMD_EXECUTION_USER",
+    "evidence_detail": "ndsp-user-login.service",
+    "candidate_value": "nawaf511",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-242D8324FAD9",
+    "gap_type": "OWNER_UNASSIGNED",
+    "evidence_type": "SYSTEMD_EXECUTION_USER",
+    "evidence_detail": "ndsp-user-login.service",
+    "candidate_value": "nawaf511",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-F56AB637F669",
+    "gap_type": "OWNER_UNASSIGNED",
+    "evidence_type": "SYSTEMD_EXECUTION_USER",
+    "evidence_detail": "ndsp-user-login.service",
+    "candidate_value": "nawaf511",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-8F78E58E5656",
+    "gap_type": "OWNER_UNASSIGNED",
+    "evidence_type": "SYSTEMD_EXECUTION_USER",
+    "evidence_detail": "ndsp-user-login.service",
+    "candidate_value": "nawaf511",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-E6FFD507C6FA",
+    "gap_type": "OWNER_UNASSIGNED",
+    "evidence_type": "SYSTEMD_EXECUTION_USER",
+    "evidence_detail": "ndsp-user-login.service",
+    "candidate_value": "nawaf511",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-6565FE804AF5",
+    "gap_type": "OWNER_UNASSIGNED",
+    "evidence_type": "SYSTEMD_EXECUTION_USER",
+    "evidence_detail": "ndsp-user-login.service",
+    "candidate_value": "nawaf511",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-2ED357832A3E",
+    "gap_type": "OWNER_UNASSIGNED",
+    "evidence_type": "SYSTEMD_EXECUTION_USER",
+    "evidence_detail": "ndsp-user-login.service",
+    "candidate_value": "nawaf511",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-636B50FAED04",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-D6102C7DC3C1",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-4804EA150D2F",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-C95B03AE5FFB",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-11BF5E282765",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-FA44BA71A8B0",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-B167184CBF84",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-A57ECAABD0D2",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-2CC212BF4F8E",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-E4B4728311F0",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-1FBA01D3C252",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "RUNTIME_SOURCE_MATCH:{ path=/usr/bin/node ; argv[]=/usr/bin/node /home/nawaf511/empire-core-new/backend/services/bot_execution/main.cjs ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+    "candidate_value": "ndsp-bot_execution.service",
+    "confidence": "HIGH",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-0622719B013B",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-56C562461855",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "RUNTIME_SOURCE_MATCH:{ path=/usr/bin/node ; argv[]=/usr/bin/node /home/nawaf511/empire-core-new/backend/services/bot_execution/main.cjs ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+    "candidate_value": "ndsp-bot_execution.service",
+    "confidence": "HIGH",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-5B18901D1F22",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-B81607E6BCDB",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-C26418100904",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "AMBIGUOUS_RUNTIME_MATCH",
+    "candidate_value": "",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-C84121300635",
+    "gap_type": "OWNER_UNASSIGNED",
+    "evidence_type": "SYSTEMD_EXECUTION_USER",
+    "evidence_detail": "ndsp-governance-bridge.service",
+    "candidate_value": "nawaf511",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-4FF90CCC6DFE",
+    "gap_type": "OWNER_UNASSIGNED",
+    "evidence_type": "SYSTEMD_EXECUTION_USER",
+    "evidence_detail": "ndsp-governance-bridge.service",
+    "candidate_value": "nawaf511",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-93DD0F3859D4",
+    "gap_type": "OWNER_UNASSIGNED",
+    "evidence_type": "SYSTEMD_EXECUTION_USER",
+    "evidence_detail": "ndsp-governance-bridge.service",
+    "candidate_value": "nawaf511",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-8A9DD9B6E7D5",
+    "gap_type": "OWNER_UNASSIGNED",
+    "evidence_type": "SYSTEMD_EXECUTION_USER",
+    "evidence_detail": "ndsp-governance-bridge.service",
+    "candidate_value": "nawaf511",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-AA4ECF6DF3F8",
+    "gap_type": "OWNER_UNASSIGNED",
+    "evidence_type": "SYSTEMD_EXECUTION_USER",
+    "evidence_detail": "ndsp-governance-bridge.service",
+    "candidate_value": "nawaf511",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-805630C7C819",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "RUNTIME_SOURCE_MATCH:{ path=/usr/bin/node ; argv[]=/usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp_scenario_levels_adapter.cjs ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+    "candidate_value": "ndsp-scenario-levels-adapter.service",
+    "confidence": "HIGH",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-9BE0DE3ADC89",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "RUNTIME_SOURCE_MATCH:{ path=/usr/bin/node ; argv[]=/usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp_scenario_levels_adapter.cjs ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+    "candidate_value": "ndsp-scenario-levels-adapter.service",
+    "confidence": "HIGH",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-552A04A27A0F",
+    "gap_type": "RUNTIME_SERVICE_UNVERIFIED",
+    "evidence_type": "SYSTEMD_RUNTIME_MATCH",
+    "evidence_detail": "RUNTIME_SOURCE_MATCH:{ path=/usr/bin/node ; argv[]=/usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp_scenario_levels_adapter.cjs ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+    "candidate_value": "ndsp-scenario-levels-adapter.service",
+    "confidence": "HIGH",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-00ED621D6D60",
+    "gap_type": "OWNER_UNASSIGNED",
+    "evidence_type": "SYSTEMD_EXECUTION_USER",
+    "evidence_detail": "ndsp-live-decision-quality.service",
+    "candidate_value": "nawaf511",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-A1CD5A0B9B66",
+    "gap_type": "OWNER_UNASSIGNED",
+    "evidence_type": "SYSTEMD_EXECUTION_USER",
+    "evidence_detail": "ndsp-live-decision-quality.service",
+    "candidate_value": "nawaf511",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-353E6D9C0A43",
+    "gap_type": "OWNER_UNASSIGNED",
+    "evidence_type": "SYSTEMD_EXECUTION_USER",
+    "evidence_detail": "ndsp-user-login.service",
+    "candidate_value": "nawaf511",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-B26FA1996A34",
+    "gap_type": "OWNER_UNASSIGNED",
+    "evidence_type": "SYSTEMD_EXECUTION_USER",
+    "evidence_detail": "ndsp-user-login.service",
+    "candidate_value": "nawaf511",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-E07F7BC7E52F",
+    "gap_type": "OWNER_UNASSIGNED",
+    "evidence_type": "SYSTEMD_EXECUTION_USER",
+    "evidence_detail": "ndsp-user-login.service",
+    "candidate_value": "nawaf511",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-1A9F62165A6D",
+    "gap_type": "OWNER_UNASSIGNED",
+    "evidence_type": "SYSTEMD_EXECUTION_USER",
+    "evidence_detail": "ndsp-user-login.service",
+    "candidate_value": "nawaf511",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-1D926198372A",
+    "gap_type": "OWNER_UNASSIGNED",
+    "evidence_type": "SYSTEMD_EXECUTION_USER",
+    "evidence_detail": "ndsp-user-login.service",
+    "candidate_value": "nawaf511",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-9ADF707918ED",
+    "gap_type": "OWNER_UNASSIGNED",
+    "evidence_type": "SYSTEMD_EXECUTION_USER",
+    "evidence_detail": "ndsp-user-login.service",
+    "candidate_value": "nawaf511",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-5FEF33A2C87F",
+    "gap_type": "OWNER_UNASSIGNED",
+    "evidence_type": "SYSTEMD_EXECUTION_USER",
+    "evidence_detail": "ndsp-user-login.service",
+    "candidate_value": "nawaf511",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-E01E3F460977",
+    "gap_type": "OWNER_UNASSIGNED",
+    "evidence_type": "SYSTEMD_EXECUTION_USER",
+    "evidence_detail": "ndsp-user-login.service",
+    "candidate_value": "nawaf511",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-644C81537AC6",
+    "gap_type": "OWNER_UNASSIGNED",
+    "evidence_type": "SYSTEMD_EXECUTION_USER",
+    "evidence_detail": "ndsp-user-login.service",
+    "candidate_value": "nawaf511",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-116FF6D929A9",
+    "gap_type": "OWNER_UNASSIGNED",
+    "evidence_type": "SYSTEMD_EXECUTION_USER",
+    "evidence_detail": "ndsp-user-login.service",
+    "candidate_value": "nawaf511",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-4ADB944E408B",
+    "gap_type": "OWNER_UNASSIGNED",
+    "evidence_type": "SYSTEMD_EXECUTION_USER",
+    "evidence_detail": "ndsp-user-login.service",
+    "candidate_value": "nawaf511",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-214521E6EBD1",
+    "gap_type": "OWNER_UNASSIGNED",
+    "evidence_type": "SYSTEMD_EXECUTION_USER",
+    "evidence_detail": "ndsp-user-login.service",
+    "candidate_value": "nawaf511",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-2D0CFB1BC505",
+    "gap_type": "OWNER_UNASSIGNED",
+    "evidence_type": "SYSTEMD_EXECUTION_USER",
+    "evidence_detail": "ndsp-user-login.service",
+    "candidate_value": "nawaf511",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  },
+  {
+    "capability_id": "CAP-15C56B60B4B0",
+    "gap_type": "OWNER_UNASSIGNED",
+    "evidence_type": "SYSTEMD_EXECUTION_USER",
+    "evidence_detail": "ndsp-user-login.service",
+    "candidate_value": "nawaf511",
+    "confidence": "LOW",
+    "human_confirmation_required": "true"
+  }
+]
