@@ -17,6 +17,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Fetch base branch
+        run: git fetch --no-tags origin main:refs/remotes/origin/main
 
       - uses: actions/setup-python@v5
         with:
