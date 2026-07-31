@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "document": "PR-030 Endpoint and Real-Data Closure",
+  "generated_at": "2026-07-31T23:25:03.534725+00:00",
+  "input_capability_count": 20,
+  "endpoint_gap_input_count": 18,
+  "real_data_gap_input_count": 2,
+  "discovered_route_count": 115,
+  "route_candidate_records": 200,
+  "http_probe_records": 90,
+  "accepted_http_probes": 18,
+  "executable_test_count": 20,
+  "closed_machine_verified_count": 18,
+  "still_open_count": 2,
+  "remaining_gap_counts": {
+    "REAL_DATA": 2
+  },
+  "traceability_rows_updated": 20,
+  "unsafe_mutating_requests_executed": 0,
+  "services_restarted": 0,
+  "mock_data_created": 0,
+  "human_approvals_granted": 0,
+  "ui_complete_records_created": 0,
+  "full_capability_coverage_claimed": false,
+  "human_confirmation_required": true,
+  "runtime_changes": "none",
+  "status": "ENDPOINT_REAL_DATA_PARTIALLY_CLOSED"
+}

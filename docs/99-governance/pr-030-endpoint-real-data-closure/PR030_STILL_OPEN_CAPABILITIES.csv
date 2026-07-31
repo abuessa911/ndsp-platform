@@ -1,0 +1,3 @@
+capability_id,capability_name,original_missing_evidence,resolved_evidence,remaining_missing_evidence,selected_route,selected_route_source,accepted_probe_url,accepted_http_status,data_source,data_state,evidence,closure_state,human_confirmation_required,ui_complete_created
+CAP-4FF90CCC6DFE,Tdl V2 Policy Admin,REAL_DATA,,REAL_DATA,,,,,UNKNOWN,UNKNOWN,,REMAINS_OPEN,true,false
+CAP-8A9DD9B6E7D5,Tdl V2 Policy Admin,REAL_DATA,,REAL_DATA,,,,,UNKNOWN,UNKNOWN,,REMAINS_OPEN,true,false
