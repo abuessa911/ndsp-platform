@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "document": "PR-032 Real-Data Root-Cause Diagnostic",
+  "generated_at": "2026-07-31T23:37:19.978408+00:00",
+  "input_capability_count": 2,
+  "diagnosed_capability_count": 2,
+  "blocker_record_count": 10,
+  "blocker_counts": {
+    "ENDPOINT_NOT_RESPONSIVE": 2,
+    "EXPLICIT_DATA_SOURCE_MISSING": 2,
+    "PAYLOAD_EMPTY": 2,
+    "PAYLOAD_NOT_JSON": 2,
+    "REAL_DATA_STATE_MISSING": 2
+  },
+  "capabilities_closed": 0,
+  "traceability_rows_modified": 0,
+  "runtime_changes": "none",
+  "services_restarted": 0,
+  "mutating_requests_executed": 0,
+  "payload_values_persisted": false,
+  "human_confirmation_required": true,
+  "status": "REAL_DATA_ROOT_CAUSES_DIAGNOSED_REMEDIATION_REQUIRED"
+}

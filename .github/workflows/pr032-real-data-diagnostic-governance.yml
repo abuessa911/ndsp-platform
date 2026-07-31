@@ -1,0 +1,36 @@
+name: PR-032 Real-Data Diagnostic Governance
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-real-data-diagnostic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Fetch base branch
+        run: git fetch --no-tags origin main:refs/remotes/origin/main
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate PR-032 diagnostic
+        run: python3 scripts/governance/validate_pr032_real_data_diagnostic.py
+
+      - name: Validate capability governance
+        run: |
+          python3 scripts/governance/validate_full_capability_ui.py \
+            --base-ref origin/main
