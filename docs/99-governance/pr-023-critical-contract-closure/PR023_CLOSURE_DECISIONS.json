@@ -1,0 +1,164 @@
+[
+  {
+    "capability_id": "CAP-235EF538DEF9",
+    "capability_name": "Auth Reset",
+    "machine_status": "INCOMPLETE_CHAIN",
+    "closure_decision": "REMAINS_OPEN",
+    "closure_reason": "Missing: TEST|UI_CONSUMER",
+    "human_approval_required": "true",
+    "ui_complete": "false"
+  },
+  {
+    "capability_id": "CAP-2CD69A7EA838",
+    "capability_name": "Frontend Contract",
+    "machine_status": "INCOMPLETE_CHAIN",
+    "closure_decision": "REMAINS_OPEN",
+    "closure_reason": "Missing: REAL_DATA|TEST|UI_CONSUMER",
+    "human_approval_required": "true",
+    "ui_complete": "false"
+  },
+  {
+    "capability_id": "CAP-C8C94E7A8122",
+    "capability_name": "Frontend Contract",
+    "machine_status": "INCOMPLETE_CHAIN",
+    "closure_decision": "REMAINS_OPEN",
+    "closure_reason": "Missing: REAL_DATA|TEST|UI_CONSUMER",
+    "human_approval_required": "true",
+    "ui_complete": "false"
+  },
+  {
+    "capability_id": "CAP-D0B86CD5E331",
+    "capability_name": "Frontend Contract",
+    "machine_status": "INCOMPLETE_CHAIN",
+    "closure_decision": "REMAINS_OPEN",
+    "closure_reason": "Missing: REAL_DATA|TEST|UI_CONSUMER",
+    "human_approval_required": "true",
+    "ui_complete": "false"
+  },
+  {
+    "capability_id": "CAP-862CD297F1FD",
+    "capability_name": "Frontend Contract",
+    "machine_status": "INCOMPLETE_CHAIN",
+    "closure_decision": "REMAINS_OPEN",
+    "closure_reason": "Missing: REAL_DATA|TEST|UI_CONSUMER",
+    "human_approval_required": "true",
+    "ui_complete": "false"
+  },
+  {
+    "capability_id": "CAP-2B9AC68DB1D6",
+    "capability_name": "Assert No Decision Mutation",
+    "machine_status": "INCOMPLETE_CHAIN",
+    "closure_decision": "REMAINS_OPEN",
+    "closure_reason": "Missing: REAL_DATA|UI_CONSUMER",
+    "human_approval_required": "true",
+    "ui_complete": "false"
+  },
+  {
+    "capability_id": "CAP-3965B46743DE",
+    "capability_name": "Frontend Contract",
+    "machine_status": "INCOMPLETE_CHAIN",
+    "closure_decision": "REMAINS_OPEN",
+    "closure_reason": "Missing: REAL_DATA|UI_CONSUMER",
+    "human_approval_required": "true",
+    "ui_complete": "false"
+  },
+  {
+    "capability_id": "CAP-935E1E26D22F",
+    "capability_name": "Dqsrisk State",
+    "machine_status": "INCOMPLETE_CHAIN",
+    "closure_decision": "REMAINS_OPEN",
+    "closure_reason": "Missing: REAL_DATA|TEST|UI_CONSUMER",
+    "human_approval_required": "true",
+    "ui_complete": "false"
+  },
+  {
+    "capability_id": "CAP-B89CF4208B10",
+    "capability_name": "Grade From Score",
+    "machine_status": "INCOMPLETE_CHAIN",
+    "closure_decision": "REMAINS_OPEN",
+    "closure_reason": "Missing: REAL_DATA|TEST|UI_CONSUMER",
+    "human_approval_required": "true",
+    "ui_complete": "false"
+  },
+  {
+    "capability_id": "CAP-C84121300635",
+    "capability_name": "Tdl V2 Policy Admin",
+    "machine_status": "INCOMPLETE_CHAIN",
+    "closure_decision": "REMAINS_OPEN",
+    "closure_reason": "Missing: REAL_DATA|UI_CONSUMER",
+    "human_approval_required": "true",
+    "ui_complete": "false"
+  },
+  {
+    "capability_id": "CAP-4FF90CCC6DFE",
+    "capability_name": "Tdl V2 Policy Admin",
+    "machine_status": "INCOMPLETE_CHAIN",
+    "closure_decision": "REMAINS_OPEN",
+    "closure_reason": "Missing: REAL_DATA|UI_CONSUMER",
+    "human_approval_required": "true",
+    "ui_complete": "false"
+  },
+  {
+    "capability_id": "CAP-93DD0F3859D4",
+    "capability_name": "Tdl V2 Policy Admin",
+    "machine_status": "INCOMPLETE_CHAIN",
+    "closure_decision": "REMAINS_OPEN",
+    "closure_reason": "Missing: REAL_DATA|UI_CONSUMER",
+    "human_approval_required": "true",
+    "ui_complete": "false"
+  },
+  {
+    "capability_id": "CAP-8A9DD9B6E7D5",
+    "capability_name": "Tdl V2 Policy Admin",
+    "machine_status": "INCOMPLETE_CHAIN",
+    "closure_decision": "REMAINS_OPEN",
+    "closure_reason": "Missing: REAL_DATA|UI_CONSUMER",
+    "human_approval_required": "true",
+    "ui_complete": "false"
+  },
+  {
+    "capability_id": "CAP-AA4ECF6DF3F8",
+    "capability_name": "Tdl V2 Policy Admin",
+    "machine_status": "INCOMPLETE_CHAIN",
+    "closure_decision": "REMAINS_OPEN",
+    "closure_reason": "Missing: REAL_DATA|UI_CONSUMER",
+    "human_approval_required": "true",
+    "ui_complete": "false"
+  },
+  {
+    "capability_id": "CAP-8BFCC7DDCBE0",
+    "capability_name": "Frontend Contract",
+    "machine_status": "INCOMPLETE_CHAIN",
+    "closure_decision": "REMAINS_OPEN",
+    "closure_reason": "Missing: REAL_DATA|TEST",
+    "human_approval_required": "true",
+    "ui_complete": "false"
+  },
+  {
+    "capability_id": "CAP-F402D935EFF7",
+    "capability_name": "Frontend Contract",
+    "machine_status": "INCOMPLETE_CHAIN",
+    "closure_decision": "REMAINS_OPEN",
+    "closure_reason": "Missing: REAL_DATA|TEST",
+    "human_approval_required": "true",
+    "ui_complete": "false"
+  },
+  {
+    "capability_id": "CAP-10D53C6D7918",
+    "capability_name": "Frontend Contract",
+    "machine_status": "INCOMPLETE_CHAIN",
+    "closure_decision": "REMAINS_OPEN",
+    "closure_reason": "Missing: REAL_DATA|TEST",
+    "human_approval_required": "true",
+    "ui_complete": "false"
+  },
+  {
+    "capability_id": "CAP-9F3B6AAA223B",
+    "capability_name": "Frontend Contract",
+    "machine_status": "INCOMPLETE_CHAIN",
+    "closure_decision": "REMAINS_OPEN",
+    "closure_reason": "Missing: REAL_DATA|TEST",
+    "human_approval_required": "true",
+    "ui_complete": "false"
+  }
+]

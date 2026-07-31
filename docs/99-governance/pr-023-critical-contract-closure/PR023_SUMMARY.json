@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "document": "PR-023 Critical Contract Closure",
+  "generated_at": "2026-07-31T20:57:45.401182+00:00",
+  "input_critical_gap_count": 18,
+  "complete_chains_pending_human_approval": 0,
+  "incomplete_chains": 18,
+  "remaining_critical_gap_count": 18,
+  "human_approval_queue_count": 0,
+  "required_test_plan_count": 11,
+  "required_ui_binding_count": 14,
+  "traceability_rows_updated": 0,
+  "missing_chain_elements": {
+    "REAL_DATA": 17,
+    "TEST": 11,
+    "UI_CONSUMER": 14
+  },
+  "human_approvals_granted": 0,
+  "ui_complete_records_created": 0,
+  "full_capability_coverage_claimed": false,
+  "human_confirmation_required": true,
+  "runtime_changes": "none",
+  "status": "CRITICAL_CONTRACT_AUDIT_COMPLETE_APPROVALS_PENDING"
+}

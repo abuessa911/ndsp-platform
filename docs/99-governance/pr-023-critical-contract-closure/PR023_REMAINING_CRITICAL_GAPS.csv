@@ -1,0 +1,19 @@
+capability_id,capability_name,gap_type,recommended_screen,missing_chain_elements,required_action
+CAP-235EF538DEF9,Auth Reset,DATA_STATE_UNVERIFIED,AUTHENTICATION,TEST|UI_CONSUMER,Provide the missing evidence chain elements
+CAP-2CD69A7EA838,Frontend Contract,DATA_STATE_UNVERIFIED,AUTHENTICATION,REAL_DATA|TEST|UI_CONSUMER,Provide the missing evidence chain elements
+CAP-C8C94E7A8122,Frontend Contract,DATA_STATE_UNVERIFIED,AUTHENTICATION,REAL_DATA|TEST|UI_CONSUMER,Provide the missing evidence chain elements
+CAP-D0B86CD5E331,Frontend Contract,DATA_STATE_UNVERIFIED,AUTHENTICATION,REAL_DATA|TEST|UI_CONSUMER,Provide the missing evidence chain elements
+CAP-862CD297F1FD,Frontend Contract,DATA_STATE_UNVERIFIED,AUTHENTICATION,REAL_DATA|TEST|UI_CONSUMER,Provide the missing evidence chain elements
+CAP-2B9AC68DB1D6,Assert No Decision Mutation,DATA_STATE_UNVERIFIED,DECISION_ROOM,REAL_DATA|UI_CONSUMER,Provide the missing evidence chain elements
+CAP-3965B46743DE,Frontend Contract,DATA_STATE_UNVERIFIED,DECISION_ROOM,REAL_DATA|UI_CONSUMER,Provide the missing evidence chain elements
+CAP-935E1E26D22F,Dqsrisk State,DATA_STATE_UNVERIFIED,QUALITY_AND_RISK,REAL_DATA|TEST|UI_CONSUMER,Provide the missing evidence chain elements
+CAP-B89CF4208B10,Grade From Score,DATA_STATE_UNVERIFIED,QUALITY_AND_RISK,REAL_DATA|TEST|UI_CONSUMER,Provide the missing evidence chain elements
+CAP-C84121300635,Tdl V2 Policy Admin,DATA_STATE_UNVERIFIED,QUALITY_AND_RISK,REAL_DATA|UI_CONSUMER,Provide the missing evidence chain elements
+CAP-4FF90CCC6DFE,Tdl V2 Policy Admin,DATA_STATE_UNVERIFIED,QUALITY_AND_RISK,REAL_DATA|UI_CONSUMER,Provide the missing evidence chain elements
+CAP-93DD0F3859D4,Tdl V2 Policy Admin,DATA_STATE_UNVERIFIED,QUALITY_AND_RISK,REAL_DATA|UI_CONSUMER,Provide the missing evidence chain elements
+CAP-8A9DD9B6E7D5,Tdl V2 Policy Admin,DATA_STATE_UNVERIFIED,QUALITY_AND_RISK,REAL_DATA|UI_CONSUMER,Provide the missing evidence chain elements
+CAP-AA4ECF6DF3F8,Tdl V2 Policy Admin,DATA_STATE_UNVERIFIED,QUALITY_AND_RISK,REAL_DATA|UI_CONSUMER,Provide the missing evidence chain elements
+CAP-8BFCC7DDCBE0,Frontend Contract,DATA_STATE_UNVERIFIED,TRIAL_AND_BILLING,REAL_DATA|TEST,Provide the missing evidence chain elements
+CAP-F402D935EFF7,Frontend Contract,DATA_STATE_UNVERIFIED,TRIAL_AND_BILLING,REAL_DATA|TEST,Provide the missing evidence chain elements
+CAP-10D53C6D7918,Frontend Contract,DATA_STATE_UNVERIFIED,TRIAL_AND_BILLING,REAL_DATA|TEST,Provide the missing evidence chain elements
+CAP-9F3B6AAA223B,Frontend Contract,DATA_STATE_UNVERIFIED,TRIAL_AND_BILLING,REAL_DATA|TEST,Provide the missing evidence chain elements
