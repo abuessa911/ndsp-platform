@@ -1,0 +1,136 @@
+{
+  "schema_version": "1.0",
+  "document": "NDSP Governance Series Final Closure",
+  "generated_at": "2026-07-31T14:41:42.575907+00:00",
+  "source_commit": "aa45375848e0d1c0994f665a31f7e04aed387ff0",
+  "scope": "docs/99-governance",
+  "runtime_changes": "none",
+  "status": "CLOSED",
+  "series": {
+    "first_package": "PR-004",
+    "final_package": "PR-015",
+    "validated_prior_packages": 11,
+    "missing_packages": 0,
+    "invalid_primary_json_artifacts": 0
+  },
+  "capabilities": [
+    "Runtime dependency mapping",
+    "Runtime ownership mapping",
+    "Network exposure mapping",
+    "Noncanonical ownership mapping",
+    "Governance closure evidence",
+    "Canonical governance index",
+    "Integrity auditing",
+    "Governance update policy",
+    "Exceptions and approvals management",
+    "Periodic reviews and expirations",
+    "Review ownership and escalation",
+    "Final series closure"
+  ],
+  "closure_controls": [
+    "All prior primary artifacts are present.",
+    "All prior primary JSON artifacts are valid.",
+    "Every prior package has a recorded SHA-256 fingerprint.",
+    "The final package introduces no runtime changes.",
+    "Future governance updates must follow PR-011.",
+    "Exceptions must be recorded through PR-012.",
+    "Periodic reviews must follow PR-013.",
+    "Ownership and escalations must follow PR-014."
+  ],
+  "validated_packages": [
+    {
+      "pr": "PR-004",
+      "directory": "pr-004-runtime-dependency-map",
+      "primary_artifact": "FINAL_RUNTIME_DEPENDENCY_MAP.json",
+      "primary_artifact_sha256": "579336a09ee02b81a26ee6070decff87f83c96e9e6735c09e23ab670f5d84464",
+      "file_count": 8,
+      "status": "VALIDATED"
+    },
+    {
+      "pr": "PR-005",
+      "directory": "pr-005-runtime-ownership-map",
+      "primary_artifact": "FINAL_RUNTIME_OWNERSHIP_MAP.json",
+      "primary_artifact_sha256": "11009cf78d6ce22629098db8f172beed92647dc6eaf24cd120350c6a6fca44cb",
+      "file_count": 5,
+      "status": "VALIDATED"
+    },
+    {
+      "pr": "PR-006",
+      "directory": "pr-006-network-exposure-map",
+      "primary_artifact": "FINAL_NETWORK_EXPOSURE_MAP.json",
+      "primary_artifact_sha256": "4d672f5fd5313bc9ca3ab5cda21f0a89934b81ab6ecbb3cdd6ea620cae90fdc9",
+      "file_count": 5,
+      "status": "VALIDATED"
+    },
+    {
+      "pr": "PR-007",
+      "directory": "pr-007-noncanonical-ownership",
+      "primary_artifact": "FINAL_NONCANONICAL_OWNERSHIP_MAP.json",
+      "primary_artifact_sha256": "5239677f1cdf01ad470167a5b0865378ae4d36e70ccc2aabe194d4b478a35b15",
+      "file_count": 5,
+      "status": "VALIDATED"
+    },
+    {
+      "pr": "PR-008",
+      "directory": "pr-008-governance-closure",
+      "primary_artifact": "PR-008-COMMIT-MANIFEST.json",
+      "primary_artifact_sha256": "6f9934ec7bd8f2f08418be0bb2aafdf4d0d9a13e4c982c1f36b31d5d88761966",
+      "file_count": 4,
+      "status": "VALIDATED"
+    },
+    {
+      "pr": "PR-009",
+      "directory": "pr-009-governance-index",
+      "primary_artifact": "GOVERNANCE_INDEX.json",
+      "primary_artifact_sha256": "06ef7c192129729f1d0573179572ad20f5b6adfe2992e5707ee3d00a79b18da8",
+      "file_count": 4,
+      "status": "VALIDATED"
+    },
+    {
+      "pr": "PR-010",
+      "directory": "pr-010-integrity-audit",
+      "primary_artifact": "GOVERNANCE_INTEGRITY_AUDIT.json",
+      "primary_artifact_sha256": "2768a711a821f59982985bdec7a97e3a8145c94b7536e60fdc0b387e1a09087a",
+      "file_count": 4,
+      "status": "VALIDATED"
+    },
+    {
+      "pr": "PR-011",
+      "directory": "pr-011-governance-update-policy",
+      "primary_artifact": "GOVERNANCE_UPDATE_POLICY.json",
+      "primary_artifact_sha256": "3ebdef8431149f478f45083f3e0f763ef0cd72f0704a6b56d8abd056d2b41d66",
+      "file_count": 4,
+      "status": "VALIDATED"
+    },
+    {
+      "pr": "PR-012",
+      "directory": "pr-012-exceptions-approvals-register",
+      "primary_artifact": "GOVERNANCE_EXCEPTIONS_REGISTER.json",
+      "primary_artifact_sha256": "67a37f67d602efe7061c81c6858fd74b300802d76ead598449f3f7390537a94c",
+      "file_count": 4,
+      "status": "VALIDATED"
+    },
+    {
+      "pr": "PR-013",
+      "directory": "pr-013-periodic-reviews-expirations",
+      "primary_artifact": "GOVERNANCE_PERIODIC_REVIEWS_REGISTER.json",
+      "primary_artifact_sha256": "bcb434251983b98329670b1ec87199d65678d40ce439999a92ab13e0307413c7",
+      "file_count": 4,
+      "status": "VALIDATED"
+    },
+    {
+      "pr": "PR-014",
+      "directory": "pr-014-review-ownership-escalation",
+      "primary_artifact": "GOVERNANCE_REVIEW_OWNERSHIP_REGISTER.json",
+      "primary_artifact_sha256": "7aa772b41ad3596bcddf6cbe7146871dd3d552369903d4b075dfaf7ae2e8d921",
+      "file_count": 4,
+      "status": "VALIDATED"
+    }
+  ],
+  "final_declaration": {
+    "governance_series_complete": true,
+    "runtime_changes": "none",
+    "validation": "PASS",
+    "status": "PR015_CLOSED"
+  }
+}
