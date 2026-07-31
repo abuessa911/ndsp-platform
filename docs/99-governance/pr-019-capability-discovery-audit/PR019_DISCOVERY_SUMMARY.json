@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0",
+  "document": "NDSP PR-019 Capability Discovery Audit",
+  "generated_at": "2026-07-31T19:56:01.900218+00:00",
+  "source_commit": "585800c363e3a4408f3bfbd2bc6b636b81eebca2",
+  "local_head": "5647254ca3202327b6648a496f7eae562185f87b",
+  "full_capability_coverage_claimed": false,
+  "local_changes_included_in_audit": true,
+  "untracked_files_included_in_audit": true,
+  "runtime_only_components_included": true,
+  "runtime_changes": "none",
+  "status": "DISCOVERY_QUALITY_FILTERED_COVERAGE_NOT_CLAIMED",
+  "metrics": {
+    "main_tracked_files": 214,
+    "local_tracked_files": 625,
+    "inventory_records": 4325,
+    "local_change_records": 4116,
+    "capability_records": 976,
+    "capability_gap_records": 976,
+    "visible_or_partially_visible_capabilities": 150,
+    "hidden_or_unmapped_capabilities": 826,
+    "runtime_units": 91,
+    "runtime_listeners": 79,
+    "runtime_only_capabilities": 65,
+    "raw_capability_candidates": 976,
+    "active_capability_candidates": 526,
+    "excluded_candidates_retained": 450,
+    "human_review_queue": 526
+  },
+  "file_classifications": {
+    "LOCAL_MODIFIED": 5,
+    "LOCAL_ONLY": 476,
+    "ON_MAIN": 144,
+    "UNKNOWN": 65,
+    "UNTRACKED": 3635
+  },
+  "coverage_states": {
+    "API_CONNECTED": 201,
+    "DISCOVERY_REQUIRED": 65,
+    "SERVICE_CONNECTED": 24,
+    "SOURCE_IDENTIFIED": 111,
+    "UI_PARTIAL": 575
+  },
+  "data_states": {
+    "MOCK_ONLY": 55,
+    "REAL_LIVE": 158,
+    "REAL_SNAPSHOT": 441,
+    "UNKNOWN": 322
+  },
+  "capability_kinds": {
+    "ALGORITHM_OR_BUSINESS_LOGIC": 655,
+    "API_ENDPOINT": 256,
+    "RUNTIME_SERVICE": 65
+  },
+  "limitations": [
+    "Static discovery cannot prove semantic completeness of proprietary algorithms.",
+    "Sensitive file contents were not read.",
+    "Files larger than the configured limit were not parsed.",
+    "Runtime evidence is read-only and may not expose every transient process.",
+    "All discovered mappings require human validation before UI_COMPLETE."
+  ],
+  "quality_filter_applied": true,
+  "excluded_candidates_retained": true,
+  "human_validation_required": true
+}
