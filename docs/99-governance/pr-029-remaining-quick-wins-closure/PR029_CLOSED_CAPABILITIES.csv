@@ -1,0 +1,12 @@
+capability_id,capability_name,original_missing_evidence,resolved_evidence,remaining_missing_evidence,evidence,closure_state,human_confirmation_required,ui_complete_created
+CAP-6F5DF526EE59,Admin Only,UI,UI,,ui:frontend/user-portal-vite/src/features/remaining-quick-wins,CLOSED_MACHINE_VERIFIED,true,false
+CAP-753A055CFA5A,Ndsp Write Alert State,UI,UI,,ui:frontend/user-portal-vite/src/features/remaining-quick-wins,CLOSED_MACHINE_VERIFIED,true,false
+CAP-7739F02602D8,Get User By Id,UI,UI,,ui:frontend/user-portal-vite/src/features/remaining-quick-wins,CLOSED_MACHINE_VERIFIED,true,false
+CAP-784548F2FDAD,Authorize,UI,UI,,ui:frontend/user-portal-vite/src/features/remaining-quick-wins,CLOSED_MACHINE_VERIFIED,true,false
+CAP-790CBD0E1BCE,Delete User Dependencies,UI,UI,,ui:frontend/user-portal-vite/src/features/remaining-quick-wins,CLOSED_MACHINE_VERIFIED,true,false
+CAP-89CA79DDADE2,Ndsp Read Alert State,UI,UI,,ui:frontend/user-portal-vite/src/features/remaining-quick-wins,CLOSED_MACHINE_VERIFIED,true,false
+CAP-9866D4AE9D59,Update User Status,UI,UI,,ui:frontend/user-portal-vite/src/features/remaining-quick-wins,CLOSED_MACHINE_VERIFIED,true,false
+CAP-A231BBA8D29D,Auth Required,UI,UI,,ui:frontend/user-portal-vite/src/features/remaining-quick-wins,CLOSED_MACHINE_VERIFIED,true,false
+CAP-ACFDAF4DAD5E,Auth,UI,UI,,ui:frontend/user-portal-vite/src/features/remaining-quick-wins,CLOSED_MACHINE_VERIFIED,true,false
+CAP-DF54F83FC9EB,Authorize,UI,UI,,ui:frontend/user-portal-vite/src/features/remaining-quick-wins,CLOSED_MACHINE_VERIFIED,true,false
+CAP-E22DBA05712A,Get User By Email,UI,UI,,ui:frontend/user-portal-vite/src/features/remaining-quick-wins,CLOSED_MACHINE_VERIFIED,true,false

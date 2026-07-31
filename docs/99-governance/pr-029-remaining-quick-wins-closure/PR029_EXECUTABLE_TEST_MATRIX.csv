@@ -1,0 +1,32 @@
+capability_id,capability_name,endpoint_path,original_missing,resolved,remaining
+CAP-6F5DF526EE59,Admin Only,/api/admin-ui/health,UI,UI,
+CAP-753A055CFA5A,Ndsp Write Alert State,/api/admin-ui/health,UI,UI,
+CAP-7739F02602D8,Get User By Id,/api/auth/login/health,UI,UI,
+CAP-784548F2FDAD,Authorize,/api/admin-actions/users/action/health,UI,UI,
+CAP-790CBD0E1BCE,Delete User Dependencies,/api/admin/users/action/health,UI,UI,
+CAP-89CA79DDADE2,Ndsp Read Alert State,/api/admin-ui/health,UI,UI,
+CAP-9866D4AE9D59,Update User Status,/api/admin-ui/health,UI,UI,
+CAP-A231BBA8D29D,Auth Required,/health,UI,UI,
+CAP-ACFDAF4DAD5E,Auth,/api/auth/login/health,UI,UI,
+CAP-DF54F83FC9EB,Authorize,/api/admin/users/action/health,UI,UI,
+CAP-E22DBA05712A,Get User By Email,/api/auth/login/health,UI,UI,
+CAP-4FF90CCC6DFE,Tdl V2 Policy Admin,/policy,REAL_DATA,,REAL_DATA
+CAP-8A9DD9B6E7D5,Tdl V2 Policy Admin,/auth-debug,REAL_DATA,,REAL_DATA
+CAP-15C56B60B4B0,Ndsp User Login Gateway,,ENDPOINT,,ENDPOINT
+CAP-214521E6EBD1,Ndsp User Login Gateway,,ENDPOINT,,ENDPOINT
+CAP-242D8324FAD9,Ndsp User Login Gateway,,ENDPOINT,,ENDPOINT
+CAP-3A5ED3DB0C0D,Risk Label,,ENDPOINT,,ENDPOINT
+CAP-3B89863B2015,Ndsp User Login Gateway,,ENDPOINT,,ENDPOINT
+CAP-3D9086A829ED,Ndsp Admin Ui Proxy,,ENDPOINT,,ENDPOINT
+CAP-4B75FD38F852,Ndsp Admin Ui Proxy,,ENDPOINT,,ENDPOINT
+CAP-4FCAA631BA18,Ndsp Admin Actions Bypass Old Middleware,,ENDPOINT,,ENDPOINT
+CAP-644C81537AC6,Ndsp User Login Gateway,,ENDPOINT,,ENDPOINT
+CAP-6565FE804AF5,Ndsp User Login Gateway,,ENDPOINT,,ENDPOINT
+CAP-8F78E58E5656,Ndsp User Login Gateway,,ENDPOINT,,ENDPOINT
+CAP-98156F574B28,Risk Warnings,,ENDPOINT,,ENDPOINT
+CAP-A61CF5BBAA01,Ndsp Admin Ui Proxy,,ENDPOINT,,ENDPOINT
+CAP-C55DEBBD7CB7,Ndsp User Login Gateway,,ENDPOINT,,ENDPOINT
+CAP-D054F1321201,Ndsp User Login Gateway,,ENDPOINT,,ENDPOINT
+CAP-E6FFD507C6FA,Ndsp User Login Gateway,,ENDPOINT,,ENDPOINT
+CAP-F139426B5341,Ndsp User Login Gateway,,ENDPOINT,,ENDPOINT
+CAP-F56AB637F669,Ndsp User Login Gateway,,ENDPOINT,,ENDPOINT
