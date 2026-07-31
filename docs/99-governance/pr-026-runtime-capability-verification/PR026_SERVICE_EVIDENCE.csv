@@ -1,0 +1,291 @@
+unit,load,active,sub,description
+accounts-daemon.service,loaded,active,running,Accounts Service
+alsa-restore.service,loaded,inactive,dead,Save/Restore Sound Card State
+alsa-state.service,loaded,inactive,dead,Manage Sound Card State (restore and store)
+apparmor.service,loaded,active,exited,Load AppArmor profiles
+apport-autoreport.service,loaded,inactive,dead,Process error reports when automatic reporting is enabled
+apport.service,loaded,active,exited,automatic crash report generation
+apt-daily-upgrade.service,loaded,inactive,dead,Daily apt upgrade and clean activities
+apt-daily.service,loaded,inactive,dead,Daily apt download activities
+●,auditd.service,not-found,inactive,dead    auditd.service
+●,auto-cpufreq.service,not-found,inactive,dead    auto-cpufreq.service
+avahi-daemon.service,loaded,active,running,Avahi mDNS/DNS-SD Stack
+blk-availability.service,loaded,active,exited,Availability of block devices
+certbot.service,loaded,inactive,dead,Certbot
+cloud-init-local.service,loaded,inactive,dead,Cloud-init: Local Stage (pre-network)
+●,connman.service,not-found,inactive,dead    connman.service
+●,console-screen.service,not-found,inactive,dead    console-screen.service
+console-setup.service,loaded,active,exited,Set console font and keymap
+containerd.service,loaded,active,running,containerd container runtime
+cron.service,loaded,active,running,Regular background program processing daemon
+cups-browsed.service,loaded,active,running,Make remote CUPS printers available locally
+cups.service,loaded,active,running,CUPS Scheduler
+dbus.service,loaded,active,running,D-Bus System Message Bus
+●,decision-intelligence-dashboard.service,not-found,inactive,dead    decision-intelligence-dashboard.service
+dm-event.service,loaded,inactive,dead,Device-mapper event daemon
+dmesg.service,loaded,inactive,dead,Save initial kernel messages after boot
+docker.service,loaded,active,running,Docker Application Container Engine
+dpkg-db-backup.service,loaded,inactive,dead,Daily dpkg database backup service
+e2scrub_all.service,loaded,inactive,dead,Online ext4 Metadata Check for All Filesystems
+e2scrub_reap.service,loaded,inactive,dead,Remove Stale Online ext4 Metadata Check Snapshots
+emergency.service,loaded,inactive,dead,Emergency Shell
+●,empire-py-admin.service,not-found,inactive,dead    empire-py-admin.service
+●,empire-py-api-app.service,not-found,inactive,dead    empire-py-api-app.service
+●,empire-py-ndip-core-api.service,not-found,inactive,dead    empire-py-ndip-core-api.service
+●,empire-py-ndip-core-backend-app-backend-app.service,not-found,inactive,dead    empire-py-ndip-core-backend-app-backend-app.service
+●,empire-py-ndip-core-backend-app.service,not-found,inactive,dead    empire-py-ndip-core-backend-app.service
+●,empire-web-ndip-frontend.service,not-found,inactive,dead    empire-web-ndip-frontend.service
+●,exim4.service,not-found,inactive,dead    exim4.service
+fail2ban.service,loaded,active,running,Fail2Ban Service
+●,fcoe.service,not-found,inactive,dead    fcoe.service
+finalrd.service,loaded,active,exited,Create final runtime dir for shutdown pivot root
+●,firewalld.service,not-found,inactive,dead    firewalld.service
+fstrim.service,loaded,inactive,dead,Discard unused blocks on filesystems from /etc/fstab
+fwupd-refresh.service,loaded,inactive,dead,Refresh fwupd metadata and update motd
+fwupd.service,loaded,active,running,Firmware update daemon
+getty-static.service,loaded,inactive,dead,getty on tty2-tty6 if dbus and logind are not available
+getty@tty1.service,loaded,inactive,dead,Getty on tty1
+gpu-manager.service,loaded,inactive,dead,Detect the available GPUs and deal with any system changes
+grub-common.service,loaded,inactive,dead,Record successful boot for GRUB
+grub-initrd-fallback.service,loaded,inactive,dead,GRUB failed boot detection
+●,hv_kvp_daemon.service,not-found,inactive,dead    hv_kvp_daemon.service
+initrd-cleanup.service,loaded,inactive,dead,Cleaning Up and Shutting Down Daemons
+initrd-parse-etc.service,loaded,inactive,dead,Mountpoints Configured in the Real Root
+initrd-switch-root.service,loaded,inactive,dead,Switch Root
+initrd-udevadm-cleanup-db.service,loaded,inactive,dead,Cleanup udev Database
+●,ip6tables.service,not-found,inactive,dead    ip6tables.service
+●,ipset.service,not-found,inactive,dead    ipset.service
+●,iptables.service,not-found,inactive,dead    iptables.service
+●,iscsi-shutdown.service,not-found,inactive,dead    iscsi-shutdown.service
+iscsid.service,loaded,inactive,dead,iSCSI initiator daemon (iscsid)
+●,kbd.service,not-found,inactive,dead    kbd.service
+keyboard-setup.service,loaded,active,exited,Set the console keyboard layout
+kmod-static-nodes.service,loaded,active,exited,Create List of Static Device Nodes
+ldconfig.service,loaded,inactive,dead,Rebuild Dynamic Linker Cache
+logrotate.service,loaded,inactive,dead,Rotate log files
+lvm2-lvmpolld.service,loaded,inactive,dead,LVM2 poll daemon
+lvm2-monitor.service,loaded,active,exited,"Monitoring of LVM2 mirrors, snapshots etc. using dmeventd or progress polling"
+man-db.service,loaded,inactive,dead,Daily man-db regeneration
+modprobe@configfs.service,loaded,inactive,dead,Load Kernel Module configfs
+modprobe@dm_mod.service,loaded,inactive,dead,Load Kernel Module dm_mod
+modprobe@drm.service,loaded,inactive,dead,Load Kernel Module drm
+modprobe@efi_pstore.service,loaded,inactive,dead,Load Kernel Module efi_pstore
+modprobe@fuse.service,loaded,inactive,dead,Load Kernel Module fuse
+modprobe@loop.service,loaded,inactive,dead,Load Kernel Module loop
+modprobe@sd_mod.service,loaded,inactive,dead,Load Kernel Module sd_mod
+motd-news.service,loaded,inactive,dead,Message of the Day
+ndsp-16-layers.service,loaded,active,running,NDSP 16 Analytical Layers API
+ndsp-access-guard-9024.service,loaded,active,running,NDSP Access Guard 9024
+ndsp-access-guard-final.service,loaded,active,running,NDSP Access Guard Final
+ndsp-admin-actions.service,loaded,active,running,NDSP Admin Actions Gateway
+ndsp-admin-snapshot-updater.service,loaded,inactive,dead,NDSP Admin Snapshot Updater
+ndsp-admin-ui-proxy.service,loaded,active,running,NDSP Admin UI Server-Side Proxy
+ndsp-admin-user-ops.service,loaded,active,running,NDSP Admin User Ops
+ndsp-admin-users-official-readonly.service,loaded,active,exited,NDSP Admin Users Official Readonly Readiness Sentinel
+ndsp-admin-users-official.service,loaded,active,running,NDSP Admin Official Users API
+ndsp-airtable-runtime-sync.service,loaded,inactive,dead,NDSP Airtable Runtime Sync
+ndsp-api-compat.service,loaded,active,running,NDSP API Compatibility Gateway
+ndsp-api.service,loaded,inactive,dead,NDSP FastAPI Backend
+ndsp-auth-api.service,loaded,inactive,dead,NDSP Auth API
+ndsp-auth-core-clean.service,loaded,active,running,NDSP Clean Authentication Core
+ndsp-bot_execution.service,loaded,active,running,NDSP BOT-001 NDSP Bot Execution Service
+ndsp-business-digest.service,loaded,inactive,dead,NDSP Daily Business Digest V205
+ndsp-business-ops.service,loaded,active,running,NDSP Business Operations V205
+ndsp-canonical-live-runtime-v30.service,loaded,active,running,NDSP Real Canonical 16-Layer Runtime Sidecar V30
+ndsp-canonical-live-runtime-v33.service,loaded,active,running,NDSP Canonical Live Evidence Binding Sidecar V33
+ndsp-capability-runtime-controller.service,loaded,inactive,dead,NDSP Capability Runtime Evidence Controller
+ndsp-change-password-gateway.service,loaded,active,running,NDSP Change Password Gateway
+ndsp-commercial-auth-payment-staging.service,loaded,active,running,NDSP Commercial Auth Payment Staging V1.13
+ndsp-completed-decisions-evidence-v35.service,loaded,active,running,NDSP Completed Decisions Evidence Registry V35
+ndsp-completed-decisions-history-capture-v36.service,loaded,inactive,dead,NDSP Completed Decisions History Capture V36
+ndsp-completed-decisions-history-v36.service,loaded,active,running,NDSP Completed Decisions Append-Only History API V36
+ndsp-completed_decision.service,loaded,active,running,NDSP CDS-001 Completed Decision Service
+ndsp-contract-regression-v1-1.service,loaded,inactive,dead,NDSP Backend Contract V1.1 Regression
+ndsp-ctl-001-workspace-identity.service,loaded,active,running,NDSP CTL-001 Workspace Identity
+ndsp-current-user-display.service,loaded,active,running,NDSP Current User Display API
+ndsp-decision-package-v1.service,loaded,active,running,NDSP Decision Package API v1
+ndsp-decision_governance_core.service,loaded,active,running,NDSP DGC-001 Decision Governance Core
+ndsp-governance-bridge.service,loaded,active,running,NDSP Governance Bridge 9044
+ndsp-layers-api.service,loaded,active,running,NDSP Layers API
+ndsp-live-decision-quality.service,loaded,active,running,NDSP Live Decision Quality Bridge
+ndsp-live-market-adapter.service,loaded,active,running,NDSP Live Market Adapter
+ndsp-market-data-bridge-v2.service,loaded,active,running,NDSP Market Data and News Bridge V2
+ndsp-market-prices-updater.service,loaded,inactive,dead,NDSP Live Market Prices Updater
+ndsp-news-ticker.service,loaded,active,running,NDSP Live News Ticker Service
+ndsp-password-reset.service,loaded,active,running,NDSP Password Reset Gateway
+ndsp-platform-gateway-9002.service,loaded,active,running,NDSP Platform Gateway 9002 Recovery Service
+ndsp-platform-gateway.service,loaded,active,running,NDSP Platform Unified Backend Gateway 9001
+ndsp-portal-real-data-api.service,loaded,active,running,NDSP Portal Real Data API
+ndsp-production-monitor.service,loaded,inactive,dead,NDSP Production Monitor V205
+ndsp-public-summary-v548.service,loaded,active,running,NDSP Public Summary V5.4.8
+ndsp-quality-live-golden-wrapper.service,loaded,active,running,NDSP quality-live golden explainability API wrapper
+ndsp-quality-live-nmp-wrapper.service,loaded,active,running,NDSP quality-live NMP wrapper 9082
+ndsp-raw-cot-gateway.service,loaded,active,running,NDSP Raw COT Gateway
+ndsp-real-feeds-sync.service,loaded,inactive,dead,NDSP Real Feeds Sync
+ndsp-refresh-static-data-contract-v46.service,loaded,inactive,dead,NDSP V46 static data contract refresh
+ndsp-register-compat-gateway.service,loaded,active,running,NDSP Register Compatibility Gateway
+ndsp-registration-consent-v42.service,loaded,active,running,NDSP registration legal-consent gateway V42
+ndsp-registration-mailer-v12-1.service,loaded,inactive,dead,NDSP Registration Welcome and Owner Notification Mailer V12.1
+ndsp-scenario-levels-adapter.service,loaded,active,running,NDSP Scenario Levels Adapter
+ndsp-telegram-alert.service,loaded,inactive,dead,NDSP Telegram automatic health alert
+ndsp-telegram-link-listener.service,loaded,active,running,NDSP Telegram Link Listener
+ndsp-tradingview-calendar.service,loaded,inactive,dead,NDSP TradingView Live Economic Calendar
+ndsp-trial-fingerprint-guard.service,loaded,active,running,NDSP Trial Fingerprint Guard Proxy
+ndsp-trial-register-canonical-wrapper.service,loaded,active,running,NDSP Trial Register Canonical Wrapper
+ndsp-trial-register.service,loaded,active,running,NDSP Trial Registration Gateway
+ndsp-trial-seats-api.service,loaded,active,running,NDSP Trial Seats API
+ndsp-ui-bridge-api.service,loaded,active,running,NDSP UI Bridge API
+ndsp-user-alert-channels.service,loaded,active,running,NDSP User Alert Channels API
+ndsp-user-dashboard.service,loaded,active,running,NDSP User Dashboard Data Gateway
+ndsp-user-login.service,loaded,active,running,NDSP User Login Gateway
+ndsp-v3-portal-gateway.service,loaded,active,running,NDSP V3 Portal Gateway
+ndsp-v52-contract.service,loaded,active,running,NDSP V5.2 Backend NMP TDL Contract
+ndsp-v53-bridge.service,loaded,active,running,NDSP V53/V543 TDL Devil Radar Nodes Bridge
+●,netfilter-persistent.service,not-found,inactive,dead    netfilter-persistent.service
+netplan-ovs-cleanup.service,loaded,inactive,dead,OpenVSwitch configuration for cleanup
+networkd-dispatcher.service,loaded,active,running,Dispatcher daemon for systemd-networkd
+NetworkManager-wait-online.service,loaded,active,exited,Network Manager Wait Online
+NetworkManager.service,loaded,active,running,Network Manager
+nftables.service,loaded,inactive,dead,nftables
+nginx.service,loaded,active,running,A high performance web server and a reverse proxy server
+●,nslcd.service,not-found,inactive,dead    nslcd.service
+●,nt-admin-api-v2.service,not-found,inactive,dead    nt-admin-api-v2.service
+●,nt-admin-api.service,not-found,inactive,dead    nt-admin-api.service
+●,nt-admin.service,not-found,inactive,dead    nt-admin.service
+●,nt-paypal-webhook.service,not-found,inactive,dead    nt-paypal-webhook.service
+●,nt-signals-api.service,not-found,inactive,dead    nt-signals-api.service
+●,nt-signals-webhook.service,not-found,inactive,dead    nt-signals-webhook.service
+●,oem-config.service,not-found,inactive,dead    oem-config.service
+open-iscsi.service,loaded,inactive,dead,Login to default iSCSI targets
+open-vm-tools.service,loaded,inactive,dead,Service for virtual machines hosted on VMware
+●,ovsdb-server.service,not-found,inactive,dead    ovsdb-server.service
+plymouth-quit-wait.service,loaded,inactive,dead,Hold until boot process finishes up
+plymouth-quit.service,loaded,active,exited,Terminate Plymouth Boot Screen
+plymouth-read-write.service,loaded,active,exited,Tell Plymouth To Write Out Runtime Data
+plymouth-start.service,loaded,inactive,dead,Show Plymouth Boot Screen
+plymouth-switch-root.service,loaded,inactive,dead,Plymouth switch root service
+pm2-nawaf511.service,loaded,active,exited,PM2 process manager bootstrap for nawaf511
+●,podman-auto-update.service,not-found,inactive,dead    podman-auto-update.service
+●,podman-clean-transient.service,not-found,inactive,dead    podman-clean-transient.service
+●,podman-restart.service,not-found,inactive,dead    podman-restart.service
+●,podman.service,not-found,inactive,dead    podman.service
+polkit.service,loaded,active,running,Authorization Manager
+pollinate.service,loaded,inactive,dead,Pollinate to seed the pseudo random number generator
+postfix.service,loaded,active,exited,Postfix Mail Transport Agent
+postfix@-.service,loaded,active,running,Postfix Mail Transport Agent (instance -)
+postgresql.service,loaded,active,exited,PostgreSQL RDBMS
+postgresql@16-main.service,loaded,active,running,PostgreSQL Cluster 16-main
+power-profiles-daemon.service,loaded,active,running,Power Profiles daemon
+preload.service,loaded,active,running,LSB: Adaptive readahead daemon
+●,rbdmap.service,not-found,inactive,dead    rbdmap.service
+rc-local.service,loaded,inactive,dead,/etc/rc.local Compatibility
+redis-server.service,loaded,active,running,Advanced key-value store
+rescue.service,loaded,inactive,dead,Rescue Shell
+rsyslog.service,loaded,active,running,System Logging Service
+rtkit-daemon.service,loaded,active,running,RealtimeKit Scheduling Policy Service
+sddm.service,loaded,active,running,Simple Desktop Display Manager
+●,sdf-engine.service,not-found,inactive,dead    sdf-engine.service
+●,sdf-marketpulse.service,not-found,inactive,dead    sdf-marketpulse.service
+secureboot-db.service,loaded,inactive,dead,Secure Boot updates for DB and DBX
+●,sendmail.service,not-found,inactive,dead    sendmail.service
+serial-getty@ttyS0.service,loaded,active,running,Serial Getty on ttyS0
+setvtrgb.service,loaded,active,exited,Set console scheme
+smartmontools.service,loaded,inactive,dead,Self Monitoring and Reporting Technology (SMART) Daemon
+snap.cups.cups-browsed.service,loaded,active,running,Service for snap application cups.cups-browsed
+snap.cups.cupsd.service,loaded,active,running,Service for snap application cups.cupsd
+snapd.apparmor.service,loaded,active,exited,Load AppArmor profiles managed internally by snapd
+snapd.autoimport.service,loaded,inactive,dead,Auto import assertions from block devices
+snapd.core-fixup.service,loaded,inactive,dead,Automatically repair incorrect owner/permissions on core devices
+snapd.failure.service,loaded,inactive,dead,Failure handling of the snapd snap
+snapd.recovery-chooser-trigger.service,loaded,inactive,dead,Wait for the Ubuntu Core chooser trigger
+snapd.seeded.service,loaded,active,exited,Wait until snapd is fully seeded
+snapd.service,loaded,active,running,Snap Daemon
+snapd.snap-repair.service,loaded,inactive,dead,Automatically fetch and run repair assertions
+snapd.system-shutdown.service,loaded,inactive,dead,Ubuntu core (all-snaps) system shutdown helper setup service
+ssh.service,loaded,active,running,OpenBSD Secure Shell server
+ssl-cert.service,loaded,inactive,dead,Generate snakeoil SSL keypair
+switcheroo-control.service,loaded,active,running,Switcheroo Control Proxy service
+sysstat-collect.service,loaded,inactive,dead,system activity accounting tool
+sysstat-summary.service,loaded,inactive,dead,Generate a daily summary of process accounting
+sysstat.service,loaded,active,exited,Resets System Activity Logs
+●,system76-power.service,not-found,inactive,dead    system76-power.service
+systemd-ask-password-console.service,loaded,inactive,dead,Dispatch Password Requests to Console
+systemd-ask-password-plymouth.service,loaded,inactive,dead,Forward Password Requests to Plymouth
+systemd-ask-password-wall.service,loaded,inactive,dead,Forward Password Requests to Wall
+systemd-battery-check.service,loaded,inactive,dead,Check battery level during early boot
+systemd-binfmt.service,loaded,active,exited,Set Up Additional Binary Formats
+systemd-bsod.service,loaded,inactive,dead,Displays emergency message in full screen.
+systemd-firstboot.service,loaded,inactive,dead,First Boot Wizard
+systemd-fsck-root.service,loaded,inactive,dead,File System Check on Root Device
+systemd-fsck@dev-disk-by\x2dlabel-BOOT.service,loaded,active,exited,File System Check on /dev/disk/by-label/BOOT
+systemd-fsck@dev-disk-by\x2dlabel-UEFI.service,loaded,active,exited,File System Check on /dev/disk/by-label/UEFI
+systemd-fsckd.service,loaded,inactive,dead,File System Check Daemon to report status
+systemd-hibernate-resume.service,loaded,inactive,dead,Resume from hibernation
+systemd-hibernate.service,loaded,inactive,dead,System Hibernate
+systemd-hwdb-update.service,loaded,inactive,dead,Rebuild Hardware Database
+systemd-hybrid-sleep.service,loaded,inactive,dead,System Hybrid Suspend+Hibernate
+systemd-initctl.service,loaded,inactive,dead,initctl Compatibility Daemon
+systemd-journal-catalog-update.service,loaded,inactive,dead,Rebuild Journal Catalog
+systemd-journal-flush.service,loaded,active,exited,Flush Journal to Persistent Storage
+systemd-journald.service,loaded,active,running,Journal Service
+systemd-logind.service,loaded,active,running,User Login Management
+systemd-machine-id-commit.service,loaded,inactive,dead,Commit a transient machine-id on disk
+systemd-modules-load.service,loaded,active,exited,Load Kernel Modules
+●,systemd-networkd-wait-online.service,loaded,failed,failed  Wait for Network to be Configured
+systemd-networkd.service,loaded,active,running,Network Configuration
+●,systemd-oomd.service,not-found,inactive,dead    systemd-oomd.service
+systemd-pcrmachine.service,loaded,inactive,dead,TPM2 PCR Machine ID Measurement
+systemd-pcrphase-initrd.service,loaded,inactive,dead,TPM2 PCR Barrier (initrd)
+systemd-pcrphase-sysinit.service,loaded,inactive,dead,TPM2 PCR Barrier (Initialization)
+systemd-pcrphase.service,loaded,inactive,dead,TPM2 PCR Barrier (User)
+systemd-pstore.service,loaded,inactive,dead,Platform Persistent Storage Archival
+systemd-quotacheck.service,loaded,inactive,dead,File System Quota Check
+systemd-random-seed.service,loaded,active,exited,Load/Save OS Random Seed
+systemd-remount-fs.service,loaded,active,exited,Remount Root and Kernel File Systems
+systemd-repart.service,loaded,inactive,dead,Repartition Root Disk
+systemd-resolved.service,loaded,active,running,Network Name Resolution
+systemd-rfkill.service,loaded,inactive,dead,Load/Save RF Kill Switch Status
+systemd-soft-reboot.service,loaded,inactive,dead,Reboot System Userspace
+systemd-suspend-then-hibernate.service,loaded,inactive,dead,System Suspend then Hibernate
+systemd-suspend.service,loaded,inactive,dead,System Suspend
+systemd-sysctl.service,loaded,active,exited,Apply Kernel Variables
+systemd-sysext.service,loaded,inactive,dead,Merge System Extension Images into /usr/ and /opt/
+systemd-sysusers.service,loaded,inactive,dead,Create System Users
+systemd-timesyncd.service,loaded,active,running,Network Time Synchronization
+systemd-tmpfiles-clean.service,loaded,inactive,dead,Cleanup of Temporary Directories
+systemd-tmpfiles-setup-dev-early.service,loaded,active,exited,Create Static Device Nodes in /dev gracefully
+systemd-tmpfiles-setup-dev.service,loaded,active,exited,Create Static Device Nodes in /dev
+systemd-tmpfiles-setup.service,loaded,active,exited,Create Volatile Files and Directories
+systemd-tpm2-setup-early.service,loaded,inactive,dead,TPM2 SRK Setup (Early)
+systemd-tpm2-setup.service,loaded,inactive,dead,TPM2 SRK Setup
+systemd-udev-settle.service,loaded,active,exited,Wait for udev To Complete Device Initialization
+systemd-udev-trigger.service,loaded,active,exited,Coldplug All udev Devices
+systemd-udevd.service,loaded,active,running,Rule-based Manager for Device Events and Files
+systemd-update-done.service,loaded,inactive,dead,Update is Completed
+systemd-update-utmp-runlevel.service,loaded,inactive,dead,Record Runlevel Change in UTMP
+systemd-update-utmp.service,loaded,active,exited,Record System Boot/Shutdown in UTMP
+systemd-user-sessions.service,loaded,active,exited,Permit User Sessions
+●,systemd-vconsole-setup.service,not-found,inactive,dead    systemd-vconsole-setup.service
+●,tlp.service,not-found,inactive,dead    tlp.service
+tpm-udev.service,loaded,inactive,dead,Handle dynamically added tpm devices
+●,tuned.service,not-found,inactive,dead    tuned.service
+●,ua-auto-attach.service,not-found,inactive,dead    ua-auto-attach.service
+ua-reboot-cmds.service,loaded,inactive,dead,Ubuntu Pro reboot cmds
+ua-timer.service,loaded,inactive,dead,Ubuntu Pro Timer for running repeated jobs
+●,ubuntu-advantage-cloud-id-shim.service,not-found,inactive,dead    ubuntu-advantage-cloud-id-shim.service
+ubuntu-advantage.service,loaded,inactive,dead,Ubuntu Pro Background Auto Attach
+●,ubuntu-fan.service,not-found,inactive,dead    ubuntu-fan.service
+udisks2.service,loaded,active,running,Disk Manager
+ufw.service,loaded,active,exited,Uncomplicated firewall
+update-notifier-download.service,loaded,inactive,dead,Download data for packages that failed at package install time
+update-notifier-motd.service,loaded,inactive,dead,Check to see whether there is a new version of Ubuntu available
+upower.service,loaded,active,running,Daemon for power management
+user-runtime-dir@1000.service,loaded,active,exited,User Runtime Directory /run/user/1000
+user@1000.service,loaded,active,running,User Manager for UID 1000
+uuidd.service,loaded,inactive,dead,Daemon for generating UUIDs
+vgauth.service,loaded,inactive,dead,Authentication service for virtual machines hosted on VMware
+warp-svc.service,loaded,active,running,Cloudflare Zero Trust Client Daemon
+whoopsie.service,loaded,inactive,dead,crash report submission
+xrdp-sesman.service,loaded,active,running,xrdp session manager
+xrdp.service,loaded,active,running,xrdp daemon
+●,zfs-mount.service,not-found,inactive,dead    zfs-mount.service
