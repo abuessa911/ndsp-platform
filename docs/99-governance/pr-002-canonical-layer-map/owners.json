@@ -1,0 +1,98 @@
+{
+  "L01": {
+    "canonical_source": "backend/layers/canonical_v1/direction/l01_tdl_medium_long.py",
+    "owner": "nawaf511",
+    "runtime_owner": "nawaf511",
+    "notes": "Verified in layer_orchestrator_v2.py and registry_lock.py."
+  },
+  "L02": {
+    "canonical_source": "backend/layers/canonical_v1/direction/l02_tdl_short_speculative.py",
+    "owner": "nawaf511",
+    "runtime_owner": "nawaf511",
+    "notes": "Verified in layer_orchestrator_v2.py and registry_lock.py."
+  },
+  "L03": {
+    "canonical_source": "backend/layers/canonical_v1/direction/l03_market_direction_context.py",
+    "owner": "nawaf511",
+    "runtime_owner": "nawaf511",
+    "notes": "Verified in layer_orchestrator_v2.py and registry_lock.py."
+  },
+  "L04": {
+    "canonical_source": "backend/layers/canonical_v1/direction/l04_correction_gate.py",
+    "owner": "nawaf511",
+    "runtime_owner": "nawaf511",
+    "notes": "Verified in layer_orchestrator_v2.py and registry_lock.py."
+  },
+  "L05": {
+    "canonical_source": "backend/layers/canonical_v1/quality/l05_divergence_engine.py",
+    "owner": "nawaf511",
+    "runtime_owner": "nawaf511",
+    "notes": "Verified in layer_orchestrator_v2.py and registry_lock.py."
+  },
+  "L06": {
+    "canonical_source": "backend/layers/canonical_v1/direction/l06_temporal_day_logic.py",
+    "owner": "nawaf511",
+    "runtime_owner": "nawaf511",
+    "notes": "Verified in layer_orchestrator_v2.py and registry_lock.py."
+  },
+  "L07": {
+    "canonical_source": "backend/layers/canonical_v1/structure/l07_scenario_levels.py",
+    "owner": "nawaf511",
+    "runtime_owner": "nawaf511",
+    "notes": "Verified in layer_orchestrator_v2.py and registry_lock.py."
+  },
+  "L08": {
+    "canonical_source": "backend/layers/canonical_v1/structure/l08_nmp_confirmation.py",
+    "owner": "nawaf511",
+    "runtime_owner": "nawaf511",
+    "notes": "Verified in layer_orchestrator_v2.py and registry_lock.py."
+  },
+  "L09": {
+    "canonical_source": "backend/layers/canonical_v1/quality/l09_momentum_engine.py",
+    "owner": "nawaf511",
+    "runtime_owner": "nawaf511",
+    "notes": "Verified in layer_orchestrator_v2.py and registry_lock.py."
+  },
+  "L10": {
+    "canonical_source": "backend/layers/canonical_v1/quality/l10_liquidity_structure_confirmation.py",
+    "owner": "nawaf511",
+    "runtime_owner": "nawaf511",
+    "notes": "Verified in layer_orchestrator_v2.py and registry_lock.py."
+  },
+  "L11": {
+    "canonical_source": "backend/layers/canonical_v1/risk/l11_usd_macro_filter.py",
+    "owner": "nawaf511",
+    "runtime_owner": "nawaf511",
+    "notes": "Verified in layer_orchestrator_v2.py and registry_lock.py."
+  },
+  "L12": {
+    "canonical_source": "backend/layers/canonical_v1/risk/l12_risk_engine.py",
+    "owner": "nawaf511",
+    "runtime_owner": "nawaf511",
+    "notes": "Verified in layer_orchestrator_v2.py and registry_lock.py."
+  },
+  "L13": {
+    "canonical_source": "backend/layers/canonical_v1/quality/l13_nawaf_golden_signal.py",
+    "owner": "nawaf511",
+    "runtime_owner": "nawaf511",
+    "notes": "Verified in layer_orchestrator_v2.py and registry_lock.py."
+  },
+  "L14": {
+    "canonical_source": "backend/layers/canonical_v1/quality/l14_nawaf_enhanced_golden_signal.py",
+    "owner": "nawaf511",
+    "runtime_owner": "nawaf511",
+    "notes": "Verified in layer_orchestrator_v2.py and registry_lock.py."
+  },
+  "L15": {
+    "canonical_source": "backend/layers/canonical_v1/risk/l15_devils_advocate.py",
+    "owner": "nawaf511",
+    "runtime_owner": "nawaf511",
+    "notes": "Verified in layer_orchestrator_v2.py and registry_lock.py."
+  },
+  "L16": {
+    "canonical_source": "backend/layers/canonical_v1/final/l16_decision_readiness_state_machine.py",
+    "owner": "nawaf511",
+    "runtime_owner": "nawaf511",
+    "notes": "Verified in layer_orchestrator_v2.py and registry_lock.py."
+  }
+}
