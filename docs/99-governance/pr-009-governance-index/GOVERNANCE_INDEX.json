@@ -1,0 +1,108 @@
+{
+  "schema_version": "1.0",
+  "document": "NDSP Governance Index",
+  "generated_date": "2026-07-31",
+  "scope": "docs/99-governance",
+  "runtime_changes": "none",
+  "status": "COMPLETE",
+  "package_count": 5,
+  "packages": [
+    {
+      "pr": "PR-004",
+      "slug": "runtime-dependency-map",
+      "directory": "pr-004-runtime-dependency-map",
+      "title": "Runtime Dependency Map",
+      "description": "Canonical map of runtime components, dependencies, configuration evidence, and noncanonical edges.",
+      "primary_artifact": "FINAL_RUNTIME_DEPENDENCY_MAP.json",
+      "status": "COMPLETE",
+      "path": "pr-004-runtime-dependency-map",
+      "file_count": 8,
+      "files": [
+        "FINAL_RUNTIME_DEPENDENCY_MAP.csv",
+        "FINAL_RUNTIME_DEPENDENCY_MAP.json",
+        "PR-004-CONFIGURATION-EVIDENCE-APPENDIX.md",
+        "PR-004-FINAL-RUNTIME-DEPENDENCY-MAP.md",
+        "PR-004-NON-CANONICAL-COMPONENT-EDGES.md",
+        "PR004_CONFIGURATION_EVIDENCE_APPENDIX.csv",
+        "PR004_FINAL_SHA256SUMS.txt",
+        "PR004_NON_CANONICAL_COMPONENT_EDGES.csv"
+      ],
+      "primary_artifact_path": "pr-004-runtime-dependency-map/FINAL_RUNTIME_DEPENDENCY_MAP.json"
+    },
+    {
+      "pr": "PR-005",
+      "slug": "runtime-ownership-map",
+      "directory": "pr-005-runtime-ownership-map",
+      "title": "Runtime Ownership Map",
+      "description": "Ownership classification for runtime components and supporting ownership-review evidence.",
+      "primary_artifact": "FINAL_RUNTIME_OWNERSHIP_MAP.json",
+      "status": "COMPLETE",
+      "path": "pr-005-runtime-ownership-map",
+      "file_count": 5,
+      "files": [
+        "FINAL_RUNTIME_OWNERSHIP_MAP.csv",
+        "FINAL_RUNTIME_OWNERSHIP_MAP.json",
+        "PR-005-FINAL-RUNTIME-OWNERSHIP-MAP.md",
+        "PR-005-OWNERSHIP-REVIEW-NOTES.md",
+        "PR005_FINAL_SHA256SUMS.txt"
+      ],
+      "primary_artifact_path": "pr-005-runtime-ownership-map/FINAL_RUNTIME_OWNERSHIP_MAP.json"
+    },
+    {
+      "pr": "PR-006",
+      "slug": "network-exposure-map",
+      "directory": "pr-006-network-exposure-map",
+      "title": "Network Exposure Map",
+      "description": "Documented listener, binding, protocol, ownership, and network exposure inventory.",
+      "primary_artifact": "FINAL_NETWORK_EXPOSURE_MAP.json",
+      "status": "COMPLETE",
+      "path": "pr-006-network-exposure-map",
+      "file_count": 5,
+      "files": [
+        "FINAL_NETWORK_EXPOSURE_MAP.csv",
+        "FINAL_NETWORK_EXPOSURE_MAP.json",
+        "PR-006-FINAL-NETWORK-EXPOSURE-MAP.md",
+        "PR-006-NETWORK-EXPOSURE-REVIEW-NOTES.md",
+        "PR006_FINAL_SHA256SUMS.txt"
+      ],
+      "primary_artifact_path": "pr-006-network-exposure-map/FINAL_NETWORK_EXPOSURE_MAP.json"
+    },
+    {
+      "pr": "PR-007",
+      "slug": "noncanonical-ownership",
+      "directory": "pr-007-noncanonical-ownership",
+      "title": "Noncanonical Ownership Review",
+      "description": "Final ownership decisions for noncanonical components, including promotion, shared infrastructure, and deprecation.",
+      "primary_artifact": "FINAL_NONCANONICAL_OWNERSHIP_MAP.json",
+      "status": "COMPLETE",
+      "path": "pr-007-noncanonical-ownership",
+      "file_count": 5,
+      "files": [
+        "FINAL_NONCANONICAL_OWNERSHIP_MAP.csv",
+        "FINAL_NONCANONICAL_OWNERSHIP_MAP.json",
+        "PR-007-NONCANONICAL-OWNERSHIP.md",
+        "PR-007-REVIEW-NOTES.md",
+        "PR007_SHA256SUMS.txt"
+      ],
+      "primary_artifact_path": "pr-007-noncanonical-ownership/FINAL_NONCANONICAL_OWNERSHIP_MAP.json"
+    },
+    {
+      "pr": "PR-008",
+      "slug": "governance-closure",
+      "directory": "pr-008-governance-closure",
+      "title": "Governance Closure",
+      "description": "Closure summary, commit manifest, merge checklist, and validation evidence for PR-004 through PR-008.",
+      "primary_artifact": "PR-008-COMMIT-MANIFEST.json",
+      "status": "COMPLETE",
+      "path": "pr-008-governance-closure",
+      "file_count": 4,
+      "files": [
+        "PR-008-COMMIT-MANIFEST.json",
+        "PR-008-GOVERNANCE-CLOSURE-SUMMARY.md",
+        "PR-008-MERGE-CHECKLIST.md",
+        "PR008_SHA256SUMS.txt"
+      ],
+      "primary_artifact_path": "pr-008-governance-closure/PR-008-COMMIT-MANIFEST.json"
+    }
+  ]
+}
