@@ -1,0 +1,140 @@
+semantic_cluster_id,candidate_count,capability_ids,capability_names,endpoint_contracts,sources,deduplication_status
+CLUSTER-00830B85A41852B9,2,CAP-A294A80A744D|CAP-D054F1321201,Ndsp User Login Gateway,POST /API/AUTH/2FA/SETUP/CONFIRM-FINAL,backend/auth_api/ndsp_user_login_gateway.cjs|backend/ndsp_user_login_gateway.cjs,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-0328C106FF332C89,1,CAP-4B8CAC6792AE,Ndsp User Portal Final Experience V1 One Script,GET /API/USER/EXPERIENCE,NDSP_USER_PORTAL_FINAL_EXPERIENCE_V1_ONE_SCRIPT.sh,UNIQUE
+CLUSTER-0412272E609423D6,1,CAP-B89CF4208B10,Grade From Score,,backend/app/support_layers/quality/decision_quality_stack.py,UNIQUE
+CLUSTER-04AE942A6CCB8C5A,2,CAP-329C5FE62399|CAP-5649C9641068,Nowpayments Create Alias|User Operational Compat,POST /API/V6/PAYMENTS/NOWPAYMENTS/SUBSCRIPTION/CREATE,backend/app/api/compat/nowpayments_create_alias.py|backend/app/api/compat/user_operational_compat.py,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-0510FC78E483B3D6,1,CAP-353E6D9C0A43,Ndsp User Login Gateway,PUT /API/AUTH/PROFILE,backend/auth_api/ndsp_user_login_gateway.cjs,UNIQUE
+CLUSTER-058EA84FFB96BD5C,1,CAP-B26FA1996A34,Ndsp User Login Gateway,GET /API/AUTH/PROFILE,backend/auth_api/ndsp_user_login_gateway.cjs,UNIQUE
+CLUSTER-065FF7E991FE7A36,2,CAP-09B689D81772|CAP-F4D88C2A7931,Ndsp Admin Ui Proxy,GET /API/ADMIN-UI/HEALTH,backend/auth_api/ndsp_admin_ui_proxy.cjs|backend/ndsp_admin_ui_proxy.cjs,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-0746027563B4F7CB,1,CAP-636B50FAED04,Frontend Contract,GET /ME/DASHBOARD,backend/app/api/v1/frontend_contract.py,UNIQUE
+CLUSTER-075A9C033639FAC0,1,CAP-935E1E26D22F,Dqsrisk State,,backend/app/support_layers/quality/decision_quality_stack.py,UNIQUE
+CLUSTER-0AB1FDCBBD5FA5E8,1,CAP-C250957D114F,Frontend Contract,GET /ACCOUNT/TRIAL,backend/app/api/v1/frontend_contract.py,UNIQUE
+CLUSTER-0AFD7CA382703AB5,1,CAP-A5C181808EF6,Frontend Contract,POST /AUTH/2FA/VERIFY,backend/app/api/v1/frontend_contract.py,UNIQUE
+CLUSTER-0EDDB74E15FCFD6A,2,CAP-89287AB7B399|CAP-C216A7C8548C,Ndsp Admin Actions Bypass Old Middleware,GET /API/ADMIN-ACTIONS/USERS/ACTION/HEALTH,backend/auth_api/ndsp_admin_actions_bypass_old_middleware.cjs|backend/ndsp_admin_actions_bypass_old_middleware.cjs,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-0EE83BCF1B387E47,1,CAP-E07F7BC7E52F,Ndsp User Login Gateway,POST /API/AUTH/INTERNAL/EVIDENCE,backend/auth_api/ndsp_user_login_gateway.cjs,UNIQUE
+CLUSTER-1143EF6BAB8687CD,1,CAP-D6102C7DC3C1,Frontend Contract,GET /PACKAGES,backend/app/api/v1/frontend_contract.py,UNIQUE
+CLUSTER-12CE9BAE31EA4CB2,1,CAP-EDF3F96EC14B,User Operational Compat,POST /API/TRIAL/REGISTER,backend/app/api/compat/user_operational_compat.py,UNIQUE
+CLUSTER-1331DA2B82D10D74,4,CAP-1FBA01D3C252|CAP-4515D5FBBBF3|CAP-D64F1CFB3F24|CAP-F5C8984FC6A0,About|Framework Adapter,GET /ABOUT,backend/framework/about/about.cjs|backend/services/bot_execution/framework-adapter.cjs|backend/services/completed_decision/framework-adapter.cjs|backend/services/decision_governance_core/framework-adapter.cjs,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-13E1BE84357A8BF3,2,CAP-81C879AE2209|CAP-B2C76796BD6C,Ndsp Api Compat Gateway,GET /API/PACKAGES,backend/auth_api/ndsp_api_compat_gateway.cjs|backend/ndsp_api_compat_gateway.cjs,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-146A953A5A090F47,2,CAP-77CF58DFBBF6|CAP-D18B4EC4F34A,Ndsp Admin Ui Proxy,GET /API/ADMIN-UI/PACKAGES,backend/auth_api/ndsp_admin_ui_proxy.cjs|backend/ndsp_admin_ui_proxy.cjs,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-14E241D47ACC5CBA,1,CAP-B2ADCE8E14C1,Ndsp User Portal Final Experience V1 One Script,POST /API/USER/LEGAL-ACCEPTANCE,NDSP_USER_PORTAL_FINAL_EXPERIENCE_V1_ONE_SCRIPT.sh,UNIQUE
+CLUSTER-192665335C34E13D,1,CAP-BC09A0EB4549,User Operational Compat,POST /API/ALERTS/EMAIL/TEST,backend/app/api/compat/user_operational_compat.py,UNIQUE
+CLUSTER-1A1DF77772C7862E,1,CAP-805630C7C819,Attach Report,,backend/app/support_layers/scenario/scenario_engine.py,UNIQUE
+CLUSTER-1B355FCD82516B99,1,CAP-4804EA150D2F,Frontend Contract,GET /BRIEF/TODAY,backend/app/api/v1/frontend_contract.py,UNIQUE
+CLUSTER-1BD5A59391679254,1,CAP-552A04A27A0F,Scenario Report,,backend/app/support_layers/scenario/scenario_engine.py,UNIQUE
+CLUSTER-1C0006D0FCDB7718,1,CAP-C95B03AE5FFB,Frontend Contract,POST /ACCOUNT/ACTIVATE,backend/app/api/v1/frontend_contract.py,UNIQUE
+CLUSTER-20B55F2AD6D04BE8,3,CAP-45BEE5E5B9D6|CAP-6FE68AAF4F33|CAP-C3C9F07E6EC7,Telegram Routing Admin|Telegram Routing Internal|Telegram Routing V2,GET /STATUS,backend/app/api/admin/telegram_routing_admin.py|backend/app/api/admin/telegram_routing_v2.py|backend/app/api/internal/telegram_routing_internal.py,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-21D862A38B8E3867,2,CAP-3B89863B2015|CAP-7EEC4AB2500E,Ndsp User Login Gateway,POST /API/AUTH/2FA/SETUP/START,backend/auth_api/ndsp_user_login_gateway.cjs|backend/ndsp_user_login_gateway.cjs,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-2305B098920942A5,2,CAP-20B6E1FEA3A2|CAP-A323993993E5,Ndsp Api Compat Gateway,GET /API/MARKETS,backend/auth_api/ndsp_api_compat_gateway.cjs|backend/ndsp_api_compat_gateway.cjs,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-23D620B64D4FFE61,1,CAP-3A5ED3DB0C0D,Risk Label,,backend/app/support_layers/scenario/scenario_engine.py,UNIQUE
+CLUSTER-25099A6E3D05D0C3,2,CAP-7B056D6FB736|CAP-C55DEBBD7CB7,Ndsp User Login Gateway,POST /API/AUTH/2FA/DISABLE,backend/auth_api/ndsp_user_login_gateway.cjs|backend/ndsp_user_login_gateway.cjs,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-2B8E8720210CF8DD,2,CAP-846435C78CD1|CAP-F139426B5341,Ndsp User Login Gateway,POST /API/AUTH/2FA/SETUP,backend/auth_api/ndsp_user_login_gateway.cjs|backend/ndsp_user_login_gateway.cjs,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-2BF08E118E2502DD,1,CAP-F150D0BAA604,Frontend Contract,GET /ADMIN/LAYERS,backend/app/api/v1/frontend_contract.py,UNIQUE
+CLUSTER-2C421ED62D7F895B,1,CAP-1A9F62165A6D,Ndsp User Login Gateway,POST /API/AUTH/INTERNAL/LEGAL-ACCEPTANCE,backend/auth_api/ndsp_user_login_gateway.cjs,UNIQUE
+CLUSTER-2E7C1911FA0C6C3D,2,CAP-3E2090989150|CAP-7E97D2614E6D,Ndsp Admin Ui Proxy,GET /API/ADMIN-UI/MARKETS,backend/auth_api/ndsp_admin_ui_proxy.cjs|backend/ndsp_admin_ui_proxy.cjs,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-322DC710CFDB962B,1,CAP-E4980A40032A,Ndsp User Portal Final Experience V1 One Script,GET /API/USER/NOTIFICATIONS,NDSP_USER_PORTAL_FINAL_EXPERIENCE_V1_ONE_SCRIPT.sh,UNIQUE
+CLUSTER-325036ACDFEA1ED3,4,CAP-56C562461855|CAP-A34761515678|CAP-D93913F10664|CAP-F4B0061B6EC3,Framework Adapter|Version,GET /VERSION,backend/framework/version/version.cjs|backend/services/bot_execution/framework-adapter.cjs|backend/services/completed_decision/framework-adapter.cjs|backend/services/decision_governance_core/framework-adapter.cjs,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-328257E93FCC054C,1,CAP-0CE111E47411,Frontend Contract,POST /ME/CHANNELS/TELEGRAM/LINK,backend/app/api/v1/frontend_contract.py,UNIQUE
+CLUSTER-32A1E3F9E77CD9AB,1,CAP-425426D4A96B,User Operational Compat,GET /API/AUTH/ACTIVATE,backend/app/api/compat/user_operational_compat.py,UNIQUE
+CLUSTER-3373CEFA77A50B27,1,CAP-70C19D24087E,Ndsp Nowpayments,GET /WEBHOOKS/NOWPAYMENTS,backend/ndsp_nowpayments.cjs,UNIQUE
+CLUSTER-33A3608EC2C6ABB6,2,CAP-242D8324FAD9|CAP-8D64F6304F2E,Ndsp User Login Gateway,POST /API/AUTH/2FA/SETUP/SKIP,backend/auth_api/ndsp_user_login_gateway.cjs|backend/ndsp_user_login_gateway.cjs,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-37970355FCCFFAB3,1,CAP-11BF5E282765,Frontend Contract,GET /ME/WATCHLIST,backend/app/api/v1/frontend_contract.py,UNIQUE
+CLUSTER-3936838EFF8BCAF5,1,CAP-1D926198372A,Ndsp User Login Gateway,POST /API/AUTH/RUNTIME/USAGE/CONSUME,backend/auth_api/ndsp_user_login_gateway.cjs,UNIQUE
+CLUSTER-39C99CAF91B276BA,10,CAP-170A28FFB0E7|CAP-242A581E1E52|CAP-6F5DF526EE59|CAP-753A055CFA5A|CAP-89CA79DDADE2|CAP-9866D4AE9D59|CAP-B227DA36FA9B|CAP-B2BAF38F8204|CAP-ECBB8B6ED8D2|CAP-ED8397248098,Admin Only|Auth|Ndsp Read Alert State|Ndsp Write Alert State|Update User Status,GET /API/ADMIN-UI/ALERTS|GET /API/ADMIN-UI/BACKUPS|GET /API/ADMIN-UI/GOVERNANCE|GET /API/ADMIN-UI/HEALTH|GET /API/ADMIN-UI/MARKETS|GET /API/ADMIN-UI/PACKAGES|GET /API/ADMIN-UI/PAYMENTS|GET /API/ADMIN-UI/SUMMARY|GET /API/ADMIN-UI/TRIALS|GET /API/ADMIN-UI/USERS|POST /API/ADMIN-UI/ACTION|POST /API/ADMIN-UI/ALERTS/CHANNEL|POST /API/ADMIN-UI/ALERTS/TEST,backend/auth_api/ndsp_admin_ui_proxy.cjs|backend/ndsp_admin_ui_proxy.cjs,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-3B0A4645F1E78920,1,CAP-FA44BA71A8B0,Frontend Contract,GET /ASSETS/{ASSET_ID}/CHART,backend/app/api/v1/frontend_contract.py,UNIQUE
+CLUSTER-3B2119F427ED870D,1,CAP-4C3B7B99A4A6,Nowpayments Create Alias,GET /API/NDSP/NOWPAYMENTS-CREATE-ALIAS/HEALTH,backend/app/api/compat/nowpayments_create_alias.py,UNIQUE
+CLUSTER-3B2D0C744090CBFD,1,CAP-2CD69A7EA838,Frontend Contract,POST /AUTH/REGISTER,backend/app/api/v1/frontend_contract.py,UNIQUE
+CLUSTER-3C2B33BFE5D13257,1,CAP-9ADF707918ED,Ndsp User Login Gateway,GET /API/AUTH/SURVEY/STATUS,backend/auth_api/ndsp_user_login_gateway.cjs,UNIQUE
+CLUSTER-3DB2CA2224CCB065,1,CAP-B167184CBF84,Frontend Contract,POST /ME/WATCHLIST,backend/app/api/v1/frontend_contract.py,UNIQUE
+CLUSTER-40EAC1E50F40B29A,1,CAP-1736E39D1CE4,Frontend Contract,POST /AUTH/MAGIC-LINK,backend/app/api/v1/frontend_contract.py,UNIQUE
+CLUSTER-418471406315AE70,1,CAP-48F24BF885D7,User Operational Compat,POST /API/TELEGRAM/LINK/START,backend/app/api/compat/user_operational_compat.py,UNIQUE
+CLUSTER-4346E697DC6E8699,2,CAP-0843B421B752|CAP-F56AB637F669,Ndsp User Login Gateway,POST /API/AUTH/2FA/CONFIRM,backend/auth_api/ndsp_user_login_gateway.cjs|backend/ndsp_user_login_gateway.cjs,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-439BB6D39BC81D2B,1,CAP-E9D779AE5200,Frontend Contract,GET /ADMIN/REGISTRATIONS,backend/app/api/v1/frontend_contract.py,UNIQUE
+CLUSTER-43E988AB222E55F2,1,CAP-A57ECAABD0D2,Frontend Contract,GET /ASSETS,backend/app/api/v1/frontend_contract.py,UNIQUE
+CLUSTER-456F5C0D6EEA8305,1,CAP-7A9637DD3A75,Frontend Contract,GET /MARKETS,backend/app/api/v1/frontend_contract.py,UNIQUE
+CLUSTER-4667012B1A9E34A8,1,CAP-2B9AC68DB1D6,Assert No Decision Mutation,,backend/app/support_layers/scenario/scenario_engine.py,UNIQUE
+CLUSTER-46E5B501847DD809,2,CAP-13D1EE0A3B7A|CAP-2D45C5C1A44B,Ndsp User Dashboard Gateway,GET /API/USER-DASHBOARD/SAAS-POLICY,backend/auth_api/ndsp_user_dashboard_gateway.cjs|backend/ndsp_user_dashboard_gateway.cjs,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-49DBC384FFE12134,2,CAP-4B75FD38F852|CAP-C58E98CA2D3A,Ndsp Admin Ui Proxy,POST /API/ADMIN-UI/ALERTS/TEST,backend/auth_api/ndsp_admin_ui_proxy.cjs|backend/ndsp_admin_ui_proxy.cjs,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-4AE80B870122ACCA,1,CAP-F6B5F7A0A680,Frontend Fields Api,GET /API/NDSP/FRONTEND-FIELDS/PROBE,backend/app/ndsp_governance/frontend_fields_api.py,UNIQUE
+CLUSTER-52E920E2015C88E7,1,CAP-C26418100904,User Operational Compat,GET /API/NDSP/COMPAT/HEALTH,backend/app/api/compat/user_operational_compat.py,UNIQUE
+CLUSTER-547C76FD6DEEB68F,1,CAP-A1CD5A0B9B66,Market Type For,,backend/ndsp-live-decision-quality/asset_registry_runtime.py,UNIQUE
+CLUSTER-56135DB7D7AC83E9,1,CAP-5FEF33A2C87F,Ndsp User Login Gateway,POST /API/AUTH/EVENTS,backend/auth_api/ndsp_user_login_gateway.cjs,UNIQUE
+CLUSTER-566579A5139ED492,1,CAP-6F83F74440AE,Frontend Contract,GET /ASSETS/{ASSET_ID}/DECISION,backend/app/api/v1/frontend_contract.py,UNIQUE
+CLUSTER-56B06674577E8202,1,CAP-2CC212BF4F8E,Frontend Contract,DELETE /ME/WATCHLIST/{ASSET_ID},backend/app/api/v1/frontend_contract.py,UNIQUE
+CLUSTER-5792A265FF46E0D7,2,CAP-7F41666FC0D4|CAP-F142BF636522,Ndsp Admin Ui Proxy,GET /API/ADMIN-UI/TRIALS,backend/auth_api/ndsp_admin_ui_proxy.cjs|backend/ndsp_admin_ui_proxy.cjs,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-582655326350BC33,2,CAP-D6B934D294FE|CAP-E01E3F460977,Ndsp User Login Gateway,GET /API/AUTH/LOGIN/HEALTH,backend/auth_api/ndsp_user_login_gateway.cjs|backend/ndsp_user_login_gateway.cjs,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-5B9DAFE475C08AEA,1,CAP-C84121300635,Tdl V2 Policy Admin,POST /TIMING/ENABLE,apps/ndsp-governance-bridge/policies/admin_snapshot/tdl_v2_policy_admin.py,UNIQUE
+CLUSTER-5C8A28CB4849CE41,4,CAP-70F625B28F63|CAP-A6810593B898|CAP-CF000A7305E2|CAP-E668719D9AD9,Alert Prefs Get|Alert Prefs Post|Subscription Status Compat|Trial Register Compat,GET /API/AUTH/ACTIVATE|GET /API/NDSP/COMPAT/HEALTH|GET /API/PAYMENTS/NOWPAYMENTS/SUBSCRIPTION/STATUS|GET /API/USER/ALERT-PREFERENCES|GET /API/V6/PAYMENTS/NOWPAYMENTS/SUBSCRIPTION/STATUS|POST /API/ALERTS/EMAIL/TEST|POST /API/AUTH/ACTIVATE|POST /API/AUTH/REGISTER-TRIAL|POST /API/PAYMENTS/NOWPAYMENTS/SUBSCRIPTION/CREATE|POST /API/TELEGRAM/LINK/START|POST /API/TELEGRAM/LINK/VERIFY|POST /API/TRIAL/REGISTER|POST /API/TRIAL/REQUEST|POST /API/USER/ALERT-PREFERENCES|POST /API/V1/TRIAL/REGISTER|POST /API/V6/PAYMENTS/NOWPAYMENTS/SUBSCRIPTION/CREATE,backend/app/api/compat/user_operational_compat.py,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-5DBA84E9131F0BAC,1,CAP-F19E055AF8D6,User Operational Compat,POST /API/AUTH/ACTIVATE,backend/app/api/compat/user_operational_compat.py,UNIQUE
+CLUSTER-5E7C7AD2F1B4282A,3,CAP-A194414E26E2|CAP-B3BF7C85F687|CAP-CAD48928C8E4,Telegram Routing Admin|Telegram Routing Internal|Telegram Routing V2,POST /TEST,backend/app/api/admin/telegram_routing_admin.py|backend/app/api/admin/telegram_routing_v2.py|backend/app/api/internal/telegram_routing_internal.py,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-5E9DA9DE4B7D094A,1,CAP-9EAA6B9BF2BC,User Operational Compat,GET /API/PAYMENTS/NOWPAYMENTS/SUBSCRIPTION/STATUS,backend/app/api/compat/user_operational_compat.py,UNIQUE
+CLUSTER-5F9C10E11F6C8818,1,CAP-FAAE9703FE61,User Operational Compat,GET /API/USER/ALERT-PREFERENCES,backend/app/api/compat/user_operational_compat.py,UNIQUE
+CLUSTER-631F0C2197AF7D5E,2,CAP-8CF43007F5CD|CAP-C60CD9D10164,Telegram Routing Internal|Telegram Routing V2,GET /DEBUG-AUTH,backend/app/api/admin/telegram_routing_v2.py|backend/app/api/internal/telegram_routing_internal.py,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-64C310B6EDCD42B4,1,CAP-3965B46743DE,Frontend Contract,POST /ADMIN/REGISTRATIONS/{REGISTRATION_ID}/DECISION,backend/app/api/v1/frontend_contract.py,UNIQUE
+CLUSTER-65E18FD59CD68EA6,2,CAP-255A55D1B989|CAP-B39355BFBE71,Ndsp Admin Ui Proxy,GET /API/ADMIN-UI/SUMMARY,backend/auth_api/ndsp_admin_ui_proxy.cjs|backend/ndsp_admin_ui_proxy.cjs,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-67635868736B0665,1,CAP-538A80545E29,Frontend Contract,POST /ME/CHANNELS/EMAIL/TEST,backend/app/api/v1/frontend_contract.py,UNIQUE
+CLUSTER-67D1DD2C621BA7A2,2,CAP-644C81537AC6|CAP-A8D586B30335,Ndsp User Login Gateway,POST /API/AUTH/2FA/STATUS,backend/auth_api/ndsp_user_login_gateway.cjs|backend/ndsp_user_login_gateway.cjs,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-6A45450BC66CD8D3,2,CAP-513B295710F5|CAP-BE5C7B84201D,Ndsp Admin Ui Proxy,GET /API/ADMIN-UI/PAYMENTS,backend/auth_api/ndsp_admin_ui_proxy.cjs|backend/ndsp_admin_ui_proxy.cjs,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-6F9527A740879BA9,2,CAP-8374FD1D62EB|CAP-B25ABE2AD98F,Ndsp Admin Ui Proxy,GET /API/ADMIN-UI/ALERTS,backend/auth_api/ndsp_admin_ui_proxy.cjs|backend/ndsp_admin_ui_proxy.cjs,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-7221689E4834C98E,3,CAP-22453668AACA|CAP-65156AA526BC|CAP-FBE70B1294BC,Telegram Routing Admin|Telegram Routing Internal|Telegram Routing V2,POST /UPDATE,backend/app/api/admin/telegram_routing_admin.py|backend/app/api/admin/telegram_routing_v2.py|backend/app/api/internal/telegram_routing_internal.py,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-73EFBFAE1A55AC95,1,CAP-5B18901D1F22,Frontend Contract,GET /CONTRACT/STATUS,backend/app/api/v1/frontend_contract.py,UNIQUE
+CLUSTER-754B89CD5C66FF20,1,CAP-116FF6D929A9,Ndsp User Login Gateway,GET /API/AUTH/DECISION-ROOM-ACCESS,backend/auth_api/ndsp_user_login_gateway.cjs,UNIQUE
+CLUSTER-75F9D184F9AFE542,1,CAP-BD19C45FECD0,Frontend Contract,POST /PAYMENTS/CHECKOUT,backend/app/api/v1/frontend_contract.py,UNIQUE
+CLUSTER-7760D3ACF83E0B50,1,CAP-D559FE326861,User Operational Compat,POST /API/USER/ALERT-PREFERENCES,backend/app/api/compat/user_operational_compat.py,UNIQUE
+CLUSTER-7845464071C28F4D,1,CAP-F197D783C391,User Operational Compat,GET /API/V6/PAYMENTS/NOWPAYMENTS/SUBSCRIPTION/STATUS,backend/app/api/compat/user_operational_compat.py,UNIQUE
+CLUSTER-78C95988F325EF45,2,CAP-54AB364B10F5|CAP-C32C78AB47B0,Ndsp Admin Ui Proxy,GET /API/ADMIN-UI/GOVERNANCE,backend/auth_api/ndsp_admin_ui_proxy.cjs|backend/ndsp_admin_ui_proxy.cjs,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-7C1FEACB5901A8AF,2,CAP-48E71B4F1CF7|CAP-F66DBAC61596,Ndsp Api Compat Gateway,GET /API/PAYMENTS/STATUS,backend/auth_api/ndsp_api_compat_gateway.cjs|backend/ndsp_api_compat_gateway.cjs,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-7D965DF29C66CBAD,2,CAP-50F4AF813A40|CAP-8F78E58E5656,Ndsp User Login Gateway,POST /API/AUTH/2FA/SETUP/CONFIRM,backend/auth_api/ndsp_user_login_gateway.cjs|backend/ndsp_user_login_gateway.cjs,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-7EB5191C8588F907,3,CAP-00ED621D6D60|CAP-4EB8C4DDA8E9|CAP-8189CA8761C9,Dynamic Quality Score|Market Type|Ndsp Attach Dual Scenario Data Quality Public V1,GET /API/DECISION/QUALITY-LIVE|GET /API/DECISION/QUALITY-LIVE/HEALTH,backend/ndsp-live-decision-quality/server.py,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-7F849E4490C35BB1,1,CAP-4FF90CCC6DFE,Tdl V2 Policy Admin,GET /POLICY,apps/ndsp-governance-bridge/policies/admin_snapshot/tdl_v2_policy_admin.py,UNIQUE
+CLUSTER-8DB24B3A307DBA1B,2,CAP-0622719B013B|CAP-1653A8452D19,Compute From Active Engine|Ndsp Public Quality Unique,GET /API/NDSP/PUBLIC/DECISION-QUALITY,backend/app/api/ndsp_public_quality_unique.py,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-8E2FC46606546F23,1,CAP-071618E88E83,Frontend Contract,GET /ME/ENTITLEMENTS,backend/app/api/v1/frontend_contract.py,UNIQUE
+CLUSTER-8F243050068688C8,2,CAP-3ACB19AAC8FC|CAP-4FCAA631BA18,Ndsp Admin Actions Bypass Old Middleware,POST /API/ADMIN-ACTIONS/USERS/ACTION,backend/auth_api/ndsp_admin_actions_bypass_old_middleware.cjs|backend/ndsp_admin_actions_bypass_old_middleware.cjs,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-8F684E41181B6FEE,2,CAP-47C952094550|CAP-D0B77E088DEE,Ndsp Admin Actions Authoritative,GET /API/ADMIN/USERS/ACTION/HEALTH,backend/auth_api/ndsp_admin_actions_authoritative.cjs|backend/ndsp_admin_actions_authoritative.cjs,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-91FDD188B6AF925D,2,CAP-376A2E7311B7|CAP-E6FFD507C6FA,Ndsp User Login Gateway,POST /API/AUTH/2FA/SETUP/CONFIRM-SPEAKEASY,backend/auth_api/ndsp_user_login_gateway.cjs|backend/ndsp_user_login_gateway.cjs,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-93E3BBEA8F0A76F6,1,CAP-93DD0F3859D4,Tdl V2 Policy Admin,POST /TIMING/DISABLE,apps/ndsp-governance-bridge/policies/admin_snapshot/tdl_v2_policy_admin.py,UNIQUE
+CLUSTER-955B64BDFA938A5B,1,CAP-5F34508D1D07,User Operational Compat,POST /API/V1/TRIAL/REGISTER,backend/app/api/compat/user_operational_compat.py,UNIQUE
+CLUSTER-95A680D94563A2A1,3,CAP-570806ECD8A4|CAP-8E040D696446|CAP-EEDDE460DD9C,Health|Ndsp Api Compat Gateway,GET /HEALTH,backend/auth_api/ndsp_api_compat_gateway.cjs|backend/framework/health/health.cjs|backend/ndsp_api_compat_gateway.cjs,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-97466F763D9BD9E5,1,CAP-8A9DD9B6E7D5,Tdl V2 Policy Admin,GET /AUTH-DEBUG,apps/ndsp-governance-bridge/policies/admin_snapshot/tdl_v2_policy_admin.py,UNIQUE
+CLUSTER-9770B51137F30B8E,1,CAP-945D34B96341,User Operational Compat,POST /API/AUTH/REGISTER-TRIAL,backend/app/api/compat/user_operational_compat.py,UNIQUE
+CLUSTER-979F2906008108BE,2,CAP-033B90B3A316|CAP-628E213D3D54,Nowpayments Create Alias|User Operational Compat,POST /API/PAYMENTS/NOWPAYMENTS/SUBSCRIPTION/CREATE,backend/app/api/compat/nowpayments_create_alias.py|backend/app/api/compat/user_operational_compat.py,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-9899BA6BB68DEBC5,2,CAP-3D9086A829ED|CAP-43B04D28A46B,Ndsp Admin Ui Proxy,POST /API/ADMIN-UI/ACTION,backend/auth_api/ndsp_admin_ui_proxy.cjs|backend/ndsp_admin_ui_proxy.cjs,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-9BB860E906E5F008,2,CAP-24BDA2A0DD8B|CAP-C8F6891BC250,Ndsp Admin Ui Proxy,GET /API/ADMIN-UI/USERS,backend/auth_api/ndsp_admin_ui_proxy.cjs|backend/ndsp_admin_ui_proxy.cjs,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-9D13ADEF1E509D68,1,CAP-7AF5F3CAE976,Ndsp Nowpayments,POST /WEBHOOKS/NOWPAYMENTS,backend/ndsp_nowpayments.cjs,UNIQUE
+CLUSTER-9EC582F4151E97EC,2,CAP-3CFCB5B47F6B|CAP-B800EB18EDBC,Ndsp Api Compat Gateway,GET /API/ACCOUNT/TRIAL,backend/auth_api/ndsp_api_compat_gateway.cjs|backend/ndsp_api_compat_gateway.cjs,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-9F64828D6707F6B0,2,CAP-3D0167450973|CAP-A1DBE2356637,Ndsp Api Compat Gateway,GET /API/ALERTS/STATUS,backend/auth_api/ndsp_api_compat_gateway.cjs|backend/ndsp_api_compat_gateway.cjs,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-A10391D6225F56E7,1,CAP-D8194AB79967,Frontend Contract,POST /PAYMENTS/WEBHOOK,backend/app/api/v1/frontend_contract.py,UNIQUE
+CLUSTER-A4184781CB31473F,1,CAP-C8C94E7A8122,Frontend Contract,POST /AUTH/LOGIN,backend/app/api/v1/frontend_contract.py,UNIQUE
+CLUSTER-A8307409A045A817,1,CAP-98156F574B28,Risk Warnings,,backend/app/support_layers/scenario/scenario_engine.py,UNIQUE
+CLUSTER-A84405A7F2E6BD0A,1,CAP-8BFCC7DDCBE0,Frontend Contract,POST /ADMIN/PAYMENTS/{PAYMENT_ID}/APPROVE,backend/app/api/v1/frontend_contract.py,UNIQUE
+CLUSTER-AB4D236F021BB367,1,CAP-3F9549B2B851,User Operational Compat,POST /API/TRIAL/REQUEST,backend/app/api/compat/user_operational_compat.py,UNIQUE
+CLUSTER-ABFFD4E1F0B0E15D,1,CAP-931E56E35D55,Frontend Contract,POST /ME/CHANNELS/TELEGRAM/VERIFY,backend/app/api/v1/frontend_contract.py,UNIQUE
+CLUSTER-ADEC92F5352C095D,1,CAP-55015F233F5A,Frontend Contract,GET /AUTH/MAGIC-LINK/VERIFY,backend/app/api/v1/frontend_contract.py,UNIQUE
+CLUSTER-AFBD9A0F516371DC,1,CAP-4ADB944E408B,Ndsp User Login Gateway,POST /API/AUTH/SURVEY/RESPONSE,backend/auth_api/ndsp_user_login_gateway.cjs,UNIQUE
+CLUSTER-B3B8D85FAFE3D708,1,CAP-B81607E6BCDB,Frontend Contract,GET /ADMIN/HEALTH,backend/app/api/v1/frontend_contract.py,UNIQUE
+CLUSTER-B660C1DCD7F3C77B,1,CAP-E4B4728311F0,Decision Quality Public,GET /API/DECISION/QUALITY,backend/app/api/decision_quality_public.py,UNIQUE
+CLUSTER-B8252076D7DF7FF9,1,CAP-E50EE9CF3FD6,User Operational Compat,POST /API/TELEGRAM/LINK/VERIFY,backend/app/api/compat/user_operational_compat.py,UNIQUE
+CLUSTER-B9068B4DD1E0C3BC,1,CAP-F402D935EFF7,Frontend Contract,GET /ADMIN/PAYMENTS,backend/app/api/v1/frontend_contract.py,UNIQUE
+CLUSTER-BC5304F5A464794E,1,CAP-9BE0DE3ADC89,Generate Report,,backend/app/support_layers/scenario/scenario_engine.py,UNIQUE
+CLUSTER-C303E36D3C1776CA,1,CAP-AA4ECF6DF3F8,Tdl V2 Policy Admin,POST /POLICY,apps/ndsp-governance-bridge/policies/admin_snapshot/tdl_v2_policy_admin.py,UNIQUE
+CLUSTER-C427B922BB471395,1,CAP-EC53447FDEFA,Telegram Routing Internal,GET /DEBUG-DB,backend/app/api/internal/telegram_routing_internal.py,UNIQUE
+CLUSTER-C9D5E973D5F5F3E9,4,CAP-438A6D14BFBB|CAP-7E1F66F717A1|CAP-A231BBA8D29D|CAP-DECAE45DE878,Auth Optional|Auth Required,GET /API/ACCOUNT/TRIAL|GET /API/ALERTS/STATUS|GET /API/MARKETS|GET /API/PACKAGES|GET /API/PAYMENTS/STATUS|GET /HEALTH,backend/auth_api/ndsp_api_compat_gateway.cjs|backend/ndsp_api_compat_gateway.cjs,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-CAAF3729109106A9,1,CAP-10D53C6D7918,Frontend Contract,GET /ADMIN/TRIALS,backend/app/api/v1/frontend_contract.py,UNIQUE
+CLUSTER-CC1E47237D1C817F,1,CAP-D0B86CD5E331,Frontend Contract,POST /AUTH/RESET,backend/app/api/v1/frontend_contract.py,UNIQUE
+CLUSTER-D7C6C05092448016,1,CAP-29DCBEF0D49C,Ndsp Nowpayments,POST /CHECKOUT/CREATE,backend/ndsp_nowpayments.cjs,UNIQUE
+CLUSTER-DA5230BF722A7C44,1,CAP-9F3B6AAA223B,Frontend Contract,POST /ADMIN/PAYMENTS/{PAYMENT_ID}/REJECT,backend/app/api/v1/frontend_contract.py,UNIQUE
+CLUSTER-DE2E5802B250D7BF,2,CAP-214521E6EBD1|CAP-496F09F3F4BB,Ndsp User Login Gateway,POST /API/AUTH/LOGIN,backend/auth_api/ndsp_user_login_gateway.cjs|backend/ndsp_user_login_gateway.cjs,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-E25552D956180A16,1,CAP-461745E841AB,Ndsp Trial Info,GET /TRIAL/INFO,backend/ndsp_trial_info.cjs,UNIQUE
+CLUSTER-E488ABB058037AED,1,CAP-862CD297F1FD,Frontend Contract,POST /AUTH/FORGOT,backend/app/api/v1/frontend_contract.py,UNIQUE
+CLUSTER-E6F3B9DC23FA980C,2,CAP-6565FE804AF5|CAP-A810F8810A25,Ndsp User Login Gateway,POST /API/AUTH/2FA/LOGIN/VERIFY,backend/auth_api/ndsp_user_login_gateway.cjs|backend/ndsp_user_login_gateway.cjs,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-E851A39B70C0258B,3,CAP-2ED357832A3E|CAP-3F820FC0AC86|CAP-E73BB362CCA6,Ndsp User Login Gateway|Ndsp User Portal Final Experience V1 One Script,GET /API/AUTH/SESSION,NDSP_USER_PORTAL_FINAL_EXPERIENCE_V1_ONE_SCRIPT.sh|backend/auth_api/ndsp_user_login_gateway.cjs|backend/ndsp_user_login_gateway.cjs,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-E95A56A8E3519D6A,2,CAP-2D0CFB1BC505|CAP-3B516BFCFA39,Ndsp User Login Gateway,GET /API/AUTH/2FA/STATUS,backend/auth_api/ndsp_user_login_gateway.cjs|backend/ndsp_user_login_gateway.cjs,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-EDC8A6285AD42668,2,CAP-15C56B60B4B0|CAP-1AF6F47DC3CE,Ndsp User Login Gateway,POST /API/AUTH/LOGOUT,backend/auth_api/ndsp_user_login_gateway.cjs|backend/ndsp_user_login_gateway.cjs,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-F3A2BBEC8AF03293,1,CAP-8BCDCDA9FCED,Frontend Contract,GET /ME/ALERT-PREFS,backend/app/api/v1/frontend_contract.py,UNIQUE
+CLUSTER-F62343BD134E1900,2,CAP-A61CF5BBAA01|CAP-F1EB25BD9898,Ndsp Admin Ui Proxy,POST /API/ADMIN-UI/ALERTS/CHANNEL,backend/auth_api/ndsp_admin_ui_proxy.cjs|backend/ndsp_admin_ui_proxy.cjs,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-F6326AB20CA7039F,2,CAP-0D4E2C940F8F|CAP-622CD214F034,Ndsp Admin Ui Proxy,GET /API/ADMIN-UI/BACKUPS,backend/auth_api/ndsp_admin_ui_proxy.cjs|backend/ndsp_admin_ui_proxy.cjs,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-F9493910881613CF,1,CAP-F0AA44F7E81A,Frontend Contract,PUT /ME/ALERT-PREFS,backend/app/api/v1/frontend_contract.py,UNIQUE
+CLUSTER-FBE574887ED479BC,1,CAP-C514A0947E28,Frontend Contract,GET /ME/SUBSCRIPTION,backend/app/api/v1/frontend_contract.py,UNIQUE
+CLUSTER-FDBEF33E2C765F1C,1,CAP-AD97D3157EBD,Ndsp User Portal Final Experience V1 One Script,POST /API/USER/SURVEY,NDSP_USER_PORTAL_FINAL_EXPERIENCE_V1_ONE_SCRIPT.sh,UNIQUE
+CLUSTER-FDFBE9985B5F63E6,22,CAP-235EF538DEF9|CAP-367A94FB6D59|CAP-38A2585A38E0|CAP-3FBDCF7CE0E5|CAP-531AC9AE3E7D|CAP-538062400EBA|CAP-606E55E95DA2|CAP-63C8FEAE8B5B|CAP-6B7418516628|CAP-75CF22E0AFA6|CAP-798893D4D6E0|CAP-81A7994FF55D|CAP-8CF3F7EFFA7B|CAP-968B626DE9C3|CAP-A069C614B1B1|CAP-B742DDE3B851|CAP-BE68902B1F61|CAP-D2D57F714E79|CAP-DA1498962CCC|CAP-E739D717BE35|CAP-ED7AC36DD2F2|CAP-F8EDAA44375A,Account Trial|Admin Health|Admin Layers|Admin Payment Approve|Admin Payment Reject|Admin Payments|Admin Registration Decision|Admin Registrations|Admin Trials|Alert Prefs Payload|Asset Decision|Auth 2Fa Verify|Auth Forgot|Auth Login|Auth Magic Link|Auth Magic Link Verify|Auth Register|Auth Reset|Get Alert Prefs|Markets|Me Subscription|Put Alert Prefs,DELETE /ME/WATCHLIST/{ASSET_ID}|GET /ACCOUNT/TRIAL|GET /ADMIN/HEALTH|GET /ADMIN/LAYERS|GET /ADMIN/PAYMENTS|GET /ADMIN/REGISTRATIONS|GET /ADMIN/TRIALS|GET /ASSETS|GET /ASSETS/{ASSET_ID}/CHART|GET /ASSETS/{ASSET_ID}/DECISION|GET /AUTH/MAGIC-LINK/VERIFY|GET /BRIEF/TODAY|GET /CONTRACT/STATUS|GET /MARKETS|GET /ME/ALERT-PREFS|GET /ME/DASHBOARD|GET /ME/ENTITLEMENTS|GET /ME/SUBSCRIPTION|GET /ME/WATCHLIST|GET /PACKAGES|POST /ACCOUNT/ACTIVATE|POST /ADMIN/PAYMENTS/{PAYMENT_ID}/APPROVE|POST /ADMIN/PAYMENTS/{PAYMENT_ID}/REJECT|POST /ADMIN/REGISTRATIONS/{REGISTRATION_ID}/DECISION|POST /AUTH/2FA/VERIFY|POST /AUTH/FORGOT|POST /AUTH/LOGIN|POST /AUTH/MAGIC-LINK|POST /AUTH/REGISTER|POST /AUTH/RESET|POST /ME/CHANNELS/EMAIL/TEST|POST /ME/CHANNELS/TELEGRAM/LINK|POST /ME/CHANNELS/TELEGRAM/VERIFY|POST /ME/WATCHLIST|POST /PAYMENTS/CHECKOUT|POST /PAYMENTS/WEBHOOK|PUT /ME/ALERT-PREFS,backend/app/api/v1/frontend_contract.py,SEMANTIC_DUPLICATES_RETAINED
+CLUSTER-FFA7F6F8B9033F4B,1,CAP-DBE4CDD3AB94,Ndsp Nowpayments,GET /NOWPAYMENTS/HEALTH,backend/ndsp_nowpayments.cjs,UNIQUE

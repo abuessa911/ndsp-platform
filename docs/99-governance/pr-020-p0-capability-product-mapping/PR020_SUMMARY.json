@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "document": "PR-020 P0 Capability Product Mapping",
+  "generated_at": "2026-07-31T20:18:20.171442+00:00",
+  "raw_p0_candidates": 233,
+  "semantic_clusters": 139,
+  "semantic_duplicates_retained": 94,
+  "verified_representatives": 139,
+  "product_features": 11,
+  "product_screens": 11,
+  "unresolved_gaps": 285,
+  "verification_statuses": {
+    "PARTIALLY_VERIFIED": 139
+  },
+  "screen_capability_counts": {
+    "ADMIN_USERS": 8,
+    "ALERTS_AND_CHANNELS": 17,
+    "AUTHENTICATION": 21,
+    "CAPABILITY_REVIEW": 9,
+    "DECISION_ROOM": 3,
+    "LANDING": 4,
+    "MARKET_INTELLIGENCE": 1,
+    "PLATFORM_OPERATIONS": 37,
+    "QUALITY_AND_RISK": 11,
+    "REPORTS_AND_ANALYTICS": 4,
+    "TRIAL_AND_BILLING": 24
+  },
+  "gap_types": {
+    "API_CONTRACT_UNVERIFIED": 9,
+    "DATA_STATE_UNVERIFIED": 54,
+    "OWNER_UNASSIGNED": 139,
+    "RUNTIME_SERVICE_UNVERIFIED": 83
+  },
+  "full_capability_coverage_claimed": false,
+  "human_confirmation_required": true,
+  "ui_complete_records_created": 0,
+  "runtime_changes": "none",
+  "status": "P0_PRODUCT_MAPPING_COMPLETE_HUMAN_CONFIRMATION_REQUIRED"
+}
