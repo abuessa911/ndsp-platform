@@ -1,0 +1,1121 @@
+{
+  "generated_at": "2026-07-31T19:55:13.407059+00:00",
+  "mode": "read_only",
+  "runtime_changes": "none",
+  "units": [
+    {
+      "unit": "accounts-daemon.service",
+      "user": "",
+      "exec_start": "{ path=/usr/libexec/accounts-daemon ; argv[]=/usr/libexec/accounts-daemon ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/usr/lib/systemd/system/accounts-daemon.service",
+      "description": "Accounts Service"
+    },
+    {
+      "unit": "avahi-daemon.service",
+      "user": "",
+      "exec_start": "{ path=/usr/sbin/avahi-daemon ; argv[]=/usr/sbin/avahi-daemon -s ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/usr/lib/systemd/system/avahi-daemon.service",
+      "description": "Avahi mDNS/DNS-SD Stack"
+    },
+    {
+      "unit": "containerd.service",
+      "user": "",
+      "exec_start": "{ path=/usr/bin/containerd ; argv[]=/usr/bin/containerd ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/usr/lib/systemd/system/containerd.service",
+      "description": "containerd container runtime"
+    },
+    {
+      "unit": "cron.service",
+      "user": "",
+      "exec_start": "{ path=/usr/sbin/cron ; argv[]=/usr/sbin/cron -f -P $EXTRA_OPTS ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/usr/lib/systemd/system/cron.service",
+      "description": "Regular background program processing daemon"
+    },
+    {
+      "unit": "cups-browsed.service",
+      "user": "cups-browsed",
+      "exec_start": "{ path=/usr/sbin/cups-browsed ; argv[]=/usr/sbin/cups-browsed ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/usr/lib/systemd/system/cups-browsed.service",
+      "description": "Make remote CUPS printers available locally"
+    },
+    {
+      "unit": "cups.service",
+      "user": "",
+      "exec_start": "{ path=/usr/sbin/cupsd ; argv[]=/usr/sbin/cupsd -l ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/usr/lib/systemd/system/cups.service",
+      "description": "CUPS Scheduler"
+    },
+    {
+      "unit": "dbus.service",
+      "user": "",
+      "exec_start": "{ path=/usr/bin/dbus-daemon ; argv[]=@dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/usr/lib/systemd/system/dbus.service",
+      "description": "D-Bus System Message Bus"
+    },
+    {
+      "unit": "docker.service",
+      "user": "",
+      "exec_start": "{ path=/usr/bin/dockerd ; argv[]=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/usr/lib/systemd/system/docker.service",
+      "description": "Docker Application Container Engine"
+    },
+    {
+      "unit": "fail2ban.service",
+      "user": "",
+      "exec_start": "{ path=/usr/bin/fail2ban-server ; argv[]=/usr/bin/fail2ban-server -xf start ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/usr/lib/systemd/system/fail2ban.service",
+      "description": "Fail2Ban Service"
+    },
+    {
+      "unit": "fwupd.service",
+      "user": "",
+      "exec_start": "{ path=/usr/libexec/fwupd/fwupd ; argv[]=/usr/libexec/fwupd/fwupd ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/usr/lib/systemd/system/fwupd.service",
+      "description": "Firmware update daemon"
+    },
+    {
+      "unit": "ndsp-16-layers.service",
+      "user": "nawaf511",
+      "exec_start": "{ path=/usr/bin/node ; argv[]=/usr/bin/node /opt/ndsp16-api/server.js ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-16-layers.service",
+      "description": "NDSP 16 Analytical Layers API"
+    },
+    {
+      "unit": "ndsp-access-guard-9024.service",
+      "user": "nawaf511",
+      "exec_start": "{ path=/usr/bin/node ; argv[]=/usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp-access-guard-9024/server.js ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-access-guard-9024.service",
+      "description": "NDSP Access Guard 9024"
+    },
+    {
+      "unit": "ndsp-access-guard-final.service",
+      "user": "nawaf511",
+      "exec_start": "{ path=/usr/bin/node ; argv[]=/usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp-access-guard-final/server.js ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-access-guard-final.service",
+      "description": "NDSP Access Guard Final"
+    },
+    {
+      "unit": "ndsp-admin-actions.service",
+      "user": "",
+      "exec_start": "{ path=/usr/bin/node ; argv[]=/usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_actions_gateway.cjs ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-admin-actions.service",
+      "description": "NDSP Admin Actions Gateway"
+    },
+    {
+      "unit": "ndsp-admin-ui-proxy.service",
+      "user": "",
+      "exec_start": "{ path=/usr/bin/node ; argv[]=/usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_ui_proxy.cjs ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-admin-ui-proxy.service",
+      "description": "NDSP Admin UI Server-Side Proxy"
+    },
+    {
+      "unit": "ndsp-admin-user-ops.service",
+      "user": "",
+      "exec_start": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 -m uvicorn app:app --host 127.0.0.1 --port 9068 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-admin-user-ops.service",
+      "description": "NDSP Admin User Ops"
+    },
+    {
+      "unit": "ndsp-admin-users-official.service",
+      "user": "root",
+      "exec_start": "{ path=/usr/bin/node ; argv[]=/usr/bin/node /home/nawaf511/empire-core-new/backend/admin_users_official_api/server.js ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-admin-users-official.service",
+      "description": "NDSP Admin Official Users API"
+    },
+    {
+      "unit": "ndsp-api-compat.service",
+      "user": "",
+      "exec_start": "{ path=/usr/bin/node ; argv[]=/usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_api_compat_gateway.cjs ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-api-compat.service",
+      "description": "NDSP API Compatibility Gateway"
+    },
+    {
+      "unit": "ndsp-auth-core-clean.service",
+      "user": "ndsp-auth",
+      "exec_start": "{ path=/usr/bin/nsolid ; argv[]=/usr/bin/nsolid /opt/ndsp-auth-core-clean/current/server/dist/server.js ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-auth-core-clean.service",
+      "description": "NDSP Clean Authentication Core"
+    },
+    {
+      "unit": "ndsp-bot_execution.service",
+      "user": "nawaf511",
+      "exec_start": "{ path=/usr/bin/node ; argv[]=/usr/bin/node /home/nawaf511/empire-core-new/backend/services/bot_execution/main.cjs ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-bot_execution.service",
+      "description": "NDSP BOT-001 NDSP Bot Execution Service"
+    },
+    {
+      "unit": "ndsp-business-ops.service",
+      "user": "nawaf511",
+      "exec_start": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /usr/local/lib/ndsp-business-ops/app.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-business-ops.service",
+      "description": "NDSP Business Operations V205"
+    },
+    {
+      "unit": "ndsp-canonical-live-runtime-v30.service",
+      "user": "nawaf511",
+      "exec_start": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_canonical_live_runtime_v30.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-canonical-live-runtime-v30.service",
+      "description": "NDSP Real Canonical 16-Layer Runtime Sidecar V30"
+    },
+    {
+      "unit": "ndsp-canonical-live-runtime-v33.service",
+      "user": "nawaf511",
+      "exec_start": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_canonical_live_runtime_v33.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-canonical-live-runtime-v33.service",
+      "description": "NDSP Canonical Live Evidence Binding Sidecar V33"
+    },
+    {
+      "unit": "ndsp-change-password-gateway.service",
+      "user": "postgres",
+      "exec_start": "{ path=/opt/ndsp-change-password-gateway/venv/bin/uvicorn ; argv[]=/opt/ndsp-change-password-gateway/venv/bin/uvicorn app:app --host 127.0.0.1 --port 9069 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-change-password-gateway.service",
+      "description": "NDSP Change Password Gateway"
+    },
+    {
+      "unit": "ndsp-commercial-auth-payment-staging.service",
+      "user": "ndsp_commercial_staging",
+      "exec_start": "{ path=/opt/ndsp-commercial-auth-payment-staging/releases/20260730_103616-source-staging-v1-13/run-staging.sh ; argv[]=/opt/ndsp-commercial-auth-payment-staging/releases/20260730_103616-source-staging-v1-13/run-staging.sh ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-commercial-auth-payment-staging.service",
+      "description": "NDSP Commercial Auth Payment Staging V1.13"
+    },
+    {
+      "unit": "ndsp-completed-decisions-evidence-v35.service",
+      "user": "nawaf511",
+      "exec_start": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_evidence_v35.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-completed-decisions-evidence-v35.service",
+      "description": "NDSP Completed Decisions Evidence Registry V35"
+    },
+    {
+      "unit": "ndsp-completed-decisions-history-v36.service",
+      "user": "nawaf511",
+      "exec_start": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_history_v36.py serve ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-completed-decisions-history-v36.service",
+      "description": "NDSP Completed Decisions Append-Only History API V36"
+    },
+    {
+      "unit": "ndsp-completed_decision.service",
+      "user": "nawaf511",
+      "exec_start": "{ path=/usr/bin/node ; argv[]=/usr/bin/node /home/nawaf511/empire-core-new/backend/services/completed_decision/main.cjs ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-completed_decision.service",
+      "description": "NDSP CDS-001 Completed Decision Service"
+    },
+    {
+      "unit": "ndsp-ctl-001-workspace-identity.service",
+      "user": "nawaf511",
+      "exec_start": "{ path=/usr/bin/node ; argv[]=/usr/bin/node /home/nawaf511/empire-core-new/backend/services/ctl-001-workspace-identity/main.cjs ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-ctl-001-workspace-identity.service",
+      "description": "NDSP CTL-001 Workspace Identity"
+    },
+    {
+      "unit": "ndsp-current-user-display.service",
+      "user": "postgres",
+      "exec_start": "{ path=/opt/ndsp-current-user-display/.venv/bin/uvicorn ; argv[]=/opt/ndsp-current-user-display/.venv/bin/uvicorn app:app --host 127.0.0.1 --port 9074 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-current-user-display.service",
+      "description": "NDSP Current User Display API"
+    },
+    {
+      "unit": "ndsp-decision-package-v1.service",
+      "user": "",
+      "exec_start": "{ path=/opt/ndsp-decision-package-v1/venv/bin/uvicorn ; argv[]=/opt/ndsp-decision-package-v1/venv/bin/uvicorn app:app --host 127.0.0.1 --port 9061 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-decision-package-v1.service",
+      "description": "NDSP Decision Package API v1"
+    },
+    {
+      "unit": "ndsp-decision_governance_core.service",
+      "user": "nawaf511",
+      "exec_start": "{ path=/usr/bin/node ; argv[]=/usr/bin/node /home/nawaf511/empire-core-new/backend/services/decision_governance_core/main.cjs ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-decision_governance_core.service",
+      "description": "NDSP DGC-001 Decision Governance Core"
+    },
+    {
+      "unit": "ndsp-governance-bridge.service",
+      "user": "nawaf511",
+      "exec_start": "{ path=/usr/bin/node ; argv[]=/usr/bin/node /home/nawaf511/empire-core-new/apps/ndsp-governance-bridge/server.mjs ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-governance-bridge.service",
+      "description": "NDSP Governance Bridge 9044"
+    },
+    {
+      "unit": "ndsp-layers-api.service",
+      "user": "nawaf511",
+      "exec_start": "{ path=/home/nawaf511/empire-core-new/apps/ndsp-layers-api/.venv/bin/uvicorn ; argv[]=/home/nawaf511/empire-core-new/apps/ndsp-layers-api/.venv/bin/uvicorn app:app --host 127.0.0.1 --port 9065 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-layers-api.service",
+      "description": "NDSP Layers API"
+    },
+    {
+      "unit": "ndsp-live-decision-quality.service",
+      "user": "nawaf511",
+      "exec_start": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/ndsp-live-decision-quality/server.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-live-decision-quality.service",
+      "description": "NDSP Live Decision Quality Bridge"
+    },
+    {
+      "unit": "ndsp-live-market-adapter.service",
+      "user": "nawaf511",
+      "exec_start": "{ path=/usr/bin/node ; argv[]=/usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp_live_market_adapter.cjs ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-live-market-adapter.service",
+      "description": "NDSP Live Market Adapter"
+    },
+    {
+      "unit": "ndsp-market-data-bridge-v2.service",
+      "user": "nobody",
+      "exec_start": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /opt/ndsp-market-data-bridge-v2/bridge.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-market-data-bridge-v2.service",
+      "description": "NDSP Market Data and News Bridge V2"
+    },
+    {
+      "unit": "ndsp-news-ticker.service",
+      "user": "nawaf511",
+      "exec_start": "{ path=/usr/bin/node ; argv[]=/usr/bin/node /opt/ndsp-news-ticker/server.js ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-news-ticker.service",
+      "description": "NDSP Live News Ticker Service"
+    },
+    {
+      "unit": "ndsp-password-reset.service",
+      "user": "nawaf511",
+      "exec_start": "{ path=/usr/bin/node ; argv[]=/usr/bin/node /home/nawaf511/empire-core-new/backend/password_reset_gateway/server.js ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-password-reset.service",
+      "description": "NDSP Password Reset Gateway"
+    },
+    {
+      "unit": "ndsp-platform-gateway-9002.service",
+      "user": "www-data",
+      "exec_start": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /opt/ndsp-platform-gateway-9002/app.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-platform-gateway-9002.service",
+      "description": "NDSP Platform Gateway 9002 Recovery Service"
+    },
+    {
+      "unit": "ndsp-platform-gateway.service",
+      "user": "nawaf511",
+      "exec_start": "{ path=/usr/bin/node ; argv[]=/usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_platform_gateway_9001.cjs ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-platform-gateway.service",
+      "description": "NDSP Platform Unified Backend Gateway 9001"
+    },
+    {
+      "unit": "ndsp-portal-real-data-api.service",
+      "user": "postgres",
+      "exec_start": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/ndsp-portal-real-data-api/server.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-portal-real-data-api.service",
+      "description": "NDSP Portal Real Data API"
+    },
+    {
+      "unit": "ndsp-public-summary-v548.service",
+      "user": "nawaf511",
+      "exec_start": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /opt/ndsp-public-summary-v548/app.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-public-summary-v548.service",
+      "description": "NDSP Public Summary V5.4.8"
+    },
+    {
+      "unit": "ndsp-quality-live-golden-wrapper.service",
+      "user": "root",
+      "exec_start": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_quality_live_golden_wrapper.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-quality-live-golden-wrapper.service",
+      "description": "NDSP quality-live golden explainability API wrapper"
+    },
+    {
+      "unit": "ndsp-quality-live-nmp-wrapper.service",
+      "user": "root",
+      "exec_start": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_quality_live_nmp_wrapper.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-quality-live-nmp-wrapper.service",
+      "description": "NDSP quality-live NMP wrapper 9082"
+    },
+    {
+      "unit": "ndsp-raw-cot-gateway.service",
+      "user": "nawaf511",
+      "exec_start": "{ path=/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/.venv/bin/uvicorn ; argv[]=/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/.venv/bin/uvicorn app:app --host 127.0.0.1 --port 9076 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-raw-cot-gateway.service",
+      "description": "NDSP Raw COT Gateway"
+    },
+    {
+      "unit": "ndsp-register-compat-gateway.service",
+      "user": "",
+      "exec_start": "{ path=/usr/bin/node ; argv[]=/usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_register_compat_gateway.cjs ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-register-compat-gateway.service",
+      "description": "NDSP Register Compatibility Gateway"
+    },
+    {
+      "unit": "ndsp-registration-consent-v42.service",
+      "user": "www-data",
+      "exec_start": "{ path=/usr/bin/node ; argv[]=/usr/bin/node /opt/ndsp/legal-v42/ndsp-registration-consent-gateway.cjs ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-registration-consent-v42.service",
+      "description": "NDSP registration legal-consent gateway V42"
+    },
+    {
+      "unit": "ndsp-scenario-levels-adapter.service",
+      "user": "nawaf511",
+      "exec_start": "{ path=/usr/bin/node ; argv[]=/usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp_scenario_levels_adapter.cjs ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-scenario-levels-adapter.service",
+      "description": "NDSP Scenario Levels Adapter"
+    },
+    {
+      "unit": "ndsp-telegram-link-listener.service",
+      "user": "nawaf511",
+      "exec_start": "{ path=/usr/bin/node ; argv[]=/usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp-telegram-link-listener/server.js ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-telegram-link-listener.service",
+      "description": "NDSP Telegram Link Listener"
+    },
+    {
+      "unit": "ndsp-trial-fingerprint-guard.service",
+      "user": "nawaf511",
+      "exec_start": "{ path=/usr/bin/node ; argv[]=/usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_trial_fingerprint_guard_proxy.cjs ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-trial-fingerprint-guard.service",
+      "description": "NDSP Trial Fingerprint Guard Proxy"
+    },
+    {
+      "unit": "ndsp-trial-register-canonical-wrapper.service",
+      "user": "nawaf511",
+      "exec_start": "{ path=/usr/bin/node ; argv[]=/usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp-trial-register-canonical-wrapper/server.js ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-trial-register-canonical-wrapper.service",
+      "description": "NDSP Trial Register Canonical Wrapper"
+    },
+    {
+      "unit": "ndsp-trial-register.service",
+      "user": "",
+      "exec_start": "{ path=/usr/bin/node ; argv[]=/usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_trial_register_gateway.cjs ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-trial-register.service",
+      "description": "NDSP Trial Registration Gateway"
+    },
+    {
+      "unit": "ndsp-trial-seats-api.service",
+      "user": "nawaf511",
+      "exec_start": "{ path=/usr/bin/node ; argv[]=/usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp-trial-seats-api/server.js ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-trial-seats-api.service",
+      "description": "NDSP Trial Seats API"
+    },
+    {
+      "unit": "ndsp-ui-bridge-api.service",
+      "user": "root",
+      "exec_start": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 -m uvicorn main:app --host 127.0.0.1 --port 9066 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-ui-bridge-api.service",
+      "description": "NDSP UI Bridge API"
+    },
+    {
+      "unit": "ndsp-user-alert-channels.service",
+      "user": "nawaf511",
+      "exec_start": "{ path=/usr/bin/node ; argv[]=/usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp-user-alert-channels/server.js ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-user-alert-channels.service",
+      "description": "NDSP User Alert Channels API"
+    },
+    {
+      "unit": "ndsp-user-dashboard.service",
+      "user": "",
+      "exec_start": "{ path=/usr/bin/node ; argv[]=/usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_user_dashboard_gateway.cjs ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-user-dashboard.service",
+      "description": "NDSP User Dashboard Data Gateway"
+    },
+    {
+      "unit": "ndsp-user-login.service",
+      "user": "nawaf511",
+      "exec_start": "{ path=/usr/bin/node ; argv[]=/usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_user_login_gateway.cjs ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-user-login.service",
+      "description": "NDSP User Login Gateway"
+    },
+    {
+      "unit": "ndsp-v3-portal-gateway.service",
+      "user": "www-data",
+      "exec_start": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /opt/ndsp-v3-portal-gateway/app.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-v3-portal-gateway.service",
+      "description": "NDSP V3 Portal Gateway"
+    },
+    {
+      "unit": "ndsp-v52-contract.service",
+      "user": "root",
+      "exec_start": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /opt/ndsp-v52-contract/app.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-v52-contract.service",
+      "description": "NDSP V5.2 Backend NMP TDL Contract"
+    },
+    {
+      "unit": "ndsp-v53-bridge.service",
+      "user": "root",
+      "exec_start": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /opt/ndsp-v53-bridge/app.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/ndsp-v53-bridge.service",
+      "description": "NDSP V53/V543 TDL Devil Radar Nodes Bridge"
+    },
+    {
+      "unit": "networkd-dispatcher.service",
+      "user": "",
+      "exec_start": "{ path=/usr/bin/networkd-dispatcher ; argv[]=/usr/bin/networkd-dispatcher $networkd_dispatcher_args ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/usr/lib/systemd/system/networkd-dispatcher.service",
+      "description": "Dispatcher daemon for systemd-networkd"
+    },
+    {
+      "unit": "NetworkManager.service",
+      "user": "",
+      "exec_start": "{ path=/usr/sbin/NetworkManager ; argv[]=/usr/sbin/NetworkManager --no-daemon ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/usr/lib/systemd/system/NetworkManager.service",
+      "description": "Network Manager"
+    },
+    {
+      "unit": "nginx.service",
+      "user": "",
+      "exec_start": "{ path=/usr/sbin/nginx ; argv[]=/usr/sbin/nginx -g daemon on; master_process on; ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/usr/lib/systemd/system/nginx.service",
+      "description": "A high performance web server and a reverse proxy server"
+    },
+    {
+      "unit": "polkit.service",
+      "user": "polkitd",
+      "exec_start": "{ path=/usr/lib/polkit-1/polkitd ; argv[]=/usr/lib/polkit-1/polkitd --no-debug ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/usr/lib/systemd/system/polkit.service",
+      "description": "Authorization Manager"
+    },
+    {
+      "unit": "postfix@-.service",
+      "user": "",
+      "exec_start": "{ path=/usr/sbin/postmulti ; argv[]=/usr/sbin/postmulti -i - -p start ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/usr/lib/systemd/system/postfix@.service",
+      "description": "Postfix Mail Transport Agent (instance -)"
+    },
+    {
+      "unit": "postgresql@16-main.service",
+      "user": "",
+      "exec_start": "{ path=/usr/bin/pg_ctlcluster ; argv[]=/usr/bin/pg_ctlcluster --skip-systemctl-redirect 16-main start ; ignore_errors=yes ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/usr/lib/systemd/system/postgresql@.service",
+      "description": "PostgreSQL Cluster 16-main"
+    },
+    {
+      "unit": "power-profiles-daemon.service",
+      "user": "",
+      "exec_start": "{ path=/usr/libexec/power-profiles-daemon ; argv[]=/usr/libexec/power-profiles-daemon ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/usr/lib/systemd/system/power-profiles-daemon.service",
+      "description": "Power Profiles daemon"
+    },
+    {
+      "unit": "preload.service",
+      "user": "",
+      "exec_start": "{ path=/etc/init.d/preload ; argv[]=/etc/init.d/preload start ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/run/systemd/generator.late/preload.service",
+      "description": "LSB: Adaptive readahead daemon"
+    },
+    {
+      "unit": "redis-server.service",
+      "user": "redis",
+      "exec_start": "{ path=/usr/bin/redis-server ; argv[]=/usr/bin/redis-server /etc/redis/redis.conf --supervised systemd --daemonize no ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/usr/lib/systemd/system/redis-server.service",
+      "description": "Advanced key-value store"
+    },
+    {
+      "unit": "rsyslog.service",
+      "user": "",
+      "exec_start": "{ path=/usr/sbin/rsyslogd ; argv[]=/usr/sbin/rsyslogd -n -iNONE ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/usr/lib/systemd/system/rsyslog.service",
+      "description": "System Logging Service"
+    },
+    {
+      "unit": "rtkit-daemon.service",
+      "user": "",
+      "exec_start": "{ path=/usr/libexec/rtkit-daemon ; argv[]=/usr/libexec/rtkit-daemon ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/usr/lib/systemd/system/rtkit-daemon.service",
+      "description": "RealtimeKit Scheduling Policy Service"
+    },
+    {
+      "unit": "sddm.service",
+      "user": "",
+      "exec_start": "{ path=/usr/bin/sddm ; argv[]=/usr/bin/sddm ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/usr/lib/systemd/system/sddm.service",
+      "description": "Simple Desktop Display Manager"
+    },
+    {
+      "unit": "serial-getty@ttyS0.service",
+      "user": "",
+      "exec_start": "{ path=/sbin/agetty ; argv[]=/sbin/agetty -o -p -- \\u --keep-baud 115200,57600,38400,9600 - $TERM ; ignore_errors=yes ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/usr/lib/systemd/system/serial-getty@.service",
+      "description": "Serial Getty on ttyS0"
+    },
+    {
+      "unit": "snap.cups.cups-browsed.service",
+      "user": "",
+      "exec_start": "{ path=/usr/bin/snap ; argv[]=/usr/bin/snap run cups.cups-browsed ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/snap.cups.cups-browsed.service",
+      "description": "Service for snap application cups.cups-browsed"
+    },
+    {
+      "unit": "snap.cups.cupsd.service",
+      "user": "",
+      "exec_start": "{ path=/usr/bin/snap ; argv[]=/usr/bin/snap run cups.cupsd ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/etc/systemd/system/snap.cups.cupsd.service",
+      "description": "Service for snap application cups.cupsd"
+    },
+    {
+      "unit": "snapd.service",
+      "user": "",
+      "exec_start": "{ path=/usr/lib/snapd/snapd ; argv[]=/usr/lib/snapd/snapd ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/usr/lib/systemd/system/snapd.service",
+      "description": "Snap Daemon"
+    },
+    {
+      "unit": "ssh.service",
+      "user": "",
+      "exec_start": "{ path=/usr/sbin/sshd ; argv[]=/usr/sbin/sshd -D $SSHD_OPTS ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/usr/lib/systemd/system/ssh.service",
+      "description": "OpenBSD Secure Shell server"
+    },
+    {
+      "unit": "switcheroo-control.service",
+      "user": "",
+      "exec_start": "{ path=/usr/libexec/switcheroo-control ; argv[]=/usr/libexec/switcheroo-control ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/usr/lib/systemd/system/switcheroo-control.service",
+      "description": "Switcheroo Control Proxy service"
+    },
+    {
+      "unit": "systemd-journald.service",
+      "user": "",
+      "exec_start": "{ path=/usr/lib/systemd/systemd-journald ; argv[]=/usr/lib/systemd/systemd-journald ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/usr/lib/systemd/system/systemd-journald.service",
+      "description": "Journal Service"
+    },
+    {
+      "unit": "systemd-logind.service",
+      "user": "",
+      "exec_start": "{ path=/usr/lib/systemd/systemd-logind ; argv[]=/usr/lib/systemd/systemd-logind ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/usr/lib/systemd/system/systemd-logind.service",
+      "description": "User Login Management"
+    },
+    {
+      "unit": "systemd-networkd.service",
+      "user": "systemd-network",
+      "exec_start": "{ path=/usr/lib/systemd/systemd-networkd ; argv[]=/usr/lib/systemd/systemd-networkd ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/usr/lib/systemd/system/systemd-networkd.service",
+      "description": "Network Configuration"
+    },
+    {
+      "unit": "systemd-resolved.service",
+      "user": "systemd-resolve",
+      "exec_start": "{ path=/usr/lib/systemd/systemd-resolved ; argv[]=/usr/lib/systemd/systemd-resolved ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/usr/lib/systemd/system/systemd-resolved.service",
+      "description": "Network Name Resolution"
+    },
+    {
+      "unit": "systemd-timesyncd.service",
+      "user": "systemd-timesync",
+      "exec_start": "{ path=/usr/lib/systemd/systemd-timesyncd ; argv[]=/usr/lib/systemd/systemd-timesyncd ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/usr/lib/systemd/system/systemd-timesyncd.service",
+      "description": "Network Time Synchronization"
+    },
+    {
+      "unit": "systemd-udevd.service",
+      "user": "",
+      "exec_start": "{ path=/usr/lib/systemd/systemd-udevd ; argv[]=/usr/lib/systemd/systemd-udevd ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/usr/lib/systemd/system/systemd-udevd.service",
+      "description": "Rule-based Manager for Device Events and Files"
+    },
+    {
+      "unit": "udisks2.service",
+      "user": "",
+      "exec_start": "{ path=/usr/libexec/udisks2/udisksd ; argv[]=/usr/libexec/udisks2/udisksd ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/usr/lib/systemd/system/udisks2.service",
+      "description": "Disk Manager"
+    },
+    {
+      "unit": "upower.service",
+      "user": "",
+      "exec_start": "{ path=/usr/libexec/upowerd ; argv[]=/usr/libexec/upowerd ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/usr/lib/systemd/system/upower.service",
+      "description": "Daemon for power management"
+    },
+    {
+      "unit": "user@1000.service",
+      "user": "1000",
+      "exec_start": "{ path=/usr/lib/systemd/systemd ; argv[]=/usr/lib/systemd/systemd --user ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/usr/lib/systemd/system/user@.service",
+      "description": "User Manager for UID 1000"
+    },
+    {
+      "unit": "warp-svc.service",
+      "user": "",
+      "exec_start": "{ path=/bin/warp-svc ; argv[]=/bin/warp-svc ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/usr/lib/systemd/system/warp-svc.service",
+      "description": "Cloudflare Zero Trust Client Daemon"
+    },
+    {
+      "unit": "xrdp-sesman.service",
+      "user": "",
+      "exec_start": "{ path=/usr/sbin/xrdp-sesman ; argv[]=/usr/sbin/xrdp-sesman $SESMAN_OPTIONS ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/usr/lib/systemd/system/xrdp-sesman.service",
+      "description": "xrdp session manager"
+    },
+    {
+      "unit": "xrdp.service",
+      "user": "xrdp",
+      "exec_start": "{ path=/usr/sbin/xrdp ; argv[]=/usr/sbin/xrdp $XRDP_OPTIONS ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "fragment_path": "/usr/lib/systemd/system/xrdp.service",
+      "description": "xrdp daemon"
+    }
+  ],
+  "listeners": [
+    {
+      "protocol": "udp",
+      "local_address": "127.0.0.54:53",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "udp",
+      "local_address": "127.0.0.53%lo:53",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "udp",
+      "local_address": "0.0.0.0:5353",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "udp",
+      "local_address": "0.0.0.0:57534",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "udp",
+      "local_address": "[::]:34533",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "udp",
+      "local_address": "[::]:5353",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:631",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.54:53",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "0.0.0.0:5433",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:19091",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:5432",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.53%lo:53",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "0.0.0.0:3000",
+      "process": "node",
+      "pid": "2978998"
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "0.0.0.0:443",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "0.0.0.0:22",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "0.0.0.0:25",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "0.0.0.0:80",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:8097",
+      "process": "node",
+      "pid": "2498028"
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:6379",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9089",
+      "process": "python3",
+      "pid": "2978938"
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9088",
+      "process": "python3",
+      "pid": "2978627"
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9091",
+      "process": "python3",
+      "pid": "2978945"
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9090",
+      "process": "python3",
+      "pid": "2978939"
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9093",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9092",
+      "process": "python3",
+      "pid": "2978596"
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9095",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9094",
+      "process": "python3",
+      "pid": "2978555"
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9057",
+      "process": "python3",
+      "pid": "2978652"
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9061",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9062",
+      "process": "node",
+      "pid": "2498159"
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9065",
+      "process": "uvicorn",
+      "pid": "2978601"
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9064",
+      "process": "node",
+      "pid": "2498136"
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9067",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9066",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9069",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9068",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9070",
+      "process": "node",
+      "pid": "2498154"
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9074",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9077",
+      "process": "node",
+      "pid": "2497887"
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9076",
+      "process": "uvicorn",
+      "pid": "2978629"
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9079",
+      "process": "node",
+      "pid": "2498024"
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9078",
+      "process": "node",
+      "pid": "2499820"
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9081",
+      "process": "node",
+      "pid": "2498098"
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9080",
+      "process": "node",
+      "pid": "2497949"
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9083",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9082",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9085",
+      "process": "python3",
+      "pid": "2978623"
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9084",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9087",
+      "process": "python3",
+      "pid": "2978625"
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9086",
+      "process": "python3",
+      "pid": "2978624"
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9024",
+      "process": "node",
+      "pid": "2497888"
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9027",
+      "process": "node",
+      "pid": "2498041"
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9029",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9028",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9031",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9030",
+      "process": "node",
+      "pid": "2497889"
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9033",
+      "process": "node",
+      "pid": "2498040"
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9034",
+      "process": "node",
+      "pid": "2498121"
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9041",
+      "process": "node",
+      "pid": "2498156"
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9044",
+      "process": "node",
+      "pid": "2498025"
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9047",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9001",
+      "process": "node",
+      "pid": "2498048"
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9002",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9017",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9019",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9021",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9020",
+      "process": "node",
+      "pid": "2498163"
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9023",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "127.0.0.1:9022",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "[::1]:631",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "[::1]:3350",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "[::]:5433",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "[::1]:5432",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "*:3389",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "[::]:443",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "[::]:22",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "[::]:25",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "[::]:80",
+      "process": "",
+      "pid": ""
+    },
+    {
+      "protocol": "tcp",
+      "local_address": "[::1]:6379",
+      "process": "",
+      "pid": ""
+    }
+  ],
+  "errors": []
+}
