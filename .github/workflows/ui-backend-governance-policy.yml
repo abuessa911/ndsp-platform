@@ -1,0 +1,103 @@
+name: UI and Backend Governance Policy
+
+on:
+  pull_request:
+    paths:
+      - "docs/99-governance/ui-architecture/**"
+      - "scripts/governance/validate_ui_backend_governance_policy.py"
+      - "scripts/governance/requirements-ui-backend-governance.txt"
+      - ".github/workflows/ui-backend-governance-policy.yml"
+      - "apps/**"
+      - "backend/**"
+      - "frontend/**"
+      - "packages/**"
+      - "**/package.json"
+      - "**/tsconfig*.json"
+  push:
+    branches:
+      - main
+    paths:
+      - "docs/99-governance/ui-architecture/**"
+      - "scripts/governance/validate_ui_backend_governance_policy.py"
+      - "scripts/governance/requirements-ui-backend-governance.txt"
+      - ".github/workflows/ui-backend-governance-policy.yml"
+      - "apps/**"
+      - "backend/**"
+      - "frontend/**"
+      - "packages/**"
+      - "**/package.json"
+      - "**/tsconfig*.json"
+  workflow_dispatch:
+    inputs:
+      strict_warnings:
+        description: "Treat governance warnings as failures"
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ui-backend-governance-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate-policy:
+    name: Validate governance policy
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+          cache-dependency-path: |
+            scripts/governance/requirements-ui-backend-governance.txt
+
+      - name: Install validator dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install \
+            -r scripts/governance/requirements-ui-backend-governance.txt
+
+      - name: Validate policy structure
+        run: |
+          python scripts/governance/validate_ui_backend_governance_policy.py \
+            --repo-root "$GITHUB_WORKSPACE" \
+            --policy-only \
+            --report /tmp/ui-backend-governance-policy-report.json
+
+      - name: Validate repository compliance
+        env:
+          STRICT_WARNINGS: ${{ inputs.strict_warnings || 'false' }}
+        run: |
+          args=(
+            --repo-root "$GITHUB_WORKSPACE"
+            --report /tmp/ui-backend-governance-report.json
+          )
+
+          if [[ "$STRICT_WARNINGS" == "true" ]]; then
+            args+=(--strict-warnings)
+          fi
+
+          python scripts/governance/validate_ui_backend_governance_policy.py \
+            "${args[@]}"
+
+      - name: Upload governance reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-backend-governance-validation
+          if-no-files-found: warn
+          retention-days: 30
+          path: |
+            /tmp/ui-backend-governance-policy-report.json
+            /tmp/ui-backend-governance-report.json
