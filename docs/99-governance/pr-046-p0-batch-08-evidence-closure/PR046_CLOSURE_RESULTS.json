@@ -1,0 +1,80 @@
+[
+  {
+    "batch_id": "B08_SERVICE_ENDPOINT",
+    "capability_id": "CAP-B13D2E033AA3",
+    "capability_name": "Use Market",
+    "p0_signature": "SERVICE_ENDPOINT",
+    "closure_state": "CLOSED_MACHINE_EVIDENCE_FOUND",
+    "selected_evidence_paths": "docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json",
+    "service_gap_remaining": "false",
+    "endpoint_gap_remaining": "false",
+    "real_data_gap_remaining": "false",
+    "human_confirmation_required": "true",
+    "ui_complete_created": "false"
+  },
+  {
+    "batch_id": "B08_SERVICE_ENDPOINT",
+    "capability_id": "CAP-C231FDE8F33A",
+    "capability_name": "Is Decision Request",
+    "p0_signature": "SERVICE_ENDPOINT",
+    "closure_state": "CLOSED_MACHINE_EVIDENCE_FOUND",
+    "selected_evidence_paths": "docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json",
+    "service_gap_remaining": "false",
+    "endpoint_gap_remaining": "false",
+    "real_data_gap_remaining": "false",
+    "human_confirmation_required": "true",
+    "ui_complete_created": "false"
+  },
+  {
+    "batch_id": "B08_SERVICE_ENDPOINT",
+    "capability_id": "CAP-D89712BC5C12",
+    "capability_name": "Ndsp Governance 44 V26",
+    "p0_signature": "SERVICE_ENDPOINT",
+    "closure_state": "CLOSED_MACHINE_EVIDENCE_FOUND",
+    "selected_evidence_paths": "docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json",
+    "service_gap_remaining": "false",
+    "endpoint_gap_remaining": "false",
+    "real_data_gap_remaining": "false",
+    "human_confirmation_required": "true",
+    "ui_complete_created": "false"
+  },
+  {
+    "batch_id": "B08_SERVICE_ENDPOINT",
+    "capability_id": "CAP-E4F9CD5311CA",
+    "capability_name": "Pick Market Timestamp",
+    "p0_signature": "SERVICE_ENDPOINT",
+    "closure_state": "CLOSED_MACHINE_EVIDENCE_FOUND",
+    "selected_evidence_paths": "docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json",
+    "service_gap_remaining": "false",
+    "endpoint_gap_remaining": "false",
+    "real_data_gap_remaining": "false",
+    "human_confirmation_required": "true",
+    "ui_complete_created": "false"
+  },
+  {
+    "batch_id": "B08_SERVICE_ENDPOINT",
+    "capability_id": "CAP-EAFDBC235B37",
+    "capability_name": "Format Market Timestamp",
+    "p0_signature": "SERVICE_ENDPOINT",
+    "closure_state": "CLOSED_MACHINE_EVIDENCE_FOUND",
+    "selected_evidence_paths": "docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json",
+    "service_gap_remaining": "false",
+    "endpoint_gap_remaining": "false",
+    "real_data_gap_remaining": "false",
+    "human_confirmation_required": "true",
+    "ui_complete_created": "false"
+  },
+  {
+    "batch_id": "B08_SERVICE_ENDPOINT",
+    "capability_id": "CAP-F5C7F3807EC2",
+    "capability_name": "Canonical Decision Text",
+    "p0_signature": "SERVICE_ENDPOINT",
+    "closure_state": "CLOSED_MACHINE_EVIDENCE_FOUND",
+    "selected_evidence_paths": "docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json",
+    "service_gap_remaining": "false",
+    "endpoint_gap_remaining": "false",
+    "real_data_gap_remaining": "false",
+    "human_confirmation_required": "true",
+    "ui_complete_created": "false"
+  }
+]
