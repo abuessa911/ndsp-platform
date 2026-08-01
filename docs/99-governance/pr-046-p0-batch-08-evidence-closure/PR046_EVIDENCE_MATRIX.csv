@@ -1,0 +1,7 @@
+batch_id,capability_id,capability_name,p0_signature,service_required,endpoint_required,real_data_required,service_evidence_found,endpoint_evidence_found,real_data_evidence_found,candidate_count,selected_evidence_paths,machine_closed,human_confirmation_required
+B08_SERVICE_ENDPOINT,CAP-B13D2E033AA3,Use Market,SERVICE_ENDPOINT,true,true,false,true,true,true,297,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B08_SERVICE_ENDPOINT,CAP-C231FDE8F33A,Is Decision Request,SERVICE_ENDPOINT,true,true,false,true,true,true,328,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B08_SERVICE_ENDPOINT,CAP-D89712BC5C12,Ndsp Governance 44 V26,SERVICE_ENDPOINT,true,true,false,true,true,true,330,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B08_SERVICE_ENDPOINT,CAP-E4F9CD5311CA,Pick Market Timestamp,SERVICE_ENDPOINT,true,true,false,true,true,true,334,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B08_SERVICE_ENDPOINT,CAP-EAFDBC235B37,Format Market Timestamp,SERVICE_ENDPOINT,true,true,false,true,true,true,337,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B08_SERVICE_ENDPOINT,CAP-F5C7F3807EC2,Canonical Decision Text,SERVICE_ENDPOINT,true,true,false,true,true,true,373,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
