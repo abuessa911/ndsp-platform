@@ -1,0 +1,46 @@
+name: PR-062 COT Direction and Time Backend Audit
+
+on:
+  pull_request:
+    paths:
+      - "docs/99-governance/pr-062-cot-direction-time-backend-audit/**"
+      - "scripts/governance/build_pr062_cot_direction_time_backend_audit.py"
+      - "scripts/governance/validate_pr062_cot_direction_time_backend_audit.py"
+      - "scripts/governance/tests/pr062-cot-direction-time-backend-audit.test.cjs"
+      - ".github/workflows/pr062-cot-direction-time-backend-audit.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "docs/99-governance/pr-062-cot-direction-time-backend-audit/**"
+      - "scripts/governance/build_pr062_cot_direction_time_backend_audit.py"
+      - "scripts/governance/validate_pr062_cot_direction_time_backend_audit.py"
+      - "scripts/governance/tests/pr062-cot-direction-time-backend-audit.test.cjs"
+      - ".github/workflows/pr062-cot-direction-time-backend-audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Validate generated audit
+        env:
+          PYTHONDONTWRITEBYTECODE: "1"
+        run: |
+          python3 scripts/governance/validate_pr062_cot_direction_time_backend_audit.py .
+          node --test scripts/governance/tests/pr062-cot-direction-time-backend-audit.test.cjs
