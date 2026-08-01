@@ -1,0 +1,14 @@
+{
+  "selected_locator": "/home/nawaf511/empire-core-new/backend/runtime/private_governance/final_extra_snapshot/tdl_v2_policy.py",
+  "selected_source_kind": "primary_local_worktree",
+  "selected_sha256": "916fd5074c00ea149e418166b0700ca188d68f5f404bd18b839a63a2324aa3a7",
+  "selected_bytes": 8479,
+  "selected_modified_iso": "2026-05-16T18:02:58+00:00",
+  "selection_reason": "highest deterministic score among AST-valid, secret-safe, SHA-256-deduplicated candidates",
+  "restored_target": "apps/ndsp-governance-bridge/app/core/tdl_v2_policy.py",
+  "candidate_count_raw": 1,
+  "candidate_count_secret_safe": 1,
+  "secrets_copied": false,
+  "local_sources_deleted": false,
+  "snapshots_deleted": false
+}
