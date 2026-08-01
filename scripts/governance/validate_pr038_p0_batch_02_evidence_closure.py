@@ -109,7 +109,7 @@ def main() -> int:
     print("ui_complete_records_created=0")
     print("runtime_changes=none")
     print("validation=PASS")
-    print("status=PR038_P0_BATCH_01_EVIDENCE_CLOSURE_VALID")
+    print("status=PR038_P0_BATCH_02_EVIDENCE_CLOSURE_VALID")
     return 0
 
 
