@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "document": "PR-051 P0 Batch 13 Evidence Closure",
+  "generated_at": "2026-08-01T09:58:19.105856+00:00",
+  "batch_id": "B13_ENDPOINT_REAL_DATA",
+  "input_capability_count": 18,
+  "machine_closed_count": 18,
+  "remaining_gap_count": 0,
+  "traceability_rows_updated": 18,
+  "candidate_files_scanned": 452,
+  "production_services_restarted": 0,
+  "mutating_requests_executed": 0,
+  "runtime_changes": "none",
+  "human_confirmation_required": true,
+  "ui_complete_records_created": 0,
+  "full_capability_coverage_claimed": false,
+  "status": "P0_BATCH_13_MACHINE_EVIDENCE_COMPLETE"
+}
