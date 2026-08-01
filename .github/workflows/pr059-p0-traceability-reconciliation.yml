@@ -1,0 +1,30 @@
+name: PR-059 P0 Traceability reconciliation
+
+on:
+  pull_request:
+    paths:
+      - "docs/99-governance/pr-018-full-capability-ui-governance/CAPABILITY_UI_TRACEABILITY.csv"
+      - "docs/99-governance/pr-059-p0-traceability-reconciliation/**"
+      - "scripts/governance/validate_pr059_p0_traceability_reconciliation.py"
+      - "scripts/governance/tests/pr059-p0-traceability-reconciliation.test.cjs"
+      - ".github/workflows/pr059-p0-traceability-reconciliation.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-p0-reconciliation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: node --test scripts/governance/tests/pr059-p0-traceability-reconciliation.test.cjs
+      - run: python3 scripts/governance/validate_pr059_p0_traceability_reconciliation.py
+      - run: python3 scripts/governance/validate_full_capability_ui.py --base-ref "origin/${{ github.base_ref }}"
