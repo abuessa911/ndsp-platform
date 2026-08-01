@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "document": "PR-036 P0 Remediation Batch Decomposition",
+  "generated_at": "2026-08-01T02:06:27.267050+00:00",
+  "total_capabilities": 526,
+  "p0_capability_count": 391,
+  "top_50_exported": 50,
+  "batch_size_limit": 25,
+  "remediation_batch_count": 19,
+  "batch_assignment_count": 391,
+  "signature_counts": {
+    "SERVICE_ENDPOINT_REAL_DATA": 110,
+    "SERVICE_ENDPOINT": 56,
+    "SERVICE_REAL_DATA": 68,
+    "ENDPOINT_REAL_DATA": 43,
+    "SERVICE_ONLY": 78,
+    "ENDPOINT_ONLY": 36
+  },
+  "gap_counts": {
+    "SERVICE": 312,
+    "ENDPOINT": 245,
+    "REAL_DATA": 221
+  },
+  "unassigned_p0_capabilities": 0,
+  "duplicate_assignments": 0,
+  "traceability_rows_modified": 0,
+  "runtime_changes": "none",
+  "production_services_restarted": 0,
+  "mutating_requests_executed": 0,
+  "full_capability_coverage_claimed": false,
+  "human_confirmation_required": true,
+  "status": "P0_REMEDIATION_BATCHES_READY"
+}
