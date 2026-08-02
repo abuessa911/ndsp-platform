@@ -165,6 +165,34 @@ if len(matching) != 2:
         )
     )
 
+
+PR065_SUMMARY = (
+    ROOT
+    / "docs/99-governance/pr-065-utc-effective-week-correction"
+    / "PR065_SUMMARY.json"
+)
+
+def approved_pr065_traceability_successor(relative: str) -> bool:
+    if relative != MUTABLE_TRACEABILITY_PATH:
+        return False
+
+    if not PR065_SUMMARY.is_file():
+        return False
+
+    successor = json.loads(PR065_SUMMARY.read_text(encoding="utf-8"))
+
+    return (
+        successor.get("validation") == "PASS"
+        and successor.get("status")
+        == "UTC_EFFECTIVE_WEEK_CORRECTED_REPOSITORY_ONLY"
+        and successor.get("traceability_rows_changed") == 1
+        and successor.get("new_capability_created") is False
+        and successor.get("direction_logic_changes") == 0
+        and successor.get("runtime_integration_changes") == 0
+        and successor.get("deployment_authorized") is False
+        and successor.get("runtime_changes") == "none"
+    )
+
 checksums = DOC / "PR064C_SHA256SUMS.txt"
 
 for line in checksums.read_text(encoding="utf-8").splitlines():
@@ -186,6 +214,11 @@ for line in checksums.read_text(encoding="utf-8").splitlines():
             print(
                 "approved_traceability_successor_change="
                 f"{normalized}:PR064"
+            )
+        elif approved_pr065_traceability_successor(normalized):
+            print(
+                "approved_traceability_successor_change="
+                f"{normalized}:PR065"
             )
         else:
             raise SystemExit(fail(f"Checksum mismatch: {normalized}"))
