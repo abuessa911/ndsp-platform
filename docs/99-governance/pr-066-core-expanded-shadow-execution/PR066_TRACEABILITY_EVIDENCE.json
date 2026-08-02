@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "central_traceability_mutated": false,
+  "evidence_mode": "REFERENCE_EXISTING_CANONICAL_CAPABILITIES",
+  "capability_count": 2,
+  "capabilities": [
+    {
+      "capability_id": "CAP-704639CE50C9",
+      "capability_name": "Validate Decision",
+      "canonicality": "REVIEW_REQUIRED",
+      "source_or_algorithm": "backend/services/decision_governance_core/main.cjs::validateDecision|backend/services/decision_governance_core/main.cjs|backend/services/decision_governance_core/direction/canonical-direction.cjs::calculateCanonicalDirection",
+      "evidence_path": "backend/services/decision_governance_core/main.cjs|docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json|docs/99-governance/pr-052-p0-batch-14-evidence-closure/PR-052-P0-BATCH-14-EVIDENCE-CLOSURE.md|docs/99-governance/pr-059-p0-traceability-reconciliation/PR-059-P0-TRACEABILITY-RECONCILIATION.md|docs/99-governance/pr-064-canonical-direction-engine-correction/PR064_SUMMARY.json",
+      "coverage_state": "SOURCE_IDENTIFIED",
+      "data_state": "REAL_LIVE",
+      "governance_disposition": "REFERENCE_ONLY_PENDING_HUMAN_REVIEW",
+      "pr066_role": "DUAL_MODEL_EXECUTION_REFERENCE"
+    },
+    {
+      "capability_id": "CAP-C807F0E54F0D",
+      "capability_name": "Expected Cot Cycle",
+      "canonicality": "CANONICAL",
+      "source_or_algorithm": "backend/layers/canonical_v1/data/cot_validity_gate.py::ExpectedCotCycle|backend/services/decision_governance_core/time/canonical-effective-week.cjs::calculateEffectiveWeek",
+      "evidence_path": "backend/layers/canonical_v1/data/cot_validity_gate.py|docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json|docs/99-governance/pr-040-p0-batch-03-evidence-closure/PR-040-P0-BATCH-01-EVIDENCE-CLOSURE.md|docs/99-governance/pr-059-p0-traceability-reconciliation/PR-059-P0-TRACEABILITY-RECONCILIATION.md|docs/99-governance/pr-065-utc-effective-week-correction/PR065_SUMMARY.json",
+      "coverage_state": "UI_PARTIAL",
+      "data_state": "REAL_SNAPSHOT",
+      "governance_disposition": "CANONICAL_REFERENCE",
+      "pr066_role": "UTC_EFFECTIVE_WEEK_INPUT"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+name: PR-066 CORE EXPANDED Shadow Execution
+
+on:
+  pull_request:
+    paths:
+      - "backend/services/decision_governance_core/execution/**"
+      - "backend/services/decision_governance_core/tests/core-expanded-shadow-runner.test.cjs"
+      - "docs/99-governance/pr-066-core-expanded-shadow-execution/**"
+      - "scripts/governance/validate_pr066_core_expanded_shadow_execution.py"
+      - "scripts/governance/tests/pr066-core-expanded-shadow-execution.test.cjs"
+      - ".github/workflows/pr066-core-expanded-shadow-execution.yml"
+  push:
+    branches: [main]
+    paths:
+      - "backend/services/decision_governance_core/execution/**"
+      - "backend/services/decision_governance_core/tests/core-expanded-shadow-runner.test.cjs"
+      - "docs/99-governance/pr-066-core-expanded-shadow-execution/**"
+      - "scripts/governance/validate_pr066_core_expanded_shadow_execution.py"
+      - "scripts/governance/tests/pr066-core-expanded-shadow-execution.test.cjs"
+      - ".github/workflows/pr066-core-expanded-shadow-execution.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Validate PR-066
+        env:
+          PYTHONDONTWRITEBYTECODE: "1"
+        run: |
+          python3 scripts/governance/validate_pr066_core_expanded_shadow_execution.py .
+          node --test backend/services/decision_governance_core/tests/core-expanded-shadow-runner.test.cjs
+          node --test scripts/governance/tests/pr066-core-expanded-shadow-execution.test.cjs
+          node --check backend/services/decision_governance_core/execution/core-expanded-shadow-runner.cjs
