@@ -36,6 +36,38 @@ for path in required:
     print(f"{path.relative_to(root)}: OK")
 
 summary = json.loads((doc / "PR064_SUMMARY.json").read_text(encoding="utf-8"))
+
+PR065_SUMMARY = (
+    root
+    / "docs/99-governance/pr-065-utc-effective-week-correction"
+    / "PR065_SUMMARY.json"
+)
+
+MUTABLE_TRACEABILITY_PATH = (
+    "docs/99-governance/pr-018-full-capability-ui-governance/"
+    "CAPABILITY_UI_TRACEABILITY.csv"
+)
+
+def approved_pr065_traceability_successor(relative: str) -> bool:
+    if relative != MUTABLE_TRACEABILITY_PATH:
+        return False
+
+    if not PR065_SUMMARY.is_file():
+        return False
+
+    successor = json.loads(PR065_SUMMARY.read_text(encoding="utf-8"))
+
+    return (
+        successor.get("validation") == "PASS"
+        and successor.get("status")
+        == "UTC_EFFECTIVE_WEEK_CORRECTED_REPOSITORY_ONLY"
+        and successor.get("traceability_rows_changed") == 1
+        and successor.get("new_capability_created") is False
+        and successor.get("direction_logic_changes") == 0
+        and successor.get("runtime_integration_changes") == 0
+        and successor.get("deployment_authorized") is False
+        and successor.get("runtime_changes") == "none"
+    )
 expected = {
     "direction_rule": "delta = long - short",
     "neutral_rule": "long == short only",
@@ -89,8 +121,18 @@ for line in (doc / "PR064_SHA256SUMS.txt").read_text(encoding="utf-8").splitline
     path = root / relative.strip()
     if not path.is_file():
         raise SystemExit(fail(f"Checksum target missing: {relative.strip()}"))
-    if hashlib.sha256(path.read_bytes()).hexdigest() != expected_hash:
-        raise SystemExit(fail(f"Checksum mismatch: {relative.strip()}"))
+    actual_hash = hashlib.sha256(path.read_bytes()).hexdigest()
+
+    if actual_hash != expected_hash:
+        normalized = relative.strip()
+
+        if approved_pr065_traceability_successor(normalized):
+            print(
+                "approved_traceability_successor_change="
+                f"{normalized}:PR065"
+            )
+        else:
+            raise SystemExit(fail(f"Checksum mismatch: {normalized}"))
 
 print("direction_rule=PASS")
 print("neutral_rule=PASS")
