@@ -13,7 +13,7 @@
   "automatic_promotion": false,
   "direction_contract_source": "PR-064",
   "time_contract_source": "PR-065",
-  "central_traceability_mutated": false,
+  "central_traceability_mutated": true,
   "validate_decision_canonicality": "REVIEW_REQUIRED",
   "validate_decision_disposition": "REFERENCE_ONLY_PENDING_HUMAN_REVIEW",
   "expected_cot_cycle_canonicality": "CANONICAL",
@@ -28,5 +28,8 @@
   "mutating_requests_executed": 0,
   "runtime_changes": "none",
   "validation": "PASS",
-  "status": "CORE_EXPANDED_SHADOW_EXECUTION_REPOSITORY_ONLY"
+  "status": "CORE_EXPANDED_SHADOW_EXECUTION_TRACEABILITY_RECONCILED",
+  "traceability_rows_changed": 2,
+  "new_capability_created": false,
+  "traceability_reconciliation": "PASS"
 }

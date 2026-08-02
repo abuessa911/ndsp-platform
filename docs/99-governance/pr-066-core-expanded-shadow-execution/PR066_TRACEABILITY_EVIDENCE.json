@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "central_traceability_mutated": false,
+  "central_traceability_mutated": true,
   "evidence_mode": "REFERENCE_EXISTING_CANONICAL_CAPABILITIES",
   "capability_count": 2,
   "capabilities": [
@@ -13,7 +13,9 @@
       "coverage_state": "SOURCE_IDENTIFIED",
       "data_state": "REAL_LIVE",
       "governance_disposition": "REFERENCE_ONLY_PENDING_HUMAN_REVIEW",
-      "pr066_role": "DUAL_MODEL_EXECUTION_REFERENCE"
+      "pr066_role": "DUAL_MODEL_EXECUTION_REFERENCE",
+      "traceability_reconciled": true,
+      "canonicality_preserved": true
     },
     {
       "capability_id": "CAP-C807F0E54F0D",
@@ -24,7 +26,16 @@
       "coverage_state": "UI_PARTIAL",
       "data_state": "REAL_SNAPSHOT",
       "governance_disposition": "CANONICAL_REFERENCE",
-      "pr066_role": "UTC_EFFECTIVE_WEEK_INPUT"
+      "pr066_role": "UTC_EFFECTIVE_WEEK_EXECUTION_REFERENCE",
+      "traceability_reconciled": true,
+      "canonicality_preserved": true
     }
+  ],
+  "traceability_rows_changed": 2,
+  "new_capability_created": false,
+  "reconciliation_status": "PASS",
+  "reconciled_capability_ids": [
+    "CAP-704639CE50C9",
+    "CAP-C807F0E54F0D"
   ]
 }

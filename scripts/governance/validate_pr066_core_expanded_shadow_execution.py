@@ -70,7 +70,10 @@ expected = {
     "automatic_promotion": False,
     "direction_contract_source": "PR-064",
     "time_contract_source": "PR-065",
-    "central_traceability_mutated": False,
+    "central_traceability_mutated": True,
+    "traceability_rows_changed": 2,
+    "new_capability_created": False,
+    "traceability_reconciliation": "PASS",
     "validate_decision_canonicality": "REVIEW_REQUIRED",
     "validate_decision_disposition": (
         "REFERENCE_ONLY_PENDING_HUMAN_REVIEW"
@@ -117,9 +120,19 @@ trace_evidence = json.loads(
     )
 )
 
-if trace_evidence.get("central_traceability_mutated") is not False:
+if trace_evidence.get("central_traceability_mutated") is not True:
     raise SystemExit(
-        fail("Central Traceability mutation is not disabled")
+        fail("Central Traceability reconciliation is not recorded")
+    )
+
+if trace_evidence.get("traceability_rows_changed") != 2:
+    raise SystemExit(
+        fail("Expected exactly two reconciled Traceability rows")
+    )
+
+if trace_evidence.get("new_capability_created") is not False:
+    raise SystemExit(
+        fail("PR-066A must not create a capability")
     )
 
 expected_ids = {
@@ -215,7 +228,10 @@ print("official_result_write=false")
 print("experimental_result_write=false")
 print("expanded_public_exposure=false")
 print("automatic_promotion=false")
-print("central_traceability_mutated=false")
+print("central_traceability_mutated=true")
+print("traceability_rows_changed=2")
+print("new_capability_created=false")
+print("traceability_reconciliation=PASS")
 print("validate_decision_canonicality=REVIEW_REQUIRED")
 print("expected_cot_cycle_canonicality=CANONICAL")
 print("validate_decision_disposition=REFERENCE_ONLY_PENDING_HUMAN_REVIEW")
