@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "capability_id": "CAP-704639CE50C9",
+  "row_number": 427,
+  "changed_columns": [
+    "source_or_algorithm",
+    "endpoint_or_contract",
+    "evidence_path",
+    "notes"
+  ],
+  "rows_changed": 1,
+  "new_capability_created": false,
+  "status_fields_preserved": true
+}

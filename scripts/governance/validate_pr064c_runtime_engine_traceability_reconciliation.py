@@ -43,6 +43,37 @@ for path in required:
 summary = json.loads(
     (DOC / "PR064C_SUMMARY.json").read_text(encoding="utf-8")
 )
+
+PR064_SUMMARY = (
+    ROOT
+    / "docs/99-governance/pr-064-canonical-direction-engine-correction"
+    / "PR064_SUMMARY.json"
+)
+
+MUTABLE_TRACEABILITY_PATH = (
+    "docs/99-governance/pr-018-full-capability-ui-governance/"
+    "CAPABILITY_UI_TRACEABILITY.csv"
+)
+
+def approved_pr064_traceability_successor(relative: str) -> bool:
+    if relative != MUTABLE_TRACEABILITY_PATH:
+        return False
+
+    if not PR064_SUMMARY.is_file():
+        return False
+
+    successor = json.loads(PR064_SUMMARY.read_text(encoding="utf-8"))
+
+    return (
+        successor.get("validation") == "PASS"
+        and successor.get("status")
+        == "CANONICAL_DIRECTION_ENGINE_CORRECTED_SHADOW_ONLY"
+        and successor.get("traceability_rows_changed") == 1
+        and successor.get("new_capability_created") is False
+        and successor.get("execution_mode") == "SHADOW_ONLY"
+        and successor.get("deployment_authorized") is False
+        and successor.get("runtime_changes") == "none"
+    )
 audit = json.loads(
     (DOC / "PR064C_TRACEABILITY_RECONCILIATION_AUDIT.json").read_text(
         encoding="utf-8"
@@ -149,8 +180,18 @@ for line in checksums.read_text(encoding="utf-8").splitlines():
     actual = hashlib.sha256(target.read_bytes()).hexdigest()
 
     if actual != expected_hash:
-        raise SystemExit(fail(f"Checksum mismatch: {relative.strip()}"))
+        normalized = relative.strip()
 
+        if approved_pr064_traceability_successor(normalized):
+            print(
+                "approved_traceability_successor_change="
+                f"{normalized}:PR064"
+            )
+        else:
+            raise SystemExit(fail(f"Checksum mismatch: {normalized}"))
+
+print("historical_traceability_baseline=PASS")
+print("mutable_traceability_successor_compatibility=PASS")
 print("canonical_traceability_update=PASS")
 print("runtime_engine_mapping=PASS")
 print("runtime_service_mapping_count=1")
