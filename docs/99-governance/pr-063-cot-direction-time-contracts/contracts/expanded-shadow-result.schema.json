@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ndsp.local/contracts/cot/expanded-shadow-result.schema.json",
+  "title": "EXPANDED Shadow Result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "model",
+    "mode",
+    "public_exposure",
+    "direction_result",
+    "effective_week"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0.0" },
+    "model": { "const": "EXPANDED" },
+    "mode": { "const": "SHADOW_MODE" },
+    "public_exposure": { "const": false },
+    "direction_result": {
+      "$ref": "./direction-result.schema.json"
+    },
+    "effective_week": {
+      "$ref": "./effective-week.schema.json"
+    }
+  }
+}

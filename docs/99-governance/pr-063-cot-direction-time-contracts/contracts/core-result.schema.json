@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ndsp.local/contracts/cot/core-result.schema.json",
+  "title": "CORE Official Result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "model",
+    "exposure",
+    "direction_result",
+    "effective_week"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0.0" },
+    "model": { "const": "CORE" },
+    "exposure": { "const": "PUBLIC_OFFICIAL" },
+    "direction_result": {
+      "$ref": "./direction-result.schema.json"
+    },
+    "effective_week": {
+      "$ref": "./effective-week.schema.json"
+    }
+  }
+}
