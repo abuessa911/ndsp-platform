@@ -1,5 +1,7 @@
 'use strict';
 
+const { calculateCanonicalDirection } = require("./direction/canonical-direction.cjs");
+
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
@@ -175,6 +177,31 @@ app.post('/api/governance/submit', async (req, res) => {
       source:'decision_governance_core',
       error:'GOVERNANCE_SUBMIT_FAILED',
       message:e.message
+    });
+  }
+});
+
+
+// PR-064: internal shadow-only canonical direction evaluation.
+app.post("/api/governance/direction/shadow", (req, res) => {
+  try {
+    const result = calculateCanonicalDirection({
+      long: req.body?.long,
+      short: req.body?.short,
+    });
+
+    return res.status(200).json({
+      status: "SHADOW_ONLY",
+      public_exposure: "DISABLED",
+      official_result_written: false,
+      result,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      error: error.code || "INVALID_DIRECTION_INPUT",
+      message: error.message,
+      status: "SHADOW_ONLY",
+      official_result_written: false,
     });
   }
 });
