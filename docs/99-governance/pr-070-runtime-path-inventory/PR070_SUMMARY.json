@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "document": "PR-070 Runtime Path Inventory",
+  "generated_at": "2026-08-02T00:35:26.262952+00:00",
+  "scan_mode": "READ_ONLY",
+  "path_record_count": 50001,
+  "systemd_service_count": 93,
+  "nginx_directive_count": 131,
+  "repository_reference_count": 583,
+  "inventory_limit_reached": true,
+  "filesystem_roots": [
+    "/opt",
+    "/var/www"
+  ],
+  "systemd_mutations": 0,
+  "nginx_mutations": 0,
+  "files_deleted": 0,
+  "files_moved": 0,
+  "production_services_restarted": 0,
+  "mutating_requests_executed": 0,
+  "runtime_changes": "none",
+  "human_review_required": true,
+  "validation": "PASS",
+  "status": "RUNTIME_PATH_INVENTORY_COMPLETE"
+}
