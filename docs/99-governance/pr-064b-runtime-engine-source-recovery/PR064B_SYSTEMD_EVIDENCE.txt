@@ -1,0 +1,26 @@
+PR-064B systemd evidence
+captured_at_utc=2026-08-02T03:07:23Z
+mutating_commands_executed=0
+
+unit=ndsp-decision-governance-core.service
+ExecStart={ path=/usr/bin/node ; argv[]=/usr/bin/node /home/nawaf511/empire-core-new/backend/services/decision_governance_core/main.cjs ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }
+WorkingDirectory=/home/nawaf511/empire-core-new/backend/services/decision_governance_core
+User=nawaf511
+Group=
+LoadState=loaded
+ActiveState=inactive
+SubState=dead
+FragmentPath=/etc/systemd/system/ndsp-decision-governance-core.service
+
+unit=ndsp-decision_governance_core.service
+ExecStart={ path=/usr/bin/node ; argv[]=/usr/bin/node /home/nawaf511/empire-core-new/backend/services/decision_governance_core/main.cjs ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }
+WorkingDirectory=/home/nawaf511/empire-core-new/backend/services/decision_governance_core
+User=nawaf511
+Group=
+LoadState=loaded
+ActiveState=active
+SubState=running
+FragmentPath=/etc/systemd/system/ndsp-decision_governance_core.service
+
+systemd_changes=0
+production_services_restarted=0
