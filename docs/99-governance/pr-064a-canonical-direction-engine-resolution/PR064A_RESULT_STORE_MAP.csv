@@ -1,0 +1,3 @@
+store_name,logical_owner,model,exposure,writer,reader,physical_location,current_location_identified,decision_status
+Official Result Store,decision_governance_core,CORE,PUBLIC_OFFICIAL,decision_governance_core,Public API,TO_BE_IMPLEMENTED_AFTER_APPROVAL,false,PROPOSED
+Experimental Result Store,decision_governance_core,EXPANDED,INTERNAL_SHADOW_ONLY,decision_governance_core_shadow,Internal Admin API,TO_BE_IMPLEMENTED_AFTER_APPROVAL,false,PROPOSED

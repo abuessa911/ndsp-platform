@@ -1,0 +1,46 @@
+name: PR-064A Canonical Direction Engine Resolution
+
+on:
+  pull_request:
+    paths:
+      - "docs/99-governance/pr-064a-canonical-direction-engine-resolution/**"
+      - "scripts/governance/build_pr064a_canonical_direction_engine_resolution.py"
+      - "scripts/governance/validate_pr064a_canonical_direction_engine_resolution.py"
+      - "scripts/governance/tests/pr064a-canonical-direction-engine-resolution.test.cjs"
+      - ".github/workflows/pr064a-canonical-direction-engine-resolution.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "docs/99-governance/pr-064a-canonical-direction-engine-resolution/**"
+      - "scripts/governance/build_pr064a_canonical_direction_engine_resolution.py"
+      - "scripts/governance/validate_pr064a_canonical_direction_engine_resolution.py"
+      - "scripts/governance/tests/pr064a-canonical-direction-engine-resolution.test.cjs"
+      - ".github/workflows/pr064a-canonical-direction-engine-resolution.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Validate PR-064A
+        env:
+          PYTHONDONTWRITEBYTECODE: "1"
+        run: |
+          python3 scripts/governance/validate_pr064a_canonical_direction_engine_resolution.py .
+          node --test scripts/governance/tests/pr064a-canonical-direction-engine-resolution.test.cjs

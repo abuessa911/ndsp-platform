@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "decision": "CANONICAL_DIRECTION_ENGINE_TARGET",
+  "decision_status": "PROPOSED_FOR_HUMAN_APPROVAL",
+  "canonical_engine_path": "backend/services/decision_governance_core/",
+  "canonical_engine_path_exists": false,
+  "creation_allowed_before_approval": false,
+  "runtime_language": "Node.js",
+  "module_format": "CommonJS",
+  "contract_source": "docs/99-governance/pr-063-cot-direction-time-contracts/contracts/",
+  "raw_data_gateway_role": "RAW_DATA_ONLY",
+  "raw_data_gateway_may_publish_direction": false,
+  "direction_rule": "delta = long - short",
+  "neutral_rule": "long == short only",
+  "public_result_model": "CORE",
+  "expanded_mode": "SHADOW_MODE",
+  "expanded_public_exposure": false,
+  "human_approval_required": true
+}
