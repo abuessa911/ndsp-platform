@@ -1,0 +1,12 @@
+a55f7898380950c02ba4001ff5b2add0e953bfc41eac882a397350825a8cfe38  docs/99-governance/pr-063-cot-direction-time-contracts/PR-063-COT-DIRECTION-TIME-CONTRACTS.md
+7169a4a826af988dc940963c1d0c6a259b9d06457b20d412043a79c2306bd5f0  docs/99-governance/pr-063-cot-direction-time-contracts/PR063_SUMMARY.json
+411a5070d46fb68380eefe2c56f52d6cd958efcfeeed93b9b56d0cca40a4a38b  docs/99-governance/pr-063-cot-direction-time-contracts/README.md
+315b2dac1a220aedfad61a5fc8955d4c3c0812f9f35118c43d9b4c34135a2975  docs/99-governance/pr-063-cot-direction-time-contracts/contracts/direction-result.schema.json
+d9c9467ecdeac4685661bcd7e4fd975d31e0a03d5fd5360e23c7d031e2da70e7  docs/99-governance/pr-063-cot-direction-time-contracts/contracts/effective-week.schema.json
+14dab7c1945c5304f8d6d549bc8afe3e7e64a2aedb1cf3f789c1a4ca3750cbcc  docs/99-governance/pr-063-cot-direction-time-contracts/contracts/core-result.schema.json
+c659d6138b39aaa848240689840f41a94d9b25698d347fae75ca84357cc9c777  docs/99-governance/pr-063-cot-direction-time-contracts/contracts/expanded-shadow-result.schema.json
+d95dbbb9693649d62fa880a4f136f62aff9973dd3bff4a510413342b3f1894a4  docs/99-governance/pr-063-cot-direction-time-contracts/fixtures/regression-fixtures.json
+49b42c3951353eb7054be8ef82d17c51e07b5dc1bd6678bb507fa2368ad32525  docs/99-governance/pr-063-cot-direction-time-contracts/fixtures/regression-expected-results.json
+8dd3683c1e40e771659b30d11c140d9f8eee97d41e382adcf760f47419b76c16  scripts/governance/validate_pr063_cot_direction_time_contracts.py
+05b50ff71728861dac7d2daab61d2198dc3c042a1f2521a58718b108a8cfe5ec  scripts/governance/tests/pr063-cot-direction-time-contracts.test.cjs
+be4d55fab887aca355f9e29fe51e38d26d98e3fec30c6b406c2b6dfb44dd0e0e  .github/workflows/pr063-cot-direction-time-contracts.yml

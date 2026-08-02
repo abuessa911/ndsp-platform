@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ndsp.local/contracts/cot/direction-result.schema.json",
+  "title": "COT Direction Result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "mode",
+    "long",
+    "short",
+    "delta",
+    "direction",
+    "explicitness",
+    "horizon"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0.0" },
+    "mode": { "enum": ["INVESTMENT", "SPECULATION"] },
+    "long": { "type": "number" },
+    "short": { "type": "number" },
+    "delta": { "type": "number" },
+    "direction": { "enum": ["BULLISH", "BEARISH", "NEUTRAL"] },
+    "explicitness": { "enum": ["EXPLICIT", "NON_EXPLICIT"] },
+    "horizon": { "enum": ["NARROW", "EXTENDED"] }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "direction": { "const": "NEUTRAL" }
+        }
+      },
+      "then": {
+        "properties": {
+          "delta": { "const": 0 }
+        }
+      }
+    }
+  ]
+}

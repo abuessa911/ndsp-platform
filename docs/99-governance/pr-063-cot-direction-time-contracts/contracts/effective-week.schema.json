@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ndsp.local/contracts/cot/effective-week.schema.json",
+  "title": "COT Effective Week",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "timezone",
+    "report_date",
+    "effective_from",
+    "effective_until",
+    "interval_semantics"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0.0" },
+    "timezone": { "const": "UTC" },
+    "report_date": { "type": "string", "format": "date" },
+    "effective_from": { "type": "string", "format": "date-time" },
+    "effective_until": { "type": "string", "format": "date-time" },
+    "interval_semantics": { "const": "[effective_from,effective_until)" }
+  }
+}
