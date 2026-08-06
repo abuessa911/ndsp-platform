@@ -440,3 +440,42 @@ def run_layers(payload: LayerPayload) -> dict[str, Any]:
     result = module.run_all_layers(base)
     result["input_context_source"] = base.get("live_context_source")
     return result
+
+
+@app.get("/api/admin/layers/canonical/health")
+def canonical_health() -> dict[str, Any]:
+    from canonical_runtime import health_metadata
+
+    return {
+        "ok": True,
+        "service": "ndsp-layers-api",
+        "mode": "shadow",
+        "canonical": health_metadata(),
+    }
+
+
+@app.get("/api/admin/layers/canonical/run")
+def run_canonical_layers_default(
+    asset: str = Query("GOLD"),
+) -> dict[str, Any]:
+    from canonical_runtime import run_layers_compat
+
+    payload = live_context(asset)
+    return run_layers_compat(
+        payload,
+        input_context_source=payload.get("live_context_source"),
+    )
+
+
+@app.post("/api/admin/layers/canonical/run")
+def run_canonical_layers_payload(
+    payload: LayerPayload,
+) -> dict[str, Any]:
+    from canonical_runtime import run_layers_compat
+
+    base = live_context(payload.asset or "GOLD")
+    base.update(payload.model_dump(exclude_none=True))
+    return run_layers_compat(
+        base,
+        input_context_source=base.get("live_context_source"),
+    )
