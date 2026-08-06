@@ -211,3 +211,68 @@ def apply_canonical_golden(payload: Mapping[str, Any]) -> dict[str, Any]:
         "golden_reason_code": reason_code,
     }
     return data
+
+
+def to_legacy_api_envelope(
+    canonical_result: Mapping[str, Any],
+    *,
+    input_context_source: str | None = None,
+) -> dict[str, Any]:
+    """Add the legacy API envelope without changing canonical layer IDs."""
+    from .registry_lock import CANONICAL_MODULES
+
+    data = deepcopy(dict(canonical_result))
+    raw_layers = data.get("layers")
+    layers = raw_layers if isinstance(raw_layers, list) else []
+
+    compatible_layers: list[dict[str, Any]] = []
+    confidences: list[int] = []
+
+    for raw_layer in layers:
+        if not isinstance(raw_layer, Mapping):
+            continue
+
+        layer = deepcopy(dict(raw_layer))
+        layer_id = str(layer.get("layer_id") or "")
+        relative_path = CANONICAL_MODULES.get(layer_id)
+
+        if relative_path:
+            layer.setdefault(
+                "module_file",
+                f"canonical_v1/{relative_path}",
+            )
+
+        layer.setdefault("canonical_layer_id", layer_id)
+
+        if layer_id.startswith("NDSP-CORE-L") and layer_id[-2:].isdigit():
+            layer.setdefault("legacy_layer_number", int(layer_id[-2:]))
+
+        try:
+            confidences.append(int(float(layer.get("confidence", 0))))
+        except (TypeError, ValueError):
+            pass
+
+        compatible_layers.append(layer)
+
+    raw_errors = data.get("errors")
+    errors = raw_errors if isinstance(raw_errors, list) else []
+
+    data["layers"] = compatible_layers
+    data["errors"] = errors
+    data["total_layers_expected"] = int(
+        data.get("total_layers_expected") or 16
+    )
+    data["total_layers_executed"] = len(compatible_layers)
+    data["total_errors"] = len(errors)
+    data["average_confidence"] = (
+        int(sum(confidences) / len(confidences))
+        if confidences
+        else 0
+    )
+    data["engine_mode"] = "canonical_v1_candidate"
+    data["compatibility_mode"] = "legacy_envelope_additive"
+
+    if input_context_source is not None:
+        data["input_context_source"] = input_context_source
+
+    return data
