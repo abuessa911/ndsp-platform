@@ -1,16 +1,16 @@
 {
   "ok": true,
-  "imported_at": "2026-06-18T08:08:47Z",
+  "imported_at": "2026-07-26T06:34:58Z",
   "sources": {
     "tff_futures_only": {
       "url": "https://www.cftc.gov/dea/newcot/FinFutWk.txt",
-      "path": "/home/nawaf511/empire-core-new/backend/data/raw_cot/tff_futures_only_FinFutWk_20260618_100847.txt",
-      "bytes": 71102
+      "path": "/home/nawaf511/empire-core-new/backend/data/raw_cot/tff_futures_only_FinFutWk_20260726_083458.txt",
+      "bytes": 69682
     },
     "disaggregated_futures_only": {
       "url": "https://www.cftc.gov/dea/newcot/f_disagg.txt",
-      "path": "/home/nawaf511/empire-core-new/backend/data/raw_cot/disaggregated_futures_only_f_disagg_20260618_100847.txt",
-      "bytes": 426921
+      "path": "/home/nawaf511/empire-core-new/backend/data/raw_cot/disaggregated_futures_only_f_disagg_20260726_083458.txt",
+      "bytes": 443610
     }
   },
   "current_files": {
