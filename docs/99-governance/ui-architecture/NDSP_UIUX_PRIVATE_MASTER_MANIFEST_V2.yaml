@@ -1,0 +1,62 @@
+schema_version: "1.0"
+manifest_id: "NDSP-UIUX-PRIVATE-MASTER-V2"
+status: "FROZEN"
+authority: "AUTHORITATIVE_PRIVATE_MASTER"
+effective_from: "2026-08-08"
+classification: "CONFIDENTIAL_PROPRIETARY"
+repository: "abuessa911/ndsp-platform"
+repository_visibility: "PUBLIC"
+
+purpose: >
+  Register the owner-approved full NDSP UI/UX Architecture Governance V2 master
+  artifacts as the private canonical source of truth without exposing their
+  confidential contents in the public repository.
+
+project_registration:
+  governing_overlay: "docs/99-governance/ui-architecture/NDSP_UIUX_GOVERNANCE_SUPERSESSION_V2.yaml"
+  approval_record: "docs/99-governance/ui-architecture/NDSP_UIUX_GOVERNANCE_APPROVAL_RECORD_V2.md"
+  public_safe_reference: "docs/99-governance/ui-architecture/NDSP_UIUX_GOVERNING_REFERENCE_V2.md"
+  private_project_directory: "docs/99-governance/private/uiux-v2/"
+  private_directory_git_tracked: false
+  private_directory_must_remain_git_ignored: true
+  installer: "scripts/governance/install_uiux_private_master_v2.sh"
+
+canonical_artifacts:
+  markdown:
+    filename: "NDSP_FINAL_MASTER_UIUX_ARCHITECTURE_GOVERNANCE_AR_V2_CONFIDENTIALITY_SUBSCRIPTIONS.md"
+    sha256: "806be2bb2fbc72ae4192ec68d14d5b0e52162af4b5a9238ca9932b96c08c9d70"
+    required: true
+  pdf:
+    filename: "NDSP_FINAL_MASTER_UIUX_ARCHITECTURE_GOVERNANCE_AR_V2_CONFIDENTIALITY_SUBSCRIPTIONS.pdf"
+    sha256: "43ee65c41ee4451e7956c8242cc637ae80c2e3b28a72a27cf74593281365b3e5"
+    required: true
+  docx:
+    filename: "NDSP_FINAL_MASTER_UIUX_ARCHITECTURE_GOVERNANCE_AR_V2_CONFIDENTIALITY_SUBSCRIPTIONS.docx"
+    sha256: "f6f7cdf097c827faa58c9a71e1a06cb4104fbe9ee0417d1bad6aa9ad0dff1bd8"
+    required: true
+  sha256sums:
+    filename: "NDSP_FINAL_MASTER_UIUX_ARCHITECTURE_GOVERNANCE_AR_V2_SHA256SUMS.txt"
+    sha256: "a5005e2c70c9bc4cff6287bea4420984ad9a7bebee1ad7cbc62bc4ba81e45a60"
+    required: true
+
+precedence:
+  full_private_master: "CANONICAL_CONTENT_SOURCE"
+  v2_overlay: "CANONICAL_MACHINE_ENFORCEMENT_SOURCE"
+  baseline_policy: "PRESERVED_WHERE_NON_CONFLICTING"
+  merge_rule: "MERGE_NOT_REWRITE"
+  unique_content_preserved: true
+  true_duplicates_only_may_be_consolidated: true
+
+security:
+  commit_full_private_artifacts_to_public_repo: "FORBIDDEN"
+  publish_private_artifact_contents: "FORBIDDEN"
+  substitute_different_file_with_same_name: "FORBIDDEN"
+  integrity_verification_required: true
+  sha256_mismatch: "FAIL_CLOSED"
+  local_file_permissions_recommended: "0600"
+
+final_state:
+  project_registered: true
+  governance_registered: true
+  ci_enforced: true
+  private_canonical_set_frozen: true
