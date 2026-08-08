@@ -44,7 +44,27 @@ The private master artifact set is:
 - `NDSP_UIUX_GOVERNANCE_SUPERSESSION_V2.yaml`: controlling V2 design/exposure/confidentiality policy.
 - `NDSP_UIUX_GOVERNING_REFERENCE_V2.md`: controlling human-readable V2 reference.
 - `UI_BACKEND_GOVERNANCE_POLICY.yaml`: baseline normative technical policy.
-- `UI_BACKEND_GOVERNANCE_VALIDATION_REPORT.json`: generated locally when the validator is executed. The report does not need to be committed.
+- `UI_BACKEND_GOVERNANCE_VALIDATION_REPORT.json`: generated locally when the baseline validator is executed. The report does not need to be committed.
+- `NDSP_UIUX_GOVERNANCE_V2_VALIDATION_REPORT.json`: generated locally when the V2 validator is executed. The report does not need to be committed.
+
+## Machine enforcement
+
+V2 is enforced by:
+
+- `scripts/governance/validate_uiux_governance_v2.py`
+- `scripts/governance/tests/test_validate_uiux_governance_v2.py`
+- `.github/workflows/ui-backend-governance-policy.yml`
+
+The V2 guard fails changed customer/public paths when a change attempts to:
+
+- restore Indigo/Violet as the primary/brand identity;
+- expose more than the five approved customer-visible names;
+- introduce an unapproved customer-visible Decision Intelligence name;
+- expose Decision Layers 01–16 as numbered customer-facing structure;
+- serialize forbidden proprietary fields into customer/public API paths;
+- commit one of the full confidential master artifacts into the public repository.
+
+The pull-request and push jobs scan the changed-file set. A manual workflow run can optionally request a full-repository V2 source scan.
 
 ## Local validation
 
@@ -54,6 +74,29 @@ python3 -m pip install \
 
 python3 scripts/governance/validate_ui_backend_governance_policy.py \
   --repo-root .
+
+python3 scripts/governance/validate_uiux_governance_v2.py \
+  --repo-root . \
+  --policy-only
+
+python3 -m unittest \
+  scripts/governance/tests/test_validate_uiux_governance_v2.py
+```
+
+To scan a prepared changed-file list:
+
+```bash
+python3 scripts/governance/validate_uiux_governance_v2.py \
+  --repo-root . \
+  --changed-files /tmp/ndsp-uiux-v2-changed-files.txt
+```
+
+To run the V2 guard over the whole repository:
+
+```bash
+python3 scripts/governance/validate_uiux_governance_v2.py \
+  --repo-root . \
+  --full-source-scan
 ```
 
 Validate the baseline YAML structure only:
@@ -74,7 +117,7 @@ python3 scripts/governance/validate_ui_backend_governance_policy.py \
 
 ## Explicit exceptions
 
-The validator supports narrow inline exceptions for heuristic source scans.
+The baseline validator supports narrow inline exceptions for its heuristic source scans.
 
 ```ts
 // governance-allow: direct-fetch
@@ -88,22 +131,30 @@ const response = await fetch(url);
 Exceptions must be justified in an Architecture Decision Record and reviewed
 during pull-request approval. The comments do not override structural policy
 requirements such as CORE/EXPANDED separation or the V2 confidentiality and
-entitlement boundaries.
+entitlement boundaries. V2 secrecy and customer-exposure failures intentionally
+have no inline bypass comment.
 
 ## Expected output
 
-Successful validation:
+Successful baseline validation:
 
 ```text
 validation=PASS
 status=UI_BACKEND_GOVERNANCE_POLICY_VALID
 ```
 
-Failed validation:
+Successful V2 validation:
+
+```text
+validation=PASS
+status=UIUX_GOVERNANCE_V2_VALID
+```
+
+Failed V2 validation:
 
 ```text
 validation=FAIL
-status=UI_BACKEND_GOVERNANCE_POLICY_INVALID
+status=UIUX_GOVERNANCE_V2_INVALID
 ```
 
 ## TypeScript migration

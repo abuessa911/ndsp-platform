@@ -216,6 +216,22 @@ canonical_private_artifacts:
     filename: "NDSP_FINAL_MASTER_UIUX_ARCHITECTURE_GOVERNANCE_AR_V2_CONFIDENTIALITY_SUBSCRIPTIONS.docx"
     sha256: "f6f7cdf097c827faa58c9a71e1a06cb4104fbe9ee0417d1bad6aa9ad0dff1bd8"
 
+machine_enforcement:
+  validator_path: "scripts/governance/validate_uiux_governance_v2.py"
+  workflow_path: ".github/workflows/ui-backend-governance-policy.yml"
+  unit_test_path: "scripts/governance/tests/test_validate_uiux_governance_v2.py"
+  pull_request_changed_file_enforcement: true
+  push_changed_file_enforcement: true
+  full_repository_scan_available: true
+  ci_fail_on:
+    - "v2_policy_drift"
+    - "legacy_primary_brand_reintroduced"
+    - "more_than_five_customer_visible_names"
+    - "unapproved_customer_visible_name"
+    - "confidential_field_in_customer_or_public_api"
+    - "confidential_master_committed_to_public_repo"
+    - "decision_layer_number_exposure"
+
 final_rule:
   ar: "تُظهر NDSP عمق الذكاء دون كشف خريطة أسراره."
   en: "NDSP communicates the depth of its intelligence without exposing the secrets of its intelligence."
