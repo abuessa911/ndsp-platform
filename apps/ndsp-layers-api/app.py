@@ -424,22 +424,25 @@ def context(asset: str = Query("GOLD")) -> dict[str, Any]:
 
 @app.get("/api/admin/layers/run")
 def run_layers_default(asset: str = Query("GOLD")) -> dict[str, Any]:
-    module = load_orchestrator()
+    from canonical_runtime import run_layers_compat
+
     payload = live_context(asset)
-    result = module.run_all_layers(payload)
-    result["input_context_source"] = payload.get("live_context_source")
-    return result
+    return run_layers_compat(
+        payload,
+        input_context_source=payload.get("live_context_source"),
+    )
 
 
 @app.post("/api/admin/layers/run")
 def run_layers(payload: LayerPayload) -> dict[str, Any]:
-    module = load_orchestrator()
+    from canonical_runtime import run_layers_compat
+
     base = live_context(payload.asset or "GOLD")
-    override = payload.model_dump(exclude_none=True)
-    base.update(override)
-    result = module.run_all_layers(base)
-    result["input_context_source"] = base.get("live_context_source")
-    return result
+    base.update(payload.model_dump(exclude_none=True))
+    return run_layers_compat(
+        base,
+        input_context_source=base.get("live_context_source"),
+    )
 
 
 @app.get("/api/admin/layers/canonical/health")

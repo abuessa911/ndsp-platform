@@ -55,6 +55,61 @@ const app = express()
 
 app.use(express.json({ limit: '1mb' }))
 
+const SESSION_COOKIE = 'ndsp_session'
+const SESSION_MAX_AGE_SECONDS = 7 * 24 * 60 * 60
+
+function readCookie(req, name) {
+  const raw = String(req.headers.cookie || '')
+  if (!raw) return ''
+
+  for (const part of raw.split(';')) {
+    const index = part.indexOf('=')
+    if (index < 0) continue
+
+    const key = part.slice(0, index).trim()
+    if (key !== name) continue
+
+    const value = part.slice(index + 1).trim()
+
+    try {
+      return decodeURIComponent(value)
+    } catch (_) {
+      return value
+    }
+  }
+
+  return ''
+}
+
+function setSessionCookie(res, token) {
+  res.setHeader(
+    'Set-Cookie',
+    [
+      `${SESSION_COOKIE}=${encodeURIComponent(token)}`,
+      'Path=/',
+      `Max-Age=${SESSION_MAX_AGE_SECONDS}`,
+      'HttpOnly',
+      'Secure',
+      'SameSite=Lax',
+    ].join('; ')
+  )
+}
+
+function clearSessionCookie(res) {
+  res.setHeader(
+    'Set-Cookie',
+    [
+      `${SESSION_COOKIE}=`,
+      'Path=/',
+      'Max-Age=0',
+      'Expires=Thu, 01 Jan 1970 00:00:00 GMT',
+      'HttpOnly',
+      'Secure',
+      'SameSite=Lax',
+    ].join('; ')
+  )
+}
+
 function send(res, status, obj) {
   return res.status(status).json(obj)
 }
@@ -111,14 +166,58 @@ function signToken(user) {
   )
 }
 
+const NDSP_FOUR_PLAN_FEATURES = {
+  essential: { decision_summary: true, levels: true, nmp: true, completion_radar: true, history_days: 30, alternatives: false, alerts: false, professional_evidence: false, export: false, teams: false, audit: false, integrations: false },
+  advanced: { decision_summary: true, levels: true, nmp: true, completion_radar: true, history_days: 90, alternatives: true, alerts: true, professional_evidence: false, export: false, teams: false, audit: false, integrations: false },
+  professional: { decision_summary: true, levels: true, nmp: true, completion_radar: true, history_days: 365, alternatives: true, alerts: true, professional_evidence: true, export: true, teams: false, audit: false, integrations: false },
+  enterprise: { decision_summary: true, levels: true, nmp: true, completion_radar: true, history_days: 365, alternatives: true, alerts: true, professional_evidence: true, export: true, teams: true, audit: true, integrations: true },
+}
+
+function normalizedDecisionPlan(value) {
+  const raw = String(value || '').trim().toLowerCase()
+  const aliases = {
+    essential: 'essential', starter: 'essential', basic: 'essential', free: 'essential', trial: 'essential',
+    advanced: 'advanced', plus: 'advanced',
+    professional: 'professional', premium: 'professional', pro: 'professional',
+    enterprise: 'enterprise', elite: 'enterprise', ultimate: 'enterprise', vip: 'enterprise',
+  }
+  return aliases[raw] || null
+}
+
+function decisionEntitlement(user) {
+  const role = String(user.role || 'user').trim().toLowerCase()
+  const roleElevated = role === 'owner' || role === 'admin'
+  const plan = roleElevated ? 'enterprise' : normalizedDecisionPlan(user.plan)
+  if (!plan) return null
+  return { plan, role, user_id: String(user.id || ''), features: NDSP_FOUR_PLAN_FEATURES[plan] }
+}
+
+function applyEntitlementHeaders(res, access) {
+  res.set('X-NDSP-Plan', access.plan)
+  res.set('X-NDSP-Role', access.role)
+  res.set('X-NDSP-Entitlement', 'verified-v39')
+  res.set('X-NDSP-User-Id', access.user_id) // NDSP_V43_USER_ID_HEADER
+}
+
 function auth(req, res, next) {
-  const h = String(req.headers.authorization || '')
-  const token = h.startsWith('Bearer ') ? h.slice(7) : String(req.headers['x-ndsp-token'] || '')
-  if (!token) return send(res, 401, { ok: false, error: 'AUTH_REQUIRED' })
+  const authorization = String(req.headers.authorization || '')
+
+  const token =
+    (authorization.startsWith('Bearer ')
+      ? authorization.slice(7)
+      : '') ||
+    String(req.headers['x-ndsp-token'] || '') ||
+    readCookie(req, SESSION_COOKIE)
+
+  if (!token) {
+    return send(res, 401, { ok: false, error: 'AUTH_REQUIRED' })
+  }
+
   try {
     req.user = jwt.verify(token, JWT_SECRET)
     return next()
   } catch (_) {
+    clearSessionCookie(res)
     return send(res, 401, { ok: false, error: 'INVALID_TOKEN' })
   }
 }
@@ -282,6 +381,7 @@ app.post('/api/auth/login', async (req, res) => {
     }
 
     const token = signToken(user)
+    setSessionCookie(res, token)
     
       try {
         const dspLoginUserId =
@@ -358,6 +458,7 @@ app.post('/api/auth/2fa/login/verify', async (req, res) => {
     await pool.query(`UPDATE user_2fa_settings SET last_verified_at=now(), updated_at=now() WHERE user_id=$1`, [user.id])
 
     const token = signToken(user)
+    setSessionCookie(res, token)
     
       try {
         const dspLoginUserId =
@@ -394,15 +495,40 @@ return send(res, 200, {
   }
 })
 
+async function activeSessionUser(req, res) {
+  const user = await getUserById(req.user.sub)
+  if (!user) {
+    send(res, 404, { ok: false, error: 'USER_NOT_FOUND' })
+    return null
+  }
+  if (String(user.status || '').toLowerCase() !== 'active') {
+    send(res, 403, { ok: false, error: 'ACCOUNT_NOT_ACTIVE' })
+    return null
+  }
+  return user
+}
+
 app.get('/api/auth/session', auth, async (req, res) => {
   const user = await getUserById(req.user.sub)
   if (!user) return send(res, 404, { ok: false, error: 'USER_NOT_FOUND' })
   return send(res, 200, { ok: true, user })
 })
 
+
+app.get('/api/auth/decision-room-access', auth, async (req, res) => {
+  const user = await activeSessionUser(req, res)
+  if (!user) return
+  const access = decisionEntitlement(user)
+  if (!access) return send(res, 403, { ok: false, error: 'PLAN_NOT_ENTITLED' })
+  applyEntitlementHeaders(res, access)
+  return send(res, 200, { ok: true, access: { plan: access.plan, features: access.features } })
+})
+
 app.post('/api/auth/logout', (_req, res) => {
+  clearSessionCookie(res)
   return send(res, 200, { ok: true, message: 'LOGOUT_OK' })
 })
+
 
 app.get('/api/auth/2fa/status', auth, async (req, res) => {
   try {
