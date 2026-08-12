@@ -1,0 +1,297 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+PROJECT_ROOT="${PROJECT_ROOT:-$HOME/empire-core-new}"
+TIMESTAMP="$(date +%Y%m%d-%H%M%S)"
+
+STAGE_ROOT="${PROJECT_ROOT}/runtime/opt-services"
+AUDIT_DIR="${PROJECT_ROOT}/var/audits/opt-stage-${TIMESTAMP}"
+REPORT="${AUDIT_DIR}/STAGING_REPORT.md"
+MANIFEST="${AUDIT_DIR}/SERVICES.tsv"
+ERRORS="${AUDIT_DIR}/ERRORS.log"
+
+mkdir -p "${STAGE_ROOT}" "${AUDIT_DIR}"
+touch "${REPORT}" "${MANIFEST}" "${ERRORS}"
+
+log() {
+  printf '\033[1;34m[STAGE]\033[0m %s\n' "$*"
+}
+
+warn() {
+  printf '\033[1;33m[WARN]\033[0m %s\n' "$*" >&2
+}
+
+fail() {
+  printf '\033[1;31m[ERROR]\033[0m %s\n' "$*" >&2
+  exit 1
+}
+
+[[ -d "${PROJECT_ROOT}" ]] ||
+  fail "المشروع غير موجود: ${PROJECT_ROOT}"
+
+command -v rsync >/dev/null 2>&1 ||
+  fail "rsync غير مثبت."
+
+printf '%s\t%s\t%s\t%s\t%s\t%s\n' \
+  "service" \
+  "source" \
+  "destination" \
+  "active" \
+  "copy_status" \
+  "verification" \
+  > "${MANIFEST}"
+
+discover_active_opt_services() {
+  while IFS= read -r unit; do
+    [[ -n "${unit}" ]] || continue
+
+    active="$(
+      systemctl is-active "${unit}" 2>/dev/null ||
+      echo inactive
+    )"
+
+    [[ "${active}" == "active" ]] || continue
+
+    working_directory="$(
+      systemctl show "${unit}" \
+        -p WorkingDirectory \
+        --value \
+        2>/dev/null || true
+    )"
+
+    exec_start="$(
+      systemctl show "${unit}" \
+        -p ExecStart \
+        --value \
+        2>/dev/null || true
+    )"
+
+    source_path=""
+
+    if [[ "${working_directory}" == /opt/* ]]; then
+      source_path="${working_directory}"
+    else
+      source_path="$(
+        printf '%s\n' "${exec_start}" |
+        grep -oE '/opt/[^ ;}]+' |
+        head -n 1 || true
+      )"
+    fi
+
+    [[ -n "${source_path}" ]] || continue
+
+    while [[ ! -d "${source_path}" && "${source_path}" != "/opt" ]]; do
+      source_path="$(dirname "${source_path}")"
+    done
+
+    [[ "${source_path}" != "/opt" ]] || continue
+    [[ -d "${source_path}" ]] || continue
+
+    printf '%s\t%s\n' "${unit}" "${source_path}"
+  done < <(
+    systemctl list-unit-files \
+      --type=service \
+      --no-legend |
+    awk '{print $1}'
+  )
+}
+
+declare -A COPIED_SOURCES=()
+
+while IFS=$'\t' read -r unit source_path; do
+  [[ -n "${unit}" ]] || continue
+  [[ -n "${source_path}" ]] || continue
+
+  source_key="$(
+    printf '%s' "${source_path}" |
+    sha256sum |
+    awk '{print $1}'
+  )"
+
+  base_name="$(basename "${source_path}")"
+  destination="${STAGE_ROOT}/${base_name}-${source_key:0:10}"
+
+  log "تحليل ${unit}: ${source_path}"
+
+  if [[ -n "${COPIED_SOURCES[${source_path}]:-}" ]]; then
+    destination="${COPIED_SOURCES[${source_path}]}"
+
+    printf '%s\t%s\t%s\t%s\t%s\t%s\n' \
+      "${unit}" \
+      "${source_path}" \
+      "${destination}" \
+      "active" \
+      "shared-copy" \
+      "referenced-by-another-service" \
+      >> "${MANIFEST}"
+
+    continue
+  fi
+
+  COPIED_SOURCES["${source_path}"]="${destination}"
+
+  mkdir -p "${destination}"
+
+  copy_status="failed"
+  verification="not-run"
+
+  if sudo rsync -aHAX \
+      --numeric-ids \
+      --delete \
+      --exclude='.git/' \
+      --exclude='node_modules/.cache/' \
+      --exclude='__pycache__/' \
+      --exclude='*.pyc' \
+      "${source_path}/" \
+      "${destination}/" \
+      2>>"${ERRORS}"
+  then
+    copy_status="copied"
+  else
+    warn "فشل نسخ ${source_path}"
+  fi
+
+  if [[ "${copy_status}" == "copied" ]]; then
+    # التحقق بنفس قواعد الاستبعاد المستخدمة في النسخ.
+    # أي اختلاف متبقٍ يعني أن المصدر تغير أثناء عمل الخدمة
+    # أو أن عنصرًا لم يُنسخ.
+    dry_run_output="$(
+      sudo rsync -aHAXn \
+        --numeric-ids \
+        --delete \
+        --itemize-changes \
+        --exclude='.git/' \
+        --exclude='node_modules/.cache/' \
+        --exclude='__pycache__/' \
+        --exclude='*.pyc' \
+        "${source_path}/" \
+        "${destination}/" \
+        2>>"${ERRORS}" || true
+    )"
+
+    meaningful_changes="$(
+      printf '%s\n' "${dry_run_output}" |
+      sed '/^[[:space:]]*$/d' |
+      wc -l
+    )"
+
+    if [[ "${meaningful_changes}" -eq 0 ]]; then
+      verification="rsync-dry-run-clean"
+    else
+      verification="live-source-changed"
+      printf '%s\n' "${dry_run_output}" \
+        > "${AUDIT_DIR}/${unit}.verification-diff.txt"
+
+      warn "المصدر تغير أثناء النسخ: ${source_path}"
+    fi
+  fi
+
+  sudo systemctl cat "${unit}" \
+    > "${AUDIT_DIR}/${unit}.service.txt" \
+    2>>"${ERRORS}" || true
+
+  systemctl show "${unit}" \
+    -p ActiveState \
+    -p SubState \
+    -p MainPID \
+    -p WorkingDirectory \
+    -p ExecStart \
+    -p Environment \
+    -p EnvironmentFiles \
+    > "${AUDIT_DIR}/${unit}.runtime.txt" \
+    2>>"${ERRORS}" || true
+
+  printf '%s\t%s\t%s\t%s\t%s\t%s\n' \
+    "${unit}" \
+    "${source_path}" \
+    "${destination}" \
+    "active" \
+    "${copy_status}" \
+    "${verification}" \
+    >> "${MANIFEST}"
+done < <(discover_active_opt_services)
+
+{
+  echo "# NDSP Active /opt Services Staging"
+  echo
+  echo "Generated: $(date --iso-8601=seconds)"
+  echo
+  echo "Canonical project:"
+  echo
+  echo "\`${PROJECT_ROOT}\`"
+  echo
+  echo "Staging root:"
+  echo
+  echo "\`${STAGE_ROOT}\`"
+  echo
+  echo "## Important"
+  echo
+  echo "- لم يتم إيقاف أي خدمة."
+  echo "- لم يتم تعديل systemd."
+  echo "- لم يتم حذف أي مسار من /opt."
+  echo "- هذه مرحلة نسخ وتحقق فقط."
+  echo
+  echo "## Services"
+  echo
+  echo '```text'
+  column -t -s $'\t' "${MANIFEST}" 2>/dev/null ||
+    cat "${MANIFEST}"
+  echo '```'
+  echo
+  echo "## Next gate"
+  echo
+  echo "لا يتم Cutover إلا للخدمات التي تحقق:"
+  echo
+  echo "\`copy_status=copied\`"
+  echo
+  echo "و"
+  echo
+  echo "\`verification=count-and-size-match\`"
+} > "${REPORT}"
+
+ARCHIVE="${PROJECT_ROOT}/var/audits/OPT_ACTIVE_SERVICES_STAGE_${TIMESTAMP}.tar.gz"
+
+tar \
+  -czf "${ARCHIVE}" \
+  -C "${PROJECT_ROOT}/var/audits" \
+  "$(basename "${AUDIT_DIR}")"
+
+log "اكتملت مرحلة النسخ."
+
+cat <<EOF
+
+============================================================
+اكتمل نسخ الخدمات النشطة من /opt إلى المشروع الرئيسي
+============================================================
+
+مكان النسخ:
+${STAGE_ROOT}
+
+التقرير:
+${REPORT}
+
+البيانات:
+${MANIFEST}
+
+الأخطاء:
+${ERRORS}
+
+الأرشيف:
+${ARCHIVE}
+
+عرض التقرير:
+sed -n '1,260p' "${REPORT}"
+
+الخدمات التي اجتازت التحقق:
+awk -F '\t' \
+  'NR==1 || (\$5=="copied" && \$6=="count-and-size-match")' \
+  "${MANIFEST}" |
+column -t -s \$'\t'
+
+مهم:
+لم يتم حذف /opt.
+لم يتم تعديل systemd.
+لم تتوقف خدمات الإنتاج.
+============================================================
+
+EOF

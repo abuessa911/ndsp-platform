@@ -1,0 +1,26 @@
+batch_id,capability_id,capability_name,p0_signature,service_required,endpoint_required,real_data_required,service_evidence_found,endpoint_evidence_found,real_data_evidence_found,candidate_count,selected_evidence_paths,machine_closed,human_confirmation_required
+B15_SERVICE_ONLY,CAP-B7B141CE6F45,Activate Subscription,SERVICE_ONLY,true,false,false,true,true,true,161,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B15_SERVICE_ONLY,CAP-C60CD9D10164,Telegram Routing Internal,SERVICE_ONLY,true,false,false,true,true,true,337,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B15_SERVICE_ONLY,CAP-C85D75362012,Admin Only,SERVICE_ONLY,true,false,false,true,true,true,231,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B15_SERVICE_ONLY,CAP-CAD48928C8E4,Telegram Routing V2,SERVICE_ONLY,true,false,false,true,true,true,391,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B15_SERVICE_ONLY,CAP-CF000A7305E2,Subscription Status Compat,SERVICE_ONLY,true,false,false,true,true,true,115,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B15_SERVICE_ONLY,CAP-E668719D9AD9,Alert Prefs Get,SERVICE_ONLY,true,false,false,true,true,true,115,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B15_SERVICE_ONLY,CAP-EBD64BBF9712,Ndsp Build Otp Auth Uri,SERVICE_ONLY,true,false,false,true,true,true,231,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B15_SERVICE_ONLY,CAP-EEDDE460DD9C,Health,SERVICE_ONLY,true,false,false,true,true,true,316,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B15_SERVICE_ONLY,CAP-F14BB07445FB,Admin Key Ok,SERVICE_ONLY,true,false,false,true,true,true,400,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B15_SERVICE_ONLY,CAP-F4B0061B6EC3,Version,SERVICE_ONLY,true,false,false,true,true,true,370,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B15_SERVICE_ONLY,CAP-F54EAA1EFDDA,Admin Key Ok,SERVICE_ONLY,true,false,false,true,true,true,436,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B15_SERVICE_ONLY,CAP-F5C8984FC6A0,About,SERVICE_ONLY,true,false,false,true,true,true,310,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B15_SERVICE_ONLY,CAP-F5E96763B830,Debug Auth,SERVICE_ONLY,true,false,false,true,true,true,400,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B15_SERVICE_ONLY,CAP-FBE70B1294BC,Telegram Routing Admin,SERVICE_ONLY,true,false,false,true,true,true,381,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B15_SERVICE_ONLY,CAP-033B90B3A316,Nowpayments Create Alias,SERVICE_ONLY,true,false,false,true,true,true,367,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B15_SERVICE_ONLY,CAP-22453668AACA,Telegram Routing V2,SERVICE_ONLY,true,false,false,true,true,true,381,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B15_SERVICE_ONLY,CAP-29DCBEF0D49C,Ndsp Nowpayments,SERVICE_ONLY,true,false,false,true,true,true,401,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B15_SERVICE_ONLY,CAP-329C5FE62399,Nowpayments Create Alias,SERVICE_ONLY,true,false,false,true,true,true,367,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B15_SERVICE_ONLY,CAP-3F820FC0AC86,Ndsp User Portal Final Experience V1 One Script,SERVICE_ONLY,true,false,false,true,true,true,371,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B15_SERVICE_ONLY,CAP-3F9549B2B851,User Operational Compat,SERVICE_ONLY,true,false,false,true,true,true,408,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B15_SERVICE_ONLY,CAP-425426D4A96B,User Operational Compat,SERVICE_ONLY,true,false,false,true,true,true,351,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B15_SERVICE_ONLY,CAP-4515D5FBBBF3,Framework Adapter,SERVICE_ONLY,true,false,false,true,true,true,339,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B15_SERVICE_ONLY,CAP-45BEE5E5B9D6,Telegram Routing V2,SERVICE_ONLY,true,false,false,true,true,true,384,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B15_SERVICE_ONLY,CAP-461745E841AB,Ndsp Trial Info,SERVICE_ONLY,true,false,false,true,true,true,349,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B15_SERVICE_ONLY,CAP-48F24BF885D7,User Operational Compat,SERVICE_ONLY,true,false,false,true,true,true,378,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true

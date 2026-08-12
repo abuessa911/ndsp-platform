@@ -1,0 +1,61 @@
+يوليو 13 10:12:43 vmi2934783 systemd[1]: Stopping ndsp-admin-ui-proxy.service - NDSP Admin UI Server-Side Proxy...
+يوليو 13 10:12:43 vmi2934783 systemd[1]: ndsp-admin-ui-proxy.service: Deactivated successfully.
+يوليو 13 10:12:43 vmi2934783 systemd[1]: Stopped ndsp-admin-ui-proxy.service - NDSP Admin UI Server-Side Proxy.
+يوليو 13 10:12:43 vmi2934783 systemd[1]: ndsp-admin-ui-proxy.service: Consumed 9min 58.595s CPU time, 31.1M memory peak, 0B memory swap peak.
+يوليو 13 10:12:43 vmi2934783 systemd[1]: Started ndsp-admin-ui-proxy.service - NDSP Admin UI Server-Side Proxy.
+يوليو 13 10:12:46 vmi2934783 node[982528]: [NDSP] admin ui proxy production routes listening on 127.0.0.1:9023
+يوليو 13 10:13:47 vmi2934783 systemd[1]: Stopping ndsp-admin-ui-proxy.service - NDSP Admin UI Server-Side Proxy...
+يوليو 13 10:13:47 vmi2934783 systemd[1]: ndsp-admin-ui-proxy.service: Deactivated successfully.
+يوليو 13 10:13:47 vmi2934783 systemd[1]: Stopped ndsp-admin-ui-proxy.service - NDSP Admin UI Server-Side Proxy.
+يوليو 13 10:13:47 vmi2934783 systemd[1]: ndsp-admin-ui-proxy.service: Consumed 1.543s CPU time.
+-- Boot cbb2808e8f684e6685b03c5280b4663d --
+يوليو 13 10:14:43 vmi2934783 systemd[1]: Started ndsp-admin-ui-proxy.service - NDSP Admin UI Server-Side Proxy.
+يوليو 13 10:14:46 vmi2934783 node[1341]: [NDSP] admin ui proxy production routes listening on 127.0.0.1:9023
+يوليو 19 11:01:29 vmi2934783 systemd[1]: Stopping ndsp-admin-ui-proxy.service - NDSP Admin UI Server-Side Proxy...
+يوليو 19 11:01:29 vmi2934783 systemd[1]: ndsp-admin-ui-proxy.service: Deactivated successfully.
+يوليو 19 11:01:29 vmi2934783 systemd[1]: Stopped ndsp-admin-ui-proxy.service - NDSP Admin UI Server-Side Proxy.
+يوليو 19 11:01:29 vmi2934783 systemd[1]: ndsp-admin-ui-proxy.service: Consumed 9min 35.513s CPU time, 47.9M memory peak, 0B memory swap peak.
+-- Boot fe5776de3c0644b08141110715d6b69f --
+يوليو 19 11:02:06 vmi2934783 systemd[1]: Started ndsp-admin-ui-proxy.service - NDSP Admin UI Server-Side Proxy.
+يوليو 19 11:02:10 vmi2934783 node[1319]: [NDSP] admin ui proxy production routes listening on 127.0.0.1:9023
+يوليو 26 12:50:41 vmi2934783 systemd[1]: Stopping ndsp-admin-ui-proxy.service - NDSP Admin UI Server-Side Proxy...
+يوليو 26 12:50:41 vmi2934783 systemd[1]: ndsp-admin-ui-proxy.service: Deactivated successfully.
+يوليو 26 12:50:41 vmi2934783 systemd[1]: Stopped ndsp-admin-ui-proxy.service - NDSP Admin UI Server-Side Proxy.
+يوليو 26 12:50:41 vmi2934783 systemd[1]: ndsp-admin-ui-proxy.service: Consumed 25min 59.622s CPU time, 46.7M memory peak, 0B memory swap peak.
+يوليو 26 12:50:41 vmi2934783 systemd[1]: Started ndsp-admin-ui-proxy.service - NDSP Admin UI Server-Side Proxy.
+يوليو 26 12:50:42 vmi2934783 node[1883427]: [NDSP] admin ui proxy production routes listening on 127.0.0.1:9023
+يوليو 26 12:51:09 vmi2934783 systemd[1]: Stopping ndsp-admin-ui-proxy.service - NDSP Admin UI Server-Side Proxy...
+يوليو 26 12:51:10 vmi2934783 systemd[1]: ndsp-admin-ui-proxy.service: Deactivated successfully.
+يوليو 26 12:51:10 vmi2934783 systemd[1]: Stopped ndsp-admin-ui-proxy.service - NDSP Admin UI Server-Side Proxy.
+يوليو 26 12:51:10 vmi2934783 systemd[1]: ndsp-admin-ui-proxy.service: Consumed 1.973s CPU time, 32.1M memory peak, 0B memory swap peak.
+-- Boot 8533528739ff4501818bba1d77ac8edf --
+يوليو 26 12:52:00 vmi2934783 systemd[1]: Started ndsp-admin-ui-proxy.service - NDSP Admin UI Server-Side Proxy.
+يوليو 26 12:52:08 vmi2934783 node[1389]: [NDSP] admin ui proxy production routes listening on 127.0.0.1:9023
+يوليو 26 13:03:39 vmi2934783 systemd[1]: Stopping ndsp-admin-ui-proxy.service - NDSP Admin UI Server-Side Proxy...
+يوليو 26 13:03:39 vmi2934783 systemd[1]: ndsp-admin-ui-proxy.service: Deactivated successfully.
+يوليو 26 13:03:39 vmi2934783 systemd[1]: Stopped ndsp-admin-ui-proxy.service - NDSP Admin UI Server-Side Proxy.
+يوليو 26 13:03:39 vmi2934783 systemd[1]: ndsp-admin-ui-proxy.service: Consumed 2.607s CPU time.
+يوليو 26 13:03:39 vmi2934783 systemd[1]: Started ndsp-admin-ui-proxy.service - NDSP Admin UI Server-Side Proxy.
+يوليو 26 13:03:39 vmi2934783 node[40703]: [NDSP] admin ui proxy production routes listening on 127.0.0.1:9023
+يوليو 26 13:03:50 vmi2934783 systemd[1]: Stopping ndsp-admin-ui-proxy.service - NDSP Admin UI Server-Side Proxy...
+يوليو 26 13:03:50 vmi2934783 systemd[1]: ndsp-admin-ui-proxy.service: Deactivated successfully.
+يوليو 26 13:03:50 vmi2934783 systemd[1]: Stopped ndsp-admin-ui-proxy.service - NDSP Admin UI Server-Side Proxy.
+-- Boot 168f7de0363e42cdb477fddec5756ef4 --
+يوليو 26 13:04:14 vmi2934783 systemd[1]: Started ndsp-admin-ui-proxy.service - NDSP Admin UI Server-Side Proxy.
+يوليو 26 13:04:17 vmi2934783 node[1345]: [NDSP] admin ui proxy production routes listening on 127.0.0.1:9023
+-- Boot d4a1b926329d4c869a2dfafb02ae170e --
+يوليو 26 18:03:51 vmi2934783 systemd[1]: Started ndsp-admin-ui-proxy.service - NDSP Admin UI Server-Side Proxy.
+يوليو 26 18:03:54 vmi2934783 node[1378]: [NDSP] admin ui proxy production routes listening on 127.0.0.1:9023
+يوليو 26 18:09:39 vmi2934783 systemd[1]: Stopping ndsp-admin-ui-proxy.service - NDSP Admin UI Server-Side Proxy...
+يوليو 26 18:09:39 vmi2934783 systemd[1]: ndsp-admin-ui-proxy.service: Deactivated successfully.
+يوليو 26 18:09:39 vmi2934783 systemd[1]: Stopped ndsp-admin-ui-proxy.service - NDSP Admin UI Server-Side Proxy.
+يوليو 26 18:09:39 vmi2934783 systemd[1]: ndsp-admin-ui-proxy.service: Consumed 1.595s CPU time.
+-- Boot 75fb0989b75446339fadce54dbb8147b --
+يوليو 26 18:10:00 vmi2934783 systemd[1]: Started ndsp-admin-ui-proxy.service - NDSP Admin UI Server-Side Proxy.
+يوليو 26 18:10:07 vmi2934783 node[1381]: [NDSP] admin ui proxy production routes listening on 127.0.0.1:9023
+يوليو 27 19:47:17 vmi2934783 systemd[1]: Stopping ndsp-admin-ui-proxy.service - NDSP Admin UI Server-Side Proxy...
+يوليو 27 19:47:17 vmi2934783 systemd[1]: ndsp-admin-ui-proxy.service: Deactivated successfully.
+يوليو 27 19:47:17 vmi2934783 systemd[1]: Stopped ndsp-admin-ui-proxy.service - NDSP Admin UI Server-Side Proxy.
+يوليو 27 19:47:17 vmi2934783 systemd[1]: ndsp-admin-ui-proxy.service: Consumed 3min 35.109s CPU time, 48.8M memory peak, 0B memory swap peak.
+يوليو 27 19:47:17 vmi2934783 systemd[1]: Started ndsp-admin-ui-proxy.service - NDSP Admin UI Server-Side Proxy.
+يوليو 27 19:47:24 vmi2934783 node[460722]: [NDSP] admin ui proxy production routes listening on 127.0.0.1:9023

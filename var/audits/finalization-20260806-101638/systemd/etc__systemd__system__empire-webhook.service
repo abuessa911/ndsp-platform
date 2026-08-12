@@ -1,0 +1,15 @@
+[Unit]
+Description=Empire Universal Webhook
+After=network.target
+
+[Service]
+User=nawaf511
+WorkingDirectory=/opt/empire/webhooks/universal
+ExecStart=/opt/empire/webhooks/universal/venv/bin/uvicorn app:app --host 127.0.0.1 --port 9100
+Restart=always
+RestartSec=3
+StandardOutput=append:/opt/empire/logs/webhook.log
+StandardError=append:/opt/empire/logs/webhook_error.log
+
+[Install]
+WantedBy=multi-user.target

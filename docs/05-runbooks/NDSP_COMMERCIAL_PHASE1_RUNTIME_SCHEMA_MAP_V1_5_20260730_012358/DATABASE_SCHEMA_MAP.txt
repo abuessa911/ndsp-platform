@@ -1,0 +1,96 @@
+=== DATABASE IDENTITY ===
+ndsp_auth|ndsp_auth|127.0.0.1/32|5432
+
+=== TABLE ROW COUNTS ===
+ndsp_legal_acceptances|0
+ndsp_subscriptions|0
+
+=== COLUMNS ===
+       table_name       | ordinal_position |     column_name     |        data_type         | is_nullable |                 column_default                 
+------------------------+------------------+---------------------+--------------------------+-------------+------------------------------------------------
+ ndsp_legal_acceptances |                1 | acceptance_id       | bigint                   | NO          | 
+ ndsp_legal_acceptances |                2 | subject_key         | text                     | YES         | 
+ ndsp_legal_acceptances |                3 | email_sha256        | character varying        | NO          | 
+ ndsp_legal_acceptances |                4 | request_id          | text                     | NO          | 
+ ndsp_legal_acceptances |                5 | disclaimer_version  | text                     | NO          | 
+ ndsp_legal_acceptances |                6 | terms_version       | text                     | NO          | 
+ ndsp_legal_acceptances |                7 | privacy_version     | text                     | NO          | 
+ ndsp_legal_acceptances |                8 | acceptance_source   | text                     | NO          | 
+ ndsp_legal_acceptances |                9 | upstream_status     | smallint                 | YES         | 
+ ndsp_legal_acceptances |               10 | user_agent_sha256   | character varying        | YES         | 
+ ndsp_legal_acceptances |               11 | evidence_sha256     | character varying        | NO          | 
+ ndsp_legal_acceptances |               12 | accepted_at         | timestamp with time zone | NO          | 
+ ndsp_legal_acceptances |               13 | recorded_at         | timestamp with time zone | NO          | now()
+ ndsp_legal_acceptances |               14 | metadata            | jsonb                    | NO          | '{}'::jsonb
+ ndsp_subscriptions     |                1 | id                  | bigint                   | NO          | nextval('ndsp_subscriptions_id_seq'::regclass)
+ ndsp_subscriptions     |                2 | user_id             | text                     | NO          | 
+ ndsp_subscriptions     |                3 | user_email          | text                     | YES         | 
+ ndsp_subscriptions     |                4 | plan_id             | integer                  | YES         | 
+ ndsp_subscriptions     |                5 | plan_code           | text                     | YES         | 
+ ndsp_subscriptions     |                6 | status              | text                     | NO          | 'active'::text
+ ndsp_subscriptions     |                7 | provider            | text                     | NO          | 'nowpayments'::text
+ ndsp_subscriptions     |                8 | provider_order_id   | text                     | YES         | 
+ ndsp_subscriptions     |                9 | provider_payment_id | text                     | YES         | 
+ ndsp_subscriptions     |               10 | billing_cycle       | text                     | NO          | 'monthly'::text
+ ndsp_subscriptions     |               11 | starts_at           | timestamp with time zone | NO          | now()
+ ndsp_subscriptions     |               12 | ends_at             | timestamp with time zone | YES         | 
+ ndsp_subscriptions     |               13 | created_at          | timestamp with time zone | NO          | now()
+ ndsp_subscriptions     |               14 | updated_at          | timestamp with time zone | NO          | now()
+(28 rows)
+
+
+=== CONSTRAINTS ===
+       table_name       |                 conname                 | contype |                                                  definition                                                  
+------------------------+-----------------------------------------+---------+--------------------------------------------------------------------------------------------------------------
+ ndsp_legal_acceptances | ndsp_legal_acceptances_agent_hash_ck    | c       | CHECK (((user_agent_sha256 IS NULL) OR ((user_agent_sha256)::text ~ '^[0-9a-f]{64}$'::text)))
+ ndsp_legal_acceptances | ndsp_legal_acceptances_email_hash_ck    | c       | CHECK (((email_sha256)::text ~ '^[0-9a-f]{64}$'::text))
+ ndsp_legal_acceptances | ndsp_legal_acceptances_evidence_hash_ck | c       | CHECK (((evidence_sha256)::text ~ '^[0-9a-f]{64}$'::text))
+ ndsp_legal_acceptances | ndsp_legal_acceptances_pkey             | p       | PRIMARY KEY (acceptance_id)
+ ndsp_legal_acceptances | ndsp_legal_acceptances_request_uq       | u       | UNIQUE (request_id)
+ ndsp_legal_acceptances | ndsp_legal_acceptances_status_ck        | c       | CHECK (((upstream_status IS NULL) OR ((upstream_status >= 100) AND (upstream_status <= 599))))
+ ndsp_legal_acceptances | ndsp_legal_acceptances_versions_ck      | c       | CHECK (((length(disclaimer_version) > 0) AND (length(terms_version) > 0) AND (length(privacy_version) > 0)))
+ ndsp_subscriptions     | ndsp_subscriptions_pkey                 | p       | PRIMARY KEY (id)
+ ndsp_subscriptions     | ndsp_subscriptions_plan_id_fkey         | f       | FOREIGN KEY (plan_id) REFERENCES ndsp_plans(id) ON DELETE SET NULL
+(9 rows)
+
+
+=== INDEXES ===
+       tablename        |                indexname                |                                                                             indexdef                                                                              
+------------------------+-----------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ ndsp_legal_acceptances | ndsp_legal_acceptances_email_time_idx   | CREATE INDEX ndsp_legal_acceptances_email_time_idx ON public.ndsp_legal_acceptances USING btree (email_sha256, accepted_at DESC)
+ ndsp_legal_acceptances | ndsp_legal_acceptances_pkey             | CREATE UNIQUE INDEX ndsp_legal_acceptances_pkey ON public.ndsp_legal_acceptances USING btree (acceptance_id)
+ ndsp_legal_acceptances | ndsp_legal_acceptances_request_uq       | CREATE UNIQUE INDEX ndsp_legal_acceptances_request_uq ON public.ndsp_legal_acceptances USING btree (request_id)
+ ndsp_legal_acceptances | ndsp_legal_acceptances_subject_time_idx | CREATE INDEX ndsp_legal_acceptances_subject_time_idx ON public.ndsp_legal_acceptances USING btree (subject_key, accepted_at DESC) WHERE (subject_key IS NOT NULL)
+ ndsp_subscriptions     | idx_ndsp_subscriptions_user             | CREATE INDEX idx_ndsp_subscriptions_user ON public.ndsp_subscriptions USING btree (user_id)
+ ndsp_subscriptions     | ndsp_subscriptions_pkey                 | CREATE UNIQUE INDEX ndsp_subscriptions_pkey ON public.ndsp_subscriptions USING btree (id)
+ ndsp_subscriptions     | ndsp_subscriptions_user_idx             | CREATE INDEX ndsp_subscriptions_user_idx ON public.ndsp_subscriptions USING btree (user_id)
+(7 rows)
+
+
+=== REFERENCING VIEWS ===
+ schemaname | viewname | definition 
+------------+----------+------------
+(0 rows)
+
+
+=== REFERENCING FUNCTIONS ===
+
+=== TABLE PRIVILEGES ===
+       table_name       |  grantee  | privilege_type 
+------------------------+-----------+----------------
+ ndsp_legal_acceptances | ndsp_auth | DELETE
+ ndsp_legal_acceptances | ndsp_auth | INSERT
+ ndsp_legal_acceptances | ndsp_auth | REFERENCES
+ ndsp_legal_acceptances | ndsp_auth | SELECT
+ ndsp_legal_acceptances | ndsp_auth | TRIGGER
+ ndsp_legal_acceptances | ndsp_auth | TRUNCATE
+ ndsp_legal_acceptances | ndsp_auth | UPDATE
+ ndsp_subscriptions     | ndsp_auth | DELETE
+ ndsp_subscriptions     | ndsp_auth | INSERT
+ ndsp_subscriptions     | ndsp_auth | REFERENCES
+ ndsp_subscriptions     | ndsp_auth | SELECT
+ ndsp_subscriptions     | ndsp_auth | TRIGGER
+ ndsp_subscriptions     | ndsp_auth | TRUNCATE
+ ndsp_subscriptions     | ndsp_auth | UPDATE
+(14 rows)
+

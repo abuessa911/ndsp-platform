@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0",
+  "document": "PR-027 Runtime Gap Decomposition",
+  "generated_at": "2026-07-31T22:31:31.014169+00:00",
+  "total_capabilities": 526,
+  "runtime_verified_capabilities": 0,
+  "runtime_pending_capabilities": 526,
+  "gap_category_counts": {
+    "SOURCE": 362,
+    "SERVICE": 326,
+    "ENDPOINT": 327,
+    "REAL_DATA": 216,
+    "CALCULATION": 164,
+    "TEST": 526,
+    "UI": 337
+  },
+  "missing_count_distribution": {
+    "1": 24,
+    "2": 49,
+    "3": 114,
+    "4": 108,
+    "5": 84,
+    "6": 87,
+    "7": 60
+  },
+  "remediation_batch_counts": {
+    "B01_QUICK_WINS": 55,
+    "B02_SERVICE_MAPPING": 56,
+    "B03_ENDPOINT_CONTRACTS": 7,
+    "B04_DATA_CALCULATION": 2,
+    "B05_TEST_IMPLEMENTATION": 0,
+    "B06_UI_CONSUMERS": 0,
+    "B07_DEEP_REMEDIATION": 281,
+    "B08_HUMAN_REVIEW": 125
+  },
+  "quick_win_count": 55,
+  "top_50_quick_wins_exported": 50,
+  "human_review_queue_count": 462,
+  "matching_risk_counts": {
+    "LOW": 64,
+    "SERVICE_MATCHING": 100,
+    "SERVICE_MATCHING|SOURCE_PATH_NORMALIZATION": 226,
+    "SOURCE_PATH_NORMALIZATION": 136
+  },
+  "ui_complete_records_created": 0,
+  "full_capability_coverage_claimed": false,
+  "human_confirmation_required": true,
+  "runtime_changes": "none",
+  "status": "RUNTIME_GAPS_DECOMPOSED_REMEDIATION_PRIORITIZED"
+}

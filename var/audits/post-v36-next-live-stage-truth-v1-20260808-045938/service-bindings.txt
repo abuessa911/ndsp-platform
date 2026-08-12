@@ -1,0 +1,10 @@
+SERVICE=ndsp-completed-decisions-history-capture-v36.service
+STATE=unknown
+SOURCE=/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_history_v36.py
+EXECSTART={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_history_v36.py capture ; ignore_errors=no ; start_time=[Sat 2026-08-08 04:51:13 CEST] ; stop_time=[Sat 2026-08-08 04:51:13 CEST] ; pid=2442732 ; code=exited ; status=0 }
+
+SERVICE=ndsp-completed-decisions-history-v36.service
+STATE=active
+SOURCE=/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_history_v36.py
+EXECSTART={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_history_v36.py serve ; ignore_errors=no ; start_time=[Sat 2026-08-08 04:38:11 CEST] ; stop_time=[n/a] ; pid=2402288 ; code=(null) ; status=0/0 }
+

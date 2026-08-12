@@ -1,0 +1,13 @@
+[Unit]
+Description=NDIP Autonomous Loop
+After=network.target
+
+[Service]
+User=www-data
+WorkingDirectory=/opt/empire-core/backend
+ExecStart=/opt/empire-core/backend/venv/bin/python3 /opt/empire-core/backend/engine/autonomous_loop.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

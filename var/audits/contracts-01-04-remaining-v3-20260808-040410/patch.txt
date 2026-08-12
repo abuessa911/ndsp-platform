@@ -1,0 +1,2 @@
+PATCH_APPLICATION=PASS
+PATCHED_ASSIGNMENT=cot = discover_cot_from_quality_live(symbol, timeframe)

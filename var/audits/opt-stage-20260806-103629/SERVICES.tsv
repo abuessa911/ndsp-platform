@@ -1,0 +1,5 @@
+service	source	destination	active	copy_status	verification
+ndsp-16-layers.service	/opt/ndsp16-api	/home/nawaf511/empire-core-new/runtime/opt-services/ndsp16-api-98114d2615	active	copied	count-and-size-match
+ndsp-admin-user-ops.service	/opt/ndsp-admin-user-ops	/home/nawaf511/empire-core-new/runtime/opt-services/ndsp-admin-user-ops-56dc62c37f	active	copied	mismatch
+ndsp-auth-core-clean.service	/opt/ndsp-auth-core-clean/current	/home/nawaf511/empire-core-new/runtime/opt-services/current-e13df671b8	active	copied	mismatch
+ndsp-change-password-gateway.service	/opt/ndsp-change-password-gateway	/home/nawaf511/empire-core-new/runtime/opt-services/ndsp-change-password-gateway-04d5fbac32	active	copied	mismatch

@@ -1,0 +1,125 @@
+PATTERN=sign.?out
+ANCHOR_LINE=7431
+CONTEXT_START=7386
+CONTEXT_END=7505
+
+  007386:   const [draft, setDraft] = useState(state);
+  007387:   const assets = ASSETS.filter((asset) => asset.market === draft.market);
+  007388:   return <><PageHeader title={t("changeContext")}/><Card title={t("changeContext")}><div className="context-form"><label><span>{t("market")}</span><select value={draft.market} onChange={(event) => { const market = event.target.value; setDraft((current) => ({ ...current, market, symbol: ASSETS.find((asset) => asset.market === market)?.symbol || current.symbol })); }}>{MARKETS.map((market) => <option value={market} key={market}>{marketLabel(market, lang)}</option>)}</select></label><label><span>{t("asset")}</span><select value={draft.symbol} onChange={(event) => setDraft((current) => ({ ...current, symbol: event.target.value }))}>{assets.map((asset) => <option value={asset.symbol} key={asset.symbol}>{assetName(asset, lang)} · {asset.symbol}</option>)}</select></label><label><span>{t("timeframe")}</span><select value={draft.timeframe} onChange={(event) => setDraft((current) => ({ ...current, timeframe: event.target.value }))}>{TIMEFRAMES.map((timeframe) => <option key={timeframe}>{timeframe}</option>)}</select></label><label><span>{t("readingType")}</span><select value={draft.mode} onChange={(event) => setDraft((current) => ({ ...current, mode: event.target.value }))}><option value="investment">{t("investment")}</option><option value="speculative">{t("speculative")}</option></select></label><label><span>{t("viewLevel")}</span><select value={draft.view} onChange={(event) => setDraft((current) => ({ ...current, view: event.target.value }))}><option value="beginner">{t("beginner")}</option><option value="professional">{t("professional")}</option></select></label></div><div className="form-actions"><button className="button secondary" onClick={() => setDraft(state)}>{t("reset")}</button><button className="button primary" onClick={() => { patch(draft, { newSession: true, push: true }); navigate("/command-center"); }}>{t("confirm")}</button></div></Card></>;
+  007389: }
+  007390: 
+  007391: function TrialExpiredPage() {
+  007392:   const { t } = useTranslate();
+  007393:   const { navigate } = useNavigation();
+  007394:   return <div className="center-page"><Icon name="lock" size={52}/><h1>{t("trialExpired")}</h1><p>{t("planUnavailable")}</p><button className="button primary" onClick={() => navigate("/plans")}>{t("plans")}</button></div>;
+  007395: }
+  007396: function NotFoundPage() {
+  007397:   const { navigate } = useNavigation();
+  007398:   return <div className="center-page"><span className="error-code">404</span><button className="button primary" onClick={() => navigate("/command-center")}><Icon name="home"/> Home</button></div>;
+  007399: }
+  007400: 
+  007401: /* NDSP_SOURCE_LOGOUT_V1_BEGIN */
+  007402: function PortalLogoutButton() {
+  007403:   const { lang } = useTranslate();
+  007404:   const [busy, setBusy] = useState(false);
+  007405: 
+  007406:   async function logout() {
+  007407:     if (busy) return;
+  007408:     setBusy(true);
+  007409: 
+  007410:     try {
+  007411:       const response = await fetch("/api/auth/logout", {
+  007412:         method: "POST",
+  007413:         credentials: "include",
+  007414:         cache: "no-store",
+  007415:         headers: { Accept: "application/json" }
+  007416:       });
+  007417: 
+  007418:       if (!response.ok) {
+  007419:         throw new Error(`LOGOUT_HTTP_${response.status}`);
+  007420:       }
+  007421: 
+  007422:       window.location.replace("/login/?logged_out=1");
+  007423:     } catch {
+  007424:       window.location.assign("/logout/");
+  007425:     }
+  007426:   }
+  007427: 
+  007428:   const label =
+  007429:     busy
+  007430:       ? (lang === "ar" ? "جارٍ تسجيل الخروج…" : "Signing out…")
+>>007431:       : (lang === "ar" ? "تسجيل الخروج" : "Sign out");
+  007432: 
+  007433:   return (
+  007434:     <button
+  007435:       type="button"
+  007436:       className="nav-link drawer-logout"
+  007437:       onClick={logout}
+  007438:       disabled={busy}
+  007439:       data-ndsp-source-logout-v2="integrated-nav-item"
+  007440:       aria-label={label}
+  007441:     >
+  007442:       <span className="drawer-logout-icon" aria-hidden="true">↪</span>
+  007443:       <span>{label}</span>
+  007444:     </button>
+  007445:   );
+  007446: }
+  007447: /* NDSP_SOURCE_LOGOUT_V1_END */
+  007448: 
+  007449: function AppRoutes() {
+  007450:   const { route, navigate } = useNavigation();
+  007451:   useEffect(() => { if (route === "/") navigate("/command-center", { replace: true }); }, [route, navigate]);
+  007452:   const routes = {
+  007453:     "/command-center": <CommandCenterPage/>,
+  007454:     "/markets": <MarketsPage/>,
+  007455:     "/prices-chart": <PricesChartPage/>,
+  007456:     "/opportunities": <OpportunitiesPage/>,
+  007457:     "/decision-room": <DecisionRoomPage/>,
+  007458:     "/portfolio": <PortfolioPage/>,
+  007459:     "/scenarios": <ScenariosPage/>,
+  007460:     "/layers": <LayersPage/>,
+  007461:     "/risk": <RiskPage/>,
+  007462:     "/completed": <CompletedPage/>,
+  007463:     "/data-health": <DataHealthPage/>,
+  007464:     "/alerts": <AlertsPage/>,
+  007465:     "/guide": <GuidePage/>,
+  007466:     "/support": <SupportPage/>,
+  007467:     "/account": <AccountPage/>,
+  007468:     "/plans": <PlansPage/>,
+  007469:     "/settings": <SettingsPage/>,
+  007470:     "/context": <ContextPage/>,
+  007471:     "/trial-expired": <TrialExpiredPage/>
+  007472:   };
+  007473:   return routes[route] || <NotFoundPage/>;
+  007474: }
+  007475: 
+  007476: function AppShell() {
+  007477:   const { t } = useTranslate();
+  007478:   return <div className="app-shell"><Topbar/><ContextStrip/><main className="page-container"><AppRoutes/></main><footer className="footer"><span>© 2026 NDSP</span><span>{t("explanatoryOnly")}</span></footer><LegalModal/></div>;
+  007479: }
+  007480: 
+  007481: class AppErrorBoundary extends React.Component {
+  007482:   constructor(props) {
+  007483:     super(props);
+  007484:     this.state = {
+  007485:       error: null
+  007486:     };
+  007487:   }
+  007488: 
+  007489:   static getDerivedStateFromError(error) {
+  007490:     return {
+  007491:       error
+  007492:     };
+  007493:   }
+  007494: 
+  007495:   componentDidCatch(error, info) {
+  007496:     console.error(
+  007497:       "NDSP_ROUTE_RENDER_ERROR",
+  007498:       error,
+  007499:       info
+  007500:     );
+  007501:   }
+  007502: 
+  007503:   render() {
+  007504:     if (!this.state.error) {
+  007505:       return this.props.children;

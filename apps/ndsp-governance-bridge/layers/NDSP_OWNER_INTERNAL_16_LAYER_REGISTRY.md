@@ -15,9 +15,9 @@ Owner-internal unmasked registry.
 ## Layers
 
 1. Temporal Decision Logic / TDL / منطق البعد الزمني
-2. Nawaf Meet Point / NMP / نقطة التقاء نواف
+2. NMP / NMP / NMP
 3. Devil's Advocate / محامي الشيطان
-4. Nawaf Golden Alignment / إشارة نواف الذهبية
+4. Golden Signal / الإشارة الذهبية
 5. Data Freshness And Source Integrity / سلامة وحداثة البيانات
 6. Live Market Feed Bridge / جسر الأسعار والبيانات الحية
 7. Institutional Positioning Context / السياق المؤسسي وتموضع الفئات

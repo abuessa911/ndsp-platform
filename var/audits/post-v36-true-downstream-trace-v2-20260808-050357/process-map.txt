@@ -1,0 +1,94 @@
+--- PORT=9088 ---
+LISTEN 0      5          127.0.0.1:9088       0.0.0.0:*    users:(("python3",pid=2402288,fd=3)) 
+PORT_9088_PID=2402288
+2402288       1 nawaf511 س أغسطس  8 04:38:11 2026 /usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_history_v36.py serve
+CMDLINE=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_history_v36.py serve 
+ENV=MEMORY_PRESSURE_WATCH=/sys/fs/cgroup/system.slice/ndsp-completed-decisions-history-v36.service/memory.pressure
+ENV=NDSP_HISTORY_HOST=127.0.0.1
+ENV=NDSP_HISTORY_PORT=9088
+ENV=NDSP_HISTORY_SOURCE_URL=http://127.0.0.1:9087/api/completed-decisions?limit=100
+ENV=NDSP_HISTORY_DATA_DIR=/home/nawaf511/empire-core-new/var/ledger/completed-decisions-v36
+--- PORT=9089 ---
+LISTEN 0      5          127.0.0.1:9089       0.0.0.0:*    users:(("python3",pid=4122,fd=5))    
+PORT_9089_PID=4122
+   4122    3737 nawaf511 ج أغسطس  7 16:46:08 2026 python3 /home/nawaf511/empire-core-new/backend/services/ndsp-trial-clock-v164/server.py
+CMDLINE=python3 /home/nawaf511/empire-core-new/backend/services/ndsp-trial-clock-v164/server.py 
+ENV=name=ndsp-trial-clock-v164
+ENV=pm_exec_path=/home/nawaf511/empire-core-new/backend/services/ndsp-trial-clock-v164/server.py
+ENV=pm_out_log_path=/home/nawaf511/.pm2/logs/ndsp-trial-clock-v164-out.log
+ENV=pm_err_log_path=/home/nawaf511/.pm2/logs/ndsp-trial-clock-v164-error.log
+ENV=pm_pid_path=/home/nawaf511/.pm2/pids/ndsp-trial-clock-v164-1.pid
+ENV=REGISTER_URL=http://127.0.0.1:9028/api/register
+ENV=STATUS_URL=http://127.0.0.1:9001/api/trial/status
+ENV=PORT=9089
+ENV=LEDGER_DB=/home/nawaf511/empire-core-new/backend/services/ndsp-trial-clock-v164/data/trial_clock.sqlite3
+ENV=TELEGRAM_BOT_TOKEN=8570826779:AAF7wVKT57HAcMVN-MsfxCgkdurLDWr-nxo
+ENV=SESSION_URL=https://api.ndsp.app/api/auth/session
+ENV=XDG_RUNTIME_DIR=/run/user/1000
+ENV=DEBUGINFOD_URLS=https://debuginfod.ubuntu.com 
+ENV=NDSP_V164_PORT=9089
+--- PORT=9090 ---
+LISTEN 0      5          127.0.0.1:9090       0.0.0.0:*    users:(("python3",pid=4138,fd=7))    
+PORT_9090_PID=4138
+   4138    3737 nawaf511 ج أغسطس  7 16:46:08 2026 python3 /home/nawaf511/empire-core-new/backend/services/ndsp-launch-control-v167/server.py
+CMDLINE=python3 /home/nawaf511/empire-core-new/backend/services/ndsp-launch-control-v167/server.py 
+ENV=name=ndsp-launch-control-v167
+ENV=pm_exec_path=/home/nawaf511/empire-core-new/backend/services/ndsp-launch-control-v167/server.py
+ENV=pm_out_log_path=/home/nawaf511/.pm2/logs/ndsp-launch-control-v167-out.log
+ENV=pm_err_log_path=/home/nawaf511/.pm2/logs/ndsp-launch-control-v167-error.log
+ENV=pm_pid_path=/home/nawaf511/.pm2/pids/ndsp-launch-control-v167-2.pid
+ENV=REGISTER_URL=http://127.0.0.1:9028/api/register
+ENV=DECISION_ACCESS_URL=http://127.0.0.1:9020/api/auth/decision-room-access
+ENV=TRIAL_STATUS_URL=http://127.0.0.1:9001/api/trial/status
+ENV=CONSENT_VERSION=NDSP-LEGAL-2026-07-19-V1
+ENV=PORT=9090
+ENV=TELEGRAM_BOT_TOKEN=8570826779:AAF7wVKT57HAcMVN-MsfxCgkdurLDWr-nxo
+ENV=INTERNAL_EMAILS=nawaf.barrak.911@gmail.com,shla511511+ndsptrial20260719_122049@gmail.com,ncm2025.2025@gmail.com
+ENV=SESSION_URL=https://api.ndsp.app/api/auth/session
+ENV=XDG_RUNTIME_DIR=/run/user/1000
+ENV=DEBUGINFOD_URLS=https://debuginfod.ubuntu.com 
+ENV=DB_PATH=/home/nawaf511/empire-core-new/backend/services/ndsp-launch-control-v167/data/launch_control.sqlite3
+--- PORT=9091 ---
+LISTEN 0      5          127.0.0.1:9091       0.0.0.0:*    users:(("python3",pid=4161,fd=7))    
+PORT_9091_PID=4161
+   4161    3737 nawaf511 ج أغسطس  7 16:46:08 2026 python3 /home/nawaf511/empire-core-new/backend/services/ndsp-telegram-notifications-v182/server.py
+CMDLINE=python3 /home/nawaf511/empire-core-new/backend/services/ndsp-telegram-notifications-v182/server.py 
+ENV=TELEGRAM_BOT_TOKEN=8570826779:AAF7wVKT57HAcMVN-MsfxCgkdurLDWr-nxo
+ENV=NDSP_TELEGRAM_BOT_TOKEN=8938659092:AAGsWw8-Xu3hRUhblUgN3onZYNYGkmlaZlw
+ENV=XDG_RUNTIME_DIR=/run/user/1000
+ENV=DEBUGINFOD_URLS=https://debuginfod.ubuntu.com 
+ENV=pm_pid_path=/home/nawaf511/.pm2/pids/ndsp-telegram-notifications-v182-3.pid
+ENV=pm_err_log_path=/home/nawaf511/.pm2/logs/ndsp-telegram-notifications-v182-error.log
+ENV=pm_exec_path=/home/nawaf511/empire-core-new/backend/services/ndsp-telegram-notifications-v182/run.sh
+ENV=name=ndsp-telegram-notifications-v182
+ENV=pm_out_log_path=/home/nawaf511/.pm2/logs/ndsp-telegram-notifications-v182-out.log
+--- PORT=9092 ---
+LISTEN 0      5          127.0.0.1:9092       0.0.0.0:*    users:(("python3",pid=1350,fd=3))    
+PORT_9092_PID=1350
+   1350       1 nawaf511 ج أغسطس  7 16:46:00 2026 /usr/bin/python3 /home/nawaf511/empire-core-new/apps/ndsp-public-summary-v548/app.py
+CMDLINE=/usr/bin/python3 /home/nawaf511/empire-core-new/apps/ndsp-public-summary-v548/app.py 
+ENV=MEMORY_PRESSURE_WATCH=/sys/fs/cgroup/system.slice/ndsp-public-summary-v548.service/memory.pressure
+--- PORT=9093 ---
+LISTEN 0      5          127.0.0.1:9093       0.0.0.0:*                                         
+PORT_9093_PID=NOT_VISIBLE_OR_NONE
+--- PORT=9094 ---
+LISTEN 0      5          127.0.0.1:9094       0.0.0.0:*    users:(("python3",pid=575763,fd=6))  
+PORT_9094_PID=575763
+ 575763       1 nawaf511 ج أغسطس  7 19:14:30 2026 /usr/bin/python3 /home/nawaf511/empire-core-new/backend/services/ndsp-business-ops/app.py
+CMDLINE=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/services/ndsp-business-ops/app.py 
+ENV=MEMORY_PRESSURE_WATCH=/sys/fs/cgroup/system.slice/ndsp-business-ops.service/memory.pressure
+ENV=NDSP_OPS_HOST=127.0.0.1
+ENV=NDSP_OPS_PORT=9094
+ENV=NDSP_OPS_DB=/var/lib/ndsp-business-ops/ops.sqlite3
+ENV=NDSP_OPS_HASH_SALT=04680564e28e4e41261f3f804683b679134da5c455cad1b51eeb6358cdd68c3e
+ENV=NDSP_LOCAL_PACKAGES_URL=http://127.0.0.1:9022/api/packages
+ENV=NDSP_OPS_MONITOR_STATE=/var/lib/ndsp-business-ops/monitor-state.json
+ENV=NDSP_OPS_LATEST_MONITOR=/var/lib/ndsp-business-ops/latest-monitor.json
+ENV=NDSP_PUBLIC_BASE=https://my.ndsp.app
+ENV=NDSP_LANDING_BASE=https://ndsp.app
+ENV=NDSP_LOCAL_DECISION_BASE=http://127.0.0.1:9082
+ENV=NDSP_LOCAL_MAIL_USER=nawaf511
+ENV=NDSP_OPS_REPORT_DIR=/home/nawaf511/ndsp_launch_reports
+--- PORT=9095 ---
+LISTEN 0      5          127.0.0.1:9095       0.0.0.0:*                                         
+PORT_9095_PID=NOT_VISIBLE_OR_NONE

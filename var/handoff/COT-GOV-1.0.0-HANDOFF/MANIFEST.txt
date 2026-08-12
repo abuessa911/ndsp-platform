@@ -1,0 +1,64 @@
+COT-GOV-1.0.0-HANDOFF
+
+00_START_HERE_AR.md
+00_START_HERE_EN.md
+MASTER_HANDOFF_AR_EN.md
+NEXT_CONVERSATION_PROMPT_AR.txt
+
+reports/
+  COT_GOVERNANCE_REPORT_AR.md
+  COT_GOVERNANCE_REPORT_EN.md
+  COT_GOVERNANCE_REPORT_AR_EN.html
+
+governance/
+  ADR-001-COT-MODES.md
+  ADR-002-CORE-EXPANDED.md
+  ADR-003-UTC.md
+  ADR-004-CANONICAL-PATH.md
+  CHANGELOG.md
+
+config/
+  cot-engine.config.json
+  tdl-ml.rules.json
+  tdl-s.rules.json
+
+contracts/
+  cot-input.schema.json
+  cot-analysis-result.schema.json
+  governance-policy.schema.json
+
+src/
+  shared/dominance.cjs
+  timing/report-calendar.cjs
+  timing/day-control.cjs
+  investment/investment-engine.cjs
+  speculation/speculation-engine.cjs
+  shadow/perspective-runner.cjs
+  public/public-view.cjs
+  index.cjs
+
+tests/
+  dominance.test.cjs
+  calendar.test.cjs
+  investment.test.cjs
+  speculation.test.cjs
+  public-view.test.cjs
+
+fixtures/
+  cot-report-2026-07-21.json
+
+integration/
+  INTEGRATION_GUIDE_AR.md
+  adapter.example.cjs
+  IMPACT_MAP_TEMPLATE.csv
+
+deploy/path-migration/
+  audit-cot-logic.sh
+  inventory-legacy-paths.sh
+  validate-canonical-paths.sh
+  generate-migration-plan.sh
+  forbidden-paths.policy.json
+  README.md
+
+ui/
+  ADMIN_UI_REQUIREMENTS.md

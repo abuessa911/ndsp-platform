@@ -1,0 +1,125 @@
+PATTERN=\bMore\b
+ANCHOR_LINE=7346
+CONTEXT_START=7301
+CONTEXT_END=7420
+
+  007301:                 checked
+  007302:                 readOnly
+  007303:               />
+  007304: 
+  007305:               <span>
+  007306:                 <b>{t("live")}</b>
+  007307:                 <small>
+  007308:                   {t("commercialNotice")}
+  007309:                 </small>
+  007310:               </span>
+  007311:             </label>
+  007312:           </div>
+  007313:         </Card>
+  007314: 
+  007315:         <Card title={t("appearance")}>
+  007316:           <p className="setting-explanation">
+  007317:             {
+  007318:               lang === "ar"
+  007319:                 ? "المظهر هنا يحدد كثافة عرض الصفحة والمسافات بين العناصر، ولا يغير ألوان المنصة أو بياناتها."
+  007320:                 : "Appearance here controls page density and spacing; it does not change platform colors or data."
+  007321:             }
+  007322:           </p>
+  007323: 
+  007324:           <div className="radio-stack">
+  007325:             <label>
+  007326:               <input
+  007327:                 type="radio"
+  007328:                 name="density"
+  007329:                 checked={
+  007330:                   density ===
+  007331:                   "comfortable"
+  007332:                 }
+  007333:                 onChange={() =>
+  007334:                   setDensity(
+  007335:                     "comfortable"
+  007336:                   )
+  007337:                 }
+  007338:               />
+  007339: 
+  007340:               <span>
+  007341:                 <b>{t("comfortable")}</b>
+  007342:                 <small>
+  007343:                   {
+  007344:                     lang === "ar"
+  007345:                       ? "مسافات أكبر وقراءة أهدأ، مع ظهور محتوى أقل في الشاشة."
+>>007346:                       : "More spacing and calmer reading, with less content visible at once."
+  007347:                   }
+  007348:                 </small>
+  007349:               </span>
+  007350:             </label>
+  007351: 
+  007352:             <label>
+  007353:               <input
+  007354:                 type="radio"
+  007355:                 name="density"
+  007356:                 checked={
+  007357:                   density === "compact"
+  007358:                 }
+  007359:                 onChange={() =>
+  007360:                   setDensity("compact")
+  007361:                 }
+  007362:               />
+  007363: 
+  007364:               <span>
+  007365:                 <b>{t("compact")}</b>
+  007366:                 <small>
+  007367:                   {
+  007368:                     lang === "ar"
+  007369:                       ? "مسافات أقل لعرض محتوى أكثر دون تغيير حجم البيانات أو معناها."
+  007370:                       : "Less spacing to show more content without changing data size or meaning."
+  007371:                   }
+  007372:                 </small>
+  007373:               </span>
+  007374:             </label>
+  007375:           </div>
+  007376:         </Card>
+  007377:       </div>
+  007378:     </>
+  007379:   );
+  007380: }
+  007381: 
+  007382: function ContextPage() {
+  007383:   const { state, patch } = useDecision();
+  007384:   const { navigate } = useNavigation();
+  007385:   const { t, lang } = useTranslate();
+  007386:   const [draft, setDraft] = useState(state);
+  007387:   const assets = ASSETS.filter((asset) => asset.market === draft.market);
+  007388:   return <><PageHeader title={t("changeContext")}/><Card title={t("changeContext")}><div className="context-form"><label><span>{t("market")}</span><select value={draft.market} onChange={(event) => { const market = event.target.value; setDraft((current) => ({ ...current, market, symbol: ASSETS.find((asset) => asset.market === market)?.symbol || current.symbol })); }}>{MARKETS.map((market) => <option value={market} key={market}>{marketLabel(market, lang)}</option>)}</select></label><label><span>{t("asset")}</span><select value={draft.symbol} onChange={(event) => setDraft((current) => ({ ...current, symbol: event.target.value }))}>{assets.map((asset) => <option value={asset.symbol} key={asset.symbol}>{assetName(asset, lang)} · {asset.symbol}</option>)}</select></label><label><span>{t("timeframe")}</span><select value={draft.timeframe} onChange={(event) => setDraft((current) => ({ ...current, timeframe: event.target.value }))}>{TIMEFRAMES.map((timeframe) => <option key={timeframe}>{timeframe}</option>)}</select></label><label><span>{t("readingType")}</span><select value={draft.mode} onChange={(event) => setDraft((current) => ({ ...current, mode: event.target.value }))}><option value="investment">{t("investment")}</option><option value="speculative">{t("speculative")}</option></select></label><label><span>{t("viewLevel")}</span><select value={draft.view} onChange={(event) => setDraft((current) => ({ ...current, view: event.target.value }))}><option value="beginner">{t("beginner")}</option><option value="professional">{t("professional")}</option></select></label></div><div className="form-actions"><button className="button secondary" onClick={() => setDraft(state)}>{t("reset")}</button><button className="button primary" onClick={() => { patch(draft, { newSession: true, push: true }); navigate("/command-center"); }}>{t("confirm")}</button></div></Card></>;
+  007389: }
+  007390: 
+  007391: function TrialExpiredPage() {
+  007392:   const { t } = useTranslate();
+  007393:   const { navigate } = useNavigation();
+  007394:   return <div className="center-page"><Icon name="lock" size={52}/><h1>{t("trialExpired")}</h1><p>{t("planUnavailable")}</p><button className="button primary" onClick={() => navigate("/plans")}>{t("plans")}</button></div>;
+  007395: }
+  007396: function NotFoundPage() {
+  007397:   const { navigate } = useNavigation();
+  007398:   return <div className="center-page"><span className="error-code">404</span><button className="button primary" onClick={() => navigate("/command-center")}><Icon name="home"/> Home</button></div>;
+  007399: }
+  007400: 
+  007401: /* NDSP_SOURCE_LOGOUT_V1_BEGIN */
+  007402: function PortalLogoutButton() {
+  007403:   const { lang } = useTranslate();
+  007404:   const [busy, setBusy] = useState(false);
+  007405: 
+  007406:   async function logout() {
+  007407:     if (busy) return;
+  007408:     setBusy(true);
+  007409: 
+  007410:     try {
+  007411:       const response = await fetch("/api/auth/logout", {
+  007412:         method: "POST",
+  007413:         credentials: "include",
+  007414:         cache: "no-store",
+  007415:         headers: { Accept: "application/json" }
+  007416:       });
+  007417: 
+  007418:       if (!response.ok) {
+  007419:         throw new Error(`LOGOUT_HTTP_${response.status}`);
+  007420:       }

@@ -410,7 +410,7 @@ return send(res, 200, {
         plan: user.plan || null,
         status: user.status || null,
       },
-      redirect: '/pages/dashboard.html',
+      redirect: '/portal/command-center/',
     })
   } catch (e) {
     console.error('[NDSP login error]', e)
@@ -487,7 +487,7 @@ return send(res, 200, {
         plan: user.plan || null,
         status: user.status || null,
       },
-      redirect: '/pages/dashboard.html',
+      redirect: '/portal/command-center/',
     })
   } catch (e) {
     console.error('[NDSP 2FA verify error]', e)
@@ -529,6 +529,10 @@ app.post('/api/auth/logout', (_req, res) => {
   return send(res, 200, { ok: true, message: 'LOGOUT_OK' })
 })
 
+app.get('/api/auth/logout-page', (_req, res) => {
+  clearSessionCookie(res)
+  return res.redirect(302, '/login/?logged_out=1')
+})
 
 app.get('/api/auth/2fa/status', auth, async (req, res) => {
   try {

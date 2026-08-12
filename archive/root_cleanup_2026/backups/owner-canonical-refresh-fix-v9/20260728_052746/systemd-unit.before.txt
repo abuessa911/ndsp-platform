@@ -1,0 +1,25 @@
+# /etc/systemd/system/ndsp-admin-ui-proxy.service
+[Unit]
+Description=NDSP Admin UI Server-Side Proxy
+After=network.target ndsp-auth-api.service
+
+[Service]
+Type=simple
+WorkingDirectory=/home/nawaf511/empire-core-new/backend/auth_api
+EnvironmentFile=-/etc/ndsp/ndsp-db.env
+EnvironmentFile=-/etc/ndsp/ndsp-session.env
+EnvironmentFile=-/home/nawaf511/empire-core-new/backend/auth_api/.env
+Environment=NDSP_ADMIN_UI_PROXY_PORT=9023
+ExecStart=/usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_ui_proxy.cjs
+Restart=always
+RestartSec=3
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target
+
+# /etc/systemd/system/ndsp-admin-ui-proxy.service.d/30-ndsp-official-runtime-source.conf
+[Service]
+EnvironmentFile=/etc/ndsp/ndsp-db.env
+EnvironmentFile=/etc/ndsp/ndsp-mail.env
+Environment=NDSP_ADMIN_USERS_JSON=/home/nawaf511/empire-core-new/runtime/admin-users.json

@@ -1,0 +1,20 @@
+HTTP/2 200 
+server: nginx/1.24.0 (Ubuntu)
+date: Mon, 27 Jul 2026 11:53:58 GMT
+content-type: application/javascript; charset=utf-8
+content-length: 146480
+cross-origin-opener-policy: same-origin
+cross-origin-resource-policy: same-origin
+origin-agent-cluster: ?1
+referrer-policy: no-referrer
+strict-transport-security: max-age=31536000; includeSubDomains
+x-content-type-options: nosniff
+x-dns-prefetch-control: off
+x-download-options: noopen
+x-frame-options: SAMEORIGIN
+x-permitted-cross-domain-policies: none
+x-xss-protection: 0
+cache-control: public, max-age=31536000, immutable
+x-ndsp-auth-core: clean-v2.2-users-delete
+cache-control: public, max-age=31536000, immutable
+

@@ -4,7 +4,7 @@
   NDSP Layer Name Masking Policy Engine
   Public rule:
   - 4 layer names may appear:
-    TDL, NMP, Devil's Advocate, Nawaf Golden Alignment
+    TDL, NMP, Devil's Advocate, Golden Signal
   - The other 12 layer names and internal IDs are hidden.
   - Their outputs remain allowed, but must be sanitized.
 */
@@ -15,10 +15,10 @@ const POLICY = Object.freeze({
   visible_named_layers_count: 4,
   hidden_named_layers_count: 12,
   visible_named_layers: [
-    { name: 'TDL', ar: 'منطق البعد الزمني' },
-    { name: 'NMP', ar: 'نقطة التقاء نواف' },
+    { name: 'TDL', ar: 'TDL' },
+    { name: 'NMP', ar: 'NMP' },
     { name: "Devil's Advocate", ar: 'محامي الشيطان' },
-    { name: 'Nawaf Golden Alignment', ar: 'إشارة نواف الذهبية' }
+    { name: 'Golden Signal', ar: 'الإشارة الذهبية' }
   ],
   public_output_sanitized: true,
   hidden_outputs_allowed: true,
@@ -30,11 +30,11 @@ const ALLOWED_NAMES = [
   'NMP',
   "Devil's Advocate",
   'Devil&#39;s Advocate',
-  'Nawaf Golden Alignment',
-  'منطق البعد الزمني',
-  'نقطة التقاء نواف',
+  'Golden Signal',
+  'TDL',
+  'NMP',
   'محامي الشيطان',
-  'إشارة نواف الذهبية'
+  'الإشارة الذهبية'
 ];
 
 const FORBIDDEN_PATTERNS = [
@@ -209,7 +209,7 @@ function selfTest() {
   const sample = {
     analysis: {
       layer_map: ['D1', 'D2', 'Layer 8'],
-      visible: ['TDL', 'NMP', "Devil's Advocate", 'Nawaf Golden Alignment'],
+      visible: ['TDL', 'NMP', "Devil's Advocate", 'Golden Signal'],
       text: 'D1 and Protected Layers 8 · 9 · 10 · 11 · 12 · 16 must not appear. TDL remains visible.'
     }
   };
@@ -225,7 +225,7 @@ function selfTest() {
       body.includes('TDL') &&
       body.includes('NMP') &&
       body.includes("Devil's Advocate") &&
-      body.includes('Nawaf Golden Alignment'),
+      body.includes('Golden Signal'),
     body
   };
 }

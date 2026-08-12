@@ -1,0 +1,17 @@
+[Unit]
+Description=NDSP Capability Runtime Evidence Controller
+After=network-online.target ndsp-quality-live-nmp-wrapper.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=nawaf511
+Group=nawaf511
+WorkingDirectory=/home/nawaf511/empire-core-new
+Environment=PYTHONPATH=/home/nawaf511/empire-core-new
+ExecStart=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/platform/runtime/capability_runtime_controller_v1.py --project /home/nawaf511/empire-core-new --output /home/nawaf511/empire-core-new/var/runtime/NDSP_CAPABILITY_RUNTIME_EVIDENCE_V1.json
+TimeoutStartSec=120
+Nice=10
+
+[Install]
+WantedBy=multi-user.target

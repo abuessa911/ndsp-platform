@@ -1,0 +1,1483 @@
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState
+} from "react";
+import { createRoot } from "react-dom/client";
+import "./styles.css";
+import "./supplement.css";
+
+const APP_BASE = (import.meta.env.BASE_URL || "/portal/").replace(/\/+$/, "");
+const CONTEXT_KEYS = ["lang", "market", "symbol", "timeframe", "mode", "view", "session"];
+const CONTEXT_STORAGE = "ndsp.commercial.context.v1";
+const LEGAL_STORAGE = "ndsp.commercial.legal.v1";
+const DENSITY_STORAGE = "ndsp.commercial.density.v1";
+const WATCHLIST_STORAGE = "ndsp.commercial.watchlist.v1";
+const PORTFOLIO_STORAGE = "ndsp.commercial.portfolio.v1";
+const ALERTS_STORAGE = "ndsp.commercial.alerts.v1";
+
+const MARKETS = ["CRYPTO", "FOREX", "METALS", "COMMODITIES", "INDICES", "BONDS", "ENERGY"];
+const TIMEFRAMES = ["15m", "1h", "4h", "daily", "weekly"];
+const PUBLIC_LAYERS = [
+  { id: "tdl", label: { ar: "TDL", en: "TDL" } },
+  { id: "nmp", label: { ar: "NMP", en: "NMP" } },
+  { id: "golden", label: { ar: "إشارة نواف الذهبية", en: "Nawaf Golden Signal" } },
+  { id: "enhancedGolden", label: { ar: "إشارة نواف الذهبية المعززة", en: "Enhanced Nawaf Golden Signal" } },
+  { id: "devilsAdvocate", label: { ar: "محامي الشيطان", en: "Devil's Advocate" } }
+];
+
+const ASSETS = [
+  { market: "CRYPTO", symbol: "BTCUSDT", nameAr: "بيتكوين", nameEn: "Bitcoin" },
+  { market: "CRYPTO", symbol: "ETHUSDT", nameAr: "إيثيريوم", nameEn: "Ethereum" },
+  { market: "CRYPTO", symbol: "SOLUSDT", nameAr: "سولانا", nameEn: "Solana" },
+  { market: "FOREX", symbol: "EURUSD", nameAr: "اليورو / الدولار", nameEn: "Euro / US Dollar" },
+  { market: "FOREX", symbol: "GBPUSD", nameAr: "الجنيه / الدولار", nameEn: "British Pound / US Dollar" },
+  { market: "FOREX", symbol: "USDJPY", nameAr: "الدولار / الين", nameEn: "US Dollar / Yen" },
+  { market: "METALS", symbol: "XAUUSD", nameAr: "الذهب", nameEn: "Gold" },
+  { market: "METALS", symbol: "XAGUSD", nameAr: "الفضة", nameEn: "Silver" },
+  { market: "COMMODITIES", symbol: "CORN", nameAr: "الذرة", nameEn: "Corn" },
+  { market: "COMMODITIES", symbol: "WHEAT", nameAr: "القمح", nameEn: "Wheat" },
+  { market: "INDICES", symbol: "SPX", nameAr: "إس آند بي 500", nameEn: "S&P 500" },
+  { market: "INDICES", symbol: "NDX", nameAr: "ناسداك 100", nameEn: "Nasdaq 100" },
+  { market: "BONDS", symbol: "US10Y", nameAr: "عائد السندات الأمريكية 10 سنوات", nameEn: "US 10Y Yield" },
+  { market: "BONDS", symbol: "US02Y", nameAr: "عائد السندات الأمريكية سنتين", nameEn: "US 2Y Yield" },
+  { market: "ENERGY", symbol: "WTI", nameAr: "خام غرب تكساس", nameEn: "WTI Crude" },
+  { market: "ENERGY", symbol: "NGAS", nameAr: "الغاز الطبيعي", nameEn: "Natural Gas" }
+];
+
+const DEFAULT_CONTEXT = {
+  lang: "ar",
+  market: "CRYPTO",
+  symbol: "BTCUSDT",
+  timeframe: "weekly",
+  mode: "investment",
+  view: "beginner",
+  session: ""
+};
+
+const I18N = {
+  ar: {
+    brand: "NDSP",
+    brandFull: "منصة نواف لدعم القرار",
+    commandCenter: "مركز القيادة",
+    markets: "الأسواق",
+    pricesChart: "الأسعار والشارت",
+    opportunities: "مستكشف الفرص",
+    decisionRoom: "غرفة القرار",
+    portfolio: "المحفظة",
+    more: "المزيد",
+    scenarios: "السيناريوهات والمستويات",
+    publicLayers: "الطبقات العامة",
+    riskChallenge: "المخاطر والاعتراض",
+    completed: "القرارات المكتملة",
+    dataHealth: "صحة البيانات",
+    alerts: "مركز التنبيهات",
+    guide: "دليل المستخدم",
+    support: "مركز الدعم",
+    account: "الحساب والاشتراك",
+    plans: "الباقات والترقية",
+    settings: "الإعدادات",
+    changeContext: "تغيير الاختيار",
+    trialExpired: "انتهت الفترة التجريبية",
+    market: "السوق",
+    asset: "الأصل",
+    timeframe: "الإطار الزمني",
+    readingType: "نوع القراءة",
+    viewLevel: "مستوى العرض",
+    investment: "استثماري",
+    speculative: "مضاربي",
+    beginner: "مبتدئ",
+    professional: "محترف",
+    live: "بيانات حية",
+    unavailable: "غير متاحة",
+    delayed: "متأخرة",
+    stale: "قديمة",
+    loading: "جارٍ التحميل…",
+    retry: "إعادة المحاولة",
+    error: "تعذر تحميل البيانات",
+    empty: "لا توجد بيانات متاحة",
+    partial: "البيانات المتاحة جزئية",
+    lastUpdated: "آخر تحديث",
+    sourceStatus: "حالة المصدر",
+    marketSummary: "ملخص السوق",
+    currentDecision: "القرار الحالي",
+    readingStatus: "حالة القراءة",
+    readiness: "جاهزية القرار",
+    strength: "قوة القراءة",
+    dataQuality: "جودة البيانات",
+    momentum: "الزخم",
+    macro: "السياق الكلي",
+    trackedAssets: "الأصول المتابعة",
+    activeAlerts: "التنبيهات النشطة",
+    completedReads: "قراءات مكتملة",
+    monitoredReads: "تحت المتابعة",
+    strongestOpportunities: "أقوى الفرص",
+    keyRisks: "أبرز المخاطر",
+    dailyBrief: "الملخص اليومي",
+    quickLinks: "روابط سريعة",
+    underMonitoring: "تحت المتابعة",
+    blocked: "غير مكتمل",
+    allowed: "مسموح",
+    armed: "جاهز للتأكيد",
+    executed: "مكتمل",
+    bullish: "ضغط إيجابي",
+    bearish: "ضغط سلبي",
+    neutral: "محايد",
+    high: "مرتفعة",
+    medium: "متوسطة",
+    low: "منخفضة",
+    search: "بحث",
+    allMarkets: "كل الأسواق",
+    addWatchlist: "إضافة للمفضلة",
+    removeWatchlist: "إزالة من المفضلة",
+    openChart: "فتح الشارت",
+    openDecision: "فتح غرفة القرار",
+    addPortfolio: "إضافة للمحفظة",
+    price: "السعر",
+    change: "التغير",
+    status: "الحالة",
+    actions: "الإجراءات",
+    chartTitle: "الأسعار الحية والشارت الفني",
+    refresh: "تحديث",
+    fullscreen: "ملء الشاشة",
+    open: "الافتتاح",
+    highPrice: "الأعلى",
+    lowPrice: "الأدنى",
+    closePrice: "الإغلاق",
+    indicators: "المؤشرات المعتمدة",
+    divergence: "الانحراف",
+    noDivergence: "لا يوجد انحراف مؤكد",
+    scenarioLevels: "مستويات السيناريو",
+    activation: "التفعيل",
+    arrival: "الوصول",
+    review: "المراجعة",
+    invalidation: "الإلغاء",
+    nmpZone: "منطقة / مستوى NMP",
+    opportunityReason: "سبب الفرصة",
+    score: "درجة المتابعة",
+    risk: "المخاطر",
+    view: "عرض",
+    decisionSummary: "ملخص القرار",
+    governingState: "الحالة الحاكمة",
+    strengthVsReadiness: "قوة القراءة مقابل جاهزية القرار",
+    incompleteReason: "سبب عدم اكتمال القراءة",
+    directionalContext: "السياق الاتجاهي",
+    nmp: "NMP",
+    usdMacro: "ضغط الدولار والسياق الكلي",
+    devilsAdvocate: "محامي الشيطان",
+    evidence: "الأدلة التحليلية",
+    advancedDetails: "التفاصيل المتقدمة",
+    explanatoryOnly: "المخرجات تفسيرية وليست أوامر تداول.",
+    legalTitle: "إقرار الاستخدام",
+    legalBody: "NDSP منصة دعم قرار تفسيرية. لا تعرض أوامر تداول ولا تضمن نتائج مالية. باستخدام المنصة تقر بأنك تتحمل مسؤولية قراراتك.",
+    accept: "أوافق وأتابع",
+    showAlternative: "عرض السيناريو البديل",
+    hideAlternative: "إخفاء السيناريو البديل",
+    alternativeScenario: "السيناريو البديل",
+    local: "حفظ محلي على هذا الجهاز",
+    holdings: "المقتنيات",
+    portfolioValue: "قيمة المحفظة",
+    costBasis: "التكلفة",
+    profitLoss: "الربح والخسارة",
+    quantity: "الكمية",
+    weight: "الوزن",
+    delete: "حذف",
+    alertRules: "قواعد التنبيه",
+    createRule: "إنشاء قاعدة",
+    noUserData: "لا توجد بيانات مستخدم متاحة من جلسة موثقة.",
+    authRequired: "يلزم تسجيل الدخول للوصول إلى هذه البيانات.",
+    registrationAvailable: "التسجيل متاح",
+    registrationUnavailable: "التسجيل غير متاح حاليًا",
+    commercialNotice: "نسخة إنتاج حية: المصدر الحي إلزامي، والقيم المفقودة تظهر غير متاحة.",
+    serviceHealthy: "سليم",
+    serviceUnavailable: "غير متاح",
+    news: "الأخبار",
+    events: "الأحداث",
+    noNews: "لا توجد أخبار متاحة",
+    noEvents: "لا توجد أحداث متاحة",
+    planUnavailable: "تفاصيل الباقة غير متاحة حتى تعود جلسة مستخدم موثقة.",
+    billingUnavailable: "الدفع الإلكتروني غير مفعّل في هذه النسخة.",
+    supportUnavailable: "قناة الدعم الكتابية غير مفعلة بعد؛ لا يتم إنشاء تذاكر وهمية.",
+    save: "حفظ",
+    confirm: "تأكيد الاختيار",
+    reset: "إعادة ضبط",
+    appearance: "المظهر",
+    comfortable: "مريح",
+    compact: "مضغوط"
+  },
+  en: {
+    brand: "NDSP",
+    brandFull: "Nawaf Decision Support Platform",
+    commandCenter: "Command Center",
+    markets: "Markets",
+    pricesChart: "Prices & Chart",
+    opportunities: "Opportunity Explorer",
+    decisionRoom: "Decision Room",
+    portfolio: "Portfolio",
+    more: "More",
+    scenarios: "Scenarios & Levels",
+    publicLayers: "Public Layers",
+    riskChallenge: "Risk & Challenge",
+    completed: "Completed Decisions",
+    dataHealth: "Data Health",
+    alerts: "Alerts Center",
+    guide: "User Guide",
+    support: "Support Center",
+    account: "Account & Subscription",
+    plans: "Plans & Upgrade",
+    settings: "Settings",
+    changeContext: "Change Context",
+    trialExpired: "Trial Expired",
+    market: "Market",
+    asset: "Asset",
+    timeframe: "Timeframe",
+    readingType: "Reading Type",
+    viewLevel: "View Level",
+    investment: "Investment",
+    speculative: "Speculative",
+    beginner: "Beginner",
+    professional: "Professional",
+    live: "Live data",
+    unavailable: "Unavailable",
+    delayed: "Delayed",
+    stale: "Stale",
+    loading: "Loading…",
+    retry: "Retry",
+    error: "Unable to load data",
+    empty: "No data available",
+    partial: "Available data is partial",
+    lastUpdated: "Last updated",
+    sourceStatus: "Source status",
+    marketSummary: "Market Summary",
+    currentDecision: "Current Decision",
+    readingStatus: "Reading Status",
+    readiness: "Decision Readiness",
+    strength: "Reading Strength",
+    dataQuality: "Data Quality",
+    momentum: "Momentum",
+    macro: "Macro",
+    trackedAssets: "Tracked Assets",
+    activeAlerts: "Active Alerts",
+    completedReads: "Completed Reads",
+    monitoredReads: "Under Monitoring",
+    strongestOpportunities: "Strongest Opportunities",
+    keyRisks: "Key Risks",
+    dailyBrief: "Daily Brief",
+    quickLinks: "Quick Links",
+    underMonitoring: "Under Monitoring",
+    blocked: "Incomplete",
+    allowed: "Allowed",
+    armed: "Armed",
+    executed: "Completed",
+    bullish: "Positive Pressure",
+    bearish: "Negative Pressure",
+    neutral: "Neutral",
+    high: "High",
+    medium: "Medium",
+    low: "Low",
+    search: "Search",
+    allMarkets: "All Markets",
+    addWatchlist: "Add to watchlist",
+    removeWatchlist: "Remove from watchlist",
+    openChart: "Open chart",
+    openDecision: "Open decision room",
+    addPortfolio: "Add to portfolio",
+    price: "Price",
+    change: "Change",
+    status: "Status",
+    actions: "Actions",
+    chartTitle: "Live Prices & Technical Chart",
+    refresh: "Refresh",
+    fullscreen: "Fullscreen",
+    open: "Open",
+    highPrice: "High",
+    lowPrice: "Low",
+    closePrice: "Close",
+    indicators: "Approved Indicators",
+    divergence: "Divergence",
+    noDivergence: "No confirmed divergence",
+    scenarioLevels: "Scenario Levels",
+    activation: "Activation",
+    arrival: "Arrival",
+    review: "Review",
+    invalidation: "Invalidation",
+    nmpZone: "NMP Zone / Level",
+    opportunityReason: "Opportunity Reason",
+    score: "Monitoring Score",
+    risk: "Risk",
+    view: "View",
+    decisionSummary: "Decision Summary",
+    governingState: "Governing State",
+    strengthVsReadiness: "Strength vs Readiness",
+    incompleteReason: "Why the Reading Is Incomplete",
+    directionalContext: "Directional Context",
+    nmp: "NMP",
+    usdMacro: "USD & Macro Context",
+    devilsAdvocate: "Devil's Advocate",
+    evidence: "Analytical Evidence",
+    advancedDetails: "Advanced Details",
+    explanatoryOnly: "Outputs are explanatory and are not trading orders.",
+    legalTitle: "Use Acknowledgment",
+    legalBody: "NDSP is an explanatory decision-support platform. It does not issue trading orders or guarantee financial outcomes. You remain responsible for your decisions.",
+    accept: "Accept and continue",
+    showAlternative: "Show alternative scenario",
+    hideAlternative: "Hide alternative scenario",
+    alternativeScenario: "Alternative Scenario",
+    local: "Stored locally on this device",
+    holdings: "Holdings",
+    portfolioValue: "Portfolio Value",
+    costBasis: "Cost Basis",
+    profitLoss: "Profit & Loss",
+    quantity: "Quantity",
+    weight: "Weight",
+    delete: "Delete",
+    alertRules: "Alert Rules",
+    createRule: "Create Rule",
+    noUserData: "No authenticated user data is available.",
+    authRequired: "Sign in is required to access this data.",
+    registrationAvailable: "Registration available",
+    registrationUnavailable: "Registration currently unavailable",
+    commercialNotice: "Live production build: the live source is mandatory, and missing values are shown as unavailable.",
+    serviceHealthy: "Healthy",
+    serviceUnavailable: "Unavailable",
+    news: "News",
+    events: "Events",
+    noNews: "No news available",
+    noEvents: "No events available",
+    planUnavailable: "Plan details are unavailable until an authenticated user session is restored.",
+    billingUnavailable: "Online billing is not enabled in this build.",
+    supportUnavailable: "Written support is not enabled yet; success is shown only after a real support integration exists.",
+    save: "Save",
+    confirm: "Confirm",
+    reset: "Reset",
+    appearance: "Appearance",
+    comfortable: "Comfortable",
+    compact: "Compact"
+  }
+};
+
+function newSession() {
+  return `s-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
+}
+
+function normalizeContext(input = {}) {
+  const next = { ...DEFAULT_CONTEXT, ...input };
+  if (!["ar", "en"].includes(next.lang)) next.lang = "ar";
+  if (!["investment", "speculative"].includes(next.mode)) next.mode = "investment";
+  if (!["beginner", "professional"].includes(next.view)) next.view = "beginner";
+  if (!MARKETS.includes(next.market)) next.market = "CRYPTO";
+  if (!ASSETS.some((asset) => asset.market === next.market && asset.symbol === next.symbol)) {
+    next.symbol = ASSETS.find((asset) => asset.market === next.market)?.symbol || "BTCUSDT";
+  }
+  if (!TIMEFRAMES.includes(next.timeframe)) next.timeframe = "weekly";
+  if (!next.session) next.session = newSession();
+  return next;
+}
+
+function readJsonStorage(key, fallback) {
+  try {
+    const value = localStorage.getItem(key);
+    return value ? JSON.parse(value) : fallback;
+  } catch {
+    return fallback;
+  }
+}
+
+function queryContext() {
+  const params = new URLSearchParams(window.location.search);
+  const value = {};
+  CONTEXT_KEYS.forEach((key) => {
+    if (params.has(key)) value[key] = params.get(key);
+  });
+  return value;
+}
+
+function updateContextQuery(state, replace = true) {
+  const url = new URL(window.location.href);
+  CONTEXT_KEYS.forEach((key) => url.searchParams.set(key, state[key]));
+  history[replace ? "replaceState" : "pushState"](null, "", `${url.pathname}${url.search}${url.hash}`);
+}
+
+function routeFromLocation() {
+  let path = window.location.pathname;
+  if (APP_BASE && path.startsWith(APP_BASE)) path = path.slice(APP_BASE.length) || "/";
+  path = path.replace(/\/+$/, "") || "/";
+  return path;
+}
+
+const NavigationContext = createContext(null);
+function BrowserRouter({ children }) {
+  const [route, setRoute] = useState(routeFromLocation);
+  useEffect(() => {
+    const onPop = () => setRoute(routeFromLocation());
+    addEventListener("popstate", onPop);
+    return () => removeEventListener("popstate", onPop);
+  }, []);
+  const navigate = useCallback((to, { replace = false } = {}) => {
+    const path = to.startsWith("/") ? to : `/${to}`;
+    const url = `${APP_BASE}${path}${window.location.search}`;
+    history[replace ? "replaceState" : "pushState"](null, "", url);
+    setRoute(path.replace(/\/+$/, "") || "/");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+  return <NavigationContext.Provider value={{ route, navigate }}>{children}</NavigationContext.Provider>;
+}
+function useNavigation() {
+  const value = useContext(NavigationContext);
+  if (!value) throw new Error("Navigation context is missing");
+  return value;
+}
+
+const DecisionContext = createContext(null);
+function DecisionProvider({ children }) {
+  const [state, setState] = useState(() => normalizeContext({
+    ...readJsonStorage(CONTEXT_STORAGE, {}),
+    ...queryContext()
+  }));
+  const [accepted, setAccepted] = useState(() => localStorage.getItem(LEGAL_STORAGE) === "yes");
+  const [density, setDensityState] = useState(() => localStorage.getItem(DENSITY_STORAGE) || "comfortable");
+
+  useEffect(() => {
+    document.documentElement.lang = state.lang;
+    document.documentElement.dir = state.lang === "ar" ? "rtl" : "ltr";
+    document.body.dataset.density = density;
+    localStorage.setItem(CONTEXT_STORAGE, JSON.stringify(state));
+    localStorage.setItem(DENSITY_STORAGE, density);
+    updateContextQuery(state, true);
+  }, [state, density]);
+
+  useEffect(() => {
+    const onPop = () => setState(normalizeContext({ ...readJsonStorage(CONTEXT_STORAGE, {}), ...queryContext() }));
+    addEventListener("popstate", onPop);
+    return () => removeEventListener("popstate", onPop);
+  }, []);
+
+  const patch = useCallback((partial, options = {}) => {
+    setState((current) => {
+      const next = normalizeContext({
+        ...current,
+        ...partial,
+        ...(options.newSession ? { session: newSession() } : {})
+      });
+      if (options.push) updateContextQuery(next, false);
+      return next;
+    });
+  }, []);
+
+  const acceptLegal = useCallback(() => {
+    localStorage.setItem(LEGAL_STORAGE, "yes");
+    setAccepted(true);
+  }, []);
+
+  const setDensity = useCallback((value) => {
+    setDensityState(value === "compact" ? "compact" : "comfortable");
+  }, []);
+
+  const value = useMemo(() => ({
+    state,
+    patch,
+    dataMode: "live",
+    accepted,
+    acceptLegal,
+    density,
+    setDensity
+  }), [state, patch, accepted, acceptLegal, density, setDensity]);
+
+  return <DecisionContext.Provider value={value}>{children}</DecisionContext.Provider>;
+}
+function useDecision() {
+  const value = useContext(DecisionContext);
+  if (!value) throw new Error("Decision context is missing");
+  return value;
+}
+
+function useTranslate() {
+  const { state } = useDecision();
+  const lang = state.lang;
+  const t = useCallback((key) => I18N[lang]?.[key] ?? key, [lang]);
+  return { lang, t };
+}
+
+async function fetchJson(path, { signal, timeout = 15000 } = {}) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeout);
+  const abort = () => controller.abort();
+  signal?.addEventListener("abort", abort, { once: true });
+  try {
+    const response = await fetch(path, {
+      signal: controller.signal,
+      cache: "no-store",
+      credentials: "same-origin",
+      headers: { Accept: "application/json" }
+    });
+    const contentType = response.headers.get("content-type") || "";
+    const body = contentType.includes("json") ? await response.json() : await response.text();
+    if (!response.ok) {
+      const error = new Error(`HTTP_${response.status}`);
+      error.status = response.status;
+      error.body = body;
+      throw error;
+    }
+    return body;
+  } finally {
+    clearTimeout(timer);
+    signal?.removeEventListener("abort", abort);
+  }
+}
+
+function numeric(value) {
+  if (value === null || value === undefined || value === "") return null;
+  if (typeof value === "number") return Number.isFinite(value) ? value : null;
+  if (typeof value === "string") {
+    const cleaned = value.replace(/,/g, "").trim();
+    const parsed = Number(cleaned);
+    return Number.isFinite(parsed) ? parsed : null;
+  }
+  if (typeof value === "object") {
+    for (const key of ["price", "value", "level", "raw_value", "rawValue"]) {
+      const parsed = numeric(value[key]);
+      if (parsed !== null) return parsed;
+    }
+  }
+  return null;
+}
+
+function formatNumber(value, lang = "ar", digits = 2) {
+  const parsed = numeric(value);
+  if (parsed === null) return "—";
+  return new Intl.NumberFormat(lang === "ar" ? "ar-SA" : "en-US", {
+    maximumFractionDigits: digits
+  }).format(parsed);
+}
+
+function formatDate(value, lang = "ar") {
+  if (!value) return "—";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "—";
+  return date.toLocaleString(lang === "ar" ? "ar-SA" : "en-US");
+}
+
+function assetName(asset, lang) {
+  return lang === "ar" ? asset.nameAr : asset.nameEn;
+}
+function marketLabel(market, lang) {
+  const labels = {
+    CRYPTO: { ar: "العملات الرقمية", en: "Crypto" },
+    FOREX: { ar: "العملات", en: "Forex" },
+    METALS: { ar: "المعادن", en: "Metals" },
+    COMMODITIES: { ar: "السلع", en: "Commodities" },
+    INDICES: { ar: "المؤشرات", en: "Indices" },
+    BONDS: { ar: "السندات", en: "Bonds" },
+    ENERGY: { ar: "الطاقة", en: "Energy" }
+  };
+  return labels[market]?.[lang] || market;
+}
+function findAsset(symbol) {
+  return ASSETS.find((asset) => asset.symbol === symbol) || ASSETS[0];
+}
+
+function normalizeQuality(payload) {
+  if (!payload || typeof payload !== "object") return null;
+  const scenario = payload.scenario || {};
+  const levels = payload.scenario_levels || scenario.scenario_levels || {};
+  const scoreInputs = payload.score_inputs || {};
+  const allowed = payload.allowed_public_outputs || {};
+  const market = payload.live_market_analysis || {};
+  const blockers = scoreInputs.blockers || payload.blockers || {};
+  const tdl = scoreInputs.tdl || {};
+  const correction = scoreInputs.correction || {};
+  const momentum = scoreInputs.momentum || {};
+  const macro = scoreInputs.macro || {};
+  const nmp = payload.nmp || {};
+  const golden = payload.golden_spotlight || payload.public_explainability?.golden_alignment || {};
+
+  return {
+    raw: payload,
+    ok: payload.ok === true,
+    instrument: {
+      symbol: payload.instrument?.symbol || payload.symbol || null,
+      market: payload.instrument?.market || payload.market || null,
+      timeframe: payload.instrument?.timeframe || payload.timeframe || null,
+      livePrice: numeric(payload.instrument?.live_price ?? payload.live_price)
+    },
+    scenario: {
+      state: scenario.scenario_state || payload.scenario_state || null,
+      directionalContext: scenario.scenario_directional_context || payload.scenario_directional_context || allowed.market_state || null,
+      activation: numeric(levels.activation ?? scenario.scenario_activation_level ?? payload.scenario_activation_level),
+      arrival: numeric(levels.arrival ?? scenario.scenario_arrival_level ?? payload.scenario_arrival_level),
+      review: numeric(levels.review ?? scenario.scenario_review_zone ?? scenario.scenario_review_level ?? payload.scenario_review_zone ?? payload.scenario_review_level),
+      invalidation: numeric(levels.invalidation ?? scenario.scenario_invalidation_level ?? payload.scenario_invalidation_level),
+      confidenceBand: scenario.scenario_confidence_band || allowed.horizon_strength || null,
+      timeHorizon: scenario.scenario_time_horizon || allowed.reading_horizon || payload.time_horizon || null,
+      riskNote: scenario.scenario_risk_note || allowed.caution_reason || payload.caution_reason || null,
+      updatedAt: scenario.scenario_last_updated || payload.generated_at || payload.updated_at || null
+    },
+    decisionQuality: numeric(allowed.decision_quality ?? payload.decision_quality),
+    alignmentScore: numeric(tdl.alignment_score ?? payload.alignment_score),
+    confirmationScore: numeric(correction.confirmation_score ?? payload.confirmation_score),
+    macdHistogram: numeric(momentum.macd_histogram ?? payload.macd_histogram),
+    obvSlope: numeric(momentum.obv_slope ?? payload.obv_slope),
+    cciValue: numeric(momentum.cci_value ?? payload.cci_value),
+    usdPressureScore: numeric(macro.usd_pressure_score ?? payload.usd_pressure_score),
+    blockers: {
+      count: numeric(blockers.count) ?? 0,
+      codes: Array.isArray(blockers.codes) ? blockers.codes : []
+    },
+    nmp: {
+      status: nmp.status || payload.nmp_status || scenario.nmp_status || null,
+      level: numeric(nmp.level ?? nmp.value ?? payload.nmp_level ?? scenario.nmp_level),
+      note: nmp.note || allowed.nmp_note || null
+    },
+    golden: {
+      status: golden.status || payload.golden_status || null,
+      label: golden.label || null,
+      summary: golden.summary || golden.reason || payload.golden_reason_public || null
+    },
+    liveChangePct: numeric(market.price_change_24h_pct),
+    sourceStatus: "live",
+    sourceMode: payload.source_mode || null,
+    generatedAt: payload.generated_at || scenario.scenario_last_updated || null,
+    decisionLayers: Array.isArray(payload.decision_layers) ? payload.decision_layers : [],
+    launchReadiness: payload.launch_readiness || null
+  };
+}
+
+const qualityCache = new Map();
+const candlesCache = new Map();
+function cacheFresh(entry, maxAge) {
+  return entry && Date.now() - entry.time < maxAge;
+}
+
+async function loadQuality(symbol, timeframe, signal) {
+  const key = `${symbol}|${timeframe}`;
+  const cached = qualityCache.get(key);
+  if (cacheFresh(cached, 20_000)) return cached.value;
+  const payload = await fetchJson(`/api/decision/quality-live?symbol=${encodeURIComponent(symbol)}&timeframe=${encodeURIComponent(timeframe)}`, { signal });
+  const value = normalizeQuality(payload);
+  if (!value) throw new Error("INVALID_QUALITY_PAYLOAD");
+  qualityCache.set(key, { time: Date.now(), value });
+  return value;
+}
+
+function useQuality(symbol, timeframe) {
+  const [state, setState] = useState({ status: "loading", value: null, error: null });
+  const [revision, setRevision] = useState(0);
+  const retry = useCallback(() => setRevision((value) => value + 1), []);
+  useEffect(() => {
+    const controller = new AbortController();
+    setState((current) => ({ ...current, status: "loading", error: null }));
+    loadQuality(symbol, timeframe, controller.signal)
+      .then((value) => setState({ status: "ready", value, error: null }))
+      .catch((error) => {
+        if (error.name !== "AbortError") setState({ status: "error", value: null, error });
+      });
+    return () => controller.abort();
+  }, [symbol, timeframe, revision]);
+  return { ...state, retry };
+}
+
+function normalizeCandles(payload) {
+  const rows = Array.isArray(payload) ? payload : payload?.candles || payload?.items || payload?.data || [];
+  return rows
+    .map((row) => ({
+      time: numeric(row.time ?? row.timestamp ?? row.open_time ?? row.t),
+      open: numeric(row.open ?? row.o),
+      high: numeric(row.high ?? row.h),
+      low: numeric(row.low ?? row.l),
+      close: numeric(row.close ?? row.c),
+      volume: numeric(row.volume ?? row.v)
+    }))
+    .filter((row) => [row.time, row.open, row.high, row.low, row.close].every((value) => value !== null));
+}
+
+function candleInterval(timeframe) {
+  return ({ "15m": "15m", "1h": "1h", "4h": "4h", daily: "1d", weekly: "1w" })[timeframe] || timeframe;
+}
+
+async function loadCandles(symbol, timeframe, signal) {
+  const key = `${symbol}|${timeframe}`;
+  const cached = candlesCache.get(key);
+  if (cacheFresh(cached, 30_000)) return cached.value;
+  const interval = candleInterval(timeframe);
+  const payload = await fetchJson(`/api/market/candles?symbol=${encodeURIComponent(symbol)}&timeframe=${encodeURIComponent(timeframe)}&interval=${encodeURIComponent(interval)}&limit=100`, { signal, timeout: 20_000 });
+  const value = normalizeCandles(payload);
+  if (!value.length) throw new Error("EMPTY_CANDLE_PAYLOAD");
+  candlesCache.set(key, { time: Date.now(), value });
+  return value;
+}
+
+function useCandles(symbol, timeframe) {
+  const [state, setState] = useState({ status: "loading", value: [], error: null });
+  const [revision, setRevision] = useState(0);
+  const retry = useCallback(() => setRevision((value) => value + 1), []);
+  useEffect(() => {
+    const controller = new AbortController();
+    setState((current) => ({ ...current, status: "loading", error: null }));
+    loadCandles(symbol, timeframe, controller.signal)
+      .then((value) => setState({ status: "ready", value, error: null }))
+      .catch((error) => {
+        if (error.name !== "AbortError") setState({ status: "error", value: [], error });
+      });
+    return () => controller.abort();
+  }, [symbol, timeframe, revision]);
+  return { ...state, retry };
+}
+
+async function mapWithConcurrency(items, limit, mapper) {
+  const results = new Array(items.length);
+  let index = 0;
+  async function worker() {
+    while (index < items.length) {
+      const current = index++;
+      try {
+        results[current] = { status: "fulfilled", value: await mapper(items[current], current) };
+      } catch (reason) {
+        results[current] = { status: "rejected", reason };
+      }
+    }
+  }
+  await Promise.all(Array.from({ length: Math.min(limit, items.length) }, worker));
+  return results;
+}
+
+function useMarketUniverse(timeframe) {
+  const [state, setState] = useState({ status: "loading", rows: [], error: null });
+  const [revision, setRevision] = useState(0);
+  const retry = useCallback(() => setRevision((value) => value + 1), []);
+  useEffect(() => {
+    const controller = new AbortController();
+    setState((current) => ({ ...current, status: "loading", error: null }));
+    mapWithConcurrency(ASSETS, 4, async (asset) => ({
+      ...asset,
+      quality: await loadQuality(asset.symbol, timeframe, controller.signal)
+    }))
+      .then((results) => {
+        const rows = results.map((result, index) => result.status === "fulfilled"
+          ? result.value
+          : { ...ASSETS[index], quality: null, error: result.reason });
+        setState({ status: "ready", rows, error: null });
+      })
+      .catch((error) => {
+        if (error.name !== "AbortError") setState({ status: "error", rows: [], error });
+      });
+    return () => controller.abort();
+  }, [timeframe, revision]);
+  return { ...state, retry };
+}
+
+function useCompletedDecisions() {
+  const [state, setState] = useState({ status: "loading", rows: [], error: null });
+  const [revision, setRevision] = useState(0);
+  const retry = useCallback(() => setRevision((value) => value + 1), []);
+  useEffect(() => {
+    const controller = new AbortController();
+    setState({ status: "loading", rows: [], error: null });
+    fetchJson("/api/completed-decisions", { signal: controller.signal, timeout: 20_000 })
+      .then((payload) => {
+        const rows = Array.isArray(payload) ? payload : payload?.items || payload?.decisions || [];
+        setState({ status: "ready", rows, error: null });
+      })
+      .catch((error) => {
+        if (error.name !== "AbortError") {
+          setState({ status: error.status === 401 ? "auth" : "error", rows: [], error });
+        }
+      });
+    return () => controller.abort();
+  }, [revision]);
+  return { ...state, retry };
+}
+
+function useAccessState() {
+  const [state, setState] = useState({
+    status: "loading",
+    authenticated: null,
+    entitlement: null,
+    trial: null,
+    registration: null,
+    error: null
+  });
+  useEffect(() => {
+    const controller = new AbortController();
+    Promise.allSettled([
+      fetchJson("/api/entitlements/me", { signal: controller.signal }),
+      fetchJson("/api/trial/status", { signal: controller.signal })
+    ]).then(([entitlementResult, trialResult]) => {
+      const entitlement = entitlementResult.status === "fulfilled" ? entitlementResult.value : null;
+      const trialPayload = trialResult.status === "fulfilled" ? trialResult.value : null;
+      const authError = entitlementResult.status === "rejected" ? entitlementResult.reason : null;
+      setState({
+        status: "ready",
+        authenticated: entitlement ? true : authError?.status === 401 ? false : null,
+        entitlement,
+        trial: entitlement?.trial || entitlement?.subscription?.trial || null,
+        registration: trialPayload?.seat_control || trialPayload?.trial || null,
+        error: authError && authError.status !== 401 ? authError : null
+      });
+    });
+    return () => controller.abort();
+  }, []);
+  return state;
+}
+
+function useNewsEvents(symbol) {
+  const [state, setState] = useState({ status: "loading", news: [], events: [] });
+  useEffect(() => {
+    const controller = new AbortController();
+    Promise.allSettled([
+      fetchJson(`/api/news?symbol=${encodeURIComponent(symbol)}&limit=8`, { signal: controller.signal }),
+      fetchJson("/api/events?limit=8", { signal: controller.signal })
+    ]).then(([newsResult, eventsResult]) => {
+      const newsPayload = newsResult.status === "fulfilled" ? newsResult.value : null;
+      const eventsPayload = eventsResult.status === "fulfilled" ? eventsResult.value : null;
+      setState({
+        status: "ready",
+        news: Array.isArray(newsPayload) ? newsPayload : newsPayload?.items || newsPayload?.news || [],
+        events: Array.isArray(eventsPayload) ? eventsPayload : eventsPayload?.items || eventsPayload?.events || []
+      });
+    });
+    return () => controller.abort();
+  }, [symbol]);
+  return state;
+}
+
+function stateKey(value) {
+  const code = String(value || "").toUpperCase();
+  if (code.includes("EXECUTED") || code === "COMPLETE") return "executed";
+  if (code.includes("ARMED")) return "armed";
+  if (code.includes("ALLOWED")) return "allowed";
+  if (code.includes("BLOCK")) return "blocked";
+  return "underMonitoring";
+}
+function directionKey(value) {
+  const text = String(value || "").toUpperCase();
+  if (text.includes("هابط") || text.includes("NEGATIVE") || text.includes("BEAR")) return "bearish";
+  if (text.includes("صاعد") || text.includes("POSITIVE") || text.includes("BULL")) return "bullish";
+  return "neutral";
+}
+function toneFromNumber(value) {
+  const number = numeric(value);
+  if (number === null) return "muted";
+  return number >= 0 ? "success" : "danger";
+}
+function riskLevel(quality) {
+  if (!quality) return { key: "high", tone: "danger" };
+  if ((quality.blockers?.count || 0) >= 2) return { key: "high", tone: "danger" };
+  if ((quality.blockers?.count || 0) === 1) return { key: "medium", tone: "warning" };
+  return { key: "low", tone: "success" };
+}
+
+function Icon({ name, size = 20 }) {
+  const glyphs = {
+    menu: "☰", close: "×", globe: "◎", bell: "◉", chart: "⌁", arrow: "←",
+    refresh: "↻", fullscreen: "⛶", search: "⌕", plus: "+", trash: "⌫",
+    warning: "!", lock: "◈", info: "i", home: "⌂", check: "✓", user: "◌"
+  };
+  return <span className="icon" style={{ fontSize: size }} aria-hidden="true">{glyphs[name] || "•"}</span>;
+}
+
+function Badge({ children, tone = "muted" }) {
+  return <span className={`badge ${tone}`}>{children}</span>;
+}
+function Metric({ label, value, hint, tone = "muted" }) {
+  return <div className={`metric ${tone}`}><span>{label}</span><strong>{value ?? "—"}</strong>{hint ? <small>{hint}</small> : null}</div>;
+}
+function Card({ title, subtitle, actions, children, className = "", id }) {
+  return <section id={id} className={`card ${className}`.trim()}>
+    {(title || actions) ? <div className="card-head"><div>{title ? <h2>{title}</h2> : null}{subtitle ? <p>{subtitle}</p> : null}</div>{actions}</div> : null}
+    <div className="card-body">{children}</div>
+  </section>;
+}
+function PageHeader({ title, subtitle, actions }) {
+  return <div className="page-head"><div><h1>{title}</h1>{subtitle ? <p>{subtitle}</p> : null}</div>{actions}</div>;
+}
+function EmptyState({ type = "empty", message, onRetry }) {
+  const { t } = useTranslate();
+  return <div className={`empty-state ${type}`}><Icon name={type === "error" ? "warning" : type === "loading" ? "refresh" : "info"} size={32}/><strong>{message || t(type)}</strong>{onRetry ? <button className="button secondary" onClick={onRetry}>{t("retry")}</button> : null}</div>;
+}
+function DataMeta({ updatedAt }) {
+  const { t, lang } = useTranslate();
+  return <div className="data-meta"><Badge tone="success">{t("live")}</Badge><span>{t("lastUpdated")}: {formatDate(updatedAt, lang)}</span></div>;
+}
+
+function Radar({ values, labels }) {
+  const safeValues = values.map((value) => Math.max(0, Math.min(100, numeric(value) ?? 0)));
+  const displayValues = safeValues.map((value) => Math.round(value));
+  const count = safeValues.length;
+  const point = (index, percentage = 100) => {
+    const angle = -Math.PI / 2 + index * Math.PI * 2 / count;
+    const radius = 92 * percentage / 100;
+    return [130 + Math.cos(angle) * radius, 130 + Math.sin(angle) * radius];
+  };
+  const polygon = safeValues.map((value, index) => point(index, value).join(",")).join(" ");
+  return <div className="radar-wrap">
+    <svg viewBox="0 0 260 260" role="img" aria-label={labels.join(", ")}>
+      {[25, 50, 75, 100].map((ring) => <polygon key={ring} points={safeValues.map((_, index) => point(index, ring).join(",")).join(" ")} className="radar-ring" />)}
+      {safeValues.map((_, index) => <line key={index} x1="130" y1="130" x2={point(index)[0]} y2={point(index)[1]} className="radar-axis" />)}
+      <polygon points={polygon} className="radar-value" />
+      {safeValues.map((value, index) => <circle key={index} cx={point(index, value)[0]} cy={point(index, value)[1]} r="3" className="radar-dot" />)}
+    </svg>
+    <div className="radar-legend">{labels.map((label, index) => <span className="radar-item" key={label}><i/><em>{label}</em><b>{displayValues[index]}%</b></span>)}</div>
+  </div>;
+}
+
+function CandleChart({ candles, levels, nmpRange, nmpLevel, lang, t }) {
+  if (!candles.length) return <EmptyState/>;
+
+  const bounds = candles.flatMap((row) => [row.high, row.low])
+    .concat(Object.values(levels || {}).filter((value) => numeric(value) !== null))
+    .concat((nmpRange || []).filter((value) => numeric(value) !== null));
+
+  const min = Math.min(...bounds);
+  const max = Math.max(...bounds);
+  const span = Math.max(max - min, 1e-8);
+  const low = min - span * 0.08;
+  const high = max + span * 0.08;
+
+  const box = { top: 28, right: 76, bottom: 34, left: 18 };
+  const x = (index) => box.left + index * (960 - box.left - box.right) / Math.max(candles.length - 1, 1);
+  const y = (value) => box.top + (high - value) * (420 - box.top - box.bottom) / (high - low);
+  const width = Math.max(3, (960 - box.left - box.right) / candles.length * 0.58);
+
+  const colors = {
+    activation: "#6ccf8d",
+    arrival: "#d6b35a",
+    review: "#79a9ff",
+    invalidation: "#ee7b7b"
+  };
+
+  const labels = {
+    activation: t("activation"),
+    arrival: t("arrival"),
+    review: t("review"),
+    invalidation: t("invalidation")
+  };
+
+  const nmpValue = numeric(nmpLevel);
+
+  return <div className="chart-scroll">
+    <svg className="candle-chart" viewBox="0 0 960 420" role="img" aria-label="Candlestick chart">
+      {[0, .25, .5, .75, 1].map((part) => (
+        <g key={part}>
+          <line
+            x1={box.left}
+            x2={960 - box.right}
+            y1={box.top + part * (420 - box.top - box.bottom)}
+            y2={box.top + part * (420 - box.top - box.bottom)}
+            className="chart-grid"
+          />
+          <text
+            x={960 - box.right + 8}
+            y={box.top + part * (420 - box.top - box.bottom) + 4}
+            className="chart-axis-label"
+          >
+            {formatNumber(high - part * (high - low), lang, 4)}
+          </text>
+        </g>
+      ))}
+
+      {nmpRange?.length === 2 ? (
+        <g>
+          <rect
+            x={box.left}
+            width={960 - box.left - box.right}
+            y={y(Math.max(...nmpRange))}
+            height={Math.max(2, y(Math.min(...nmpRange)) - y(Math.max(...nmpRange)))}
+            className="nmp-zone"
+          />
+          {nmpValue !== null ? (
+            <>
+              <line
+                x1={box.left}
+                x2={960 - box.right}
+                y1={y(nmpValue)}
+                y2={y(nmpValue)}
+                className="nmp-line"
+              />
+              <text
+                x={box.left + 8}
+                y={y(nmpValue) - 5}
+                className="nmp-label"
+              >
+                {`${t("nmp")}: ${formatNumber(nmpValue, lang, 4)}`}
+              </text>
+            </>
+          ) : null}
+        </g>
+      ) : null}
+
+      {candles.map((row, index) => (
+        <g key={`${row.time}-${index}`}>
+          <line
+            x1={x(index)}
+            x2={x(index)}
+            y1={y(row.high)}
+            y2={y(row.low)}
+            className={row.close >= row.open ? "candle-up" : "candle-down"}
+          />
+          <rect
+            x={x(index) - width / 2}
+            width={width}
+            y={Math.min(y(row.open), y(row.close))}
+            height={Math.max(1.5, Math.abs(y(row.open) - y(row.close)))}
+            className={row.close >= row.open ? "candle-up" : "candle-down"}
+          />
+        </g>
+      ))}
+
+      {Object.entries(levels || {}).map(([key, value]) =>
+        numeric(value) === null ? null : (
+          <g key={key}>
+            <line
+              x1={box.left}
+              x2={960 - box.right}
+              y1={y(value)}
+              y2={y(value)}
+              stroke={colors[key]}
+              className="level-line"
+            />
+            <text
+              x={box.left + 8}
+              y={y(value) - 5}
+              fill={colors[key]}
+              className="level-label"
+            >
+              {labels[key]}: {formatNumber(value, lang, 4)}
+            </text>
+          </g>
+        )
+      )}
+    </svg>
+  </div>;
+}
+
+const PRIMARY_NAV = [
+  ["commandCenter", "/command-center"], ["markets", "/markets"], ["pricesChart", "/prices-chart"],
+  ["opportunities", "/opportunities"], ["decisionRoom", "/decision-room"], ["portfolio", "/portfolio"]
+];
+const MORE_NAV = [
+  ["scenarios", "/scenarios"], ["publicLayers", "/layers"], ["riskChallenge", "/risk"],
+  ["completed", "/completed"], ["dataHealth", "/data-health"], ["alerts", "/alerts"],
+  ["guide", "/guide"], ["support", "/support"], ["account", "/account"],
+  ["plans", "/plans"], ["settings", "/settings"], ["changeContext", "/context"]
+];
+
+function querySuffix(state) {
+  const params = new URLSearchParams();
+  CONTEXT_KEYS.forEach((key) => params.set(key, state[key]));
+  return `?${params.toString()}`;
+}
+
+function Topbar() {
+  const { state, patch } = useDecision();
+  const { route, navigate } = useNavigation();
+  const { t, lang } = useTranslate();
+  const [drawer, setDrawer] = useState(false);
+  const [more, setMore] = useState(false);
+  const drawerRef = useRef(null);
+  const menuRef = useRef(null);
+
+  useEffect(() => {
+    if (!drawer) return undefined;
+    document.body.classList.add("drawer-open");
+    const previous = document.activeElement;
+    drawerRef.current?.querySelector("a,button")?.focus();
+    const onKey = (event) => {
+      if (event.key === "Escape") setDrawer(false);
+    };
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.body.classList.remove("drawer-open");
+      document.removeEventListener("keydown", onKey);
+      previous?.focus?.();
+    };
+  }, [drawer]);
+
+  const go = (path) => {
+    navigate(path);
+    setDrawer(false);
+    setMore(false);
+  };
+  const navButton = ([key, path], mobile = false) => <button key={path} onClick={() => go(path)} className={`nav-link ${route === path ? "active" : ""} ${mobile ? "drawer-link" : ""}`}>{t(key)}</button>;
+
+  return <>
+    <header className="topbar"><div className="topbar-inner">
+      <button className="brand" onClick={() => go("/command-center")} aria-label={`${t("brand")} — ${t("brandFull")}`}><span className="brand-mark">N</span><span><strong>{t("brand")}</strong><small>{t("brandFull")}</small></span></button>
+      <nav className="desktop-nav" aria-label="menu">{PRIMARY_NAV.map((item) => navButton(item))}<div className="more-wrap"><button className={`nav-link nav-button ${MORE_NAV.some(([, path]) => path === route) ? "active" : ""}`} onClick={() => setMore((value) => !value)}>{t("more")} <span className="caret">⌄</span></button>{more ? <div className="dropdown" onMouseLeave={() => setMore(false)}>{MORE_NAV.map((item) => navButton(item))}</div> : null}</div></nav>
+      <div className="header-actions"><Badge tone="success">{t("live")}</Badge><button className="icon-button" onClick={() => patch({ lang: lang === "ar" ? "en" : "ar" })}><Icon name="globe"/><span className="action-text">{lang === "ar" ? "English" : "العربية"}</span></button><button ref={menuRef} className="icon-button mobile-menu" onClick={() => setDrawer(true)} aria-expanded={drawer}><Icon name="menu"/></button></div>
+    </div></header>
+    {drawer ? <div className="drawer-layer" data-dir={state.lang === "ar" ? "rtl" : "ltr"}><button className="drawer-backdrop" onClick={() => setDrawer(false)} aria-label="close"/><aside ref={drawerRef} className="drawer" role="dialog" aria-modal="true"><div className="drawer-head"><div className="brand"><span className="brand-mark">N</span><span><strong>{t("brand")}</strong><small>{t("brandFull")}</small></span></div><button className="icon-button" onClick={() => setDrawer(false)}><Icon name="close"/></button></div><div className="drawer-trial"><span>{t("commercialNotice")}</span></div><nav className="drawer-nav">{PRIMARY_NAV.map((item) => navButton(item, true))}<div className="drawer-separator">{t("more")}</div>{MORE_NAV.map((item) => navButton(item, true))}</nav></aside></div> : null}
+  </>;
+}
+
+function ContextStrip() {
+  const { state, patch } = useDecision();
+  const { t, lang } = useTranslate();
+  const setMarket = (market) => patch({ market, symbol: ASSETS.find((asset) => asset.market === market)?.symbol || state.symbol });
+  return <div className="context-shell"><div className="context-strip" data-testid="context-strip">
+    <label><span>{t("market")}</span><select value={state.market} onChange={(event) => setMarket(event.target.value)}>{MARKETS.map((market) => <option value={market} key={market}>{marketLabel(market, lang)}</option>)}</select></label>
+    <label><span>{t("asset")}</span><select value={state.symbol} onChange={(event) => patch({ symbol: event.target.value })}>{ASSETS.filter((asset) => asset.market === state.market).map((asset) => <option value={asset.symbol} key={asset.symbol}>{assetName(asset, lang)} · {asset.symbol}</option>)}</select></label>
+    <label><span>{t("timeframe")}</span><select value={state.timeframe} onChange={(event) => patch({ timeframe: event.target.value })}>{TIMEFRAMES.map((timeframe) => <option key={timeframe}>{timeframe}</option>)}</select></label>
+    <label><span>{t("readingType")}</span><select value={state.mode} onChange={(event) => patch({ mode: event.target.value })}><option value="investment">{t("investment")}</option><option value="speculative">{t("speculative")}</option></select></label>
+    <label><span>{t("viewLevel")}</span><select value={state.view} onChange={(event) => patch({ view: event.target.value })}><option value="beginner">{t("beginner")}</option><option value="professional">{t("professional")}</option></select></label>
+  </div></div>;
+}
+
+function LegalModal() {
+  const { accepted, acceptLegal } = useDecision();
+  const { t } = useTranslate();
+  if (accepted) return null;
+  return <div className="modal-layer"><div className="modal-backdrop"/><div className="modal" role="dialog" aria-modal="true"><div className="modal-head"><h2>{t("legalTitle")}</h2></div><div className="modal-body"><p>{t("legalBody")}</p><div className="modal-actions"><button className="button primary" onClick={acceptLegal}>{t("accept")}</button></div></div></div></div>;
+}
+
+function ContextSummary() {
+  const { state } = useDecision();
+  const { t, lang } = useTranslate();
+  return <div className="context-summary"><Badge>{marketLabel(state.market, lang)}</Badge><Badge tone="muted">{assetName(findAsset(state.symbol), lang)}</Badge><Badge tone="muted">{state.timeframe}</Badge><Badge tone="muted">{t(state.mode)}</Badge><Badge tone="muted">{t(state.view)}</Badge></div>;
+}
+
+function qualityRadar(quality, t) {
+  return {
+    labels: [t("dataQuality"), "TDL", t("momentum"), "NMP", t("macro"), t("readiness")],
+    values: [
+      quality?.decisionQuality,
+      quality?.alignmentScore,
+      quality?.cciValue === null ? null : Math.min(100, Math.abs(quality.cciValue)),
+      quality?.nmp?.status === "AVAILABLE" ? 100 : 0,
+      quality?.usdPressureScore === null ? null : Math.max(0, 100 - Math.min(100, Math.abs(quality.usdPressureScore))),
+      quality?.confirmationScore
+    ]
+  };
+}
+
+function CommandCenterPage() {
+  const { state } = useDecision();
+  const { navigate } = useNavigation();
+  const { t, lang } = useTranslate();
+  const quality = useQuality(state.symbol, state.timeframe);
+  const universe = useMarketUniverse(state.timeframe);
+  const completed = useCompletedDecisions();
+  const newsEvents = useNewsEvents(state.symbol);
+  if (quality.status === "loading") return <EmptyState type="loading"/>;
+  if (quality.status === "error") return <EmptyState type="error" onRetry={quality.retry}/>;
+  const value = quality.value;
+  const radar = qualityRadar(value, t);
+  const watchlist = readJsonStorage(WATCHLIST_STORAGE, []);
+  const opportunities = universe.rows
+    .filter((row) => row.quality?.decisionQuality !== null)
+    .sort((a, b) => (b.quality?.decisionQuality || 0) - (a.quality?.decisionQuality || 0))
+    .slice(0, 4);
+  const monitored = universe.rows.filter((row) => row.quality?.scenario?.state === "UNDER_MONITORING").length;
+  const completedCount = completed.status === "ready" ? completed.rows.length : null;
+  return <>
+    <PageHeader title={t("commandCenter")} subtitle={t("marketSummary")} actions={<ContextSummary/>}/>
+    <div className="commercial-banner"><Badge tone="success">{t("live")}</Badge><span>{t("commercialNotice")}</span></div>
+    <div className="hero-grid">
+      <Card title={t("currentDecision")} subtitle={`${assetName(findAsset(state.symbol), lang)} · ${state.symbol}`} className="decision-hero">
+        <div className="decision-hero-row"><div><Badge tone="warning">{t(stateKey(value.scenario.state))}</Badge><h3>{value.scenario.directionalContext || t("unavailable")}</h3><p>{value.scenario.riskNote || t("partial")}</p></div><div className="hero-score"><strong>{formatNumber(value.decisionQuality, lang, 0)}%</strong><span>{t("strength")}</span></div></div>
+        <div className="mini-levels"><span>{t("activation")} <b>{formatNumber(value.scenario.activation, lang, 4)}</b></span><span>{t("arrival")} <b>{formatNumber(value.scenario.arrival, lang, 4)}</b></span><span>{t("review")} <b>{formatNumber(value.scenario.review, lang, 4)}</b></span><span>{t("invalidation")} <b>{formatNumber(value.scenario.invalidation, lang, 4)}</b></span></div>
+        <DataMeta updatedAt={value.generatedAt}/>
+        <div className="inline-actions"><button className="button primary" onClick={() => navigate("/decision-room")}>{t("openDecision")} <Icon name="arrow"/></button><button className="button secondary" onClick={() => navigate("/prices-chart")}>{t("openChart")} <Icon name="chart"/></button></div>
+      </Card>
+      <Card title={t("readingStatus")}><div className="metrics-grid two"><Metric label={t("strength")} value={`${formatNumber(value.decisionQuality, lang, 0)}%`} tone="gold"/><Metric label={t("readiness")} value={`${formatNumber(value.confirmationScore, lang, 0)}%`} tone="warning"/><Metric label={t("dataQuality")} value={`${formatNumber(value.decisionQuality, lang, 0)}%`}/><Metric label={t("sourceStatus")} value={t("live")} tone="success"/></div></Card>
+    </div>
+    <div className="metrics-grid dashboard-metrics"><Metric label={t("completedReads")} value={completedCount === null ? "—" : completedCount}/><Metric label={t("monitoredReads")} value={universe.status === "ready" ? monitored : "—"}/><Metric label={t("trackedAssets")} value={watchlist.length}/><Metric label={t("activeAlerts")} value={readJsonStorage(ALERTS_STORAGE, []).filter((row) => row.enabled).length}/></div>
+    <div className="content-grid two-wide"><Card title={t("marketSummary")}><div className="market-strip">{MARKETS.map((market) => { const rows = universe.rows.filter((row) => row.market === market && row.quality?.liveChangePct !== null); const average = rows.length ? rows.reduce((sum, row) => sum + row.quality.liveChangePct, 0) / rows.length : null; return <button key={market} onClick={() => navigate("/markets")}><span>{marketLabel(market, lang)}</span><strong className={toneFromNumber(average) === "success" ? "up" : average === null ? "" : "down"}>{average === null ? "—" : `${average >= 0 ? "+" : ""}${formatNumber(average, lang, 2)}%`}</strong></button>; })}</div><div className="brief-box"><h3>{t("dailyBrief")}</h3><p>{value.raw?.allowed_public_outputs?.sanitized_summary || value.scenario.riskNote || t("partial")}</p></div></Card><Card title={t("keyRisks")}><Radar values={radar.values} labels={radar.labels}/></Card></div>
+    <div className="content-grid two"><Card title={t("strongestOpportunities")}><div className="list-stack">{opportunities.length ? opportunities.map((row) => <button className="list-row" key={row.symbol} onClick={() => navigate("/opportunities")}><span><b>{assetName(row, lang)}</b><small>{row.symbol} · {marketLabel(row.market, lang)}</small></span><Badge>{formatNumber(row.quality.decisionQuality, lang, 0)}%</Badge></button>) : <EmptyState/>}</div></Card><Card title={t("quickLinks")}><div className="quick-grid"><button onClick={() => navigate("/prices-chart")}><Icon name="chart"/><span>{t("pricesChart")}</span></button><button onClick={() => navigate("/portfolio")}><Icon name="user"/><span>{t("portfolio")}</span></button><button onClick={() => navigate("/alerts")}><Icon name="bell"/><span>{t("alerts")}</span></button><button onClick={() => navigate("/guide")}><Icon name="info"/><span>{t("guide")}</span></button></div></Card></div>
+    <div className="content-grid two"><Card title={t("news")}><NewsList items={newsEvents.news} empty={t("noNews")} lang={lang}/></Card><Card title={t("events")}><NewsList items={newsEvents.events} empty={t("noEvents")} lang={lang}/></Card></div>
+  </>;
+}
+
+function NewsList({ items, empty, lang }) {
+  if (!items?.length) return <EmptyState message={empty}/>;
+  return <div className="news-list">{items.slice(0, 8).map((item, index) => <article key={`${item.url || item.title}-${index}`}><div><strong>{item.title || item.name || "—"}</strong><small>{item.source || item.country || item.category || ""} · {formatDate(item.time || item.date || item.datetime, lang)}</small></div>{item.url ? <a href={item.url} target="_blank" rel="noreferrer">↗</a> : null}</article>)}</div>;
+}
+
+function MarketsPage() {
+  const { state, patch } = useDecision();
+  const { navigate } = useNavigation();
+  const { t, lang } = useTranslate();
+  const universe = useMarketUniverse(state.timeframe);
+  const [search, setSearch] = useState("");
+  const [filter, setFilter] = useState("ALL");
+  const [watchlist, setWatchlist] = useState(() => readJsonStorage(WATCHLIST_STORAGE, []));
+  useEffect(() => localStorage.setItem(WATCHLIST_STORAGE, JSON.stringify(watchlist)), [watchlist]);
+  const rows = universe.rows.filter((row) => (filter === "ALL" || row.market === filter) && `${row.symbol} ${row.nameAr} ${row.nameEn}`.toLowerCase().includes(search.toLowerCase()));
+  const open = (row, path) => { patch({ market: row.market, symbol: row.symbol }); navigate(path); };
+  return <><PageHeader title={t("markets")} subtitle={t("marketSummary")} actions={<button className="button secondary" onClick={universe.retry}><Icon name="refresh"/> {t("refresh")}</button>}/><div className="toolbar"><label className="search-box"><Icon name="search"/><input value={search} onChange={(event) => setSearch(event.target.value)} placeholder={t("search")}/></label><select value={filter} onChange={(event) => setFilter(event.target.value)}><option value="ALL">{t("allMarkets")}</option>{MARKETS.map((market) => <option value={market} key={market}>{marketLabel(market, lang)}</option>)}</select></div>{universe.status === "loading" ? <EmptyState type="loading"/> : universe.status === "error" ? <EmptyState type="error" onRetry={universe.retry}/> : <div className="asset-grid">{rows.map((row) => { const q = row.quality; const watched = watchlist.includes(row.symbol); return <article className="asset-card" key={row.symbol}><div className="asset-top"><span className="asset-icon">{row.symbol.slice(0, 2)}</span><div><h2>{assetName(row, lang)}</h2><p>{row.symbol} · {marketLabel(row.market, lang)}</p></div><button className={`watch-button ${watched ? "active" : ""}`} onClick={() => setWatchlist((current) => watched ? current.filter((symbol) => symbol !== row.symbol) : [...current, row.symbol])}>★</button></div><div className="asset-price"><strong>{formatNumber(q?.instrument?.livePrice, lang, 5)}</strong><Badge tone={toneFromNumber(q?.liveChangePct)}>{q?.liveChangePct === null || q?.liveChangePct === undefined ? "—" : `${q.liveChangePct >= 0 ? "+" : ""}${formatNumber(q.liveChangePct, lang, 2)}%`}</Badge></div><DataMeta updatedAt={q?.generatedAt}/><div className="asset-actions"><button onClick={() => open(row, "/prices-chart")}>{t("openChart")}</button><button onClick={() => open(row, "/decision-room")}>{t("openDecision")}</button><button onClick={() => open(row, "/portfolio")}>{t("addPortfolio")}</button></div></article>; })}</div>}</>;
+}
+
+function PricesChartPage() {
+  const { state, patch } = useDecision();
+  const { t, lang } = useTranslate();
+  const quality = useQuality(state.symbol, state.timeframe);
+  const candles = useCandles(state.symbol, state.timeframe);
+  const [fullscreen, setFullscreen] = useState(false);
+  if (quality.status === "loading" || candles.status === "loading") return <EmptyState type="loading"/>;
+  if (quality.status === "error") return <EmptyState type="error" onRetry={quality.retry}/>;
+  if (candles.status === "error") return <EmptyState type="error" onRetry={candles.retry}/>;
+  const q = quality.value;
+  const levels = { activation: q.scenario.activation, arrival: q.scenario.arrival, review: q.scenario.review, invalidation: q.scenario.invalidation };
+  const nmp = q.nmp.level;
+  const range = nmp === null ? [] : [nmp * .998, nmp * 1.002];
+  const last = candles.value.at(-1);
+  const chart = <CandleChart candles={candles.value} levels={levels} nmpRange={range} nmpLevel={nmp} lang={lang} t={t}/>;
+  return <><PageHeader title={t("chartTitle")} subtitle={`${assetName(findAsset(state.symbol), lang)} · ${state.symbol}`} actions={<div className="inline-actions"><button className="button secondary" onClick={() => { quality.retry(); candles.retry(); }}><Icon name="refresh"/> {t("refresh")}</button><button className="button secondary" onClick={() => setFullscreen(true)}><Icon name="fullscreen"/> {t("fullscreen")}</button></div>}/><Card title={`${assetName(findAsset(state.symbol), lang)} · ${state.timeframe}`} actions={<DataMeta updatedAt={q.generatedAt}/>}><div className="chart-toolbar"><select value={state.symbol} onChange={(event) => { const asset = findAsset(event.target.value); patch({ market: asset.market, symbol: asset.symbol }); }}>{ASSETS.map((asset) => <option value={asset.symbol} key={asset.symbol}>{assetName(asset, lang)} · {asset.symbol}</option>)}</select><div className="segmented">{TIMEFRAMES.map((timeframe) => <button className={state.timeframe === timeframe ? "active" : ""} onClick={() => patch({ timeframe })} key={timeframe}>{timeframe}</button>)}</div></div><div className="ohlc-row"><Metric label={t("open")} value={formatNumber(last?.open, lang, 5)}/><Metric label={t("highPrice")} value={formatNumber(last?.high, lang, 5)}/><Metric label={t("lowPrice")} value={formatNumber(last?.low, lang, 5)}/><Metric label={t("closePrice")} value={formatNumber(last?.close, lang, 5)} tone={last && last.close >= last.open ? "success" : "danger"}/></div>{chart}<div className="chart-legend">
+  <span><i className="l-activation"/>{t("activation")}</span>
+  <span><i className="l-arrival"/>{t("arrival")}</span>
+  <span><i className="l-review"/>{t("review")}</span>
+  <span><i className="l-invalidation"/>{t("invalidation")}</span>
+  <span><i className="l-nmp"/>{`${t("nmpZone")} · ${t("nmp")}: ${formatNumber(nmp, lang, 4)}`}</span>
+</div></Card><div className="content-grid two"><Card title={t("indicators")}><div className="indicator-grid"><Metric label="RSI" value={formatNumber(q.raw?.live_market_analysis?.selected_timeframe_rsi, lang, 1)}/><Metric label="MACD Histogram" value={formatNumber(q.macdHistogram, lang, 3)} tone={toneFromNumber(q.macdHistogram)}/><Metric label="OBV" value={formatNumber(q.obvSlope, lang, 3)} tone={toneFromNumber(q.obvSlope)}/><Metric label="CCI" value={formatNumber(q.cciValue, lang, 2)} tone={toneFromNumber(q.cciValue)}/></div></Card><Card title={t("divergence")}><div className="divergence-box"><Badge tone="muted">{q.raw?.cross_timeframe_divergence ? t("partial") : t("noDivergence")}</Badge><p>{state.view === "professional" ? (lang === "ar" ? "يتم التحقق من الانحراف المنتظم والخفي على الإطار المختار دون نسخ نتائج إطار آخر." : "Regular and hidden divergence are checked on the selected timeframe without copying another timeframe.") : t("noDivergence")}</p></div></Card></div>{fullscreen ? <div className="modal-layer"><button className="modal-backdrop" onClick={() => setFullscreen(false)}/><div className="modal fullscreen-modal"><div className="modal-head"><h2>{t("chartTitle")}</h2><button className="icon-button" onClick={() => setFullscreen(false)}><Icon name="close"/></button></div><div className="modal-body fullscreen-chart">{chart}</div></div></div> : null}</>;
+}
+
+function OpportunitiesPage() {
+  const { state, patch } = useDecision();
+  const { navigate } = useNavigation();
+  const { t, lang } = useTranslate();
+  const universe = useMarketUniverse(state.timeframe);
+  const [filter, setFilter] = useState("ALL");
+  const rows = universe.rows
+    .filter((row) => row.quality && (filter === "ALL" || row.market === filter))
+    .sort((a, b) => (b.quality.decisionQuality || 0) - (a.quality.decisionQuality || 0));
+  return <><PageHeader title={t("opportunities")} subtitle={t("explanatoryOnly")}/><div className="toolbar"><select value={filter} onChange={(event) => setFilter(event.target.value)}><option value="ALL">{t("allMarkets")}</option>{MARKETS.map((market) => <option value={market} key={market}>{marketLabel(market, lang)}</option>)}</select></div>{universe.status === "loading" ? <EmptyState type="loading"/> : <div className="table-wrap"><table><thead><tr><th>{t("asset")}</th><th>{t("market")}</th><th>{t("timeframe")}</th><th>{t("opportunityReason")}</th><th>{t("score")}</th><th>{t("readiness")}</th><th>{t("risk")}</th><th>{t("actions")}</th></tr></thead><tbody>{rows.map((row) => { const risk = riskLevel(row.quality); return <tr key={row.symbol}><td><b>{assetName(row, lang)}</b><small>{row.symbol}</small></td><td>{marketLabel(row.market, lang)}</td><td>{state.timeframe}</td><td>{row.quality.scenario.riskNote || t("partial")}</td><td><Badge>{formatNumber(row.quality.decisionQuality, lang, 0)}%</Badge></td><td>{formatNumber(row.quality.confirmationScore, lang, 0)}%</td><td><Badge tone={risk.tone}>{t(risk.key)}</Badge></td><td><button className="table-action" onClick={() => { patch({ market: row.market, symbol: row.symbol }); navigate("/decision-room"); }}>{t("view")}</button></td></tr>; })}</tbody></table></div>}</>;
+}
+
+function DecisionRoomPage() {
+  const { state } = useDecision();
+  const { t, lang } = useTranslate();
+  const quality = useQuality(state.symbol, state.timeframe);
+  const [alternative, setAlternative] = useState(false);
+  if (quality.status === "loading") return <EmptyState type="loading"/>;
+  if (quality.status === "error") return <EmptyState type="error" onRetry={quality.retry}/>;
+  const q = quality.value;
+  const risk = riskLevel(q);
+  const sections = [
+    [t("decisionSummary"), <><div className="decision-summary-main"><Badge tone="warning">{t(stateKey(q.scenario.state))}</Badge><h2>{q.scenario.directionalContext || t("unavailable")}</h2><p>{t("explanatoryOnly")}</p></div><DataMeta updatedAt={q.generatedAt}/></>],
+    [t("governingState"), <div className="state-timeline"><span className={q.scenario.state === "BLOCKED" ? "current" : "done"}>BLOCKED</span><i/><span className={q.scenario.state === "ALLOWED" ? "current" : ""}>ALLOWED</span><i/><span className={q.scenario.state === "ARMED" ? "current" : ""}>ARMED</span><i/><span className={q.scenario.state === "EXECUTED" ? "current" : ""}>EXECUTED</span></div>],
+    [t("strengthVsReadiness"), <div className="metrics-grid two"><Metric label={t("strength")} value={`${formatNumber(q.decisionQuality, lang, 0)}%`} tone="gold"/><Metric label={t("readiness")} value={`${formatNumber(q.confirmationScore, lang, 0)}%`} tone="warning"/></div>],
+    [t("incompleteReason"), <div className="callout warning"><Icon name="warning"/><div><strong>{q.scenario.riskNote || t("partial")}</strong><p>{q.blockers.count ? `${q.blockers.count} ${lang === "ar" ? "شرط حاكم غير مكتمل" : "governing condition is incomplete"}` : q.nmp.note || t("partial")}</p></div></div>],
+    [t("directionalContext"), <div className="narrative"><Badge tone={directionKey(q.scenario.directionalContext) === "bullish" ? "success" : directionKey(q.scenario.directionalContext) === "bearish" ? "danger" : "muted"}>{q.scenario.directionalContext || t("unavailable")}</Badge><p>{lang === "ar" ? "السياق الاتجاهي منفصل عن جاهزية القرار النهائية." : "Directional context remains separate from final decision readiness."}</p></div>],
+    [t("scenarioLevels"), <div className="level-grid"><Metric label={t("activation")} value={formatNumber(q.scenario.activation, lang, 4)} tone="success"/><Metric label={t("arrival")} value={formatNumber(q.scenario.arrival, lang, 4)} tone="gold"/><Metric label={t("review")} value={formatNumber(q.scenario.review, lang, 4)}/><Metric label={t("invalidation")} value={formatNumber(q.scenario.invalidation, lang, 4)} tone="danger"/></div>],
+    [t("nmp"), <div className="nmp-card"><div className="nmp-meter"><span style={{ width: q.nmp.status === "AVAILABLE" ? "100%" : "12%" }}/></div><strong>{q.nmp.status || t("unavailable")}</strong><p>{q.nmp.note || t("partial")}</p><b>{formatNumber(q.nmp.level, lang, 4)}</b></div>],
+    [t("riskChallenge"), <div className="risk-list"><span>{t("dataQuality")}<b>{formatNumber(q.decisionQuality, lang, 0)}%</b></span><span>{t("risk")}<b>{t(risk.key)}</b></span><span>{t("timeframe")}<b>{state.timeframe}</b></span></div>],
+    [t("usdMacro"), <div className="narrative"><Badge tone={Math.abs(q.usdPressureScore || 0) > 20 ? "warning" : "muted"}>{formatNumber(q.usdPressureScore, lang, 2)}</Badge><p>{lang === "ar" ? "ضغط الدولار عامل سياقي محكوم ولا يغير TDL مباشرة." : "USD pressure is a governed contextual factor and does not directly change TDL."}</p></div>],
+    [t("devilsAdvocate"), <div className="callout"><Icon name="warning"/><div><strong>{t("devilsAdvocate")}</strong><p>{q.golden.summary || q.scenario.riskNote || t("partial")}</p></div></div>],
+    [t("evidence"), <div className="evidence-grid"><Metric label="TDL" value={`${formatNumber(q.alignmentScore, lang, 0)}%`}/><Metric label="NMP" value={q.nmp.status || "—"}/><Metric label="MACD" value={formatNumber(q.macdHistogram, lang, 2)}/><Metric label="OBV" value={formatNumber(q.obvSlope, lang, 2)}/><Metric label="CCI" value={formatNumber(q.cciValue, lang, 2)}/><Metric label={t("dataQuality")} value={`${formatNumber(q.decisionQuality, lang, 0)}%`}/></div>],
+    [t("advancedDetails"), state.view === "professional" ? <div className="advanced-list"><span>{t("timeframe")}<b>{q.scenario.timeHorizon || state.timeframe}</b></span><span>{t("sourceStatus")}<b>{t("live")}</b></span><span>{t("lastUpdated")}<b>{formatDate(q.generatedAt, lang)}</b></span><span>Contract<b>{q.raw?.public_contract_version || "—"}</b></span></div> : <div className="locked-inline"><Icon name="lock"/><span>{t("professional")}</span></div>]
+  ];
+  return <><PageHeader title={t("decisionRoom")} subtitle={`${assetName(findAsset(state.symbol), lang)} · ${state.symbol}`} actions={<ContextSummary/>}/><div className="decision-sections">{sections.map(([title, content], index) => <Card id={`decision-section-${index + 1}`} title={`${index + 1}. ${title}`} className={`decision-section section-${index + 1}`} key={title}>{content}</Card>)}</div><Card title={t("alternativeScenario")} actions={<button className="button secondary" onClick={() => setAlternative((value) => !value)}>{t(alternative ? "hideAlternative" : "showAlternative")}</button>}>{alternative ? <p>{lang === "ar" ? "إذا تجاوز السعر مستوى الإلغاء، يعاد بناء السياق من البداية ولا تنسخ مستويات السيناريو السابق." : "If price crosses invalidation, context is rebuilt from the start and previous scenario levels are not copied."}</p> : <p>{lang === "ar" ? "مغلق افتراضيًا لتجنب تشتيت المستخدم." : "Closed by default to avoid distracting the user."}</p>}</Card></>;
+}
+
+function PortfolioPage() {
+  const { state } = useDecision();
+  const { t, lang } = useTranslate();
+  const universe = useMarketUniverse(state.timeframe);
+  const [holdings, setHoldings] = useState(() => readJsonStorage(PORTFOLIO_STORAGE, []));
+  const [symbol, setSymbol] = useState(state.symbol);
+  const [quantity, setQuantity] = useState("");
+  const [cost, setCost] = useState("");
+  useEffect(() => localStorage.setItem(PORTFOLIO_STORAGE, JSON.stringify(holdings)), [holdings]);
+  const liveMap = new Map(universe.rows.map((row) => [row.symbol, row.quality?.instrument?.livePrice]));
+  const rows = holdings.map((holding) => {
+    const asset = findAsset(holding.symbol);
+    const price = numeric(liveMap.get(holding.symbol));
+    const value = price === null ? null : price * numeric(holding.quantity);
+    const costValue = numeric(holding.cost) * numeric(holding.quantity);
+    return { ...holding, asset, price, value, costValue };
+  });
+  const total = rows.reduce((sum, row) => sum + (row.value || 0), 0);
+  const totalCost = rows.reduce((sum, row) => sum + (row.costValue || 0), 0);
+  const add = () => {
+    const qty = numeric(quantity);
+    const cst = numeric(cost);
+    if (qty === null || qty <= 0 || cst === null || cst < 0) return;
+    setHoldings((current) => [...current.filter((row) => row.symbol !== symbol), { symbol, quantity: qty, cost: cst }]);
+    setQuantity(""); setCost("");
+  };
+  return <><PageHeader title={t("portfolio")} subtitle={t("local")}/><div className="portfolio-form card"><select value={symbol} onChange={(event) => setSymbol(event.target.value)}>{ASSETS.map((asset) => <option value={asset.symbol} key={asset.symbol}>{assetName(asset, lang)} · {asset.symbol}</option>)}</select><input value={quantity} onChange={(event) => setQuantity(event.target.value)} inputMode="decimal" placeholder={t("quantity")}/><input value={cost} onChange={(event) => setCost(event.target.value)} inputMode="decimal" placeholder={t("costBasis")}/><button className="button primary" onClick={add}>{t("addPortfolio")}</button></div><div className="metrics-grid dashboard-metrics"><Metric label={t("portfolioValue")} value={formatNumber(total, lang, 2)}/><Metric label={t("costBasis")} value={formatNumber(totalCost, lang, 2)}/><Metric label={t("profitLoss")} value={formatNumber(total - totalCost, lang, 2)} tone={total - totalCost >= 0 ? "success" : "danger"}/><Metric label={t("trackedAssets")} value={rows.length}/></div><Card title={t("holdings")}>{rows.length ? <div className="table-wrap"><table><thead><tr><th>{t("asset")}</th><th>{t("quantity")}</th><th>{t("costBasis")}</th><th>{t("price")}</th><th>{t("portfolioValue")}</th><th>{t("profitLoss")}</th><th>{t("actions")}</th></tr></thead><tbody>{rows.map((row) => <tr key={row.symbol}><td><b>{assetName(row.asset, lang)}</b><small>{row.symbol}</small></td><td>{formatNumber(row.quantity, lang, 6)}</td><td>{formatNumber(row.cost, lang, 4)}</td><td>{formatNumber(row.price, lang, 4)}</td><td>{formatNumber(row.value, lang, 2)}</td><td className={(row.value || 0) - row.costValue >= 0 ? "up" : "down"}>{row.value === null ? "—" : formatNumber(row.value - row.costValue, lang, 2)}</td><td><button className="icon-button compact" onClick={() => setHoldings((current) => current.filter((item) => item.symbol !== row.symbol))}><Icon name="trash"/></button></td></tr>)}</tbody></table></div> : <EmptyState/>}</Card></>;
+}
+
+function ScenariosPage() {
+  const { state } = useDecision();
+  const { t, lang } = useTranslate();
+  const quality = useQuality(state.symbol, state.timeframe);
+  if (quality.status !== "ready") return <EmptyState type={quality.status === "error" ? "error" : "loading"} onRetry={quality.status === "error" ? quality.retry : undefined}/>;
+  const q = quality.value;
+  return <><PageHeader title={t("scenarios")} subtitle={`${assetName(findAsset(state.symbol), lang)} · ${state.symbol}`}/><div className="level-grid large"><Metric label={t("activation")} value={formatNumber(q.scenario.activation, lang, 4)} tone="success"/><Metric label={t("arrival")} value={formatNumber(q.scenario.arrival, lang, 4)} tone="gold"/><Metric label={t("review")} value={formatNumber(q.scenario.review, lang, 4)}/><Metric label={t("invalidation")} value={formatNumber(q.scenario.invalidation, lang, 4)} tone="danger"/></div><Card title={t("nmpZone")}><div className="nmp-card"><strong>{q.nmp.status || t("unavailable")}</strong><b>{formatNumber(q.nmp.level, lang, 4)}</b><p>{q.nmp.note || t("partial")}</p></div></Card></>;
+}
+
+function LayersPage() {
+  const { state } = useDecision();
+  const { t, lang } = useTranslate();
+  const quality = useQuality(state.symbol, state.timeframe);
+  if (quality.status !== "ready") return <EmptyState type={quality.status === "error" ? "error" : "loading"} onRetry={quality.status === "error" ? quality.retry : undefined}/>;
+  const q = quality.value;
+  const publicData = {
+    tdl: { state: q.alignmentScore === null ? t("unavailable") : `${formatNumber(q.alignmentScore, lang, 0)}%`, text: q.scenario.directionalContext },
+    nmp: { state: q.nmp.status || t("unavailable"), text: q.nmp.note },
+    golden: { state: q.golden.status || t("unavailable"), text: q.golden.summary },
+    enhancedGolden: { state: q.raw?.enhanced_golden_alignment_active ? t("executed") : t("underMonitoring"), text: q.raw?.enhanced_golden_name || "—" },
+    devilsAdvocate: { state: q.blockers.count ? t("underMonitoring") : t("allowed"), text: q.scenario.riskNote }
+  };
+  return <><PageHeader title={t("publicLayers")} subtitle={t("explanatoryOnly")}/><div className="layers-grid">{PUBLIC_LAYERS.map((layer) => <Card title={layer.label[lang]} key={layer.id}><div className="layer-public"><Badge>{publicData[layer.id]?.state || "—"}</Badge><p>{publicData[layer.id]?.text || t("partial")}</p></div></Card>)}</div><div className="callout"><Icon name="lock"/><p>{lang === "ar" ? "الطبقات الداخلية الأخرى محمية ولا تعرض أسماؤها أو صيغها في واجهة المستخدم التجارية." : "Other internal layers are protected; their names and formulas are not exposed in the commercial UI."}</p></div></>;
+}
+
+function RiskPage() {
+  const { state } = useDecision();
+  const { t } = useTranslate();
+  const quality = useQuality(state.symbol, state.timeframe);
+  if (quality.status !== "ready") return <EmptyState type={quality.status === "error" ? "error" : "loading"} onRetry={quality.status === "error" ? quality.retry : undefined}/>;
+  const q = quality.value;
+  const radar = qualityRadar(q, t);
+  const risk = riskLevel(q);
+  return <><PageHeader title={t("riskChallenge")} subtitle={q.scenario.riskNote}/><div className="content-grid two"><Card title={t("keyRisks")}><Radar values={radar.values} labels={radar.labels}/></Card><Card title={t("devilsAdvocate")}><div className="risk-list"><span>{t("risk")}<b>{t(risk.key)}</b></span><span>{t("incompleteReason")}<b>{q.blockers.count}</b></span><span>{t("usdMacro")}<b>{formatNumber(q.usdPressureScore, state.lang, 2)}</b></span></div><div className="callout warning"><Icon name="warning"/><p>{q.scenario.riskNote || t("partial")}</p></div></Card></div></>;
+}
+
+function CompletedPage() {
+  const completed = useCompletedDecisions();
+  const { t, lang } = useTranslate();
+  if (completed.status === "loading") return <EmptyState type="loading"/>;
+  if (completed.status === "auth") return <><PageHeader title={t("completed")}/><EmptyState message={t("authRequired")}/></>;
+  if (completed.status === "error") return <EmptyState type="error" onRetry={completed.retry}/>;
+  return <><PageHeader title={t("completed")}/><Card title={t("completed")}>{completed.rows.length ? <div className="table-wrap"><table><thead><tr><th>{t("asset")}</th><th>{t("status")}</th><th>{t("strength")}</th><th>{t("timeframe")}</th><th>{t("lastUpdated")}</th></tr></thead><tbody>{completed.rows.map((row, index) => <tr key={row.id || row.asset_id || `${row.symbol}-${index}`}><td>{row.asset_name || row.symbol || "—"}</td><td><Badge>{row.decision_status || "—"}</Badge></td><td>{formatNumber(row.decision_quality, lang, 0)}%</td><td>{row.follow_up_horizon || "—"}</td><td>{formatDate(row.updated_at || row.completed_at, lang)}</td></tr>)}</tbody></table></div> : <EmptyState/>}</Card></>;
+}
+
+function useHealthProbe() {
+  const [state, setState] = useState({ status: "loading", rows: [] });
+  const [revision, setRevision] = useState(0);
+  const retry = () => setRevision((value) => value + 1);
+  useEffect(() => {
+    const controller = new AbortController();
+    const checks = [
+      ["API", "/api/health"],
+      ["Quality", "/api/decision/quality-live?symbol=ETHUSDT&timeframe=weekly"],
+      ["Candles", "/api/market/candles?symbol=ETHUSDT&timeframe=1h&interval=1h&limit=5"],
+      ["News", "/api/news?symbol=ETHUSDT&limit=1"]
+    ];
+    Promise.all(checks.map(async ([name, path]) => {
+      const started = performance.now();
+      try {
+        await fetchJson(path, { signal: controller.signal, timeout: 20_000 });
+        return { name, ok: true, latency: Math.round(performance.now() - started), updatedAt: new Date().toISOString() };
+      } catch (error) {
+        return { name, ok: false, latency: null, error: error.message, updatedAt: new Date().toISOString() };
+      }
+    })).then((rows) => setState({ status: "ready", rows }));
+    return () => controller.abort();
+  }, [revision]);
+  return { ...state, retry };
+}
+
+function DataHealthPage() {
+  const { t } = useTranslate();
+  const health = useHealthProbe();
+  if (health.status === "loading") return <EmptyState type="loading"/>;
+  return <><PageHeader title={t("dataHealth")} actions={<button className="button secondary" onClick={health.retry}><Icon name="refresh"/> {t("refresh")}</button>}/><div className="health-grid">{health.rows.map((row) => <Card title={row.name} key={row.name}><div className="health-status"><Badge tone={row.ok ? "success" : "danger"}>{row.ok ? t("serviceHealthy") : t("serviceUnavailable")}</Badge><strong>{row.latency === null ? "—" : `${row.latency} ms`}</strong></div><DataMeta updatedAt={row.updatedAt}/></Card>)}</div></>;
+}
+
+function AlertsPage() {
+  const { state } = useDecision();
+  const { t } = useTranslate();
+  const [rules, setRules] = useState(() => readJsonStorage(ALERTS_STORAGE, []));
+  const [event, setEvent] = useState("stateChange");
+  useEffect(() => localStorage.setItem(ALERTS_STORAGE, JSON.stringify(rules)), [rules]);
+  const add = () => setRules((current) => [...current, { id: Date.now(), symbol: state.symbol, timeframe: state.timeframe, event, enabled: true }]);
+  return <><PageHeader title={t("alerts")} subtitle={t("local")} actions={<button className="button primary" onClick={add}><Icon name="plus"/> {t("createRule")}</button>}/><Card title={t("alertRules")}><div className="toolbar"><select value={event} onChange={(e) => setEvent(e.target.value)}><option value="stateChange">State change</option><option value="activation">Activation</option><option value="stale">Stale data</option></select></div>{rules.length ? <div className="table-wrap"><table><thead><tr><th>{t("asset")}</th><th>{t("timeframe")}</th><th>Event</th><th>{t("status")}</th><th>{t("actions")}</th></tr></thead><tbody>{rules.map((rule) => <tr key={rule.id}><td>{rule.symbol}</td><td>{rule.timeframe}</td><td>{rule.event}</td><td><button className={`status-toggle ${rule.enabled ? "on" : ""}`} onClick={() => setRules((current) => current.map((row) => row.id === rule.id ? { ...row, enabled: !row.enabled } : row))}>{rule.enabled ? "ON" : "OFF"}</button></td><td><button className="icon-button compact" onClick={() => setRules((current) => current.filter((row) => row.id !== rule.id))}><Icon name="trash"/></button></td></tr>)}</tbody></table></div> : <EmptyState/>}</Card></>;
+}
+
+function GuidePage() {
+  const { t, lang } = useTranslate();
+  const steps = lang === "ar" ? [
+    ["ابدأ بالحالة الحاكمة", "لا تفسر قوة القراءة باعتبارها جاهزية تنفيذية."],
+    ["قارن القوة بالجاهزية", "القرار يبقى تحت المتابعة ما دامت شروط التأكيد أو NMP غير مكتملة."],
+    ["راقب المستويات", "التفعيل والوصول والمراجعة والإلغاء مستويات تفسيرية للسيناريو."]
+  ] : [
+    ["Start with the governing state", "Do not interpret reading strength as execution readiness."],
+    ["Compare strength with readiness", "The decision stays under monitoring while confirmation or NMP conditions remain incomplete."],
+    ["Watch the levels", "Activation, arrival, review, and invalidation are explanatory scenario levels."]
+  ];
+  return <><PageHeader title={t("guide")}/><div className="guide-grid">{steps.map(([title, text], index) => <Card title={`${index + 1}. ${title}`} key={title}><p>{text}</p></Card>)}<Card title={t("decisionRoom")}><div className="guide-flow"><span>{t("governingState")}</span><i/><span>{t("strengthVsReadiness")}</span><i/><span>{t("scenarioLevels")}</span><i/><span>{t("riskChallenge")}</span></div></Card></div></>;
+}
+
+function SupportPage() {
+  const { t } = useTranslate();
+  return <><PageHeader title={t("support")}/><Card title={t("support")}><div className="callout warning"><Icon name="warning"/><p>{t("supportUnavailable")}</p></div></Card></>;
+}
+
+function AccountPage() {
+  const { t } = useTranslate();
+  const access = useAccessState();
+  return <><PageHeader title={t("account")}/><div className="account-grid"><Card title={t("account")}><p>{access.authenticated === false ? t("authRequired") : access.authenticated === true ? t("live") : t("noUserData")}</p></Card><Card title={t("plans")}><pre className="json-view">{access.entitlement ? JSON.stringify(access.entitlement, null, 2) : t("planUnavailable")}</pre></Card><Card title="Trial registration"><Badge tone={access.registration?.registration_allowed ? "success" : "muted"}>{access.registration?.registration_allowed ? t("registrationAvailable") : t("registrationUnavailable")}</Badge></Card></div></>;
+}
+
+function PlansPage() {
+  const { t } = useTranslate();
+  return <><PageHeader title={t("plans")}/><div className="plans-grid"><Card title={t("plans")}><p>{t("planUnavailable")}</p></Card><Card title="Billing"><div className="callout warning"><Icon name="warning"/><p>{t("billingUnavailable")}</p></div></Card></div></>;
+}
+
+function SettingsPage() {
+  const { density, setDensity } = useDecision();
+  const { t } = useTranslate();
+  return <><PageHeader title={t("settings")}/><div className="settings-grid"><Card title={t("sourceStatus")}><div className="radio-stack"><label><input type="radio" checked readOnly/><span><b>{t("live")}</b><small>{t("commercialNotice")}</small></span></label></div></Card><Card title={t("appearance")}><div className="radio-stack"><label><input type="radio" name="density" checked={density === "comfortable"} onChange={() => setDensity("comfortable")}/><span><b>{t("comfortable")}</b></span></label><label><input type="radio" name="density" checked={density === "compact"} onChange={() => setDensity("compact")}/><span><b>{t("compact")}</b></span></label></div></Card></div></>;
+}
+
+function ContextPage() {
+  const { state, patch } = useDecision();
+  const { navigate } = useNavigation();
+  const { t, lang } = useTranslate();
+  const [draft, setDraft] = useState(state);
+  const assets = ASSETS.filter((asset) => asset.market === draft.market);
+  return <><PageHeader title={t("changeContext")}/><Card title={t("changeContext")}><div className="context-form"><label><span>{t("market")}</span><select value={draft.market} onChange={(event) => { const market = event.target.value; setDraft((current) => ({ ...current, market, symbol: ASSETS.find((asset) => asset.market === market)?.symbol || current.symbol })); }}>{MARKETS.map((market) => <option value={market} key={market}>{marketLabel(market, lang)}</option>)}</select></label><label><span>{t("asset")}</span><select value={draft.symbol} onChange={(event) => setDraft((current) => ({ ...current, symbol: event.target.value }))}>{assets.map((asset) => <option value={asset.symbol} key={asset.symbol}>{assetName(asset, lang)} · {asset.symbol}</option>)}</select></label><label><span>{t("timeframe")}</span><select value={draft.timeframe} onChange={(event) => setDraft((current) => ({ ...current, timeframe: event.target.value }))}>{TIMEFRAMES.map((timeframe) => <option key={timeframe}>{timeframe}</option>)}</select></label><label><span>{t("readingType")}</span><select value={draft.mode} onChange={(event) => setDraft((current) => ({ ...current, mode: event.target.value }))}><option value="investment">{t("investment")}</option><option value="speculative">{t("speculative")}</option></select></label><label><span>{t("viewLevel")}</span><select value={draft.view} onChange={(event) => setDraft((current) => ({ ...current, view: event.target.value }))}><option value="beginner">{t("beginner")}</option><option value="professional">{t("professional")}</option></select></label></div><div className="form-actions"><button className="button secondary" onClick={() => setDraft(state)}>{t("reset")}</button><button className="button primary" onClick={() => { patch(draft, { newSession: true, push: true }); navigate("/command-center"); }}>{t("confirm")}</button></div></Card></>;
+}
+
+function TrialExpiredPage() {
+  const { t } = useTranslate();
+  const { navigate } = useNavigation();
+  return <div className="center-page"><Icon name="lock" size={52}/><h1>{t("trialExpired")}</h1><p>{t("planUnavailable")}</p><button className="button primary" onClick={() => navigate("/plans")}>{t("plans")}</button></div>;
+}
+function NotFoundPage() {
+  const { navigate } = useNavigation();
+  return <div className="center-page"><span className="error-code">404</span><button className="button primary" onClick={() => navigate("/command-center")}><Icon name="home"/> Home</button></div>;
+}
+
+function AppRoutes() {
+  const { route, navigate } = useNavigation();
+  useEffect(() => { if (route === "/") navigate("/command-center", { replace: true }); }, [route, navigate]);
+  const routes = {
+    "/command-center": <CommandCenterPage/>,
+    "/markets": <MarketsPage/>,
+    "/prices-chart": <PricesChartPage/>,
+    "/opportunities": <OpportunitiesPage/>,
+    "/decision-room": <DecisionRoomPage/>,
+    "/portfolio": <PortfolioPage/>,
+    "/scenarios": <ScenariosPage/>,
+    "/layers": <LayersPage/>,
+    "/risk": <RiskPage/>,
+    "/completed": <CompletedPage/>,
+    "/data-health": <DataHealthPage/>,
+    "/alerts": <AlertsPage/>,
+    "/guide": <GuidePage/>,
+    "/support": <SupportPage/>,
+    "/account": <AccountPage/>,
+    "/plans": <PlansPage/>,
+    "/settings": <SettingsPage/>,
+    "/context": <ContextPage/>,
+    "/trial-expired": <TrialExpiredPage/>
+  };
+  return routes[route] || <NotFoundPage/>;
+}
+
+function AppShell() {
+  const { t } = useTranslate();
+  return <div className="app-shell"><Topbar/><ContextStrip/><main className="page-container"><AppRoutes/></main><footer className="footer"><span>© 2026 NDSP</span><span>{t("explanatoryOnly")}</span></footer><LegalModal/></div>;
+}
+
+function App() {
+  return <React.StrictMode><DecisionProvider><BrowserRouter><AppShell/></BrowserRouter></DecisionProvider></React.StrictMode>;
+}
+
+createRoot(document.getElementById("root")).render(<App/>);

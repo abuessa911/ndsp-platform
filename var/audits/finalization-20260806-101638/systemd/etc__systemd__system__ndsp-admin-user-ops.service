@@ -1,0 +1,12 @@
+[Unit]
+Description=NDSP Admin User Ops
+After=network.target postgresql.service
+
+[Service]
+WorkingDirectory=/opt/ndsp-admin-user-ops
+ExecStart=/usr/bin/python3 -m uvicorn app:app --host 127.0.0.1 --port 9068
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,272 @@
+{
+  "results": [
+    {
+      "viewport": "desktop",
+      "page": "home",
+      "status": 200,
+      "finalUrl": "https://my.ndsp.app/?_ndsp_v17=20260712_221953_desktop_home&fresh=1783887633568",
+      "expectedPath": "/",
+      "bodyTextLength": 3070,
+      "route404": false,
+      "visible404": false,
+      "navigationError": null,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "overflow": false,
+      "languageResult": {
+        "found": true,
+        "first": true,
+        "second": false,
+        "firstState": {
+          "exists": true,
+          "value": "en"
+        },
+        "secondState": {
+          "exists": true,
+          "value": "en"
+        },
+        "initialState": {
+          "exists": false,
+          "value": null
+        },
+        "error": null
+      },
+      "menuResult": null,
+      "screenshot": "desktop_home.png"
+    },
+    {
+      "viewport": "desktop",
+      "page": "asset",
+      "status": 200,
+      "finalUrl": "https://my.ndsp.app/markets?symbol=ETHUSDT&timeframe=weekly",
+      "expectedPath": "/markets",
+      "bodyTextLength": 3315,
+      "route404": false,
+      "visible404": false,
+      "navigationError": null,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "overflow": false,
+      "languageResult": null,
+      "menuResult": null,
+      "screenshot": "desktop_asset.png"
+    },
+    {
+      "viewport": "desktop",
+      "page": "command_center",
+      "status": 200,
+      "finalUrl": "https://my.ndsp.app/decisions",
+      "expectedPath": "/decisions",
+      "bodyTextLength": 2124,
+      "route404": false,
+      "visible404": false,
+      "navigationError": null,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "overflow": false,
+      "languageResult": null,
+      "menuResult": null,
+      "screenshot": "desktop_command_center.png"
+    },
+    {
+      "viewport": "desktop",
+      "page": "daily_brief",
+      "status": 200,
+      "finalUrl": "https://my.ndsp.app/decisions?ndsp_compat=daily-brief",
+      "expectedPath": "/decisions",
+      "bodyTextLength": 2124,
+      "route404": false,
+      "visible404": false,
+      "navigationError": null,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "overflow": false,
+      "languageResult": null,
+      "menuResult": null,
+      "screenshot": "desktop_daily_brief.png"
+    },
+    {
+      "viewport": "desktop",
+      "page": "settings_alerts",
+      "status": 200,
+      "finalUrl": "https://my.ndsp.app/?ndsp_compat=settings-alerts",
+      "expectedPath": "/",
+      "bodyTextLength": 3214,
+      "route404": false,
+      "visible404": false,
+      "navigationError": null,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "overflow": false,
+      "languageResult": null,
+      "menuResult": null,
+      "screenshot": "desktop_settings_alerts.png"
+    },
+    {
+      "viewport": "desktop",
+      "page": "decision_support",
+      "status": 200,
+      "finalUrl": "https://my.ndsp.app/decisions?ndsp_compat=decision-support",
+      "expectedPath": "/decisions",
+      "bodyTextLength": 2124,
+      "route404": false,
+      "visible404": false,
+      "navigationError": null,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "overflow": false,
+      "languageResult": null,
+      "menuResult": null,
+      "screenshot": "desktop_decision_support.png"
+    },
+    {
+      "viewport": "mobile",
+      "page": "home",
+      "status": 200,
+      "finalUrl": "https://my.ndsp.app/?_ndsp_v17=20260712_221953_mobile_home&fresh=1783887684700",
+      "expectedPath": "/",
+      "bodyTextLength": 2294,
+      "route404": false,
+      "visible404": false,
+      "navigationError": null,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "overflow": false,
+      "languageResult": {
+        "found": true,
+        "first": true,
+        "second": false,
+        "firstState": {
+          "exists": true,
+          "value": "en"
+        },
+        "secondState": {
+          "exists": true,
+          "value": "en"
+        },
+        "initialState": {
+          "exists": false,
+          "value": null
+        },
+        "error": null
+      },
+      "menuResult": {
+        "found": true,
+        "clicked": true,
+        "changed": true,
+        "error": null
+      },
+      "screenshot": "mobile_home.png"
+    },
+    {
+      "viewport": "mobile",
+      "page": "asset",
+      "status": 200,
+      "finalUrl": "https://my.ndsp.app/markets?symbol=ETHUSDT&timeframe=weekly",
+      "expectedPath": "/markets",
+      "bodyTextLength": 2555,
+      "route404": false,
+      "visible404": false,
+      "navigationError": null,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "overflow": false,
+      "languageResult": null,
+      "menuResult": {
+        "found": true,
+        "clicked": true,
+        "changed": true,
+        "error": null
+      },
+      "screenshot": "mobile_asset.png"
+    },
+    {
+      "viewport": "mobile",
+      "page": "command_center",
+      "status": 200,
+      "finalUrl": "https://my.ndsp.app/decisions",
+      "expectedPath": "/decisions",
+      "bodyTextLength": 1364,
+      "route404": false,
+      "visible404": false,
+      "navigationError": null,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "overflow": false,
+      "languageResult": null,
+      "menuResult": {
+        "found": true,
+        "clicked": true,
+        "changed": true,
+        "error": null
+      },
+      "screenshot": "mobile_command_center.png"
+    },
+    {
+      "viewport": "mobile",
+      "page": "daily_brief",
+      "status": 200,
+      "finalUrl": "https://my.ndsp.app/decisions?ndsp_compat=daily-brief",
+      "expectedPath": "/decisions",
+      "bodyTextLength": 1364,
+      "route404": false,
+      "visible404": false,
+      "navigationError": null,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "overflow": false,
+      "languageResult": null,
+      "menuResult": {
+        "found": true,
+        "clicked": true,
+        "changed": true,
+        "error": null
+      },
+      "screenshot": "mobile_daily_brief.png"
+    },
+    {
+      "viewport": "mobile",
+      "page": "settings_alerts",
+      "status": 200,
+      "finalUrl": "https://my.ndsp.app/?ndsp_compat=settings-alerts",
+      "expectedPath": "/",
+      "bodyTextLength": 2421,
+      "route404": false,
+      "visible404": false,
+      "navigationError": null,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "overflow": false,
+      "languageResult": null,
+      "menuResult": {
+        "found": true,
+        "clicked": true,
+        "changed": true,
+        "error": null
+      },
+      "screenshot": "mobile_settings_alerts.png"
+    },
+    {
+      "viewport": "mobile",
+      "page": "decision_support",
+      "status": 200,
+      "finalUrl": "https://my.ndsp.app/decisions?ndsp_compat=decision-support",
+      "expectedPath": "/decisions",
+      "bodyTextLength": 1364,
+      "route404": false,
+      "visible404": false,
+      "navigationError": null,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "overflow": false,
+      "languageResult": null,
+      "menuResult": {
+        "found": true,
+        "clicked": true,
+        "changed": true,
+        "error": null
+      },
+      "screenshot": "mobile_decision_support.png"
+    }
+  ]
+}

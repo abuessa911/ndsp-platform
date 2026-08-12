@@ -1,0 +1,20 @@
+# /etc/systemd/system/ndsp-contract-regression-v1-1.service
+[Unit]
+Description=NDSP Backend Contract V1.1 Regression
+After=network-online.target ndsp-live-decision-quality.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=nawaf511
+Group=1000
+EnvironmentFile=-/home/nawaf511/.config/ndsp-contract-regression.env
+ExecStart="/usr/bin/python3.12" "/home/nawaf511/ndsp_contract_regression_v1_1_1.py" verify --baseline "/home/nawaf511/.local/state/ndsp-contract-v1-1/baseline.json" --output-dir "/home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1" --max-latency-ms 3000.0
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1
+LockPersonality=yes
+RestrictSUIDSGID=yes
+UMask=0077

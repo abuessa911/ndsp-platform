@@ -1,0 +1,2 @@
+/home/nawaf511/empire-core-new/apps/ndsp-v53-bridge/app.py:717:    try: base=jget(f'http://127.0.0.1:9083/api/decision/quality-contract-v52?symbol={sym}')
+/home/nawaf511/empire-core-new/apps/ndsp-public-summary-v548/app.py:9:BACKEND = "http://127.0.0.1:9084/api/decision/quality-contract-v53"

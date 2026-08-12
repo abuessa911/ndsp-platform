@@ -1,0 +1,88 @@
+=== NDSP V35 FINAL TRUTH V1 ===
+DATE=2026-08-08T04:45:25+02:00
+MODE=READ_ONLY
+FILES_MODIFIED=0
+SERVICES_RESTARTED=0
+RUNTIME_LOGIC_MODIFIED=0
+AUDIT=/home/nawaf511/empire-core-new/var/audits/v35-final-truth-v1-20260808-044525
+
+=== 1. V35 SERVICE ===
+V35_STATE=active
+MainPID=2402285
+ExecMainStatus=0
+ExecStart={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_evidence_v35.py ; ignore_errors=no ; start_time=[Sat 2026-08-08 04:38:11 CEST] ; stop_time=[n/a] ; pid=2402285 ; code=(null) ; status=0/0 }
+ActiveState=active
+SubState=running
+V35_SERVICE=PASS
+
+=== 2. V35 SOURCE / EXECSTART DISCOVERY ===
+EXECSTART={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_evidence_v35.py ; ignore_errors=no ; start_time=[Sat 2026-08-08 04:38:11 CEST] ; stop_time=[n/a] ; pid=2402285 ; code=(null) ; status=0/0 }
+V35_SOURCE=/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_evidence_v35.py
+V35_PYTHON_SYNTAX=PASS
+
+=== 3. V35 LISTENERS ===
+LISTEN 0      5          127.0.0.1:9087       0.0.0.0:*    users:(("python3",pid=2402285,fd=3)) 
+
+=== 4. V35 RUNTIME OUTPUT DISCOVERY ===
+
+=== 5. NEWEST V35 JSON INSPECTION ===
+V35_JSON_CANDIDATES=0
+
+=== 6. V35 SOURCE REFERENCES ===
+15:HOST = os.environ.get("NDSP_COMPLETED_EVIDENCE_HOST", "127.0.0.1")
+16:PORT = int(os.environ.get("NDSP_COMPLETED_EVIDENCE_PORT", "9087"))
+17:V33_RUNTIME_DIR = Path(os.environ.get(
+18:    "NDSP_V33_RUNTIME_DIR",
+19:    "/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33",
+21:VERSION = "ndsp-completed-decisions-evidence-v35.0.0"
+22:CONTRACT_VERSION = "ndsp-completed-decisions-current-v35"
+75:        "decision_use_allowed": execution.get("decision_use_allowed"),
+76:        "publishable": execution.get("publishable_completed_decision"),
+77:        "blockers": execution.get("blockers") or [],
+95:        and response.get("runtime_version") == "ndsp-canonical-live-runtime-v33.0.0"
+98:        and execution.get("decision_use_allowed") is True
+99:        and execution.get("publishable_completed_decision") is True
+100:        and execution.get("governed_single_truth_state") in {"READY", "COMPLETED"}
+101:        and not (execution.get("blockers") or [])
+157:    evidence_confidence = (
+209:        "evidence_confidence_average": evidence_confidence,
+225:        "evidence_sha256": response.get("evidence_sha256"),
+242:    for path in sorted(V33_RUNTIME_DIR.glob("latest_*.json")):
+263:                "blockers": execution.get("blockers") or [],
+282:    server_version = "NDSPCompletedEvidence/35"
+318:                "service": "ndsp-completed-decisions-evidence-v35",
+322:                "v33_runtime_dir": str(V33_RUNTIME_DIR),
+323:                "v33_runtime_dir_exists": V33_RUNTIME_DIR.is_dir(),
+332:        if parsed.path == "/api/completed-decisions":
+352:                "source": "v33_evidence_backed_current_registry",
+356:                "decision_authority_boundary": "ONLY_V33_PUBLISHABLE_CANONICAL_DECISIONS",
+363:        if parsed.path == "/api/completed-decisions/latest":
+366:                "source": "v33_evidence_backed_current_registry",
+372:        prefix = "/api/completed-decisions/"
+382:                    "error": "NO_CURRENT_PUBLISHABLE_COMPLETED_DECISION",
+388:                "source": "v33_evidence_backed_current_registry",
+398:    if not V33_RUNTIME_DIR.is_dir():
+399:        raise SystemExit(f"V33 runtime directory not found: {V33_RUNTIME_DIR}")
+402:        f"[NDSP] Completed Decisions Evidence V35 listening on "
+
+=== 7. JOURNAL ===
+V35_RUNTIME_ERRORS=NONE_FOUND
+
+=== 8. CLASSIFICATION ===
+V35_FOUR_DIRECTION_EVIDENCE=NOT_FOUND
+V35_COT_HANDOFF=NOT_PROVEN
+NEXT_ACTION=TRACE_V35_INPUT_CONTRACT
+FINAL_RESULT=PASS_DIAGNOSTIC
+
+=== 9. CHECKSUMS ===
+CHECKSUMS=PASS
+
+============================================================
+FILES_MODIFIED=0
+SERVICES_RESTARTED=0
+RUNTIME_LOGIC_MODIFIED=0
+AUDIT=/home/nawaf511/empire-core-new/var/audits/v35-final-truth-v1-20260808-044525
+REPORT=/home/nawaf511/empire-core-new/var/audits/v35-final-truth-v1-20260808-044525/report.txt
+JOURNAL=/home/nawaf511/empire-core-new/var/audits/v35-final-truth-v1-20260808-044525/journal.txt
+CHECKSUMS=/home/nawaf511/empire-core-new/var/audits/v35-final-truth-v1-20260808-044525/SHA256SUMS
+=== V35 FINAL TRUTH COMPLETE ===

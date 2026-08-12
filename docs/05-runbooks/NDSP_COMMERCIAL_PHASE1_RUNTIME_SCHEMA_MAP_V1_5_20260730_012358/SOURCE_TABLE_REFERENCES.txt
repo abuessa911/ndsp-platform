@@ -1,0 +1,15 @@
+=== CURRENT SOURCE REFERENCES ===
+/home/nawaf511/empire-core-new/backend/ndsp_nowpayments.cjs:117:    INSERT INTO public.ndsp_subscriptions
+/home/nawaf511/empire-core-new/backend/ndsp_nowpayments.cjs:381:          FROM public.ndsp_subscriptions
+/home/nawaf511/empire-core-new/backend/ndsp_nowpayments_migrate.cjs:41:    CREATE TABLE IF NOT EXISTS public.ndsp_subscriptions (
+/home/nawaf511/empire-core-new/backend/ndsp_nowpayments_migrate.cjs:58:    CREATE INDEX IF NOT EXISTS ndsp_subscriptions_user_idx
+/home/nawaf511/empire-core-new/backend/ndsp_nowpayments_migrate.cjs:59:      ON public.ndsp_subscriptions (user_id);
+/home/nawaf511/empire-core-new/backend/app/api/compat/user_operational_compat.py:218:                FROM ndsp_subscriptions
+/home/nawaf511/empire-core-new/backend/auth_api/ndsp_user_login_gateway.cjs:774:    `INSERT INTO public.ndsp_legal_acceptances
+/home/nawaf511/empire-core-new/backend/auth_api/ndsp_user_login_gateway.cjs:777:     ON CONFLICT (request_id) DO UPDATE SET upstream_status=COALESCE(EXCLUDED.upstream_status,public.ndsp_legal_acceptances.upstream_status)
+
+=== HASHES OF REFERENCING SOURCE FILES ===
+b7189c7278c0e45ce71f66fb1c1b2b5debeaeb9b77331aa5c745f142af1b7448  /home/nawaf511/empire-core-new/backend/app/api/compat/user_operational_compat.py
+932cbbdda617f2189741843bb11d74b8218e837c61004f9e7ee07c7995854421  /home/nawaf511/empire-core-new/backend/auth_api/ndsp_user_login_gateway.cjs
+c86c22a98ab21e9c4befc6ba3cc35f3f4336432f573dbf398ee80ab259ba08ef  /home/nawaf511/empire-core-new/backend/ndsp_nowpayments.cjs
+574137c8bbc1b5de7e6215677225b5b9be3e0b7ff875374a92927508cd454beb  /home/nawaf511/empire-core-new/backend/ndsp_nowpayments_migrate.cjs

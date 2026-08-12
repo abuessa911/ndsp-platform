@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0.0",
+  "project": "NDSP — Nawaf Decision Support Platform",
+  "generated_at": "2026-07-12T17:54:46+02:00",
+  "counts": {
+    "in_scope_files": 1186,
+    "documentation_files": 320,
+    "canonical_files": 78,
+    "discovered_api_routes": 385,
+    "registered_services": 3
+  },
+  "registries": {
+    "layer_registry": {
+      "path": "docs/03-contracts/NDSP_16_LAYER_CORE_REGISTRY_V1.json",
+      "exists": true,
+      "sha256": "1e82873218176c33ab67176a9ff11494ddf87a72e75ca510abf0d59bcb3d1931"
+    },
+    "capability_registry": {
+      "path": "docs/03-contracts/NDSP_PLATFORM_CAPABILITY_REGISTRY_V1.json",
+      "exists": true,
+      "sha256": "74699294e8cb0ec17d34359379606dc223b72c96091df6fb4298d0f505cc3895"
+    },
+    "asset_registry": {
+      "path": "docs/03-contracts/NDSP_ASSET_MASTER_REGISTRY_V1.json",
+      "exists": true,
+      "sha256": "fbe79e89af86197c90f4463a2f5ff7d0edb993db69f810c236521ff4ee95e944"
+    },
+    "source_registry": {
+      "path": "docs/03-contracts/NDSP_SOURCE_REGISTRY_V1.json",
+      "exists": true,
+      "sha256": "cc0d37db0362e98f246e89b20eb8b3b0b9d808283a72e3dc7678a4fdde2e3dde"
+    },
+    "contract_registry": {
+      "path": "docs/03-contracts/NDSP_SCHEMA_CONTRACT_REGISTRY_V1.json",
+      "exists": true,
+      "sha256": "3352ff12fbab94b1f3a683ee4b9cbe31b0ec9b80efc4a7de6f2bf1ce9d27c48a"
+    }
+  },
+  "canonical_roots": [
+    "backend/layers/canonical_v1",
+    "backend/platform/canonical_v1",
+    "backend/data_foundation/canonical_v1",
+    "backend/contracts/canonical_v1",
+    "backend/orchestration/canonical_v1",
+    "backend/evidence/canonical_v1",
+    "backend/governance/canonical_v1",
+    "backend/simulation/canonical_v1",
+    "backend/observability/canonical_v1",
+    "backend/intelligence/canonical_v1",
+    "backend/explainability/canonical_v1",
+    "backend/evaluation/canonical_v1",
+    "backend/access/canonical_v1",
+    "backend/integrations/canonical_v1",
+    "backend/commercial/canonical_v1",
+    "backend/security/canonical_v1",
+    "backend/operations/canonical_v1"
+  ],
+  "service_registry": "docs/99-governance-baseline/SERVICE_REGISTRY.json",
+  "api_registry": "docs/99-governance-baseline/API_REGISTRY.json",
+  "documentation_registry": "docs/99-governance-baseline/DOCUMENTATION_REGISTRY.json"
+}

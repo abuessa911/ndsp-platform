@@ -1,0 +1,44 @@
+server {
+    listen 80;
+    listen [::]:80;
+    server_name ndsp.app www.ndsp.app;
+
+    return 301 https://my.ndsp.app$request_uri;
+
+
+    # NDSP_RESET_PASSWORD_ROUTE_V3_BEGIN
+    location = /reset-password.html {
+        root /var/www/html;
+        default_type text/html;
+        add_header Cache-Control "no-store, no-cache, must-revalidate, max-age=0" always;
+        add_header X-NDSP-Reset-Route "v3" always;
+        try_files /reset-password.html =404;
+    }
+    # NDSP_RESET_PASSWORD_ROUTE_V3_END
+
+}
+
+server {
+    include /etc/nginx/snippets/ndsp-staged-commercial-security.conf;
+
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name ndsp.app www.ndsp.app;
+
+    ssl_certificate /etc/letsencrypt/live/ndsp.app/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/ndsp.app/privkey.pem;
+
+    return 301 https://my.ndsp.app$request_uri;
+
+
+    # NDSP_RESET_PASSWORD_ROUTE_V3_BEGIN
+    location = /reset-password.html {
+        root /var/www/html;
+        default_type text/html;
+        add_header Cache-Control "no-store, no-cache, must-revalidate, max-age=0" always;
+        add_header X-NDSP-Reset-Route "v3" always;
+        try_files /reset-password.html =404;
+    }
+    # NDSP_RESET_PASSWORD_ROUTE_V3_END
+
+}

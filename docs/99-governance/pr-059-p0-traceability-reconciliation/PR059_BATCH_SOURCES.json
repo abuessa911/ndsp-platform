@@ -1,0 +1,116 @@
+[
+  {
+    "pr_number": 37,
+    "closure_results": "docs/99-governance/pr-037-p0-batch-01-evidence-closure/PR037_CLOSURE_RESULTS.csv",
+    "evidence_matrix": "docs/99-governance/pr-037-p0-batch-01-evidence-closure/PR037_EVIDENCE_MATRIX.csv",
+    "capability_count": 25
+  },
+  {
+    "pr_number": 38,
+    "closure_results": "docs/99-governance/pr-038-p0-batch-02-evidence-closure/PR038_CLOSURE_RESULTS.csv",
+    "evidence_matrix": "docs/99-governance/pr-038-p0-batch-02-evidence-closure/PR038_EVIDENCE_MATRIX.csv",
+    "capability_count": 25
+  },
+  {
+    "pr_number": 40,
+    "closure_results": "docs/99-governance/pr-040-p0-batch-03-evidence-closure/PR040_CLOSURE_RESULTS.csv",
+    "evidence_matrix": "docs/99-governance/pr-040-p0-batch-03-evidence-closure/PR040_EVIDENCE_MATRIX.csv",
+    "capability_count": 25
+  },
+  {
+    "pr_number": 42,
+    "closure_results": "docs/99-governance/pr-042-p0-batch-04-evidence-closure/PR042_CLOSURE_RESULTS.csv",
+    "evidence_matrix": "docs/99-governance/pr-042-p0-batch-04-evidence-closure/PR042_EVIDENCE_MATRIX.csv",
+    "capability_count": 25
+  },
+  {
+    "pr_number": 43,
+    "closure_results": "docs/99-governance/pr-043-p0-batch-05-evidence-closure/PR043_CLOSURE_RESULTS.csv",
+    "evidence_matrix": "docs/99-governance/pr-043-p0-batch-05-evidence-closure/PR043_EVIDENCE_MATRIX.csv",
+    "capability_count": 10
+  },
+  {
+    "pr_number": 44,
+    "closure_results": "docs/99-governance/pr-044-p0-batch-06-evidence-closure/PR044_CLOSURE_RESULTS.csv",
+    "evidence_matrix": "docs/99-governance/pr-044-p0-batch-06-evidence-closure/PR044_EVIDENCE_MATRIX.csv",
+    "capability_count": 25
+  },
+  {
+    "pr_number": 45,
+    "closure_results": "docs/99-governance/pr-045-p0-batch-07-evidence-closure/PR045_CLOSURE_RESULTS.csv",
+    "evidence_matrix": "docs/99-governance/pr-045-p0-batch-07-evidence-closure/PR045_EVIDENCE_MATRIX.csv",
+    "capability_count": 25
+  },
+  {
+    "pr_number": 46,
+    "closure_results": "docs/99-governance/pr-046-p0-batch-08-evidence-closure/PR046_CLOSURE_RESULTS.csv",
+    "evidence_matrix": "docs/99-governance/pr-046-p0-batch-08-evidence-closure/PR046_EVIDENCE_MATRIX.csv",
+    "capability_count": 6
+  },
+  {
+    "pr_number": 47,
+    "closure_results": "docs/99-governance/pr-047-p0-batch-09-evidence-closure/PR047_CLOSURE_RESULTS.csv",
+    "evidence_matrix": "docs/99-governance/pr-047-p0-batch-09-evidence-closure/PR047_EVIDENCE_MATRIX.csv",
+    "capability_count": 25
+  },
+  {
+    "pr_number": 48,
+    "closure_results": "docs/99-governance/pr-048-p0-batch-10-evidence-closure/PR048_CLOSURE_RESULTS.csv",
+    "evidence_matrix": "docs/99-governance/pr-048-p0-batch-10-evidence-closure/PR048_EVIDENCE_MATRIX.csv",
+    "capability_count": 25
+  },
+  {
+    "pr_number": 49,
+    "closure_results": "docs/99-governance/pr-049-p0-batch-11-evidence-closure/PR049_CLOSURE_RESULTS.csv",
+    "evidence_matrix": "docs/99-governance/pr-049-p0-batch-11-evidence-closure/PR049_EVIDENCE_MATRIX.csv",
+    "capability_count": 18
+  },
+  {
+    "pr_number": 50,
+    "closure_results": "docs/99-governance/pr-050-p0-batch-12-evidence-closure/PR050_CLOSURE_RESULTS.csv",
+    "evidence_matrix": "docs/99-governance/pr-050-p0-batch-12-evidence-closure/PR050_EVIDENCE_MATRIX.csv",
+    "capability_count": 25
+  },
+  {
+    "pr_number": 51,
+    "closure_results": "docs/99-governance/pr-051-p0-batch-13-evidence-closure/PR051_CLOSURE_RESULTS.csv",
+    "evidence_matrix": "docs/99-governance/pr-051-p0-batch-13-evidence-closure/PR051_EVIDENCE_MATRIX.csv",
+    "capability_count": 18
+  },
+  {
+    "pr_number": 52,
+    "closure_results": "docs/99-governance/pr-052-p0-batch-14-evidence-closure/PR052_CLOSURE_RESULTS.csv",
+    "evidence_matrix": "docs/99-governance/pr-052-p0-batch-14-evidence-closure/PR052_EVIDENCE_MATRIX.csv",
+    "capability_count": 25
+  },
+  {
+    "pr_number": 53,
+    "closure_results": "docs/99-governance/pr-053-p0-batch-15-evidence-closure/PR053_CLOSURE_RESULTS.csv",
+    "evidence_matrix": "docs/99-governance/pr-053-p0-batch-15-evidence-closure/PR053_EVIDENCE_MATRIX.csv",
+    "capability_count": 25
+  },
+  {
+    "pr_number": 54,
+    "closure_results": "docs/99-governance/pr-054-p0-batch-16-evidence-closure/PR054_CLOSURE_RESULTS.csv",
+    "evidence_matrix": "docs/99-governance/pr-054-p0-batch-16-evidence-closure/PR054_EVIDENCE_MATRIX.csv",
+    "capability_count": 25
+  },
+  {
+    "pr_number": 55,
+    "closure_results": "docs/99-governance/pr-055-p0-batch-17-evidence-closure/PR055_CLOSURE_RESULTS.csv",
+    "evidence_matrix": "docs/99-governance/pr-055-p0-batch-17-evidence-closure/PR055_EVIDENCE_MATRIX.csv",
+    "capability_count": 3
+  },
+  {
+    "pr_number": 56,
+    "closure_results": "docs/99-governance/pr-056-p0-batch-18-evidence-closure/PR056_CLOSURE_RESULTS.csv",
+    "evidence_matrix": "docs/99-governance/pr-056-p0-batch-18-evidence-closure/PR056_EVIDENCE_MATRIX.csv",
+    "capability_count": 25
+  },
+  {
+    "pr_number": 57,
+    "closure_results": "docs/99-governance/pr-057-p0-batch-19-evidence-closure/PR057_CLOSURE_RESULTS.csv",
+    "evidence_matrix": "docs/99-governance/pr-057-p0-batch-19-evidence-closure/PR057_EVIDENCE_MATRIX.csv",
+    "capability_count": 11
+  }
+]

@@ -307,7 +307,7 @@ async function insertUser(client, body, mode) {
 function sendMailSafe(to, subject, text, html) {
   try {
     const payload = JSON.stringify({ to, subject, text, html: html || '' });
-    const r = spawnSync('/usr/local/bin/ndsp_send_mail.py', [], {
+    const r = spawnSync('/home/nawaf511/empire-core-new/backend/services/ndsp-runtime-jobs/ndsp_send_mail.py', [], {
       input: payload,
       encoding: 'utf8',
       timeout: 30000,

@@ -343,7 +343,7 @@ async function insertUser(client, body, mode) {
 function sendMailSafe(to, subject, text, html) {
   try {
     const payload = JSON.stringify({ to, subject, text, html: html || '' });
-    const r = spawnSync('/usr/local/bin/ndsp_send_mail.py', [], {
+    const r = spawnSync('/home/nawaf511/empire-core-new/backend/services/ndsp-runtime-jobs/ndsp_send_mail.py', [], {
       input: payload,
       encoding: 'utf8',
       timeout: 30000,
@@ -407,7 +407,7 @@ https://admin.ndsp.app/
   const userText = isPending
     ? `مرحبًا ${name},
 
-تم استلام طلب التسجيل في NDSP — منصة نواف لدعم القرار.
+تم استلام طلب التسجيل في NDSP — منصة دعم القرار.
 
 نوع الحساب:
 ${modeLabel}
@@ -420,7 +420,7 @@ NDSP
 `
     : `مرحبًا ${name},
 
-تم إنشاء حساب التجربة في NDSP — منصة نواف لدعم القرار.
+تم إنشاء حساب التجربة في NDSP — منصة دعم القرار.
 
 يمكنك الآن الدخول إلى بوابة المستخدم:
 https://my.ndsp.app/

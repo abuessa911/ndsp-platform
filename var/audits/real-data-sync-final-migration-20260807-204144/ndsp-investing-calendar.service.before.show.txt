@@ -1,0 +1,8 @@
+Result=success
+ExecStart={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/ndsp-portal-real-data-sync/investing_live_calendar.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }
+TriggeredBy=
+LoadState=loaded
+ActiveState=inactive
+SubState=dead
+FragmentPath=/etc/systemd/system/ndsp-investing-calendar.service
+DropInPaths=

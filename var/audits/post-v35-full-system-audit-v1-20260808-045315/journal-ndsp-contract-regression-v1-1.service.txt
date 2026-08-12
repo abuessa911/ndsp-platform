@@ -1,0 +1,151 @@
+أغسطس 07 15:55:20 vmi2934783 python3.12[1794630]: FAIL: 837 regression failure(s), 1 warning(s).
+أغسطس 07 15:55:20 vmi2934783 python3.12[1794630]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T135520Z.md
+أغسطس 07 15:55:20 vmi2934783 python3.12[1794630]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T135520Z.json
+أغسطس 07 16:11:24 vmi2934783 python3.12[1849053]: FAIL: 837 regression failure(s), 0 warning(s).
+أغسطس 07 16:11:24 vmi2934783 python3.12[1849053]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T141124Z.md
+أغسطس 07 16:11:24 vmi2934783 python3.12[1849053]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T141124Z.json
+أغسطس 07 16:27:57 vmi2934783 python3.12[1904738]: FAIL: 837 regression failure(s), 0 warning(s).
+أغسطس 07 16:27:57 vmi2934783 python3.12[1904738]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T142757Z.md
+أغسطس 07 16:27:57 vmi2934783 python3.12[1904738]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T142757Z.json
+أغسطس 07 16:44:01 vmi2934783 python3.12[1956237]: FAIL: 837 regression failure(s), 0 warning(s).
+أغسطس 07 16:44:01 vmi2934783 python3.12[1956237]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T144401Z.md
+أغسطس 07 16:44:01 vmi2934783 python3.12[1956237]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T144401Z.json
+-- Boot 645dbba7d26d4e9886840cf8f0143622 --
+أغسطس 07 16:51:18 vmi2934783 python3.12[23631]: FAIL: 843 regression failure(s), 1 warning(s).
+أغسطس 07 16:51:18 vmi2934783 python3.12[23631]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T145118Z.md
+أغسطس 07 16:51:18 vmi2934783 python3.12[23631]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T145118Z.json
+أغسطس 07 17:07:41 vmi2934783 python3.12[74732]: FAIL: 843 regression failure(s), 0 warning(s).
+أغسطس 07 17:07:41 vmi2934783 python3.12[74732]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T150741Z.md
+أغسطس 07 17:07:41 vmi2934783 python3.12[74732]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T150741Z.json
+أغسطس 07 17:23:17 vmi2934783 python3.12[122834]: FAIL: 843 regression failure(s), 0 warning(s).
+أغسطس 07 17:23:17 vmi2934783 python3.12[122834]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T152317Z.md
+أغسطس 07 17:23:17 vmi2934783 python3.12[122834]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T152317Z.json
+أغسطس 07 17:38:54 vmi2934783 python3.12[170663]: FAIL: 843 regression failure(s), 0 warning(s).
+أغسطس 07 17:38:54 vmi2934783 python3.12[170663]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T153854Z.md
+أغسطس 07 17:38:54 vmi2934783 python3.12[170663]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T153854Z.json
+أغسطس 07 17:54:49 vmi2934783 python3.12[218702]: FAIL: 843 regression failure(s), 0 warning(s).
+أغسطس 07 17:54:49 vmi2934783 python3.12[218702]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T155449Z.md
+أغسطس 07 17:54:49 vmi2934783 python3.12[218702]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T155449Z.json
+أغسطس 07 18:10:14 vmi2934783 python3.12[265069]: FAIL: 843 regression failure(s), 2 warning(s).
+أغسطس 07 18:10:14 vmi2934783 python3.12[265069]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T161014Z.md
+أغسطس 07 18:10:14 vmi2934783 python3.12[265069]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T161014Z.json
+أغسطس 07 18:25:22 vmi2934783 python3.12[310408]: FAIL: 843 regression failure(s), 2 warning(s).
+أغسطس 07 18:25:22 vmi2934783 python3.12[310408]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T162522Z.md
+أغسطس 07 18:25:22 vmi2934783 python3.12[310408]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T162522Z.json
+أغسطس 07 18:42:18 vmi2934783 python3.12[361777]: FAIL: 843 regression failure(s), 0 warning(s).
+أغسطس 07 18:42:18 vmi2934783 python3.12[361777]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T164218Z.md
+أغسطس 07 18:42:18 vmi2934783 python3.12[361777]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T164218Z.json
+أغسطس 07 18:58:41 vmi2934783 python3.12[442637]: FAIL: 843 regression failure(s), 1 warning(s).
+أغسطس 07 18:58:41 vmi2934783 python3.12[442637]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T165841Z.md
+أغسطس 07 18:58:41 vmi2934783 python3.12[442637]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T165841Z.json
+أغسطس 07 19:14:37 vmi2934783 python3.12[575758]: FAIL: 843 regression failure(s), 0 warning(s).
+أغسطس 07 19:14:37 vmi2934783 python3.12[575758]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T171437Z.md
+أغسطس 07 19:14:37 vmi2934783 python3.12[575758]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T171437Z.json
+أغسطس 07 19:30:12 vmi2934783 python3.12[665086]: FAIL: 843 regression failure(s), 1 warning(s).
+أغسطس 07 19:30:12 vmi2934783 python3.12[665086]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T173012Z.md
+أغسطس 07 19:30:12 vmi2934783 python3.12[665086]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T173012Z.json
+أغسطس 07 19:46:28 vmi2934783 python3.12[741124]: FAIL: 843 regression failure(s), 0 warning(s).
+أغسطس 07 19:46:28 vmi2934783 python3.12[741124]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T174628Z.md
+أغسطس 07 19:46:28 vmi2934783 python3.12[741124]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T174628Z.json
+أغسطس 07 20:01:54 vmi2934783 python3.12[798480]: FAIL: 843 regression failure(s), 0 warning(s).
+أغسطس 07 20:01:54 vmi2934783 python3.12[798480]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T180154Z.md
+أغسطس 07 20:01:54 vmi2934783 python3.12[798480]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T180154Z.json
+أغسطس 07 20:18:29 vmi2934783 python3.12[858723]: FAIL: 843 regression failure(s), 0 warning(s).
+أغسطس 07 20:18:29 vmi2934783 python3.12[858723]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T181829Z.md
+أغسطس 07 20:18:29 vmi2934783 python3.12[858723]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T181829Z.json
+أغسطس 07 20:35:25 vmi2934783 python3.12[919311]: FAIL: 843 regression failure(s), 0 warning(s).
+أغسطس 07 20:35:25 vmi2934783 python3.12[919311]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T183525Z.md
+أغسطس 07 20:35:25 vmi2934783 python3.12[919311]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T183525Z.json
+أغسطس 07 20:50:33 vmi2934783 python3.12[968408]: FAIL: 843 regression failure(s), 0 warning(s).
+أغسطس 07 20:50:33 vmi2934783 python3.12[968408]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T185033Z.md
+أغسطس 07 20:50:33 vmi2934783 python3.12[968408]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T185033Z.json
+أغسطس 07 21:05:51 vmi2934783 python3.12[1014901]: FAIL: 843 regression failure(s), 1 warning(s).
+أغسطس 07 21:05:51 vmi2934783 python3.12[1014901]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T190551Z.md
+أغسطس 07 21:05:51 vmi2934783 python3.12[1014901]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T190551Z.json
+أغسطس 07 21:21:36 vmi2934783 python3.12[1062863]: FAIL: 843 regression failure(s), 0 warning(s).
+أغسطس 07 21:21:36 vmi2934783 python3.12[1062863]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T192136Z.md
+أغسطس 07 21:21:36 vmi2934783 python3.12[1062863]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T192136Z.json
+أغسطس 07 21:36:53 vmi2934783 python3.12[1111210]: FAIL: 843 regression failure(s), 0 warning(s).
+أغسطس 07 21:36:53 vmi2934783 python3.12[1111210]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T193653Z.md
+أغسطس 07 21:36:53 vmi2934783 python3.12[1111210]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T193653Z.json
+أغسطس 07 21:52:02 vmi2934783 python3.12[1160022]: FAIL: 843 regression failure(s), 0 warning(s).
+أغسطس 07 21:52:02 vmi2934783 python3.12[1160022]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T195202Z.md
+أغسطس 07 21:52:02 vmi2934783 python3.12[1160022]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T195202Z.json
+أغسطس 07 22:08:14 vmi2934783 python3.12[1209310]: FAIL: 843 regression failure(s), 0 warning(s).
+أغسطس 07 22:08:14 vmi2934783 python3.12[1209310]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T200814Z.md
+أغسطس 07 22:08:14 vmi2934783 python3.12[1209310]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T200814Z.json
+أغسطس 07 22:25:05 vmi2934783 python3.12[1261486]: FAIL: 843 regression failure(s), 1 warning(s).
+أغسطس 07 22:25:05 vmi2934783 python3.12[1261486]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T202505Z.md
+أغسطس 07 22:25:05 vmi2934783 python3.12[1261486]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T202505Z.json
+أغسطس 07 22:40:18 vmi2934783 python3.12[1307755]: FAIL: 843 regression failure(s), 1 warning(s).
+أغسطس 07 22:40:18 vmi2934783 python3.12[1307755]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T204018Z.md
+أغسطس 07 22:40:18 vmi2934783 python3.12[1307755]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T204018Z.json
+أغسطس 07 22:56:54 vmi2934783 python3.12[1359541]: FAIL: 843 regression failure(s), 0 warning(s).
+أغسطس 07 22:56:54 vmi2934783 python3.12[1359541]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T205654Z.md
+أغسطس 07 22:56:54 vmi2934783 python3.12[1359541]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T205654Z.json
+أغسطس 07 23:12:03 vmi2934783 python3.12[1406220]: FAIL: 843 regression failure(s), 0 warning(s).
+أغسطس 07 23:12:03 vmi2934783 python3.12[1406220]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T211203Z.md
+أغسطس 07 23:12:03 vmi2934783 python3.12[1406220]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T211203Z.json
+أغسطس 07 23:28:36 vmi2934783 python3.12[1457378]: FAIL: 843 regression failure(s), 0 warning(s).
+أغسطس 07 23:28:36 vmi2934783 python3.12[1457378]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T212836Z.md
+أغسطس 07 23:28:36 vmi2934783 python3.12[1457378]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T212836Z.json
+أغسطس 07 23:44:53 vmi2934783 python3.12[1505933]: FAIL: 843 regression failure(s), 0 warning(s).
+أغسطس 07 23:44:53 vmi2934783 python3.12[1505933]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T214453Z.md
+أغسطس 07 23:44:53 vmi2934783 python3.12[1505933]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T214453Z.json
+أغسطس 08 00:00:55 vmi2934783 python3.12[1555300]: FAIL: 843 regression failure(s), 0 warning(s).
+أغسطس 08 00:00:55 vmi2934783 python3.12[1555300]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T220055Z.md
+أغسطس 08 00:00:55 vmi2934783 python3.12[1555300]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T220055Z.json
+أغسطس 08 00:16:23 vmi2934783 python3.12[1602629]: FAIL: 843 regression failure(s), 0 warning(s).
+أغسطس 08 00:16:23 vmi2934783 python3.12[1602629]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T221623Z.md
+أغسطس 08 00:16:23 vmi2934783 python3.12[1602629]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T221623Z.json
+أغسطس 08 00:31:30 vmi2934783 python3.12[1648731]: FAIL: 843 regression failure(s), 1 warning(s).
+أغسطس 08 00:31:30 vmi2934783 python3.12[1648731]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T223130Z.md
+أغسطس 08 00:31:30 vmi2934783 python3.12[1648731]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T223130Z.json
+أغسطس 08 00:48:07 vmi2934783 python3.12[1698457]: FAIL: 843 regression failure(s), 0 warning(s).
+أغسطس 08 00:48:07 vmi2934783 python3.12[1698457]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T224807Z.md
+أغسطس 08 00:48:07 vmi2934783 python3.12[1698457]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T224807Z.json
+أغسطس 08 01:04:53 vmi2934783 python3.12[1749910]: FAIL: 843 regression failure(s), 0 warning(s).
+أغسطس 08 01:04:53 vmi2934783 python3.12[1749910]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T230453Z.md
+أغسطس 08 01:04:53 vmi2934783 python3.12[1749910]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T230453Z.json
+أغسطس 08 01:20:41 vmi2934783 python3.12[1797461]: FAIL: 843 regression failure(s), 0 warning(s).
+أغسطس 08 01:20:41 vmi2934783 python3.12[1797461]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T232041Z.md
+أغسطس 08 01:20:41 vmi2934783 python3.12[1797461]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T232041Z.json
+أغسطس 08 01:37:04 vmi2934783 python3.12[1847931]: FAIL: 843 regression failure(s), 0 warning(s).
+أغسطس 08 01:37:04 vmi2934783 python3.12[1847931]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T233704Z.md
+أغسطس 08 01:37:04 vmi2934783 python3.12[1847931]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T233704Z.json
+أغسطس 08 01:54:04 vmi2934783 python3.12[1898577]: FAIL: 843 regression failure(s), 0 warning(s).
+أغسطس 08 01:54:04 vmi2934783 python3.12[1898577]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T235404Z.md
+أغسطس 08 01:54:04 vmi2934783 python3.12[1898577]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T235404Z.json
+أغسطس 08 02:10:13 vmi2934783 python3.12[1949228]: FAIL: 843 regression failure(s), 0 warning(s).
+أغسطس 08 02:10:13 vmi2934783 python3.12[1949228]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260808T001013Z.md
+أغسطس 08 02:10:13 vmi2934783 python3.12[1949228]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260808T001013Z.json
+أغسطس 08 02:25:44 vmi2934783 python3.12[1996201]: FAIL: 843 regression failure(s), 0 warning(s).
+أغسطس 08 02:25:44 vmi2934783 python3.12[1996201]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260808T002544Z.md
+أغسطس 08 02:25:44 vmi2934783 python3.12[1996201]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260808T002544Z.json
+أغسطس 08 02:42:34 vmi2934783 python3.12[2047067]: FAIL: 843 regression failure(s), 0 warning(s).
+أغسطس 08 02:42:34 vmi2934783 python3.12[2047067]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260808T004234Z.md
+أغسطس 08 02:42:34 vmi2934783 python3.12[2047067]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260808T004234Z.json
+أغسطس 08 02:58:03 vmi2934783 python3.12[2094131]: FAIL: 843 regression failure(s), 0 warning(s).
+أغسطس 08 02:58:03 vmi2934783 python3.12[2094131]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260808T005803Z.md
+أغسطس 08 02:58:03 vmi2934783 python3.12[2094131]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260808T005803Z.json
+أغسطس 08 03:14:18 vmi2934783 python3.12[2142997]: FAIL: 843 regression failure(s), 0 warning(s).
+أغسطس 08 03:14:18 vmi2934783 python3.12[2142997]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260808T011418Z.md
+أغسطس 08 03:14:18 vmi2934783 python3.12[2142997]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260808T011418Z.json
+أغسطس 08 03:30:12 vmi2934783 python3.12[2191733]: FAIL: 843 regression failure(s), 0 warning(s).
+أغسطس 08 03:30:12 vmi2934783 python3.12[2191733]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260808T013012Z.md
+أغسطس 08 03:30:12 vmi2934783 python3.12[2191733]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260808T013012Z.json
+أغسطس 08 03:46:08 vmi2934783 python3.12[2240947]: FAIL: 843 regression failure(s), 0 warning(s).
+أغسطس 08 03:46:08 vmi2934783 python3.12[2240947]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260808T014608Z.md
+أغسطس 08 03:46:08 vmi2934783 python3.12[2240947]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260808T014608Z.json
+أغسطس 08 04:01:44 vmi2934783 python3.12[2289379]: FAIL: 837 regression failure(s), 0 warning(s).
+أغسطس 08 04:01:44 vmi2934783 python3.12[2289379]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260808T020144Z.md
+أغسطس 08 04:01:44 vmi2934783 python3.12[2289379]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260808T020144Z.json
+أغسطس 08 04:17:35 vmi2934783 python3.12[2337916]: FAIL: 837 regression failure(s), 0 warning(s).
+أغسطس 08 04:17:35 vmi2934783 python3.12[2337916]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260808T021735Z.md
+أغسطس 08 04:17:35 vmi2934783 python3.12[2337916]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260808T021735Z.json
+أغسطس 08 04:33:04 vmi2934783 python3.12[2386936]: FAIL: 837 regression failure(s), 0 warning(s).
+أغسطس 08 04:33:04 vmi2934783 python3.12[2386936]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260808T023304Z.md
+أغسطس 08 04:33:04 vmi2934783 python3.12[2386936]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260808T023304Z.json
+أغسطس 08 04:49:20 vmi2934783 python3.12[2436365]: FAIL: 837 regression failure(s), 0 warning(s).
+أغسطس 08 04:49:20 vmi2934783 python3.12[2436365]: Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260808T024920Z.md
+أغسطس 08 04:49:20 vmi2934783 python3.12[2436365]: JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260808T024920Z.json

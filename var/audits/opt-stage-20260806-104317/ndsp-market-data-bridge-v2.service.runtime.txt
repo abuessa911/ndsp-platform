@@ -1,0 +1,7 @@
+MainPID=1398
+ExecStart={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /opt/ndsp-market-data-bridge-v2/bridge.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }
+Environment=BRIDGE_HOST=127.0.0.1 BRIDGE_PORT=9095 PYTHONUNBUFFERED=1 NEWS_CACHE_DIR=/var/lib/ndsp-market-data-bridge-v2 NEWS_CACHE_TTL=900 NEWS_STALE_TTL=86400 NEWS_MIN_UPSTREAM_INTERVAL=6
+EnvironmentFiles=/etc/ndsp-market-data-bridge-v2.env (ignore_errors=yes)
+WorkingDirectory=/opt/ndsp-market-data-bridge-v2
+ActiveState=active
+SubState=running

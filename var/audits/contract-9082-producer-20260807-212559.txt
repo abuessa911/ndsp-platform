@@ -1,0 +1,196 @@
+=== 9082 CANONICAL CONTRACT PRODUCER ===
+
+1) WHO LISTENS ON 9082
+LISTEN 0      5          127.0.0.1:9082       0.0.0.0:*    users:(("python3",pid=1338,fd=3))                                                                                                                                                                                              
+
+2) SYSTEMD / PM2 PROCESS
+PID=1338
+CMD=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_quality_live_nmp_wrapper.py 
+CWD=/home/nawaf511/empire-core-new
+EXE=/usr/bin/python3.12
+
+3) PROJECT ROUTE DEFINITIONS
+backend/services/ndsp-runtime-jobs/real-data-sync/sync.sh:8:LIVE_SAMPLE="$(curl -sS 'http://127.0.0.1:9057/api/decision/quality-live?symbol=ETHUSDT' || true)"
+backend/services/ndsp-runtime-jobs/real-data-sync/sync_real_ledger.py:11:API="http://127.0.0.1:9057/api/decision/quality-live"
+backend/services/ndsp-runtime-jobs/ndsp-refresh-static-data-contract-v46.core_before_public_scrub_20260701_190411:34:    url=f"https://api.ndsp.app/api/decision/quality-live?symbol={symbol}&timeframe={timeframe}&v={int(time.time())}"
+backend/services/ndsp-runtime-jobs/ndsp-refresh-static-data-contract-v46.core_before_public_scrub_20260701_190411:171:    item["source"]="quality-live+nmp+v46-backend-fields"
+backend/services/ndsp-runtime-jobs/ndsp-refresh-static-data-contract-v46.core_before_public_scrub_20260701_190411:177:  "version":"NDSP_V4.6_BACKEND_FIELDS_READY","nmp_connected":True,"nmp_source":"quality-live-nmp-wrapper",
+backend/services/ndsp-runtime-jobs/ndsp-refresh-live-data:101:        f"https://api.ndsp.app/api/decision/quality-live?symbol={symbol}",
+backend/services/ndsp-runtime-jobs/ndsp-refresh-live-data:102:        f"http://127.0.0.1:9057/api/decision/quality-live?symbol={symbol}",
+backend/services/ndsp-business-ops/monitor.py:15:SERVICES=['ndsp-business-ops.service','ndsp-raw-cot-gateway.service','ndsp-quality-live-nmp-wrapper.service','ndsp-quality-live-golden-wrapper.service','ndsp-live-decision-quality.service']
+backend/services/ndsp-business-ops/monitor.py:18: ('decision_local',LOCAL+'/api/decision/quality-live?symbol=ETHUSDT&timeframe=weekly&analysis_mode=investment','decision'),
+backend/runtime/quarantine/live-before-dev020c-20260629_101120/NDSP_Sovereign_Command_Preview.html:1204:    `/api/decision/quality-live?symbol=${encodeURIComponent(symbol)}`,
+backend/runtime/quarantine/live-before-dev020c-20260629_101120/NDSP_Sovereign_Command_Preview.html:1205:    `https://api.ndsp.app/api/decision/quality-live?symbol=${encodeURIComponent(symbol)}`,
+backend/runtime/quarantine/live-html-before-dev018b-20260629_093055/NDSP_Radar_Command.html:568:    `/api/decision/quality-live?symbol=${symbol}`,
+backend/runtime/quarantine/live-html-before-dev018b-20260629_093055/NDSP_Radar_Command.html:569:    `https://api.ndsp.app/api/decision/quality-live?symbol=${symbol}`,
+backend/ndsp-live-decision-quality/server.py.bak.instrument_timeframe_20260712_202842:919:@app.get("/api/decision/quality-live")
+backend/ndsp-live-decision-quality/server.py.bak.instrument_timeframe_20260712_202842:925:@app.get("/api/decision/quality-live/health")
+backend/ndsp-live-decision-quality/server.py:919:@app.get("/api/decision/quality-live")
+backend/ndsp-live-decision-quality/server.py:925:@app.get("/api/decision/quality-live/health")
+backend/ndsp-live-decision-quality/server.py.bak.instrument_timeframe_v4_20260712_204058:919:@app.get("/api/decision/quality-live")
+backend/ndsp-live-decision-quality/server.py.bak.instrument_timeframe_v4_20260712_204058:925:@app.get("/api/decision/quality-live/health")
+backend/ndsp-live-decision-quality/server.py.bak.instrument_timeframe_v3_20260712_203522:919:@app.get("/api/decision/quality-live")
+backend/ndsp-live-decision-quality/server.py.bak.instrument_timeframe_v3_20260712_203522:925:@app.get("/api/decision/quality-live/health")
+backend/ndsp-live-decision-quality/server.py.bak.instrument_timeframe_v2_20260712_203329:919:@app.get("/api/decision/quality-live")
+backend/ndsp-live-decision-quality/server.py.bak.instrument_timeframe_v2_20260712_203329:925:@app.get("/api/decision/quality-live/health")
+backend/platform/runtime/capability_runtime_controller_v1.py:224:    quality_url = "https://api.ndsp.app/api/decision/quality-live?symbol=ETHUSDT&timeframe=weekly&_ndsp_runtime_probe=1"
+backend/platform/runtime/capability_runtime_controller_v1.py:257:        return "LIVE_VERIFIED", "public quality-live gateway returned HTTP 200", [], "STRONG"
+backend/architecture/ui/artifacts/NDSP_Sovereign_Command_Preview.html:279:  const urls=[`/api/decision/quality-live?symbol=${encodeURIComponent(sym)}`,`https://api.ndsp.app/api/decision/quality-live?symbol=${encodeURIComponent(sym)}`,"https://api.ndsp.app/api/completed/latest"];
+backend/app/runtime/ndsp_canonical_live_runtime_v30.py:513:        "L02": {"state": "LIVE" if timing_eligible else "PARTIAL", "source": "quality-live technical context"},
+backend/app/runtime/ndsp_canonical_live_runtime_v30.py:543:    upstream_url = f"{UPSTREAM_BASE}/api/decision/quality-live?{query}"
+backend/app/runtime/ndsp_quality_live_nmp_wrapper.py:185:            "source": "quality-live-nmp-wrapper",
+backend/app/runtime/ndsp_quality_live_nmp_wrapper.py:203:            "source": "quality-live-nmp-wrapper",
+backend/app/runtime/ndsp_quality_live_nmp_wrapper.py:214:            "source": "quality-live-nmp-wrapper",
+backend/app/runtime/ndsp_quality_live_nmp_wrapper.py:229:            "source": "quality-live-nmp-wrapper",
+backend/app/runtime/ndsp_quality_live_nmp_wrapper.py:242:            "source": "quality-live-nmp-wrapper",
+backend/app/runtime/ndsp_quality_live_nmp_wrapper.py:268:        "source": "quality-live-nmp-wrapper",
+backend/app/runtime/ndsp_quality_live_nmp_wrapper.py:544:        "quality-live-public-v9"
+backend/app/runtime/ndsp_quality_live_nmp_wrapper.py:582:    data["_ndsp_nmp_contract"] = "quality-live-nmp-wrapper-v1"
+backend/app/runtime/ndsp_quality_live_nmp_wrapper.py:612:        if parsed.path in ("/health", "/api/decision/quality-live/health"):
+backend/app/runtime/ndsp_quality_live_nmp_wrapper.py:615:                "service": "ndsp-quality-live-nmp-wrapper",
+backend/app/runtime/ndsp_quality_live_nmp_wrapper.py:621:        if parsed.path != "/api/decision/quality-live":
+backend/app/runtime/ndsp_quality_live_nmp_wrapper.py:669:    print(f"[NDSP] quality-live NMP wrapper listening on http://{HOST}:{PORT} upstream={UPSTREAM}", flush=True)
+backend/app/runtime/ndsp_quality_live_nmp_wrapper.py:764:        "source": "quality-live-nmp-wrapper",
+apps/ndsp-ui-bridge-api/main.py:21:QUALITY_URL = "https://api.ndsp.app/api/decision/quality-live"
+apps/ndsp-auth-core-clean/server/dist/server.js:530:        const url = `${NDSP_DECISION_INTERNAL_BASE}/api/decision/quality-live?symbol=${encodeURIComponent(symbol)}&timeframe=${encodeURIComponent(timeframe)}`;
+apps/ndsp-auth-core-clean/server/src/server.ts:585:    const url=`${NDSP_DECISION_INTERNAL_BASE}/api/decision/quality-live?symbol=${encodeURIComponent(symbol)}&timeframe=${encodeURIComponent(timeframe)}`;
+apps/ndsp-platform-gateway-9002/app.py:34:    url = "https://api.ndsp.app/api/decision/quality-live?symbol=" + urllib.parse.quote(symbol)
+apps/ndsp-commercial-auth-payment-staging/server/dist/server.js:530:        const url = `${NDSP_DECISION_INTERNAL_BASE}/api/decision/quality-live?symbol=${encodeURIComponent(symbol)}&timeframe=${encodeURIComponent(timeframe)}`;
+apps/ndsp-commercial-auth-payment-staging/server/src/server.ts:585:    const url=`${NDSP_DECISION_INTERNAL_BASE}/api/decision/quality-live?symbol=${encodeURIComponent(symbol)}&timeframe=${encodeURIComponent(timeframe)}`;
+apps/ndsp-decision-package-v1/app.py:7:BASE_QUALITY_URL = "https://api.ndsp.app/api/decision/quality-live"
+apps/ndsp-decision-package-v1/app.py:193:            "Decision package generated from existing quality-live engine.",
+apps/ndsp-decision-package-v1/app.py:194:            "Scenario levels are real from backend quality-live.",
+apps/ndsp-decision-package-v1/app.py:233:def _engine_ok(name, source="quality-live", score=None, details=None):
+apps/ndsp-decision-package-v1/app.py:290:                "Existing quality-live source is unavailable.",
+apps/ndsp-decision-package-v1/app.py:291:                "Check api.ndsp.app /api/decision/quality-live route and backend service."
+apps/ndsp-decision-package-v1/app.py:313:                    "message_ar": "مصدر quality-live غير متاح، لذلك لا يمكن إصدار قرار مكتمل الأركان."
+apps/ndsp-decision-package-v1/app.py:325:    # Real values currently available from quality-live
+apps/ndsp-v52-contract/app.py:22:        f"http://127.0.0.1:9082/api/decision/quality-live?symbol={symbol}",
+apps/ndsp-v52-contract/app.py:23:        f"http://127.0.0.1:9067/api/decision/quality-live?symbol={symbol}",
+apps/ndsp-v52-contract/app.py:160:            "correction_source": "quality-live"
+apps/ndsp-v3-portal-gateway/app.py:234:            "source": nmp.get("source") or "quality-live",
+apps/ndsp-v3-portal-gateway/app.py:242:        "source": "quality-live",
+apps/ndsp-v3-portal-gateway/app.py:271:    url = "https://api.ndsp.app/api/decision/quality-live?" + qs
+apps/ndsp-v3-portal-gateway/app.py:299:        "source_note": "قراءة مباشرة من quality-live. إذا ظهر UNSPECIFIED فهذا يعني أن المصدر لم يثبت الفريم صراحة.",
+apps/ndsp-layers-api/app.py:18:    "http://127.0.0.1:9057/api/decision/quality-live",
+apps/ndsp-layers-api/app.py:20:    "https://my.ndsp.app/api/decision/quality-live",
+apps/ndsp-layers-api/app.py:22:    "https://api.ndsp.app/api/decision/quality-live",
+apps/ndsp-layers-api/app.py:209:        # Important: when API is called without explicit asset, trust quality-live selected symbol.
+apps/ndsp-layers-api/app.py:344:        # Horizon strength from quality-live wording
+scripts/audit/ndsp_server_and_project_audit_EN.sh:62:api_url="$API_BASE/api/decision/quality-live?symbol=ETHUSDT"
+scripts/audit/ndsp_server_and_project_audit_AR.sh:62:api_url="$API_BASE/api/decision/quality-live?symbol=ETHUSDT"
+scripts/tests/ndsp_post_patch_test_AR.sh:54:if curl -k -fsS "$API_BASE/api/decision/quality-live?symbol=ETHUSDT" -o "$API_JSON"; then
+scripts/tests/ndsp_post_patch_test_EN.sh:35:api_url="$API_BASE/api/decision/quality-live?symbol=ETHUSDT"
+runtime/opt-services/ndsp-platform-gateway-9002-55c51a91c1/app.py:34:    url = "https://api.ndsp.app/api/decision/quality-live?symbol=" + urllib.parse.quote(symbol)
+runtime/opt-services/ndsp-ui-bridge-api-706e22e798/main.py:21:QUALITY_URL = "https://api.ndsp.app/api/decision/quality-live"
+runtime/opt-services/ndsp-v52-contract-901f5d55ee/app.py:22:        f"http://127.0.0.1:9082/api/decision/quality-live?symbol={symbol}",
+runtime/opt-services/ndsp-v52-contract-901f5d55ee/app.py:23:        f"http://127.0.0.1:9067/api/decision/quality-live?symbol={symbol}",
+runtime/opt-services/ndsp-v52-contract-901f5d55ee/app.py:160:            "correction_source": "quality-live"
+runtime/opt-services/ndsp-v3-portal-gateway-b0c8082879/app.py:234:            "source": nmp.get("source") or "quality-live",
+runtime/opt-services/ndsp-v3-portal-gateway-b0c8082879/app.py:242:        "source": "quality-live",
+runtime/opt-services/ndsp-v3-portal-gateway-b0c8082879/app.py:271:    url = "https://api.ndsp.app/api/decision/quality-live?" + qs
+runtime/opt-services/ndsp-v3-portal-gateway-b0c8082879/app.py:299:        "source_note": "قراءة مباشرة من quality-live. إذا ظهر UNSPECIFIED فهذا يعني أن المصدر لم يثبت الفريم صراحة.",
+runtime/opt-services/ndsp-v3-portal-gateway-b0c8082879/app.py.before_restore_20260701_031555:108:            "source": "quality-live",
+runtime/opt-services/ndsp-v3-portal-gateway-b0c8082879/app.py.before_restore_20260701_031555:112:        nmp["source"] = "quality-live"
+runtime/opt-services/ndsp-v3-portal-gateway-b0c8082879/app.py.before_restore_20260701_031555:142:        f"http://127.0.0.1:9067/api/decision/quality-live?symbol={urllib.parse.quote(symbol)}",
+runtime/opt-services/ndsp-v3-portal-gateway-b0c8082879/app.py.before_restore_20260701_031555:143:        f"https://api.ndsp.app/api/decision/quality-live?symbol={urllib.parse.quote(symbol)}",
+runtime/opt-services/ndsp-v3-portal-gateway-b0c8082879/app.py.before_restore_20260701_031555:162:            "source":"quality-live",
+runtime/opt-services/ndsp-v3-portal-gateway-b0c8082879/app.py.before_restore_20260701_031555:187:        ("quality_live_9067", "http://127.0.0.1:9067/api/decision/quality-live?symbol=BTCUSDT"),
+runtime/opt-services/ndsp-v3-portal-gateway-b0c8082879/app.py.before_restore_20260701_031555:232:    # لا نخترع أسعار. نجرب quality-live لكل رمز بسرعة، ونعلّم الأصل هل له قراءة حية أم لا.
+runtime/opt-services/ndsp-v3-portal-gateway-b0c8082879/app.py.before_restore_20260701_031555:296:        f"http://127.0.0.1:9067/api/decision/quality-live?symbol={enc_symbol}&timeframe={enc_tf}",
+runtime/opt-services/ndsp-v3-portal-gateway-b0c8082879/app.py.before_restore_20260701_031555:297:        f"https://api.ndsp.app/api/decision/quality-live?symbol={enc_symbol}&timeframe={enc_tf}",
+runtime/opt-services/ndsp-v3-portal-gateway-b0c8082879/app.py.before_restore_20260701_031555:320:            "source": "quality-live",
+runtime/opt-services/ndsp-v3-portal-gateway-b0c8082879/app.py.before_restore_20260701_031555:352:                "source": nmp.get("source", "quality-live"),
+runtime/opt-services/ndsp-v3-portal-gateway-b0c8082879/app.py.broken_truth_20260701_030850:108:            "source": "quality-live",
+runtime/opt-services/ndsp-v3-portal-gateway-b0c8082879/app.py.broken_truth_20260701_030850:112:        nmp["source"] = "quality-live"
+runtime/opt-services/ndsp-v3-portal-gateway-b0c8082879/app.py.broken_truth_20260701_030850:142:        f"http://127.0.0.1:9067/api/decision/quality-live?symbol={urllib.parse.quote(symbol)}",
+runtime/opt-services/ndsp-v3-portal-gateway-b0c8082879/app.py.broken_truth_20260701_030850:143:        f"https://api.ndsp.app/api/decision/quality-live?symbol={urllib.parse.quote(symbol)}",
+runtime/opt-services/ndsp-v3-portal-gateway-b0c8082879/app.py.broken_truth_20260701_030850:162:            "source":"quality-live",
+runtime/opt-services/ndsp-v3-portal-gateway-b0c8082879/app.py.broken_truth_20260701_030850:187:        ("quality_live_9067", "http://127.0.0.1:9067/api/decision/quality-live?symbol=BTCUSDT"),
+runtime/opt-services/ndsp-v3-portal-gateway-b0c8082879/app.py.broken_truth_20260701_030850:232:    # لا نخترع أسعار. نجرب quality-live لكل رمز بسرعة، ونعلّم الأصل هل له قراءة حية أم لا.
+runtime/opt-services/ndsp-v3-portal-gateway-b0c8082879/app.py.broken_truth_20260701_030850:335:        f"http://127.0.0.1:9067/api/decision/quality-live?symbol={enc_symbol}&timeframe={enc_tf}",
+runtime/opt-services/ndsp-v3-portal-gateway-b0c8082879/app.py.broken_truth_20260701_030850:336:        f"https://api.ndsp.app/api/decision/quality-live?symbol={enc_symbol}&timeframe={enc_tf}",
+runtime/opt-services/ndsp-v3-portal-gateway-b0c8082879/app.py.broken_truth_20260701_030850:359:            "source": "quality-live",
+runtime/opt-services/ndsp-v3-portal-gateway-b0c8082879/app.py.broken_truth_20260701_030850:391:                "source": nmp.get("source", "quality-live"),
+runtime/opt-services/current-e13df671b8/server/dist/server.js:530:        const url = `${NDSP_DECISION_INTERNAL_BASE}/api/decision/quality-live?symbol=${encodeURIComponent(symbol)}&timeframe=${encodeURIComponent(timeframe)}`;
+runtime/opt-services/current-e13df671b8/server/src/server.ts:585:    const url=`${NDSP_DECISION_INTERNAL_BASE}/api/decision/quality-live?symbol=${encodeURIComponent(symbol)}&timeframe=${encodeURIComponent(timeframe)}`;
+runtime/opt-services/ndsp-decision-package-v1-7db4e1e2c9/app.py.bak_source_route_20260625_094003:7:BASE_QUALITY_URL = "http://127.0.0.1:9001/api/decision/quality-live"
+runtime/opt-services/ndsp-decision-package-v1-7db4e1e2c9/app.py.bak_source_route_20260625_094003:193:            "Decision package generated from existing quality-live engine.",
+runtime/opt-services/ndsp-decision-package-v1-7db4e1e2c9/app.py.bak_source_route_20260625_094003:194:            "Scenario levels are real from backend quality-live.",
+runtime/opt-services/ndsp-decision-package-v1-7db4e1e2c9/app.py:7:BASE_QUALITY_URL = "https://api.ndsp.app/api/decision/quality-live"
+runtime/opt-services/ndsp-decision-package-v1-7db4e1e2c9/app.py:193:            "Decision package generated from existing quality-live engine.",
+runtime/opt-services/ndsp-decision-package-v1-7db4e1e2c9/app.py:194:            "Scenario levels are real from backend quality-live.",
+runtime/opt-services/ndsp-decision-package-v1-7db4e1e2c9/app.py:233:def _engine_ok(name, source="quality-live", score=None, details=None):
+runtime/opt-services/ndsp-decision-package-v1-7db4e1e2c9/app.py:290:                "Existing quality-live source is unavailable.",
+runtime/opt-services/ndsp-decision-package-v1-7db4e1e2c9/app.py:291:                "Check api.ndsp.app /api/decision/quality-live route and backend service."
+runtime/opt-services/ndsp-decision-package-v1-7db4e1e2c9/app.py:313:                    "message_ar": "مصدر quality-live غير متاح، لذلك لا يمكن إصدار قرار مكتمل الأركان."
+runtime/opt-services/ndsp-decision-package-v1-7db4e1e2c9/app.py:325:    # Real values currently available from quality-live
+runtime/opt-services/ndsp-decision-package-v1-7db4e1e2c9/app.py.bak_v2_governance_20260625_100624:7:BASE_QUALITY_URL = "https://api.ndsp.app/api/decision/quality-live"
+runtime/opt-services/ndsp-decision-package-v1-7db4e1e2c9/app.py.bak_v2_governance_20260625_100624:193:            "Decision package generated from existing quality-live engine.",
+runtime/opt-services/ndsp-decision-package-v1-7db4e1e2c9/app.py.bak_v2_governance_20260625_100624:194:            "Scenario levels are real from backend quality-live.",
+
+4) DISTINCTIVE CONTRACT PRODUCER MARKERS
+backend/layers/canonical_v1/runtime_bridge.py:174:    data["golden_alignment_active"] = bool(result["golden_active"])
+backend/layers/canonical_v1/runtime_bridge.py:176:    data["enhanced_golden_alignment_active"] = bool(result["enhanced_active"])
+backend/layers/canonical_v1/runtime_bridge.py:181:    data["golden_alignment"] = {
+backend/layers/canonical_v1/runtime_bridge.py:184:        "golden_alignment_active": bool(result["golden_active"]),
+backend/layers/canonical_v1/runtime_bridge.py:185:        "enhanced_golden_alignment_active": bool(result["enhanced_active"]),
+backend/layers/direction/l6_dominant_direction.py.disabled:173:        alignment_score = _as_int(_get(payload, "golden_alignment_score", default=aligned_inputs * 25), aligned_inputs * 25)
+backend/layers/direction/l6_dominant_direction.py.disabled:175:            "golden_alignment_score": min(100, alignment_score),
+backend/.backup_execution_bridge_20260529_225823/governed_pipeline.py:413:        breakdown['golden_alignment'] = 15
+backend/.backup_execution_bridge_20260529_225823/app_core_governed_pipeline.py:413:        breakdown['golden_alignment'] = 15
+backend/runtime/private_governance/source_snapshot/decision_output_policy.py:569:            "public_value": sanitize_public_text(first_present(data, ["golden_alignment_summary", "alignment_quality"], "حالة توافق عالية ضمن القراءة السياقية.")),
+backend/runtime/private_governance/source_snapshot/decision_output_policy.py:576:            "public_value": sanitize_public_text(first_present(data, ["golden_alignment_summary", "alignment_quality"], "حالة توافق سياقي داعمة دون كشف اسم الطبقة.")),
+backend/runtime/private_governance/final_extra_snapshot/decision_output_policy.py:569:            "public_value": sanitize_public_text(first_present(data, ["golden_alignment_summary", "alignment_quality"], "حالة توافق عالية ضمن القراءة السياقية.")),
+backend/runtime/private_governance/final_extra_snapshot/decision_output_policy.py:576:            "public_value": sanitize_public_text(first_present(data, ["golden_alignment_summary", "alignment_quality"], "حالة توافق سياقي داعمة دون كشف اسم الطبقة.")),
+backend/ndsp_user_dashboard_gateway.cjs:372:      golden_alignment:{ visible:true, label:'Golden Alignment' }
+backend/_backups/DEV002E_docs_policy_intake_20260628_002836/backend/docs/API_CONTRACT.md:93:  "golden_alignment": { "active": true, "note_ar": "...", "note_en": "..." },
+backend/_backups/DEV002E_docs_policy_intake_20260628_002836/backend/docs/openapi.yaml:101:        golden_alignment: { type: object }
+backend/_backups/DEV002E_hotfix_placeholder_scan_20260628_002936/backend/docs/API_CONTRACT.md:93:  "golden_alignment": { "active": true, "note_ar": "...", "note_en": "..." },
+backend/_backups/DEV002E_hotfix_placeholder_scan_20260628_002936/backend/docs/openapi.yaml:101:        golden_alignment: { type: object }
+backend/docs/API_CONTRACT.md:93:  "golden_alignment": { "active": true, "note_ar": "...", "note_en": "..." },
+backend/docs/openapi.yaml:101:        golden_alignment: { type: object }
+backend/app/ndsp_governance/decision_output_policy.py:569:            "public_value": sanitize_public_text(first_present(data, ["golden_alignment_summary", "alignment_quality"], "حالة توافق عالية ضمن القراءة السياقية.")),
+backend/app/ndsp_governance/decision_output_policy.py:576:            "public_value": sanitize_public_text(first_present(data, ["golden_alignment_summary", "alignment_quality"], "حالة توافق سياقي داعمة دون كشف اسم الطبقة.")),
+backend/app/support_layers/cot/cot_engine.py:51:            alignment_state = "golden_alignment"
+backend/app/support_layers/cot/test_cot_spine.py:43:        self.assertIn(result.alignment_state, {"golden_alignment", "participant_conflict", "mixed_or_neutral"})
+backend/app/api/v1/frontend_contract.py:301:        "golden_alignment": {
+backend/app/runtime/ndsp_canonical_live_runtime_v30.py:643:        "golden_alignment": upstream.get("golden_alignment"),
+backend/app/runtime/ndsp_v200_score_inputs.py:481:    golden = payload.get("golden_alignment")
+backend/app/runtime/ndsp_v200_score_inputs.py:501:            "golden_alignment.missing_inputs",
+backend/app/runtime/ndsp_quality_live_nmp_wrapper.py:332:    golden = data.get("golden_alignment")
+backend/app/runtime/ndsp_quality_live_nmp_wrapper.py:335:        data["golden_alignment"] = golden
+backend/app/runtime/ndsp_quality_live_nmp_wrapper.py:373:        data["golden_alignment_active"] = False
+backend/app/runtime/ndsp_quality_live_nmp_wrapper.py:375:        data["enhanced_golden_alignment_active"] = False
+backend/app/runtime/ndsp_quality_live_nmp_wrapper.py:382:        golden["golden_alignment_active"] = False
+backend/app/runtime/ndsp_quality_live_nmp_wrapper.py:383:        golden["enhanced_golden_alignment_active"] = False
+backend/app/runtime/ndsp_quality_live_nmp_wrapper.py:429:            "golden_alignment"
+backend/app/runtime/ndsp_quality_live_nmp_wrapper.py:434:            public_explainability["golden_alignment"] = (
+backend/app/runtime/ndsp_v201_launch_completion.py:183:    golden = data.get("golden_alignment")
+backend/app/runtime/ndsp_v201_launch_completion.py:244:    pg = public.get("golden_alignment")
+backend/app/runtime/ndsp_v201_launch_completion.py:247:        public["golden_alignment"] = pg
+backend/app/runtime/ndsp_v201_launch_completion.py:326:    data["canonical_cot_directions"] = dict(directions)
+backend/app/runtime/ndsp_v201_launch_completion.py:329:    golden = data.get("golden_alignment")
+backend/app/runtime/ndsp_v201_launch_completion.py:442:    golden = data.get("golden_alignment") if isinstance(data.get("golden_alignment"), Mapping) else {}
+backend/app/runtime/ndsp_quality_live_golden_wrapper.py:87:        sig = find_first(data, ["golden_signal", "golden_alignment_active"])
+backend/app/runtime/ndsp_quality_live_golden_wrapper.py:123:        "golden_signal", "golden_alignment_active"
+backend/app/runtime/ndsp_quality_live_golden_wrapper.py:185:        "golden_alignment_active": bool(active),
+backend/app/runtime/ndsp_quality_live_golden_wrapper.py:201:    data["golden_alignment_active"] = golden["golden_alignment_active"]
+backend/app/runtime/ndsp_quality_live_golden_wrapper.py:206:    data["golden_alignment"] = golden
+backend/app/runtime/ndsp_quality_live_golden_wrapper.py:237:    public_explainability["golden_alignment"] = {
+backend/app/runtime/ndsp_public_governance_projection_v1.py:76:    golden = payload.get("golden_alignment") or {}
+backend/auth_api/ndsp_user_dashboard_gateway.cjs:372:      golden_alignment:{ visible:true, label:'Golden Alignment' }
+apps/ndsp-ui-bridge-api/main.py:274:        "golden_alignment_active": q.get("golden_alignment_active"),
+apps/ndsp-ui-bridge-api/main.py:278:        "golden_alignment": q.get("golden_alignment"),
+apps/ndsp-governance-bridge/layers/NDSP_OWNER_INTERNAL_16_LAYER_REGISTRY.json:48:      "primary_output": "golden_alignment_state"
+apps/admin-console/data/owner-layer-source-map.json:370:      "primary_output": "golden_alignment_state",
+apps/admin-console/data/owner-layer-source-map.json:450:            "\"internal_name\": \"Nawaf Golden Alignment\", \"short_name\": \"GOLDEN_ALIGNMENT\", \"arabic_name\": \"إشارة نواف الذهبية\", \"visibility\": \"public_allowed_and_owner_internal\", \"logic\": \"Detects multi-layer agreement and publishes the golden alignment state when internal coherence is high.\", \"primary_output\": \"golden_alignment_state\" }, { \"id"
+apps/admin-console/data/owner-layer-source-map.json:550:            "ce is high.\", \"primary_output\": \"golden_alignment_state\" }, { \"id\": 5, \"internal_name\": \"Data Freshness And Source Integrity\", \"short_name\": \"DATA_INTEGRITY\", \"arabic_name\": \"سلامة وحداثة البيانات\", \"visibility\": \"owner_internal_only\", \"logic\": \"Checks whether the decision is based on fresh, connected, and reliable data sources.",
+apps/admin-console/data/owner-layer-source-map.json:552:            "primary_output\": \"golden_alignment_state\" }, { \"id\": 5, \"internal_name\": \"Data Freshness And Source Integrity\", \"short_name\": \"DATA_INTEGRITY\", \"arabic_name\": \"سلامة وحداثة البيانات\", \"visibility\": \"owner_internal_only\", \"logic\": \"Checks whether the decision is based on fresh, connected, and reliable data sources.\", \"primary_out"
+runtime/opt-services/ndsp-ui-bridge-api-706e22e798/main.py:274:        "golden_alignment_active": q.get("golden_alignment_active"),
+runtime/opt-services/ndsp-ui-bridge-api-706e22e798/main.py:278:        "golden_alignment": q.get("golden_alignment"),
+
+5) 9082 PROCESS ENVIRONMENT — SAFE KEYS ONLY
+-bash: /proc/1338/environ: Permission denied
+
+=== END ===

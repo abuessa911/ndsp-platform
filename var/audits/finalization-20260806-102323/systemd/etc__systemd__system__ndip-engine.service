@@ -1,0 +1,12 @@
+[Unit]
+Description=NDIP Market Engine
+After=network.target
+
+[Service]
+User=www-data
+WorkingDirectory=/opt/empire-core/backend
+ExecStart=/opt/empire-core/backend/venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 9001
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

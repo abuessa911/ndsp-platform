@@ -1,0 +1,149 @@
+أغسطس 07 16:44:27 vmi2934783 node[1958584]:     at defaultResolveImpl (node:internal/modules/cjs/loader:1057:19)
+أغسطس 07 16:44:27 vmi2934783 node[1958584]:     at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1062:22)
+أغسطس 07 16:44:27 vmi2934783 node[1958584]:     at Function._load (node:internal/modules/cjs/loader:1233:25)
+أغسطس 07 16:44:27 vmi2934783 node[1958584]:     at wrapModuleLoad (node:internal/modules/cjs/loader:256:19)
+أغسطس 07 16:44:27 vmi2934783 node[1958584]:     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+أغسطس 07 16:44:27 vmi2934783 node[1958584]:     at node:internal/main/run_main_module:36:49 {
+أغسطس 07 16:44:27 vmi2934783 node[1958584]:   code: 'MODULE_NOT_FOUND',
+أغسطس 07 16:44:27 vmi2934783 node[1958584]:   requireStack: []
+أغسطس 07 16:44:27 vmi2934783 node[1958584]: }
+أغسطس 07 16:44:27 vmi2934783 node[1958584]: Node.js v22.23.1
+أغسطس 07 16:44:30 vmi2934783 node[1958615]: node:internal/modules/cjs/loader:1450
+أغسطس 07 16:44:30 vmi2934783 node[1958615]:   throw err;
+أغسطس 07 16:44:30 vmi2934783 node[1958615]:   ^
+أغسطس 07 16:44:30 vmi2934783 node[1958615]: Error: Cannot find module '/home/nawaf511/empire-core-new/ndsp_checkout_plans_package/backend-express/src/server.js'
+أغسطس 07 16:44:30 vmi2934783 node[1958615]:     at Function._resolveFilename (node:internal/modules/cjs/loader:1447:15)
+أغسطس 07 16:44:30 vmi2934783 node[1958615]:     at defaultResolveImpl (node:internal/modules/cjs/loader:1057:19)
+أغسطس 07 16:44:30 vmi2934783 node[1958615]:     at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1062:22)
+أغسطس 07 16:44:30 vmi2934783 node[1958615]:     at Function._load (node:internal/modules/cjs/loader:1233:25)
+أغسطس 07 16:44:30 vmi2934783 node[1958615]:     at wrapModuleLoad (node:internal/modules/cjs/loader:256:19)
+أغسطس 07 16:44:30 vmi2934783 node[1958615]:     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+أغسطس 07 16:44:30 vmi2934783 node[1958615]:     at node:internal/main/run_main_module:36:49 {
+أغسطس 07 16:44:30 vmi2934783 node[1958615]:   code: 'MODULE_NOT_FOUND',
+أغسطس 07 16:44:30 vmi2934783 node[1958615]:   requireStack: []
+أغسطس 07 16:44:30 vmi2934783 node[1958615]: }
+أغسطس 07 16:44:30 vmi2934783 node[1958615]: Node.js v22.23.1
+أغسطس 07 16:44:33 vmi2934783 node[1958630]: node:internal/modules/cjs/loader:1450
+أغسطس 07 16:44:33 vmi2934783 node[1958630]:   throw err;
+أغسطس 07 16:44:33 vmi2934783 node[1958630]:   ^
+أغسطس 07 16:44:33 vmi2934783 node[1958630]: Error: Cannot find module '/home/nawaf511/empire-core-new/ndsp_checkout_plans_package/backend-express/src/server.js'
+أغسطس 07 16:44:33 vmi2934783 node[1958630]:     at Function._resolveFilename (node:internal/modules/cjs/loader:1447:15)
+أغسطس 07 16:44:33 vmi2934783 node[1958630]:     at defaultResolveImpl (node:internal/modules/cjs/loader:1057:19)
+أغسطس 07 16:44:33 vmi2934783 node[1958630]:     at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1062:22)
+أغسطس 07 16:44:33 vmi2934783 node[1958630]:     at Function._load (node:internal/modules/cjs/loader:1233:25)
+أغسطس 07 16:44:33 vmi2934783 node[1958630]:     at wrapModuleLoad (node:internal/modules/cjs/loader:256:19)
+أغسطس 07 16:44:33 vmi2934783 node[1958630]:     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+أغسطس 07 16:44:33 vmi2934783 node[1958630]:     at node:internal/main/run_main_module:36:49 {
+أغسطس 07 16:44:33 vmi2934783 node[1958630]:   code: 'MODULE_NOT_FOUND',
+أغسطس 07 16:44:33 vmi2934783 node[1958630]:   requireStack: []
+أغسطس 07 16:44:33 vmi2934783 node[1958630]: }
+أغسطس 07 16:44:33 vmi2934783 node[1958630]: Node.js v22.23.1
+أغسطس 07 16:44:36 vmi2934783 node[1958642]: node:internal/modules/cjs/loader:1450
+أغسطس 07 16:44:36 vmi2934783 node[1958642]:   throw err;
+أغسطس 07 16:44:36 vmi2934783 node[1958642]:   ^
+أغسطس 07 16:44:36 vmi2934783 node[1958642]: Error: Cannot find module '/home/nawaf511/empire-core-new/ndsp_checkout_plans_package/backend-express/src/server.js'
+أغسطس 07 16:44:36 vmi2934783 node[1958642]:     at Function._resolveFilename (node:internal/modules/cjs/loader:1447:15)
+أغسطس 07 16:44:36 vmi2934783 node[1958642]:     at defaultResolveImpl (node:internal/modules/cjs/loader:1057:19)
+أغسطس 07 16:44:36 vmi2934783 node[1958642]:     at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1062:22)
+أغسطس 07 16:44:36 vmi2934783 node[1958642]:     at Function._load (node:internal/modules/cjs/loader:1233:25)
+أغسطس 07 16:44:36 vmi2934783 node[1958642]:     at wrapModuleLoad (node:internal/modules/cjs/loader:256:19)
+أغسطس 07 16:44:36 vmi2934783 node[1958642]:     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+أغسطس 07 16:44:36 vmi2934783 node[1958642]:     at node:internal/main/run_main_module:36:49 {
+أغسطس 07 16:44:36 vmi2934783 node[1958642]:   code: 'MODULE_NOT_FOUND',
+أغسطس 07 16:44:36 vmi2934783 node[1958642]:   requireStack: []
+أغسطس 07 16:44:36 vmi2934783 node[1958642]: }
+أغسطس 07 16:44:36 vmi2934783 node[1958642]: Node.js v22.23.1
+أغسطس 07 16:44:40 vmi2934783 node[1959662]: node:internal/modules/cjs/loader:1450
+أغسطس 07 16:44:40 vmi2934783 node[1959662]:   throw err;
+أغسطس 07 16:44:40 vmi2934783 node[1959662]:   ^
+أغسطس 07 16:44:40 vmi2934783 node[1959662]: Error: Cannot find module '/home/nawaf511/empire-core-new/ndsp_checkout_plans_package/backend-express/src/server.js'
+أغسطس 07 16:44:40 vmi2934783 node[1959662]:     at Function._resolveFilename (node:internal/modules/cjs/loader:1447:15)
+أغسطس 07 16:44:40 vmi2934783 node[1959662]:     at defaultResolveImpl (node:internal/modules/cjs/loader:1057:19)
+أغسطس 07 16:44:40 vmi2934783 node[1959662]:     at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1062:22)
+أغسطس 07 16:44:40 vmi2934783 node[1959662]:     at Function._load (node:internal/modules/cjs/loader:1233:25)
+أغسطس 07 16:44:40 vmi2934783 node[1959662]:     at wrapModuleLoad (node:internal/modules/cjs/loader:256:19)
+أغسطس 07 16:44:40 vmi2934783 node[1959662]:     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+أغسطس 07 16:44:40 vmi2934783 node[1959662]:     at node:internal/main/run_main_module:36:49 {
+أغسطس 07 16:44:40 vmi2934783 node[1959662]:   code: 'MODULE_NOT_FOUND',
+أغسطس 07 16:44:40 vmi2934783 node[1959662]:   requireStack: []
+أغسطس 07 16:44:40 vmi2934783 node[1959662]: }
+أغسطس 07 16:44:40 vmi2934783 node[1959662]: Node.js v22.23.1
+أغسطس 07 16:44:43 vmi2934783 node[1959673]: node:internal/modules/cjs/loader:1450
+أغسطس 07 16:44:43 vmi2934783 node[1959673]:   throw err;
+أغسطس 07 16:44:43 vmi2934783 node[1959673]:   ^
+أغسطس 07 16:44:43 vmi2934783 node[1959673]: Error: Cannot find module '/home/nawaf511/empire-core-new/ndsp_checkout_plans_package/backend-express/src/server.js'
+أغسطس 07 16:44:43 vmi2934783 node[1959673]:     at Function._resolveFilename (node:internal/modules/cjs/loader:1447:15)
+أغسطس 07 16:44:43 vmi2934783 node[1959673]:     at defaultResolveImpl (node:internal/modules/cjs/loader:1057:19)
+أغسطس 07 16:44:43 vmi2934783 node[1959673]:     at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1062:22)
+أغسطس 07 16:44:43 vmi2934783 node[1959673]:     at Function._load (node:internal/modules/cjs/loader:1233:25)
+أغسطس 07 16:44:43 vmi2934783 node[1959673]:     at wrapModuleLoad (node:internal/modules/cjs/loader:256:19)
+أغسطس 07 16:44:43 vmi2934783 node[1959673]:     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+أغسطس 07 16:44:43 vmi2934783 node[1959673]:     at node:internal/main/run_main_module:36:49 {
+أغسطس 07 16:44:43 vmi2934783 node[1959673]:   code: 'MODULE_NOT_FOUND',
+أغسطس 07 16:44:43 vmi2934783 node[1959673]:   requireStack: []
+أغسطس 07 16:44:43 vmi2934783 node[1959673]: }
+أغسطس 07 16:44:43 vmi2934783 node[1959673]: Node.js v22.23.1
+أغسطس 07 16:44:46 vmi2934783 node[1959688]: node:internal/modules/cjs/loader:1450
+أغسطس 07 16:44:46 vmi2934783 node[1959688]:   throw err;
+أغسطس 07 16:44:46 vmi2934783 node[1959688]:   ^
+أغسطس 07 16:44:46 vmi2934783 node[1959688]: Error: Cannot find module '/home/nawaf511/empire-core-new/ndsp_checkout_plans_package/backend-express/src/server.js'
+أغسطس 07 16:44:46 vmi2934783 node[1959688]:     at Function._resolveFilename (node:internal/modules/cjs/loader:1447:15)
+أغسطس 07 16:44:46 vmi2934783 node[1959688]:     at defaultResolveImpl (node:internal/modules/cjs/loader:1057:19)
+أغسطس 07 16:44:46 vmi2934783 node[1959688]:     at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1062:22)
+أغسطس 07 16:44:46 vmi2934783 node[1959688]:     at Function._load (node:internal/modules/cjs/loader:1233:25)
+أغسطس 07 16:44:46 vmi2934783 node[1959688]:     at wrapModuleLoad (node:internal/modules/cjs/loader:256:19)
+أغسطس 07 16:44:46 vmi2934783 node[1959688]:     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+أغسطس 07 16:44:46 vmi2934783 node[1959688]:     at node:internal/main/run_main_module:36:49 {
+أغسطس 07 16:44:46 vmi2934783 node[1959688]:   code: 'MODULE_NOT_FOUND',
+أغسطس 07 16:44:46 vmi2934783 node[1959688]:   requireStack: []
+أغسطس 07 16:44:46 vmi2934783 node[1959688]: }
+أغسطس 07 16:44:46 vmi2934783 node[1959688]: Node.js v22.23.1
+أغسطس 07 16:44:49 vmi2934783 node[1959701]: node:internal/modules/cjs/loader:1450
+أغسطس 07 16:44:49 vmi2934783 node[1959701]:   throw err;
+أغسطس 07 16:44:49 vmi2934783 node[1959701]:   ^
+أغسطس 07 16:44:49 vmi2934783 node[1959701]: Error: Cannot find module '/home/nawaf511/empire-core-new/ndsp_checkout_plans_package/backend-express/src/server.js'
+أغسطس 07 16:44:49 vmi2934783 node[1959701]:     at Function._resolveFilename (node:internal/modules/cjs/loader:1447:15)
+أغسطس 07 16:44:49 vmi2934783 node[1959701]:     at defaultResolveImpl (node:internal/modules/cjs/loader:1057:19)
+أغسطس 07 16:44:49 vmi2934783 node[1959701]:     at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1062:22)
+أغسطس 07 16:44:49 vmi2934783 node[1959701]:     at Function._load (node:internal/modules/cjs/loader:1233:25)
+أغسطس 07 16:44:49 vmi2934783 node[1959701]:     at wrapModuleLoad (node:internal/modules/cjs/loader:256:19)
+أغسطس 07 16:44:49 vmi2934783 node[1959701]:     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+أغسطس 07 16:44:49 vmi2934783 node[1959701]:     at node:internal/main/run_main_module:36:49 {
+أغسطس 07 16:44:49 vmi2934783 node[1959701]:   code: 'MODULE_NOT_FOUND',
+أغسطس 07 16:44:49 vmi2934783 node[1959701]:   requireStack: []
+أغسطس 07 16:44:49 vmi2934783 node[1959701]: }
+أغسطس 07 16:44:49 vmi2934783 node[1959701]: Node.js v22.23.1
+أغسطس 07 16:44:53 vmi2934783 node[1959734]: node:internal/modules/cjs/loader:1450
+أغسطس 07 16:44:53 vmi2934783 node[1959734]:   throw err;
+أغسطس 07 16:44:53 vmi2934783 node[1959734]:   ^
+أغسطس 07 16:44:53 vmi2934783 node[1959734]: Error: Cannot find module '/home/nawaf511/empire-core-new/ndsp_checkout_plans_package/backend-express/src/server.js'
+أغسطس 07 16:44:53 vmi2934783 node[1959734]:     at Function._resolveFilename (node:internal/modules/cjs/loader:1447:15)
+أغسطس 07 16:44:53 vmi2934783 node[1959734]:     at defaultResolveImpl (node:internal/modules/cjs/loader:1057:19)
+أغسطس 07 16:44:53 vmi2934783 node[1959734]:     at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1062:22)
+أغسطس 07 16:44:53 vmi2934783 node[1959734]:     at Function._load (node:internal/modules/cjs/loader:1233:25)
+أغسطس 07 16:44:53 vmi2934783 node[1959734]:     at wrapModuleLoad (node:internal/modules/cjs/loader:256:19)
+أغسطس 07 16:44:53 vmi2934783 node[1959734]:     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+أغسطس 07 16:44:53 vmi2934783 node[1959734]:     at node:internal/main/run_main_module:36:49 {
+أغسطس 07 16:44:53 vmi2934783 node[1959734]:   code: 'MODULE_NOT_FOUND',
+أغسطس 07 16:44:53 vmi2934783 node[1959734]:   requireStack: []
+أغسطس 07 16:44:53 vmi2934783 node[1959734]: }
+أغسطس 07 16:44:53 vmi2934783 node[1959734]: Node.js v22.23.1
+أغسطس 07 16:44:56 vmi2934783 node[1959749]: node:internal/modules/cjs/loader:1450
+أغسطس 07 16:44:56 vmi2934783 node[1959749]:   throw err;
+أغسطس 07 16:44:56 vmi2934783 node[1959749]:   ^
+أغسطس 07 16:44:56 vmi2934783 node[1959749]: Error: Cannot find module '/home/nawaf511/empire-core-new/ndsp_checkout_plans_package/backend-express/src/server.js'
+أغسطس 07 16:44:56 vmi2934783 node[1959749]:     at Function._resolveFilename (node:internal/modules/cjs/loader:1447:15)
+أغسطس 07 16:44:56 vmi2934783 node[1959749]:     at defaultResolveImpl (node:internal/modules/cjs/loader:1057:19)
+أغسطس 07 16:44:56 vmi2934783 node[1959749]:     at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1062:22)
+أغسطس 07 16:44:56 vmi2934783 node[1959749]:     at Function._load (node:internal/modules/cjs/loader:1233:25)
+أغسطس 07 16:44:56 vmi2934783 node[1959749]:     at wrapModuleLoad (node:internal/modules/cjs/loader:256:19)
+أغسطس 07 16:44:56 vmi2934783 node[1959749]:     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+أغسطس 07 16:44:56 vmi2934783 node[1959749]:     at node:internal/main/run_main_module:36:49 {
+أغسطس 07 16:44:56 vmi2934783 node[1959749]:   code: 'MODULE_NOT_FOUND',
+أغسطس 07 16:44:56 vmi2934783 node[1959749]:   requireStack: []
+أغسطس 07 16:44:56 vmi2934783 node[1959749]: }
+أغسطس 07 16:44:56 vmi2934783 node[1959749]: Node.js v22.23.1
+أغسطس 07 16:44:59 vmi2934783 node[1960362]: node:internal/modules/cjs/loader:1450
+أغسطس 07 16:44:59 vmi2934783 node[1960362]:   throw err;
+أغسطس 07 16:44:59 vmi2934783 node[1960362]:   ^
+أغسطس 07 16:44:59 vmi2934783 node[1960362]: Error: Cannot find module '/home/nawaf511/empire-core-new/ndsp_checkout_plans_package/backend-express/src/server.js'

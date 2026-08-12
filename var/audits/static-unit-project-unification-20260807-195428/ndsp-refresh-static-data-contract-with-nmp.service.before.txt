@@ -1,0 +1,15 @@
+# /etc/systemd/system/ndsp-refresh-static-data-contract-with-nmp.service
+[Unit]
+Description=NDSP refresh static data contract from quality-live with NMP
+After=network-online.target ndsp-quality-live-nmp-wrapper.service
+Wants=ndsp-quality-live-nmp-wrapper.service
+
+[Service]
+Type=oneshot
+User=root
+ExecStart=/usr/local/bin/ndsp-refresh-static-data-contract-with-nmp
+
+# /etc/systemd/system/ndsp-refresh-static-data-contract-with-nmp.service.d/override.conf
+[Service]
+ExecStart=
+ExecStart=/usr/local/bin/ndsp-refresh-static-data-contract-v46

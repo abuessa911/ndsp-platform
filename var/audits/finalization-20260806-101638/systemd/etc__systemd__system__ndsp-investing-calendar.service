@@ -1,0 +1,7 @@
+[Unit]
+Description=NDSP Investing Live Economic Calendar
+
+[Service]
+Type=oneshot
+User=nawaf511
+ExecStart=/usr/bin/python3 /home/nawaf511/ndsp-portal-real-data-sync/investing_live_calendar.py

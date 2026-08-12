@@ -1,0 +1,16 @@
+NDSP ARCHITECTURE AUDIT SUMMARY
+
+Generated: 2026-08-06T01:50:59+02:00
+Project: /home/nawaf511/empire-core-new
+
+Main report:
+/home/nawaf511/empire-core-new/var/audits/architecture-20260806-014829/NDSP_ARCHITECTURE_REPORT_20260806-014829.txt
+
+Errors:
+/home/nawaf511/empire-core-new/var/audits/architecture-20260806-014829/ERRORS_20260806-014829.log
+
+Report size:
+15M	/home/nawaf511/empire-core-new/var/audits/architecture-20260806-014829/NDSP_ARCHITECTURE_REPORT_20260806-014829.txt
+
+SHA256:
+b01a2d82a2168e10ddddd71865fde81b8be7ffce397ac77fd455e10316ff836e  /home/nawaf511/empire-core-new/var/audits/architecture-20260806-014829/NDSP_ARCHITECTURE_REPORT_20260806-014829.txt

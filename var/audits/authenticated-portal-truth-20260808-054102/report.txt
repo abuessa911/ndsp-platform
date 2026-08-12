@@ -1,0 +1,40 @@
+=== AUTHENTICATED PORTAL TRUTH ===
+MODE=READ_ONLY
+AUDIT=/home/nawaf511/empire-core-new/var/audits/authenticated-portal-truth-20260808-054102
+
+=== 1. EFFECTIVE NGINX ===
+NGINX_DUMP=PASS
+
+=== 2. PORTAL ROUTING REFERENCES ===
+ROUTE_REFERENCE_COUNT=146
+
+=== 3. CANDIDATE ROOTS ===
+ROOT=/var/www/ndsp
+ROUTER=NO
+ROOT=/var/www/ndsp-my
+ROUTER=YES
+ROUTER_FILE=/var/www/ndsp-my/portal-commercial-preview/assets/index-BbNOtHX6.js
+ROUTER_FILE=/var/www/ndsp-my/portal.previous.20260726_230859/assets/app-DL-BVG88.js
+ROUTER_FILE=/var/www/ndsp-my/portal/assets/index-YRhdpSxC.js
+ROUTER_FILE=/var/www/ndsp-my/portal/assets/index-bdi5oWzB.js
+ROUTER_FILE=/var/www/ndsp-my/portal-next/assets/app-DL-BVG88.js
+ROOT=/var/www/ndsp-my/portal
+ROUTER=YES
+ROUTER_FILE=/var/www/ndsp-my/portal/assets/index-YRhdpSxC.js
+ROUTER_FILE=/var/www/ndsp-my/portal/assets/index-bdi5oWzB.js
+ROOT=/var/www/ndsp-my/portal-next
+ROUTER=YES
+ROUTER_FILE=/var/www/ndsp-my/portal-next/assets/app-DL-BVG88.js
+ROOT=/var/www/ndsp-my/portal-v50
+ROUTER=NO
+
+=== 4. NGINX FILE OWNERSHIP ===
+OWNERSHIP_REFERENCE_COUNT=89
+
+FILES_MODIFIED=0
+SERVICES_RESTARTED=0
+BUILD_EXECUTED=0
+PATCH_APPLIED=NO
+NEXT_ACTION=SELECT_AUTHENTICATED_PORTAL_FROM_EFFECTIVE_NGINX
+FINAL_RESULT=PASS_READ_ONLY
+AUDIT=/home/nawaf511/empire-core-new/var/audits/authenticated-portal-truth-20260808-054102

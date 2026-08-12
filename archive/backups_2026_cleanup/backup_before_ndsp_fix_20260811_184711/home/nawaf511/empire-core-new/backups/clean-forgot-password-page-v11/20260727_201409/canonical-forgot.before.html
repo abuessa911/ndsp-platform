@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>NDSP - Forgot Password</title>
+  <style>
+    :root{color-scheme:dark}
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;background:#070805;color:#f4f1e8;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;display:flex;align-items:center;justify-content:center;padding:24px}
+    .card{width:min(100%,680px);border:1px solid rgba(214,177,61,.42);border-radius:24px;padding:28px;background:radial-gradient(circle at top right,rgba(173,127,13,.14),transparent 42%),#0d0e0b;box-shadow:0 24px 80px rgba(0,0,0,.42)}
+    .eyebrow{color:#e7c75e;font-weight:700;letter-spacing:.04em}
+    h1{font-size:clamp(34px,7vw,58px);margin:12px 0 10px}
+    p{color:#aaa79f;font-size:18px;line-height:1.8;margin:0 0 22px}
+    label{display:block;font-size:17px;font-weight:700;margin:0 0 10px}
+    input{width:100%;min-height:58px;border-radius:16px;border:1px solid #34352f;background:#050604;color:#fff;padding:14px 16px;font-size:18px;direction:ltr;text-align:left;outline:none}
+    input:focus{border-color:#d6b13d;box-shadow:0 0 0 3px rgba(214,177,61,.14)}
+    button{width:100%;min-height:58px;margin-top:18px;border:0;border-radius:16px;background:linear-gradient(135deg,#f1d568,#bd8915);color:#0b0b08;font-size:20px;font-weight:800;cursor:pointer}
+    button:disabled{opacity:.6;cursor:wait}
+    .message{display:none;margin-top:18px;padding:15px 17px;border-radius:14px;line-height:1.7}
+    .ok{display:block;background:rgba(55,157,88,.13);border:1px solid rgba(86,196,119,.4);color:#a9e9bb}
+    .error{display:block;background:rgba(207,63,84,.13);border:1px solid rgba(235,86,108,.45);color:#ff9aaa}
+    .back{display:inline-flex;margin-top:22px;color:#e7c75e;text-decoration:none;font-weight:700}
+    .note{font-size:14px;color:#77776f;margin-top:20px}
+  </style>
+  <link rel="stylesheet" href="css/ndsp-density.css">
+</head>
+<body>
+<header class="ndsp-header" id="ndsp-primary-header">
+    <a href="portal.html" class="ndsp-brand" id="ndsp-primary-brand">NDSP</a>
+    <nav class="ndsp-main-nav" id="ndsp-primary-nav">
+      <ul class="ndsp-nav-links">
+        <li class="ndsp-nav-item"><a href="portal.html">مركز القيادة</a></li>
+        <li class="ndsp-nav-item"><a href="market-assets.html">الأسواق</a></li>
+        <li class="ndsp-nav-item"><a href="live-market-analysis.html">الأسعار والشارت</a></li>
+        <li class="ndsp-nav-item"><a href="analysis-center.html">مستكشف الفرص</a></li>
+        <li class="ndsp-nav-item"><a href="decision-support.html">غرفة القرار</a></li>
+        <li class="ndsp-nav-item"><a href="#" id="ndsp-more-btn">المزيد</a></li>
+      </ul>
+    </nav>
+    <div class="ndsp-header-actions" style="display:flex; align-items:center; gap:8px;">
+      <button class="ndsp-lang-btn" id="ndsp-primary-lang-btn" style="background:none; border:1px solid #444; color:#fff; padding:4px 8px; border-radius:4px; font-size:12px; cursor:pointer;">EN</button>
+      <a href="market-assets.html" class="ndsp-header-btn" id="ndsp-primary-change-btn">تغيير الاختيار</a>
+    </div>
+  </header>
+
+  <div class="ndsp-drawer-backdrop" id="ndsp-more-backdrop"></div>
+  <aside class="ndsp-drawer" id="ndsp-more-drawer" aria-hidden="true">
+    <div class="ndsp-drawer-header">
+      <span style="color:var(--ndsp-gold); font-weight:700;">القائمة الكاملة</span>
+      <button id="ndsp-drawer-close" style="background:none; border:none; color:#fff; font-size:18px; cursor:pointer;">✕</button>
+    </div>
+    <div class="ndsp-drawer-body">
+      <ul class="ndsp-drawer-menu">
+        <li><a href="scenario-levels.html">السيناريوهات والمستويات</a></li>
+        <li><a href="decision-layers.html">الطبقات المعلنة</a></li>
+        <li><a href="risk-governance.html">المخاطر والاعتراض</a></li>
+        <li><a href="completed-decisions.html">القرارات المكتملة</a></li>
+        <li><a href="guide.html">دليل الاستخدام</a></li>
+        <li><a href="support-center.html">مركز المستخدم والمساعدة</a></li>
+        <li><a href="#">الإعدادات والتنبيهات</a></li>
+        <li><a href="#">تسجيل الخروج</a></li>
+      </ul>
+    </div>
+  </aside>
+  
+
+  <div class="ndsp-drawer-backdrop" id="ndsp-more-backdrop"></div>
+  <aside class="ndsp-drawer" id="ndsp-more-drawer" aria-hidden="true">
+    <div class="ndsp-drawer-header">
+      <span style="color:var(--ndsp-gold); font-weight:700;">القائمة الكاملة</span>
+      <button id="ndsp-drawer-close" style="background:none; border:none; color:#fff; font-size:18px; cursor:pointer;">✕</button>
+    </div>
+    
+  </aside>
+  <main class="card">
+    <div class="eyebrow">NDSP - Account Recovery</div>
+    <h1>&#1606;&#1587;&#1610;&#1578; &#1603;&#1604;&#1605;&#1577; &#1575;&#1604;&#1605;&#1585;&#1608;&#1585;&#1567;</h1>
+    <p>&#1571;&#1583;&#1582;&#1604; &#1576;&#1585;&#1610;&#1583; &#1581;&#1587;&#1575;&#1576;&#1603;&#1548; &#1608;&#1587;&#1606;&#1585;&#1587;&#1604; &#1604;&#1603; &#1585;&#1575;&#1576;&#1591;&#1611;&#1575; &#1589;&#1575;&#1604;&#1581;&#1611;&#1575; &#1604;&#1601;&#1578;&#1585;&#1577; &#1605;&#1581;&#1583;&#1608;&#1583;&#1577;.</p>
+    <form id="forgot-form" novalidate>
+      <label for="email">&#1575;&#1604;&#1576;&#1585;&#1610;&#1583; &#1575;&#1604;&#1573;&#1604;&#1603;&#1578;&#1585;&#1608;&#1606;&#1610;</label>
+      <input id="email" name="email" type="email" autocomplete="email" required placeholder="name@example.com">
+      <button id="submit" type="submit">&#1573;&#1585;&#1587;&#1575;&#1604; &#1585;&#1575;&#1576;&#1591; &#1573;&#1593;&#1575;&#1583;&#1577; &#1575;&#1604;&#1578;&#1593;&#1610;&#1610;&#1606;</button>
+      <div id="message" class="message" role="status" aria-live="polite"></div>
+    </form>
+    <a class="back" href="/login/">&#1575;&#1604;&#1593;&#1608;&#1583;&#1577; &#1573;&#1604;&#1609; &#1578;&#1587;&#1580;&#1610;&#1604; &#1575;&#1604;&#1583;&#1582;&#1608;&#1604;</a>
+    <div class="note">For privacy, the response is generic whether or not the account exists.</div>
+  </main>
+  <script>
+    (function () {
+      "use strict";
+
+      var form = document.getElementById("forgot-form");
+      var email = document.getElementById("email");
+      var submit = document.getElementById("submit");
+      var message = document.getElementById("message");
+
+      form.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        var value = String(email.value || "").trim();
+
+        if (!value || !value.includes("@")) {
+          message.className = "message error";
+          message.textContent = "Enter a valid email address.";
+          return;
+        }
+
+        submit.disabled = true;
+        message.className = "message";
+        message.textContent = "";
+
+        try {
+          var response = await fetch("/api/auth/forgot-password", {
+            method: "POST",
+            credentials: "include",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              email: value
+            })
+          });
+
+          if (!response.ok) {
+            throw new Error("HTTP " + response.status);
+          }
+
+          message.className = "message ok";
+          message.textContent = "If the account exists, a password-reset email has been sent. Check Inbox and Spam.";
+          form.reset();
+        } catch (error) {
+          message.className = "message error";
+          message.textContent = "The request could not be completed. Please try again shortly.";
+        } finally {
+          submit.disabled = false;
+        }
+      });
+    }());
+  </script>
+  <script src="js/ndsp-nav.js"></script>
+</body>
+</html>

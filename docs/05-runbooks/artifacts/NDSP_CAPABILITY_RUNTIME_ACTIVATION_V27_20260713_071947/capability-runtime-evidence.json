@@ -1,0 +1,539 @@
+{
+  "evidence_version": "ndsp-capability-runtime-evidence-v1",
+  "checked_at": "2026-07-13T05:20:16.232807+00:00",
+  "valid_until": "2026-07-13T06:05:16.232807+00:00",
+  "summary": {
+    "capability_total": 28,
+    "installed": 28,
+    "functional_probe_passed": 28,
+    "operational_ready": 28,
+    "live_verified": 1,
+    "partially_live": 8,
+    "ready_verified": 19,
+    "probe_failed": 0,
+    "not_installed": 0,
+    "timer_active": true,
+    "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16"
+  },
+  "runtime_context": {
+    "api_status": 200,
+    "health_status": 200,
+    "bridge_status": 200,
+    "timer_active": true,
+    "auth_units": [
+      "ndsp-api-compat.service",
+      "ndsp-change-password-gateway.service",
+      "ndsp-platform-gateway-9002.service",
+      "ndsp-platform-gateway.service",
+      "ndsp-raw-cot-gateway.service",
+      "ndsp-register-compat-gateway.service",
+      "ndsp-v3-portal-gateway.service"
+    ],
+    "otel_units": [],
+    "recent_backup_count": 10
+  },
+  "capabilities": [
+    {
+      "id": "NDSP-CAP-001",
+      "canonical_name": "asset_master_registry",
+      "module": "backend.data_foundation.canonical_v1.asset_master_registry",
+      "module_file": "/home/nawaf511/empire-core-new/backend/data_foundation/canonical_v1/asset_master_registry.py",
+      "installed": true,
+      "functional_probe_status": "PASS",
+      "functional_probe_detail": "RESOLVED",
+      "operational_ready": true,
+      "runtime_state": "READY_VERIFIED",
+      "runtime_binding": "functional probe passed; no production binding was proven",
+      "activation_blockers": [
+        "not_bound_to_verified_live_runtime"
+      ],
+      "evidence_strength": "FUNCTIONAL",
+      "decision_authority": false,
+      "checked_at": "2026-07-13T05:20:16.232807+00:00"
+    },
+    {
+      "id": "NDSP-CAP-002",
+      "canonical_name": "source_registry",
+      "module": "backend.data_foundation.canonical_v1.source_registry",
+      "module_file": "/home/nawaf511/empire-core-new/backend/data_foundation/canonical_v1/source_registry.py",
+      "installed": true,
+      "functional_probe_status": "PASS",
+      "functional_probe_detail": "active",
+      "operational_ready": true,
+      "runtime_state": "READY_VERIFIED",
+      "runtime_binding": "functional probe passed; no production binding was proven",
+      "activation_blockers": [
+        "not_bound_to_verified_live_runtime"
+      ],
+      "evidence_strength": "FUNCTIONAL",
+      "decision_authority": false,
+      "checked_at": "2026-07-13T05:20:16.232807+00:00"
+    },
+    {
+      "id": "NDSP-CAP-003",
+      "canonical_name": "schema_contract_registry",
+      "module": "backend.contracts.canonical_v1.contract_registry",
+      "module_file": "/home/nawaf511/empire-core-new/backend/contracts/canonical_v1/contract_registry.py",
+      "installed": true,
+      "functional_probe_status": "PASS",
+      "functional_probe_detail": "CONTRACT_ACCEPTED",
+      "operational_ready": true,
+      "runtime_state": "PARTIALLY_LIVE",
+      "runtime_binding": "public API contract version is enforced in the live response",
+      "activation_blockers": [
+        "all internal boundaries are not instrumented by this probe"
+      ],
+      "evidence_strength": "MODERATE",
+      "decision_authority": false,
+      "checked_at": "2026-07-13T05:20:16.232807+00:00"
+    },
+    {
+      "id": "NDSP-CAP-004",
+      "canonical_name": "data_quality_gate",
+      "module": "backend.data_foundation.canonical_v1.data_quality_gate",
+      "module_file": "/home/nawaf511/empire-core-new/backend/data_foundation/canonical_v1/data_quality_gate.py",
+      "installed": true,
+      "functional_probe_status": "PASS",
+      "functional_probe_detail": "ACCEPTED",
+      "operational_ready": true,
+      "runtime_state": "PARTIALLY_LIVE",
+      "runtime_binding": "live response passed public health and live-price binding gates",
+      "activation_blockers": [
+        "all provider-quality checks are not exposed publicly"
+      ],
+      "evidence_strength": "MODERATE",
+      "decision_authority": false,
+      "checked_at": "2026-07-13T05:20:16.232807+00:00"
+    },
+    {
+      "id": "NDSP-CAP-005",
+      "canonical_name": "provider_reconciliation",
+      "module": "backend.data_foundation.canonical_v1.provider_reconciliation",
+      "module_file": "/home/nawaf511/empire-core-new/backend/data_foundation/canonical_v1/provider_reconciliation.py",
+      "installed": true,
+      "functional_probe_status": "PASS",
+      "functional_probe_detail": "RECONCILED",
+      "operational_ready": true,
+      "runtime_state": "READY_VERIFIED",
+      "runtime_binding": "functional probe passed; no production binding was proven",
+      "activation_blockers": [
+        "not_bound_to_verified_live_runtime"
+      ],
+      "evidence_strength": "FUNCTIONAL",
+      "decision_authority": false,
+      "checked_at": "2026-07-13T05:20:16.232807+00:00"
+    },
+    {
+      "id": "NDSP-CAP-006",
+      "canonical_name": "raw_snapshot_storage",
+      "module": "backend.data_foundation.canonical_v1.snapshots",
+      "module_file": "/home/nawaf511/empire-core-new/backend/data_foundation/canonical_v1/snapshots.py",
+      "installed": true,
+      "functional_probe_status": "PASS",
+      "functional_probe_detail": "RAW_SNAPSHOT_BUILT",
+      "operational_ready": true,
+      "runtime_state": "READY_VERIFIED",
+      "runtime_binding": "functional probe passed; no production binding was proven",
+      "activation_blockers": [
+        "not_bound_to_verified_live_runtime"
+      ],
+      "evidence_strength": "FUNCTIONAL",
+      "decision_authority": false,
+      "checked_at": "2026-07-13T05:20:16.232807+00:00"
+    },
+    {
+      "id": "NDSP-CAP-007",
+      "canonical_name": "canonical_accepted_snapshot_store",
+      "module": "backend.data_foundation.canonical_v1.snapshots",
+      "module_file": "/home/nawaf511/empire-core-new/backend/data_foundation/canonical_v1/snapshots.py",
+      "installed": true,
+      "functional_probe_status": "PASS",
+      "functional_probe_detail": "CANONICAL_SNAPSHOT_BUILT",
+      "operational_ready": true,
+      "runtime_state": "READY_VERIFIED",
+      "runtime_binding": "functional probe passed; no production binding was proven",
+      "activation_blockers": [
+        "not_bound_to_verified_live_runtime"
+      ],
+      "evidence_strength": "FUNCTIONAL",
+      "decision_authority": false,
+      "checked_at": "2026-07-13T05:20:16.232807+00:00"
+    },
+    {
+      "id": "NDSP-CAP-008",
+      "canonical_name": "freshness_release_calendar_governor",
+      "module": "backend.data_foundation.canonical_v1.data_quality_gate",
+      "module_file": "/home/nawaf511/empire-core-new/backend/data_foundation/canonical_v1/data_quality_gate.py",
+      "installed": true,
+      "functional_probe_status": "PASS",
+      "functional_probe_detail": "ACCEPTED",
+      "operational_ready": true,
+      "runtime_state": "READY_VERIFIED",
+      "runtime_binding": "functional probe passed; no production binding was proven",
+      "activation_blockers": [
+        "not_bound_to_verified_live_runtime"
+      ],
+      "evidence_strength": "FUNCTIONAL",
+      "decision_authority": false,
+      "checked_at": "2026-07-13T05:20:16.232807+00:00"
+    },
+    {
+      "id": "NDSP-CAP-009",
+      "canonical_name": "data_lineage",
+      "module": "backend.evidence.canonical_v1.lineage",
+      "module_file": "/home/nawaf511/empire-core-new/backend/evidence/canonical_v1/lineage.py",
+      "installed": true,
+      "functional_probe_status": "PASS",
+      "functional_probe_detail": "LINEAGE_BUILT",
+      "operational_ready": true,
+      "runtime_state": "READY_VERIFIED",
+      "runtime_binding": "functional probe passed; no production binding was proven",
+      "activation_blockers": [
+        "not_bound_to_verified_live_runtime"
+      ],
+      "evidence_strength": "FUNCTIONAL",
+      "decision_authority": false,
+      "checked_at": "2026-07-13T05:20:16.232807+00:00"
+    },
+    {
+      "id": "NDSP-CAP-010",
+      "canonical_name": "decision_evidence_ledger",
+      "module": "backend.evidence.canonical_v1.decision_ledger",
+      "module_file": "/home/nawaf511/empire-core-new/backend/evidence/canonical_v1/decision_ledger.py",
+      "installed": true,
+      "functional_probe_status": "PASS",
+      "functional_probe_detail": "LEDGER_CHAIN_VERIFIED",
+      "operational_ready": true,
+      "runtime_state": "READY_VERIFIED",
+      "runtime_binding": "functional probe passed; no production binding was proven",
+      "activation_blockers": [
+        "not_bound_to_verified_live_runtime"
+      ],
+      "evidence_strength": "FUNCTIONAL",
+      "decision_authority": false,
+      "checked_at": "2026-07-13T05:20:16.232807+00:00"
+    },
+    {
+      "id": "NDSP-CAP-011",
+      "canonical_name": "engine_model_policy_version_registry",
+      "module": "backend.governance.canonical_v1.version_registry",
+      "module_file": "/home/nawaf511/empire-core-new/backend/governance/canonical_v1/version_registry.py",
+      "installed": true,
+      "functional_probe_status": "PASS",
+      "functional_probe_detail": "VALID",
+      "operational_ready": true,
+      "runtime_state": "PARTIALLY_LIVE",
+      "runtime_binding": "live response exposes governed contract and source version markers",
+      "activation_blockers": [
+        "complete engine/model manifest is not exposed publicly"
+      ],
+      "evidence_strength": "MODERATE",
+      "decision_authority": false,
+      "checked_at": "2026-07-13T05:20:16.232807+00:00"
+    },
+    {
+      "id": "NDSP-CAP-012",
+      "canonical_name": "historical_replay_lab",
+      "module": "backend.simulation.canonical_v1.replay",
+      "module_file": "/home/nawaf511/empire-core-new/backend/simulation/canonical_v1/replay.py",
+      "installed": true,
+      "functional_probe_status": "PASS",
+      "functional_probe_detail": "REPLAY_READY",
+      "operational_ready": true,
+      "runtime_state": "READY_VERIFIED",
+      "runtime_binding": "functional probe passed; no production binding was proven",
+      "activation_blockers": [
+        "not_bound_to_verified_live_runtime"
+      ],
+      "evidence_strength": "FUNCTIONAL",
+      "decision_authority": false,
+      "checked_at": "2026-07-13T05:20:16.232807+00:00"
+    },
+    {
+      "id": "NDSP-CAP-013",
+      "canonical_name": "opentelemetry_observability",
+      "module": "backend.observability.canonical_v1.telemetry",
+      "module_file": "/home/nawaf511/empire-core-new/backend/observability/canonical_v1/telemetry.py",
+      "installed": true,
+      "functional_probe_status": "PASS",
+      "functional_probe_detail": "TRACE_ATTRIBUTES_BUILT",
+      "operational_ready": true,
+      "runtime_state": "READY_VERIFIED",
+      "runtime_binding": "functional probe passed; no production binding was proven",
+      "activation_blockers": [
+        "not_bound_to_verified_live_runtime"
+      ],
+      "evidence_strength": "FUNCTIONAL",
+      "decision_authority": false,
+      "checked_at": "2026-07-13T05:20:16.232807+00:00"
+    },
+    {
+      "id": "NDSP-CAP-014",
+      "canonical_name": "news_narrative_context_engine",
+      "module": "backend.intelligence.canonical_v1.context_engines",
+      "module_file": "/home/nawaf511/empire-core-new/backend/intelligence/canonical_v1/context_engines.py",
+      "installed": true,
+      "functional_probe_status": "PASS",
+      "functional_probe_detail": "NEWS_CONTEXT_BUILT",
+      "operational_ready": true,
+      "runtime_state": "READY_VERIFIED",
+      "runtime_binding": "functional probe passed; no production binding was proven",
+      "activation_blockers": [
+        "not_bound_to_verified_live_runtime"
+      ],
+      "evidence_strength": "FUNCTIONAL",
+      "decision_authority": false,
+      "checked_at": "2026-07-13T05:20:16.232807+00:00"
+    },
+    {
+      "id": "NDSP-CAP-015",
+      "canonical_name": "economic_events_market_calendar_engine",
+      "module": "backend.intelligence.canonical_v1.context_engines",
+      "module_file": "/home/nawaf511/empire-core-new/backend/intelligence/canonical_v1/context_engines.py",
+      "installed": true,
+      "functional_probe_status": "PASS",
+      "functional_probe_detail": "CALENDAR_CONTEXT_BUILT",
+      "operational_ready": true,
+      "runtime_state": "READY_VERIFIED",
+      "runtime_binding": "functional probe passed; no production binding was proven",
+      "activation_blockers": [
+        "not_bound_to_verified_live_runtime"
+      ],
+      "evidence_strength": "FUNCTIONAL",
+      "decision_authority": false,
+      "checked_at": "2026-07-13T05:20:16.232807+00:00"
+    },
+    {
+      "id": "NDSP-CAP-016",
+      "canonical_name": "cross_layer_conflict_engine",
+      "module": "backend.orchestration.canonical_v1.conflict_engine",
+      "module_file": "/home/nawaf511/empire-core-new/backend/orchestration/canonical_v1/conflict_engine.py",
+      "installed": true,
+      "functional_probe_status": "PASS",
+      "functional_probe_detail": "CONFIRMED",
+      "operational_ready": true,
+      "runtime_state": "READY_VERIFIED",
+      "runtime_binding": "functional probe passed; no production binding was proven",
+      "activation_blockers": [
+        "not_bound_to_verified_live_runtime"
+      ],
+      "evidence_strength": "FUNCTIONAL",
+      "decision_authority": false,
+      "checked_at": "2026-07-13T05:20:16.232807+00:00"
+    },
+    {
+      "id": "NDSP-CAP-017",
+      "canonical_name": "decision_explainability",
+      "module": "backend.explainability.canonical_v1.explainer",
+      "module_file": "/home/nawaf511/empire-core-new/backend/explainability/canonical_v1/explainer.py",
+      "installed": true,
+      "functional_probe_status": "PASS",
+      "functional_probe_detail": "EXPLANATION_BUILT",
+      "operational_ready": true,
+      "runtime_state": "PARTIALLY_LIVE",
+      "runtime_binding": "live response contains explanatory decision context",
+      "activation_blockers": [
+        "audience-specific explanation service is not independently exposed"
+      ],
+      "evidence_strength": "MODERATE",
+      "decision_authority": false,
+      "checked_at": "2026-07-13T05:20:16.232807+00:00"
+    },
+    {
+      "id": "NDSP-CAP-018",
+      "canonical_name": "decision_evaluation",
+      "module": "backend.evaluation.canonical_v1.evaluator",
+      "module_file": "/home/nawaf511/empire-core-new/backend/evaluation/canonical_v1/evaluator.py",
+      "installed": true,
+      "functional_probe_status": "PASS",
+      "functional_probe_detail": "EVALUATION_BUILT",
+      "operational_ready": true,
+      "runtime_state": "READY_VERIFIED",
+      "runtime_binding": "functional probe passed; no production binding was proven",
+      "activation_blockers": [
+        "not_bound_to_verified_live_runtime"
+      ],
+      "evidence_strength": "FUNCTIONAL",
+      "decision_authority": false,
+      "checked_at": "2026-07-13T05:20:16.232807+00:00"
+    },
+    {
+      "id": "NDSP-CAP-019",
+      "canonical_name": "cross_asset_influence_transmission",
+      "module": "backend.intelligence.canonical_v1.context_engines",
+      "module_file": "/home/nawaf511/empire-core-new/backend/intelligence/canonical_v1/context_engines.py",
+      "installed": true,
+      "functional_probe_status": "PASS",
+      "functional_probe_detail": "INFLUENCE_CONTEXT_BUILT",
+      "operational_ready": true,
+      "runtime_state": "READY_VERIFIED",
+      "runtime_binding": "functional probe passed; no production binding was proven",
+      "activation_blockers": [
+        "not_bound_to_verified_live_runtime"
+      ],
+      "evidence_strength": "FUNCTIONAL",
+      "decision_authority": false,
+      "checked_at": "2026-07-13T05:20:16.232807+00:00"
+    },
+    {
+      "id": "NDSP-CAP-020",
+      "canonical_name": "scenario_simulation",
+      "module": "backend.simulation.canonical_v1.scenario",
+      "module_file": "/home/nawaf511/empire-core-new/backend/simulation/canonical_v1/scenario.py",
+      "installed": true,
+      "functional_probe_status": "PASS",
+      "functional_probe_detail": "SIMULATION_ONLY",
+      "operational_ready": true,
+      "runtime_state": "READY_VERIFIED",
+      "runtime_binding": "functional probe passed; no production binding was proven",
+      "activation_blockers": [
+        "not_bound_to_verified_live_runtime"
+      ],
+      "evidence_strength": "FUNCTIONAL",
+      "decision_authority": false,
+      "checked_at": "2026-07-13T05:20:16.232807+00:00"
+    },
+    {
+      "id": "NDSP-CAP-021",
+      "canonical_name": "personalized_experience",
+      "module": "backend.personalization.canonical_v1.personalization",
+      "module_file": "/home/nawaf511/empire-core-new/backend/personalization/canonical_v1/personalization.py",
+      "installed": true,
+      "functional_probe_status": "PASS",
+      "functional_probe_detail": "PERSONALIZATION_BUILT",
+      "operational_ready": true,
+      "runtime_state": "READY_VERIFIED",
+      "runtime_binding": "functional probe passed; no production binding was proven",
+      "activation_blockers": [
+        "not_bound_to_verified_live_runtime"
+      ],
+      "evidence_strength": "FUNCTIONAL",
+      "decision_authority": false,
+      "checked_at": "2026-07-13T05:20:16.232807+00:00"
+    },
+    {
+      "id": "NDSP-CAP-022",
+      "canonical_name": "access_visibility_governance",
+      "module": "backend.access.canonical_v1.access",
+      "module_file": "/home/nawaf511/empire-core-new/backend/access/canonical_v1/access.py",
+      "installed": true,
+      "functional_probe_status": "PASS",
+      "functional_probe_detail": "VISIBILITY_FILTER_BUILT",
+      "operational_ready": true,
+      "runtime_state": "PARTIALLY_LIVE",
+      "runtime_binding": "public visibility metadata is bound to the live sidecar",
+      "activation_blockers": [
+        "role-specific server enforcement not verified by this probe"
+      ],
+      "evidence_strength": "MODERATE",
+      "decision_authority": false,
+      "checked_at": "2026-07-13T05:20:16.232807+00:00"
+    },
+    {
+      "id": "NDSP-CAP-023",
+      "canonical_name": "external_integration_gateway",
+      "module": "backend.integrations.canonical_v1.gateway",
+      "module_file": "/home/nawaf511/empire-core-new/backend/integrations/canonical_v1/gateway.py",
+      "installed": true,
+      "functional_probe_status": "PASS",
+      "functional_probe_detail": "EXTERNAL_PAYLOAD_SANITIZED",
+      "operational_ready": true,
+      "runtime_state": "LIVE_VERIFIED",
+      "runtime_binding": "public quality-live gateway returned HTTP 200",
+      "activation_blockers": [],
+      "evidence_strength": "STRONG",
+      "decision_authority": false,
+      "checked_at": "2026-07-13T05:20:16.232807+00:00"
+    },
+    {
+      "id": "NDSP-CAP-024",
+      "canonical_name": "commercial_entitlements_billing",
+      "module": "backend.commercial.canonical_v1.entitlements",
+      "module_file": "/home/nawaf511/empire-core-new/backend/commercial/canonical_v1/entitlements.py",
+      "installed": true,
+      "functional_probe_status": "PASS",
+      "functional_probe_detail": "ENTITLEMENT_ACCEPTED",
+      "operational_ready": true,
+      "runtime_state": "READY_VERIFIED",
+      "runtime_binding": "functional probe passed; no production binding was proven",
+      "activation_blockers": [
+        "not_bound_to_verified_live_runtime"
+      ],
+      "evidence_strength": "FUNCTIONAL",
+      "decision_authority": false,
+      "checked_at": "2026-07-13T05:20:16.232807+00:00"
+    },
+    {
+      "id": "NDSP-CAP-025",
+      "canonical_name": "identity_authentication_authorization",
+      "module": "backend.access.canonical_v1.access",
+      "module_file": "/home/nawaf511/empire-core-new/backend/access/canonical_v1/access.py",
+      "installed": true,
+      "functional_probe_status": "PASS",
+      "functional_probe_detail": "AUTHORIZATION_RULE_VERIFIED",
+      "operational_ready": true,
+      "runtime_state": "PARTIALLY_LIVE",
+      "runtime_binding": "authentication-related runtime and public entry pages were detected",
+      "activation_blockers": [
+        "full authorization matrix was not exercised against production identities"
+      ],
+      "evidence_strength": "MODERATE",
+      "decision_authority": false,
+      "checked_at": "2026-07-13T05:20:16.232807+00:00"
+    },
+    {
+      "id": "NDSP-CAP-026",
+      "canonical_name": "security_secrets_key_management",
+      "module": "backend.security.canonical_v1.policy",
+      "module_file": "/home/nawaf511/empire-core-new/backend/security/canonical_v1/policy.py",
+      "installed": true,
+      "functional_probe_status": "PASS",
+      "functional_probe_detail": "REFERENCE_ACCEPTED",
+      "operational_ready": true,
+      "runtime_state": "READY_VERIFIED",
+      "runtime_binding": "functional probe passed; no production binding was proven",
+      "activation_blockers": [
+        "not_bound_to_verified_live_runtime"
+      ],
+      "evidence_strength": "FUNCTIONAL",
+      "decision_authority": false,
+      "checked_at": "2026-07-13T05:20:16.232807+00:00"
+    },
+    {
+      "id": "NDSP-CAP-027",
+      "canonical_name": "backup_recovery_disaster_governance",
+      "module": "backend.operations.canonical_v1.operations",
+      "module_file": "/home/nawaf511/empire-core-new/backend/operations/canonical_v1/operations.py",
+      "installed": true,
+      "functional_probe_status": "PASS",
+      "functional_probe_detail": "RECOVERY_MANIFEST_BUILT",
+      "operational_ready": true,
+      "runtime_state": "PARTIALLY_LIVE",
+      "runtime_binding": "recent NDSP backup artifacts were detected",
+      "activation_blockers": [
+        "automated restore drill is not verified by this probe"
+      ],
+      "evidence_strength": "MODERATE",
+      "decision_authority": false,
+      "checked_at": "2026-07-13T05:20:16.232807+00:00"
+    },
+    {
+      "id": "NDSP-CAP-028",
+      "canonical_name": "workflow_scheduler_event_bus",
+      "module": "backend.operations.canonical_v1.operations",
+      "module_file": "/home/nawaf511/empire-core-new/backend/operations/canonical_v1/operations.py",
+      "installed": true,
+      "functional_probe_status": "PASS",
+      "functional_probe_detail": "WORKFLOW_EVENT_BUILT",
+      "operational_ready": true,
+      "runtime_state": "PARTIALLY_LIVE",
+      "runtime_binding": "systemd scheduler is active for runtime evidence refresh",
+      "activation_blockers": [
+        "independent event-bus transport is not verified"
+      ],
+      "evidence_strength": "MODERATE",
+      "decision_authority": false,
+      "checked_at": "2026-07-13T05:20:16.232807+00:00"
+    }
+  ]
+}

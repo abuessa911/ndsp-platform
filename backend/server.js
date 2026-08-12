@@ -996,7 +996,7 @@ function ndspReadAdminActionKey() {
 
 function ndspRunExporter() {
   try {
-    execFile('/usr/bin/python3', ['/usr/local/bin/ndsp_export_admin_users_json.py'], { timeout: 15000 }, () => {})
+    execFile('/usr/bin/python3', ['/home/nawaf511/empire-core-new/backend/services/ndsp-runtime-jobs/ndsp_export_admin_users_json.py'], { timeout: 15000 }, () => {})
   } catch (e) {}
 }
 

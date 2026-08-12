@@ -1,0 +1,193 @@
+#!/usr/bin/env python3
+import json, time, urllib.request, os
+from pathlib import Path
+from datetime import datetime, timezone
+
+DATA = Path("/var/www/ndsp-my/data/command-center-real.json")
+TMP = Path("/var/www/ndsp-my/data/.command-center-real.v46.tmp")
+DEFAULT_SYMBOLS = ["BTCUSDT","ETHUSDT","SOLUSDT","BNBUSDT","XRPUSDT","XAUUSD","EURUSD","GBPUSD","UKOIL","USOIL"]
+NAMES = {
+ "BTCUSDT":("بيتكوين","Bitcoin","CRYPTO"), "ETHUSDT":("إيثريوم","Ethereum","CRYPTO"),
+ "SOLUSDT":("سولانا","Solana","CRYPTO"), "BNBUSDT":("بي إن بي","BNB","CRYPTO"),
+ "XRPUSDT":("إكس آر بي","XRP","CRYPTO"), "XAUUSD":("الذهب","Gold","METALS"),
+ "EURUSD":("اليورو دولار","Euro / US Dollar","FX"), "GBPUSD":("الجنيه الإسترليني دولار","British Pound / US Dollar","FX"),
+ "UKOIL":("برنت","Brent Crude Oil","ENERGY"), "USOIL":("النفط الأمريكي","WTI Crude Oil","ENERGY")
+}
+
+def now_iso():
+    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00","Z")
+
+def read_existing():
+    try:
+        d=json.loads(DATA.read_text(encoding="utf-8"))
+        return d,{x.get("symbol"):x for x in (d.get("items") or []) if x.get("symbol")}
+    except Exception:
+        return {},{}
+
+def unique_symbols(old_map):
+    out=[]
+    for s in list(old_map.keys())+DEFAULT_SYMBOLS:
+        if s and s not in out: out.append(s)
+    return out
+
+def fetch_live(symbol, timeframe="1W"):
+    url=f"https://api.ndsp.app/api/decision/quality-live?symbol={symbol}&timeframe={timeframe}&v={int(time.time())}"
+    req=urllib.request.Request(url, headers={"User-Agent":"ndsp-v46-backend-fields/1.0"})
+    with urllib.request.urlopen(req, timeout=35) as r:
+        return json.loads(r.read().decode("utf-8","replace"))
+
+def clean(v):
+    if v is None: return None
+    s=str(v).strip()
+    return s or None
+
+def get_path(d,*path):
+    cur=d
+    for k in path:
+        if not isinstance(cur,dict): return None
+        cur=cur.get(k)
+    return cur
+
+def norm_dir(v):
+    s=clean(v)
+    if not s: return "UNKNOWN"
+    low=s.lower()
+    if any(x in low for x in ["bullish","up","positive","صاعد","إيجابي","ايجابي"]): return "BULLISH"
+    if any(x in low for x in ["bearish","down","negative","هابط","سلبي"]): return "BEARISH"
+    if any(x in low for x in ["neutral","محايد"]): return "NEUTRAL"
+    return s
+
+def norm_nature(v, kind):
+    s=clean(v)
+    if not s: return "UNKNOWN"
+    low=s.lower()
+    if kind=="explicit":
+        if "غير صريح" in s or "implicit" in low: return "UNKNOWN"
+        if any(x in low for x in ["explicit","open","exposed"]) or "صريح" in s or "على المكشوف" in s: return "EXPLICIT"
+    if kind=="implicit":
+        if any(x in low for x in ["implicit","non-explicit"]) or "غير صريح" in s: return "IMPLICIT"
+    if any(x in low for x in ["unknown","none","unavailable"]) or "غير مرسل" in s: return "UNKNOWN"
+    return s
+
+def is_commodity(symbol, market):
+    s=(symbol or "").upper(); m=(market or "").upper()
+    return s in {"XAUUSD","XAGUSD","USOIL","UKOIL"} or m in {"METALS","ENERGY","COMMODITY","COMMODITIES"}
+
+def categories(symbol, market):
+    return ("Commercials","Non-Commercials") if is_commodity(symbol,market) else ("Asset Managers","Leveraged Funds")
+
+def direction_nature(live):
+    raw=live.get("direction_nature") if isinstance(live.get("direction_nature"),dict) else {}
+    ext=(get_path(raw,"extended_explicit","state") or get_path(raw,"explicit","state") or
+         live.get("extended_explicit_state") or live.get("direction_nature_extended_explicit_state") or live.get("explicit_direction_state"))
+    imp=(get_path(raw,"narrow_implicit","state") or get_path(raw,"implicit","state") or
+         live.get("narrow_implicit_state") or live.get("direction_nature_narrow_implicit_state") or live.get("implicit_direction_state"))
+    live_src=bool(clean(ext) or clean(imp))
+    return {
+      "contract_status":"LIVE" if live_src else "SKELETON_ONLY",
+      "live_source":live_src,
+      "note_ar":"هذا تصنيف لطبيعة الاتجاه، مستقل عن TDL-M&L و TDL-S.",
+      "extended_explicit":{
+        "label_ar":"الأفق الممتد / الاتجاه على المكشوف",
+        "state":norm_nature(ext,"explicit"),
+        "definition_ar":"إغلاق عقود من جانب وفتح عقود من جانب آخر.",
+        "public_summary":"قيمة حية من الباكند." if clean(ext) else "لم يرسل الباكند بعد قياس الاتجاه على المكشوف."
+      },
+      "narrow_implicit":{
+        "label_ar":"الأفق الضيق / الاتجاه غير الصريح",
+        "state":norm_nature(imp,"implicit"),
+        "definition_ar":"فتح عقود من الطرفين أو إغلاق عقود من الطرفين؛ حركة غير مباشرة في اللونج والشورت.",
+        "public_summary":"قيمة حية من الباكند." if clean(imp) else "لم يرسل الباكند بعد قياس الاتجاه غير الصريح."
+      }
+    }, live_src
+
+def tdl_tracks(live, symbol, market):
+    raw=live.get("tdl_tracks") if isinstance(live.get("tdl_tracks"),dict) else {}
+    mcat, scat=categories(symbol,market)
+    mdir=(get_path(raw,"tdl_mnl","direction") or get_path(raw,"tdl_m_and_l","direction") or
+          live.get("tdl_mnl_direction") or live.get("tdl_m_l_direction") or live.get("tdl_ml_direction"))
+    sdir=(get_path(raw,"tdl_s","direction") or get_path(raw,"tdl_short","direction") or
+          live.get("tdl_s_direction") or live.get("tdl_short_direction"))
+    mconf=(get_path(raw,"tdl_mnl","confidence") or get_path(raw,"tdl_m_and_l","confidence") or live.get("tdl_mnl_confidence"))
+    sconf=(get_path(raw,"tdl_s","confidence") or get_path(raw,"tdl_short","confidence") or live.get("tdl_s_confidence"))
+    live_src=bool(clean(mdir) or clean(sdir))
+    return {
+      "contract_status":"LIVE" if live_src else "SKELETON_ONLY",
+      "live_source":live_src,
+      "note_ar":"TDL-M&L و TDL-S يخصان الأفق الزمني ونوع المشاركين، وليس الصريح/غير الصريح.",
+      "tdl_mnl":{
+        "engine":"TDL-M&L","role_ar":"الاتجاه طويل الأمد","participants_ar":"المستثمرون / مدراء الصناديق",
+        "category":mcat,"direction":norm_dir(mdir),"confidence":clean(mconf) or "غير مرسل",
+        "public_summary":"قيمة حية من الباكند." if clean(mdir) else "لم يرسل الباكند بعد اتجاه TDL-M&L الحقيقي."
+      },
+      "tdl_s":{
+        "engine":"TDL-S","role_ar":"الاتجاه قصير الأمد","participants_ar":"المضاربون / أصحاب الرافعات المالية",
+        "category":scat,"direction":norm_dir(sdir),"confidence":clean(sconf) or "غير مرسل",
+        "public_summary":"قيمة حية من الباكند." if clean(sdir) else "لم يرسل الباكند بعد اتجاه TDL-S الحقيقي."
+      }
+    }, live_src
+
+old_payload, old_map=read_existing()
+items=[]
+for symbol in unique_symbols(old_map):
+    item=dict(old_map.get(symbol) or {})
+    ar,en,market_default=NAMES.get(symbol,(symbol,symbol,item.get("market") or ""))
+    item["symbol"]=symbol
+    item["name_ar"]=item.get("name_ar") or ar
+    item["name_en"]=item.get("name_en") or en
+    item["market"]=item.get("market") or market_default
+    item["category"]=item.get("category") or item["market"]
+    try:
+        live=fetch_live(symbol,"1W")
+        inst=live.get("instrument") or {}; sc=live.get("scenario") or {}; apo=live.get("allowed_public_outputs") or {}; nmp=live.get("nmp") or {}
+        item["live_price"]=inst.get("live_price") or item.get("live_price")
+        item["price"]=inst.get("live_price") or item.get("price")
+        item["decision_quality"]=apo.get("decision_quality") or item.get("decision_quality")
+        item["quality"]=apo.get("decision_quality") or item.get("quality")
+        item["scenario_state"]=sc.get("scenario_state") or item.get("scenario_state")
+        item["directional_context"]=sc.get("scenario_directional_context") or apo.get("directional_bias") or item.get("directional_context")
+        item["market_state"]=apo.get("market_state") or sc.get("scenario_directional_context") or item.get("market_state")
+        item["timeframe"]="1W"
+        for k in ["scenario_activation_level","scenario_arrival_level","scenario_review_zone","scenario_invalidation_level","scenario_confidence_band","scenario_time_horizon","scenario_risk_note"]:
+            item[k]=sc.get(k)
+        item["nmp_status"]=nmp.get("status") or "UNAVAILABLE"
+        item["nmp_value"]=nmp.get("value")
+        item["nmp_level"]=nmp.get("level") or nmp.get("value")
+        item["nmp_source"]=nmp.get("source")
+        item["nmp_method"]=nmp.get("method")
+        item["nmp_timeframe"]=nmp.get("timeframe") or "1W"
+        item["nmp_note"]=nmp.get("note")
+        dn,dnlive=direction_nature(live); tt,ttlive=tdl_tracks(live,symbol,item.get("market"))
+        item["direction_nature"]=dn; item["direction_nature_live"]=dnlive
+        item["tdl_tracks"]=tt; item["tdl_tracks_live"]=ttlive
+    except Exception as e:
+        dn,dnlive=direction_nature({}); tt,ttlive=tdl_tracks({},symbol,item.get("market"))
+        item["direction_nature"]=dn; item["direction_nature_live"]=dnlive
+        item["tdl_tracks"]=tt; item["tdl_tracks_live"]=ttlive
+        item["nmp_status"]=item.get("nmp_status") or "UNAVAILABLE"
+        item["v46_error"]=str(e)[:180]
+    item.pop("tdl_horizons",None); item.pop("tdl_horizons_live",None)
+    item["tdl_horizons_deprecated"]=True
+    item["source"]="quality-live+nmp+v46-backend-fields"
+    item["updated_at"]=item.get("updated_at") or now_iso()
+    items.append(item)
+
+payload={
+  "ok":True,"source":"NDSP Live Decision API","source_mode":"static_data_contract_v46_backend_fields",
+  "version":"NDSP_V4.6_BACKEND_FIELDS_READY","nmp_connected":True,"nmp_source":"quality-live-nmp-wrapper",
+  "concepts_fixed":True,"backend_fields_ready":True,
+  "direction_nature_contract":"extended_explicit_vs_narrow_implicit",
+  "tdl_tracks_contract":"tdl_mnl_long_term_vs_tdl_s_short_term",
+  "not_recommendation":True,"no_buy_sell":True,"updated_at":now_iso(),"items":items
+}
+DATA.parent.mkdir(parents=True, exist_ok=True)
+TMP.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+os.replace(str(TMP), str(DATA))
+print("VERSION=NDSP_V4.6_BACKEND_FIELDS_READY")
+print("UPDATED_ITEMS=",len(items))
+print("NMP_AVAILABLE=",sum(1 for x in items if x.get("nmp_status")=="AVAILABLE"))
+print("DIRECTION_NATURE_ITEMS=",sum(1 for x in items if isinstance(x.get("direction_nature"),dict)))
+print("DIRECTION_NATURE_LIVE_ITEMS=",sum(1 for x in items if x.get("direction_nature_live") is True))
+print("TDL_TRACKS_ITEMS=",sum(1 for x in items if isinstance(x.get("tdl_tracks"),dict)))
+print("TDL_TRACKS_LIVE_ITEMS=",sum(1 for x in items if x.get("tdl_tracks_live") is True))
+print("OLD_TDL_HORIZONS_ITEMS=",sum(1 for x in items if isinstance(x.get("tdl_horizons"),dict)))

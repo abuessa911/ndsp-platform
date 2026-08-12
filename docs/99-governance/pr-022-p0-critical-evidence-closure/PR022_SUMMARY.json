@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "document": "PR-022 P0 Critical Evidence Closure",
+  "generated_at": "2026-07-31T20:48:36.236316+00:00",
+  "critical_gap_count": 35,
+  "gap_types": {
+    "API_CONTRACT_UNVERIFIED": 5,
+    "DATA_STATE_UNVERIFIED": 30
+  },
+  "screens": {
+    "AUTHENTICATION": 8,
+    "DECISION_ROOM": 4,
+    "MARKET_INTELLIGENCE": 1,
+    "QUALITY_AND_RISK": 14,
+    "TRIAL_AND_BILLING": 8
+  },
+  "closure_statuses": {
+    "BLOCKED_MOCK_SIGNATURE_PRESENT": 18,
+    "EVIDENCE_FOUND_PENDING_HUMAN_CONFIRMATION": 17
+  },
+  "confidence": {
+    "HIGH": 18,
+    "MEDIUM": 17
+  },
+  "evidence_found_pending_human_confirmation": 17,
+  "remaining_critical_gap_count": 18,
+  "traceability_rows_updated": 12,
+  "traceability_fields_updated": {
+    "data_state": 12
+  },
+  "environment_variable_names_recorded": 3341,
+  "environment_values_exposed": false,
+  "test_evidence_records": 2,
+  "ui_evidence_records": 3,
+  "ui_complete_records_created": 0,
+  "full_capability_coverage_claimed": false,
+  "human_confirmation_required": true,
+  "runtime_changes": "none",
+  "status": "P0_CRITICAL_EVIDENCE_CLOSURE_COMPLETE_HUMAN_CONFIRMATION_REQUIRED"
+}

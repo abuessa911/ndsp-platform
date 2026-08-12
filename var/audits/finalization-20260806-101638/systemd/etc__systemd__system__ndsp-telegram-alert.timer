@@ -1,0 +1,12 @@
+[Unit]
+Description=Run NDSP Telegram automatic health alert every 2 minutes
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=2min
+AccuracySec=20s
+Persistent=true
+Unit=ndsp-telegram-alert.service
+
+[Install]
+WantedBy=timers.target

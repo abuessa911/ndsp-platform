@@ -1,0 +1,93 @@
+.ndsp-button {
+  min-height: 42px;
+  border: 1px solid transparent;
+  border-radius: var(--ndsp-radius-md);
+  padding: 0 16px;
+  cursor: pointer;
+  transition:
+    background-color 140ms ease,
+    border-color 140ms ease,
+    transform 140ms ease;
+}
+
+.ndsp-button:active {
+  transform: translateY(1px);
+}
+
+.ndsp-button:focus-visible {
+  outline: 2px solid var(--ndsp-primary);
+  outline-offset: 2px;
+}
+
+.ndsp-button--primary {
+  background: var(--ndsp-primary);
+  color: #03111c;
+}
+
+.ndsp-button--secondary {
+  border-color: var(--ndsp-border-strong);
+  background: var(--ndsp-surface-2);
+  color: var(--ndsp-text);
+}
+
+.ndsp-button--ghost {
+  background: transparent;
+  color: var(--ndsp-text-secondary);
+}
+
+.ndsp-button--danger {
+  background: var(--ndsp-danger);
+  color: #21060c;
+}
+
+.ndsp-ui-card {
+  overflow: hidden;
+}
+
+.ndsp-ui-card__header {
+  padding: 18px 20px 0;
+}
+
+.ndsp-ui-card__header h2 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.ndsp-ui-card__header p {
+  margin: 6px 0 0;
+  color: var(--ndsp-text-muted);
+  font-size: 0.875rem;
+}
+
+.ndsp-ui-card__body {
+  padding: 20px;
+}
+
+.ndsp-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 3px 9px;
+  border: 1px solid var(--ndsp-border);
+  border-radius: 999px;
+  background: var(--ndsp-surface-2);
+  color: var(--ndsp-text-secondary);
+  font-size: 0.75rem;
+  font-weight: 650;
+}
+
+.ndsp-badge--info {
+  color: var(--ndsp-info);
+}
+
+.ndsp-badge--success {
+  color: var(--ndsp-success);
+}
+
+.ndsp-badge--warning {
+  color: var(--ndsp-warning);
+}
+
+.ndsp-badge--danger {
+  color: var(--ndsp-danger);
+}

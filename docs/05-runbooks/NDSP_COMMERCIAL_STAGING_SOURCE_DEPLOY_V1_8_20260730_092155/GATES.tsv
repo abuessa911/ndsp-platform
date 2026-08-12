@@ -1,0 +1,6 @@
+gate	status	evidence
+SAFETY_CONTRACT	PASS	Explicit confirmation, protected names, tools, identities and canonical paths validated.
+SOURCE_LOCK	PASS	Active production entrypoint and audited source path match the expected package identity and hashes.
+PRODUCTION_DB_READ_ONLY	PASS	Only public schema metadata was read; archive schemas and all production rows were excluded.
+STAGING_POLICY	PASS	No staging DB, role, OS user/group, unit, env, release root, state root or current link exists; automatic reset is disabled.
+FINAL	FAIL	UNEXPECTED_EXIT_CODE_3_AT_LINE_388

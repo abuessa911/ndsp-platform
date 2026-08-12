@@ -1,0 +1,3 @@
+gate	status	evidence
+SAFETY_CONTRACT	PASS	Explicit confirmation, protected production names, required tools and canonical paths validated.
+FINAL	FAIL	AUTH_ENTRYPOINT_OUTSIDE_CANONICAL_BACKEND:/opt/ndsp-auth-core-clean/current/server/dist/server.js

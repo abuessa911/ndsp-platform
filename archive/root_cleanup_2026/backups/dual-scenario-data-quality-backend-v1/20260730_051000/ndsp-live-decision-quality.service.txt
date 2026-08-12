@@ -1,0 +1,15 @@
+# /etc/systemd/system/ndsp-live-decision-quality.service
+[Unit]
+Description=NDSP Live Decision Quality Bridge
+After=network-online.target
+
+[Service]
+Type=simple
+User=nawaf511
+WorkingDirectory=/home/nawaf511/empire-core-new/backend/ndsp-live-decision-quality
+ExecStart=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/ndsp-live-decision-quality/server.py
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

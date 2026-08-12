@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-07-12T17:54:46+02:00",
+  "services": [
+    {
+      "service_id": "ndsp-quality-live-golden-wrapper",
+      "unit": "ndsp-quality-live-golden-wrapper.service",
+      "active_state": "active",
+      "exec_start": "/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_quality_live_golden_wrapper.py",
+      "environment_non_secret": {
+        "NDSP_QUALITY_LIVE_UPSTREAM": "http://127.0.0.1:9057",
+        "NDSP_GOLDEN_WRAPPER_HOST": "127.0.0.1",
+        "NDSP_GOLDEN_WRAPPER_PORT": "9067",
+        "PYTHONPATH": "/home/nawaf511/empire-core-new"
+      }
+    },
+    {
+      "service_id": "ndsp-quality-live-nmp-wrapper",
+      "unit": "ndsp-quality-live-nmp-wrapper.service",
+      "active_state": "active",
+      "exec_start": "/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_quality_live_nmp_wrapper.py",
+      "environment_non_secret": {
+        "NDSP_NMP_WRAPPER_UPSTREAM": "http://127.0.0.1:9067",
+        "NDSP_NMP_WRAPPER_HOST": "127.0.0.1",
+        "NDSP_NMP_WRAPPER_PORT": "9082",
+        "PYTHONPATH": "/home/nawaf511/empire-core-new"
+      }
+    },
+    {
+      "service_id": "ndsp-raw-cot-gateway",
+      "unit": "ndsp-raw-cot-gateway.service",
+      "active_state": "active",
+      "exec_start": "/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/.venv/bin/uvicorn app:app --host 127.0.0.1 --port 9076",
+      "environment_non_secret": {}
+    }
+  ]
+}

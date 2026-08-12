@@ -1,0 +1,14 @@
+8	/var/www/ndsp-my/login/index.html	forgot-label,forgot-route,login-title
+8	/home/nawaf511/empire-core-new/frontend/ndsp-auth-canonical-v94/login/index.html	forgot-label,forgot-route,login-title
+6	/var/www/ndsp-my/ndsp-forgot-password-v68.js	forgot-label,forgot-route
+6	/var/www/ndsp-my/ndsp-forgot-password-v67.js	forgot-label,forgot-route
+6	/var/www/ndsp-my/ndsp-forgot-password-v65.js	forgot-label,forgot-route
+6	/var/www/ndsp-my/forgot-password.html	forgot-label,forgot-route
+6	/var/www/ndsp-my/forgot-password-v67.html	forgot-label,forgot-route
+6	/home/nawaf511/empire-core-new/frontend/ndsp-user-portal-v50/public/ndsp-forgot-password-v65.js	forgot-label,forgot-route
+5	/opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1/ui/src/main.tsx	forgot-label,reset-route
+5	/opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1/ui-dist/assets/index-s5NFk2mn.js	forgot-label,reset-route
+5	/home/nawaf511/empire-core-new/backend/password_reset_gateway/server.js	forgot-route,reset-route
+5	/home/nawaf511/empire-core-new/backend/auth_api/ndsp_password_reset_module.js	forgot-label,reset-route
+5	/home/nawaf511/empire-core-new/backend/_backups/DEV002G_legacy_backend_modules_intake_20260628_003623/backend/password_reset_gateway/server.js	forgot-route,reset-route
+5	/home/nawaf511/empire-core-new/backend/_backups/DEV002D_backend_core_source_intake_20260628_002228/backend/auth_api/ndsp_password_reset_module.js	forgot-label,reset-route

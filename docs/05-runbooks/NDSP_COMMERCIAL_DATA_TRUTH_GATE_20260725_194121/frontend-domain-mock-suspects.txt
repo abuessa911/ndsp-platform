@@ -1,0 +1,21 @@
+[1] TOKEN=mock
+zon:f,caution_reason:"CORRECTION_AND_NMP_PENDING",alignment_score:76,confirmation_score:58,macd_histogram:y?12.4:-9.8,obv_slope:y?8.2:-6.4,cci_value:y?88:-72,usd_pressure_score:y?-14:18,blockers:{count:1},source_status:"mock",updated_at:new Date().toISOString()}}const kv=[{asset_id:"NDSP-CRYPTO-BTC-USD",asset_name:"Bitcoin",symbol:"BTCUSDT",decision_status:"complete",decision_quality:86,trend_context:"POSITIVE_PRESSURE",follow_up_horizon:"w
+
+[2] TOKEN=mock
+e:Ye,children:s})}function De(){const s=H.useContext(Fd);if(!s)throw new Error("useDecision must be inside DecisionProvider");return s}const th={brand:"NDSP",brandFull:"منصة نواف لدعم القرار",preview:"نسخة المعاينة V52",mock:"بيانات تجريبية",live:"بيانات حية",delayed:"متأخرة",stale:"قديمة",unavailable:"غير متاحة",local:"حفظ محلي للمعاينة",commandCenter:"مركز القيادة",markets:"الأسواق",pricesChart:"الأسعار والشارت",opportunities:"مستكشف الفر
+
+[3] TOKEN=mock
+ا القوة تقيس جودة القراءة الحالية.",guide3Title:"راقب المستويات",guide3Text:"التفعيل والوصول والمراجعة والإلغاء هي مستويات تفسيرية للسيناريو."},$v={...th,brandFull:"Nawaf Decision Support Platform",preview:"V52 Preview",mock:"Mock data",live:"Live data",delayed:"Delayed",stale:"Stale",unavailable:"Unavailable",local:"Local preview storage",commandCenter:"Command Center",markets:"Markets",pricesChart:"Prices & Chart",opportunities:"Opportuni
+
+[4] TOKEN=mock
+ة تقيس جودة القراءة الحالية.",guide3Title:"راقب المستويات",guide3Text:"التفعيل والوصول والمراجعة والإلغاء هي مستويات تفسيرية للسيناريو."},$v={...th,brandFull:"Nawaf Decision Support Platform",preview:"V52 Preview",mock:"Mock data",live:"Live data",delayed:"Delayed",stale:"Stale",unavailable:"Unavailable",local:"Local preview storage",commandCenter:"Command Center",markets:"Markets",pricesChart:"Prices & Chart",opportunities:"Opportunity Exp
+
+[5] TOKEN=mock
+ated:"A preview support ticket was created",category:"Category",technical:"Technical",dataIssue:"Data Issue",billingIssue:"Billing",feedback:"Feedback",appearance:"Appearance",darkMode:"Dark Mode",dataMode:"Data Source",mockModeDesc:"Uses clearly labeled mock data for preview.",liveModeDesc:"Uses live NDSP contracts and never invents missing values.",theme:"Theme",compact:"Compact Density",comfortable:"Comfortable Density",notFound:"Page No
+
+[6] TOKEN=mock
+created",category:"Category",technical:"Technical",dataIssue:"Data Issue",billingIssue:"Billing",feedback:"Feedback",appearance:"Appearance",darkMode:"Dark Mode",dataMode:"Data Source",mockModeDesc:"Uses clearly labeled mock data for preview.",liveModeDesc:"Uses live NDSP contracts and never invents missing values.",theme:"Theme",compact:"Compact Density",comfortable:"Comfortable Density",notFound:"Page Not Found",backHome:"Back to Command 
+
+[7] TOKEN=بيانات تجريبية
+hildren:s})}function De(){const s=H.useContext(Fd);if(!s)throw new Error("useDecision must be inside DecisionProvider");return s}const th={brand:"NDSP",brandFull:"منصة نواف لدعم القرار",preview:"نسخة المعاينة V52",mock:"بيانات تجريبية",live:"بيانات حية",delayed:"متأخرة",stale:"قديمة",unavailable:"غير متاحة",local:"حفظ محلي للمعاينة",commandCenter:"مركز القيادة",markets:"الأسواق",pricesChart:"الأسعار والشارت",opportunities:"مستكشف الفرص",decisionRoom:
+

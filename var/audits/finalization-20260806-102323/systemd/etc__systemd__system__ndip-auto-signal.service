@@ -1,0 +1,12 @@
+[Unit]
+Description=NDIP Auto Signal Engine
+After=network.target
+
+[Service]
+User=www-data
+WorkingDirectory=/opt/empire-core/backend
+ExecStart=/opt/empire-core/backend/venv/bin/python3 /opt/empire-core/backend/engine/auto_signal_engine.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

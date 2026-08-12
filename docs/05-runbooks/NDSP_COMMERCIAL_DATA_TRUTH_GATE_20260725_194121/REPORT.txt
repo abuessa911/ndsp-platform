@@ -1,0 +1,125 @@
+============================================================
+NDSP — COMMERCIAL DATA TRUTH GATE V1
+MODE=READ_ONLY_NO_PATCH_NO_RESTART_NO_NGINX_CHANGE
+DATE=2026-07-25T19:41:21+02:00
+OUT=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_COMMERCIAL_DATA_TRUTH_GATE_20260725_194121
+============================================================
+
+== 1) Canonical frontend identity ==
+INDEX_SHA=5a2ee3cf06fdb16b7c18adcf7bd2b73e5eb0b9b447648b353c9166ba4def0547
+JS_FILE=/var/www/ndsp-my/portal/assets/app-DL-BVG88.js
+JS_SHA=e616b0b9a8e9aed7aeabba28479e1ed66c0da21afec960e9250c06ab71f8a862
+CSS_FILE=/var/www/ndsp-my/portal/assets/index-9fd27c75.css
+CSS_SHA=9fd27c75d618cbc2751db4ea3a184a933ad80cc6be032757802556d92aff8813
+PASS=CANONICAL_ASSET_BASE
+PASS=COMMAND_CENTER_PRESENT
+PASS=RISK_RADAR_PRESENT
+
+== 2) Frontend API contracts and mock-data scan ==
+FRONTEND_API_PATH_COUNT=3
+FRONTEND_API_PATH=/api/completed-decisions
+FRONTEND_API_PATH=/api/decision/quality-live?symbol=${encodeURIComponent
+FRONTEND_API_PATH=/api/health
+FRONTEND_DOMAIN_MOCK_SUSPECT_COUNT=7
+WARN=FRONTEND_DOMAIN_MOCK_SUSPECTS_REQUIRE_REVIEW:7
+FRONTEND_BINDING=live_price=YES aliases=live_price
+FRONTEND_BINDING=scenario_state=YES aliases=scenario_state
+FRONTEND_BINDING=directional_context=YES aliases=scenario_directional_context,directional_context
+FRONTEND_BINDING=activation_level=YES aliases=scenario_activation_level,activation_level
+FRONTEND_BINDING=arrival_level=YES aliases=scenario_arrival_level,arrival_level
+FRONTEND_BINDING=review_level=YES aliases=scenario_review_level,review_level
+FRONTEND_BINDING=invalidation_level=YES aliases=scenario_invalidation_level,invalidation_level
+FRONTEND_BINDING=confidence=YES aliases=confidence
+FRONTEND_BINDING=time_horizon=YES aliases=time_horizon,follow_up_horizon
+FRONTEND_BINDING=alignment_score=YES aliases=alignment_score
+FRONTEND_BINDING=confirmation_score=YES aliases=confirmation_score
+FRONTEND_BINDING=macd_histogram=YES aliases=macd_histogram
+FRONTEND_BINDING=obv_slope=YES aliases=obv_slope
+FRONTEND_BINDING=cci_value=YES aliases=cci_value
+FRONTEND_BINDING=usd_pressure_score=YES aliases=usd_pressure_score
+FRONTEND_BINDING=blockers=YES aliases=blockers
+FRONTEND_BINDING_MISSING_COUNT=0
+PASS=FRONTEND_BINDS_ALL_GOVERNING_DATA_FIELDS
+
+== 3) Backend endpoint matrix ==
+ENDPOINT=health HTTP=200 PATH=/api/health?audit=20260725_194121
+ENDPOINT=quality_eth_weekly HTTP=200 PATH=/api/decision/quality-live?symbol=ETHUSDT&timeframe=weekly&audit=20260725_194121
+ENDPOINT=quality_btc_weekly HTTP=200 PATH=/api/decision/quality-live?symbol=BTCUSDT&timeframe=weekly&audit=20260725_194121
+ENDPOINT=quality_eth_15m HTTP=200 PATH=/api/decision/quality-live?symbol=ETHUSDT&timeframe=15m&audit=20260725_194121
+ENDPOINT=completed_decisions HTTP=401 PATH=/api/completed-decisions?audit=20260725_194121
+ENDPOINT=entitlements_me HTTP=401 PATH=/api/entitlements/me?audit=20260725_194121
+ENDPOINT=trial_status HTTP=200 PATH=/api/trial/status?audit=20260725_194121
+ENDPOINT=market_bridge_health HTTP=200 PATH=/api/market-data-bridge/health?audit=20260725_194121
+ENDPOINT=candles_market HTTP=200 PATH=/api/market/candles?symbol=ETHUSDT&timeframe=1h&interval=1h&limit=50&audit=20260725_194121
+ENDPOINT=candles_market_data HTTP=200 PATH=/api/market-data/candles?symbol=ETHUSDT&timeframe=1h&interval=1h&limit=50&audit=20260725_194121
+ENDPOINT=candles_ohlcv HTTP=200 PATH=/api/ohlcv?symbol=ETHUSDT&timeframe=1h&interval=1h&limit=50&audit=20260725_194121
+ENDPOINT=candles_plain HTTP=200 PATH=/api/candles?symbol=ETHUSDT&timeframe=1h&interval=1h&limit=50&audit=20260725_194121
+ENDPOINT=candles_market_ohlcv HTTP=200 PATH=/api/market/ohlcv?symbol=ETHUSDT&timeframe=1h&interval=1h&limit=50&audit=20260725_194121
+ENDPOINT=candles_technical HTTP=200 PATH=/api/technical/candles?symbol=ETHUSDT&timeframe=1h&interval=1h&limit=50&audit=20260725_194121
+ENDPOINT=news HTTP=200 PATH=/api/news?symbol=ETHUSDT&audit=20260725_194121
+ENDPOINT=market_news HTTP=200 PATH=/api/market/news?symbol=ETHUSDT&audit=20260725_194121
+ENDPOINT=events HTTP=200 PATH=/api/events?audit=20260725_194121
+ENDPOINT=economic_calendar HTTP=200 PATH=/api/economic-calendar?audit=20260725_194121
+
+== 4) Decision contract and provenance audit ==
+USABLE_CANDLE_ENDPOINTS=candles_market,candles_market_data,candles_ohlcv,candles_plain,candles_market_ohlcv,candles_technical
+CONTRACT_WARN=completed_decisions:PROTECTED_AUTHENTICATED_GATE_REQUIRED
+CONTRACT_WARN=entitlements_me:PROTECTED_AUTHENTICATED_GATE_REQUIRED
+CONTRACT_FAIL=quality_eth_weekly:missing_review_level
+CONTRACT_FAIL=quality_eth_weekly:missing_time_horizon
+CONTRACT_FAIL=quality_btc_weekly:missing_review_level
+CONTRACT_FAIL=quality_btc_weekly:missing_time_horizon
+CONTRACT_FAIL=quality_eth_15m:missing_review_level
+CONTRACT_FAIL=quality_eth_15m:missing_time_horizon
+CONTRACT_WARNING_COUNT=2
+CONTRACT_FAILURE_COUNT=6
+FAIL=DECISION_OR_MARKET_CONTRACTS
+
+== 5) Hardcoded live-value collision scan ==
+HARDCODED_VALUE_COLLISION_COUNT=0
+PASS=NO_CURRENT_RUNTIME_VALUES_EMBEDDED_IN_BUNDLE
+
+== 6) Browser-rendered end-to-end truth gate ==
+BROWSER=/usr/bin/chromium-browser
+BROWSER_RENDER=decision_eth OK SIZE=12732
+BROWSER_RENDER=decision_btc OK SIZE=12742
+BROWSER_RENDER=page_command-center OK SIZE=14935
+BROWSER_RENDER=page_markets OK SIZE=15028
+BROWSER_RENDER=page_prices-chart OK SIZE=38166
+BROWSER_RENDER=page_scenarios OK SIZE=6777
+BROWSER_RENDER=page_risk OK SIZE=9439
+BROWSER_RENDER=page_completed OK SIZE=7164
+BROWSER_RENDER=page_data-health OK SIZE=8316
+DOM_LEVEL_MATCHES_DECISION_ETH=0/4
+DOM_LEVEL_DETAIL_DECISION_ETH=activation_level=NO:1,768.18
+DOM_LEVEL_DETAIL_DECISION_ETH=arrival_level=NO:1,622.99
+DOM_LEVEL_DETAIL_DECISION_ETH=review_level=NO:None
+DOM_LEVEL_DETAIL_DECISION_ETH=invalidation_level=NO:2,040.40
+DOM_LEVEL_MATCHES_DECISION_BTC=0/4
+DOM_LEVEL_DETAIL_DECISION_BTC=activation_level=NO:61,443.57
+DOM_LEVEL_DETAIL_DECISION_BTC=arrival_level=NO:57,424.61
+DOM_LEVEL_DETAIL_DECISION_BTC=review_level=NO:None
+DOM_LEVEL_DETAIL_DECISION_BTC=invalidation_level=NO:68,979.11
+BROWSER_FAIL=decision_eth:VISIBLE_MOCK_MARKER
+BROWSER_FAIL=decision_eth:API_LEVELS_NOT_RENDERED
+BROWSER_FAIL=decision_btc:VISIBLE_MOCK_MARKER
+BROWSER_FAIL=decision_btc:API_LEVELS_NOT_RENDERED
+BROWSER_FAIL=page_command-center:PLACEHOLDER_OR_MOCK_VISIBLE
+BROWSER_FAIL=page_markets:PLACEHOLDER_OR_MOCK_VISIBLE
+BROWSER_FAIL=page_prices-chart:PLACEHOLDER_OR_MOCK_VISIBLE
+BROWSER_FAIL=page_scenarios:PLACEHOLDER_OR_MOCK_VISIBLE
+BROWSER_FAIL=page_risk:PLACEHOLDER_OR_MOCK_VISIBLE
+BROWSER_FAIL=page_completed:PLACEHOLDER_OR_MOCK_VISIBLE
+BROWSER_FAIL=page_data-health:PLACEHOLDER_OR_MOCK_VISIBLE
+BROWSER_FAILURE_COUNT=11
+FAIL=BROWSER_END_TO_END_DATA_RENDERING
+
+== 7) Final commercial verdict ==
+FAIL_COUNT=2
+WARN_COUNT=1
+REPORT=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_COMMERCIAL_DATA_TRUTH_GATE_20260725_194121/REPORT.txt
+API_PATHS=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_COMMERCIAL_DATA_TRUTH_GATE_20260725_194121/frontend-api-paths.txt
+FRONTEND_BINDINGS=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_COMMERCIAL_DATA_TRUTH_GATE_20260725_194121/frontend-contract-bindings.txt
+MOCK_SUSPECTS=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_COMMERCIAL_DATA_TRUTH_GATE_20260725_194121/frontend-domain-mock-suspects.txt
+ENDPOINT_MATRIX=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_COMMERCIAL_DATA_TRUTH_GATE_20260725_194121/endpoint-matrix.tsv
+FINAL_STATUS=COMMERCIAL_DATA_GATE_BLOCKED

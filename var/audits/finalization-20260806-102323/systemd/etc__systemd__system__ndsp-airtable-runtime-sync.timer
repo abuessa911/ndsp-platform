@@ -1,0 +1,12 @@
+[Unit]
+Description=Run NDSP Airtable Runtime Sync every 15 minutes
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=15min
+AccuracySec=30s
+Persistent=true
+Unit=ndsp-airtable-runtime-sync.service
+
+[Install]
+WantedBy=timers.target

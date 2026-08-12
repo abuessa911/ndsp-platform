@@ -1,0 +1,61 @@
+=== NDSP CONTRACT TRUTH EXTRACTION ===
+MODE=READ_ONLY
+
+=== TARGET FILES ===
+backend/ndsp_latest_16_layers_logic_functions.py=FOUND
+backend/app/runtime/ndsp_v201_launch_completion.py=FOUND
+backend/app/support_layers/cot/cot_storage.py=FOUND
+backend/layers/canonical_v1/runtime_bridge.py=FOUND
+backend/shared/tdl_day_logic_v2.py=FOUND
+backend/app/api/v1/frontend_contract.py=FOUND
+
+=== COT FUNCTIONS ===
+_ndsp_direction_from_long_short=FOUND backend/ndsp_latest_16_layers_logic_functions.py:335-367
+_ndsp_extract_group_numbers=FOUND backend/ndsp_latest_16_layers_logic_functions.py:441-508
+_ndsp_movement_type=FOUND backend/ndsp_latest_16_layers_logic_functions.py:406-416
+_ndsp_num=FOUND backend/ndsp_latest_16_layers_logic_functions.py:321-325
+_ndsp_weekly_direction_from_changes=FOUND backend/ndsp_latest_16_layers_logic_functions.py:370-403
+
+=== CANONICAL DIRECTIONS ===
+ASSET_MANAGERS_OVERALL=FOUND
+ASSET_MANAGERS_WEEKLY=FOUND
+LEVERAGED_FUNDS_OVERALL=FOUND
+LEVERAGED_FUNDS_WEEKLY=FOUND
+
+=== FRESHNESS ===
+REPORT_DATE=FOUND
+REPORT_AGE_DAYS=FOUND
+MAX_AGE_DAYS=FOUND
+FRESH=FOUND
+
+=== ROUTING ===
+ASSET_CLASS=FOUND
+PROVIDER=NOT_FOUND
+DATASET=NOT_FOUND
+REPORT_FAMILY=FOUND
+SOURCE_MARKET=FOUND
+SOURCE_TIMEFRAME=FOUND
+ANALYSIS_TIMEFRAME=FOUND
+
+=== COT NUMERIC NORMALIZATION ===
+CURRENT_LONG_ALIASES=['long', 'longs', 'current_long', 'positions_long']
+CURRENT_SHORT_ALIASES=['short', 'shorts', 'current_short', 'positions_short']
+CHANGE_LONG_ALIASES=['change_long', 'long_change', 'change_in_long', 'weekly_change_long']
+CHANGE_SHORT_ALIASES=['change_short', 'short_change', 'change_in_short', 'weekly_change_short']
+
+=== EXTRACT RETURN KEYS ===
+EXTRACT_RETURN_KEYS=['change_long', 'change_short', 'has_current_totals', 'has_weekly_changes', 'long', 'short']
+
+=== LEVERAGED OVERALL SEARCH ===
+POSSIBLE_LEVERAGED_OVERALL_EVIDENCE=10
+
+=== GOVERNANCE STATUS ===
+GOVERNANCE_REVIEW_01=LEVERAGED_FUNDS_OVERALL_EXPLICIT
+GOVERNANCE_REVIEW_02=DATASET_IDENTITY_NOT_EXPLICIT
+
+NOTE=FOUND_MEANS_SOURCE_EVIDENCE_ONLY;NOT_CONTRACT_CLOSURE
+
+FILES_MODIFIED=0
+SERVICES_RESTARTED=0
+RUNTIME_LOGIC_MODIFIED=0
+FINAL_RESULT=PASS

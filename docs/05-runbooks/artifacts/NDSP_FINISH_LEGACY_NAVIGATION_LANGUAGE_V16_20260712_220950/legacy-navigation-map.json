@@ -1,0 +1,25 @@
+{
+  "version": "16",
+  "aliases": {
+    "/NDSP_Asset_View.html": {
+      "mode": "route",
+      "value": "/markets"
+    },
+    "/NDSP_Command_Center.html": {
+      "mode": "route",
+      "value": "/decisions"
+    },
+    "/NDSP_Daily_Brief.html": {
+      "mode": "target",
+      "value": "daily-brief"
+    },
+    "/NDSP_Settings_Alerts.html": {
+      "mode": "target",
+      "value": "settings-alerts"
+    },
+    "/decision-support.html": {
+      "mode": "target",
+      "value": "decision-support"
+    }
+  }
+}

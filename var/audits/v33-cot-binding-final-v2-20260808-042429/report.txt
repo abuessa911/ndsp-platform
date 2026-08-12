@@ -1,0 +1,39 @@
+=== NDSP V33 COT BINDING FINAL V2 ===
+DATE=2026-08-08T04:24:29+02:00
+AUDIT=/home/nawaf511/empire-core-new/var/audits/v33-cot-binding-final-v2-20260808-042429
+
+=== 1. PRECONDITIONS ===
+V33_SOURCE=FOUND
+PYTHON_SYNTAX_BEFORE=PASS
+V33_ACTIVE_STATE=active
+V33_PID=2267278
+V33_SERVICE=PASS
+
+=== 2. VERIFY 9085 GOVERNED COT ===
+HTTP_9085=200
+STATUS= 'STALE_BY_POLICY'
+DECISION_USE_ALLOWED= False
+MONITORING_USE_ALLOWED= True
+REPORT_DATE= '2026-07-21'
+REPORT_AGE_DAYS= 18.0
+MAX_AGE_DAYS= 10
+FRESH= False
+asset_managers_overall='bearish'
+asset_managers_weekly='bearish'
+leveraged_funds_overall='bearish'
+leveraged_funds_weekly='bullish'
+9085_GOVERNED_COT=PASS
+
+=== 3. BACKUP ===
+BACKUP=/home/nawaf511/empire-core-new/var/audits/v33-cot-binding-final-v2-20260808-042429/backup/ndsp_canonical_live_runtime_v33.py
+
+=== 4. DISCOVER EXACT V33 PATCH POINT ===
+PATCHPOINT_COUNT=0
+PATCH_ALLOWED=NO_UNLESS_EXACTLY_ONE_TARGET
+
+============================================================
+=== AUTOMATIC SAFE ROLLBACK ===
+ROLLBACK_REASON=RC_40
+ROLLBACK=COMPLETE
+FINAL_RESULT=ROLLED_BACK_SAFE
+AUDIT=/home/nawaf511/empire-core-new/var/audits/v33-cot-binding-final-v2-20260808-042429

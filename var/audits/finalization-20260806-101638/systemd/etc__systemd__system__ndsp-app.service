@@ -1,0 +1,13 @@
+[Unit]
+Description=NDSP App Static Frontend Service
+After=network.target
+
+[Service]
+User=nawaf511
+WorkingDirectory=/home/nawaf511/empire-core-new/backend/frontend_public
+ExecStart=/usr/bin/python3 -m http.server 8010 --bind 127.0.0.1
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

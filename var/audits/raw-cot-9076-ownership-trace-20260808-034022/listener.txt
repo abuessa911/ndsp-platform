@@ -1,0 +1,6 @@
+=== PORT 9076 LISTENER ===
+LISTEN 0      2048       127.0.0.1:9076       0.0.0.0:*    users:(("uvicorn",pid=1339,fd=13))  
+PID=1339
+CMDLINE=/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/.venv/bin/python3 /home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/.venv/bin/uvicorn app:app --host 127.0.0.1 --port 9076 
+CWD=/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway
+EXE=/usr/bin/python3.12

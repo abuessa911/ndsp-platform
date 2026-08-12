@@ -1,0 +1,147 @@
+=== NDSP RAW COT 9076 EXACT TRUTH V4 ===
+MODE=READ_ONLY
+
+=== RAW 9076 TOP LEVEL ===
+KEYS=['asset', 'asset_managers_bias', 'asset_managers_long', 'asset_managers_net', 'asset_managers_short', 'dealer_intermediary_bias', 'dealer_intermediary_long', 'dealer_intermediary_net', 'dealer_intermediary_short', 'exchange', 'leveraged_funds_bias', 'leveraged_funds_long', 'leveraged_funds_net', 'leveraged_funds_short', 'market_name', 'matched_rows', 'ok', 'open_interest', 'raw_cot_connected', 'raw_cot_status', 'raw_row_head', 'report_date', 'report_yyMMdd', 'source_family', 'source_file', 'total_rows']
+
+=== RAW 9076 FULL PAYLOAD ===
+{
+  "asset": "ETHUSDT",
+  "asset_managers_bias": "bearish",
+  "asset_managers_long": 1634,
+  "asset_managers_net": -2420,
+  "asset_managers_short": 4054,
+  "dealer_intermediary_bias": "bullish",
+  "dealer_intermediary_long": 16361,
+  "dealer_intermediary_net": 9163,
+  "dealer_intermediary_short": 7198,
+  "exchange": "CME",
+  "leveraged_funds_bias": "bearish",
+  "leveraged_funds_long": 2223,
+  "leveraged_funds_net": -7053,
+  "leveraged_funds_short": 9276,
+  "market_name": "ETHER CASH SETTLED - CHICAGO MERCANTILE EXCHANGE",
+  "matched_rows": 1,
+  "ok": true,
+  "open_interest": 23667,
+  "raw_cot_connected": true,
+  "raw_cot_status": "CONNECTED_MATCHED",
+  "raw_row_head": [
+    "ETHER CASH SETTLED - CHICAGO MERCANTILE EXCHANGE",
+    "260721",
+    "2026-07-21",
+    "146021",
+    "CME",
+    "00",
+    "146",
+    "23667",
+    "16361",
+    "7198",
+    "175",
+    "1634",
+    "4054",
+    "219",
+    "2223",
+    "9276",
+    "2208",
+    "25"
+  ],
+  "report_date": "2026-07-21",
+  "report_yyMMdd": "260721",
+  "source_family": "TFF",
+  "source_file": "/home/nawaf511/empire-core-new/backend/data/raw_cot/current_tff_futures_only_FinFutWk.txt",
+  "total_rows": 90
+}
+
+=== RAW 9076 REQUIRED FIELD PATHS ===
+asset_managers_bias=PRESENT count=1
+PATH=$.asset_managers_bias VALUE='bearish'
+asset_managers_change_long=NOT_PRESENT
+asset_managers_change_short=NOT_PRESENT
+asset_managers_long=PRESENT count=1
+PATH=$.asset_managers_long VALUE=1634
+asset_managers_overall_direction=NOT_PRESENT
+asset_managers_short=PRESENT count=1
+PATH=$.asset_managers_short VALUE=4054
+asset_managers_weekly_direction=NOT_PRESENT
+fresh=NOT_PRESENT
+leveraged_funds_bias=PRESENT count=1
+PATH=$.leveraged_funds_bias VALUE='bearish'
+leveraged_funds_change_long=NOT_PRESENT
+leveraged_funds_change_short=NOT_PRESENT
+leveraged_funds_long=PRESENT count=1
+PATH=$.leveraged_funds_long VALUE=2223
+leveraged_funds_overall_direction=NOT_PRESENT
+leveraged_funds_short=PRESENT count=1
+PATH=$.leveraged_funds_short VALUE=9276
+leveraged_funds_weekly_direction=NOT_PRESENT
+max_age_days=NOT_PRESENT
+raw_cot_connected=PRESENT count=1
+PATH=$.raw_cot_connected VALUE=True
+raw_cot_governing_inputs_complete=NOT_PRESENT
+raw_cot_status=PRESENT count=1
+PATH=$.raw_cot_status VALUE='CONNECTED_MATCHED'
+report_age_days=NOT_PRESENT
+report_date=PRESENT count=1
+PATH=$.report_date VALUE='2026-07-21'
+
+=== QUALITY 9082 GOVERNING INPUTS ===
+{
+  "analysis_mode": "investment",
+  "analysis_timeframe": "weekly",
+  "contract_version": "NDSP_GOVERNING_INPUTS_V201",
+  "directions": {
+    "asset_managers_overall": "bearish",
+    "asset_managers_weekly": null,
+    "leveraged_funds_weekly": null
+  },
+  "fresh": false,
+  "max_age_days": 10,
+  "missing_inputs": [
+    "asset_managers_weekly",
+    "leveraged_funds_weekly"
+  ],
+  "not_recommendation": true,
+  "raw_cot_connected": true,
+  "raw_cot_status": "CONNECTED_MATCHED",
+  "report_age_days": null,
+  "report_date": "2026-07-21",
+  "source": "CFTC_TFF_FUTURES_ONLY",
+  "source_family": "TFF",
+  "source_market": "ETHER CASH SETTLED - CHICAGO MERCANTILE EXCHANGE",
+  "source_timeframe": "weekly",
+  "status": "INCOMPLETE",
+  "symbol": "ETHUSDT"
+}
+
+=== 9076 -> 9082 COMPARISON ===
+asset_managers_overall_direction=VALUE_CREATED_OR_DERIVED_AT_9082 RAW_VALUES=[] QUALITY_VALUE='bearish'
+asset_managers_weekly_direction=MISSING_AT_9076_AND_9082 RAW_VALUES=[] QUALITY_VALUE=None
+leveraged_funds_overall_direction=MISSING_AT_9076_AND_9082 RAW_VALUES=[] QUALITY_VALUE=None
+leveraged_funds_weekly_direction=MISSING_AT_9076_AND_9082 RAW_VALUES=[] QUALITY_VALUE=None
+report_date=VALUE_SURVIVES_9076_TO_9082 RAW_VALUES=['2026-07-21'] QUALITY_VALUE='2026-07-21'
+report_age_days=MISSING_AT_9076_AND_9082 RAW_VALUES=[] QUALITY_VALUE=None
+
+=== NUMERIC SOURCE CLASSIFICATION ===
+asset_managers_long=AVAILABLE VALUES=[1634]
+asset_managers_short=AVAILABLE VALUES=[4054]
+asset_managers_change_long=MISSING
+asset_managers_change_short=MISSING
+leveraged_funds_long=AVAILABLE VALUES=[2223]
+leveraged_funds_short=AVAILABLE VALUES=[9276]
+leveraged_funds_change_long=MISSING
+leveraged_funds_change_short=MISSING
+NUMERIC_FIELDS_AVAILABLE=4/8
+
+=== ROOT CAUSE DECISION ===
+WEEKLY_SOURCE_9076=MISSING
+WEEKLY_LOSS_BOUNDARY=UPSTREAM_OF_9076
+LEVERAGED_FUNDS_OVERALL_SOURCE_9076=AVAILABLE
+V30_GOVERNING_INPUTS_ADAPTER_CANDIDATE=YES
+PATCH_ALLOWED=NO
+NEXT_ACTION=DECIDE_AFTER_9076_SOURCE_TRUTH
+
+FILES_MODIFIED=0
+SERVICES_RESTARTED=0
+RUNTIME_LOGIC_MODIFIED=0
+FINAL_RESULT=PASS

@@ -1,0 +1,74 @@
+=== NDSP PRE-PATCH EXACT VALUES ===
+MODE=READ_ONLY
+
+=== LIVE VALUE PATHS ===
+analysis_timeframe=PRESENT count=1
+  PATH=$.governing_inputs.analysis_timeframe VALUE='weekly'
+asset_managers_change_long=NOT_PRESENT
+asset_managers_change_short=NOT_PRESENT
+asset_managers_long=NOT_PRESENT
+asset_managers_overall=PRESENT count=1
+  PATH=$.governing_inputs.directions.asset_managers_overall VALUE='bearish'
+asset_managers_overall_direction=NOT_PRESENT
+asset_managers_short=NOT_PRESENT
+asset_managers_weekly=PRESENT count=1
+  PATH=$.governing_inputs.directions.asset_managers_weekly VALUE=None
+asset_managers_weekly_direction=NOT_PRESENT
+cot_report_date=NOT_PRESENT
+dataset=NOT_PRESENT
+fresh=PRESENT count=1
+  PATH=$.governing_inputs.fresh VALUE=False
+leveraged_funds_change_long=NOT_PRESENT
+leveraged_funds_change_short=NOT_PRESENT
+leveraged_funds_long=NOT_PRESENT
+leveraged_funds_overall=NOT_PRESENT
+leveraged_funds_overall_direction=NOT_PRESENT
+leveraged_funds_short=NOT_PRESENT
+leveraged_funds_weekly=PRESENT count=1
+  PATH=$.governing_inputs.directions.leveraged_funds_weekly VALUE=None
+leveraged_funds_weekly_direction=NOT_PRESENT
+max_age_days=PRESENT count=1
+  PATH=$.governing_inputs.max_age_days VALUE=10
+provider=PRESENT count=3
+  PATH=$.live_market_analysis.provider VALUE='binance'
+  PATH=$.nmp.provider VALUE='binance_klines'
+  PATH=$.score_inputs.macro.provider VALUE='yahoo_chart'
+raw_cot_report_date=NOT_PRESENT
+report_age_days=PRESENT count=1
+  PATH=$.governing_inputs.report_age_days VALUE=None
+report_date=PRESENT count=1
+  PATH=$.governing_inputs.report_date VALUE='2026-07-21'
+report_family=NOT_PRESENT
+source_market=PRESENT count=1
+  PATH=$.governing_inputs.source_market VALUE='ETHER CASH SETTLED - CHICAGO MERCANTILE EXCHANGE'
+source_timeframe=PRESENT count=1
+  PATH=$.governing_inputs.source_timeframe VALUE='weekly'
+
+=== REQUIRED COT NUMERIC AVAILABILITY ===
+ASSET_MANAGERS_LONG=VALUE_NOT_PRESENT
+ASSET_MANAGERS_SHORT=VALUE_NOT_PRESENT
+ASSET_MANAGERS_CHANGE_LONG=VALUE_NOT_PRESENT
+ASSET_MANAGERS_CHANGE_SHORT=VALUE_NOT_PRESENT
+LEVERAGED_FUNDS_LONG=VALUE_NOT_PRESENT
+LEVERAGED_FUNDS_SHORT=VALUE_NOT_PRESENT
+LEVERAGED_FUNDS_CHANGE_LONG=VALUE_NOT_PRESENT
+LEVERAGED_FUNDS_CHANGE_SHORT=VALUE_NOT_PRESENT
+
+=== DIRECTION AVAILABILITY ===
+AM_OVERALL=VALUE_PRESENT
+AM_WEEKLY=VALUE_NOT_PRESENT
+LF_OVERALL=VALUE_NOT_PRESENT
+LF_WEEKLY=VALUE_NOT_PRESENT
+
+=== FRESHNESS ===
+REPORT_DATE='2026-07-21'
+RAW_COT_REPORT_DATE=NOT_PRESENT
+COT_REPORT_DATE=NOT_PRESENT
+REPORT_AGE_DAYS=None
+MAX_AGE_DAYS=10
+FRESH=False
+
+FILES_MODIFIED=0
+SERVICES_RESTARTED=0
+RUNTIME_LOGIC_MODIFIED=0
+FINAL_RESULT=PASS

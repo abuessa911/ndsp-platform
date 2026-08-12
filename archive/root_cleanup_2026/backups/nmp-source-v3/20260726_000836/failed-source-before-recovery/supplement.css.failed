@@ -1,0 +1,54 @@
+.commercial-banner{display:flex;align-items:center;gap:10px;margin:0 0 18px;padding:12px 14px;border:1px solid rgba(108,207,141,.25);border-radius:14px;background:rgba(108,207,141,.06)}
+.news-list{display:grid;gap:10px}.news-list article{display:flex;justify-content:space-between;gap:14px;padding:12px;border:1px solid var(--border);border-radius:12px;background:var(--surface-2)}.news-list article div{display:grid;gap:4px}.news-list article small{opacity:.68}.news-list article a{font-size:22px}
+.portfolio-form{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;padding:14px;margin-bottom:18px}.portfolio-form input,.portfolio-form select{min-width:0}
+.layer-public{display:grid;gap:12px}.json-view{white-space:pre-wrap;word-break:break-word;max-height:320px;overflow:auto;font:12px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace}
+.fullscreen-modal{width:min(96vw,1400px);max-width:none}.fullscreen-modal .modal-body{max-height:82vh;overflow:auto}
+.icon{display:inline-flex;align-items:center;justify-content:center;line-height:1}.brand{border:0;background:none;color:inherit;text-align:inherit;cursor:pointer}.nav-link{border:0;background:none;font:inherit;color:inherit;cursor:pointer}.drawer-link{width:100%;text-align:inherit}
+@media(max-width:900px){.portfolio-form{grid-template-columns:1fr 1fr}}@media(max-width:560px){.portfolio-form{grid-template-columns:1fr}}
+/* NDSP_RADAR_LEGEND_FIX_V1_BEGIN */
+.radar-legend{
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:10px 14px;
+}
+.radar-legend .radar-item{
+  display:flex!important;
+  align-items:center;
+  gap:9px;
+  direction:inherit!important;
+  min-width:0;
+  overflow:hidden;
+  padding:10px 12px;
+}
+html[dir="rtl"] .radar-legend .radar-item{
+  direction:rtl!important;
+}
+html[dir="ltr"] .radar-legend .radar-item{
+  direction:ltr!important;
+}
+.radar-item i{
+  flex:0 0 6px;
+}
+.radar-item em{
+  flex:1 1 auto;
+  min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  word-break:normal;
+  overflow-wrap:normal;
+}
+.radar-item b{
+  flex:0 0 4.8rem!important;
+  width:4.8rem!important;
+  min-width:4.8rem!important;
+  max-width:4.8rem;
+  padding:3px 8px;
+  font-size:.78rem;
+  line-height:1.4;
+}
+@media(max-width:640px){
+  .radar-legend{
+    grid-template-columns:minmax(0,1fr);
+  }
+}
+/* NDSP_RADAR_LEGEND_FIX_V1_END */

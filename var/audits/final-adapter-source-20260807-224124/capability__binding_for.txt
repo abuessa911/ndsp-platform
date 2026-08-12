@@ -1,0 +1,40 @@
+00245:         "timer_active": systemctl_active("ndsp-capability-runtime-controller.timer"),
+00246:         "running_units": units,
+00247:         "auth_units": auth_units,
+00248:         "otel_units": otel_units,
+00249:         "recent_backups": recent_backup_evidence(Path.home()),
+00250:     }
+00251: 
+00252: 
+00253: def binding_for(name: str, context: dict[str, Any]) -> tuple[str, str, list[str], str]:
+00254:     api = context.get("api_payload") or {}
+00255:     bridge = context.get("bridge_payload") or {}
+00256:     if name == "external_integration_gateway" and context.get("api_status") == 200:
+00257:         return "LIVE_VERIFIED", "public quality-live gateway returned HTTP 200", [], "STRONG"
+00258:     if name == "access_visibility_governance" and context.get("bridge_status") == 200 and len(bridge.get("decision_layers") or []) == 16:
+00259:         return "PARTIALLY_LIVE", "public visibility metadata is bound to the live sidecar", ["role-specific server enforcement not verified by this probe"], "MODERATE"
+00260:     if name == "workflow_scheduler_event_bus" and context.get("timer_active"):
+00261:         return "PARTIALLY_LIVE", "systemd scheduler is active for runtime evidence refresh", ["independent event-bus transport is not verified"], "MODERATE"
+00262:     if name == "backup_recovery_disaster_governance" and context.get("recent_backups"):
+00263:         return "PARTIALLY_LIVE", "recent NDSP backup artifacts were detected", ["automated restore drill is not verified by this probe"], "MODERATE"
+00264:     if name == "identity_authentication_authorization" and context.get("auth_units") and context.get("login_status") == 200 and context.get("register_status") == 200:
+00265:         return "PARTIALLY_LIVE", "authentication-related runtime and public entry pages were detected", ["full authorization matrix was not exercised against production identities"], "MODERATE"
+00266:     if name == "schema_contract_registry" and api.get("public_contract_version"):
+00267:         return "PARTIALLY_LIVE", "public API contract version is enforced in the live response", ["all internal boundaries are not instrumented by this probe"], "MODERATE"
+00268:     if name == "engine_model_policy_version_registry" and api.get("public_contract_version") and api.get("source_mode"):
+00269:         return "PARTIALLY_LIVE", "live response exposes governed contract and source version markers", ["complete engine/model manifest is not exposed publicly"], "MODERATE"
+00270:     if name == "data_quality_gate" and api.get("ok") is True and api.get("live_price_bound") is True:
+00271:         return "PARTIALLY_LIVE", "live response passed public health and live-price binding gates", ["all provider-quality checks are not exposed publicly"], "MODERATE"
+00272:     if name == "decision_explainability" and ((api.get("scenario") or {}).get("scenario_directional_context") or api.get("final_summary")):
+00273:         return "PARTIALLY_LIVE", "live response contains explanatory decision context", ["audience-specific explanation service is not independently exposed"], "MODERATE"
+00274:     if name == "opentelemetry_observability" and context.get("otel_units"):
+00275:         return "PARTIALLY_LIVE", "OpenTelemetry-related runtime unit detected", ["end-to-end trace export was not verified"], "MODERATE"
+00276:     return "READY_VERIFIED", "functional probe passed; no production binding was proven", ["not_bound_to_verified_live_runtime"], "FUNCTIONAL"
+00277: 
+00278: 
+00279: def main() -> int:
+00280:     parser = argparse.ArgumentParser()
+00281:     parser.add_argument("--project", required=True)
+00282:     parser.add_argument("--output", required=True)
+00283:     args = parser.parse_args()
+00284:     project = Path(args.project).resolve()

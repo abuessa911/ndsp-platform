@@ -21,7 +21,7 @@ export function HeroSection() {
             </div>
 
             <h1>
-              منصة نواف
+              منصة دعم القرار
               <br />
               لدعم القرار
               <span>

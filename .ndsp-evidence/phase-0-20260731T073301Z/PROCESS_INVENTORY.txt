@@ -1,0 +1,285 @@
+$ ps -eo user,pid,ppid,lstart,etime,cmd --sort=pid
+
+USER         PID    PPID                  STARTED     ELAPSED CMD
+root           1       0 ح يوليو 26 18:09:50 2026 4-15:23:22 /usr/lib/systemd/systemd --system --deserialize=212
+root           2       0 ح يوليو 26 18:09:50 2026 4-15:23:22 [kthreadd]
+root           3       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [pool_workqueue_release]
+root           4       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [kworker/R-rcu_g]
+root           5       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [kworker/R-rcu_p]
+root           6       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [kworker/R-slub_]
+root           7       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [kworker/R-netns]
+root          12       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [kworker/R-mm_pe]
+root          13       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [rcu_tasks_kthread]
+root          14       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [rcu_tasks_rude_kthread]
+root          15       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [rcu_tasks_trace_kthread]
+root          16       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [ksoftirqd/0]
+root          17       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [rcu_preempt]
+root          18       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [migration/0]
+root          19       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [idle_inject/0]
+root          20       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [cpuhp/0]
+root          21       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [cpuhp/1]
+root          22       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [idle_inject/1]
+root          23       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [migration/1]
+root          24       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [ksoftirqd/1]
+root          27       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [cpuhp/2]
+root          28       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [idle_inject/2]
+root          29       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [migration/2]
+root          30       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [ksoftirqd/2]
+root          33       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [cpuhp/3]
+root          34       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [idle_inject/3]
+root          35       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [migration/3]
+root          36       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [ksoftirqd/3]
+root          39       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [cpuhp/4]
+root          40       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [idle_inject/4]
+root          41       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [migration/4]
+root          42       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [ksoftirqd/4]
+root          45       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [cpuhp/5]
+root          46       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [idle_inject/5]
+root          47       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [migration/5]
+root          48       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [ksoftirqd/5]
+root          51       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [cpuhp/6]
+root          52       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [idle_inject/6]
+root          53       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [migration/6]
+root          54       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [ksoftirqd/6]
+root          57       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [cpuhp/7]
+root          58       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [idle_inject/7]
+root          59       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [migration/7]
+root          60       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [ksoftirqd/7]
+root          63       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [kdevtmpfs]
+root          64       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [kworker/R-inet_]
+root          65       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [kauditd]
+root          66       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [khungtaskd]
+root          67       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [oom_reaper]
+root          69       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [kworker/R-write]
+root          70       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [kcompactd0]
+root          72       2 ح يوليو 26 18:09:50 2026 4-15:23:22 [ksmd]
+root          73       2 ح يوليو 26 18:09:50 2026 4-15:23:21 [khugepaged]
+root          74       2 ح يوليو 26 18:09:50 2026 4-15:23:21 [kworker/R-kinte]
+root          75       2 ح يوليو 26 18:09:50 2026 4-15:23:21 [kworker/R-kbloc]
+root          76       2 ح يوليو 26 18:09:50 2026 4-15:23:21 [kworker/R-blkcg]
+root          77       2 ح يوليو 26 18:09:50 2026 4-15:23:21 [irq/9-acpi]
+root          80       2 ح يوليو 26 18:09:50 2026 4-15:23:21 [kworker/R-tpm_d]
+root          81       2 ح يوليو 26 18:09:50 2026 4-15:23:21 [kworker/R-ata_s]
+root          82       2 ح يوليو 26 18:09:50 2026 4-15:23:21 [kworker/R-md]
+root          83       2 ح يوليو 26 18:09:50 2026 4-15:23:21 [kworker/R-md_bi]
+root          84       2 ح يوليو 26 18:09:50 2026 4-15:23:21 [kworker/R-edac-]
+root          85       2 ح يوليو 26 18:09:50 2026 4-15:23:21 [kworker/R-devfr]
+root          86       2 ح يوليو 26 18:09:50 2026 4-15:23:21 [watchdogd]
+root          88       2 ح يوليو 26 18:09:50 2026 4-15:23:21 [kworker/R-quota]
+root          90       2 ح يوليو 26 18:09:51 2026 4-15:23:21 [kswapd0]
+root          91       2 ح يوليو 26 18:09:51 2026 4-15:23:21 [ecryptfs-kthread]
+root          92       2 ح يوليو 26 18:09:51 2026 4-15:23:21 [kworker/R-kthro]
+root          93       2 ح يوليو 26 18:09:51 2026 4-15:23:21 [kworker/R-acpi_]
+root          94       2 ح يوليو 26 18:09:51 2026 4-15:23:21 [scsi_eh_0]
+root          95       2 ح يوليو 26 18:09:51 2026 4-15:23:21 [kworker/R-scsi_]
+root          96       2 ح يوليو 26 18:09:51 2026 4-15:23:21 [scsi_eh_1]
+root          97       2 ح يوليو 26 18:09:51 2026 4-15:23:21 [kworker/R-scsi_]
+root          98       2 ح يوليو 26 18:09:51 2026 4-15:23:21 [scsi_eh_2]
+root          99       2 ح يوليو 26 18:09:51 2026 4-15:23:21 [kworker/R-scsi_]
+root         106       2 ح يوليو 26 18:09:51 2026 4-15:23:21 [kworker/R-mld]
+root         108       2 ح يوليو 26 18:09:51 2026 4-15:23:21 [kworker/R-ipv6_]
+root         115       2 ح يوليو 26 18:09:51 2026 4-15:23:21 [kworker/R-kstrp]
+root         119       2 ح يوليو 26 18:09:51 2026 4-15:23:21 [kworker/u17:0]
+root         124       2 ح يوليو 26 18:09:51 2026 4-15:23:21 [kworker/R-crypt]
+root         134       2 ح يوليو 26 18:09:51 2026 4-15:23:20 [kworker/R-charg]
+root         299       2 ح يوليو 26 18:09:53 2026 4-15:23:18 [kworker/R-raid5]
+root         339       2 ح يوليو 26 18:09:54 2026 4-15:23:18 [jbd2/sda1-8]
+root         340       2 ح يوليو 26 18:09:54 2026 4-15:23:18 [kworker/R-ext4-]
+root         462       2 ح يوليو 26 18:09:55 2026 4-15:23:16 [kworker/R-kmpat]
+root         463       2 ح يوليو 26 18:09:55 2026 4-15:23:16 [kworker/R-kmpat]
+root         726       2 ح يوليو 26 18:09:57 2026 4-15:23:15 [jbd2/sda16-8]
+root         727       2 ح يوليو 26 18:09:57 2026 4-15:23:15 [kworker/R-ext4-]
+message+    1049       1 ح يوليو 26 18:09:58 2026 4-15:23:14 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root        1054       1 ح يوليو 26 18:09:58 2026 4-15:23:14 /usr/bin/python3 /usr/bin/networkd-dispatcher --run-startup-triggers
+root        1076       1 ح يوليو 26 18:09:58 2026 4-15:23:14 /usr/lib/systemd/systemd-logind
+root        1127       1 ح يوليو 26 18:09:58 2026 4-15:23:14 /usr/sbin/NetworkManager --no-daemon
+root        1408       1 ح يوليو 26 18:10:02 2026 4-15:23:09 /bin/sh /snap/cups/1229/scripts/run-cups-browsed
+root        1415       1 ح يوليو 26 18:10:02 2026 4-15:23:09 /bin/sh /snap/cups/1229/scripts/run-cupsd
+root        1492       1 ح يوليو 26 18:10:04 2026 4-15:23:08 /sbin/agetty -o -p -- \u --keep-baud 115200,57600,38400,9600 - vt220
+root        1541       1 ح يوليو 26 18:10:04 2026 4-15:23:08 /usr/bin/sddm
+root        2639    1415 ح يوليو 26 18:10:07 2026 4-15:23:05 cupsd -f -s /var/snap/cups/common/etc/cups/cups-files.conf -c /var/snap/cups/common/etc/cups/cupsd.conf
+root        2640    1415 ح يوليو 26 18:10:07 2026 4-15:23:05 cups-proxyd /var/snap/cups/common/run/cups.sock /run/cups/cups.sock -l --logdir /var/snap/cups/1229/var/log
+root        2710    1408 ح يوليو 26 18:10:07 2026 4-15:23:05 /bin/sh /snap/cups/1229/scripts/run-cups-browsed
+root        4362       2 ح يوليو 26 18:10:11 2026 4-15:23:01 [kworker/R-tls-s]
+root      458080       1 ن يوليو 27 19:46:28 2026 3-13:46:43 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root      458435       1 ن يوليو 27 19:46:36 2026 3-13:46:36 /usr/bin/containerd-shim-runc-v2 -namespace moby -id f1cd005aa4d48a8990a5e55950e350d693efb9265bed246c3fd7280754892b27 -address /run/containerd/containerd.sock
+dnsmasq   458465  458435 ن يوليو 27 19:46:36 2026 3-13:46:36 postgres
+root      458752  458080 ن يوليو 27 19:46:37 2026 3-13:46:34 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 5433 -container-ip 172.19.0.2 -container-port 5432 -use-listen-fd
+root      458763  458080 ن يوليو 27 19:46:37 2026 3-13:46:34 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 5433 -container-ip 172.19.0.2 -container-port 5432 -use-listen-fd
+dnsmasq   459504  458465 ن يوليو 27 19:46:38 2026 3-13:46:33 postgres: checkpointer 
+dnsmasq   459505  458465 ن يوليو 27 19:46:38 2026 3-13:46:33 postgres: background writer 
+dnsmasq   459507  458465 ن يوليو 27 19:46:38 2026 3-13:46:33 postgres: walwriter 
+dnsmasq   459509  458465 ن يوليو 27 19:46:38 2026 3-13:46:33 postgres: autovacuum launcher 
+dnsmasq   459510  458465 ن يوليو 27 19:46:38 2026 3-13:46:33 postgres: logical replication launcher 
+root      568783       2 ث يوليو 28 20:30:03 2026 2-13:03:09 [kworker/3:0H-kblockd]
+root      648549       2 خ يوليو 30 17:40:02 2026 15:53:10 [kworker/5:1H-kblockd]
+nawaf511  718203       1 ن يوليو 27 21:11:58 2026 3-12:21:14 /usr/lib/systemd/systemd --user
+nawaf511  718204  718203 ن يوليو 27 21:11:58 2026 3-12:21:13 (sd-pam)
+nawaf511  718288  718203 ن يوليو 27 21:12:01 2026 3-12:21:10 /usr/bin/dbus-daemon --session --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root      748760       1 ن يوليو 27 21:22:00 2026 3-12:11:11 sudo -u postgres psql -Atqc select 1
+root      748761  748760 ن يوليو 27 21:22:00 2026 3-12:11:11 sudo -u postgres psql -Atqc select 1
+postgres  748762  748761 ن يوليو 27 21:22:00 2026 3-12:11:11 /usr/bin/perl /usr/bin/psql -Atqc select 1
+root     1062421       1 ث يوليو 28 00:17:15 2026 3-09:15:56 PM2 v7.0.3: God Daemon (/root/.pm2)
+root     1364653       2 ر يوليو 29 23:17:03 2026 1-10:16:09 [kworker/7:2H-kblockd]
+root     1496316       2 خ يوليو 30 22:15:02 2026 11:18:10 [kworker/3:1H-kblockd]
+root     1543181       2 خ يوليو 30 22:30:02 2026 11:03:10 [kworker/6:0H]
+root     1635882       2 خ يوليو 30 23:00:03 2026 10:33:09 [kworker/6:2H-kblockd]
+root     1822547       1 ج يوليو 31 00:00:03 2026 09:33:09 /usr/sbin/cupsd -l
+lp       1822559 1822547 ج يوليو 31 00:00:04 2026 09:33:07 /usr/lib/cups/notifier/dbus dbus://
+root     1975662       2 خ يوليو 30 02:30:02 2026 1-07:03:10 [kworker/0:0H]
+root     2132848       2 ر يوليو 29 04:55:44 2026 2-04:37:28 [kworker/7:0H-kblockd]
+root     2289292       2 خ يوليو 30 04:10:01 2026 1-05:23:10 [kworker/4:2H-kblockd]
+root     2374529       1 ث يوليو 28 07:25:27 2026 3-02:07:45 /snap/snapd/current/usr/lib/snapd/snapd
+root     2497870       1 ر يوليو 29 06:52:49 2026 2-02:40:23 /usr/libexec/accounts-daemon
+root     2497872       1 ر يوليو 29 06:52:49 2026 2-02:40:22 /usr/sbin/cron -f -P
+root     2497874       1 ر يوليو 29 06:52:49 2026 2-02:40:22 /usr/bin/containerd
+nawaf511 2497887       1 ر يوليو 29 06:52:49 2026 2-02:40:22 /usr/bin/node /opt/ndsp16-api/server.js
+nawaf511 2497888       1 ر يوليو 29 06:52:49 2026 2-02:40:22 /usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp-access-guard-9024/server.js
+nawaf511 2497889       1 ر يوليو 29 06:52:49 2026 2-02:40:22 /usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp-access-guard-final/server.js
+root     2497900       1 ر يوليو 29 06:52:49 2026 2-02:40:22 /usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_actions_gateway.cjs
+root     2497902       1 ر يوليو 29 06:52:49 2026 2-02:40:22 /usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_ui_proxy.cjs
+root     2497937       1 ر يوليو 29 06:52:50 2026 2-02:40:22 /usr/bin/node /home/nawaf511/empire-core-new/backend/admin_users_official_api/server.js
+root     2497947       1 ر يوليو 29 06:52:50 2026 2-02:40:22 /usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_api_compat_gateway.cjs
+nawaf511 2497949       1 ر يوليو 29 06:52:50 2026 2-02:40:22 /usr/bin/node /home/nawaf511/empire-core-new/backend/services/bot_execution/main.cjs
+ndsp-au+ 2497988       1 ر يوليو 29 06:52:50 2026 2-02:40:22 /usr/bin/nsolid /opt/ndsp-auth-core-clean/current/server/dist/server.js
+nawaf511 2498024       1 ر يوليو 29 06:52:51 2026 2-02:40:21 /usr/bin/node /home/nawaf511/empire-core-new/backend/services/decision_governance_core/main.cjs
+nawaf511 2498025       1 ر يوليو 29 06:52:51 2026 2-02:40:21 /usr/bin/node /home/nawaf511/empire-core-new/apps/ndsp-governance-bridge/server.mjs
+nawaf511 2498028       1 ر يوليو 29 06:52:51 2026 2-02:40:21 /usr/bin/node /opt/ndsp-news-ticker/server.js
+nawaf511 2498040       1 ر يوليو 29 06:52:51 2026 2-02:40:21 /usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp_live_market_adapter.cjs
+nawaf511 2498041       1 ر يوليو 29 06:52:51 2026 2-02:40:21 /usr/bin/node /home/nawaf511/empire-core-new/backend/password_reset_gateway/server.js
+nawaf511 2498048       1 ر يوليو 29 06:52:51 2026 2-02:40:21 /usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_platform_gateway_9001.cjs
+www-data 2498093       1 ر يوليو 29 06:52:51 2026 2-02:40:20 /usr/bin/node /opt/ndsp/legal-v42/ndsp-registration-consent-gateway.cjs
+nawaf511 2498098       1 ر يوليو 29 06:52:51 2026 2-02:40:20 /usr/bin/node /home/nawaf511/empire-core-new/backend/services/ctl-001-workspace-identity/main.cjs
+root     2498120       1 ر يوليو 29 06:52:52 2026 2-02:40:20 /usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_register_compat_gateway.cjs
+nawaf511 2498121       1 ر يوليو 29 06:52:52 2026 2-02:40:20 /usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp_scenario_levels_adapter.cjs
+nawaf511 2498136       1 ر يوليو 29 06:52:52 2026 2-02:40:20 /usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp-trial-seats-api/server.js
+root     2498152       1 ر يوليو 29 06:52:52 2026 2-02:40:19 /usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_trial_register_gateway.cjs
+nawaf511 2498154       1 ر يوليو 29 06:52:52 2026 2-02:40:19 /usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_trial_fingerprint_guard_proxy.cjs
+nawaf511 2498156       1 ر يوليو 29 06:52:52 2026 2-02:40:19 /usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp-trial-register-canonical-wrapper/server.js
+nawaf511 2498159       1 ر يوليو 29 06:52:52 2026 2-02:40:19 /usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp-user-alert-channels/server.js
+root     2498162       1 ر يوليو 29 06:52:52 2026 2-02:40:19 /usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_user_dashboard_gateway.cjs
+nawaf511 2498163       1 ر يوليو 29 06:52:52 2026 2-02:40:19 /usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_user_login_gateway.cjs
+polkitd  2498182       1 ر يوليو 29 06:52:53 2026 2-02:40:19 /usr/lib/polkit-1/polkitd --no-debug
+rtkit    2498184       1 ر يوليو 29 06:52:53 2026 2-02:40:19 /usr/libexec/rtkit-daemon
+root     2498196       1 ر يوليو 29 06:52:53 2026 2-02:40:19 /usr/libexec/switcheroo-control
+root     2498236       1 ر يوليو 29 06:52:54 2026 2-02:40:18 /usr/libexec/power-profiles-daemon
+root     2498384       1 ر يوليو 29 06:52:56 2026 2-02:40:16 /usr/sbin/preload -s /var/lib/preload/preload.state
+syslog   2498444       1 ر يوليو 29 06:52:57 2026 2-02:40:15 /usr/sbin/rsyslogd -n -iNONE
+nawaf511 2499786       1 ر يوليو 29 06:53:04 2026 2-02:40:07 /usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp-telegram-link-listener/server.js
+nawaf511 2499820       1 ر يوليو 29 06:53:05 2026 2-02:40:07 /usr/bin/node /home/nawaf511/empire-core-new/backend/services/completed_decision/main.cjs
+root     2499955       1 ر يوليو 29 06:53:05 2026 2-02:40:06 /usr/lib/postfix/sbin/master -w
+postfix  2499958 2499955 ر يوليو 29 06:53:05 2026 2-02:40:06 qmgr -l -t unix -u
+avahi    2500039       1 ر يوليو 29 06:53:14 2026 2-02:39:57 avahi-daemon: running [vmi2934783.local]
+avahi    2500040 2500039 ر يوليو 29 06:53:14 2026 2-02:39:57 avahi-daemon: chroot helper
+root     2702694       2 خ يوليو 30 06:20:02 2026 1-03:13:09 [kworker/1:1H-kblockd]
+nawaf511 2767581  718203 خ يوليو 30 06:40:26 2026 1-02:52:45 /usr/bin/gnome-keyring-daemon --start --foreground --components=secrets
+nawaf511 2767582  718203 خ يوليو 30 06:40:26 2026 1-02:52:45 /usr/bin/gnome-keyring-daemon --foreground --components=pkcs11,secrets --control-directory=/run/user/1000/keyring
+root     2787215       2 ج يوليو 31 05:10:02 2026 04:23:10 [kworker/1:2H]
+root     2978535       2 ج يوليو 31 06:11:30 2026 03:21:41 [psimon]
+nawaf511 2978555       1 ج يوليو 31 06:11:31 2026 03:21:41 /usr/bin/python3 /usr/local/lib/ndsp-business-ops/app.py
+cups-br+ 2978561       1 ج يوليو 31 06:11:31 2026 03:21:41 /usr/sbin/cups-browsed
+root     2978583       1 ج يوليو 31 06:11:31 2026 03:21:41 /usr/libexec/fwupd/fwupd
+nobody   2978584       1 ج يوليو 31 06:11:31 2026 03:21:41 /usr/bin/python3 /opt/ndsp-market-data-bridge-v2/bridge.py
+www-data 2978585       1 ج يوليو 31 06:11:31 2026 03:21:41 /usr/bin/python3 /opt/ndsp-platform-gateway-9002/app.py
+postgres 2978588       1 ج يوليو 31 06:11:31 2026 03:21:40 /opt/ndsp-change-password-gateway/venv/bin/python3 /opt/ndsp-change-password-gateway/venv/bin/uvicorn app:app --host 127.0.0.1 --port 9069
+postgres 2978595       1 ج يوليو 31 06:11:31 2026 03:21:40 /usr/bin/python3 /home/nawaf511/empire-core-new/backend/ndsp-portal-real-data-api/server.py
+nawaf511 2978596       1 ج يوليو 31 06:11:31 2026 03:21:40 /usr/bin/python3 /opt/ndsp-public-summary-v548/app.py
+nawaf511 2978601       1 ج يوليو 31 06:11:31 2026 03:21:40 /home/nawaf511/empire-core-new/apps/ndsp-layers-api/.venv/bin/python3 /home/nawaf511/empire-core-new/apps/ndsp-layers-api/.venv/bin/uvicorn app:app --host 127.0.0.1 --port 9065
+postgres 2978608       1 ج يوليو 31 06:11:31 2026 03:21:40 /opt/ndsp-current-user-display/.venv/bin/python3 /opt/ndsp-current-user-display/.venv/bin/uvicorn app:app --host 127.0.0.1 --port 9074
+www-data 2978609       1 ج يوليو 31 06:11:31 2026 03:21:40 /usr/bin/python3 /opt/ndsp-v3-portal-gateway/app.py
+root     2978615       1 ج يوليو 31 06:11:31 2026 03:21:40 /opt/ndsp-decision-package-v1/venv/bin/python3 /opt/ndsp-decision-package-v1/venv/bin/uvicorn app:app --host 127.0.0.1 --port 9061
+root     2978616       1 ج يوليو 31 06:11:31 2026 03:21:40 /usr/bin/python3 /opt/ndsp-v52-contract/app.py
+root     2978617       1 ج يوليو 31 06:11:31 2026 03:21:40 /usr/bin/python3 /opt/ndsp-v53-bridge/app.py
+root     2978620       1 ج يوليو 31 06:11:31 2026 03:21:40 /usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_quality_live_golden_wrapper.py
+root     2978622       1 ج يوليو 31 06:11:31 2026 03:21:40 /usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_quality_live_nmp_wrapper.py
+nawaf511 2978623       1 ج يوليو 31 06:11:31 2026 03:21:40 /usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_canonical_live_runtime_v30.py
+nawaf511 2978624       1 ج يوليو 31 06:11:32 2026 03:21:40 /usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_canonical_live_runtime_v33.py
+nawaf511 2978625       1 ج يوليو 31 06:11:32 2026 03:21:40 /usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_evidence_v35.py
+nawaf511 2978627       1 ج يوليو 31 06:11:32 2026 03:21:40 /usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_history_v36.py serve
+nawaf511 2978629       1 ج يوليو 31 06:11:32 2026 03:21:40 /home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/.venv/bin/python3 /home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/.venv/bin/uvicorn app:app --host 127.0.0.1 --port 9076
+root     2978650       1 ج يوليو 31 06:11:32 2026 03:21:40 /usr/lib/systemd/systemd-journald
+nawaf511 2978652       1 ج يوليو 31 06:11:32 2026 03:21:40 /usr/bin/python3 /home/nawaf511/empire-core-new/backend/ndsp-live-decision-quality/server.py
+systemd+ 2978657       1 ج يوليو 31 06:11:32 2026 03:21:40 /usr/lib/systemd/systemd-timesyncd
+root     2978658       1 ج يوليو 31 06:11:32 2026 03:21:40 sshd: /usr/sbin/sshd -D [listener] 1 of 10-100 startups
+root     2978664       1 ج يوليو 31 06:11:32 2026 03:21:39 /usr/libexec/upowerd
+redis    2978668       1 ج يوليو 31 06:11:32 2026 03:21:39 /usr/bin/redis-server 127.0.0.1:6379
+systemd+ 2978673       1 ج يوليو 31 06:11:32 2026 03:21:39 /usr/lib/systemd/systemd-resolved
+root     2978675       1 ج يوليو 31 06:11:32 2026 03:21:39 /usr/lib/systemd/systemd-udevd
+root     2978685       1 ج يوليو 31 06:11:33 2026 03:21:39 /usr/libexec/udisks2/udisksd
+root     2978704       1 ج يوليو 31 06:11:33 2026 03:21:38 /usr/sbin/xrdp-sesman
+root     2978732       1 ج يوليو 31 06:11:34 2026 03:21:38 /usr/bin/python3 /usr/bin/fail2ban-server -xf start
+xrdp     2978733       1 ج يوليو 31 06:11:34 2026 03:21:38 /usr/sbin/xrdp
+root     2978739       1 ج يوليو 31 06:11:34 2026 03:21:37 nginx: master process /usr/sbin/nginx -g daemon on; master_process on;
+www-data 2978740 2978739 ج يوليو 31 06:11:34 2026 03:21:37 nginx: worker process
+www-data 2978741 2978739 ج يوليو 31 06:11:34 2026 03:21:37 nginx: worker process
+www-data 2978742 2978739 ج يوليو 31 06:11:34 2026 03:21:37 nginx: worker process
+www-data 2978743 2978739 ج يوليو 31 06:11:34 2026 03:21:37 nginx: worker process
+www-data 2978745 2978739 ج يوليو 31 06:11:34 2026 03:21:37 nginx: worker process
+root     2978746       2 ج يوليو 31 06:11:34 2026 03:21:37 [psimon]
+www-data 2978747 2978739 ج يوليو 31 06:11:34 2026 03:21:37 nginx: worker process
+systemd+ 2978749       1 ج يوليو 31 06:11:34 2026 03:21:37 /usr/lib/systemd/systemd-networkd
+www-data 2978750 2978739 ج يوليو 31 06:11:34 2026 03:21:37 nginx: worker process
+root     2978752       1 ج يوليو 31 06:11:34 2026 03:21:37 /usr/bin/python3 -m uvicorn app:app --host 127.0.0.1 --port 9068
+www-data 2978753 2978739 ج يوليو 31 06:11:34 2026 03:21:37 nginx: worker process
+postgres 2978763       1 ج يوليو 31 06:11:35 2026 03:21:37 /usr/lib/postgresql/16/bin/postgres -D /var/lib/postgresql/16/main -c config_file=/etc/postgresql/16/main/postgresql.conf
+root     2978766       1 ج يوليو 31 06:11:35 2026 03:21:37 /usr/bin/python3 -m uvicorn main:app --host 127.0.0.1 --port 9066
+root     2978768       1 ج يوليو 31 06:11:35 2026 03:21:37 /bin/warp-svc
+postgres 2978769 2978763 ج يوليو 31 06:11:35 2026 03:21:37 postgres: 16/main: checkpointer 
+postgres 2978770 2978763 ج يوليو 31 06:11:35 2026 03:21:37 postgres: 16/main: background writer 
+postgres 2978772 2978763 ج يوليو 31 06:11:35 2026 03:21:37 postgres: 16/main: walwriter 
+postgres 2978773 2978763 ج يوليو 31 06:11:35 2026 03:21:37 postgres: 16/main: autovacuum launcher 
+postgres 2978775 2978763 ج يوليو 31 06:11:35 2026 03:21:37 postgres: 16/main: logical replication launcher 
+nawaf511 2978924       1 ج يوليو 31 06:11:38 2026 03:21:34 PM2 v7.0.3: God Daemon (/home/nawaf511/.pm2)
+nawaf511 2978937 2978924 ج يوليو 31 06:11:38 2026 03:21:33 npm run start
+nawaf511 2978938 2978924 ج يوليو 31 06:11:38 2026 03:21:33 python3 /home/nawaf511/empire-core-new/backend/services/ndsp-trial-clock-v164/server.py
+nawaf511 2978939 2978924 ج يوليو 31 06:11:38 2026 03:21:33 python3 /home/nawaf511/empire-core-new/backend/services/ndsp-launch-control-v167/server.py
+nawaf511 2978945 2978924 ج يوليو 31 06:11:38 2026 03:21:33 python3 /home/nawaf511/empire-core-new/backend/services/ndsp-telegram-notifications-v182/server.py
+nawaf511 2978997 2978937 ج يوليو 31 06:11:39 2026 03:21:32 sh -c node server.js
+nawaf511 2978998 2978997 ج يوليو 31 06:11:39 2026 03:21:32 node server.js
+nawaf511 3145810       1 خ يوليو 30 08:40:00 2026 1-00:53:12 tmux new -s ndsp-commercial-v16
+nawaf511 3145811 3145810 خ يوليو 30 08:40:00 2026 1-00:53:12 -bash
+root     3191822       2 ج يوليو 31 07:20:02 2026 02:13:10 [kworker/2:0H]
+root     3191842       2 ج يوليو 31 07:20:03 2026 02:13:09 [kworker/0:1H-kblockd]
+nawaf511 3275864 3145810 خ يوليو 30 09:20:44 2026 1-00:12:27 -bash
+nawaf511 3287535 3145810 خ يوليو 30 09:24:08 2026 1-00:09:03 -bash
+root     3356600       2 ج يوليو 31 08:13:00 2026 01:20:12 [kworker/u16:3-iou_exit]
+root     3369649       2 ج يوليو 31 08:17:14 2026 01:15:58 [kworker/2:2-events]
+root     3372787       2 ج يوليو 31 08:18:04 2026 01:15:08 [kworker/2:2H-kblockd]
+root     3468931       2 ج يوليو 31 08:49:09 2026 44:03 [kworker/u16:5-writeback]
+postfix  3472220 2499955 ج يوليو 31 08:50:01 2026 43:11 pickup -l -t unix -u -c
+root     3506141       2 ج يوليو 31 09:01:05 2026 32:07 [kworker/1:1-events]
+root     3508281       2 ج يوليو 31 09:01:53 2026 31:19 [kworker/3:2-events]
+ndsp_co+ 3520574       1 خ يوليو 30 10:36:40 2026 22:56:31 /usr/bin/nsolid /opt/ndsp-commercial-auth-payment-staging/releases/20260730_103616-source-staging-v1-13/source/server/dist/server.js
+root     3521360       2 ج يوليو 31 09:06:03 2026 27:08 [kworker/7:2-cgroup_free]
+root     3523513       2 ج يوليو 31 09:06:33 2026 26:39 [kworker/6:1-events]
+root     3524527       2 ج يوليو 31 09:06:49 2026 26:22 [kworker/0:1-cgroup_free]
+root     3534406       2 ج يوليو 31 09:10:15 2026 22:57 [kworker/u16:1-events_power_efficient]
+root     3534422    2710 ج يوليو 31 09:10:16 2026 22:56 sleep 3600
+root     3557495       2 ج يوليو 31 09:17:40 2026 15:32 [kworker/5:1-events]
+root     3563775       2 ج يوليو 31 09:19:27 2026 13:45 [kworker/5:3-cgroup_free]
+root     3567162       2 ج يوليو 31 09:20:45 2026 12:27 [kworker/0:0-events]
+root     3568282       2 ج يوليو 31 09:21:01 2026 12:10 [kworker/4:0-events]
+root     3571515       2 ج يوليو 31 09:21:58 2026 11:14 [kworker/7:1-cgroup_release]
+root     3574833       2 ج يوليو 31 09:23:12 2026 09:59 [kworker/3:0-cgroup_release]
+root     3577007       2 ج يوليو 31 09:23:54 2026 09:17 [kworker/6:0-events]
+root     3583500       2 ج يوليو 31 09:25:58 2026 07:14 [kworker/1:2-cgroup_free]
+root     3584619       2 ج يوليو 31 09:26:12 2026 07:00 [kworker/2:1]
+root     3586803       2 ج يوليو 31 09:27:04 2026 06:08 [kworker/4:2-cgroup_free]
+root     3590128       2 ج يوليو 31 09:28:06 2026 05:06 [kworker/0:2-cgroup_free]
+root     3593286       2 ج يوليو 31 09:29:08 2026 04:04 [kworker/7:0-events]
+root     3594398 2978658 ج يوليو 31 09:29:22 2026 03:50 sshd: nawaf511 [priv]
+nawaf511 3594514 3594398 ج يوليو 31 09:29:26 2026 03:45 sshd: nawaf511@pts/2
+nawaf511 3594517 3594514 ج يوليو 31 09:29:27 2026 03:45 -bash
+root     3594882       2 ج يوليو 31 09:29:29 2026 03:43 [kworker/6:2]
+root     3595920       2 ج يوليو 31 09:29:40 2026 03:31 [kworker/u16:0-flush-8:0]
+root     3596968       2 ج يوليو 31 09:30:00 2026 03:12 [kworker/5:0-cgroup_free]
+root     3596969       2 ج يوليو 31 09:30:00 2026 03:12 [kworker/5:2]
+root     3597118       2 ج يوليو 31 09:30:13 2026 02:58 [kworker/3:1-cgroup_free]
+root     3600292 2978658 ج يوليو 31 09:31:15 2026 01:56 sshd: unknown [priv]
+sshd     3600293 3600292 ج يوليو 31 09:31:15 2026 01:56 sshd: unknown [net]
+root     3603953       2 ج يوليو 31 09:32:17 2026 00:54 [kworker/2:0]
+nawaf511 3606179 3594517 ج يوليو 31 09:33:01 2026 00:10 bash ./ndsp_phase0_baseline.sh
+nawaf511 3606185 3606179 ج يوليو 31 09:33:01 2026 00:10 tee -a /home/nawaf511/empire-core-new/.ndsp-evidence/phase-0-20260731T073301Z/errors.log
+nawaf511 3607959 3606179 ج يوليو 31 09:33:11 2026 00:01 ps -eo user,pid,ppid,lstart,etime,cmd --sort=pid
+root     3782063       2 خ يوليو 30 12:00:01 2026 21:33:10 [kworker/4:0H-kblockd]
+root     3828551       2 خ يوليو 30 12:15:01 2026 21:18:10 [kworker/5:2H-kblockd]

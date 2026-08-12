@@ -1,0 +1,47 @@
+class	path	references	exact_copy	same_name
+NO_REFERENCE_FOUND	.github/workflows/ndsp-project-validator.yml	0		
+REFERENCED	DSP_FINAL_TRIAL_POLICY.md	2		
+REFERENCED	DSP_NMP_V1_POLICY.md	2		
+NO_REFERENCE_FOUND	NDSP_UI_CHANGE_GOVERNANCE_FINAL.md	0		
+EXACT_COPY_EXISTS	apps/NDSP_APPS_ONLY_GOVERNANCE.md	1	frontend/NDSP_APPS_ONLY_GOVERNANCE.md	frontend/NDSP_APPS_ONLY_GOVERNANCE.md
+REFERENCED	apps/ndsp-governance-bridge/NDSP_LAYER_VISIBILITY_OWNER_INTERNAL_POLICY.json	1		
+REFERENCED	apps/ndsp-governance-bridge/NDSP_LAYER_VISIBILITY_OWNER_INTERNAL_POLICY.md	2		
+REFERENCED	apps/ndsp-governance-bridge/layers/NDSP_OWNER_INTERNAL_16_LAYER_REGISTRY.json	2		
+REFERENCED	apps/ndsp-governance-bridge/layers/NDSP_OWNER_INTERNAL_16_LAYER_REGISTRY.md	2		
+REFERENCED	apps/ndsp-governance-bridge/policies/admin_snapshot/audit_admin_v6.py	1		
+REFERENCED	apps/ndsp-governance-bridge/policies/audit_logger.py	1		
+REFERENCED	apps/ndsp-governance-bridge/policies/decision_active_governance.py	1		
+REFERENCED	apps/ndsp-governance-bridge/policies/elite_trial_capacity.py	1		
+REFERENCED	apps/ndsp-governance-bridge/policies/feature_gate.py	1		
+REFERENCED	apps/ndsp-governance-bridge/policies/governance_runtime.py	2		
+REFERENCED	apps/ndsp-governance-bridge/policies/ndsp_alert_audit.py	1		
+REFERENCED	apps/ndsp-governance-bridge/policies/ndsp_governance_mode.py	2		
+REFERENCED	apps/ndsp-governance-bridge/policies/tdl_v2_policy.py	2		
+REFERENCED	apps/ndsp-governance-bridge/server.mjs	3		
+REFERENCED	backend/architecture/API_CONTRACTS.md	1		
+REFERENCED	backend/architecture/GOVERNANCE_RULES.md	1		
+REFERENCED	backend/docs/API_CONTRACT.md	1		
+NO_REFERENCE_FOUND	docs/99-governance/pr-002-canonical-layer-map/CANONICAL_LAYER_SOURCE_MAP.csv	0		
+NO_REFERENCE_FOUND	docs/99-governance/pr-002-canonical-layer-map/CANONICAL_LAYER_SOURCE_MAP.json	0		
+NO_REFERENCE_FOUND	docs/99-governance/pr-002-canonical-layer-map/PR-002-CANONICAL-LAYER-SOURCE-MAP.md	0		
+REFERENCED	docs/99-governance/pr-002-canonical-layer-map/SHA256SUMS.txt	2		
+NO_REFERENCE_FOUND	docs/99-governance/pr-002-canonical-layer-map/owners.json	0		
+NO_REFERENCE_FOUND	docs/99-governance/pr-003-canonical-service-map/CANONICAL_SERVICE_MAP.csv	0		
+NO_REFERENCE_FOUND	docs/99-governance/pr-003-canonical-service-map/CANONICAL_SERVICE_MAP.json	0		
+NO_REFERENCE_FOUND	docs/99-governance/pr-003-canonical-service-map/CANONICAL_SERVICE_MAP_FINAL.csv	0		
+NO_REFERENCE_FOUND	docs/99-governance/pr-003-canonical-service-map/CANONICAL_SERVICE_MAP_FINAL.json	0		
+NO_REFERENCE_FOUND	docs/99-governance/pr-003-canonical-service-map/PR-003-CANONICAL-SERVICE-MAP-FINAL.md	0		
+NO_REFERENCE_FOUND	docs/99-governance/pr-003-canonical-service-map/PR-003-CANONICAL-SERVICE-MAP.md	0		
+NO_REFERENCE_FOUND	docs/99-governance/pr-003-canonical-service-map/PR003_FINAL_SHA256SUMS.txt	0		
+NO_REFERENCE_FOUND	docs/NDSP_GOVERNANCE_DOCUMENTATION.md	0		
+EXACT_COPY_EXISTS	frontend/NDSP_APPS_ONLY_GOVERNANCE.md	1	apps/NDSP_APPS_ONLY_GOVERNANCE.md	apps/NDSP_APPS_ONLY_GOVERNANCE.md
+REFERENCED	governance/CANONICAL_GOVERNANCE.md	2		
+REFERENCED	governance/GOVERNANCE_PACKAGE_INDEX.md	1		
+REFERENCED	governance/NDSP_FINAL_GOVERNANCE_ALL_POLICIES_LOCKED.md	1		
+REFERENCED	governance/NDSP_FINAL_GOVERNANCE_EXCLUSIONS_AND_ADOPTIONS.md	1		
+NO_REFERENCE_FOUND	ndsp_governance/NDSP_CURRENT_ADOPTIONS_MASTER.md	0		
+NO_REFERENCE_FOUND	ndsp_governance/NDSP_LAYER_NAME_MASKING_POLICY.json	0		
+NO_REFERENCE_FOUND	ndsp_governance/NDSP_LAYER_NAME_MASKING_POLICY.md	0		
+NO_REFERENCE_FOUND	ndsp_governance/NDSP_SAAS_PACKAGES_POLICY.json	0		
+NO_REFERENCE_FOUND	ndsp_governance/NDSP_SAAS_PACKAGES_POLICY.md	0		
+REFERENCED	research/nmp-lab/NMP_RESEARCH_LAB_POLICY.md	1		

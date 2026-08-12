@@ -1,0 +1,105 @@
+=== NDSP PRE-FRONTEND TECHNICAL FREEZE AUDIT ===
+DATE=2026-08-08T00:47:38+02:00
+MODE=READ_ONLY
+PROJECT=/home/nawaf511/empire-core-new
+AUDIT=/home/nawaf511/empire-core-new/var/audits/pre-frontend-freeze-20260808-004738
+HTTP=200
+LIVE_JSON=PASS
+=== FREEZE MATRIX ===
+
+[RUNTIME]
+PASS  9082_live_contract
+
+[TDL]
+PASS  runtime_presence
+TBD   investment_mode_source_evidence
+TBD   speculation_mode_source_evidence
+PASS  analysis_mode_present
+PASS  same_timeframe_integrity
+
+[CORE]
+PASS  explicit_authority_boundary
+TBD   authoritative_producer
+TBD   authoritative_source
+TBD   authoritative_contract
+TBD   derivation_path
+
+[NMP]
+PASS  runtime_presence
+TBD   freeze_policy_in_source
+FAIL  not_in_allowed_public_outputs
+
+[EXPOSURE]
+FAIL  public_internal_fields_blocked
+PASS  public_projection_present
+
+[ADMIN_REVIEW]
+PASS  authorization_source_evidence
+PASS  tdl_admin_boundary
+PASS  nmp_experimental_review_boundary
+PASS  shadow_boundary
+PASS  review_boundary
+
+[COT_TFF]
+PASS  asset_managers_overall
+TBD   asset_managers_weekly
+TBD   leveraged_funds_overall
+TBD   leveraged_funds_weekly
+PASS  raw_cot_connected
+TBD   freshness_computed
+
+[DECISION]
+PASS  sixteen_layers
+
+[CAPABILITIES]
+PASS  twenty_eight_capabilities
+
+[SCORING]
+PASS  score_inputs_present
+PASS  score_contract_complete
+PASS  commercial_governance_gate
+
+[GOVERNANCE]
+PASS  evidence_fresh
+PASS  all_items_exposed
+FAIL  governing_inputs_complete
+
+[CONTRACTS]
+PASS  versioned_live_contracts
+
+[EXPLAINABILITY]
+PASS  public_explainability
+
+=== COUNTS ===
+PASS=23
+FAIL=3
+TBD=11
+NOT_APPLICABLE=0
+TECHNICAL_FREEZE=NOT_READY
+
+=== CURRENT COMMERCIAL GATES ===
+score_input_contract_complete=True
+score_input_missing_components_empty=True
+same_timeframe_enforced=True
+static_fallback_unused=True
+cross_timeframe_fallback_unused=True
+governing_inputs_complete=False
+governing_inputs_fresh=False
+golden_evaluated=True
+runtime_blockers_clear=True
+scenario_levels_complete=True
+nmp_available=True
+governance_evidence_fresh=True
+sixteen_layers_exposed=True
+twenty_eight_capabilities_exposed=True
+commercial_components_complete=True
+score_finite=True
+FAILED_GATE_COUNT= 2
+FAILED_GATES= ['governing_inputs_complete', 'governing_inputs_fresh']
+
+=== FINAL ARTIFACTS ===
+REPORT=/home/nawaf511/empire-core-new/var/audits/pre-frontend-freeze-20260808-004738/report.txt
+MATRIX=/home/nawaf511/empire-core-new/var/audits/pre-frontend-freeze-20260808-004738/freeze-matrix.json
+LIVE=/home/nawaf511/empire-core-new/var/audits/pre-frontend-freeze-20260808-004738/9082-live.json
+SOURCE_EVIDENCE=/home/nawaf511/empire-core-new/var/audits/pre-frontend-freeze-20260808-004738/source-evidence.txt
+CHECKSUMS=/home/nawaf511/empire-core-new/var/audits/pre-frontend-freeze-20260808-004738/SHA256SUMS

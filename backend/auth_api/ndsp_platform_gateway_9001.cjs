@@ -8,11 +8,21 @@ const HOST = process.env.NDSP_PLATFORM_GATEWAY_HOST || '127.0.0.1';
 
 const ROUTES = [
   { prefix: '/api/admin-ui/', target: 'http://127.0.0.1:9023' }, // NDSP_ADMIN_UI_PROXY_ROUTE_SAFE_20260604
+  { prefix: '/api/entitlements/me', target: 'http://127.0.0.1:9090' },
+  { prefix: '/api/auth/forgot-password', target: 'http://127.0.0.1:9027' },
+  { prefix: '/api/auth/reset-password', target: 'http://127.0.0.1:9027' },
+  { prefix: '/api/register', target: 'http://127.0.0.1:9028' },
   { prefix: '/api/auth/', target: 'http://127.0.0.1:9020' },
   { prefix: '/api/user-dashboard/', target: 'http://127.0.0.1:9021' },
   { prefix: '/api/trial/', target: 'http://127.0.0.1:9019' },
   { prefix: '/api/admin-actions/', target: 'http://127.0.0.1:9017' },
   { prefix: '/api/admin/', target: 'http://127.0.0.1:9017' },
+  { prefix: '/api/account/trial', target: 'http://127.0.0.1:9022' },
+  { prefix: '/api/decision/live', target: 'http://127.0.0.1:9022' },
+  { prefix: '/api/chart/candles', target: 'http://127.0.0.1:9022' },
+  { prefix: '/api/payments/status', target: 'http://127.0.0.1:9022' },
+  { prefix: '/api/packages', target: 'http://127.0.0.1:9022' },
+  { prefix: '/api/markets', target: 'http://127.0.0.1:9022' },
   { prefix: '/api/', target: 'http://127.0.0.1:9002' }
 ];
 

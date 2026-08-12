@@ -1,0 +1,234 @@
+00313:     count = 0
+00314:     for item in calendar.get("items") or []:
+00315:         impact = str((item or {}).get("impact") or "").strip().lower()
+00316:         if impact in {"high", "عالي", "مرتفع", "3"}:
+00317:             count += 1
+00318:     return count
+00319: 
+00320: 
+00321: def build_payload(
+00322:     upstream: Mapping[str, Any],
+00323:     symbol: str,
+00324:     timeframe: str,
+00325:     mode: str,
+00326: ) -> tuple[dict[str, Any], dict[str, Any]]:
+00327:     instrument = upstream.get("instrument") if isinstance(upstream.get("instrument"), Mapping) else {}
+00328:     market = upstream.get("live_market_analysis")
+00329:     market = market if isinstance(market, Mapping) else {}
+00330:     scenario = upstream.get("scenario") if isinstance(upstream.get("scenario"), Mapping) else {}
+00331:     nmp = upstream.get("nmp") if isinstance(upstream.get("nmp"), Mapping) else {}
+00332:     levels = normalize_levels(upstream)
+00333: 
+00334:     selected_direction = normalize_direction(
+00335:         market.get("selected_timeframe_direction")
+00336:         or market.get("direction")
+00337:     )
+00338:     weekly_direction = selected_direction
+00339:     timing_eligible = bool(
+00340:         selected_direction in {"bullish", "bearish"}
+00341:         and len(levels) == 4
+00342:         and upstream.get("ok", False)
+00343:     )
+00344: 
+00345:     selected_rsi = finite_number(market.get("selected_timeframe_rsi"))
+00346:     atr_pct = finite_number(market.get("atr_4h_pct"))
+00347:     price = finite_number(instrument.get("live_price") or market.get("price"))
+00348:     cross_divergence = upstream.get("cross_timeframe_divergence")
+00349: 
+00350:     if cross_divergence is True:
+00351:         divergence_result = {
+00352:             "status": "CONFLICT_DETECTED",
+00353:             "confidence": 65,
+00354:             "regular_or_hidden": "NOT_CLASSIFIED",
+00355:             "reason": "cross_timeframe_divergence_flag",
+00356:             "input_quality": "PARTIAL",
+00357:         }
+00358:     else:
+00359:         divergence_result = {
+00360:             "status": "NOT_EVALUATED",
+00361:             "confidence": 0,
+00362:             "regular_or_hidden": "NOT_CLASSIFIED",
+00363:             "reason": "RSI_MACD_OBV_CCI_DIVERGENCE_SET_NOT_BOUND",
+00364:             "input_quality": "MISSING_GOVERNED_INDICATOR_SET",
+00365:         }
+00366: 
+00367:     momentum_status = "NOT_EVALUATED"
+00368:     momentum_confidence = 0
+00369:     if selected_rsi is not None and selected_direction in {"bullish", "bearish"}:
+00370:         momentum_status = "PARTIAL_AVAILABLE"
+00371:         momentum_confidence = int(min(85, 45 + abs(selected_rsi - 50)))
+00372:     momentum_result = {
+00373:         "status": momentum_status,
+00374:         "confidence": momentum_confidence,
+00375:         "rsi": selected_rsi,
+00376:         "direction": selected_direction,
+00377:         "reason": (
+00378:             "RSI_AND_DIRECTION_BOUND_MACD_OBV_CCI_PENDING"
+00379:             if momentum_status != "NOT_EVALUATED"
+00380:             else "NO_DIRECTIONAL_RSI_INPUT"
+00381:         ),
+00382:         "input_quality": "PARTIAL" if momentum_status != "NOT_EVALUATED" else "MISSING",
+00383:     }
+00384: 
+00385:     structure_complete = len(levels) == 4 and price is not None
+00386:     liquidity_structure_result = {
+00387:         "status": "PARTIAL_AVAILABLE" if structure_complete else "NOT_EVALUATED",
+00388:         "confidence": 55 if structure_complete else 0,
+00389:         "price": price,
+00390:         "scenario_levels": levels,
+00391:         "liquidity_verified": False,
+00392:         "structure_verified": structure_complete,
+00393:         "reason": (
+00394:             "STRUCTURE_BOUND_LIQUIDITY_FEED_PENDING"
+00395:             if structure_complete
+00396:             else "SCENARIO_STRUCTURE_INPUT_INCOMPLETE"
+00397:         ),
+00398:         "input_quality": "PARTIAL" if structure_complete else "MISSING",
+00399:     }
+00400: 
+00401:     calendar = load_context_file("economic-calendar.json", 30)
+00402:     news = load_context_file("news-impact.json", 30)
+00403:     macro_fresh = bool(calendar["fresh"] and news["fresh"])
+00404:     macro_status = "PARTIAL_AVAILABLE" if macro_fresh else "DEGRADED"
+00405:     usd_macro_result = {
+00406:         "status": macro_status,
+00407:         "confidence": 60 if macro_fresh else 25,
+00408:         "economic_calendar": {
+00409:             key: calendar.get(key)
+00410:             for key in ("available", "fresh", "source", "provider", "generated_at", "age_minutes", "item_count")
+00411:         },
+00412:         "news_context": {
+00413:             key: news.get(key)
+00414:             for key in ("available", "fresh", "source", "provider", "generated_at", "age_minutes", "item_count")
+00415:         },
+00416:         "high_impact_event_count": high_impact_count(calendar),
+00417:         "usd_direction_verified": False,
+00418:         "reason": (
+00419:             "LIVE_CALENDAR_AND_NEWS_BOUND_USD_INDEX_PENDING"
+00420:             if macro_fresh
+00421:             else "MACRO_CONTEXT_STALE_OR_UNAVAILABLE"
+00422:         ),
+00423:         "input_quality": "PARTIAL",
+00424:     }
+00425: 
+00426:     risk_reasons: list[str] = []
+00427:     risk_score = 20
+00428:     if atr_pct is None:
+00429:         risk_score += 25
+00430:         risk_reasons.append("ATR_PERCENT_MISSING")
+00431:     elif atr_pct >= 4:
+00432:         risk_score += 35
+00433:         risk_reasons.append("HIGH_ATR_VOLATILITY")
+00434:     elif atr_pct >= 2:
+00435:         risk_score += 20
+00436:         risk_reasons.append("ELEVATED_ATR_VOLATILITY")
+00437:     if not macro_fresh:
+00438:         risk_score += 20
+00439:         risk_reasons.append("MACRO_CONTEXT_NOT_FRESH")
+00440:     if len(levels) != 4:
+00441:         risk_score += 35
+00442:         risk_reasons.append("SCENARIO_LEVELS_INCOMPLETE")
+00443:     risk_score = min(100, risk_score)
+00444:     risk_blocked = bool(risk_score >= 80 or not upstream.get("ok", False))
+00445:     risk_result = {
+00446:         "status": "BLOCKED" if risk_blocked else "ACTIVE",
+00447:         "confidence": 75 if atr_pct is not None else 45,
+00448:         "blocked": risk_blocked,
+00449:         "risk_score": risk_score,
+00450:         "atr_pct": atr_pct,
+00451:         "reasons": risk_reasons,
+00452:         "input_quality": "PARTIAL",
+00453:     }
+00454: 
+00455:     cot = discover_cot()
+00456:     cot_directions = cot["directions"]
+00457: 
+00458:     nmp_candle = nmp.get("momentum_candle")
+00459:     nmp_candle = nmp_candle if isinstance(nmp_candle, Mapping) else {}
+00460:     nmp_open = finite_number(nmp_candle.get("open") or nmp.get("value"))
+00461:     nmp_indicator = finite_number(nmp.get("rsi"))
+00462:     nmp_direction = normalize_direction(nmp.get("direction") or selected_direction)
+00463:     candles = [{"open": nmp_open}] if nmp_open is not None else []
+00464:     indicator_values = [nmp_indicator] if nmp_open is not None and nmp_indicator is not None else []
+00465: 
+00466:     objections: list[str] = []
+00467:     if mode == "investment" and not cot["decision_use_allowed"]:
+00468:         objections.append("CANONICAL_COT_NOT_VERIFIED")
+00469:     if divergence_result["status"] == "NOT_EVALUATED":
+00470:         objections.append("DIVERGENCE_ENGINE_INPUT_SET_NOT_BOUND")
+00471:     if momentum_result["status"] != "AVAILABLE":
+00472:         objections.append("MOMENTUM_INDICATOR_SET_PARTIAL")
+00473:     if not liquidity_structure_result["liquidity_verified"]:
+00474:         objections.append("LIQUIDITY_FEED_NOT_VERIFIED")
+00475:     if not usd_macro_result["usd_direction_verified"]:
+00476:         objections.append("USD_DIRECTION_FEED_NOT_VERIFIED")
+00477:     if risk_blocked:
+00478:         objections.extend(risk_reasons or ["RISK_ENGINE_BLOCKED"])
+00479: 
+00480:     payload = {
+00481:         "analysis_mode": mode,
+00482:         "symbol": symbol,
+00483:         "market": instrument.get("market"),
+00484:         "timeframe": timeframe,
+00485:         "direction": nmp_direction if nmp_direction != "unknown" else selected_direction,
+00486:         "asset_managers_overall": cot_directions.get("asset_managers_overall"),
+00487:         "asset_managers_weekly": cot_directions.get("asset_managers_weekly"),
+00488:         "leveraged_funds_weekly": cot_directions.get("leveraged_funds_weekly"),
+00489:         "weekly_tdl_direction": weekly_direction,
+00490:         "timing_eligible": timing_eligible,
+00491:         "divergence_result": divergence_result,
+00492:         "scenario_levels": levels,
+00493:         "candles": candles,
+00494:         "indicator_values": indicator_values,
+00495:         "indicator_name": "RSI",
+00496:         "momentum_result": momentum_result,
+00497:         "liquidity_structure_result": liquidity_structure_result,
+00498:         "usd_macro_result": usd_macro_result,
+00499:         "risk_result": risk_result,
+00500:         "devils_advocate_blocked": bool(risk_blocked),
+00501:         "devils_advocate_reasons": objections,
+00502:         "_runtime_evidence": {
+00503:             "upstream_contract": upstream.get("public_contract_version"),
+00504:             "upstream_generated_at": upstream.get("generated_at"),
+00505:             "upstream_source_mode": upstream.get("source_mode"),
+00506:             "cot": cot,
+00507:         },
+00508:     }
+00509: 
+00510:     critical_blockers = list(dict.fromkeys(objections))
+00511:     input_matrix = {
+00512:         "L01": {"state": "LIVE" if cot["decision_use_allowed"] else "BLOCKED", "source": "CFTC_COT"},
+00513:         "L02": {"state": "LIVE" if timing_eligible else "PARTIAL", "source": "quality-live technical context"},
+00514:         "L03": {"state": "RUNTIME_DERIVED"},
+00515:         "L04": {"state": "RUNTIME_DERIVED"},
+00516:         "L05": {"state": "PARTIAL" if divergence_result["status"] != "NOT_EVALUATED" else "NOT_BOUND"},
+00517:         "L06": {"state": "RUNTIME_DERIVED"},
+00518:         "L07": {"state": "LIVE" if len(levels) == 4 else "BLOCKED"},
+00519:         "L08": {"state": "LIVE" if candles and indicator_values else "BLOCKED"},
+00520:         "L09": {"state": "PARTIAL" if momentum_status != "NOT_EVALUATED" else "NOT_BOUND"},
+00521:         "L10": {"state": "PARTIAL" if structure_complete else "NOT_BOUND"},
+00522:         "L11": {"state": "PARTIAL" if macro_fresh else "DEGRADED"},
+00523:         "L12": {"state": "PARTIAL"},
+00524:         "L13": {"state": "LIVE" if cot["decision_use_allowed"] else "BLOCKED"},
+00525:         "L14": {"state": "LIVE" if cot["decision_use_allowed"] else "BLOCKED"},
+00526:         "L15": {"state": "RUNTIME_DERIVED"},
+00527:         "L16": {"state": "REAL_ORCHESTRATOR"},
+00528:     }
+00529:     evidence = {
+00530:         "cot": cot,
+00531:         "input_matrix": input_matrix,
+00532:         "critical_blockers": critical_blockers,
+00533:         "upstream_generated_at": upstream.get("generated_at"),
+00534:         "upstream_provider": market.get("provider") or upstream.get("data_provider"),
+00535:         "upstream_contract": upstream.get("public_contract_version"),
+00536:         "scenario_state": scenario.get("scenario_state"),
+00537:     }
+00538:     return payload, evidence
+00539: 
+00540: 
+00541: def execute(symbol: str, timeframe: str, mode: str) -> tuple[int, dict[str, Any]]:
+00542:     query = urlencode({"symbol": symbol, "timeframe": timeframe})
+00543:     upstream_url = f"{UPSTREAM_BASE}/api/decision/quality-live?{query}"
+00544:     upstream_http, upstream = fetch_json(upstream_url)
+00545: 
+00546:     if upstream_http != 200 or upstream.get("ok") is not True:

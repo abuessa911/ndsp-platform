@@ -1,0 +1,131 @@
+{
+  "contract_version": "NDSP_GOVERNANCE_V1",
+  "status": "AUTHORITATIVE_BASELINE",
+  "semantic_rules": {
+    "missing_is_zero": false,
+    "unknown_is_neutral": false,
+    "stale_is_fresh": false,
+    "fallback_is_authoritative": false,
+    "silent_cross_timeframe_fallback": false,
+    "silent_semantic_reinterpretation": false,
+    "synthetic_pass_values": false
+  },
+  "direction": {
+    "allowed_values": [
+      "BULLISH",
+      "BEARISH",
+      "NEUTRAL"
+    ],
+    "overall_rule": {
+      "bullish": "LONG > SHORT",
+      "bearish": "SHORT > LONG",
+      "neutral": "LONG == SHORT"
+    },
+    "weekly_rule": {
+      "bullish": "CHANGE_LONG > CHANGE_SHORT",
+      "bearish": "CHANGE_SHORT > CHANGE_LONG",
+      "neutral": "CHANGE_LONG == CHANGE_SHORT"
+    }
+  },
+  "cot_tff": {
+    "groups": [
+      "ASSET_MANAGERS",
+      "LEVERAGED_FUNDS"
+    ],
+    "required_direction_fields": [
+      "asset_managers_overall",
+      "asset_managers_weekly",
+      "leveraged_funds_overall",
+      "leveraged_funds_weekly"
+    ],
+    "required_freshness_fields": [
+      "report_date",
+      "report_age_days",
+      "max_age_days",
+      "fresh"
+    ]
+  },
+  "investment": {
+    "overall_direction_source": "ASSET_MANAGERS_OVERALL",
+    "final_weekly_decision_source": "ASSET_MANAGERS_WEEKLY",
+    "nmp_governing_direction": "ASSET_MANAGERS_WEEKLY",
+    "nmp_decision_authority": false
+  },
+  "speculation": {
+    "timing_function_role": "CONTROL_DAY_CLASSIFICATION",
+    "control_day_mapping": {
+      "SPECULATORS": "LEVERAGED_FUNDS_WEEKLY",
+      "INVESTORS": "ASSET_MANAGERS_WEEKLY"
+    },
+    "final_direction_source": "SELECTED_WEEKLY_DIRECTION"
+  },
+  "nmp": {
+    "semantic_type": "PRICE_LEVEL",
+    "definition": "OPEN_TO_CLOSE_PRICE_LEVEL",
+    "ar_definition": "مستوى سعري ممتد بين سعر افتتاح الشمعة وسعر إغلاقها",
+    "arithmetic_subtraction": false,
+    "required_fields": [
+      "open_price",
+      "close_price",
+      "lower_price",
+      "upper_price",
+      "reference_candle",
+      "reference_indicator",
+      "reference_timeframe",
+      "momentum_metric",
+      "selection_rule",
+      "direction_context",
+      "source",
+      "calculated_at"
+    ],
+    "decision_authority": false
+  },
+  "handoff_required_metadata": [
+    "contract_version",
+    "field_id",
+    "value",
+    "data_type",
+    "semantic_role",
+    "producer",
+    "consumer",
+    "source",
+    "source_path",
+    "method_id",
+    "timeframe",
+    "horizon",
+    "calculated_at",
+    "fresh",
+    "complete",
+    "missing_reason",
+    "fallback_used",
+    "quality_status",
+    "authority",
+    "exposure_class"
+  ],
+  "exposure_classes": [
+    "PUBLIC",
+    "ADMIN",
+    "INTERNAL",
+    "EXPERIMENTAL",
+    "WITHHELD"
+  ],
+  "closure_order": [
+    "CANONICAL_SEMANTIC",
+    "ASSET_SOURCE_ROUTING",
+    "MARKET_DATA",
+    "COT_TFF",
+    "GOVERNING_INPUTS",
+    "TDL_INVESTMENT",
+    "TDL_SPECULATION",
+    "NMP_DEFINITION",
+    "NMP_INTERACTION",
+    "DIRECTION_AUTHORITY",
+    "BOT_HANDOFF",
+    "SCORE_INPUTS",
+    "EVIDENCE_LINEAGE_QUALITY",
+    "GOVERNANCE_GATE",
+    "PUBLIC_PROJECTION",
+    "ADMIN_PROJECTION",
+    "FRONTEND_BINDING"
+  ]
+}

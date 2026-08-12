@@ -1,0 +1,86 @@
+=== NDSP V33 LIVE TRIGGER + FINAL PROOF V1 ===
+DATE=2026-08-08T04:43:01+02:00
+MODE=READ_ONLY_RUNTIME_TRIGGER
+SOURCE_MODIFICATION=NO
+SERVICE_RESTART=NO
+AUDIT=/home/nawaf511/empire-core-new/var/audits/v33-live-trigger-final-proof-v1-20260808-044301
+
+=== 1. PRECONDITIONS ===
+V33_STATE=active
+V33_PID=2402283
+V33_SERVICE=PASS
+PORT_9086=LISTENING
+
+=== 2. BEFORE OUTPUT STATE ===
+OLD_OUTPUT=FOUND
+OLD_MTIME=1784007623
+OLD_SIZE=18161
+
+=== 3. CALL V33 DIRECTLY ===
+HTTP_9086=200
+RESPONSE_SIZE=13611
+V33_HTTP=PASS
+
+=== 4. VALIDATE RESPONSE JSON ===
+RESPONSE_JSON=PASS
+service= None
+runtime_version= 'ndsp-canonical-live-runtime-v33.0.0'
+symbol= None
+timeframe= None
+mode= None
+COT_STATUS= 'STALE_BY_POLICY'
+COT_DECISION_USE_ALLOWED= False
+COT_MONITORING_USE_ALLOWED= True
+COT_REASON_CODE= 'COT_REPORT_STALE_BY_POLICY'
+COT_REPORT_DATE= '2026-07-21'
+asset_managers_overall=None
+asset_managers_weekly=None
+leveraged_funds_overall=None
+leveraged_funds_weekly=None
+
+=== 5. WAIT FOR V33 OUTPUT WRITE ===
+OUTPUT_EXISTS=YES
+OUTPUT_UPDATED=YES
+NEW_MTIME=1786156987
+NEW_SIZE=18941
+
+=== 6. RESPONSE CONTRACT ASSERTIONS ===
+STATUS= 'STALE_BY_POLICY'
+DECISION_USE_ALLOWED= False
+MONITORING_USE_ALLOWED= True
+asset_managers_overall=None
+asset_managers_weekly=None
+leveraged_funds_overall=None
+leveraged_funds_weekly=None
+FOUR_COT_DIRECTIONS_PRESENT=FAIL
+STALE_NOT_PROMOTED_TO_DECISION_AUTHORITY=PASS
+V33_COT_RUNTIME_BINDING=FAIL
+
+=== 7. BLOCKER SEARCH ===
+OLD_COT_BLOCKERS=3
+BLOCKER:$.execution.blockers[0]='CANONICAL_COT_NOT_VERIFIED'
+BLOCKER:$.input_evidence.critical_blockers[0]='CANONICAL_COT_NOT_VERIFIED'
+BLOCKER:$.decision_layers[14].output.reasons[0]='CANONICAL_COT_NOT_VERIFIED'
+OLD_COT_BLOCKERS_CLEARED=FAIL
+
+=== 8. JOURNAL AFTER REQUEST ===
+JOURNAL_RUNTIME_ERRORS=NONE
+
+=== 9. FINAL CLASSIFICATION ===
+V33_COT_BINDING_CLOSED=NO
+NEXT_ACTION=INSPECT_V33_RESPONSE_STRUCTURE
+FINAL_RESULT=SAFE_STOP_DIAGNOSTIC
+
+=== 10. CHECKSUMS ===
+CHECKSUMS=PASS
+
+============================================================
+FILES_MODIFIED=0
+SERVICES_RESTARTED=0
+RUNTIME_LOGIC_MODIFIED=0
+AUDIT=/home/nawaf511/empire-core-new/var/audits/v33-live-trigger-final-proof-v1-20260808-044301
+RESPONSE=/home/nawaf511/empire-core-new/var/audits/v33-live-trigger-final-proof-v1-20260808-044301/v33-response.json
+LATEST_OUTPUT=/home/nawaf511/empire-core-new/var/audits/v33-live-trigger-final-proof-v1-20260808-044301/v33-latest-after.json
+JOURNAL=/home/nawaf511/empire-core-new/var/audits/v33-live-trigger-final-proof-v1-20260808-044301/journal.txt
+CHECKSUMS=/home/nawaf511/empire-core-new/var/audits/v33-live-trigger-final-proof-v1-20260808-044301/SHA256SUMS
+=== V33 LIVE TRIGGER + FINAL PROOF COMPLETE ===

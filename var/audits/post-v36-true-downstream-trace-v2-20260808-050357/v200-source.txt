@@ -1,0 +1,551 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import json
+import math
+import time
+import urllib.parse
+import urllib.request
+from datetime import datetime, timezone
+from typing import Any, Mapping
+
+from backend.ndsp_latest_16_layers_logic_functions import (
+    _nmp_cci_values,
+    _nmp_macd_hist_values,
+    _nmp_obv_slope_values,
+)
+
+CONTRACT_VERSION = "NDSP_SCORE_INPUTS_V200"
+USER_AGENT = "NDSP-V200-Score-Inputs/1.0"
+BINANCE_KLINES = "https://api.binance.com/api/v3/klines"
+YAHOO_CHART = "https://query1.finance.yahoo.com/v8/finance/chart/{symbol}"
+
+TF_BINANCE = {
+    "1m": "1m", "5m": "5m", "15m": "15m", "30m": "30m",
+    "1h": "1h", "4h": "4h", "1d": "1d", "daily": "1d",
+    "1w": "1w", "weekly": "1w", "1M": "1M", "monthly": "1M",
+}
+TF_YAHOO = {
+    "1m": ("1m", "5d"),
+    "5m": ("5m", "5d"),
+    "15m": ("15m", "5d"),
+    "30m": ("30m", "5d"),
+    "1h": ("60m", "1mo"),
+    "4h": ("1h", "3mo"),
+    "1d": ("1d", "1y"),
+    "daily": ("1d", "1y"),
+    "1w": ("1wk", "5y"),
+    "weekly": ("1wk", "5y"),
+    "1M": ("1mo", "10y"),
+    "monthly": ("1mo", "10y"),
+}
+
+
+def _now_iso() -> str:
+    return datetime.now(timezone.utc).replace(microsecond=0).isoformat()
+
+
+def _safe_float(value: Any) -> float | None:
+    if value is None or isinstance(value, bool):
+        return None
+    try:
+        number = float(str(value).replace(",", "").replace("٬", "").strip())
+    except (TypeError, ValueError):
+        return None
+    return number if math.isfinite(number) else None
+
+
+def _clamp(value: float, low: float, high: float) -> float:
+    return max(low, min(high, value))
+
+
+def _normalize_tf(value: Any) -> str:
+    raw = str(value or "weekly").strip()
+    aliases = {
+        "h1": "1h", "hourly": "1h",
+        "h4": "4h",
+        "d1": "1d", "day": "1d",
+        "w1": "1w", "week": "1w",
+        "mn1": "1M", "month": "1M",
+    }
+    return aliases.get(raw.lower(), raw)
+
+
+def _analysis_mode(explicit: Any, timeframe: str) -> str:
+    raw = str(explicit or "").strip().lower()
+    if any(token in raw for token in ("investment", "invest", "استثمار")):
+        return "investment"
+    if any(token in raw for token in ("speculative", "speculation", "trade", "مضارب")):
+        return "speculative"
+    return "investment" if timeframe in {"1w", "weekly", "1M", "monthly"} else "speculative"
+
+
+def _http_json(url: str, timeout: int = 10) -> Any:
+    request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+    with urllib.request.urlopen(request, timeout=timeout) as response:
+        if int(getattr(response, "status", 200)) < 200 or int(getattr(response, "status", 200)) >= 300:
+            raise RuntimeError(f"HTTP_{getattr(response, 'status', 'UNKNOWN')}")
+        return json.loads(response.read().decode("utf-8", "replace"))
+
+
+def _closed_binance_rows(rows: Any) -> list[list[Any]]:
+    if not isinstance(rows, list):
+        return []
+    now_ms = int(time.time() * 1000)
+    out = []
+    for row in rows:
+        if not isinstance(row, list) or len(row) < 7:
+            continue
+        try:
+            close_time = int(row[6])
+        except (TypeError, ValueError):
+            continue
+        if close_time < now_ms:
+            out.append(row)
+    return out
+
+
+def _fetch_asset_ohlcv(symbol: str, timeframe: str, limit: int = 220) -> dict[str, Any]:
+    interval = TF_BINANCE.get(timeframe)
+    if not interval:
+        return {
+            "ok": False,
+            "error": "UNSUPPORTED_TIMEFRAME",
+            "provider": "binance_klines",
+            "timeframe": timeframe,
+        }
+
+    normalized_symbol = str(symbol or "").upper().strip().replace("/", "").replace("-", "")
+    if not normalized_symbol.endswith("USDT"):
+        return {
+            "ok": False,
+            "error": "UNSUPPORTED_SYMBOL_FOR_BINANCE_KLINES",
+            "provider": "binance_klines",
+            "symbol": normalized_symbol,
+            "timeframe": timeframe,
+        }
+
+    query = urllib.parse.urlencode({
+        "symbol": normalized_symbol,
+        "interval": interval,
+        "limit": int(limit),
+    })
+    url = f"{BINANCE_KLINES}?{query}"
+
+    try:
+        rows = _closed_binance_rows(_http_json(url, timeout=10))
+    except Exception as exc:
+        return {
+            "ok": False,
+            "error": f"ASSET_OHLCV_FETCH_FAILED:{type(exc).__name__}",
+            "provider": "binance_klines",
+            "symbol": normalized_symbol,
+            "timeframe": timeframe,
+            "source_interval": interval,
+        }
+
+    if len(rows) < 40:
+        return {
+            "ok": False,
+            "error": "INSUFFICIENT_CLOSED_CANDLES",
+            "provider": "binance_klines",
+            "symbol": normalized_symbol,
+            "timeframe": timeframe,
+            "source_interval": interval,
+            "closed_candle_count": len(rows),
+        }
+
+    opens = [_safe_float(row[1]) for row in rows]
+    highs = [_safe_float(row[2]) for row in rows]
+    lows = [_safe_float(row[3]) for row in rows]
+    closes = [_safe_float(row[4]) for row in rows]
+    volumes = [_safe_float(row[5]) for row in rows]
+
+    if any(value is None for values in (opens, highs, lows, closes, volumes) for value in values[-40:]):
+        return {
+            "ok": False,
+            "error": "INVALID_RECENT_OHLCV",
+            "provider": "binance_klines",
+            "symbol": normalized_symbol,
+            "timeframe": timeframe,
+            "source_interval": interval,
+        }
+
+    return {
+        "ok": True,
+        "provider": "binance_klines",
+        "symbol": normalized_symbol,
+        "timeframe": timeframe,
+        "source_interval": interval,
+        "closed_candle_count": len(rows),
+        "last_close_time_ms": int(rows[-1][6]),
+        "opens": [float(v) for v in opens],
+        "highs": [float(v) for v in highs],
+        "lows": [float(v) for v in lows],
+        "closes": [float(v) for v in closes],
+        "volumes": [float(v) for v in volumes],
+        "source_path": f"provider.binance_klines.{normalized_symbol}.{interval}.closed",
+    }
+
+
+def _momentum_inputs(ohlcv: Mapping[str, Any], calculated_at: str) -> dict[str, Any]:
+    if not ohlcv.get("ok"):
+        return {
+            "status": "UNAVAILABLE",
+            "macd_histogram": None,
+            "obv_slope": None,
+            "cci_value": None,
+            "same_timeframe": True,
+            "calculated_at": calculated_at,
+            "source_paths": [
+                "engine.momentum.macd_histogram.v1",
+                "engine.momentum.obv_slope_normalized.v1",
+                "engine.momentum.cci.v1",
+            ],
+            "error": ohlcv.get("error"),
+        }
+
+    highs = list(ohlcv["highs"])
+    lows = list(ohlcv["lows"])
+    closes = list(ohlcv["closes"])
+    volumes = list(ohlcv["volumes"])
+
+    macd_values = _nmp_macd_hist_values(closes)
+    cci_values = _nmp_cci_values(highs, lows, closes, 20)
+    obv_values = _nmp_obv_slope_values(closes, volumes, 5)
+
+    macd = _safe_float(macd_values[-1] if macd_values else None)
+    cci = _safe_float(cci_values[-1] if cci_values else None)
+    obv_raw = _safe_float(obv_values[-1] if obv_values else None)
+    denominator = sum(abs(v) for v in volumes[-5:]) if len(volumes) >= 5 else 0.0
+    obv_normalized = None
+    if obv_raw is not None and denominator > 0:
+        obv_normalized = _clamp((obv_raw / denominator) * 100.0, -100.0, 100.0)
+
+    status = "AVAILABLE" if None not in (macd, cci, obv_normalized) else "UNAVAILABLE"
+    return {
+        "status": status,
+        "macd_histogram": round(macd, 10) if macd is not None else None,
+        "obv_slope": round(obv_normalized, 6) if obv_normalized is not None else None,
+        "cci_value": round(cci, 6) if cci is not None else None,
+        "obv_raw_5bar_delta": round(obv_raw, 6) if obv_raw is not None else None,
+        "same_timeframe": True,
+        "timeframe": ohlcv.get("timeframe"),
+        "source_interval": ohlcv.get("source_interval"),
+        "closed_candle_count": ohlcv.get("closed_candle_count"),
+        "last_close_time_ms": ohlcv.get("last_close_time_ms"),
+        "calculated_at": calculated_at,
+        "source_paths": [
+            ohlcv.get("source_path"),
+            "engine.momentum.macd_histogram.v1",
+            "engine.momentum.obv_slope_normalized.v1",
+            "engine.momentum.cci.v1",
+        ],
+        "method_ids": [
+            "MACD_12_26_9_HISTOGRAM",
+            "OBV_5_BAR_VOLUME_NORMALIZED",
+            "CCI_20",
+        ],
+    }
+
+
+def _extract_yahoo_series(payload: Any) -> dict[str, Any] | None:
+    try:
+        result = payload["chart"]["result"][0]
+        timestamps = result.get("timestamp") or []
+        quote = (result.get("indicators", {}).get("quote") or [{}])[0]
+        closes = quote.get("close") or []
+        highs = quote.get("high") or []
+        lows = quote.get("low") or []
+    except (KeyError, IndexError, TypeError):
+        return None
+
+    triples = []
+    for ts, high, low, close in zip(timestamps, highs, lows, closes):
+        h, l, c = _safe_float(high), _safe_float(low), _safe_float(close)
+        if h is None or l is None or c is None:
+            continue
+        triples.append((int(ts), h, l, c))
+
+    if len(triples) < 25:
+        return None
+
+    return {
+        "timestamps": [row[0] for row in triples],
+        "highs": [row[1] for row in triples],
+        "lows": [row[2] for row in triples],
+        "closes": [row[3] for row in triples],
+    }
+
+
+def _atr(highs: list[float], lows: list[float], closes: list[float], period: int = 14) -> float | None:
+    if len(closes) < period + 1:
+        return None
+    true_ranges = []
+    for index in range(1, len(closes)):
+        true_ranges.append(max(
+            highs[index] - lows[index],
+            abs(highs[index] - closes[index - 1]),
+            abs(lows[index] - closes[index - 1]),
+        ))
+    if len(true_ranges) < period:
+        return None
+    return sum(true_ranges[-period:]) / period
+
+
+def _macro_usd_input(timeframe: str, calculated_at: str) -> dict[str, Any]:
+    config = TF_YAHOO.get(timeframe)
+    if not config:
+        return {
+            "status": "UNAVAILABLE",
+            "usd_pressure_score": None,
+            "same_timeframe": True,
+            "timeframe": timeframe,
+            "calculated_at": calculated_at,
+            "source_paths": ["yahoo_chart:DXY"],
+            "error": "UNSUPPORTED_TIMEFRAME",
+        }
+
+    interval, range_value = config
+    last_error = "DXY_SOURCE_UNAVAILABLE"
+    for dxy_symbol in ("DX-Y.NYB", "DX=F"):
+        query = urllib.parse.urlencode({
+            "interval": interval,
+            "range": range_value,
+            "events": "history",
+            "includePrePost": "false",
+        })
+        url = YAHOO_CHART.format(symbol=urllib.parse.quote(dxy_symbol, safe="")) + "?" + query
+        try:
+            series = _extract_yahoo_series(_http_json(url, timeout=10))
+        except Exception as exc:
+            last_error = f"DXY_FETCH_FAILED:{type(exc).__name__}"
+            continue
+        if not series:
+            last_error = "DXY_SERIES_INSUFFICIENT"
+            continue
+
+        highs = series["highs"]
+        lows = series["lows"]
+        closes = series["closes"]
+        atr14 = _atr(highs, lows, closes, 14)
+        if atr14 is None or atr14 <= 0 or len(closes) < 6:
+            last_error = "DXY_ATR_UNAVAILABLE"
+            continue
+
+        five_bar_move = closes[-1] - closes[-6]
+        strength_atr_units = five_bar_move / atr14
+        dxy_strength = 100.0 * math.tanh(strength_atr_units / 2.0)
+        asset_pressure = -_clamp(dxy_strength, -100.0, 100.0)
+
+        return {
+            "status": "AVAILABLE",
+            "usd_pressure_score": round(asset_pressure, 6),
+            "dxy_strength_score": round(dxy_strength, 6),
+            "inverse_to_usd": True,
+            "same_timeframe": True,
+            "timeframe": timeframe,
+            "source_interval": interval,
+            "provider": "yahoo_chart",
+            "provider_symbol": dxy_symbol,
+            "last_bar_time_unix": series["timestamps"][-1],
+            "dxy_last_close": round(closes[-1], 8),
+            "dxy_five_bar_move": round(five_bar_move, 8),
+            "dxy_atr14": round(atr14, 8),
+            "calculated_at": calculated_at,
+            "source_paths": [
+                f"provider.yahoo_chart.{dxy_symbol}.{interval}",
+                "engine.macro.usd_pressure_atr_normalized.v1",
+            ],
+            "method_id": "DXY_5_BAR_ATR_NORMALIZED_INVERSE_PRESSURE",
+        }
+
+    return {
+        "status": "UNAVAILABLE",
+        "usd_pressure_score": None,
+        "same_timeframe": True,
+        "timeframe": timeframe,
+        "calculated_at": calculated_at,
+        "source_paths": ["yahoo_chart:DX-Y.NYB", "yahoo_chart:DX=F"],
+        "error": last_error,
+    }
+
+
+def _layer(payload: Mapping[str, Any], layer_id: str) -> Mapping[str, Any] | None:
+    layers = payload.get("decision_layers")
+    if not isinstance(layers, list):
+        return None
+    for item in layers:
+        if isinstance(item, Mapping) and str(item.get("id") or "") == layer_id:
+            return item
+    return None
+
+
+def _layer_numeric_input(
+    payload: Mapping[str, Any],
+    *,
+    layer_id: str,
+    output_name: str,
+    calculated_at: str,
+    timeframe: str,
+) -> dict[str, Any]:
+    layer = _layer(payload, layer_id)
+    score = _safe_float(layer.get("score")) if layer else None
+    return {
+        "status": "AVAILABLE" if score is not None else "UNAVAILABLE",
+        output_name: round(_clamp(score, 0.0, 100.0), 6) if score is not None else None,
+        "same_timeframe": True,
+        "timeframe": timeframe,
+        "calculated_at": calculated_at,
+        "source_paths": [f"decision_layers[{layer_id}].score"],
+        "layer_id": layer_id,
+        "canonical_name": layer.get("canonical_name") if layer else None,
+    }
+
+
+def _scenario_levels_complete(payload: Mapping[str, Any]) -> bool:
+    levels = payload.get("scenario_levels")
+    if not isinstance(levels, Mapping):
+        scenario = payload.get("scenario")
+        levels = scenario.get("scenario_levels") if isinstance(scenario, Mapping) else None
+    if not isinstance(levels, Mapping):
+        return False
+    for name in ("activation", "arrival", "review", "invalidation"):
+        item = levels.get(name)
+        if not isinstance(item, Mapping) or _safe_float(item.get("price")) is None:
+            return False
+    return True
+
+
+def _numeric(value: Any) -> bool:
+    return _safe_float(value) is not None
+
+
+def attach_v200_score_inputs(
+    payload: Any,
+    *,
+    symbol: Any = None,
+    timeframe: Any = None,
+    analysis_mode: Any = None,
+) -> Any:
+    if not isinstance(payload, dict):
+        return payload
+
+    calculated_at = _now_iso()
+    instrument = payload.get("instrument") if isinstance(payload.get("instrument"), Mapping) else {}
+    normalized_symbol = str(symbol or instrument.get("symbol") or payload.get("symbol") or "").upper().strip()
+    normalized_tf = _normalize_tf(timeframe or instrument.get("timeframe") or "weekly")
+    mode = _analysis_mode(analysis_mode, normalized_tf)
+
+    tdl_layer = "NDSP-CORE-L01" if mode == "investment" else "NDSP-CORE-L02"
+    tdl = _layer_numeric_input(
+        payload,
+        layer_id=tdl_layer,
+        output_name="alignment_score",
+        calculated_at=calculated_at,
+        timeframe=normalized_tf,
+    )
+    correction = _layer_numeric_input(
+        payload,
+        layer_id="NDSP-CORE-L04",
+        output_name="confirmation_score",
+        calculated_at=calculated_at,
+        timeframe=normalized_tf,
+    )
+
+    ohlcv = _fetch_asset_ohlcv(normalized_symbol, normalized_tf, 220)
+    momentum = _momentum_inputs(ohlcv, calculated_at)
+    macro = _macro_usd_input(normalized_tf, calculated_at)
+
+    blocker_codes: list[str] = []
+    if not _numeric(tdl.get("alignment_score")):
+        blocker_codes.append("TDL_INPUT_MISSING")
+    if not _numeric(correction.get("confirmation_score")):
+        blocker_codes.append("CORRECTION_INPUT_MISSING")
+    if not all(_numeric(momentum.get(name)) for name in ("macd_histogram", "obv_slope", "cci_value")):
+        blocker_codes.append("MOMENTUM_INPUTS_MISSING")
+    if not _numeric(macro.get("usd_pressure_score")):
+        blocker_codes.append("MACRO_USD_INPUT_MISSING")
+
+    nmp = payload.get("nmp")
+    if not isinstance(nmp, Mapping) or nmp.get("status") != "AVAILABLE" or not _numeric(nmp.get("value")):
+        blocker_codes.append("NMP_UNAVAILABLE")
+
+    if not _scenario_levels_complete(payload):
+        blocker_codes.append("SCENARIO_LEVELS_INCOMPLETE")
+
+    governance = payload.get("governance_summary")
+    if isinstance(governance, Mapping) and governance.get("evidence_fresh") is False:
+        blocker_codes.append("EVIDENCE_STALE")
+
+    golden = payload.get("golden_alignment")
+    if isinstance(golden, Mapping) and golden.get("missing_inputs"):
+        blocker_codes.append("GOLDEN_GOVERNING_INPUTS_INCOMPLETE")
+
+    blocker_codes = list(dict.fromkeys(blocker_codes))
+    blockers = {
+        "status": "AVAILABLE",
+        "count": len(blocker_codes),
+        "codes": blocker_codes,
+        "same_timeframe": True,
+        "timeframe": normalized_tf,
+        "calculated_at": calculated_at,
+        "source_paths": [
+            "score_inputs.tdl.alignment_score",
+            "score_inputs.correction.confirmation_score",
+            "score_inputs.momentum",
+            "score_inputs.macro.usd_pressure_score",
+            "nmp.status",
+            "scenario_levels",
+            "governance_summary.evidence_fresh",
+            "golden_alignment.missing_inputs",
+        ],
+    }
+
+    required_values = {
+        "tdl": tdl.get("alignment_score"),
+        "correction": correction.get("confirmation_score"),
+        "macd_histogram": momentum.get("macd_histogram"),
+        "obv": momentum.get("obv_slope"),
+        "cci": momentum.get("cci_value"),
+        "macro_usd": macro.get("usd_pressure_score"),
+        "blockers": blockers.get("count"),
+    }
+    missing_components = [name for name, value in required_values.items() if not _numeric(value)]
+    contract_complete = not missing_components
+
+    payload["score_inputs"] = {
+        "contract_version": CONTRACT_VERSION,
+        "purpose": "backend_numeric_input_contract_only",
+        "commercial_score_calculated": False,
+        "commercial_score_status": (
+            "INPUT_CONTRACT_COMPLETE_WITH_RUNTIME_BLOCKERS"
+            if contract_complete and blockers["count"] > 0
+            else "INPUT_CONTRACT_COMPLETE"
+            if contract_complete
+            else "INPUT_CONTRACT_INCOMPLETE"
+        ),
+        "symbol": normalized_symbol,
+        "timeframe": normalized_tf,
+        "analysis_mode": mode,
+        "same_timeframe_enforced": True,
+        "static_fallback_used": False,
+        "cross_timeframe_fallback_used": False,
+        "calculated_at": calculated_at,
+        "contract_complete": contract_complete,
+        "missing_components": missing_components,
+        "tdl": tdl,
+        "correction": correction,
+        "momentum": momentum,
+        "macro": macro,
+        "blockers": blockers,
+        "governance": {
+            "correction_required": True,
+            "macro_usd_required": True,
+            "momentum_required": ["rsi", "macd_histogram", "obv", "cci"],
+            "missing_component_behavior": "do_not_calculate_commercial_score",
+        },
+    }
+    payload["score_inputs_contract_version"] = CONTRACT_VERSION
+    return payload
+

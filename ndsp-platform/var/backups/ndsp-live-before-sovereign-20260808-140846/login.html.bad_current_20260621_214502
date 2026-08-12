@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>تسجيل الدخول — NDSP</title>
+<style>
+body{margin:0;background:#0b0b0c;color:#f5f5f5;font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+.wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:28px}
+.card{width:min(760px,100%);border:1px solid #2b2b2f;border-radius:34px;background:#151516;padding:42px;box-shadow:0 20px 80px #0008}
+.kicker{color:#d8b85c;letter-spacing:.4em;font-weight:800;text-align:center}
+h1{font-size:48px;text-align:center;margin:18px 0}
+p{color:#aaa;text-align:center;font-size:22px;line-height:1.8}
+label{display:block;margin:28px 0 10px;font-size:24px;font-weight:800}
+input{width:100%;box-sizing:border-box;border:1px solid #333;border-radius:28px;background:#090909;color:#fff;padding:24px;font-size:24px;text-align:center}
+button{width:100%;border:0;border-radius:28px;background:#e3c263;color:#050505;padding:25px;margin-top:34px;font-size:28px;font-weight:900}
+.msg{margin-top:22px;color:#e3c263;text-align:center;font-size:20px;line-height:1.7}
+.links{display:flex;justify-content:space-between;margin-top:32px;color:#aaa}
+.links a{color:#aaa;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <main class="card">
+    <div class="kicker">تسجيل الدخول</div>
+    <h1>ادخل إلى مركز القيادة</h1>
+    <p>صفحة دخول موحدة بهوية NDSP الجديدة.</p>
+
+    <form id="loginForm">
+      <label>البريد الإلكتروني</label>
+      <input id="email" name="email" type="email" autocomplete="email" required>
+
+      <label>كلمة المرور</label>
+      <input id="password" name="password" type="password" autocomplete="current-password" required>
+
+      <button type="submit">تسجيل الدخول</button>
+      <div id="msg" class="msg"></div>
+    </form>
+
+    <div class="links">
+      <a href="/">صفحة المنتج</a>
+      <a href="/register.html">إنشاء حساب</a>
+    </div>
+  </main>
+</div>
+
+<script>
+document.getElementById("loginForm").addEventListener("submit", async function(e){
+  e.preventDefault();
+  const msg=document.getElementById("msg");
+  msg.textContent="جاري التحقق...";
+  try{
+    const res=await fetch("https://api.ndsp.app/api/auth/login",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      credentials:"include",
+      body:JSON.stringify({
+        email:document.getElementById("email").value.trim(),
+        password:document.getElementById("password").value
+      })
+    });
+    const data=await res.json().catch(()=>({}));
+    if(data.ok && data.token){
+      localStorage.setItem("ndsp_token",data.token);
+      localStorage.setItem("ndsp_user",JSON.stringify(data.user||{}));
+      location.href="https://my.ndsp.app/";
+      return;
+    }
+    msg.textContent="بيانات الدخول غير صحيحة أو الحساب غير مفعل.";
+  }catch(err){
+    msg.textContent="تعذر الاتصال ببوابة المصادقة.";
+  }
+});
+</script>
+</body>
+</html>

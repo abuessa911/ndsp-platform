@@ -1,0 +1,136 @@
+{
+  "golden": {
+    "path": "backend/app/runtime/ndsp_quality_live_golden_wrapper.py",
+    "functions": {
+      "load_runtime_golden": {
+        "line": 75,
+        "end_line": 100,
+        "capture": "golden__load_runtime_golden.txt"
+      }
+    }
+  },
+  "score": {
+    "path": "backend/app/runtime/ndsp_v200_score_inputs.py",
+    "functions": {
+      "attach_v200_score_inputs": {
+        "line": 424,
+        "end_line": 550,
+        "capture": "score__attach_v200_score_inputs.txt"
+      }
+    }
+  },
+  "launch": {
+    "path": "backend/app/runtime/ndsp_v201_launch_completion.py",
+    "functions": {
+      "attach_v202_commercial_score": {
+        "line": 402,
+        "end_line": 563,
+        "capture": "launch__attach_v202_commercial_score.txt"
+      }
+    }
+  },
+  "canonical": {
+    "path": "backend/app/runtime/ndsp_canonical_live_runtime_v30.py",
+    "functions": {
+      "discover_cot": {
+        "line": 200,
+        "end_line": 260,
+        "capture": "canonical__discover_cot.txt"
+      },
+      "build_payload": {
+        "line": 321,
+        "end_line": 538,
+        "capture": "canonical__build_payload.txt"
+      },
+      "execute": {
+        "line": 541,
+        "end_line": 676,
+        "capture": "canonical__execute.txt"
+      }
+    }
+  },
+  "projection": {
+    "path": "backend/app/runtime/ndsp_public_governance_projection_v1.py",
+    "functions": {
+      "attach_governance_projection": {
+        "line": 143,
+        "end_line": 215,
+        "capture": "projection__attach_governance_projection.txt"
+      }
+    }
+  },
+  "capability": {
+    "path": "backend/platform/runtime/capability_runtime_controller_v1.py",
+    "functions": {
+      "run_functional_probe": {
+        "line": 121,
+        "end_line": 220,
+        "capture": "capability__run_functional_probe.txt"
+      },
+      "binding_for": {
+        "line": 253,
+        "end_line": 276,
+        "capture": "capability__binding_for.txt"
+      }
+    }
+  },
+  "quality": {
+    "path": "backend/data_foundation/canonical_v1/data_quality_gate.py",
+    "functions": {
+      "evaluate_data_quality": {
+        "line": 4,
+        "end_line": 22,
+        "capture": "quality__evaluate_data_quality.txt"
+      }
+    }
+  },
+  "9082": {
+    "capture": "9082-current.json",
+    "root_keys": [
+      "allowed_public_outputs",
+      "capability_runtime_evidence_version",
+      "commercial_launch_contract_version",
+      "commercial_score",
+      "commercial_score_contract_version",
+      "cross_timeframe_divergence",
+      "cross_timeframe_state",
+      "data_provider",
+      "decision_layers",
+      "explainability",
+      "generated_at",
+      "golden_alignment",
+      "golden_alignment_active",
+      "golden_evidence_public",
+      "golden_name",
+      "golden_reason_public",
+      "golden_signal",
+      "golden_spotlight",
+      "golden_status",
+      "governance_projection_version",
+      "governance_summary",
+      "governing_inputs",
+      "governing_inputs_reason_code",
+      "instrument",
+      "launch_readiness",
+      "live_market_analysis",
+      "live_price_bound",
+      "nmp",
+      "nmp_level",
+      "nmp_source",
+      "nmp_status",
+      "nmp_timeframe",
+      "nmp_value",
+      "ok",
+      "package",
+      "platform_capabilities",
+      "project",
+      "public_contract_version",
+      "public_explainability",
+      "scenario",
+      "scenario_levels",
+      "score_inputs",
+      "score_inputs_contract_version",
+      "source_mode"
+    ]
+  }
+}

@@ -1,0 +1,119 @@
+152:    server_name my.ndsp.app;
+203:    server_name my.ndsp.app;
+225:        proxy_pass https://api.ndsp.app/api/;
+339:        proxy_pass http://127.0.0.1:9090/api/register;
+346:        proxy_pass_request_headers on;
+351:    location = /api/trial/status {
+352:        proxy_pass http://127.0.0.1:9090/api/trial/status;
+359:        proxy_pass_request_headers on;
+365:    location = /api/trial/seats {
+366:        proxy_pass http://127.0.0.1:9090/api/trial/seats;
+376:        proxy_pass http://127.0.0.1:9090/api/launch/status;
+386:        proxy_pass http://127.0.0.1:9090/api/entitlements/me;
+393:        proxy_pass_request_headers on;
+405:        proxy_pass http://127.0.0.1:9090/api/auth/decision-room-access;
+410:        proxy_pass_request_body off;
+456:        proxy_pass http://127.0.0.1:9091;
+463:        proxy_pass_request_headers on;
+473:        proxy_pass http://127.0.0.1:9095;
+486:        proxy_pass http://127.0.0.1:9095;
+499:        proxy_pass http://127.0.0.1:9095;
+512:        proxy_pass http://127.0.0.1:9095;
+525:        proxy_pass http://127.0.0.1:9095;
+538:        proxy_pass http://127.0.0.1:9095;
+551:        proxy_pass http://127.0.0.1:9095;
+564:        proxy_pass http://127.0.0.1:9095;
+577:        proxy_pass http://127.0.0.1:9095;
+590:        proxy_pass http://127.0.0.1:9095;
+603:        proxy_pass http://127.0.0.1:9095;
+621:        proxy_pass http://127.0.0.1:19091/api/auth/session;
+622:        proxy_pass_request_body off;
+631:        proxy_pass http://127.0.0.1:9078/api/completed$is_args$args;
+646:        proxy_pass http://127.0.0.1:9078/api/completed/latest$is_args$args;
+755:        proxy_pass http://127.0.0.1:9027/api/auth/forgot-password;
+767:        proxy_pass http://127.0.0.1:9027/api/auth/reset-password;
+784:    proxy_pass http://127.0.0.1:9082/api/decision/quality-live;
+808:location = /ops-admin { return 301 /ops-admin/; }
+809:location ^~ /ops-admin/ {
+818:    proxy_pass http://127.0.0.1:9094/health;
+828:    proxy_pass http://127.0.0.1:9094;
+838:location ^~ /api/ops/admin/ {
+841:    proxy_pass http://127.0.0.1:9094;
+859:    proxy_pass http://127.0.0.1:19091/auth-ui/index.html;
+871:    proxy_pass http://127.0.0.1:19091/auth-ui/assets/;
+882:    proxy_pass http://127.0.0.1:19091;
+895:location = /_ndsp_auth_admin_clean {
+897:    proxy_pass http://127.0.0.1:19091/internal/authorize-admin;
+898:    proxy_pass_request_body off;
+921:    proxy_pass http://127.0.0.1:19091/api/auth/logout-page;
+929:location ^~ /owner/ {
+936:location ^~ /admin/ {
+947:    server_name admin.ndsp.app;
+967:    server_name admin.ndsp.app;
+977:    location = /api/admin/users/health {
+978:        proxy_pass http://127.0.0.1:9068/health;
+986:    location ^~ /api/admin/users/ {
+987:        proxy_pass http://127.0.0.1:9068/;
+1010:location ^~ /api/admin/layers/ {
+1011:    proxy_pass http://127.0.0.1:9065/api/admin/layers/;
+1020:location ^~ /api/admin/raw-cot/ {
+1021:    proxy_pass http://127.0.0.1:9076/api/admin/raw-cot/;
+1038:    server_name api.ndsp.app;
+1047:        proxy_pass http://127.0.0.1:9061/api/decision/package-v2;
+1081:        proxy_pass http://127.0.0.1:9082/api/decision/quality-live$is_args$args;
+1139:        proxy_pass http://127.0.0.1:9028/api/register;
+1152:        proxy_pass http://127.0.0.1:9028/api/auth/register;
+1167:        proxy_pass http://127.0.0.1:9001/api/completed-decisions$is_args$args;
+1183:        proxy_pass http://127.0.0.1:9001/api/completed-decisions/latest$is_args$args;
+1241:    server_name api.ndsp.app;
+1251:        proxy_pass http://127.0.0.1:9020/api/auth/login;
+1260:        proxy_pass http://127.0.0.1:9020/api/auth/me;
+1269:        proxy_pass http://127.0.0.1:9020/api/auth/logout;
+1278:        proxy_pass http://127.0.0.1:9001;
+1288:        proxy_pass http://127.0.0.1:9082/api/decision/quality-live$is_args$args;
+1336:        proxy_pass http://127.0.0.1:9066;
+1343:        proxy_pass http://127.0.0.1:9066;
+1351:    location = /api/ui-bridge/health { proxy_pass http://127.0.0.1:9066; proxy_http_version 1.1; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; }
+1355:    location = /api/market-structure { proxy_pass http://127.0.0.1:9066; proxy_http_version 1.1; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; }
+1356:    location = /api/technical-confirmation { proxy_pass http://127.0.0.1:9066; proxy_http_version 1.1; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; }
+1357:    location = /api/macro-analysis { proxy_pass http://127.0.0.1:9066; proxy_http_version 1.1; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; }
+1358:    location = /api/risk-layer { proxy_pass http://127.0.0.1:9066; proxy_http_version 1.1; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; }
+1359:    location = /api/nawaf-signal { proxy_pass http://127.0.0.1:9066; proxy_http_version 1.1; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; }
+1360:    location = /api/alerts { proxy_pass http://127.0.0.1:9066; proxy_http_version 1.1; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; }
+1361:    location = /api/settings { proxy_pass http://127.0.0.1:9066; proxy_http_version 1.1; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; }
+1376:        proxy_pass http://127.0.0.1:9061/api/decision/package-live;
+1390:        proxy_pass http://127.0.0.1:9078/api/completed;
+1398:        proxy_pass http://127.0.0.1:9078/api/completed/latest;
+1406:        proxy_pass http://127.0.0.1:9078$request_uri;
+1414:        proxy_pass http://127.0.0.1:9078$request_uri;
+1422:        proxy_pass http://127.0.0.1:9078$request_uri;
+1430:        proxy_pass http://127.0.0.1:9079/health;
+1438:        proxy_pass http://127.0.0.1:9079/api/governance/evaluate;
+1465:        proxy_pass http://127.0.0.1:9028/api/register;
+1478:        proxy_pass http://127.0.0.1:9028/api/auth/register;
+1493:        proxy_pass http://127.0.0.1:9001/api/completed-decisions$is_args$args;
+1509:        proxy_pass http://127.0.0.1:9001/api/completed-decisions/latest$is_args$args;
+1561:    location = /api/trial/status {
+1562:        proxy_pass http://127.0.0.1:9090/api/trial/status;
+1569:        proxy_pass_request_headers on;
+1575:    location = /api/trial/seats {
+1576:        proxy_pass http://127.0.0.1:9090/api/trial/seats;
+1586:        proxy_pass http://127.0.0.1:9090/api/launch/status;
+1638:        proxy_pass https://api.ndsp.app/api/auth/reset-password;
+1736:        proxy_pass http://127.0.0.1:9020/api/auth/login;
+1744:    location = /api/trial/register/health {
+1745:        proxy_pass http://127.0.0.1:9019/api/trial/register/health;
+1756:    location ^~ /api/trial/register/ {
+1757:        proxy_pass http://127.0.0.1:9019/api/trial/register/;
+1768:    location = /api/trial/invites/validate {
+1769:        proxy_pass http://127.0.0.1:9019/api/trial/invites/validate;
+1804:        proxy_pass https://api.ndsp.app/api/auth/reset-password;
+1822:        proxy_pass http://127.0.0.1:9083/api/decision/nmp-timeframes-live$is_args$args;
+1829:        proxy_pass http://127.0.0.1:9083/api/decision/quality-contract-v52$is_args$args;
+1836:        proxy_pass http://127.0.0.1:9083/health;
+1897:    location = /api/trial/status {
+1898:        proxy_pass http://127.0.0.1:9090/api/trial/status;
+1905:        proxy_pass_request_headers on;
+1911:    location = /api/trial/seats {
+1912:        proxy_pass http://127.0.0.1:9090/api/trial/seats;
+1922:        proxy_pass http://127.0.0.1:9090/api/launch/status;

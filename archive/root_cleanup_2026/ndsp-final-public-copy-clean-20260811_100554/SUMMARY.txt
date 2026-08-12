@@ -1,0 +1,80 @@
+NDSP Final Public Copy Clean Summary
+Timestamp: 20260811_100554
+Project: /home/nawaf511/empire-core-new
+Backup: /home/nawaf511/ndsp-final-public-copy-clean-backup-20260811_100554.tar.gz
+
+Changed files:
+./apps/admin-console/admin-users.json
+./apps/admin-console/data/owner-layer-source-map.json
+./apps/ndsp-governance-bridge/layers/NDSP_OWNER_INTERNAL_16_LAYER_REGISTRY.json
+./apps/ndsp-governance-bridge/layers/NDSP_OWNER_INTERNAL_16_LAYER_REGISTRY.md
+./apps/ndsp-governance-bridge/NDSP_LAYER_VISIBILITY_OWNER_INTERNAL_POLICY.md
+./frontend/admin-console/admin-users.json
+./frontend/admin-console/index.html
+./frontend/admin-console/NDSP_Admin_Console.html
+./frontend/admin-console/NDSP_Help_Center.html
+./frontend/admin-console/NDSP_Terms_Privacy.html
+./frontend/auth-recovery/reset-password.html
+./frontend/ndsp-user-portal-v50/assets/ndsp-portal-v50.js
+./frontend/ndsp-user-portal-v50/public/ndsp-timeframe-layer-contract-v121.js
+./frontend/owner-console/index.html
+./frontend/public-landing/NDSP_Help_Center.html
+./frontend/public-landing/NDSP_Packages_Compare.html
+./frontend/public-landing/NDSP_Terms_Privacy.html
+./frontend/public-site/src/i18n/locales/ar.ts
+./frontend/public-site/src/i18n/locales/bn.ts
+./frontend/public-site/src/i18n/locales/cs.ts
+./frontend/public-site/src/i18n/locales/de.ts
+./frontend/public-site/src/i18n/locales/el.ts
+./frontend/public-site/src/i18n/locales/en.ts
+./frontend/public-site/src/i18n/locales/es.ts
+./frontend/public-site/src/i18n/locales/fa.ts
+./frontend/public-site/src/i18n/locales/fr.ts
+./frontend/public-site/src/i18n/locales/hi.ts
+./frontend/public-site/src/i18n/locales/hu.ts
+./frontend/public-site/src/i18n/locales/id.ts
+./frontend/public-site/src/i18n/locales/it.ts
+./frontend/public-site/src/i18n/locales/ja.ts
+./frontend/public-site/src/i18n/locales/ko.ts
+./frontend/public-site/src/i18n/locales/ms.ts
+./frontend/public-site/src/i18n/locales/nl.ts
+./frontend/public-site/src/i18n/locales/pl.ts
+./frontend/public-site/src/i18n/locales/pt.ts
+./frontend/public-site/src/i18n/locales/ro.ts
+./frontend/public-site/src/i18n/locales/ru.ts
+./frontend/public-site/src/i18n/locales/sv.ts
+./frontend/public-site/src/i18n/locales/sw.ts
+./frontend/public-site/src/i18n/locales/th.ts
+./frontend/public-site/src/i18n/locales/tr.ts
+./frontend/public-site/src/i18n/locales/uk.ts
+./frontend/public-site/src/i18n/locales/ur.ts
+./frontend/public-site/src/i18n/locales/vi.ts
+./frontend/public-site/src/i18n/locales/zh.ts
+./frontend/user-portal-vite/public/assets/ndsp-governance-44-v26.js
+./frontend/user-portal-vite/public/market-suite/index.html
+./frontend/user-portal-vite/src/components/PortalPageRouterV1.jsx
+./frontend/user-portal-vite/src/main.jsx
+./ndsp-platform/frontend/public/src/components/ndsp/hero-section.tsx
+
+Remaining public name hits:
+187:            "nm:[\"منطق البُعد الزمني\",\"Timed Direction Logic\"],sub:\"TDL\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-b\",ic:\"⬡\",nm:[\"NMP\",\"NMP\"],sub:\"NMP\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-r\",ic:\"⚔\",nm:[\"محامي الشيطان\",\"Devil's Advocate\"],sub:\"DEVIL'S ADVOCATE\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-g\",ic:\"✦\",nm:[\"الإشارة الذهبية\",\"Nawaf Gold"
+196:            "nm:[\"منطق البُعد الزمني\",\"Timed Direction Logic\"],sub:\"TDL\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-b\",ic:\"⬡\",nm:[\"NMP\",\"NMP\"],sub:\"NMP\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-r\",ic:\"⚔\",nm:[\"محامي الشيطان\",\"Devil's Advocate\"],sub:\"DEVIL'S ADVOCATE\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-g\",ic:\"✦\",nm:[\"الإشارة الذهبية\",\"Nawaf Gold"
+312:            "تقاء نواف\",\"NMP\"],sub:\"NMP\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-r\",ic:\"⚔\",nm:[\"محامي الشيطان\",\"Devil's Advocate\"],sub:\"DEVIL'S ADVOCATE\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-g\",ic:\"✦\",nm:[\"الإشارة الذهبية\",\"Golden Signal\"],sub:\"GOLDEN ALIGNMENT\",st:\"b-gold\",sl:[\"محكوم\",\"Governed\"]}, ]; const allowedCats=[[\"انحياز اتجاهي\",\"Directional",
+313:            "تقاء نواف\",\"NMP\"],sub:\"NMP\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-r\",ic:\"⚔\",nm:[\"محامي الشيطان\",\"Devil's Advocate\"],sub:\"DEVIL'S ADVOCATE\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-g\",ic:\"✦\",nm:[\"الإشارة الذهبية\",\"Golden Signal\"],sub:\"GOLDEN ALIGNMENT\",st:\"b-gold\",sl:[\"محكوم\",\"Governed\"]}, ]; const allowedCats=[[\"انحياز اتجاهي\",\"Directional",
+321:            "تقاء نواف\",\"NMP\"],sub:\"NMP\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-r\",ic:\"⚔\",nm:[\"محامي الشيطان\",\"Devil's Advocate\"],sub:\"DEVIL'S ADVOCATE\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-g\",ic:\"✦\",nm:[\"الإشارة الذهبية\",\"Golden Signal\"],sub:\"GOLDEN ALIGNMENT\",st:\"b-gold\",sl:[\"محكوم\",\"Governed\"]}, ]; const allowedCats=[[\"انحياز اتجاهي\",\"Directional",
+322:            "تقاء نواف\",\"NMP\"],sub:\"NMP\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-r\",ic:\"⚔\",nm:[\"محامي الشيطان\",\"Devil's Advocate\"],sub:\"DEVIL'S ADVOCATE\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-g\",ic:\"✦\",nm:[\"الإشارة الذهبية\",\"Golden Signal\"],sub:\"GOLDEN ALIGNMENT\",st:\"b-gold\",sl:[\"محكوم\",\"Governed\"]}, ]; const allowedCats=[[\"انحياز اتجاهي\",\"Directional",
+542:            "طة التقاء نواف 3. Devil's Advocate / محامي الشيطان 4. Golden Signal / الإشارة الذهبية 5. Data Freshness And Source Integrity / سلامة وحداثة البيانات 6. Live Market Feed Bridge / جسر الأسعار والبيانات الحية 7. Institutional Positioning Context / السياق المؤسسي وتموضع الفئات 8. Macro And Dollar Pressure / ضغط الدولار والمشهد الكلي 9. Volatility And Risk Pressure / الت",
+543:            "اء نواف 3. Devil's Advocate / محامي الشيطان 4. Golden Signal / الإشارة الذهبية 5. Data Freshness And Source Integrity / سلامة وحداثة البيانات 6. Live Market Feed Bridge / جسر الأسعار والبيانات الحية 7. Institutional Positioning Context / السياق المؤسسي وتموضع الفئات 8. Macro And Dollar Pressure / ضغط الدولار والمشهد الكلي 9. Volatility And Risk Pressure / التذبذب وض"
+11:    nmpPro: { name: "Meeting point Pro", price: "$49", desc: "สำหรับผู้ใช้ที่จริงจังที่ต้องการความเข้าใจลึกขึ้นเกี่ยวกับบริบท สภาพคล่อง และการจัดตำแหน่ง", features: ["TDL — ตรรกะมิติเวลา", "Meeting point — จุดนัดพบ Nawaf", "Golden Signal", "รายงานเชิงตีความที่ชัดเจนกว่า", "ระดับความเสี่ยงและบริบทที่กว้างกว่า", "การทดลองใช้เต็มรูปแบบ 16 วัน"], hidden: ["Black Layer เต็มรูปแบบ", "ห้าชั้นอธิปไตยที่ได้รับการป้องกัน", "API / Webhooks", "สิทธิ์ผู้ดูแลระบบ", "ตรรกะดิบ"] },
+
+Remaining forbidden claims:
+None
+
+Build status:
+OK_OR_NO_SCRIPT: /home/nawaf511/empire-core-new/ndsp-final-public-copy-clean-20260811_100554/build-__frontend_public-site.log
+OK_OR_NO_SCRIPT: /home/nawaf511/empire-core-new/ndsp-final-public-copy-clean-20260811_100554/build-__frontend_user-portal-vite.log
+OK_OR_NO_SCRIPT: /home/nawaf511/empire-core-new/ndsp-final-public-copy-clean-20260811_100554/build-__ndsp-platform_frontend_public.log
+
+Not changed automatically:
+- /home/nawaf511 OS paths.
+- Internal canonical identifiers: nawaf_golden_signal, nawaf_enhanced_golden_signal, NAWAF_GOLDEN_SIGNAL if used as contracts.

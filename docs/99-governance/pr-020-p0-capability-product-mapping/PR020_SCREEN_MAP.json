@@ -1,0 +1,112 @@
+[
+  {
+    "screen": "ADMIN_USERS",
+    "feature_count": 1,
+    "capability_count": 8,
+    "blocked_capability_count": 8,
+    "features": "Admin user management",
+    "recommended_components": "EntitlementPanel|RoleBadge|UserDetailDrawer|UsersTable",
+    "roles": "ADMIN",
+    "screen_status": "TRACEABILITY_REMEDIATION_REQUIRED"
+  },
+  {
+    "screen": "ALERTS_AND_CHANNELS",
+    "feature_count": 1,
+    "capability_count": 17,
+    "blocked_capability_count": 17,
+    "features": "Alerts and delivery channels",
+    "recommended_components": "AlertCenter|ChannelSettings|RoutingStatus|TestDelivery",
+    "roles": "ADMIN|USER",
+    "screen_status": "TRACEABILITY_REMEDIATION_REQUIRED"
+  },
+  {
+    "screen": "AUTHENTICATION",
+    "feature_count": 1,
+    "capability_count": 21,
+    "blocked_capability_count": 21,
+    "features": "Authentication and account access",
+    "recommended_components": "AuthForm|RecoveryFlow|SessionStatus|TwoFactorStep",
+    "roles": "AUTHENTICATED_USER|PUBLIC",
+    "screen_status": "TRACEABILITY_REMEDIATION_REQUIRED"
+  },
+  {
+    "screen": "CAPABILITY_REVIEW",
+    "feature_count": 1,
+    "capability_count": 9,
+    "blocked_capability_count": 9,
+    "features": "Unclassified platform capability",
+    "recommended_components": "CapabilityInspector|EvidencePanel",
+    "roles": "ADMIN",
+    "screen_status": "TRACEABILITY_REMEDIATION_REQUIRED"
+  },
+  {
+    "screen": "DECISION_ROOM",
+    "feature_count": 1,
+    "capability_count": 3,
+    "blocked_capability_count": 3,
+    "features": "Decision intelligence workspace",
+    "recommended_components": "DecisionSummary|NarrativeCard|ScenarioMatrix|SignalPanel",
+    "roles": "ADMIN|USER",
+    "screen_status": "TRACEABILITY_REMEDIATION_REQUIRED"
+  },
+  {
+    "screen": "LANDING",
+    "feature_count": 1,
+    "capability_count": 4,
+    "blocked_capability_count": 4,
+    "features": "Public platform presentation",
+    "recommended_components": "CapabilityProof|LiveMetric|PlatformTimeline",
+    "roles": "PUBLIC",
+    "screen_status": "TRACEABILITY_REMEDIATION_REQUIRED"
+  },
+  {
+    "screen": "MARKET_INTELLIGENCE",
+    "feature_count": 1,
+    "capability_count": 1,
+    "blocked_capability_count": 1,
+    "features": "Market and economic intelligence",
+    "recommended_components": "COTPanel|ForecastChart|IndicatorGrid|MarketOverview",
+    "roles": "ADMIN|USER",
+    "screen_status": "TRACEABILITY_REMEDIATION_REQUIRED"
+  },
+  {
+    "screen": "PLATFORM_OPERATIONS",
+    "feature_count": 1,
+    "capability_count": 37,
+    "blocked_capability_count": 37,
+    "features": "Platform operations and service health",
+    "recommended_components": "BackupPanel|GatewayMonitor|RuntimeStatus|ServiceHealthGrid",
+    "roles": "ADMIN",
+    "screen_status": "TRACEABILITY_REMEDIATION_REQUIRED"
+  },
+  {
+    "screen": "QUALITY_AND_RISK",
+    "feature_count": 1,
+    "capability_count": 11,
+    "blocked_capability_count": 11,
+    "features": "Decision quality and risk controls",
+    "recommended_components": "ConfidenceGauge|GovernanceStatus|QualityScore|RiskPanel",
+    "roles": "ADMIN|USER",
+    "screen_status": "TRACEABILITY_REMEDIATION_REQUIRED"
+  },
+  {
+    "screen": "REPORTS_AND_ANALYTICS",
+    "feature_count": 1,
+    "capability_count": 4,
+    "blocked_capability_count": 4,
+    "features": "Reports, analytics, and evidence",
+    "recommended_components": "AnalyticsChart|EvidenceDrawer|HistoryTable|ReportLibrary",
+    "roles": "ADMIN|USER",
+    "screen_status": "TRACEABILITY_REMEDIATION_REQUIRED"
+  },
+  {
+    "screen": "TRIAL_AND_BILLING",
+    "feature_count": 1,
+    "capability_count": 24,
+    "blocked_capability_count": 24,
+    "features": "Trial, plans, and billing",
+    "recommended_components": "BillingStatus|PlanComparison|TrialCountdown|UsageMeter",
+    "roles": "ADMIN|USER",
+    "screen_status": "TRACEABILITY_REMEDIATION_REQUIRED"
+  }
+]

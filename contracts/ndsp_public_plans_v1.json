@@ -1,0 +1,119 @@
+{
+  "version": "NDSP_PUBLIC_PLANS_V1",
+  "currency": "SAR",
+  "trial": {
+    "duration_days": 16,
+    "requires_card": false,
+    "auto_charge": false,
+    "entitlement": "ELITE_TRIAL"
+  },
+  "plans": [
+    {
+      "id": "FREE",
+      "name": "Free",
+      "monthly_price": 0,
+      "annual_price": 0,
+      "contact_sales": false,
+      "limits": {
+        "assets": 1,
+        "alerts_per_month": 3,
+        "history_days": 0,
+        "pdf_per_month": 0,
+        "users": 1
+      },
+      "features": [
+        "current_core_summary",
+        "in_platform_alerts",
+        "weekly_brief",
+        "current_result",
+        "decision_room_locked_preview",
+        "help"
+      ]
+    },
+    {
+      "id": "PRO",
+      "name": "Pro",
+      "monthly_price": 149,
+      "annual_price": 1490,
+      "contact_sales": false,
+      "limits": {
+        "assets": 10,
+        "alerts_per_month": 50,
+        "history_days": 90,
+        "pdf_per_month": 2,
+        "users": 1
+      },
+      "features": [
+        "standard_decision_room",
+        "TDL",
+        "NMP",
+        "Golden Signal",
+        "basic_decision_components",
+        "weekly_reports",
+        "platform_notifications",
+        "email_notifications",
+        "one_business_day_support"
+      ]
+    },
+    {
+      "id": "ELITE",
+      "name": "Elite",
+      "monthly_price": 399,
+      "annual_price": 3990,
+      "contact_sales": false,
+      "limits": {
+        "assets": "supported",
+        "alerts_per_month": 500,
+        "history_months": 24,
+        "exports": "fair_use",
+        "users": 1
+      },
+      "features": [
+        "professional_decision_room",
+        "TDL",
+        "NMP",
+        "Golden Signal",
+        "Enhanced Golden Signal",
+        "Devil's Advocate",
+        "advanced_explanation",
+        "advanced_risks",
+        "advanced_evidence",
+        "comparisons",
+        "daily_reports",
+        "weekly_reports",
+        "monthly_reports",
+        "pdf_export",
+        "csv_export",
+        "platform_notifications",
+        "email_notifications",
+        "telegram_notifications",
+        "priority_support"
+      ]
+    },
+    {
+      "id": "SAAS",
+      "name": "SaaS",
+      "monthly_price": null,
+      "annual_price": null,
+      "contact_sales": true,
+      "limits": {
+        "assets": "contracted",
+        "users": "contracted",
+        "workspaces": "contracted"
+      },
+      "features": [
+        "contracted_sources",
+        "rbac",
+        "audit",
+        "sso_if_contracted",
+        "api",
+        "webhooks",
+        "custom_reporting",
+        "custom_retention",
+        "onboarding",
+        "sla",
+        "pilot"
+      ]
+    }
+  ]
+}

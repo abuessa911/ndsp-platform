@@ -1,0 +1,7 @@
+# Contract Status Matrix
+
+{
+  "DISCOVERED": 1184,
+  "DOCUMENTATION_ONLY": 532,
+  "DESIGN_REFERENCE_ONLY": 4
+}

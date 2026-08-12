@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#0b0b0c" />
+<title>NDSP — منصة ذكاء القرار للأسواق المالية</title>
+<meta name="description" content="NDSP منصة ذكاء قرار مؤسسية، وليست منصة تداول أو توصيات." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    color-scheme:dark;
+    --void:#0b0b0c;
+    --surface:#151516;
+    --surface-2:#1a1a1c;
+    --line:#26262a;
+    --line-strong:#34343a;
+    --gold:#caa24a;
+    --gold-hi:#d8b56a;
+    --gold-soft:rgba(202,162,74,.10);
+    --text:#ededee;
+    --text-2:#a7a7ab;
+    --text-3:#6d6d72;
+    --pos:#4ea96b;
+    --neg:#c8553d;
+    --sans:'IBM Plex Sans Arabic',system-ui,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --maxw:1180px;
+  }
+  html[lang="en"]{--sans:'IBM Plex Sans',system-ui,sans-serif}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;background:var(--void)}
+  html,body{min-height:100%}
+  body{background:var(--void);color:var(--text);font-family:var(--sans);font-weight:400;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--gold-soft);color:var(--gold-hi)}
+
+  /* ===== background ===== */
+  .bg-base{position:fixed;inset:0;z-index:0;pointer-events:none;background:#0b0b0c}
+  .bg-mark{position:fixed;inset:-25%;z-index:0;pointer-events:none;opacity:.035;transform:rotate(-14deg);background-repeat:repeat;background-size:560px 390px}
+  .watermark{position:fixed;bottom:14px;inset-inline-start:16px;z-index:5;font-family:var(--mono);font-size:10px;letter-spacing:.28em;color:var(--text-3);opacity:.5;pointer-events:none;user-select:none}
+
+  /* ===== shell ===== */
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;position:relative;z-index:1}
+  .eyebrow{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);display:inline-block}
+  .mono{font-family:var(--mono)}
+  section{position:relative;z-index:1}
+
+  /* ===== nav ===== */
+  header{position:sticky;top:0;z-index:40;background:rgba(11,11,12,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:600;letter-spacing:.02em}
+  .brand .mark{width:26px;height:26px;border:1px solid var(--gold);display:grid;place-items:center;font-family:var(--mono);font-size:13px;color:var(--gold);font-weight:600;border-radius:3px}
+  .brand small{font-family:var(--mono);font-size:9.5px;letter-spacing:.22em;color:var(--text-3);display:block;margin-top:1px}
+  .nav-links{display:flex;align-items:center;gap:34px}
+  .nav-links a{font-size:14px;color:var(--text-2);transition:color .2s}
+  .nav-links a:hover{color:var(--text)}
+  .nav-actions{display:flex;align-items:center;gap:12px}
+  .lang-btn{font-family:var(--mono);font-size:12px;color:var(--text-2);background:transparent;border:1px solid var(--line-strong);border-radius:5px;padding:7px 11px;cursor:pointer;transition:all .2s;min-width:38px}
+  .lang-btn:hover{border-color:var(--gold);color:var(--gold)}
+  .nav-toggle{display:none;background:none;border:1px solid var(--line);color:var(--text);width:38px;height:38px;border-radius:5px;cursor:pointer}
+
+  /* ===== buttons ===== */
+  .btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--sans);font-size:14px;font-weight:500;padding:11px 22px;border-radius:5px;cursor:pointer;transition:all .2s;border:1px solid transparent;white-space:nowrap}
+  .btn-gold{background:var(--gold);color:#15120a;font-weight:600}
+  .btn-gold:hover{background:var(--gold-hi);transform:translateY(-1px)}
+  .btn-ghost{background:transparent;color:var(--text);border-color:var(--line-strong)}
+  .btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+  .btn-sm{padding:8px 16px;font-size:13px}
+
+  /* ===== hero ===== */
+  .hero{padding:96px 0 84px;border-bottom:1px solid var(--line)}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
+  .hero h1{font-size:clamp(34px,5vw,56px);font-weight:600;line-height:1.18;letter-spacing:-.01em;margin:22px 0 0}
+  .hero h1 .g{color:var(--gold)}
+  .hero p.lead{font-size:18px;color:var(--text-2);max-width:32em;margin:24px 0 0;line-height:1.75}
+  .hero-cta{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap}
+  .vstrip{display:flex;flex-wrap:wrap;gap:14px 26px;margin-top:34px;padding-top:24px;border-top:1px solid var(--line)}
+  .vstrip .vi{display:flex;align-items:center;gap:9px;font-size:13.5px;color:var(--text-2)}
+  .vstrip .vi::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--gold);flex:0 0 5px;opacity:.85}
+  .vstrip .vi b{color:var(--gold);font-family:var(--mono);font-weight:600;font-size:13px;margin-inline-end:4px}
+
+  /* ===== pipeline ===== */
+  .pipe{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:26px 24px;position:relative}
+  .pipe::before{content:"DECISION PIPELINE";position:absolute;top:-9px;inset-inline-end:22px;background:var(--void);padding:0 10px;font-family:var(--mono);font-size:9.5px;letter-spacing:.24em;color:var(--gold)}
+  .stage{display:flex;align-items:center;gap:14px;padding:13px 14px;border:1px solid var(--line);border-radius:7px;background:rgba(255,255,255,.012);position:relative;transition:border-color .25s,transform .25s}
+  .stage:hover{border-color:var(--line-strong)}
+  .stage .idx{font-family:var(--mono);font-size:11px;color:var(--gold);width:22px;flex:0 0 22px;text-align:center}
+  .stage .body{flex:1}
+  .stage .t{font-size:14.5px;font-weight:500}
+  .stage .d{font-size:12px;color:var(--text-3);margin-top:2px}
+  .stage .d:empty{display:none}
+  .stage.final{border-color:var(--gold);background:var(--gold-soft)}
+  .stage.final .t{color:var(--gold-hi)}
+  .connector{height:14px;width:1px;background:var(--line-strong);margin:0 24px}
+  .pipe-note{font-size:12.5px;color:var(--text-3);line-height:1.85;margin-top:18px}
+  .pipe-note b{color:var(--text-2);font-weight:600}
+  .eng-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .eng-chips .chip{font-family:var(--mono);font-size:10.5px;letter-spacing:.03em;color:var(--text-2);border:1px solid var(--line);border-radius:5px;padding:6px 10px;background:var(--surface)}
+
+  /* ===== sections ===== */
+  .sec{padding:84px 0;border-bottom:1px solid var(--line)}
+  .sec-head{max-width:42em;margin-bottom:48px}
+  .sec-head h2{font-size:clamp(26px,3.4vw,36px);font-weight:600;line-height:1.3;margin-top:14px;letter-spacing:-.01em}
+  .sec-head p{color:var(--text-2);font-size:16px;margin-top:14px;line-height:1.75}
+
+  /* ===== how ===== */
+  .flow{display:grid;grid-template-columns:repeat(5,1fr);gap:0}
+  .flow-step{padding:24px 20px;border:1px solid var(--line);border-inline-end:none;position:relative;transition:background .25s}
+  .flow-step:first-child{border-start-end-radius:9px;border-end-end-radius:9px}
+  .flow-step:last-child{border-inline-end:1px solid var(--line);border-start-start-radius:9px;border-end-start-radius:9px;background:var(--gold-soft)}
+  .flow-step:hover{background:rgba(255,255,255,.02)}
+  .flow-step:last-child:hover{background:var(--gold-soft)}
+  .flow-step .num{font-family:var(--mono);font-size:11px;color:var(--gold);letter-spacing:.12em}
+  .flow-step .ft{font-size:15px;font-weight:600;margin-top:14px}
+  .flow-step .fk{font-family:var(--mono);font-size:10.5px;color:var(--text-3);letter-spacing:.08em;margin-top:5px;direction:ltr;text-align:start}
+  .flow-step .fd{font-size:12.5px;color:var(--text-2);margin-top:12px;line-height:1.65}
+
+  /* ===== features ===== */
+  .features{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .feat{background:var(--surface);padding:30px 26px;transition:background .25s}
+  .feat:hover{background:var(--surface-2)}
+  .feat .fnum{font-family:var(--mono);font-size:11px;color:var(--gold);letter-spacing:.1em}
+  .feat h3{font-size:17px;font-weight:600;margin-top:16px}
+  .feat p{font-size:13.5px;color:var(--text-2);margin-top:10px;line-height:1.7}
+
+  /* ===== methodology ===== */
+  .method-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  .method-card{border:1px solid var(--line);border-radius:10px;padding:30px 28px;background:var(--surface)}
+  .method-card.no{border-top:2px solid var(--neg)}
+  .method-card.yes{border-top:2px solid var(--gold)}
+  .method-card h3{font-size:17px;font-weight:600;display:flex;align-items:center;gap:10px}
+  .tag{font-family:var(--mono);font-size:10px;letter-spacing:.14em;padding:3px 8px;border-radius:4px}
+  .tag.tneg{color:var(--neg);border:1px solid rgba(200,85,61,.4)}
+  .tag.tpos{color:var(--gold);border:1px solid rgba(202,162,74,.4)}
+  .method-list{list-style:none;margin-top:20px;display:flex;flex-direction:column;gap:14px}
+  .method-list li{display:flex;gap:12px;font-size:14.5px;color:var(--text-2);line-height:1.6}
+  .method-list li .ic{flex:0 0 18px;margin-top:3px;font-family:var(--mono);font-size:13px}
+  .no .ic{color:var(--neg)}
+  .yes .ic{color:var(--gold)}
+  .method-note{margin-top:28px;padding:20px 24px;border:1px dashed var(--line-strong);border-radius:8px;font-size:14px;color:var(--text-2);line-height:1.8;text-align:center}
+  .method-note b{color:var(--text);font-weight:600}
+
+  /* ===== pricing ===== */
+  .price-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .plan{position:relative;border:1px solid var(--line);border-radius:11px;padding:28px 22px;background:var(--surface);display:flex;flex-direction:column}
+  .plan.featured{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold-soft)}
+  .plan .ptag{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--text-3);text-transform:uppercase}
+  .plan.featured .ptag{color:var(--gold)}
+  .plan h3{font-size:20px;font-weight:600;margin-top:10px}
+  .plan .pdesc{font-size:12px;color:var(--text-3);margin:4px 0 0;line-height:1.6}
+  .plan .badge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--gold);color:#15120a;font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.06em;padding:4px 13px;border-radius:20px;white-space:nowrap}
+  .plan .price{display:flex;align-items:baseline;gap:8px;margin:18px 0 4px}
+  .plan .price .amt{font-family:var(--mono);font-size:28px;font-weight:600;color:var(--text)}
+  .plan .price .per{font-size:13px;color:var(--text-3)}
+  .plan ul{list-style:none;margin:20px 0;display:flex;flex-direction:column;gap:12px;flex:1}
+  .plan ul li{font-size:13px;color:var(--text-2);display:flex;gap:10px;line-height:1.5}
+  .plan ul li::before{content:"—";color:var(--gold);font-family:var(--mono)}
+  .plan .btn{width:100%;justify-content:center;margin-top:auto}
+  .price-note{max-width:62em;margin:30px auto 0;text-align:center;font-size:13.5px;color:var(--text-2);line-height:1.85;padding:18px 26px;border:1px solid var(--line);border-radius:9px;background:var(--surface)}
+
+  /* ===== footer ===== */
+  footer{padding:56px 0 70px;position:relative;z-index:1}
+  .foot-top{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;padding-bottom:32px;border-bottom:1px solid var(--line)}
+  .foot-brand{max-width:30em}
+  .foot-brand p{color:var(--text-3);font-size:13px;margin-top:14px;line-height:1.8}
+  .foot-links{display:flex;gap:60px;flex-wrap:wrap}
+  .foot-col h4{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--text-3);text-transform:uppercase;margin-bottom:16px}
+  .foot-col a{display:block;font-size:13.5px;color:var(--text-2);margin-bottom:11px;transition:color .2s}
+  .foot-col a:hover{color:var(--gold)}
+  .foot-bottom{display:flex;justify-content:space-between;align-items:center;gap:20px;padding-top:26px;flex-wrap:wrap}
+  .foot-bottom span{font-family:var(--mono);font-size:11px;color:var(--text-3);letter-spacing:.08em}
+
+  /* ===== reveal ===== */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ===== responsive ===== */
+  @media(max-width:900px){
+    .hero-grid{grid-template-columns:1fr;gap:44px}
+    .flow{grid-template-columns:1fr 1fr}
+    .flow-step{border:1px solid var(--line)!important;border-radius:0!important}
+    .features{grid-template-columns:1fr 1fr}
+    .method-grid{grid-template-columns:1fr}
+    .price-grid{grid-template-columns:repeat(2,1fr)}
+    .nav-links{display:none}
+    .nav-links.open{display:flex;position:absolute;top:64px;inset-inline:0;flex-direction:column;background:var(--surface);border-bottom:1px solid var(--line);padding:18px 28px;gap:18px}
+    .nav-toggle{display:grid;place-items:center}
+    .nav-actions .btn-ghost{display:none}
+  }
+  @media(max-width:560px){
+    .wrap{padding:0 20px}
+    .flow,.features,.price-grid{grid-template-columns:1fr}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{scroll-behavior:auto!important}
+    .reveal{opacity:1;transform:none;transition:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-base" aria-hidden="true"></div>
+<div class="bg-mark" aria-hidden="true"></div>
+<div class="watermark">HUNTER_KSA1</div>
+
+<!-- ===== NAV ===== -->
+<header>
+  <div class="wrap nav">
+    <div class="brand">
+      <div class="mark">N</div>
+      <div>NDSP<small>DECISION INTELLIGENCE</small></div>
+    </div>
+    <nav class="nav-links" id="navlinks">
+      <a href="#how" data-i18n="nav.how">كيف تعمل</a>
+      <a href="#features" data-i18n="nav.features">المميزات</a>
+      <a href="#method" data-i18n="nav.method">المنهجية</a>
+      <a href="#pricing" data-i18n="nav.pricing">الباقات</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="lang-btn" id="langBtn" aria-label="Language">EN</button>
+      <a href="/login.html" class="btn btn-ghost btn-sm" data-i18n="nav.login">تسجيل الدخول</a>
+      <a href="/register.html" class="btn btn-gold btn-sm" data-i18n="nav.cta">ابدأ التجربة</a>
+      <button class="nav-toggle" id="navtoggle" aria-label="القائمة">☰</button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow" data-i18n="hero.eyebrow">منصة ذكاء قرار مؤسسية</span>
+      <h1 data-i18n-html="hero.h1">قرار قابل <span class="g">للتفسير</span>، وليس مجرّد تحليل</h1>
+      <p class="lead" data-i18n="hero.lead">من البيانات الخام إلى حالة قرار موثّقة وقابلة للفهم والمراجعة، عبر طبقات ومحرّكات تحليل مترابطة.</p>
+      <div class="hero-cta">
+        <a href="/register.html" class="btn btn-gold" data-i18n="hero.ctaPrimary">ابدأ التجربة المجانية</a>
+        <a href="#method" class="btn btn-ghost" data-i18n="hero.ctaMethod">تعرّف على المنهجية</a>
+      </div>
+      <div class="vstrip">
+        <span class="vi" data-i18n-html="vs.1"><b>16</b> يوم تجربة كاملة</span>
+        <span class="vi" data-i18n-html="vs.2"><b>16</b> محرّك قرار</span>
+        <span class="vi" data-i18n-html="vs.3"><b>+5</b> محرّكات حوكمة واعتماد</span>
+        <span class="vi" data-i18n="vs.4">يوميات قرار</span>
+        <span class="vi" data-i18n="vs.5">تنبيهات ذكية</span>
+      </div>
+    </div>
+
+    <div class="pipe">
+      <div class="stage"><span class="idx">01</span><div class="body"><div class="t" data-i18n="p.1t">بيانات السوق</div><div class="d" data-i18n="p.1d">Market Data</div></div></div>
+      <div class="connector"></div>
+      <div class="stage"><span class="idx">02</span><div class="body"><div class="t" data-i18n="p.2t">السياق الكلّي</div><div class="d" data-i18n="p.2d">Macro Context</div></div></div>
+      <div class="connector"></div>
+      <div class="stage"><span class="idx">03</span><div class="body"><div class="t" data-i18n-html="p.3t">محرّك <span class="mono">TDL</span></div><div class="d" data-i18n="p.3d">TDL Engine</div></div></div>
+      <div class="connector"></div>
+      <div class="stage"><span class="idx">04</span><div class="body"><div class="t" data-i18n-html="p.4t">محرّك <span class="mono">NMP</span></div><div class="d" data-i18n="p.4d">NMP Engine</div></div></div>
+      <div class="connector"></div>
+      <div class="stage final"><span class="idx">05</span><div class="body"><div class="t" data-i18n="p.5t">حالة القرار</div><div class="d" data-i18n="p.5d">Decision State</div></div></div>
+      <p class="pipe-note" data-i18n-html="pipe.note">تعمل هذه السلسلة بالاستناد إلى منظومة داخلية تضم <b>16 محرّك قرار</b>، إضافة إلى محرّكات حوكمة واعتماد وجودة داخلية غير معروضة للمستخدم، بهدف حماية المنهجية وتقديم حالة قرار قابلة للتفسير.</p>
+      <div class="eng-chips">
+        <span class="chip" data-i18n="chip.1">محرّكات قرار داخلية</span>
+        <span class="chip" data-i18n="chip.2">محرّكات حوكمة واعتماد</span>
+        <span class="chip" data-i18n="chip.3">محرّكات جودة وربط</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HOW ===== -->
+<section class="sec" id="how">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" data-i18n="how.eyebrow">كيف تعمل المنصة</span>
+      <h2 data-i18n="how.h2">من البيانات الخام إلى حالة قرار قابلة للتفسير</h2>
+      <p data-i18n="how.p">كل مرحلة تُغذّي التي تليها، وتبقى أسبابها موثّقة وقابلة للمراجعة عبر سلسلة القرار كاملة.</p>
+    </div>
+    <div class="flow reveal">
+      <div class="flow-step"><div class="num">01</div><div class="ft" data-i18n="f.1t">بيانات السوق</div><div class="fk">MARKET DATA</div><div class="fd" data-i18n="f.1d">تدفّق أسعار ومؤشرات متعددة الأصول كمدخل أساسي.</div></div>
+      <div class="flow-step"><div class="num">02</div><div class="ft" data-i18n="f.2t">السياق الكلّي</div><div class="fk">MACRO CONTEXT</div><div class="fd" data-i18n="f.2d">قراءة الظروف الاقتصادية الكلية التي تؤطّر السوق.</div></div>
+      <div class="flow-step"><div class="num">03</div><div class="ft" data-i18n="f.3t">محرّك TDL</div><div class="fk">TDL ENGINE</div><div class="fd" data-i18n="f.3d">تحديد الاتجاه الحاكم وبنية الحركة عبر الطبقات.</div></div>
+      <div class="flow-step"><div class="num">04</div><div class="ft" data-i18n="f.4t">محرّك NMP</div><div class="fk">NMP ENGINE</div><div class="fd" data-i18n="f.4d">معالجة وترجيح الإشارات إلى حالة مترابطة واحدة.</div></div>
+      <div class="flow-step"><div class="num">05</div><div class="ft" data-i18n="f.5t">حالة القرار</div><div class="fk">DECISION STATE</div><div class="fd" data-i18n="f.5d">المخرَج النهائي: حالة قابلة للفهم والتفسير والمراجعة.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section class="sec" id="features">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" data-i18n="feat.eyebrow">المميزات</span>
+      <h2 data-i18n="feat.h2">ما الذي يجعل القرار قابلاً للثقة؟</h2>
+      <p data-i18n="feat.p">كل عنصر مصمّم ليجيب على سؤال واحد بوضوح، دون ضوضاء بصرية أو أرقام تجميلية.</p>
+    </div>
+    <div class="features reveal">
+      <div class="feat"><div class="fnum">01</div><h3 data-i18n="feat.1t">تفسير القرار</h3><p data-i18n="feat.1d">عرض الأسباب التي قادت النظام إلى الحالة الحالية، خطوة بخطوة.</p></div>
+      <div class="feat"><div class="fnum">02</div><h3 data-i18n="feat.2t">محرّكات متعددة الطبقات</h3><p data-i18n="feat.2d">طبقات تحليل مترابطة تعمل معاً بدل مؤشر واحد معزول.</p></div>
+      <div class="feat"><div class="fnum">03</div><h3 data-i18n="feat.3t">شفافية كاملة</h3><p data-i18n="feat.3d">لا صناديق سوداء — مصادر البيانات وحالة الربط ظاهرة دائماً.</p></div>
+      <div class="feat"><div class="fnum">04</div><h3 data-i18n="feat.4t">يوميات القرار</h3><p data-i18n="feat.4d">توثيق ما تغيّر عبر الزمن، وكيف تطوّرت الحالة ولماذا.</p></div>
+      <div class="feat"><div class="fnum">05</div><h3 data-i18n="feat.5t">مستويات مرجعية</h3><p data-i18n="feat.5d">مستويات سعرية مرجعية للقراءة، لا أوامر ولا أهداف تنفيذية.</p></div>
+      <div class="feat"><div class="fnum">06</div><h3 data-i18n="feat.6t">تنبيهات ذكية</h3><p data-i18n="feat.6d">تنبيه عند ما يستحق الانتباه فعلاً، دون إغراق بالإشعارات.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== METHODOLOGY ===== -->
+<section class="sec" id="method">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" data-i18n="method.eyebrow">المنهجية</span>
+      <h2 data-i18n="method.h2">NDSP منصة دعم قرار — وليست منصة تداول</h2>
+      <p data-i18n="method.p">تموضع المنصة واضح ومقصود: إطار تحليل ودعم قرار، لا وساطة مالية ولا إصدار توصيات.</p>
+    </div>
+    <div class="method-grid reveal">
+      <div class="method-card no">
+        <h3 data-i18n-html="method.noH"><span class="tag tneg">لا تفعل</span> ما لا تقدّمه NDSP</h3>
+        <ul class="method-list">
+          <li><span class="ic">✕</span><span data-i18n="method.no1">لا تُصدر أوامر شراء أو بيع.</span></li>
+          <li><span class="ic">✕</span><span data-i18n="method.no2">لا تدير المحافظ ولا تنفّذ الصفقات.</span></li>
+          <li><span class="ic">✕</span><span data-i18n="method.no3">لا تقدّم توصيات استثمارية.</span></li>
+          <li><span class="ic">✕</span><span data-i18n="method.no4">لا تعرض أرباحاً أو خسائر أو مراكز مفتوحة.</span></li>
+        </ul>
+      </div>
+      <div class="method-card yes">
+        <h3 data-i18n-html="method.yesH"><span class="tag tpos">تقدّم</span> ما توفّره NDSP</h3>
+        <ul class="method-list">
+          <li><span class="ic">✦</span><span data-i18n="method.yes1">إطار دعم قرار وتحليل متعدد الطبقات.</span></li>
+          <li><span class="ic">✦</span><span data-i18n="method.yes2">تفسير وتوثيق أسباب كل حالة قرار.</span></li>
+          <li><span class="ic">✦</span><span data-i18n="method.yes3">مستويات مرجعية ويوميات قرار للمراجعة.</span></li>
+          <li><span class="ic">✦</span><span data-i18n="method.yes4">شفافية كاملة في مصادر البيانات وجودة الربط.</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="method-note reveal" data-i18n-html="method.note">
+      NDSP منصة <b>ذكاء قرار مؤسسية</b> تقوم بشرح وتفسير وتوثيق أسباب القرار عبر طبقات تحليل متعددة مترابطة — تصنيفها <b>بيانات وتحليلات</b>، لا استشارات استثمارية.
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRICING ===== -->
+<section class="sec" id="pricing">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" data-i18n="price.eyebrow">الباقات</span>
+      <h2 data-i18n="price.h2">باقات واضحة لدعم القرار وتحليل السوق</h2>
+      <p data-i18n="price.p">من الاستكشاف إلى المؤسسات — وصول متدرّج إلى القراءات المرجعية والمؤشرات التحليلية.</p>
+    </div>
+    <div class="price-grid reveal">
+
+      <div class="plan">
+        <span class="ptag">Explorer</span>
+        <h3 data-i18n="pl.exH">استكشاف</h3>
+        <div class="price"><span class="amt" data-i18n="pl.exAmt">مجاناً</span></div>
+        <p class="pdesc" data-i18n="pl.exDesc">تجربة واستكشاف المنصة.</p>
+        <ul>
+          <li data-i18n="pl.ex1">وصول محدود للمنصة</li>
+          <li data-i18n="pl.ex2">الاطلاع على بعض القراءات المرجعية</li>
+          <li data-i18n="pl.ex3">تجربة واجهة NDSP</li>
+          <li data-i18n="pl.ex4">دعم أساسي</li>
+        </ul>
+        <a href="/register.html" class="btn btn-ghost" data-i18n="pl.exCta">ابدأ مجاناً</a>
+      </div>
+
+      <div class="plan">
+        <span class="ptag">Professional</span>
+        <h3 data-i18n="pl.proH">احترافي</h3>
+        <div class="price"><span class="amt" dir="ltr">$49</span><span class="per" data-i18n="pl.perMonth">/ شهرياً</span></div>
+        <p class="pdesc" data-i18n="pl.proDesc">للمستخدم المتقدم.</p>
+        <ul>
+          <li data-i18n="pl.pro1">الوصول الكامل لمركز القرار</li>
+          <li data-i18n="pl.pro2">يوميات القرار</li>
+          <li data-i18n="pl.pro3">المستويات المرجعية</li>
+          <li data-i18n="pl.pro4">التنبيهات والإشعارات</li>
+          <li data-i18n="pl.pro5">متابعة الأصول المدعومة</li>
+          <li data-i18n="pl.pro6">دعم فني قياسي</li>
+        </ul>
+        <a href="/register.html" class="btn btn-ghost" data-i18n="pl.subscribe">اشترك الآن</a>
+      </div>
+
+      <div class="plan featured">
+        <span class="badge" data-i18n="pl.badge">الأكثر اختياراً</span>
+        <span class="ptag">Elite</span>
+        <h3 data-i18n="pl.elH">النخبة</h3>
+        <div class="price"><span class="amt" dir="ltr">$149</span><span class="per" data-i18n="pl.perMonth2">/ شهرياً</span></div>
+        <p class="pdesc" data-i18n="pl.elDesc">للمحترفين وصنّاع القرار.</p>
+        <ul>
+          <li data-i18n="pl.el1">جميع مزايا Professional</li>
+          <li data-i18n="pl.el2">الوصول الكامل إلى جميع طبقات التحليل</li>
+          <li data-i18n="pl.el3">الوصول إلى جميع محرّكات القرار المتاحة</li>
+          <li data-i18n="pl.el4">مؤشرات تحليلية متقدمة</li>
+          <li data-i18n="pl.el5">أولوية في الدعم الفني</li>
+          <li data-i18n="pl.el6">مزايا جديدة فور إطلاقها</li>
+        </ul>
+        <a href="/register.html" class="btn btn-gold" data-i18n="pl.subscribe2">اشترك الآن</a>
+      </div>
+
+      <div class="plan">
+        <span class="ptag">Enterprise</span>
+        <h3 data-i18n="pl.enH">المؤسسات</h3>
+        <div class="price"><span class="amt" data-i18n="pl.enAmt">حسب الاتفاق</span></div>
+        <p class="pdesc" data-i18n="pl.enDesc">للمؤسسات والجهات الاحترافية.</p>
+        <ul>
+          <li data-i18n="pl.en1">تخصيص كامل</li>
+          <li data-i18n="pl.en2">صلاحيات متقدمة</li>
+          <li data-i18n="pl.en3">دعم مخصّص</li>
+          <li data-i18n="pl.en4">متطلبات تشغيل خاصة</li>
+          <li data-i18n="pl.en5">اتفاقيات مستوى الخدمة SLA</li>
+        </ul>
+        <a href="/ops.html" class="btn btn-ghost" data-i18n="pl.enCta">طلب عرض مؤسسي</a>
+      </div>
+
+    </div>
+    <p class="price-note reveal" data-i18n="price.note">NDSP منصة دعم قرار وتحليل معلوماتي تساعد المستخدم على فهم المشهد السوقي وبناء قراراته الخاصة، ولا تقدّم توصيات استثمارية أو أوامر تداول.</p>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <div class="brand">
+          <div class="mark">N</div>
+          <div>NDSP<small>DECISION INTELLIGENCE</small></div>
+        </div>
+        <p data-i18n="foot.brand">NDSP منصة ذكاء قرار مؤسسية، وليست منصة تداول أو توصيات. بيانات وتحليلات لدعم القرار، دون أوامر تنفيذية أو إدارة محافظ.</p>
+      </div>
+      <div class="foot-links">
+        <div class="foot-col">
+          <h4 data-i18n="foot.platform">المنصة</h4>
+          <a href="#how" data-i18n="nav.how">كيف تعمل</a>
+          <a href="#features" data-i18n="nav.features">المميزات</a>
+          <a href="#method" data-i18n="nav.method">المنهجية</a>
+          <a href="#pricing" data-i18n="nav.pricing">الباقات</a>
+        </div>
+        <div class="foot-col">
+          <h4 data-i18n="foot.account">الحساب</h4>
+          <a href="/login.html" data-i18n="nav.login">تسجيل الدخول</a>
+          <a href="/register.html" data-i18n="foot.register">إنشاء حساب</a>
+          <a href="/ops.html" data-i18n="foot.contact">تواصل معنا</a>
+        </div>
+        <div class="foot-col">
+          <h4 data-i18n="foot.legal">قانوني</h4>
+          <a href="/privacy" data-i18n="foot.privacy">سياسة الخصوصية</a>
+          <a href="/terms" data-i18n="foot.terms">شروط الاستخدام</a>
+          <a href="/disclaimer" data-i18n="foot.disclaimer">إخلاء المسؤولية</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span data-i18n="foot.rights">© 2026 NDSP — جميع الحقوق محفوظة</span>
+      <span>HUNTER_KSA1</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ===== i18n (English overrides; Arabic is the page default) =====
+  var EN={
+    "nav.how":"How it works","nav.features":"Features","nav.method":"Methodology","nav.pricing":"Plans",
+    "nav.login":"Log in","nav.cta":"Start trial",
+    "hero.eyebrow":"Institutional Decision Intelligence",
+    "hero.h1":"Decisions you can <span class='g'>explain</span>, not just analysis",
+    "hero.lead":"From raw data to a documented decision state you can understand and review, through interconnected analysis layers and engines.",
+    "hero.ctaPrimary":"Start the free trial","hero.ctaMethod":"See the methodology",
+    "vs.1":"<b>16</b>-day full trial","vs.2":"<b>16</b> decision engines","vs.3":"<b>5+</b> governance & validation engines","vs.4":"Decision journal","vs.5":"Smart alerts",
+    "p.1t":"Market Data","p.1d":"","p.2t":"Macro Context","p.2d":"",
+    "p.3t":"TDL Engine","p.3d":"","p.4t":"NMP Engine","p.4d":"","p.5t":"Decision State","p.5d":"",
+    "pipe.note":"This chain runs on an internal system of <b>16 decision engines</b>, plus governance, validation and quality engines kept private to the user — protecting the methodology while delivering an explainable decision state.",
+    "chip.1":"Internal decision engines","chip.2":"Governance & validation engines","chip.3":"Quality & connectivity engines",
+    "how.eyebrow":"How it works","how.h2":"From raw data to an explainable decision state","how.p":"Each stage feeds the next, and its reasons stay documented and reviewable across the full decision chain.",
+    "f.1t":"Market Data","f.1d":"Multi-asset price and indicator feeds as the primary input.",
+    "f.2t":"Macro Context","f.2d":"Reading the macro conditions that frame the market.",
+    "f.3t":"TDL Engine","f.3d":"Identifying the governing trend and movement structure across layers.",
+    "f.4t":"NMP Engine","f.4d":"Processing and weighting signals into one coherent state.",
+    "f.5t":"Decision State","f.5d":"The final output: a state you can understand, explain and review.",
+    "feat.eyebrow":"Features","feat.h2":"What makes a decision trustworthy?","feat.p":"Every element answers one question clearly — no visual noise, no cosmetic numbers.",
+    "feat.1t":"Decision explanation","feat.1d":"Shows the reasons that led the system to the current state, step by step.",
+    "feat.2t":"Multi-layer engines","feat.2d":"Interconnected analysis layers working together, not one isolated indicator.",
+    "feat.3t":"Full transparency","feat.3d":"No black boxes — data sources and connection status are always visible.",
+    "feat.4t":"Decision journal","feat.4d":"Documents what changed over time, and how the state evolved and why.",
+    "feat.5t":"Reference levels","feat.5d":"Reference price levels to read — no orders, no execution targets.",
+    "feat.6t":"Smart alerts","feat.6d":"Alerts when something truly deserves attention, without notification overload.",
+    "method.eyebrow":"Methodology","method.h2":"NDSP is a decision-support platform — not a trading platform","method.p":"The platform's positioning is clear and deliberate: an analysis and decision-support framework — not brokerage, not recommendations.",
+    "method.noH":"<span class='tag tneg'>Doesn't</span> What NDSP doesn't do",
+    "method.no1":"Issues no buy or sell orders.","method.no2":"Doesn't manage portfolios or execute trades.","method.no3":"Provides no investment recommendations.","method.no4":"Shows no profit, loss, or open positions.",
+    "method.yesH":"<span class='tag tpos'>Provides</span> What NDSP offers",
+    "method.yes1":"A decision-support and multi-layer analysis framework.","method.yes2":"Explains and documents the reasons behind each decision state.","method.yes3":"Reference levels and a decision journal for review.","method.yes4":"Full transparency over data sources and connection quality.",
+    "method.note":"NDSP is an <b>institutional decision-intelligence</b> platform that explains, interprets and documents the reasons behind a decision across interconnected analysis layers — classified as <b>data &amp; analytics</b>, not investment advice.",
+    "price.eyebrow":"Plans","price.h2":"Clear plans for decision support and market analysis","price.p":"From exploration to enterprise — tiered access to reference readings and analytical indicators.",
+    "pl.exH":"Explorer","pl.exAmt":"Free","pl.exDesc":"Try and explore the platform.",
+    "pl.ex1":"Limited platform access","pl.ex2":"View selected reference readings","pl.ex3":"Experience the NDSP interface","pl.ex4":"Basic support","pl.exCta":"Start free",
+    "pl.proH":"Professional","pl.perMonth":"/ month","pl.proDesc":"For the advanced user.",
+    "pl.pro1":"Full access to the Decision Center","pl.pro2":"Decision journal","pl.pro3":"Reference levels","pl.pro4":"Alerts and notifications","pl.pro5":"Track supported assets","pl.pro6":"Standard technical support","pl.subscribe":"Subscribe now",
+    "pl.elH":"Elite","pl.perMonth2":"/ month","pl.badge":"Most chosen","pl.elDesc":"For professionals and decision-makers.",
+    "pl.el1":"Everything in Professional","pl.el2":"Full access to all analysis layers","pl.el3":"Access to all available decision engines","pl.el4":"Advanced analytical indicators","pl.el5":"Priority technical support","pl.el6":"New features as soon as they launch","pl.subscribe2":"Subscribe now",
+    "pl.enH":"Enterprise","pl.enAmt":"Custom","pl.enDesc":"For institutions and professional entities.",
+    "pl.en1":"Full customization","pl.en2":"Advanced permissions","pl.en3":"Dedicated support","pl.en4":"Custom operational requirements","pl.en5":"Service-level agreements (SLA)","pl.enCta":"Request enterprise demo",
+    "price.note":"NDSP is a decision-support and information-analysis platform that helps users understand the market landscape and build their own decisions — it does not provide investment recommendations or trading orders.",
+    "foot.brand":"NDSP is an institutional decision-intelligence platform — not a trading or recommendations platform. Data and analytics for decision support, with no execution orders or portfolio management.",
+    "foot.platform":"Platform","foot.account":"Account","foot.register":"Create account","foot.contact":"Contact us",
+    "foot.legal":"Legal","foot.privacy":"Privacy policy","foot.terms":"Terms of use","foot.disclaimer":"Disclaimer",
+    "foot.rights":"© 2026 NDSP — All rights reserved"
+  };
+
+  function applyLang(lang){
+    var en = (lang==='en');
+    document.documentElement.lang = en?'en':'ar';
+    document.documentElement.dir = en?'ltr':'rtl';
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k=el.getAttribute('data-i18n');
+      if(!el.hasAttribute('data-ar')) el.setAttribute('data-ar', el.textContent);
+      el.textContent = (en && EN[k]!=null) ? EN[k] : el.getAttribute('data-ar');
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(function(el){
+      var k=el.getAttribute('data-i18n-html');
+      if(!el.hasAttribute('data-ar-html')) el.setAttribute('data-ar-html', el.innerHTML);
+      el.innerHTML = (en && EN[k]!=null) ? EN[k] : el.getAttribute('data-ar-html');
+    });
+    var btn=document.getElementById('langBtn'); if(btn) btn.textContent = en?'ع':'EN';
+    try{localStorage.setItem('ndsp_lang', en?'en':'ar');}catch(e){}
+  }
+
+  var saved='ar'; try{saved=localStorage.getItem('ndsp_lang')||'ar';}catch(e){}
+  applyLang(saved);
+  document.getElementById('langBtn').addEventListener('click',function(){
+    applyLang(document.documentElement.lang==='en'?'ar':'en');
+  });
+
+  // ===== mobile nav =====
+  var t=document.getElementById('navtoggle'),l=document.getElementById('navlinks');
+  t&&t.addEventListener('click',function(){l.classList.toggle('open')});
+  l&&l.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){l.classList.remove('open')})});
+
+  // ===== background IP watermark =====
+  (function(){
+    var el=document.querySelector('.bg-mark'); if(!el) return;
+    var svg="<svg xmlns='http://www.w3.org/2000/svg' width='560' height='390' viewBox='0 0 560 390'>"
+      +"<g fill='#ffffff' font-family='monospace' font-weight='600'>"
+      +"<text x='28' y='78' font-size='40' letter-spacing='4'>NDSP</text>"
+      +"<text x='374' y='150' font-size='30' letter-spacing='3'>TDL</text>"
+      +"<text x='30' y='250' font-size='18' letter-spacing='6'>DECISION INTELLIGENCE</text>"
+      +"<text x='386' y='332' font-size='30' letter-spacing='3'>NMP</text>"
+      +"</g></svg>";
+    el.style.backgroundImage="url(\"data:image/svg+xml,"+encodeURIComponent(svg)+"\")";
+  })();
+
+  // ===== scroll reveal =====
+  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})
+    },{threshold:.14});
+    document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+  }else{
+    document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in')});
+  }
+</script>
+</body>
+</html>

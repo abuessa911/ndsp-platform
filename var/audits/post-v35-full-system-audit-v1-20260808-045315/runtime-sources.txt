@@ -1,0 +1,15 @@
+/home/nawaf511/empire-core-new/backend/app/api/admin/telegram_routing_v2.py
+/home/nawaf511/empire-core-new/backend/app/api/v1/frontend_contract.py
+/home/nawaf511/empire-core-new/backend/app/contracts/assets/source_routing_contract.py
+/home/nawaf511/empire-core-new/backend/app/contracts/canonical/semantic_contract.py
+/home/nawaf511/empire-core-new/backend/app/contracts/cot/cot_tff_contract.py
+/home/nawaf511/empire-core-new/backend/app/contracts/market_data/market_data_contract.py
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_canonical_live_runtime_v30.py
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_canonical_live_runtime_v33.py
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_evidence_v35.py
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_history_v36.py
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_public_governance_projection_v1.py
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v200_score_inputs.py
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v201_launch_completion.py
+/home/nawaf511/empire-core-new/backend/app/support_layers/cot/cot_contracts.py
+/home/nawaf511/empire-core-new/backend/app/support_layers/cot/test_cot_v6_1_storage.py

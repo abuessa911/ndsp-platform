@@ -1,0 +1,8 @@
+$ docker volume ls
+
+DRIVER    VOLUME NAME
+local     d1199a9b4ea82c8819d5e35757e1b1814a2ce6af52427a7d960a82f7eebd12d1
+local     docker_ndsp_pg
+local     empire-core_logs
+local     ndip-backend_ndip_postgres_data
+local     ndsp-binance-bot_pgdata

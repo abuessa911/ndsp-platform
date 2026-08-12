@@ -1,0 +1,43 @@
+name: PR-054 P0 Batch 16 Evidence Closure
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-p0-batch-16-evidence-closure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Fetch base branch
+        run: git fetch --no-tags origin main:refs/remotes/origin/main
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run PR-054 tests
+        run: node --test scripts/governance/tests/pr054-p0-batch-16-evidence-closure.test.cjs
+
+      - name: Validate PR-054 closure
+        run: python3 scripts/governance/validate_pr054_p0_batch_16_evidence_closure.py
+
+      - name: Validate capability governance
+        run: |
+          python3 scripts/governance/validate_full_capability_ui.py \
+            --base-ref origin/main

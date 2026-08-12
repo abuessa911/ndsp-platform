@@ -1,0 +1,5 @@
+Result=exit-code
+ExecMainStatus=1
+ExecStart={ path=/usr/bin/python3.12 ; argv[]=/usr/bin/python3.12 /home/nawaf511/ndsp_contract_regression_v1_1_1.py verify --baseline /home/nawaf511/.local/state/ndsp-contract-v1-1/baseline.json --output-dir /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1 --max-latency-ms 3000.0 ; ignore_errors=no ; start_time=[Fri 2026-08-07 21:21:29 CEST] ; stop_time=[Fri 2026-08-07 21:21:36 CEST] ; pid=1062863 ; code=exited ; status=1 }
+ActiveState=failed
+SubState=failed

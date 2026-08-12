@@ -1,0 +1,17 @@
+يوليو 26 12:50:55 vmi2934783 node[1883718]: [NDSP] Decision Governance Core listening on http://127.0.0.1:9079
+-- Boot 8533528739ff4501818bba1d77ac8edf --
+يوليو 26 12:52:08 vmi2934783 node[1394]: [NDSP] Decision Governance Core listening on http://127.0.0.1:9079
+يوليو 26 13:03:43 vmi2934783 node[41026]: [NDSP] Decision Governance Core listening on http://127.0.0.1:9079
+-- Boot 168f7de0363e42cdb477fddec5756ef4 --
+يوليو 26 13:04:17 vmi2934783 node[1355]: [NDSP] Decision Governance Core listening on http://127.0.0.1:9079
+-- Boot d4a1b926329d4c869a2dfafb02ae170e --
+يوليو 26 18:03:54 vmi2934783 node[1386]: [NDSP] Decision Governance Core listening on http://127.0.0.1:9079
+-- Boot 75fb0989b75446339fadce54dbb8147b --
+يوليو 26 18:10:07 vmi2934783 node[1386]: [NDSP] Decision Governance Core listening on http://127.0.0.1:9079
+يوليو 27 19:47:24 vmi2934783 node[460801]: [NDSP] Decision Governance Core listening on http://127.0.0.1:9079
+يوليو 29 06:53:01 vmi2934783 node[2498024]: [NDSP] Decision Governance Core listening on http://127.0.0.1:9079
+-- Boot 1d7a60877acc40148d88a352d85728d7 --
+أغسطس 02 23:57:10 vmi2934783 node[1355]: [NDSP] Decision Governance Core listening on http://127.0.0.1:9079
+أغسطس 05 09:30:53 vmi2934783 node[3019784]: [NDSP] Decision Governance Core listening on http://127.0.0.1:9079
+-- Boot 645dbba7d26d4e9886840cf8f0143622 --
+أغسطس 07 16:46:06 vmi2934783 node[1331]: [NDSP] Decision Governance Core listening on http://127.0.0.1:9079

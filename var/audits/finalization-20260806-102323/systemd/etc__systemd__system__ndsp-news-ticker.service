@@ -1,0 +1,17 @@
+[Unit]
+Description=NDSP Live News Ticker Service
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=nawaf511
+WorkingDirectory=/opt/ndsp-news-ticker
+EnvironmentFile=/etc/ndsp-news-ticker.env
+ExecStart=/usr/bin/node /opt/ndsp-news-ticker/server.js
+Restart=always
+RestartSec=5
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

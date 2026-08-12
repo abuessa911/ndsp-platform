@@ -1,0 +1,16 @@
+[Unit]
+Description=NDIP Dashboard FastAPI Service
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root/empire-core/backend
+Environment=TELEGRAM_BOT_TOKEN=8570826779:AAF7wVKT57HAcMVN-MsfxCgkdurLDWr-nxo
+Environment=TELEGRAM_CHAT_IDS=-1003491841685,-1003793881886
+ExecStart=/root/empire-core/backend/venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 8010
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

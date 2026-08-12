@@ -1,0 +1,3 @@
+gate	status	evidence
+SAFETY_CONTRACT	PASS	Explicit confirmation, protected production names, required tools and canonical paths validated.
+SOURCE_PROVENANCE	PASS	Buildable source was proven without treating dist/server.js as editable source. Origin=ACTIVE_RELEASE_SOURCE_PACKAGE; package=/opt/ndsp-auth-core-clean/releases/20260727_200610-auth-recovery-true-source-fix-v7.

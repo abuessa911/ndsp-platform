@@ -117,7 +117,7 @@ function governPayload(payload = {}, plan = "free") {
   return {
     ok: true,
     source_mode: "node_governance_bridge_sanitized",
-    project: "NDSP — منصة نواف لدعم القرار",
+    project: "NDSP — منصة دعم القرار",
     package: String(plan || "free"),
     instrument: { symbol, market, timeframe },
     allowed_public_outputs: {

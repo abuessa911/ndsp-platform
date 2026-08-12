@@ -1,0 +1,16 @@
+[Unit]
+Description=NDSP MT4 Freshness Guard
+After=network.target
+
+[Service]
+User=nawaf511
+Group=www-data
+WorkingDirectory=/home/nawaf511/empire-core-new/backend
+Environment="PYTHONUNBUFFERED=1"
+EnvironmentFile=-/home/nawaf511/empire-core-new/backend/.env
+ExecStart=/home/nawaf511/empire-core-new/backend/venv/bin/python /home/nawaf511/empire-core-new/backend/app/runtime/mt4_freshness_guard.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

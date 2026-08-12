@@ -1,0 +1,5 @@
+MainPID=0
+ExecStart={ path=/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/.venv/bin/uvicorn ; argv[]=/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/.venv/bin/uvicorn app:app --host 127.0.0.1 --port 9076 ; ignore_errors=no ; start_time=[Sat 2026-08-08 03:47:25 CEST] ; stop_time=[Sat 2026-08-08 03:47:25 CEST] ; pid=2245401 ; code=exited ; status=1 }
+WorkingDirectory=/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway
+ActiveState=activating
+SubState=auto-restart

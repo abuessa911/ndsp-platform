@@ -1,0 +1,26 @@
+{
+  "public_contract_version": "quality-live-public-v9",
+  "governance_projection_version": "ndsp-public-governance-projection-v1",
+  "governance_summary": {
+    "layer_total": 16,
+    "layer_bound": 12,
+    "layer_not_exposed": 4,
+    "capability_total": 28,
+    "capability_installed": 27,
+    "capability_live": 0,
+    "all_items_exposed": true,
+    "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16"
+  },
+  "layer_count": 16,
+  "capability_count": 28,
+  "capability_runtime_states": [
+    {
+      "state": "INSTALLED_NOT_LIVE",
+      "count": 27
+    },
+    {
+      "state": "NOT_INSTALLED",
+      "count": 1
+    }
+  ]
+}

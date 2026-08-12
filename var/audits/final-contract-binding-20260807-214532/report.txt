@@ -1,0 +1,178 @@
+============================================================
+=== NDSP FINAL LATEST-CONTRACT BINDING =====================
+============================================================
+DATE=2026-08-07T21:45:32+02:00
+PROJECT=/home/nawaf511/empire-core-new
+RUNTIME=/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_quality_live_nmp_wrapper.py
+
+POLICY=LATEST_CONTRACTS_AUTHORITATIVE
+OLD_BASELINE=HISTORICAL_ONLY
+RESTORE_OLD_BASELINE=NO
+SYNTHETIC_CONTRACT_VALUES=FORBIDDEN
+RUNTIME_CHANGE=ONLY_AFTER_PRODUCER_VERIFICATION
+
+1. PRECHECK CANONICAL RUNTIME
+RUNTIME_EXISTS=PASS
+5b5c0b7a992ceecc930c8d6654d54ae7e52010dfd83bf9092deb84a83445c85e  /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_quality_live_nmp_wrapper.py
+
+2. BACKUP CURRENT CANONICAL RUNTIME
+5b5c0b7a992ceecc930c8d6654d54ae7e52010dfd83bf9092deb84a83445c85e  /home/nawaf511/empire-core-new/var/audits/final-contract-binding-20260807-214532/ndsp_quality_live_nmp_wrapper.py.before
+BACKUP=PASS
+
+3. VERIFY AUTHORITATIVE CANDIDATES
+PASS  governance/contracts/00_MASTER_REGISTRY/CONTRACT_INDEX.md
+d4f01b4c8c620b0142dca7376114fc0f2f37c62aff80b45bd69425777c7009e4  /home/nawaf511/empire-core-new/governance/contracts/00_MASTER_REGISTRY/CONTRACT_INDEX.md
+PASS  governance/contracts/00_MASTER_REGISTRY/CONTRACT_REGISTRY.yaml
+a699e95ae8435c81404170ae11e068159c0c1a0641f43c3a3e1ed914f656997a  /home/nawaf511/empire-core-new/governance/contracts/00_MASTER_REGISTRY/CONTRACT_REGISTRY.yaml
+PASS  governance/contracts/00_MASTER_REGISTRY/CONTRACT_REGISTRY.json
+562feef2c23f89e7c31b3f3dfa3c3d007fcedbc75981cf78d96fb5a803eb39d6  /home/nawaf511/empire-core-new/governance/contracts/00_MASTER_REGISTRY/CONTRACT_REGISTRY.json
+PASS  backend/app/runtime/ndsp_quality_live_golden_wrapper.py
+a90f2bcdb9425f90ca54aef7564e97c0b247df4fd34e79c2a9616f420a16eff6  /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_quality_live_golden_wrapper.py
+PASS  backend/app/runtime/ndsp_v201_launch_completion.py
+888cddd98161b9ac1a9a1d2dfe1ec7de3b324dbe027f57f74e1f7d99c1d49432  /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v201_launch_completion.py
+PASS  backend/app/runtime/ndsp_v200_score_inputs.py
+23da7a4e9a4cf94e98c1df422c3645c43eb67a7a9fe9fa8d8a24cbe4ae1019aa  /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v200_score_inputs.py
+PASS  backend/app/runtime/ndsp_canonical_live_runtime_v30.py
+6875bec736043896762c1202d4c419126d3e28e5e095dffd5459410410671784  /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_canonical_live_runtime_v30.py
+PASS  backend/app/runtime/ndsp_public_governance_projection_v1.py
+ce930a3c9a644fedaa24bf9b88156e914feceeaaab88eb5405144551a8545032  /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_public_governance_projection_v1.py
+PASS  backend/platform/runtime/capability_runtime_controller_v1.py
+734eb99419787c56b88da56b521bca95b8ce071640bf5904bd713426ae8e8bf7  /home/nawaf511/empire-core-new/backend/platform/runtime/capability_runtime_controller_v1.py
+PASS  backend/data_foundation/canonical_v1/data_quality_gate.py
+422bcd06862582a1b2927998f8e2c55d36776c71780c80bfd862f884ebbbaf76  /home/nawaf511/empire-core-new/backend/data_foundation/canonical_v1/data_quality_gate.py
+
+4. DISCOVER ACTUAL PRODUCERS / FUNCTIONS
+
+============================================================
+TDL
+============================================================
+FILE= backend/app/runtime/ndsp_quality_live_golden_wrapper.py
+TERMS= tdl
+FUNCTIONS= load_runtime_golden
+CLASSES= NONE
+FILE= backend/app/runtime/ndsp_v201_launch_completion.py
+TERMS= tdl
+FUNCTIONS= attach_v202_commercial_score
+CLASSES= NONE
+FILE= backend/app/runtime/ndsp_v200_score_inputs.py
+TERMS= tdl
+FUNCTIONS= attach_v200_score_inputs
+CLASSES= NONE
+FILE= backend/app/runtime/ndsp_canonical_live_runtime_v30.py
+TERMS= tdl
+FUNCTIONS= build_payload,discover_cot
+CLASSES= NONE
+FILE= backend/platform/runtime/capability_runtime_controller_v1.py
+TERMS= tdl
+FUNCTIONS= run_functional_probe
+CLASSES= NONE
+
+============================================================
+DECISION_LAYERS
+============================================================
+FILE= backend/app/runtime/ndsp_v201_launch_completion.py
+TERMS= decision_layers,ndsp-core-l
+FUNCTIONS= _layer,_update_public_layers,attach_v202_commercial_score
+CLASSES= NONE
+FILE= backend/app/runtime/ndsp_v200_score_inputs.py
+TERMS= decision_layers,ndsp-core-l
+FUNCTIONS= _layer,_layer_numeric_input,attach_v200_score_inputs
+CLASSES= NONE
+FILE= backend/app/runtime/ndsp_canonical_live_runtime_v30.py
+TERMS= decision_layers,ndsp-core-l
+FUNCTIONS= execute
+CLASSES= NONE
+FILE= backend/app/runtime/ndsp_public_governance_projection_v1.py
+TERMS= decision_layers,ndsp-core-l
+FUNCTIONS= _layer_state,attach_governance_projection
+CLASSES= NONE
+FILE= backend/platform/runtime/capability_runtime_controller_v1.py
+TERMS= decision_layers,ndsp-core-l
+FUNCTIONS= binding_for,run_functional_probe
+CLASSES= NONE
+
+============================================================
+CAPABILITIES
+============================================================
+FILE= backend/app/runtime/ndsp_v201_launch_completion.py
+TERMS= platform_capabilities
+FUNCTIONS= attach_v202_commercial_score
+CLASSES= NONE
+FILE= backend/app/runtime/ndsp_public_governance_projection_v1.py
+TERMS= platform_capabilities
+FUNCTIONS= attach_governance_projection
+CLASSES= NONE
+
+============================================================
+DATA_QUALITY
+============================================================
+FILE= backend/app/runtime/ndsp_public_governance_projection_v1.py
+TERMS= data_quality,quality_gate
+FUNCTIONS= NONE
+CLASSES= NONE
+FILE= backend/platform/runtime/capability_runtime_controller_v1.py
+TERMS= data_quality,quality_gate
+FUNCTIONS= binding_for,run_functional_probe
+CLASSES= NONE
+FILE= backend/data_foundation/canonical_v1/data_quality_gate.py
+TERMS= data_quality
+FUNCTIONS= evaluate_data_quality
+CLASSES= NONE
+
+PRODUCER_MAP= /home/nawaf511/empire-core-new/var/audits/final-contract-binding-20260807-214532/producer-map.json
+
+5. INSPECT CURRENT WRAPPER BINDING SURFACE
+tdl=NO
+decision_layers=NO
+platform_capabilities=NO
+data_quality=NO
+quality_gate=NO
+nmp=YES
+golden_alignment=YES
+scenario_levels=YES
+governance=YES
+explainability=YES
+
+6. CAPTURE CURRENT 9082 CONTRACT
+HTTP_9082=200
+9082_CAPTURE=PASS
+
+7. CHECK LIVE CONTRACT SURFACE
+TDL_ROOT_BINDING=NO KEYS=NONE
+DECISION_LAYERS_ROOT_BINDING=YES KEYS=decision_layers
+CAPABILITIES_ROOT_BINDING=YES KEYS=platform_capabilities
+DATA_QUALITY_ROOT_BINDING=NO KEYS=NONE
+NMP_ROOT_BINDING=YES KEYS=nmp,nmp_value,nmp_status
+GOLDEN_ROOT_BINDING=YES KEYS=golden_alignment,golden_signal,golden_spotlight
+SCENARIO_ROOT_BINDING=YES KEYS=scenario_levels
+GOVERNANCE_ROOT_BINDING=YES KEYS=governance_summary,governing_inputs
+EXPLAINABILITY_ROOT_BINDING=YES KEYS=explainability,public_explainability
+ROOT_KEY_COUNT= 44
+
+8. DETERMINE SAFE NEXT ACTION
+TDL=PRODUCER_IDENTIFIED_REQUIRES_EXPLICIT_ADAPTER
+TDL_EXECUTABLE_CANDIDATES=5
+DECISION_LAYERS=PRODUCER_IDENTIFIED_REQUIRES_EXPLICIT_ADAPTER
+DECISION_LAYERS_EXECUTABLE_CANDIDATES=5
+CAPABILITIES=PRODUCER_IDENTIFIED_REQUIRES_EXPLICIT_ADAPTER
+CAPABILITIES_EXECUTABLE_CANDIDATES=2
+DATA_QUALITY=PRODUCER_IDENTIFIED_REQUIRES_EXPLICIT_ADAPTER
+DATA_QUALITY_EXECUTABLE_CANDIDATES=2
+
+9. SAFETY DECISION
+AUTO_BIND=READY_FOR_EXPLICIT_ADAPTER
+REASON=CALLABLE_PRODUCERS_IDENTIFIED
+
+10. VERIFY RUNTIME WAS NOT SILENTLY MODIFIED
+BEFORE=5b5c0b7a992ceecc930c8d6654d54ae7e52010dfd83bf9092deb84a83445c85e
+NOW=5b5c0b7a992ceecc930c8d6654d54ae7e52010dfd83bf9092deb84a83445c85e
+RUNTIME_UNCHANGED=PASS
+
+============================================================
+FINAL_RESULT=PASS
+REPORT=/home/nawaf511/empire-core-new/var/audits/final-contract-binding-20260807-214532/report.txt
+PRODUCER_MAP=/home/nawaf511/empire-core-new/var/audits/final-contract-binding-20260807-214532/producer-map.json
+WRAPPER_SURFACE=/home/nawaf511/empire-core-new/var/audits/final-contract-binding-20260807-214532/wrapper-surface.json
+BINDING_PLAN=/home/nawaf511/empire-core-new/var/audits/final-contract-binding-20260807-214532/binding-plan.json
+SNAPSHOT=/home/nawaf511/empire-core-new/var/audits/final-contract-binding-20260807-214532/9082-before.json
+============================================================

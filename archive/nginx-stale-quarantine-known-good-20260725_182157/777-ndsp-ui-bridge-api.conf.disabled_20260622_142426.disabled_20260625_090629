@@ -1,0 +1,106 @@
+server {
+    include /etc/nginx/snippets/ndsp-staged-commercial-security.conf;
+
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    server_name api.ndsp.app;
+
+    ssl_certificate /etc/letsencrypt/live/api.ndsp.app/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/api.ndsp.app/privkey.pem;
+
+    location = /api/ui-bridge/health {
+        proxy_pass http://127.0.0.1:9066;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    location = /api/dashboard/overview {
+        proxy_pass http://127.0.0.1:9066;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    location = /api/market/assets {
+        proxy_pass http://127.0.0.1:9066;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    location = /api/layers {
+        proxy_pass http://127.0.0.1:9066;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    location = /api/market-structure {
+        proxy_pass http://127.0.0.1:9066;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    location = /api/technical-confirmation {
+        proxy_pass http://127.0.0.1:9066;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    location = /api/macro-analysis {
+        proxy_pass http://127.0.0.1:9066;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    location = /api/risk-layer {
+        proxy_pass http://127.0.0.1:9066;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    location = /api/nawaf-signal {
+        proxy_pass http://127.0.0.1:9066;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    location = /api/alerts {
+        proxy_pass http://127.0.0.1:9066;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    location = /api/settings {
+        proxy_pass http://127.0.0.1:9066;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    location = /api/account/profile {
+        proxy_pass http://127.0.0.1:9066;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    # NDSP_DECISION_PACKAGE_V1_START
+    location = /api/decision/package-live {
+        proxy_pass http://127.0.0.1:9061/api/decision/package-live;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+    # NDSP_DECISION_PACKAGE_V1_END
+
+}

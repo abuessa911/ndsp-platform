@@ -1,0 +1,130 @@
+=== NDSP APPLICATION SHELL V1 ===
+DATE=2026-08-08T06:05:03+02:00
+PROJECT=/home/nawaf511/empire-core-new/frontend/user-portal-vite
+CANONICAL_PORTAL=/portal/
+PRODUCTION=/var/www/ndsp-my/portal
+AUDIT=/home/nawaf511/empire-core-new/var/audits/application-shell-v1-20260808-060503
+
+=== 1. PRECHECK ===
+PACKAGE=react-router-dom STATUS=PASS
+PACKAGE=lucide-react STATUS=PASS
+PACKAGE=i18next STATUS=PASS
+PACKAGE=react-i18next STATUS=PASS
+PACKAGE=@tanstack/react-query STATUS=PASS
+PUBLIC_HTTP=200
+PRODUCTION_HASH_BEFORE=2a9dd08b3e4cfe78556d0ca85b0b4fdf153886aee1fb92ce22884b9df76aa1c3
+PRECHECK=PASS
+
+=== 2. SOURCE BACKUP ===
+SOURCE_BACKUP=PASS
+
+=== 3. DISCOVER EXISTING PAGE CONTRACT ===
+EXISTING_PAGE=src/pages/Home.jsx STATUS=FOUND
+EXISTING_PAGE=src/pages/CommandPage.jsx STATUS=FOUND
+EXISTING_PAGE=src/pages/AssetPage.jsx STATUS=FOUND
+EXISTING_PAGE=src/pages/BriefPage.jsx STATUS=FOUND
+EXISTING_PAGE=src/pages/SettingsPage.jsx STATUS=FOUND
+EXISTING_PAGE=src/components/CompletedDecisionsPanelV37.jsx STATUS=FOUND
+ROUTING_DISCOVERY=PASS
+
+=== 4. CREATE SHELL DIRECTORIES ===
+DIRECTORIES=PASS
+
+=== 5. ROUTE REGISTRY ===
+ROUTE_REGISTRY=PASS
+
+=== 6. BRAND COMPONENT ===
+BRAND=PASS
+
+=== 7. SIDEBAR ===
+SIDEBAR=PASS
+
+=== 8. TOPBAR ===
+TOPBAR=PASS
+
+=== 9. MOBILE NAVIGATION ===
+MOBILE_NAVIGATION=PASS
+
+=== 10. APPLICATION SHELL ===
+APPLICATION_SHELL=PASS
+
+=== 11. SHELL STYLES ===
+SHELL_STYLES=PASS
+
+=== 12. REGISTER SHELL CSS ===
+SHELL_CSS_IMPORT_ADDED=1
+SHELL_CSS_REGISTERED=PASS
+
+=== 13. SHELL CONTRACT ASSERTIONS ===
+NAVIGATION_CONTRACT=PASS
+SHELL_CONTRACT=PASS
+
+=== 14. TYPESCRIPT CHECK ===
+TYPESCRIPT_CHECK=PASS
+
+=== 15. PRODUCTION BUILD ===
+
+> ndsp-user-portal-vite@1.0.0 build
+> vite build
+
+vite v6.4.3 building for production...
+transforming...
+✓ 63 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.46 kB │ gzip:  0.33 kB
+dist/assets/index-BrU4LgHx.css   13.75 kB │ gzip:  3.77 kB
+dist/assets/index-BgUFMAEB.js   220.25 kB │ gzip: 70.40 kB
+✓ built in 2.31s
+BUILD=PASS
+
+=== 16. V37 REGRESSION CONTRACT ===
+DIST_JS=/portal/assets/index-BgUFMAEB.js
+DIST_CSS=/portal/assets/index-BrU4LgHx.css
+V37_COMPLETED_MARKER=PASS
+DATA_CONTRACT_FILE=src/hooks/useCompletedDecisionsV37.js STATUS=PASS
+DATA_CONTRACT_FILE=src/hooks/useCanonicalDecision.js STATUS=PASS
+DATA_CONTRACT_FILE=src/hooks/useMarket.js STATUS=PASS
+DATA_CONTRACT_PRESERVED=PASS
+V37_REGRESSION=PASS
+
+=== 17. PRODUCTION IMMUTABILITY ===
+PRODUCTION_HASH_BEFORE=2a9dd08b3e4cfe78556d0ca85b0b4fdf153886aee1fb92ce22884b9df76aa1c3
+PRODUCTION_HASH_AFTER=2a9dd08b3e4cfe78556d0ca85b0b4fdf153886aee1fb92ce22884b9df76aa1c3
+PUBLIC_HTTP_AFTER=200
+PRODUCTION_UNCHANGED=PASS
+
+=== 18. SHELL INVENTORY ===
+ApplicationShell.tsx
+Brand.tsx
+components.css
+foundation.css
+MobileNavigation.tsx
+navigation.ts
+shell.css
+Sidebar.tsx
+tokens.css
+Topbar.tsx
+uiFoundation.ts
+
+=== FINAL ===
+APPLICATION_SHELL_VERSION=V1
+BRAND=PASS
+SIDEBAR=PASS
+TOPBAR=PASS
+MOBILE_NAVIGATION=PASS
+RESPONSIVE_SHELL=PASS
+RTL_LTR=PASS
+NAVIGATION_REGISTRY=PASS
+TYPESCRIPT=PASS
+BUILD=PASS
+V37_DATA_CONTRACT=PRESERVED
+PRODUCTION_MODIFIED=NO
+DEPLOY_EXECUTED=NO
+NGINX_MODIFIED=NO
+SERVICES_RESTARTED=NO
+ROLLBACK_REQUIRED=NO
+NEXT_ACTION=INTEGRATE_APPLICATION_SHELL_V1
+FINAL_RESULT=PASS
+AUDIT=/home/nawaf511/empire-core-new/var/audits/application-shell-v1-20260808-060503
+REPORT=/home/nawaf511/empire-core-new/var/audits/application-shell-v1-20260808-060503/report.txt

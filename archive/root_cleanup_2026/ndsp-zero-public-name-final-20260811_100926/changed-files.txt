@@ -1,0 +1,2 @@
+./apps/admin-console/data/owner-layer-source-map.json
+./frontend/public-site/src/i18n/locales/th.ts

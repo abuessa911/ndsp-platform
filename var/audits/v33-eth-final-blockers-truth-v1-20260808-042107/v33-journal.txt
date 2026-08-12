@@ -1,0 +1,25 @@
+أغسطس 07 23:01:23 vmi2934783 python3[1373828]: {"ok": true, "service": "ndsp-canonical-live-runtime-v30", "host": "127.0.0.1", "port": 9086, "runtime_version": "ndsp-canonical-live-runtime-v33.0.0", "registry_layers": 16}
+أغسطس 08 03:28:27 vmi2934783 python3[1373828]: 2026-08-08T01:28:27.574470Z client=127.0.0.1 "GET / HTTP/1.1" 404 -
+أغسطس 08 03:28:27 vmi2934783 python3[1373828]: 2026-08-08T01:28:27.653677Z client=127.0.0.1 "GET /health HTTP/1.1" 200 -
+أغسطس 08 03:28:27 vmi2934783 python3[1373828]: 2026-08-08T01:28:27.677051Z client=127.0.0.1 "GET /healthz HTTP/1.1" 404 -
+أغسطس 08 03:28:27 vmi2934783 python3[1373828]: 2026-08-08T01:28:27.702215Z client=127.0.0.1 "GET /docs HTTP/1.1" 404 -
+أغسطس 08 03:28:27 vmi2934783 python3[1373828]: 2026-08-08T01:28:27.729611Z client=127.0.0.1 "GET /openapi.json HTTP/1.1" 404 -
+أغسطس 08 03:28:27 vmi2934783 python3[1373828]: 2026-08-08T01:28:27.758927Z client=127.0.0.1 "GET /api HTTP/1.1" 404 -
+أغسطس 08 03:28:27 vmi2934783 python3[1373828]: 2026-08-08T01:28:27.784124Z client=127.0.0.1 "GET /api/health HTTP/1.1" 200 -
+أغسطس 08 03:28:27 vmi2934783 python3[1373828]: 2026-08-08T01:28:27.812043Z client=127.0.0.1 "GET /api/v1 HTTP/1.1" 404 -
+أغسطس 08 03:28:27 vmi2934783 python3[1373828]: 2026-08-08T01:28:27.844819Z client=127.0.0.1 "GET /status HTTP/1.1" 404 -
+أغسطس 08 03:28:27 vmi2934783 python3[1373828]: 2026-08-08T01:28:27.888856Z client=127.0.0.1 "GET /openapi.json HTTP/1.1" 404 -
+أغسطس 08 03:29:01 vmi2934783 python3[1373828]: 2026-08-08T01:29:01.052370Z client=127.0.0.1 "GET / HTTP/1.1" 404 -
+أغسطس 08 03:29:01 vmi2934783 python3[1373828]: 2026-08-08T01:29:01.088024Z client=127.0.0.1 "GET /health HTTP/1.1" 200 -
+أغسطس 08 03:29:01 vmi2934783 python3[1373828]: 2026-08-08T01:29:01.140705Z client=127.0.0.1 "GET /healthz HTTP/1.1" 404 -
+أغسطس 08 03:29:01 vmi2934783 python3[1373828]: 2026-08-08T01:29:01.175599Z client=127.0.0.1 "GET /docs HTTP/1.1" 404 -
+أغسطس 08 03:29:01 vmi2934783 python3[1373828]: 2026-08-08T01:29:01.218459Z client=127.0.0.1 "GET /openapi.json HTTP/1.1" 404 -
+أغسطس 08 03:29:01 vmi2934783 python3[1373828]: 2026-08-08T01:29:01.253516Z client=127.0.0.1 "GET /api HTTP/1.1" 404 -
+أغسطس 08 03:29:01 vmi2934783 python3[1373828]: 2026-08-08T01:29:01.296926Z client=127.0.0.1 "GET /api/health HTTP/1.1" 200 -
+أغسطس 08 03:29:01 vmi2934783 python3[1373828]: 2026-08-08T01:29:01.371109Z client=127.0.0.1 "GET /api/v1 HTTP/1.1" 404 -
+أغسطس 08 03:29:01 vmi2934783 python3[1373828]: 2026-08-08T01:29:01.419038Z client=127.0.0.1 "GET /status HTTP/1.1" 404 -
+أغسطس 08 03:29:01 vmi2934783 python3[1373828]: 2026-08-08T01:29:01.610428Z client=127.0.0.1 "GET /openapi.json HTTP/1.1" 404 -
+أغسطس 08 03:30:57 vmi2934783 python3[1373828]: 2026-08-08T01:30:57.331672Z client=127.0.0.1 "GET /health HTTP/1.1" 200 -
+أغسطس 08 03:30:57 vmi2934783 python3[1373828]: 2026-08-08T01:30:57.366253Z client=127.0.0.1 "GET /api/health HTTP/1.1" 200 -
+أغسطس 08 03:30:57 vmi2934783 python3[1373828]: 2026-08-08T01:30:57.479349Z client=127.0.0.1 "GET /health HTTP/1.1" 200 -
+أغسطس 08 03:54:33 vmi2934783 python3[2267278]: {"ok": true, "service": "ndsp-canonical-live-runtime-v30", "host": "127.0.0.1", "port": 9086, "runtime_version": "ndsp-canonical-live-runtime-v33.0.0", "registry_layers": 16}

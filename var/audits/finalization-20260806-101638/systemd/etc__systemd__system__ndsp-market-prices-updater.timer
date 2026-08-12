@@ -1,0 +1,11 @@
+[Unit]
+Description=Run NDSP Live Market Prices Updater every minute
+
+[Timer]
+OnBootSec=20
+OnUnitActiveSec=60
+AccuracySec=10
+Unit=ndsp-market-prices-updater.service
+
+[Install]
+WantedBy=timers.target

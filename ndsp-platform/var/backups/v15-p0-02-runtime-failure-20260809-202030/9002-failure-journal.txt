@@ -1,0 +1,100 @@
+أغسطس 09 20:19:49 vmi2934783 python3[1525443]:     from backend.platform.canonical_v1.live_public_providers import (
+أغسطس 09 20:19:49 vmi2934783 python3[1525443]: ModuleNotFoundError: No module named 'backend'
+أغسطس 09 20:19:49 vmi2934783 systemd[1]: ndsp-platform-gateway-9002.service: Main process exited, code=exited, status=1/FAILURE
+أغسطس 09 20:19:49 vmi2934783 systemd[1]: ndsp-platform-gateway-9002.service: Failed with result 'exit-code'.
+أغسطس 09 20:19:52 vmi2934783 systemd[1]: ndsp-platform-gateway-9002.service: Scheduled restart job, restart counter is at 25.
+أغسطس 09 20:19:52 vmi2934783 systemd[1]: Started ndsp-platform-gateway-9002.service - NDSP Platform Gateway 9002 Recovery Service.
+أغسطس 09 20:19:53 vmi2934783 python3[1525549]: Traceback (most recent call last):
+أغسطس 09 20:19:53 vmi2934783 python3[1525549]:   File "/home/nawaf511/empire-core-new/apps/ndsp-platform-gateway-9002/app.py", line 14, in <module>
+أغسطس 09 20:19:53 vmi2934783 python3[1525549]:     from backend.platform.canonical_v1.live_public_providers import (
+أغسطس 09 20:19:53 vmi2934783 python3[1525549]: ModuleNotFoundError: No module named 'backend'
+أغسطس 09 20:19:53 vmi2934783 systemd[1]: ndsp-platform-gateway-9002.service: Main process exited, code=exited, status=1/FAILURE
+أغسطس 09 20:19:53 vmi2934783 systemd[1]: ndsp-platform-gateway-9002.service: Failed with result 'exit-code'.
+أغسطس 09 20:19:56 vmi2934783 systemd[1]: ndsp-platform-gateway-9002.service: Scheduled restart job, restart counter is at 26.
+أغسطس 09 20:19:56 vmi2934783 systemd[1]: Started ndsp-platform-gateway-9002.service - NDSP Platform Gateway 9002 Recovery Service.
+أغسطس 09 20:19:56 vmi2934783 python3[1525604]: Traceback (most recent call last):
+أغسطس 09 20:19:56 vmi2934783 python3[1525604]:   File "/home/nawaf511/empire-core-new/apps/ndsp-platform-gateway-9002/app.py", line 14, in <module>
+أغسطس 09 20:19:56 vmi2934783 python3[1525604]:     from backend.platform.canonical_v1.live_public_providers import (
+أغسطس 09 20:19:56 vmi2934783 python3[1525604]: ModuleNotFoundError: No module named 'backend'
+أغسطس 09 20:19:56 vmi2934783 systemd[1]: ndsp-platform-gateway-9002.service: Main process exited, code=exited, status=1/FAILURE
+أغسطس 09 20:19:56 vmi2934783 systemd[1]: ndsp-platform-gateway-9002.service: Failed with result 'exit-code'.
+أغسطس 09 20:19:59 vmi2934783 systemd[1]: ndsp-platform-gateway-9002.service: Scheduled restart job, restart counter is at 27.
+أغسطس 09 20:19:59 vmi2934783 systemd[1]: Started ndsp-platform-gateway-9002.service - NDSP Platform Gateway 9002 Recovery Service.
+أغسطس 09 20:19:59 vmi2934783 python3[1525612]: Traceback (most recent call last):
+أغسطس 09 20:19:59 vmi2934783 python3[1525612]:   File "/home/nawaf511/empire-core-new/apps/ndsp-platform-gateway-9002/app.py", line 14, in <module>
+أغسطس 09 20:19:59 vmi2934783 python3[1525612]:     from backend.platform.canonical_v1.live_public_providers import (
+أغسطس 09 20:19:59 vmi2934783 python3[1525612]: ModuleNotFoundError: No module named 'backend'
+أغسطس 09 20:19:59 vmi2934783 systemd[1]: ndsp-platform-gateway-9002.service: Main process exited, code=exited, status=1/FAILURE
+أغسطس 09 20:19:59 vmi2934783 systemd[1]: ndsp-platform-gateway-9002.service: Failed with result 'exit-code'.
+أغسطس 09 20:20:02 vmi2934783 systemd[1]: ndsp-platform-gateway-9002.service: Scheduled restart job, restart counter is at 28.
+أغسطس 09 20:20:02 vmi2934783 systemd[1]: Started ndsp-platform-gateway-9002.service - NDSP Platform Gateway 9002 Recovery Service.
+أغسطس 09 20:20:03 vmi2934783 python3[1525661]: Traceback (most recent call last):
+أغسطس 09 20:20:03 vmi2934783 python3[1525661]:   File "/home/nawaf511/empire-core-new/apps/ndsp-platform-gateway-9002/app.py", line 14, in <module>
+أغسطس 09 20:20:03 vmi2934783 python3[1525661]:     from backend.platform.canonical_v1.live_public_providers import (
+أغسطس 09 20:20:03 vmi2934783 python3[1525661]: ModuleNotFoundError: No module named 'backend'
+أغسطس 09 20:20:03 vmi2934783 systemd[1]: ndsp-platform-gateway-9002.service: Main process exited, code=exited, status=1/FAILURE
+أغسطس 09 20:20:03 vmi2934783 systemd[1]: ndsp-platform-gateway-9002.service: Failed with result 'exit-code'.
+أغسطس 09 20:20:06 vmi2934783 systemd[1]: ndsp-platform-gateway-9002.service: Scheduled restart job, restart counter is at 29.
+أغسطس 09 20:20:06 vmi2934783 systemd[1]: Started ndsp-platform-gateway-9002.service - NDSP Platform Gateway 9002 Recovery Service.
+أغسطس 09 20:20:06 vmi2934783 python3[1526531]: Traceback (most recent call last):
+أغسطس 09 20:20:06 vmi2934783 python3[1526531]:   File "/home/nawaf511/empire-core-new/apps/ndsp-platform-gateway-9002/app.py", line 14, in <module>
+أغسطس 09 20:20:06 vmi2934783 python3[1526531]:     from backend.platform.canonical_v1.live_public_providers import (
+أغسطس 09 20:20:06 vmi2934783 python3[1526531]: ModuleNotFoundError: No module named 'backend'
+أغسطس 09 20:20:06 vmi2934783 systemd[1]: ndsp-platform-gateway-9002.service: Main process exited, code=exited, status=1/FAILURE
+أغسطس 09 20:20:06 vmi2934783 systemd[1]: ndsp-platform-gateway-9002.service: Failed with result 'exit-code'.
+أغسطس 09 20:20:10 vmi2934783 systemd[1]: ndsp-platform-gateway-9002.service: Scheduled restart job, restart counter is at 30.
+أغسطس 09 20:20:10 vmi2934783 systemd[1]: Started ndsp-platform-gateway-9002.service - NDSP Platform Gateway 9002 Recovery Service.
+أغسطس 09 20:20:10 vmi2934783 python3[1526638]: Traceback (most recent call last):
+أغسطس 09 20:20:10 vmi2934783 python3[1526638]:   File "/home/nawaf511/empire-core-new/apps/ndsp-platform-gateway-9002/app.py", line 14, in <module>
+أغسطس 09 20:20:10 vmi2934783 python3[1526638]:     from backend.platform.canonical_v1.live_public_providers import (
+أغسطس 09 20:20:10 vmi2934783 python3[1526638]: ModuleNotFoundError: No module named 'backend'
+أغسطس 09 20:20:10 vmi2934783 systemd[1]: ndsp-platform-gateway-9002.service: Main process exited, code=exited, status=1/FAILURE
+أغسطس 09 20:20:10 vmi2934783 systemd[1]: ndsp-platform-gateway-9002.service: Failed with result 'exit-code'.
+أغسطس 09 20:20:13 vmi2934783 systemd[1]: ndsp-platform-gateway-9002.service: Scheduled restart job, restart counter is at 31.
+أغسطس 09 20:20:13 vmi2934783 systemd[1]: Started ndsp-platform-gateway-9002.service - NDSP Platform Gateway 9002 Recovery Service.
+أغسطس 09 20:20:13 vmi2934783 python3[1526648]: Traceback (most recent call last):
+أغسطس 09 20:20:13 vmi2934783 python3[1526648]:   File "/home/nawaf511/empire-core-new/apps/ndsp-platform-gateway-9002/app.py", line 14, in <module>
+أغسطس 09 20:20:13 vmi2934783 python3[1526648]:     from backend.platform.canonical_v1.live_public_providers import (
+أغسطس 09 20:20:13 vmi2934783 python3[1526648]: ModuleNotFoundError: No module named 'backend'
+أغسطس 09 20:20:13 vmi2934783 systemd[1]: ndsp-platform-gateway-9002.service: Main process exited, code=exited, status=1/FAILURE
+أغسطس 09 20:20:13 vmi2934783 systemd[1]: ndsp-platform-gateway-9002.service: Failed with result 'exit-code'.
+أغسطس 09 20:20:16 vmi2934783 systemd[1]: ndsp-platform-gateway-9002.service: Scheduled restart job, restart counter is at 32.
+أغسطس 09 20:20:16 vmi2934783 systemd[1]: Started ndsp-platform-gateway-9002.service - NDSP Platform Gateway 9002 Recovery Service.
+أغسطس 09 20:20:16 vmi2934783 python3[1526656]: Traceback (most recent call last):
+أغسطس 09 20:20:16 vmi2934783 python3[1526656]:   File "/home/nawaf511/empire-core-new/apps/ndsp-platform-gateway-9002/app.py", line 14, in <module>
+أغسطس 09 20:20:16 vmi2934783 python3[1526656]:     from backend.platform.canonical_v1.live_public_providers import (
+أغسطس 09 20:20:16 vmi2934783 python3[1526656]: ModuleNotFoundError: No module named 'backend'
+أغسطس 09 20:20:16 vmi2934783 systemd[1]: ndsp-platform-gateway-9002.service: Main process exited, code=exited, status=1/FAILURE
+أغسطس 09 20:20:16 vmi2934783 systemd[1]: ndsp-platform-gateway-9002.service: Failed with result 'exit-code'.
+أغسطس 09 20:20:20 vmi2934783 systemd[1]: ndsp-platform-gateway-9002.service: Scheduled restart job, restart counter is at 33.
+أغسطس 09 20:20:20 vmi2934783 systemd[1]: Started ndsp-platform-gateway-9002.service - NDSP Platform Gateway 9002 Recovery Service.
+أغسطس 09 20:20:20 vmi2934783 python3[1526685]: Traceback (most recent call last):
+أغسطس 09 20:20:20 vmi2934783 python3[1526685]:   File "/home/nawaf511/empire-core-new/apps/ndsp-platform-gateway-9002/app.py", line 14, in <module>
+أغسطس 09 20:20:20 vmi2934783 python3[1526685]:     from backend.platform.canonical_v1.live_public_providers import (
+أغسطس 09 20:20:20 vmi2934783 python3[1526685]: ModuleNotFoundError: No module named 'backend'
+أغسطس 09 20:20:20 vmi2934783 systemd[1]: ndsp-platform-gateway-9002.service: Main process exited, code=exited, status=1/FAILURE
+أغسطس 09 20:20:20 vmi2934783 systemd[1]: ndsp-platform-gateway-9002.service: Failed with result 'exit-code'.
+أغسطس 09 20:20:23 vmi2934783 systemd[1]: ndsp-platform-gateway-9002.service: Scheduled restart job, restart counter is at 34.
+أغسطس 09 20:20:23 vmi2934783 systemd[1]: Started ndsp-platform-gateway-9002.service - NDSP Platform Gateway 9002 Recovery Service.
+أغسطس 09 20:20:23 vmi2934783 python3[1526689]: Traceback (most recent call last):
+أغسطس 09 20:20:23 vmi2934783 python3[1526689]:   File "/home/nawaf511/empire-core-new/apps/ndsp-platform-gateway-9002/app.py", line 14, in <module>
+أغسطس 09 20:20:23 vmi2934783 python3[1526689]:     from backend.platform.canonical_v1.live_public_providers import (
+أغسطس 09 20:20:23 vmi2934783 python3[1526689]: ModuleNotFoundError: No module named 'backend'
+أغسطس 09 20:20:23 vmi2934783 systemd[1]: ndsp-platform-gateway-9002.service: Main process exited, code=exited, status=1/FAILURE
+أغسطس 09 20:20:23 vmi2934783 systemd[1]: ndsp-platform-gateway-9002.service: Failed with result 'exit-code'.
+أغسطس 09 20:20:26 vmi2934783 systemd[1]: ndsp-platform-gateway-9002.service: Scheduled restart job, restart counter is at 35.
+أغسطس 09 20:20:26 vmi2934783 systemd[1]: Started ndsp-platform-gateway-9002.service - NDSP Platform Gateway 9002 Recovery Service.
+أغسطس 09 20:20:26 vmi2934783 python3[1526693]: Traceback (most recent call last):
+أغسطس 09 20:20:26 vmi2934783 python3[1526693]:   File "/home/nawaf511/empire-core-new/apps/ndsp-platform-gateway-9002/app.py", line 14, in <module>
+أغسطس 09 20:20:26 vmi2934783 python3[1526693]:     from backend.platform.canonical_v1.live_public_providers import (
+أغسطس 09 20:20:26 vmi2934783 python3[1526693]: ModuleNotFoundError: No module named 'backend'
+أغسطس 09 20:20:26 vmi2934783 systemd[1]: ndsp-platform-gateway-9002.service: Main process exited, code=exited, status=1/FAILURE
+أغسطس 09 20:20:26 vmi2934783 systemd[1]: ndsp-platform-gateway-9002.service: Failed with result 'exit-code'.
+أغسطس 09 20:20:29 vmi2934783 systemd[1]: ndsp-platform-gateway-9002.service: Scheduled restart job, restart counter is at 36.
+أغسطس 09 20:20:29 vmi2934783 systemd[1]: Started ndsp-platform-gateway-9002.service - NDSP Platform Gateway 9002 Recovery Service.
+أغسطس 09 20:20:30 vmi2934783 python3[1527659]: Traceback (most recent call last):
+أغسطس 09 20:20:30 vmi2934783 python3[1527659]:   File "/home/nawaf511/empire-core-new/apps/ndsp-platform-gateway-9002/app.py", line 14, in <module>
+أغسطس 09 20:20:30 vmi2934783 python3[1527659]:     from backend.platform.canonical_v1.live_public_providers import (
+أغسطس 09 20:20:30 vmi2934783 python3[1527659]: ModuleNotFoundError: No module named 'backend'
+أغسطس 09 20:20:30 vmi2934783 systemd[1]: ndsp-platform-gateway-9002.service: Main process exited, code=exited, status=1/FAILURE
+أغسطس 09 20:20:30 vmi2934783 systemd[1]: ndsp-platform-gateway-9002.service: Failed with result 'exit-code'.

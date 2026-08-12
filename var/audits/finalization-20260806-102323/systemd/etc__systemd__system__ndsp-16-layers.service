@@ -1,0 +1,18 @@
+[Unit]
+Description=NDSP 16 Analytical Layers API
+After=network.target
+
+[Service]
+Type=simple
+User=nawaf511
+WorkingDirectory=/opt/ndsp16-api
+Environment=NODE_ENV=production
+Environment=PORT=9077
+ExecStart=/usr/bin/node /opt/ndsp16-api/server.js
+Restart=always
+RestartSec=3
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

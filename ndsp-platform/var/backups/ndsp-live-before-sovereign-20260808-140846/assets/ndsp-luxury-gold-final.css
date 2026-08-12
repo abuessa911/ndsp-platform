@@ -1,0 +1,278 @@
+/* ============================================================
+ NDSP — Luxury Gold Identity Final
+ Keeps approved Empire/NDIP structure.
+ Changes color identity only.
+ ============================================================ */
+
+:root{
+ --ndsp-bg-0:#040404 !important;
+ --ndsp-bg-1:#070707 !important;
+ --ndsp-bg-2:#0b0b0c !important;
+ --ndsp-panel:#0d0d0f !important;
+ --ndsp-panel-2:#12100b !important;
+
+ --ndsp-line:rgba(212,175,55,.24) !important;
+ --ndsp-line-strong:rgba(244,215,125,.44) !important;
+
+ --ndsp-text:#f7f1df !important;
+ --ndsp-muted:#b9ad91 !important;
+ --ndsp-dim:#7f765f !important;
+
+ --ndsp-gold:#d4af37 !important;
+ --ndsp-gold-hi:#f4d77d !important;
+ --ndsp-gold-soft:#b8942e !important;
+
+ --ndsp-green:#22c55e !important;
+ --ndsp-emerald:#10b981 !important;
+ --ndsp-red:#ef4444 !important;
+
+ --background:45 10% 3% !important;
+ --foreground:43 46% 92% !important;
+ --card:45 13% 5% !important;
+ --card-foreground:43 46% 92% !important;
+ --popover:45 13% 5% !important;
+ --popover-foreground:43 46% 92% !important;
+
+ --primary:45 65% 52% !important;
+ --primary-foreground:45 18% 5% !important;
+ --secondary:42 18% 10% !important;
+ --secondary-foreground:43 46% 88% !important;
+ --muted:42 14% 12% !important;
+ --muted-foreground:42 18% 66% !important;
+ --accent:45 82% 60% !important;
+ --accent-foreground:45 18% 5% !important;
+ --border:43 30% 22% !important;
+ --input:43 30% 22% !important;
+ --ring:45 82% 60% !important;
+}
+
+html,
+body{
+ background:
+ radial-gradient(circle at 18% 8%, rgba(212,175,55,.105), transparent 33%),
+ radial-gradient(circle at 82% 12%, rgba(34,197,94,.045), transparent 34%),
+ linear-gradient(180deg, #040404, #080807 48%, #020202) !important;
+ color:var(--ndsp-text) !important;
+}
+
+/* Empire / terminal shell */
+#root,
+main,
+section,
+header,
+nav,
+aside,
+footer{
+ color:var(--ndsp-text) !important;
+}
+
+/* Text identity */
+h1,h2,h3,h4,h5,h6{
+ color:var(--ndsp-text) !important;
+}
+
+p,li,small,span,div{
+ border-color:var(--ndsp-line);
+}
+
+/* Convert cyan/blue identity to luxury gold */
+.text-cyan-300,
+.text-cyan-400,
+.text-cyan-500,
+.text-sky-300,
+.text-sky-400,
+.text-sky-500,
+.text-blue-300,
+.text-blue-400,
+.text-blue-500,
+.text-primary,
+.text-accent,
+[class*="text-cyan"],
+[class*="text-sky"],
+[class*="text-blue"]{
+ color:var(--ndsp-gold-hi) !important;
+ text-shadow:0 0 18px rgba(212,175,55,.18) !important;
+}
+
+.border-cyan-300,
+.border-cyan-400,
+.border-cyan-500,
+.border-sky-300,
+.border-sky-400,
+.border-sky-500,
+.border-blue-300,
+.border-blue-400,
+.border-blue-500,
+.border-primary,
+.border-accent,
+[class*="border-cyan"],
+[class*="border-sky"],
+[class*="border-blue"]{
+ border-color:rgba(212,175,55,.46) !important;
+}
+
+.bg-cyan-300,
+.bg-cyan-400,
+.bg-cyan-500,
+.bg-sky-300,
+.bg-sky-400,
+.bg-sky-500,
+.bg-blue-300,
+.bg-blue-400,
+.bg-blue-500,
+.bg-primary,
+.bg-accent,
+[class*="bg-cyan"],
+[class*="bg-sky"],
+[class*="bg-blue"]{
+ background:linear-gradient(135deg, rgba(212,175,55,.98), rgba(244,215,125,.82)) !important;
+ color:#090806 !important;
+}
+
+/* Keep green for live/status/positive */
+.text-green-300,
+.text-green-400,
+.text-emerald-300,
+.text-emerald-400,
+[class*="text-green"],
+[class*="text-emerald"]{
+ color:var(--ndsp-green) !important;
+ text-shadow:0 0 18px rgba(34,197,94,.16) !important;
+}
+
+.border-green-300,
+.border-green-400,
+.border-emerald-300,
+.border-emerald-400,
+[class*="border-green"],
+[class*="border-emerald"]{
+ border-color:rgba(34,197,94,.45) !important;
+}
+
+/* Panels / cards */
+[class*="border"],
+.card,
+.panel,
+article,
+aside{
+ border-color:var(--ndsp-line) !important;
+}
+
+section[class*="border"],
+div[class*="border"],
+article[class*="border"],
+aside[class*="border"],
+[class*="bg-card"],
+[class*="bg-muted"]{
+ background:
+ linear-gradient(180deg, rgba(18,16,11,.92), rgba(7,7,7,.96)) !important;
+ box-shadow:
+ 0 20px 70px rgba(0,0,0,.42),
+ inset 0 1px 0 rgba(244,215,125,.045) !important;
+}
+
+/* Header / top bar */
+header,
+nav,
+[class*="top"],
+[class*="Top"],
+[class*="bar"],
+[class*="Bar"]{
+ border-color:var(--ndsp-line) !important;
+}
+
+/* Buttons */
+a,
+button{
+ transition:all.18s ease !important;
+}
+
+a[class*="rounded"],
+button[class*="rounded"],
+a[class*="border"],
+button[class*="border"]{
+ border-color:rgba(212,175,55,.38) !important;
+}
+
+a:hover,
+button:hover{
+ border-color:rgba(244,215,125,.76) !important;
+ box-shadow:0 0 28px rgba(212,175,55,.18) !important;
+}
+
+/* Muted text */
+.text-muted-foreground,
+[class*="text-muted"],
+[class*="text-zinc-400"],
+[class*="text-zinc-500"],
+[class*="text-neutral-400"],
+[class*="text-neutral-500"],
+[class*="text-slate-400"],
+[class*="text-slate-500"],
+[class*="text-gray-400"],
+[class*="text-gray-500"]{
+ color:var(--ndsp-muted) !important;
+}
+
+/* SVG / charts */
+svg [stroke="#22d3ee"],
+svg [stroke="#38bdf8"],
+svg [stroke="#0ea5e9"],
+svg [stroke="#06b6d4"],
+svg [stroke="#67e8f9"],
+svg [stroke="cyan"],
+svg [stroke="blue"]{
+ stroke:rgba(244,215,125,.84) !important;
+}
+
+svg [fill="#22d3ee"],
+svg [fill="#38bdf8"],
+svg [fill="#0ea5e9"],
+svg [fill="#06b6d4"],
+svg [fill="#67e8f9"],
+svg [fill="cyan"],
+svg [fill="blue"]{
+ fill:rgba(212,175,55,.84) !important;
+}
+
+/* Landing old cyan override neutralization */
+*{
+ --empire-cyan:var(--ndsp-gold-hi) !important;
+ --empire-blue:var(--ndsp-gold) !important;
+ --empire-border:rgba(212,175,55,.24) !important;
+ --empire-border-strong:rgba(244,215,125,.44) !important;
+ --empire-text:var(--ndsp-text) !important;
+ --empire-muted:var(--ndsp-muted) !important;
+ --gold:var(--ndsp-gold) !important;
+ --gold2:var(--ndsp-gold-hi) !important;
+ --yellow:var(--ndsp-gold-hi) !important;
+ --line:rgba(212,175,55,.24) !important;
+}
+
+/* Selection + scrollbar */
+::selection{
+ background:rgba(212,175,55,.24) !important;
+ color:var(--ndsp-text) !important;
+}
+
+*{
+ scrollbar-color:rgba(212,175,55,.38) #070707 !important;
+}
+
+::-webkit-scrollbar{
+ width:8px;
+ height:8px;
+}
+
+::-webkit-scrollbar-track{
+ background:#070707 !important;
+}
+
+::-webkit-scrollbar-thumb{
+ background:rgba(212,175,55,.34) !important;
+ border-radius:999px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+ background:rgba(244,215,125,.55) !important;
+}

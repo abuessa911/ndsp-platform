@@ -1,0 +1,121 @@
+============================================================
+=== MIGRATE NDSP REAL-DATA-SYNC INTO PROJECT ===============
+============================================================
+DATE=2026-08-07T20:26:27+02:00
+SRC=/home/nawaf511/ndsp-portal-real-data-sync
+DST=/home/nawaf511/empire-core-new/backend/services/ndsp-runtime-jobs/real-data-sync
+AUDIT=/home/nawaf511/empire-core-new/var/audits/real-data-sync-migration-20260807-202627
+
+1) PRECHECK SOURCES
+df70255d0c5b26e47c61225fe1ffde0e0c7e7cb08fefb19e887b8dba051c68bc  /home/nawaf511/ndsp-portal-real-data-sync/sync_real_feeds.py
+d435b629865801f23c9b60f142c56981cca7247c6d8e8993a6be821a9104fbff  /home/nawaf511/ndsp-portal-real-data-sync/tradingview_live_calendar.py
+2063f8f7c45ab00c4ca299557699f3e9e811e903d8befa8f031698840484a4f5  /home/nawaf511/ndsp-portal-real-data-sync/investing_live_calendar.py
+556dd843fd05cdc5ea6c18562bf3601388abda52ea89bfb8aa3aa1271441ddbe  /home/nawaf511/ndsp-portal-real-data-sync/live_economic_calendar_sync.py
+da16a83b135ff696e4b7b94a71f1884900b9a9d1a1e923305f19fb69354088bb  /home/nawaf511/ndsp-portal-real-data-sync/sync_real_ledger.py
+
+2) BACKUP SOURCE + EFFECTIVE SYSTEMD
+
+3) COPY ALL FIVE FILES INTO PROJECT
+
+4) BYTE-FOR-BYTE VERIFICATION
+sync_real_feeds.py
+OLD=df70255d0c5b26e47c61225fe1ffde0e0c7e7cb08fefb19e887b8dba051c68bc
+NEW=df70255d0c5b26e47c61225fe1ffde0e0c7e7cb08fefb19e887b8dba051c68bc
+HASH_RESULT=PASS
+tradingview_live_calendar.py
+OLD=d435b629865801f23c9b60f142c56981cca7247c6d8e8993a6be821a9104fbff
+NEW=d435b629865801f23c9b60f142c56981cca7247c6d8e8993a6be821a9104fbff
+HASH_RESULT=PASS
+investing_live_calendar.py
+OLD=2063f8f7c45ab00c4ca299557699f3e9e811e903d8befa8f031698840484a4f5
+NEW=2063f8f7c45ab00c4ca299557699f3e9e811e903d8befa8f031698840484a4f5
+HASH_RESULT=PASS
+live_economic_calendar_sync.py
+OLD=556dd843fd05cdc5ea6c18562bf3601388abda52ea89bfb8aa3aa1271441ddbe
+NEW=556dd843fd05cdc5ea6c18562bf3601388abda52ea89bfb8aa3aa1271441ddbe
+HASH_RESULT=PASS
+sync_real_ledger.py
+OLD=da16a83b135ff696e4b7b94a71f1884900b9a9d1a1e923305f19fb69354088bb
+NEW=da16a83b135ff696e4b7b94a71f1884900b9a9d1a1e923305f19fb69354088bb
+HASH_RESULT=PASS
+
+5) PYTHON SYNTAX
+SYNTAX_PASS=sync_real_feeds.py
+SYNTAX_PASS=tradingview_live_calendar.py
+SYNTAX_PASS=investing_live_calendar.py
+SYNTAX_PASS=live_economic_calendar_sync.py
+SYNTAX_PASS=sync_real_ledger.py
+
+6) CREATE WINNING SYSTEMD OVERRIDES
+OVERRIDE_CREATED=ndsp-real-feeds-sync.service
+OVERRIDE_CREATED=ndsp-tradingview-calendar.service
+
+7) DAEMON RELOAD
+
+8) VERIFY EFFECTIVE EXECSTART
+UNIT=ndsp-real-feeds-sync.service
+EXEC={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/services/ndsp-runtime-jobs/real-data-sync/sync_real_feeds.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }
+EXEC_RESULT=PASS
+UNIT=ndsp-tradingview-calendar.service
+EXEC={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/services/ndsp-runtime-jobs/real-data-sync/tradingview_live_calendar.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }
+EXEC_RESULT=PASS
+
+9) RUN BOTH SERVICES ONCE
+
+START=ndsp-real-feeds-sync.service
+Result=success
+ExecMainStatus=0
+ExecStart={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/services/ndsp-runtime-jobs/real-data-sync/sync_real_feeds.py ; ignore_errors=no ; start_time=[Fri 2026-08-07 20:26:30 CEST] ; stop_time=[Fri 2026-08-07 20:26:31 CEST] ; pid=892712 ; code=exited ; status=0 }
+ActiveState=inactive
+SubState=dead
+RUN_RESULT=PASS
+
+START=ndsp-tradingview-calendar.service
+Result=success
+ExecMainStatus=0
+ExecStart={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/services/ndsp-runtime-jobs/real-data-sync/tradingview_live_calendar.py ; ignore_errors=no ; start_time=[Fri 2026-08-07 20:26:33 CEST] ; stop_time=[Fri 2026-08-07 20:26:34 CEST] ; pid=892735 ; code=exited ; status=0 }
+ActiveState=inactive
+SubState=dead
+RUN_RESULT=PASS
+
+10) TIMERS STILL CONNECTED
+TriggeredBy=ndsp-real-feeds-sync.timer
+TriggeredBy=ndsp-tradingview-calendar.timer
+
+11) WAIT FOR ONE NATURAL TIMER CYCLE
+
+12) VERIFY AFTER NATURAL TIMER CYCLE
+
+===== ndsp-real-feeds-sync.service =====
+Result=success
+ExecMainStatus=0
+ExecStart={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/services/ndsp-runtime-jobs/real-data-sync/sync_real_feeds.py ; ignore_errors=no ; start_time=[Fri 2026-08-07 20:26:30 CEST] ; stop_time=[Fri 2026-08-07 20:26:31 CEST] ; pid=892712 ; code=exited ; status=0 }
+ActiveState=inactive
+SubState=dead
+NATURAL_TIMER_RESULT=PASS
+
+===== ndsp-tradingview-calendar.service =====
+Result=success
+ExecMainStatus=0
+ExecStart={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/services/ndsp-runtime-jobs/real-data-sync/tradingview_live_calendar.py ; ignore_errors=no ; start_time=[Fri 2026-08-07 20:31:46 CEST] ; stop_time=[n/a] ; pid=908733 ; code=(null) ; status=0/0 }
+ActiveState=activating
+SubState=start
+NATURAL_TIMER_RESULT=PASS
+
+13) OLD SOURCE PRESERVED
+PRESERVED=/home/nawaf511/ndsp-portal-real-data-sync/sync_real_feeds.py
+PRESERVED=/home/nawaf511/ndsp-portal-real-data-sync/tradingview_live_calendar.py
+PRESERVED=/home/nawaf511/ndsp-portal-real-data-sync/investing_live_calendar.py
+PRESERVED=/home/nawaf511/ndsp-portal-real-data-sync/live_economic_calendar_sync.py
+PRESERVED=/home/nawaf511/ndsp-portal-real-data-sync/sync_real_ledger.py
+
+14) FAILED NDSP UNITS — INFORMATION ONLY
+● ndsp-contract-regression-v1-1.service loaded failed failed NDSP Backend Contract V1.1 Regression
+● ndsp-production-monitor.service       loaded failed failed NDSP Production Monitor V205
+
+============================================================
+FINAL_RESULT=PASS
+OLD_SOURCE_DELETED=NO
+ROLLBACK_DIR=/home/nawaf511/empire-core-new/var/audits/real-data-sync-migration-20260807-202627
+REPORT=/home/nawaf511/empire-core-new/var/audits/real-data-sync-migration-20260807-202627/report.txt
+============================================================

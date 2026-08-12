@@ -1,0 +1,9 @@
+/home/nawaf511/ndsp_capture_final_delete_failure_v1.sh
+/home/nawaf511/ndsp_delete_user_tree_guarded_v1.sh
+/home/nawaf511/NDSP_FINAL_DELETE_FAILURE_CAPTURE_20260727_103903/NDSP_FINAL_DELETE_FAILURE_REPORT_20260727_103903.txt
+/home/nawaf511/ndsp_legacy_malformed_email_delete_source_fix_v1_1.sh
+/home/nawaf511/ndsp_legacy_malformed_email_delete_source_fix_v1.sh
+/home/nawaf511/ndsp_owner_visible_user_trace_v2.sh
+/home/nawaf511/ndsp_source_first_account_delete_and_db_wiring_v1.sh
+/home/nawaf511/ndsp_trial_seats_9090_source_trace_v3.sh
+/home/nawaf511/.pm2/logs/ndsp-launch-control-v167-out.log

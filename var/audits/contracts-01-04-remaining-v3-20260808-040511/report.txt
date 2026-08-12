@@ -1,0 +1,170 @@
+============================================================
+=== NDSP REMAINING CONTRACT CLOSURE V3 ===
+DATE=2026-08-08T04:05:11+02:00
+AUDIT=/home/nawaf511/empire-core-new/var/audits/contracts-01-04-remaining-v3-20260808-040511
+============================================================
+
+=== 1. CURRENT SAFE STATE ===
+PYTHON_SYNTAX_BEFORE=PASS
+V30_ACTIVE_STATE=active
+V30_SUB_STATE=running
+V30_PID=2293757
+HTTP_9085_BEFORE=200
+SAFE_ROLLBACK_STATE=PASS
+
+=== 2. VERIFY 9082 GOVERNING CONTRACT ===
+HTTP_9082=200
+report_date='2026-07-21'
+report_age_days=18.0
+max_age_days=10
+fresh=False
+asset_managers_overall='bearish'
+asset_managers_weekly='bearish'
+leveraged_funds_overall='bearish'
+leveraged_funds_weekly='bullish'
+9082_GOVERNING_CONTRACT=PASS
+
+=== 3. BACKUP RESTORED SOURCE ===
+BACKUP=/home/nawaf511/empire-core-new/var/audits/contracts-01-04-remaining-v3-20260808-040511/backup/ndsp_canonical_live_runtime_v30.py
+
+=== 4. APPLY PROVEN 9082 -> V30 ADAPTER ===
+PATCH_APPLICATION=PASS
+PATCHED_ASSIGNMENT=cot = discover_cot_from_quality_live(symbol, timeframe)
+
+=== 5. STATIC VERIFICATION ===
+PYTHON_SYNTAX_AFTER_PATCH=PASS
+STATIC_ASSERTIONS=PASS
+
+=== 6. OFFLINE ADAPTER PROOF ===
+STATUS= 'STALE_BY_POLICY'
+DECISION_USE_ALLOWED= False
+MONITORING_USE_ALLOWED= True
+REPORT_DATE= '2026-07-21'
+REPORT_AGE_DAYS= 18.0
+MAX_AGE_DAYS= 10
+FRESH= False
+asset_managers_overall='bearish'
+asset_managers_weekly='bearish'
+leveraged_funds_overall='bearish'
+leveraged_funds_weekly='bullish'
+OFFLINE_ADAPTER_PROOF=PASS
+
+=== 7. RESTART V30 ONLY ===
+OLD_PID=2293757
+NEW_PID=2301282
+PID_ROTATION=PASS
+
+=== 8. WAIT FOR 9085 ===
+9085_RECOVERY=PASS
+
+=== 9. LIVE END-TO-END CAPTURE ===
+HTTP_9082=200
+HTTP_9085=200
+
+=== 10. HARD FINAL ASSERTIONS ===
+UPSTREAM_REPORT_DATE= '2026-07-21'
+UPSTREAM_REPORT_AGE_DAYS= 18.0
+UPSTREAM_MAX_AGE_DAYS= 10
+UPSTREAM_FRESH= False
+
+CANONICAL_STATUS= 'STALE_BY_POLICY'
+CANONICAL_REPORT_DATE= '2026-07-21'
+CANONICAL_REPORT_AGE_DAYS= 18.0
+CANONICAL_MAX_AGE_DAYS= 10
+CANONICAL_FRESH= False
+asset_managers_overall: 9082='bearish' 9085='bearish'
+asset_managers_weekly: 9082='bearish' 9085='bearish'
+leveraged_funds_overall: 9082='bearish' 9085='bearish'
+leveraged_funds_weekly: 9082='bullish' 9085='bullish'
+
+REPORT_DATE_HANDOFF=PASS
+REPORT_AGE_HANDOFF=PASS
+MAX_AGE_HANDOFF=PASS
+FRESHNESS_HANDOFF=PASS
+ASSET_MANAGERS_OVERALL_HANDOFF=PASS
+ASSET_MANAGERS_WEEKLY_HANDOFF=PASS
+LEVERAGED_FUNDS_OVERALL_HANDOFF=PASS
+LEVERAGED_FUNDS_WEEKLY_HANDOFF=PASS
+FOUR_DIRECTION_HANDOFF=PASS
+NO_SYNTHETIC_VALUES=PASS
+STALE_POLICY_PRESERVED=PASS
+9082_TO_9085_END_TO_END=PASS
+
+=== 11. CANONICAL LAYER VERIFICATION ===
+NDSP-CORE-L01_STATE='ACTIVE'
+NDSP-CORE-L01_OUTPUT={'governing_direction': 'bearish', 'governing_source': 'asset_managers_overall', 'timing_rule_applied': False, 'asset_managers_weekly_alignment': True, 'correction_state': 'ended', 'leveraged_funds_weekly_alignment': False, 'correction_risk': 'elevated', 'readiness_allowed': True}
+NDSP-CORE-L13_STATE='INACTIVE'
+NDSP-CORE-L13_OUTPUT={'active': False, 'direction': 'unknown', 'rule': 'AM_WEEKLY_EQUALS_LF_WEEKLY'}
+NDSP-CORE-L14_STATE='INACTIVE'
+NDSP-CORE-L14_OUTPUT={'active': False, 'direction': 'unknown', 'rule': 'AM_OVERALL_EQUALS_AM_WEEKLY_EQUALS_LF_WEEKLY', 'lf_overall_used': False}
+NDSP-CORE-L16_STATE='READY'
+NDSP-CORE-L16_OUTPUT={'single_truth_state': 'READY', 'allowed': True, 'reason_code': None}
+DECISION_USE_ALLOWED= False
+MONITORING_USE_ALLOWED= True
+PUBLISHABLE_COMPLETED_DECISION= False
+CANONICAL_LAYER_VERIFICATION=PASS
+
+=== 12. FINAL SERVICE HEALTH ===
+MainPID=2301282
+ExecMainStatus=0
+ExecStart={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_canonical_live_runtime_v30.py ; ignore_errors=no ; start_time=[Sat 2026-08-08 04:05:23 CEST] ; stop_time=[n/a] ; pid=2301282 ; code=(null) ; status=0/0 }
+ActiveState=active
+SubState=running
+
+=== LISTENERS ===
+LISTEN 0      5          127.0.0.1:9082       0.0.0.0:*                                         
+LISTEN 0      5          127.0.0.1:9085       0.0.0.0:*    users:(("python3",pid=2301282,fd=3)) 
+LISTEN 0      2048       127.0.0.1:9076       0.0.0.0:*    users:(("uvicorn",pid=2248834,fd=13))
+
+=== CAPTURE JOURNAL ===
+JOURNAL=/home/nawaf511/empire-core-new/var/audits/contracts-01-04-remaining-v3-20260808-040511/journal.txt
+FATAL_RUNTIME_ERROR_FOUND=NO
+JOURNAL_VERIFICATION=PASS
+
+=== 13. FINAL HTTP CONFIRMATION ===
+FINAL_HTTP_9085=200
+FINAL_HTTP_CONTRACT=PASS
+
+=== 14. AUDIT CHECKSUMS ===
+CHECKSUMS=/home/nawaf511/empire-core-new/var/audits/contracts-01-04-remaining-v3-20260808-040511/SHA256SUMS
+CHECKSUMS=PASS
+
+============================================================
+=== NDSP CONTRACTS 01-04 FINAL CLOSURE ===
+============================================================
+RAW_9076_HISTORY_ADAPTER=PASS
+QUALITY_9082_GOVERNING_INPUTS=PASS
+CANONICAL_9085_HANDOFF=PASS
+REPORT_DATE_HANDOFF=PASS
+REPORT_AGE_HANDOFF=PASS
+MAX_AGE_POLICY_HANDOFF=PASS
+FRESHNESS_HANDOFF=PASS
+ASSET_MANAGERS_OVERALL=BEARISH
+ASSET_MANAGERS_WEEKLY=BEARISH
+LEVERAGED_FUNDS_OVERALL=BEARISH
+LEVERAGED_FUNDS_WEEKLY=BULLISH
+FOUR_DIRECTION_HANDOFF=PASS
+SYNTHETIC_VALUES_USED=NO
+COT_STATUS=STALE_BY_POLICY
+COT_DECISION_USE_ALLOWED=FALSE
+COT_MONITORING_USE_ALLOWED=TRUE
+STALE_DATA_PROMOTED_TO_DECISION_AUTHORITY=NO
+FILES_MODIFIED=1
+SERVICES_RESTARTED=1
+RESTARTED_SERVICE=ndsp-canonical-live-runtime-v30.service
+ROLLBACK_REQUIRED=NO
+
+CONTRACTS_01_04_RUNTIME_HANDOFF=CLOSED
+FINAL_RESULT=PASS
+
+=== ARTIFACTS ===
+AUDIT=/home/nawaf511/empire-core-new/var/audits/contracts-01-04-remaining-v3-20260808-040511
+REPORT=/home/nawaf511/empire-core-new/var/audits/contracts-01-04-remaining-v3-20260808-040511/report.txt
+UPSTREAM_9082=/home/nawaf511/empire-core-new/var/audits/contracts-01-04-remaining-v3-20260808-040511/upstream-9082.json
+CANONICAL_9085=/home/nawaf511/empire-core-new/var/audits/contracts-01-04-remaining-v3-20260808-040511/canonical-9085.json
+FINAL_9085=/home/nawaf511/empire-core-new/var/audits/contracts-01-04-remaining-v3-20260808-040511/final-9085.json
+JOURNAL=/home/nawaf511/empire-core-new/var/audits/contracts-01-04-remaining-v3-20260808-040511/journal.txt
+BACKUP=/home/nawaf511/empire-core-new/var/audits/contracts-01-04-remaining-v3-20260808-040511/backup/ndsp_canonical_live_runtime_v30.py
+CHECKSUMS=/home/nawaf511/empire-core-new/var/audits/contracts-01-04-remaining-v3-20260808-040511/SHA256SUMS
+
+=== REMAINING STAGE COMPLETE ===

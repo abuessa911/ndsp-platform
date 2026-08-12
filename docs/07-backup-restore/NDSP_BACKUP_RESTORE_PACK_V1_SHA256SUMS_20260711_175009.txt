@@ -1,0 +1,8 @@
+7a82e513160b161ac88b7b2a8fd08de2bf8fd2470def4e0c18f2f67f1827932d  /home/nawaf511/empire-core-new/scripts/backup/ndsp_create_backup_passphrase_v1.sh
+3cdcad4f00af0e062e0a5b11a73bdc672f64eb8e4394734e22d557220e2dcac0  /home/nawaf511/empire-core-new/scripts/backup/ndsp_backup_runtime_precheck_v1.sh
+c38e9480996bfa8ee69cc85f0edd874493e526f1df200c543908bef64e2ece5f  /home/nawaf511/empire-core-new/scripts/backup/ndsp_full_backup_v1.sh
+06b385ab58adb637dc816e95c0df8e51624e4756c7c2099de850cb12543c1c87  /home/nawaf511/empire-core-new/scripts/restore/ndsp_backup_verify_v1.sh
+da1b63bd916ea79474c08579261986a3bf5d69af486fa1f678b9be473d5b84a8  /home/nawaf511/empire-core-new/scripts/restore/ndsp_restore_drill_v1.sh
+f9034cd56811256d635a9fc9a492646a9f04896f7b1dd81ba89d7d2184954176  /home/nawaf511/empire-core-new/docs/07-backup-restore/NDSP_BACKUP_SCOPE_V1.json
+37cfddd3dcca3102606615513da9bbc7931d612acacc2cb4d1ac0ffb6262d2d6  /home/nawaf511/empire-core-new/docs/07-backup-restore/NDSP_BACKUP_RESTORE_RUNBOOK_AR.md
+01ea07d4a4d01ba92fcad27cca87162da9f2937f63c39dfb66cd2011b1842f1d  /home/nawaf511/empire-core-new/docs/07-backup-restore/NDSP_BACKUP_RESTORE_RUNBOOK_EN.md

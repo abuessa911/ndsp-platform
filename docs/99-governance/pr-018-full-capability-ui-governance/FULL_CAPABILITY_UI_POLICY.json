@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "document": "NDSP Full Capability-to-UI Governance Policy",
+  "source_commit": "f1e861201b5f4a2dad6e71a520e0489fca1ff957",
+  "status": "DISCOVERY_REQUIRED",
+  "full_capability_coverage_claimed": false,
+  "runtime_changes": "none",
+  "principle": "No verified NDSP capability may be ignored, hidden, mocked, or omitted merely because it is absent from the current interface.",
+  "required_chain": [
+    "capability",
+    "source_or_algorithm",
+    "runtime_service",
+    "endpoint_or_contract",
+    "data_source",
+    "calculation_mode",
+    "user_role",
+    "screen",
+    "visible_component",
+    "validation_evidence"
+  ],
+  "coverage_states": [
+    "DISCOVERY_REQUIRED",
+    "SOURCE_IDENTIFIED",
+    "SERVICE_CONNECTED",
+    "API_CONNECTED",
+    "UI_PARTIAL",
+    "UI_COMPLETE",
+    "NOT_USER_FACING",
+    "DEPRECATED_WITH_APPROVAL"
+  ],
+  "data_states": [
+    "UNKNOWN",
+    "REAL_LIVE",
+    "REAL_DELAYED",
+    "REAL_SNAPSHOT",
+    "CALCULATED_REAL",
+    "MOCK_ONLY",
+    "NOT_APPLICABLE"
+  ],
+  "enforcement": {
+    "agent_contract": "AGENTS.md",
+    "copilot_contract": ".github/copilot-instructions.md",
+    "register": "docs/99-governance/pr-018-full-capability-ui-governance/CAPABILITY_UI_TRACEABILITY.csv",
+    "validator": "scripts/governance/validate_full_capability_ui.py",
+    "workflow": ".github/workflows/full-capability-ui-governance.yml"
+  }
+}

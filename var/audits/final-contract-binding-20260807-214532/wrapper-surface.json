@@ -1,0 +1,44 @@
+{
+  "imports": [
+    "from backend.layers.canonical_v1.runtime_bridge import run_canonical_layers, canonical_nmp_from_legacy, apply_canonical_golden",
+    "from backend.app.runtime.ndsp_v200_score_inputs import attach_v200_score_inputs as _ndsp_attach_v200_score_inputs_v200",
+    "from backend.app.runtime.ndsp_v201_launch_completion import (\n    attach_v201_governing_inputs as _ndsp_attach_v201_governing_inputs,\n    attach_v202_commercial_score as _ndsp_attach_v202_commercial_score,\n)",
+    "import os, json, math, urllib.parse, urllib.request",
+    "from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer",
+    "from datetime import datetime, timezone",
+    "from backend.app.runtime.ndsp_public_governance_projection_v1 import attach_governance_projection as _ndsp_attach_governance_projection_v26"
+  ],
+  "functions": [
+    "_ndsp_public_text_v143",
+    "_ndsp_public_contract_v143",
+    "now_iso",
+    "safe_float",
+    "http_json",
+    "rsi_values",
+    "direction_from_quality",
+    "binance_symbol_ok",
+    "compute_nmp",
+    "_ndsp_finalize_public_contract_v9",
+    "enrich_with_nmp",
+    "enrich_with_nmp",
+    "main",
+    "_ndsp_v12_parse_scenario_price",
+    "_ndsp_v12_level_object",
+    "_ndsp_v12_inject_scenario_levels_contract"
+  ],
+  "classes": [
+    "Handler"
+  ],
+  "terms": {
+    "tdl": false,
+    "decision_layers": false,
+    "platform_capabilities": false,
+    "data_quality": false,
+    "quality_gate": false,
+    "nmp": true,
+    "golden_alignment": true,
+    "scenario_levels": true,
+    "governance": true,
+    "explainability": true
+  }
+}

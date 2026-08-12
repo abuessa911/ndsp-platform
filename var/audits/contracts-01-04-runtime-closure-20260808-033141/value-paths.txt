@@ -1,0 +1,23 @@
+=== UPSTREAM_9082 ===
+analysis_timeframe	$.governing_inputs.analysis_timeframe	'weekly'
+asset_managers_overall	$.governing_inputs.directions.asset_managers_overall	'bearish'
+asset_managers_weekly	$.governing_inputs.directions.asset_managers_weekly	None
+fresh	$.governing_inputs.fresh	False
+leveraged_funds_weekly	$.governing_inputs.directions.leveraged_funds_weekly	None
+max_age_days	$.governing_inputs.max_age_days	10
+provider	$.live_market_analysis.provider	'binance'
+provider	$.nmp.provider	'binance_klines'
+provider	$.score_inputs.macro.provider	'yahoo_chart'
+report_age_days	$.governing_inputs.report_age_days	None
+report_date	$.governing_inputs.report_date	'2026-07-21'
+source_market	$.governing_inputs.source_market	'ETHER CASH SETTLED - CHICAGO MERCANTILE EXCHANGE'
+source_timeframe	$.governing_inputs.source_timeframe	'weekly'
+=== CANONICAL_V30_9085 ===
+asset_managers_overall	$.input_evidence.cot.directions.asset_managers_overall	None
+asset_managers_weekly	$.input_evidence.cot.directions.asset_managers_weekly	None
+fresh	$.decision_layers[10].output.economic_calendar.fresh	True
+fresh	$.decision_layers[10].output.news_context.fresh	True
+leveraged_funds_weekly	$.input_evidence.cot.directions.leveraged_funds_weekly	None
+provider	$.decision_layers[10].output.economic_calendar.provider	'TradingView'
+provider	$.decision_layers[10].output.news_context.provider	None
+provider	$.nmp.provider	'binance_klines'

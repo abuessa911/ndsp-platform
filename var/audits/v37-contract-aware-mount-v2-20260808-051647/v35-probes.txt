@@ -1,0 +1,2 @@
+200 /api/completed-decisions
+200 /api/completed-decisions/latest

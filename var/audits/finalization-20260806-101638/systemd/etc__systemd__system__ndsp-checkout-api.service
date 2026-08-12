@@ -1,0 +1,19 @@
+[Unit]
+Description=NDSP Checkout Plans Express API
+After=network.target
+
+[Service]
+Type=simple
+User=nawaf511
+Group=nawaf511
+WorkingDirectory=/home/nawaf511/empire-core-new/ndsp_checkout_plans_package/backend-express
+EnvironmentFile=/home/nawaf511/empire-core-new/ndsp_checkout_plans_package/backend-express/.env
+Environment=NODE_ENV=production
+Environment=PATH=/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/bin
+ExecStart=/usr/bin/node /home/nawaf511/empire-core-new/ndsp_checkout_plans_package/backend-express/src/server.js
+Restart=always
+RestartSec=3
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

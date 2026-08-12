@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>طبقات NDSP الداخلية | Owner</title>
+  <style>
+    :root{
+      --bg:#070a11;
+      --card:#101622;
+      --line:rgba(245,197,90,.22);
+      --text:#f8fafc;
+      --muted:rgba(226,232,240,.66);
+      --gold:#f5c55a;
+      --green:#34d399;
+      --red:#fb7185;
+      --blue:#60a5fa;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:
+        radial-gradient(circle at 16% 10%,rgba(245,197,90,.12),transparent 30%),
+        linear-gradient(180deg,#080b12,#05070c);
+      color:var(--text);
+      font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;
+    }
+    .wrap{max-width:1380px;margin:auto;padding:28px 16px 70px}
+    .top{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-bottom:22px}
+    h1{margin:0 0 8px;font-size:36px}
+    p{margin:0;color:var(--muted);line-height:1.9}
+    a{color:var(--gold);text-decoration:none}
+    .notice{
+      border:1px solid var(--line);
+      background:rgba(245,197,90,.08);
+      border-radius:22px;
+      padding:16px;
+      color:rgba(248,250,252,.86);
+      line-height:1.9;
+      margin:16px 0 22px;
+    }
+    .summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:18px}
+    .metric,.layer{
+      border:1px solid rgba(148,163,184,.14);
+      background:rgba(16,22,34,.86);
+      border-radius:24px;
+      padding:18px;
+      box-shadow:0 18px 45px rgba(0,0,0,.26);
+    }
+    .metric .label{color:var(--muted);font-size:13px}
+    .metric .value{margin-top:7px;color:var(--gold);font-size:32px;font-weight:950}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+    .layer{overflow:hidden}
+    .head{display:flex;gap:12px;justify-content:space-between;align-items:flex-start}
+    .id{width:46px;height:46px;border-radius:16px;display:grid;place-items:center;border:1px solid var(--line);color:var(--gold);font-weight:950;background:rgba(245,197,90,.08)}
+    .title{font-size:20px;font-weight:950;line-height:1.4}
+    .sub{font-size:13px;color:var(--muted);margin-top:4px}
+    .badge{display:inline-flex;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:900;white-space:nowrap}
+    .public{border:1px solid rgba(96,165,250,.35);background:rgba(96,165,250,.10);color:var(--blue)}
+    .internal{border:1px solid rgba(245,197,90,.35);background:rgba(245,197,90,.08);color:var(--gold)}
+    .ok{border:1px solid rgba(52,211,153,.35);background:rgba(52,211,153,.10);color:var(--green)}
+    .bad{border:1px solid rgba(251,113,133,.35);background:rgba(251,113,133,.10);color:var(--red)}
+    .row{margin-top:14px;border-top:1px solid rgba(148,163,184,.10);padding-top:12px}
+    .row strong{display:block;color:var(--gold);font-size:13px;margin-bottom:6px}
+    .row span{color:rgba(248,250,252,.82);line-height:1.8}
+    .file{
+      direction:ltr;
+      text-align:left;
+      font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      border:1px solid rgba(148,163,184,.12);
+      background:rgba(255,255,255,.035);
+      border-radius:14px;
+      padding:10px;
+      margin-top:8px;
+      overflow:auto;
+      color:rgba(248,250,252,.85);
+      font-size:12px;
+    }
+    .excerpt{
+      direction:ltr;
+      text-align:left;
+      white-space:pre-wrap;
+      border:1px solid rgba(148,163,184,.10);
+      background:rgba(0,0,0,.20);
+      border-radius:12px;
+      padding:9px;
+      margin-top:7px;
+      color:rgba(226,232,240,.72);
+      font-size:12px;
+      line-height:1.7;
+    }
+    @media(max-width:1000px){.grid,.summary{grid-template-columns:1fr}.top{flex-direction:column}}
+  </style>
+</head>
+<body>
+<main class="wrap">
+  <div class="top">
+    <div>
+      <h1>طبقات NDSP الداخلية — عرض المالك</h1>
+      <p>هذه الصفحة تكشف أسماء الطبقات ومنطقها ومواقع الكود للمالك فقط. واجهة المستخدم العامة تبقى محجوبة الأسماء.</p>
+    </div>
+    <a href="/">العودة للوحة الإدارة</a>
+  </div>
+
+  <div class="notice">
+    تم إلغاء الحجب الداخلي. الحجب المتبقي فقط في الواجهة العامة وواجهات API العامة. هذه الصفحة إدارية للمالك وليست صفحة عميل.
+  </div>
+
+  <section class="summary">
+    <div class="metric"><div class="label">إجمالي الطبقات</div><div class="value" id="total">—</div></div>
+    <div class="metric"><div class="label">لها مراجع كود</div><div class="value" id="hits">—</div></div>
+    <div class="metric"><div class="label">بدون مراجع مباشرة</div><div class="value" id="miss">—</div></div>
+  </section>
+
+  <section class="grid" id="layers"></section>
+</main>
+
+<script>
+(async function(){
+  const res = await fetch('/data/owner-layer-source-map.json?v=' + Date.now(), {cache:'no-store'});
+  const data = await res.json();
+
+  document.getElementById('total').textContent = data.summary.total_layers;
+  document.getElementById('hits').textContent = data.summary.with_source_hits;
+  document.getElementById('miss').textContent = data.summary.without_source_hits;
+
+  function esc(v){
+    return String(v == null ? '—' : v)
+      .replaceAll('&','&amp;')
+      .replaceAll('<','&lt;')
+      .replaceAll('>','&gt;');
+  }
+
+  document.getElementById('layers').innerHTML = data.layers.map(function(x){
+    const visibility = x.visibility && x.visibility.indexOf('public') >= 0
+      ? '<span class="badge public">مسموح علنًا</span>'
+      : '<span class="badge internal">داخلي فقط</span>';
+
+    const sourceStatus = x.source_hits && x.source_hits.length
+      ? '<span class="badge ok">مراجع كود موجودة</span>'
+      : '<span class="badge bad">لا توجد مراجع مباشرة</span>';
+
+    const files = (x.source_hits || []).map(function(h){
+      const excerpts = (h.excerpts || []).map(e => '<div class="excerpt">'+esc(e)+'</div>').join('');
+      return '<div class="file">'+esc(h.file)+'<br>score='+esc(h.score)+excerpts+'</div>';
+    }).join('');
+
+    return `
+      <article class="layer">
+        <div class="head">
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div class="id">${esc(x.id)}</div>
+            <div>
+              <div class="title">${esc(x.internal_name)}</div>
+              <div class="sub">${esc(x.short_name)} — ${esc(x.arabic_name)}</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end">
+            ${visibility}
+            ${sourceStatus}
+          </div>
+        </div>
+
+        <div class="row">
+          <strong>منطق الطبقة</strong>
+          <span>${esc(x.logic)}</span>
+        </div>
+
+        <div class="row">
+          <strong>المخرج الأساسي</strong>
+          <span>${esc(x.primary_output)}</span>
+        </div>
+
+        <div class="row">
+          <strong>مواقع الكود والمراجع</strong>
+          ${files || '<span>لا يوجد ملف مطابق بالكلمات المفتاحية الحالية. يجب ربط هذه الطبقة صراحة في مجلد الطبقات.</span>'}
+        </div>
+      </article>
+    `;
+  }).join('');
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{
+  "asset_managers_change_long": -303,
+  "asset_managers_change_short": 711,
+  "asset_managers_long": 1634,
+  "asset_managers_short": 4054,
+  "current_source_file": "/home/nawaf511/empire-core-new/backend/data/raw_cot/current_tff_futures_only_FinFutWk.txt",
+  "exchange": "CME",
+  "history_dates": [
+    "2026-07-21",
+    "2026-07-14",
+    "2026-07-07",
+    "2026-06-23",
+    "2026-06-09"
+  ],
+  "history_depth": 5,
+  "leveraged_funds_change_long": -691,
+  "leveraged_funds_change_short": -1599,
+  "leveraged_funds_long": 2223,
+  "leveraged_funds_short": 9276,
+  "market_code": "146021",
+  "market_name": "ETHER CASH SETTLED - CHICAGO MERCANTILE EXCHANGE",
+  "previous_report_date": "2026-07-14",
+  "report_date": "2026-07-21",
+  "synthetic_values_used": false,
+  "weekly_change_source": "REAL_SAME_MARKET_CONSECUTIVE_CFTC_REPORTS"
+}

@@ -1,0 +1,89 @@
+=== NDSP CONTRACTS 01-04 FINAL SEAL ===
+DATE=2026-08-08T04:06:36+02:00
+MODE=READ_ONLY
+
+=== 1. SERVICE STATES ===
+ndsp-raw-cot-gateway.service=active
+ndsp-quality-live-nmp-wrapper.service=active
+ndsp-canonical-live-runtime-v30.service=active
+SERVICE_HEALTH=PASS
+
+=== 2. HTTP CAPTURE ===
+HTTP_9076=200
+HTTP_9082=200
+HTTP_9085=200
+HTTP_HEALTH=PASS
+
+=== 3. END-TO-END CONTRACT PROOF ===
+RAW_9076_REPORT_DATE= '2026-07-21'
+RAW_9076_HISTORY_ADAPTER_STATUS= 'CONNECTED'
+RAW_9076_GOVERNING_COMPLETE= True
+
+UPSTREAM_REPORT_DATE= '2026-07-21'
+UPSTREAM_REPORT_AGE_DAYS= 18.0
+UPSTREAM_MAX_AGE_DAYS= 10
+UPSTREAM_FRESH= False
+
+CANONICAL_STATUS= 'STALE_BY_POLICY'
+CANONICAL_REPORT_DATE= '2026-07-21'
+CANONICAL_REPORT_AGE_DAYS= 18.0
+CANONICAL_MAX_AGE_DAYS= 10
+CANONICAL_FRESH= False
+
+asset_managers_overall: 9082='bearish' 9085='bearish'
+asset_managers_weekly: 9082='bearish' 9085='bearish'
+leveraged_funds_overall: 9082='bearish' 9085='bearish'
+leveraged_funds_weekly: 9082='bullish' 9085='bullish'
+
+RAW_9076_HISTORY_ADAPTER=PASS
+QUALITY_9082_GOVERNING_INPUTS=PASS
+CANONICAL_9085_HANDOFF=PASS
+REPORT_DATE_HANDOFF=PASS
+REPORT_AGE_HANDOFF=PASS
+MAX_AGE_POLICY_HANDOFF=PASS
+FRESHNESS_HANDOFF=PASS
+FOUR_DIRECTION_HANDOFF=PASS
+NO_SYNTHETIC_VALUES=PASS
+STALE_POLICY_PRESERVED=PASS
+END_TO_END_CONTRACT=PASS
+
+=== 4. V30 SERVICE ===
+MainPID=2301282
+ExecMainStatus=0
+ExecStart={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_canonical_live_runtime_v30.py ; ignore_errors=no ; start_time=[Sat 2026-08-08 04:05:23 CEST] ; stop_time=[n/a] ; pid=2301282 ; code=(null) ; status=0/0 }
+ActiveState=active
+SubState=running
+
+=== 5. LISTENERS ===
+LISTEN 0      5          127.0.0.1:9082       0.0.0.0:*                                         
+LISTEN 0      5          127.0.0.1:9085       0.0.0.0:*    users:(("python3",pid=2301282,fd=3)) 
+LISTEN 0      2048       127.0.0.1:9076       0.0.0.0:*    users:(("uvicorn",pid=2248834,fd=13))
+
+=== 6. JOURNAL REGRESSION CHECK ===
+JOURNAL_REGRESSION_CHECK=PASS
+
+=== 7. CHECKSUMS ===
+CHECKSUMS=PASS
+
+============================================================
+RAW_9076_HISTORY_ADAPTER=PASS
+QUALITY_9082_GOVERNING_INPUTS=PASS
+CANONICAL_9085_HANDOFF=PASS
+FOUR_DIRECTION_HANDOFF=PASS
+SYNTHETIC_VALUES_USED=NO
+STALE_DATA_PROMOTED_TO_DECISION_AUTHORITY=NO
+
+CONTRACTS_01_04_RUNTIME_HANDOFF=CLOSED
+CONTRACTS_01_04_FINAL_SEAL=PASS
+FILES_MODIFIED=0
+SERVICES_RESTARTED=0
+FINAL_RESULT=PASS
+
+AUDIT=/home/nawaf511/empire-core-new/var/audits/contracts-01-04-final-seal-20260808-040636
+REPORT=/home/nawaf511/empire-core-new/var/audits/contracts-01-04-final-seal-20260808-040636/report.txt
+RAW_9076=/home/nawaf511/empire-core-new/var/audits/contracts-01-04-final-seal-20260808-040636/9076.json
+QUALITY_9082=/home/nawaf511/empire-core-new/var/audits/contracts-01-04-final-seal-20260808-040636/9082.json
+CANONICAL_9085=/home/nawaf511/empire-core-new/var/audits/contracts-01-04-final-seal-20260808-040636/9085.json
+JOURNAL=/home/nawaf511/empire-core-new/var/audits/contracts-01-04-final-seal-20260808-040636/v30-journal.txt
+CHECKSUMS=/home/nawaf511/empire-core-new/var/audits/contracts-01-04-final-seal-20260808-040636/SHA256SUMS
+============================================================

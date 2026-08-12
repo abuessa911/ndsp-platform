@@ -1,0 +1,18 @@
+[Unit]
+Description=NDSP Admin Actions Gateway
+After=network.target postgresql.service
+
+[Service]
+Type=simple
+WorkingDirectory=/home/nawaf511/empire-core-new/backend/auth_api
+EnvironmentFile=-/etc/ndsp/ndsp-db.env
+EnvironmentFile=-/etc/ndsp/ndsp-admin.env
+Environment=NDSP_ADMIN_ACTIONS_PORT=9017
+Environment=NDSP_ADMIN_USERS_JSON=/var/www/ndsp-admin/admin-users.json
+ExecStart=/usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_actions_gateway.cjs
+Restart=always
+RestartSec=3
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,603 @@
+# NDSP P8-D10-D4 canonical route for my.ndsp.app approved design only
+# Generated: 20260709_173339
+#
+# Scope:
+# - my.ndsp.app only
+# - public approved design
+# - preserves auth/static aliases
+# - preserves API proxy pass-through to api.ndsp.app/local auth where needed
+
+server {
+
+
+    listen 80;
+    listen [::]:80;
+    server_name my.ndsp.app;
+    return 301 https://$host$request_uri;
+
+    # NDSP_PREVIEW_RETIRE_BEGIN
+    location = /__source_preview {
+        add_header Cache-Control "no-store, no-cache, must-revalidate" always;
+        return 302 /;
+    }
+
+    location ^~ /__source_preview/ {
+        add_header Cache-Control "no-store, no-cache, must-revalidate" always;
+        return 302 /;
+    }
+
+    location = /__clean_preview {
+        add_header Cache-Control "no-store, no-cache, must-revalidate" always;
+        return 302 /;
+    }
+
+    location ^~ /__clean_preview/ {
+        add_header Cache-Control "no-store, no-cache, must-revalidate" always;
+        return 302 /;
+    }
+    # NDSP_PREVIEW_RETIRE_END
+
+}
+
+server {
+    # NDSP_SECURITY_HEADERS_V59_BEGIN
+    add_header Strict-Transport-Security "max-age=31536000" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header Content-Security-Policy "default-src 'self' https: data: blob: 'unsafe-inline' 'unsafe-eval'; connect-src 'self' https: wss:; frame-ancestors 'self'; base-uri 'self'; object-src 'none';" always;
+    add_header Permissions-Policy "geolocation=(), microphone=(), camera=()" always;
+    # NDSP_SECURITY_HEADERS_V59_END
+
+
+    # NDSP_ROOT_TO_LANDING_FINAL_V1_BEGIN
+    location = / {
+        add_header Cache-Control "no-store, no-cache, must-revalidate, max-age=0" always;
+        add_header Pragma "no-cache" always;
+        add_header Expires "0" always;
+        return 302 https://www.ndsp.app/;
+    }
+    # NDSP_ROOT_TO_LANDING_FINAL_V1_END
+
+
+
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name my.ndsp.app;
+    include /etc/nginx/snippets/ndsp-governance-44-v26.conf;
+
+    root /var/www/ndsp-my;
+    index index.html;
+
+    ssl_certificate /etc/letsencrypt/live/my.ndsp.app/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/my.ndsp.app/privkey.pem;
+
+    add_header X-NDSP-Portal "approved-design-only-d10-d4" always;
+    add_header X-Content-Type-Options "nosniff" always;
+
+
+    location = /register {
+        return 308 /register/;
+    }
+
+    location = /forgot-password {
+        return 308 /forgot-password/;
+    }
+
+    location = /reset-password {
+        return 308 /reset-password/;
+    }
+
+
+
+    location ^~ /api/ {
+        proxy_pass https://api.ndsp.app/api/;
+        proxy_ssl_server_name on;
+        proxy_set_header Host api.ndsp.app;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    location /approved-design/ {
+        try_files $uri $uri/ /approved-design/index.html;
+        expires 1h;
+    }
+
+    location /assets/ {
+        try_files $uri =404;
+        expires 1h;
+    }
+
+    location ~* \.(?:css|js|mjs|png|jpg|jpeg|gif|svg|webp|ico|json|txt|woff2?)$ {
+        try_files $uri =404;
+        access_log off;
+        expires 1h;
+    }
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    # NDSP_PREVIEW_RETIRE_BEGIN
+    location = /__source_preview {
+        add_header Cache-Control "no-store, no-cache, must-revalidate" always;
+        return 302 /;
+    }
+
+    location ^~ /__source_preview/ {
+        add_header Cache-Control "no-store, no-cache, must-revalidate" always;
+        return 302 /;
+    }
+
+    location = /__clean_preview {
+        add_header Cache-Control "no-store, no-cache, must-revalidate" always;
+        return 302 /;
+    }
+
+    location ^~ /__clean_preview/ {
+        add_header Cache-Control "no-store, no-cache, must-revalidate" always;
+        return 302 /;
+    }
+    # NDSP_PREVIEW_RETIRE_END
+
+
+
+    # NDSP_V39_DECISION_ROOM_ACCESS_BEGIN
+    # Authentication is evaluated by the local service; no client-side plan is trusted.
+    
+
+    location = /decision-room-v31/account {
+        return 308 /decision-room-v31/account/;
+    }
+
+    location ^~ /decision-room-v31/account/ {
+        try_files $uri $uri/ /decision-room-v31/account/index.html;
+    }
+
+    location = /decision-room-v31 {
+        auth_request /__ndsp_v39_decision_access;
+        error_page 401 403 = @ndsp_v39_login;
+        try_files /decision-room-v31/index.html =404;
+    }
+
+    location ^~ /decision-room-v31/ {
+        auth_request /__ndsp_v39_decision_access;
+        error_page 401 403 = @ndsp_v39_login;
+        try_files $uri $uri/ /decision-room-v31/index.html;
+    }
+
+    location @ndsp_v39_login {
+        return 302 /decision-room-v31/account/?mode=login;
+    }
+    # NDSP_V39_DECISION_ROOM_ACCESS_END
+
+    # NDSP_PUBLIC_JSON_V53_BEGIN
+    location = /portal-v50/config/assets.json {
+        alias /var/www/ndsp-my/portal-v50/config/assets.json;
+        default_type application/json;
+        add_header Cache-Control "no-store" always;
+        add_header X-NDSP-Static-Contract "assets-v53" always;
+    }
+    location = /portal-v50/config/layers.json {
+        alias /var/www/ndsp-my/portal-v50/config/layers.json;
+        default_type application/json;
+        add_header Cache-Control "no-store" always;
+        add_header X-NDSP-Static-Contract "layers-v53" always;
+    }
+    location = /portal-v50/config/capabilities.json {
+        alias /var/www/ndsp-my/portal-v50/config/capabilities.json;
+        default_type application/json;
+        add_header Cache-Control "no-store" always;
+        add_header X-NDSP-Static-Contract "capabilities-v53" always;
+    }
+
+    # NDSP_PUBLIC_JSON_V53_END
+
+    # NDSP_SUPPORT_ROUTE_V60_BEGIN
+    location = /support-center.html {
+        try_files /portal-v50/support-center-v60.html =404;
+    }
+    # NDSP_SUPPORT_ROUTE_V60_END
+
+    # NDSP_LAUNCH_CONTROL_V167_BEGIN
+
+
+
+    location = /api/register {
+        proxy_pass http://127.0.0.1:9090/api/register;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Cookie $http_cookie;
+        proxy_pass_request_headers on;
+        proxy_buffering off;
+        add_header X-NDSP-Launch-Control "v167" always;
+    }
+
+    location = /api/trial/status {
+        proxy_pass http://127.0.0.1:9090/api/trial/status;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Cookie $http_cookie;
+        proxy_pass_request_headers on;
+        proxy_buffering off;
+        add_header X-NDSP-Launch-Control "v167" always;
+        add_header Cache-Control "no-store" always;
+    }
+
+    location = /api/trial/seats {
+        proxy_pass http://127.0.0.1:9090/api/trial/seats;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_buffering off;
+        add_header X-NDSP-Launch-Control "v167" always;
+        add_header Cache-Control "no-store" always;
+    }
+
+    location = /api/launch/status {
+        proxy_pass http://127.0.0.1:9090/api/launch/status;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_buffering off;
+        add_header X-NDSP-Launch-Control "v167" always;
+        add_header Cache-Control "no-store" always;
+    }
+
+    location = /api/entitlements/me {
+        proxy_pass http://127.0.0.1:9090/api/entitlements/me;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Cookie $http_cookie;
+        proxy_pass_request_headers on;
+        proxy_buffering off;
+        add_header X-NDSP-Launch-Control "v167" always;
+        add_header Cache-Control "no-store" always;
+    }
+
+
+
+
+
+    location = /__ndsp_v39_decision_access {
+        internal;
+        proxy_pass http://127.0.0.1:9090/api/auth/decision-room-access;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Original-URI $request_uri;
+        proxy_set_header Cookie $http_cookie;
+        proxy_pass_request_body off;
+        proxy_set_header Content-Length "";
+    }
+    # NDSP_LAUNCH_CONTROL_V167_END
+
+    # NDSP_OWNER_DASHBOARD_V173_BEGIN
+
+
+
+
+
+
+
+    # NDSP_OWNER_DASHBOARD_V173_END
+
+    # NDSP_TELEGRAM_V182_BEGIN
+    location = /telegram-alerts {
+        return 302 /telegram-alerts/;
+    }
+
+    location ^~ /telegram-alerts/ {
+        root /var/www/ndsp-my;
+        index index.html;
+        try_files $uri $uri/index.html =404;
+        add_header Cache-Control "no-store" always;
+    }
+
+    location = /assets/ndsp-telegram-v182.css {
+        alias /var/www/ndsp-my/assets/ndsp-telegram-v182.css;
+        default_type text/css;
+        add_header Cache-Control "no-store" always;
+    }
+
+    location = /assets/ndsp-telegram-v182.js {
+        alias /var/www/ndsp-my/assets/ndsp-telegram-v182.js;
+        default_type application/javascript;
+        add_header Cache-Control "no-store" always;
+    }
+
+    location = /assets/ndsp-telegram-entry-v182.js {
+        alias /var/www/ndsp-my/assets/ndsp-telegram-entry-v182.js;
+        default_type application/javascript;
+        add_header Cache-Control "no-store" always;
+    }
+
+    location ^~ /api/telegram/ {
+        proxy_pass http://127.0.0.1:9091;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Cookie $http_cookie;
+        proxy_pass_request_headers on;
+        proxy_buffering off;
+    }
+    # NDSP_TELEGRAM_V182_END
+
+    # NDSP_BUSINESS_OPERATIONS_V205_INCLUDE
+    include /etc/nginx/snippets/ndsp-business-ops-v205.conf;
+
+    # NDSP_MARKET_DATA_BRIDGE_V4_ALL_ACTIVE_VHOSTS_BEGIN
+    location = /api/market/candles {
+        proxy_pass http://127.0.0.1:9095;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_connect_timeout 10s;
+        proxy_read_timeout 45s;
+        proxy_send_timeout 45s;
+        add_header X-NDSP-Market-Bridge V4 always;
+    }
+
+    location = /api/market-data/candles {
+        proxy_pass http://127.0.0.1:9095;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_connect_timeout 10s;
+        proxy_read_timeout 45s;
+        proxy_send_timeout 45s;
+        add_header X-NDSP-Market-Bridge V4 always;
+    }
+
+    location = /api/ohlcv {
+        proxy_pass http://127.0.0.1:9095;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_connect_timeout 10s;
+        proxy_read_timeout 45s;
+        proxy_send_timeout 45s;
+        add_header X-NDSP-Market-Bridge V4 always;
+    }
+
+    location = /api/candles {
+        proxy_pass http://127.0.0.1:9095;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_connect_timeout 10s;
+        proxy_read_timeout 45s;
+        proxy_send_timeout 45s;
+        add_header X-NDSP-Market-Bridge V4 always;
+    }
+
+    location = /api/market/ohlcv {
+        proxy_pass http://127.0.0.1:9095;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_connect_timeout 10s;
+        proxy_read_timeout 45s;
+        proxy_send_timeout 45s;
+        add_header X-NDSP-Market-Bridge V4 always;
+    }
+
+    location = /api/technical/candles {
+        proxy_pass http://127.0.0.1:9095;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_connect_timeout 10s;
+        proxy_read_timeout 45s;
+        proxy_send_timeout 45s;
+        add_header X-NDSP-Market-Bridge V4 always;
+    }
+
+    location = /api/news {
+        proxy_pass http://127.0.0.1:9095;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_connect_timeout 10s;
+        proxy_read_timeout 45s;
+        proxy_send_timeout 45s;
+        add_header X-NDSP-Market-Bridge V4 always;
+    }
+
+    location = /api/market/news {
+        proxy_pass http://127.0.0.1:9095;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_connect_timeout 10s;
+        proxy_read_timeout 45s;
+        proxy_send_timeout 45s;
+        add_header X-NDSP-Market-Bridge V4 always;
+    }
+
+    location = /api/events {
+        proxy_pass http://127.0.0.1:9095;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_connect_timeout 10s;
+        proxy_read_timeout 45s;
+        proxy_send_timeout 45s;
+        add_header X-NDSP-Market-Bridge V4 always;
+    }
+
+    location = /api/economic-calendar {
+        proxy_pass http://127.0.0.1:9095;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_connect_timeout 10s;
+        proxy_read_timeout 45s;
+        proxy_send_timeout 45s;
+        add_header X-NDSP-Market-Bridge V4 always;
+    }
+
+    location = /api/market-data-bridge/health {
+        proxy_pass http://127.0.0.1:9095;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_connect_timeout 10s;
+        proxy_read_timeout 45s;
+        proxy_send_timeout 45s;
+        add_header X-NDSP-Market-Bridge V4 always;
+    }
+    # NDSP_MARKET_DATA_BRIDGE_V4_ALL_ACTIVE_VHOSTS_END
+
+    include /etc/nginx/snippets/ndsp-auth-core-clean.conf;
+
+    # NDSP_CLEAN_AUTH_COMPLETED_DECISIONS_BRIDGE_V3_BEGIN
+    location = /_ndsp_clean_auth_completed_check {
+        internal;
+        proxy_pass http://127.0.0.1:19091/api/auth/session;
+        proxy_pass_request_body off;
+        proxy_set_header Content-Length "";
+        proxy_set_header Cookie $http_cookie;
+        proxy_set_header X-Original-URI $request_uri;
+        proxy_set_header Host $host;
+    }
+
+    location = /api/completed-decisions {
+        auth_request /_ndsp_clean_auth_completed_check;
+        proxy_pass http://127.0.0.1:9078/api/completed$is_args$args;
+        proxy_http_version 1.1;
+        proxy_set_header Host 127.0.0.1:9078;
+        proxy_set_header Cookie "";
+        proxy_set_header Authorization "";
+        proxy_set_header X-NDSP-Auth-Verified 1;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_no_cache 1;
+        proxy_cache_bypass 1;
+        add_header Cache-Control "no-store" always;
+    }
+
+    location = /api/completed-decisions/latest {
+        auth_request /_ndsp_clean_auth_completed_check;
+        proxy_pass http://127.0.0.1:9078/api/completed/latest$is_args$args;
+        proxy_http_version 1.1;
+        proxy_set_header Host 127.0.0.1:9078;
+        proxy_set_header Cookie "";
+        proxy_set_header Authorization "";
+        proxy_set_header X-NDSP-Auth-Verified 1;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_no_cache 1;
+        proxy_cache_bypass 1;
+        add_header Cache-Control "no-store" always;
+    }
+    # NDSP_CLEAN_AUTH_COMPLETED_DECISIONS_BRIDGE_V3_END
+
+
+    # NDSP_REAL_PORTAL_NEXT_ROUTE_BEGIN
+
+
+    # NDSP_FINAL_PORTAL_SPA_BEGIN
+
+    location = /portal {
+        return 301 /portal/;
+    }
+
+    location ^~ /portal/assets/ {
+        root /var/www/ndsp-my;
+        try_files $uri =404;
+
+        add_header X-NDSP-Portal-Route "V52-CANONICAL" always;
+        add_header Cache-Control "public, max-age=31536000, immutable" always;
+    }
+
+    location = /portal/favicon.svg {
+        root /var/www/ndsp-my;
+        try_files $uri =404;
+
+        add_header X-NDSP-Portal-Route "V52-CANONICAL" always;
+    }
+
+    location ^~ /portal/ {
+        root /var/www/ndsp-my;
+
+        try_files $uri $uri/ /portal/index.html;
+
+        add_header X-NDSP-Portal-Route "V52-CANONICAL" always;
+        add_header Cache-Control "no-cache, no-store, must-revalidate" always;
+        add_header Pragma "no-cache" always;
+        add_header Expires "0" always;
+    }
+
+    # NDSP_FINAL_PORTAL_SPA_END
+
+    location = /portal-next {
+        return 301 /portal-next/;
+    }
+
+    location = /portal-next/ {
+        root /var/www/ndsp-my;
+        try_files /portal-next/index.html =404;
+
+        add_header Cache-Control "no-cache, no-store, must-revalidate" always;
+        add_header Pragma "no-cache" always;
+        add_header Expires "0" always;
+    }
+
+    location ^~ /portal-next/assets/ {
+        root /var/www/ndsp-my;
+        try_files $uri =404;
+
+        add_header Cache-Control "public, max-age=31536000, immutable" always;
+    }
+
+    location = /portal-next/favicon.svg {
+        root /var/www/ndsp-my;
+        try_files $uri =404;
+    }
+
+    location ^~ /portal-next/ {
+        root /var/www/ndsp-my;
+        try_files /portal-next/index.html =404;
+
+        add_header Cache-Control "no-cache, no-store, must-revalidate" always;
+        add_header Pragma "no-cache" always;
+        add_header Expires "0" always;
+    }
+
+    # NDSP_REAL_PORTAL_NEXT_ROUTE_END
+
+}

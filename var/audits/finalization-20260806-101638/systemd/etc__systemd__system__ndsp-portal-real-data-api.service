@@ -1,0 +1,16 @@
+[Unit]
+Description=NDSP Portal Real Data API
+After=postgresql.service network.target
+Wants=postgresql.service
+
+[Service]
+Type=simple
+User=postgres
+WorkingDirectory=/home/nawaf511/empire-core-new/backend/ndsp-portal-real-data-api
+ExecStart=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/ndsp-portal-real-data-api/server.py
+Restart=always
+RestartSec=3
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target

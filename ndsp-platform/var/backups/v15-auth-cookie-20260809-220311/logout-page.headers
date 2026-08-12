@@ -1,0 +1,11 @@
+HTTP/1.1 302 Found
+X-Powered-By: Express
+Set-Cookie: ndsp_session=; Path=/; Max-Age=0; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly; Secure; SameSite=Lax
+Location: /login/?logged_out=1
+Vary: Accept
+Content-Type: text/plain; charset=utf-8
+Content-Length: 42
+Date: Sun, 09 Aug 2026 20:03:15 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+

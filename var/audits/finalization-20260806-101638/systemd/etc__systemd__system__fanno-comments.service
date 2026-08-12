@@ -1,0 +1,12 @@
+[Unit]
+Description=Fanno Comment Service
+After=network.target
+
+[Service]
+User=nawaf511
+WorkingDirectory=/opt/fanno_comments
+ExecStart=/opt/fanno_comments/venv/bin/python app.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

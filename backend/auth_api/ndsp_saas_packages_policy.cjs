@@ -4,7 +4,7 @@ const APPROVED_LAYER_NAMES = Object.freeze([
   'TDL',
   'NMP',
   "Devil's Advocate",
-  'Nawaf Golden Alignment'
+  'Golden Signal'
 ]);
 
 const PACKAGES = Object.freeze({
@@ -30,7 +30,7 @@ const PACKAGES = Object.freeze({
     assets_limit: 20,
     daily_analysis_limit: 15,
     visible_named_layers: ['TDL', 'NMP'],
-    hidden_by_name_but_outputs_allowed: ["Devil's Advocate", 'Nawaf Golden Alignment'],
+    hidden_by_name_but_outputs_allowed: ["Devil's Advocate", 'Golden Signal'],
     hidden_named_layers_count: 14,
     decision_depth: 'advanced_entry',
     alerts: 'basic_limited',
@@ -45,7 +45,7 @@ const PACKAGES = Object.freeze({
     markets_limit: 'all',
     assets_limit: 100,
     daily_analysis_limit: 250,
-    visible_named_layers: ['TDL', 'NMP', "Devil's Advocate", 'Nawaf Golden Alignment'],
+    visible_named_layers: ['TDL', 'NMP', "Devil's Advocate", 'Golden Signal'],
     hidden_named_layers_count: 12,
     decision_depth: 'full_individual',
     alerts: 'advanced_telegram',
@@ -63,7 +63,7 @@ const PACKAGES = Object.freeze({
     markets_limit: 'all',
     assets_limit: '250+ or contract',
     daily_analysis_limit: 'contract',
-    visible_named_layers: ['TDL', 'NMP', "Devil's Advocate", 'Nawaf Golden Alignment'],
+    visible_named_layers: ['TDL', 'NMP', "Devil's Advocate", 'Golden Signal'],
     hidden_named_layers_count: 12,
     decision_depth: 'commercial_institutional',
     alerts: 'multi_channel',

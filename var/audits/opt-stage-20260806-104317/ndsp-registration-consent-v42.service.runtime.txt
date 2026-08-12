@@ -1,0 +1,7 @@
+MainPID=1364
+ExecStart={ path=/usr/bin/node ; argv[]=/usr/bin/node /opt/ndsp/legal-v42/ndsp-registration-consent-gateway.cjs ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }
+Environment=
+EnvironmentFiles=/etc/ndsp/v46-internal.env (ignore_errors=yes)
+WorkingDirectory=
+ActiveState=active
+SubState=running

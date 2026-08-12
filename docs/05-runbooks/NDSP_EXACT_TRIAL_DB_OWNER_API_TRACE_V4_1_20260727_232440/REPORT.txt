@@ -1,0 +1,2230 @@
+
+============================================================
+NDSP — EXACT TRIAL DATABASE AND OWNER API TRACE V4
+============================================================
+DATE=2026-07-27T23:24:40+02:00
+HOST=vmi2934783.contaboserver.net
+PROJECT=/home/nawaf511/empire-core-new
+TARGET_EMAIL=she20232030@gmail.com
+SERVER=/home/nawaf511/empire-core-new/backend/services/ndsp-launch-control-v167/server.py
+DATABASE=/home/nawaf511/empire-core-new/backend/services/ndsp-launch-control-v167/data/launch_control.sqlite3
+MODE=READ_ONLY
+REPORT=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_EXACT_TRIAL_DB_OWNER_API_TRACE_V4_1_20260727_232440/REPORT.txt
+
+============================================================
+0) PRECONDITIONS
+============================================================
+SERVER_SHA256=5b6328ceff5611698930e2bcb99b8df8cb451ee54094ad8474c2dc862feb51ca
+DATABASE_SHA256=3d1d7bc898a6c8001cfa50322748367ad46149509dbdb1f74755140a54808d02
+DATABASE_BYTES=53248
+PRECONDITION_GATE=PASS
+
+============================================================
+1) ACTIVE PORT 9090 PROCESS BINDING
+============================================================
+State  Recv-Q Send-Q Local Address:Port Peer Address:PortProcess
+LISTEN 0      5          127.0.0.1:9090      0.0.0.0:*    users:(("python3",pid=461973,fd=7))
+PORT_9090_PID=461973
+PORT_9090_USER=nawaf511
+PORT_9090_CWD=/home/nawaf511
+PORT_9090_EXE=/usr/bin/python3.12
+PORT_9090_CMD=python3 /home/nawaf511/empire-core-new/backend/services/ndsp-launch-control-v167/server.py 
+
+============================================================
+2) SOURCE CONTEXT FOR DATABASE AND SEAT CALCULATION
+============================================================
+========================================================================
+CONTEXT_LINES=6-18
+000006: import http.client
+000007: import http.server
+000008: import json
+000009: import os
+000010: import secrets
+000011: import sqlite3
+000012: import ssl
+000013: import threading
+000014: import time
+000015: import urllib.parse
+000016: 
+000017: PORT=int(os.environ["PORT"])
+000018: DB_PATH=os.environ["DB_PATH"]
+========================================================================
+CONTEXT_LINES=15-27
+000015: import urllib.parse
+000016: 
+000017: PORT=int(os.environ["PORT"])
+000018: DB_PATH=os.environ["DB_PATH"]
+000019: ADMIN_SECRET=os.environ["ADMIN_SECRET"]
+000020: OWNER_EMAIL=os.environ.get("OWNER_EMAIL","").strip().lower()
+000021: INTERNAL_EMAILS={
+000022:     value.strip().lower()
+000023:     for value in os.environ.get("INTERNAL_EMAILS","").split(",")
+000024:     if value.strip()
+000025: }
+000026: MAX_TRIAL_SEATS=int(os.environ.get("MAX_TRIAL_SEATS","50"))
+000027: CONSENT_VERSION=os.environ.get(
+========================================================================
+CONTEXT_LINES=16-28
+000016: 
+000017: PORT=int(os.environ["PORT"])
+000018: DB_PATH=os.environ["DB_PATH"]
+000019: ADMIN_SECRET=os.environ["ADMIN_SECRET"]
+000020: OWNER_EMAIL=os.environ.get("OWNER_EMAIL","").strip().lower()
+000021: INTERNAL_EMAILS={
+000022:     value.strip().lower()
+000023:     for value in os.environ.get("INTERNAL_EMAILS","").split(",")
+000024:     if value.strip()
+000025: }
+000026: MAX_TRIAL_SEATS=int(os.environ.get("MAX_TRIAL_SEATS","50"))
+000027: CONSENT_VERSION=os.environ.get(
+000028:     "CONSENT_VERSION",
+========================================================================
+CONTEXT_LINES=18-30
+000018: DB_PATH=os.environ["DB_PATH"]
+000019: ADMIN_SECRET=os.environ["ADMIN_SECRET"]
+000020: OWNER_EMAIL=os.environ.get("OWNER_EMAIL","").strip().lower()
+000021: INTERNAL_EMAILS={
+000022:     value.strip().lower()
+000023:     for value in os.environ.get("INTERNAL_EMAILS","").split(",")
+000024:     if value.strip()
+000025: }
+000026: MAX_TRIAL_SEATS=int(os.environ.get("MAX_TRIAL_SEATS","50"))
+000027: CONSENT_VERSION=os.environ.get(
+000028:     "CONSENT_VERSION",
+000029:     "NDSP-LEGAL-2026-07-19-V1",
+000030: )
+========================================================================
+CONTEXT_LINES=21-33
+000021: INTERNAL_EMAILS={
+000022:     value.strip().lower()
+000023:     for value in os.environ.get("INTERNAL_EMAILS","").split(",")
+000024:     if value.strip()
+000025: }
+000026: MAX_TRIAL_SEATS=int(os.environ.get("MAX_TRIAL_SEATS","50"))
+000027: CONSENT_VERSION=os.environ.get(
+000028:     "CONSENT_VERSION",
+000029:     "NDSP-LEGAL-2026-07-19-V1",
+000030: )
+000031: SESSION_URL=os.environ.get(
+000032:     "SESSION_URL",
+000033:     "https://api.ndsp.app/api/auth/session",
+========================================================================
+CONTEXT_LINES=34-46
+000034: )
+000035: REGISTER_URL=os.environ.get(
+000036:     "REGISTER_URL",
+000037:     "http://127.0.0.1:9028/api/register",
+000038: )
+000039: TRIAL_STATUS_URL=os.environ.get(
+000040:     "TRIAL_STATUS_URL",
+000041:     "http://127.0.0.1:9001/api/trial/status",
+000042: )
+000043: DECISION_ACCESS_URL=os.environ.get(
+000044:     "DECISION_ACCESS_URL",
+000045:     "http://127.0.0.1:9020/api/auth/decision-room-access",
+000046: )
+========================================================================
+CONTEXT_LINES=35-47
+000035: REGISTER_URL=os.environ.get(
+000036:     "REGISTER_URL",
+000037:     "http://127.0.0.1:9028/api/register",
+000038: )
+000039: TRIAL_STATUS_URL=os.environ.get(
+000040:     "TRIAL_STATUS_URL",
+000041:     "http://127.0.0.1:9001/api/trial/status",
+000042: )
+000043: DECISION_ACCESS_URL=os.environ.get(
+000044:     "DECISION_ACCESS_URL",
+000045:     "http://127.0.0.1:9020/api/auth/decision-room-access",
+000046: )
+000047: TRIAL_DAYS=16
+========================================================================
+CONTEXT_LINES=36-48
+000036:     "REGISTER_URL",
+000037:     "http://127.0.0.1:9028/api/register",
+000038: )
+000039: TRIAL_STATUS_URL=os.environ.get(
+000040:     "TRIAL_STATUS_URL",
+000041:     "http://127.0.0.1:9001/api/trial/status",
+000042: )
+000043: DECISION_ACCESS_URL=os.environ.get(
+000044:     "DECISION_ACCESS_URL",
+000045:     "http://127.0.0.1:9020/api/auth/decision-room-access",
+000046: )
+000047: TRIAL_DAYS=16
+000048: MARKER="v167"
+========================================================================
+CONTEXT_LINES=52-64
+000052:     "اكتمل العدد المخصص للمرحلة التجريبية الحالية. "
+000053:     "نشكر اهتمامك بمنصة NDSP، وسيتم فتح مقاعد إضافية في مرحلة لاحقة."
+000054: )
+000055: CAPACITY_MESSAGE_EN=(
+000056:     "The current limited-trial capacity is full. "
+000057:     "Additional NDSP seats may open in a later phase."
+000058: )
+000059: 
+000060: def now():
+000061:     return dt.datetime.now(dt.timezone.utc)
+000062: 
+000063: def iso(value):
+000064:     return value.astimezone(dt.timezone.utc).isoformat().replace("+00:00","Z")
+========================================================================
+CONTEXT_LINES=76-88
+000076:         return parsed.astimezone(dt.timezone.utc)
+000077:     except Exception:
+000078:         return None
+000079: 
+000080: def connect():
+000081:     connection=sqlite3.connect(
+000082:         DB_PATH,
+000083:         timeout=30,
+000084:         isolation_level=None,
+000085:     )
+000086:     connection.row_factory=sqlite3.Row
+000087:     connection.execute("PRAGMA journal_mode=WAL")
+000088:     connection.execute("PRAGMA foreign_keys=ON")
+========================================================================
+CONTEXT_LINES=81-93
+000081:     connection=sqlite3.connect(
+000082:         DB_PATH,
+000083:         timeout=30,
+000084:         isolation_level=None,
+000085:     )
+000086:     connection.row_factory=sqlite3.Row
+000087:     connection.execute("PRAGMA journal_mode=WAL")
+000088:     connection.execute("PRAGMA foreign_keys=ON")
+000089:     connection.execute("PRAGMA busy_timeout=30000")
+000090:     return connection
+000091: 
+000092: def columns(connection,table):
+000093:     return {
+========================================================================
+CONTEXT_LINES=108-120
+000108: 
+000109:     with connect() as connection:
+000110:         connection.execute(
+000111:             """
+000112:             CREATE TABLE IF NOT EXISTS trial_clock (
+000113:                 user_key TEXT PRIMARY KEY,
+000114:                 user_id TEXT,
+000115:                 email TEXT,
+000116:                 trial_started_at TEXT NOT NULL,
+000117:                 trial_ends_at TEXT NOT NULL,
+000118:                 duration_days INTEGER NOT NULL DEFAULT 16,
+000119:                 source TEXT NOT NULL,
+000120:                 source_reference TEXT,
+========================================================================
+CONTEXT_LINES=109-121
+000109:     with connect() as connection:
+000110:         connection.execute(
+000111:             """
+000112:             CREATE TABLE IF NOT EXISTS trial_clock (
+000113:                 user_key TEXT PRIMARY KEY,
+000114:                 user_id TEXT,
+000115:                 email TEXT,
+000116:                 trial_started_at TEXT NOT NULL,
+000117:                 trial_ends_at TEXT NOT NULL,
+000118:                 duration_days INTEGER NOT NULL DEFAULT 16,
+000119:                 source TEXT NOT NULL,
+000120:                 source_reference TEXT,
+000121:                 created_at TEXT NOT NULL,
+========================================================================
+CONTEXT_LINES=110-122
+000110:         connection.execute(
+000111:             """
+000112:             CREATE TABLE IF NOT EXISTS trial_clock (
+000113:                 user_key TEXT PRIMARY KEY,
+000114:                 user_id TEXT,
+000115:                 email TEXT,
+000116:                 trial_started_at TEXT NOT NULL,
+000117:                 trial_ends_at TEXT NOT NULL,
+000118:                 duration_days INTEGER NOT NULL DEFAULT 16,
+000119:                 source TEXT NOT NULL,
+000120:                 source_reference TEXT,
+000121:                 created_at TEXT NOT NULL,
+000122:                 updated_at TEXT NOT NULL
+========================================================================
+CONTEXT_LINES=117-129
+000117:                 trial_ends_at TEXT NOT NULL,
+000118:                 duration_days INTEGER NOT NULL DEFAULT 16,
+000119:                 source TEXT NOT NULL,
+000120:                 source_reference TEXT,
+000121:                 created_at TEXT NOT NULL,
+000122:                 updated_at TEXT NOT NULL
+000123:             )
+000124:             """
+000125:         )
+000126: 
+000127:         add_column(
+000128:             connection,
+000129:             "trial_clock",
+========================================================================
+CONTEXT_LINES=131-143
+000131:             "INTEGER NOT NULL DEFAULT 0",
+000132:         )
+000133:         add_column(
+000134:             connection,
+000135:             "trial_clock",
+000136:             "entitlement_status",
+000137:             "TEXT NOT NULL DEFAULT 'trial'",
+000138:         )
+000139:         add_column(
+000140:             connection,
+000141:             "trial_clock",
+000142:             "plan",
+000143:             "TEXT NOT NULL DEFAULT 'trial'",
+========================================================================
+CONTEXT_LINES=156-168
+000156:         )
+000157: 
+000158:         connection.execute(
+000159:             """
+000160:             CREATE UNIQUE INDEX IF NOT EXISTS
+000161:             trial_clock_email_idx
+000162:             ON trial_clock(lower(email))
+000163:             WHERE email IS NOT NULL AND email<>''
+000164:             """
+000165:         )
+000166: 
+000167:         connection.execute(
+000168:             """
+========================================================================
+CONTEXT_LINES=157-169
+000157: 
+000158:         connection.execute(
+000159:             """
+000160:             CREATE UNIQUE INDEX IF NOT EXISTS
+000161:             trial_clock_email_idx
+000162:             ON trial_clock(lower(email))
+000163:             WHERE email IS NOT NULL AND email<>''
+000164:             """
+000165:         )
+000166: 
+000167:         connection.execute(
+000168:             """
+000169:             CREATE TABLE IF NOT EXISTS seat_reservations (
+========================================================================
+CONTEXT_LINES=158-170
+000158:         connection.execute(
+000159:             """
+000160:             CREATE UNIQUE INDEX IF NOT EXISTS
+000161:             trial_clock_email_idx
+000162:             ON trial_clock(lower(email))
+000163:             WHERE email IS NOT NULL AND email<>''
+000164:             """
+000165:         )
+000166: 
+000167:         connection.execute(
+000168:             """
+000169:             CREATE TABLE IF NOT EXISTS seat_reservations (
+000170:                 token TEXT PRIMARY KEY,
+========================================================================
+CONTEXT_LINES=164-176
+000164:             """
+000165:         )
+000166: 
+000167:         connection.execute(
+000168:             """
+000169:             CREATE TABLE IF NOT EXISTS seat_reservations (
+000170:                 token TEXT PRIMARY KEY,
+000171:                 email TEXT NOT NULL,
+000172:                 created_at TEXT NOT NULL,
+000173:                 expires_at TEXT NOT NULL
+000174:             )
+000175:             """
+000176:         )
+========================================================================
+CONTEXT_LINES=166-178
+000166: 
+000167:         connection.execute(
+000168:             """
+000169:             CREATE TABLE IF NOT EXISTS seat_reservations (
+000170:                 token TEXT PRIMARY KEY,
+000171:                 email TEXT NOT NULL,
+000172:                 created_at TEXT NOT NULL,
+000173:                 expires_at TEXT NOT NULL
+000174:             )
+000175:             """
+000176:         )
+000177: 
+000178:         connection.execute(
+========================================================================
+CONTEXT_LINES=176-188
+000176:         )
+000177: 
+000178:         connection.execute(
+000179:             """
+000180:             CREATE UNIQUE INDEX IF NOT EXISTS
+000181:             seat_reservations_email_idx
+000182:             ON seat_reservations(lower(email))
+000183:             """
+000184:         )
+000185: 
+000186:         connection.execute(
+000187:             """
+000188:             CREATE TABLE IF NOT EXISTS legal_consents (
+========================================================================
+CONTEXT_LINES=177-189
+000177: 
+000178:         connection.execute(
+000179:             """
+000180:             CREATE UNIQUE INDEX IF NOT EXISTS
+000181:             seat_reservations_email_idx
+000182:             ON seat_reservations(lower(email))
+000183:             """
+000184:         )
+000185: 
+000186:         connection.execute(
+000187:             """
+000188:             CREATE TABLE IF NOT EXISTS legal_consents (
+000189:                 id INTEGER PRIMARY KEY AUTOINCREMENT,
+========================================================================
+CONTEXT_LINES=185-197
+000185: 
+000186:         connection.execute(
+000187:             """
+000188:             CREATE TABLE IF NOT EXISTS legal_consents (
+000189:                 id INTEGER PRIMARY KEY AUTOINCREMENT,
+000190:                 user_id TEXT,
+000191:                 email TEXT NOT NULL,
+000192:                 consent_version TEXT NOT NULL,
+000193:                 terms_accepted INTEGER NOT NULL,
+000194:                 privacy_accepted INTEGER NOT NULL,
+000195:                 disclaimer_accepted INTEGER NOT NULL,
+000196:                 accepted_at TEXT NOT NULL,
+000197:                 source_ip TEXT,
+========================================================================
+CONTEXT_LINES=186-198
+000186:         connection.execute(
+000187:             """
+000188:             CREATE TABLE IF NOT EXISTS legal_consents (
+000189:                 id INTEGER PRIMARY KEY AUTOINCREMENT,
+000190:                 user_id TEXT,
+000191:                 email TEXT NOT NULL,
+000192:                 consent_version TEXT NOT NULL,
+000193:                 terms_accepted INTEGER NOT NULL,
+000194:                 privacy_accepted INTEGER NOT NULL,
+000195:                 disclaimer_accepted INTEGER NOT NULL,
+000196:                 accepted_at TEXT NOT NULL,
+000197:                 source_ip TEXT,
+000198:                 user_agent TEXT
+========================================================================
+CONTEXT_LINES=193-205
+000193:                 terms_accepted INTEGER NOT NULL,
+000194:                 privacy_accepted INTEGER NOT NULL,
+000195:                 disclaimer_accepted INTEGER NOT NULL,
+000196:                 accepted_at TEXT NOT NULL,
+000197:                 source_ip TEXT,
+000198:                 user_agent TEXT
+000199:             )
+000200:             """
+000201:         )
+000202: 
+000203:         connection.execute(
+000204:             """
+000205:             CREATE UNIQUE INDEX IF NOT EXISTS
+========================================================================
+CONTEXT_LINES=201-213
+000201:         )
+000202: 
+000203:         connection.execute(
+000204:             """
+000205:             CREATE UNIQUE INDEX IF NOT EXISTS
+000206:             legal_consents_email_version_idx
+000207:             ON legal_consents(lower(email),consent_version)
+000208:             """
+000209:         )
+000210: 
+000211:         connection.execute(
+000212:             """
+000213:             CREATE TABLE IF NOT EXISTS audit_log (
+========================================================================
+CONTEXT_LINES=202-214
+000202: 
+000203:         connection.execute(
+000204:             """
+000205:             CREATE UNIQUE INDEX IF NOT EXISTS
+000206:             legal_consents_email_version_idx
+000207:             ON legal_consents(lower(email),consent_version)
+000208:             """
+000209:         )
+000210: 
+000211:         connection.execute(
+000212:             """
+000213:             CREATE TABLE IF NOT EXISTS audit_log (
+000214:                 id INTEGER PRIMARY KEY AUTOINCREMENT,
+========================================================================
+CONTEXT_LINES=210-222
+000210: 
+000211:         connection.execute(
+000212:             """
+000213:             CREATE TABLE IF NOT EXISTS audit_log (
+000214:                 id INTEGER PRIMARY KEY AUTOINCREMENT,
+000215:                 actor_email TEXT,
+000216:                 action TEXT NOT NULL,
+000217:                 target_email TEXT,
+000218:                 details_json TEXT,
+000219:                 created_at TEXT NOT NULL
+000220:             )
+000221:             """
+000222:         )
+========================================================================
+CONTEXT_LINES=212-224
+000212:             """
+000213:             CREATE TABLE IF NOT EXISTS audit_log (
+000214:                 id INTEGER PRIMARY KEY AUTOINCREMENT,
+000215:                 actor_email TEXT,
+000216:                 action TEXT NOT NULL,
+000217:                 target_email TEXT,
+000218:                 details_json TEXT,
+000219:                 created_at TEXT NOT NULL
+000220:             )
+000221:             """
+000222:         )
+000223: 
+000224:         connection.execute(
+========================================================================
+CONTEXT_LINES=224-236
+000224:         connection.execute(
+000225:             """
+000226:             CREATE TABLE IF NOT EXISTS settings (
+000227:                 key TEXT PRIMARY KEY,
+000228:                 value TEXT NOT NULL,
+000229:                 updated_at TEXT NOT NULL
+000230:             )
+000231:             """
+000232:         )
+000233: 
+000234:         connection.execute(
+000235:             """
+000236:             INSERT INTO settings(key,value,updated_at)
+========================================================================
+CONTEXT_LINES=231-243
+000231:             """
+000232:         )
+000233: 
+000234:         connection.execute(
+000235:             """
+000236:             INSERT INTO settings(key,value,updated_at)
+000237:             VALUES('max_trial_seats',?,?)
+000238:             ON CONFLICT(key) DO UPDATE SET
+000239:                 value=excluded.value,
+000240:                 updated_at=excluded.updated_at
+000241:             """,
+000242:             (str(MAX_TRIAL_SEATS),iso(now())),
+000243:         )
+========================================================================
+CONTEXT_LINES=232-244
+000232:         )
+000233: 
+000234:         connection.execute(
+000235:             """
+000236:             INSERT INTO settings(key,value,updated_at)
+000237:             VALUES('max_trial_seats',?,?)
+000238:             ON CONFLICT(key) DO UPDATE SET
+000239:                 value=excluded.value,
+000240:                 updated_at=excluded.updated_at
+000241:             """,
+000242:             (str(MAX_TRIAL_SEATS),iso(now())),
+000243:         )
+000244: 
+========================================================================
+CONTEXT_LINES=233-245
+000233: 
+000234:         connection.execute(
+000235:             """
+000236:             INSERT INTO settings(key,value,updated_at)
+000237:             VALUES('max_trial_seats',?,?)
+000238:             ON CONFLICT(key) DO UPDATE SET
+000239:                 value=excluded.value,
+000240:                 updated_at=excluded.updated_at
+000241:             """,
+000242:             (str(MAX_TRIAL_SEATS),iso(now())),
+000243:         )
+000244: 
+000245:         for email in INTERNAL_EMAILS:
+========================================================================
+CONTEXT_LINES=235-247
+000235:             """
+000236:             INSERT INTO settings(key,value,updated_at)
+000237:             VALUES('max_trial_seats',?,?)
+000238:             ON CONFLICT(key) DO UPDATE SET
+000239:                 value=excluded.value,
+000240:                 updated_at=excluded.updated_at
+000241:             """,
+000242:             (str(MAX_TRIAL_SEATS),iso(now())),
+000243:         )
+000244: 
+000245:         for email in INTERNAL_EMAILS:
+000246:             connection.execute(
+000247:                 """
+========================================================================
+CONTEXT_LINES=237-249
+000237:             VALUES('max_trial_seats',?,?)
+000238:             ON CONFLICT(key) DO UPDATE SET
+000239:                 value=excluded.value,
+000240:                 updated_at=excluded.updated_at
+000241:             """,
+000242:             (str(MAX_TRIAL_SEATS),iso(now())),
+000243:         )
+000244: 
+000245:         for email in INTERNAL_EMAILS:
+000246:             connection.execute(
+000247:                 """
+000248:                 UPDATE trial_clock
+000249:                 SET is_internal=1,
+========================================================================
+CONTEXT_LINES=240-252
+000240:                 updated_at=excluded.updated_at
+000241:             """,
+000242:             (str(MAX_TRIAL_SEATS),iso(now())),
+000243:         )
+000244: 
+000245:         for email in INTERNAL_EMAILS:
+000246:             connection.execute(
+000247:                 """
+000248:                 UPDATE trial_clock
+000249:                 SET is_internal=1,
+000250:                     notes=CASE
+000251:                         WHEN notes='' THEN 'internal_test_account'
+000252:                         ELSE notes
+========================================================================
+CONTEXT_LINES=243-255
+000243:         )
+000244: 
+000245:         for email in INTERNAL_EMAILS:
+000246:             connection.execute(
+000247:                 """
+000248:                 UPDATE trial_clock
+000249:                 SET is_internal=1,
+000250:                     notes=CASE
+000251:                         WHEN notes='' THEN 'internal_test_account'
+000252:                         ELSE notes
+000253:                     END,
+000254:                     updated_at=?
+000255:                 WHERE lower(email)=lower(?)
+========================================================================
+CONTEXT_LINES=249-261
+000249:                 SET is_internal=1,
+000250:                     notes=CASE
+000251:                         WHEN notes='' THEN 'internal_test_account'
+000252:                         ELSE notes
+000253:                     END,
+000254:                     updated_at=?
+000255:                 WHERE lower(email)=lower(?)
+000256:                 """,
+000257:                 (iso(now()),email),
+000258:             )
+000259: 
+000260: def flatten(value,output=None):
+000261:     if output is None:
+========================================================================
+CONTEXT_LINES=250-262
+000250:                     notes=CASE
+000251:                         WHEN notes='' THEN 'internal_test_account'
+000252:                         ELSE notes
+000253:                     END,
+000254:                     updated_at=?
+000255:                 WHERE lower(email)=lower(?)
+000256:                 """,
+000257:                 (iso(now()),email),
+000258:             )
+000259: 
+000260: def flatten(value,output=None):
+000261:     if output is None:
+000262:         output=[]
+========================================================================
+CONTEXT_LINES=252-264
+000252:                         ELSE notes
+000253:                     END,
+000254:                     updated_at=?
+000255:                 WHERE lower(email)=lower(?)
+000256:                 """,
+000257:                 (iso(now()),email),
+000258:             )
+000259: 
+000260: def flatten(value,output=None):
+000261:     if output is None:
+000262:         output=[]
+000263: 
+000264:     if isinstance(value,dict):
+========================================================================
+CONTEXT_LINES=285-297
+000285: 
+000286:     return ""
+000287: 
+000288: def identity_from(data,headers=None):
+000289:     headers=headers or {}
+000290:     user_id=first_value(
+000291:         data,
+000292:         ["user_id","account_id","subject","sub","id"],
+000293:     )
+000294:     email=first_value(
+000295:         data,
+000296:         ["email_address","user_email","email"],
+000297:     ).strip().lower()
+========================================================================
+CONTEXT_LINES=287-299
+000287: 
+000288: def identity_from(data,headers=None):
+000289:     headers=headers or {}
+000290:     user_id=first_value(
+000291:         data,
+000292:         ["user_id","account_id","subject","sub","id"],
+000293:     )
+000294:     email=first_value(
+000295:         data,
+000296:         ["email_address","user_email","email"],
+000297:     ).strip().lower()
+000298: 
+000299:     if not user_id:
+========================================================================
+CONTEXT_LINES=289-301
+000289:     headers=headers or {}
+000290:     user_id=first_value(
+000291:         data,
+000292:         ["user_id","account_id","subject","sub","id"],
+000293:     )
+000294:     email=first_value(
+000295:         data,
+000296:         ["email_address","user_email","email"],
+000297:     ).strip().lower()
+000298: 
+000299:     if not user_id:
+000300:         user_id=str(headers.get("x-ndsp-user-id","")).strip()
+000301: 
+========================================================================
+CONTEXT_LINES=291-303
+000291:         data,
+000292:         ["user_id","account_id","subject","sub","id"],
+000293:     )
+000294:     email=first_value(
+000295:         data,
+000296:         ["email_address","user_email","email"],
+000297:     ).strip().lower()
+000298: 
+000299:     if not user_id:
+000300:         user_id=str(headers.get("x-ndsp-user-id","")).strip()
+000301: 
+000302:     if not email:
+000303:         email=str(headers.get("x-ndsp-user-email","")).strip().lower()
+========================================================================
+CONTEXT_LINES=294-306
+000294:     email=first_value(
+000295:         data,
+000296:         ["email_address","user_email","email"],
+000297:     ).strip().lower()
+000298: 
+000299:     if not user_id:
+000300:         user_id=str(headers.get("x-ndsp-user-id","")).strip()
+000301: 
+000302:     if not email:
+000303:         email=str(headers.get("x-ndsp-user-email","")).strip().lower()
+000304: 
+000305:     return user_id,email
+000306: 
+========================================================================
+CONTEXT_LINES=295-307
+000295:         data,
+000296:         ["email_address","user_email","email"],
+000297:     ).strip().lower()
+000298: 
+000299:     if not user_id:
+000300:         user_id=str(headers.get("x-ndsp-user-id","")).strip()
+000301: 
+000302:     if not email:
+000303:         email=str(headers.get("x-ndsp-user-email","")).strip().lower()
+000304: 
+000305:     return user_id,email
+000306: 
+000307: def role_from(data):
+========================================================================
+CONTEXT_LINES=297-309
+000297:     ).strip().lower()
+000298: 
+000299:     if not user_id:
+000300:         user_id=str(headers.get("x-ndsp-user-id","")).strip()
+000301: 
+000302:     if not email:
+000303:         email=str(headers.get("x-ndsp-user-email","")).strip().lower()
+000304: 
+000305:     return user_id,email
+000306: 
+000307: def role_from(data):
+000308:     role=first_value(
+000309:         data,
+========================================================================
+CONTEXT_LINES=298-310
+000298: 
+000299:     if not user_id:
+000300:         user_id=str(headers.get("x-ndsp-user-id","")).strip()
+000301: 
+000302:     if not email:
+000303:         email=str(headers.get("x-ndsp-user-email","")).strip().lower()
+000304: 
+000305:     return user_id,email
+000306: 
+000307: def role_from(data):
+000308:     role=first_value(
+000309:         data,
+000310:         ["user_role","account_role","role","type"],
+========================================================================
+CONTEXT_LINES=300-312
+000300:         user_id=str(headers.get("x-ndsp-user-id","")).strip()
+000301: 
+000302:     if not email:
+000303:         email=str(headers.get("x-ndsp-user-email","")).strip().lower()
+000304: 
+000305:     return user_id,email
+000306: 
+000307: def role_from(data):
+000308:     role=first_value(
+000309:         data,
+000310:         ["user_role","account_role","role","type"],
+000311:     ).strip().lower()
+000312:     return role
+========================================================================
+CONTEXT_LINES=305-317
+000305:     return user_id,email
+000306: 
+000307: def role_from(data):
+000308:     role=first_value(
+000309:         data,
+000310:         ["user_role","account_role","role","type"],
+000311:     ).strip().lower()
+000312:     return role
+000313: 
+000314: def plan_from(data):
+000315:     return first_value(
+000316:         data,
+000317:         [
+========================================================================
+CONTEXT_LINES=321-333
+000321:             "subscription",
+000322:         ],
+000323:     ).strip().lower()
+000324: 
+000325: def is_admin_session(data):
+000326:     _,email=identity_from(data)
+000327:     role=role_from(data)
+000328: 
+000329:     return (
+000330:         email==OWNER_EMAIL
+000331:         or role in {
+000332:             "owner",
+000333:             "admin",
+========================================================================
+CONTEXT_LINES=325-337
+000325: def is_admin_session(data):
+000326:     _,email=identity_from(data)
+000327:     role=role_from(data)
+000328: 
+000329:     return (
+000330:         email==OWNER_EMAIL
+000331:         or role in {
+000332:             "owner",
+000333:             "admin",
+000334:             "administrator",
+000335:             "superadmin",
+000336:             "super_admin",
+000337:         }
+========================================================================
+CONTEXT_LINES=335-347
+000335:             "superadmin",
+000336:             "super_admin",
+000337:         }
+000338:     )
+000339: 
+000340: def user_key(user_id,email):
+000341:     if user_id:
+000342:         return "id:"+str(user_id)
+000343: 
+000344:     if email:
+000345:         return "email:"+email.lower()
+000346: 
+000347:     return ""
+========================================================================
+CONTEXT_LINES=336-348
+000336:             "super_admin",
+000337:         }
+000338:     )
+000339: 
+000340: def user_key(user_id,email):
+000341:     if user_id:
+000342:         return "id:"+str(user_id)
+000343: 
+000344:     if email:
+000345:         return "email:"+email.lower()
+000346: 
+000347:     return ""
+000348: 
+========================================================================
+CONTEXT_LINES=337-349
+000337:         }
+000338:     )
+000339: 
+000340: def user_key(user_id,email):
+000341:     if user_id:
+000342:         return "id:"+str(user_id)
+000343: 
+000344:     if email:
+000345:         return "email:"+email.lower()
+000346: 
+000347:     return ""
+000348: 
+000349: def cleanup_reservations(connection):
+========================================================================
+CONTEXT_LINES=339-351
+000339: 
+000340: def user_key(user_id,email):
+000341:     if user_id:
+000342:         return "id:"+str(user_id)
+000343: 
+000344:     if email:
+000345:         return "email:"+email.lower()
+000346: 
+000347:     return ""
+000348: 
+000349: def cleanup_reservations(connection):
+000350:     connection.execute(
+000351:         "DELETE FROM seat_reservations WHERE expires_at<=?",
+========================================================================
+CONTEXT_LINES=340-352
+000340: def user_key(user_id,email):
+000341:     if user_id:
+000342:         return "id:"+str(user_id)
+000343: 
+000344:     if email:
+000345:         return "email:"+email.lower()
+000346: 
+000347:     return ""
+000348: 
+000349: def cleanup_reservations(connection):
+000350:     connection.execute(
+000351:         "DELETE FROM seat_reservations WHERE expires_at<=?",
+000352:         (iso(now()),),
+========================================================================
+CONTEXT_LINES=346-358
+000346: 
+000347:     return ""
+000348: 
+000349: def cleanup_reservations(connection):
+000350:     connection.execute(
+000351:         "DELETE FROM seat_reservations WHERE expires_at<=?",
+000352:         (iso(now()),),
+000353:     )
+000354: 
+000355: def record_for(user_id,email,connection=None):
+000356:     own=connection is None
+000357:     connection=connection or connect()
+000358:     row=None
+========================================================================
+CONTEXT_LINES=350-362
+000350:     connection.execute(
+000351:         "DELETE FROM seat_reservations WHERE expires_at<=?",
+000352:         (iso(now()),),
+000353:     )
+000354: 
+000355: def record_for(user_id,email,connection=None):
+000356:     own=connection is None
+000357:     connection=connection or connect()
+000358:     row=None
+000359:     key=user_key(user_id,email)
+000360: 
+000361:     try:
+000362:         if key:
+========================================================================
+CONTEXT_LINES=354-366
+000354: 
+000355: def record_for(user_id,email,connection=None):
+000356:     own=connection is None
+000357:     connection=connection or connect()
+000358:     row=None
+000359:     key=user_key(user_id,email)
+000360: 
+000361:     try:
+000362:         if key:
+000363:             row=connection.execute(
+000364:                 "SELECT * FROM trial_clock WHERE user_key=?",
+000365:                 (key,),
+000366:             ).fetchone()
+========================================================================
+CONTEXT_LINES=359-371
+000359:     key=user_key(user_id,email)
+000360: 
+000361:     try:
+000362:         if key:
+000363:             row=connection.execute(
+000364:                 "SELECT * FROM trial_clock WHERE user_key=?",
+000365:                 (key,),
+000366:             ).fetchone()
+000367: 
+000368:         if row is None and email:
+000369:             row=connection.execute(
+000370:                 """
+000371:                 SELECT * FROM trial_clock
+========================================================================
+CONTEXT_LINES=363-375
+000363:             row=connection.execute(
+000364:                 "SELECT * FROM trial_clock WHERE user_key=?",
+000365:                 (key,),
+000366:             ).fetchone()
+000367: 
+000368:         if row is None and email:
+000369:             row=connection.execute(
+000370:                 """
+000371:                 SELECT * FROM trial_clock
+000372:                 WHERE lower(email)=lower(?)
+000373:                 """,
+000374:                 (email,),
+000375:             ).fetchone()
+========================================================================
+CONTEXT_LINES=366-378
+000366:             ).fetchone()
+000367: 
+000368:         if row is None and email:
+000369:             row=connection.execute(
+000370:                 """
+000371:                 SELECT * FROM trial_clock
+000372:                 WHERE lower(email)=lower(?)
+000373:                 """,
+000374:                 (email,),
+000375:             ).fetchone()
+000376: 
+000377:         if row is None and user_id:
+000378:             row=connection.execute(
+========================================================================
+CONTEXT_LINES=367-379
+000367: 
+000368:         if row is None and email:
+000369:             row=connection.execute(
+000370:                 """
+000371:                 SELECT * FROM trial_clock
+000372:                 WHERE lower(email)=lower(?)
+000373:                 """,
+000374:                 (email,),
+000375:             ).fetchone()
+000376: 
+000377:         if row is None and user_id:
+000378:             row=connection.execute(
+000379:                 "SELECT * FROM trial_clock WHERE user_id=?",
+========================================================================
+CONTEXT_LINES=369-381
+000369:             row=connection.execute(
+000370:                 """
+000371:                 SELECT * FROM trial_clock
+000372:                 WHERE lower(email)=lower(?)
+000373:                 """,
+000374:                 (email,),
+000375:             ).fetchone()
+000376: 
+000377:         if row is None and user_id:
+000378:             row=connection.execute(
+000379:                 "SELECT * FROM trial_clock WHERE user_id=?",
+000380:                 (str(user_id),),
+000381:             ).fetchone()
+========================================================================
+CONTEXT_LINES=372-384
+000372:                 WHERE lower(email)=lower(?)
+000373:                 """,
+000374:                 (email,),
+000375:             ).fetchone()
+000376: 
+000377:         if row is None and user_id:
+000378:             row=connection.execute(
+000379:                 "SELECT * FROM trial_clock WHERE user_id=?",
+000380:                 (str(user_id),),
+000381:             ).fetchone()
+000382:     finally:
+000383:         if own:
+000384:             connection.close()
+========================================================================
+CONTEXT_LINES=374-386
+000374:                 (email,),
+000375:             ).fetchone()
+000376: 
+000377:         if row is None and user_id:
+000378:             row=connection.execute(
+000379:                 "SELECT * FROM trial_clock WHERE user_id=?",
+000380:                 (str(user_id),),
+000381:             ).fetchone()
+000382:     finally:
+000383:         if own:
+000384:             connection.close()
+000385: 
+000386:     return dict(row) if row else None
+========================================================================
+CONTEXT_LINES=375-387
+000375:             ).fetchone()
+000376: 
+000377:         if row is None and user_id:
+000378:             row=connection.execute(
+000379:                 "SELECT * FROM trial_clock WHERE user_id=?",
+000380:                 (str(user_id),),
+000381:             ).fetchone()
+000382:     finally:
+000383:         if own:
+000384:             connection.close()
+000385: 
+000386:     return dict(row) if row else None
+000387: 
+========================================================================
+CONTEXT_LINES=383-395
+000383:         if own:
+000384:             connection.close()
+000385: 
+000386:     return dict(row) if row else None
+000387: 
+000388: def active_trial(row,at=None):
+000389:     at=at or now()
+000390: 
+000391:     if not row:
+000392:         return False
+000393: 
+000394:     if int(row.get("is_internal") or 0)==1:
+000395:         return True
+========================================================================
+CONTEXT_LINES=395-407
+000395:         return True
+000396: 
+000397:     if int(row.get("suspended") or 0)==1:
+000398:         return False
+000399: 
+000400:     status=str(row.get("entitlement_status") or "trial").lower()
+000401: 
+000402:     if status=="paid":
+000403:         return True
+000404: 
+000405:     if status in {"cancelled","expired","suspended"}:
+000406:         return False
+000407: 
+========================================================================
+CONTEXT_LINES=397-409
+000397:     if int(row.get("suspended") or 0)==1:
+000398:         return False
+000399: 
+000400:     status=str(row.get("entitlement_status") or "trial").lower()
+000401: 
+000402:     if status=="paid":
+000403:         return True
+000404: 
+000405:     if status in {"cancelled","expired","suspended"}:
+000406:         return False
+000407: 
+000408:     end=parse_date(row.get("trial_ends_at"))
+000409:     return bool(end and end>at)
+========================================================================
+CONTEXT_LINES=400-412
+000400:     status=str(row.get("entitlement_status") or "trial").lower()
+000401: 
+000402:     if status=="paid":
+000403:         return True
+000404: 
+000405:     if status in {"cancelled","expired","suspended"}:
+000406:         return False
+000407: 
+000408:     end=parse_date(row.get("trial_ends_at"))
+000409:     return bool(end and end>at)
+000410: 
+000411: def status_for(row,at=None):
+000412:     at=at or now()
+========================================================================
+CONTEXT_LINES=406-418
+000406:         return False
+000407: 
+000408:     end=parse_date(row.get("trial_ends_at"))
+000409:     return bool(end and end>at)
+000410: 
+000411: def status_for(row,at=None):
+000412:     at=at or now()
+000413: 
+000414:     if not row:
+000415:         return "UNTRACKED"
+000416: 
+000417:     if int(row.get("suspended") or 0)==1:
+000418:         return "SUSPENDED"
+========================================================================
+CONTEXT_LINES=415-427
+000415:         return "UNTRACKED"
+000416: 
+000417:     if int(row.get("suspended") or 0)==1:
+000418:         return "SUSPENDED"
+000419: 
+000420:     status=str(row.get("entitlement_status") or "trial").lower()
+000421: 
+000422:     if status=="paid":
+000423:         return "PAID_ACTIVE"
+000424: 
+000425:     if status=="cancelled":
+000426:         return "CANCELLED"
+000427: 
+========================================================================
+CONTEXT_LINES=417-429
+000417:     if int(row.get("suspended") or 0)==1:
+000418:         return "SUSPENDED"
+000419: 
+000420:     status=str(row.get("entitlement_status") or "trial").lower()
+000421: 
+000422:     if status=="paid":
+000423:         return "PAID_ACTIVE"
+000424: 
+000425:     if status=="cancelled":
+000426:         return "CANCELLED"
+000427: 
+000428:     end=parse_date(row.get("trial_ends_at"))
+000429: 
+========================================================================
+CONTEXT_LINES=420-432
+000420:     status=str(row.get("entitlement_status") or "trial").lower()
+000421: 
+000422:     if status=="paid":
+000423:         return "PAID_ACTIVE"
+000424: 
+000425:     if status=="cancelled":
+000426:         return "CANCELLED"
+000427: 
+000428:     end=parse_date(row.get("trial_ends_at"))
+000429: 
+000430:     if not end or end<=at:
+000431:         return "EXPIRED"
+000432: 
+========================================================================
+CONTEXT_LINES=430-442
+000430:     if not end or end<=at:
+000431:         return "EXPIRED"
+000432: 
+000433:     return "ACTIVE"
+000434: 
+000435: def seat_snapshot(connection=None):
+000436:     own=connection is None
+000437:     connection=connection or connect()
+000438: 
+000439:     try:
+000440:         cleanup_reservations(connection)
+000441:         current=iso(now())
+000442: 
+========================================================================
+CONTEXT_LINES=440-452
+000440:         cleanup_reservations(connection)
+000441:         current=iso(now())
+000442: 
+000443:         active=connection.execute(
+000444:             """
+000445:             SELECT COUNT(*) AS c
+000446:             FROM trial_clock
+000447:             WHERE is_internal=0
+000448:               AND suspended=0
+000449:               AND lower(entitlement_status)='trial'
+000450:               AND trial_ends_at>?
+000451:             """,
+000452:             (current,),
+========================================================================
+CONTEXT_LINES=444-456
+000444:             """
+000445:             SELECT COUNT(*) AS c
+000446:             FROM trial_clock
+000447:             WHERE is_internal=0
+000448:               AND suspended=0
+000449:               AND lower(entitlement_status)='trial'
+000450:               AND trial_ends_at>?
+000451:             """,
+000452:             (current,),
+000453:         ).fetchone()["c"]
+000454: 
+000455:         reserved=connection.execute(
+000456:             """
+========================================================================
+CONTEXT_LINES=452-464
+000452:             (current,),
+000453:         ).fetchone()["c"]
+000454: 
+000455:         reserved=connection.execute(
+000456:             """
+000457:             SELECT COUNT(*) AS c
+000458:             FROM seat_reservations
+000459:             WHERE expires_at>?
+000460:             """,
+000461:             (current,),
+000462:         ).fetchone()["c"]
+000463: 
+000464:         paid=connection.execute(
+========================================================================
+CONTEXT_LINES=453-465
+000453:         ).fetchone()["c"]
+000454: 
+000455:         reserved=connection.execute(
+000456:             """
+000457:             SELECT COUNT(*) AS c
+000458:             FROM seat_reservations
+000459:             WHERE expires_at>?
+000460:             """,
+000461:             (current,),
+000462:         ).fetchone()["c"]
+000463: 
+000464:         paid=connection.execute(
+000465:             """
+========================================================================
+CONTEXT_LINES=461-473
+000461:             (current,),
+000462:         ).fetchone()["c"]
+000463: 
+000464:         paid=connection.execute(
+000465:             """
+000466:             SELECT COUNT(*) AS c
+000467:             FROM trial_clock
+000468:             WHERE is_internal=0
+000469:               AND suspended=0
+000470:               AND lower(entitlement_status)='paid'
+000471:             """
+000472:         ).fetchone()["c"]
+000473: 
+========================================================================
+CONTEXT_LINES=465-477
+000465:             """
+000466:             SELECT COUNT(*) AS c
+000467:             FROM trial_clock
+000468:             WHERE is_internal=0
+000469:               AND suspended=0
+000470:               AND lower(entitlement_status)='paid'
+000471:             """
+000472:         ).fetchone()["c"]
+000473: 
+000474:         expired=connection.execute(
+000475:             """
+000476:             SELECT COUNT(*) AS c
+000477:             FROM trial_clock
+========================================================================
+CONTEXT_LINES=471-483
+000471:             """
+000472:         ).fetchone()["c"]
+000473: 
+000474:         expired=connection.execute(
+000475:             """
+000476:             SELECT COUNT(*) AS c
+000477:             FROM trial_clock
+000478:             WHERE is_internal=0
+000479:               AND (
+000480:                 lower(entitlement_status) IN (
+000481:                     'expired',
+000482:                     'cancelled',
+000483:                     'suspended'
+========================================================================
+CONTEXT_LINES=475-487
+000475:             """
+000476:             SELECT COUNT(*) AS c
+000477:             FROM trial_clock
+000478:             WHERE is_internal=0
+000479:               AND (
+000480:                 lower(entitlement_status) IN (
+000481:                     'expired',
+000482:                     'cancelled',
+000483:                     'suspended'
+000484:                 )
+000485:                 OR suspended=1
+000486:                 OR (
+000487:                     lower(entitlement_status)='trial'
+========================================================================
+CONTEXT_LINES=482-494
+000482:                     'cancelled',
+000483:                     'suspended'
+000484:                 )
+000485:                 OR suspended=1
+000486:                 OR (
+000487:                     lower(entitlement_status)='trial'
+000488:                     AND trial_ends_at<=?
+000489:                 )
+000490:               )
+000491:             """,
+000492:             (current,),
+000493:         ).fetchone()["c"]
+000494:     finally:
+========================================================================
+CONTEXT_LINES=493-505
+000493:         ).fetchone()["c"]
+000494:     finally:
+000495:         if own:
+000496:             connection.close()
+000497: 
+000498:     remaining=max(0,MAX_TRIAL_SEATS-active-reserved)
+000499: 
+000500:     return {
+000501:         "max_trial_seats":MAX_TRIAL_SEATS,
+000502:         "active_trial_seats":int(active),
+000503:         "reserved_trial_seats":int(reserved),
+000504:         "paid_users":int(paid),
+000505:         "inactive_or_expired":int(expired),
+========================================================================
+CONTEXT_LINES=496-508
+000496:             connection.close()
+000497: 
+000498:     remaining=max(0,MAX_TRIAL_SEATS-active-reserved)
+000499: 
+000500:     return {
+000501:         "max_trial_seats":MAX_TRIAL_SEATS,
+000502:         "active_trial_seats":int(active),
+000503:         "reserved_trial_seats":int(reserved),
+000504:         "paid_users":int(paid),
+000505:         "inactive_or_expired":int(expired),
+000506:         "remaining_trial_seats":int(remaining),
+000507:         "registration_allowed":remaining>0,
+000508:         "capacity_reached":remaining<=0,
+========================================================================
+CONTEXT_LINES=497-509
+000497: 
+000498:     remaining=max(0,MAX_TRIAL_SEATS-active-reserved)
+000499: 
+000500:     return {
+000501:         "max_trial_seats":MAX_TRIAL_SEATS,
+000502:         "active_trial_seats":int(active),
+000503:         "reserved_trial_seats":int(reserved),
+000504:         "paid_users":int(paid),
+000505:         "inactive_or_expired":int(expired),
+000506:         "remaining_trial_seats":int(remaining),
+000507:         "registration_allowed":remaining>0,
+000508:         "capacity_reached":remaining<=0,
+000509:         "message_ar":(
+========================================================================
+CONTEXT_LINES=498-510
+000498:     remaining=max(0,MAX_TRIAL_SEATS-active-reserved)
+000499: 
+000500:     return {
+000501:         "max_trial_seats":MAX_TRIAL_SEATS,
+000502:         "active_trial_seats":int(active),
+000503:         "reserved_trial_seats":int(reserved),
+000504:         "paid_users":int(paid),
+000505:         "inactive_or_expired":int(expired),
+000506:         "remaining_trial_seats":int(remaining),
+000507:         "registration_allowed":remaining>0,
+000508:         "capacity_reached":remaining<=0,
+000509:         "message_ar":(
+000510:             "التسجيل متاح ضمن المرحلة التجريبية المحدودة."
+========================================================================
+CONTEXT_LINES=499-511
+000499: 
+000500:     return {
+000501:         "max_trial_seats":MAX_TRIAL_SEATS,
+000502:         "active_trial_seats":int(active),
+000503:         "reserved_trial_seats":int(reserved),
+000504:         "paid_users":int(paid),
+000505:         "inactive_or_expired":int(expired),
+000506:         "remaining_trial_seats":int(remaining),
+000507:         "registration_allowed":remaining>0,
+000508:         "capacity_reached":remaining<=0,
+000509:         "message_ar":(
+000510:             "التسجيل متاح ضمن المرحلة التجريبية المحدودة."
+000511:             if remaining>0
+========================================================================
+CONTEXT_LINES=501-513
+000501:         "max_trial_seats":MAX_TRIAL_SEATS,
+000502:         "active_trial_seats":int(active),
+000503:         "reserved_trial_seats":int(reserved),
+000504:         "paid_users":int(paid),
+000505:         "inactive_or_expired":int(expired),
+000506:         "remaining_trial_seats":int(remaining),
+000507:         "registration_allowed":remaining>0,
+000508:         "capacity_reached":remaining<=0,
+000509:         "message_ar":(
+000510:             "التسجيل متاح ضمن المرحلة التجريبية المحدودة."
+000511:             if remaining>0
+000512:             else CAPACITY_MESSAGE_AR
+000513:         ),
+========================================================================
+CONTEXT_LINES=516-528
+000516:             if remaining>0
+000517:             else CAPACITY_MESSAGE_EN
+000518:         ),
+SOURCE_9002_REFERENCE_COUNT=11
+
+============================================================
+3) EXACT SQLITE DATABASE READ-ONLY INSPECTION
+============================================================
+DATABASE=/home/nawaf511/empire-core-new/backend/services/ndsp-launch-control-v167/data/launch_control.sqlite3
+TARGET_EMAIL=she20232030@gmail.com
+SQLITE_INTEGRITY_CHECK=ok
+TABLE_COUNT=5
+TABLES=audit_log,legal_consents,seat_reservations,settings,trial_clock
+
+TABLE=audit_log
+TABLE_ROW_COUNT=0
+TABLE_COLUMNS=id,actor_email,action,target_email,details_json,created_at
+IDENTITY_OR_STATUS_COLUMNS=id,actor_email,target_email,created_at
+
+TABLE=legal_consents
+TABLE_ROW_COUNT=1
+TABLE_COLUMNS=id,user_id,email,consent_version,terms_accepted,privacy_accepted,disclaimer_accepted,accepted_at,source_ip,user_agent
+IDENTITY_OR_STATUS_COLUMNS=id,user_id,email,user_agent
+CANDIDATE_TABLE_ROW={"table": "legal_consents", "row": {"id": 1, "user_id": "a88988e1-e1d4-49f3-9451-f97b83e92f73", "email": "studying1991@hotmail.com", "user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5.2 Mobile/15E148 Safari/604.1"}}
+
+TABLE=seat_reservations
+TABLE_ROW_COUNT=0
+TABLE_COLUMNS=token,email,created_at,expires_at
+IDENTITY_OR_STATUS_COLUMNS=email,created_at,expires_at
+
+TABLE=settings
+TABLE_ROW_COUNT=1
+TABLE_COLUMNS=key,value,updated_at
+IDENTITY_OR_STATUS_COLUMNS=updated_at
+CANDIDATE_TABLE_ROW={"table": "settings", "row": {"updated_at": "2026-07-27T17:47:30.872539Z"}}
+
+TABLE=trial_clock
+TABLE_ROW_COUNT=3
+TABLE_COLUMNS=user_key,user_id,email,trial_started_at,trial_ends_at,duration_days,source,source_reference,created_at,updated_at,is_internal,entitlement_status,plan,suspended,notes
+IDENTITY_OR_STATUS_COLUMNS=user_key,user_id,email,trial_started_at,trial_ends_at,created_at,updated_at,entitlement_status,plan
+STATUS_DISTRIBUTION={"table": "trial_clock", "column": "entitlement_status", "values": [{"value": "trial", "count": 3}]}
+CANDIDATE_TABLE_ROW={"table": "trial_clock", "row": {"user_key": "id:f5414ed3-39fe-4491-8247-a3620a75b824", "user_id": "f5414ed3-39fe-4491-8247-a3620a75b824", "email": "shla511511+ndsptrial20260719_122049@gmail.com", "trial_started_at": "2026-07-19T10:21:47Z", "trial_ends_at": "2026-08-04T10:21:47Z", "created_at": "2026-07-19T10:43:16.689857Z", "updated_at": "2026-07-27T17:47:31.280383Z", "entitlement_status": "trial", "plan": "trial"}}
+CANDIDATE_TABLE_ROW={"table": "trial_clock", "row": {"user_key": "id:a88988e1-e1d4-49f3-9451-f97b83e92f73", "user_id": "a88988e1-e1d4-49f3-9451-f97b83e92f73", "email": "studying1991@hotmail.com", "trial_started_at": "2026-07-22T08:26:44.089331Z", "trial_ends_at": "2026-08-07T08:26:44.089331Z", "created_at": "2026-07-22T08:26:44.089331Z", "updated_at": "2026-07-22T08:26:44.089331Z", "entitlement_status": "trial", "plan": "trial"}}
+CANDIDATE_TABLE_ROW={"table": "trial_clock", "row": {"user_key": "id:846d91d7-9dbc-4ca2-98d9-e861c5d0e350", "user_id": "846d91d7-9dbc-4ca2-98d9-e861c5d0e350", "email": "nawaf.barrak.911@gmail.com", "trial_started_at": "2026-07-23T20:54:11.330183Z", "trial_ends_at": "2026-08-08T20:54:11.330183Z", "created_at": "2026-07-23T20:54:11.330183Z", "updated_at": "2026-07-27T17:47:31.200223Z", "entitlement_status": "trial", "plan": "trial"}}
+
+EXACT_TARGET_HIT_COUNT=0
+CANDIDATE_TABLE_COUNT=5
+ACTIVE_LIKE_SAMPLE_ROW_COUNT=0
+
+============================================================
+4) PORT 9002 UPSTREAM BINDING AND PROBES
+============================================================
+State  Recv-Q Send-Q Local Address:Port Peer Address:PortProcess
+LISTEN 0      5          127.0.0.1:9002      0.0.0.0:*    users:(("python3",pid=1464,fd=3))
+PORT_9002_PID=1464
+PORT_9002_USER=www-data
+PORT_9002_CWD=/opt/ndsp-platform-gateway-9002
+PORT_9002_EXE=/usr/bin/python3.12
+PORT_9002_CMD=/usr/bin/python3 /opt/ndsp-platform-gateway-9002/app.py 
+UPSTREAM_9002_PROBE=/health
+UPSTREAM_9002_HTTP=200
+UPSTREAM_9002_BYTES=128
+UPSTREAM_9002_CONTAINS_TARGET=NO:/health
+UPSTREAM_9002_BODY_HEAD={"ok": true, "service": "ndsp-platform-gateway-9002", "status": "LISTENING", "port": 9002, "updated_at": "2026-07-27T21:24:41Z"}
+---
+UPSTREAM_9002_PROBE=/api/trial/status
+UPSTREAM_9002_HTTP=200
+UPSTREAM_9002_BYTES=277
+UPSTREAM_9002_CONTAINS_TARGET=NO:/api/trial/status
+UPSTREAM_9002_BODY_HEAD={"ok": true, "source_mode": "ndsp_platform_gateway_9002_recovery", "trial": {"enabled": true, "duration_days": 16, "status": "ACTIVE", "registration_endpoint": "/api/trial/register/ordinary"}, "message": "NDSP trial gateway is reachable.", "updated_at": "2026-07-27T21:24:42Z"}
+---
+UPSTREAM_9002_PROBE=/api/trial/status?email=she20232030@gmail.com
+UPSTREAM_9002_HTTP=200
+UPSTREAM_9002_BYTES=277
+UPSTREAM_9002_CONTAINS_TARGET=NO:/api/trial/status?email=she20232030@gmail.com
+UPSTREAM_9002_BODY_HEAD={"ok": true, "source_mode": "ndsp_platform_gateway_9002_recovery", "trial": {"enabled": true, "duration_days": 16, "status": "ACTIVE", "registration_endpoint": "/api/trial/register/ordinary"}, "message": "NDSP trial gateway is reachable.", "updated_at": "2026-07-27T21:24:42Z"}
+---
+UPSTREAM_9002_PROBE=/api/trial/seats
+UPSTREAM_9002_HTTP=404
+UPSTREAM_9002_BYTES=104
+UPSTREAM_9002_CONTAINS_TARGET=NO:/api/trial/seats
+UPSTREAM_9002_BODY_HEAD={"ok": false, "error": "NOT_FOUND", "path": "/api/trial/seats", "service": "ndsp-platform-gateway-9002"}
+---
+UPSTREAM_9002_PROBE=/api/trial/seats?email=she20232030@gmail.com
+UPSTREAM_9002_HTTP=404
+UPSTREAM_9002_BYTES=104
+UPSTREAM_9002_CONTAINS_TARGET=NO:/api/trial/seats?email=she20232030@gmail.com
+UPSTREAM_9002_BODY_HEAD={"ok": false, "error": "NOT_FOUND", "path": "/api/trial/seats", "service": "ndsp-platform-gateway-9002"}
+---
+UPSTREAM_9002_PROBE=/api/users
+UPSTREAM_9002_HTTP=404
+UPSTREAM_9002_BYTES=98
+UPSTREAM_9002_CONTAINS_TARGET=NO:/api/users
+UPSTREAM_9002_BODY_HEAD={"ok": false, "error": "NOT_FOUND", "path": "/api/users", "service": "ndsp-platform-gateway-9002"}
+---
+UPSTREAM_9002_PROBE=/api/admin/users
+UPSTREAM_9002_HTTP=404
+UPSTREAM_9002_BYTES=104
+UPSTREAM_9002_CONTAINS_TARGET=NO:/api/admin/users
+UPSTREAM_9002_BODY_HEAD={"ok": false, "error": "NOT_FOUND", "path": "/api/admin/users", "service": "ndsp-platform-gateway-9002"}
+---
+UPSTREAM_9002_PROBE=/api/owner/users
+UPSTREAM_9002_HTTP=404
+UPSTREAM_9002_BYTES=104
+UPSTREAM_9002_CONTAINS_TARGET=NO:/api/owner/users
+UPSTREAM_9002_BODY_HEAD={"ok": false, "error": "NOT_FOUND", "path": "/api/owner/users", "service": "ndsp-platform-gateway-9002"}
+---
+
+============================================================
+5) PM2 APPLICATION BINDINGS WITHOUT SECRET VALUES
+============================================================
+
+============================================================
+6) EFFECTIVE NGINX OWNER AND USER ROUTES
+============================================================
+152:    server_name my.ndsp.app;
+203:    server_name my.ndsp.app;
+225:        proxy_pass https://api.ndsp.app/api/;
+339:        proxy_pass http://127.0.0.1:9090/api/register;
+346:        proxy_pass_request_headers on;
+351:    location = /api/trial/status {
+352:        proxy_pass http://127.0.0.1:9090/api/trial/status;
+359:        proxy_pass_request_headers on;
+365:    location = /api/trial/seats {
+366:        proxy_pass http://127.0.0.1:9090/api/trial/seats;
+376:        proxy_pass http://127.0.0.1:9090/api/launch/status;
+386:        proxy_pass http://127.0.0.1:9090/api/entitlements/me;
+393:        proxy_pass_request_headers on;
+405:        proxy_pass http://127.0.0.1:9090/api/auth/decision-room-access;
+410:        proxy_pass_request_body off;
+456:        proxy_pass http://127.0.0.1:9091;
+463:        proxy_pass_request_headers on;
+473:        proxy_pass http://127.0.0.1:9095;
+486:        proxy_pass http://127.0.0.1:9095;
+499:        proxy_pass http://127.0.0.1:9095;
+512:        proxy_pass http://127.0.0.1:9095;
+525:        proxy_pass http://127.0.0.1:9095;
+538:        proxy_pass http://127.0.0.1:9095;
+551:        proxy_pass http://127.0.0.1:9095;
+564:        proxy_pass http://127.0.0.1:9095;
+577:        proxy_pass http://127.0.0.1:9095;
+590:        proxy_pass http://127.0.0.1:9095;
+603:        proxy_pass http://127.0.0.1:9095;
+621:        proxy_pass http://127.0.0.1:19091/api/auth/session;
+622:        proxy_pass_request_body off;
+631:        proxy_pass http://127.0.0.1:9078/api/completed$is_args$args;
+646:        proxy_pass http://127.0.0.1:9078/api/completed/latest$is_args$args;
+755:        proxy_pass http://127.0.0.1:9027/api/auth/forgot-password;
+767:        proxy_pass http://127.0.0.1:9027/api/auth/reset-password;
+784:    proxy_pass http://127.0.0.1:9082/api/decision/quality-live;
+808:location = /ops-admin { return 301 /ops-admin/; }
+809:location ^~ /ops-admin/ {
+818:    proxy_pass http://127.0.0.1:9094/health;
+828:    proxy_pass http://127.0.0.1:9094;
+838:location ^~ /api/ops/admin/ {
+841:    proxy_pass http://127.0.0.1:9094;
+859:    proxy_pass http://127.0.0.1:19091/auth-ui/index.html;
+871:    proxy_pass http://127.0.0.1:19091/auth-ui/assets/;
+882:    proxy_pass http://127.0.0.1:19091;
+895:location = /_ndsp_auth_admin_clean {
+897:    proxy_pass http://127.0.0.1:19091/internal/authorize-admin;
+898:    proxy_pass_request_body off;
+921:    proxy_pass http://127.0.0.1:19091/api/auth/logout-page;
+929:location ^~ /owner/ {
+936:location ^~ /admin/ {
+947:    server_name admin.ndsp.app;
+967:    server_name admin.ndsp.app;
+977:    location = /api/admin/users/health {
+978:        proxy_pass http://127.0.0.1:9068/health;
+986:    location ^~ /api/admin/users/ {
+987:        proxy_pass http://127.0.0.1:9068/;
+1010:location ^~ /api/admin/layers/ {
+1011:    proxy_pass http://127.0.0.1:9065/api/admin/layers/;
+1020:location ^~ /api/admin/raw-cot/ {
+1021:    proxy_pass http://127.0.0.1:9076/api/admin/raw-cot/;
+1038:    server_name api.ndsp.app;
+1047:        proxy_pass http://127.0.0.1:9061/api/decision/package-v2;
+1081:        proxy_pass http://127.0.0.1:9082/api/decision/quality-live$is_args$args;
+1139:        proxy_pass http://127.0.0.1:9028/api/register;
+1152:        proxy_pass http://127.0.0.1:9028/api/auth/register;
+1167:        proxy_pass http://127.0.0.1:9001/api/completed-decisions$is_args$args;
+1183:        proxy_pass http://127.0.0.1:9001/api/completed-decisions/latest$is_args$args;
+1241:    server_name api.ndsp.app;
+1251:        proxy_pass http://127.0.0.1:9020/api/auth/login;
+1260:        proxy_pass http://127.0.0.1:9020/api/auth/me;
+1269:        proxy_pass http://127.0.0.1:9020/api/auth/logout;
+1278:        proxy_pass http://127.0.0.1:9001;
+1288:        proxy_pass http://127.0.0.1:9082/api/decision/quality-live$is_args$args;
+1336:        proxy_pass http://127.0.0.1:9066;
+1343:        proxy_pass http://127.0.0.1:9066;
+1351:    location = /api/ui-bridge/health { proxy_pass http://127.0.0.1:9066; proxy_http_version 1.1; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; }
+1355:    location = /api/market-structure { proxy_pass http://127.0.0.1:9066; proxy_http_version 1.1; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; }
+1356:    location = /api/technical-confirmation { proxy_pass http://127.0.0.1:9066; proxy_http_version 1.1; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; }
+1357:    location = /api/macro-analysis { proxy_pass http://127.0.0.1:9066; proxy_http_version 1.1; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; }
+1358:    location = /api/risk-layer { proxy_pass http://127.0.0.1:9066; proxy_http_version 1.1; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; }
+1359:    location = /api/nawaf-signal { proxy_pass http://127.0.0.1:9066; proxy_http_version 1.1; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; }
+1360:    location = /api/alerts { proxy_pass http://127.0.0.1:9066; proxy_http_version 1.1; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; }
+1361:    location = /api/settings { proxy_pass http://127.0.0.1:9066; proxy_http_version 1.1; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; }
+1376:        proxy_pass http://127.0.0.1:9061/api/decision/package-live;
+1390:        proxy_pass http://127.0.0.1:9078/api/completed;
+1398:        proxy_pass http://127.0.0.1:9078/api/completed/latest;
+1406:        proxy_pass http://127.0.0.1:9078$request_uri;
+1414:        proxy_pass http://127.0.0.1:9078$request_uri;
+1422:        proxy_pass http://127.0.0.1:9078$request_uri;
+1430:        proxy_pass http://127.0.0.1:9079/health;
+1438:        proxy_pass http://127.0.0.1:9079/api/governance/evaluate;
+1465:        proxy_pass http://127.0.0.1:9028/api/register;
+1478:        proxy_pass http://127.0.0.1:9028/api/auth/register;
+1493:        proxy_pass http://127.0.0.1:9001/api/completed-decisions$is_args$args;
+1509:        proxy_pass http://127.0.0.1:9001/api/completed-decisions/latest$is_args$args;
+1561:    location = /api/trial/status {
+1562:        proxy_pass http://127.0.0.1:9090/api/trial/status;
+1569:        proxy_pass_request_headers on;
+1575:    location = /api/trial/seats {
+1576:        proxy_pass http://127.0.0.1:9090/api/trial/seats;
+1586:        proxy_pass http://127.0.0.1:9090/api/launch/status;
+1638:        proxy_pass https://api.ndsp.app/api/auth/reset-password;
+1736:        proxy_pass http://127.0.0.1:9020/api/auth/login;
+1744:    location = /api/trial/register/health {
+1745:        proxy_pass http://127.0.0.1:9019/api/trial/register/health;
+1756:    location ^~ /api/trial/register/ {
+1757:        proxy_pass http://127.0.0.1:9019/api/trial/register/;
+1768:    location = /api/trial/invites/validate {
+1769:        proxy_pass http://127.0.0.1:9019/api/trial/invites/validate;
+1804:        proxy_pass https://api.ndsp.app/api/auth/reset-password;
+1822:        proxy_pass http://127.0.0.1:9083/api/decision/nmp-timeframes-live$is_args$args;
+1829:        proxy_pass http://127.0.0.1:9083/api/decision/quality-contract-v52$is_args$args;
+1836:        proxy_pass http://127.0.0.1:9083/health;
+1897:    location = /api/trial/status {
+1898:        proxy_pass http://127.0.0.1:9090/api/trial/status;
+1905:        proxy_pass_request_headers on;
+1911:    location = /api/trial/seats {
+1912:        proxy_pass http://127.0.0.1:9090/api/trial/seats;
+1922:        proxy_pass http://127.0.0.1:9090/api/launch/status;
+NGINX_RELEVANT_ROUTE_LINE_COUNT=119
+
+============================================================
+7) LIVE OWNER FRONTEND AND API ROUTE DISCOVERY
+============================================================
+DISCOVERY_ROOT=/var/www/ndsp-my
+DISCOVERED_API_ROUTE=/api/auth/login|FILE=/var/www/ndsp-my/ndsp-login-to-portal-v90.js
+DISCOVERED_API_ROUTE=/api/auth/session|FILE=/var/www/ndsp-my/ndsp-login-to-portal-v90.js
+DISCOVERED_API_ROUTE=/api/auth/forgot-password|FILE=/var/www/ndsp-my/forgot-password-v67.html
+DISCOVERED_API_ROUTE=/api/auth/session|FILE=/var/www/ndsp-my/ndsp-canonical-user-portal-v86.js
+DISCOVERED_API_ROUTE=/api/auth/reset-password|FILE=/var/www/ndsp-my/reset-password.html
+DISCOVERED_API_ROUTE=/api/auth/session|FILE=/var/www/ndsp-my/ndsp-canonical-user-portal-v79.js
+DISCOVERED_API_ROUTE=/api/auth/session|FILE=/var/www/ndsp-my/ndsp-canonical-user-portal-v78.js
+DISCOVERED_API_ROUTE=/api/auth/forgot-password|FILE=/var/www/ndsp-my/forgot-password.html
+DISCOVERED_API_ROUTE=/api/completed-decisions|FILE=/var/www/ndsp-my/portal-commercial-preview/assets/index-BbNOtHX6.js
+DISCOVERED_API_ROUTE=/api/entitlements/me|FILE=/var/www/ndsp-my/portal-commercial-preview/assets/index-BbNOtHX6.js
+DISCOVERED_API_ROUTE=/api/trial/status|FILE=/var/www/ndsp-my/portal-commercial-preview/assets/index-BbNOtHX6.js
+DISCOVERED_API_ROUTE=/api/support/tickets|FILE=/var/www/ndsp-my/portal-commercial-preview/assets/index-BbNOtHX6.js
+DISCOVERED_API_ROUTE=/api/support|FILE=/var/www/ndsp-my/portal-commercial-preview/assets/index-BbNOtHX6.js
+DISCOVERED_API_ROUTE=/api/market/candles?${A}|FILE=/var/www/ndsp-my/portal-commercial-preview/assets/index-BbNOtHX6.js
+DISCOVERED_API_ROUTE=/api/market-data/candles?${A}|FILE=/var/www/ndsp-my/portal-commercial-preview/assets/index-BbNOtHX6.js
+DISCOVERED_API_ROUTE=/api/ohlcv?${A}|FILE=/var/www/ndsp-my/portal-commercial-preview/assets/index-BbNOtHX6.js
+DISCOVERED_API_ROUTE=/api/candles?${A}|FILE=/var/www/ndsp-my/portal-commercial-preview/assets/index-BbNOtHX6.js
+DISCOVERED_API_ROUTE=/api/market/ohlcv?${A}|FILE=/var/www/ndsp-my/portal-commercial-preview/assets/index-BbNOtHX6.js
+DISCOVERED_API_ROUTE=/api/technical/candles?${A}|FILE=/var/www/ndsp-my/portal-commercial-preview/assets/index-BbNOtHX6.js
+DISCOVERED_API_ROUTE=/api/health|FILE=/var/www/ndsp-my/portal-commercial-preview/assets/index-BbNOtHX6.js
+DISCOVERED_API_ROUTE=/api/decision/quality-live?symbol=ETHUSDT&timeframe=weekly|FILE=/var/www/ndsp-my/portal-commercial-preview/assets/index-BbNOtHX6.js
+DISCOVERED_API_ROUTE=/api/market/candles?symbol=ETHUSDT&timeframe=1h&interval=1h&limit=5|FILE=/var/www/ndsp-my/portal-commercial-preview/assets/index-BbNOtHX6.js
+DISCOVERED_API_ROUTE=/api/news?symbol=ETHUSDT&limit=1|FILE=/var/www/ndsp-my/portal-commercial-preview/assets/index-BbNOtHX6.js
+DISCOVERED_API_ROUTE=/api/health|FILE=/var/www/ndsp-my/portal.previous.20260726_230859/assets/app-DL-BVG88.js
+DISCOVERED_API_ROUTE=/api/completed-decisions|FILE=/var/www/ndsp-my/portal.previous.20260726_230859/assets/app-DL-BVG88.js
+DISCOVERED_API_ROUTE=/api/completed-decisions?limit=500|FILE=/var/www/ndsp-my/market-suite/index.html
+DISCOVERED_API_ROUTE=/api/completed-decisions|FILE=/var/www/ndsp-my/market-suite/index.html
+DISCOVERED_API_ROUTE=/api/market/candles?${qs}|FILE=/var/www/ndsp-my/market-suite/index.html
+DISCOVERED_API_ROUTE=/api/market-data/candles?${qs}|FILE=/var/www/ndsp-my/market-suite/index.html
+DISCOVERED_API_ROUTE=/api/ohlcv?${qs}|FILE=/var/www/ndsp-my/market-suite/index.html
+DISCOVERED_API_ROUTE=/api/candles?${qs}|FILE=/var/www/ndsp-my/market-suite/index.html
+DISCOVERED_API_ROUTE=/api/market/ohlcv?${qs}|FILE=/var/www/ndsp-my/market-suite/index.html
+DISCOVERED_API_ROUTE=/api/technical/candles?${qs}|FILE=/var/www/ndsp-my/market-suite/index.html
+DISCOVERED_API_ROUTE=/api/news?limit=30|FILE=/var/www/ndsp-my/market-suite/index.html
+DISCOVERED_API_ROUTE=/api/market/news?limit=30|FILE=/var/www/ndsp-my/market-suite/index.html
+DISCOVERED_API_ROUTE=/api/events?limit=30|FILE=/var/www/ndsp-my/market-suite/index.html
+DISCOVERED_API_ROUTE=/api/economic-calendar?limit=30|FILE=/var/www/ndsp-my/market-suite/index.html
+DISCOVERED_API_ROUTE=/api/auth/session|FILE=/var/www/ndsp-my/admin/index.html
+DISCOVERED_API_ROUTE=/api/health|FILE=/var/www/ndsp-my/admin/index.html
+DISCOVERED_API_ROUTE=/api/completed-decisions|FILE=/var/www/ndsp-my/portal/assets/index-YRhdpSxC.js
+DISCOVERED_API_ROUTE=/api/entitlements/me|FILE=/var/www/ndsp-my/portal/assets/index-YRhdpSxC.js
+DISCOVERED_API_ROUTE=/api/trial/status|FILE=/var/www/ndsp-my/portal/assets/index-YRhdpSxC.js
+DISCOVERED_API_ROUTE=/api/support/tickets|FILE=/var/www/ndsp-my/portal/assets/index-YRhdpSxC.js
+DISCOVERED_API_ROUTE=/api/support|FILE=/var/www/ndsp-my/portal/assets/index-YRhdpSxC.js
+DISCOVERED_API_ROUTE=/api/market/candles?${A}|FILE=/var/www/ndsp-my/portal/assets/index-YRhdpSxC.js
+DISCOVERED_API_ROUTE=/api/market-data/candles?${A}|FILE=/var/www/ndsp-my/portal/assets/index-YRhdpSxC.js
+DISCOVERED_API_ROUTE=/api/ohlcv?${A}|FILE=/var/www/ndsp-my/portal/assets/index-YRhdpSxC.js
+DISCOVERED_API_ROUTE=/api/candles?${A}|FILE=/var/www/ndsp-my/portal/assets/index-YRhdpSxC.js
+DISCOVERED_API_ROUTE=/api/market/ohlcv?${A}|FILE=/var/www/ndsp-my/portal/assets/index-YRhdpSxC.js
+DISCOVERED_API_ROUTE=/api/technical/candles?${A}|FILE=/var/www/ndsp-my/portal/assets/index-YRhdpSxC.js
+DISCOVERED_API_ROUTE=/api/health|FILE=/var/www/ndsp-my/portal/assets/index-YRhdpSxC.js
+DISCOVERED_API_ROUTE=/api/decision/quality-live?symbol=ETHUSDT&timeframe=weekly|FILE=/var/www/ndsp-my/portal/assets/index-YRhdpSxC.js
+DISCOVERED_API_ROUTE=/api/market/candles?symbol=ETHUSDT&timeframe=1h&interval=1h&limit=5|FILE=/var/www/ndsp-my/portal/assets/index-YRhdpSxC.js
+DISCOVERED_API_ROUTE=/api/news?symbol=ETHUSDT&limit=1|FILE=/var/www/ndsp-my/portal/assets/index-YRhdpSxC.js
+DISCOVERED_API_ROUTE=/api/auth/logout|FILE=/var/www/ndsp-my/portal/assets/index-YRhdpSxC.js
+DISCOVERED_API_ROUTE=/api/completed-decisions|FILE=/var/www/ndsp-my/portal/assets/index-bdi5oWzB.js
+DISCOVERED_API_ROUTE=/api/entitlements/me|FILE=/var/www/ndsp-my/portal/assets/index-bdi5oWzB.js
+DISCOVERED_API_ROUTE=/api/trial/status|FILE=/var/www/ndsp-my/portal/assets/index-bdi5oWzB.js
+DISCOVERED_API_ROUTE=/api/support/tickets|FILE=/var/www/ndsp-my/portal/assets/index-bdi5oWzB.js
+DISCOVERED_API_ROUTE=/api/support|FILE=/var/www/ndsp-my/portal/assets/index-bdi5oWzB.js
+DISCOVERED_API_ROUTE=/api/market/candles?${A}|FILE=/var/www/ndsp-my/portal/assets/index-bdi5oWzB.js
+DISCOVERED_API_ROUTE=/api/market-data/candles?${A}|FILE=/var/www/ndsp-my/portal/assets/index-bdi5oWzB.js
+DISCOVERED_API_ROUTE=/api/ohlcv?${A}|FILE=/var/www/ndsp-my/portal/assets/index-bdi5oWzB.js
+DISCOVERED_API_ROUTE=/api/candles?${A}|FILE=/var/www/ndsp-my/portal/assets/index-bdi5oWzB.js
+DISCOVERED_API_ROUTE=/api/market/ohlcv?${A}|FILE=/var/www/ndsp-my/portal/assets/index-bdi5oWzB.js
+DISCOVERED_API_ROUTE=/api/technical/candles?${A}|FILE=/var/www/ndsp-my/portal/assets/index-bdi5oWzB.js
+DISCOVERED_API_ROUTE=/api/health|FILE=/var/www/ndsp-my/portal/assets/index-bdi5oWzB.js
+DISCOVERED_API_ROUTE=/api/decision/quality-live?symbol=ETHUSDT&timeframe=weekly|FILE=/var/www/ndsp-my/portal/assets/index-bdi5oWzB.js
+DISCOVERED_API_ROUTE=/api/market/candles?symbol=ETHUSDT&timeframe=1h&interval=1h&limit=5|FILE=/var/www/ndsp-my/portal/assets/index-bdi5oWzB.js
+DISCOVERED_API_ROUTE=/api/news?symbol=ETHUSDT&limit=1|FILE=/var/www/ndsp-my/portal/assets/index-bdi5oWzB.js
+DISCOVERED_API_ROUTE=/api/auth/logout|FILE=/var/www/ndsp-my/portal/assets/index-bdi5oWzB.js
+DISCOVERED_API_ROUTE=/api/health|FILE=/var/www/ndsp-my/portal-next/assets/app-DL-BVG88.js
+DISCOVERED_API_ROUTE=/api/completed-decisions|FILE=/var/www/ndsp-my/portal-next/assets/app-DL-BVG88.js
+DISCOVERED_API_ROUTE=/api/register|FILE=/var/www/ndsp-my/register/ndsp-seat-cap-v167.js
+DISCOVERED_API_ROUTE=/api/auth/session|FILE=/var/www/ndsp-my/owner/index.html
+DISCOVERED_API_ROUTE=/api/health|FILE=/var/www/ndsp-my/owner/index.html
+DISCOVERED_API_ROUTE=/api/auth/login|FILE=/var/www/ndsp-my/login/index.html
+DISCOVERED_API_ROUTE=/api/auth/|FILE=/var/www/ndsp-my/login/index.html
+DISCOVERED_API_ROUTE=/api/telegram/status|FILE=/var/www/ndsp-my/assets/ndsp-telegram-v182.js
+DISCOVERED_API_ROUTE=/api/telegram/history|FILE=/var/www/ndsp-my/assets/ndsp-telegram-v182.js
+DISCOVERED_API_ROUTE=/api/telegram/link|FILE=/var/www/ndsp-my/assets/ndsp-telegram-v182.js
+DISCOVERED_API_ROUTE=/api/telegram/test|FILE=/var/www/ndsp-my/assets/ndsp-telegram-v182.js
+DISCOVERED_API_ROUTE=/api/telegram/disconnect|FILE=/var/www/ndsp-my/assets/ndsp-telegram-v182.js
+DISCOVERED_API_ROUTE=/api/telegram/preferences|FILE=/var/www/ndsp-my/assets/ndsp-telegram-v182.js
+DISCOVERED_API_ROUTE=/api/completed-decisions|FILE=/var/www/ndsp-my/assets/index-CdX-Uybq.js
+DISCOVERED_API_ROUTE=/api/completed-decisions/history?limit=100|FILE=/var/www/ndsp-my/assets/index-CdX-Uybq.js
+DISCOVERED_API_ROUTE=/api/completed-decisions/history/integrity|FILE=/var/www/ndsp-my/assets/index-CdX-Uybq.js
+DISCOVERED_API_ROUTE=/api/register|FILE=/var/www/ndsp-my/assets/ndsp-register-submit-bridge-v152.js
+DISCOVERED_API_ROUTE=/api/auth/register|FILE=/var/www/ndsp-my/assets/ndsp-register-v1.js
+DISCOVERED_API_ROUTE=/api/register|FILE=/var/www/ndsp-my/assets/ndsp-register-v1.js
+DISCOVERED_API_ROUTE=/api/completed-decisions|FILE=/var/www/ndsp-my/assets/index-DmcfunFh.js
+DISCOVERED_API_ROUTE=/api/completed-decisions/history?limit=100|FILE=/var/www/ndsp-my/assets/index-DmcfunFh.js
+DISCOVERED_API_ROUTE=/api/completed-decisions/history/integrity|FILE=/var/www/ndsp-my/assets/index-DmcfunFh.js
+DISCOVERED_API_ROUTE=/api/completed-decisions|FILE=/var/www/ndsp-my/assets/index-CJP_ADc4.js
+DISCOVERED_API_ROUTE=/api/completed-decisions/history?limit=100|FILE=/var/www/ndsp-my/assets/index-CJP_ADc4.js
+DISCOVERED_API_ROUTE=/api/completed-decisions/history/integrity|FILE=/var/www/ndsp-my/assets/index-CJP_ADc4.js
+DISCOVERED_API_ROUTE=/api/auth/login|FILE=/var/www/ndsp-my/assets/ndsp-login-v1.js
+DISCOVERED_API_ROUTE=/api/auth/logout|FILE=/var/www/ndsp-my/assets/ndsp-final-v160/shell.js
+DISCOVERED_API_ROUTE=/api/auth/ux/legal-acceptance|FILE=/var/www/ndsp-my/assets/ndsp-final-v160/shell.js
+DISCOVERED_API_ROUTE=/api/auth/ux/survey|FILE=/var/www/ndsp-my/assets/ndsp-final-v160/shell.js
+DISCOVERED_API_ROUTE=/api/auth/ux/experience|FILE=/var/www/ndsp-my/assets/ndsp-final-v160/shell.js
+DISCOVERED_API_ROUTE=/api/auth/ux/notifications|FILE=/var/www/ndsp-my/assets/ndsp-final-v160/shell.js
+DISCOVERED_API_ROUTE=/api/auth/ux/experience|FILE=/var/www/ndsp-my/assets/ndsp-final-v160/support.js
+DISCOVERED_API_ROUTE=/api/auth/ux/notifications|FILE=/var/www/ndsp-my/assets/ndsp-final-v160/support.js
+DISCOVERED_API_ROUTE=/api/auth/ux/notifications/${b.dataset.id}/read|FILE=/var/www/ndsp-my/assets/ndsp-final-v160/support.js
+DISCOVERED_API_ROUTE=/api/auth/ux/feedback|FILE=/var/www/ndsp-my/assets/ndsp-final-v160/support.js
+DISCOVERED_API_ROUTE=/api/auth/ux/experience|FILE=/var/www/ndsp-my/assets/ndsp-final-v160/layers.js
+DISCOVERED_API_ROUTE=/api/market/candles?${q}|FILE=/var/www/ndsp-my/assets/ndsp-final-v160/market.js
+DISCOVERED_API_ROUTE=/api/market/ohlc?${q}|FILE=/var/www/ndsp-my/assets/ndsp-final-v160/market.js
+DISCOVERED_API_ROUTE=/api/candles?${q}|FILE=/var/www/ndsp-my/assets/ndsp-final-v160/market.js
+DISCOVERED_API_ROUTE=/api/chart/candles?${q}|FILE=/var/www/ndsp-my/assets/ndsp-final-v160/market.js
+DISCOVERED_API_ROUTE=/api/economic-calendar?limit=12|FILE=/var/www/ndsp-my/assets/ndsp-final-v160/market.js
+DISCOVERED_API_ROUTE=/api/news?limit=12|FILE=/var/www/ndsp-my/assets/ndsp-final-v160/market.js
+DISCOVERED_API_ROUTE=/api/market/news?limit=12|FILE=/var/www/ndsp-my/assets/ndsp-final-v160/market.js
+DISCOVERED_API_ROUTE=/api/events?limit=12|FILE=/var/www/ndsp-my/assets/ndsp-final-v160/market.js
+DISCOVERY_ROOT=/home/nawaf511/empire-core-new/frontend
+DISCOVERED_API_ROUTE=/api/trial/status?v=|FILE=/home/nawaf511/empire-core-new/frontend/public-site/ndsp-counter-debug.html
+DISCOVERED_API_ROUTE=/api/trial/status?v=|FILE=/home/nawaf511/empire-core-new/frontend/public-site/ndsp-live-trial-counters.js
+DISCOVERED_API_ROUTE=/api/auth/login|FILE=/home/nawaf511/empire-core-new/frontend/ndsp-auth-canonical-v94/login/index.html
+DISCOVERED_API_ROUTE=/api/auth/|FILE=/home/nawaf511/empire-core-new/frontend/ndsp-auth-canonical-v94/login/index.html
+DISCOVERED_API_ROUTE=/api/trial/seats|FILE=/home/nawaf511/empire-core-new/frontend/public-landing/index.html
+DISCOVERED_API_ROUTE=/api/trial/status|FILE=/home/nawaf511/empire-core-new/frontend/public-landing/NDSP_Landing.html
+DISCOVERED_API_ROUTE=/api/trial/register/professional|FILE=/home/nawaf511/empire-core-new/frontend/public-landing/register.html
+DISCOVERED_API_ROUTE=/api/trial/register/private-invite|FILE=/home/nawaf511/empire-core-new/frontend/public-landing/register.html
+DISCOVERED_API_ROUTE=/api/trial/register/ordinary|FILE=/home/nawaf511/empire-core-new/frontend/public-landing/register.html
+DISCOVERED_API_ROUTE=/api/trial/status|FILE=/home/nawaf511/empire-core-new/frontend/public-landing/register.html
+DISCOVERED_API_ROUTE=/api/trial/register/status|FILE=/home/nawaf511/empire-core-new/frontend/public-landing/register.html
+DISCOVERED_API_ROUTE=/api/register|FILE=/home/nawaf511/empire-core-new/frontend/shared/ndsp-register-submit-bridge-v152.js
+DISCOVERED_API_ROUTE=/api/auth/session|FILE=/home/nawaf511/empire-core-new/frontend/ndsp-user-portal-v50/public/ndsp-canonical-user-portal-v86.js
+DISCOVERED_API_ROUTE=/api/auth/session|FILE=/home/nawaf511/empire-core-new/frontend/ndsp-user-portal-v50/public/ndsp-canonical-user-portal-v79.js
+DISCOVERED_API_ROUTE=/api/decision/quality-live|FILE=/home/nawaf511/empire-core-new/frontend/ndsp-user-portal-v50/public/ndsp-timeframe-layer-contract-v121.js
+DISCOVERED_API_ROUTE=/api/auth/session|FILE=/home/nawaf511/empire-core-new/frontend/ndsp-user-portal-v50/public/ndsp-canonical-user-portal-v78.js
+DISCOVERED_API_ROUTE=/api/decision/quality-live?${q}|FILE=/home/nawaf511/empire-core-new/frontend/ndsp-user-portal-v50/assets/ndsp-portal-v50.js
+DISCOVERED_API_ROUTE=/api/health|FILE=/home/nawaf511/empire-core-new/frontend/ndsp-user-portal-v50/assets/ndsp-portal-v50.js
+DISCOVERED_API_ROUTE=/api/completed-decisions?${q}|FILE=/home/nawaf511/empire-core-new/frontend/ndsp-user-portal-v50/assets/ndsp-portal-v50.js
+DISCOVERED_API_ROUTE=/api/auth/reset-password|FILE=/home/nawaf511/empire-core-new/frontend/auth-recovery/reset-password.html
+DISCOVERED_API_ROUTE=/api/auth/forgot-password|FILE=/home/nawaf511/empire-core-new/frontend/auth-recovery/forgot-password.html
+DISCOVERED_API_ROUTE=/api/market/candles?${qs}|FILE=/home/nawaf511/empire-core-new/frontend/user-portal-vite/public/market-suite/index.html
+DISCOVERED_API_ROUTE=/api/market-data/candles?${qs}|FILE=/home/nawaf511/empire-core-new/frontend/user-portal-vite/public/market-suite/index.html
+DISCOVERED_API_ROUTE=/api/ohlcv?${qs}|FILE=/home/nawaf511/empire-core-new/frontend/user-portal-vite/public/market-suite/index.html
+DISCOVERED_API_ROUTE=/api/candles?${qs}|FILE=/home/nawaf511/empire-core-new/frontend/user-portal-vite/public/market-suite/index.html
+DISCOVERED_API_ROUTE=/api/market/ohlcv?${qs}|FILE=/home/nawaf511/empire-core-new/frontend/user-portal-vite/public/market-suite/index.html
+DISCOVERED_API_ROUTE=/api/technical/candles?${qs}|FILE=/home/nawaf511/empire-core-new/frontend/user-portal-vite/public/market-suite/index.html
+DISCOVERED_API_ROUTE=/api/news?limit=30|FILE=/home/nawaf511/empire-core-new/frontend/user-portal-vite/public/market-suite/index.html
+DISCOVERED_API_ROUTE=/api/market/news?limit=30|FILE=/home/nawaf511/empire-core-new/frontend/user-portal-vite/public/market-suite/index.html
+DISCOVERED_API_ROUTE=/api/events?limit=30|FILE=/home/nawaf511/empire-core-new/frontend/user-portal-vite/public/market-suite/index.html
+DISCOVERED_API_ROUTE=/api/economic-calendar?limit=30|FILE=/home/nawaf511/empire-core-new/frontend/user-portal-vite/public/market-suite/index.html
+DISCOVERED_API_ROUTE=/api/completed-decisions|FILE=/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/hooks/useCompletedDecisionsV37.js
+DISCOVERED_API_ROUTE=/api/completed-decisions/history?limit=100|FILE=/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/hooks/useCompletedDecisionsV37.js
+DISCOVERED_API_ROUTE=/api/completed-decisions/history/integrity|FILE=/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/hooks/useCompletedDecisionsV37.js
+DISCOVERY_ROOT=/home/nawaf511/empire-core-new/backend
+DISCOVERED_API_ROUTE=/api/account/trial|FILE=/home/nawaf511/empire-core-new/backend/ndsp_api_compat_gateway.cjs
+DISCOVERED_API_ROUTE=/api/packages|FILE=/home/nawaf511/empire-core-new/backend/ndsp_api_compat_gateway.cjs
+DISCOVERED_API_ROUTE=/api/markets|FILE=/home/nawaf511/empire-core-new/backend/ndsp_api_compat_gateway.cjs
+DISCOVERED_API_ROUTE=/api/alerts/status|FILE=/home/nawaf511/empire-core-new/backend/ndsp_api_compat_gateway.cjs
+DISCOVERED_API_ROUTE=/api/payments/status|FILE=/home/nawaf511/empire-core-new/backend/ndsp_api_compat_gateway.cjs
+DISCOVERED_API_ROUTE=/api/admin-actions/users/action/health|FILE=/home/nawaf511/empire-core-new/backend/ndsp_admin_actions_bypass_old_middleware.cjs
+DISCOVERED_API_ROUTE=/api/admin-actions/users/action|FILE=/home/nawaf511/empire-core-new/backend/ndsp_admin_actions_bypass_old_middleware.cjs
+DISCOVERED_API_ROUTE=/api/portal/command-center|FILE=/home/nawaf511/empire-core-new/backend/portal_snapshot_generator.cjs
+DISCOVERED_API_ROUTE=/api/admin-ui/|FILE=/home/nawaf511/empire-core-new/backend/ndsp_platform_gateway_9001.cjs
+DISCOVERED_API_ROUTE=/api/auth/|FILE=/home/nawaf511/empire-core-new/backend/ndsp_platform_gateway_9001.cjs
+DISCOVERED_API_ROUTE=/api/user-dashboard/|FILE=/home/nawaf511/empire-core-new/backend/ndsp_platform_gateway_9001.cjs
+DISCOVERED_API_ROUTE=/api/trial/|FILE=/home/nawaf511/empire-core-new/backend/ndsp_platform_gateway_9001.cjs
+DISCOVERED_API_ROUTE=/api/admin-actions/|FILE=/home/nawaf511/empire-core-new/backend/ndsp_platform_gateway_9001.cjs
+DISCOVERED_API_ROUTE=/api/admin/|FILE=/home/nawaf511/empire-core-new/backend/ndsp_platform_gateway_9001.cjs
+DISCOVERED_API_ROUTE=/api/health|FILE=/home/nawaf511/empire-core-new/backend/ndsp_platform_gateway_9001.cjs
+DISCOVERED_API_ROUTE=/api/trial/status|FILE=/home/nawaf511/empire-core-new/backend/ndsp_platform_gateway_9001.cjs
+DISCOVERED_API_ROUTE=/api/trial/info|FILE=/home/nawaf511/empire-core-new/backend/ndsp_platform_gateway_9001.cjs
+DISCOVERED_API_ROUTE=/api/ops/ws-status|FILE=/home/nawaf511/empire-core-new/backend/ndsp_platform_gateway_9001.cjs
+DISCOVERED_API_ROUTE=/api/ops/alerts-status|FILE=/home/nawaf511/empire-core-new/backend/ndsp_platform_gateway_9001.cjs
+DISCOVERED_API_ROUTE=/api/alerts/status|FILE=/home/nawaf511/empire-core-new/backend/ndsp_platform_gateway_9001.cjs
+DISCOVERED_API_ROUTE=/api/auth/login/health|FILE=/home/nawaf511/empire-core-new/backend/ndsp_user_login_gateway.cjs
+DISCOVERED_API_ROUTE=/api/auth/login|FILE=/home/nawaf511/empire-core-new/backend/ndsp_user_login_gateway.cjs
+DISCOVERED_API_ROUTE=/api/auth/2fa/login/verify|FILE=/home/nawaf511/empire-core-new/backend/ndsp_user_login_gateway.cjs
+DISCOVERED_API_ROUTE=/api/auth/session|FILE=/home/nawaf511/empire-core-new/backend/ndsp_user_login_gateway.cjs
+DISCOVERED_API_ROUTE=/api/auth/logout|FILE=/home/nawaf511/empire-core-new/backend/ndsp_user_login_gateway.cjs
+DISCOVERED_API_ROUTE=/api/auth/2fa/status|FILE=/home/nawaf511/empire-core-new/backend/ndsp_user_login_gateway.cjs
+DISCOVERED_API_ROUTE=/api/auth/2fa/setup|FILE=/home/nawaf511/empire-core-new/backend/ndsp_user_login_gateway.cjs
+DISCOVERED_API_ROUTE=/api/auth/2fa/confirm|FILE=/home/nawaf511/empire-core-new/backend/ndsp_user_login_gateway.cjs
+DISCOVERED_API_ROUTE=/api/auth/2fa/disable|FILE=/home/nawaf511/empire-core-new/backend/ndsp_user_login_gateway.cjs
+DISCOVERED_API_ROUTE=/api/auth/2fa/setup/start|FILE=/home/nawaf511/empire-core-new/backend/ndsp_user_login_gateway.cjs
+DISCOVERED_API_ROUTE=/api/auth/2fa/setup/confirm|FILE=/home/nawaf511/empire-core-new/backend/ndsp_user_login_gateway.cjs
+DISCOVERED_API_ROUTE=/api/auth/2fa/setup/skip|FILE=/home/nawaf511/empire-core-new/backend/ndsp_user_login_gateway.cjs
+DISCOVERED_API_ROUTE=/api/auth/2fa/setup/confirm-final|FILE=/home/nawaf511/empire-core-new/backend/ndsp_user_login_gateway.cjs
+DISCOVERED_API_ROUTE=/api/auth/2fa/setup/confirm-speakeasy|FILE=/home/nawaf511/empire-core-new/backend/ndsp_user_login_gateway.cjs
+DISCOVERED_API_ROUTE=/api/webhooks/nowpayments|FILE=/home/nawaf511/empire-core-new/backend/ndsp_nowpayments.cjs
+DISCOVERED_API_ROUTE=/api/user-dashboard/health|FILE=/home/nawaf511/empire-core-new/backend/ndsp_user_dashboard_gateway.cjs
+DISCOVERED_API_ROUTE=/api/user-dashboard/analyze|FILE=/home/nawaf511/empire-core-new/backend/ndsp_user_dashboard_gateway.cjs
+DISCOVERED_API_ROUTE=/api/user-dashboard/markets|FILE=/home/nawaf511/empire-core-new/backend/ndsp_user_dashboard_gateway.cjs
+DISCOVERED_API_ROUTE=/api/user-dashboard/brief|FILE=/home/nawaf511/empire-core-new/backend/ndsp_user_dashboard_gateway.cjs
+DISCOVERED_API_ROUTE=/api/user-dashboard/saas-policy|FILE=/home/nawaf511/empire-core-new/backend/ndsp_user_dashboard_gateway.cjs
+DISCOVERED_API_ROUTE=/api/register|FILE=/home/nawaf511/empire-core-new/backend/ndsp_device_guard.cjs
+DISCOVERED_API_ROUTE=/api/signup|FILE=/home/nawaf511/empire-core-new/backend/ndsp_device_guard.cjs
+DISCOVERED_API_ROUTE=/api/auth/register|FILE=/home/nawaf511/empire-core-new/backend/ndsp_device_guard.cjs
+DISCOVERED_API_ROUTE=/api/auth/signup|FILE=/home/nawaf511/empire-core-new/backend/ndsp_device_guard.cjs
+DISCOVERED_API_ROUTE=/api/admin/users/action/health|FILE=/home/nawaf511/empire-core-new/backend/ndsp_admin_actions_authoritative.cjs
+DISCOVERED_API_ROUTE=/api/admin/users/action|FILE=/home/nawaf511/empire-core-new/backend/ndsp_admin_actions_authoritative.cjs
+DISCOVERED_API_ROUTE=/api/market/prices|FILE=/home/nawaf511/empire-core-new/backend/ndsp_live_market_adapter.cjs
+DISCOVERED_API_ROUTE=/api/market/snapshot|FILE=/home/nawaf511/empire-core-new/backend/ndsp_live_market_adapter.cjs
+DISCOVERED_API_ROUTE=/api/market/refresh|FILE=/home/nawaf511/empire-core-new/backend/ndsp_live_market_adapter.cjs
+DISCOVERED_API_ROUTE=/api/admin-actions/users/sync-json|FILE=/home/nawaf511/empire-core-new/backend/ndsp_trial_register_gateway.cjs
+DISCOVERED_API_ROUTE=/api/auth/activate|FILE=/home/nawaf511/empire-core-new/backend/ndsp_trial_register_gateway.cjs
+DISCOVERED_API_ROUTE=/api/trial/activate|FILE=/home/nawaf511/empire-core-new/backend/ndsp_trial_register_gateway.cjs
+DISCOVERED_API_ROUTE=/api/trial/register/health|FILE=/home/nawaf511/empire-core-new/backend/ndsp_trial_register_gateway.cjs
+DISCOVERED_API_ROUTE=/api/trial/register/ordinary|FILE=/home/nawaf511/empire-core-new/backend/ndsp_trial_register_gateway.cjs
+DISCOVERED_API_ROUTE=/api/trial/register/professional|FILE=/home/nawaf511/empire-core-new/backend/ndsp_trial_register_gateway.cjs
+DISCOVERED_API_ROUTE=/api/trial/register/private-invite|FILE=/home/nawaf511/empire-core-new/backend/ndsp_trial_register_gateway.cjs
+DISCOVERED_API_ROUTE=/api/trial/invites/validate|FILE=/home/nawaf511/empire-core-new/backend/ndsp_trial_register_gateway.cjs
+DISCOVERED_API_ROUTE=/api/scenario/levels/health|FILE=/home/nawaf511/empire-core-new/backend/ndsp_scenario_levels_adapter.cjs
+DISCOVERED_API_ROUTE=/api/scenario/levels|FILE=/home/nawaf511/empire-core-new/backend/ndsp_scenario_levels_adapter.cjs
+DISCOVERED_API_ROUTE=/api/admin|FILE=/home/nawaf511/empire-core-new/backend/ndsp_admin_extension.cjs
+DISCOVERED_API_ROUTE=/api/admin-actions/users/action/health|FILE=/home/nawaf511/empire-core-new/backend/ndsp_admin_actions_gateway.cjs
+DISCOVERED_API_ROUTE=/api/admin-actions/users/action|FILE=/home/nawaf511/empire-core-new/backend/ndsp_admin_actions_gateway.cjs
+DISCOVERED_API_ROUTE=/api/admin-actions/users/sync-json|FILE=/home/nawaf511/empire-core-new/backend/ndsp_admin_actions_gateway.cjs
+DISCOVERED_API_ROUTE=/api/admin-ui/health|FILE=/home/nawaf511/empire-core-new/backend/ndsp_admin_ui_proxy.cjs
+DISCOVERED_API_ROUTE=/api/admin-ui/summary|FILE=/home/nawaf511/empire-core-new/backend/ndsp_admin_ui_proxy.cjs
+DISCOVERED_API_ROUTE=/api/admin-ui/users|FILE=/home/nawaf511/empire-core-new/backend/ndsp_admin_ui_proxy.cjs
+DISCOVERED_API_ROUTE=/api/admin-ui/payments|FILE=/home/nawaf511/empire-core-new/backend/ndsp_admin_ui_proxy.cjs
+DISCOVERED_API_ROUTE=/api/admin-ui/trials|FILE=/home/nawaf511/empire-core-new/backend/ndsp_admin_ui_proxy.cjs
+DISCOVERED_API_ROUTE=/api/admin-ui/packages|FILE=/home/nawaf511/empire-core-new/backend/ndsp_admin_ui_proxy.cjs
+DISCOVERED_API_ROUTE=/api/admin-ui/markets|FILE=/home/nawaf511/empire-core-new/backend/ndsp_admin_ui_proxy.cjs
+DISCOVERED_API_ROUTE=/api/admin-ui/alerts|FILE=/home/nawaf511/empire-core-new/backend/ndsp_admin_ui_proxy.cjs
+DISCOVERED_API_ROUTE=/api/admin-ui/alerts/channel|FILE=/home/nawaf511/empire-core-new/backend/ndsp_admin_ui_proxy.cjs
+DISCOVERED_API_ROUTE=/api/admin-ui/alerts/test|FILE=/home/nawaf511/empire-core-new/backend/ndsp_admin_ui_proxy.cjs
+DISCOVERED_API_ROUTE=/api/admin-ui/backups|FILE=/home/nawaf511/empire-core-new/backend/ndsp_admin_ui_proxy.cjs
+DISCOVERED_API_ROUTE=/api/admin-ui/governance|FILE=/home/nawaf511/empire-core-new/backend/ndsp_admin_ui_proxy.cjs
+DISCOVERED_API_ROUTE=/api/admin-ui/action|FILE=/home/nawaf511/empire-core-new/backend/ndsp_admin_ui_proxy.cjs
+DISCOVERED_API_ROUTE=/api/auth/2fa/setup/start|FILE=/home/nawaf511/empire-core-new/backend/server.js
+DISCOVERED_API_ROUTE=/api/auth/2fa/setup/confirm|FILE=/home/nawaf511/empire-core-new/backend/server.js
+DISCOVERED_API_ROUTE=/api/admin/telegram-routing/status|FILE=/home/nawaf511/empire-core-new/backend/server.js
+DISCOVERED_API_ROUTE=/api/admin/telegram-routing/update|FILE=/home/nawaf511/empire-core-new/backend/server.js
+DISCOVERED_API_ROUTE=/api/admin/telegram-routing/test|FILE=/home/nawaf511/empire-core-new/backend/server.js
+DISCOVERED_API_ROUTE=/api/register|FILE=/home/nawaf511/empire-core-new/backend/services/ndsp-trial-clock-v164/server.py
+DISCOVERED_API_ROUTE=/api/auth/session|FILE=/home/nawaf511/empire-core-new/backend/services/ndsp-trial-clock-v164/server.py
+DISCOVERED_API_ROUTE=/api/trial/status|FILE=/home/nawaf511/empire-core-new/backend/services/ndsp-trial-clock-v164/server.py
+DISCOVERED_API_ROUTE=/api/completed|FILE=/home/nawaf511/empire-core-new/backend/services/completed_decision/main.cjs
+DISCOVERED_API_ROUTE=/api/completed/latest|FILE=/home/nawaf511/empire-core-new/backend/services/completed_decision/main.cjs
+DISCOVERED_API_ROUTE=/api/completed/:symbol|FILE=/home/nawaf511/empire-core-new/backend/services/completed_decision/main.cjs
+DISCOVERED_API_ROUTE=/api/completed/id/:decision_id|FILE=/home/nawaf511/empire-core-new/backend/services/completed_decision/main.cjs
+DISCOVERED_API_ROUTE=/api/completed/id/:decision_id/timeline|FILE=/home/nawaf511/empire-core-new/backend/services/completed_decision/main.cjs
+DISCOVERED_API_ROUTE=/api/completed/ingest|FILE=/home/nawaf511/empire-core-new/backend/services/completed_decision/main.cjs
+DISCOVERED_API_ROUTE=/api/completed/:decision_id/publish|FILE=/home/nawaf511/empire-core-new/backend/services/completed_decision/main.cjs
+DISCOVERED_API_ROUTE=/api/auth/session|FILE=/home/nawaf511/empire-core-new/backend/services/ndsp-telegram-notifications-v182/server.py
+DISCOVERED_API_ROUTE=/api/telegram/health|FILE=/home/nawaf511/empire-core-new/backend/services/ndsp-telegram-notifications-v182/server.py
+DISCOVERED_API_ROUTE=/api/telegram/status|FILE=/home/nawaf511/empire-core-new/backend/services/ndsp-telegram-notifications-v182/server.py
+DISCOVERED_API_ROUTE=/api/telegram/history|FILE=/home/nawaf511/empire-core-new/backend/services/ndsp-telegram-notifications-v182/server.py
+DISCOVERED_API_ROUTE=/api/telegram/webhook/{WEBHOOK_PATH}|FILE=/home/nawaf511/empire-core-new/backend/services/ndsp-telegram-notifications-v182/server.py
+DISCOVERED_API_ROUTE=/api/telegram/events|FILE=/home/nawaf511/empire-core-new/backend/services/ndsp-telegram-notifications-v182/server.py
+DISCOVERED_API_ROUTE=/api/telegram/link|FILE=/home/nawaf511/empire-core-new/backend/services/ndsp-telegram-notifications-v182/server.py
+DISCOVERED_API_ROUTE=/api/telegram/preferences|FILE=/home/nawaf511/empire-core-new/backend/services/ndsp-telegram-notifications-v182/server.py
+DISCOVERED_API_ROUTE=/api/telegram/test|FILE=/home/nawaf511/empire-core-new/backend/services/ndsp-telegram-notifications-v182/server.py
+DISCOVERED_API_ROUTE=/api/telegram/disconnect|FILE=/home/nawaf511/empire-core-new/backend/services/ndsp-telegram-notifications-v182/server.py
+DISCOVERED_API_ROUTE=/api/governance/evaluate|FILE=/home/nawaf511/empire-core-new/backend/services/decision_governance_core/main.cjs
+DISCOVERED_API_ROUTE=/api/governance/submit|FILE=/home/nawaf511/empire-core-new/backend/services/decision_governance_core/main.cjs
+DISCOVERED_API_ROUTE=/api/completed/ingest|FILE=/home/nawaf511/empire-core-new/backend/services/decision_governance_core/main.cjs
+DISCOVERED_API_ROUTE=/api/bot/latest|FILE=/home/nawaf511/empire-core-new/backend/services/bot_execution/main.cjs
+DISCOVERED_API_ROUTE=/api/bot/:symbol|FILE=/home/nawaf511/empire-core-new/backend/services/bot_execution/main.cjs
+DISCOVERED_API_ROUTE=/api/bot/simulate|FILE=/home/nawaf511/empire-core-new/backend/services/bot_execution/main.cjs
+DISCOVERED_API_ROUTE=/api/admin/launch-control|FILE=/home/nawaf511/empire-core-new/backend/services/ndsp-launch-control-v167/server.py
+DISCOVERED_API_ROUTE=/api/admin/launch-control/action|FILE=/home/nawaf511/empire-core-new/backend/services/ndsp-launch-control-v167/server.py
+DISCOVERED_API_ROUTE=/api/launch/status|FILE=/home/nawaf511/empire-core-new/backend/services/ndsp-launch-control-v167/server.py
+DISCOVERED_API_ROUTE=/api/health|FILE=/home/nawaf511/empire-core-new/backend/services/ndsp-launch-control-v167/server.py
+DISCOVERED_API_ROUTE=/api/auth/session|FILE=/home/nawaf511/empire-core-new/backend/services/ndsp-launch-control-v167/server.py
+DISCOVERED_API_ROUTE=/api/trial/seats|FILE=/home/nawaf511/empire-core-new/backend/services/ndsp-launch-control-v167/server.py
+DISCOVERED_API_ROUTE=/api/trial/status|FILE=/home/nawaf511/empire-core-new/backend/services/ndsp-launch-control-v167/server.py
+DISCOVERED_API_ROUTE=/api/entitlements/me|FILE=/home/nawaf511/empire-core-new/backend/services/ndsp-launch-control-v167/server.py
+DISCOVERED_API_ROUTE=/api/auth/decision-room-access|FILE=/home/nawaf511/empire-core-new/backend/services/ndsp-launch-control-v167/server.py
+DISCOVERED_API_ROUTE=/api/register|FILE=/home/nawaf511/empire-core-new/backend/services/ndsp-launch-control-v167/server.py
+DISCOVERED_API_ROUTE=/api/register|FILE=/home/nawaf511/empire-core-new/backend/services/ndsp-trial-clock-v163/server.py
+DISCOVERED_API_ROUTE=/api/auth/session|FILE=/home/nawaf511/empire-core-new/backend/services/ndsp-trial-clock-v163/server.py
+DISCOVERED_API_ROUTE=/api/trial/status|FILE=/home/nawaf511/empire-core-new/backend/services/ndsp-trial-clock-v163/server.py
+DISCOVERED_API_ROUTE=/api/decision/quality-live?symbol=${symbol}|FILE=/home/nawaf511/empire-core-new/backend/runtime/quarantine/live-html-before-dev018b-20260629_093055/NDSP_Radar_Command.html
+DISCOVERED_API_ROUTE=/api/admin-actions/users/sync-json|FILE=/home/nawaf511/empire-core-new/backend/runtime/private_governance/source_snapshot/ndsp_trial_register_gateway.cjs
+DISCOVERED_API_ROUTE=/api/auth/activate|FILE=/home/nawaf511/empire-core-new/backend/runtime/private_governance/source_snapshot/ndsp_trial_register_gateway.cjs
+DISCOVERED_API_ROUTE=/api/trial/activate|FILE=/home/nawaf511/empire-core-new/backend/runtime/private_governance/source_snapshot/ndsp_trial_register_gateway.cjs
+DISCOVERED_API_ROUTE=/api/trial/register/health|FILE=/home/nawaf511/empire-core-new/backend/runtime/private_governance/source_snapshot/ndsp_trial_register_gateway.cjs
+DISCOVERED_API_ROUTE=/api/trial/register/ordinary|FILE=/home/nawaf511/empire-core-new/backend/runtime/private_governance/source_snapshot/ndsp_trial_register_gateway.cjs
+DISCOVERED_API_ROUTE=/api/trial/register/professional|FILE=/home/nawaf511/empire-core-new/backend/runtime/private_governance/source_snapshot/ndsp_trial_register_gateway.cjs
+DISCOVERED_API_ROUTE=/api/trial/register/private-invite|FILE=/home/nawaf511/empire-core-new/backend/runtime/private_governance/source_snapshot/ndsp_trial_register_gateway.cjs
+DISCOVERED_API_ROUTE=/api/trial/invites/validate|FILE=/home/nawaf511/empire-core-new/backend/runtime/private_governance/source_snapshot/ndsp_trial_register_gateway.cjs
+DISCOVERED_API_ROUTE=/api/trial/register/professional|FILE=/home/nawaf511/empire-core-new/backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_activation_admin.py
+DISCOVERED_API_ROUTE=/api/trial/register/private-invite|FILE=/home/nawaf511/empire-core-new/backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_activation_admin.py
+DISCOVERED_API_ROUTE=/api/trial/private-invite/consume|FILE=/home/nawaf511/empire-core-new/backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_activation_admin.py
+DISCOVERED_API_ROUTE=/api/v6/elite-trial/analyst|FILE=/home/nawaf511/empire-core-new/backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_activation_admin.py
+DISCOVERED_API_ROUTE=/api/v6/elite-trial/professional|FILE=/home/nawaf511/empire-core-new/backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_activation_admin.py
+DISCOVERED_API_ROUTE=/api/v6/auth/elite-trial|FILE=/home/nawaf511/empire-core-new/backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_activation_admin.py
+DISCOVERED_API_ROUTE=/api/admin/trial-activations/status|FILE=/home/nawaf511/empire-core-new/backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_activation_admin.py
+DISCOVERED_API_ROUTE=/api/admin/trial-activations/list|FILE=/home/nawaf511/empire-core-new/backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_activation_admin.py
+DISCOVERED_API_ROUTE=/api/admin/trial-activations/approve|FILE=/home/nawaf511/empire-core-new/backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_activation_admin.py
+DISCOVERED_API_ROUTE=/api/admin/trial-activations/reject|FILE=/home/nawaf511/empire-core-new/backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_activation_admin.py
+DISCOVERED_API_ROUTE=/api/admin/trial-activations/create-pending|FILE=/home/nawaf511/empire-core-new/backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_activation_admin.py
+DISCOVERED_API_ROUTE=/api/trial/activation-policy|FILE=/home/nawaf511/empire-core-new/backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_activation_admin.py
+DISCOVERED_API_ROUTE=/api/v6/elite-trial|FILE=/home/nawaf511/empire-core-new/backend/runtime/private_governance/final_extra_snapshot/elite_trial_requests.py
+DISCOVERED_API_ROUTE=/api/admin-actions/users/sync-json|FILE=/home/nawaf511/empire-core-new/backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_register_gateway.cjs
+DISCOVERED_API_ROUTE=/api/auth/activate|FILE=/home/nawaf511/empire-core-new/backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_register_gateway.cjs
+DISCOVERED_API_ROUTE=/api/trial/activate|FILE=/home/nawaf511/empire-core-new/backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_register_gateway.cjs
+DISCOVERED_API_ROUTE=/api/trial/register/health|FILE=/home/nawaf511/empire-core-new/backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_register_gateway.cjs
+DISCOVERED_API_ROUTE=/api/trial/register/ordinary|FILE=/home/nawaf511/empire-core-new/backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_register_gateway.cjs
+DISCOVERED_API_ROUTE=/api/trial/register/professional|FILE=/home/nawaf511/empire-core-new/backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_register_gateway.cjs
+DISCOVERED_API_ROUTE=/api/trial/register/private-invite|FILE=/home/nawaf511/empire-core-new/backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_register_gateway.cjs
+DISCOVERED_API_ROUTE=/api/trial/invites/validate|FILE=/home/nawaf511/empire-core-new/backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_register_gateway.cjs
+DISCOVERED_API_ROUTE=/api/trial/register/ordinary|FILE=/home/nawaf511/empire-core-new/backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_telegram_alerts.py
+DISCOVERED_API_ROUTE=/api/trial/register/professional|FILE=/home/nawaf511/empire-core-new/backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_telegram_alerts.py
+DISCOVERED_API_ROUTE=/api/trial/register/private-invite|FILE=/home/nawaf511/empire-core-new/backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_telegram_alerts.py
+DISCOVERED_API_ROUTE=/api/trial/activate|FILE=/home/nawaf511/empire-core-new/backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_telegram_alerts.py
+DISCOVERED_API_ROUTE=/api/v6/auth/elite-trial|FILE=/home/nawaf511/empire-core-new/backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_telegram_alerts.py
+DISCOVERED_API_ROUTE=/api/v6/elite-trial/ordinary|FILE=/home/nawaf511/empire-core-new/backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_telegram_alerts.py
+DISCOVERED_API_ROUTE=/api/v6/elite-trial/analyst|FILE=/home/nawaf511/empire-core-new/backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_telegram_alerts.py
+DISCOVERED_API_ROUTE=/api/trial/alerts/status|FILE=/home/nawaf511/empire-core-new/backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_telegram_alerts.py
+DISCOVERED_API_ROUTE=/api/trial/alerts/test|FILE=/home/nawaf511/empire-core-new/backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_telegram_alerts.py
+DISCOVERED_API_ROUTE=/api/trial/alerts/notify|FILE=/home/nawaf511/empire-core-new/backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_telegram_alerts.py
+DISCOVERED_API_ROUTE=/api/trial/register/|FILE=/home/nawaf511/empire-core-new/backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_register_guard_middleware.py
+DISCOVERED_API_ROUTE=/api/admin/timing_model-v2|FILE=/home/nawaf511/empire-core-new/backend/runtime/private_governance/final_extra_snapshot/tdl_v2_policy_admin.py
+DISCOVERED_API_ROUTE=/api/v6/elite-trial|FILE=/home/nawaf511/empire-core-new/backend/runtime/private_governance/final_extra_snapshot/elite_trial.py
+DISCOVERED_API_ROUTE=/api/admin/audit|FILE=/home/nawaf511/empire-core-new/backend/runtime/private_governance/final_extra_snapshot/audit_admin_v6.py
+DISCOVERED_API_ROUTE=/api/auth/me?alerts_bridge_v38=|FILE=/home/nawaf511/empire-core-new/backend/ndsp-user-alert-channels/server.js
+DISCOVERED_API_ROUTE=/api/alerts/user/status|FILE=/home/nawaf511/empire-core-new/backend/ndsp-user-alert-channels/server.js
+DISCOVERED_API_ROUTE=/api/alerts/telegram/link/start|FILE=/home/nawaf511/empire-core-new/backend/ndsp-user-alert-channels/server.js
+DISCOVERED_API_ROUTE=/api/alerts/telegram/link/confirm|FILE=/home/nawaf511/empire-core-new/backend/ndsp-user-alert-channels/server.js
+DISCOVERED_API_ROUTE=/api/alerts/email/verify/start|FILE=/home/nawaf511/empire-core-new/backend/ndsp-user-alert-channels/server.js
+DISCOVERED_API_ROUTE=/api/alerts/email/verify/confirm|FILE=/home/nawaf511/empire-core-new/backend/ndsp-user-alert-channels/server.js
+DISCOVERED_API_ROUTE=/api/alerts/user/test|FILE=/home/nawaf511/empire-core-new/backend/ndsp-user-alert-channels/server.js
+DISCOVERED_API_ROUTE=/api/portal/health|FILE=/home/nawaf511/empire-core-new/backend/ndsp-portal-real-data-api/server.py
+DISCOVERED_API_ROUTE=/api/portal/db-map|FILE=/home/nawaf511/empire-core-new/backend/ndsp-portal-real-data-api/server.py
+DISCOVERED_API_ROUTE=/api/portal/user-summary|FILE=/home/nawaf511/empire-core-new/backend/ndsp-portal-real-data-api/server.py
+DISCOVERED_API_ROUTE=/api/portal/asset-view|FILE=/home/nawaf511/empire-core-new/backend/ndsp-portal-real-data-api/server.py
+DISCOVERED_API_ROUTE=/api/portal/daily-brief|FILE=/home/nawaf511/empire-core-new/backend/ndsp-portal-real-data-api/server.py
+DISCOVERED_API_ROUTE=/api/portal/command-center|FILE=/home/nawaf511/empire-core-new/backend/ndsp-portal-real-data-api/server.py
+DISCOVERED_API_ROUTE=/api/portal/settings|FILE=/home/nawaf511/empire-core-new/backend/ndsp-portal-real-data-api/server.py
+DISCOVERED_API_ROUTE=/api/portal/account|FILE=/home/nawaf511/empire-core-new/backend/ndsp-portal-real-data-api/server.py
+DISCOVERED_API_ROUTE=/api/trial/register/|FILE=/home/nawaf511/empire-core-new/backend/ndsp-trial-register-canonical-wrapper/server.js
+DISCOVERED_API_ROUTE=/api/trial/register/health|FILE=/home/nawaf511/empire-core-new/backend/ndsp-trial-register-canonical-wrapper/server.js
+DISCOVERED_API_ROUTE=/api/decision/quality-live|FILE=/home/nawaf511/empire-core-new/backend/ndsp-live-decision-quality/server.py
+DISCOVERED_API_ROUTE=/api/decision/quality-live/health|FILE=/home/nawaf511/empire-core-new/backend/ndsp-live-decision-quality/server.py
+DISCOVERED_API_ROUTE=/api/trial/seats|FILE=/home/nawaf511/empire-core-new/backend/ndsp-trial-seats-api/server.js
+DISCOVERED_API_ROUTE=/api/auth/forgot-password|FILE=/home/nawaf511/empire-core-new/backend/password_reset_gateway/server.js
+DISCOVERED_API_ROUTE=/api/auth/reset-password|FILE=/home/nawaf511/empire-core-new/backend/password_reset_gateway/server.js
+DISCOVERED_API_ROUTE=/api/trial/register|FILE=/home/nawaf511/empire-core-new/backend/app/api/ndsp_trial_activation_guard.py
+DISCOVERED_API_ROUTE=/api/v1|FILE=/home/nawaf511/empire-core-new/backend/app/api/v1/frontend_contract.py
+DISCOVERED_API_ROUTE=/api/admin/telegram-routing|FILE=/home/nawaf511/empire-core-new/backend/app/api/admin/telegram_routing_admin.py
+DISCOVERED_API_ROUTE=/api/admin/telegram-routing-v2|FILE=/home/nawaf511/empire-core-new/backend/app/api/admin/telegram_routing_v2.py
+DISCOVERED_API_ROUTE=/api/ndsp/nowpayments-create-alias/health|FILE=/home/nawaf511/empire-core-new/backend/app/api/compat/nowpayments_create_alias.py
+DISCOVERED_API_ROUTE=/api/v6/payments/nowpayments/subscription/create|FILE=/home/nawaf511/empire-core-new/backend/app/api/compat/nowpayments_create_alias.py
+DISCOVERED_API_ROUTE=/api/payments/nowpayments/subscription/create|FILE=/home/nawaf511/empire-core-new/backend/app/api/compat/nowpayments_create_alias.py
+DISCOVERED_API_ROUTE=/api/ndsp/compat/health|FILE=/home/nawaf511/empire-core-new/backend/app/api/compat/user_operational_compat.py
+DISCOVERED_API_ROUTE=/api/trial/register|FILE=/home/nawaf511/empire-core-new/backend/app/api/compat/user_operational_compat.py
+DISCOVERED_API_ROUTE=/api/v1/trial/register|FILE=/home/nawaf511/empire-core-new/backend/app/api/compat/user_operational_compat.py
+DISCOVERED_API_ROUTE=/api/trial/request|FILE=/home/nawaf511/empire-core-new/backend/app/api/compat/user_operational_compat.py
+DISCOVERED_API_ROUTE=/api/auth/activate|FILE=/home/nawaf511/empire-core-new/backend/app/api/compat/user_operational_compat.py
+DISCOVERED_API_ROUTE=/api/v6/payments/nowpayments/subscription/create|FILE=/home/nawaf511/empire-core-new/backend/app/api/compat/user_operational_compat.py
+DISCOVERED_API_ROUTE=/api/payments/nowpayments/subscription/create|FILE=/home/nawaf511/empire-core-new/backend/app/api/compat/user_operational_compat.py
+DISCOVERED_API_ROUTE=/api/user/alert-preferences|FILE=/home/nawaf511/empire-core-new/backend/app/api/compat/user_operational_compat.py
+DISCOVERED_API_ROUTE=/api/telegram/link/start|FILE=/home/nawaf511/empire-core-new/backend/app/api/compat/user_operational_compat.py
+DISCOVERED_API_ROUTE=/api/telegram/link/verify|FILE=/home/nawaf511/empire-core-new/backend/app/api/compat/user_operational_compat.py
+DISCOVERED_API_ROUTE=/api/alerts/email/test|FILE=/home/nawaf511/empire-core-new/backend/app/api/compat/user_operational_compat.py
+DISCOVERED_API_ROUTE=/api/auth/register-trial|FILE=/home/nawaf511/empire-core-new/backend/app/api/compat/user_operational_compat.py
+DISCOVERED_API_ROUTE=/api/v6/payments/nowpayments/subscription/status|FILE=/home/nawaf511/empire-core-new/backend/app/api/compat/user_operational_compat.py
+DISCOVERED_API_ROUTE=/api/payments/nowpayments/subscription/status|FILE=/home/nawaf511/empire-core-new/backend/app/api/compat/user_operational_compat.py
+DISCOVERED_API_ROUTE=/api/ndsp/internal/telegram-routing-v2|FILE=/home/nawaf511/empire-core-new/backend/app/api/internal/telegram_routing_internal.py
+DISCOVERED_API_ROUTE=/api/health|FILE=/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_canonical_live_runtime_v30.py
+DISCOVERED_API_ROUTE=/api/decision/canonical-live|FILE=/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_canonical_live_runtime_v30.py
+DISCOVERED_API_ROUTE=/api/decision/quality-live/health|FILE=/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_quality_live_nmp_wrapper.py
+DISCOVERED_API_ROUTE=/api/decision/quality-live|FILE=/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_quality_live_nmp_wrapper.py
+DISCOVERED_API_ROUTE=/api/health|FILE=/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_history_v36.py
+DISCOVERED_API_ROUTE=/api/completed-decisions/history|FILE=/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_history_v36.py
+DISCOVERED_API_ROUTE=/api/v1/openapi.json|FILE=/home/nawaf511/empire-core-new/backend/venv/lib/python3.12/site-packages/fastapi/applications.py
+DISCOVERED_API_ROUTE=/api/v1|FILE=/home/nawaf511/empire-core-new/backend/venv/lib/python3.12/site-packages/fastapi/applications.py
+DISCOVERED_API_ROUTE=/api/admin/users/official|FILE=/home/nawaf511/empire-core-new/backend/admin_users_official_api/server.js
+DISCOVERED_API_ROUTE=/api/admin/users/action|FILE=/home/nawaf511/empire-core-new/backend/admin_users_official_api/server.js
+DISCOVERED_API_ROUTE=/api/account/trial|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_api_compat_gateway.cjs
+DISCOVERED_API_ROUTE=/api/packages|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_api_compat_gateway.cjs
+DISCOVERED_API_ROUTE=/api/markets|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_api_compat_gateway.cjs
+DISCOVERED_API_ROUTE=/api/alerts/status|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_api_compat_gateway.cjs
+DISCOVERED_API_ROUTE=/api/payments/status|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_api_compat_gateway.cjs
+DISCOVERED_API_ROUTE=/api/admin-actions/users/action/health|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_actions_bypass_old_middleware.cjs
+DISCOVERED_API_ROUTE=/api/admin-actions/users/action|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_actions_bypass_old_middleware.cjs
+DISCOVERED_API_ROUTE=/api/admin-ui/|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_platform_gateway_9001.cjs
+DISCOVERED_API_ROUTE=/api/auth/forgot-password|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_platform_gateway_9001.cjs
+DISCOVERED_API_ROUTE=/api/auth/reset-password|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_platform_gateway_9001.cjs
+DISCOVERED_API_ROUTE=/api/auth/|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_platform_gateway_9001.cjs
+DISCOVERED_API_ROUTE=/api/user-dashboard/|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_platform_gateway_9001.cjs
+DISCOVERED_API_ROUTE=/api/completed|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_platform_gateway_9001.cjs
+DISCOVERED_API_ROUTE=/api/trial/|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_platform_gateway_9001.cjs
+DISCOVERED_API_ROUTE=/api/admin-actions/|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_platform_gateway_9001.cjs
+DISCOVERED_API_ROUTE=/api/admin/|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_platform_gateway_9001.cjs
+DISCOVERED_API_ROUTE=/api/decision/canonical-live|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_platform_gateway_9001.cjs
+DISCOVERED_API_ROUTE=/api/completed-decisions/history|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_platform_gateway_9001.cjs
+DISCOVERED_API_ROUTE=/api/completed-decisions|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_platform_gateway_9001.cjs
+DISCOVERED_API_ROUTE=/api/decision/quality-live|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_platform_gateway_9001.cjs
+DISCOVERED_API_ROUTE=/api/user-dashboard/analyze|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_platform_gateway_9001.cjs
+DISCOVERED_API_ROUTE=/api/auth/runtime/usage/consume|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_platform_gateway_9001.cjs
+DISCOVERED_API_ROUTE=/api/auth/internal/evidence|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_platform_gateway_9001.cjs
+DISCOVERED_API_ROUTE=/api/user-dashboard/markets|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_platform_gateway_9001.cjs
+DISCOVERED_API_ROUTE=/api/decision/|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_platform_gateway_9001.cjs
+DISCOVERED_API_ROUTE=/api/health|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_platform_gateway_9001.cjs
+DISCOVERED_API_ROUTE=/api/auth/decision-room-access|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_platform_gateway_9001.cjs
+DISCOVERED_API_ROUTE=/api/trial/status|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_platform_gateway_9001.cjs
+DISCOVERED_API_ROUTE=/api/trial/info|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_platform_gateway_9001.cjs
+DISCOVERED_API_ROUTE=/api/ops/ws-status|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_platform_gateway_9001.cjs
+DISCOVERED_API_ROUTE=/api/ops/alerts-status|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_platform_gateway_9001.cjs
+DISCOVERED_API_ROUTE=/api/alerts/status|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_platform_gateway_9001.cjs
+DISCOVERED_API_ROUTE=/api/auth/login/health|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_user_login_gateway.cjs
+DISCOVERED_API_ROUTE=/api/auth/login|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_user_login_gateway.cjs
+DISCOVERED_API_ROUTE=/api/auth/2fa/login/verify|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_user_login_gateway.cjs
+DISCOVERED_API_ROUTE=/api/auth/session|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_user_login_gateway.cjs
+DISCOVERED_API_ROUTE=/api/auth/decision-room-access|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_user_login_gateway.cjs
+DISCOVERED_API_ROUTE=/api/auth/runtime/usage/consume|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_user_login_gateway.cjs
+DISCOVERED_API_ROUTE=/api/auth/profile|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_user_login_gateway.cjs
+DISCOVERED_API_ROUTE=/api/auth/survey/status|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_user_login_gateway.cjs
+DISCOVERED_API_ROUTE=/api/auth/survey/response|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_user_login_gateway.cjs
+DISCOVERED_API_ROUTE=/api/auth/events|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_user_login_gateway.cjs
+DISCOVERED_API_ROUTE=/api/auth/internal/legal-acceptance|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_user_login_gateway.cjs
+DISCOVERED_API_ROUTE=/api/auth/internal/evidence|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_user_login_gateway.cjs
+DISCOVERED_API_ROUTE=/api/auth/logout|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_user_login_gateway.cjs
+DISCOVERED_API_ROUTE=/api/auth/2fa/status|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_user_login_gateway.cjs
+DISCOVERED_API_ROUTE=/api/auth/2fa/setup|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_user_login_gateway.cjs
+DISCOVERED_API_ROUTE=/api/auth/2fa/confirm|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_user_login_gateway.cjs
+DISCOVERED_API_ROUTE=/api/auth/2fa/disable|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_user_login_gateway.cjs
+DISCOVERED_API_ROUTE=/api/auth/2fa/setup/start|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_user_login_gateway.cjs
+DISCOVERED_API_ROUTE=/api/auth/2fa/setup/confirm|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_user_login_gateway.cjs
+DISCOVERED_API_ROUTE=/api/auth/2fa/setup/skip|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_user_login_gateway.cjs
+DISCOVERED_API_ROUTE=/api/auth/2fa/setup/confirm-final|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_user_login_gateway.cjs
+DISCOVERED_API_ROUTE=/api/auth/2fa/setup/confirm-speakeasy|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_user_login_gateway.cjs
+DISCOVERED_API_ROUTE=/api/user-dashboard/health|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_user_dashboard_gateway.cjs
+DISCOVERED_API_ROUTE=/api/user-dashboard/analyze|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_user_dashboard_gateway.cjs
+DISCOVERED_API_ROUTE=/api/user-dashboard/markets|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_user_dashboard_gateway.cjs
+DISCOVERED_API_ROUTE=/api/user-dashboard/brief|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_user_dashboard_gateway.cjs
+DISCOVERED_API_ROUTE=/api/user-dashboard/saas-policy|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_user_dashboard_gateway.cjs
+DISCOVERED_API_ROUTE=/api/admin/users/action/health|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_actions_authoritative.cjs
+DISCOVERED_API_ROUTE=/api/admin/users/action|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_actions_authoritative.cjs
+DISCOVERED_API_ROUTE=/api/register/health|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_register_compat_gateway.cjs
+DISCOVERED_API_ROUTE=/api/register|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_register_compat_gateway.cjs
+DISCOVERED_API_ROUTE=/api/auth/register|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_register_compat_gateway.cjs
+DISCOVERED_API_ROUTE=/api/admin-actions/users/sync-json|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_trial_register_gateway.cjs
+DISCOVERED_API_ROUTE=/api/auth/activate|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_trial_register_gateway.cjs
+DISCOVERED_API_ROUTE=/api/trial/activate|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_trial_register_gateway.cjs
+DISCOVERED_API_ROUTE=/api/trial/register/health|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_trial_register_gateway.cjs
+DISCOVERED_API_ROUTE=/api/trial/register/ordinary|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_trial_register_gateway.cjs
+DISCOVERED_API_ROUTE=/api/trial/register/professional|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_trial_register_gateway.cjs
+DISCOVERED_API_ROUTE=/api/trial/register/private-invite|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_trial_register_gateway.cjs
+DISCOVERED_API_ROUTE=/api/trial/invites/validate|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_trial_register_gateway.cjs
+DISCOVERED_API_ROUTE=/api/admin-actions/users/action/health|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_actions_gateway.cjs
+DISCOVERED_API_ROUTE=/api/admin-actions/users/action|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_actions_gateway.cjs
+DISCOVERED_API_ROUTE=/api/admin-actions/users/sync-json|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_actions_gateway.cjs
+DISCOVERED_API_ROUTE=/api/admin-ui/health|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_ui_proxy.cjs
+DISCOVERED_API_ROUTE=/api/admin-ui/summary|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_ui_proxy.cjs
+DISCOVERED_API_ROUTE=/api/admin-ui/users|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_ui_proxy.cjs
+DISCOVERED_API_ROUTE=/api/admin-ui/payments|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_ui_proxy.cjs
+DISCOVERED_API_ROUTE=/api/admin-ui/trials|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_ui_proxy.cjs
+DISCOVERED_API_ROUTE=/api/admin-ui/packages|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_ui_proxy.cjs
+DISCOVERED_API_ROUTE=/api/admin-ui/markets|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_ui_proxy.cjs
+DISCOVERED_API_ROUTE=/api/admin-ui/alerts|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_ui_proxy.cjs
+DISCOVERED_API_ROUTE=/api/admin-ui/alerts/channel|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_ui_proxy.cjs
+DISCOVERED_API_ROUTE=/api/admin-ui/alerts/test|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_ui_proxy.cjs
+DISCOVERED_API_ROUTE=/api/admin-ui/backups|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_ui_proxy.cjs
+DISCOVERED_API_ROUTE=/api/admin-ui/governance|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_ui_proxy.cjs
+DISCOVERED_API_ROUTE=/api/admin-ui/action|FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_ui_proxy.cjs
+FILES_SCANNED=5881
+FILES_WITH_OWNER_OR_USER_KEYWORDS=1487
+DISCOVERED_API_ROUTE_COUNT=455
+TARGET_EMAIL_FRONTEND_OR_SOURCE_FILE_COUNT=0
+BROWSER_STORAGE_SOURCE_FILE_COUNT=61
+BROWSER_STORAGE_SOURCE_FILE=/home/nawaf511/empire-core-new/backend/venv/lib/python3.12/site-packages/setuptools/tests/indexes/test_links_priority/simple/foobar/index.html
+BROWSER_STORAGE_SOURCE_FILE=/home/nawaf511/empire-core-new/frontend/admin-console/NDSP_Admin_Console.html
+BROWSER_STORAGE_SOURCE_FILE=/home/nawaf511/empire-core-new/frontend/admin-console/NDSP_Design_System.html
+BROWSER_STORAGE_SOURCE_FILE=/home/nawaf511/empire-core-new/frontend/admin-console/NDSP_Help_Center.html
+BROWSER_STORAGE_SOURCE_FILE=/home/nawaf511/empire-core-new/frontend/admin-console/NDSP_Terms_Privacy.html
+BROWSER_STORAGE_SOURCE_FILE=/home/nawaf511/empire-core-new/frontend/admin-console/NMP_Research_Lab.html
+BROWSER_STORAGE_SOURCE_FILE=/home/nawaf511/empire-core-new/frontend/admin-console/index.html
+BROWSER_STORAGE_SOURCE_FILE=/home/nawaf511/empire-core-new/frontend/admin-console/research/NMP_Research_Level.html
+BROWSER_STORAGE_SOURCE_FILE=/home/nawaf511/empire-core-new/frontend/admin-console/research/TDL_Research_Lab.html
+BROWSER_STORAGE_SOURCE_FILE=/home/nawaf511/empire-core-new/frontend/ndsp-auth-canonical-v94/login/index.html
+BROWSER_STORAGE_SOURCE_FILE=/home/nawaf511/empire-core-new/frontend/ndsp-user-portal-v50/assets/ndsp-portal-recovery-v184.js
+BROWSER_STORAGE_SOURCE_FILE=/home/nawaf511/empire-core-new/frontend/ndsp-user-portal-v50/assets/ndsp-portal-v50.js
+BROWSER_STORAGE_SOURCE_FILE=/home/nawaf511/empire-core-new/frontend/ndsp-user-portal-v50/ndsp-mobile-unified-v93.js
+BROWSER_STORAGE_SOURCE_FILE=/home/nawaf511/empire-core-new/frontend/ndsp-user-portal-v50/ndsp-mobile-unified-v94.js
+BROWSER_STORAGE_SOURCE_FILE=/home/nawaf511/empire-core-new/frontend/ndsp-user-portal-v50/public/ndsp-multi-timeframe-v86.js
+BROWSER_STORAGE_SOURCE_FILE=/home/nawaf511/empire-core-new/frontend/ndsp-user-portal-v50/public/ndsp-timeframe-layer-contract-v121.js
+BROWSER_STORAGE_SOURCE_FILE=/home/nawaf511/empire-core-new/frontend/ndsp-user-portal-v50/public/ndsp-timeframe-wizard-v92.js
+BROWSER_STORAGE_SOURCE_FILE=/home/nawaf511/empire-core-new/frontend/ndsp-user-portal-v50/public/ndsp-v81-mobile-context.js
+BROWSER_STORAGE_SOURCE_FILE=/home/nawaf511/empire-core-new/frontend/ndsp-user-portal-v50/public/ndsp-v82-runtime-contract-bridge.js
+BROWSER_STORAGE_SOURCE_FILE=/home/nawaf511/empire-core-new/frontend/public-landing/NDSP_Activation.html
+BROWSER_STORAGE_SOURCE_FILE=/home/nawaf511/empire-core-new/frontend/public-landing/NDSP_Help_Center.html
+BROWSER_STORAGE_SOURCE_FILE=/home/nawaf511/empire-core-new/frontend/public-landing/NDSP_Landing.html
+BROWSER_STORAGE_SOURCE_FILE=/home/nawaf511/empire-core-new/frontend/public-landing/NDSP_Packages_Compare.html
+BROWSER_STORAGE_SOURCE_FILE=/home/nawaf511/empire-core-new/frontend/public-landing/index.html
+BROWSER_STORAGE_SOURCE_FILE=/home/nawaf511/empire-core-new/frontend/public-landing/ndsp-2fa-optional-choice.js
+BROWSER_STORAGE_SOURCE_FILE=/home/nawaf511/empire-core-new/frontend/public-landing/register.html
+BROWSER_STORAGE_SOURCE_FILE=/home/nawaf511/empire-core-new/frontend/public-site/ndsp-live-trial-counters.js
+BROWSER_STORAGE_SOURCE_FILE=/home/nawaf511/empire-core-new/frontend/public-site/src/i18n/index.ts
+BROWSER_STORAGE_SOURCE_FILE=/home/nawaf511/empire-core-new/frontend/user-portal-vite/.backup_terminal_design_20260627_200642/main.jsx
+BROWSER_STORAGE_SOURCE_FILE=/home/nawaf511/empire-core-new/frontend/user-portal-vite/dist/assets/index-BX9FubtP.js
+BROWSER_STORAGE_SOURCE_FILE=/home/nawaf511/empire-core-new/frontend/user-portal-vite/dist/index.html
+BROWSER_STORAGE_SOURCE_FILE=/home/nawaf511/empire-core-new/frontend/user-portal-vite/index.html
+BROWSER_STORAGE_SOURCE_FILE=/home/nawaf511/empire-core-new/frontend/user-portal-vite/public/assets/ndsp-auth-mobile-ios-fix-v1.js
+BROWSER_STORAGE_SOURCE_FILE=/home/nawaf511/empire-core-new/frontend/user-portal-vite/public/assets/ndsp-governance-44-v26.js
+BROWSER_STORAGE_SOURCE_FILE=/home/nawaf511/empire-core-new/frontend/user-portal-vite/public/market-suite/index.html
+BROWSER_STORAGE_SOURCE_FILE=/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/main.jsx
+BROWSER_STORAGE_SOURCE_FILE=/var/www/ndsp-my/assets/_disabled_ui_stack_20260710_190241/ndsp-clean-top-controls-v12.js
+BROWSER_STORAGE_SOURCE_FILE=/var/www/ndsp-my/assets/_disabled_ui_stack_20260710_190241/ndsp-integrated-language-final.js
+BROWSER_STORAGE_SOURCE_FILE=/var/www/ndsp-my/assets/_disabled_ui_stack_20260710_190241/ndsp-language-content-guard-v1.js
+BROWSER_STORAGE_SOURCE_FILE=/var/www/ndsp-my/assets/_disabled_ui_stack_20260710_190241/ndsp-mobile-pages-nav-clean.js
+BROWSER_STORAGE_SOURCE_FILE=/var/www/ndsp-my/assets/_disabled_ui_stack_20260710_190241/ndsp-single-arabic-guard-v10.js
+BROWSER_STORAGE_SOURCE_FILE=/var/www/ndsp-my/assets/_disabled_ui_stack_20260710_190241/ndsp-topbar-i18n-final.js
+BROWSER_STORAGE_SOURCE_FILE=/var/www/ndsp-my/assets/_disabled_ui_stack_20260710_190241/ndsp-unified-page-i18n-clean.js
+BROWSER_STORAGE_SOURCE_FILE=/var/www/ndsp-my/assets/index-CJP_ADc4.js
+BROWSER_STORAGE_SOURCE_FILE=/var/www/ndsp-my/assets/index-CdX-Uybq.js
+BROWSER_STORAGE_SOURCE_FILE=/var/www/ndsp-my/assets/index-DmcfunFh.js
+BROWSER_STORAGE_SOURCE_FILE=/var/www/ndsp-my/assets/ndsp-auth-mobile-ios-fix-v1.js
+BROWSER_STORAGE_SOURCE_FILE=/var/www/ndsp-my/assets/ndsp-final-v160/shell.js
+BROWSER_STORAGE_SOURCE_FILE=/var/www/ndsp-my/assets/ndsp-governance-44-v26.js
+BROWSER_STORAGE_SOURCE_FILE=/var/www/ndsp-my/assets/ndsp-i18n/NDSP_TRANSLATIONS_AR_EN.js
+BROWSER_STORAGE_SOURCE_FILE=/var/www/ndsp-my/data/index.html
+BROWSER_STORAGE_SOURCE_FILE=/var/www/ndsp-my/index.html
+BROWSER_STORAGE_SOURCE_FILE=/var/www/ndsp-my/login/index.html
+BROWSER_STORAGE_SOURCE_FILE=/var/www/ndsp-my/market-suite/index.html
+BROWSER_STORAGE_SOURCE_FILE=/var/www/ndsp-my/ndsp-login-to-portal-v90.js
+BROWSER_STORAGE_SOURCE_FILE=/var/www/ndsp-my/ndsp-multi-timeframe-v86.js
+BROWSER_STORAGE_SOURCE_FILE=/var/www/ndsp-my/portal-commercial-preview/assets/index-BbNOtHX6.js
+BROWSER_STORAGE_SOURCE_FILE=/var/www/ndsp-my/portal-next/assets/app-DL-BVG88.js
+BROWSER_STORAGE_SOURCE_FILE=/var/www/ndsp-my/portal.previous.20260726_230859/assets/app-DL-BVG88.js
+BROWSER_STORAGE_SOURCE_FILE=/var/www/ndsp-my/portal/assets/index-YRhdpSxC.js
+BROWSER_STORAGE_SOURCE_FILE=/var/www/ndsp-my/portal/assets/index-bdi5oWzB.js
+
+============================================================
+8) CURRENT PUBLIC OWNER RESPONSE WITHOUT SESSION
+============================================================
+PUBLIC_OWNER_HTTP=302
+PUBLIC_OWNER_LOCATION=location: https://my.ndsp.app/login/?admin=1&next=%2Fowner%2F
+PUBLIC_OWNER_BYTES=154
+PUBLIC_OWNER_CONTAINS_TARGET=NO
+
+============================================================
+9) CLASSIFICATION
+============================================================
+EXACT_TARGET_HIT_COUNT=0
+CANDIDATE_TABLE_COUNT=5
+ACTIVE_LIKE_SAMPLE_ROW_COUNT=0
+SOURCE_9002_REFERENCE_COUNT=11
+UPSTREAM_TARGET_HIT=NO
+DISCOVERED_API_ROUTE_COUNT=455
+TARGET_SOURCE_FILE_COUNT=0
+BROWSER_STORAGE_SOURCE_FILE_COUNT=61
+ROOT_CAUSE_CLASS=TRIAL_SEAT_COUNT_IS_DERIVED_OR_RECOVERED_FROM_GATEWAY_9002
+
+============================================================
+10) FINAL RESULT
+============================================================
+PRODUCTION_MODIFIED=NO
+DATABASE_CHANGED=NO
+DATABASE_OPEN_MODE=READ_ONLY
+SOURCE_CHANGED=NO
+NGINX_CHANGED=NO
+PM2_CHANGED=NO
+SERVICE_RESTARTED=NO
+LIVE_FILE_CHANGED=NO
+FINAL_STATUS=NDSP_EXACT_TRIAL_DB_OWNER_API_TRACE_V4_1_1_COMPLETE
+REPORT=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_EXACT_TRIAL_DB_OWNER_API_TRACE_V4_1_20260727_232440/REPORT.txt

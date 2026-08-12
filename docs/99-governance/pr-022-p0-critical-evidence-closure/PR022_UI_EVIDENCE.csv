@@ -1,0 +1,4 @@
+capability_id,ui_path,location,matched_endpoints,evidence_strength
+CAP-C8C94E7A8122,frontend/ndsp-auth-canonical-v94/login/index.html,LOCAL_ONLY_OR_MODIFIED,POST /auth/login,HIGH
+CAP-D0B86CD5E331,frontend/auth-recovery/reset-password.html,LOCAL_ONLY_OR_MODIFIED,POST /auth/reset,HIGH
+CAP-862CD297F1FD,frontend/auth-recovery/forgot-password.html,LOCAL_ONLY_OR_MODIFIED,POST /auth/forgot,HIGH

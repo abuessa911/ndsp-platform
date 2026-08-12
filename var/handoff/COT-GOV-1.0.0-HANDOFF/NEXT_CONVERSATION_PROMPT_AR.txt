@@ -1,0 +1,41 @@
+نريد متابعة مشروع COT-GOV-1.0.0 من الحزمة المرفوعة.
+
+جذر المشروع الرسمي:
+/home/nawaf511/empire-core-new
+
+الخدمة المستهدفة:
+backend/services/decision_governance_core
+
+بوابة COT الخام:
+apps/ndsp-raw-cot-gateway
+
+الرجاء البدء بالآتي:
+
+1. قراءة MASTER_HANDOFF_AR_EN.md.
+2. قراءة التقريرين العربي والإنجليزي.
+3. مراجعة ملفات العقود والإعدادات والمحرك والاختبارات.
+4. مراجعة الملفات الفعلية التالية:
+   - backend/services/decision_governance_core/package.json
+   - backend/services/decision_governance_core/main.cjs
+   - apps/ndsp-raw-cot-gateway/app.py
+   - apps/ndsp-raw-cot-gateway/requirements.txt
+5. مراجعة تقرير cot-backend-audit.
+6. إنشاء خريطة أثر للكود القديم.
+7. عدم تعديل الإنتاج قبل تحديد:
+   - طبقة الاتجاه القديمة.
+   - طبقة التوقيت القديمة.
+   - TDL-M&L.
+   - TDL-S.
+   - مخزن النتائج الرسمي.
+   - Public API.
+   - Admin API.
+8. اعتماد القواعد:
+   - الاستثمار من Asset Manager Positions فقط.
+   - Asset Manager Changes للدعم الأسبوعي فقط.
+   - التوقيت معطل في الاستثمار.
+   - المضاربة تستخدم Changes وأيام السيطرة.
+   - UTC فقط.
+   - CORE رسمي.
+   - EXPANDED Shadow.
+9. بدء الدمج في فرع مستقل وبوضع الظل.
+10. عدم حذف /opt أو /var/www قبل الترحيل والاختبارات وخطة الرجوع.

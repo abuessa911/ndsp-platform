@@ -1,0 +1,113 @@
+{
+  "$schema": "../contracts/governance-policy.schema.json",
+  "governanceVersion": "COT-GOV-1.0.0",
+  "canonicalProjectRoot": "/home/nawaf511/empire-core-new",
+  "canonicalTimezone": "UTC",
+  "reportActivation": {
+    "rule": "NEXT_MONDAY_00_00_UTC",
+    "intervalType": "HALF_OPEN"
+  },
+  "production": {
+    "activePerspective": "CORE",
+    "publicPerspective": "CORE"
+  },
+  "shadow": {
+    "enabled": true,
+    "perspective": "EXPANDED",
+    "executionMode": "SHADOW",
+    "publicExposure": false,
+    "canAffectOfficialResult": false,
+    "canWriteOfficialStore": false,
+    "automaticPromotion": false
+  },
+  "investment": {
+    "officialDirection": {
+      "dataset": "POSITIONS",
+      "categories": [
+        "ASSET_MANAGER"
+      ]
+    },
+    "weeklySupport": {
+      "dataset": "CHANGES",
+      "categories": [
+        "ASSET_MANAGER"
+      ],
+      "purpose": "SUPPORT_ONLY",
+      "canOverrideOfficialDirection": false,
+      "canHideOfficialDirection": false,
+      "agreementStatus": "CONFIRMED",
+      "disagreementStatus": "NOT_CONFIRMED",
+      "disagreementDisplayAr": "الدعم الأسبوعي غير متحقق",
+      "disagreementDisplayEn": "Weekly support is not confirmed"
+    },
+    "timing": {
+      "enabled": false,
+      "dayControl": false,
+      "tdlML": false,
+      "tdlS": false,
+      "speculationTiming": false
+    }
+  },
+  "speculation": {
+    "dataset": "CHANGES",
+    "selectedDayControlPerspective": "D1",
+    "dayControlPerspectives": {
+      "D1": {
+        "MONDAY": "LONG_TERM",
+        "TUESDAY": "SHORT_TERM",
+        "WEDNESDAY": "SHORT_TERM",
+        "THURSDAY": "SHORT_TERM",
+        "FRIDAY": "LONG_TERM",
+        "SATURDAY": "SHORT_TERM",
+        "SUNDAY": "SHORT_TERM"
+      },
+      "D2": {
+        "MONDAY": "SHORT_TERM",
+        "TUESDAY": "SHORT_TERM",
+        "WEDNESDAY": "SHORT_TERM",
+        "THURSDAY": "LONG_TERM",
+        "FRIDAY": "LONG_TERM",
+        "SATURDAY": "SHORT_TERM",
+        "SUNDAY": "SHORT_TERM"
+      }
+    },
+    "coreCategories": {
+      "LONG_TERM": [
+        "ASSET_MANAGER"
+      ],
+      "SHORT_TERM": [
+        "LEVERAGED_FUNDS"
+      ]
+    },
+    "expandedCategories": {
+      "LONG_TERM": [
+        "ASSET_MANAGER",
+        "OTHER_REPORTABLES"
+      ],
+      "SHORT_TERM": [
+        "LEVERAGED_FUNDS",
+        "DEALER_INTERMEDIARY"
+      ]
+    },
+    "timing": {
+      "allowedModes": [
+        "SPECULATION"
+      ],
+      "tdlML": {
+        "enabled": false,
+        "status": "TO_BE_MAPPED_FROM_LEGACY_CODE",
+        "rulesFile": "./tdl-ml.rules.json"
+      },
+      "tdlS": {
+        "enabled": false,
+        "status": "TO_BE_MAPPED_FROM_LEGACY_CODE",
+        "rulesFile": "./tdl-s.rules.json"
+      }
+    }
+  },
+  "display": {
+    "directionLabelIncludesExplicitness": true,
+    "directionLabelIncludesHorizon": true,
+    "localTimezoneUsage": "DISPLAY_ONLY"
+  }
+}

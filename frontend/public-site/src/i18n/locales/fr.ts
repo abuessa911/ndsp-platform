@@ -57,13 +57,13 @@ export default {
       price: "Gratuit",
       desc: "Pour les nouveaux utilisateurs qui veulent découvrir le système et comprendre le concept général.",
       features: ["Vue générale de l'état du marché", "Parcours de 16 jours", "Sondage du jour 16", "FAQ, sécurité et confidentialité", "Avis légal clair"],
-      hidden: ["TDL détaillé", "Meeting point détaillé", "Meeting point The golden signal", "Black Layer", "API / Webhooks", "Panneau d'administration"],
+      hidden: ["TDL détaillé", "Meeting point détaillé", "Golden Signal", "Black Layer", "API / Webhooks", "Panneau d'administration"],
     },
     nmpPro: {
       name: "Meeting point Pro",
       price: "49$",
       desc: "Pour les utilisateurs sérieux qui veulent une compréhension plus approfondie du contexte, de la liquidité et de l'alignement.",
-      features: ["TDL — Logique de dimension temporelle", "Meeting point — Point de rencontre Nawaf", "Meeting point The golden signal", "Rapports interprétatifs plus clairs", "Niveaux de risque et contexte élargi", "Essai complet de 16 jours"],
+      features: ["TDL — Logique de dimension temporelle", "Meeting point — NMP", "Golden Signal", "Rapports interprétatifs plus clairs", "Niveaux de risque et contexte élargi", "Essai complet de 16 jours"],
       hidden: ["Black Layer complet", "Cinq couches souveraines protégées", "API / Webhooks", "Permissions d'administration", "Logique brute"],
     },
     elite16: {

@@ -1,0 +1,7 @@
+signature,capability_count,batch_count,service_gap_count,endpoint_gap_count,real_data_gap_count
+SERVICE_ENDPOINT_REAL_DATA,110,5,110,110,110
+SERVICE_ENDPOINT,56,3,56,56,0
+SERVICE_REAL_DATA,68,3,68,0,68
+ENDPOINT_REAL_DATA,43,2,0,43,43
+SERVICE_ONLY,78,4,78,0,0
+ENDPOINT_ONLY,36,2,0,36,0

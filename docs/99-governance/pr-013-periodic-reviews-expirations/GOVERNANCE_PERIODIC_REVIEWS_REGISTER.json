@@ -1,0 +1,272 @@
+{
+  "schema_version": "1.0",
+  "document": "NDSP Governance Periodic Reviews and Expirations Register",
+  "generated_at": "2026-07-31T14:21:20.175035+00:00",
+  "source_commit": "ac64bee821e694c3b2200cdd4b8f337c323ad43e",
+  "scope": "docs/99-governance",
+  "runtime_changes": "none",
+  "status": "ACTIVE",
+  "purpose": "Define review frequencies, expiration controls, review evidence, ownership requirements, and overdue escalation rules for governance artifacts.",
+  "register_state": {
+    "tracked_packages": 9,
+    "completed_reviews": 0,
+    "scheduled_reviews": 0,
+    "overdue_reviews": 0,
+    "expired_artifacts": 0,
+    "pending_owner_assignments": 9
+  },
+  "review_frequencies": {
+    "monthly": {
+      "maximum_interval_days": 31,
+      "use_case": "Frequently changing operational governance records."
+    },
+    "quarterly": {
+      "maximum_interval_days": 92,
+      "use_case": "Ownership, dependency, integrity, and architecture records."
+    },
+    "semiannual": {
+      "maximum_interval_days": 183,
+      "use_case": "Moderately stable governance policies and controls."
+    },
+    "annual": {
+      "maximum_interval_days": 366,
+      "use_case": "Stable policies, closure records, and historical manifests."
+    },
+    "event_driven": {
+      "maximum_interval_days": null,
+      "use_case": "Review triggered by a material runtime or governance change."
+    }
+  },
+  "required_review_fields": [
+    "review_id",
+    "artifact",
+    "review_owner",
+    "review_frequency",
+    "review_scope",
+    "last_review_date",
+    "next_review_date",
+    "expiration_date",
+    "review_status",
+    "findings",
+    "required_actions",
+    "evidence",
+    "approved_by",
+    "approval_date",
+    "closure_date"
+  ],
+  "review_statuses": [
+    "NOT_YET_REVIEWED",
+    "SCHEDULED",
+    "IN_PROGRESS",
+    "COMPLETED",
+    "ACTION_REQUIRED",
+    "OVERDUE",
+    "EXPIRED",
+    "WAIVED",
+    "CLOSED"
+  ],
+  "control_rules": [
+    "Every tracked artifact must have an assigned review owner.",
+    "Every scheduled review must have a next review date.",
+    "Review dates must not exceed the configured frequency interval.",
+    "Expired artifacts must not be treated as current governance evidence.",
+    "Overdue reviews must be escalated to the governance owner.",
+    "Review findings and approval evidence must be retained.",
+    "Material findings must create a governed remediation action.",
+    "Exceptions to review frequency must be recorded in PR-012.",
+    "Runtime changes must not be included in governance-only review updates."
+  ],
+  "expiration_rules": [
+    {
+      "condition": "next_review_date_passed",
+      "result": "OVERDUE",
+      "required_action": "Notify owner and schedule immediate review."
+    },
+    {
+      "condition": "expiration_date_passed",
+      "result": "EXPIRED",
+      "required_action": "Stop treating the artifact as current evidence."
+    },
+    {
+      "condition": "owner_missing",
+      "result": "ACTION_REQUIRED",
+      "required_action": "Assign an accountable review owner."
+    },
+    {
+      "condition": "material_runtime_change",
+      "result": "EVENT_DRIVEN_REVIEW",
+      "required_action": "Review affected governance artifacts immediately."
+    },
+    {
+      "condition": "open_exception_affects_artifact",
+      "result": "EXCEPTION_REVIEW",
+      "required_action": "Review the related PR-012 exception record."
+    }
+  ],
+  "review_process": [
+    {
+      "step": 1,
+      "name": "schedule",
+      "requirement": "Assign owner, scope, frequency, and review date."
+    },
+    {
+      "step": 2,
+      "name": "collect",
+      "requirement": "Collect repository and operational evidence."
+    },
+    {
+      "step": 3,
+      "name": "assess",
+      "requirement": "Evaluate accuracy, ownership, integrity, and currency."
+    },
+    {
+      "step": 4,
+      "name": "record",
+      "requirement": "Record findings, actions, evidence, and approval."
+    },
+    {
+      "step": 5,
+      "name": "remediate",
+      "requirement": "Resolve material findings through governed changes."
+    },
+    {
+      "step": 6,
+      "name": "reschedule",
+      "requirement": "Set the next review and expiration dates."
+    },
+    {
+      "step": 7,
+      "name": "close",
+      "requirement": "Close the review while retaining complete evidence."
+    }
+  ],
+  "tracked_governance_packages": [
+    {
+      "pr": "PR-004",
+      "directory": "pr-004-runtime-dependency-map",
+      "primary_artifact": "FINAL_RUNTIME_DEPENDENCY_MAP.json",
+      "review_frequency": "quarterly",
+      "status": "PRESENT",
+      "file_count": 8,
+      "primary_artifact_sha256": "579336a09ee02b81a26ee6070decff87f83c96e9e6735c09e23ab670f5d84464",
+      "review_status": "NOT_YET_REVIEWED",
+      "last_review_date": null,
+      "next_review_date": null,
+      "expiration_date": null,
+      "review_owner": null
+    },
+    {
+      "pr": "PR-005",
+      "directory": "pr-005-runtime-ownership-map",
+      "primary_artifact": "FINAL_RUNTIME_OWNERSHIP_MAP.json",
+      "review_frequency": "quarterly",
+      "status": "PRESENT",
+      "file_count": 5,
+      "primary_artifact_sha256": "11009cf78d6ce22629098db8f172beed92647dc6eaf24cd120350c6a6fca44cb",
+      "review_status": "NOT_YET_REVIEWED",
+      "last_review_date": null,
+      "next_review_date": null,
+      "expiration_date": null,
+      "review_owner": null
+    },
+    {
+      "pr": "PR-006",
+      "directory": "pr-006-network-exposure-map",
+      "primary_artifact": "FINAL_NETWORK_EXPOSURE_MAP.json",
+      "review_frequency": "monthly",
+      "status": "PRESENT",
+      "file_count": 5,
+      "primary_artifact_sha256": "4d672f5fd5313bc9ca3ab5cda21f0a89934b81ab6ecbb3cdd6ea620cae90fdc9",
+      "review_status": "NOT_YET_REVIEWED",
+      "last_review_date": null,
+      "next_review_date": null,
+      "expiration_date": null,
+      "review_owner": null
+    },
+    {
+      "pr": "PR-007",
+      "directory": "pr-007-noncanonical-ownership",
+      "primary_artifact": "FINAL_NONCANONICAL_OWNERSHIP_MAP.json",
+      "review_frequency": "quarterly",
+      "status": "PRESENT",
+      "file_count": 5,
+      "primary_artifact_sha256": "5239677f1cdf01ad470167a5b0865378ae4d36e70ccc2aabe194d4b478a35b15",
+      "review_status": "NOT_YET_REVIEWED",
+      "last_review_date": null,
+      "next_review_date": null,
+      "expiration_date": null,
+      "review_owner": null
+    },
+    {
+      "pr": "PR-008",
+      "directory": "pr-008-governance-closure",
+      "primary_artifact": "PR-008-COMMIT-MANIFEST.json",
+      "review_frequency": "annual",
+      "status": "PRESENT",
+      "file_count": 4,
+      "primary_artifact_sha256": "6f9934ec7bd8f2f08418be0bb2aafdf4d0d9a13e4c982c1f36b31d5d88761966",
+      "review_status": "NOT_YET_REVIEWED",
+      "last_review_date": null,
+      "next_review_date": null,
+      "expiration_date": null,
+      "review_owner": null
+    },
+    {
+      "pr": "PR-009",
+      "directory": "pr-009-governance-index",
+      "primary_artifact": "GOVERNANCE_INDEX.json",
+      "review_frequency": "monthly",
+      "status": "PRESENT",
+      "file_count": 4,
+      "primary_artifact_sha256": "06ef7c192129729f1d0573179572ad20f5b6adfe2992e5707ee3d00a79b18da8",
+      "review_status": "NOT_YET_REVIEWED",
+      "last_review_date": null,
+      "next_review_date": null,
+      "expiration_date": null,
+      "review_owner": null
+    },
+    {
+      "pr": "PR-010",
+      "directory": "pr-010-integrity-audit",
+      "primary_artifact": "GOVERNANCE_INTEGRITY_AUDIT.json",
+      "review_frequency": "quarterly",
+      "status": "PRESENT",
+      "file_count": 4,
+      "primary_artifact_sha256": "2768a711a821f59982985bdec7a97e3a8145c94b7536e60fdc0b387e1a09087a",
+      "review_status": "NOT_YET_REVIEWED",
+      "last_review_date": null,
+      "next_review_date": null,
+      "expiration_date": null,
+      "review_owner": null
+    },
+    {
+      "pr": "PR-011",
+      "directory": "pr-011-governance-update-policy",
+      "primary_artifact": "GOVERNANCE_UPDATE_POLICY.json",
+      "review_frequency": "annual",
+      "status": "PRESENT",
+      "file_count": 4,
+      "primary_artifact_sha256": "3ebdef8431149f478f45083f3e0f763ef0cd72f0704a6b56d8abd056d2b41d66",
+      "review_status": "NOT_YET_REVIEWED",
+      "last_review_date": null,
+      "next_review_date": null,
+      "expiration_date": null,
+      "review_owner": null
+    },
+    {
+      "pr": "PR-012",
+      "directory": "pr-012-exceptions-approvals-register",
+      "primary_artifact": "GOVERNANCE_EXCEPTIONS_REGISTER.json",
+      "review_frequency": "monthly",
+      "status": "PRESENT",
+      "file_count": 4,
+      "primary_artifact_sha256": "67a37f67d602efe7061c81c6858fd74b300802d76ead598449f3f7390537a94c",
+      "review_status": "NOT_YET_REVIEWED",
+      "last_review_date": null,
+      "next_review_date": null,
+      "expiration_date": null,
+      "review_owner": null
+    }
+  ],
+  "reviews": []
+}

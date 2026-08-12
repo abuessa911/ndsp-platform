@@ -1,0 +1,5 @@
+/home/nawaf511/Downloads/NDSP_COMMERCIAL_FRONTEND_LIVE_V1/src/main.jsx:7411:      const response = await fetch("/api/auth/logout", {
+/home/nawaf511/Downloads/NDSP_COMMERCIAL_FRONTEND_LIVE_V1/src/main.jsx:7422:      window.location.replace("/login/?logged_out=1");
+/home/nawaf511/Downloads/NDSP_COMMERCIAL_FRONTEND_LIVE_V1/src/main.jsx:7424:      window.location.assign("/logout/");
+/home/nawaf511/Downloads/NDSP_COMMERCIAL_FRONTEND_LIVE_V1/src/main.jsx:7430:      ? (lang === "ar" ? "جارٍ تسجيل الخروج…" : "Signing out…")
+/home/nawaf511/Downloads/NDSP_COMMERCIAL_FRONTEND_LIVE_V1/src/main.jsx:7431:      : (lang === "ar" ? "تسجيل الخروج" : "Sign out");

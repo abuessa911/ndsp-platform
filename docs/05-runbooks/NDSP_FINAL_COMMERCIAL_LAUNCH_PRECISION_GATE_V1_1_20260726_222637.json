@@ -1,0 +1,14 @@
+{
+  "backend_changed": false,
+  "commercial_launch_ready": false,
+  "critical_fail_count": 20,
+  "fail_count": 21,
+  "final_status": "BLOCKED_BY_CONFIRMED_CRITICAL_FAILURES",
+  "nginx_changed": false,
+  "pass_count": 5,
+  "report": "/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_FINAL_COMMERCIAL_LAUNCH_PRECISION_GATE_V1_1_20260726_222637.md",
+  "service_restarted": false,
+  "source_changed": false,
+  "timestamp": "20260726_222637",
+  "warn_count": 0
+}

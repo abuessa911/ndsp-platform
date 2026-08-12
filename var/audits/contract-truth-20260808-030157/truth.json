@@ -1,0 +1,2103 @@
+{
+  "mode": "READ_ONLY",
+  "files": {
+    "backend/ndsp_latest_16_layers_logic_functions.py": {
+      "exists": true,
+      "line_count": 1639,
+      "ranges": [
+        {
+          "start": 220,
+          "end": 245
+        },
+        {
+          "start": 320,
+          "end": 425
+        },
+        {
+          "start": 430,
+          "end": 520
+        },
+        {
+          "start": 560,
+          "end": 660
+        }
+      ]
+    },
+    "backend/app/runtime/ndsp_v201_launch_completion.py": {
+      "exists": true,
+      "line_count": 564,
+      "ranges": [
+        {
+          "start": 260,
+          "end": 345
+        }
+      ]
+    },
+    "backend/app/support_layers/cot/cot_storage.py": {
+      "exists": true,
+      "line_count": 182,
+      "ranges": [
+        {
+          "start": 60,
+          "end": 100
+        },
+        {
+          "start": 135,
+          "end": 182
+        }
+      ]
+    },
+    "backend/layers/canonical_v1/runtime_bridge.py": {
+      "exists": true,
+      "line_count": 278,
+      "ranges": [
+        {
+          "start": 70,
+          "end": 115
+        },
+        {
+          "start": 120,
+          "end": 205
+        }
+      ]
+    },
+    "backend/shared/tdl_day_logic_v2.py": {
+      "exists": true,
+      "line_count": 39,
+      "ranges": [
+        {
+          "start": 1,
+          "end": 39
+        }
+      ]
+    },
+    "backend/app/api/v1/frontend_contract.py": {
+      "exists": true,
+      "line_count": 474,
+      "ranges": [
+        {
+          "start": 260,
+          "end": 310
+        },
+        {
+          "start": 370,
+          "end": 410
+        }
+      ]
+    }
+  },
+  "functions": {
+    "_ndsp_num": {
+      "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+      "line": 321,
+      "end_line": 325
+    },
+    "_ndsp_direction_from_long_short": {
+      "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+      "line": 335,
+      "end_line": 367
+    },
+    "_ndsp_weekly_direction_from_changes": {
+      "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+      "line": 370,
+      "end_line": 403
+    },
+    "_ndsp_movement_type": {
+      "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+      "line": 406,
+      "end_line": 416
+    },
+    "_ndsp_extract_group_numbers": {
+      "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+      "line": 441,
+      "end_line": 508
+    }
+  },
+  "field_evidence": {
+    "long": [
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 86,
+        "text": "bullish = {\"bullish\", \"up\", \"long\", \"buy\", \"positive\", \"supportive\", \"صاعد\", \"شراء\", \"داعم\", \"إيجابي\", \"ايجابي\"}"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 269,
+        "text": "timing_bias = \"INSTITUTIONAL_LONG_HORIZON\""
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 315,
+        "text": "# الاتجاه الكلي = إجمالي Long الحالي مقابل إجمالي Short الحالي"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 316,
+        "text": "# الاتجاه الأسبوعي = تغير Long وتغير Short في آخر تقرير"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 335,
+        "text": "def _ndsp_direction_from_long_short(long_value, short_value):"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 338,
+        "text": "# إذا Long أكبر => صاعد."
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 340,
+        "text": "long_value = _ndsp_num(long_value)"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 343,
+        "text": "if long_value > short_value:"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 345,
+        "text": "\"dominant_side\": \"LONG\","
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 346,
+        "text": "\"long_value\": long_value,"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 348,
+        "text": "\"comparison_rule\": \"LONG_GREATER_THAN_SHORT\","
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 349,
+        "text": "\"comparison_gap_for_display_only\": abs(long_value - short_value),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 352,
+        "text": "if short_value > long_value:"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 355,
+        "text": "\"long_value\": long_value,"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 357,
+        "text": "\"comparison_rule\": \"SHORT_GREATER_THAN_LONG\","
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 358,
+        "text": "\"comparison_gap_for_display_only\": abs(short_value - long_value),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 363,
+        "text": "\"long_value\": long_value,"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 365,
+        "text": "\"comparison_rule\": \"LONG_EQUALS_SHORT\","
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 370,
+        "text": "def _ndsp_weekly_direction_from_changes(change_long, change_short):"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 373,
+        "text": "# نقارن تغير Long مع تغير Short كما هما."
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 374,
+        "text": "# إذا تغير Long أكبر => صاعد أسبوعي."
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 376,
+        "text": "change_long = _ndsp_num(change_long)"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 379,
+        "text": "if change_long > change_short:"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 381,
+        "text": "\"dominant_side\": \"LONG_CHANGE\","
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 382,
+        "text": "\"change_long\": change_long,"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 384,
+        "text": "\"comparison_rule\": \"CHANGE_LONG_GREATER_THAN_CHANGE_SHORT\","
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 385,
+        "text": "\"comparison_gap_for_display_only\": abs(change_long - change_short),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 388,
+        "text": "if change_short > change_long:"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 391,
+        "text": "\"change_long\": change_long,"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 393,
+        "text": "\"comparison_rule\": \"CHANGE_SHORT_GREATER_THAN_CHANGE_LONG\","
+      }
+    ],
+    "short": [
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 87,
+        "text": "bearish = {\"bearish\", \"down\", \"short\", \"sell\", \"negative\", \"pressure\", \"هابط\", \"بيع\", \"سلبي\", \"ضغط\"}"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 108,
+        "text": "short_name: str,"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 121,
+        "text": "\"short_name\": short_name,"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 315,
+        "text": "# الاتجاه الكلي = إجمالي Long الحالي مقابل إجمالي Short الحالي"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 316,
+        "text": "# الاتجاه الأسبوعي = تغير Long وتغير Short في آخر تقرير"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 335,
+        "text": "def _ndsp_direction_from_long_short(long_value, short_value):"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 339,
+        "text": "# إذا Short أكبر => هابط."
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 341,
+        "text": "short_value = _ndsp_num(short_value)"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 343,
+        "text": "if long_value > short_value:"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 347,
+        "text": "\"short_value\": short_value,"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 348,
+        "text": "\"comparison_rule\": \"LONG_GREATER_THAN_SHORT\","
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 349,
+        "text": "\"comparison_gap_for_display_only\": abs(long_value - short_value),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 352,
+        "text": "if short_value > long_value:"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 354,
+        "text": "\"dominant_side\": \"SHORT\","
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 356,
+        "text": "\"short_value\": short_value,"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 357,
+        "text": "\"comparison_rule\": \"SHORT_GREATER_THAN_LONG\","
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 358,
+        "text": "\"comparison_gap_for_display_only\": abs(short_value - long_value),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 364,
+        "text": "\"short_value\": short_value,"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 365,
+        "text": "\"comparison_rule\": \"LONG_EQUALS_SHORT\","
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 370,
+        "text": "def _ndsp_weekly_direction_from_changes(change_long, change_short):"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 373,
+        "text": "# نقارن تغير Long مع تغير Short كما هما."
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 375,
+        "text": "# إذا تغير Short أكبر => هابط أسبوعي."
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 377,
+        "text": "change_short = _ndsp_num(change_short)"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 379,
+        "text": "if change_long > change_short:"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 383,
+        "text": "\"change_short\": change_short,"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 384,
+        "text": "\"comparison_rule\": \"CHANGE_LONG_GREATER_THAN_CHANGE_SHORT\","
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 385,
+        "text": "\"comparison_gap_for_display_only\": abs(change_long - change_short),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 388,
+        "text": "if change_short > change_long:"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 390,
+        "text": "\"dominant_side\": \"SHORT_CHANGE\","
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 392,
+        "text": "\"change_short\": change_short,"
+      }
+    ],
+    "fresh": [
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 145,
+        "text": "data_is_fresh = _bool(_get(payload, \"data_is_fresh\", \"fresh\", default=True), True)"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 164,
+        "text": "if not data_is_fresh or feed_age_seconds > 300:"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 166,
+        "text": "warnings.append(\"Data freshness is degraded.\")"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 168,
+        "text": "signals.append(\"Data freshness is acceptable.\")"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 174,
+        "text": "\"data_is_fresh\": data_is_fresh,"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 182,
+        "text": "def _refresh_public_golden(data: dict[str, Any]) -> None:"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 286,
+        "text": "fresh = age is not None and age <= float(max_cot_age_days)"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 291,
+        "text": "and fresh"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 303,
+        "text": "\"fresh\": fresh,"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 317,
+        "text": "\"COT_STALE\" if age is not None and not fresh"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 336,
+        "text": "\"source_fresh\": fresh,"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 344,
+        "text": "_refresh_public_golden(data)"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 504,
+        "text": "\"governing_inputs_fresh\": governing.get(\"fresh\") is True,"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 509,
+        "text": "\"governance_evidence_fresh\": governance_summary.get(\"evidence_fresh\") is True,"
+      }
+    ],
+    "asset_class": [
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 202,
+        "text": "asset_class = _text(_get(payload, \"asset_class\", default=\"commodity\")).lower()"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 203,
+        "text": "is_crypto = _bool(_get(payload, \"is_crypto\", default=False), False) or \"crypto\" in asset_class or asset.upper() in {\"BTC\", \"ETH\", \"SOL\", \"BNB\"}"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 231,
+        "text": "\"asset_class\": asset_class,"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 260,
+        "text": "asset_class = _text(_get(payload, \"asset_class\", default=\"commodity\")).lower()"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 261,
+        "text": "is_crypto = _bool(_get(payload, \"is_crypto\", default=False), False) or \"crypto\" in asset_class or asset.upper() in {\"BTC\", \"ETH\", \"SOL\", \"BNB\"}"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 555,
+        "text": "asset_class = _text(_get(payload, \"asset_class\", \"market\", default=\"crypto\")).lower()"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 593,
+        "text": "\"asset_class\": asset_class,"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 1626,
+        "text": "\"asset_class\": \"commodity\","
+      },
+      {
+        "file": "backend/app/support_layers/cot/cot_storage.py",
+        "line": 85,
+        "text": "\"asset_class\": mapping.asset_class.value,"
+      },
+      {
+        "file": "backend/app/support_layers/cot/cot_storage.py",
+        "line": 155,
+        "text": "\"asset_class\": record.get(\"asset_class\"),"
+      },
+      {
+        "file": "backend/shared/tdl_day_logic_v2.py",
+        "line": 28,
+        "text": "def get_tdl_day_controller(day_name, asset_class=\"\"):"
+      },
+      {
+        "file": "backend/shared/tdl_day_logic_v2.py",
+        "line": 30,
+        "text": "cls = str(asset_class or \"\").strip().upper()"
+      },
+      {
+        "file": "backend/shared/tdl_day_logic_v2.py",
+        "line": 34,
+        "text": "return {\"ok\": False, \"controller\": \"UNKNOWN\", \"mode\": \"unknown_day\", \"day\": day, \"asset_class\": cls}"
+      },
+      {
+        "file": "backend/shared/tdl_day_logic_v2.py",
+        "line": 37,
+        "text": "return {\"ok\": True, \"controller\": \"MARKET_CLOSED_OR_IGNORED\", \"mode\": \"non_crypto_weekend\", \"day\": day, \"asset_class\": cls}"
+      },
+      {
+        "file": "backend/shared/tdl_day_logic_v2.py",
+        "line": 39,
+        "text": "return {\"ok\": True, \"controller\": row[\"controller\"], \"mode\": row[\"mode\"], \"day\": day, \"asset_class\": cls, \"version\": TDL_DAY_LOGIC_V2[\"version\"]}"
+      }
+    ],
+    "asset_managers": [
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 268,
+        "text": "group = \"ASSET_MANAGERS\""
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 446,
+        "text": "\"asset_managers\": ["
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 447,
+        "text": "\"asset_managers\", \"asset_manager\", \"asset_manager_institutional\","
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 474,
+        "text": "if g == \"asset_managers\":"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 477,
+        "text": "f\"raw_cot_asset_managers_{k}\","
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 478,
+        "text": "f\"context_asset_managers_{k}\","
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 479,
+        "text": "f\"asset_managers_{k}\","
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 560,
+        "text": "long_term_group = \"ASSET_MANAGERS\""
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 563,
+        "text": "am = _ndsp_extract_group_numbers(payload, \"asset_managers\")"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 568,
+        "text": "str(_get(payload, \"asset_managers_bias\", \"long_term_bias\", default=\"NEUTRAL\")).upper(),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 598,
+        "text": "\"asset_managers_long\": am.get(\"long\"),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 599,
+        "text": "\"asset_managers_short\": am.get(\"short\"),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 600,
+        "text": "\"asset_managers_change_long\": am.get(\"change_long\"),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 601,
+        "text": "\"asset_managers_change_short\": am.get(\"change_short\"),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 608,
+        "text": "\"asset_managers_overall_direction\": am_overall,"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 609,
+        "text": "\"asset_managers_overall_direction_ar\": _ndsp_bias_ar(am_overall),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 610,
+        "text": "\"asset_managers_overall_comparison\": am_overall_net,"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 612,
+        "text": "\"asset_managers_weekly_direction\": am_weekly,"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 613,
+        "text": "\"asset_managers_weekly_direction_ar\": _ndsp_weekly_bias_ar_with_scope(am_weekly, am_overall, movement_type),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 614,
+        "text": "\"asset_managers_weekly_comparison\": am_weekly_delta,"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 615,
+        "text": "\"asset_managers_weekly_scope\": \"NARROW_CORRECTIVE_HORIZON\" if movement_type == \"WEEKLY_CORRECTION\" else \"DIRECTIONAL_CONTINUATION_OR_NEUTRAL\","
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 616,
+        "text": "\"asset_managers_weekly_scope_ar\": \"غير صريح / ذو أفق ضيق\" if movement_type == \"WEEKLY_CORRECTION\" else \"اتجاه مباشر أو محايد\","
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 680,
+        "text": "overall_direction = str(_get(payload, \"asset_managers_overall_direction\", \"long_term_bias\", default=\"NEUTRAL\")).upper()"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 681,
+        "text": "weekly_direction = str(_get(payload, \"asset_managers_weekly_direction\", \"weekly_operational_bias\", default=\"NEUTRAL\")).upper()"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 762,
+        "text": "overall_direction = str(_get(payload, \"overall_trend_direction\", \"asset_managers_overall_direction\", default=\"NEUTRAL\")).upper()"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 112,
+        "text": "overall = directions.get(\"asset_managers_overall\")"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 113,
+        "text": "am_weekly = directions.get(\"asset_managers_weekly\")"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 117,
+        "text": "asset_managers_overall=overall,"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 118,
+        "text": "asset_managers_weekly=am_weekly,"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 122,
+        "text": "asset_managers_overall=overall,"
+      }
+    ],
+    "leveraged_funds": [
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 273,
+        "text": "group = \"LEVERAGED_FUNDS\""
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 278,
+        "text": "group = \"LEVERAGED_FUNDS\""
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 450,
+        "text": "\"leveraged_funds\": ["
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 451,
+        "text": "\"leveraged_funds\", \"leveraged\", \"lev_funds\", \"speculative\","
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 484,
+        "text": "if g == \"leveraged_funds\":"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 487,
+        "text": "f\"raw_cot_leveraged_funds_{k}\","
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 488,
+        "text": "f\"context_leveraged_funds_{k}\","
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 489,
+        "text": "f\"leveraged_funds_{k}\","
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 561,
+        "text": "short_term_group = \"LEVERAGED_FUNDS\""
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 564,
+        "text": "lf = _ndsp_extract_group_numbers(payload, \"leveraged_funds\")"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 573,
+        "text": "str(_get(payload, \"leveraged_funds_bias\", \"speculative_bias\", default=\"NEUTRAL\")).upper(),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 603,
+        "text": "\"leveraged_funds_long\": lf.get(\"long\"),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 604,
+        "text": "\"leveraged_funds_short\": lf.get(\"short\"),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 605,
+        "text": "\"leveraged_funds_change_long\": lf.get(\"change_long\"),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 606,
+        "text": "\"leveraged_funds_change_short\": lf.get(\"change_short\"),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 618,
+        "text": "\"leveraged_funds_overall_direction\": lf_overall,"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 619,
+        "text": "\"leveraged_funds_overall_direction_ar\": _ndsp_bias_ar(lf_overall),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 620,
+        "text": "\"leveraged_funds_overall_comparison\": lf_overall_net,"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 622,
+        "text": "\"leveraged_funds_weekly_direction\": lf_weekly,"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 623,
+        "text": "\"leveraged_funds_weekly_direction_ar\": _ndsp_bias_ar(lf_weekly),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 624,
+        "text": "\"leveraged_funds_weekly_comparison\": lf_weekly_delta,"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 114,
+        "text": "lf_weekly = directions.get(\"leveraged_funds_weekly\")"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 119,
+        "text": "leveraged_funds_weekly=lf_weekly,"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 124,
+        "text": "leveraged_funds_weekly=lf_weekly,"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 136,
+        "text": "f\"leveraged_funds_weekly={lf_weekly}; correction={investment['correction_state']}\""
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 282,
+        "text": "\"leveraged_funds_weekly\": _normalize_direction(raw.get(\"leveraged_funds_weekly_direction\")),"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 325,
+        "text": "data[\"leveraged_funds_weekly_direction\"] = directions[\"leveraged_funds_weekly\"]"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 432,
+        "text": "else directions.get(\"leveraged_funds_weekly\")"
+      },
+      {
+        "file": "backend/layers/canonical_v1/runtime_bridge.py",
+        "line": 103,
+        "text": "\"leveraged_funds_weekly\": ("
+      },
+      {
+        "file": "backend/layers/canonical_v1/runtime_bridge.py",
+        "line": 104,
+        "text": "\"leveraged_funds_weekly\","
+      }
+    ],
+    "change_long": [
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 370,
+        "text": "def _ndsp_weekly_direction_from_changes(change_long, change_short):"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 376,
+        "text": "change_long = _ndsp_num(change_long)"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 379,
+        "text": "if change_long > change_short:"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 382,
+        "text": "\"change_long\": change_long,"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 384,
+        "text": "\"comparison_rule\": \"CHANGE_LONG_GREATER_THAN_CHANGE_SHORT\","
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 385,
+        "text": "\"comparison_gap_for_display_only\": abs(change_long - change_short),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 388,
+        "text": "if change_short > change_long:"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 391,
+        "text": "\"change_long\": change_long,"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 393,
+        "text": "\"comparison_rule\": \"CHANGE_SHORT_GREATER_THAN_CHANGE_LONG\","
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 394,
+        "text": "\"comparison_gap_for_display_only\": abs(change_short - change_long),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 399,
+        "text": "\"change_long\": change_long,"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 401,
+        "text": "\"comparison_rule\": \"CHANGE_LONG_EQUALS_CHANGE_SHORT\","
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 498,
+        "text": "change_long = find_value([\"change_long\", \"long_change\", \"change_in_long\", \"weekly_change_long\"])"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 504,
+        "text": "\"change_long\": change_long,"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 507,
+        "text": "\"has_weekly_changes\": change_long is not None and change_short is not None,"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 578,
+        "text": "am_weekly, am_weekly_delta = _ndsp_weekly_direction_from_changes(am.get(\"change_long\"), am.get(\"change_short\")) if am.get(\"has_weekly_changes\") else (\"NEUTRAL\", None)"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 579,
+        "text": "lf_weekly, lf_weekly_delta = _ndsp_weekly_direction_from_changes(lf.get(\"change_long\"), lf.get(\"change_short\")) if lf.get(\"has_weekly_changes\") else (\"NEUTRAL\", None)"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 600,
+        "text": "\"asset_managers_change_long\": am.get(\"change_long\"),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 605,
+        "text": "\"leveraged_funds_change_long\": lf.get(\"change_long\"),"
+      }
+    ],
+    "change_short": [
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 370,
+        "text": "def _ndsp_weekly_direction_from_changes(change_long, change_short):"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 377,
+        "text": "change_short = _ndsp_num(change_short)"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 379,
+        "text": "if change_long > change_short:"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 383,
+        "text": "\"change_short\": change_short,"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 384,
+        "text": "\"comparison_rule\": \"CHANGE_LONG_GREATER_THAN_CHANGE_SHORT\","
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 385,
+        "text": "\"comparison_gap_for_display_only\": abs(change_long - change_short),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 388,
+        "text": "if change_short > change_long:"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 392,
+        "text": "\"change_short\": change_short,"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 393,
+        "text": "\"comparison_rule\": \"CHANGE_SHORT_GREATER_THAN_CHANGE_LONG\","
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 394,
+        "text": "\"comparison_gap_for_display_only\": abs(change_short - change_long),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 400,
+        "text": "\"change_short\": change_short,"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 401,
+        "text": "\"comparison_rule\": \"CHANGE_LONG_EQUALS_CHANGE_SHORT\","
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 499,
+        "text": "change_short = find_value([\"change_short\", \"short_change\", \"change_in_short\", \"weekly_change_short\"])"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 505,
+        "text": "\"change_short\": change_short,"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 507,
+        "text": "\"has_weekly_changes\": change_long is not None and change_short is not None,"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 578,
+        "text": "am_weekly, am_weekly_delta = _ndsp_weekly_direction_from_changes(am.get(\"change_long\"), am.get(\"change_short\")) if am.get(\"has_weekly_changes\") else (\"NEUTRAL\", None)"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 579,
+        "text": "lf_weekly, lf_weekly_delta = _ndsp_weekly_direction_from_changes(lf.get(\"change_long\"), lf.get(\"change_short\")) if lf.get(\"has_weekly_changes\") else (\"NEUTRAL\", None)"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 601,
+        "text": "\"asset_managers_change_short\": am.get(\"change_short\"),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 606,
+        "text": "\"leveraged_funds_change_short\": lf.get(\"change_short\"),"
+      }
+    ],
+    "weekly_direction": [
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 370,
+        "text": "def _ndsp_weekly_direction_from_changes(change_long, change_short):"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 406,
+        "text": "def _ndsp_movement_type(overall_direction, weekly_direction):"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 408,
+        "text": "weekly_direction = str(weekly_direction or \"NEUTRAL\").upper()"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 410,
+        "text": "if overall_direction == \"NEUTRAL\" or weekly_direction == \"NEUTRAL\":"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 413,
+        "text": "if overall_direction == weekly_direction:"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 518,
+        "text": "def _ndsp_weekly_bias_ar_with_scope(weekly_direction, overall_direction, movement_type):"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 519,
+        "text": "weekly_direction = str(weekly_direction or \"\").upper()"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 524,
+        "text": "if weekly_direction == \"BULLISH\":"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 526,
+        "text": "if weekly_direction == \"BEARISH\":"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 529,
+        "text": "if weekly_direction == \"BULLISH\":"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 531,
+        "text": "if weekly_direction == \"BEARISH\":"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 533,
+        "text": "if weekly_direction == \"NEUTRAL\":"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 538,
+        "text": "def _ndsp_tdl_reading_ar(overall_direction, weekly_direction, movement_type):"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 540,
+        "text": "weekly_scope_ar = _ndsp_weekly_bias_ar_with_scope(weekly_direction, overall_direction, movement_type)"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 578,
+        "text": "am_weekly, am_weekly_delta = _ndsp_weekly_direction_from_changes(am.get(\"change_long\"), am.get(\"change_short\")) if am.get(\"has_weekly_changes\") else (\"NEUTRAL\", None)"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 579,
+        "text": "lf_weekly, lf_weekly_delta = _ndsp_weekly_direction_from_changes(lf.get(\"change_long\"), lf.get(\"change_short\")) if lf.get(\"has_weekly_changes\") else (\"NEUTRAL\", None)"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 612,
+        "text": "\"asset_managers_weekly_direction\": am_weekly,"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 613,
+        "text": "\"asset_managers_weekly_direction_ar\": _ndsp_weekly_bias_ar_with_scope(am_weekly, am_overall, movement_type),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 622,
+        "text": "\"leveraged_funds_weekly_direction\": lf_weekly,"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 623,
+        "text": "\"leveraged_funds_weekly_direction_ar\": _ndsp_bias_ar(lf_weekly),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 681,
+        "text": "weekly_direction = str(_get(payload, \"asset_managers_weekly_direction\", \"weekly_operational_bias\", default=\"NEUTRAL\")).upper()"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 693,
+        "text": "if weekly_direction in {\"BULLISH\", \"BEARISH\"} and timing_allowed:"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 695,
+        "text": "tdl_bias = weekly_direction"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 696,
+        "text": "elif weekly_direction in {\"BULLISH\", \"BEARISH\"} and not timing_allowed:"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 698,
+        "text": "tdl_bias = weekly_direction"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 703,
+        "text": "tdl_reading = _ndsp_tdl_reading_ar(overall_direction, weekly_direction, movement_type)"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 715,
+        "text": "\"weekly_partial_direction\": weekly_direction,"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 716,
+        "text": "\"weekly_partial_direction_ar\": _ndsp_weekly_bias_ar_with_scope(weekly_direction, overall_direction, movement_type),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 761,
+        "text": "weekly_direction = str(_get(payload, \"tdl_bias\", \"weekly_partial_direction\", \"weekly_operational_bias\", default=\"NEUTRAL\")).upper()"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 769,
+        "text": "if weekly_direction in {\"BULLISH\", \"BEARISH\"}:"
+      }
+    ],
+    "overall_direction": [
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 406,
+        "text": "def _ndsp_movement_type(overall_direction, weekly_direction):"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 407,
+        "text": "overall_direction = str(overall_direction or \"NEUTRAL\").upper()"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 410,
+        "text": "if overall_direction == \"NEUTRAL\" or weekly_direction == \"NEUTRAL\":"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 413,
+        "text": "if overall_direction == weekly_direction:"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 518,
+        "text": "def _ndsp_weekly_bias_ar_with_scope(weekly_direction, overall_direction, movement_type):"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 520,
+        "text": "overall_direction = str(overall_direction or \"\").upper()"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 538,
+        "text": "def _ndsp_tdl_reading_ar(overall_direction, weekly_direction, movement_type):"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 539,
+        "text": "overall_ar = _ndsp_bias_ar(overall_direction)"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 540,
+        "text": "weekly_scope_ar = _ndsp_weekly_bias_ar_with_scope(weekly_direction, overall_direction, movement_type)"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 608,
+        "text": "\"asset_managers_overall_direction\": am_overall,"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 609,
+        "text": "\"asset_managers_overall_direction_ar\": _ndsp_bias_ar(am_overall),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 618,
+        "text": "\"leveraged_funds_overall_direction\": lf_overall,"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 619,
+        "text": "\"leveraged_funds_overall_direction_ar\": _ndsp_bias_ar(lf_overall),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 680,
+        "text": "overall_direction = str(_get(payload, \"asset_managers_overall_direction\", \"long_term_bias\", default=\"NEUTRAL\")).upper()"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 703,
+        "text": "tdl_reading = _ndsp_tdl_reading_ar(overall_direction, weekly_direction, movement_type)"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 708,
+        "text": "\"tdl_bias_ar\": _ndsp_weekly_bias_ar_with_scope(tdl_bias, overall_direction, movement_type),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 712,
+        "text": "\"overall_trend_direction\": overall_direction,"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 713,
+        "text": "\"overall_trend_direction_ar\": _ndsp_bias_ar(overall_direction),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 716,
+        "text": "\"weekly_partial_direction_ar\": _ndsp_weekly_bias_ar_with_scope(weekly_direction, overall_direction, movement_type),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 745,
+        "text": "f\"اعتماد القرار الأسبوعي: {_ndsp_weekly_bias_ar_with_scope(tdl_bias, overall_direction, movement_type)}.\","
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 746,
+        "text": "f\"السياق الكلي: {_ndsp_bias_ar(overall_direction)}.\","
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 762,
+        "text": "overall_direction = str(_get(payload, \"overall_trend_direction\", \"asset_managers_overall_direction\", default=\"NEUTRAL\")).upper()"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 777,
+        "text": "support.append(f\"الاتجاه الكلي: {_ndsp_bias_ar(overall_direction)}.\")"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 789,
+        "text": "\"dominant_direction_ar\": _ndsp_weekly_bias_ar_with_scope(dominant_direction, overall_direction, movement_type),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 794,
+        "text": "\"overall_trend_direction\": overall_direction,"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 795,
+        "text": "\"overall_trend_direction_ar\": _ndsp_bias_ar(overall_direction),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 798,
+        "text": "\"weekly_partial_direction_ar\": _ndsp_weekly_bias_ar_with_scope(weekly_direction, overall_direction, movement_type),"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 279,
+        "text": "raw.get(\"asset_managers_overall_direction\") or raw.get(\"asset_managers_bias\")"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 323,
+        "text": "data[\"asset_managers_overall_direction\"] = directions[\"asset_managers_overall\"]"
+      },
+      {
+        "file": "backend/layers/canonical_v1/runtime_bridge.py",
+        "line": 90,
+        "text": "\"asset_managers_overall_direction\","
+      }
+    ],
+    "asset_managers_overall": [
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 608,
+        "text": "\"asset_managers_overall_direction\": am_overall,"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 609,
+        "text": "\"asset_managers_overall_direction_ar\": _ndsp_bias_ar(am_overall),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 610,
+        "text": "\"asset_managers_overall_comparison\": am_overall_net,"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 680,
+        "text": "overall_direction = str(_get(payload, \"asset_managers_overall_direction\", \"long_term_bias\", default=\"NEUTRAL\")).upper()"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 762,
+        "text": "overall_direction = str(_get(payload, \"overall_trend_direction\", \"asset_managers_overall_direction\", default=\"NEUTRAL\")).upper()"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 112,
+        "text": "overall = directions.get(\"asset_managers_overall\")"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 117,
+        "text": "asset_managers_overall=overall,"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 122,
+        "text": "asset_managers_overall=overall,"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 278,
+        "text": "\"asset_managers_overall\": _normalize_direction("
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 279,
+        "text": "raw.get(\"asset_managers_overall_direction\") or raw.get(\"asset_managers_bias\")"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 323,
+        "text": "data[\"asset_managers_overall_direction\"] = directions[\"asset_managers_overall\"]"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 430,
+        "text": "directions.get(\"asset_managers_overall\")"
+      },
+      {
+        "file": "backend/layers/canonical_v1/runtime_bridge.py",
+        "line": 88,
+        "text": "\"asset_managers_overall\": ("
+      },
+      {
+        "file": "backend/layers/canonical_v1/runtime_bridge.py",
+        "line": 89,
+        "text": "\"asset_managers_overall\","
+      },
+      {
+        "file": "backend/layers/canonical_v1/runtime_bridge.py",
+        "line": 90,
+        "text": "\"asset_managers_overall_direction\","
+      },
+      {
+        "file": "backend/layers/canonical_v1/runtime_bridge.py",
+        "line": 132,
+        "text": "am_overall = _extract_direction(data, DIRECTION_KEYS[\"asset_managers_overall\"])"
+      },
+      {
+        "file": "backend/layers/canonical_v1/runtime_bridge.py",
+        "line": 139,
+        "text": "(\"asset_managers_overall\", am_overall),"
+      },
+      {
+        "file": "backend/layers/canonical_v1/runtime_bridge.py",
+        "line": 151,
+        "text": "\"asset_managers_overall\": am_overall or \"unknown\","
+      },
+      {
+        "file": "backend/layers/canonical_v1/runtime_bridge.py",
+        "line": 160,
+        "text": "asset_managers_overall=am_overall,"
+      },
+      {
+        "file": "backend/layers/canonical_v1/runtime_bridge.py",
+        "line": 190,
+        "text": "\"asset_managers_overall\": result[\"asset_managers_overall\"],"
+      }
+    ],
+    "asset_managers_weekly": [
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 612,
+        "text": "\"asset_managers_weekly_direction\": am_weekly,"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 613,
+        "text": "\"asset_managers_weekly_direction_ar\": _ndsp_weekly_bias_ar_with_scope(am_weekly, am_overall, movement_type),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 614,
+        "text": "\"asset_managers_weekly_comparison\": am_weekly_delta,"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 615,
+        "text": "\"asset_managers_weekly_scope\": \"NARROW_CORRECTIVE_HORIZON\" if movement_type == \"WEEKLY_CORRECTION\" else \"DIRECTIONAL_CONTINUATION_OR_NEUTRAL\","
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 616,
+        "text": "\"asset_managers_weekly_scope_ar\": \"غير صريح / ذو أفق ضيق\" if movement_type == \"WEEKLY_CORRECTION\" else \"اتجاه مباشر أو محايد\","
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 681,
+        "text": "weekly_direction = str(_get(payload, \"asset_managers_weekly_direction\", \"weekly_operational_bias\", default=\"NEUTRAL\")).upper()"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 113,
+        "text": "am_weekly = directions.get(\"asset_managers_weekly\")"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 118,
+        "text": "asset_managers_weekly=am_weekly,"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 123,
+        "text": "asset_managers_weekly=am_weekly,"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 135,
+        "text": "f\"governing={overall}; asset_managers_weekly={am_weekly}; \""
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 147,
+        "text": "allowed = bool(investment[\"asset_managers_weekly_alignment\"])"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 281,
+        "text": "\"asset_managers_weekly\": _normalize_direction(raw.get(\"asset_managers_weekly_direction\")),"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 324,
+        "text": "data[\"asset_managers_weekly_direction\"] = directions[\"asset_managers_weekly\"]"
+      },
+      {
+        "file": "backend/layers/canonical_v1/runtime_bridge.py",
+        "line": 96,
+        "text": "\"asset_managers_weekly\": ("
+      },
+      {
+        "file": "backend/layers/canonical_v1/runtime_bridge.py",
+        "line": 97,
+        "text": "\"asset_managers_weekly\","
+      },
+      {
+        "file": "backend/layers/canonical_v1/runtime_bridge.py",
+        "line": 98,
+        "text": "\"asset_managers_weekly_direction\","
+      },
+      {
+        "file": "backend/layers/canonical_v1/runtime_bridge.py",
+        "line": 133,
+        "text": "am_weekly = _extract_direction(data, DIRECTION_KEYS[\"asset_managers_weekly\"])"
+      },
+      {
+        "file": "backend/layers/canonical_v1/runtime_bridge.py",
+        "line": 140,
+        "text": "(\"asset_managers_weekly\", am_weekly),"
+      },
+      {
+        "file": "backend/layers/canonical_v1/runtime_bridge.py",
+        "line": 152,
+        "text": "\"asset_managers_weekly\": am_weekly or \"unknown\","
+      },
+      {
+        "file": "backend/layers/canonical_v1/runtime_bridge.py",
+        "line": 161,
+        "text": "asset_managers_weekly=am_weekly,"
+      },
+      {
+        "file": "backend/layers/canonical_v1/runtime_bridge.py",
+        "line": 191,
+        "text": "\"asset_managers_weekly\": result[\"asset_managers_weekly\"],"
+      }
+    ],
+    "leveraged_funds_overall": [
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 618,
+        "text": "\"leveraged_funds_overall_direction\": lf_overall,"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 619,
+        "text": "\"leveraged_funds_overall_direction_ar\": _ndsp_bias_ar(lf_overall),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 620,
+        "text": "\"leveraged_funds_overall_comparison\": lf_overall_net,"
+      },
+      {
+        "file": "backend/layers/canonical_v1/runtime_bridge.py",
+        "line": 154,
+        "text": "\"leveraged_funds_overall_used\": False,"
+      },
+      {
+        "file": "backend/layers/canonical_v1/runtime_bridge.py",
+        "line": 193,
+        "text": "\"leveraged_funds_overall_used\": False,"
+      }
+    ],
+    "leveraged_funds_weekly": [
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 622,
+        "text": "\"leveraged_funds_weekly_direction\": lf_weekly,"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 623,
+        "text": "\"leveraged_funds_weekly_direction_ar\": _ndsp_bias_ar(lf_weekly),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 624,
+        "text": "\"leveraged_funds_weekly_comparison\": lf_weekly_delta,"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 114,
+        "text": "lf_weekly = directions.get(\"leveraged_funds_weekly\")"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 119,
+        "text": "leveraged_funds_weekly=lf_weekly,"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 124,
+        "text": "leveraged_funds_weekly=lf_weekly,"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 136,
+        "text": "f\"leveraged_funds_weekly={lf_weekly}; correction={investment['correction_state']}\""
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 282,
+        "text": "\"leveraged_funds_weekly\": _normalize_direction(raw.get(\"leveraged_funds_weekly_direction\")),"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 325,
+        "text": "data[\"leveraged_funds_weekly_direction\"] = directions[\"leveraged_funds_weekly\"]"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 432,
+        "text": "else directions.get(\"leveraged_funds_weekly\")"
+      },
+      {
+        "file": "backend/layers/canonical_v1/runtime_bridge.py",
+        "line": 103,
+        "text": "\"leveraged_funds_weekly\": ("
+      },
+      {
+        "file": "backend/layers/canonical_v1/runtime_bridge.py",
+        "line": 104,
+        "text": "\"leveraged_funds_weekly\","
+      },
+      {
+        "file": "backend/layers/canonical_v1/runtime_bridge.py",
+        "line": 105,
+        "text": "\"leveraged_funds_weekly_direction\","
+      },
+      {
+        "file": "backend/layers/canonical_v1/runtime_bridge.py",
+        "line": 134,
+        "text": "lf_weekly = _extract_direction(data, DIRECTION_KEYS[\"leveraged_funds_weekly\"])"
+      },
+      {
+        "file": "backend/layers/canonical_v1/runtime_bridge.py",
+        "line": 141,
+        "text": "(\"leveraged_funds_weekly\", lf_weekly),"
+      },
+      {
+        "file": "backend/layers/canonical_v1/runtime_bridge.py",
+        "line": 153,
+        "text": "\"leveraged_funds_weekly\": lf_weekly or \"unknown\","
+      },
+      {
+        "file": "backend/layers/canonical_v1/runtime_bridge.py",
+        "line": 162,
+        "text": "leveraged_funds_weekly=lf_weekly,"
+      },
+      {
+        "file": "backend/layers/canonical_v1/runtime_bridge.py",
+        "line": 192,
+        "text": "\"leveraged_funds_weekly\": result[\"leveraged_funds_weekly\"],"
+      }
+    ],
+    "report_date": [
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 644,
+        "text": "\"raw_cot_report_date\": _get(payload, \"raw_cot_report_date\", \"cot_report_date\", default=None),"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 300,
+        "text": "\"report_date\": raw.get(\"report_date\"),"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 334,
+        "text": "\"source_report_date\": raw.get(\"report_date\"),"
+      },
+      {
+        "file": "backend/app/support_layers/cot/cot_storage.py",
+        "line": 60,
+        "text": "report_date: str,"
+      },
+      {
+        "file": "backend/app/support_layers/cot/cot_storage.py",
+        "line": 83,
+        "text": "\"report_date\": report_date,"
+      },
+      {
+        "file": "backend/app/support_layers/cot/cot_storage.py",
+        "line": 150,
+        "text": "report_date=record[\"report_date\"],"
+      },
+      {
+        "file": "backend/app/support_layers/cot/cot_storage.py",
+        "line": 169,
+        "text": "\"report_date\": snapshot.report_date,"
+      }
+    ],
+    "report_age_days": [
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 645,
+        "text": "\"report_age_days\": _get(payload, \"report_age_days\", default=None),"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 285,
+        "text": "age = _safe_float(raw.get(\"report_age_days\"))"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 301,
+        "text": "\"report_age_days\": age,"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 335,
+        "text": "\"source_report_age_days\": age,"
+      }
+    ],
+    "investment": [
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 13,
+        "text": "from backend.layers.canonical_v1.direction.investment_policy import evaluate_investment_policy"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 65,
+        "text": "if any(token in raw for token in (\"investment\", \"invest\", \"استثمار\")):"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 66,
+        "text": "return \"investment\""
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 70,
+        "text": "return \"investment\" if tf in {\"1w\", \"weekly\", \"1m\", \"monthly\"} else \"speculative\""
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 116,
+        "text": "investment = evaluate_investment_policy("
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 132,
+        "text": "\"score\": 90 if investment[\"readiness_allowed\"] else 65,"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 133,
+        "text": "\"blocking\": not investment[\"readiness_allowed\"],"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 136,
+        "text": "f\"leveraged_funds_weekly={lf_weekly}; correction={investment['correction_state']}\""
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 140,
+        "text": "+ (\"انتهى التصحيح الأسبوعي.\" if investment[\"readiness_allowed\"] else \"التصحيح الأسبوعي ما زال قائمًا.\")"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 144,
+        "text": "if mode == \"investment\":"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 147,
+        "text": "allowed = bool(investment[\"asset_managers_weekly_alignment\"])"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 153,
+        "text": "\"evidence\": \"investment weekly correction gate derived from current and weekly Asset Manager directions\","
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 431,
+        "text": "if mode == \"investment\""
+      }
+    ],
+    "source_market": [
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 299,
+        "text": "\"source_market\": raw.get(\"market_name\"),"
+      }
+    ],
+    "max_age_days": [
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 302,
+        "text": "\"max_age_days\": int(max_cot_age_days),"
+      }
+    ],
+    "source_timeframe": [
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 305,
+        "text": "\"source_timeframe\": \"weekly\","
+      }
+    ],
+    "analysis_timeframe": [
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 306,
+        "text": "\"analysis_timeframe\": normalized_tf,"
+      }
+    ],
+    "report_family": [
+      {
+        "file": "backend/app/support_layers/cot/cot_storage.py",
+        "line": 84,
+        "text": "\"report_family\": mapping.report_family.value,"
+      },
+      {
+        "file": "backend/app/support_layers/cot/cot_storage.py",
+        "line": 151,
+        "text": "report_family=mapping.report_family,"
+      },
+      {
+        "file": "backend/app/support_layers/cot/cot_storage.py",
+        "line": 170,
+        "text": "\"report_family\": snapshot.report_family.value,"
+      }
+    ]
+  },
+  "findings": {
+    "canonical_directions": {
+      "asset_managers_overall": true,
+      "asset_managers_weekly": true,
+      "leveraged_funds_overall": true,
+      "leveraged_funds_weekly": true
+    },
+    "freshness": {
+      "report_date": true,
+      "report_age_days": true,
+      "max_age_days": true,
+      "fresh": true
+    },
+    "routing": {
+      "asset_class": true,
+      "provider": false,
+      "dataset": false,
+      "report_family": true,
+      "source_market": true,
+      "source_timeframe": true,
+      "analysis_timeframe": true
+    },
+    "extract_group_numbers": {
+      "aliases": {
+        "asset_managers": [
+          "asset_managers",
+          "asset_manager",
+          "asset_manager_institutional",
+          "am",
+          "long_term",
+          "ml"
+        ],
+        "leveraged_funds": [
+          "leveraged_funds",
+          "leveraged",
+          "lev_funds",
+          "speculative",
+          "short_term",
+          "s"
+        ],
+        "dealer_intermediary": [
+          "dealer_intermediary",
+          "dealer",
+          "dealers"
+        ]
+      },
+      "return_keys": [
+        "change_long",
+        "change_short",
+        "has_current_totals",
+        "has_weekly_changes",
+        "long",
+        "short"
+      ]
+    },
+    "cot_numeric_aliases": {
+      "current_long_aliases": [
+        "long",
+        "longs",
+        "current_long",
+        "positions_long"
+      ],
+      "current_short_aliases": [
+        "short",
+        "shorts",
+        "current_short",
+        "positions_short"
+      ],
+      "change_long_aliases": [
+        "change_long",
+        "long_change",
+        "change_in_long",
+        "weekly_change_long"
+      ],
+      "change_short_aliases": [
+        "change_short",
+        "short_change",
+        "change_in_short",
+        "weekly_change_short"
+      ]
+    },
+    "freshness_evidence": [
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 645,
+        "text": "\"report_age_days\": _get(payload, \"report_age_days\", default=None),"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 285,
+        "text": "age = _safe_float(raw.get(\"report_age_days\"))"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 301,
+        "text": "\"report_age_days\": age,"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 335,
+        "text": "\"source_report_age_days\": age,"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 302,
+        "text": "\"max_age_days\": int(max_cot_age_days),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 145,
+        "text": "data_is_fresh = _bool(_get(payload, \"data_is_fresh\", \"fresh\", default=True), True)"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 164,
+        "text": "if not data_is_fresh or feed_age_seconds > 300:"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 166,
+        "text": "warnings.append(\"Data freshness is degraded.\")"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 168,
+        "text": "signals.append(\"Data freshness is acceptable.\")"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 174,
+        "text": "\"data_is_fresh\": data_is_fresh,"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 182,
+        "text": "def _refresh_public_golden(data: dict[str, Any]) -> None:"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 286,
+        "text": "fresh = age is not None and age <= float(max_cot_age_days)"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 291,
+        "text": "and fresh"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 303,
+        "text": "\"fresh\": fresh,"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 317,
+        "text": "\"COT_STALE\" if age is not None and not fresh"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 336,
+        "text": "\"source_fresh\": fresh,"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 344,
+        "text": "_refresh_public_golden(data)"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 504,
+        "text": "\"governing_inputs_fresh\": governing.get(\"fresh\") is True,"
+      },
+      {
+        "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+        "line": 509,
+        "text": "\"governance_evidence_fresh\": governance_summary.get(\"evidence_fresh\") is True,"
+      }
+    ],
+    "possible_leveraged_overall_evidence": [
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 561,
+        "text": "short_term_group = \"LEVERAGED_FUNDS\""
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 603,
+        "text": "\"leveraged_funds_long\": lf.get(\"long\"),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 604,
+        "text": "\"leveraged_funds_short\": lf.get(\"short\"),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 605,
+        "text": "\"leveraged_funds_change_long\": lf.get(\"change_long\"),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 606,
+        "text": "\"leveraged_funds_change_short\": lf.get(\"change_short\"),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 618,
+        "text": "\"leveraged_funds_overall_direction\": lf_overall,"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 619,
+        "text": "\"leveraged_funds_overall_direction_ar\": _ndsp_bias_ar(lf_overall),"
+      },
+      {
+        "file": "backend/ndsp_latest_16_layers_logic_functions.py",
+        "line": 620,
+        "text": "\"leveraged_funds_overall_comparison\": lf_overall_net,"
+      },
+      {
+        "file": "backend/layers/canonical_v1/runtime_bridge.py",
+        "line": 154,
+        "text": "\"leveraged_funds_overall_used\": False,"
+      },
+      {
+        "file": "backend/layers/canonical_v1/runtime_bridge.py",
+        "line": 193,
+        "text": "\"leveraged_funds_overall_used\": False,"
+      }
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+   1325       1 root     ج أغسطس  7 16:45:59 2026 /usr/bin/python3 /usr/bin/fail2ban-server -xf start
+   1326       1 nawaf511 ج أغسطس  7 16:45:59 2026 /usr/bin/node /home/nawaf511/empire-core-new/runtime/opt-services/ndsp16-api-98114d2615/server.js
+   1329       1 nawaf511 ج أغسطس  7 16:45:59 2026 /usr/bin/node /home/nawaf511/empire-core-new/backend/services/ctl-001-workspace-identity/main.cjs
+   1331       1 nawaf511 ج أغسطس  7 16:45:59 2026 /usr/bin/node /home/nawaf511/empire-core-new/backend/services/decision_governance_core/main.cjs
+   1332       1 nawaf511 ج أغسطس  7 16:45:59 2026 /usr/bin/node /home/nawaf511/empire-core-new/apps/ndsp-governance-bridge/server.mjs
+   1334       1 nawaf511 ج أغسطس  7 16:45:59 2026 /usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_platform_gateway_9001.cjs
+   1342       1 root     ج أغسطس  7 16:45:59 2026 /usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_user_dashboard_gateway.cjs
+   1352       1 redis    ج أغسطس  7 16:46:00 2026 /usr/bin/redis-server 127.0.0.1:6379
+   1386       1 nawaf511 ج أغسطس  7 16:46:00 2026 /usr/bin/python3 /home/nawaf511/empire-core-new/backend/ndsp-live-decision-quality/server.py
+   1387       1 nawaf511 ج أغسطس  7 16:46:00 2026 /usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp_live_market_adapter.cjs
+   1402       1 nawaf511 ج أغسطس  7 16:46:00 2026 /usr/bin/node /home/nawaf511/empire-core-new/apps/ndsp-news-ticker/server.cjs
+   1408       1 nawaf511 ج أغسطس  7 16:46:00 2026 /usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp_scenario_levels_adapter.cjs
+   1556       1 root     ج أغسطس  7 16:46:01 2026 nginx: master process /usr/sbin/nginx -g daemon on; master_process on;
+   1557    1556 www-data ج أغسطس  7 16:46:01 2026 nginx: worker process
+   1558    1556 www-data ج أغسطس  7 16:46:01 2026 nginx: worker process
+   1559    1556 www-data ج أغسطس  7 16:46:01 2026 nginx: worker process
+   1560    1556 www-data ج أغسطس  7 16:46:01 2026 nginx: worker process
+   1561    1556 www-data ج أغسطس  7 16:46:01 2026 nginx: worker process
+   1562    1556 www-data ج أغسطس  7 16:46:01 2026 nginx: worker process
+   1563    1556 www-data ج أغسطس  7 16:46:01 2026 nginx: worker process
+   1564    1556 www-data ج أغسطس  7 16:46:01 2026 nginx: worker process
+   4111    3737 nawaf511 ج أغسطس  7 16:46:08 2026 npm run start
+   4122    3737 nawaf511 ج أغسطس  7 16:46:08 2026 python3 /home/nawaf511/empire-core-new/backend/services/ndsp-trial-clock-v164/server.py
+   4138    3737 nawaf511 ج أغسطس  7 16:46:08 2026 python3 /home/nawaf511/empire-core-new/backend/services/ndsp-launch-control-v167/server.py
+   4161    3737 nawaf511 ج أغسطس  7 16:46:08 2026 python3 /home/nawaf511/empire-core-new/backend/services/ndsp-telegram-notifications-v182/server.py
+   4561       1 nawaf511 ج أغسطس  7 16:46:09 2026 /usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp-access-guard-9024/server.js
+   4562       1 nawaf511 ج أغسطس  7 16:46:09 2026 /usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp-access-guard-final/server.js
+   4564       1 root     ج أغسطس  7 16:46:09 2026 /usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_actions_gateway.cjs
+   4567       1 root     ج أغسطس  7 16:46:09 2026 /usr/bin/node /home/nawaf511/empire-core-new/backend/admin_users_official_api/server.js
+   4570       1 root     ج أغسطس  7 16:46:09 2026 /usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_api_compat_gateway.cjs
+   4578       1 nawaf511 ج أغسطس  7 16:46:09 2026 /usr/bin/node /home/nawaf511/empire-core-new/backend/server.js
+   4579       1 ndsp-au+ ج أغسطس  7 16:46:09 2026 /usr/bin/nsolid /run/ndsp-auth-core-clean/server/dist/server.js
+   4598       1 nawaf511 ج أغسطس  7 16:46:09 2026 /usr/bin/node /home/nawaf511/empire-core-new/backend/password_reset_gateway/server.js
+   4601       1 postgres ج أغسطس  7 16:46:09 2026 /usr/bin/python3 /home/nawaf511/empire-core-new/backend/ndsp-portal-real-data-api/server.py
+   4602       1 root     ج أغسطس  7 16:46:09 2026 /usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_register_compat_gateway.cjs
+   4605       1 root     ج أغسطس  7 16:46:09 2026 /usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_trial_register_gateway.cjs
+   4606       1 nawaf511 ج أغسطس  7 16:46:09 2026 /usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_trial_fingerprint_guard_proxy.cjs
+   4608       1 nawaf511 ج أغسطس  7 16:46:09 2026 /usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp-trial-register-canonical-wrapper/server.js
+   4619       1 nawaf511 ج أغسطس  7 16:46:09 2026 /usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp-trial-seats-api/server.js
+   4623       1 nawaf511 ج أغسطس  7 16:46:09 2026 /usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp-user-alert-channels/server.js
+   4624       1 nawaf511 ج أغسطس  7 16:46:09 2026 /usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp-telegram-link-listener/server.js
+   4625       1 nawaf511 ج أغسطس  7 16:46:09 2026 /usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_user_login_gateway.cjs
+   4768       1 nawaf511 ج أغسطس  7 16:46:10 2026 /usr/bin/node /home/nawaf511/empire-core-new/backend/services/completed_decision/main.cjs
+   5169    4111 nawaf511 ج أغسطس  7 16:46:12 2026 sh -c node server.js
+   5171    5169 nawaf511 ج أغسطس  7 16:46:12 2026 node server.js
+ 585567       1 www-data ج أغسطس  7 19:17:52 2026 /usr/bin/node /home/nawaf511/empire-core-new/runtime/opt-services/legal-v42-729774de5b/ndsp-registration-consent-gateway.cjs
+2402288       1 nawaf511 س أغسطس  8 04:38:11 2026 /usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_history_v36.py serve

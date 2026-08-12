@@ -1,0 +1,281 @@
+=== NDSP COT HANDOFF EXACT ROOTCAUSE V2 ===
+MODE=READ_ONLY
+
+=== UPSTREAM_9082 COT/FRESHNESS PATHS ===
+RELEVANT_PATH_COUNT=10
+PATH=$.governing_inputs VALUE={'contract_version': 'NDSP_GOVERNING_INPUTS_V201', 'status': 'INCOMPLETE', 'source': 'CFTC_TFF_FUTURES_ONLY', 'source_family': 'TFF', 'source_market': 'ETHER CASH SETTLED - CHICAGO MERCANTILE EXCHANGE', 'report_date': '2026-07-21', 'report_age_days': None, 'max_age_days': 10, 'fresh': False, 'symbol': 'ETHUSDT', 'source_timeframe': 'weekly', 'analysis_timeframe': 'weekly', 'analysis_mode': 'investment', 'directions': {'asset_managers_overall': 'bearish', 'asset_managers_weekly': None, 'leveraged_funds_weekly': None}, 'missing_inputs': ['asset_managers_weekly', 'leveraged_funds_weekly'], 'raw_cot_connected': True, 'raw_cot_status': 'CONNECTED_MATCHED', 'not_recommendation': True}
+PATH=$.governing_inputs.report_date VALUE='2026-07-21'
+PATH=$.governing_inputs.report_age_days VALUE=None
+PATH=$.governing_inputs.max_age_days VALUE=10
+PATH=$.governing_inputs.directions VALUE={'asset_managers_overall': 'bearish', 'asset_managers_weekly': None, 'leveraged_funds_weekly': None}
+PATH=$.governing_inputs.directions.asset_managers_overall VALUE='bearish'
+PATH=$.governing_inputs.directions.asset_managers_weekly VALUE=None
+PATH=$.governing_inputs.directions.leveraged_funds_weekly VALUE=None
+PATH=$.governing_inputs.raw_cot_connected VALUE=True
+PATH=$.governing_inputs.raw_cot_status VALUE='CONNECTED_MATCHED'
+
+=== CANONICAL_9085 COT/FRESHNESS PATHS ===
+RELEVANT_PATH_COUNT=7
+PATH=$.input_evidence.cot VALUE={'status': 'INPUTS_INCOMPLETE', 'decision_use_allowed': False, 'monitoring_use_allowed': False, 'directions': {'asset_managers_overall': None, 'asset_managers_weekly': None, 'leveraged_funds_weekly': None}, 'report_as_of_date': None, 'generated_at': None, 'age_hours': None, 'files_used': [], 'reason_code': 'CANONICAL_COT_NOT_VERIFIED'}
+PATH=$.input_evidence.cot.directions VALUE={'asset_managers_overall': None, 'asset_managers_weekly': None, 'leveraged_funds_weekly': None}
+PATH=$.input_evidence.cot.directions.asset_managers_overall VALUE=None
+PATH=$.input_evidence.cot.directions.asset_managers_weekly VALUE=None
+PATH=$.input_evidence.cot.directions.leveraged_funds_weekly VALUE=None
+PATH=$.decision_layers[0].output.asset_managers_weekly_alignment VALUE=False
+PATH=$.decision_layers[0].output.leveraged_funds_weekly_alignment VALUE=False
+
+=== EXACT FUNCTION LOCATIONS ===
+discover_cot=backend/app/runtime/ndsp_canonical_live_runtime_v30.py:200-260
+build_payload=backend/app/runtime/ndsp_canonical_live_runtime_v30.py:321-539
+execute=backend/app/runtime/ndsp_canonical_live_runtime_v30.py:542-677
+_fetch_raw_cot=backend/app/runtime/ndsp_v201_launch_completion.py:82-98
+_ndsp_direction_from_long_short=backend/ndsp_latest_16_layers_logic_functions.py:335-367
+_ndsp_weekly_direction_from_changes=backend/ndsp_latest_16_layers_logic_functions.py:370-403
+_ndsp_extract_group_numbers=backend/ndsp_latest_16_layers_logic_functions.py:441-508
+
+=== SOURCE HANDOFF HITS ===
+TOTAL_SOURCE_HITS=219
+backend/app/runtime/ndsp_canonical_live_runtime_v30.py:168 TAGS=asset_managers_overall TEXT="asset_managers_overall": {
+backend/app/runtime/ndsp_canonical_live_runtime_v30.py:169 TAGS=asset_managers_overall TEXT="asset_managers_overall", "asset_managers_overall_direction",
+backend/app/runtime/ndsp_canonical_live_runtime_v30.py:173 TAGS=asset_managers_weekly TEXT="asset_managers_weekly": {
+backend/app/runtime/ndsp_canonical_live_runtime_v30.py:174 TAGS=asset_managers_weekly TEXT="asset_managers_weekly", "asset_managers_weekly_direction",
+backend/app/runtime/ndsp_canonical_live_runtime_v30.py:177 TAGS=leveraged_funds_weekly TEXT="leveraged_funds_weekly": {
+backend/app/runtime/ndsp_canonical_live_runtime_v30.py:178 TAGS=leveraged_funds_weekly TEXT="leveraged_funds_weekly", "leveraged_funds_weekly_direction",
+backend/app/runtime/ndsp_canonical_live_runtime_v30.py:231 TAGS=cot_report_date TEXT="report_as_of_date", "report_date", "as_of_date", "cot_report_date"
+backend/app/runtime/ndsp_canonical_live_runtime_v30.py:486 TAGS=asset_managers_overall TEXT="asset_managers_overall": cot_directions.get("asset_managers_overall"),
+backend/app/runtime/ndsp_canonical_live_runtime_v30.py:487 TAGS=asset_managers_weekly TEXT="asset_managers_weekly": cot_directions.get("asset_managers_weekly"),
+backend/app/runtime/ndsp_canonical_live_runtime_v30.py:488 TAGS=leveraged_funds_overall TEXT="leveraged_funds_overall": cot_directions.get("leveraged_funds_overall"),
+backend/app/runtime/ndsp_canonical_live_runtime_v30.py:489 TAGS=leveraged_funds_weekly TEXT="leveraged_funds_weekly": cot_directions.get("leveraged_funds_weekly"),
+backend/app/runtime/ndsp_v201_launch_completion.py:112 TAGS=asset_managers_overall TEXT=overall = directions.get("asset_managers_overall")
+backend/app/runtime/ndsp_v201_launch_completion.py:113 TAGS=asset_managers_weekly TEXT=am_weekly = directions.get("asset_managers_weekly")
+backend/app/runtime/ndsp_v201_launch_completion.py:114 TAGS=leveraged_funds_weekly TEXT=lf_weekly = directions.get("leveraged_funds_weekly")
+backend/app/runtime/ndsp_v201_launch_completion.py:117 TAGS=asset_managers_overall TEXT=asset_managers_overall=overall,
+backend/app/runtime/ndsp_v201_launch_completion.py:118 TAGS=asset_managers_weekly TEXT=asset_managers_weekly=am_weekly,
+backend/app/runtime/ndsp_v201_launch_completion.py:119 TAGS=leveraged_funds_weekly TEXT=leveraged_funds_weekly=lf_weekly,
+backend/app/runtime/ndsp_v201_launch_completion.py:122 TAGS=asset_managers_overall TEXT=asset_managers_overall=overall,
+backend/app/runtime/ndsp_v201_launch_completion.py:123 TAGS=asset_managers_weekly TEXT=asset_managers_weekly=am_weekly,
+backend/app/runtime/ndsp_v201_launch_completion.py:124 TAGS=leveraged_funds_weekly TEXT=leveraged_funds_weekly=lf_weekly,
+backend/app/runtime/ndsp_v201_launch_completion.py:135 TAGS=asset_managers_weekly TEXT=f"governing={overall}; asset_managers_weekly={am_weekly}; "
+backend/app/runtime/ndsp_v201_launch_completion.py:136 TAGS=leveraged_funds_weekly TEXT=f"leveraged_funds_weekly={lf_weekly}; correction={investment['correction_state']}"
+backend/app/runtime/ndsp_v201_launch_completion.py:147 TAGS=asset_managers_weekly TEXT=allowed = bool(investment["asset_managers_weekly_alignment"])
+backend/app/runtime/ndsp_v201_launch_completion.py:278 TAGS=asset_managers_overall TEXT="asset_managers_overall": _normalize_direction(
+backend/app/runtime/ndsp_v201_launch_completion.py:279 TAGS=asset_managers_overall TEXT=raw.get("asset_managers_overall_direction") or raw.get("asset_managers_bias")
+backend/app/runtime/ndsp_v201_launch_completion.py:281 TAGS=asset_managers_weekly TEXT="asset_managers_weekly": _normalize_direction(raw.get("asset_managers_weekly_direction")),
+backend/app/runtime/ndsp_v201_launch_completion.py:282 TAGS=leveraged_funds_overall TEXT="leveraged_funds_overall": _normalize_direction(
+backend/app/runtime/ndsp_v201_launch_completion.py:283 TAGS=leveraged_funds_overall TEXT=raw.get("leveraged_funds_overall_direction")
+backend/app/runtime/ndsp_v201_launch_completion.py:286 TAGS=leveraged_funds_weekly TEXT="leveraged_funds_weekly": _normalize_direction(raw.get("leveraged_funds_weekly_direction")),
+backend/app/runtime/ndsp_v201_launch_completion.py:289 TAGS=report_age_days TEXT=age = _safe_float(raw.get("report_age_days"))
+backend/app/runtime/ndsp_v201_launch_completion.py:292 TAGS=report_age_days TEXT=# report_age_days may be derived only from a real report_date.
+backend/app/runtime/ndsp_v201_launch_completion.py:337 TAGS=report_age_days TEXT="report_age_days": age,
+backend/app/runtime/ndsp_v201_launch_completion.py:359 TAGS=asset_managers_overall TEXT=data["asset_managers_overall_direction"] = directions["asset_managers_overall"]
+backend/app/runtime/ndsp_v201_launch_completion.py:360 TAGS=asset_managers_weekly TEXT=data["asset_managers_weekly_direction"] = directions["asset_managers_weekly"]
+backend/app/runtime/ndsp_v201_launch_completion.py:361 TAGS=leveraged_funds_overall TEXT=data["leveraged_funds_overall_direction"] = directions["leveraged_funds_overall"]
+backend/app/runtime/ndsp_v201_launch_completion.py:362 TAGS=leveraged_funds_weekly TEXT=data["leveraged_funds_weekly_direction"] = directions["leveraged_funds_weekly"]
+backend/app/runtime/ndsp_v201_launch_completion.py:372 TAGS=report_age_days TEXT="source_report_age_days": age,
+backend/app/runtime/ndsp_v201_launch_completion.py:467 TAGS=asset_managers_overall TEXT=directions.get("asset_managers_overall")
+backend/app/runtime/ndsp_v201_launch_completion.py:469 TAGS=leveraged_funds_weekly TEXT=else directions.get("leveraged_funds_weekly")
+backend/layers/canonical_v1/runtime_bridge.py:88 TAGS=asset_managers_overall TEXT="asset_managers_overall": (
+backend/layers/canonical_v1/runtime_bridge.py:89 TAGS=asset_managers_overall TEXT="asset_managers_overall",
+backend/layers/canonical_v1/runtime_bridge.py:90 TAGS=asset_managers_overall TEXT="asset_managers_overall_direction",
+backend/layers/canonical_v1/runtime_bridge.py:96 TAGS=asset_managers_weekly TEXT="asset_managers_weekly": (
+backend/layers/canonical_v1/runtime_bridge.py:97 TAGS=asset_managers_weekly TEXT="asset_managers_weekly",
+backend/layers/canonical_v1/runtime_bridge.py:98 TAGS=asset_managers_weekly TEXT="asset_managers_weekly_direction",
+backend/layers/canonical_v1/runtime_bridge.py:103 TAGS=leveraged_funds_weekly TEXT="leveraged_funds_weekly": (
+backend/layers/canonical_v1/runtime_bridge.py:104 TAGS=leveraged_funds_weekly TEXT="leveraged_funds_weekly",
+backend/layers/canonical_v1/runtime_bridge.py:105 TAGS=leveraged_funds_weekly TEXT="leveraged_funds_weekly_direction",
+backend/layers/canonical_v1/runtime_bridge.py:132 TAGS=asset_managers_overall TEXT=am_overall = _extract_direction(data, DIRECTION_KEYS["asset_managers_overall"])
+backend/layers/canonical_v1/runtime_bridge.py:133 TAGS=asset_managers_weekly TEXT=am_weekly = _extract_direction(data, DIRECTION_KEYS["asset_managers_weekly"])
+backend/layers/canonical_v1/runtime_bridge.py:134 TAGS=leveraged_funds_weekly TEXT=lf_weekly = _extract_direction(data, DIRECTION_KEYS["leveraged_funds_weekly"])
+backend/layers/canonical_v1/runtime_bridge.py:139 TAGS=asset_managers_overall TEXT=("asset_managers_overall", am_overall),
+backend/layers/canonical_v1/runtime_bridge.py:140 TAGS=asset_managers_weekly TEXT=("asset_managers_weekly", am_weekly),
+backend/layers/canonical_v1/runtime_bridge.py:141 TAGS=leveraged_funds_weekly TEXT=("leveraged_funds_weekly", lf_weekly),
+backend/layers/canonical_v1/runtime_bridge.py:151 TAGS=asset_managers_overall TEXT="asset_managers_overall": am_overall or "unknown",
+backend/layers/canonical_v1/runtime_bridge.py:152 TAGS=asset_managers_weekly TEXT="asset_managers_weekly": am_weekly or "unknown",
+backend/layers/canonical_v1/runtime_bridge.py:153 TAGS=leveraged_funds_weekly TEXT="leveraged_funds_weekly": lf_weekly or "unknown",
+backend/layers/canonical_v1/runtime_bridge.py:154 TAGS=leveraged_funds_overall TEXT="leveraged_funds_overall_used": False,
+backend/layers/canonical_v1/runtime_bridge.py:160 TAGS=asset_managers_overall TEXT=asset_managers_overall=am_overall,
+backend/layers/canonical_v1/runtime_bridge.py:161 TAGS=asset_managers_weekly TEXT=asset_managers_weekly=am_weekly,
+backend/layers/canonical_v1/runtime_bridge.py:162 TAGS=leveraged_funds_weekly TEXT=leveraged_funds_weekly=lf_weekly,
+backend/layers/canonical_v1/runtime_bridge.py:190 TAGS=asset_managers_overall TEXT="asset_managers_overall": result["asset_managers_overall"],
+backend/layers/canonical_v1/runtime_bridge.py:191 TAGS=asset_managers_weekly TEXT="asset_managers_weekly": result["asset_managers_weekly"],
+backend/layers/canonical_v1/runtime_bridge.py:192 TAGS=leveraged_funds_weekly TEXT="leveraged_funds_weekly": result["leveraged_funds_weekly"],
+backend/layers/canonical_v1/runtime_bridge.py:193 TAGS=leveraged_funds_overall TEXT="leveraged_funds_overall_used": False,
+backend/layers/canonical_v1/quality/l13_nawaf_golden_signal.py:15 TAGS=asset_managers_overall TEXT=asset_managers_overall=payload.get("asset_managers_overall"),
+backend/layers/canonical_v1/quality/l13_nawaf_golden_signal.py:16 TAGS=asset_managers_weekly TEXT=asset_managers_weekly=payload.get("asset_managers_weekly"),
+backend/layers/canonical_v1/quality/l13_nawaf_golden_signal.py:17 TAGS=leveraged_funds_weekly TEXT=leveraged_funds_weekly=payload.get("leveraged_funds_weekly"),
+backend/layers/canonical_v1/quality/l14_nawaf_enhanced_golden_signal.py:15 TAGS=asset_managers_overall TEXT=asset_managers_overall=payload.get("asset_managers_overall"),
+backend/layers/canonical_v1/quality/l14_nawaf_enhanced_golden_signal.py:16 TAGS=asset_managers_weekly TEXT=asset_managers_weekly=payload.get("asset_managers_weekly"),
+backend/layers/canonical_v1/quality/l14_nawaf_enhanced_golden_signal.py:17 TAGS=leveraged_funds_weekly TEXT=leveraged_funds_weekly=payload.get("leveraged_funds_weekly"),
+backend/layers/canonical_v1/quality/golden_signals.py:5 TAGS=asset_managers_overall,asset_managers_weekly,leveraged_funds_weekly TEXT=*, asset_managers_overall, asset_managers_weekly, leveraged_funds_weekly
+backend/layers/canonical_v1/quality/golden_signals.py:7 TAGS=asset_managers_overall TEXT=am_overall = coerce_direction(asset_managers_overall)
+backend/layers/canonical_v1/quality/golden_signals.py:8 TAGS=asset_managers_weekly TEXT=am_weekly = coerce_direction(asset_managers_weekly)
+backend/layers/canonical_v1/quality/golden_signals.py:9 TAGS=leveraged_funds_weekly TEXT=lf_weekly = coerce_direction(leveraged_funds_weekly)
+backend/layers/canonical_v1/quality/golden_signals.py:19 TAGS=asset_managers_overall TEXT="asset_managers_overall": am_overall.value,
+backend/layers/canonical_v1/quality/golden_signals.py:20 TAGS=asset_managers_weekly TEXT="asset_managers_weekly": am_weekly.value,
+backend/layers/canonical_v1/quality/golden_signals.py:21 TAGS=leveraged_funds_weekly TEXT="leveraged_funds_weekly": lf_weekly.value,
+backend/layers/canonical_v1/quality/golden_signals.py:22 TAGS=leveraged_funds_overall TEXT="leveraged_funds_overall_used": False,
+backend/layers/canonical_v1/direction/l04_correction_gate.py:15 TAGS=asset_managers_weekly TEXT=allowed = bool((payload.get("l01") or {}).get("asset_managers_weekly_alignment"))
+backend/layers/canonical_v1/direction/investment_policy.py:5 TAGS=asset_managers_overall,asset_managers_weekly,leveraged_funds_weekly TEXT=*, asset_managers_overall, asset_managers_weekly, leveraged_funds_weekly
+backend/layers/canonical_v1/direction/investment_policy.py:7 TAGS=asset_managers_overall TEXT=overall = coerce_direction(asset_managers_overall)
+backend/layers/canonical_v1/direction/investment_policy.py:8 TAGS=asset_managers_weekly TEXT=am_weekly = coerce_direction(asset_managers_weekly)
+backend/layers/canonical_v1/direction/investment_policy.py:9 TAGS=leveraged_funds_weekly TEXT=lf_weekly = coerce_direction(leveraged_funds_weekly)
+backend/layers/canonical_v1/direction/investment_policy.py:16 TAGS=asset_managers_overall TEXT="governing_source": "asset_managers_overall",
+backend/layers/canonical_v1/direction/investment_policy.py:18 TAGS=asset_managers_weekly TEXT="asset_managers_weekly_alignment": weekly_aligned,
+backend/layers/canonical_v1/direction/investment_policy.py:20 TAGS=leveraged_funds_weekly TEXT="leveraged_funds_weekly_alignment": stability_aligned,
+backend/layers/canonical_v1/direction/l01_tdl_medium_long.py:15 TAGS=asset_managers_overall TEXT=asset_managers_overall=payload.get("asset_managers_overall"),
+backend/layers/canonical_v1/direction/l01_tdl_medium_long.py:16 TAGS=asset_managers_weekly TEXT=asset_managers_weekly=payload.get("asset_managers_weekly"),
+backend/layers/canonical_v1/direction/l01_tdl_medium_long.py:17 TAGS=leveraged_funds_weekly TEXT=leveraged_funds_weekly=payload.get("leveraged_funds_weekly"),
+backend/layers/canonical_v1/tests/test_orchestrator_smoke.py:18 TAGS=asset_managers_overall TEXT="asset_managers_overall": "bullish",
+backend/layers/canonical_v1/tests/test_orchestrator_smoke.py:19 TAGS=asset_managers_weekly TEXT="asset_managers_weekly": "bullish",
+backend/layers/canonical_v1/tests/test_orchestrator_smoke.py:20 TAGS=leveraged_funds_weekly TEXT="leveraged_funds_weekly": "bullish",
+backend/layers/canonical_v1/tests/test_logic.py:10 TAGS=asset_managers_overall TEXT=asset_managers_overall="bullish",
+backend/layers/canonical_v1/tests/test_logic.py:11 TAGS=asset_managers_weekly TEXT=asset_managers_weekly="bearish",
+backend/layers/canonical_v1/tests/test_logic.py:12 TAGS=leveraged_funds_weekly TEXT=leveraged_funds_weekly="bearish",
+backend/layers/canonical_v1/tests/test_logic.py:20 TAGS=asset_managers_overall TEXT=asset_managers_overall="bullish",
+backend/layers/canonical_v1/tests/test_logic.py:21 TAGS=asset_managers_weekly TEXT=asset_managers_weekly="bullish",
+backend/layers/canonical_v1/tests/test_logic.py:22 TAGS=leveraged_funds_weekly TEXT=leveraged_funds_weekly="bearish",
+backend/layers/canonical_v1/tests/test_logic.py:35 TAGS=asset_managers_overall TEXT=asset_managers_overall="bearish",
+backend/layers/canonical_v1/tests/test_logic.py:36 TAGS=asset_managers_weekly TEXT=asset_managers_weekly="bullish",
+backend/layers/canonical_v1/tests/test_logic.py:37 TAGS=leveraged_funds_weekly TEXT=leveraged_funds_weekly="bullish",
+backend/layers/canonical_v1/tests/test_logic.py:42 TAGS=asset_managers_overall TEXT=asset_managers_overall="bullish",
+backend/layers/canonical_v1/tests/test_logic.py:43 TAGS=asset_managers_weekly TEXT=asset_managers_weekly="bullish",
+backend/layers/canonical_v1/tests/test_logic.py:44 TAGS=leveraged_funds_weekly TEXT=leveraged_funds_weekly="bullish",
+backend/layers/canonical_v1/tests/test_logic.py:47 TAGS=leveraged_funds_overall TEXT=self.assertFalse(enhanced["leveraged_funds_overall_used"])
+backend/ndsp_latest_16_layers_logic_functions.py:370 TAGS=change_long,change_short TEXT=def _ndsp_weekly_direction_from_changes(change_long, change_short):
+backend/ndsp_latest_16_layers_logic_functions.py:376 TAGS=change_long TEXT=change_long = _ndsp_num(change_long)
+backend/ndsp_latest_16_layers_logic_functions.py:377 TAGS=change_short TEXT=change_short = _ndsp_num(change_short)
+backend/ndsp_latest_16_layers_logic_functions.py:379 TAGS=change_long,change_short TEXT=if change_long > change_short:
+backend/ndsp_latest_16_layers_logic_functions.py:382 TAGS=change_long TEXT="change_long": change_long,
+backend/ndsp_latest_16_layers_logic_functions.py:383 TAGS=change_short TEXT="change_short": change_short,
+backend/ndsp_latest_16_layers_logic_functions.py:384 TAGS=change_long,change_short TEXT="comparison_rule": "CHANGE_LONG_GREATER_THAN_CHANGE_SHORT",
+backend/ndsp_latest_16_layers_logic_functions.py:385 TAGS=change_long,change_short TEXT="comparison_gap_for_display_only": abs(change_long - change_short),
+backend/ndsp_latest_16_layers_logic_functions.py:388 TAGS=change_long,change_short TEXT=if change_short > change_long:
+backend/ndsp_latest_16_layers_logic_functions.py:391 TAGS=change_long TEXT="change_long": change_long,
+backend/ndsp_latest_16_layers_logic_functions.py:392 TAGS=change_short TEXT="change_short": change_short,
+backend/ndsp_latest_16_layers_logic_functions.py:393 TAGS=change_long,change_short TEXT="comparison_rule": "CHANGE_SHORT_GREATER_THAN_CHANGE_LONG",
+backend/ndsp_latest_16_layers_logic_functions.py:394 TAGS=change_long,change_short TEXT="comparison_gap_for_display_only": abs(change_short - change_long),
+backend/ndsp_latest_16_layers_logic_functions.py:399 TAGS=change_long TEXT="change_long": change_long,
+backend/ndsp_latest_16_layers_logic_functions.py:400 TAGS=change_short TEXT="change_short": change_short,
+backend/ndsp_latest_16_layers_logic_functions.py:401 TAGS=change_long,change_short TEXT="comparison_rule": "CHANGE_LONG_EQUALS_CHANGE_SHORT",
+backend/ndsp_latest_16_layers_logic_functions.py:496 TAGS=current_long TEXT=long_current = find_value(["long", "longs", "current_long", "positions_long"])
+backend/ndsp_latest_16_layers_logic_functions.py:497 TAGS=current_short TEXT=short_current = find_value(["short", "shorts", "current_short", "positions_short"])
+backend/ndsp_latest_16_layers_logic_functions.py:498 TAGS=change_long TEXT=change_long = find_value(["change_long", "long_change", "change_in_long", "weekly_change_long"])
+backend/ndsp_latest_16_layers_logic_functions.py:499 TAGS=change_short TEXT=change_short = find_value(["change_short", "short_change", "change_in_short", "weekly_change_short"])
+backend/ndsp_latest_16_layers_logic_functions.py:504 TAGS=change_long TEXT="change_long": change_long,
+backend/ndsp_latest_16_layers_logic_functions.py:505 TAGS=change_short TEXT="change_short": change_short,
+backend/ndsp_latest_16_layers_logic_functions.py:507 TAGS=change_long,change_short TEXT="has_weekly_changes": change_long is not None and change_short is not None,
+backend/ndsp_latest_16_layers_logic_functions.py:578 TAGS=change_long,change_short TEXT=am_weekly, am_weekly_delta = _ndsp_weekly_direction_from_changes(am.get("change_long"), am.get("change_short")) if am.get("has_weekly_changes") else ("NEUTRAL", None)
+backend/ndsp_latest_16_layers_logic_functions.py:579 TAGS=change_long,change_short TEXT=lf_weekly, lf_weekly_delta = _ndsp_weekly_direction_from_changes(lf.get("change_long"), lf.get("change_short")) if lf.get("has_weekly_changes") else ("NEUTRAL", None)
+backend/ndsp_latest_16_layers_logic_functions.py:600 TAGS=change_long TEXT="asset_managers_change_long": am.get("change_long"),
+backend/ndsp_latest_16_layers_logic_functions.py:601 TAGS=change_short TEXT="asset_managers_change_short": am.get("change_short"),
+backend/ndsp_latest_16_layers_logic_functions.py:605 TAGS=change_long TEXT="leveraged_funds_change_long": lf.get("change_long"),
+backend/ndsp_latest_16_layers_logic_functions.py:606 TAGS=change_short TEXT="leveraged_funds_change_short": lf.get("change_short"),
+backend/ndsp_latest_16_layers_logic_functions.py:608 TAGS=asset_managers_overall TEXT="asset_managers_overall_direction": am_overall,
+backend/ndsp_latest_16_layers_logic_functions.py:609 TAGS=asset_managers_overall TEXT="asset_managers_overall_direction_ar": _ndsp_bias_ar(am_overall),
+backend/ndsp_latest_16_layers_logic_functions.py:610 TAGS=asset_managers_overall TEXT="asset_managers_overall_comparison": am_overall_net,
+backend/ndsp_latest_16_layers_logic_functions.py:612 TAGS=asset_managers_weekly TEXT="asset_managers_weekly_direction": am_weekly,
+backend/ndsp_latest_16_layers_logic_functions.py:613 TAGS=asset_managers_weekly TEXT="asset_managers_weekly_direction_ar": _ndsp_weekly_bias_ar_with_scope(am_weekly, am_overall, movement_type),
+backend/ndsp_latest_16_layers_logic_functions.py:614 TAGS=asset_managers_weekly TEXT="asset_managers_weekly_comparison": am_weekly_delta,
+backend/ndsp_latest_16_layers_logic_functions.py:615 TAGS=asset_managers_weekly TEXT="asset_managers_weekly_scope": "NARROW_CORRECTIVE_HORIZON" if movement_type == "WEEKLY_CORRECTION" else "DIRECTIONAL_CONTINUATION_OR_NEUTRAL",
+backend/ndsp_latest_16_layers_logic_functions.py:616 TAGS=asset_managers_weekly TEXT="asset_managers_weekly_scope_ar": "غير صريح / ذو أفق ضيق" if movement_type == "WEEKLY_CORRECTION" else "اتجاه مباشر أو محايد",
+backend/ndsp_latest_16_layers_logic_functions.py:618 TAGS=leveraged_funds_overall TEXT="leveraged_funds_overall_direction": lf_overall,
+backend/ndsp_latest_16_layers_logic_functions.py:619 TAGS=leveraged_funds_overall TEXT="leveraged_funds_overall_direction_ar": _ndsp_bias_ar(lf_overall),
+backend/ndsp_latest_16_layers_logic_functions.py:620 TAGS=leveraged_funds_overall TEXT="leveraged_funds_overall_comparison": lf_overall_net,
+backend/ndsp_latest_16_layers_logic_functions.py:622 TAGS=leveraged_funds_weekly TEXT="leveraged_funds_weekly_direction": lf_weekly,
+backend/ndsp_latest_16_layers_logic_functions.py:623 TAGS=leveraged_funds_weekly TEXT="leveraged_funds_weekly_direction_ar": _ndsp_bias_ar(lf_weekly),
+backend/ndsp_latest_16_layers_logic_functions.py:624 TAGS=leveraged_funds_weekly TEXT="leveraged_funds_weekly_comparison": lf_weekly_delta,
+backend/ndsp_latest_16_layers_logic_functions.py:644 TAGS=cot_report_date TEXT="raw_cot_report_date": _get(payload, "raw_cot_report_date", "cot_report_date", default=None),
+backend/ndsp_latest_16_layers_logic_functions.py:645 TAGS=report_age_days TEXT="report_age_days": _get(payload, "report_age_days", default=None),
+backend/ndsp_latest_16_layers_logic_functions.py:680 TAGS=asset_managers_overall TEXT=overall_direction = str(_get(payload, "asset_managers_overall_direction", "long_term_bias", default="NEUTRAL")).upper()
+backend/ndsp_latest_16_layers_logic_functions.py:681 TAGS=asset_managers_weekly TEXT=weekly_direction = str(_get(payload, "asset_managers_weekly_direction", "weekly_operational_bias", default="NEUTRAL")).upper()
+backend/ndsp_latest_16_layers_logic_functions.py:762 TAGS=asset_managers_overall TEXT=overall_direction = str(_get(payload, "overall_trend_direction", "asset_managers_overall_direction", default="NEUTRAL")).upper()
+backend/tests/contracts/test_contracts_01_04.py:81 TAGS=asset_managers_weekly,change_long TEXT="asset_managers_weekly_change_long": 50,
+backend/tests/contracts/test_contracts_01_04.py:82 TAGS=asset_managers_weekly,change_short TEXT="asset_managers_weekly_change_short": -20,
+backend/tests/contracts/test_contracts_01_04.py:92 TAGS=change_long TEXT=assert x.change_long == 50
+backend/tests/contracts/test_contracts_01_04.py:93 TAGS=change_short TEXT=assert x.change_short == -20
+backend/tests/contracts/test_contracts_01_04.py:101 TAGS=report_age_days TEXT=report_age_days=7,
+backend/app/contracts/cot/cot_tff_contract.py:47 TAGS=current_long TEXT=CURRENT_LONG_ALIASES = [
+backend/app/contracts/cot/cot_tff_contract.py:50 TAGS=current_long TEXT="current_long",
+backend/app/contracts/cot/cot_tff_contract.py:54 TAGS=current_short TEXT=CURRENT_SHORT_ALIASES = [
+backend/app/contracts/cot/cot_tff_contract.py:57 TAGS=current_short TEXT="current_short",
+backend/app/contracts/cot/cot_tff_contract.py:61 TAGS=change_long TEXT=CHANGE_LONG_ALIASES = [
+backend/app/contracts/cot/cot_tff_contract.py:62 TAGS=change_long TEXT="change_long",
+backend/app/contracts/cot/cot_tff_contract.py:65 TAGS=change_long TEXT="weekly_change_long",
+backend/app/contracts/cot/cot_tff_contract.py:68 TAGS=change_short TEXT=CHANGE_SHORT_ALIASES = [
+backend/app/contracts/cot/cot_tff_contract.py:69 TAGS=change_short TEXT="change_short",
+backend/app/contracts/cot/cot_tff_contract.py:72 TAGS=change_short TEXT="weekly_change_short",
+backend/app/contracts/cot/cot_tff_contract.py:81 TAGS=change_long TEXT=change_long: Optional[float]
+backend/app/contracts/cot/cot_tff_contract.py:82 TAGS=change_short TEXT=change_short: Optional[float]
+backend/app/contracts/cot/cot_tff_contract.py:90 TAGS=asset_managers_overall TEXT=asset_managers_overall: Optional[str]
+backend/app/contracts/cot/cot_tff_contract.py:91 TAGS=asset_managers_weekly TEXT=asset_managers_weekly: Optional[str]
+backend/app/contracts/cot/cot_tff_contract.py:93 TAGS=leveraged_funds_overall TEXT=leveraged_funds_overall: Optional[str]
+backend/app/contracts/cot/cot_tff_contract.py:94 TAGS=leveraged_funds_weekly TEXT=leveraged_funds_weekly: Optional[str]
+backend/app/contracts/cot/cot_tff_contract.py:97 TAGS=report_age_days TEXT=report_age_days: Optional[int]
+backend/app/contracts/cot/cot_tff_contract.py:160 TAGS=change_long TEXT=change_long: Any,
+backend/app/contracts/cot/cot_tff_contract.py:161 TAGS=change_short TEXT=change_short: Any,
+backend/app/contracts/cot/cot_tff_contract.py:164 TAGS=change_long TEXT=change_long = _num(change_long)
+backend/app/contracts/cot/cot_tff_contract.py:165 TAGS=change_short TEXT=change_short = _num(change_short)
+backend/app/contracts/cot/cot_tff_contract.py:167 TAGS=change_long,change_short TEXT=if change_long > change_short:
+backend/app/contracts/cot/cot_tff_contract.py:170 TAGS=change_long TEXT="change_long": change_long,
+backend/app/contracts/cot/cot_tff_contract.py:171 TAGS=change_short TEXT="change_short": change_short,
+backend/app/contracts/cot/cot_tff_contract.py:173 TAGS=change_long,change_short TEXT="CHANGE_LONG_GREATER_THAN_CHANGE_SHORT",
+backend/app/contracts/cot/cot_tff_contract.py:175 TAGS=change_long,change_short TEXT=abs(change_long - change_short),
+backend/app/contracts/cot/cot_tff_contract.py:178 TAGS=change_long,change_short TEXT=if change_short > change_long:
+backend/app/contracts/cot/cot_tff_contract.py:181 TAGS=change_long TEXT="change_long": change_long,
+backend/app/contracts/cot/cot_tff_contract.py:182 TAGS=change_short TEXT="change_short": change_short,
+backend/app/contracts/cot/cot_tff_contract.py:184 TAGS=change_long,change_short TEXT="CHANGE_SHORT_GREATER_THAN_CHANGE_LONG",
+backend/app/contracts/cot/cot_tff_contract.py:186 TAGS=change_long,change_short TEXT=abs(change_short - change_long),
+backend/app/contracts/cot/cot_tff_contract.py:191 TAGS=change_long TEXT="change_long": change_long,
+backend/app/contracts/cot/cot_tff_contract.py:192 TAGS=change_short TEXT="change_short": change_short,
+backend/app/contracts/cot/cot_tff_contract.py:194 TAGS=change_long,change_short TEXT="CHANGE_LONG_EQUALS_CHANGE_SHORT",
+backend/app/contracts/cot/cot_tff_contract.py:249 TAGS=current_long TEXT=long_value = find_value(CURRENT_LONG_ALIASES)
+backend/app/contracts/cot/cot_tff_contract.py:250 TAGS=current_short TEXT=short_value = find_value(CURRENT_SHORT_ALIASES)
+backend/app/contracts/cot/cot_tff_contract.py:252 TAGS=change_long TEXT=change_long = find_value(CHANGE_LONG_ALIASES)
+backend/app/contracts/cot/cot_tff_contract.py:253 TAGS=change_short TEXT=change_short = find_value(CHANGE_SHORT_ALIASES)
+backend/app/contracts/cot/cot_tff_contract.py:258 TAGS=change_long TEXT=change_long=change_long,
+backend/app/contracts/cot/cot_tff_contract.py:259 TAGS=change_short TEXT=change_short=change_short,
+backend/app/contracts/cot/cot_tff_contract.py:264 TAGS=change_long,change_short TEXT=change_long is not None and change_short is not None
+backend/app/contracts/cot/cot_tff_contract.py:283 TAGS=asset_managers_overall TEXT=c.asset_managers_overall,
+backend/app/contracts/cot/cot_tff_contract.py:284 TAGS=asset_managers_overall TEXT="asset_managers_overall",
+backend/app/contracts/cot/cot_tff_contract.py:287 TAGS=asset_managers_weekly TEXT=c.asset_managers_weekly,
+backend/app/contracts/cot/cot_tff_contract.py:288 TAGS=asset_managers_weekly TEXT="asset_managers_weekly",
+backend/app/contracts/cot/cot_tff_contract.py:291 TAGS=leveraged_funds_overall TEXT=c.leveraged_funds_overall,
+backend/app/contracts/cot/cot_tff_contract.py:292 TAGS=leveraged_funds_overall TEXT="leveraged_funds_overall",
+backend/app/contracts/cot/cot_tff_contract.py:295 TAGS=leveraged_funds_weekly TEXT=c.leveraged_funds_weekly,
+backend/app/contracts/cot/cot_tff_contract.py:296 TAGS=leveraged_funds_weekly TEXT="leveraged_funds_weekly",
+backend/app/contracts/cot/cot_tff_contract.py:302 TAGS=report_age_days TEXT=c.report_age_days,
+backend/app/contracts/cot/cot_tff_contract.py:312 TAGS=report_age_days TEXT="report_date/report_age_days/max_age_days/fresh "
+backend/app/contracts/cot/cot_tff_contract.py:317 TAGS=report_age_days TEXT=if c.report_age_days < 0:
+backend/app/contracts/cot/cot_tff_contract.py:318 TAGS=report_age_days TEXT=raise ValueError("report_age_days cannot be negative")
+backend/app/contracts/cot/cot_tff_contract.py:320 TAGS=report_age_days TEXT=expected = c.report_age_days <= c.max_age_days
+backend/app/contracts/market_data/market_data_contract.py:36 TAGS=report_age_days TEXT=report_age_days: int
+backend/app/contracts/market_data/market_data_contract.py:69 TAGS=report_age_days TEXT=if f.report_age_days < 0:
+backend/app/contracts/market_data/market_data_contract.py:71 TAGS=report_age_days TEXT="report_age_days (عمر التقرير) cannot be negative"
+backend/app/contracts/market_data/market_data_contract.py:79 TAGS=report_age_days TEXT=expected = f.report_age_days <= f.max_age_days
+backend/app/contracts/market_data/market_data_contract.py:84 TAGS=report_age_days TEXT="report_age_days/max_age_days"
+backend/app/contracts/canonical/semantic_contract.py:77 TAGS=report_age_days TEXT=report_age_days: Optional[int] = None
+
+=== 9082 -> V30 LOSS ANALYSIS ===
+ASSET_MANAGERS_OVERALL=VALUE_LOST_IN_V30_HANDOFF UPSTREAM_PATH='$.governing_inputs.directions.asset_managers_overall' UPSTREAM_VALUE='bearish' V30_PATH='$.input_evidence.cot.directions.asset_managers_overall' V30_VALUE=None
+ASSET_MANAGERS_WEEKLY=MISSING_UPSTREAM_AND_V30 UPSTREAM_PATH='$.governing_inputs.directions.asset_managers_weekly' UPSTREAM_VALUE=None V30_PATH='$.input_evidence.cot.directions.asset_managers_weekly' V30_VALUE=None
+LEVERAGED_FUNDS_OVERALL=MISSING_UPSTREAM_AND_V30 UPSTREAM_PATH=None UPSTREAM_VALUE=None V30_PATH=None V30_VALUE=None
+LEVERAGED_FUNDS_WEEKLY=MISSING_UPSTREAM_AND_V30 UPSTREAM_PATH='$.governing_inputs.directions.leveraged_funds_weekly' UPSTREAM_VALUE=None V30_PATH='$.input_evidence.cot.directions.leveraged_funds_weekly' V30_VALUE=None
+REPORT_DATE=VALUE_LOST_IN_V30_HANDOFF UPSTREAM_PATH='$.governing_inputs.report_date' UPSTREAM_VALUE='2026-07-21' V30_PATH=None V30_VALUE=None
+REPORT_AGE_DAYS=MISSING_UPSTREAM_AND_V30 UPSTREAM_PATH='$.governing_inputs.report_age_days' UPSTREAM_VALUE=None V30_PATH=None V30_VALUE=None
+MAX_AGE_DAYS=VALUE_LOST_IN_V30_HANDOFF UPSTREAM_PATH='$.governing_inputs.max_age_days' UPSTREAM_VALUE=10 V30_PATH=None V30_VALUE=None
+
+=== ROOT CAUSE CLASSIFICATION ===
+AM_OVERALL_HANDOFF=BROKEN
+AM_WEEKLY_UPSTREAM=MISSING
+LF_WEEKLY_UPSTREAM=MISSING
+REPORT_DATE_UPSTREAM=AVAILABLE
+REPORT_AGE_UPSTREAM=MISSING
+
+CONTRACTS_01_04_RUNTIME_CLOSED=NO
+PATCH_ALLOWED_FROM_THIS_AUDIT=NO
+NEXT_ACTION=TRACE_EXACT_EXTRACTION_AND_UPSTREAM_RAW_COT_SOURCE
+
+FILES_MODIFIED=0
+SERVICES_RESTARTED=0
+RUNTIME_LOGIC_MODIFIED=0
+FINAL_RESULT=PASS

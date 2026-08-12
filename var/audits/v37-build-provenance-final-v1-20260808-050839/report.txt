@@ -1,0 +1,75 @@
+=== NDSP V37 BUILD PROVENANCE FINAL V1 ===
+DATE=2026-08-08T05:08:39+02:00
+MODE=READ_ONLY
+FILES_MODIFIED=0
+SERVICES_RESTARTED=0
+BUILD_EXECUTED=0
+RUNTIME_LOGIC_MODIFIED=0
+AUDIT=/home/nawaf511/empire-core-new/var/audits/v37-build-provenance-final-v1-20260808-050839
+
+=== 1. REQUIRED SOURCE OBJECTS ===
+FOUND=/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/hooks/useCompletedDecisionsV37.js
+MTIME=2026-07-14 06:55:20.534177023 +0200 SIZE=2248 SHA256_PENDING=YES
+FOUND=/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/components/CompletedDecisionsPanelV37.jsx
+MTIME=2026-07-14 06:55:20.538177010 +0200 SIZE=28203 SHA256_PENDING=YES
+FOUND=/home/nawaf511/empire-core-new/frontend/user-portal-vite/package.json
+MTIME=2026-08-06 13:06:46.298209240 +0200 SIZE=412 SHA256_PENDING=YES
+FOUND=/home/nawaf511/empire-core-new/frontend/user-portal-vite/vite.config.js
+MTIME=2026-06-27 19:52:10.724512077 +0200 SIZE=422 SHA256_PENDING=YES
+
+=== 2. V37 SOURCE CONTRACT ===
+4:  current: "/api/completed-decisions",
+5:  history: "/api/completed-decisions/history?limit=100",
+6:  integrity: "/api/completed-decisions/history/integrity"
+9:async function fetchJson(url) {
+14:    const response = await fetch(url, {
+30:export function useCompletedDecisionsV37() {
+32:  const [history, setHistory] = useState(null);
+33:  const [integrity, setIntegrity] = useState(null);
+43:      fetchJson(ENDPOINTS.current),
+44:      fetchJson(ENDPOINTS.history),
+45:      fetchJson(ENDPOINTS.integrity)
+84:    history,
+85:    integrity,
+
+=== 3. PANEL -> HOOK BINDING ===
+2:import { useCompletedDecisionsV37 } from "../hooks/useCompletedDecisionsV37";
+31:    historyTab: "السجل التاريخي",
+38:    historyCount: "السجلات التاريخية",
+81:    historyNote: "يحفظ السجل نسخة جديدة فقط عند تغيّر جوهري في القرار.",
+105:    integrityFail: "فشل التحقق من سلسلة السجل",
+114:    historyTab: "Decision History",
+121:    historyCount: "History Records",
+164:    historyNote: "A new record is appended only when the decision changes meaningfully.",
+188:    integrityFail: "Ledger chain verification failed",
+271:  return tab === "history" ? (entry?.decision || {}) : (entry || {});
+275:  if (tab === "history") {
+276:    return entry?.event_id || entry?.record_hash || `history-${index}`;
+318:  if (tab === "history" && entry?.record_index) chunks.push(`${tr.record}: #${entry.record_index}`);
+353:            <span>{tab === "history" ? tr.historical : tr.current}</span>
+356:            {tab === "history"
+420:            {tab === "history" ? <div><small>{tr.eventId}</small><code>{entry?.event_id || "—"}</code></div> : null}
+424:            {tab === "history" ? <div><small>{tr.recordHash}</small><code>{entry?.record_hash || "—"}</code></div> : null}
+470:  const registry = useCompletedDecisionsV37();
+477:  const historyEntries = Array.isArray(registry.history?.records) ? registry.history.records : [];
+480:    () => [...currentEntries, ...historyEntries.map((entry) => entry?.decision || {})],
+481:    [currentEntries, historyEntries]
+488:  const entries = tab === "history" ? historyEntries : currentEntries;
+503:  const integrityVerified = registry.integrity?.ok === true && registry.integrity?.chain_verified === true;
+507:      id="completed-decisions"
+509:      data-ndsp-v37="completed-decisions"
+532:        <span className={registry.history?.ok ? "isOk" : "isOff"}>
+533:          {tr.sourceHistory}: {registry.history?.ok ? tr.connected : tr.unavailable}
+535:        <span className={integrityVerified ? "isOk" : "isOff"}>
+536:          {tr.chainIntegrity}: {integrityVerified ? tr.verified : tr.unavailable}
+548:      {!integrityVerified && registry.integrity ? (
+550:          {tr.integrityFail}
+556:        <div><small>{tr.historyCount}</small><strong data-ndsp-v37-history-count>{registry.integrity?.record_count ?? historyEntries.length}</strong></div>
+557:        <div><small>{tr.chainIntegrity}</small><strong>{integrityVerified ? tr.verified : tr.unavailable}</strong></div>
+578:          <button type="button" data-v37-tab="history" className={tab === "history" ? "isActive" : ""} onClick={() => setTab("history")}>
+579:            {tr.historyTab}
+599:      {tab === "history" ? <p className="v37HistoryNote">{tr.historyNote}</p> : null}
+614:          <div className="v37Empty">{tab === "history" ? tr.noHistory : tr.noCurrent}</div>
+PANEL_TO_V37_HOOK=PASS
+
+=== 4. WHO IMPORTS V37 PANEL? ===

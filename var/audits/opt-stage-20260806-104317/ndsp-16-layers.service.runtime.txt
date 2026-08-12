@@ -1,0 +1,6 @@
+MainPID=1333
+ExecStart={ path=/usr/bin/node ; argv[]=/usr/bin/node /opt/ndsp16-api/server.js ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }
+Environment=NODE_ENV=production PORT=9077
+WorkingDirectory=/opt/ndsp16-api
+ActiveState=active
+SubState=running

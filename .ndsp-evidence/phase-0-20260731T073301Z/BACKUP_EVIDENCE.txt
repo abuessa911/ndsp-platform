@@ -1,0 +1,62 @@
+$ for d in /backup /backups /var/backups /srv/backup /srv/backups       /home/nawaf511/empire-core-new/backup /home/nawaf511/empire-core-new/backups; do
+        if [ -e "$d" ]; then
+          printf '\n### %s\n' "$d"
+          find "$d" -maxdepth 2 -type f -printf '%TY-%Tm-%TdT%TH:%TM:%TS %s %p\n'             2>/dev/null | sort -r | head -n 200
+        fi
+      done
+
+
+### /var/backups
+2026-07-30T15:25:16.8785977410 0 /var/backups/ndsp-db/SHA256SUMS.txt
+2026-07-30T15:25:16.4745992250 1775 /var/backups/ndsp-db/postgres_.dump
+2026-07-30T15:25:16.1816003020 298540 /var/backups/ndsp-db/ndsp_auth_commercial_staging_.dump
+2026-07-30T15:25:15.6736021690 3185432 /var/backups/ndsp-db/ndsp_auth_.dump
+2026-07-30T15:25:12.2226148480 3003 /var/backups/ndsp-db/globals_.sql
+2026-07-30T00:00:02.5790967020 0 /var/backups/dpkg.arch.0
+2026-07-29T06:53:53.1425362730 3321224 /var/backups/dpkg.status.0
+2026-07-28T00:00:09.5438393250 153600 /var/backups/alternatives.tar.0
+2026-07-28T00:00:01.5248685990 32 /var/backups/dpkg.arch.1.gz
+2026-07-27T19:47:06.9581808510 677057 /var/backups/dpkg.status.1.gz
+2026-07-26T00:00:01.5853340640 32 /var/backups/dpkg.arch.2.gz
+2026-07-25T06:54:43.3045390470 677043 /var/backups/dpkg.status.2.gz
+2026-07-24T00:00:11.9311195420 9333 /var/backups/alternatives.tar.1.gz
+2026-07-24T00:00:03.1641668220 32 /var/backups/dpkg.arch.3.gz
+2026-07-23T06:44:11.7068732810 677045 /var/backups/dpkg.status.3.gz
+2026-07-23T06:43:03.5502517150 433 /var/backups/dpkg.diversions.3.gz
+2026-07-23T06:43:03.5502517150 433 /var/backups/dpkg.diversions.2.gz
+2026-07-23T06:43:03.5502517150 433 /var/backups/dpkg.diversions.1.gz
+2026-07-23T06:43:03.5502517150 1882 /var/backups/dpkg.diversions.0
+2026-07-23T00:00:02.5452622170 32 /var/backups/dpkg.arch.4.gz
+2026-07-22T06:53:11.9740464680 677256 /var/backups/dpkg.status.4.gz
+2026-07-20T00:00:00.4474549940 32 /var/backups/dpkg.arch.5.gz
+2026-07-19T06:13:52.6700259890 677245 /var/backups/dpkg.status.5.gz
+2026-07-19T06:13:51.5760301170 171659 /var/backups/apt.extended_states.0
+2026-07-18T00:00:04.5969934890 9329 /var/backups/alternatives.tar.2.gz
+2026-07-18T00:00:01.7110040910 32 /var/backups/dpkg.arch.6.gz
+2026-07-17T06:46:59.6959979420 677074 /var/backups/dpkg.status.6.gz
+2026-07-17T00:00:05.7923811560 9326 /var/backups/alternatives.tar.3.gz
+2026-07-14T00:00:05.7167978050 9322 /var/backups/alternatives.tar.4.gz
+2026-07-11T00:00:06.1962462490 9327 /var/backups/alternatives.tar.5.gz
+2026-07-10T17:44:31.8404145810 18736 /var/backups/apt.extended_states.1.gz
+2026-07-09T00:00:05.9009561750 9306 /var/backups/alternatives.tar.6.gz
+2026-07-02T06:36:10.9587979600 18862 /var/backups/apt.extended_states.2.gz
+2026-06-19T19:03:52.5025426460 18868 /var/backups/apt.extended_states.3.gz
+2026-06-12T17:56:17.9243598180 18852 /var/backups/apt.extended_states.4.gz
+2026-06-03T06:19:40.4048673640 18844 /var/backups/apt.extended_states.5.gz
+2026-06-02T16:58:41.7811401280 18835 /var/backups/apt.extended_states.6.gz
+2026-05-08T06:20:09.2499565650 335 /var/backups/dpkg.statoverride.0
+2026-05-08T06:20:09.2499565650 215 /var/backups/dpkg.statoverride.6.gz
+2026-05-08T06:20:09.2499565650 215 /var/backups/dpkg.statoverride.5.gz
+2026-05-08T06:20:09.2499565650 215 /var/backups/dpkg.statoverride.4.gz
+2026-05-08T06:20:09.2499565650 215 /var/backups/dpkg.statoverride.3.gz
+2026-05-08T06:20:09.2499565650 215 /var/backups/dpkg.statoverride.2.gz
+2026-05-08T06:20:09.2499565650 215 /var/backups/dpkg.statoverride.1.gz
+2026-04-13T12:35:01.1589540530 433 /var/backups/dpkg.diversions.6.gz
+2026-04-13T12:35:01.1589540530 433 /var/backups/dpkg.diversions.5.gz
+2026-04-13T12:35:01.1589540530 433 /var/backups/dpkg.diversions.4.gz
+
+### /home/nawaf511/empire-core-new/backups
+2026-07-25T19:00:24.7453958310 80 /home/nawaf511/empire-core-new/backups/known-good-v52-canonical/LATEST
+2026-07-25T17:43:26.8032421780 80 /home/nawaf511/empire-core-new/backups/canonical-portal-cutover/LATEST
+2026-07-05T17:15:41.8175860910 6912 /home/nawaf511/empire-core-new/backups/NDSP_V18_P8_D12_20260709_181731/main.jsx.before
+2026-06-27T20:06:42.5184988210 5398 /home/nawaf511/empire-core-new/backups/NDSP_V18_P8_D12_20260709_181731/styles.css.before

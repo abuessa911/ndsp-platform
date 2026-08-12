@@ -1,0 +1,614 @@
+============================================================
+=== NDSP CALENDAR / REAL-DATA ARCHITECTURE AUDIT ===========
+============================================================
+DATE=2026-08-07T20:45:49+02:00
+REPORT=/home/nawaf511/empire-core-new/var/audits/calendar-architecture-audit-20260807-204549.txt
+
+1) ALL RELATED SYSTEMD UNITS
+ndsp-command-center-real-data.service                                         static          -
+ndsp-investing-calendar.service                                               static          -
+ndsp-live-economic-calendar.service                                           static          -
+ndsp-portal-real-data-api.service                                             enabled         enabled
+ndsp-portal-real-data-ledger.service                                          static          -
+ndsp-real-feeds-sync.service                                                  static          -
+ndsp-tradingview-calendar.service                                             static          -
+ndsp-command-center-real-data.timer                                           disabled        enabled
+ndsp-investing-calendar.timer                                                 disabled        enabled
+ndsp-live-economic-calendar.timer                                             disabled        enabled
+ndsp-portal-real-data-ledger.timer                                            disabled        enabled
+ndsp-real-feeds-sync.timer                                                    enabled         enabled
+ndsp-tradingview-calendar.timer                                               enabled         enabled
+
+2) ALL RELATED TIMERS
+Fri 2026-08-07 20:46:47 CEST           54s Fri 2026-08-07 20:41:47 CEST  4min 5s ago ndsp-real-feeds-sync.timer                  ndsp-real-feeds-sync.service
+Fri 2026-08-07 20:46:47 CEST           54s Fri 2026-08-07 20:41:47 CEST  4min 5s ago ndsp-tradingview-calendar.timer             ndsp-tradingview-calendar.service
+
+3) EFFECTIVE STATE OF FIVE SERVICES
+
+===== ndsp-real-feeds-sync.service =====
+Result=success
+ExecMainStatus=0
+ExecStart={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/services/ndsp-runtime-jobs/real-data-sync/sync_real_feeds.py ; ignore_errors=no ; start_time=[Fri 2026-08-07 20:41:47 CEST] ; stop_time=[Fri 2026-08-07 20:41:48 CEST] ; pid=938744 ; code=exited ; status=0 }
+Requires=system.slice sysinit.target
+Wants=
+RequiredBy=
+WantedBy=
+Triggers=
+TriggeredBy=ndsp-real-feeds-sync.timer
+LoadState=loaded
+ActiveState=inactive
+SubState=dead
+FragmentPath=/etc/systemd/system/ndsp-real-feeds-sync.service
+DropInPaths=/etc/systemd/system/ndsp-real-feeds-sync.service.d/99-project-runtime.conf
+UnitFileState=static
+
+===== ndsp-tradingview-calendar.service =====
+Result=success
+ExecMainStatus=0
+ExecStart={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/services/ndsp-runtime-jobs/real-data-sync/tradingview_live_calendar.py ; ignore_errors=no ; start_time=[Fri 2026-08-07 20:41:47 CEST] ; stop_time=[Fri 2026-08-07 20:41:49 CEST] ; pid=938751 ; code=exited ; status=0 }
+Requires=system.slice sysinit.target
+Wants=
+RequiredBy=
+WantedBy=
+Triggers=
+TriggeredBy=ndsp-tradingview-calendar.timer
+LoadState=loaded
+ActiveState=inactive
+SubState=dead
+FragmentPath=/etc/systemd/system/ndsp-tradingview-calendar.service
+DropInPaths=/etc/systemd/system/ndsp-tradingview-calendar.service.d/99-project-runtime.conf
+UnitFileState=static
+
+===== ndsp-live-economic-calendar.service =====
+Result=exit-code
+ExecMainStatus=2
+ExecStart={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/services/ndsp-runtime-jobs/real-data-sync/live_economic_calendar_sync.py ; ignore_errors=no ; start_time=[Fri 2026-08-07 20:41:47 CEST] ; stop_time=[Fri 2026-08-07 20:41:49 CEST] ; pid=938759 ; code=exited ; status=2 }
+Requires=system.slice sysinit.target
+Wants=
+RequiredBy=
+WantedBy=
+Triggers=
+TriggeredBy=
+LoadState=loaded
+ActiveState=failed
+SubState=failed
+FragmentPath=/etc/systemd/system/ndsp-live-economic-calendar.service
+DropInPaths=/etc/systemd/system/ndsp-live-economic-calendar.service.d/override.conf
+UnitFileState=static
+
+===== ndsp-investing-calendar.service =====
+Result=exit-code
+ExecMainStatus=1
+ExecStart={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/services/ndsp-runtime-jobs/real-data-sync/investing_live_calendar.py ; ignore_errors=no ; start_time=[Fri 2026-08-07 20:41:49 CEST] ; stop_time=[Fri 2026-08-07 20:42:21 CEST] ; pid=938786 ; code=exited ; status=1 }
+Requires=system.slice sysinit.target
+Wants=
+RequiredBy=
+WantedBy=
+Triggers=
+TriggeredBy=
+LoadState=loaded
+ActiveState=failed
+SubState=failed
+FragmentPath=/etc/systemd/system/ndsp-investing-calendar.service
+DropInPaths=/etc/systemd/system/ndsp-investing-calendar.service.d/override.conf
+UnitFileState=static
+
+===== ndsp-portal-real-data-ledger.service =====
+Result=success
+ExecMainStatus=0
+ExecStart={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/services/ndsp-runtime-jobs/real-data-sync/sync_real_ledger.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }
+Requires=system.slice sysinit.target
+Wants=
+RequiredBy=
+WantedBy=
+Triggers=
+TriggeredBy=
+LoadState=loaded
+ActiveState=inactive
+SubState=dead
+FragmentPath=/etc/systemd/system/ndsp-portal-real-data-ledger.service
+DropInPaths=/etc/systemd/system/ndsp-portal-real-data-ledger.service.d/override.conf
+UnitFileState=static
+
+4) REVERSE DEPENDENCIES
+
+===== ndsp-real-feeds-sync.service =====
+ndsp-real-feeds-sync.service
+
+===== ndsp-tradingview-calendar.service =====
+ndsp-tradingview-calendar.service
+
+===== ndsp-live-economic-calendar.service =====
+ndsp-live-economic-calendar.service
+
+===== ndsp-investing-calendar.service =====
+ndsp-investing-calendar.service
+
+===== ndsp-portal-real-data-ledger.service =====
+ndsp-portal-real-data-ledger.service
+
+5) COMPLETE UNIT DEFINITIONS
+
+===== ndsp-real-feeds-sync.service =====
+# /etc/systemd/system/ndsp-real-feeds-sync.service
+[Unit]
+Description=NDSP Real Feeds Sync
+
+[Service]
+Type=oneshot
+User=nawaf511
+ExecStart=/usr/bin/python3 /home/nawaf511/ndsp-portal-real-data-sync/sync_real_feeds.py
+
+# /etc/systemd/system/ndsp-real-feeds-sync.service.d/99-project-runtime.conf
+[Service]
+ExecStart=
+ExecStart=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/services/ndsp-runtime-jobs/real-data-sync/sync_real_feeds.py
+ProtectHome=read-only
+
+===== ndsp-tradingview-calendar.service =====
+# /etc/systemd/system/ndsp-tradingview-calendar.service
+[Unit]
+Description=NDSP TradingView Live Economic Calendar
+
+[Service]
+Type=oneshot
+User=nawaf511
+ExecStart=/usr/bin/python3 /home/nawaf511/ndsp-portal-real-data-sync/tradingview_live_calendar.py
+
+# /etc/systemd/system/ndsp-tradingview-calendar.service.d/99-project-runtime.conf
+[Service]
+ExecStart=
+ExecStart=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/services/ndsp-runtime-jobs/real-data-sync/tradingview_live_calendar.py
+ProtectHome=read-only
+
+===== ndsp-live-economic-calendar.service =====
+# /etc/systemd/system/ndsp-live-economic-calendar.service
+[Unit]
+Description=NDSP Live Economic Calendar Sync
+After=network-online.target
+
+[Service]
+Type=oneshot
+User=nawaf511
+ExecStart=/usr/bin/python3 /home/nawaf511/ndsp-portal-real-data-sync/live_economic_calendar_sync.py
+
+# /etc/systemd/system/ndsp-live-economic-calendar.service.d/override.conf
+[Service]
+ExecStart=
+ExecStart=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/services/ndsp-runtime-jobs/real-data-sync/live_economic_calendar_sync.py
+ProtectHome=read-only
+
+===== ndsp-investing-calendar.service =====
+# /etc/systemd/system/ndsp-investing-calendar.service
+[Unit]
+Description=NDSP Investing Live Economic Calendar
+
+[Service]
+Type=oneshot
+User=nawaf511
+ExecStart=/usr/bin/python3 /home/nawaf511/ndsp-portal-real-data-sync/investing_live_calendar.py
+
+# /etc/systemd/system/ndsp-investing-calendar.service.d/override.conf
+[Service]
+ExecStart=
+ExecStart=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/services/ndsp-runtime-jobs/real-data-sync/investing_live_calendar.py
+ProtectHome=read-only
+
+===== ndsp-portal-real-data-ledger.service =====
+# /etc/systemd/system/ndsp-portal-real-data-ledger.service
+[Unit]
+Description=NDSP Portal Real Data Ledger Sync
+
+[Service]
+Type=oneshot
+ExecStart=/home/nawaf511/ndsp-portal-real-data-sync/sync_real_ledger.py
+
+# /etc/systemd/system/ndsp-portal-real-data-ledger.service.d/override.conf
+[Service]
+ExecStart=
+ExecStart=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/services/ndsp-runtime-jobs/real-data-sync/sync_real_ledger.py
+ProtectHome=read-only
+
+6) ALL SYSTEMD REFERENCES TO FIVE SERVICES
+/etc/systemd/system/ndsp-real-feeds-sync.timer:7:Unit=ndsp-real-feeds-sync.service
+/etc/systemd/system/ndsp-portal-real-data-ledger.timer:8:Unit=ndsp-portal-real-data-ledger.service
+/etc/systemd/system/timers.target.wants/ndsp-real-feeds-sync.timer:7:Unit=ndsp-real-feeds-sync.service
+NONE
+
+7) CRON REFERENCES
+SYSTEM_CRON=NONE
+USER_CRONTAB=NONE
+ROOT_CRONTAB=NONE
+
+8) ACTIVE PROJECT CALLERS / REFERENCES
+/home/nawaf511/empire-core-new/scripts/backup/ndsp_full_backup_v1.sh:171:  "/home/nawaf511/ndsp-portal-real-data-sync" \
+NONE
+
+9) PM2 REFERENCES
+PM2_UNAVAILABLE_OR_INVALID
+
+10) NGINX REFERENCES
+NONE
+
+11) EXTERNAL REFERENCES
+
+12) LIVE PROCESSES
+NONE
+
+13) DATA OUTPUT PATHS USED BY THE FIVE PYTHON FILES
+
+===== sync_real_feeds.py =====
+6:DATA = Path("/var/www/ndsp-my/data")
+16:    (DATA / name).write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+20:    with urllib.request.urlopen(req, timeout=timeout) as r:
+42:        write("news-impact.json", {
+51:        write("news-impact.json", {
+62:        write("economic-calendar.json", {
+74:        write("economic-calendar.json", {
+83:        write("economic-calendar.json", {
+95:write("data-quality.json", {
+
+===== tradingview_live_calendar.py =====
+4:DATA="/var/www/ndsp-my/data"
+5:OUT=f"{DATA}/economic-calendar.json"
+6:DQ=f"{DATA}/data-quality.json"
+16:    with open(tmp,"w",encoding="utf-8") as f:
+17:        json.dump(obj,f,ensure_ascii=False,indent=2)
+22:        q=json.load(open(DQ,encoding="utf-8"))
+38:    with urllib.request.urlopen(req,timeout=25) as r:
+
+===== investing_live_calendar.py =====
+5:DATA="/var/www/ndsp-my/data"
+6:OUT=f"{DATA}/economic-calendar.json"
+7:DQ=f"{DATA}/data-quality.json"
+14:    with open(tmp,"w",encoding="utf-8") as f:
+15:        json.dump(obj,f,ensure_ascii=False,indent=2)
+33:    with urllib.request.urlopen(r, timeout=25) as x:
+43:        q=json.load(open(DQ,encoding="utf-8"))
+
+===== live_economic_calendar_sync.py =====
+4:DATA_DIR="/var/www/ndsp-my/data"
+5:OUT=f"{DATA_DIR}/economic-calendar.json"
+6:DQ=f"{DATA_DIR}/data-quality.json"
+13:    with open(tmp,"w",encoding="utf-8") as f:
+14:        json.dump(payload,f,ensure_ascii=False,indent=2)
+22:    with urllib.request.urlopen(req, timeout=timeout) as r:
+51:        with open(DQ,"r",encoding="utf-8") as f:
+
+===== sync_real_ledger.py =====
+10:DATA="/var/www/ndsp-my/data"
+17:    with urllib.request.urlopen(f"{API}?symbol={symbol}", timeout=15) as r:
+51:            json.dumps(j, ensure_ascii=False)
+85:with open(f"{DATA}/completed-decisions.json","w",encoding="utf-8") as f:
+86:    json.dump({
+92:with open(f"{DATA}/data-quality.json","w",encoding="utf-8") as f:
+93:    json.dump({
+
+14) NETWORK / PROVIDER REFERENCES
+
+===== sync_real_feeds.py =====
+2:import json, os, urllib.request, xml.etree.ElementTree as ET
+9:NEWS_RSS_URL = os.getenv("NDSP_NEWS_RSS_URL", "https://www.coindesk.com/arc/outboundfeeds/rss/")
+19:    req = urllib.request.Request(url, headers={"User-Agent":"NDSP-RealFeed/1.0"})
+20:    with urllib.request.urlopen(req, timeout=timeout) as r:
+
+===== tradingview_live_calendar.py =====
+2:import json, os, urllib.request, datetime
+32:    req=urllib.request.Request(url,headers={
+35:        "Origin":"https://www.tradingview.com",
+36:        "Referer":"https://www.tradingview.com/economic-calendar/"
+38:    with urllib.request.urlopen(req,timeout=25) as r:
+50:    url="https://economic-calendar.tradingview.com/events?from=%s&to=%s" % (iso(start), iso(end))
+72:                "source": "TradingView Economic Calendar"
+77:            "source":"real_live_tradingview_calendar",
+78:            "provider":"TradingView",
+84:        update_quality("connected" if items else "empty", f"مرتبط حي من TradingView، عدد الأحداث: {len(items)}")
+89:            "source":"real_live_tradingview_calendar",
+90:            "provider":"TradingView",
+96:        update_quality("error","فشل الجلب الحي من TradingView")
+
+===== investing_live_calendar.py =====
+2:import json, os, re, urllib.request, urllib.parse, datetime
+23:        "Referer":"https://www.investing.com/economic-calendar/",
+24:        "Origin":"https://www.investing.com",
+30:        body=urllib.parse.urlencode(data, doseq=True).encode()
+32:    r=urllib.request.Request(url, data=body, headers=h)
+33:    with urllib.request.urlopen(r, timeout=25) as x:
+53:    url="https://www.investing.com/economic-calendar/Service/getCalendarFilteredData"
+88:                    "source": "Investing.com Economic Calendar"
+93:            "source":"real_live_investing_calendar",
+94:            "provider":"Investing.com",
+97:            "note":"لا توجد بيانات وهمية؛ هذا جلب حي مباشر من Investing.com"
+100:        update_quality("connected" if items else "empty", f"مرتبط حي من Investing.com، عدد الأحداث: {len(items)}")
+105:            "source":"real_live_investing_calendar",
+106:            "provider":"Investing.com",
+112:        update_quality("error","فشل الجلب الحي من Investing.com")
+
+===== live_economic_calendar_sync.py =====
+2:import json, urllib.request, urllib.parse, datetime, os, sys
+18:    req=urllib.request.Request(url, headers={
+22:    with urllib.request.urlopen(req, timeout=timeout) as r:
+44:            "source": "TradingEconomics live calendar"
+66:        "https://api.tradingeconomics.com/calendar?c=guest:guest",
+67:        "https://api.tradingeconomics.com/calendar/country/all?c=guest:guest"
+84:                    "provider":"TradingEconomics",
+92:                print(f"OK items={len(items)} provider=TradingEconomics")
+
+===== sync_real_ledger.py =====
+7:import urllib.request
+11:API="http://127.0.0.1:9057/api/decision/quality-live"
+17:    with urllib.request.urlopen(f"{API}?symbol={symbol}", timeout=15) as r:
+
+15) FAILED SERVICE HISTORY
+
+===== ndsp-live-economic-calendar.service =====
+أغسطس 07 20:41:47 vmi2934783 systemd[1]: Starting ndsp-live-economic-calendar.service - NDSP Live Economic Calendar Sync...
+أغسطس 07 20:41:49 vmi2934783 python3[938759]: FAILED ['https://api.tradingeconomics.com/calendar?c=guest:guest => HTTP Error 410: Gone', 'https://api.tradingeconomics.com/calendar/country/all?c=guest:guest => HTTP Error 410: Gone']
+أغسطس 07 20:41:49 vmi2934783 systemd[1]: ndsp-live-economic-calendar.service: Main process exited, code=exited, status=2/INVALIDARGUMENT
+أغسطس 07 20:41:49 vmi2934783 systemd[1]: ndsp-live-economic-calendar.service: Failed with result 'exit-code'.
+أغسطس 07 20:41:49 vmi2934783 systemd[1]: Failed to start ndsp-live-economic-calendar.service - NDSP Live Economic Calendar Sync.
+
+===== ndsp-investing-calendar.service =====
+أغسطس 07 20:41:49 vmi2934783 systemd[1]: Starting ndsp-investing-calendar.service - NDSP Investing Live Economic Calendar...
+أغسطس 07 20:42:21 vmi2934783 python3[938786]: Traceback (most recent call last):
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:   File "/usr/lib/python3.12/urllib/request.py", line 1344, in do_open
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:     h.request(req.get_method(), req.selector, req.data, headers,
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:   File "/usr/lib/python3.12/http/client.py", line 1365, in request
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:     self._send_request(method, url, body, headers, encode_chunked)
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:   File "/usr/lib/python3.12/http/client.py", line 1411, in _send_request
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:     self.endheaders(body, encode_chunked=encode_chunked)
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:   File "/usr/lib/python3.12/http/client.py", line 1360, in endheaders
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:     self._send_output(message_body, encode_chunked=encode_chunked)
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:   File "/usr/lib/python3.12/http/client.py", line 1120, in _send_output
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:     self.send(msg)
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:   File "/usr/lib/python3.12/http/client.py", line 1064, in send
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:     self.connect()
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:   File "/usr/lib/python3.12/http/client.py", line 1506, in connect
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:     self.sock = self._context.wrap_socket(self.sock,
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:   File "/usr/lib/python3.12/ssl.py", line 455, in wrap_socket
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:     return self.sslsocket_class._create(
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:   File "/usr/lib/python3.12/ssl.py", line 1042, in _create
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:     self.do_handshake()
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:   File "/usr/lib/python3.12/ssl.py", line 1320, in do_handshake
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:     self._sslobj.do_handshake()
+أغسطس 07 20:42:21 vmi2934783 python3[938786]: ConnectionResetError: [Errno 104] Connection reset by peer
+أغسطس 07 20:42:21 vmi2934783 python3[938786]: During handling of the above exception, another exception occurred:
+أغسطس 07 20:42:21 vmi2934783 python3[938786]: Traceback (most recent call last):
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:   File "/home/nawaf511/empire-core-new/backend/services/ndsp-runtime-jobs/real-data-sync/investing_live_calendar.py", line 115, in <module>
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:     main()
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:   File "/home/nawaf511/empire-core-new/backend/services/ndsp-runtime-jobs/real-data-sync/investing_live_calendar.py", line 65, in main
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:     raw=req(url, post)
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:         ^^^^^^^^^^^^^^
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:   File "/home/nawaf511/empire-core-new/backend/services/ndsp-runtime-jobs/real-data-sync/investing_live_calendar.py", line 33, in req
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:     with urllib.request.urlopen(r, timeout=25) as x:
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:   File "/usr/lib/python3.12/urllib/request.py", line 215, in urlopen
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:     return opener.open(url, data, timeout)
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:   File "/usr/lib/python3.12/urllib/request.py", line 515, in open
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:     response = self._open(req, data)
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:                ^^^^^^^^^^^^^^^^^^^^^
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:   File "/usr/lib/python3.12/urllib/request.py", line 532, in _open
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:     result = self._call_chain(self.handle_open, protocol, protocol +
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:   File "/usr/lib/python3.12/urllib/request.py", line 492, in _call_chain
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:     result = func(*args)
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:              ^^^^^^^^^^^
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:   File "/usr/lib/python3.12/urllib/request.py", line 1392, in https_open
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:     return self.do_open(http.client.HTTPSConnection, req,
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:   File "/usr/lib/python3.12/urllib/request.py", line 1347, in do_open
+أغسطس 07 20:42:21 vmi2934783 python3[938786]:     raise URLError(err)
+أغسطس 07 20:42:21 vmi2934783 python3[938786]: urllib.error.URLError: <urlopen error [Errno 104] Connection reset by peer>
+أغسطس 07 20:42:21 vmi2934783 systemd[1]: ndsp-investing-calendar.service: Main process exited, code=exited, status=1/FAILURE
+أغسطس 07 20:42:21 vmi2934783 systemd[1]: ndsp-investing-calendar.service: Failed with result 'exit-code'.
+أغسطس 07 20:42:21 vmi2934783 systemd[1]: Failed to start ndsp-investing-calendar.service - NDSP Investing Live Economic Calendar.
+
+16) WORKING TRADINGVIEW HISTORY
+أغسطس 07 17:41:48 vmi2934783 systemd[1]: Finished ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar.
+أغسطس 07 17:46:54 vmi2934783 systemd[1]: Starting ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar...
+أغسطس 07 17:46:55 vmi2934783 python3[195491]: ITEMS= 120
+أغسطس 07 17:46:55 vmi2934783 systemd[1]: ndsp-tradingview-calendar.service: Deactivated successfully.
+أغسطس 07 17:46:55 vmi2934783 systemd[1]: Finished ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar.
+أغسطس 07 17:51:54 vmi2934783 systemd[1]: Starting ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar...
+أغسطس 07 17:51:55 vmi2934783 python3[210374]: ITEMS= 120
+أغسطس 07 17:51:55 vmi2934783 systemd[1]: ndsp-tradingview-calendar.service: Deactivated successfully.
+أغسطس 07 17:51:55 vmi2934783 systemd[1]: Finished ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar.
+أغسطس 07 17:56:56 vmi2934783 systemd[1]: Starting ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar...
+أغسطس 07 17:56:57 vmi2934783 python3[225760]: ITEMS= 120
+أغسطس 07 17:56:57 vmi2934783 systemd[1]: ndsp-tradingview-calendar.service: Deactivated successfully.
+أغسطس 07 17:56:57 vmi2934783 systemd[1]: Finished ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar.
+أغسطس 07 18:01:57 vmi2934783 systemd[1]: Starting ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar...
+أغسطس 07 18:01:58 vmi2934783 python3[240792]: ITEMS= 120
+أغسطس 07 18:01:58 vmi2934783 systemd[1]: ndsp-tradingview-calendar.service: Deactivated successfully.
+أغسطس 07 18:01:58 vmi2934783 systemd[1]: Finished ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar.
+أغسطس 07 18:07:01 vmi2934783 systemd[1]: Starting ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar...
+أغسطس 07 18:07:03 vmi2934783 python3[255646]: ITEMS= 120
+أغسطس 07 18:07:03 vmi2934783 systemd[1]: ndsp-tradingview-calendar.service: Deactivated successfully.
+أغسطس 07 18:07:03 vmi2934783 systemd[1]: Finished ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar.
+أغسطس 07 18:12:02 vmi2934783 systemd[1]: Starting ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar...
+أغسطس 07 18:12:03 vmi2934783 python3[270449]: ITEMS= 120
+أغسطس 07 18:12:03 vmi2934783 systemd[1]: ndsp-tradingview-calendar.service: Deactivated successfully.
+أغسطس 07 18:12:03 vmi2934783 systemd[1]: Finished ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar.
+أغسطس 07 18:17:11 vmi2934783 systemd[1]: Starting ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar...
+أغسطس 07 18:17:14 vmi2934783 python3[286333]: ITEMS= 120
+أغسطس 07 18:17:14 vmi2934783 systemd[1]: ndsp-tradingview-calendar.service: Deactivated successfully.
+أغسطس 07 18:17:14 vmi2934783 systemd[1]: Finished ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar.
+أغسطس 07 18:17:14 vmi2934783 systemd[1]: ndsp-tradingview-calendar.service: Consumed 1.315s CPU time.
+أغسطس 07 18:22:11 vmi2934783 systemd[1]: Starting ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar...
+أغسطس 07 18:22:12 vmi2934783 python3[301222]: ITEMS= 120
+أغسطس 07 18:22:12 vmi2934783 systemd[1]: ndsp-tradingview-calendar.service: Deactivated successfully.
+أغسطس 07 18:22:12 vmi2934783 systemd[1]: Finished ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar.
+أغسطس 07 18:27:11 vmi2934783 systemd[1]: Starting ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar...
+أغسطس 07 18:27:12 vmi2934783 python3[316669]: ITEMS= 120
+أغسطس 07 18:27:12 vmi2934783 systemd[1]: ndsp-tradingview-calendar.service: Deactivated successfully.
+أغسطس 07 18:27:12 vmi2934783 systemd[1]: Finished ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar.
+أغسطس 07 18:32:14 vmi2934783 systemd[1]: Starting ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar...
+أغسطس 07 18:32:16 vmi2934783 python3[332006]: ITEMS= 120
+أغسطس 07 18:32:16 vmi2934783 systemd[1]: ndsp-tradingview-calendar.service: Deactivated successfully.
+أغسطس 07 18:32:16 vmi2934783 systemd[1]: Finished ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar.
+أغسطس 07 18:37:15 vmi2934783 systemd[1]: Starting ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar...
+أغسطس 07 18:37:17 vmi2934783 python3[347797]: ITEMS= 120
+أغسطس 07 18:37:17 vmi2934783 systemd[1]: ndsp-tradingview-calendar.service: Deactivated successfully.
+أغسطس 07 18:37:17 vmi2934783 systemd[1]: Finished ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar.
+أغسطس 07 18:42:15 vmi2934783 systemd[1]: Starting ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar...
+أغسطس 07 18:42:17 vmi2934783 python3[362719]: ITEMS= 120
+أغسطس 07 18:42:17 vmi2934783 systemd[1]: ndsp-tradingview-calendar.service: Deactivated successfully.
+أغسطس 07 18:42:17 vmi2934783 systemd[1]: Finished ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar.
+أغسطس 07 18:47:16 vmi2934783 systemd[1]: Starting ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar...
+أغسطس 07 18:47:17 vmi2934783 python3[378383]: ITEMS= 120
+أغسطس 07 18:47:17 vmi2934783 systemd[1]: ndsp-tradingview-calendar.service: Deactivated successfully.
+أغسطس 07 18:47:17 vmi2934783 systemd[1]: Finished ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar.
+أغسطس 07 18:52:17 vmi2934783 systemd[1]: Starting ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar...
+أغسطس 07 18:52:18 vmi2934783 python3[395623]: ITEMS= 120
+أغسطس 07 18:52:18 vmi2934783 systemd[1]: ndsp-tradingview-calendar.service: Deactivated successfully.
+أغسطس 07 18:52:18 vmi2934783 systemd[1]: Finished ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar.
+أغسطس 07 18:57:24 vmi2934783 systemd[1]: Starting ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar...
+أغسطس 07 18:57:26 vmi2934783 python3[427412]: ITEMS= 120
+أغسطس 07 18:57:26 vmi2934783 systemd[1]: ndsp-tradingview-calendar.service: Deactivated successfully.
+أغسطس 07 18:57:26 vmi2934783 systemd[1]: Finished ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar.
+أغسطس 07 19:02:47 vmi2934783 systemd[1]: Starting ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar...
+أغسطس 07 19:02:49 vmi2934783 python3[492858]: ITEMS= 120
+أغسطس 07 19:02:49 vmi2934783 systemd[1]: ndsp-tradingview-calendar.service: Deactivated successfully.
+أغسطس 07 19:02:49 vmi2934783 systemd[1]: Finished ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar.
+أغسطس 07 19:08:01 vmi2934783 systemd[1]: Starting ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar...
+أغسطس 07 19:08:02 vmi2934783 python3[555750]: ITEMS= 120
+أغسطس 07 19:08:02 vmi2934783 systemd[1]: ndsp-tradingview-calendar.service: Deactivated successfully.
+أغسطس 07 19:08:02 vmi2934783 systemd[1]: Finished ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar.
+أغسطس 07 19:13:03 vmi2934783 systemd[1]: Starting ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar...
+أغسطس 07 19:13:04 vmi2934783 python3[571216]: ITEMS= 120
+أغسطس 07 19:13:04 vmi2934783 systemd[1]: ndsp-tradingview-calendar.service: Deactivated successfully.
+أغسطس 07 19:13:04 vmi2934783 systemd[1]: Finished ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar.
+أغسطس 07 19:18:04 vmi2934783 systemd[1]: Starting ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar...
+أغسطس 07 19:18:05 vmi2934783 python3[586578]: ITEMS= 120
+أغسطس 07 19:18:05 vmi2934783 systemd[1]: ndsp-tradingview-calendar.service: Deactivated successfully.
+أغسطس 07 19:18:05 vmi2934783 systemd[1]: Finished ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar.
+أغسطس 07 19:23:11 vmi2934783 systemd[1]: Starting ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar...
+أغسطس 07 19:23:12 vmi2934783 python3[604991]: ITEMS= 120
+أغسطس 07 19:23:12 vmi2934783 systemd[1]: ndsp-tradingview-calendar.service: Deactivated successfully.
+أغسطس 07 19:23:12 vmi2934783 systemd[1]: Finished ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar.
+أغسطس 07 19:28:11 vmi2934783 systemd[1]: Starting ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar...
+أغسطس 07 19:28:12 vmi2934783 python3[657011]: ITEMS= 120
+أغسطس 07 19:28:12 vmi2934783 systemd[1]: ndsp-tradingview-calendar.service: Deactivated successfully.
+أغسطس 07 19:28:12 vmi2934783 systemd[1]: Finished ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar.
+أغسطس 07 19:33:13 vmi2934783 systemd[1]: Starting ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar...
+أغسطس 07 19:33:14 vmi2934783 python3[674881]: ITEMS= 120
+أغسطس 07 19:33:15 vmi2934783 systemd[1]: ndsp-tradingview-calendar.service: Deactivated successfully.
+أغسطس 07 19:33:15 vmi2934783 systemd[1]: Finished ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar.
+أغسطس 07 19:38:28 vmi2934783 systemd[1]: Starting ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar...
+أغسطس 07 19:38:30 vmi2934783 python3[715586]: ITEMS= 120
+أغسطس 07 19:38:30 vmi2934783 systemd[1]: ndsp-tradingview-calendar.service: Deactivated successfully.
+أغسطس 07 19:38:30 vmi2934783 systemd[1]: Finished ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar.
+أغسطس 07 19:43:33 vmi2934783 systemd[1]: Starting ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar...
+أغسطس 07 19:43:34 vmi2934783 python3[732485]: ITEMS= 120
+أغسطس 07 19:43:34 vmi2934783 systemd[1]: ndsp-tradingview-calendar.service: Deactivated successfully.
+أغسطس 07 19:43:34 vmi2934783 systemd[1]: Finished ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar.
+أغسطس 07 19:48:37 vmi2934783 systemd[1]: Starting ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar...
+أغسطس 07 19:48:38 vmi2934783 python3[752255]: ITEMS= 120
+أغسطس 07 19:48:38 vmi2934783 systemd[1]: ndsp-tradingview-calendar.service: Deactivated successfully.
+أغسطس 07 19:48:38 vmi2934783 systemd[1]: Finished ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar.
+أغسطس 07 19:53:47 vmi2934783 systemd[1]: Starting ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar...
+أغسطس 07 19:53:48 vmi2934783 python3[767105]: ITEMS= 120
+أغسطس 07 19:53:48 vmi2934783 systemd[1]: ndsp-tradingview-calendar.service: Deactivated successfully.
+أغسطس 07 19:53:48 vmi2934783 systemd[1]: Finished ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar.
+أغسطس 07 19:59:02 vmi2934783 systemd[1]: Starting ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar...
+أغسطس 07 19:59:03 vmi2934783 python3[789861]: ITEMS= 120
+أغسطس 07 19:59:03 vmi2934783 systemd[1]: ndsp-tradingview-calendar.service: Deactivated successfully.
+أغسطس 07 19:59:03 vmi2934783 systemd[1]: Finished ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar.
+أغسطس 07 20:04:02 vmi2934783 systemd[1]: Starting ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar...
+أغسطس 07 20:04:04 vmi2934783 python3[807161]: ITEMS= 120
+أغسطس 07 20:04:04 vmi2934783 systemd[1]: ndsp-tradingview-calendar.service: Deactivated successfully.
+أغسطس 07 20:04:04 vmi2934783 systemd[1]: Finished ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar.
+أغسطس 07 20:09:06 vmi2934783 systemd[1]: Starting ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar...
+أغسطس 07 20:09:08 vmi2934783 python3[823881]: ITEMS= 120
+أغسطس 07 20:09:08 vmi2934783 systemd[1]: ndsp-tradingview-calendar.service: Deactivated successfully.
+أغسطس 07 20:09:08 vmi2934783 systemd[1]: Finished ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar.
+أغسطس 07 20:14:07 vmi2934783 systemd[1]: Starting ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar...
+أغسطس 07 20:14:08 vmi2934783 python3[838750]: ITEMS= 120
+أغسطس 07 20:14:08 vmi2934783 systemd[1]: ndsp-tradingview-calendar.service: Deactivated successfully.
+أغسطس 07 20:14:08 vmi2934783 systemd[1]: Finished ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar.
+أغسطس 07 20:19:08 vmi2934783 systemd[1]: Starting ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar...
+أغسطس 07 20:19:09 vmi2934783 python3[860888]: ITEMS= 120
+أغسطس 07 20:19:10 vmi2934783 systemd[1]: ndsp-tradingview-calendar.service: Deactivated successfully.
+أغسطس 07 20:19:10 vmi2934783 systemd[1]: Finished ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar.
+أغسطس 07 20:24:08 vmi2934783 systemd[1]: Starting ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar...
+أغسطس 07 20:24:10 vmi2934783 python3[883462]: ITEMS= 120
+أغسطس 07 20:24:10 vmi2934783 systemd[1]: ndsp-tradingview-calendar.service: Deactivated successfully.
+أغسطس 07 20:24:10 vmi2934783 systemd[1]: Finished ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar.
+أغسطس 07 20:26:33 vmi2934783 systemd[1]: Starting ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar...
+أغسطس 07 20:26:34 vmi2934783 python3[892735]: ITEMS= 120
+أغسطس 07 20:26:34 vmi2934783 systemd[1]: ndsp-tradingview-calendar.service: Deactivated successfully.
+أغسطس 07 20:26:34 vmi2934783 systemd[1]: Finished ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar.
+أغسطس 07 20:31:46 vmi2934783 systemd[1]: Starting ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar...
+أغسطس 07 20:31:48 vmi2934783 python3[908733]: ITEMS= 120
+أغسطس 07 20:31:48 vmi2934783 systemd[1]: ndsp-tradingview-calendar.service: Deactivated successfully.
+أغسطس 07 20:31:48 vmi2934783 systemd[1]: Finished ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar.
+أغسطس 07 20:36:47 vmi2934783 systemd[1]: Starting ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar...
+أغسطس 07 20:36:49 vmi2934783 python3[923665]: ITEMS= 120
+أغسطس 07 20:36:49 vmi2934783 systemd[1]: ndsp-tradingview-calendar.service: Deactivated successfully.
+أغسطس 07 20:36:49 vmi2934783 systemd[1]: Finished ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar.
+أغسطس 07 20:41:47 vmi2934783 systemd[1]: Starting ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar...
+أغسطس 07 20:41:49 vmi2934783 python3[938751]: ITEMS= 120
+أغسطس 07 20:41:49 vmi2934783 systemd[1]: ndsp-tradingview-calendar.service: Deactivated successfully.
+أغسطس 07 20:41:49 vmi2934783 systemd[1]: Finished ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar.
+أغسطس 07 20:46:48 vmi2934783 systemd[1]: Starting ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar...
+أغسطس 07 20:46:49 vmi2934783 python3[955988]: ITEMS= 120
+أغسطس 07 20:46:49 vmi2934783 systemd[1]: ndsp-tradingview-calendar.service: Deactivated successfully.
+أغسطس 07 20:46:49 vmi2934783 systemd[1]: Finished ndsp-tradingview-calendar.service - NDSP TradingView Live Economic Calendar.
+
+17) BACKUP SCRIPT OLD DIRECTORY REFERENCE
+166-CURRENT_STAGE="filesystem-project"
+167-archive_paths "$STAGE/filesystem/project-full.tar.gz" "$PROJECT_DIR"
+168-
+169-CURRENT_STAGE="filesystem-home-runtime"
+170-archive_paths "$STAGE/filesystem/home-runtime.tar.gz" \
+171:  "/home/nawaf511/ndsp-portal-real-data-sync" \
+172-  "/home/nawaf511/ndsp_ops" \
+173-  "/home/nawaf511/.pm2"
+174-
+175-CURRENT_STAGE="filesystem-live-apps"
+176-archive_paths "$STAGE/filesystem/live-apps.tar.gz" \
+
+18) OLD DIRECTORY COMPLETE CONTENT
+2026-06-24 09:32:31.4430911240  1535 bytes  /home/nawaf511/ndsp-portal-real-data-sync/sync.sh
+2026-06-24 09:37:03.6050261470  3462 bytes  /home/nawaf511/ndsp-portal-real-data-sync/sync_real_ledger.py
+2026-06-24 10:35:30.3660102440  4239 bytes  /home/nawaf511/ndsp-portal-real-data-sync/sync_real_feeds.py
+2026-06-24 10:39:44.1749629870  4038 bytes  /home/nawaf511/ndsp-portal-real-data-sync/live_economic_calendar_sync.py
+2026-06-24 10:42:14.0993621810  4398 bytes  /home/nawaf511/ndsp-portal-real-data-sync/investing_live_calendar.py
+2026-06-24 10:45:46.1875272850  3446 bytes  /home/nawaf511/ndsp-portal-real-data-sync/tradingview_live_calendar.py
+2026-08-07 20:26:27.5048266410  5795 bytes  /home/nawaf511/ndsp-portal-real-data-sync/__pycache__/sync_real_feeds.cpython-312.pyc
+2026-08-07 20:26:27.5898261710  6105 bytes  /home/nawaf511/ndsp-portal-real-data-sync/__pycache__/tradingview_live_calendar.cpython-312.pyc
+2026-08-07 20:26:27.6728257120  7136 bytes  /home/nawaf511/ndsp-portal-real-data-sync/__pycache__/investing_live_calendar.cpython-312.pyc
+2026-08-07 20:26:27.7748251470  6651 bytes  /home/nawaf511/ndsp-portal-real-data-sync/__pycache__/live_economic_calendar_sync.cpython-312.pyc
+2026-08-07 20:26:27.8708246160  5674 bytes  /home/nawaf511/ndsp-portal-real-data-sync/__pycache__/sync_real_ledger.cpython-312.pyc
+
+19) OLD VS PROJECT HASHES
+
+===== sync_real_feeds.py =====
+OLD=df70255d0c5b26e47c61225fe1ffde0e0c7e7cb08fefb19e887b8dba051c68bc
+NEW=df70255d0c5b26e47c61225fe1ffde0e0c7e7cb08fefb19e887b8dba051c68bc
+
+===== tradingview_live_calendar.py =====
+OLD=d435b629865801f23c9b60f142c56981cca7247c6d8e8993a6be821a9104fbff
+NEW=d435b629865801f23c9b60f142c56981cca7247c6d8e8993a6be821a9104fbff
+
+===== investing_live_calendar.py =====
+OLD=2063f8f7c45ab00c4ca299557699f3e9e811e903d8befa8f031698840484a4f5
+NEW=2063f8f7c45ab00c4ca299557699f3e9e811e903d8befa8f031698840484a4f5
+
+===== live_economic_calendar_sync.py =====
+OLD=556dd843fd05cdc5ea6c18562bf3601388abda52ea89bfb8aa3aa1271441ddbe
+NEW=556dd843fd05cdc5ea6c18562bf3601388abda52ea89bfb8aa3aa1271441ddbe
+
+===== sync_real_ledger.py =====
+OLD=da16a83b135ff696e4b7b94a71f1884900b9a9d1a1e923305f19fb69354088bb
+NEW=da16a83b135ff696e4b7b94a71f1884900b9a9d1a1e923305f19fb69354088bb
+
+20) SUMMARY
+NO CHANGES OR DELETIONS WERE PERFORMED.
+REPORT=/home/nawaf511/empire-core-new/var/audits/calendar-architecture-audit-20260807-204549.txt
+============================================================
+=== END ====================================================
+============================================================

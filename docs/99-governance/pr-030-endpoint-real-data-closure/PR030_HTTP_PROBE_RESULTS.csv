@@ -1,0 +1,181 @@
+capability_id,route_score,framework,route_source_file,route_line,route_path,method,url,exit_code,http_status,time_total,content_type,accepted,error
+CAP-15C56B60B4B0,120,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:22/api/auth/2fa/status,1,000,0.016647,,false,curl: (1) Received HTTP/0.9 when not allowed
+CAP-15C56B60B4B0,120,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:25/api/auth/2fa/status,1,000,0.051581,,false,curl: (1) Received HTTP/0.9 when not allowed
+CAP-15C56B60B4B0,120,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:53/api/auth/2fa/status,7,000,0.000367,,false,curl: (7) Failed to connect to 127.0.0.1 port 53 after 0 ms: Couldn't connect to server
+CAP-15C56B60B4B0,120,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:80/api/auth/2fa/status,60,301,0.061869,text/html,false,"curl: (60) SSL: no alternative certificate subject name matches target host name '127.0.0.1'
+More details here: https://curl.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+h"
+CAP-15C56B60B4B0,120,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:443/api/auth/2fa/status,0,400,0.001001,text/html,true,
+CAP-214521E6EBD1,120,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:22/api/auth/2fa/status,1,000,0.029645,,false,curl: (1) Received HTTP/0.9 when not allowed
+CAP-214521E6EBD1,120,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:25/api/auth/2fa/status,1,000,0.001828,,false,curl: (1) Received HTTP/0.9 when not allowed
+CAP-214521E6EBD1,120,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:53/api/auth/2fa/status,7,000,0.000297,,false,curl: (7) Failed to connect to 127.0.0.1 port 53 after 0 ms: Couldn't connect to server
+CAP-214521E6EBD1,120,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:80/api/auth/2fa/status,60,301,0.046207,text/html,false,"curl: (60) SSL: no alternative certificate subject name matches target host name '127.0.0.1'
+More details here: https://curl.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+h"
+CAP-214521E6EBD1,120,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:443/api/auth/2fa/status,0,400,0.001163,text/html,true,
+CAP-242D8324FAD9,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:22/api/auth/2fa/status,1,000,0.021422,,false,curl: (1) Received HTTP/0.9 when not allowed
+CAP-242D8324FAD9,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:25/api/auth/2fa/status,1,000,0.001389,,false,curl: (1) Received HTTP/0.9 when not allowed
+CAP-242D8324FAD9,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:53/api/auth/2fa/status,7,000,0.000275,,false,curl: (7) Failed to connect to 127.0.0.1 port 53 after 0 ms: Couldn't connect to server
+CAP-242D8324FAD9,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:80/api/auth/2fa/status,60,301,0.043905,text/html,false,"curl: (60) SSL: no alternative certificate subject name matches target host name '127.0.0.1'
+More details here: https://curl.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+h"
+CAP-242D8324FAD9,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:443/api/auth/2fa/status,0,400,0.000984,text/html,true,
+CAP-3A5ED3DB0C0D,100,express,backend/app/support_layers/scenario/scenario_engine.py,105,/risk_state,GET,http://127.0.0.1:22/risk_state,1,000,0.016404,,false,curl: (1) Received HTTP/0.9 when not allowed
+CAP-3A5ED3DB0C0D,100,express,backend/app/support_layers/scenario/scenario_engine.py,105,/risk_state,GET,http://127.0.0.1:25/risk_state,1,000,0.004146,,false,curl: (1) Received HTTP/0.9 when not allowed
+CAP-3A5ED3DB0C0D,100,express,backend/app/support_layers/scenario/scenario_engine.py,105,/risk_state,GET,http://127.0.0.1:53/risk_state,7,000,0.000270,,false,curl: (7) Failed to connect to 127.0.0.1 port 53 after 0 ms: Couldn't connect to server
+CAP-3A5ED3DB0C0D,100,express,backend/app/support_layers/scenario/scenario_engine.py,105,/risk_state,GET,http://127.0.0.1:80/risk_state,60,301,0.054617,text/html,false,"curl: (60) SSL: no alternative certificate subject name matches target host name '127.0.0.1'
+More details here: https://curl.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+h"
+CAP-3A5ED3DB0C0D,100,express,backend/app/support_layers/scenario/scenario_engine.py,105,/risk_state,GET,http://127.0.0.1:443/risk_state,0,400,0.000810,text/html,true,
+CAP-3B89863B2015,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:22/api/auth/2fa/status,1,000,0.026268,,false,curl: (1) Received HTTP/0.9 when not allowed
+CAP-3B89863B2015,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:25/api/auth/2fa/status,1,000,0.001053,,false,curl: (1) Received HTTP/0.9 when not allowed
+CAP-3B89863B2015,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:53/api/auth/2fa/status,7,000,0.000246,,false,curl: (7) Failed to connect to 127.0.0.1 port 53 after 0 ms: Couldn't connect to server
+CAP-3B89863B2015,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:80/api/auth/2fa/status,60,301,0.046822,text/html,false,"curl: (60) SSL: no alternative certificate subject name matches target host name '127.0.0.1'
+More details here: https://curl.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+h"
+CAP-3B89863B2015,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:443/api/auth/2fa/status,0,400,0.002062,text/html,true,
+CAP-3D9086A829ED,100,express,backend/ndsp_admin_ui_proxy.cjs,486,/api/admin-ui/alerts,GET,http://127.0.0.1:22/api/admin-ui/alerts,1,000,0.018297,,false,curl: (1) Received HTTP/0.9 when not allowed
+CAP-3D9086A829ED,100,express,backend/ndsp_admin_ui_proxy.cjs,486,/api/admin-ui/alerts,GET,http://127.0.0.1:25/api/admin-ui/alerts,1,000,0.001721,,false,curl: (1) Received HTTP/0.9 when not allowed
+CAP-3D9086A829ED,100,express,backend/ndsp_admin_ui_proxy.cjs,486,/api/admin-ui/alerts,GET,http://127.0.0.1:53/api/admin-ui/alerts,7,000,0.000250,,false,curl: (7) Failed to connect to 127.0.0.1 port 53 after 0 ms: Couldn't connect to server
+CAP-3D9086A829ED,100,express,backend/ndsp_admin_ui_proxy.cjs,486,/api/admin-ui/alerts,GET,http://127.0.0.1:80/api/admin-ui/alerts,60,301,0.051325,text/html,false,"curl: (60) SSL: no alternative certificate subject name matches target host name '127.0.0.1'
+More details here: https://curl.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+h"
+CAP-3D9086A829ED,100,express,backend/ndsp_admin_ui_proxy.cjs,486,/api/admin-ui/alerts,GET,http://127.0.0.1:443/api/admin-ui/alerts,0,400,0.008887,text/html,true,
+CAP-4B75FD38F852,170,express,backend/ndsp_admin_ui_proxy.cjs,486,/api/admin-ui/alerts,GET,http://127.0.0.1:22/api/admin-ui/alerts,1,000,0.019745,,false,curl: (1) Received HTTP/0.9 when not allowed
+CAP-4B75FD38F852,170,express,backend/ndsp_admin_ui_proxy.cjs,486,/api/admin-ui/alerts,GET,http://127.0.0.1:25/api/admin-ui/alerts,1,000,0.001948,,false,curl: (1) Received HTTP/0.9 when not allowed
+CAP-4B75FD38F852,170,express,backend/ndsp_admin_ui_proxy.cjs,486,/api/admin-ui/alerts,GET,http://127.0.0.1:53/api/admin-ui/alerts,7,000,0.000190,,false,curl: (7) Failed to connect to 127.0.0.1 port 53 after 0 ms: Couldn't connect to server
+CAP-4B75FD38F852,170,express,backend/ndsp_admin_ui_proxy.cjs,486,/api/admin-ui/alerts,GET,http://127.0.0.1:80/api/admin-ui/alerts,60,301,0.043552,text/html,false,"curl: (60) SSL: no alternative certificate subject name matches target host name '127.0.0.1'
+More details here: https://curl.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+h"
+CAP-4B75FD38F852,170,express,backend/ndsp_admin_ui_proxy.cjs,486,/api/admin-ui/alerts,GET,http://127.0.0.1:443/api/admin-ui/alerts,0,400,0.000710,text/html,true,
+CAP-4FCAA631BA18,150,express,backend/ndsp_admin_actions_bypass_old_middleware.cjs,225,/api/admin-actions/users/action/health,GET,http://127.0.0.1:22/api/admin-actions/users/action/health,1,000,0.057068,,false,curl: (1) Received HTTP/0.9 when not allowed
+CAP-4FCAA631BA18,150,express,backend/ndsp_admin_actions_bypass_old_middleware.cjs,225,/api/admin-actions/users/action/health,GET,http://127.0.0.1:25/api/admin-actions/users/action/health,1,000,0.001882,,false,curl: (1) Received HTTP/0.9 when not allowed
+CAP-4FCAA631BA18,150,express,backend/ndsp_admin_actions_bypass_old_middleware.cjs,225,/api/admin-actions/users/action/health,GET,http://127.0.0.1:53/api/admin-actions/users/action/health,7,000,0.000378,,false,curl: (7) Failed to connect to 127.0.0.1 port 53 after 0 ms: Couldn't connect to server
+CAP-4FCAA631BA18,150,express,backend/ndsp_admin_actions_bypass_old_middleware.cjs,225,/api/admin-actions/users/action/health,GET,http://127.0.0.1:80/api/admin-actions/users/action/health,60,301,0.046651,text/html,false,"curl: (60) SSL: no alternative certificate subject name matches target host name '127.0.0.1'
+More details here: https://curl.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+h"
+CAP-4FCAA631BA18,150,express,backend/ndsp_admin_actions_bypass_old_middleware.cjs,225,/api/admin-actions/users/action/health,GET,http://127.0.0.1:443/api/admin-actions/users/action/health,0,400,0.001708,text/html,true,
+CAP-644C81537AC6,200,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:22/api/auth/2fa/status,1,000,0.023984,,false,curl: (1) Received HTTP/0.9 when not allowed
+CAP-644C81537AC6,200,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:25/api/auth/2fa/status,1,000,0.001834,,false,curl: (1) Received HTTP/0.9 when not allowed
+CAP-644C81537AC6,200,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:53/api/auth/2fa/status,7,000,0.000267,,false,curl: (7) Failed to connect to 127.0.0.1 port 53 after 0 ms: Couldn't connect to server
+CAP-644C81537AC6,200,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:80/api/auth/2fa/status,60,301,0.046517,text/html,false,"curl: (60) SSL: no alternative certificate subject name matches target host name '127.0.0.1'
+More details here: https://curl.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+h"
+CAP-644C81537AC6,200,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:443/api/auth/2fa/status,0,400,0.000873,text/html,true,
+CAP-6565FE804AF5,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:22/api/auth/2fa/status,1,000,0.016879,,false,curl: (1) Received HTTP/0.9 when not allowed
+CAP-6565FE804AF5,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:25/api/auth/2fa/status,1,000,0.002149,,false,curl: (1) Received HTTP/0.9 when not allowed
+CAP-6565FE804AF5,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:53/api/auth/2fa/status,7,000,0.000388,,false,curl: (7) Failed to connect to 127.0.0.1 port 53 after 0 ms: Couldn't connect to server
+CAP-6565FE804AF5,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:80/api/auth/2fa/status,60,301,0.053765,text/html,false,"curl: (60) SSL: no alternative certificate subject name matches target host name '127.0.0.1'
+More details here: https://curl.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+h"
+CAP-6565FE804AF5,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:443/api/auth/2fa/status,0,400,0.000857,text/html,true,
+CAP-8F78E58E5656,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:22/api/auth/2fa/status,1,000,0.049261,,false,curl: (1) Received HTTP/0.9 when not allowed
+CAP-8F78E58E5656,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:25/api/auth/2fa/status,1,000,0.001016,,false,curl: (1) Received HTTP/0.9 when not allowed
+CAP-8F78E58E5656,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:53/api/auth/2fa/status,7,000,0.000301,,false,curl: (7) Failed to connect to 127.0.0.1 port 53 after 0 ms: Couldn't connect to server
+CAP-8F78E58E5656,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:80/api/auth/2fa/status,60,301,0.050922,text/html,false,"curl: (60) SSL: no alternative certificate subject name matches target host name '127.0.0.1'
+More details here: https://curl.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+h"
+CAP-8F78E58E5656,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:443/api/auth/2fa/status,0,400,0.004435,text/html,true,
+CAP-98156F574B28,100,express,backend/app/support_layers/scenario/scenario_engine.py,105,/risk_state,GET,http://127.0.0.1:22/risk_state,1,000,0.020045,,false,curl: (1) Received HTTP/0.9 when not allowed
+CAP-98156F574B28,100,express,backend/app/support_layers/scenario/scenario_engine.py,105,/risk_state,GET,http://127.0.0.1:25/risk_state,1,000,0.010348,,false,curl: (1) Received HTTP/0.9 when not allowed
+CAP-98156F574B28,100,express,backend/app/support_layers/scenario/scenario_engine.py,105,/risk_state,GET,http://127.0.0.1:53/risk_state,7,000,0.000620,,false,curl: (7) Failed to connect to 127.0.0.1 port 53 after 0 ms: Couldn't connect to server
+CAP-98156F574B28,100,express,backend/app/support_layers/scenario/scenario_engine.py,105,/risk_state,GET,http://127.0.0.1:80/risk_state,60,301,0.096305,text/html,false,"curl: (60) SSL: no alternative certificate subject name matches target host name '127.0.0.1'
+More details here: https://curl.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+h"
+CAP-98156F574B28,100,express,backend/app/support_layers/scenario/scenario_engine.py,105,/risk_state,GET,http://127.0.0.1:443/risk_state,0,400,0.004337,text/html,true,
+CAP-A61CF5BBAA01,170,express,backend/ndsp_admin_ui_proxy.cjs,486,/api/admin-ui/alerts,GET,http://127.0.0.1:22/api/admin-ui/alerts,1,000,0.023496,,false,curl: (1) Received HTTP/0.9 when not allowed
+CAP-A61CF5BBAA01,170,express,backend/ndsp_admin_ui_proxy.cjs,486,/api/admin-ui/alerts,GET,http://127.0.0.1:25/api/admin-ui/alerts,1,000,0.001371,,false,curl: (1) Received HTTP/0.9 when not allowed
+CAP-A61CF5BBAA01,170,express,backend/ndsp_admin_ui_proxy.cjs,486,/api/admin-ui/alerts,GET,http://127.0.0.1:53/api/admin-ui/alerts,7,000,0.000327,,false,curl: (7) Failed to connect to 127.0.0.1 port 53 after 0 ms: Couldn't connect to server
+CAP-A61CF5BBAA01,170,express,backend/ndsp_admin_ui_proxy.cjs,486,/api/admin-ui/alerts,GET,http://127.0.0.1:80/api/admin-ui/alerts,60,301,0.050949,text/html,false,"curl: (60) SSL: no alternative certificate subject name matches target host name '127.0.0.1'
+More details here: https://curl.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+h"
+CAP-A61CF5BBAA01,170,express,backend/ndsp_admin_ui_proxy.cjs,486,/api/admin-ui/alerts,GET,http://127.0.0.1:443/api/admin-ui/alerts,0,400,0.004555,text/html,true,
+CAP-C55DEBBD7CB7,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:22/api/auth/2fa/status,1,000,0.053347,,false,curl: (1) Received HTTP/0.9 when not allowed
+CAP-C55DEBBD7CB7,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:25/api/auth/2fa/status,1,000,0.001465,,false,curl: (1) Received HTTP/0.9 when not allowed
+CAP-C55DEBBD7CB7,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:53/api/auth/2fa/status,7,000,0.000328,,false,curl: (7) Failed to connect to 127.0.0.1 port 53 after 0 ms: Couldn't connect to server
+CAP-C55DEBBD7CB7,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:80/api/auth/2fa/status,60,301,0.094538,text/html,false,"curl: (60) SSL: no alternative certificate subject name matches target host name '127.0.0.1'
+More details here: https://curl.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+h"
+CAP-C55DEBBD7CB7,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:443/api/auth/2fa/status,0,400,0.000762,text/html,true,
+CAP-D054F1321201,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:22/api/auth/2fa/status,1,000,0.138047,,false,curl: (1) Received HTTP/0.9 when not allowed
+CAP-D054F1321201,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:25/api/auth/2fa/status,1,000,0.000924,,false,curl: (1) Received HTTP/0.9 when not allowed
+CAP-D054F1321201,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:53/api/auth/2fa/status,7,000,0.000244,,false,curl: (7) Failed to connect to 127.0.0.1 port 53 after 0 ms: Couldn't connect to server
+CAP-D054F1321201,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:80/api/auth/2fa/status,60,301,0.266790,text/html,false,"curl: (60) SSL: no alternative certificate subject name matches target host name '127.0.0.1'
+More details here: https://curl.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+h"
+CAP-D054F1321201,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:443/api/auth/2fa/status,0,400,0.002191,text/html,true,
+CAP-E6FFD507C6FA,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:22/api/auth/2fa/status,1,000,0.040151,,false,curl: (1) Received HTTP/0.9 when not allowed
+CAP-E6FFD507C6FA,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:25/api/auth/2fa/status,1,000,0.010494,,false,curl: (1) Received HTTP/0.9 when not allowed
+CAP-E6FFD507C6FA,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:53/api/auth/2fa/status,7,000,0.000262,,false,curl: (7) Failed to connect to 127.0.0.1 port 53 after 0 ms: Couldn't connect to server
+CAP-E6FFD507C6FA,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:80/api/auth/2fa/status,60,301,0.069733,text/html,false,"curl: (60) SSL: no alternative certificate subject name matches target host name '127.0.0.1'
+More details here: https://curl.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+h"
+CAP-E6FFD507C6FA,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:443/api/auth/2fa/status,0,400,0.001269,text/html,true,
+CAP-F139426B5341,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:22/api/auth/2fa/status,1,000,0.028072,,false,curl: (1) Received HTTP/0.9 when not allowed
+CAP-F139426B5341,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:25/api/auth/2fa/status,1,000,0.007169,,false,curl: (1) Received HTTP/0.9 when not allowed
+CAP-F139426B5341,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:53/api/auth/2fa/status,7,000,0.000485,,false,curl: (7) Failed to connect to 127.0.0.1 port 53 after 0 ms: Couldn't connect to server
+CAP-F139426B5341,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:80/api/auth/2fa/status,60,301,0.085061,text/html,false,"curl: (60) SSL: no alternative certificate subject name matches target host name '127.0.0.1'
+More details here: https://curl.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+h"
+CAP-F139426B5341,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:443/api/auth/2fa/status,0,400,0.006930,text/html,true,
+CAP-F56AB637F669,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:22/api/auth/2fa/status,1,000,0.035475,,false,curl: (1) Received HTTP/0.9 when not allowed
+CAP-F56AB637F669,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:25/api/auth/2fa/status,1,000,0.003459,,false,curl: (1) Received HTTP/0.9 when not allowed
+CAP-F56AB637F669,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:53/api/auth/2fa/status,7,000,0.000249,,false,curl: (7) Failed to connect to 127.0.0.1 port 53 after 0 ms: Couldn't connect to server
+CAP-F56AB637F669,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:80/api/auth/2fa/status,60,301,0.049804,text/html,false,"curl: (60) SSL: no alternative certificate subject name matches target host name '127.0.0.1'
+More details here: https://curl.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+h"
+CAP-F56AB637F669,130,express,backend/ndsp_user_login_gateway.cjs,407,/api/auth/2fa/status,GET,http://127.0.0.1:443/api/auth/2fa/status,0,400,0.000614,text/html,true,

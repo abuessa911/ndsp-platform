@@ -1,0 +1,1801 @@
+=== NDSP COT UPSTREAM SOURCE EVIDENCE ===
+
+====================================================================================================
+FILE=backend/app/contracts/cot/cot_tff_contract.py RELEVANT_HITS=79
+====================================================================================================
+
+--- backend/app/contracts/cot/cot_tff_contract.py:15-117 ---
+00015: CONTRACT_VERSION = "NDSP_COT_TFF_V1"
+00016: 
+00017: BULLISH = "BULLISH"
+00018: BEARISH = "BEARISH"
+00019: NEUTRAL = "NEUTRAL"
+00020: 
+00021: 
+00022: GROUP_ALIASES = {
+00023:     "asset_managers": [
+00024:         "asset_managers",
+00025:         "asset_manager",
+00026:         "asset_manager_institutional",
+00027:         "am",
+00028:         "long_term",
+00029:         "ml",
+00030:     ],
+00031:     "leveraged_funds": [
+00032:         "leveraged_funds",
+00033:         "leveraged",
+00034:         "lev_funds",
+00035:         "speculative",
+00036:         "short_term",
+00037:         "s",
+00038:     ],
+00039:     "dealer_intermediary": [
+00040:         "dealer_intermediary",
+00041:         "dealer",
+00042:         "dealers",
+00043:     ],
+00044: }
+00045: 
+00046: 
+00047: CURRENT_LONG_ALIASES = [
+00048:     "long",
+00049:     "longs",
+00050:     "current_long",
+00051:     "positions_long",
+00052: ]
+00053: 
+00054: CURRENT_SHORT_ALIASES = [
+00055:     "short",
+00056:     "shorts",
+00057:     "current_short",
+00058:     "positions_short",
+00059: ]
+00060: 
+00061: CHANGE_LONG_ALIASES = [
+00062:     "change_long",
+00063:     "long_change",
+00064:     "change_in_long",
+00065:     "weekly_change_long",
+00066: ]
+00067: 
+00068: CHANGE_SHORT_ALIASES = [
+00069:     "change_short",
+00070:     "short_change",
+00071:     "change_in_short",
+00072:     "weekly_change_short",
+00073: ]
+00074: 
+00075: 
+00076: @dataclass(frozen=True)
+00077: class COTGroupNumbers:
+00078:     long: Optional[float]
+00079:     short: Optional[float]
+00080: 
+00081:     change_long: Optional[float]
+00082:     change_short: Optional[float]
+00083: 
+00084:     has_current_totals: bool
+00085:     has_weekly_changes: bool
+00086: 
+00087: 
+00088: @dataclass(frozen=True)
+00089: class COTDirectionSet:
+00090:     asset_managers_overall: Optional[str]
+00091:     asset_managers_weekly: Optional[str]
+00092: 
+00093:     leveraged_funds_overall: Optional[str]
+00094:     leveraged_funds_weekly: Optional[str]
+00095: 
+00096:     report_date: Optional[str]
+00097:     report_age_days: Optional[int]
+00098:     max_age_days: Optional[int]
+00099:     fresh: Optional[bool]
+00100: 
+00101:     source_market: Optional[str]
+00102:     source_timeframe: Optional[str]
+00103:     analysis_timeframe: Optional[str]
+00104: 
+00105:     report_family: Optional[str] = None
+00106:     provider: Optional[str] = None
+00107:     dataset: Optional[str] = None
+00108: 
+00109:     contract_version: str = CONTRACT_VERSION
+00110: 
+00111: 
+00112: def _num(value: Any) -> float:
+00113:     if value is None or value == "":
+00114:         raise ValueError("numeric COT value is missing")
+00115: 
+00116:     if isinstance(value, str):
+00117:         value = value.replace(",", "").strip()
+
+--- backend/app/contracts/cot/cot_tff_contract.py:152-206 ---
+00152:         "long_value": long_value,
+00153:         "short_value": short_value,
+00154:         "comparison_rule": "LONG_EQUALS_SHORT",
+00155:         "comparison_gap_for_display_only": 0,
+00156:     }
+00157: 
+00158: 
+00159: def weekly_direction_from_changes(
+00160:     change_long: Any,
+00161:     change_short: Any,
+00162: ) -> Tuple[str, dict]:
+00163: 
+00164:     change_long = _num(change_long)
+00165:     change_short = _num(change_short)
+00166: 
+00167:     if change_long > change_short:
+00168:         return BULLISH, {
+00169:             "dominant_side": "LONG_CHANGE",
+00170:             "change_long": change_long,
+00171:             "change_short": change_short,
+00172:             "comparison_rule":
+00173:                 "CHANGE_LONG_GREATER_THAN_CHANGE_SHORT",
+00174:             "comparison_gap_for_display_only":
+00175:                 abs(change_long - change_short),
+00176:         }
+00177: 
+00178:     if change_short > change_long:
+00179:         return BEARISH, {
+00180:             "dominant_side": "SHORT_CHANGE",
+00181:             "change_long": change_long,
+00182:             "change_short": change_short,
+00183:             "comparison_rule":
+00184:                 "CHANGE_SHORT_GREATER_THAN_CHANGE_LONG",
+00185:             "comparison_gap_for_display_only":
+00186:                 abs(change_short - change_long),
+00187:         }
+00188: 
+00189:     return NEUTRAL, {
+00190:         "dominant_side": "EQUAL_CHANGE",
+00191:         "change_long": change_long,
+00192:         "change_short": change_short,
+00193:         "comparison_rule":
+00194:             "CHANGE_LONG_EQUALS_CHANGE_SHORT",
+00195:         "comparison_gap_for_display_only": 0,
+00196:     }
+00197: 
+00198: 
+00199: def extract_group_numbers(
+00200:     payload: Mapping[str, Any],
+00201:     group: str,
+00202: ) -> COTGroupNumbers:
+00203: 
+00204:     g = str(group or "").lower()
+00205:     prefixes = GROUP_ALIASES.get(g, [g])
+00206: 
+
+--- backend/app/contracts/cot/cot_tff_contract.py:213-325 ---
+00213:                     f"{pref}:{suf}",
+00214:                 ):
+00215:                     if (
+00216:                         key in payload
+00217:                         and payload.get(key) not in (None, "")
+00218:                     ):
+00219:                         return payload.get(key)
+00220: 
+00221:         if g == "asset_managers":
+00222:             for suffix in suffixes:
+00223:                 for key in (
+00224:                     f"raw_cot_asset_managers_{suffix}",
+00225:                     f"context_asset_managers_{suffix}",
+00226:                     f"asset_managers_{suffix}",
+00227:                 ):
+00228:                     if (
+00229:                         key in payload
+00230:                         and payload.get(key) not in (None, "")
+00231:                     ):
+00232:                         return payload.get(key)
+00233: 
+00234:         if g == "leveraged_funds":
+00235:             for suffix in suffixes:
+00236:                 for key in (
+00237:                     f"raw_cot_leveraged_funds_{suffix}",
+00238:                     f"context_leveraged_funds_{suffix}",
+00239:                     f"leveraged_funds_{suffix}",
+00240:                 ):
+00241:                     if (
+00242:                         key in payload
+00243:                         and payload.get(key) not in (None, "")
+00244:                     ):
+00245:                         return payload.get(key)
+00246: 
+00247:         return None
+00248: 
+00249:     long_value = find_value(CURRENT_LONG_ALIASES)
+00250:     short_value = find_value(CURRENT_SHORT_ALIASES)
+00251: 
+00252:     change_long = find_value(CHANGE_LONG_ALIASES)
+00253:     change_short = find_value(CHANGE_SHORT_ALIASES)
+00254: 
+00255:     return COTGroupNumbers(
+00256:         long=long_value,
+00257:         short=short_value,
+00258:         change_long=change_long,
+00259:         change_short=change_short,
+00260:         has_current_totals=(
+00261:             long_value is not None and short_value is not None
+00262:         ),
+00263:         has_weekly_changes=(
+00264:             change_long is not None and change_short is not None
+00265:         ),
+00266:     )
+00267: 
+00268: 
+00269: def validate_direction(value: Optional[str], field: str) -> None:
+00270:     # Missing (مفقود) stays missing.
+00271:     if value is None:
+00272:         return
+00273: 
+00274:     if value not in {BULLISH, BEARISH, NEUTRAL}:
+00275:         raise ValueError(
+00276:             f"{field}: invalid direction {value!r}"
+00277:         )
+00278: 
+00279: 
+00280: def validate_cot_direction_set(c: COTDirectionSet) -> None:
+00281: 
+00282:     validate_direction(
+00283:         c.asset_managers_overall,
+00284:         "asset_managers_overall",
+00285:     )
+00286:     validate_direction(
+00287:         c.asset_managers_weekly,
+00288:         "asset_managers_weekly",
+00289:     )
+00290:     validate_direction(
+00291:         c.leveraged_funds_overall,
+00292:         "leveraged_funds_overall",
+00293:     )
+00294:     validate_direction(
+00295:         c.leveraged_funds_weekly,
+00296:         "leveraged_funds_weekly",
+00297:     )
+00298: 
+00299:     # لا نحول البيانات المفقودة إلى نجاح اصطناعي.
+00300:     freshness_parts = (
+00301:         c.report_date,
+00302:         c.report_age_days,
+00303:         c.max_age_days,
+00304:         c.fresh,
+00305:     )
+00306: 
+00307:     present = sum(x is not None for x in freshness_parts)
+00308: 
+00309:     if present not in (0, len(freshness_parts)):
+00310:         raise ValueError(
+00311:             "partial freshness metadata: "
+00312:             "report_date/report_age_days/max_age_days/fresh "
+00313:             "must remain explicitly complete or incomplete"
+00314:         )
+00315: 
+00316:     if present == len(freshness_parts):
+00317:         if c.report_age_days < 0:
+00318:             raise ValueError("report_age_days cannot be negative")
+00319: 
+00320:         expected = c.report_age_days <= c.max_age_days
+00321: 
+00322:         if c.fresh != expected:
+00323:             raise ValueError(
+00324:                 "fresh disagrees with report age policy"
+00325:             )
+
+====================================================================================================
+FILE=backend/ndsp_latest_16_layers_logic_functions.py RELEVANT_HITS=77
+====================================================================================================
+
+--- backend/ndsp_latest_16_layers_logic_functions.py:255-290 ---
+00255: def evaluate_l3_timing(payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+00256:     payload = dict(payload or {})
+00257: 
+00258:     day = _text(_get(payload, "weekday", "day", default=datetime.now(timezone.utc).strftime("%A"))).lower()
+00259:     asset = _text(_get(payload, "asset", "symbol", default="GOLD"))
+00260:     asset_class = _text(_get(payload, "asset_class", default="commodity")).lower()
+00261:     is_crypto = _bool(_get(payload, "is_crypto", default=False), False) or "crypto" in asset_class or asset.upper() in {"BTC", "ETH", "SOL", "BNB"}
+00262: 
+00263:     asset_manager_days = {"monday", "mon", "friday", "fri", "الاثنين", "الإثنين", "الجمعة"}
+00264:     leveraged_days = {"tuesday", "tue", "wednesday", "wed", "thursday", "thu", "الثلاثاء", "الأربعاء", "الاربعاء", "الخميس"}
+00265:     weekend_days = {"saturday", "sat", "sunday", "sun", "السبت", "الأحد", "الاحد"}
+00266: 
+00267:     if day in asset_manager_days:
+00268:         group = "ASSET_MANAGERS"
+00269:         timing_bias = "INSTITUTIONAL_LONG_HORIZON"
+00270:         allowed = True
+00271:         score = 86
+00272:     elif day in leveraged_days:
+00273:         group = "LEVERAGED_FUNDS"
+00274:         timing_bias = "SPECULATIVE_WEEKLY_HORIZON"
+00275:         allowed = True
+00276:         score = 82
+00277:     elif day in weekend_days and is_crypto:
+00278:         group = "LEVERAGED_FUNDS"
+00279:         timing_bias = "CRYPTO_WEEKEND_SPECULATIVE_HORIZON"
+00280:         allowed = True
+00281:         score = 74
+00282:     else:
+00283:         group = "NO_PRIMARY_TIMING_AUTHORITY"
+00284:         timing_bias = "LOW_AUTHORITY"
+00285:         allowed = False
+00286:         score = 42
+00287: 
+00288:     output = {
+00289:         "weekday": day,
+00290:         "asset": asset,
+
+--- backend/ndsp_latest_16_layers_logic_functions.py:362-413 ---
+00362:         "dominant_side": "EQUAL",
+00363:         "long_value": long_value,
+00364:         "short_value": short_value,
+00365:         "comparison_rule": "LONG_EQUALS_SHORT",
+00366:         "comparison_gap_for_display_only": 0,
+00367:     }
+00368: 
+00369: 
+00370: def _ndsp_weekly_direction_from_changes(change_long, change_short):
+00371:     # قاعدة NDSP الصحيحة للاتجاه الأسبوعي:
+00372:     # ليست عملية طرح.
+00373:     # نقارن تغير Long مع تغير Short كما هما.
+00374:     # إذا تغير Long أكبر => صاعد أسبوعي.
+00375:     # إذا تغير Short أكبر => هابط أسبوعي.
+00376:     change_long = _ndsp_num(change_long)
+00377:     change_short = _ndsp_num(change_short)
+00378: 
+00379:     if change_long > change_short:
+00380:         return "BULLISH", {
+00381:             "dominant_side": "LONG_CHANGE",
+00382:             "change_long": change_long,
+00383:             "change_short": change_short,
+00384:             "comparison_rule": "CHANGE_LONG_GREATER_THAN_CHANGE_SHORT",
+00385:             "comparison_gap_for_display_only": abs(change_long - change_short),
+00386:         }
+00387: 
+00388:     if change_short > change_long:
+00389:         return "BEARISH", {
+00390:             "dominant_side": "SHORT_CHANGE",
+00391:             "change_long": change_long,
+00392:             "change_short": change_short,
+00393:             "comparison_rule": "CHANGE_SHORT_GREATER_THAN_CHANGE_LONG",
+00394:             "comparison_gap_for_display_only": abs(change_short - change_long),
+00395:         }
+00396: 
+00397:     return "NEUTRAL", {
+00398:         "dominant_side": "EQUAL_CHANGE",
+00399:         "change_long": change_long,
+00400:         "change_short": change_short,
+00401:         "comparison_rule": "CHANGE_LONG_EQUALS_CHANGE_SHORT",
+00402:         "comparison_gap_for_display_only": 0,
+00403:     }
+00404: 
+00405: 
+00406: def _ndsp_movement_type(overall_direction, weekly_direction):
+00407:     overall_direction = str(overall_direction or "NEUTRAL").upper()
+00408:     weekly_direction = str(weekly_direction or "NEUTRAL").upper()
+00409: 
+00410:     if overall_direction == "NEUTRAL" or weekly_direction == "NEUTRAL":
+00411:         return "غير واضح", "WATCH_ONLY"
+00412: 
+00413:     if overall_direction == weekly_direction:
+
+--- backend/ndsp_latest_16_layers_logic_functions.py:438-463 ---
+00438:     return "غير واضح"
+00439: 
+00440: 
+00441: def _ndsp_extract_group_numbers(payload, group):
+00442:     # يدعم عدة أسماء محتملة من Raw COT أو من طبقة الربط
+00443:     g = str(group or "").lower()
+00444: 
+00445:     aliases = {
+00446:         "asset_managers": [
+00447:             "asset_managers", "asset_manager", "asset_manager_institutional",
+00448:             "am", "long_term", "ml"
+00449:         ],
+00450:         "leveraged_funds": [
+00451:             "leveraged_funds", "leveraged", "lev_funds", "speculative",
+00452:             "short_term", "s"
+00453:         ],
+00454:         "dealer_intermediary": [
+00455:             "dealer_intermediary", "dealer", "dealers"
+00456:         ],
+00457:     }
+00458: 
+00459:     prefixes = aliases.get(g, [g])
+00460: 
+00461:     def find_value(suffixes):
+00462:         for pref in prefixes:
+00463:             for suf in suffixes:
+
+--- backend/ndsp_latest_16_layers_logic_functions.py:466-519 ---
+00466:                     f"{pref}.{suf}",
+00467:                     f"{pref}:{suf}",
+00468:                 ]
+00469:                 for k in keys:
+00470:                     if k in payload and payload.get(k) not in (None, ""):
+00471:                         return payload.get(k)
+00472: 
+00473:         # مفاتيح سياقية سبق استعمالها
+00474:         if g == "asset_managers":
+00475:             for k in suffixes:
+00476:                 for kk in [
+00477:                     f"raw_cot_asset_managers_{k}",
+00478:                     f"context_asset_managers_{k}",
+00479:                     f"asset_managers_{k}",
+00480:                 ]:
+00481:                     if kk in payload and payload.get(kk) not in (None, ""):
+00482:                         return payload.get(kk)
+00483: 
+00484:         if g == "leveraged_funds":
+00485:             for k in suffixes:
+00486:                 for kk in [
+00487:                     f"raw_cot_leveraged_funds_{k}",
+00488:                     f"context_leveraged_funds_{k}",
+00489:                     f"leveraged_funds_{k}",
+00490:                 ]:
+00491:                     if kk in payload and payload.get(kk) not in (None, ""):
+00492:                         return payload.get(kk)
+00493: 
+00494:         return None
+00495: 
+00496:     long_current = find_value(["long", "longs", "current_long", "positions_long"])
+00497:     short_current = find_value(["short", "shorts", "current_short", "positions_short"])
+00498:     change_long = find_value(["change_long", "long_change", "change_in_long", "weekly_change_long"])
+00499:     change_short = find_value(["change_short", "short_change", "change_in_short", "weekly_change_short"])
+00500: 
+00501:     return {
+00502:         "long": long_current,
+00503:         "short": short_current,
+00504:         "change_long": change_long,
+00505:         "change_short": change_short,
+00506:         "has_current_totals": long_current is not None and short_current is not None,
+00507:         "has_weekly_changes": change_long is not None and change_short is not None,
+00508:     }
+00509: 
+00510: 
+00511: 
+00512: # ============================================================
+00513: # Layer 4 — COT / Positioning Manager
+00514: # File: backend/layers/data/l4_cot_manager.py
+00515: # ============================================================
+00516: 
+00517: 
+00518: def _ndsp_weekly_bias_ar_with_scope(weekly_direction, overall_direction, movement_type):
+00519:     weekly_direction = str(weekly_direction or "").upper()
+
+--- backend/ndsp_latest_16_layers_logic_functions.py:552-657 ---
+00552:     payload = dict(payload or {})
+00553: 
+00554:     asset = _text(_get(payload, "asset", "symbol", default="ETHUSDT")).upper()
+00555:     asset_class = _text(_get(payload, "asset_class", "market", default="crypto")).lower()
+00556: 
+00557:     # للأصول الرقمية والعملات والمؤشرات:
+00558:     # الفئة المؤسسية طويلة الأمد = مدراء الأصول
+00559:     # الفئة القصيرة / المضاربة = الرافعات
+00560:     long_term_group = "ASSET_MANAGERS"
+00561:     short_term_group = "LEVERAGED_FUNDS"
+00562: 
+00563:     am = _ndsp_extract_group_numbers(payload, "asset_managers")
+00564:     lf = _ndsp_extract_group_numbers(payload, "leveraged_funds")
+00565: 
+00566:     # الاتجاه الكلي من إجمالي العقود الحالية
+00567:     am_overall, am_overall_net = _ndsp_direction_from_long_short(am.get("long"), am.get("short")) if am.get("has_current_totals") else (
+00568:         str(_get(payload, "asset_managers_bias", "long_term_bias", default="NEUTRAL")).upper(),
+00569:         None,
+00570:     )
+00571: 
+00572:     lf_overall, lf_overall_net = _ndsp_direction_from_long_short(lf.get("long"), lf.get("short")) if lf.get("has_current_totals") else (
+00573:         str(_get(payload, "leveraged_funds_bias", "speculative_bias", default="NEUTRAL")).upper(),
+00574:         None,
+00575:     )
+00576: 
+00577:     # الاتجاه الأسبوعي من التغيرات
+00578:     am_weekly, am_weekly_delta = _ndsp_weekly_direction_from_changes(am.get("change_long"), am.get("change_short")) if am.get("has_weekly_changes") else ("NEUTRAL", None)
+00579:     lf_weekly, lf_weekly_delta = _ndsp_weekly_direction_from_changes(lf.get("change_long"), lf.get("change_short")) if lf.get("has_weekly_changes") else ("NEUTRAL", None)
+00580: 
+00581:     # اعتماد السكالبينق الأسبوعي يكون على الاتجاه الجزئي الأسبوعي
+00582:     # إذا توفر اتجاه مدراء الأصول الأسبوعي نستخدمه للقراءة المؤسسية الأسبوعية.
+00583:     # وإذا لم يتوفر، لا نختلقه من الاتجاه الكلي.
+00584:     weekly_operational_bias = am_weekly if am_weekly != "NEUTRAL" else "NEUTRAL"
+00585: 
+00586:     movement_description, movement_type = _ndsp_movement_type(am_overall, weekly_operational_bias)
+00587: 
+00588:     correction_present = movement_type == "WEEKLY_CORRECTION"
+00589:     continuation_present = movement_type == "WEEKLY_CONTINUATION"
+00590: 
+00591:     output = {
+00592:         "asset": asset,
+00593:         "asset_class": asset_class,
+00594: 
+00595:         "long_term_group": long_term_group,
+00596:         "short_term_group": short_term_group,
+00597: 
+00598:         "asset_managers_long": am.get("long"),
+00599:         "asset_managers_short": am.get("short"),
+00600:         "asset_managers_change_long": am.get("change_long"),
+00601:         "asset_managers_change_short": am.get("change_short"),
+00602: 
+00603:         "leveraged_funds_long": lf.get("long"),
+00604:         "leveraged_funds_short": lf.get("short"),
+00605:         "leveraged_funds_change_long": lf.get("change_long"),
+00606:         "leveraged_funds_change_short": lf.get("change_short"),
+00607: 
+00608:         "asset_managers_overall_direction": am_overall,
+00609:         "asset_managers_overall_direction_ar": _ndsp_bias_ar(am_overall),
+00610:         "asset_managers_overall_comparison": am_overall_net,
+00611: 
+00612:         "asset_managers_weekly_direction": am_weekly,
+00613:         "asset_managers_weekly_direction_ar": _ndsp_weekly_bias_ar_with_scope(am_weekly, am_overall, movement_type),
+00614:         "asset_managers_weekly_comparison": am_weekly_delta,
+00615:         "asset_managers_weekly_scope": "NARROW_CORRECTIVE_HORIZON" if movement_type == "WEEKLY_CORRECTION" else "DIRECTIONAL_CONTINUATION_OR_NEUTRAL",
+00616:         "asset_managers_weekly_scope_ar": "غير صريح / ذو أفق ضيق" if movement_type == "WEEKLY_CORRECTION" else "اتجاه مباشر أو محايد",
+00617: 
+00618:         "leveraged_funds_overall_direction": lf_overall,
+00619:         "leveraged_funds_overall_direction_ar": _ndsp_bias_ar(lf_overall),
+00620:         "leveraged_funds_overall_comparison": lf_overall_net,
+00621: 
+00622:         "leveraged_funds_weekly_direction": lf_weekly,
+00623:         "leveraged_funds_weekly_direction_ar": _ndsp_bias_ar(lf_weekly),
+00624:         "leveraged_funds_weekly_comparison": lf_weekly_delta,
+00625: 
+00626:         "decision_basis": "WEEKLY_PARTIAL_DIRECTION_FOR_SCALPING",
+00627:         "trend_context_basis": "OVERALL_CURRENT_TOTALS_LONG_VS_SHORT",
+00628: 
+00629:         "weekly_operational_bias": weekly_operational_bias,
+00630:         "weekly_operational_bias_ar": _ndsp_weekly_bias_ar_with_scope(weekly_operational_bias, am_overall, movement_type),
+00631:         "weekly_operational_scope": "NARROW_CORRECTIVE_HORIZON" if movement_type == "WEEKLY_CORRECTION" else "DIRECTIONAL_CONTINUATION_OR_NEUTRAL",
+00632:         "weekly_operational_scope_ar": "غير صريح / ذو أفق ضيق" if movement_type == "WEEKLY_CORRECTION" else "اتجاه مباشر أو محايد",
+00633: 
+00634:         "movement_type": movement_type,
+00635:         "movement_type_ar": _ndsp_movement_ar(movement_type),
+00636:         "movement_description": movement_description,
+00637: 
+00638:         "correction_present": correction_present,
+00639:         "continuation_present": continuation_present,
+00640: 
+00641:         "has_current_totals": bool(am.get("has_current_totals")),
+00642:         "has_weekly_changes": bool(am.get("has_weekly_changes")),
+00643: 
+00644:         "raw_cot_report_date": _get(payload, "raw_cot_report_date", "cot_report_date", default=None),
+00645:         "report_age_days": _get(payload, "report_age_days", default=None),
+00646:     }
+00647: 
+00648:     score = 88 if output["has_current_totals"] and output["has_weekly_changes"] else 62
+00649:     warnings = []
+00650:     if not output["has_current_totals"]:
+00651:         warnings.append("الاتجاه الكلي لم يحسب من Long/Short الحالي بسبب نقص البيانات الرقمية.")
+00652:     if not output["has_weekly_changes"]:
+00653:         warnings.append("الاتجاه الأسبوعي لم يحسب من تغير Long/Short بسبب نقص بيانات التغير الأسبوعي.")
+00654: 
+00655:     return _layer_result(
+00656:         4,
+00657:         "COT Positioning Manager",
+
+--- backend/ndsp_latest_16_layers_logic_functions.py:672-693 ---
+00672: # ============================================================
+00673: # Layer 5 — TDL V2 Direction Logic
+00674: # File: backend/layers/direction/l5_tdl_v2.py
+00675: # ============================================================
+00676: 
+00677: def evaluate_l5_tdl_v2(payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+00678:     payload = dict(payload or {})
+00679: 
+00680:     overall_direction = str(_get(payload, "asset_managers_overall_direction", "long_term_bias", default="NEUTRAL")).upper()
+00681:     weekly_direction = str(_get(payload, "asset_managers_weekly_direction", "weekly_operational_bias", default="NEUTRAL")).upper()
+00682: 
+00683:     movement_type = str(_get(payload, "movement_type", default="WATCH_ONLY")).upper()
+00684:     correction_present = bool(_get(payload, "correction_present", default=(movement_type == "WEEKLY_CORRECTION")))
+00685:     continuation_present = bool(_get(payload, "continuation_present", default=(movement_type == "WEEKLY_CONTINUATION")))
+00686: 
+00687:     timing_allowed = bool(_get(payload, "timing_allowed", "allowed", default=True))
+00688: 
+00689:     # قاعدة TDL الجديدة:
+00690:     # الترند يقاس بالاتجاه الكلي.
+00691:     # قرار السكالبينق الأسبوعي يعتمد على الاتجاه الجزئي الأسبوعي.
+00692:     # الاتجاه الكلي يحدد هل الحركة استمرار أم تصحيح.
+00693:     if weekly_direction in {"BULLISH", "BEARISH"} and timing_allowed:
+
+--- backend/ndsp_latest_16_layers_logic_functions.py:754-774 ---
+00754: # Layer 6 — Dominant Timed Direction / Direction Authority
+00755: # File: backend/layers/direction/l6_direction_authority.py
+00756: # ============================================================
+00757: 
+00758: def evaluate_l6_direction_authority(payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+00759:     payload = dict(payload or {})
+00760: 
+00761:     weekly_direction = str(_get(payload, "tdl_bias", "weekly_partial_direction", "weekly_operational_bias", default="NEUTRAL")).upper()
+00762:     overall_direction = str(_get(payload, "overall_trend_direction", "asset_managers_overall_direction", default="NEUTRAL")).upper()
+00763:     movement_type = str(_get(payload, "movement_type", default="WATCH_ONLY")).upper()
+00764: 
+00765:     timing_allowed = bool(_get(payload, "timing_allowed", default=True))
+00766:     correction_present = bool(_get(payload, "correction_present", default=(movement_type == "WEEKLY_CORRECTION")))
+00767:     continuation_present = bool(_get(payload, "continuation_present", default=(movement_type == "WEEKLY_CONTINUATION")))
+00768: 
+00769:     if weekly_direction in {"BULLISH", "BEARISH"}:
+00770:         dominant_direction = weekly_direction
+00771:         authority = "WEEKLY_SCALPING_AUTHORITY"
+00772:     else:
+00773:         dominant_direction = "NEUTRAL"
+00774:         authority = "WATCH_ONLY"
+
+====================================================================================================
+FILE=backend/layers/canonical_v1/runtime_bridge.py RELEVANT_HITS=27
+====================================================================================================
+
+--- backend/layers/canonical_v1/runtime_bridge.py:80-117 ---
+00080:         "neutral": "neutral",
+00081:         "flat": "neutral",
+00082:         "محايد": "neutral",
+00083:     }
+00084:     return aliases.get(raw)
+00085: 
+00086: 
+00087: DIRECTION_KEYS = {
+00088:     "asset_managers_overall": (
+00089:         "asset_managers_overall",
+00090:         "asset_managers_overall_direction",
+00091:         "am_overall",
+00092:         "am_overall_direction",
+00093:         "tdl_medium_long_direction",
+00094:         "tdl_ml_direction",
+00095:     ),
+00096:     "asset_managers_weekly": (
+00097:         "asset_managers_weekly",
+00098:         "asset_managers_weekly_direction",
+00099:         "am_weekly",
+00100:         "am_weekly_direction",
+00101:         "asset_manager_weekly_direction",
+00102:     ),
+00103:     "leveraged_funds_weekly": (
+00104:         "leveraged_funds_weekly",
+00105:         "leveraged_funds_weekly_direction",
+00106:         "lf_weekly",
+00107:         "lf_weekly_direction",
+00108:         "leveraged_weekly_direction",
+00109:     ),
+00110: }
+00111: 
+00112: 
+00113: def _extract_direction(payload: Mapping[str, Any], candidates: Sequence[str]) -> str | None:
+00114:     lowered = {item.lower() for item in candidates}
+00115:     for key, value in _walk(payload):
+00116:         if key.lower() not in lowered:
+00117:             continue
+
+--- backend/layers/canonical_v1/runtime_bridge.py:124-174 ---
+00124:         if normalized:
+00125:             return normalized
+00126:     return None
+00127: 
+00128: 
+00129: def apply_canonical_golden(payload: Mapping[str, Any]) -> dict[str, Any]:
+00130:     """Overwrite legacy heuristic Golden fields with canonical COT-direction rules."""
+00131:     data = deepcopy(dict(payload))
+00132:     am_overall = _extract_direction(data, DIRECTION_KEYS["asset_managers_overall"])
+00133:     am_weekly = _extract_direction(data, DIRECTION_KEYS["asset_managers_weekly"])
+00134:     lf_weekly = _extract_direction(data, DIRECTION_KEYS["leveraged_funds_weekly"])
+00135: 
+00136:     missing = [
+00137:         name
+00138:         for name, value in (
+00139:             ("asset_managers_overall", am_overall),
+00140:             ("asset_managers_weekly", am_weekly),
+00141:             ("leveraged_funds_weekly", lf_weekly),
+00142:         )
+00143:         if value is None
+00144:     ]
+00145: 
+00146:     if missing:
+00147:         result = {
+00148:             "golden_active": False,
+00149:             "enhanced_active": False,
+00150:             "direction": "unknown",
+00151:             "asset_managers_overall": am_overall or "unknown",
+00152:             "asset_managers_weekly": am_weekly or "unknown",
+00153:             "leveraged_funds_weekly": lf_weekly or "unknown",
+00154:             "leveraged_funds_overall_used": False,
+00155:         }
+00156:         status = "not_evaluated"
+00157:         reason_code = "MISSING_CANONICAL_COT_DIRECTIONS"
+00158:     else:
+00159:         result = evaluate_golden_signals(
+00160:             asset_managers_overall=am_overall,
+00161:             asset_managers_weekly=am_weekly,
+00162:             leveraged_funds_weekly=lf_weekly,
+00163:         )
+00164:         status = (
+00165:             "enhanced"
+00166:             if result["enhanced_active"]
+00167:             else "active"
+00168:             if result["golden_active"]
+00169:             else "inactive"
+00170:         )
+00171:         reason_code = None
+00172: 
+00173:     data["golden_signal"] = bool(result["golden_active"])
+00174:     data["golden_alignment_active"] = bool(result["golden_active"])
+
+--- backend/layers/canonical_v1/runtime_bridge.py:182-205 ---
+00182:         "golden_signal": bool(result["golden_active"]),
+00183:         "enhanced_golden_signal": bool(result["enhanced_active"]),
+00184:         "golden_alignment_active": bool(result["golden_active"]),
+00185:         "enhanced_golden_alignment_active": bool(result["enhanced_active"]),
+00186:         "golden_status": status,
+00187:         "golden_name_public": "إشارة نواف الذهبية",
+00188:         "enhanced_golden_name_public": "إشارة نواف الذهبية المعززة",
+00189:         "direction": result["direction"],
+00190:         "asset_managers_overall": result["asset_managers_overall"],
+00191:         "asset_managers_weekly": result["asset_managers_weekly"],
+00192:         "leveraged_funds_weekly": result["leveraged_funds_weekly"],
+00193:         "leveraged_funds_overall_used": False,
+00194:         "rule_golden": "AM_WEEKLY_EQUALS_LF_WEEKLY",
+00195:         "rule_enhanced": "AM_OVERALL_EQUALS_AM_WEEKLY_EQUALS_LF_WEEKLY",
+00196:         "reason_code": reason_code,
+00197:         "missing_inputs": missing,
+00198:         "decision_authority": False,
+00199:         "not_recommendation": True,
+00200:         "no_buy_sell": True,
+00201:         "source_mode": "backend.layers.canonical_v1.quality.golden_signals",
+00202:         "wrapper_version": "2.0.0-canonical-consumer",
+00203:     }
+00204: 
+00205:     data["_ndsp_canonical_consumer"] = {
+
+====================================================================================================
+FILE=backend/app/runtime/ndsp_v201_launch_completion.py RELEVANT_HITS=25
+====================================================================================================
+
+--- backend/app/runtime/ndsp_v201_launch_completion.py:104-159 ---
+00104:         return None
+00105:     for item in layers:
+00106:         if isinstance(item, dict) and str(item.get("id") or "") == layer_id:
+00107:             return item
+00108:     return None
+00109: 
+00110: 
+00111: def _update_public_layers(data: dict[str, Any], mode: str, directions: Mapping[str, Any]) -> None:
+00112:     overall = directions.get("asset_managers_overall")
+00113:     am_weekly = directions.get("asset_managers_weekly")
+00114:     lf_weekly = directions.get("leveraged_funds_weekly")
+00115: 
+00116:     investment = evaluate_investment_policy(
+00117:         asset_managers_overall=overall,
+00118:         asset_managers_weekly=am_weekly,
+00119:         leveraged_funds_weekly=lf_weekly,
+00120:     )
+00121:     golden = evaluate_golden_signals(
+00122:         asset_managers_overall=overall,
+00123:         asset_managers_weekly=am_weekly,
+00124:         leveraged_funds_weekly=lf_weekly,
+00125:     )
+00126: 
+00127:     l01 = _layer(data, "NDSP-CORE-L01")
+00128:     if l01 is not None:
+00129:         l01.update({
+00130:             "state": "ACTIVE" if _normalize_direction(overall) in {"bullish", "bearish"} else "UNDER_REVIEW",
+00131:             "state_ar": "نشطة" if _normalize_direction(overall) in {"bullish", "bearish"} else "قيد المراجعة",
+00132:             "score": 90 if investment["readiness_allowed"] else 65,
+00133:             "blocking": not investment["readiness_allowed"],
+00134:             "evidence": (
+00135:                 f"governing={overall}; asset_managers_weekly={am_weekly}; "
+00136:                 f"leveraged_funds_weekly={lf_weekly}; correction={investment['correction_state']}"
+00137:             ),
+00138:             "public_summary": (
+00139:                 "اكتملت بيانات الاتجاه المؤسسي الحاكمة؛ "
+00140:                 + ("انتهى التصحيح الأسبوعي." if investment["readiness_allowed"] else "التصحيح الأسبوعي ما زال قائمًا.")
+00141:             ),
+00142:         })
+00143: 
+00144:     if mode == "investment":
+00145:         l04 = _layer(data, "NDSP-CORE-L04")
+00146:         if l04 is not None:
+00147:             allowed = bool(investment["asset_managers_weekly_alignment"])
+00148:             l04.update({
+00149:                 "state": "ALLOWED" if allowed else "MONITORING_ONLY",
+00150:                 "state_ar": "مسموحة" if allowed else "للمتابعة فقط",
+00151:                 "score": 88 if allowed else 55,
+00152:                 "blocking": not allowed,
+00153:                 "evidence": "investment weekly correction gate derived from current and weekly Asset Manager directions",
+00154:                 "public_summary": "انتهى التصحيح الأسبوعي." if allowed else "التصحيح الأسبوعي لم ينتهِ بعد.",
+00155:             })
+00156: 
+00157:     l13 = _layer(data, "NDSP-CORE-L13")
+00158:     if l13 is not None:
+00159:         active = bool(golden["golden_active"])
+
+--- backend/app/runtime/ndsp_v201_launch_completion.py:270-313 ---
+00270:     data = deepcopy(payload)
+00271:     instrument = data.get("instrument") if isinstance(data.get("instrument"), Mapping) else {}
+00272:     normalized_symbol = str(symbol or instrument.get("symbol") or data.get("symbol") or "").upper().strip()
+00273:     normalized_tf = str(timeframe or instrument.get("timeframe") or "weekly").strip()
+00274:     mode = _analysis_mode(analysis_mode, normalized_tf)
+00275:     raw = dict(raw_cot_override) if isinstance(raw_cot_override, Mapping) else _fetch_raw_cot(normalized_symbol)
+00276: 
+00277:     directions = {
+00278:         "asset_managers_overall": _normalize_direction(
+00279:             raw.get("asset_managers_overall_direction") or raw.get("asset_managers_bias")
+00280:         ),
+00281:         "asset_managers_weekly": _normalize_direction(raw.get("asset_managers_weekly_direction")),
+00282:         "leveraged_funds_weekly": _normalize_direction(raw.get("leveraged_funds_weekly_direction")),
+00283:     }
+00284:     missing = [name for name, value in directions.items() if value not in {"bullish", "bearish", "neutral"}]
+00285:     age = _safe_float(raw.get("report_age_days"))
+00286:     fresh = age is not None and age <= float(max_cot_age_days)
+00287:     complete = (
+00288:         raw.get("raw_cot_connected") is True
+00289:         and raw.get("raw_cot_governing_inputs_complete") is True
+00290:         and not missing
+00291:         and fresh
+00292:     )
+00293: 
+00294:     data["governing_inputs"] = {
+00295:         "contract_version": GOVERNING_INPUTS_VERSION,
+00296:         "status": "COMPLETE" if complete else "INCOMPLETE",
+00297:         "source": "CFTC_TFF_FUTURES_ONLY",
+00298:         "source_family": raw.get("source_family"),
+00299:         "source_market": raw.get("market_name"),
+00300:         "report_date": raw.get("report_date"),
+00301:         "report_age_days": age,
+00302:         "max_age_days": int(max_cot_age_days),
+00303:         "fresh": fresh,
+00304:         "symbol": normalized_symbol,
+00305:         "source_timeframe": "weekly",
+00306:         "analysis_timeframe": normalized_tf,
+00307:         "analysis_mode": mode,
+00308:         "directions": directions,
+00309:         "missing_inputs": missing,
+00310:         "raw_cot_connected": raw.get("raw_cot_connected") is True,
+00311:         "raw_cot_status": raw.get("raw_cot_status"),
+00312:         "not_recommendation": True,
+00313:     }
+
+--- backend/app/runtime/ndsp_v201_launch_completion.py:315-347 ---
+00315:     if not complete:
+00316:         data["governing_inputs_reason_code"] = (
+00317:             "COT_STALE" if age is not None and not fresh
+00318:             else "COT_GOVERNING_INPUTS_INCOMPLETE"
+00319:         )
+00320:         return data
+00321: 
+00322:     data.update(directions)
+00323:     data["asset_managers_overall_direction"] = directions["asset_managers_overall"]
+00324:     data["asset_managers_weekly_direction"] = directions["asset_managers_weekly"]
+00325:     data["leveraged_funds_weekly_direction"] = directions["leveraged_funds_weekly"]
+00326:     data["canonical_cot_directions"] = dict(directions)
+00327: 
+00328:     data = apply_canonical_golden(data)
+00329:     golden = data.get("golden_alignment")
+00330:     if isinstance(golden, dict):
+00331:         golden.update({
+00332:             "governing_inputs_complete": True,
+00333:             "governing_inputs_contract_version": GOVERNING_INPUTS_VERSION,
+00334:             "source_report_date": raw.get("report_date"),
+00335:             "source_report_age_days": age,
+00336:             "source_fresh": fresh,
+00337:             "source_family": raw.get("source_family"),
+00338:             "decision_authority": False,
+00339:             "not_recommendation": True,
+00340:             "no_buy_sell": True,
+00341:         })
+00342: 
+00343:     _update_public_layers(data, mode, directions)
+00344:     _refresh_public_golden(data)
+00345:     data["governing_inputs_reason_code"] = None
+00346:     data["governing_inputs_contract_version"] = GOVERNING_INPUTS_VERSION
+00347:     return data
+
+--- backend/app/runtime/ndsp_v201_launch_completion.py:422-444 ---
+00422:         return data
+00423: 
+00424:     instrument = data.get("instrument") if isinstance(data.get("instrument"), Mapping) else {}
+00425:     normalized_tf = str(timeframe or instrument.get("timeframe") or score_inputs.get("timeframe") or "weekly")
+00426:     mode = _analysis_mode(analysis_mode or score_inputs.get("analysis_mode"), normalized_tf)
+00427:     governing = data.get("governing_inputs") if isinstance(data.get("governing_inputs"), Mapping) else {}
+00428:     directions = governing.get("directions") if isinstance(governing.get("directions"), Mapping) else {}
+00429:     direction = (
+00430:         directions.get("asset_managers_overall")
+00431:         if mode == "investment"
+00432:         else directions.get("leveraged_funds_weekly")
+00433:     )
+00434:     direction = _normalize_direction(direction) or "neutral"
+00435:     sign = _direction_sign(direction)
+00436: 
+00437:     tdl_block = score_inputs.get("tdl") if isinstance(score_inputs.get("tdl"), Mapping) else {}
+00438:     correction_block = score_inputs.get("correction") if isinstance(score_inputs.get("correction"), Mapping) else {}
+00439:     macro_block = score_inputs.get("macro") if isinstance(score_inputs.get("macro"), Mapping) else {}
+00440:     blocker_block = score_inputs.get("blockers") if isinstance(score_inputs.get("blockers"), dict) else {}
+00441: 
+00442:     golden = data.get("golden_alignment") if isinstance(data.get("golden_alignment"), Mapping) else {}
+00443:     golden_complete = not bool(golden.get("missing_inputs")) and golden.get("reason_code") in (None, "")
+00444:     if golden_complete:
+
+====================================================================================================
+FILE=backend/layers/canonical_v1/tests/test_logic.py RELEVANT_HITS=13
+====================================================================================================
+
+--- backend/layers/canonical_v1/tests/test_logic.py:2-59 ---
+00002: from backend.layers.canonical_v1.direction.investment_policy import evaluate_investment_policy
+00003: from backend.layers.canonical_v1.direction.speculative_policy import evaluate_speculative_policy
+00004: from backend.layers.canonical_v1.quality.golden_signals import evaluate_golden_signals
+00005: from backend.layers.canonical_v1.quality.nmp_engine import calculate_nmp
+00006: 
+00007: class TestLogic(unittest.TestCase):
+00008:     def test_investment_direction_and_correction(self):
+00009:         result = evaluate_investment_policy(
+00010:             asset_managers_overall="bullish",
+00011:             asset_managers_weekly="bearish",
+00012:             leveraged_funds_weekly="bearish",
+00013:         )
+00014:         self.assertEqual(result["governing_direction"],"bullish")
+00015:         self.assertFalse(result["readiness_allowed"])
+00016:         self.assertEqual(result["correction_state"],"active")
+00017: 
+00018:     def test_lf_weekly_is_stability_not_direction(self):
+00019:         result = evaluate_investment_policy(
+00020:             asset_managers_overall="bullish",
+00021:             asset_managers_weekly="bullish",
+00022:             leveraged_funds_weekly="bearish",
+00023:         )
+00024:         self.assertEqual(result["governing_direction"],"bullish")
+00025:         self.assertTrue(result["readiness_allowed"])
+00026:         self.assertEqual(result["correction_risk"],"elevated")
+00027: 
+00028:     def test_speculative_tdl_remains_visible_outside_timing(self):
+00029:         result = evaluate_speculative_policy(timing_eligible=False,weekly_tdl_direction="bearish")
+00030:         self.assertEqual(result["weekly_tdl_direction"],"bearish")
+00031:         self.assertEqual(result["state"],"MONITORING_ONLY")
+00032: 
+00033:     def test_golden_and_enhanced(self):
+00034:         golden = evaluate_golden_signals(
+00035:             asset_managers_overall="bearish",
+00036:             asset_managers_weekly="bullish",
+00037:             leveraged_funds_weekly="bullish",
+00038:         )
+00039:         self.assertTrue(golden["golden_active"])
+00040:         self.assertFalse(golden["enhanced_active"])
+00041:         enhanced = evaluate_golden_signals(
+00042:             asset_managers_overall="bullish",
+00043:             asset_managers_weekly="bullish",
+00044:             leveraged_funds_weekly="bullish",
+00045:         )
+00046:         self.assertTrue(enhanced["enhanced_active"])
+00047:         self.assertFalse(enhanced["leveraged_funds_overall_used"])
+00048: 
+00049:     def test_nmp_uses_open_at_indicator_extreme(self):
+00050:         candles=[{"open":10,"close":11},{"open":20,"close":21},{"open":30,"close":31}]
+00051:         bull=calculate_nmp(candles=candles,indicator_values=[1,9,2],direction="bullish",indicator_name="RSI")
+00052:         bear=calculate_nmp(candles=candles,indicator_values=[-1,-9,-2],direction="bearish",indicator_name="CCI")
+00053:         self.assertEqual(bull["value"],20)
+00054:         self.assertEqual(bear["value"],20)
+00055: 
+00056:     def test_neutral_nmp_is_not_invented(self):
+00057:         result=calculate_nmp(candles=[{"open":10}],indicator_values=[50],direction="neutral",indicator_name="RSI")
+00058:         self.assertEqual(result["status"],"PENDING_DIRECTION")
+00059:         self.assertIsNone(result["value"])
+
+====================================================================================================
+FILE=backend/app/runtime/ndsp_canonical_live_runtime_v30.py RELEVANT_HITS=11
+====================================================================================================
+
+--- backend/app/runtime/ndsp_canonical_live_runtime_v30.py:160-190 ---
+00160:             yield str(key), child
+00161:             yield from walk_items(child)
+00162:     elif isinstance(value, list):
+00163:         for child in value:
+00164:             yield from walk_items(child)
+00165: 
+00166: 
+00167: DIRECTION_CANDIDATES = {
+00168:     "asset_managers_overall": {
+00169:         "asset_managers_overall", "asset_managers_overall_direction",
+00170:         "am_overall", "am_overall_direction", "tdl_medium_long_direction",
+00171:         "tdl_ml_direction",
+00172:     },
+00173:     "asset_managers_weekly": {
+00174:         "asset_managers_weekly", "asset_managers_weekly_direction",
+00175:         "am_weekly", "am_weekly_direction", "asset_manager_weekly_direction",
+00176:     },
+00177:     "leveraged_funds_weekly": {
+00178:         "leveraged_funds_weekly", "leveraged_funds_weekly_direction",
+00179:         "lf_weekly", "lf_weekly_direction", "leveraged_weekly_direction",
+00180:     },
+00181: }
+00182: 
+00183: 
+00184: def extract_direction(value: Mapping[str, Any], candidates: set[str]) -> str | None:
+00185:     lowered = {item.lower() for item in candidates}
+00186:     for key, child in walk_items(value):
+00187:         if key.lower() not in lowered:
+00188:             continue
+00189:         if isinstance(child, Mapping):
+00190:             for nested in ("direction", "value", "state", "signal"):
+
+--- backend/app/runtime/ndsp_canonical_live_runtime_v30.py:223-243 ---
+00223:         name: extract_direction(merged, keys)
+00224:         for name, keys in DIRECTION_CANDIDATES.items()
+00225:     }
+00226:     report_date = None
+00227:     generated_at = None
+00228:     for key, value in walk_items(merged):
+00229:         low = key.lower()
+00230:         if report_date is None and low in {
+00231:             "report_as_of_date", "report_date", "as_of_date", "cot_report_date"
+00232:         }:
+00233:             report_date = str(value or "").strip() or None
+00234:         if generated_at is None and low in {
+00235:             "generated_at", "updated_at", "fetched_at", "received_at"
+00236:         }:
+00237:             generated_at = str(value or "").strip() or None
+00238: 
+00239:     complete = all(
+00240:         directions[name] in {"bullish", "bearish"}
+00241:         for name in DIRECTION_CANDIDATES
+00242:     )
+00243:     timestamp = parse_iso(generated_at)
+
+--- backend/app/runtime/ndsp_canonical_live_runtime_v30.py:478-500 ---
+00478:         objections.extend(risk_reasons or ["RISK_ENGINE_BLOCKED"])
+00479: 
+00480:     payload = {
+00481:         "analysis_mode": mode,
+00482:         "symbol": symbol,
+00483:         "market": instrument.get("market"),
+00484:         "timeframe": timeframe,
+00485:         "direction": nmp_direction if nmp_direction != "unknown" else selected_direction,
+00486:         "asset_managers_overall": cot_directions.get("asset_managers_overall"),
+00487:         "asset_managers_weekly": cot_directions.get("asset_managers_weekly"),
+00488:         "leveraged_funds_weekly": cot_directions.get("leveraged_funds_weekly"),
+00489:         "weekly_tdl_direction": weekly_direction,
+00490:         "timing_eligible": timing_eligible,
+00491:         "divergence_result": divergence_result,
+00492:         "scenario_levels": levels,
+00493:         "candles": candles,
+00494:         "indicator_values": indicator_values,
+00495:         "indicator_name": "RSI",
+00496:         "momentum_result": momentum_result,
+00497:         "liquidity_structure_result": liquidity_structure_result,
+00498:         "usd_macro_result": usd_macro_result,
+00499:         "risk_result": risk_result,
+00500:         "devils_advocate_blocked": bool(risk_blocked),
+
+====================================================================================================
+FILE=backend/tests/contracts/test_contracts_01_04.py RELEVANT_HITS=9
+====================================================================================================
+
+--- backend/tests/contracts/test_contracts_01_04.py:40-60 ---
+00040:     )
+00041:     validate_missing_semantics(x)
+00042: 
+00043: 
+00044: def test_unknown_asset_class_blocked():
+00045:     route = SourceRoute(
+00046:         asset="X",
+00047:         asset_class="unknown",
+00048:         source_market=None,
+00049:         source_timeframe="weekly",
+00050:         analysis_timeframe="weekly",
+00051:     )
+00052: 
+00053:     try:
+00054:         validate_source_route(route)
+00055:     except ValueError:
+00056:         return
+00057: 
+00058:     raise AssertionError("UNKNOWN asset_class must be blocked")
+00059: 
+00060: 
+
+--- backend/tests/contracts/test_contracts_01_04.py:71-105 ---
+00071:     assert d == BULLISH
+00072: 
+00073:     d, _ = weekly_direction_from_changes(-20, 5)
+00074:     assert d == BEARISH
+00075: 
+00076: 
+00077: def test_alias_extraction():
+00078:     payload = {
+00079:         "asset_managers_positions_long": "1,200",
+00080:         "asset_managers_positions_short": "900",
+00081:         "asset_managers_weekly_change_long": 50,
+00082:         "asset_managers_weekly_change_short": -20,
+00083:     }
+00084: 
+00085:     x = extract_group_numbers(
+00086:         payload,
+00087:         "asset_managers",
+00088:     )
+00089: 
+00090:     assert x.long == "1,200"
+00091:     assert x.short == "900"
+00092:     assert x.change_long == 50
+00093:     assert x.change_short == -20
+00094:     assert x.has_current_totals is True
+00095:     assert x.has_weekly_changes is True
+00096: 
+00097: 
+00098: def test_freshness():
+00099:     x = Freshness(
+00100:         report_date="2026-08-01",
+00101:         report_age_days=7,
+00102:         max_age_days=10,
+00103:         fresh=True,
+00104:     )
+00105:     validate_freshness(x)
+
+====================================================================================================
+FILE=backend/layers/canonical_v1/quality/golden_signals.py RELEVANT_HITS=8
+====================================================================================================
+
+--- backend/layers/canonical_v1/quality/golden_signals.py:1-23 ---
+00001: from __future__ import annotations
+00002: from ..core.contracts import coerce_direction, directional
+00003: 
+00004: def evaluate_golden_signals(
+00005:     *, asset_managers_overall, asset_managers_weekly, leveraged_funds_weekly
+00006: ):
+00007:     am_overall = coerce_direction(asset_managers_overall)
+00008:     am_weekly = coerce_direction(asset_managers_weekly)
+00009:     lf_weekly = coerce_direction(leveraged_funds_weekly)
+00010: 
+00011:     golden = directional(am_weekly) and am_weekly == lf_weekly
+00012:     enhanced = golden and directional(am_overall) and am_overall == am_weekly
+00013:     direction = am_weekly.value if golden else "unknown"
+00014: 
+00015:     return {
+00016:         "golden_active": golden,
+00017:         "enhanced_active": enhanced,
+00018:         "direction": direction,
+00019:         "asset_managers_overall": am_overall.value,
+00020:         "asset_managers_weekly": am_weekly.value,
+00021:         "leveraged_funds_weekly": lf_weekly.value,
+00022:         "leveraged_funds_overall_used": False,
+00023:     }
+
+====================================================================================================
+FILE=backend/layers/canonical_v1/direction/investment_policy.py RELEVANT_HITS=7
+====================================================================================================
+
+--- backend/layers/canonical_v1/direction/investment_policy.py:1-23 ---
+00001: from __future__ import annotations
+00002: from ..core.contracts import coerce_direction, directional
+00003: 
+00004: def evaluate_investment_policy(
+00005:     *, asset_managers_overall, asset_managers_weekly, leveraged_funds_weekly
+00006: ):
+00007:     overall = coerce_direction(asset_managers_overall)
+00008:     am_weekly = coerce_direction(asset_managers_weekly)
+00009:     lf_weekly = coerce_direction(leveraged_funds_weekly)
+00010: 
+00011:     weekly_aligned = directional(overall) and am_weekly == overall
+00012:     stability_aligned = directional(overall) and lf_weekly == overall
+00013: 
+00014:     return {
+00015:         "governing_direction": overall.value,
+00016:         "governing_source": "asset_managers_overall",
+00017:         "timing_rule_applied": False,
+00018:         "asset_managers_weekly_alignment": weekly_aligned,
+00019:         "correction_state": "ended" if weekly_aligned else "active",
+00020:         "leveraged_funds_weekly_alignment": stability_aligned,
+00021:         "correction_risk": "low" if stability_aligned else "elevated",
+00022:         "readiness_allowed": bool(directional(overall) and weekly_aligned),
+00023:     }
+
+====================================================================================================
+FILE=backend/research/tdl_lab/tdl_lab_engine.py RELEVANT_HITS=7
+====================================================================================================
+
+--- backend/research/tdl_lab/tdl_lab_engine.py:6-32 ---
+00006: from pathlib import Path
+00007: 
+00008: ROOT = Path("/home/nawaf511/empire-core-new")
+00009: DATA_DIR = ROOT / "backend/research/tdl_lab/data"
+00010: RESULTS_DIR = ROOT / "backend/research/tdl_lab/results"
+00011: RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+00012: 
+00013: DAY_LOGIC = {
+00014:     "monday": "ASSET_MANAGERS",
+00015:     "tuesday": "LEVERAGED_FUNDS",
+00016:     "wednesday": "LEVERAGED_FUNDS",
+00017:     "thursday": "LEVERAGED_FUNDS",
+00018:     "friday": "ASSET_MANAGERS",
+00019:     "saturday": "LEVERAGED_FUNDS_CRYPTO_ONLY",
+00020:     "sunday": "LEVERAGED_FUNDS_CRYPTO_ONLY",
+00021: }
+00022: 
+00023: M_MODELS = {
+00024:     "M1": "Asset Managers فقط",
+00025:     "M2": "Asset Managers + Other Reportables",
+00026:     "M3": "Asset Managers + Nonreportable",
+00027:     "M4": "Asset Managers + Other Reportables + Nonreportable",
+00028: }
+00029: 
+00030: S_MODELS = {
+00031:     "S1": "Leveraged Funds فقط",
+00032:     "S2": "Leveraged Funds + Dealer/Intermediary",
+
+====================================================================================================
+FILE=backend/shared/tdl_day_logic_v2.py RELEVANT_HITS=7
+====================================================================================================
+
+--- backend/shared/tdl_day_logic_v2.py:1-23 ---
+00001: TDL_DAY_LOGIC_V2 = {
+00002:     "version": "TDL_WEEKLY_DAY_LOGIC_V2",
+00003:     "status": "ACTIVE_BASELINE",
+00004:     "days": {
+00005:         "monday": {"controller": "ASSET_MANAGERS", "mode": "weekly_anchor"},
+00006:         "tuesday": {"controller": "LEVERAGED_FUNDS", "mode": "tactical_structure"},
+00007:         "wednesday": {"controller": "LEVERAGED_FUNDS", "mode": "tactical_structure"},
+00008:         "thursday": {"controller": "LEVERAGED_FUNDS", "mode": "tactical_structure"},
+00009:         "friday": {"controller": "ASSET_MANAGERS", "mode": "weekly_anchor"},
+00010:         "saturday": {"controller": "LEVERAGED_FUNDS", "mode": "crypto_only", "applies_to": ["CRYPTO"]},
+00011:         "sunday": {"controller": "LEVERAGED_FUNDS", "mode": "crypto_only", "applies_to": ["CRYPTO"]},
+00012:     },
+00013: }
+00014: 
+00015: DAY_MAP = {
+00016:     "mon": "monday", "monday": "monday", "الاثنين": "monday",
+00017:     "tue": "tuesday", "tues": "tuesday", "tuesday": "tuesday", "الثلاثاء": "tuesday",
+00018:     "wed": "wednesday", "wednesday": "wednesday", "الأربعاء": "wednesday", "الاربعاء": "wednesday",
+00019:     "thu": "thursday", "thur": "thursday", "thurs": "thursday", "thursday": "thursday", "الخميس": "thursday",
+00020:     "fri": "friday", "friday": "friday", "الجمعة": "friday",
+00021:     "sat": "saturday", "saturday": "saturday", "السبت": "saturday",
+00022:     "sun": "sunday", "sunday": "sunday", "الأحد": "sunday", "الاحد": "sunday",
+00023: }
+
+====================================================================================================
+FILE=backend/app/contracts/market_data/market_data_contract.py RELEVANT_HITS=5
+====================================================================================================
+
+--- backend/app/contracts/market_data/market_data_contract.py:28-48 ---
+00028:     dataset: Optional[str] = None
+00029: 
+00030:     contract_version: str = CONTRACT_VERSION
+00031: 
+00032: 
+00033: @dataclass(frozen=True)
+00034: class Freshness:
+00035:     report_date: str
+00036:     report_age_days: int
+00037:     max_age_days: int
+00038:     fresh: bool
+00039: 
+00040:     contract_version: str = CONTRACT_VERSION
+00041: 
+00042: 
+00043: def validate_candle(c: Candle) -> None:
+00044:     if not c.asset:
+00045:         raise ValueError("asset (الأصل) is required")
+00046: 
+00047:     if not c.timeframe:
+00048:         raise ValueError("timeframe (الإطار الزمني) is required")
+
+--- backend/app/contracts/market_data/market_data_contract.py:61-85 ---
+00061:     ):
+00062:         if not (c.low <= value <= c.high):
+00063:             raise ValueError(
+00064:                 f"{name} must be inside candle high/low range"
+00065:             )
+00066: 
+00067: 
+00068: def validate_freshness(f: Freshness) -> None:
+00069:     if f.report_age_days < 0:
+00070:         raise ValueError(
+00071:             "report_age_days (عمر التقرير) cannot be negative"
+00072:         )
+00073: 
+00074:     if f.max_age_days < 0:
+00075:         raise ValueError(
+00076:             "max_age_days (الحد الأقصى للعمر) cannot be negative"
+00077:         )
+00078: 
+00079:     expected = f.report_age_days <= f.max_age_days
+00080: 
+00081:     if f.fresh != expected:
+00082:         raise ValueError(
+00083:             "fresh (الحداثة) disagrees with "
+00084:             "report_age_days/max_age_days"
+00085:         )
+
+====================================================================================================
+FILE=backend/app/support_layers/cot/cot_asset_mapper.py RELEVANT_HITS=4
+====================================================================================================
+
+--- backend/app/support_layers/cot/cot_asset_mapper.py:26-72 ---
+00026: def resolve_cot_asset_mapping(symbol: str) -> CotAssetMapping:
+00027:     s = normalize_symbol(symbol)
+00028: 
+00029:     if s in FOREX or s in INDICES:
+00030:         asset_class = CotAssetClass.FOREX if s in FOREX else CotAssetClass.INDICES
+00031:         return CotAssetMapping(
+00032:             symbol=s,
+00033:             asset_class=asset_class,
+00034:             report_family=CotReportFamily.TFF,
+00035:             lm_categories=("institutional direction/Institutional", "market activity"),
+00036:             s_categories=("market momentum", "Dealer/Intermediary"),
+00037:             fallback_allowed=True,
+00038:             notes="Financial market: TFF market_positioning family is primary.",
+00039:         )
+00040: 
+00041:     if s in METALS or s in ENERGY:
+00042:         asset_class = CotAssetClass.METALS if s in METALS else CotAssetClass.ENERGY
+00043:         return CotAssetMapping(
+00044:             symbol=s,
+00045:             asset_class=asset_class,
+00046:             report_family=CotReportFamily.DISAGGREGATED,
+00047:             lm_categories=("Producer/Merchant/Processor/User", "Swap Dealers", "market activity"),
+00048:             s_categories=("Managed Money",),
+00049:             fallback_allowed=True,
+00050:             notes="Physical commodity: Disaggregated market_positioning family is primary.",
+00051:         )
+00052: 
+00053:     if s in CRYPTO or s.endswith("USDT"):
+00054:         return CotAssetMapping(
+00055:             symbol=s,
+00056:             asset_class=CotAssetClass.CRYPTO,
+00057:             report_family=CotReportFamily.LEGACY,
+00058:             lm_categories=("institutional_positioning",),
+00059:             s_categories=("Noncommercials",),
+00060:             fallback_allowed=True,
+00061:             notes="Crypto market_positioning is fallback only when matching futures data exists.",
+00062:         )
+00063: 
+00064:     return CotAssetMapping(
+00065:         symbol=s,
+00066:         asset_class=CotAssetClass.UNKNOWN,
+00067:         report_family=CotReportFamily.LEGACY,
+00068:         lm_categories=("institutional_positioning",),
+00069:         s_categories=("Noncommercials",),
+00070:         fallback_allowed=False,
+00071:         notes="Unknown symbol. Manual production mapping required.",
+00072:     )
+
+====================================================================================================
+FILE=backend/app/contracts/canonical/semantic_contract.py RELEVANT_HITS=3
+====================================================================================================
+
+--- backend/app/contracts/canonical/semantic_contract.py:20-41 ---
+00020: 
+00021: 
+00022: class DirectionScope(str, Enum):
+00023:     OVERALL = "OVERALL"
+00024:     WEEKLY = "WEEKLY"
+00025: 
+00026: 
+00027: class ParticipantGroup(str, Enum):
+00028:     ASSET_MANAGERS = "ASSET_MANAGERS"
+00029:     LEVERAGED_FUNDS = "LEVERAGED_FUNDS"
+00030:     DEALER_INTERMEDIARY = "DEALER_INTERMEDIARY"
+00031: 
+00032: 
+00033: class ExposureClass(str, Enum):
+00034:     PUBLIC = "PUBLIC"
+00035:     ADMIN = "ADMIN"
+00036:     INTERNAL = "INTERNAL"
+00037:     EXPERIMENTAL = "EXPERIMENTAL"
+00038:     WITHHELD = "WITHHELD"
+00039: 
+00040: 
+00041: class QualityStatus(str, Enum):
+
+--- backend/app/contracts/canonical/semantic_contract.py:69-89 ---
+00069: 
+00070:     timeframe: Optional[str] = None
+00071:     horizon: Optional[str] = None
+00072: 
+00073:     observed_at: Optional[str] = None
+00074:     calculated_at: Optional[str] = None
+00075: 
+00076:     report_date: Optional[str] = None
+00077:     report_age_days: Optional[int] = None
+00078: 
+00079:     fresh: Optional[bool] = None
+00080:     complete: bool = True
+00081: 
+00082:     missing_reason: Optional[str] = None
+00083:     fallback_used: bool = False
+00084: 
+00085:     quality_status: str = QualityStatus.UNKNOWN.value
+00086:     authority: Optional[str] = None
+00087:     exposure_class: str = ExposureClass.INTERNAL.value
+00088: 
+00089:     contract_version: str = CONTRACT_VERSION
+
+====================================================================================================
+FILE=backend/app/support_layers/cot/cot_contracts.py RELEVANT_HITS=3
+====================================================================================================
+
+--- backend/app/support_layers/cot/cot_contracts.py:25-45 ---
+00025:     BEARISH = "bearish"
+00026:     NEUTRAL = "neutral"
+00027: 
+00028: 
+00029: @dataclass(frozen=True)
+00030: class CotAssetMapping:
+00031:     symbol: str
+00032:     asset_class: CotAssetClass
+00033:     report_family: CotReportFamily
+00034:     lm_categories: tuple[str, ...]
+00035:     s_categories: tuple[str, ...]
+00036:     fallback_allowed: bool
+00037:     notes: str
+00038: 
+00039: 
+00040: @dataclass(frozen=True)
+00041: class CotCategoryPosition:
+00042:     category: str
+00043:     long: float
+00044:     short: float
+00045: 
+
+--- backend/app/support_layers/cot/cot_contracts.py:47-83 ---
+00047:     def net(self) -> float:
+00048:         return float(self.long) - float(self.short)
+00049: 
+00050: 
+00051: @dataclass(frozen=True)
+00052: class CotSnapshot:
+00053:     symbol: str
+00054:     report_date: str
+00055:     report_family: CotReportFamily
+00056:     positions: tuple[CotCategoryPosition, ...]
+00057:     source: str = "manual"
+00058:     metadata: dict[str, Any] = field(default_factory=dict)
+00059: 
+00060: 
+00061: @dataclass(frozen=True)
+00062: class CotGroupResult:
+00063:     group_name: str
+00064:     categories: tuple[str, ...]
+00065:     net: float
+00066:     direction: CotDirection
+00067: 
+00068: 
+00069: @dataclass(frozen=True)
+00070: class CotIntelligenceResult:
+00071:     symbol: str
+00072:     report_date: str
+00073:     report_family: CotReportFamily
+00074:     lm: CotGroupResult
+00075:     s: CotGroupResult
+00076:     dominant_group: str
+00077:     dominant_direction: CotDirection
+00078:     alignment_state: str
+00079:     confidence_effect: float
+00080:     context_only: bool
+00081:     execution_allowed: bool
+00082:     notes: list[str]
+00083:     metadata: dict[str, Any] = field(default_factory=dict)
+
+====================================================================================================
+FILE=backend/app/support_layers/cot/cot_storage.py RELEVANT_HITS=3
+====================================================================================================
+
+--- backend/app/support_layers/cot/cot_storage.py:76-96 ---
+00076:                 "net": float(p.get("long", 0.0)) - float(p.get("short", 0.0)),
+00077:             }
+00078:             for p in positions
+00079:         ]
+00080: 
+00081:         record = {
+00082:             "symbol": normalized,
+00083:             "report_date": report_date,
+00084:             "report_family": mapping.report_family.value,
+00085:             "asset_class": mapping.asset_class.value,
+00086:             "positions": parsed_positions,
+00087:             "source": source,
+00088:             "source_type": source_type,
+00089:             "created_at_utc": datetime.now(timezone.utc).isoformat(),
+00090:             "context_only": True,
+00091:             "execution_allowed": False,
+00092:             "net_formula": "net = long - short",
+00093:         }
+00094: 
+00095:         data = self._read()
+00096:         data[source_type][normalized] = record
+
+--- backend/app/support_layers/cot/cot_storage.py:143-182 ---
+00143:             for p in record.get("positions", [])
+00144:         )
+00145: 
+00146:         mapping = resolve_cot_asset_mapping(record["symbol"])
+00147: 
+00148:         return CotSnapshot(
+00149:             symbol=record["symbol"],
+00150:             report_date=record["report_date"],
+00151:             report_family=mapping.report_family,
+00152:             positions=positions,
+00153:             source=record.get("active_source", record.get("source_type", "unknown")),
+00154:             metadata={
+00155:                 "asset_class": record.get("asset_class"),
+00156:                 "source": record.get("source"),
+00157:                 "source_type": record.get("source_type"),
+00158:                 "active_source": record.get("active_source"),
+00159:                 "context_only": True,
+00160:                 "execution_allowed": False,
+00161:                 "net_formula": "net = long - short",
+00162:             },
+00163:         )
+00164: 
+00165: 
+00166: def snapshot_to_dict(snapshot: CotSnapshot) -> dict[str, Any]:
+00167:     return {
+00168:         "symbol": snapshot.symbol,
+00169:         "report_date": snapshot.report_date,
+00170:         "report_family": snapshot.report_family.value,
+00171:         "source": snapshot.source,
+00172:         "positions": [
+00173:             {
+00174:                 "category": p.category,
+00175:                 "long": p.long,
+00176:                 "short": p.short,
+00177:                 "net": p.net,
+00178:             }
+00179:             for p in snapshot.positions
+00180:         ],
+00181:         "metadata": dict(snapshot.metadata),
+00182:     }
+
+====================================================================================================
+FILE=backend/app/support_layers/cot/test_cot_spine.py RELEVANT_HITS=3
+====================================================================================================
+
+--- backend/app/support_layers/cot/test_cot_spine.py:4-32 ---
+00004: from app.support_layers.cot.cot_contracts import CotReportFamily, CotDirection
+00005: from app.support_layers.cot.cot_engine import CotIntelligenceEngine
+00006: from app.support_layers.cot.manual_cot_provider import seed_demo_provider
+00007: 
+00008: 
+00009: class TestCotSpine(unittest.TestCase):
+00010:     def test_forex_uses_tff(self):
+00011:         mapping = resolve_cot_asset_mapping("EURUSD")
+00012:         self.assertEqual(mapping.report_family, CotReportFamily.TFF)
+00013: 
+00014:     def test_gold_uses_disaggregated(self):
+00015:         mapping = resolve_cot_asset_mapping("XAUUSD")
+00016:         self.assertEqual(mapping.report_family, CotReportFamily.DISAGGREGATED)
+00017: 
+00018:     def test_crypto_uses_legacy_fallback(self):
+00019:         mapping = resolve_cot_asset_mapping("BTCUSDT")
+00020:         self.assertEqual(mapping.report_family, CotReportFamily.LEGACY)
+00021: 
+00022:     def test_evaluate_eurusd(self):
+00023:         provider = seed_demo_provider()
+00024:         snapshot = provider.get_snapshot("EURUSD")
+00025:         self.assertIsNotNone(snapshot)
+00026: 
+00027:         result = CotIntelligenceEngine().evaluate(snapshot)
+00028: 
+00029:         self.assertEqual(result.symbol, "EURUSD")
+00030:         self.assertFalse(result.execution_allowed)
+00031:         self.assertTrue(result.context_only)
+00032:         self.assertIn(result.dominant_direction, {CotDirection.BULLISH, CotDirection.BEARISH, CotDirection.NEUTRAL})
+
+====================================================================================================
+FILE=backend/layers/canonical_v1/direction/l01_tdl_medium_long.py RELEVANT_HITS=3
+====================================================================================================
+
+--- backend/layers/canonical_v1/direction/l01_tdl_medium_long.py:7-26 ---
+00007: 
+00008: LAYER_ID = "NDSP-CORE-L01"
+00009: CANONICAL_NAME = "tdl_medium_long"
+00010: 
+00011: 
+00012: def evaluate(payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+00013:     payload = dict(payload or {})
+00014:     output = evaluate_investment_policy(
+00015:         asset_managers_overall=payload.get("asset_managers_overall"),
+00016:         asset_managers_weekly=payload.get("asset_managers_weekly"),
+00017:         leveraged_funds_weekly=payload.get("leveraged_funds_weekly"),
+00018:     )
+00019:     active = output["governing_direction"] in {"bullish", "bearish"}
+00020:     return LayerResult(
+00021:         LAYER_ID, CANONICAL_NAME,
+00022:         "ACTIVE" if active else "UNDER_REVIEW",
+00023:         90 if output["readiness_allowed"] else 65,
+00024:         output,
+00025:         blocking=not output["readiness_allowed"],
+00026:     ).to_dict()
+
+====================================================================================================
+FILE=backend/layers/canonical_v1/quality/l13_nawaf_golden_signal.py RELEVANT_HITS=3
+====================================================================================================
+
+--- backend/layers/canonical_v1/quality/l13_nawaf_golden_signal.py:7-28 ---
+00007: 
+00008: LAYER_ID = "NDSP-CORE-L13"
+00009: CANONICAL_NAME = "nawaf_golden_signal"
+00010: 
+00011: 
+00012: def evaluate(payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+00013:     payload = dict(payload or {})
+00014:     signals = evaluate_golden_signals(
+00015:         asset_managers_overall=payload.get("asset_managers_overall"),
+00016:         asset_managers_weekly=payload.get("asset_managers_weekly"),
+00017:         leveraged_funds_weekly=payload.get("leveraged_funds_weekly"),
+00018:     )
+00019:     output = {
+00020:         "active": signals["golden_active"],
+00021:         "direction": signals["direction"],
+00022:         "rule": "AM_WEEKLY_EQUALS_LF_WEEKLY",
+00023:     }
+00024:     return LayerResult(
+00025:         LAYER_ID, CANONICAL_NAME,
+00026:         "ACTIVE" if output["active"] else "INACTIVE",
+00027:         95 if output["active"] else 0, output, blocking=False,
+00028:     ).to_dict()
+
+====================================================================================================
+FILE=backend/layers/canonical_v1/quality/l14_nawaf_enhanced_golden_signal.py RELEVANT_HITS=3
+====================================================================================================
+
+--- backend/layers/canonical_v1/quality/l14_nawaf_enhanced_golden_signal.py:7-29 ---
+00007: 
+00008: LAYER_ID = "NDSP-CORE-L14"
+00009: CANONICAL_NAME = "nawaf_enhanced_golden_signal"
+00010: 
+00011: 
+00012: def evaluate(payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+00013:     payload = dict(payload or {})
+00014:     signals = evaluate_golden_signals(
+00015:         asset_managers_overall=payload.get("asset_managers_overall"),
+00016:         asset_managers_weekly=payload.get("asset_managers_weekly"),
+00017:         leveraged_funds_weekly=payload.get("leveraged_funds_weekly"),
+00018:     )
+00019:     output = {
+00020:         "active": signals["enhanced_active"],
+00021:         "direction": signals["direction"],
+00022:         "rule": "AM_OVERALL_EQUALS_AM_WEEKLY_EQUALS_LF_WEEKLY",
+00023:         "lf_overall_used": False,
+00024:     }
+00025:     return LayerResult(
+00026:         LAYER_ID, CANONICAL_NAME,
+00027:         "ACTIVE" if output["active"] else "INACTIVE",
+00028:         98 if output["active"] else 0, output, blocking=False,
+00029:     ).to_dict()
+
+====================================================================================================
+FILE=backend/layers/canonical_v1/tests/test_orchestrator_smoke.py RELEVANT_HITS=3
+====================================================================================================
+
+--- backend/layers/canonical_v1/tests/test_orchestrator_smoke.py:10-32 ---
+00010:         registry = project / "docs/03-contracts/NDSP_16_LAYER_CORE_REGISTRY_V1.json"
+00011:         payload = {
+00012:             "analysis_mode": "investment",
+00013:             "cot_validity": {
+00014:                 "decision_use_allowed": True,
+00015:                 "monitoring_use_allowed": True,
+00016:                 "status": "CURRENT",
+00017:             },
+00018:             "asset_managers_overall": "bullish",
+00019:             "asset_managers_weekly": "bullish",
+00020:             "leveraged_funds_weekly": "bullish",
+00021:             "weekly_tdl_direction": "bullish",
+00022:             "timing_eligible": True,
+00023:             "divergence_result": {"status": "CONFIRMED", "confidence": 80},
+00024:             "scenario_levels": {
+00025:                 "activation": 100,
+00026:                 "arrival": 110,
+00027:                 "review": 95,
+00028:                 "invalidation": 90,
+00029:             },
+00030:             "candles": [{"open": 100}, {"open": 105}, {"open": 103}],
+00031:             "indicator_values": [20, 80, 40],
+00032:             "indicator_name": "RSI",
+
+====================================================================================================
+FILE=backend/app/contracts/assets/source_routing_contract.py RELEVANT_HITS=2
+====================================================================================================
+
+--- backend/app/contracts/assets/source_routing_contract.py:10-37 ---
+00010: CONTRACT_VERSION = "NDSP_ASSET_SOURCE_ROUTING_V1"
+00011: 
+00012: 
+00013: @dataclass(frozen=True)
+00014: class SourceRoute:
+00015:     asset: str
+00016:     asset_class: str
+00017: 
+00018:     source_market: Optional[str]
+00019: 
+00020:     source_timeframe: Optional[str]
+00021:     analysis_timeframe: Optional[str]
+00022: 
+00023:     provider: Optional[str] = None
+00024:     dataset: Optional[str] = None
+00025:     report_family: Optional[str] = None
+00026: 
+00027:     contract_version: str = CONTRACT_VERSION
+00028: 
+00029: 
+00030: def validate_source_route(
+00031:     route: SourceRoute,
+00032:     *,
+00033:     require_provider: bool = False,
+00034:     require_dataset: bool = False,
+00035: ) -> None:
+00036: 
+00037:     if not route.asset:
+
+====================================================================================================
+FILE=backend/app/support_layers/cot/cot_engine.py RELEVANT_HITS=2
+====================================================================================================
+
+--- backend/app/support_layers/cot/cot_engine.py:55-82 ---
+00055:             confidence_effect = -0.5
+00056:         else:
+00057:             alignment_state = "mixed_or_neutral"
+00058:             confidence_effect = 0.0
+00059: 
+00060:         notes = [
+00061:             "market_positioning is positioning context only.",
+00062:             "market_positioning does not produce direct execution.",
+00063:             f"Report family: {snapshot.report_family.value}.",
+00064:             f"Dominant group: {dominant_group}.",
+00065:         ]
+00066: 
+00067:         return CotIntelligenceResult(
+00068:             symbol=snapshot.symbol,
+00069:             report_date=snapshot.report_date,
+00070:             report_family=snapshot.report_family,
+00071:             lm=lm,
+00072:             s=s,
+00073:             dominant_group=dominant_group,
+00074:             dominant_direction=dominant_direction,
+00075:             alignment_state=alignment_state,
+00076:             confidence_effect=confidence_effect,
+00077:             context_only=True,
+00078:             execution_allowed=False,
+00079:             notes=notes,
+00080:             metadata={
+00081:                 "source": snapshot.source,
+00082:                 "asset_class": snapshot.metadata.get("asset_class"),
+
+====================================================================================================
+FILE=backend/app/support_layers/cot/manual_cot_provider.py RELEVANT_HITS=1
+====================================================================================================
+
+--- backend/app/support_layers/cot/manual_cot_provider.py:17-37 ---
+00017:         source: str = "manual",
+00018:     ) -> CotSnapshot:
+00019:         normalized = normalize_symbol(symbol)
+00020:         mapping = resolve_cot_asset_mapping(normalized)
+00021: 
+00022:         snapshot = CotSnapshot(
+00023:             symbol=normalized,
+00024:             report_date=report_date,
+00025:             report_family=mapping.report_family,
+00026:             positions=tuple(
+00027:                 CotCategoryPosition(
+00028:                     category=str(p["category"]),
+00029:                     long=float(p.get("long", 0.0)),
+00030:                     short=float(p.get("short", 0.0)),
+00031:                 )
+00032:                 for p in positions
+00033:             ),
+00034:             source=source,
+00035:             metadata={
+00036:                 "asset_class": mapping.asset_class.value,
+00037:                 "fallback_allowed": mapping.fallback_allowed,
+
+====================================================================================================
+FILE=backend/layers/canonical_v1/direction/l04_correction_gate.py RELEVANT_HITS=1
+====================================================================================================
+
+--- backend/layers/canonical_v1/direction/l04_correction_gate.py:7-25 ---
+00007: LAYER_ID = "NDSP-CORE-L04"
+00008: CANONICAL_NAME = "correction_gate"
+00009: 
+00010: 
+00011: def evaluate(payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+00012:     payload = dict(payload or {})
+00013:     mode = payload.get("analysis_mode", "investment")
+00014:     if mode == "investment":
+00015:         allowed = bool((payload.get("l01") or {}).get("asset_managers_weekly_alignment"))
+00016:         role = "investment_weekly_correction_gate"
+00017:     else:
+00018:         allowed = bool((payload.get("l02") or {}).get("timing_eligible"))
+00019:         role = "speculative_timing_eligibility"
+00020:     output = {"mode": mode, "allowed": allowed, "role": role}
+00021:     return LayerResult(
+00022:         LAYER_ID, CANONICAL_NAME,
+00023:         "ALLOWED" if allowed else "MONITORING_ONLY",
+00024:         88 if allowed else 55, output, blocking=not allowed,
+00025:     ).to_dict()

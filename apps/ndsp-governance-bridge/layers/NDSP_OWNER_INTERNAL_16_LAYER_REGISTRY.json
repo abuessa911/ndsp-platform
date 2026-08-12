@@ -22,9 +22,9 @@
     },
     {
       "id": 2,
-      "internal_name": "Nawaf Meet Point",
+      "internal_name": "NMP",
       "short_name": "NMP",
-      "arabic_name": "نقطة التقاء نواف",
+      "arabic_name": "NMP",
       "visibility": "public_allowed_and_owner_internal",
       "logic": "Extracts spatial reference zones and critical convergence levels from market structure.",
       "primary_output": "reference_price_zone"
@@ -40,9 +40,9 @@
     },
     {
       "id": 4,
-      "internal_name": "Nawaf Golden Alignment",
+      "internal_name": "Golden Signal",
       "short_name": "GOLDEN_ALIGNMENT",
-      "arabic_name": "إشارة نواف الذهبية",
+      "arabic_name": "الإشارة الذهبية",
       "visibility": "public_allowed_and_owner_internal",
       "logic": "Detects multi-layer agreement and publishes the golden alignment state when internal coherence is high.",
       "primary_output": "golden_alignment_state"

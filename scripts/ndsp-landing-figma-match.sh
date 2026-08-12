@@ -1,0 +1,774 @@
+set -Eeuo pipefail
+
+PROJECT_ROOT="/home/nawaf511/empire-core-new"
+SRC="$PROJECT_ROOT/frontend/public-landing/index.html"
+LIVE="/var/www/ndsp.app/index.html"
+STAMP="$(date +%Y%m%d_%H%M%S)"
+
+cd "$PROJECT_ROOT"
+
+cp "$SRC" "$SRC.before-figma-match-$STAMP" || true
+sudo cp "$LIVE" "$LIVE.before-figma-match-$STAMP" || true
+
+cat > "$SRC" <<'HTML'
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>NDSP — منصة دعم القرار</title>
+  <meta name="description" content="NDSP منصة دعم قرار مؤسسية تجمع الأدلة والسياق داخل إطار محكوم لتقديم اتجاه رسمي واضح وقابل للتفسير والتحقق.">
+  <meta property="og:title" content="NDSP — منصة دعم القرار">
+  <meta property="og:description" content="الأدلة تتقاطع. القرار يتجه.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#080A0D">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --black:#080A0D;
+      --graphite:#151A20;
+      --surface:#0C0F13;
+      --surface2:#111820;
+      --gold:#CDAA56;
+      --gold2:#E4BF68;
+      --blue:#35AFE3;
+      --mist:#D9DDE2;
+      --white:#F4F3EF;
+      --slate:#77818C;
+      --line:rgba(217,221,226,.10);
+      --goldLine:rgba(205,170,86,.42);
+      --max:1440px;
+      --safeTop:env(safe-area-inset-top,0px);
+      --safeBottom:env(safe-area-inset-bottom,0px);
+    }
+
+    *{box-sizing:border-box}
+    html{background:var(--black);overflow-x:hidden;scroll-behavior:smooth}
+    body{
+      margin:0;
+      min-height:100dvh;
+      overflow-x:clip;
+      color:var(--white);
+      font-family:"IBM Plex Sans Arabic","Inter",system-ui,sans-serif;
+      background:
+        radial-gradient(circle at 74% 14%,rgba(205,170,86,.10),transparent 36rem),
+        radial-gradient(circle at 17% 44%,rgba(53,175,227,.08),transparent 36rem),
+        linear-gradient(180deg,#080A0D 0%,#0B1016 54%,#080A0D 100%);
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.42;
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
+      background-size:80px 80px;
+      mask-image:radial-gradient(circle at 50% 20%,black,transparent 78%);
+    }
+
+    a{color:inherit;text-decoration:none}
+    button,input{font:inherit}
+    a,button{min-height:44px}
+    :focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:10px}
+
+    .shell{
+      width:min(100% - 64px,var(--max));
+      margin-inline:auto;
+    }
+
+    .topbar{
+      position:fixed;
+      inset:0 0 auto 0;
+      z-index:50;
+      padding-top:var(--safeTop);
+      background:linear-gradient(180deg,rgba(8,10,13,.82),rgba(8,10,13,.28),transparent);
+      backdrop-filter:blur(10px);
+    }
+
+    .nav{
+      height:96px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:30px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:18px;
+      order:1;
+    }
+
+    .mark{
+      width:58px;
+      height:58px;
+      position:relative;
+      border-radius:8px;
+    }
+
+    .mark::before{
+      content:"";
+      position:absolute;
+      inset:8px 10px;
+      background:
+        linear-gradient(35deg,transparent 0 38%,var(--gold) 39% 45%,transparent 46%),
+        linear-gradient(-35deg,transparent 0 38%,var(--gold) 39% 45%,transparent 46%),
+        linear-gradient(90deg,transparent 0 36%,var(--gold) 37% 43%,transparent 44%),
+        linear-gradient(145deg,transparent 0 42%,var(--gold) 43% 49%,transparent 50%);
+      filter:drop-shadow(0 0 8px rgba(205,170,86,.18));
+    }
+
+    .mark::after{
+      content:"";
+      position:absolute;
+      left:7px;
+      top:24px;
+      border-top:6px solid transparent;
+      border-bottom:6px solid transparent;
+      border-right:10px solid var(--blue);
+      filter:drop-shadow(0 0 8px rgba(53,175,227,.35));
+    }
+
+    .brandText{
+      display:grid;
+      gap:4px;
+      line-height:1;
+    }
+
+    .brandText strong{
+      font-family:"IBM Plex Mono",monospace;
+      font-size:42px;
+      letter-spacing:.24em;
+      font-weight:700;
+      color:var(--mist);
+    }
+
+    .brandText small{
+      color:var(--mist);
+      font-size:14px;
+      letter-spacing:.02em;
+    }
+
+    .links{
+      order:2;
+      display:flex;
+      align-items:center;
+      gap:42px;
+      color:rgba(217,221,226,.76);
+      font-size:17px;
+    }
+
+    .links a:not(.login):hover{color:var(--white)}
+    .sep{width:1px;height:30px;background:rgba(217,221,226,.28)}
+
+    .login{
+      border:1px solid rgba(205,170,86,.64);
+      border-radius:8px;
+      padding:11px 22px;
+      color:var(--white);
+      background:rgba(8,10,13,.34);
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.025);
+    }
+
+    .menuBtn{display:none}
+
+    .hero{
+      min-height:100dvh;
+      padding-top:128px;
+      display:grid;
+      grid-template-columns:minmax(580px,1.15fr) minmax(420px,.85fr);
+      align-items:center;
+      gap:72px;
+      position:relative;
+    }
+
+    .copy{
+      order:1;
+      justify-self:end;
+      max-width:660px;
+      padding-bottom:32px;
+    }
+
+    h1{
+      margin:0;
+      font-size:clamp(54px,5.9vw,86px);
+      line-height:1.05;
+      letter-spacing:-.045em;
+      font-weight:700;
+      color:var(--white);
+      text-wrap:balance;
+    }
+
+    .gold{color:var(--gold)}
+    .lead{
+      margin:28px 0 0;
+      max-width:650px;
+      color:rgba(217,221,226,.78);
+      font-size:clamp(20px,1.75vw,26px);
+      line-height:1.85;
+      font-weight:400;
+    }
+
+    .actions{
+      margin-top:44px;
+      display:flex;
+      gap:18px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:210px;
+      border-radius:7px;
+      padding:15px 28px;
+      font-size:18px;
+      font-weight:700;
+      transition:.18s ease;
+    }
+
+    .primary{
+      background:linear-gradient(180deg,#E7BF69,#CDAA56);
+      color:#111;
+      border:1px solid rgba(244,243,239,.25);
+      box-shadow:0 16px 44px rgba(205,170,86,.15);
+    }
+
+    .secondary{
+      color:var(--mist);
+      border:1px solid rgba(217,221,226,.26);
+      background:rgba(12,15,19,.56);
+    }
+
+    .btn:hover{transform:translateY(-2px)}
+
+    .visual{
+      order:2;
+      justify-self:start;
+      width:100%;
+      max-width:760px;
+      position:relative;
+    }
+
+    .meridian{
+      width:100%;
+      display:block;
+      overflow:visible;
+    }
+
+    .evidencePath{
+      stroke-dasharray:740;
+      stroke-dashoffset:740;
+      animation:draw 1.7s cubic-bezier(.2,.8,.2,1) forwards;
+    }
+    .evidencePath:nth-child(2){animation-delay:.08s}
+    .evidencePath:nth-child(3){animation-delay:.16s}
+    .evidencePath:nth-child(4){animation-delay:.24s}
+    .evidencePath:nth-child(5){animation-delay:.32s}
+
+    .blueDot{
+      filter:drop-shadow(0 0 9px rgba(53,175,227,.55));
+      transform-box:fill-box;
+      transform-origin:center;
+      animation:dotPulse 3s ease-in-out infinite;
+    }
+
+    .goldNode{
+      transform-box:fill-box;
+      transform-origin:center;
+      animation:nodePulse 2.4s ease-out 1;
+    }
+
+    .corePanel{
+      filter:drop-shadow(0 0 28px rgba(205,170,86,.12));
+    }
+
+    .belowFold{
+      position:absolute;
+      inset:auto 0 0;
+      border-top:1px solid rgba(217,221,226,.11);
+      background:linear-gradient(180deg,rgba(21,26,32,.40),rgba(8,10,13,.62));
+      min-height:186px;
+      display:flex;
+      align-items:center;
+      z-index:2;
+    }
+
+    .steps{
+      width:min(100% - 64px,var(--max));
+      margin-inline:auto;
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:34px;
+      direction:rtl;
+    }
+
+    .step{
+      display:grid;
+      grid-template-columns:auto 1fr;
+      gap:18px;
+      align-items:center;
+      min-height:110px;
+    }
+
+    .stepIcon{
+      width:74px;
+      height:74px;
+      border-radius:999px;
+      border:1px solid rgba(217,221,226,.34);
+      display:grid;
+      place-items:center;
+      color:var(--blue);
+      background:rgba(12,15,19,.58);
+      position:relative;
+    }
+
+    .stepIcon::after{
+      content:"";
+      position:absolute;
+      inset:13px;
+      border-radius:inherit;
+      border:1px solid rgba(217,221,226,.12);
+    }
+
+    .step b{
+      display:block;
+      color:var(--blue);
+      font-family:"IBM Plex Mono",monospace;
+      font-size:20px;
+      margin-bottom:4px;
+    }
+
+    .step h3{
+      margin:0;
+      color:var(--white);
+      font-size:28px;
+      line-height:1.2;
+    }
+
+    .step p{
+      margin:8px 0 0;
+      color:rgba(217,221,226,.68);
+      line-height:1.65;
+      font-size:16px;
+    }
+
+    section.content{
+      padding:96px 0;
+      border-top:1px solid rgba(217,221,226,.08);
+    }
+
+    .sectionHead{
+      max-width:760px;
+      display:grid;
+      gap:12px;
+    }
+
+    .sectionHead h2{
+      margin:0;
+      font-size:clamp(34px,4vw,56px);
+      line-height:1.16;
+      letter-spacing:-.025em;
+    }
+
+    .sectionHead p{
+      margin:0;
+      color:var(--slate);
+      font-size:18px;
+      line-height:1.9;
+    }
+
+    .authorityCard{
+      margin-top:36px;
+      display:grid;
+      grid-template-columns:1.1fr repeat(3,1fr);
+      border:1px solid var(--goldLine);
+      border-radius:12px;
+      overflow:hidden;
+      background:
+        radial-gradient(circle at 0% 50%,rgba(205,170,86,.13),transparent 30%),
+        linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.01)),
+        #0C0F13;
+      box-shadow:
+        0 0 0 1px rgba(205,170,86,.08),
+        0 18px 54px rgba(0,0,0,.34),
+        0 0 44px rgba(205,170,86,.08);
+    }
+
+    .authorityCard > div{
+      min-height:92px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:14px;
+      color:var(--mist);
+      border-inline-start:1px solid rgba(205,170,86,.20);
+      font-size:18px;
+    }
+
+    .authorityCard .coreWord{
+      border-inline-start:0;
+      color:var(--gold);
+      font-family:"IBM Plex Mono",monospace;
+      font-size:34px;
+      font-weight:700;
+      letter-spacing:.08em;
+    }
+
+    .cards{
+      margin-top:34px;
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:1px;
+      border:1px solid rgba(217,221,226,.10);
+      border-radius:14px;
+      overflow:hidden;
+      background:rgba(217,221,226,.08);
+    }
+
+    .card{
+      min-height:170px;
+      padding:28px;
+      background:linear-gradient(180deg,rgba(21,26,32,.72),rgba(8,10,13,.92));
+    }
+
+    .card small{
+      color:var(--blue);
+      font-family:"IBM Plex Mono",monospace;
+      font-weight:700;
+    }
+
+    .card h3{
+      margin:16px 0 8px;
+      font-size:25px;
+      color:var(--white);
+    }
+
+    .card p{
+      margin:0;
+      color:var(--slate);
+      line-height:1.75;
+    }
+
+    .cta{
+      margin:96px 0;
+      border:1px solid rgba(205,170,86,.30);
+      border-radius:18px;
+      padding:46px;
+      background:
+        radial-gradient(circle at 85% 20%,rgba(205,170,86,.11),transparent 34%),
+        linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01)),
+        #0C0F13;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:28px;
+    }
+
+    .cta h2{
+      margin:0;
+      font-size:clamp(32px,4vw,52px);
+    }
+
+    .cta p{
+      margin:12px 0 0;
+      color:var(--slate);
+      font-size:18px;
+    }
+
+    footer{
+      padding:44px 0 64px;
+      border-top:1px solid rgba(217,221,226,.08);
+      color:rgba(217,221,226,.58);
+    }
+
+    .foot{
+      display:flex;
+      justify-content:space-between;
+      gap:24px;
+      flex-wrap:wrap;
+    }
+
+    .footLinks{
+      display:flex;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+
+    @keyframes draw{to{stroke-dashoffset:0}}
+    @keyframes dotPulse{0%,100%{opacity:.72;transform:scale(1)}50%{opacity:1;transform:scale(1.14)}}
+    @keyframes nodePulse{0%{opacity:.34;transform:scale(.74)}54%{opacity:1;transform:scale(1.14)}100%{opacity:.95;transform:scale(1)}}
+
+    @media(max-width:1100px){
+      .shell{width:min(100% - 36px,var(--max))}
+      .links{display:none}
+      .menuBtn{
+        display:inline-flex;
+        border:1px solid rgba(205,170,86,.44);
+        background:rgba(12,15,19,.58);
+        color:var(--gold);
+        border-radius:9px;
+        padding:10px 14px;
+      }
+      .hero{
+        grid-template-columns:1fr;
+        padding-top:110px;
+        gap:36px;
+      }
+      .copy{justify-self:stretch;order:1}
+      .visual{justify-self:stretch;order:2;max-width:none}
+      .belowFold{position:relative;margin-top:34px}
+      .steps{grid-template-columns:1fr;padding:28px 0}
+      .authorityCard,.cards{grid-template-columns:1fr}
+      .authorityCard > div{border-inline-start:0;border-top:1px solid rgba(205,170,86,.18)}
+      .authorityCard .coreWord{border-top:0}
+      .cta{display:grid}
+    }
+
+    @media(max-width:620px){
+      .brandText strong{font-size:25px}
+      .brandText small{font-size:11px}
+      .mark{width:46px;height:46px}
+      .nav{height:78px}
+      h1{font-size:44px}
+      .lead{font-size:17px}
+      .btn{width:100%}
+      .hero{min-height:auto;padding-bottom:20px}
+      .step{grid-template-columns:1fr;text-align:center;justify-items:center}
+      section.content{padding:64px 0}
+      .cta{padding:28px}
+    }
+
+    @media(prefers-reduced-motion:reduce){
+      *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+      .evidencePath{stroke-dashoffset:0!important}
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="shell nav">
+      <a class="brand" href="/" aria-label="NDSP منصة دعم القرار">
+        <span class="mark" aria-hidden="true"></span>
+        <span class="brandText">
+          <strong>NDSP</strong>
+          <small>منصة دعم القرار</small>
+        </span>
+      </a>
+
+      <nav class="links" aria-label="التنقل الرئيسي">
+        <a href="#methodology">المنهجية</a>
+        <span class="sep"></span>
+        <a href="#governance">الحوكمة</a>
+        <a class="login" href="https://my.ndsp.app/login">تسجيل الدخول</a>
+      </nav>
+
+      <button class="menuBtn" onclick="document.body.classList.toggle('menu-open')" type="button">القائمة</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="shell hero">
+      <div class="copy">
+        <h1>
+          منصة دعم القرار<br>
+          <span>كل الأدلة. </span><span class="gold">اتجاه رسمي واحد.</span>
+        </h1>
+
+        <p class="lead">
+          ذكاء مؤسسي محكوم يحوّل السياق المعقد إلى قرار واضح يمكن تفسيره.
+        </p>
+
+        <div class="actions">
+          <a class="btn primary" href="https://my.ndsp.app/register?trial=elite&days=16">ابدأ تجربتك لمدة 16 يومًا</a>
+          <a class="btn secondary" href="#methodology">اعرف لماذا</a>
+        </div>
+      </div>
+
+      <div class="visual" aria-label="تقاطع الأدلة نحو CORE">
+        <svg class="meridian" viewBox="0 0 900 650" role="img" aria-label="مصادر أدلة تتقاطع في CORE">
+          <defs>
+            <linearGradient id="blueGold" x1="1" x2="0">
+              <stop offset="0" stop-color="#35AFE3" stop-opacity=".95"/>
+              <stop offset=".70" stop-color="#35AFE3" stop-opacity=".38"/>
+              <stop offset="1" stop-color="#CDAA56" stop-opacity=".98"/>
+            </linearGradient>
+            <radialGradient id="node" cx="50%" cy="50%" r="50%">
+              <stop offset="0" stop-color="#F4D47A"/>
+              <stop offset=".42" stop-color="#CDAA56"/>
+              <stop offset="1" stop-color="#CDAA56" stop-opacity="0"/>
+            </radialGradient>
+            <filter id="glow" x="-90%" y="-90%" width="280%" height="280%">
+              <feGaussianBlur stdDeviation="9" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+
+          <rect x="0" y="0" width="900" height="650" fill="transparent"/>
+
+          <g font-family="IBM Plex Sans Arabic" font-size="20" fill="#D9DDE2">
+            <text x="735" y="104">بيانات مؤسسية</text>
+            <text x="710" y="206">تقارير وتحليلات</text>
+            <text x="730" y="318">سياق تشغيلي</text>
+            <text x="710" y="430">معلومات خارجية</text>
+            <text x="705" y="532">معايير وسياسات</text>
+          </g>
+
+          <g fill="none" stroke="url(#blueGold)" stroke-width="2.4">
+            <path class="evidencePath" d="M700 98 C560 105 455 170 382 290"/>
+            <path class="evidencePath" d="M700 200 C560 205 455 242 382 305"/>
+            <path class="evidencePath" d="M700 314 C560 314 455 314 382 314"/>
+            <path class="evidencePath" d="M700 428 C560 420 455 380 382 330"/>
+            <path class="evidencePath" d="M700 528 C560 510 455 450 382 346"/>
+          </g>
+
+          <g fill="#35AFE3">
+            <circle class="blueDot" cx="678" cy="98" r="5.5"/>
+            <circle class="blueDot" cx="678" cy="200" r="5.5"/>
+            <circle class="blueDot" cx="678" cy="314" r="5.5"/>
+            <circle class="blueDot" cx="678" cy="428" r="5.5"/>
+            <circle class="blueDot" cx="678" cy="528" r="5.5"/>
+          </g>
+
+          <circle class="goldNode" cx="362" cy="316" r="34" fill="url(#node)" filter="url(#glow)"/>
+
+          <path d="M342 316 L94 316" stroke="#CDAA56" stroke-width="3.2" fill="none"/>
+          <path d="M94 316 L64 286 L64 346 L94 316" fill="rgba(205,170,86,.10)" stroke="#CDAA56" stroke-width="2"/>
+
+          <g class="corePanel">
+            <rect x="65" y="262" width="270" height="108" rx="18" fill="#0C0F13" stroke="#CDAA56" stroke-width="1.4"/>
+            <line x1="184" y1="280" x2="184" y2="352" stroke="rgba(205,170,86,.28)" stroke-width="1"/>
+            <text x="270" y="328" text-anchor="middle" fill="#CDAA56" font-family="IBM Plex Mono" font-size="34" font-weight="700">CORE</text>
+            <text x="132" y="304" text-anchor="middle" fill="#D9DDE2" font-family="IBM Plex Sans Arabic" font-size="15">الاتجاه الرسمي</text>
+            <text x="132" y="332" text-anchor="middle" fill="#D9DDE2" font-family="IBM Plex Sans Arabic" font-size="15">محكوم حوكميًا</text>
+            <text x="132" y="360" text-anchor="middle" fill="#D9DDE2" font-family="IBM Plex Sans Arabic" font-size="15">أدلة قابلة للتحقق</text>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <div class="belowFold">
+      <div class="steps">
+        <article class="step">
+          <div class="stepIcon">◎</div>
+          <div>
+            <b>01</b>
+            <h3>السياق</h3>
+            <p>نستوعب الصورة الكاملة من داخل المؤسسة وخارجها.</p>
+          </div>
+        </article>
+
+        <article class="step">
+          <div class="stepIcon">⋮</div>
+          <div>
+            <b>02</b>
+            <h3>الأدلة</h3>
+            <p>تُجمع الأدلة الموثوقة وتحلل ضمن إطار حوكمي واضح.</p>
+          </div>
+        </article>
+
+        <article class="step">
+          <div class="stepIcon">↗</div>
+          <div>
+            <b>03</b>
+            <h3>الاتجاه الرسمي</h3>
+            <p>نقدم اتجاهًا رسميًا واحدًا واضحًا وقابلًا للتفسير.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <section id="methodology" class="content">
+      <div class="shell">
+        <div class="sectionHead">
+          <h2>من السياق إلى اتجاه رسمي</h2>
+          <p>صفحة الهبوط تعرض المسار العام فقط. التفاصيل المتقدمة تبقى داخل غرفة القرار حسب الصلاحيات.</p>
+        </div>
+
+        <div class="authorityCard">
+          <div class="coreWord">CORE</div>
+          <div>◇ الاتجاه الرسمي</div>
+          <div>◇ محكوم حوكميًا</div>
+          <div>▣ أدلة قابلة للتحقق</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="governance" class="content">
+      <div class="shell">
+        <div class="sectionHead">
+          <h2>الثقة تُبنى على الحوكمة والأدلة.</h2>
+          <p>NDSP لا تنفذ صفقات ولا تقدم أوامر تنفيذ. هي منصة دعم قرار تعرض نتيجة رسمية قابلة للتفسير والتحقق.</p>
+        </div>
+
+        <div class="cards">
+          <article class="card">
+            <small>01</small>
+            <h3>مصدر واضح</h3>
+            <p>كل نتيجة ترتبط بسياق ومصدر ووقت تحديث مصرح به.</p>
+          </article>
+          <article class="card">
+            <small>02</small>
+            <h3>أدلة قابلة للتتبع</h3>
+            <p>تظهر الأدلة المتاحة حسب الباقة دون كشف الطبقات الداخلية.</p>
+          </article>
+          <article class="card">
+            <small>03</small>
+            <h3>تفسير منظم</h3>
+            <p>الهدف فهم النتيجة، لا مطاردة مؤشرات متفرقة.</p>
+          </article>
+        </div>
+
+        <div class="cta">
+          <div>
+            <h2>جرّب Elite لمدة 16 يومًا.</h2>
+            <p>دون بطاقة دفع — ودون خصم تلقائي.</p>
+          </div>
+          <a class="btn primary" href="https://my.ndsp.app/register?trial=elite&days=16">ابدأ الآن</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell foot">
+      <div><strong>NDSP</strong><br>منصة دعم القرار</div>
+      <div class="footLinks">
+        <a href="#methodology">المنهجية</a>
+        <a href="#governance">الحوكمة</a>
+        <a href="https://my.ndsp.app/login">تسجيل الدخول</a>
+        <a href="/privacy">الخصوصية</a>
+        <a href="/terms">الشروط</a>
+        <a href="/support">الدعم</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
+HTML
+
+sudo cp "$SRC" "$LIVE"
+sudo chown www-data:www-data "$LIVE"
+sudo chmod 644 "$LIVE"
+
+sudo nginx -t
+sudo systemctl reload nginx
+
+curl -I https://ndsp.app
+curl -sL https://ndsp.app | grep -E "نواف|Nawaf|NAWAF|nawaf" || echo "ndsp.app clean"
+curl -sL https://ndsp.app | grep -E "إشارة شراء|إشارة بيع|ربح مضمون|دقة مضمونة" || echo "no forbidden claims"
+
+echo "DONE"
+echo "Updated: $SRC"
+echo "Live:    $LIVE"

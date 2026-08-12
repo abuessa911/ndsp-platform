@@ -1,0 +1,19 @@
+[Unit]
+Description=NDSP Register Compatibility Gateway
+After=network.target postgresql.service
+Wants=postgresql.service
+
+[Service]
+Type=simple
+WorkingDirectory=/home/nawaf511/empire-core-new/backend/auth_api
+EnvironmentFile=-/etc/ndsp/ndsp-db.env
+EnvironmentFile=-/etc/ndsp/ndsp-session.env
+EnvironmentFile=-/home/nawaf511/empire-core-new/backend/auth_api/.env
+Environment=NDSP_REGISTER_COMPAT_PORT=9028
+ExecStart=/usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_register_compat_gateway.cjs
+Restart=always
+RestartSec=3
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,1856 @@
+
+============================================================
+NDSP — PORTAL MORE MENU SOURCE DISCOVERY V12.2
+============================================================
+DATE=2026-07-27T20:41:17+02:00
+HOST=vmi2934783.contaboserver.net
+SOURCE_DIR=/home/nawaf511/Downloads/NDSP_COMMERCIAL_FRONTEND_LIVE_V1
+MODE=READ_ONLY
+REPORT=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_20260727_204117/REPORT.txt
+
+============================================================
+0) PRECONDITIONS
+============================================================
+MAIN=/home/nawaf511/Downloads/NDSP_COMMERCIAL_FRONTEND_LIVE_V1/src/main.jsx
+CSS=/home/nawaf511/Downloads/NDSP_COMMERCIAL_FRONTEND_LIVE_V1/src/styles.css
+MAIN_SIZE=206358
+MAIN_SHA256=0cf384c20ae503c7e39c8d4f3e42274c5a923d04b5d5708d1522c1b780237be5
+CSS_SIZE=45311
+CSS_SHA256=483712fd3557fbdd3c454a6259e0294725e2333ad31c9ad49a378ede3d6e5740
+PRECONDITION_GATE=PASS
+
+============================================================
+1) SOURCE FILE INVENTORY
+============================================================
+main.jsx|SIZE=206358
+ndsp-assets.json|SIZE=7601
+styles.css|SIZE=45311
+supplement.css|SIZE=2340
+
+============================================================
+2) ALL MENU-RELATED SOURCE LINES
+============================================================
+65:    more: "المزيد",
+76:    settings: "الإعدادات",
+77:    changeContext: "تغيير الاختيار",
+214:    more: "More",
+225:    settings: "Settings",
+2128:    menu: "☰", close: "×", globe: "◎", bell: "◉", chart: "⌁", arrow: "←",
+2203:    loadMore: "تحميل تاريخ أكثر",
+2225:    loadMore: "Load more history",
+4052:const MORE_NAV = [
+4056:  ["plans", "/plans"], ["settings", "/settings"], ["changeContext", "/context"]
+4069:  const [drawer, setDrawer] = useState(false);
+4070:  const [more, setMore] = useState(false);
+4071:  const drawerRef = useRef(null);
+4072:  const menuRef = useRef(null);
+4075:    if (!drawer) return undefined;
+4076:    document.body.classList.add("drawer-open");
+4078:    drawerRef.current?.querySelector("a,button")?.focus();
+4080:      if (event.key === "Escape") setDrawer(false);
+4084:      document.body.classList.remove("drawer-open");
+4088:  }, [drawer]);
+4092:    setDrawer(false);
+4093:    setMore(false);
+4095:  const navButton = ([key, path], mobile = false) => <button key={path} onClick={() => go(path)} className={`nav-link ${route === path ? "active" : ""} ${mobile ? "drawer-link" : ""}`}>{t(key)}</button>;
+4100:      <nav className="desktop-nav" aria-label="menu">{PRIMARY_NAV.map((item) => navButton(item))}<div className="more-wrap"><button className={`nav-link nav-button ${MORE_NAV.some(([, path]) => path === route) ? "active" : ""}`} onClick={() => setMore((value) => !value)}>{t("more")} <span className="caret">⌄</span></button>{more ? <div className="dropdown" onMouseLeave={() => setMore(false)}>{MORE_NAV.map((item) => navButton(item))}</div> : null}</div></nav>
+4101:      <div className="header-actions"><Badge tone="success">{t("live")}</Badge><button className="icon-button" onClick={() => patch({ lang: lang === "ar" ? "en" : "ar" })}><Icon name="globe"/><span className="action-text">{lang === "ar" ? "English" : "العربية"}</span></button><button ref={menuRef} className="icon-button mobile-menu" onClick={() => setDrawer(true)} aria-expanded={drawer}><Icon name="menu"/></button></div>
+4103:    {drawer ? <div className="drawer-layer" data-dir={state.lang === "ar" ? "rtl" : "ltr"}><button className="drawer-backdrop" onClick={() => setDrawer(false)} aria-label="close"/><aside ref={drawerRef} className="drawer" role="dialog" aria-modal="true"><div className="drawer-head"><div className="brand"><span className="brand-mark">N</span><span><strong>{t("brand")}</strong><small>{t("brandFull")}</small></span></div><button className="icon-button" onClick={() => setDrawer(false)}><Icon name="close"/></button></div><div className="drawer-trial"><span>{t("commercialNotice")}</span></div><nav className="drawer-nav">{PRIMARY_NAV.map((item) => navButton(item, true))}<div className="drawer-separator">{t("more")}</div>{MORE_NAV.map((item) => navButton(item, true))}
+4104:            <PortalLogoutButton/>
+5106:            {CHART_COPY[lang].loadMore}
+7283:function SettingsPage() {
+7293:      <PageHeader title={t("settings")}/>
+7295:      <div className="settings-grid">
+7346:                      : "More spacing and calmer reading, with less content visible at once."
+7370:                      : "Less spacing to show more content without changing data size or meaning."
+7401:/* NDSP_SOURCE_LOGOUT_V1_BEGIN */
+7402:function PortalLogoutButton() {
+7406:  async function logout() {
+7411:      const response = await fetch("/api/auth/logout", {
+7419:        throw new Error(`LOGOUT_HTTP_${response.status}`);
+7424:      window.location.assign("/logout/");
+7430:      ? (lang === "ar" ? "جارٍ تسجيل الخروج…" : "Signing out…")
+7431:      : (lang === "ar" ? "تسجيل الخروج" : "Sign out");
+7436:      className="nav-link drawer-logout"
+7437:      onClick={logout}
+7439:      data-ndsp-source-logout-v2="integrated-nav-item"
+7442:      <span className="drawer-logout-icon" aria-hidden="true">↪</span>
+7447:/* NDSP_SOURCE_LOGOUT_V1_END */
+7469:    "/settings": <SettingsPage/>,
+
+============================================================
+3) EXACT LABEL OCCURRENCES
+============================================================
+NEEDLE=المزيد
+HIT_COUNT=1
+65:    more: "المزيد",
+---
+NEEDLE=More
+HIT_COUNT=8
+214:    more: "More",
+2203:    loadMore: "تحميل تاريخ أكثر",
+2225:    loadMore: "Load more history",
+4070:  const [more, setMore] = useState(false);
+4093:    setMore(false);
+4100:      <nav className="desktop-nav" aria-label="menu">{PRIMARY_NAV.map((item) => navButton(item))}<div className="more-wrap"><button className={`nav-link nav-button ${MORE_NAV.some(([, path]) => path === route) ? "active" : ""}`} onClick={() => setMore((value) => !value)}>{t("more")} <span className="caret">⌄</span></button>{more ? <div className="dropdown" onMouseLeave={() => setMore(false)}>{MORE_NAV.map((item) => navButton(item))}</div> : null}</div></nav>
+5106:            {CHART_COPY[lang].loadMore}
+7346:                      : "More spacing and calmer reading, with less content visible at once."
+---
+NEEDLE=تغيير الاختيار
+HIT_COUNT=1
+77:    changeContext: "تغيير الاختيار",
+---
+NEEDLE=Change selection
+HIT_COUNT=0
+---
+NEEDLE=Change Selection
+HIT_COUNT=0
+---
+NEEDLE=الإعدادات
+HIT_COUNT=1
+76:    settings: "الإعدادات",
+---
+NEEDLE=Settings
+HIT_COUNT=3
+225:    settings: "Settings",
+7283:function SettingsPage() {
+7469:    "/settings": <SettingsPage/>,
+---
+NEEDLE=تسجيل الخروج
+HIT_COUNT=2
+7430:      ? (lang === "ar" ? "جارٍ تسجيل الخروج…" : "Signing out…")
+7431:      : (lang === "ar" ? "تسجيل الخروج" : "Sign out");
+---
+NEEDLE=Sign out
+HIT_COUNT=1
+7431:      : (lang === "ar" ? "تسجيل الخروج" : "Sign out");
+---
+NEEDLE=logout
+HIT_COUNT=7
+7406:  async function logout() {
+7411:      const response = await fetch("/api/auth/logout", {
+7424:      window.location.assign("/logout/");
+7436:      className="nav-link drawer-logout"
+7437:      onClick={logout}
+7439:      data-ndsp-source-logout-v2="integrated-nav-item"
+7442:      <span className="drawer-logout-icon" aria-hidden="true">↪</span>
+---
+NEEDLE=/api/auth/logout
+HIT_COUNT=1
+7411:      const response = await fetch("/api/auth/logout", {
+---
+
+============================================================
+4) JSX ELEMENT BLOCKS AROUND MENU ANCHORS
+============================================================
+CONTEXT_FILE=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_20260727_204117/context-01.txt
+PATTERN=drawer-nav
+ANCHOR_LINE=4103
+---
+CONTEXT_FILE=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_20260727_204117/context-02.txt
+PATTERN=تغيير الاختيار
+ANCHOR_LINE=77
+---
+CONTEXT_FILE=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_20260727_204117/context-03.txt
+PATTERN=المزيد
+ANCHOR_LINE=65
+---
+CONTEXT_FILE=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_20260727_204117/context-04.txt
+PATTERN=\bMore\b
+ANCHOR_LINE=65
+---
+CONTEXT_FILE=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_20260727_204117/context-05.txt
+PATTERN=\bMore\b
+ANCHOR_LINE=214
+---
+CONTEXT_FILE=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_20260727_204117/context-06.txt
+PATTERN=\bMore\b
+ANCHOR_LINE=2225
+---
+CONTEXT_FILE=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_20260727_204117/context-07.txt
+PATTERN=\bMore\b
+ANCHOR_LINE=4070
+---
+CONTEXT_FILE=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_20260727_204117/context-08.txt
+PATTERN=\bMore\b
+ANCHOR_LINE=4100
+---
+CONTEXT_FILE=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_20260727_204117/context-09.txt
+PATTERN=\bMore\b
+ANCHOR_LINE=4103
+---
+CONTEXT_FILE=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_20260727_204117/context-10.txt
+PATTERN=\bMore\b
+ANCHOR_LINE=7346
+---
+CONTEXT_FILE=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_20260727_204117/context-11.txt
+PATTERN=\bMore\b
+ANCHOR_LINE=7370
+---
+CONTEXT_FILE=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_20260727_204117/context-12.txt
+PATTERN=الإعدادات
+ANCHOR_LINE=76
+---
+CONTEXT_FILE=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_20260727_204117/context-13.txt
+PATTERN=\bSettings\b
+ANCHOR_LINE=76
+---
+CONTEXT_FILE=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_20260727_204117/context-14.txt
+PATTERN=\bSettings\b
+ANCHOR_LINE=225
+---
+CONTEXT_FILE=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_20260727_204117/context-15.txt
+PATTERN=\bSettings\b
+ANCHOR_LINE=4056
+---
+CONTEXT_FILE=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_20260727_204117/context-16.txt
+PATTERN=\bSettings\b
+ANCHOR_LINE=7293
+---
+CONTEXT_FILE=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_20260727_204117/context-17.txt
+PATTERN=\bSettings\b
+ANCHOR_LINE=7295
+---
+CONTEXT_FILE=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_20260727_204117/context-18.txt
+PATTERN=\bSettings\b
+ANCHOR_LINE=7469
+---
+CONTEXT_FILE=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_20260727_204117/context-19.txt
+PATTERN=logout
+ANCHOR_LINE=4104
+---
+CONTEXT_FILE=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_20260727_204117/context-20.txt
+PATTERN=logout
+ANCHOR_LINE=7401
+---
+CONTEXT_FILE=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_20260727_204117/context-21.txt
+PATTERN=logout
+ANCHOR_LINE=7402
+---
+CONTEXT_FILE=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_20260727_204117/context-22.txt
+PATTERN=logout
+ANCHOR_LINE=7406
+---
+CONTEXT_FILE=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_20260727_204117/context-23.txt
+PATTERN=logout
+ANCHOR_LINE=7411
+---
+CONTEXT_FILE=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_20260727_204117/context-24.txt
+PATTERN=logout
+ANCHOR_LINE=7419
+---
+CONTEXT_FILE=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_20260727_204117/context-25.txt
+PATTERN=logout
+ANCHOR_LINE=7424
+---
+CONTEXT_FILE=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_20260727_204117/context-26.txt
+PATTERN=logout
+ANCHOR_LINE=7436
+---
+CONTEXT_FILE=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_20260727_204117/context-27.txt
+PATTERN=logout
+ANCHOR_LINE=7437
+---
+CONTEXT_FILE=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_20260727_204117/context-28.txt
+PATTERN=logout
+ANCHOR_LINE=7439
+---
+CONTEXT_FILE=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_20260727_204117/context-29.txt
+PATTERN=logout
+ANCHOR_LINE=7442
+---
+CONTEXT_FILE=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_20260727_204117/context-30.txt
+PATTERN=logout
+ANCHOR_LINE=7447
+---
+CONTEXT_FILE=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_20260727_204117/context-31.txt
+PATTERN=sign.?out
+ANCHOR_LINE=7431
+---
+CONTEXT_FILE_COUNT=31
+
+============================================================
+5) PRINT MOST RELEVANT CONTEXT FILES
+============================================================
+
+---------------- FILE: /home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_20260727_204117/context-01.txt ----------------
+PATTERN=drawer-nav
+ANCHOR_LINE=4103
+CONTEXT_START=4058
+CONTEXT_END=4177
+
+  004058: 
+  004059: function querySuffix(state) {
+  004060:   const params = new URLSearchParams();
+  004061:   CONTEXT_KEYS.forEach((key) => params.set(key, state[key]));
+  004062:   return `?${params.toString()}`;
+  004063: }
+  004064: 
+  004065: function Topbar() {
+  004066:   const { state, patch } = useDecision();
+  004067:   const { route, navigate } = useNavigation();
+  004068:   const { t, lang } = useTranslate();
+  004069:   const [drawer, setDrawer] = useState(false);
+  004070:   const [more, setMore] = useState(false);
+  004071:   const drawerRef = useRef(null);
+  004072:   const menuRef = useRef(null);
+  004073: 
+  004074:   useEffect(() => {
+  004075:     if (!drawer) return undefined;
+  004076:     document.body.classList.add("drawer-open");
+  004077:     const previous = document.activeElement;
+  004078:     drawerRef.current?.querySelector("a,button")?.focus();
+  004079:     const onKey = (event) => {
+  004080:       if (event.key === "Escape") setDrawer(false);
+  004081:     };
+  004082:     document.addEventListener("keydown", onKey);
+  004083:     return () => {
+  004084:       document.body.classList.remove("drawer-open");
+  004085:       document.removeEventListener("keydown", onKey);
+  004086:       previous?.focus?.();
+  004087:     };
+  004088:   }, [drawer]);
+  004089: 
+  004090:   const go = (path) => {
+  004091:     navigate(path);
+  004092:     setDrawer(false);
+  004093:     setMore(false);
+  004094:   };
+  004095:   const navButton = ([key, path], mobile = false) => <button key={path} onClick={() => go(path)} className={`nav-link ${route === path ? "active" : ""} ${mobile ? "drawer-link" : ""}`}>{t(key)}</button>;
+  004096: 
+  004097:   return <>
+  004098:     <header className="topbar"><div className="topbar-inner">
+  004099:       <button className="brand" onClick={() => go("/command-center")} aria-label={`${t("brand")} — ${t("brandFull")}`}><span className="brand-mark">N</span><span><strong>{t("brand")}</strong><small>{t("brandFull")}</small></span></button>
+  004100:       <nav className="desktop-nav" aria-label="menu">{PRIMARY_NAV.map((item) => navButton(item))}<div className="more-wrap"><button className={`nav-link nav-button ${MORE_NAV.some(([, path]) => path === route) ? "active" : ""}`} onClick={() => setMore((value) => !value)}>{t("more")} <span className="caret">⌄</span></button>{more ? <div className="dropdown" onMouseLeave={() => setMore(false)}>{MORE_NAV.map((item) => navButton(item))}</div> : null}</div></nav>
+  004101:       <div className="header-actions"><Badge tone="success">{t("live")}</Badge><button className="icon-button" onClick={() => patch({ lang: lang === "ar" ? "en" : "ar" })}><Icon name="globe"/><span className="action-text">{lang === "ar" ? "English" : "العربية"}</span></button><button ref={menuRef} className="icon-button mobile-menu" onClick={() => setDrawer(true)} aria-expanded={drawer}><Icon name="menu"/></button></div>
+  004102:     </div></header>
+>>004103:     {drawer ? <div className="drawer-layer" data-dir={state.lang === "ar" ? "rtl" : "ltr"}><button className="drawer-backdrop" onClick={() => setDrawer(false)} aria-label="close"/><aside ref={drawerRef} className="drawer" role="dialog" aria-modal="true"><div className="drawer-head"><div className="brand"><span className="brand-mark">N</span><span><strong>{t("brand")}</strong><small>{t("brandFull")}</small></span></div><button className="icon-button" onClick={() => setDrawer(false)}><Icon name="close"/></button></div><div className="drawer-trial"><span>{t("commercialNotice")}</span></div><nav className="drawer-nav">{PRIMARY_NAV.map((item) => navButton(item, true))}<div className="drawer-separator">{t("more")}</div>{MORE_NAV.map((item) => navButton(item, true))}
+  004104:             <PortalLogoutButton/>
+  004105:           </nav></aside></div> : null}
+  004106:   </>;
+  004107: }
+  004108: 
+  004109: function ContextStrip() {
+  004110:   const { state, patch } = useDecision();
+  004111:   const { t, lang } = useTranslate();
+  004112:   const setMarket = (market) => patch({ market, symbol: ASSETS.find((asset) => asset.market === market)?.symbol || state.symbol });
+  004113:   return <div className="context-shell"><div className="context-strip" data-testid="context-strip">
+  004114:     <label><span>{t("market")}</span><select value={state.market} onChange={(event) => setMarket(event.target.value)}>{MARKETS.map((market) => <option value={market} key={market}>{marketLabel(market, lang)}</option>)}</select></label>
+  004115:     <label><span>{t("asset")}</span><select value={state.symbol} onChange={(event) => patch({ symbol: event.target.value })}>{ASSETS.filter((asset) => asset.market === state.market).map((asset) => <option value={asset.symbol} key={asset.symbol}>{assetName(asset, lang)} · {asset.symbol}</option>)}</select></label>
+  004116:     <label><span>{t("timeframe")}</span><select value={state.timeframe} onChange={(event) => patch({ timeframe: event.target.value })}>{TIMEFRAMES.map((timeframe) => <option key={timeframe}>{timeframe}</option>)}</select></label>
+  004117:     <label><span>{t("readingType")}</span><select value={state.mode} onChange={(event) => patch({ mode: event.target.value })}><option value="investment">{t("investment")}</option><option value="speculative">{t("speculative")}</option></select></label>
+  004118:     <label><span>{t("viewLevel")}</span><select value={state.view} onChange={(event) => patch({ view: event.target.value })}><option value="beginner">{t("beginner")}</option><option value="professional">{t("professional")}</option></select></label>
+  004119:   </div></div>;
+  004120: }
+  004121: 
+  004122: function LegalModal() {
+  004123:   const { accepted, acceptLegal } = useDecision();
+  004124:   const { t } = useTranslate();
+  004125:   if (accepted) return null;
+  004126:   return <div className="modal-layer"><div className="modal-backdrop"/><div className="modal" role="dialog" aria-modal="true"><div className="modal-head"><h2>{t("legalTitle")}</h2></div><div className="modal-body"><p>{t("legalBody")}</p><div className="modal-actions"><button className="button primary" onClick={acceptLegal}>{t("accept")}</button></div></div></div></div>;
+  004127: }
+  004128: 
+  004129: function ContextSummary() {
+  004130:   const { state } = useDecision();
+  004131:   const { t, lang } = useTranslate();
+  004132:   return <div className="context-summary"><Badge>{marketLabel(state.market, lang)}</Badge><Badge tone="muted">{assetName(findAsset(state.symbol), lang)}</Badge><Badge tone="muted">{state.timeframe}</Badge><Badge tone="muted">{t(state.mode)}</Badge><Badge tone="muted">{t(state.view)}</Badge></div>;
+  004133: }
+  004134: 
+  004135: function qualityRadar(quality, t) {
+  004136:   return {
+  004137:     labels: [t("dataQuality"), "TDL", t("momentum"), "NMP", t("macro"), t("readiness")],
+  004138:     values: [
+  004139:       quality?.decisionQuality,
+  004140:       quality?.alignmentScore,
+  004141:       quality?.cciValue === null ? null : Math.min(100, Math.abs(quality.cciValue)),
+  004142:       quality?.nmp?.status === "AVAILABLE" ? 100 : 0,
+  004143:       quality?.usdPressureScore === null ? null : Math.max(0, 100 - Math.min(100, Math.abs(quality.usdPressureScore))),
+  004144:       quality?.confirmationScore
+  004145:     ]
+  004146:   };
+  004147: }
+  004148: 
+  004149: function CommandCenterPage() {
+  004150:   const { state } = useDecision();
+  004151:   const { navigate } = useNavigation();
+  004152:   const { t, lang } = useTranslate();
+  004153: 
+  004154:   const quality = useQuality(state.symbol, state.timeframe, state.mode);
+  004155: 
+  004156:   const universe = useMarketUniverse(
+  004157:     state.timeframe
+  004158:   );
+  004159: 
+  004160:   const completed = useCompletedDecisions();
+  004161:   const newsEvents = useNewsEvents(state.symbol, lang);
+  004162: 
+  004163:   if (quality.status === "loading") {
+  004164:     return <EmptyState type="loading"/>;
+  004165:   }
+  004166: 
+  004167:   if (quality.status === "error") {
+  004168:     return (
+  004169:       <EmptyState
+  004170:         type="error"
+  004171:         onRetry={quality.retry}
+  004172:       />
+  004173:     );
+  004174:   }
+  004175: 
+  004176:   const value = quality.value;
+  004177:   const radar = qualityRadar(value, t);
+
+---------------- FILE: /home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_20260727_204117/context-02.txt ----------------
+PATTERN=تغيير الاختيار
+ANCHOR_LINE=77
+CONTEXT_START=32
+CONTEXT_END=151
+
+  000032:   { id: "nmp", label: { ar: "NMP", en: "NMP" } },
+  000033:   { id: "golden", label: { ar: "إشارة نواف الذهبية", en: "Nawaf Golden Signal" } },
+  000034:   { id: "enhancedGolden", label: { ar: "إشارة نواف الذهبية المعززة", en: "Enhanced Nawaf Golden Signal" } },
+  000035:   { id: "devilsAdvocate", label: { ar: "محامي الشيطان", en: "Devil's Advocate" } }
+  000036: ];
+  000037: 
+  000038: const ASSETS = ndspAssetsRegistry.map((asset) => ({
+  000039:   market: String(asset.market || "").toUpperCase(),
+  000040:   symbol: String(asset.symbol || "").toUpperCase(),
+  000041:   nameAr: String(asset.nameAr || ""),
+  000042:   nameEn: String(asset.nameEn || "")
+  000043: }));
+  000044: 
+  000045: const DEFAULT_CONTEXT = {
+  000046:   lang: "ar",
+  000047:   market: "CRYPTO",
+  000048:   symbol: "BTCUSDT",
+  000049:   timeframe: "weekly",
+  000050:   mode: "investment",
+  000051:   view: "beginner",
+  000052:   session: ""
+  000053: };
+  000054: 
+  000055: const I18N = {
+  000056:   ar: {
+  000057:     brand: "NDSP",
+  000058:     brandFull: "منصة نواف لدعم القرار",
+  000059:     commandCenter: "مركز القيادة",
+  000060:     markets: "الأسواق",
+  000061:     pricesChart: "الأسعار والشارت",
+  000062:     opportunities: "مستكشف الفرص",
+  000063:     decisionRoom: "غرفة القرار",
+  000064:     portfolio: "المحفظة",
+  000065:     more: "المزيد",
+  000066:     scenarios: "السيناريوهات والمستويات",
+  000067:     publicLayers: "الطبقات العامة",
+  000068:     riskChallenge: "المخاطر والاعتراض",
+  000069:     completed: "القرارات المكتملة",
+  000070:     dataHealth: "صحة البيانات",
+  000071:     alerts: "مركز التنبيهات",
+  000072:     guide: "دليل المستخدم",
+  000073:     support: "مركز الدعم",
+  000074:     account: "الحساب والاشتراك",
+  000075:     plans: "الباقات والترقية",
+  000076:     settings: "الإعدادات",
+>>000077:     changeContext: "تغيير الاختيار",
+  000078:     trialExpired: "انتهت الفترة التجريبية",
+  000079:     market: "السوق",
+  000080:     asset: "الأصل",
+  000081:     timeframe: "الإطار الزمني",
+  000082:     readingType: "نوع القراءة",
+  000083:     viewLevel: "مستوى العرض",
+  000084:     investment: "استثماري",
+  000085:     speculative: "مضاربي",
+  000086:     beginner: "مبتدئ",
+  000087:     professional: "محترف",
+  000088:     live: "بيانات حية",
+  000089:     unavailable: "غير متاحة",
+  000090:     delayed: "متأخرة",
+  000091:     stale: "قديمة",
+  000092:     loading: "جارٍ التحميل…",
+  000093:     retry: "إعادة المحاولة",
+  000094:     error: "تعذر تحميل البيانات",
+  000095:     empty: "لا توجد بيانات متاحة",
+  000096:     partial: "البيانات المتاحة جزئية",
+  000097:     lastUpdated: "آخر تحديث",
+  000098:     sourceStatus: "حالة المصدر",
+  000099:     marketSummary: "ملخص السوق",
+  000100:     currentDecision: "القرار الحالي",
+  000101:     readingStatus: "حالة القراءة",
+  000102:     readiness: "جاهزية القرار",
+  000103:     strength: "قوة القراءة",
+  000104:     dataQuality: "جودة البيانات",
+  000105:     momentum: "الزخم",
+  000106:     macro: "السياق الكلي",
+  000107:     trackedAssets: "الأصول المتابعة",
+  000108:     activeAlerts: "التنبيهات النشطة",
+  000109:     completedReads: "قراءات مكتملة",
+  000110:     monitoredReads: "تحت المتابعة",
+  000111:     strongestOpportunities: "أقوى الفرص",
+  000112:     keyRisks: "أبرز المخاطر",
+  000113:     dailyBrief: "الملخص اليومي",
+  000114:     quickLinks: "روابط سريعة",
+  000115:     underMonitoring: "تحت المتابعة",
+  000116:     blocked: "غير مكتمل",
+  000117:     allowed: "مسموح",
+  000118:     armed: "جاهز للتأكيد",
+  000119:     executed: "مكتمل",
+  000120:     bullish: "ضغط إيجابي",
+  000121:     bearish: "ضغط سلبي",
+  000122:     neutral: "محايد",
+  000123:     high: "مرتفعة",
+  000124:     medium: "متوسطة",
+  000125:     low: "منخفضة",
+  000126:     search: "بحث",
+  000127:     allMarkets: "كل الأسواق",
+  000128:     addWatchlist: "إضافة للمفضلة",
+  000129:     removeWatchlist: "إزالة من المفضلة",
+  000130:     openChart: "فتح الشارت",
+  000131:     openDecision: "فتح غرفة القرار",
+  000132:     addPortfolio: "إضافة للمحفظة",
+  000133:     price: "السعر",
+  000134:     change: "التغير",
+  000135:     status: "الحالة",
+  000136:     actions: "الإجراءات",
+  000137:     chartTitle: "الأسعار الحية والشارت الفني",
+  000138:     refresh: "تحديث",
+  000139:     fullscreen: "ملء الشاشة",
+  000140:     open: "الافتتاح",
+  000141:     highPrice: "الأعلى",
+  000142:     lowPrice: "الأدنى",
+  000143:     closePrice: "الإغلاق",
+  000144:     indicators: "المؤشرات المعتمدة",
+  000145:     divergence: "الانحراف",
+  000146:     noDivergence: "لا يوجد انحراف مؤكد",
+  000147:     scenarioLevels: "مستويات السيناريو",
+  000148:     activation: "التفعيل",
+  000149:     arrival: "الوصول",
+  000150:     review: "المراجعة",
+  000151:     invalidation: "الإلغاء",
+
+---------------- FILE: /home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_20260727_204117/context-03.txt ----------------
+PATTERN=المزيد
+ANCHOR_LINE=65
+CONTEXT_START=20
+CONTEXT_END=139
+
+  000020: const CONTEXT_KEYS = ["lang", "market", "symbol", "timeframe", "mode", "view", "session"];
+  000021: const CONTEXT_STORAGE = "ndsp.commercial.context.v1";
+  000022: const LEGAL_STORAGE = "ndsp.commercial.legal.v1";
+  000023: const DENSITY_STORAGE = "ndsp.commercial.density.v1";
+  000024: const WATCHLIST_STORAGE = "ndsp.commercial.watchlist.v1";
+  000025: const PORTFOLIO_STORAGE = "ndsp.commercial.portfolio.v1";
+  000026: const ALERTS_STORAGE = "ndsp.commercial.alerts.v1";
+  000027: 
+  000028: const MARKETS = ["CRYPTO", "FOREX", "METALS", "COMMODITIES", "INDICES", "BONDS", "ENERGY"];
+  000029: const TIMEFRAMES = ["15m", "1h", "4h", "daily", "weekly"];
+  000030: const PUBLIC_LAYERS = [
+  000031:   { id: "tdl", label: { ar: "TDL", en: "TDL" } },
+  000032:   { id: "nmp", label: { ar: "NMP", en: "NMP" } },
+  000033:   { id: "golden", label: { ar: "إشارة نواف الذهبية", en: "Nawaf Golden Signal" } },
+  000034:   { id: "enhancedGolden", label: { ar: "إشارة نواف الذهبية المعززة", en: "Enhanced Nawaf Golden Signal" } },
+  000035:   { id: "devilsAdvocate", label: { ar: "محامي الشيطان", en: "Devil's Advocate" } }
+  000036: ];
+  000037: 
+  000038: const ASSETS = ndspAssetsRegistry.map((asset) => ({
+  000039:   market: String(asset.market || "").toUpperCase(),
+  000040:   symbol: String(asset.symbol || "").toUpperCase(),
+  000041:   nameAr: String(asset.nameAr || ""),
+  000042:   nameEn: String(asset.nameEn || "")
+  000043: }));
+  000044: 
+  000045: const DEFAULT_CONTEXT = {
+  000046:   lang: "ar",
+  000047:   market: "CRYPTO",
+  000048:   symbol: "BTCUSDT",
+  000049:   timeframe: "weekly",
+  000050:   mode: "investment",
+  000051:   view: "beginner",
+  000052:   session: ""
+  000053: };
+  000054: 
+  000055: const I18N = {
+  000056:   ar: {
+  000057:     brand: "NDSP",
+  000058:     brandFull: "منصة نواف لدعم القرار",
+  000059:     commandCenter: "مركز القيادة",
+  000060:     markets: "الأسواق",
+  000061:     pricesChart: "الأسعار والشارت",
+  000062:     opportunities: "مستكشف الفرص",
+  000063:     decisionRoom: "غرفة القرار",
+  000064:     portfolio: "المحفظة",
+>>000065:     more: "المزيد",
+  000066:     scenarios: "السيناريوهات والمستويات",
+  000067:     publicLayers: "الطبقات العامة",
+  000068:     riskChallenge: "المخاطر والاعتراض",
+  000069:     completed: "القرارات المكتملة",
+  000070:     dataHealth: "صحة البيانات",
+  000071:     alerts: "مركز التنبيهات",
+  000072:     guide: "دليل المستخدم",
+  000073:     support: "مركز الدعم",
+  000074:     account: "الحساب والاشتراك",
+  000075:     plans: "الباقات والترقية",
+  000076:     settings: "الإعدادات",
+  000077:     changeContext: "تغيير الاختيار",
+  000078:     trialExpired: "انتهت الفترة التجريبية",
+  000079:     market: "السوق",
+  000080:     asset: "الأصل",
+  000081:     timeframe: "الإطار الزمني",
+  000082:     readingType: "نوع القراءة",
+  000083:     viewLevel: "مستوى العرض",
+  000084:     investment: "استثماري",
+  000085:     speculative: "مضاربي",
+  000086:     beginner: "مبتدئ",
+  000087:     professional: "محترف",
+  000088:     live: "بيانات حية",
+  000089:     unavailable: "غير متاحة",
+  000090:     delayed: "متأخرة",
+  000091:     stale: "قديمة",
+  000092:     loading: "جارٍ التحميل…",
+  000093:     retry: "إعادة المحاولة",
+  000094:     error: "تعذر تحميل البيانات",
+  000095:     empty: "لا توجد بيانات متاحة",
+  000096:     partial: "البيانات المتاحة جزئية",
+  000097:     lastUpdated: "آخر تحديث",
+  000098:     sourceStatus: "حالة المصدر",
+  000099:     marketSummary: "ملخص السوق",
+  000100:     currentDecision: "القرار الحالي",
+  000101:     readingStatus: "حالة القراءة",
+  000102:     readiness: "جاهزية القرار",
+  000103:     strength: "قوة القراءة",
+  000104:     dataQuality: "جودة البيانات",
+  000105:     momentum: "الزخم",
+  000106:     macro: "السياق الكلي",
+  000107:     trackedAssets: "الأصول المتابعة",
+  000108:     activeAlerts: "التنبيهات النشطة",
+  000109:     completedReads: "قراءات مكتملة",
+  000110:     monitoredReads: "تحت المتابعة",
+  000111:     strongestOpportunities: "أقوى الفرص",
+  000112:     keyRisks: "أبرز المخاطر",
+  000113:     dailyBrief: "الملخص اليومي",
+  000114:     quickLinks: "روابط سريعة",
+  000115:     underMonitoring: "تحت المتابعة",
+  000116:     blocked: "غير مكتمل",
+  000117:     allowed: "مسموح",
+  000118:     armed: "جاهز للتأكيد",
+  000119:     executed: "مكتمل",
+  000120:     bullish: "ضغط إيجابي",
+  000121:     bearish: "ضغط سلبي",
+  000122:     neutral: "محايد",
+  000123:     high: "مرتفعة",
+  000124:     medium: "متوسطة",
+  000125:     low: "منخفضة",
+  000126:     search: "بحث",
+  000127:     allMarkets: "كل الأسواق",
+  000128:     addWatchlist: "إضافة للمفضلة",
+  000129:     removeWatchlist: "إزالة من المفضلة",
+  000130:     openChart: "فتح الشارت",
+  000131:     openDecision: "فتح غرفة القرار",
+  000132:     addPortfolio: "إضافة للمحفظة",
+  000133:     price: "السعر",
+  000134:     change: "التغير",
+  000135:     status: "الحالة",
+  000136:     actions: "الإجراءات",
+  000137:     chartTitle: "الأسعار الحية والشارت الفني",
+  000138:     refresh: "تحديث",
+  000139:     fullscreen: "ملء الشاشة",
+
+---------------- FILE: /home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_20260727_204117/context-04.txt ----------------
+PATTERN=\bMore\b
+ANCHOR_LINE=65
+CONTEXT_START=20
+CONTEXT_END=139
+
+  000020: const CONTEXT_KEYS = ["lang", "market", "symbol", "timeframe", "mode", "view", "session"];
+  000021: const CONTEXT_STORAGE = "ndsp.commercial.context.v1";
+  000022: const LEGAL_STORAGE = "ndsp.commercial.legal.v1";
+  000023: const DENSITY_STORAGE = "ndsp.commercial.density.v1";
+  000024: const WATCHLIST_STORAGE = "ndsp.commercial.watchlist.v1";
+  000025: const PORTFOLIO_STORAGE = "ndsp.commercial.portfolio.v1";
+  000026: const ALERTS_STORAGE = "ndsp.commercial.alerts.v1";
+  000027: 
+  000028: const MARKETS = ["CRYPTO", "FOREX", "METALS", "COMMODITIES", "INDICES", "BONDS", "ENERGY"];
+  000029: const TIMEFRAMES = ["15m", "1h", "4h", "daily", "weekly"];
+  000030: const PUBLIC_LAYERS = [
+  000031:   { id: "tdl", label: { ar: "TDL", en: "TDL" } },
+  000032:   { id: "nmp", label: { ar: "NMP", en: "NMP" } },
+  000033:   { id: "golden", label: { ar: "إشارة نواف الذهبية", en: "Nawaf Golden Signal" } },
+  000034:   { id: "enhancedGolden", label: { ar: "إشارة نواف الذهبية المعززة", en: "Enhanced Nawaf Golden Signal" } },
+  000035:   { id: "devilsAdvocate", label: { ar: "محامي الشيطان", en: "Devil's Advocate" } }
+  000036: ];
+  000037: 
+  000038: const ASSETS = ndspAssetsRegistry.map((asset) => ({
+  000039:   market: String(asset.market || "").toUpperCase(),
+  000040:   symbol: String(asset.symbol || "").toUpperCase(),
+  000041:   nameAr: String(asset.nameAr || ""),
+  000042:   nameEn: String(asset.nameEn || "")
+  000043: }));
+  000044: 
+  000045: const DEFAULT_CONTEXT = {
+  000046:   lang: "ar",
+  000047:   market: "CRYPTO",
+  000048:   symbol: "BTCUSDT",
+  000049:   timeframe: "weekly",
+  000050:   mode: "investment",
+  000051:   view: "beginner",
+  000052:   session: ""
+  000053: };
+  000054: 
+  000055: const I18N = {
+  000056:   ar: {
+  000057:     brand: "NDSP",
+  000058:     brandFull: "منصة نواف لدعم القرار",
+  000059:     commandCenter: "مركز القيادة",
+  000060:     markets: "الأسواق",
+  000061:     pricesChart: "الأسعار والشارت",
+  000062:     opportunities: "مستكشف الفرص",
+  000063:     decisionRoom: "غرفة القرار",
+  000064:     portfolio: "المحفظة",
+>>000065:     more: "المزيد",
+  000066:     scenarios: "السيناريوهات والمستويات",
+  000067:     publicLayers: "الطبقات العامة",
+  000068:     riskChallenge: "المخاطر والاعتراض",
+  000069:     completed: "القرارات المكتملة",
+  000070:     dataHealth: "صحة البيانات",
+  000071:     alerts: "مركز التنبيهات",
+  000072:     guide: "دليل المستخدم",
+  000073:     support: "مركز الدعم",
+  000074:     account: "الحساب والاشتراك",
+  000075:     plans: "الباقات والترقية",
+  000076:     settings: "الإعدادات",
+  000077:     changeContext: "تغيير الاختيار",
+  000078:     trialExpired: "انتهت الفترة التجريبية",
+  000079:     market: "السوق",
+  000080:     asset: "الأصل",
+  000081:     timeframe: "الإطار الزمني",
+  000082:     readingType: "نوع القراءة",
+  000083:     viewLevel: "مستوى العرض",
+  000084:     investment: "استثماري",
+  000085:     speculative: "مضاربي",
+  000086:     beginner: "مبتدئ",
+  000087:     professional: "محترف",
+  000088:     live: "بيانات حية",
+  000089:     unavailable: "غير متاحة",
+  000090:     delayed: "متأخرة",
+  000091:     stale: "قديمة",
+  000092:     loading: "جارٍ التحميل…",
+  000093:     retry: "إعادة المحاولة",
+  000094:     error: "تعذر تحميل البيانات",
+  000095:     empty: "لا توجد بيانات متاحة",
+  000096:     partial: "البيانات المتاحة جزئية",
+  000097:     lastUpdated: "آخر تحديث",
+  000098:     sourceStatus: "حالة المصدر",
+  000099:     marketSummary: "ملخص السوق",
+  000100:     currentDecision: "القرار الحالي",
+  000101:     readingStatus: "حالة القراءة",
+  000102:     readiness: "جاهزية القرار",
+  000103:     strength: "قوة القراءة",
+  000104:     dataQuality: "جودة البيانات",
+  000105:     momentum: "الزخم",
+  000106:     macro: "السياق الكلي",
+  000107:     trackedAssets: "الأصول المتابعة",
+  000108:     activeAlerts: "التنبيهات النشطة",
+  000109:     completedReads: "قراءات مكتملة",
+  000110:     monitoredReads: "تحت المتابعة",
+  000111:     strongestOpportunities: "أقوى الفرص",
+  000112:     keyRisks: "أبرز المخاطر",
+  000113:     dailyBrief: "الملخص اليومي",
+  000114:     quickLinks: "روابط سريعة",
+  000115:     underMonitoring: "تحت المتابعة",
+  000116:     blocked: "غير مكتمل",
+  000117:     allowed: "مسموح",
+  000118:     armed: "جاهز للتأكيد",
+  000119:     executed: "مكتمل",
+  000120:     bullish: "ضغط إيجابي",
+  000121:     bearish: "ضغط سلبي",
+  000122:     neutral: "محايد",
+  000123:     high: "مرتفعة",
+  000124:     medium: "متوسطة",
+  000125:     low: "منخفضة",
+  000126:     search: "بحث",
+  000127:     allMarkets: "كل الأسواق",
+  000128:     addWatchlist: "إضافة للمفضلة",
+  000129:     removeWatchlist: "إزالة من المفضلة",
+  000130:     openChart: "فتح الشارت",
+  000131:     openDecision: "فتح غرفة القرار",
+  000132:     addPortfolio: "إضافة للمحفظة",
+  000133:     price: "السعر",
+  000134:     change: "التغير",
+  000135:     status: "الحالة",
+  000136:     actions: "الإجراءات",
+  000137:     chartTitle: "الأسعار الحية والشارت الفني",
+  000138:     refresh: "تحديث",
+  000139:     fullscreen: "ملء الشاشة",
+
+---------------- FILE: /home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_20260727_204117/context-07.txt ----------------
+PATTERN=\bMore\b
+ANCHOR_LINE=4070
+CONTEXT_START=4025
+CONTEXT_END=4144
+
+  004025:               {activePanels.map(
+  004026:                 (indicator) => (
+  004027:                   <IndicatorPanel
+  004028:                     key={indicator.id}
+  004029:                     id={indicator.id}
+  004030:                     label={indicator.label}
+  004031:                     values={
+  004032:                       indicatorSeries[
+  004033:                         indicator.id
+  004034:                       ]
+  004035:                     }
+  004036:                     start={start}
+  004037:                     end={clampedEnd}
+  004038:                     lang={lang}
+  004039:                   />
+  004040:                 )
+  004041:               )}
+  004042:             </div>
+  004043:           )
+  004044:         : null}
+  004045:     </div>
+  004046:   );
+  004047: }
+  004048: const PRIMARY_NAV = [
+  004049:   ["commandCenter", "/command-center"], ["markets", "/markets"], ["pricesChart", "/prices-chart"],
+  004050:   ["opportunities", "/opportunities"], ["decisionRoom", "/decision-room"], ["portfolio", "/portfolio"]
+  004051: ];
+  004052: const MORE_NAV = [
+  004053:   ["scenarios", "/scenarios"], ["publicLayers", "/layers"], ["riskChallenge", "/risk"],
+  004054:   ["completed", "/completed"], ["dataHealth", "/data-health"], ["alerts", "/alerts"],
+  004055:   ["guide", "/guide"], ["support", "/support"], ["account", "/account"],
+  004056:   ["plans", "/plans"], ["settings", "/settings"], ["changeContext", "/context"]
+  004057: ];
+  004058: 
+  004059: function querySuffix(state) {
+  004060:   const params = new URLSearchParams();
+  004061:   CONTEXT_KEYS.forEach((key) => params.set(key, state[key]));
+  004062:   return `?${params.toString()}`;
+  004063: }
+  004064: 
+  004065: function Topbar() {
+  004066:   const { state, patch } = useDecision();
+  004067:   const { route, navigate } = useNavigation();
+  004068:   const { t, lang } = useTranslate();
+  004069:   const [drawer, setDrawer] = useState(false);
+>>004070:   const [more, setMore] = useState(false);
+  004071:   const drawerRef = useRef(null);
+  004072:   const menuRef = useRef(null);
+  004073: 
+  004074:   useEffect(() => {
+  004075:     if (!drawer) return undefined;
+  004076:     document.body.classList.add("drawer-open");
+  004077:     const previous = document.activeElement;
+  004078:     drawerRef.current?.querySelector("a,button")?.focus();
+  004079:     const onKey = (event) => {
+  004080:       if (event.key === "Escape") setDrawer(false);
+  004081:     };
+  004082:     document.addEventListener("keydown", onKey);
+  004083:     return () => {
+  004084:       document.body.classList.remove("drawer-open");
+  004085:       document.removeEventListener("keydown", onKey);
+  004086:       previous?.focus?.();
+  004087:     };
+  004088:   }, [drawer]);
+  004089: 
+  004090:   const go = (path) => {
+  004091:     navigate(path);
+  004092:     setDrawer(false);
+  004093:     setMore(false);
+  004094:   };
+  004095:   const navButton = ([key, path], mobile = false) => <button key={path} onClick={() => go(path)} className={`nav-link ${route === path ? "active" : ""} ${mobile ? "drawer-link" : ""}`}>{t(key)}</button>;
+  004096: 
+  004097:   return <>
+  004098:     <header className="topbar"><div className="topbar-inner">
+  004099:       <button className="brand" onClick={() => go("/command-center")} aria-label={`${t("brand")} — ${t("brandFull")}`}><span className="brand-mark">N</span><span><strong>{t("brand")}</strong><small>{t("brandFull")}</small></span></button>
+  004100:       <nav className="desktop-nav" aria-label="menu">{PRIMARY_NAV.map((item) => navButton(item))}<div className="more-wrap"><button className={`nav-link nav-button ${MORE_NAV.some(([, path]) => path === route) ? "active" : ""}`} onClick={() => setMore((value) => !value)}>{t("more")} <span className="caret">⌄</span></button>{more ? <div className="dropdown" onMouseLeave={() => setMore(false)}>{MORE_NAV.map((item) => navButton(item))}</div> : null}</div></nav>
+  004101:       <div className="header-actions"><Badge tone="success">{t("live")}</Badge><button className="icon-button" onClick={() => patch({ lang: lang === "ar" ? "en" : "ar" })}><Icon name="globe"/><span className="action-text">{lang === "ar" ? "English" : "العربية"}</span></button><button ref={menuRef} className="icon-button mobile-menu" onClick={() => setDrawer(true)} aria-expanded={drawer}><Icon name="menu"/></button></div>
+  004102:     </div></header>
+  004103:     {drawer ? <div className="drawer-layer" data-dir={state.lang === "ar" ? "rtl" : "ltr"}><button className="drawer-backdrop" onClick={() => setDrawer(false)} aria-label="close"/><aside ref={drawerRef} className="drawer" role="dialog" aria-modal="true"><div className="drawer-head"><div className="brand"><span className="brand-mark">N</span><span><strong>{t("brand")}</strong><small>{t("brandFull")}</small></span></div><button className="icon-button" onClick={() => setDrawer(false)}><Icon name="close"/></button></div><div className="drawer-trial"><span>{t("commercialNotice")}</span></div><nav className="drawer-nav">{PRIMARY_NAV.map((item) => navButton(item, true))}<div className="drawer-separator">{t("more")}</div>{MORE_NAV.map((item) => navButton(item, true))}
+  004104:             <PortalLogoutButton/>
+  004105:           </nav></aside></div> : null}
+  004106:   </>;
+  004107: }
+  004108: 
+  004109: function ContextStrip() {
+  004110:   const { state, patch } = useDecision();
+  004111:   const { t, lang } = useTranslate();
+  004112:   const setMarket = (market) => patch({ market, symbol: ASSETS.find((asset) => asset.market === market)?.symbol || state.symbol });
+  004113:   return <div className="context-shell"><div className="context-strip" data-testid="context-strip">
+  004114:     <label><span>{t("market")}</span><select value={state.market} onChange={(event) => setMarket(event.target.value)}>{MARKETS.map((market) => <option value={market} key={market}>{marketLabel(market, lang)}</option>)}</select></label>
+  004115:     <label><span>{t("asset")}</span><select value={state.symbol} onChange={(event) => patch({ symbol: event.target.value })}>{ASSETS.filter((asset) => asset.market === state.market).map((asset) => <option value={asset.symbol} key={asset.symbol}>{assetName(asset, lang)} · {asset.symbol}</option>)}</select></label>
+  004116:     <label><span>{t("timeframe")}</span><select value={state.timeframe} onChange={(event) => patch({ timeframe: event.target.value })}>{TIMEFRAMES.map((timeframe) => <option key={timeframe}>{timeframe}</option>)}</select></label>
+  004117:     <label><span>{t("readingType")}</span><select value={state.mode} onChange={(event) => patch({ mode: event.target.value })}><option value="investment">{t("investment")}</option><option value="speculative">{t("speculative")}</option></select></label>
+  004118:     <label><span>{t("viewLevel")}</span><select value={state.view} onChange={(event) => patch({ view: event.target.value })}><option value="beginner">{t("beginner")}</option><option value="professional">{t("professional")}</option></select></label>
+  004119:   </div></div>;
+  004120: }
+  004121: 
+  004122: function LegalModal() {
+  004123:   const { accepted, acceptLegal } = useDecision();
+  004124:   const { t } = useTranslate();
+  004125:   if (accepted) return null;
+  004126:   return <div className="modal-layer"><div className="modal-backdrop"/><div className="modal" role="dialog" aria-modal="true"><div className="modal-head"><h2>{t("legalTitle")}</h2></div><div className="modal-body"><p>{t("legalBody")}</p><div className="modal-actions"><button className="button primary" onClick={acceptLegal}>{t("accept")}</button></div></div></div></div>;
+  004127: }
+  004128: 
+  004129: function ContextSummary() {
+  004130:   const { state } = useDecision();
+  004131:   const { t, lang } = useTranslate();
+  004132:   return <div className="context-summary"><Badge>{marketLabel(state.market, lang)}</Badge><Badge tone="muted">{assetName(findAsset(state.symbol), lang)}</Badge><Badge tone="muted">{state.timeframe}</Badge><Badge tone="muted">{t(state.mode)}</Badge><Badge tone="muted">{t(state.view)}</Badge></div>;
+  004133: }
+  004134: 
+  004135: function qualityRadar(quality, t) {
+  004136:   return {
+  004137:     labels: [t("dataQuality"), "TDL", t("momentum"), "NMP", t("macro"), t("readiness")],
+  004138:     values: [
+  004139:       quality?.decisionQuality,
+  004140:       quality?.alignmentScore,
+  004141:       quality?.cciValue === null ? null : Math.min(100, Math.abs(quality.cciValue)),
+  004142:       quality?.nmp?.status === "AVAILABLE" ? 100 : 0,
+  004143:       quality?.usdPressureScore === null ? null : Math.max(0, 100 - Math.min(100, Math.abs(quality.usdPressureScore))),
+  004144:       quality?.confirmationScore
+
+---------------- FILE: /home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_20260727_204117/context-08.txt ----------------
+PATTERN=\bMore\b
+ANCHOR_LINE=4100
+CONTEXT_START=4055
+CONTEXT_END=4174
+
+  004055:   ["guide", "/guide"], ["support", "/support"], ["account", "/account"],
+  004056:   ["plans", "/plans"], ["settings", "/settings"], ["changeContext", "/context"]
+  004057: ];
+  004058: 
+  004059: function querySuffix(state) {
+  004060:   const params = new URLSearchParams();
+  004061:   CONTEXT_KEYS.forEach((key) => params.set(key, state[key]));
+  004062:   return `?${params.toString()}`;
+  004063: }
+  004064: 
+  004065: function Topbar() {
+  004066:   const { state, patch } = useDecision();
+  004067:   const { route, navigate } = useNavigation();
+  004068:   const { t, lang } = useTranslate();
+  004069:   const [drawer, setDrawer] = useState(false);
+  004070:   const [more, setMore] = useState(false);
+  004071:   const drawerRef = useRef(null);
+  004072:   const menuRef = useRef(null);
+  004073: 
+  004074:   useEffect(() => {
+  004075:     if (!drawer) return undefined;
+  004076:     document.body.classList.add("drawer-open");
+  004077:     const previous = document.activeElement;
+  004078:     drawerRef.current?.querySelector("a,button")?.focus();
+  004079:     const onKey = (event) => {
+  004080:       if (event.key === "Escape") setDrawer(false);
+  004081:     };
+  004082:     document.addEventListener("keydown", onKey);
+  004083:     return () => {
+  004084:       document.body.classList.remove("drawer-open");
+  004085:       document.removeEventListener("keydown", onKey);
+  004086:       previous?.focus?.();
+  004087:     };
+  004088:   }, [drawer]);
+  004089: 
+  004090:   const go = (path) => {
+  004091:     navigate(path);
+  004092:     setDrawer(false);
+  004093:     setMore(false);
+  004094:   };
+  004095:   const navButton = ([key, path], mobile = false) => <button key={path} onClick={() => go(path)} className={`nav-link ${route === path ? "active" : ""} ${mobile ? "drawer-link" : ""}`}>{t(key)}</button>;
+  004096: 
+  004097:   return <>
+  004098:     <header className="topbar"><div className="topbar-inner">
+  004099:       <button className="brand" onClick={() => go("/command-center")} aria-label={`${t("brand")} — ${t("brandFull")}`}><span className="brand-mark">N</span><span><strong>{t("brand")}</strong><small>{t("brandFull")}</small></span></button>
+>>004100:       <nav className="desktop-nav" aria-label="menu">{PRIMARY_NAV.map((item) => navButton(item))}<div className="more-wrap"><button className={`nav-link nav-button ${MORE_NAV.some(([, path]) => path === route) ? "active" : ""}`} onClick={() => setMore((value) => !value)}>{t("more")} <span className="caret">⌄</span></button>{more ? <div className="dropdown" onMouseLeave={() => setMore(false)}>{MORE_NAV.map((item) => navButton(item))}</div> : null}</div></nav>
+  004101:       <div className="header-actions"><Badge tone="success">{t("live")}</Badge><button className="icon-button" onClick={() => patch({ lang: lang === "ar" ? "en" : "ar" })}><Icon name="globe"/><span className="action-text">{lang === "ar" ? "English" : "العربية"}</span></button><button ref={menuRef} className="icon-button mobile-menu" onClick={() => setDrawer(true)} aria-expanded={drawer}><Icon name="menu"/></button></div>
+  004102:     </div></header>
+  004103:     {drawer ? <div className="drawer-layer" data-dir={state.lang === "ar" ? "rtl" : "ltr"}><button className="drawer-backdrop" onClick={() => setDrawer(false)} aria-label="close"/><aside ref={drawerRef} className="drawer" role="dialog" aria-modal="true"><div className="drawer-head"><div className="brand"><span className="brand-mark">N</span><span><strong>{t("brand")}</strong><small>{t("brandFull")}</small></span></div><button className="icon-button" onClick={() => setDrawer(false)}><Icon name="close"/></button></div><div className="drawer-trial"><span>{t("commercialNotice")}</span></div><nav className="drawer-nav">{PRIMARY_NAV.map((item) => navButton(item, true))}<div className="drawer-separator">{t("more")}</div>{MORE_NAV.map((item) => navButton(item, true))}
+  004104:             <PortalLogoutButton/>
+  004105:           </nav></aside></div> : null}
+  004106:   </>;
+  004107: }
+  004108: 
+  004109: function ContextStrip() {
+  004110:   const { state, patch } = useDecision();
+  004111:   const { t, lang } = useTranslate();
+  004112:   const setMarket = (market) => patch({ market, symbol: ASSETS.find((asset) => asset.market === market)?.symbol || state.symbol });
+  004113:   return <div className="context-shell"><div className="context-strip" data-testid="context-strip">
+  004114:     <label><span>{t("market")}</span><select value={state.market} onChange={(event) => setMarket(event.target.value)}>{MARKETS.map((market) => <option value={market} key={market}>{marketLabel(market, lang)}</option>)}</select></label>
+  004115:     <label><span>{t("asset")}</span><select value={state.symbol} onChange={(event) => patch({ symbol: event.target.value })}>{ASSETS.filter((asset) => asset.market === state.market).map((asset) => <option value={asset.symbol} key={asset.symbol}>{assetName(asset, lang)} · {asset.symbol}</option>)}</select></label>
+  004116:     <label><span>{t("timeframe")}</span><select value={state.timeframe} onChange={(event) => patch({ timeframe: event.target.value })}>{TIMEFRAMES.map((timeframe) => <option key={timeframe}>{timeframe}</option>)}</select></label>
+  004117:     <label><span>{t("readingType")}</span><select value={state.mode} onChange={(event) => patch({ mode: event.target.value })}><option value="investment">{t("investment")}</option><option value="speculative">{t("speculative")}</option></select></label>
+  004118:     <label><span>{t("viewLevel")}</span><select value={state.view} onChange={(event) => patch({ view: event.target.value })}><option value="beginner">{t("beginner")}</option><option value="professional">{t("professional")}</option></select></label>
+  004119:   </div></div>;
+  004120: }
+  004121: 
+  004122: function LegalModal() {
+  004123:   const { accepted, acceptLegal } = useDecision();
+  004124:   const { t } = useTranslate();
+  004125:   if (accepted) return null;
+  004126:   return <div className="modal-layer"><div className="modal-backdrop"/><div className="modal" role="dialog" aria-modal="true"><div className="modal-head"><h2>{t("legalTitle")}</h2></div><div className="modal-body"><p>{t("legalBody")}</p><div className="modal-actions"><button className="button primary" onClick={acceptLegal}>{t("accept")}</button></div></div></div></div>;
+  004127: }
+  004128: 
+  004129: function ContextSummary() {
+  004130:   const { state } = useDecision();
+  004131:   const { t, lang } = useTranslate();
+  004132:   return <div className="context-summary"><Badge>{marketLabel(state.market, lang)}</Badge><Badge tone="muted">{assetName(findAsset(state.symbol), lang)}</Badge><Badge tone="muted">{state.timeframe}</Badge><Badge tone="muted">{t(state.mode)}</Badge><Badge tone="muted">{t(state.view)}</Badge></div>;
+  004133: }
+  004134: 
+  004135: function qualityRadar(quality, t) {
+  004136:   return {
+  004137:     labels: [t("dataQuality"), "TDL", t("momentum"), "NMP", t("macro"), t("readiness")],
+  004138:     values: [
+  004139:       quality?.decisionQuality,
+  004140:       quality?.alignmentScore,
+  004141:       quality?.cciValue === null ? null : Math.min(100, Math.abs(quality.cciValue)),
+  004142:       quality?.nmp?.status === "AVAILABLE" ? 100 : 0,
+  004143:       quality?.usdPressureScore === null ? null : Math.max(0, 100 - Math.min(100, Math.abs(quality.usdPressureScore))),
+  004144:       quality?.confirmationScore
+  004145:     ]
+  004146:   };
+  004147: }
+  004148: 
+  004149: function CommandCenterPage() {
+  004150:   const { state } = useDecision();
+  004151:   const { navigate } = useNavigation();
+  004152:   const { t, lang } = useTranslate();
+  004153: 
+  004154:   const quality = useQuality(state.symbol, state.timeframe, state.mode);
+  004155: 
+  004156:   const universe = useMarketUniverse(
+  004157:     state.timeframe
+  004158:   );
+  004159: 
+  004160:   const completed = useCompletedDecisions();
+  004161:   const newsEvents = useNewsEvents(state.symbol, lang);
+  004162: 
+  004163:   if (quality.status === "loading") {
+  004164:     return <EmptyState type="loading"/>;
+  004165:   }
+  004166: 
+  004167:   if (quality.status === "error") {
+  004168:     return (
+  004169:       <EmptyState
+  004170:         type="error"
+  004171:         onRetry={quality.retry}
+  004172:       />
+  004173:     );
+  004174:   }
+
+---------------- FILE: /home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_20260727_204117/context-09.txt ----------------
+PATTERN=\bMore\b
+ANCHOR_LINE=4103
+CONTEXT_START=4058
+CONTEXT_END=4177
+
+  004058: 
+  004059: function querySuffix(state) {
+  004060:   const params = new URLSearchParams();
+  004061:   CONTEXT_KEYS.forEach((key) => params.set(key, state[key]));
+  004062:   return `?${params.toString()}`;
+  004063: }
+  004064: 
+  004065: function Topbar() {
+  004066:   const { state, patch } = useDecision();
+  004067:   const { route, navigate } = useNavigation();
+  004068:   const { t, lang } = useTranslate();
+  004069:   const [drawer, setDrawer] = useState(false);
+  004070:   const [more, setMore] = useState(false);
+  004071:   const drawerRef = useRef(null);
+  004072:   const menuRef = useRef(null);
+  004073: 
+  004074:   useEffect(() => {
+  004075:     if (!drawer) return undefined;
+  004076:     document.body.classList.add("drawer-open");
+  004077:     const previous = document.activeElement;
+  004078:     drawerRef.current?.querySelector("a,button")?.focus();
+  004079:     const onKey = (event) => {
+  004080:       if (event.key === "Escape") setDrawer(false);
+  004081:     };
+  004082:     document.addEventListener("keydown", onKey);
+  004083:     return () => {
+  004084:       document.body.classList.remove("drawer-open");
+  004085:       document.removeEventListener("keydown", onKey);
+  004086:       previous?.focus?.();
+  004087:     };
+  004088:   }, [drawer]);
+  004089: 
+  004090:   const go = (path) => {
+  004091:     navigate(path);
+  004092:     setDrawer(false);
+  004093:     setMore(false);
+  004094:   };
+  004095:   const navButton = ([key, path], mobile = false) => <button key={path} onClick={() => go(path)} className={`nav-link ${route === path ? "active" : ""} ${mobile ? "drawer-link" : ""}`}>{t(key)}</button>;
+  004096: 
+  004097:   return <>
+  004098:     <header className="topbar"><div className="topbar-inner">
+  004099:       <button className="brand" onClick={() => go("/command-center")} aria-label={`${t("brand")} — ${t("brandFull")}`}><span className="brand-mark">N</span><span><strong>{t("brand")}</strong><small>{t("brandFull")}</small></span></button>
+  004100:       <nav className="desktop-nav" aria-label="menu">{PRIMARY_NAV.map((item) => navButton(item))}<div className="more-wrap"><button className={`nav-link nav-button ${MORE_NAV.some(([, path]) => path === route) ? "active" : ""}`} onClick={() => setMore((value) => !value)}>{t("more")} <span className="caret">⌄</span></button>{more ? <div className="dropdown" onMouseLeave={() => setMore(false)}>{MORE_NAV.map((item) => navButton(item))}</div> : null}</div></nav>
+  004101:       <div className="header-actions"><Badge tone="success">{t("live")}</Badge><button className="icon-button" onClick={() => patch({ lang: lang === "ar" ? "en" : "ar" })}><Icon name="globe"/><span className="action-text">{lang === "ar" ? "English" : "العربية"}</span></button><button ref={menuRef} className="icon-button mobile-menu" onClick={() => setDrawer(true)} aria-expanded={drawer}><Icon name="menu"/></button></div>
+  004102:     </div></header>
+>>004103:     {drawer ? <div className="drawer-layer" data-dir={state.lang === "ar" ? "rtl" : "ltr"}><button className="drawer-backdrop" onClick={() => setDrawer(false)} aria-label="close"/><aside ref={drawerRef} className="drawer" role="dialog" aria-modal="true"><div className="drawer-head"><div className="brand"><span className="brand-mark">N</span><span><strong>{t("brand")}</strong><small>{t("brandFull")}</small></span></div><button className="icon-button" onClick={() => setDrawer(false)}><Icon name="close"/></button></div><div className="drawer-trial"><span>{t("commercialNotice")}</span></div><nav className="drawer-nav">{PRIMARY_NAV.map((item) => navButton(item, true))}<div className="drawer-separator">{t("more")}</div>{MORE_NAV.map((item) => navButton(item, true))}
+  004104:             <PortalLogoutButton/>
+  004105:           </nav></aside></div> : null}
+  004106:   </>;
+  004107: }
+  004108: 
+  004109: function ContextStrip() {
+  004110:   const { state, patch } = useDecision();
+  004111:   const { t, lang } = useTranslate();
+  004112:   const setMarket = (market) => patch({ market, symbol: ASSETS.find((asset) => asset.market === market)?.symbol || state.symbol });
+  004113:   return <div className="context-shell"><div className="context-strip" data-testid="context-strip">
+  004114:     <label><span>{t("market")}</span><select value={state.market} onChange={(event) => setMarket(event.target.value)}>{MARKETS.map((market) => <option value={market} key={market}>{marketLabel(market, lang)}</option>)}</select></label>
+  004115:     <label><span>{t("asset")}</span><select value={state.symbol} onChange={(event) => patch({ symbol: event.target.value })}>{ASSETS.filter((asset) => asset.market === state.market).map((asset) => <option value={asset.symbol} key={asset.symbol}>{assetName(asset, lang)} · {asset.symbol}</option>)}</select></label>
+  004116:     <label><span>{t("timeframe")}</span><select value={state.timeframe} onChange={(event) => patch({ timeframe: event.target.value })}>{TIMEFRAMES.map((timeframe) => <option key={timeframe}>{timeframe}</option>)}</select></label>
+  004117:     <label><span>{t("readingType")}</span><select value={state.mode} onChange={(event) => patch({ mode: event.target.value })}><option value="investment">{t("investment")}</option><option value="speculative">{t("speculative")}</option></select></label>
+  004118:     <label><span>{t("viewLevel")}</span><select value={state.view} onChange={(event) => patch({ view: event.target.value })}><option value="beginner">{t("beginner")}</option><option value="professional">{t("professional")}</option></select></label>
+  004119:   </div></div>;
+  004120: }
+  004121: 
+  004122: function LegalModal() {
+  004123:   const { accepted, acceptLegal } = useDecision();
+  004124:   const { t } = useTranslate();
+  004125:   if (accepted) return null;
+  004126:   return <div className="modal-layer"><div className="modal-backdrop"/><div className="modal" role="dialog" aria-modal="true"><div className="modal-head"><h2>{t("legalTitle")}</h2></div><div className="modal-body"><p>{t("legalBody")}</p><div className="modal-actions"><button className="button primary" onClick={acceptLegal}>{t("accept")}</button></div></div></div></div>;
+  004127: }
+  004128: 
+  004129: function ContextSummary() {
+  004130:   const { state } = useDecision();
+  004131:   const { t, lang } = useTranslate();
+  004132:   return <div className="context-summary"><Badge>{marketLabel(state.market, lang)}</Badge><Badge tone="muted">{assetName(findAsset(state.symbol), lang)}</Badge><Badge tone="muted">{state.timeframe}</Badge><Badge tone="muted">{t(state.mode)}</Badge><Badge tone="muted">{t(state.view)}</Badge></div>;
+  004133: }
+  004134: 
+  004135: function qualityRadar(quality, t) {
+  004136:   return {
+  004137:     labels: [t("dataQuality"), "TDL", t("momentum"), "NMP", t("macro"), t("readiness")],
+  004138:     values: [
+  004139:       quality?.decisionQuality,
+  004140:       quality?.alignmentScore,
+  004141:       quality?.cciValue === null ? null : Math.min(100, Math.abs(quality.cciValue)),
+  004142:       quality?.nmp?.status === "AVAILABLE" ? 100 : 0,
+  004143:       quality?.usdPressureScore === null ? null : Math.max(0, 100 - Math.min(100, Math.abs(quality.usdPressureScore))),
+  004144:       quality?.confirmationScore
+  004145:     ]
+  004146:   };
+  004147: }
+  004148: 
+  004149: function CommandCenterPage() {
+  004150:   const { state } = useDecision();
+  004151:   const { navigate } = useNavigation();
+  004152:   const { t, lang } = useTranslate();
+  004153: 
+  004154:   const quality = useQuality(state.symbol, state.timeframe, state.mode);
+  004155: 
+  004156:   const universe = useMarketUniverse(
+  004157:     state.timeframe
+  004158:   );
+  004159: 
+  004160:   const completed = useCompletedDecisions();
+  004161:   const newsEvents = useNewsEvents(state.symbol, lang);
+  004162: 
+  004163:   if (quality.status === "loading") {
+  004164:     return <EmptyState type="loading"/>;
+  004165:   }
+  004166: 
+  004167:   if (quality.status === "error") {
+  004168:     return (
+  004169:       <EmptyState
+  004170:         type="error"
+  004171:         onRetry={quality.retry}
+  004172:       />
+  004173:     );
+  004174:   }
+  004175: 
+  004176:   const value = quality.value;
+  004177:   const radar = qualityRadar(value, t);
+
+---------------- FILE: /home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_20260727_204117/context-12.txt ----------------
+PATTERN=الإعدادات
+ANCHOR_LINE=76
+CONTEXT_START=31
+CONTEXT_END=150
+
+  000031:   { id: "tdl", label: { ar: "TDL", en: "TDL" } },
+  000032:   { id: "nmp", label: { ar: "NMP", en: "NMP" } },
+  000033:   { id: "golden", label: { ar: "إشارة نواف الذهبية", en: "Nawaf Golden Signal" } },
+  000034:   { id: "enhancedGolden", label: { ar: "إشارة نواف الذهبية المعززة", en: "Enhanced Nawaf Golden Signal" } },
+  000035:   { id: "devilsAdvocate", label: { ar: "محامي الشيطان", en: "Devil's Advocate" } }
+  000036: ];
+  000037: 
+  000038: const ASSETS = ndspAssetsRegistry.map((asset) => ({
+  000039:   market: String(asset.market || "").toUpperCase(),
+  000040:   symbol: String(asset.symbol || "").toUpperCase(),
+  000041:   nameAr: String(asset.nameAr || ""),
+  000042:   nameEn: String(asset.nameEn || "")
+  000043: }));
+  000044: 
+  000045: const DEFAULT_CONTEXT = {
+  000046:   lang: "ar",
+  000047:   market: "CRYPTO",
+  000048:   symbol: "BTCUSDT",
+  000049:   timeframe: "weekly",
+  000050:   mode: "investment",
+  000051:   view: "beginner",
+  000052:   session: ""
+  000053: };
+  000054: 
+  000055: const I18N = {
+  000056:   ar: {
+  000057:     brand: "NDSP",
+  000058:     brandFull: "منصة نواف لدعم القرار",
+  000059:     commandCenter: "مركز القيادة",
+  000060:     markets: "الأسواق",
+  000061:     pricesChart: "الأسعار والشارت",
+  000062:     opportunities: "مستكشف الفرص",
+  000063:     decisionRoom: "غرفة القرار",
+  000064:     portfolio: "المحفظة",
+  000065:     more: "المزيد",
+  000066:     scenarios: "السيناريوهات والمستويات",
+  000067:     publicLayers: "الطبقات العامة",
+  000068:     riskChallenge: "المخاطر والاعتراض",
+  000069:     completed: "القرارات المكتملة",
+  000070:     dataHealth: "صحة البيانات",
+  000071:     alerts: "مركز التنبيهات",
+  000072:     guide: "دليل المستخدم",
+  000073:     support: "مركز الدعم",
+  000074:     account: "الحساب والاشتراك",
+  000075:     plans: "الباقات والترقية",
+>>000076:     settings: "الإعدادات",
+  000077:     changeContext: "تغيير الاختيار",
+  000078:     trialExpired: "انتهت الفترة التجريبية",
+  000079:     market: "السوق",
+  000080:     asset: "الأصل",
+  000081:     timeframe: "الإطار الزمني",
+  000082:     readingType: "نوع القراءة",
+  000083:     viewLevel: "مستوى العرض",
+  000084:     investment: "استثماري",
+  000085:     speculative: "مضاربي",
+  000086:     beginner: "مبتدئ",
+  000087:     professional: "محترف",
+  000088:     live: "بيانات حية",
+  000089:     unavailable: "غير متاحة",
+  000090:     delayed: "متأخرة",
+  000091:     stale: "قديمة",
+  000092:     loading: "جارٍ التحميل…",
+  000093:     retry: "إعادة المحاولة",
+  000094:     error: "تعذر تحميل البيانات",
+  000095:     empty: "لا توجد بيانات متاحة",
+  000096:     partial: "البيانات المتاحة جزئية",
+  000097:     lastUpdated: "آخر تحديث",
+  000098:     sourceStatus: "حالة المصدر",
+  000099:     marketSummary: "ملخص السوق",
+  000100:     currentDecision: "القرار الحالي",
+  000101:     readingStatus: "حالة القراءة",
+  000102:     readiness: "جاهزية القرار",
+  000103:     strength: "قوة القراءة",
+  000104:     dataQuality: "جودة البيانات",
+  000105:     momentum: "الزخم",
+  000106:     macro: "السياق الكلي",
+  000107:     trackedAssets: "الأصول المتابعة",
+  000108:     activeAlerts: "التنبيهات النشطة",
+  000109:     completedReads: "قراءات مكتملة",
+  000110:     monitoredReads: "تحت المتابعة",
+  000111:     strongestOpportunities: "أقوى الفرص",
+  000112:     keyRisks: "أبرز المخاطر",
+  000113:     dailyBrief: "الملخص اليومي",
+  000114:     quickLinks: "روابط سريعة",
+  000115:     underMonitoring: "تحت المتابعة",
+  000116:     blocked: "غير مكتمل",
+  000117:     allowed: "مسموح",
+  000118:     armed: "جاهز للتأكيد",
+  000119:     executed: "مكتمل",
+  000120:     bullish: "ضغط إيجابي",
+  000121:     bearish: "ضغط سلبي",
+  000122:     neutral: "محايد",
+  000123:     high: "مرتفعة",
+  000124:     medium: "متوسطة",
+  000125:     low: "منخفضة",
+  000126:     search: "بحث",
+  000127:     allMarkets: "كل الأسواق",
+  000128:     addWatchlist: "إضافة للمفضلة",
+  000129:     removeWatchlist: "إزالة من المفضلة",
+  000130:     openChart: "فتح الشارت",
+  000131:     openDecision: "فتح غرفة القرار",
+  000132:     addPortfolio: "إضافة للمحفظة",
+  000133:     price: "السعر",
+  000134:     change: "التغير",
+  000135:     status: "الحالة",
+  000136:     actions: "الإجراءات",
+  000137:     chartTitle: "الأسعار الحية والشارت الفني",
+  000138:     refresh: "تحديث",
+  000139:     fullscreen: "ملء الشاشة",
+  000140:     open: "الافتتاح",
+  000141:     highPrice: "الأعلى",
+  000142:     lowPrice: "الأدنى",
+  000143:     closePrice: "الإغلاق",
+  000144:     indicators: "المؤشرات المعتمدة",
+  000145:     divergence: "الانحراف",
+  000146:     noDivergence: "لا يوجد انحراف مؤكد",
+  000147:     scenarioLevels: "مستويات السيناريو",
+  000148:     activation: "التفعيل",
+  000149:     arrival: "الوصول",
+  000150:     review: "المراجعة",
+
+---------------- FILE: /home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_20260727_204117/context-13.txt ----------------
+PATTERN=\bSettings\b
+ANCHOR_LINE=76
+CONTEXT_START=31
+CONTEXT_END=150
+
+  000031:   { id: "tdl", label: { ar: "TDL", en: "TDL" } },
+  000032:   { id: "nmp", label: { ar: "NMP", en: "NMP" } },
+  000033:   { id: "golden", label: { ar: "إشارة نواف الذهبية", en: "Nawaf Golden Signal" } },
+  000034:   { id: "enhancedGolden", label: { ar: "إشارة نواف الذهبية المعززة", en: "Enhanced Nawaf Golden Signal" } },
+  000035:   { id: "devilsAdvocate", label: { ar: "محامي الشيطان", en: "Devil's Advocate" } }
+  000036: ];
+  000037: 
+  000038: const ASSETS = ndspAssetsRegistry.map((asset) => ({
+  000039:   market: String(asset.market || "").toUpperCase(),
+  000040:   symbol: String(asset.symbol || "").toUpperCase(),
+  000041:   nameAr: String(asset.nameAr || ""),
+  000042:   nameEn: String(asset.nameEn || "")
+  000043: }));
+  000044: 
+  000045: const DEFAULT_CONTEXT = {
+  000046:   lang: "ar",
+  000047:   market: "CRYPTO",
+  000048:   symbol: "BTCUSDT",
+  000049:   timeframe: "weekly",
+  000050:   mode: "investment",
+  000051:   view: "beginner",
+  000052:   session: ""
+  000053: };
+  000054: 
+  000055: const I18N = {
+  000056:   ar: {
+  000057:     brand: "NDSP",
+  000058:     brandFull: "منصة نواف لدعم القرار",
+  000059:     commandCenter: "مركز القيادة",
+  000060:     markets: "الأسواق",
+  000061:     pricesChart: "الأسعار والشارت",
+  000062:     opportunities: "مستكشف الفرص",
+  000063:     decisionRoom: "غرفة القرار",
+  000064:     portfolio: "المحفظة",
+  000065:     more: "المزيد",
+  000066:     scenarios: "السيناريوهات والمستويات",
+  000067:     publicLayers: "الطبقات العامة",
+  000068:     riskChallenge: "المخاطر والاعتراض",
+  000069:     completed: "القرارات المكتملة",
+  000070:     dataHealth: "صحة البيانات",
+  000071:     alerts: "مركز التنبيهات",
+  000072:     guide: "دليل المستخدم",
+  000073:     support: "مركز الدعم",
+  000074:     account: "الحساب والاشتراك",
+  000075:     plans: "الباقات والترقية",
+>>000076:     settings: "الإعدادات",
+  000077:     changeContext: "تغيير الاختيار",
+  000078:     trialExpired: "انتهت الفترة التجريبية",
+  000079:     market: "السوق",
+  000080:     asset: "الأصل",
+  000081:     timeframe: "الإطار الزمني",
+  000082:     readingType: "نوع القراءة",
+  000083:     viewLevel: "مستوى العرض",
+  000084:     investment: "استثماري",
+  000085:     speculative: "مضاربي",
+  000086:     beginner: "مبتدئ",
+  000087:     professional: "محترف",
+  000088:     live: "بيانات حية",
+  000089:     unavailable: "غير متاحة",
+  000090:     delayed: "متأخرة",
+  000091:     stale: "قديمة",
+  000092:     loading: "جارٍ التحميل…",
+  000093:     retry: "إعادة المحاولة",
+  000094:     error: "تعذر تحميل البيانات",
+  000095:     empty: "لا توجد بيانات متاحة",
+  000096:     partial: "البيانات المتاحة جزئية",
+  000097:     lastUpdated: "آخر تحديث",
+  000098:     sourceStatus: "حالة المصدر",
+  000099:     marketSummary: "ملخص السوق",
+  000100:     currentDecision: "القرار الحالي",
+  000101:     readingStatus: "حالة القراءة",
+  000102:     readiness: "جاهزية القرار",
+  000103:     strength: "قوة القراءة",
+  000104:     dataQuality: "جودة البيانات",
+  000105:     momentum: "الزخم",
+  000106:     macro: "السياق الكلي",
+  000107:     trackedAssets: "الأصول المتابعة",
+  000108:     activeAlerts: "التنبيهات النشطة",
+  000109:     completedReads: "قراءات مكتملة",
+  000110:     monitoredReads: "تحت المتابعة",
+  000111:     strongestOpportunities: "أقوى الفرص",
+  000112:     keyRisks: "أبرز المخاطر",
+  000113:     dailyBrief: "الملخص اليومي",
+  000114:     quickLinks: "روابط سريعة",
+  000115:     underMonitoring: "تحت المتابعة",
+  000116:     blocked: "غير مكتمل",
+  000117:     allowed: "مسموح",
+  000118:     armed: "جاهز للتأكيد",
+  000119:     executed: "مكتمل",
+  000120:     bullish: "ضغط إيجابي",
+  000121:     bearish: "ضغط سلبي",
+  000122:     neutral: "محايد",
+  000123:     high: "مرتفعة",
+  000124:     medium: "متوسطة",
+  000125:     low: "منخفضة",
+  000126:     search: "بحث",
+  000127:     allMarkets: "كل الأسواق",
+  000128:     addWatchlist: "إضافة للمفضلة",
+  000129:     removeWatchlist: "إزالة من المفضلة",
+  000130:     openChart: "فتح الشارت",
+  000131:     openDecision: "فتح غرفة القرار",
+  000132:     addPortfolio: "إضافة للمحفظة",
+  000133:     price: "السعر",
+  000134:     change: "التغير",
+  000135:     status: "الحالة",
+  000136:     actions: "الإجراءات",
+  000137:     chartTitle: "الأسعار الحية والشارت الفني",
+  000138:     refresh: "تحديث",
+  000139:     fullscreen: "ملء الشاشة",
+  000140:     open: "الافتتاح",
+  000141:     highPrice: "الأعلى",
+  000142:     lowPrice: "الأدنى",
+  000143:     closePrice: "الإغلاق",
+  000144:     indicators: "المؤشرات المعتمدة",
+  000145:     divergence: "الانحراف",
+  000146:     noDivergence: "لا يوجد انحراف مؤكد",
+  000147:     scenarioLevels: "مستويات السيناريو",
+  000148:     activation: "التفعيل",
+  000149:     arrival: "الوصول",
+  000150:     review: "المراجعة",
+
+---------------- FILE: /home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_20260727_204117/context-15.txt ----------------
+PATTERN=\bSettings\b
+ANCHOR_LINE=4056
+CONTEXT_START=4011
+CONTEXT_END=4130
+
+  004011:       {legend}
+  004012: 
+  004013:       <div className="interactive-chart-hint">
+  004014:         <span>
+  004015:           {CHART_COPY[lang].dragHint}
+  004016:         </span>
+  004017:         <span>
+  004018:           {CHART_COPY[lang].hoverHint}
+  004019:         </span>
+  004020:       </div>
+  004021: 
+  004022:       {activePanels.length
+  004023:         ? (
+  004024:             <div className="indicator-panels">
+  004025:               {activePanels.map(
+  004026:                 (indicator) => (
+  004027:                   <IndicatorPanel
+  004028:                     key={indicator.id}
+  004029:                     id={indicator.id}
+  004030:                     label={indicator.label}
+  004031:                     values={
+  004032:                       indicatorSeries[
+  004033:                         indicator.id
+  004034:                       ]
+  004035:                     }
+  004036:                     start={start}
+  004037:                     end={clampedEnd}
+  004038:                     lang={lang}
+  004039:                   />
+  004040:                 )
+  004041:               )}
+  004042:             </div>
+  004043:           )
+  004044:         : null}
+  004045:     </div>
+  004046:   );
+  004047: }
+  004048: const PRIMARY_NAV = [
+  004049:   ["commandCenter", "/command-center"], ["markets", "/markets"], ["pricesChart", "/prices-chart"],
+  004050:   ["opportunities", "/opportunities"], ["decisionRoom", "/decision-room"], ["portfolio", "/portfolio"]
+  004051: ];
+  004052: const MORE_NAV = [
+  004053:   ["scenarios", "/scenarios"], ["publicLayers", "/layers"], ["riskChallenge", "/risk"],
+  004054:   ["completed", "/completed"], ["dataHealth", "/data-health"], ["alerts", "/alerts"],
+  004055:   ["guide", "/guide"], ["support", "/support"], ["account", "/account"],
+>>004056:   ["plans", "/plans"], ["settings", "/settings"], ["changeContext", "/context"]
+  004057: ];
+  004058: 
+  004059: function querySuffix(state) {
+  004060:   const params = new URLSearchParams();
+  004061:   CONTEXT_KEYS.forEach((key) => params.set(key, state[key]));
+  004062:   return `?${params.toString()}`;
+  004063: }
+  004064: 
+  004065: function Topbar() {
+  004066:   const { state, patch } = useDecision();
+  004067:   const { route, navigate } = useNavigation();
+  004068:   const { t, lang } = useTranslate();
+  004069:   const [drawer, setDrawer] = useState(false);
+  004070:   const [more, setMore] = useState(false);
+  004071:   const drawerRef = useRef(null);
+  004072:   const menuRef = useRef(null);
+  004073: 
+  004074:   useEffect(() => {
+  004075:     if (!drawer) return undefined;
+  004076:     document.body.classList.add("drawer-open");
+  004077:     const previous = document.activeElement;
+  004078:     drawerRef.current?.querySelector("a,button")?.focus();
+  004079:     const onKey = (event) => {
+  004080:       if (event.key === "Escape") setDrawer(false);
+  004081:     };
+  004082:     document.addEventListener("keydown", onKey);
+  004083:     return () => {
+  004084:       document.body.classList.remove("drawer-open");
+  004085:       document.removeEventListener("keydown", onKey);
+  004086:       previous?.focus?.();
+  004087:     };
+  004088:   }, [drawer]);
+  004089: 
+  004090:   const go = (path) => {
+  004091:     navigate(path);
+  004092:     setDrawer(false);
+  004093:     setMore(false);
+  004094:   };
+  004095:   const navButton = ([key, path], mobile = false) => <button key={path} onClick={() => go(path)} className={`nav-link ${route === path ? "active" : ""} ${mobile ? "drawer-link" : ""}`}>{t(key)}</button>;
+  004096: 
+  004097:   return <>
+  004098:     <header className="topbar"><div className="topbar-inner">
+  004099:       <button className="brand" onClick={() => go("/command-center")} aria-label={`${t("brand")} — ${t("brandFull")}`}><span className="brand-mark">N</span><span><strong>{t("brand")}</strong><small>{t("brandFull")}</small></span></button>
+  004100:       <nav className="desktop-nav" aria-label="menu">{PRIMARY_NAV.map((item) => navButton(item))}<div className="more-wrap"><button className={`nav-link nav-button ${MORE_NAV.some(([, path]) => path === route) ? "active" : ""}`} onClick={() => setMore((value) => !value)}>{t("more")} <span className="caret">⌄</span></button>{more ? <div className="dropdown" onMouseLeave={() => setMore(false)}>{MORE_NAV.map((item) => navButton(item))}</div> : null}</div></nav>
+  004101:       <div className="header-actions"><Badge tone="success">{t("live")}</Badge><button className="icon-button" onClick={() => patch({ lang: lang === "ar" ? "en" : "ar" })}><Icon name="globe"/><span className="action-text">{lang === "ar" ? "English" : "العربية"}</span></button><button ref={menuRef} className="icon-button mobile-menu" onClick={() => setDrawer(true)} aria-expanded={drawer}><Icon name="menu"/></button></div>
+  004102:     </div></header>
+  004103:     {drawer ? <div className="drawer-layer" data-dir={state.lang === "ar" ? "rtl" : "ltr"}><button className="drawer-backdrop" onClick={() => setDrawer(false)} aria-label="close"/><aside ref={drawerRef} className="drawer" role="dialog" aria-modal="true"><div className="drawer-head"><div className="brand"><span className="brand-mark">N</span><span><strong>{t("brand")}</strong><small>{t("brandFull")}</small></span></div><button className="icon-button" onClick={() => setDrawer(false)}><Icon name="close"/></button></div><div className="drawer-trial"><span>{t("commercialNotice")}</span></div><nav className="drawer-nav">{PRIMARY_NAV.map((item) => navButton(item, true))}<div className="drawer-separator">{t("more")}</div>{MORE_NAV.map((item) => navButton(item, true))}
+  004104:             <PortalLogoutButton/>
+  004105:           </nav></aside></div> : null}
+  004106:   </>;
+  004107: }
+  004108: 
+  004109: function ContextStrip() {
+  004110:   const { state, patch } = useDecision();
+  004111:   const { t, lang } = useTranslate();
+  004112:   const setMarket = (market) => patch({ market, symbol: ASSETS.find((asset) => asset.market === market)?.symbol || state.symbol });
+  004113:   return <div className="context-shell"><div className="context-strip" data-testid="context-strip">
+  004114:     <label><span>{t("market")}</span><select value={state.market} onChange={(event) => setMarket(event.target.value)}>{MARKETS.map((market) => <option value={market} key={market}>{marketLabel(market, lang)}</option>)}</select></label>
+  004115:     <label><span>{t("asset")}</span><select value={state.symbol} onChange={(event) => patch({ symbol: event.target.value })}>{ASSETS.filter((asset) => asset.market === state.market).map((asset) => <option value={asset.symbol} key={asset.symbol}>{assetName(asset, lang)} · {asset.symbol}</option>)}</select></label>
+  004116:     <label><span>{t("timeframe")}</span><select value={state.timeframe} onChange={(event) => patch({ timeframe: event.target.value })}>{TIMEFRAMES.map((timeframe) => <option key={timeframe}>{timeframe}</option>)}</select></label>
+  004117:     <label><span>{t("readingType")}</span><select value={state.mode} onChange={(event) => patch({ mode: event.target.value })}><option value="investment">{t("investment")}</option><option value="speculative">{t("speculative")}</option></select></label>
+  004118:     <label><span>{t("viewLevel")}</span><select value={state.view} onChange={(event) => patch({ view: event.target.value })}><option value="beginner">{t("beginner")}</option><option value="professional">{t("professional")}</option></select></label>
+  004119:   </div></div>;
+  004120: }
+  004121: 
+  004122: function LegalModal() {
+  004123:   const { accepted, acceptLegal } = useDecision();
+  004124:   const { t } = useTranslate();
+  004125:   if (accepted) return null;
+  004126:   return <div className="modal-layer"><div className="modal-backdrop"/><div className="modal" role="dialog" aria-modal="true"><div className="modal-head"><h2>{t("legalTitle")}</h2></div><div className="modal-body"><p>{t("legalBody")}</p><div className="modal-actions"><button className="button primary" onClick={acceptLegal}>{t("accept")}</button></div></div></div></div>;
+  004127: }
+  004128: 
+  004129: function ContextSummary() {
+  004130:   const { state } = useDecision();
+
+---------------- FILE: /home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_20260727_204117/context-19.txt ----------------
+PATTERN=logout
+ANCHOR_LINE=4104
+CONTEXT_START=4059
+CONTEXT_END=4178
+
+  004059: function querySuffix(state) {
+  004060:   const params = new URLSearchParams();
+  004061:   CONTEXT_KEYS.forEach((key) => params.set(key, state[key]));
+  004062:   return `?${params.toString()}`;
+  004063: }
+  004064: 
+  004065: function Topbar() {
+  004066:   const { state, patch } = useDecision();
+  004067:   const { route, navigate } = useNavigation();
+  004068:   const { t, lang } = useTranslate();
+  004069:   const [drawer, setDrawer] = useState(false);
+  004070:   const [more, setMore] = useState(false);
+  004071:   const drawerRef = useRef(null);
+  004072:   const menuRef = useRef(null);
+  004073: 
+  004074:   useEffect(() => {
+  004075:     if (!drawer) return undefined;
+  004076:     document.body.classList.add("drawer-open");
+  004077:     const previous = document.activeElement;
+  004078:     drawerRef.current?.querySelector("a,button")?.focus();
+  004079:     const onKey = (event) => {
+  004080:       if (event.key === "Escape") setDrawer(false);
+  004081:     };
+  004082:     document.addEventListener("keydown", onKey);
+  004083:     return () => {
+  004084:       document.body.classList.remove("drawer-open");
+  004085:       document.removeEventListener("keydown", onKey);
+  004086:       previous?.focus?.();
+  004087:     };
+  004088:   }, [drawer]);
+  004089: 
+  004090:   const go = (path) => {
+  004091:     navigate(path);
+  004092:     setDrawer(false);
+  004093:     setMore(false);
+  004094:   };
+  004095:   const navButton = ([key, path], mobile = false) => <button key={path} onClick={() => go(path)} className={`nav-link ${route === path ? "active" : ""} ${mobile ? "drawer-link" : ""}`}>{t(key)}</button>;
+  004096: 
+  004097:   return <>
+  004098:     <header className="topbar"><div className="topbar-inner">
+  004099:       <button className="brand" onClick={() => go("/command-center")} aria-label={`${t("brand")} — ${t("brandFull")}`}><span className="brand-mark">N</span><span><strong>{t("brand")}</strong><small>{t("brandFull")}</small></span></button>
+  004100:       <nav className="desktop-nav" aria-label="menu">{PRIMARY_NAV.map((item) => navButton(item))}<div className="more-wrap"><button className={`nav-link nav-button ${MORE_NAV.some(([, path]) => path === route) ? "active" : ""}`} onClick={() => setMore((value) => !value)}>{t("more")} <span className="caret">⌄</span></button>{more ? <div className="dropdown" onMouseLeave={() => setMore(false)}>{MORE_NAV.map((item) => navButton(item))}</div> : null}</div></nav>
+  004101:       <div className="header-actions"><Badge tone="success">{t("live")}</Badge><button className="icon-button" onClick={() => patch({ lang: lang === "ar" ? "en" : "ar" })}><Icon name="globe"/><span className="action-text">{lang === "ar" ? "English" : "العربية"}</span></button><button ref={menuRef} className="icon-button mobile-menu" onClick={() => setDrawer(true)} aria-expanded={drawer}><Icon name="menu"/></button></div>
+  004102:     </div></header>
+  004103:     {drawer ? <div className="drawer-layer" data-dir={state.lang === "ar" ? "rtl" : "ltr"}><button className="drawer-backdrop" onClick={() => setDrawer(false)} aria-label="close"/><aside ref={drawerRef} className="drawer" role="dialog" aria-modal="true"><div className="drawer-head"><div className="brand"><span className="brand-mark">N</span><span><strong>{t("brand")}</strong><small>{t("brandFull")}</small></span></div><button className="icon-button" onClick={() => setDrawer(false)}><Icon name="close"/></button></div><div className="drawer-trial"><span>{t("commercialNotice")}</span></div><nav className="drawer-nav">{PRIMARY_NAV.map((item) => navButton(item, true))}<div className="drawer-separator">{t("more")}</div>{MORE_NAV.map((item) => navButton(item, true))}
+>>004104:             <PortalLogoutButton/>
+  004105:           </nav></aside></div> : null}
+  004106:   </>;
+  004107: }
+  004108: 
+  004109: function ContextStrip() {
+  004110:   const { state, patch } = useDecision();
+  004111:   const { t, lang } = useTranslate();
+  004112:   const setMarket = (market) => patch({ market, symbol: ASSETS.find((asset) => asset.market === market)?.symbol || state.symbol });
+  004113:   return <div className="context-shell"><div className="context-strip" data-testid="context-strip">
+  004114:     <label><span>{t("market")}</span><select value={state.market} onChange={(event) => setMarket(event.target.value)}>{MARKETS.map((market) => <option value={market} key={market}>{marketLabel(market, lang)}</option>)}</select></label>
+  004115:     <label><span>{t("asset")}</span><select value={state.symbol} onChange={(event) => patch({ symbol: event.target.value })}>{ASSETS.filter((asset) => asset.market === state.market).map((asset) => <option value={asset.symbol} key={asset.symbol}>{assetName(asset, lang)} · {asset.symbol}</option>)}</select></label>
+  004116:     <label><span>{t("timeframe")}</span><select value={state.timeframe} onChange={(event) => patch({ timeframe: event.target.value })}>{TIMEFRAMES.map((timeframe) => <option key={timeframe}>{timeframe}</option>)}</select></label>
+  004117:     <label><span>{t("readingType")}</span><select value={state.mode} onChange={(event) => patch({ mode: event.target.value })}><option value="investment">{t("investment")}</option><option value="speculative">{t("speculative")}</option></select></label>
+  004118:     <label><span>{t("viewLevel")}</span><select value={state.view} onChange={(event) => patch({ view: event.target.value })}><option value="beginner">{t("beginner")}</option><option value="professional">{t("professional")}</option></select></label>
+  004119:   </div></div>;
+  004120: }
+  004121: 
+  004122: function LegalModal() {
+  004123:   const { accepted, acceptLegal } = useDecision();
+  004124:   const { t } = useTranslate();
+  004125:   if (accepted) return null;
+  004126:   return <div className="modal-layer"><div className="modal-backdrop"/><div className="modal" role="dialog" aria-modal="true"><div className="modal-head"><h2>{t("legalTitle")}</h2></div><div className="modal-body"><p>{t("legalBody")}</p><div className="modal-actions"><button className="button primary" onClick={acceptLegal}>{t("accept")}</button></div></div></div></div>;
+  004127: }
+  004128: 
+  004129: function ContextSummary() {
+  004130:   const { state } = useDecision();
+  004131:   const { t, lang } = useTranslate();
+  004132:   return <div className="context-summary"><Badge>{marketLabel(state.market, lang)}</Badge><Badge tone="muted">{assetName(findAsset(state.symbol), lang)}</Badge><Badge tone="muted">{state.timeframe}</Badge><Badge tone="muted">{t(state.mode)}</Badge><Badge tone="muted">{t(state.view)}</Badge></div>;
+  004133: }
+  004134: 
+  004135: function qualityRadar(quality, t) {
+  004136:   return {
+  004137:     labels: [t("dataQuality"), "TDL", t("momentum"), "NMP", t("macro"), t("readiness")],
+  004138:     values: [
+  004139:       quality?.decisionQuality,
+  004140:       quality?.alignmentScore,
+  004141:       quality?.cciValue === null ? null : Math.min(100, Math.abs(quality.cciValue)),
+  004142:       quality?.nmp?.status === "AVAILABLE" ? 100 : 0,
+  004143:       quality?.usdPressureScore === null ? null : Math.max(0, 100 - Math.min(100, Math.abs(quality.usdPressureScore))),
+  004144:       quality?.confirmationScore
+  004145:     ]
+  004146:   };
+  004147: }
+  004148: 
+  004149: function CommandCenterPage() {
+  004150:   const { state } = useDecision();
+  004151:   const { navigate } = useNavigation();
+  004152:   const { t, lang } = useTranslate();
+  004153: 
+  004154:   const quality = useQuality(state.symbol, state.timeframe, state.mode);
+  004155: 
+  004156:   const universe = useMarketUniverse(
+  004157:     state.timeframe
+  004158:   );
+  004159: 
+  004160:   const completed = useCompletedDecisions();
+  004161:   const newsEvents = useNewsEvents(state.symbol, lang);
+  004162: 
+  004163:   if (quality.status === "loading") {
+  004164:     return <EmptyState type="loading"/>;
+  004165:   }
+  004166: 
+  004167:   if (quality.status === "error") {
+  004168:     return (
+  004169:       <EmptyState
+  004170:         type="error"
+  004171:         onRetry={quality.retry}
+  004172:       />
+  004173:     );
+  004174:   }
+  004175: 
+  004176:   const value = quality.value;
+  004177:   const radar = qualityRadar(value, t);
+  004178:   const watchlist = readJsonStorage(
+
+============================================================
+6) COMPONENT AND FUNCTION INDEX
+============================================================
+19:const APP_BASE = (import.meta.env.BASE_URL || "/portal/").replace(/\/+$/, "");
+45:const DEFAULT_CONTEXT = {
+55:const I18N = {
+356:function newSession() {
+360:function normalizeContext(input = {}) {
+374:function readJsonStorage(key, fallback) {
+383:function queryContext() {
+392:function updateContextQuery(state, replace = true) {
+398:function routeFromLocation() {
+406:function BrowserRouter({ children }) {
+422:function useNavigation() {
+429:function DecisionProvider({ children }) {
+485:function useDecision() {
+491:function useTranslate() {
+525:function numeric(value) {
+542:function formatNumber(value, lang = "ar", digits = 2) {
+550:function formatDate(value, lang = "ar") {
+557:function assetName(asset, lang) {
+560:function marketLabel(market, lang) {
+572:function findAsset(symbol) {
+576:function normalizeQuality(payload) {
+836:function cacheFresh(entry, maxAge) {
+908:function useQuality(symbol, timeframe, mode) {
+987:function normalizeCandles(payload) {
+1001:function candleInterval(timeframe) {
+1017:function useCandles(symbol, timeframe) {
+1051:function useMarketUniverse(timeframe) {
+1076:function useCompletedDecisions() {
+1098:function useAccessState() {
+1130:function useNewsEvents(symbol, lang) {
+1193:function stateKey(value) {
+1201:function directionKey(value) {
+1207:function toneFromNumber(value) {
+1213:function riskLevel(quality) {
+1224:function translateStateToken(value, t, lang) {
+1245:function translateNmpStatus(value, lang, t) {
+1257:function sanitizeUserFacingText(value, lang, fallback = "") {
+1286:function goldenStatusLabel(value, lang, t) {
+1312:function goldenPublicSummary(q, lang, t) {
+1334:function enhancedGoldenPublicText(q, lang) {
+1352:function publicNmpNote(q, lang) {
+1372:function nmpPrimaryValue(q, lang) {
+1395:function horizonProfile(q, state, lang) {
+1433:function analysisModeLabel(value, lang) {
+1455:function governingDirectionLabel(value, lang) {
+1486:function technicalScenarioText(q, lang) {
+1497:function technicalScenarioHeading(q, lang) {
+1508:function governedReadingScore(q, lang) {
+1522:function ModeContractContext({
+1695:function HorizonContext({ q, state, lang, compact = false }) {
+1717:function sourceMetricValue(value, lang, digits = 2) {
+1723:function isCompletedDecision(row) {
+1731:function blockerReasonLabel(code, lang) {
+1772:function blockerReasonList(q, lang) {
+1853:function pickFirstValue(item, keys) {
+1867:function localizedNewsTitle(item, lang) {
+1900:function localizedNewsMeta(item, lang) {
+1926:function hasLocalizedNewsText(item, lang) {
+1930:function resolveCompletedAsset(row, lang) {
+1954:function resolveCompletedState(row) {
+1967:function completedTimeframeInfo(row, fallbackTimeframe) {
+2001:function eventLabel(value, lang) {
+2020:function normalizeAlertStore(raw) {
+2126:function Icon({ name, size = 20 }) {
+2135:function Badge({ children, tone = "muted" }) {
+2138:function Metric({ label, value, hint, tone = "muted" }) {
+2141:function Card({ title, subtitle, actions, children, className = "", id }) {
+2147:function PageHeader({ title, subtitle, actions }) {
+2150:function EmptyState({ type = "empty", message, onRetry }) {
+2154:function DataMeta({ updatedAt }) {
+2159:function Radar({ values, labels }) {
+2189:const CHART_COPY = {
+2236:function chartNumber(value) {
+2241:function chartTimeValue(value) {
+2262:function chartTimeLabel(value, lang, includeTime = true) {
+2293:function normalizeChartCandles(payload) {
+2397:function useChartCandles(symbol, timeframe, limit) {
+2502:function calculateRsi(candles, period = 14) {
+2577:function calculateEma(values, period) {
+2604:function calculateMacdHistogram(candles) {
+2634:function calculateObv(candles) {
+2667:function calculateCci(candles, period = 20) {
+2722:function chartIndicatorSeries(candles) {
+2731:function IndicatorPanel({
+2982:function CandleChart({
+4059:function querySuffix(state) {
+4065:function Topbar() {
+4109:function ContextStrip() {
+4122:function LegalModal() {
+4129:function ContextSummary() {
+4135:function qualityRadar(quality, t) {
+4149:function CommandCenterPage() {
+4638:function NewsList({ items, empty, lang }) {
+4764:function MarketsPage() {
+4778:function PricesChartPage() {
+5258:function OpportunitiesPage() {
+5271:function DecisionRoomPage() {
+5856:function PortfolioPage() {
+5886:function ScenariosPage() {
+5989:function LayersPage() {
+6141:function RiskPage() {
+6279:function CompletedPage() {
+6390:function useHealthProbe() {
+6416:function DataHealthPage() {
+6424:function AlertsPage() {
+6827:function GuidePage() {
+6894:function SupportPage() {
+7272:function AccountPage() {
+7278:function PlansPage() {
+7283:function SettingsPage() {
+7382:function ContextPage() {
+7391:function TrialExpiredPage() {
+7396:function NotFoundPage() {
+7402:function PortalLogoutButton() {
+7449:function AppRoutes() {
+7476:function AppShell() {
+7554:function App() {
+
+============================================================
+7) JSX CLASSNAME INVENTORY FOR MENUS
+============================================================
+MENU_CLASSNAME_COUNT=14
+MENU_CLASSNAME=desktop-nav
+MENU_CLASSNAME=more-wrap
+MENU_CLASSNAME=dropdown
+MENU_CLASSNAME=icon-button mobile-menu
+MENU_CLASSNAME=drawer-layer
+MENU_CLASSNAME=drawer-backdrop
+MENU_CLASSNAME=drawer
+MENU_CLASSNAME=drawer-head
+MENU_CLASSNAME=drawer-trial
+MENU_CLASSNAME=drawer-nav
+MENU_CLASSNAME=drawer-separator
+MENU_CLASSNAME=modal-backdrop
+MENU_CLASSNAME=nav-link drawer-logout
+MENU_CLASSNAME=drawer-logout-icon
+
+============================================================
+8) CSS RULES FOR DISCOVERED MENU CLASSES
+============================================================
+9:*{box-sizing:border-box}html{background:var(--bg);scroll-behavior:smooth;max-width:100%;overflow-x:clip}body{margin:0;min-width:0;width:100%;max-width:100%;overflow-x:clip;background:radial-gradient(circle at 10% 0%,rgba(214,179,90,.07),transparent 28%),linear-gradient(180deg,#090909,#070707 65%);color:var(--text);font-size:16px;line-height:1.65}body.drawer-open{overflow:hidden}button,input,select,textarea{font:inherit}button,a,select,input,textarea{outline:none}button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible{box-shadow:0 0 0 3px rgba(214,179,90,.28)}button{color:inherit}a{text-decoration:none;color:inherit}h1,h2,h3,p{margin-top:0}h1{font-size:clamp(1.75rem,2.2vw,2rem);line-height:1.35;margin-bottom:8px}h2{font-size:1.08rem;line-height:1.5;margin-bottom:4px}h3{font-size:1rem}p{color:var(--muted);margin-bottom:0}.icon{display:block;flex:0 0 auto}.app-shell{min-height:100vh;display:flex;flex-direction:column}.topbar{position:sticky;top:0;z-index:80;height:var(--header-h);background:rgba(8,8,8,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}.topbar-inner{max-width:var(--max);height:100%;margin:auto;padding:0 28px;display:flex;align-items:center;gap:22px}.brand{display:flex;align-items:center;gap:11px;min-width:max-content}.brand-mark{display:grid;place-items:center;width:39px;height:39px;border:1px solid var(--line-gold);border-radius:12px;background:linear-gradient(145deg,#201a0f,#0c0c0c);color:var(--gold);font-weight:800;font-size:1.15rem;box-shadow:inset 0 0 18px rgba(214,179,90,.08)}.brand>span:last-child{display:flex;flex-direction:column;line-height:1.15}.brand strong{color:var(--gold);letter-spacing:.08em}.brand small{font-size:.68rem;color:var(--muted);margin-top:4px}.desktop-nav{display:flex;align-items:center;justify-content:center;gap:3px;min-width:0;flex:1}.nav-link{display:inline-flex;align-items:center;justify-content:center;gap:5px;min-height:40px;padding:8px 11px;border-radius:10px;color:var(--muted);font-size:.86rem;white-space:nowrap;transition:.18s ease}.nav-link:hover,.nav-link.active{background:rgba(214,179,90,.09);color:var(--text)}.nav-link.active{box-shadow:inset 0 -2px var(--gold)}.nav-button{border:0;background:transparent;cursor:pointer}.caret{font-size:.8rem}.more-wrap,.notification-wrap{position:relative}.dropdown,.notification-popover{position:absolute;top:calc(100% + 10px);inset-inline-end:0;min-width:250px;padding:8px;border:1px solid var(--line);border-radius:14px;background:#111;box-shadow:var(--shadow)}.dropdown{display:grid;grid-template-columns:1fr 1fr;gap:3px}.dropdown a{padding:9px 10px;border-radius:8px;color:var(--muted);font-size:.82rem}.dropdown a:hover,.dropdown a[aria-current="page"]{background:rgba(214,179,90,.1);color:var(--text)}.notification-popover{width:260px;padding:18px}.notification-popover p{font-size:.86rem;margin-top:8px}.header-actions{display:flex;align-items:center;gap:8px}.icon-button{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-width:40px;height:40px;padding:0 10px;border:1px solid var(--line);border-radius:11px;background:var(--surface);cursor:pointer;transition:.18s}.icon-button:hover{border-color:var(--line-gold);background:var(--surface-2)}.icon-button.compact{width:32px;min-width:32px;height:32px;padding:0}.action-text{font-size:.78rem}.notification-dot{position:absolute;width:7px;height:7px;border-radius:50%;background:var(--gold);top:7px;inset-inline-end:7px}.mobile-menu{display:none}.badge{display:inline-flex;align-items:center;gap:5px;width:max-content;max-width:100%;padding:4px 9px;border-radius:999px;border:1px solid transparent;font-size:.72rem;font-weight:700;line-height:1.3}.badge-gold{color:#f0d384;background:rgba(214,179,90,.1);border-color:rgba(214,179,90,.24)}.badge-success{color:#8ee0aa;background:rgba(99,200,135,.1);border-color:rgba(99,200,135,.25)}.badge-danger{color:#f09b9b;background:rgba(223,116,116,.1);border-color:rgba(223,116,116,.25)}.badge-warning{color:#efc783;background:rgba(217,168,92,.1);border-color:rgba(217,168,92,.25)}.badge-muted{color:#bab5aa;background:rgba(255,255,255,.035);border-color:var(--line)}.context-shell{position:sticky;top:var(--header-h);z-index:60;padding-bottom:12px;background:rgba(10,10,10,.94);border-bottom:1px solid var(--line);backdrop-filter:blur(12px);overflow:visible}.context-strip{max-width:var(--max);margin:auto;padding:10px 28px;display:grid;grid-template-columns:repeat(5,minmax(130px,1fr));gap:10px}.context-strip label,.field,.form-grid label,.context-form label,.support-form label{display:flex;flex-direction:column;gap:5px;min-width:0}.context-strip label span,.field span,.form-grid label>span,.context-form label>span,.support-form label>span{font-size:.68rem;color:var(--muted);font-weight:700}.context-strip select,select,input,textarea{width:100%;min-width:0;border:1px solid var(--line);border-radius:10px;background:#121212;color:var(--text);padding:9px 10px}.context-strip select{height:38px;padding-block:6px;font-size:.82rem}.page-container{width:100%;max-width:var(--max);min-width:0;margin:0 auto;padding:32px 28px 56px;flex:1;overflow-x:clip}.page-header{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin-bottom:24px}.page-header p{max-width:760px}.page-actions,.inline-actions,.card-actions,.form-actions,.modal-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.context-summary{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}.card{width:100%;max-width:100%;min-width:0;height:auto;align-self:start;border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(145deg,rgba(18,18,18,.98),rgba(13,13,13,.98));box-shadow:0 8px 30px rgba(0,0,0,.12);overflow:hidden}.card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;padding:20px 22px 0}.card-head p{font-size:.8rem}.card-body{padding:18px 22px 22px}.hero-grid,.content-grid,.account-grid,.settings-grid{display:grid;min-width:0;gap:18px;align-items:start}.hero-grid>*,.content-grid>*,.account-grid>*,.settings-grid>*{min-width:0;max-width:100%}.hero-grid{grid-template-columns:minmax(0,1.6fr) minmax(300px,.8fr);margin-bottom:18px}.content-grid.two-wide{grid-template-columns:minmax(0,1.5fr) minmax(320px,.85fr);margin-top:18px}.content-grid.two{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:18px}.decision-hero{border-color:var(--line-gold);background:linear-gradient(135deg,rgba(214,179,90,.08),rgba(17,17,17,.96) 50%)}.decision-hero-row{display:flex;align-items:center;justify-content:space-between;gap:20px}.decision-hero-row h3{font-size:1.55rem;margin:12px 0 6px}.hero-score{min-width:130px;text-align:center;padding:16px;border-radius:16px;border:1px solid var(--line-gold);background:rgba(0,0,0,.25)}.hero-score strong{display:block;color:var(--gold);font-size:2.2rem;line-height:1.1}.hero-score span{font-size:.75rem;color:var(--muted)}.mini-levels{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:20px 0}.mini-levels span{padding:10px;border:1px solid var(--line);border-radius:10px;background:rgba(0,0,0,.18);font-size:.72rem;color:var(--muted)}.mini-levels b{display:block;color:var(--text);font-size:.86rem;margin-top:3px}.data-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:.7rem;margin:12px 0}.button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:9px 15px;border-radius:11px;border:1px solid transparent;cursor:pointer;font-weight:700;font-size:.82rem}.button.primary{background:linear-gradient(135deg,var(--gold),#b38c36);color:#151109}.button.primary:hover{filter:brightness(1.08)}.button.secondary{background:#171717;border-color:var(--line);color:var(--text)}.button.secondary:hover{border-color:var(--line-gold)}.button.full{width:100%}.metrics-grid{display:grid;gap:12px}.metrics-grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}.dashboard-metrics{grid-template-columns:repeat(4,minmax(0,1fr));margin:18px 0}.metric{min-width:0;padding:15px 16px;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.018)}.metric span{display:block;color:var(--muted);font-size:.72rem}.metric strong{display:block;margin-top:5px;font-size:1.35rem;line-height:1.25;overflow-wrap:anywhere}.metric small{display:block;margin-top:5px;color:var(--muted-2);font-size:.65rem}.metric-gold strong{color:var(--gold)}.metric-success strong{color:var(--success)}.metric-danger strong{color:var(--danger)}.metric-warning strong{color:var(--warning)}.market-strip{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}.market-strip button{min-width:0;padding:12px 8px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.018);cursor:pointer}.market-strip span{display:block;color:var(--muted);font-size:.68rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.market-strip strong{font-size:.82rem}.up{color:var(--success)!important}.down{color:var(--danger)!important}.brief-box{margin-top:18px;padding:16px;border-inline-start:3px solid var(--gold);background:rgba(214,179,90,.055);border-radius:0 12px 12px 0}.brief-box h3{margin-bottom:6px}.brief-box p{font-size:.86rem}.radar-wrap{display:grid;grid-template-columns:minmax(0,1fr);width:100%;max-width:100%;min-width:0;gap:18px;align-items:start}.radar-wrap svg{display:block;width:100%;max-width:220px;min-width:0;margin-inline:auto}.radar-ring,.radar-axis{fill:none;stroke:#34322e;stroke-width:1}.radar-value{fill:rgba(214,179,90,.16);stroke:var(--gold);stroke-width:2}.radar-dot{fill:var(--gold)}.radar-legend{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;min-width:0;max-width:100%;gap:10px 16px;padding-inline:0}.radar-legend .radar-item{display:grid;direction:ltr;align-items:center;column-gap:8px;width:100%;min-width:0;max-width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.018);color:var(--muted);font-size:.76rem;line-height:1.5}html[dir="ltr"] .radar-legend .radar-item{grid-template-columns:8px minmax(0,1fr) 3.6rem;grid-template-areas:"dot label value"}html[dir="rtl"] .radar-legend .radar-item{grid-template-columns:3.6rem minmax(0,1fr) 8px;grid-template-areas:"value label dot"}.radar-item i{grid-area:dot;width:6px;height:6px;border-radius:50%;background:var(--gold);justify-self:center}.radar-item em{grid-area:label;min-width:0;font-style:normal;overflow-wrap:break-word;word-break:normal}html[dir="ltr"] .radar-item em{direction:ltr;text-align:left}html[dir="rtl"] .radar-item em{direction:rtl;text-align:right}.radar-item b{grid-area:value;display:block;width:3.6rem;min-width:3.6rem;padding:2px 6px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.025);color:var(--text);direction:ltr;unicode-bidi:isolate;font-variant-numeric:tabular-nums;text-align:center;white-space:nowrap;justify-self:stretch}.list-stack{display:grid;gap:8px}.list-row{display:flex;align-items:center;justify-content:space-between;gap:14px;width:100%;padding:12px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.018);text-align:start}.list-row button{cursor:pointer}.list-row span{display:flex;flex-direction:column;min-width:0}.list-row small{color:var(--muted);font-size:.68rem}.list-row>div{display:flex;align-items:center;gap:6px}.quick-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.quick-grid button{min-height:86px;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.018);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;cursor:pointer}.quick-grid button:hover{border-color:var(--line-gold);color:var(--gold)}.footer{border-top:1px solid var(--line);padding:20px 28px;display:flex;justify-content:space-between;gap:20px;color:var(--muted-2);font-size:.7rem}.toolbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}.toolbar select{width:auto;min-width:180px}.search-box{display:flex;align-items:center;gap:8px;min-width:min(420px,100%);height:42px;padding:0 12px;border:1px solid var(--line);border-radius:11px;background:#121212}.search-box input{border:0;background:transparent;padding:0;box-shadow:none!important}.asset-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.asset-card{min-width:0;border:1px solid var(--line);border-radius:var(--radius);padding:18px;background:linear-gradient(145deg,#121212,#0f0f0f)}.asset-top{display:flex;align-items:center;gap:12px}.asset-icon{display:grid;place-items:center;width:42px;height:42px;border-radius:13px;background:rgba(214,179,90,.1);color:var(--gold);font-weight:800}.asset-top h2{font-size:1rem;margin:0}.asset-top p{font-size:.68rem}.watch-button{margin-inline-start:auto;border:0;background:transparent;color:var(--muted-2);font-size:1.25rem;cursor:pointer}.watch-button.active{color:var(--gold)}.asset-price{display:flex;align-items:center;justify-content:space-between;margin:22px 0}.asset-price strong{font-size:1.5rem}.asset-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.asset-actions button,.table-action{padding:8px;border:1px solid var(--line);border-radius:9px;background:#171717;color:var(--muted);font-size:.7rem;cursor:pointer}.asset-actions button:hover,.table-action:hover{color:var(--text);border-color:var(--line-gold)}.chart-toolbar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:14px}.chart-toolbar select{width:auto;min-width:230px}.segmented{display:flex;gap:4px;padding:4px;border:1px solid var(--line);border-radius:11px;background:#0b0b0b}.segmented button{border:0;background:transparent;color:var(--muted);padding:7px 10px;border-radius:8px;cursor:pointer;font-size:.72rem}.segmented button.active{background:rgba(214,179,90,.14);color:var(--gold)}.ohlc-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}.chart-scroll{width:100%;overflow-x:auto;border:1px solid var(--line);border-radius:13px;background:#0a0a0a}.candle-chart{display:block;width:100%;min-width:760px;height:auto;max-height:520px}.chart-grid{stroke:#252525;stroke-width:1}.chart-axis-label{font-size:10px;fill:#8e8a82}.level-label{font-size:10px;font-weight:700}.level-line{stroke-dasharray:7 5;stroke-width:1.2}.chart-legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px;color:var(--muted);font-size:.68rem}.chart-legend span{display:flex;align-items:center;gap:5px}.chart-legend i{display:inline-block;width:16px;height:2px}.l-activation{background:var(--success)}.l-arrival{background:var(--gold)}.l-review{background:var(--info)}.l-invalidation{background:var(--danger)}.indicator-grid,.evidence-grid,.level-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.level-grid.large{margin-bottom:18px}.divergence-box,.narrative{display:grid;gap:12px}.table-wrap{width:100%;overflow-x:auto;border:1px solid var(--line);border-radius:14px}.table-wrap table{width:100%;min-width:840px;border-collapse:collapse;background:#101010}.table-wrap th,.table-wrap td{padding:13px 14px;border-bottom:1px solid var(--line);text-align:start;font-size:.76rem;vertical-align:middle}.table-wrap th{color:var(--muted);background:#141414;white-space:nowrap}.table-wrap td b,.table-wrap td small{display:block}.table-wrap td small{color:var(--muted);font-size:.65rem}.table-wrap tbody tr:hover{background:rgba(214,179,90,.025)}.decision-sections{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:start}.decision-section.section-1,.decision-section.section-2,.decision-section.section-3,.decision-section.section-4,.decision-section.section-11,.decision-section.section-12{grid-column:1/-1}.decision-summary-main h2{font-size:1.6rem;margin:12px 0 5px}.state-timeline,.scenario-flow,.guide-flow{display:flex;align-items:center;gap:9px;overflow-x:auto;padding:6px 2px}.state-timeline span,.scenario-flow span,.guide-flow span{min-width:max-content;padding:8px 12px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:.72rem}.state-timeline i,.scenario-flow i,.guide-flow i{width:28px;height:1px;background:var(--line)}.state-timeline span.done{color:var(--success);border-color:rgba(99,200,135,.3)}.state-timeline span.current{color:var(--gold);border-color:var(--line-gold);background:rgba(214,179,90,.08)}.callout{display:flex;align-items:flex-start;gap:12px;padding:15px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.02)}.callout.warning{border-color:rgba(217,168,92,.28);background:rgba(217,168,92,.06)}.callout.success{border-color:rgba(99,200,135,.28);background:rgba(99,200,135,.06);margin-top:16px}.callout strong{display:block;margin-bottom:4px}.callout p{font-size:.82rem}.nmp-card{display:grid;gap:10px}.nmp-meter{height:9px;border-radius:999px;background:#242424;overflow:hidden}.nmp-meter span{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--gold-2),var(--gold))}.risk-list,.advanced-list{display:grid;gap:8px}.risk-list span,.advanced-list span{display:flex;justify-content:space-between;gap:12px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;color:var(--muted);font-size:.75rem}.risk-list b,.advanced-list b{color:var(--text)}.locked-inline{display:flex;align-items:center;gap:9px;color:var(--muted);padding:14px;border:1px dashed var(--line);border-radius:12px}.row-actions{display:flex;gap:6px}.row-actions button{width:32px;height:32px;display:grid;place-items:center;border:1px solid var(--line);border-radius:8px;background:#171717;cursor:pointer}.layer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:16px}.layer-card{position:relative;min-height:230px;padding:22px;border:1px solid var(--line-gold);border-radius:var(--radius);background:linear-gradient(145deg,rgba(214,179,90,.08),#101010 54%);display:flex;flex-direction:column;align-items:flex-start}.layer-card h2{font-size:1.15rem;margin-top:20px}.layer-card p{font-size:.82rem;flex:1}.layer-number{color:var(--gold);font-weight:800;font-size:.72rem}.layer-card.locked{filter:saturate(.4);border-color:var(--line)}.layer-lock{position:absolute;top:17px;inset-inline-end:17px;color:var(--muted)}.health-grid,.channel-grid,.guide-grid,.plans-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}.health-status,.channel-foot{display:flex;align-items:center;justify-content:space-between;gap:12px}.health-status strong{font-size:1.25rem}.switch{display:inline-flex;position:relative}.switch input{position:absolute;opacity:0}.switch span{display:block;width:42px;height:24px;border-radius:999px;background:#333;position:relative;cursor:pointer}.switch span:after{content:"";position:absolute;width:18px;height:18px;top:3px;left:3px;border-radius:50%;background:#aaa;transition:.2s}.switch input:checked+span{background:rgba(214,179,90,.4)}.switch input:checked+span:after{transform:translateX(18px);background:var(--gold)}[dir="rtl"] .switch input:checked+span:after{transform:translateX(-18px)}.channel-foot{margin-top:14px}.status-toggle{border:1px solid var(--line);border-radius:999px;background:#171717;color:var(--muted);padding:5px 9px;cursor:pointer}.status-toggle.on{color:var(--success);border-color:rgba(99,200,135,.25)}.toast{position:fixed;z-index:120;top:92px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:8px;padding:12px 16px;border:1px solid rgba(99,200,135,.3);border-radius:12px;background:#101713;color:var(--success);box-shadow:var(--shadow)}.profile-block{display:flex;align-items:center;gap:16px}.avatar{display:grid;place-items:center;width:68px;height:68px;border-radius:20px;background:rgba(214,179,90,.12);color:var(--gold);font-weight:800;font-size:1.2rem}.profile-block h3{margin-bottom:3px}.profile-block p{font-size:.78rem;margin-bottom:8px}.account-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.subscription-card{display:grid;gap:10px}.subscription-card strong{font-size:1.65rem}.subscription-card span{color:var(--muted);font-size:.78rem}.plan-current{border-color:var(--line-gold)}.plan-price{font-size:2.4rem;font-weight:800;color:var(--gold);margin:10px 0}.plan-price small{font-size:.7rem;color:var(--muted);margin-inline-start:8px}.plans-grid ul{padding-inline-start:20px;color:var(--muted);font-size:.78rem;min-height:140px}.plans-grid li{margin:8px 0}.radio-stack{display:grid;gap:10px}.radio-stack label{display:flex;gap:10px;padding:12px;border:1px solid var(--line);border-radius:11px}.radio-stack input{width:auto;margin-top:4px}.radio-stack span{display:flex;flex-direction:column}.radio-stack small{color:var(--muted);font-size:.72rem}.form-grid,.context-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.context-form{grid-template-columns:repeat(5,minmax(0,1fr))}.form-actions{justify-content:flex-end;margin-top:18px}.switch-line{display:flex!important;flex-direction:row!important;align-items:center;justify-content:space-between}.support-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.support-form .full{grid-column:1/-1}.center-page{min-height:52vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}.center-page h1{margin-top:16px}.center-page p{max-width:560px;margin-bottom:20px}.error-code{font-size:5rem;font-weight:900;color:var(--gold)}.page-state{min-height:220px;border:1px dashed var(--line);border-radius:var(--radius);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:var(--muted);text-align:center;padding:28px}.modal-layer,.drawer-layer{position:fixed;inset:0;z-index:200}.modal-backdrop,.drawer-backdrop{position:absolute;inset:0;width:100%;height:100%;border:0;background:rgba(0,0,0,.72);backdrop-filter:blur(5px)}.modal{position:relative;z-index:1;width:min(680px,calc(100% - 28px));max-height:calc(100vh - 40px);overflow:auto;margin:20px auto;border:1px solid var(--line-gold);border-radius:18px;background:#111;box-shadow:var(--shadow)}.modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 20px;border-bottom:1px solid var(--line)}.modal-head h2{margin:0}.modal-body{padding:20px}.modal-actions{justify-content:flex-end;margin-top:20px}.fullscreen-chart{width:100%;overflow:auto}.drawer-layer[data-dir="rtl"] .drawer{right:0}.drawer-layer[data-dir="ltr"] .drawer{left:0}.drawer{position:absolute;z-index:1;top:0;bottom:0;width:min(360px,88vw);padding:16px;background:#101010;border-inline-start:1px solid var(--line);overflow:auto;box-shadow:var(--shadow)}.drawer-head{display:flex;align-items:center;justify-content:space-between;padding-bottom:15px;border-bottom:1px solid var(--line)}.drawer-trial{display:grid;gap:3px;margin:15px 0;padding:13px;border:1px solid var(--line-gold);border-radius:12px;background:rgba(214,179,90,.06)}.drawer-trial span,.drawer-trial small{color:var(--muted);font-size:.7rem}.drawer-nav{display:grid;gap:4px}.drawer-nav .nav-link{justify-content:flex-start}.drawer-separator{padding:14px 10px 6px;color:var(--gold);font-size:.68rem;font-weight:800}.scenario-flow,.guide-flow{padding:18px 0}.settings-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.page-actions select{width:auto}.drawer{animation:drawerIn .18s ease}@keyframes drawerIn{from{transform:translateX(12px);opacity:.4}to{transform:none;opacity:1}}@media (prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+1065:.drawer-nav{display:grid;gap:4px;overflow-y:auto;min-height:0}
+1066:.drawer-nav .drawer-logout{width:100%;min-height:44px;margin:0;padding:10px 12px;border:1px solid transparent;border-radius:10px;background:transparent;color:inherit;font:inherit;text-align:start;cursor:pointer;justify-content:flex-start}
+1067:.drawer-nav .drawer-logout:hover,.drawer-nav .drawer-logout:focus-visible{border-color:var(--line);background:rgba(214,179,90,.08);color:var(--gold);outline:none}
+1068:.drawer-nav .drawer-logout:disabled{opacity:.62;cursor:wait}
+1069:.drawer-nav .drawer-logout-icon{flex:0 0 auto;font-size:.95rem;line-height:1}
+
+============================================================
+9) EXISTING AUTH AND LOGOUT CONTRACT EVIDENCE
+============================================================
+/home/nawaf511/Downloads/NDSP_COMMERCIAL_FRONTEND_LIVE_V1/src/main.jsx:7411:      const response = await fetch("/api/auth/logout", {
+/home/nawaf511/Downloads/NDSP_COMMERCIAL_FRONTEND_LIVE_V1/src/main.jsx:7422:      window.location.replace("/login/?logged_out=1");
+/home/nawaf511/Downloads/NDSP_COMMERCIAL_FRONTEND_LIVE_V1/src/main.jsx:7424:      window.location.assign("/logout/");
+/home/nawaf511/Downloads/NDSP_COMMERCIAL_FRONTEND_LIVE_V1/src/main.jsx:7430:      ? (lang === "ar" ? "جارٍ تسجيل الخروج…" : "Signing out…")
+/home/nawaf511/Downloads/NDSP_COMMERCIAL_FRONTEND_LIVE_V1/src/main.jsx:7431:      : (lang === "ar" ? "تسجيل الخروج" : "Sign out");
+
+============================================================
+10) AUTOMATIC STRUCTURE CLASSIFICATION
+============================================================
+DRAWER_NAV_COUNT=1
+CHANGE_SELECTION_AR_COUNT=1
+CHANGE_SELECTION_EN_COUNT=0
+MORE_AR_COUNT=1
+MORE_EN_COUNT=2
+EXISTING_LOGOUT_REFERENCE_COUNT=15
+CHANGE_SELECTION_INSIDE_DRAWER_NAV=NO
+ROOT_CAUSE_HINT=DESKTOP_MORE_MENU_AND_MOBILE_DRAWER_MUST_BE_IDENTIFIED_SEPARATELY
+
+============================================================
+11) FINAL RESULT
+============================================================
+PRODUCTION_MODIFIED=NO
+CANONICAL_SOURCE_MODIFIED=NO
+LIVE_PORTAL_MODIFIED=NO
+DIST_MODIFIED=NO
+DATABASE_CHANGED=NO
+BACKEND_CHANGED=NO
+NGINX_CHANGED=NO
+SERVICE_RESTARTED=NO
+FINAL_STATUS=NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_COMPLETE
+REPORT=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PORTAL_MORE_MENU_SOURCE_DISCOVERY_V12_2_20260727_204117/REPORT.txt

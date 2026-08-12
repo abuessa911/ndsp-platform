@@ -1,0 +1,160 @@
+{
+  "results": [
+    {
+      "viewport": "desktop",
+      "page": "home",
+      "status": 200,
+      "count": null,
+      "expected": null,
+      "navigationError": null,
+      "pageErrors": [],
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 404 ()",
+        "Failed to load resource: the server responded with a status of 404 ()",
+        "Failed to load resource: the server responded with a status of 404 ()",
+        "PRICE FETCH ERROR: Error: HTTP_404\n    at b (https://my.ndsp.app/assets/index-BX9FubtP.js:40:58440)\n    at async https://my.ndsp.app/assets/index-BX9FubtP.js:40:58673"
+      ],
+      "route404": false,
+      "notFound": false,
+      "overflow": false,
+      "bodyLength": 2594,
+      "language": {
+        "first": false,
+        "second": false,
+        "error": "ReferenceError: keys is not defined"
+      },
+      "menu": null,
+      "screenshot": "desktop_home.png"
+    },
+    {
+      "viewport": "desktop",
+      "page": "decisions",
+      "status": 200,
+      "count": 0,
+      "expected": 16,
+      "navigationError": "TimeoutError: page.waitForSelector: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-ndsp-layer-card]') to be visible\u001b[22m\n",
+      "pageErrors": [],
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 404 ()",
+        "PRICE FETCH ERROR: Error: HTTP_404\n    at b (https://my.ndsp.app/assets/index-BX9FubtP.js:40:58440)\n    at async https://my.ndsp.app/assets/index-BX9FubtP.js:40:58673",
+        "Failed to load resource: the server responded with a status of 404 ()",
+        "Failed to load resource: the server responded with a status of 404 ()",
+        "Failed to load resource: the server responded with a status of 404 ()",
+        "PRICE FETCH ERROR: Error: HTTP_404\n    at b (https://my.ndsp.app/assets/index-BX9FubtP.js:40:58440)\n    at async https://my.ndsp.app/assets/index-BX9FubtP.js:40:58673",
+        "Failed to load resource: the server responded with a status of 404 ()"
+      ],
+      "route404": false,
+      "notFound": false,
+      "overflow": false,
+      "bodyLength": 2594,
+      "language": null,
+      "menu": null,
+      "screenshot": "desktop_decisions.png"
+    },
+    {
+      "viewport": "desktop",
+      "page": "governance",
+      "status": 200,
+      "count": 0,
+      "expected": 28,
+      "navigationError": "TimeoutError: page.waitForSelector: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-ndsp-capability-card]') to be visible\u001b[22m\n",
+      "pageErrors": [],
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 404 ()",
+        "PRICE FETCH ERROR: Error: HTTP_404\n    at b (https://my.ndsp.app/assets/index-BX9FubtP.js:40:58440)\n    at async https://my.ndsp.app/assets/index-BX9FubtP.js:40:58673",
+        "Failed to load resource: the server responded with a status of 404 ()",
+        "Failed to load resource: the server responded with a status of 404 ()",
+        "Failed to load resource: the server responded with a status of 404 ()",
+        "PRICE FETCH ERROR: Error: HTTP_404\n    at b (https://my.ndsp.app/assets/index-BX9FubtP.js:40:58440)\n    at async https://my.ndsp.app/assets/index-BX9FubtP.js:40:58673",
+        "Failed to load resource: the server responded with a status of 404 ()"
+      ],
+      "route404": false,
+      "notFound": false,
+      "overflow": false,
+      "bodyLength": 2594,
+      "language": null,
+      "menu": null,
+      "screenshot": "desktop_governance.png"
+    },
+    {
+      "viewport": "mobile",
+      "page": "home",
+      "status": 200,
+      "count": null,
+      "expected": null,
+      "navigationError": null,
+      "pageErrors": [],
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 404 ()",
+        "PRICE FETCH ERROR: Error: HTTP_404\n    at b (https://my.ndsp.app/assets/index-BX9FubtP.js:40:58440)\n    at async https://my.ndsp.app/assets/index-BX9FubtP.js:40:58673",
+        "Failed to load resource: the server responded with a status of 404 ()",
+        "Failed to load resource: the server responded with a status of 404 ()"
+      ],
+      "route404": false,
+      "notFound": false,
+      "overflow": false,
+      "bodyLength": 2521,
+      "language": {
+        "first": false,
+        "second": false,
+        "error": "ReferenceError: keys is not defined"
+      },
+      "menu": {
+        "found": true,
+        "clicked": true,
+        "changed": true
+      },
+      "screenshot": "mobile_home.png"
+    },
+    {
+      "viewport": "mobile",
+      "page": "decisions",
+      "status": 200,
+      "count": 0,
+      "expected": 16,
+      "navigationError": "TimeoutError: page.waitForSelector: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-ndsp-layer-card]') to be visible\u001b[22m\n",
+      "pageErrors": [],
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 404 ()",
+        "PRICE FETCH ERROR: Error: HTTP_404\n    at b (https://my.ndsp.app/assets/index-BX9FubtP.js:40:58440)\n    at async https://my.ndsp.app/assets/index-BX9FubtP.js:40:58673",
+        "Failed to load resource: the server responded with a status of 404 ()",
+        "Failed to load resource: the server responded with a status of 404 ()",
+        "Failed to load resource: the server responded with a status of 404 ()",
+        "Failed to load resource: the server responded with a status of 404 ()",
+        "PRICE FETCH ERROR: Error: HTTP_404\n    at b (https://my.ndsp.app/assets/index-BX9FubtP.js:40:58440)\n    at async https://my.ndsp.app/assets/index-BX9FubtP.js:40:58673"
+      ],
+      "route404": false,
+      "notFound": false,
+      "overflow": false,
+      "bodyLength": 2521,
+      "language": null,
+      "menu": null,
+      "screenshot": "mobile_decisions.png"
+    },
+    {
+      "viewport": "mobile",
+      "page": "governance",
+      "status": 200,
+      "count": 0,
+      "expected": 28,
+      "navigationError": "TimeoutError: page.waitForSelector: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-ndsp-capability-card]') to be visible\u001b[22m\n",
+      "pageErrors": [],
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 404 ()",
+        "PRICE FETCH ERROR: Error: HTTP_404\n    at b (https://my.ndsp.app/assets/index-BX9FubtP.js:40:58440)\n    at async https://my.ndsp.app/assets/index-BX9FubtP.js:40:58673",
+        "Failed to load resource: the server responded with a status of 404 ()",
+        "Failed to load resource: the server responded with a status of 404 ()",
+        "Failed to load resource: the server responded with a status of 404 ()",
+        "PRICE FETCH ERROR: Error: HTTP_404\n    at b (https://my.ndsp.app/assets/index-BX9FubtP.js:40:58440)\n    at async https://my.ndsp.app/assets/index-BX9FubtP.js:40:58673",
+        "Failed to load resource: the server responded with a status of 404 ()"
+      ],
+      "route404": false,
+      "notFound": false,
+      "overflow": false,
+      "bodyLength": 2521,
+      "language": null,
+      "menu": null,
+      "screenshot": "mobile_governance.png"
+    }
+  ]
+}

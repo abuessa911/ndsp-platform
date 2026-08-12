@@ -1,0 +1,208 @@
+/* NDSP Mobile Explainability + Header Fix V1 */
+
+.ndsp-explainability-panel {
+  direction: rtl;
+  margin: 14px 0 2px;
+  padding: 16px;
+  border: 1px solid rgba(222, 183, 58, 0.28);
+  border-radius: 18px;
+  background: rgba(8, 10, 11, 0.72);
+  text-align: right;
+}
+
+.ndsp-explainability-summary {
+  margin: 0 0 14px;
+  font-size: 0.95rem;
+  line-height: 1.85;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.ndsp-explainability-rows {
+  display: grid;
+  gap: 8px;
+}
+
+.ndsp-explainability-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.ndsp-explainability-label {
+  min-width: 0;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.ndsp-explainability-value {
+  flex: 0 0 auto;
+  max-width: 52%;
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1.55;
+  text-align: left;
+  color: rgba(255, 255, 255, 0.94);
+}
+
+.ndsp-explainability-value.is-ok { color: #42d995; }
+.ndsp-explainability-value.is-warn { color: #e5c34d; }
+.ndsp-explainability-value.is-danger { color: #ff7d7d; }
+.ndsp-explainability-value.is-muted { color: rgba(255, 255, 255, 0.52); }
+
+.ndsp-technical-details {
+  margin-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 12px;
+}
+
+.ndsp-technical-details > summary {
+  cursor: pointer;
+  color: #dfbd43;
+  font-size: 0.88rem;
+  font-weight: 700;
+  list-style: none;
+  user-select: none;
+}
+
+.ndsp-technical-details > summary::-webkit-details-marker { display: none; }
+.ndsp-technical-details > summary::before {
+  content: '‹';
+  display: inline-block;
+  margin-left: 7px;
+  transition: transform 160ms ease;
+}
+.ndsp-technical-details[open] > summary::before { transform: rotate(-90deg); }
+
+.ndsp-technical-json {
+  direction: ltr;
+  overflow-x: auto;
+  margin: 12px 0 0;
+  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  background: #050607;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.78rem;
+  line-height: 1.65;
+  white-space: pre;
+  text-align: left;
+}
+
+.ndsp-reason-message-fixed {
+  color: rgba(255, 255, 255, 0.62) !important;
+}
+
+.ndsp-status-card {
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+.ndsp-status-card.is-review {
+  border-color: rgba(222, 183, 58, 0.48) !important;
+  box-shadow: 0 0 0 1px rgba(222, 183, 58, 0.06) inset;
+}
+.ndsp-status-card.is-complete {
+  border-color: rgba(66, 217, 149, 0.5) !important;
+  box-shadow: 0 0 0 1px rgba(66, 217, 149, 0.06) inset;
+}
+.ndsp-status-card.is-blocked {
+  border-color: rgba(255, 93, 93, 0.55) !important;
+  box-shadow: 0 0 0 1px rgba(255, 93, 93, 0.07) inset;
+}
+.ndsp-status-card.is-neutral {
+  border-color: rgba(255, 255, 255, 0.16) !important;
+}
+
+.ndsp-accordion-control {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 7px;
+}
+.ndsp-accordion-chevron {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-left: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform 160ms ease;
+}
+.ndsp-accordion-control.is-open .ndsp-accordion-chevron {
+  transform: rotate(-45deg);
+}
+
+@media (max-width: 768px) {
+  .ndsp-mobile-header-fix {
+    position: sticky !important;
+    top: 6px !important;
+    z-index: 1000 !important;
+    width: auto !important;
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+    margin: 6px 10px 12px !important;
+    padding: 14px 16px !important;
+    border-radius: 24px !important;
+    transform: none !important;
+    inset-inline: auto !important;
+    overflow: visible !important;
+    backdrop-filter: blur(14px);
+  }
+
+  .ndsp-mobile-header-fix h1,
+  .ndsp-mobile-header-fix [class*='logo'],
+  .ndsp-mobile-header-fix [class*='brand'] {
+    margin-block: 0 !important;
+    line-height: 1.1 !important;
+  }
+
+  .ndsp-mobile-header-fix h1 {
+    font-size: clamp(1.55rem, 7vw, 2.1rem) !important;
+  }
+
+  .ndsp-mobile-header-fix p {
+    margin-block: 3px !important;
+    line-height: 1.5 !important;
+  }
+
+  .ndsp-mobile-header-fix button,
+  .ndsp-mobile-header-fix a {
+    min-height: 42px;
+  }
+
+  .ndsp-explainability-panel {
+    padding: 13px;
+    border-radius: 15px;
+  }
+
+  .ndsp-explainability-row {
+    align-items: flex-start;
+    padding: 9px 10px;
+  }
+
+  .ndsp-explainability-label,
+  .ndsp-explainability-value {
+    font-size: 0.82rem;
+  }
+
+  .ndsp-explainability-value {
+    max-width: 48%;
+  }
+}
+
+@media (max-width: 430px) {
+  .ndsp-explainability-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3px;
+  }
+
+  .ndsp-explainability-value {
+    max-width: 100%;
+    text-align: right;
+  }
+}

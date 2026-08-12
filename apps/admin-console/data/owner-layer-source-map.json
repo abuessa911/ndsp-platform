@@ -9,7 +9,7 @@
       "id": 1,
       "internal_name": "Temporal Decision Logic",
       "short_name": "TDL",
-      "arabic_name": "منطق البعد الزمني",
+      "arabic_name": "TDL",
       "visibility": "public_allowed_and_owner_internal",
       "logic": "Determines the governing temporal bias and separates short, medium, and long-horizon decision context.",
       "primary_output": "governing_decision_bias",
@@ -18,27 +18,27 @@
           "file": "/home/nawaf511/empire-core-new/apps/ndsp-governance-bridge/layers/NDSP_OWNER_INTERNAL_16_LAYER_REGISTRY.md",
           "score": 6,
           "excerpts": [
-            "ublic display. - Public API: sanitized unless an owner-internal route is used. ## Layers 1. Temporal Decision Logic / TDL / منطق البعد الزمني 2. Nawaf Meet Point / NMP / نقطة التقاء نواف 3. Devil's Advocate / محامي الشيطان 4. Nawaf Golden Alignment / إشارة نواف الذهبية 5. Data Freshness And Source Integrity / سلامة وحداثة البيانات 6. Live Market Feed Bridge / جسر الأسعار والب",
-            "ublic display. - Public API: sanitized unless an owner-internal route is used. ## Layers 1. Temporal Decision Logic / TDL / منطق البعد الزمني 2. Nawaf Meet Point / NMP / نقطة التقاء نواف 3. Devil's Advocate / محامي الشيطان 4. Nawaf Golden Alignment / إشارة نواف الذهبية 5. Data Freshness And Source Integrity / سلامة وحداثة البيانات 6. Live Market Feed Bridge / جسر الأسعار والب",
-            "explicitly approved for public display. - Public API: sanitized unless an owner-internal route is used. ## Layers 1. Temporal Decision Logic / TDL / منطق البعد الزمني 2. Nawaf Meet Point / NMP / نقطة التقاء نواف 3. Devil's Advocate / محامي الشيطان 4. Nawaf Golden Alignment / إشارة نواف الذهبية 5. Data Freshness And Source Integrity / سلامة وحداثة البيانات 6. Live Market Feed"
+            "ublic display. - Public API: sanitized unless an owner-internal route is used. ## Layers 1. Temporal Decision Logic / TDL / TDL 2. NMP / NMP / NMP 3. Devil's Advocate / محامي الشيطان 4. Golden Signal / الإشارة الذهبية 5. Data Freshness And Source Integrity / سلامة وحداثة البيانات 6. Live Market Feed Bridge / جسر الأسعار والب",
+            "ublic display. - Public API: sanitized unless an owner-internal route is used. ## Layers 1. Temporal Decision Logic / TDL / TDL 2. NMP / NMP / NMP 3. Devil's Advocate / محامي الشيطان 4. Golden Signal / الإشارة الذهبية 5. Data Freshness And Source Integrity / سلامة وحداثة البيانات 6. Live Market Feed Bridge / جسر الأسعار والب",
+            "explicitly approved for public display. - Public API: sanitized unless an owner-internal route is used. ## Layers 1. Temporal Decision Logic / TDL / TDL 2. NMP / NMP / NMP 3. Devil's Advocate / محامي الشيطان 4. Golden Signal / الإشارة الذهبية 5. Data Freshness And Source Integrity / سلامة وحداثة البيانات 6. Live Market Feed"
           ]
         },
         {
           "file": "/home/nawaf511/empire-core-new/apps/ndsp-governance-bridge/layers/NDSP_OWNER_INTERNAL_16_LAYER_REGISTRY.json",
           "score": 6,
           "excerpts": [
-            "y approved.\", \"layers\": [ { \"id\": 1, \"internal_name\": \"Temporal Decision Logic\", \"short_name\": \"TDL\", \"arabic_name\": \"منطق البعد الزمني\", \"visibility\": \"public_allowed_and_owner_internal\", \"logic\": \"Determines the governing temporal bias and separates short, medium, and long-horizon decision context.\", \"primary_output\": \"governing",
-            "y approved.\", \"layers\": [ { \"id\": 1, \"internal_name\": \"Temporal Decision Logic\", \"short_name\": \"TDL\", \"arabic_name\": \"منطق البعد الزمني\", \"visibility\": \"public_allowed_and_owner_internal\", \"logic\": \"Determines the governing temporal bias and separates short, medium, and long-horizon decision context.\", \"primary_output\": \"governing",
-            "till mask internal layer names unless explicitly approved.\", \"layers\": [ { \"id\": 1, \"internal_name\": \"Temporal Decision Logic\", \"short_name\": \"TDL\", \"arabic_name\": \"منطق البعد الزمني\", \"visibility\": \"public_allowed_and_owner_internal\", \"logic\": \"Determines the governing temporal bias and separates short, medium, and long-horizon decisio"
+            "y approved.\", \"layers\": [ { \"id\": 1, \"internal_name\": \"Temporal Decision Logic\", \"short_name\": \"TDL\", \"arabic_name\": \"TDL\", \"visibility\": \"public_allowed_and_owner_internal\", \"logic\": \"Determines the governing temporal bias and separates short, medium, and long-horizon decision context.\", \"primary_output\": \"governing",
+            "y approved.\", \"layers\": [ { \"id\": 1, \"internal_name\": \"Temporal Decision Logic\", \"short_name\": \"TDL\", \"arabic_name\": \"TDL\", \"visibility\": \"public_allowed_and_owner_internal\", \"logic\": \"Determines the governing temporal bias and separates short, medium, and long-horizon decision context.\", \"primary_output\": \"governing",
+            "till mask internal layer names unless explicitly approved.\", \"layers\": [ { \"id\": 1, \"internal_name\": \"Temporal Decision Logic\", \"short_name\": \"TDL\", \"arabic_name\": \"TDL\", \"visibility\": \"public_allowed_and_owner_internal\", \"logic\": \"Determines the governing temporal bias and separates short, medium, and long-horizon decisio"
           ]
         },
         {
           "file": "/home/nawaf511/empire-core-new/apps/ndsp-governance-bridge/NDSP_LAYER_VISIBILITY_OWNER_INTERNAL_POLICY.md",
           "score": 5,
           "excerpts": [
-            "Hidden | Hidden | Hidden | ## Publicly Allowed Names These may remain visible in customer-facing UI when needed: 1. TDL / منطق البعد الزمني 2. NMP / نقطة التقاء نواف 3. Devil's Advocate / محامي الشيطان 4. Nawaf Golden Alignment / إشارة نواف الذهبية ## Owner Internal Rule All 16 internal layer names, logic descriptions, source file paths, and output mappings are allowed in",
-            "Hidden | Hidden | Hidden | ## Publicly Allowed Names These may remain visible in customer-facing UI when needed: 1. TDL / منطق البعد الزمني 2. NMP / نقطة التقاء نواف 3. Devil's Advocate / محامي الشيطان 4. Nawaf Golden Alignment / إشارة نواف الذهبية ## Owner Internal Rule All 16 internal layer names, logic descriptions, source file paths, and output mappings are allowed in",
-            "Hidden | ## Publicly Allowed Names These may remain visible in customer-facing UI when needed: 1. TDL / منطق البعد الزمني 2. NMP / نقطة التقاء نواف 3. Devil's Advocate / محامي الشيطان 4. Nawaf Golden Alignment / إشارة نواف الذهبية ## Owner Internal Rule All 16 internal layer names, logic descriptions, source file paths, and output mappings are allowed internally for verifi"
+            "Hidden | Hidden | Hidden | ## Publicly Allowed Names These may remain visible in customer-facing UI when needed: 1. TDL / TDL 2. NMP / NMP 3. Devil's Advocate / محامي الشيطان 4. Golden Signal / الإشارة الذهبية ## Owner Internal Rule All 16 internal layer names, logic descriptions, source file paths, and output mappings are allowed in",
+            "Hidden | Hidden | Hidden | ## Publicly Allowed Names These may remain visible in customer-facing UI when needed: 1. TDL / TDL 2. NMP / NMP 3. Devil's Advocate / محامي الشيطان 4. Golden Signal / الإشارة الذهبية ## Owner Internal Rule All 16 internal layer names, logic descriptions, source file paths, and output mappings are allowed in",
+            "Hidden | ## Publicly Allowed Names These may remain visible in customer-facing UI when needed: 1. TDL / TDL 2. NMP / NMP 3. Devil's Advocate / محامي الشيطان 4. Golden Signal / الإشارة الذهبية ## Owner Internal Rule All 16 internal layer names, logic descriptions, source file paths, and output mappings are allowed internally for verifi"
           ]
         },
         {
@@ -47,7 +47,7 @@
           "excerpts": [
             "\",\"5/wk\"],[\"١٥/يوم\",\"15/day\"],[\"٢٥٠/يوم\",\"250/day\"],[\"بالعقد\",\"Contract\"]], [[\"الطبقات الظاهرة\",\"Visible layers\"],\"—\",\"TDL · NMP\",\"×4\",\"×4\"], [[\"تنبيهات\",\"Alerts\"],[\"تنبيه واحد\",\"1 alert\"],[\"أساسي\",\"Basic\"],[\"تيليجرام\",\"Telegram\"],[\"متعدد\",\"Multi\"]], [[\"API\",\"API\"],[\"لا\",\"No\"],[\"لا\",\"No\"],[\"لا\",\"No\"],[\"نعم\",\"Yes\"]], [[\"Webhooks\",\"Webhooks\"],[\"لا\",\"No\"],[\"لا\",\"No\"],[\"لا\",\"No",
             "\",\"5/wk\"],[\"١٥/يوم\",\"15/day\"],[\"٢٥٠/يوم\",\"250/day\"],[\"بالعقد\",\"Contract\"]], [[\"الطبقات الظاهرة\",\"Visible layers\"],\"—\",\"TDL · NMP\",\"×4\",\"×4\"], [[\"تنبيهات\",\"Alerts\"],[\"تنبيه واحد\",\"1 alert\"],[\"أساسي\",\"Basic\"],[\"تيليجرام\",\"Telegram\"],[\"متعدد\",\"Multi\"]], [[\"API\",\"API\"],[\"لا\",\"No\"],[\"لا\",\"No\"],[\"لا\",\"No\"],[\"نعم\",\"Yes\"]], [[\"Webhooks\",\"Webhooks\"],[\"لا\",\"No\"],[\"لا\",\"No\"],[\"لا\",\"No",
-            "\"b-info\",rejected:\"b-bad\",expired:\"b-muted\",refunded:\"b-blue\"}; const visLayers=[ {gl:\"gl-t\",ic:\"◷\",nm:[\"منطق البُعد الزمني\",\"Timed Direction Logic\"],sub:\"TDL\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-b\",ic:\"⬡\",nm:[\"نقطة التقاء نواف\",\"Nawaf Meeting Point\"],sub:\"NMP\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-r\",ic:\"⚔\",nm:[\"محامي الشيطان\",\"Devil's Advocate\"],sub:\"DEVIL'S"
+            "\"b-info\",rejected:\"b-bad\",expired:\"b-muted\",refunded:\"b-blue\"}; const visLayers=[ {gl:\"gl-t\",ic:\"◷\",nm:[\"منطق البُعد الزمني\",\"Timed Direction Logic\"],sub:\"TDL\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-b\",ic:\"⬡\",nm:[\"NMP\",\"NMP\"],sub:\"NMP\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-r\",ic:\"⚔\",nm:[\"محامي الشيطان\",\"Devil's Advocate\"],sub:\"DEVIL'S"
           ]
         },
         {
@@ -56,7 +56,7 @@
           "excerpts": [
             "\",\"5/wk\"],[\"١٥/يوم\",\"15/day\"],[\"٢٥٠/يوم\",\"250/day\"],[\"بالعقد\",\"Contract\"]], [[\"الطبقات الظاهرة\",\"Visible layers\"],\"—\",\"TDL · NMP\",\"×4\",\"×4\"], [[\"تنبيهات\",\"Alerts\"],[\"تنبيه واحد\",\"1 alert\"],[\"أساسي\",\"Basic\"],[\"تيليجرام\",\"Telegram\"],[\"متعدد\",\"Multi\"]], [[\"API\",\"API\"],[\"لا\",\"No\"],[\"لا\",\"No\"],[\"لا\",\"No\"],[\"نعم\",\"Yes\"]], [[\"Webhooks\",\"Webhooks\"],[\"لا\",\"No\"],[\"لا\",\"No\"],[\"لا\",\"No",
             "\",\"5/wk\"],[\"١٥/يوم\",\"15/day\"],[\"٢٥٠/يوم\",\"250/day\"],[\"بالعقد\",\"Contract\"]], [[\"الطبقات الظاهرة\",\"Visible layers\"],\"—\",\"TDL · NMP\",\"×4\",\"×4\"], [[\"تنبيهات\",\"Alerts\"],[\"تنبيه واحد\",\"1 alert\"],[\"أساسي\",\"Basic\"],[\"تيليجرام\",\"Telegram\"],[\"متعدد\",\"Multi\"]], [[\"API\",\"API\"],[\"لا\",\"No\"],[\"لا\",\"No\"],[\"لا\",\"No\"],[\"نعم\",\"Yes\"]], [[\"Webhooks\",\"Webhooks\"],[\"لا\",\"No\"],[\"لا\",\"No\"],[\"لا\",\"No",
-            "\"b-info\",rejected:\"b-bad\",expired:\"b-muted\",refunded:\"b-blue\"}; const visLayers=[ {gl:\"gl-t\",ic:\"◷\",nm:[\"منطق البُعد الزمني\",\"Timed Direction Logic\"],sub:\"TDL\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-b\",ic:\"⬡\",nm:[\"نقطة التقاء نواف\",\"Nawaf Meeting Point\"],sub:\"NMP\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-r\",ic:\"⚔\",nm:[\"محامي الشيطان\",\"Devil's Advocate\"],sub:\"DEVIL'S"
+            "\"b-info\",rejected:\"b-bad\",expired:\"b-muted\",refunded:\"b-blue\"}; const visLayers=[ {gl:\"gl-t\",ic:\"◷\",nm:[\"منطق البُعد الزمني\",\"Timed Direction Logic\"],sub:\"TDL\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-b\",ic:\"⬡\",nm:[\"NMP\",\"NMP\"],sub:\"NMP\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-r\",ic:\"⚔\",nm:[\"محامي الشيطان\",\"Devil's Advocate\"],sub:\"DEVIL'S"
           ]
         },
         {
@@ -65,7 +65,7 @@
           "excerpts": [
             "class=\"back\" href=\"/\">العودة لمركز العمليات</a> </div> <p> هذه منطقة إدارية داخلية لمراجعة مختبرات NMP و TDL. النتائج البحثية هنا ليست مخرجات إنتاج نهائية ولا تُعرض للمستخدم العام. </p> <section class=\"grid\"> <div class=\"card\"> <h2>مختبر NMP</h2> <p>مراجعة نقاط الالتقاء وسلوك المناطق البحثية ضمن صلاحيات الإدارة فقط.</p> <a h",
             "class=\"back\" href=\"/\">العودة لمركز العمليات</a> </div> <p> هذه منطقة إدارية داخلية لمراجعة مختبرات NMP و TDL. النتائج البحثية هنا ليست مخرجات إنتاج نهائية ولا تُعرض للمستخدم العام. </p> <section class=\"grid\"> <div class=\"card\"> <h2>مختبر NMP</h2> <p>مراجعة نقاط الالتقاء وسلوك المناطق البحثية ضمن صلاحيات الإدارة فقط.</p> <a h",
-            "tml\">فتح مختبر NMP</a> </div> <div class=\"card\"> <h2>مختبر TDL</h2> <p>مراجعة منطق البعد الزمني البحثي ضمن بيئة إدارية محمية.</p> <a href=\"/research/TDL_Research_Lab.html\">فتح مختبر TDL</a> </div> <div class=\"card\"> <h2>مستوى NMP البحثي</h2> <p>عرض صفحة مستوى البحث التفصيلية إذا كانت مفعّلة في النسخة المنشورة.</p"
+            "tml\">فتح مختبر NMP</a> </div> <div class=\"card\"> <h2>مختبر TDL</h2> <p>مراجعة TDL البحثي ضمن بيئة إدارية محمية.</p> <a href=\"/research/TDL_Research_Lab.html\">فتح مختبر TDL</a> </div> <div class=\"card\"> <h2>مستوى NMP البحثي</h2> <p>عرض صفحة مستوى البحث التفصيلية إذا كانت مفعّلة في النسخة المنشورة.</p"
           ]
         },
         {
@@ -126,9 +126,9 @@
     },
     {
       "id": 2,
-      "internal_name": "Nawaf Meet Point",
+      "internal_name": "NMP",
       "short_name": "NMP",
-      "arabic_name": "نقطة التقاء نواف",
+      "arabic_name": "NMP",
       "visibility": "public_allowed_and_owner_internal",
       "logic": "Extracts spatial reference zones and critical convergence levels from market structure.",
       "primary_output": "reference_price_zone",
@@ -137,18 +137,18 @@
           "file": "/home/nawaf511/empire-core-new/apps/ndsp-governance-bridge/layers/NDSP_OWNER_INTERNAL_16_LAYER_REGISTRY.md",
           "score": 6,
           "excerpts": [
-            "an owner-internal route is used. ## Layers 1. Temporal Decision Logic / TDL / منطق البعد الزمني 2. Nawaf Meet Point / NMP / نقطة التقاء نواف 3. Devil's Advocate / محامي الشيطان 4. Nawaf Golden Alignment / إشارة نواف الذهبية 5. Data Freshness And Source Integrity / سلامة وحداثة البيانات 6. Live Market Feed Bridge / جسر الأسعار والبيانات الحية 7. Institutional Positioning Conte",
-            "an owner-internal route is used. ## Layers 1. Temporal Decision Logic / TDL / منطق البعد الزمني 2. Nawaf Meet Point / NMP / نقطة التقاء نواف 3. Devil's Advocate / محامي الشيطان 4. Nawaf Golden Alignment / إشارة نواف الذهبية 5. Data Freshness And Source Integrity / سلامة وحداثة البيانات 6. Live Market Feed Bridge / جسر الأسعار والبيانات الحية 7. Institutional Positioning Conte",
-            "tized unless an owner-internal route is used. ## Layers 1. Temporal Decision Logic / TDL / منطق البعد الزمني 2. Nawaf Meet Point / NMP / نقطة التقاء نواف 3. Devil's Advocate / محامي الشيطان 4. Nawaf Golden Alignment / إشارة نواف الذهبية 5. Data Freshness And Source Integrity / سلامة وحداثة البيانات 6. Live Market Feed Bridge / جسر الأسعار والبيانات الحية 7. Institutional Posi"
+            "an owner-internal route is used. ## Layers 1. Temporal Decision Logic / TDL / TDL 2. NMP / NMP / NMP 3. Devil's Advocate / محامي الشيطان 4. Golden Signal / الإشارة الذهبية 5. Data Freshness And Source Integrity / سلامة وحداثة البيانات 6. Live Market Feed Bridge / جسر الأسعار والبيانات الحية 7. Institutional Positioning Conte",
+            "an owner-internal route is used. ## Layers 1. Temporal Decision Logic / TDL / TDL 2. NMP / NMP / NMP 3. Devil's Advocate / محامي الشيطان 4. Golden Signal / الإشارة الذهبية 5. Data Freshness And Source Integrity / سلامة وحداثة البيانات 6. Live Market Feed Bridge / جسر الأسعار والبيانات الحية 7. Institutional Positioning Conte",
+            "tized unless an owner-internal route is used. ## Layers 1. Temporal Decision Logic / TDL / TDL 2. NMP / NMP / NMP 3. Devil's Advocate / محامي الشيطان 4. Golden Signal / الإشارة الذهبية 5. Data Freshness And Source Integrity / سلامة وحداثة البيانات 6. Live Market Feed Bridge / جسر الأسعار والبيانات الحية 7. Institutional Posi"
           ]
         },
         {
           "file": "/home/nawaf511/empire-core-new/apps/ndsp-governance-bridge/layers/NDSP_OWNER_INTERNAL_16_LAYER_REGISTRY.json",
           "score": 6,
           "excerpts": [
-            ": \"governing_decision_bias\" }, { \"id\": 2, \"internal_name\": \"Nawaf Meet Point\", \"short_name\": \"NMP\", \"arabic_name\": \"نقطة التقاء نواف\", \"visibility\": \"public_allowed_and_owner_internal\", \"logic\": \"Extracts spatial reference zones and critical convergence levels from market structure.\", \"primary_output\": \"reference_price_zone\"",
-            ": \"governing_decision_bias\" }, { \"id\": 2, \"internal_name\": \"Nawaf Meet Point\", \"short_name\": \"NMP\", \"arabic_name\": \"نقطة التقاء نواف\", \"visibility\": \"public_allowed_and_owner_internal\", \"logic\": \"Extracts spatial reference zones and critical convergence levels from market structure.\", \"primary_output\": \"reference_price_zone\"",
-            "context.\", \"primary_output\": \"governing_decision_bias\" }, { \"id\": 2, \"internal_name\": \"Nawaf Meet Point\", \"short_name\": \"NMP\", \"arabic_name\": \"نقطة التقاء نواف\", \"visibility\": \"public_allowed_and_owner_internal\", \"logic\": \"Extracts spatial reference zones and critical convergence levels from market structure.\", \"primary_o"
+            ": \"governing_decision_bias\" }, { \"id\": 2, \"internal_name\": \"NMP\", \"short_name\": \"NMP\", \"arabic_name\": \"NMP\", \"visibility\": \"public_allowed_and_owner_internal\", \"logic\": \"Extracts spatial reference zones and critical convergence levels from market structure.\", \"primary_output\": \"reference_price_zone\"",
+            ": \"governing_decision_bias\" }, { \"id\": 2, \"internal_name\": \"NMP\", \"short_name\": \"NMP\", \"arabic_name\": \"NMP\", \"visibility\": \"public_allowed_and_owner_internal\", \"logic\": \"Extracts spatial reference zones and critical convergence levels from market structure.\", \"primary_output\": \"reference_price_zone\"",
+            "context.\", \"primary_output\": \"governing_decision_bias\" }, { \"id\": 2, \"internal_name\": \"NMP\", \"short_name\": \"NMP\", \"arabic_name\": \"NMP\", \"visibility\": \"public_allowed_and_owner_internal\", \"logic\": \"Extracts spatial reference zones and critical convergence levels from market structure.\", \"primary_o"
           ]
         },
         {
@@ -157,7 +157,7 @@
           "excerpts": [
             "kages\":\"الباقات\",\"Payments\":\"المدفوعات\", \"ENGINE & GOVERNANCE\":\"المحركات والحوكمة\",\"Layer Governance\":\"حوكمة الطبقات\",\"NMP Research Lab\":\"مختبر أبحاث NMP\", \"Alerts & Config\":\"التنبيهات والإعدادات\",\"Email\":\"البريد\",\"Telegram\":\"تيليجرام\",\"Health\":\"الصحة التشغيلية\",\"Reports\":\"التقارير\", \"Backups\":\"النسخ الاحتياطية\",\"Status\":\"الحالة\",\"Active\":\"نشط\",\"Pending\":\"قيد الانتظار\",\"Approve",
             "kages\":\"الباقات\",\"Payments\":\"المدفوعات\", \"ENGINE & GOVERNANCE\":\"المحركات والحوكمة\",\"Layer Governance\":\"حوكمة الطبقات\",\"NMP Research Lab\":\"مختبر أبحاث NMP\", \"Alerts & Config\":\"التنبيهات والإعدادات\",\"Email\":\"البريد\",\"Telegram\":\"تيليجرام\",\"Health\":\"الصحة التشغيلية\",\"Reports\":\"التقارير\", \"Backups\":\"النسخ الاحتياطية\",\"Status\":\"الحالة\",\"Active\":\"نشط\",\"Pending\":\"قيد الانتظار\",\"Approve",
-            "only 4 visible?\"], a:[\"١٦ طبقة تحليلية تشارك في كل قراءة. أربع ظاهرة بالاسم (<span class='gold'>منطق البُعد الزمني · نقطة التقاء نواف · محامي الشيطان · إشارة نواف الذهبية</span>)، و١٢ تعمل خلف الكواليس. إخفاؤها ليس غموضًا — بل حماية لجوهر المنصة، كما تحمي البنوك نماذجها. تحصل على القيمة، لا الوصفة.\", \"16 analytical layers contribute to every read. Four are named (<span"
+            "only 4 visible?\"], a:[\"١٦ طبقة تحليلية تشارك في كل قراءة. أربع ظاهرة بالاسم (<span class='gold'>منطق البُعد الزمني · NMP · محامي الشيطان · الإشارة الذهبية</span>)، و١٢ تعمل خلف الكواليس. إخفاؤها ليس غموضًا — بل حماية لجوهر المنصة، كما تحمي البنوك نماذجها. تحصل على القيمة، لا الوصفة.\", \"16 analytical layers contribute to every read. Four are named (<span"
           ]
         },
         {
@@ -166,7 +166,7 @@
           "excerpts": [
             "ckages\":\"الباقات\",\"Payments\":\"المدفوعات\", \"ENGINE & GOVERNANCE\":\"المحركات والحوكمة\",\"Layer Governance\":\"حوكمة الطبقات\",\"NMP Research Lab\":\"مختبر أبحاث NMP\", \"Alerts & Config\":\"التنبيهات والإعدادات\",\"Email\":\"البريد\",\"Telegram\":\"تيليجرام\",\"Health\":\"الصحة التشغيلية\",\"Reports\":\"التقارير\", \"Backups\":\"النسخ الاحتياطية\",\"Status\":\"الحالة\",\"Active\":\"نشط\",\"Pending\":\"قيد الانتظار\",\"Approv",
             "ckages\":\"الباقات\",\"Payments\":\"المدفوعات\", \"ENGINE & GOVERNANCE\":\"المحركات والحوكمة\",\"Layer Governance\":\"حوكمة الطبقات\",\"NMP Research Lab\":\"مختبر أبحاث NMP\", \"Alerts & Config\":\"التنبيهات والإعدادات\",\"Email\":\"البريد\",\"Telegram\":\"تيليجرام\",\"Health\":\"الصحة التشغيلية\",\"Reports\":\"التقارير\", \"Backups\":\"النسخ الاحتياطية\",\"Status\":\"الحالة\",\"Active\":\"نشط\",\"Pending\":\"قيد الانتظار\",\"Approv",
-            "itation to trade, or an execution order. <b>Scenario levels</b> (activation/arrival/review/invalidation) are contextual references for understanding, not entry/exit instructions.\"], [\"الأسواق تنطوي على مخاطر قد تؤدي لخسارة رأس المال. <b>لا أحد يضمن النتائج</b>، وأنت وحدك مسؤول عن قراراتك. حتى «إشارة نواف الذهبية» معزّز سياقي للجودة لا وعد بربح.\",\"Markets carry risk that may"
+            "itation to trade, or an execution order. <b>Scenario levels</b> (activation/arrival/review/invalidation) are contextual references for understanding, not entry/exit instructions.\"], [\"الأسواق تنطوي على مخاطر قد تؤدي لخسارة رأس المال. <b>لا أحد يضمن النتائج</b>، وأنت وحدك مسؤول عن قراراتك. حتى «الإشارة الذهبية» معزّز سياقي للجودة لا وعد بربح.\",\"Markets carry risk that may"
           ]
         },
         {
@@ -184,7 +184,7 @@
           "excerpts": [
             "ckages\":\"الباقات\",\"Payments\":\"المدفوعات\", \"ENGINE & GOVERNANCE\":\"المحركات والحوكمة\",\"Layer Governance\":\"حوكمة الطبقات\",\"NMP Research Lab\":\"مختبر أبحاث NMP\", \"Alerts & Config\":\"التنبيهات والإعدادات\",\"Email\":\"البريد\",\"Telegram\":\"تيليجرام\",\"Health\":\"الصحة التشغيلية\",\"Reports\":\"التقارير\", \"Backups\":\"النسخ الاحتياطية\",\"Status\":\"الحالة\",\"Active\":\"نشط\",\"Pending\":\"قيد الانتظار\",\"Approv",
             "ckages\":\"الباقات\",\"Payments\":\"المدفوعات\", \"ENGINE & GOVERNANCE\":\"المحركات والحوكمة\",\"Layer Governance\":\"حوكمة الطبقات\",\"NMP Research Lab\":\"مختبر أبحاث NMP\", \"Alerts & Config\":\"التنبيهات والإعدادات\",\"Email\":\"البريد\",\"Telegram\":\"تيليجرام\",\"Health\":\"الصحة التشغيلية\",\"Reports\":\"التقارير\", \"Backups\":\"النسخ الاحتياطية\",\"Status\":\"الحالة\",\"Active\":\"نشط\",\"Pending\":\"قيد الانتظار\",\"Approv",
-            "nm:[\"منطق البُعد الزمني\",\"Timed Direction Logic\"],sub:\"TDL\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-b\",ic:\"⬡\",nm:[\"نقطة التقاء نواف\",\"Nawaf Meeting Point\"],sub:\"NMP\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-r\",ic:\"⚔\",nm:[\"محامي الشيطان\",\"Devil's Advocate\"],sub:\"DEVIL'S ADVOCATE\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-g\",ic:\"✦\",nm:[\"إشارة نواف الذهبية\",\"Nawaf Gold"
+            "nm:[\"منطق البُعد الزمني\",\"Timed Direction Logic\"],sub:\"TDL\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-b\",ic:\"⬡\",nm:[\"NMP\",\"NMP\"],sub:\"NMP\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-r\",ic:\"⚔\",nm:[\"محامي الشيطان\",\"Devil's Advocate\"],sub:\"DEVIL'S ADVOCATE\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-g\",ic:\"✦\",nm:[\"الإشارة الذهبية\",\"Golden Signal"
           ]
         },
         {
@@ -193,7 +193,7 @@
           "excerpts": [
             "ckages\":\"الباقات\",\"Payments\":\"المدفوعات\", \"ENGINE & GOVERNANCE\":\"المحركات والحوكمة\",\"Layer Governance\":\"حوكمة الطبقات\",\"NMP Research Lab\":\"مختبر أبحاث NMP\", \"Alerts & Config\":\"التنبيهات والإعدادات\",\"Email\":\"البريد\",\"Telegram\":\"تيليجرام\",\"Health\":\"الصحة التشغيلية\",\"Reports\":\"التقارير\", \"Backups\":\"النسخ الاحتياطية\",\"Status\":\"الحالة\",\"Active\":\"نشط\",\"Pending\":\"قيد الانتظار\",\"Approv",
             "ckages\":\"الباقات\",\"Payments\":\"المدفوعات\", \"ENGINE & GOVERNANCE\":\"المحركات والحوكمة\",\"Layer Governance\":\"حوكمة الطبقات\",\"NMP Research Lab\":\"مختبر أبحاث NMP\", \"Alerts & Config\":\"التنبيهات والإعدادات\",\"Email\":\"البريد\",\"Telegram\":\"تيليجرام\",\"Health\":\"الصحة التشغيلية\",\"Reports\":\"التقارير\", \"Backups\":\"النسخ الاحتياطية\",\"Status\":\"الحالة\",\"Active\":\"نشط\",\"Pending\":\"قيد الانتظار\",\"Approv",
-            "nm:[\"منطق البُعد الزمني\",\"Timed Direction Logic\"],sub:\"TDL\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-b\",ic:\"⬡\",nm:[\"نقطة التقاء نواف\",\"Nawaf Meeting Point\"],sub:\"NMP\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-r\",ic:\"⚔\",nm:[\"محامي الشيطان\",\"Devil's Advocate\"],sub:\"DEVIL'S ADVOCATE\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-g\",ic:\"✦\",nm:[\"إشارة نواف الذهبية\",\"Nawaf Gold"
+            "nm:[\"منطق البُعد الزمني\",\"Timed Direction Logic\"],sub:\"TDL\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-b\",ic:\"⬡\",nm:[\"NMP\",\"NMP\"],sub:\"NMP\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-r\",ic:\"⚔\",nm:[\"محامي الشيطان\",\"Devil's Advocate\"],sub:\"DEVIL'S ADVOCATE\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-g\",ic:\"✦\",nm:[\"الإشارة الذهبية\",\"Golden Signal"
           ]
         },
         {
@@ -218,9 +218,9 @@
           "file": "/home/nawaf511/empire-core-new/apps/ndsp-governance-bridge/NDSP_LAYER_VISIBILITY_OWNER_INTERNAL_POLICY.md",
           "score": 3,
           "excerpts": [
-            "## Publicly Allowed Names These may remain visible in customer-facing UI when needed: 1. TDL / منطق البعد الزمني 2. NMP / نقطة التقاء نواف 3. Devil's Advocate / محامي الشيطان 4. Nawaf Golden Alignment / إشارة نواف الذهبية ## Owner Internal Rule All 16 internal layer names, logic descriptions, source file paths, and output mappings are allowed internally for verification a",
-            "## Publicly Allowed Names These may remain visible in customer-facing UI when needed: 1. TDL / منطق البعد الزمني 2. NMP / نقطة التقاء نواف 3. Devil's Advocate / محامي الشيطان 4. Nawaf Golden Alignment / إشارة نواف الذهبية ## Owner Internal Rule All 16 internal layer names, logic descriptions, source file paths, and output mappings are allowed internally for verification a",
-            "ublicly Allowed Names These may remain visible in customer-facing UI when needed: 1. TDL / منطق البعد الزمني 2. NMP / نقطة التقاء نواف 3. Devil's Advocate / محامي الشيطان 4. Nawaf Golden Alignment / إشارة نواف الذهبية ## Owner Internal Rule All 16 internal layer names, logic descriptions, source file paths, and output mappings are allowed internally for verification and dev"
+            "## Publicly Allowed Names These may remain visible in customer-facing UI when needed: 1. TDL / TDL 2. NMP / NMP 3. Devil's Advocate / محامي الشيطان 4. Golden Signal / الإشارة الذهبية ## Owner Internal Rule All 16 internal layer names, logic descriptions, source file paths, and output mappings are allowed internally for verification a",
+            "## Publicly Allowed Names These may remain visible in customer-facing UI when needed: 1. TDL / TDL 2. NMP / NMP 3. Devil's Advocate / محامي الشيطان 4. Golden Signal / الإشارة الذهبية ## Owner Internal Rule All 16 internal layer names, logic descriptions, source file paths, and output mappings are allowed internally for verification a",
+            "ublicly Allowed Names These may remain visible in customer-facing UI when needed: 1. TDL / TDL 2. NMP / NMP 3. Devil's Advocate / محامي الشيطان 4. Golden Signal / الإشارة الذهبية ## Owner Internal Rule All 16 internal layer names, logic descriptions, source file paths, and output mappings are allowed internally for verification and dev"
           ]
         },
         {
@@ -302,43 +302,43 @@
           "excerpts": [
             "lden Alignment' is a <b>contextual quality enhancer</b>, not a profit promise. Caution is built into every read via the Devil's Advocate.\"]}, {cat:\"trial\",q:[\"متى تبدأ تجربة الـ١٦ يوم بالضبط؟\",\"When exactly does the 16-day trial start?\"], a:[\"تبدأ <b>من لحظة تفعيل حسابك</b> بعد اعتماد التسجيل — لا عند إرسال الطلب، ولا على ساعة عامة. لكل مستخدم عدّاده الخاص، فلا تخسر أي يوم ح",
             "lden Alignment' is a <b>contextual quality enhancer</b>, not a profit promise. Caution is built into every read via the Devil's Advocate.\"]}, {cat:\"trial\",q:[\"متى تبدأ تجربة الـ١٦ يوم بالضبط؟\",\"When exactly does the 16-day trial start?\"], a:[\"تبدأ <b>من لحظة تفعيل حسابك</b> بعد اعتماد التسجيل — لا عند إرسال الطلب، ولا على ساعة عامة. لكل مستخدم عدّاده الخاص، فلا تخسر أي يوم ح",
-            "لا ندّعي ذلك. حتى «إشارة نواف الذهبية» هي <b>معزّز سياقي للجودة</b> وليست وعدًا بربح. التحفّظ جزء أصيل من كل قراءة عبر «محامي الشيطان».\", \"Absolutely not. No one guarantees market outcomes, and we make no such claim. Even 'Nawaf Golden Alignment' is a <b>contextual quality enhancer</b>, not a profit promise. Caution is built into every read via the Devil's Advocate.\"]}, {"
+            "لا ندّعي ذلك. حتى «الإشارة الذهبية» هي <b>معزّز سياقي للجودة</b> وليست وعدًا بربح. التحفّظ جزء أصيل من كل قراءة عبر «محامي الشيطان».\", \"Absolutely not. No one guarantees market outcomes, and we make no such claim. Even Golden Signal is a <b>contextual quality enhancer</b>, not a profit promise. Caution is built into every read via the Devil's Advocate.\"]}, {"
           ]
         },
         {
           "file": "/home/nawaf511/empire-core-new/apps/admin-console/NDSP_Admin_Console.html",
           "score": 3,
           "excerpts": [
-            "تقاء نواف\",\"Nawaf Meeting Point\"],sub:\"NMP\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-r\",ic:\"⚔\",nm:[\"محامي الشيطان\",\"Devil's Advocate\"],sub:\"DEVIL'S ADVOCATE\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-g\",ic:\"✦\",nm:[\"إشارة نواف الذهبية\",\"Nawaf Golden Alignment\"],sub:\"GOLDEN ALIGNMENT\",st:\"b-gold\",sl:[\"محكوم\",\"Governed\"]}, ]; const allowedCats=[[\"انحياز اتجاهي\",\"Directional",
-            "تقاء نواف\",\"Nawaf Meeting Point\"],sub:\"NMP\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-r\",ic:\"⚔\",nm:[\"محامي الشيطان\",\"Devil's Advocate\"],sub:\"DEVIL'S ADVOCATE\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-g\",ic:\"✦\",nm:[\"إشارة نواف الذهبية\",\"Nawaf Golden Alignment\"],sub:\"GOLDEN ALIGNMENT\",st:\"b-gold\",sl:[\"محكوم\",\"Governed\"]}, ]; const allowedCats=[[\"انحياز اتجاهي\",\"Directional",
-            "\"⬡\",nm:[\"نقطة التقاء نواف\",\"Nawaf Meeting Point\"],sub:\"NMP\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-r\",ic:\"⚔\",nm:[\"محامي الشيطان\",\"Devil's Advocate\"],sub:\"DEVIL'S ADVOCATE\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-g\",ic:\"✦\",nm:[\"إشارة نواف الذهبية\",\"Nawaf Golden Alignment\"],sub:\"GOLDEN ALIGNMENT\",st:\"b-gold\",sl:[\"محكوم\",\"Governed\"]}, ]; const allowedCats=[[\"انحياز اتجا"
+            "NMP\",\"NMP\"],sub:\"NMP\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-r\",ic:\"⚔\",nm:[\"محامي الشيطان\",\"Devil's Advocate\"],sub:\"DEVIL'S ADVOCATE\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-g\",ic:\"✦\",nm:[\"الإشارة الذهبية\",\"Golden Signal\"],sub:\"GOLDEN ALIGNMENT\",st:\"b-gold\",sl:[\"محكوم\",\"Governed\"]}, ]; const allowedCats=[[\"انحياز اتجاهي\",\"Directional",
+            "NMP\",\"NMP\"],sub:\"NMP\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-r\",ic:\"⚔\",nm:[\"محامي الشيطان\",\"Devil's Advocate\"],sub:\"DEVIL'S ADVOCATE\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-g\",ic:\"✦\",nm:[\"الإشارة الذهبية\",\"Golden Signal\"],sub:\"GOLDEN ALIGNMENT\",st:\"b-gold\",sl:[\"محكوم\",\"Governed\"]}, ]; const allowedCats=[[\"انحياز اتجاهي\",\"Directional",
+            "\"⬡\",nm:[\"NMP\",\"NMP\"],sub:\"NMP\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-r\",ic:\"⚔\",nm:[\"محامي الشيطان\",\"Devil's Advocate\"],sub:\"DEVIL'S ADVOCATE\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-g\",ic:\"✦\",nm:[\"الإشارة الذهبية\",\"Golden Signal\"],sub:\"GOLDEN ALIGNMENT\",st:\"b-gold\",sl:[\"محكوم\",\"Governed\"]}, ]; const allowedCats=[[\"انحياز اتجا"
           ]
         },
         {
           "file": "/home/nawaf511/empire-core-new/apps/admin-console/index.html",
           "score": 3,
           "excerpts": [
-            "تقاء نواف\",\"Nawaf Meeting Point\"],sub:\"NMP\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-r\",ic:\"⚔\",nm:[\"محامي الشيطان\",\"Devil's Advocate\"],sub:\"DEVIL'S ADVOCATE\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-g\",ic:\"✦\",nm:[\"إشارة نواف الذهبية\",\"Nawaf Golden Alignment\"],sub:\"GOLDEN ALIGNMENT\",st:\"b-gold\",sl:[\"محكوم\",\"Governed\"]}, ]; const allowedCats=[[\"انحياز اتجاهي\",\"Directional",
-            "تقاء نواف\",\"Nawaf Meeting Point\"],sub:\"NMP\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-r\",ic:\"⚔\",nm:[\"محامي الشيطان\",\"Devil's Advocate\"],sub:\"DEVIL'S ADVOCATE\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-g\",ic:\"✦\",nm:[\"إشارة نواف الذهبية\",\"Nawaf Golden Alignment\"],sub:\"GOLDEN ALIGNMENT\",st:\"b-gold\",sl:[\"محكوم\",\"Governed\"]}, ]; const allowedCats=[[\"انحياز اتجاهي\",\"Directional",
-            "\"⬡\",nm:[\"نقطة التقاء نواف\",\"Nawaf Meeting Point\"],sub:\"NMP\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-r\",ic:\"⚔\",nm:[\"محامي الشيطان\",\"Devil's Advocate\"],sub:\"DEVIL'S ADVOCATE\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-g\",ic:\"✦\",nm:[\"إشارة نواف الذهبية\",\"Nawaf Golden Alignment\"],sub:\"GOLDEN ALIGNMENT\",st:\"b-gold\",sl:[\"محكوم\",\"Governed\"]}, ]; const allowedCats=[[\"انحياز اتجا"
+            "NMP\",\"NMP\"],sub:\"NMP\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-r\",ic:\"⚔\",nm:[\"محامي الشيطان\",\"Devil's Advocate\"],sub:\"DEVIL'S ADVOCATE\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-g\",ic:\"✦\",nm:[\"الإشارة الذهبية\",\"Golden Signal\"],sub:\"GOLDEN ALIGNMENT\",st:\"b-gold\",sl:[\"محكوم\",\"Governed\"]}, ]; const allowedCats=[[\"انحياز اتجاهي\",\"Directional",
+            "NMP\",\"NMP\"],sub:\"NMP\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-r\",ic:\"⚔\",nm:[\"محامي الشيطان\",\"Devil's Advocate\"],sub:\"DEVIL'S ADVOCATE\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-g\",ic:\"✦\",nm:[\"الإشارة الذهبية\",\"Golden Signal\"],sub:\"GOLDEN ALIGNMENT\",st:\"b-gold\",sl:[\"محكوم\",\"Governed\"]}, ]; const allowedCats=[[\"انحياز اتجاهي\",\"Directional",
+            "\"⬡\",nm:[\"NMP\",\"NMP\"],sub:\"NMP\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-r\",ic:\"⚔\",nm:[\"محامي الشيطان\",\"Devil's Advocate\"],sub:\"DEVIL'S ADVOCATE\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-g\",ic:\"✦\",nm:[\"الإشارة الذهبية\",\"Golden Signal\"],sub:\"GOLDEN ALIGNMENT\",st:\"b-gold\",sl:[\"محكوم\",\"Governed\"]}, ]; const allowedCats=[[\"انحياز اتجا"
           ]
         },
         {
           "file": "/home/nawaf511/empire-core-new/apps/ndsp-governance-bridge/NDSP_LAYER_VISIBILITY_OWNER_INTERNAL_POLICY.md",
           "score": 3,
           "excerpts": [
-            "s These may remain visible in customer-facing UI when needed: 1. TDL / منطق البعد الزمني 2. NMP / نقطة التقاء نواف 3. Devil's Advocate / محامي الشيطان 4. Nawaf Golden Alignment / إشارة نواف الذهبية ## Owner Internal Rule All 16 internal layer names, logic descriptions, source file paths, and output mappings are allowed internally for verification and development. ## Public",
-            "s These may remain visible in customer-facing UI when needed: 1. TDL / منطق البعد الزمني 2. NMP / نقطة التقاء نواف 3. Devil's Advocate / محامي الشيطان 4. Nawaf Golden Alignment / إشارة نواف الذهبية ## Owner Internal Rule All 16 internal layer names, logic descriptions, source file paths, and output mappings are allowed internally for verification and development. ## Public",
-            "visible in customer-facing UI when needed: 1. TDL / منطق البعد الزمني 2. NMP / نقطة التقاء نواف 3. Devil's Advocate / محامي الشيطان 4. Nawaf Golden Alignment / إشارة نواف الذهبية ## Owner Internal Rule All 16 internal layer names, logic descriptions, source file paths, and output mappings are allowed internally for verification and development. ## Public UI Rule Public UI"
+            "s These may remain visible in customer-facing UI when needed: 1. TDL / TDL 2. NMP / NMP 3. Devil's Advocate / محامي الشيطان 4. Golden Signal / الإشارة الذهبية ## Owner Internal Rule All 16 internal layer names, logic descriptions, source file paths, and output mappings are allowed internally for verification and development. ## Public",
+            "s These may remain visible in customer-facing UI when needed: 1. TDL / TDL 2. NMP / NMP 3. Devil's Advocate / محامي الشيطان 4. Golden Signal / الإشارة الذهبية ## Owner Internal Rule All 16 internal layer names, logic descriptions, source file paths, and output mappings are allowed internally for verification and development. ## Public",
+            "visible in customer-facing UI when needed: 1. TDL / TDL 2. NMP / NMP 3. Devil's Advocate / محامي الشيطان 4. Golden Signal / الإشارة الذهبية ## Owner Internal Rule All 16 internal layer names, logic descriptions, source file paths, and output mappings are allowed internally for verification and development. ## Public UI Rule Public UI"
           ]
         },
         {
           "file": "/home/nawaf511/empire-core-new/apps/ndsp-governance-bridge/layers/NDSP_OWNER_INTERNAL_16_LAYER_REGISTRY.md",
           "score": 3,
           "excerpts": [
-            "used. ## Layers 1. Temporal Decision Logic / TDL / منطق البعد الزمني 2. Nawaf Meet Point / NMP / نقطة التقاء نواف 3. Devil's Advocate / محامي الشيطان 4. Nawaf Golden Alignment / إشارة نواف الذهبية 5. Data Freshness And Source Integrity / سلامة وحداثة البيانات 6. Live Market Feed Bridge / جسر الأسعار والبيانات الحية 7. Institutional Positioning Context / السياق المؤسسي وتموضع",
-            "used. ## Layers 1. Temporal Decision Logic / TDL / منطق البعد الزمني 2. Nawaf Meet Point / NMP / نقطة التقاء نواف 3. Devil's Advocate / محامي الشيطان 4. Nawaf Golden Alignment / إشارة نواف الذهبية 5. Data Freshness And Source Integrity / سلامة وحداثة البيانات 6. Live Market Feed Bridge / جسر الأسعار والبيانات الحية 7. Institutional Positioning Context / السياق المؤسسي وتموضع",
-            "1. Temporal Decision Logic / TDL / منطق البعد الزمني 2. Nawaf Meet Point / NMP / نقطة التقاء نواف 3. Devil's Advocate / محامي الشيطان 4. Nawaf Golden Alignment / إشارة نواف الذهبية 5. Data Freshness And Source Integrity / سلامة وحداثة البيانات 6. Live Market Feed Bridge / جسر الأسعار والبيانات الحية 7. Institutional Positioning Context / السياق المؤسسي وتموضع الفئات 8. Macro An"
+            "used. ## Layers 1. Temporal Decision Logic / TDL / TDL 2. NMP / NMP / NMP 3. Devil's Advocate / محامي الشيطان 4. Golden Signal / الإشارة الذهبية 5. Data Freshness And Source Integrity / سلامة وحداثة البيانات 6. Live Market Feed Bridge / جسر الأسعار والبيانات الحية 7. Institutional Positioning Context / السياق المؤسسي وتموضع",
+            "used. ## Layers 1. Temporal Decision Logic / TDL / TDL 2. NMP / NMP / NMP 3. Devil's Advocate / محامي الشيطان 4. Golden Signal / الإشارة الذهبية 5. Data Freshness And Source Integrity / سلامة وحداثة البيانات 6. Live Market Feed Bridge / جسر الأسعار والبيانات الحية 7. Institutional Positioning Context / السياق المؤسسي وتموضع",
+            "1. Temporal Decision Logic / TDL / TDL 2. NMP / NMP / NMP 3. Devil's Advocate / محامي الشيطان 4. Golden Signal / الإشارة الذهبية 5. Data Freshness And Source Integrity / سلامة وحداثة البيانات 6. Live Market Feed Bridge / جسر الأسعار والبيانات الحية 7. Institutional Positioning Context / السياق المؤسسي وتموضع الفئات 8. Macro An"
           ]
         },
         {
@@ -362,9 +362,9 @@
     },
     {
       "id": 4,
-      "internal_name": "Nawaf Golden Alignment",
+      "internal_name": "Golden Signal",
       "short_name": "GOLDEN_ALIGNMENT",
-      "arabic_name": "إشارة نواف الذهبية",
+      "arabic_name": "الإشارة الذهبية",
       "visibility": "public_allowed_and_owner_internal",
       "logic": "Detects multi-layer agreement and publishes the golden alignment state when internal coherence is high.",
       "primary_output": "golden_alignment_state",
@@ -382,72 +382,72 @@
           "file": "/home/nawaf511/empire-core-new/apps/user-portal/public/ndsp-devil-advocate-integrated-final.js",
           "score": 4,
           "excerpts": [
-            "ation.pathname || \"/\")) return; if(document.getElementById(\"ndsp-devil-advocate-integrated-card\")) return; var goldenEl = findTextNodeElement([\"إشارة التوافق الذهبية\", \"إشارة نواف الذهبية\"]); var summaryEl = findTextNodeElement([\"الملخص التنفيذي\"]); var decisionEl = findTextNodeElement([\"القرار الحاكم\"]); var target = goldenEl ? nearestCard(goldenEl) : nul",
-            "ation.pathname || \"/\")) return; if(document.getElementById(\"ndsp-devil-advocate-integrated-card\")) return; var goldenEl = findTextNodeElement([\"إشارة التوافق الذهبية\", \"إشارة نواف الذهبية\"]); var summaryEl = findTextNodeElement([\"الملخص التنفيذي\"]); var decisionEl = findTextNodeElement([\"القرار الحاكم\"]); var target = goldenEl ? nearestCard(goldenEl) : nul",
-            ".getElementById(\"ndsp-devil-advocate-integrated-card\")) return; var goldenEl = findTextNodeElement([\"إشارة التوافق الذهبية\", \"إشارة نواف الذهبية\"]); var summaryEl = findTextNodeElement([\"الملخص التنفيذي\"]); var decisionEl = findTextNodeElement([\"القرار الحاكم\"]); var target = goldenEl ? nearestCard(goldenEl) : null; var before = summaryEl ? nearestCard(sum"
+            "ation.pathname || \"/\")) return; if(document.getElementById(\"ndsp-devil-advocate-integrated-card\")) return; var goldenEl = findTextNodeElement([\"إشارة التوافق الذهبية\", \"الإشارة الذهبية\"]); var summaryEl = findTextNodeElement([\"الملخص التنفيذي\"]); var decisionEl = findTextNodeElement([\"القرار الحاكم\"]); var target = goldenEl ? nearestCard(goldenEl) : nul",
+            "ation.pathname || \"/\")) return; if(document.getElementById(\"ndsp-devil-advocate-integrated-card\")) return; var goldenEl = findTextNodeElement([\"إشارة التوافق الذهبية\", \"الإشارة الذهبية\"]); var summaryEl = findTextNodeElement([\"الملخص التنفيذي\"]); var decisionEl = findTextNodeElement([\"القرار الحاكم\"]); var target = goldenEl ? nearestCard(goldenEl) : nul",
+            ".getElementById(\"ndsp-devil-advocate-integrated-card\")) return; var goldenEl = findTextNodeElement([\"إشارة التوافق الذهبية\", \"الإشارة الذهبية\"]); var summaryEl = findTextNodeElement([\"الملخص التنفيذي\"]); var decisionEl = findTextNodeElement([\"القرار الحاكم\"]); var target = goldenEl ? nearestCard(goldenEl) : null; var before = summaryEl ? nearestCard(sum"
           ]
         },
         {
           "file": "/home/nawaf511/empire-core-new/apps/admin-console/NDSP_Help_Center.html",
           "score": 4,
           "excerpts": [
-            "عبر «محامي الشيطان».\", \"Absolutely not. No one guarantees market outcomes, and we make no such claim. Even 'Nawaf Golden Alignment' is a <b>contextual quality enhancer</b>, not a profit promise. Caution is built into every read via the Devil's Advocate.\"]}, {cat:\"trial\",q:[\"متى تبدأ تجربة الـ١٦ يوم بالضبط؟\",\"When exactly does the 16-day trial start?\"], a:[\"تبدأ <b>من ل",
-            "عبر «محامي الشيطان».\", \"Absolutely not. No one guarantees market outcomes, and we make no such claim. Even 'Nawaf Golden Alignment' is a <b>contextual quality enhancer</b>, not a profit promise. Caution is built into every read via the Devil's Advocate.\"]}, {cat:\"trial\",q:[\"متى تبدأ تجربة الـ١٦ يوم بالضبط؟\",\"When exactly does the 16-day trial start?\"], a:[\"تبدأ <b>من ل",
-            "ئج مضمونة؟\",\"Are results guaranteed?\"], a:[\"إطلاقًا لا. لا أحد يضمن نتائج الأسواق، ونحن لا ندّعي ذلك. حتى «إشارة نواف الذهبية» هي <b>معزّز سياقي للجودة</b> وليست وعدًا بربح. التحفّظ جزء أصيل من كل قراءة عبر «محامي الشيطان».\", \"Absolutely not. No one guarantees market outcomes, and we make no such claim. Even 'Nawaf Golden Alignment' is a <b>contextual quality enhancer</b"
+            "عبر «محامي الشيطان».\", \"Absolutely not. No one guarantees market outcomes, and we make no such claim. Even Golden Signal is a <b>contextual quality enhancer</b>, not a profit promise. Caution is built into every read via the Devil's Advocate.\"]}, {cat:\"trial\",q:[\"متى تبدأ تجربة الـ١٦ يوم بالضبط؟\",\"When exactly does the 16-day trial start?\"], a:[\"تبدأ <b>من ل",
+            "عبر «محامي الشيطان».\", \"Absolutely not. No one guarantees market outcomes, and we make no such claim. Even Golden Signal is a <b>contextual quality enhancer</b>, not a profit promise. Caution is built into every read via the Devil's Advocate.\"]}, {cat:\"trial\",q:[\"متى تبدأ تجربة الـ١٦ يوم بالضبط؟\",\"When exactly does the 16-day trial start?\"], a:[\"تبدأ <b>من ل",
+            "ئج مضمونة؟\",\"Are results guaranteed?\"], a:[\"إطلاقًا لا. لا أحد يضمن نتائج الأسواق، ونحن لا ندّعي ذلك. حتى «الإشارة الذهبية» هي <b>معزّز سياقي للجودة</b> وليست وعدًا بربح. التحفّظ جزء أصيل من كل قراءة عبر «محامي الشيطان».\", \"Absolutely not. No one guarantees market outcomes, and we make no such claim. Even Golden Signal is a <b>contextual quality enhancer</b"
           ]
         },
         {
           "file": "/home/nawaf511/empire-core-new/apps/admin-console/NDSP_Admin_Console.html",
           "score": 4,
           "excerpts": [
-            "dvocate\"],sub:\"DEVIL'S ADVOCATE\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-g\",ic:\"✦\",nm:[\"إشارة نواف الذهبية\",\"Nawaf Golden Alignment\"],sub:\"GOLDEN ALIGNMENT\",st:\"b-gold\",sl:[\"محكوم\",\"Governed\"]}, ]; const allowedCats=[[\"انحياز اتجاهي\",\"Directional bias\"],[\"أفق القراءة\",\"Reading horizon\"],[\"قوة الأفق\",\"Horizon strength\"],[\"حالة السوق\",\"Market state\"],[\"السيولة\",\"Liquidity\"],",
-            "dvocate\"],sub:\"DEVIL'S ADVOCATE\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-g\",ic:\"✦\",nm:[\"إشارة نواف الذهبية\",\"Nawaf Golden Alignment\"],sub:\"GOLDEN ALIGNMENT\",st:\"b-gold\",sl:[\"محكوم\",\"Governed\"]}, ]; const allowedCats=[[\"انحياز اتجاهي\",\"Directional bias\"],[\"أفق القراءة\",\"Reading horizon\"],[\"قوة الأفق\",\"Horizon strength\"],[\"حالة السوق\",\"Market state\"],[\"السيولة\",\"Liquidity\"],",
-            "يطان\",\"Devil's Advocate\"],sub:\"DEVIL'S ADVOCATE\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-g\",ic:\"✦\",nm:[\"إشارة نواف الذهبية\",\"Nawaf Golden Alignment\"],sub:\"GOLDEN ALIGNMENT\",st:\"b-gold\",sl:[\"محكوم\",\"Governed\"]}, ]; const allowedCats=[[\"انحياز اتجاهي\",\"Directional bias\"],[\"أفق القراءة\",\"Reading horizon\"],[\"قوة الأفق\",\"Horizon strength\"],[\"حالة السوق\",\"Market state\"],[\"السيول"
+            "dvocate\"],sub:\"DEVIL'S ADVOCATE\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-g\",ic:\"✦\",nm:[\"الإشارة الذهبية\",\"Golden Signal\"],sub:\"GOLDEN ALIGNMENT\",st:\"b-gold\",sl:[\"محكوم\",\"Governed\"]}, ]; const allowedCats=[[\"انحياز اتجاهي\",\"Directional bias\"],[\"أفق القراءة\",\"Reading horizon\"],[\"قوة الأفق\",\"Horizon strength\"],[\"حالة السوق\",\"Market state\"],[\"السيولة\",\"Liquidity\"],",
+            "dvocate\"],sub:\"DEVIL'S ADVOCATE\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-g\",ic:\"✦\",nm:[\"الإشارة الذهبية\",\"Golden Signal\"],sub:\"GOLDEN ALIGNMENT\",st:\"b-gold\",sl:[\"محكوم\",\"Governed\"]}, ]; const allowedCats=[[\"انحياز اتجاهي\",\"Directional bias\"],[\"أفق القراءة\",\"Reading horizon\"],[\"قوة الأفق\",\"Horizon strength\"],[\"حالة السوق\",\"Market state\"],[\"السيولة\",\"Liquidity\"],",
+            "يطان\",\"Devil's Advocate\"],sub:\"DEVIL'S ADVOCATE\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-g\",ic:\"✦\",nm:[\"الإشارة الذهبية\",\"Golden Signal\"],sub:\"GOLDEN ALIGNMENT\",st:\"b-gold\",sl:[\"محكوم\",\"Governed\"]}, ]; const allowedCats=[[\"انحياز اتجاهي\",\"Directional bias\"],[\"أفق القراءة\",\"Reading horizon\"],[\"قوة الأفق\",\"Horizon strength\"],[\"حالة السوق\",\"Market state\"],[\"السيول"
           ]
         },
         {
           "file": "/home/nawaf511/empire-core-new/apps/admin-console/NDSP_Terms_Privacy.html",
           "score": 4,
           "excerpts": [
-            "ad to loss of capital. <b>No one guarantees outcomes</b>, and you alone are responsible for your decisions. Even 'Nawaf Golden Alignment' is a contextual quality enhancer, not a profit promise.\"]]}, {n:\"٣\",h:[\"الأهلية والحساب\",\"Eligibility & account\"],body:[ [\"يجب أن تكون مؤهلًا قانونيًا في بلدك لاستخدام أدوات تحليل الأسواق. أنت مسؤول عن سرية بيانات دخولك وكل النشاط على حسا",
-            "ad to loss of capital. <b>No one guarantees outcomes</b>, and you alone are responsible for your decisions. Even 'Nawaf Golden Alignment' is a contextual quality enhancer, not a profit promise.\"]]}, {n:\"٣\",h:[\"الأهلية والحساب\",\"Eligibility & account\"],body:[ [\"يجب أن تكون مؤهلًا قانونيًا في بلدك لاستخدام أدوات تحليل الأسواق. أنت مسؤول عن سرية بيانات دخولك وكل النشاط على حسا",
-            "أسواق تنطوي على مخاطر قد تؤدي لخسارة رأس المال. <b>لا أحد يضمن النتائج</b>، وأنت وحدك مسؤول عن قراراتك. حتى «إشارة نواف الذهبية» معزّز سياقي للجودة لا وعد بربح.\",\"Markets carry risk that may lead to loss of capital. <b>No one guarantees outcomes</b>, and you alone are responsible for your decisions. Even 'Nawaf Golden Alignment' is a contextual quality enhancer, not a profit pr"
+            "ad to loss of capital. <b>No one guarantees outcomes</b>, and you alone are responsible for your decisions. Even Golden Signal is a contextual quality enhancer, not a profit promise.\"]]}, {n:\"٣\",h:[\"الأهلية والحساب\",\"Eligibility & account\"],body:[ [\"يجب أن تكون مؤهلًا قانونيًا في بلدك لاستخدام أدوات تحليل الأسواق. أنت مسؤول عن سرية بيانات دخولك وكل النشاط على حسا",
+            "ad to loss of capital. <b>No one guarantees outcomes</b>, and you alone are responsible for your decisions. Even Golden Signal is a contextual quality enhancer, not a profit promise.\"]]}, {n:\"٣\",h:[\"الأهلية والحساب\",\"Eligibility & account\"],body:[ [\"يجب أن تكون مؤهلًا قانونيًا في بلدك لاستخدام أدوات تحليل الأسواق. أنت مسؤول عن سرية بيانات دخولك وكل النشاط على حسا",
+            "أسواق تنطوي على مخاطر قد تؤدي لخسارة رأس المال. <b>لا أحد يضمن النتائج</b>، وأنت وحدك مسؤول عن قراراتك. حتى «الإشارة الذهبية» معزّز سياقي للجودة لا وعد بربح.\",\"Markets carry risk that may lead to loss of capital. <b>No one guarantees outcomes</b>, and you alone are responsible for your decisions. Even Golden Signal is a contextual quality enhancer, not a profit pr"
           ]
         },
         {
           "file": "/home/nawaf511/empire-core-new/apps/admin-console/index.html",
           "score": 4,
           "excerpts": [
-            "dvocate\"],sub:\"DEVIL'S ADVOCATE\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-g\",ic:\"✦\",nm:[\"إشارة نواف الذهبية\",\"Nawaf Golden Alignment\"],sub:\"GOLDEN ALIGNMENT\",st:\"b-gold\",sl:[\"محكوم\",\"Governed\"]}, ]; const allowedCats=[[\"انحياز اتجاهي\",\"Directional bias\"],[\"أفق القراءة\",\"Reading horizon\"],[\"قوة الأفق\",\"Horizon strength\"],[\"حالة السوق\",\"Market state\"],[\"السيولة\",\"Liquidity\"],",
-            "dvocate\"],sub:\"DEVIL'S ADVOCATE\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-g\",ic:\"✦\",nm:[\"إشارة نواف الذهبية\",\"Nawaf Golden Alignment\"],sub:\"GOLDEN ALIGNMENT\",st:\"b-gold\",sl:[\"محكوم\",\"Governed\"]}, ]; const allowedCats=[[\"انحياز اتجاهي\",\"Directional bias\"],[\"أفق القراءة\",\"Reading horizon\"],[\"قوة الأفق\",\"Horizon strength\"],[\"حالة السوق\",\"Market state\"],[\"السيولة\",\"Liquidity\"],",
-            "يطان\",\"Devil's Advocate\"],sub:\"DEVIL'S ADVOCATE\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-g\",ic:\"✦\",nm:[\"إشارة نواف الذهبية\",\"Nawaf Golden Alignment\"],sub:\"GOLDEN ALIGNMENT\",st:\"b-gold\",sl:[\"محكوم\",\"Governed\"]}, ]; const allowedCats=[[\"انحياز اتجاهي\",\"Directional bias\"],[\"أفق القراءة\",\"Reading horizon\"],[\"قوة الأفق\",\"Horizon strength\"],[\"حالة السوق\",\"Market state\"],[\"السيول"
+            "dvocate\"],sub:\"DEVIL'S ADVOCATE\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-g\",ic:\"✦\",nm:[\"الإشارة الذهبية\",\"Golden Signal\"],sub:\"GOLDEN ALIGNMENT\",st:\"b-gold\",sl:[\"محكوم\",\"Governed\"]}, ]; const allowedCats=[[\"انحياز اتجاهي\",\"Directional bias\"],[\"أفق القراءة\",\"Reading horizon\"],[\"قوة الأفق\",\"Horizon strength\"],[\"حالة السوق\",\"Market state\"],[\"السيولة\",\"Liquidity\"],",
+            "dvocate\"],sub:\"DEVIL'S ADVOCATE\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-g\",ic:\"✦\",nm:[\"الإشارة الذهبية\",\"Golden Signal\"],sub:\"GOLDEN ALIGNMENT\",st:\"b-gold\",sl:[\"محكوم\",\"Governed\"]}, ]; const allowedCats=[[\"انحياز اتجاهي\",\"Directional bias\"],[\"أفق القراءة\",\"Reading horizon\"],[\"قوة الأفق\",\"Horizon strength\"],[\"حالة السوق\",\"Market state\"],[\"السيولة\",\"Liquidity\"],",
+            "يطان\",\"Devil's Advocate\"],sub:\"DEVIL'S ADVOCATE\",st:\"b-ok\",sl:[\"محكوم\",\"Governed\"]}, {gl:\"gl-g\",ic:\"✦\",nm:[\"الإشارة الذهبية\",\"Golden Signal\"],sub:\"GOLDEN ALIGNMENT\",st:\"b-gold\",sl:[\"محكوم\",\"Governed\"]}, ]; const allowedCats=[[\"انحياز اتجاهي\",\"Directional bias\"],[\"أفق القراءة\",\"Reading horizon\"],[\"قوة الأفق\",\"Horizon strength\"],[\"حالة السوق\",\"Market state\"],[\"السيول"
           ]
         },
         {
           "file": "/home/nawaf511/empire-core-new/apps/ndsp-governance-bridge/NDSP_LAYER_VISIBILITY_OWNER_INTERNAL_POLICY.md",
           "score": 4,
           "excerpts": [
-            "cing UI when needed: 1. TDL / منطق البعد الزمني 2. NMP / نقطة التقاء نواف 3. Devil's Advocate / محامي الشيطان 4. Nawaf Golden Alignment / إشارة نواف الذهبية ## Owner Internal Rule All 16 internal layer names, logic descriptions, source file paths, and output mappings are allowed internally for verification and development. ## Public UI Rule Public UI may show rich outputs",
-            "cing UI when needed: 1. TDL / منطق البعد الزمني 2. NMP / نقطة التقاء نواف 3. Devil's Advocate / محامي الشيطان 4. Nawaf Golden Alignment / إشارة نواف الذهبية ## Owner Internal Rule All 16 internal layer names, logic descriptions, source file paths, and output mappings are allowed internally for verification and development. ## Public UI Rule Public UI may show rich outputs",
-            "منطق البعد الزمني 2. NMP / نقطة التقاء نواف 3. Devil's Advocate / محامي الشيطان 4. Nawaf Golden Alignment / إشارة نواف الذهبية ## Owner Internal Rule All 16 internal layer names, logic descriptions, source file paths, and output mappings are allowed internally for verification and development. ## Public UI Rule Public UI may show rich outputs without exposing all internal"
+            "cing UI when needed: 1. TDL / TDL 2. NMP / NMP 3. Devil's Advocate / محامي الشيطان 4. Golden Signal / الإشارة الذهبية ## Owner Internal Rule All 16 internal layer names, logic descriptions, source file paths, and output mappings are allowed internally for verification and development. ## Public UI Rule Public UI may show rich outputs",
+            "cing UI when needed: 1. TDL / TDL 2. NMP / NMP 3. Devil's Advocate / محامي الشيطان 4. Golden Signal / الإشارة الذهبية ## Owner Internal Rule All 16 internal layer names, logic descriptions, source file paths, and output mappings are allowed internally for verification and development. ## Public UI Rule Public UI may show rich outputs",
+            "TDL 2. NMP / NMP 3. Devil's Advocate / محامي الشيطان 4. Golden Signal / الإشارة الذهبية ## Owner Internal Rule All 16 internal layer names, logic descriptions, source file paths, and output mappings are allowed internally for verification and development. ## Public UI Rule Public UI may show rich outputs without exposing all internal"
           ]
         },
         {
           "file": "/home/nawaf511/empire-core-new/apps/ndsp-governance-bridge/layers/NDSP_OWNER_INTERNAL_16_LAYER_REGISTRY.md",
           "score": 4,
           "excerpts": [
-            "gic / TDL / منطق البعد الزمني 2. Nawaf Meet Point / NMP / نقطة التقاء نواف 3. Devil's Advocate / محامي الشيطان 4. Nawaf Golden Alignment / إشارة نواف الذهبية 5. Data Freshness And Source Integrity / سلامة وحداثة البيانات 6. Live Market Feed Bridge / جسر الأسعار والبيانات الحية 7. Institutional Positioning Context / السياق المؤسسي وتموضع الفئات 8. Macro And Dollar Pressure / ضغط",
-            "gic / TDL / منطق البعد الزمني 2. Nawaf Meet Point / NMP / نقطة التقاء نواف 3. Devil's Advocate / محامي الشيطان 4. Nawaf Golden Alignment / إشارة نواف الذهبية 5. Data Freshness And Source Integrity / سلامة وحداثة البيانات 6. Live Market Feed Bridge / جسر الأسعار والبيانات الحية 7. Institutional Positioning Context / السياق المؤسسي وتموضع الفئات 8. Macro And Dollar Pressure / ضغط",
-            "2. Nawaf Meet Point / NMP / نقطة التقاء نواف 3. Devil's Advocate / محامي الشيطان 4. Nawaf Golden Alignment / إشارة نواف الذهبية 5. Data Freshness And Source Integrity / سلامة وحداثة البيانات 6. Live Market Feed Bridge / جسر الأسعار والبيانات الحية 7. Institutional Positioning Context / السياق المؤسسي وتموضع الفئات 8. Macro And Dollar Pressure / ضغط الدولار والمشهد الكلي 9. Vola"
+            "gic / TDL / TDL 2. NMP / NMP / NMP 3. Devil's Advocate / محامي الشيطان 4. Golden Signal / الإشارة الذهبية 5. Data Freshness And Source Integrity / سلامة وحداثة البيانات 6. Live Market Feed Bridge / جسر الأسعار والبيانات الحية 7. Institutional Positioning Context / السياق المؤسسي وتموضع الفئات 8. Macro And Dollar Pressure / ضغط",
+            "gic / TDL / TDL 2. NMP / NMP / NMP 3. Devil's Advocate / محامي الشيطان 4. Golden Signal / الإشارة الذهبية 5. Data Freshness And Source Integrity / سلامة وحداثة البيانات 6. Live Market Feed Bridge / جسر الأسعار والبيانات الحية 7. Institutional Positioning Context / السياق المؤسسي وتموضع الفئات 8. Macro And Dollar Pressure / ضغط",
+            "2. NMP / NMP / NMP 3. Devil's Advocate / محامي الشيطان 4. Golden Signal / الإشارة الذهبية 5. Data Freshness And Source Integrity / سلامة وحداثة البيانات 6. Live Market Feed Bridge / جسر الأسعار والبيانات الحية 7. Institutional Positioning Context / السياق المؤسسي وتموضع الفئات 8. Macro And Dollar Pressure / ضغط الدولار والمشهد الكلي 9. Vola"
           ]
         },
         {
           "file": "/home/nawaf511/empire-core-new/apps/ndsp-governance-bridge/layers/NDSP_OWNER_INTERNAL_16_LAYER_REGISTRY.json",
           "score": 4,
           "excerpts": [
-            "l approval.\", \"primary_output\": \"counter_argument_risk\" }, { \"id\": 4, \"internal_name\": \"Nawaf Golden Alignment\", \"short_name\": \"GOLDEN_ALIGNMENT\", \"arabic_name\": \"إشارة نواف الذهبية\", \"visibility\": \"public_allowed_and_owner_internal\", \"logic\": \"Detects multi-layer agreement and publishes the golden alignment state when internal",
-            "l approval.\", \"primary_output\": \"counter_argument_risk\" }, { \"id\": 4, \"internal_name\": \"Nawaf Golden Alignment\", \"short_name\": \"GOLDEN_ALIGNMENT\", \"arabic_name\": \"إشارة نواف الذهبية\", \"visibility\": \"public_allowed_and_owner_internal\", \"logic\": \"Detects multi-layer agreement and publishes the golden alignment state when internal",
-            "\"internal_name\": \"Nawaf Golden Alignment\", \"short_name\": \"GOLDEN_ALIGNMENT\", \"arabic_name\": \"إشارة نواف الذهبية\", \"visibility\": \"public_allowed_and_owner_internal\", \"logic\": \"Detects multi-layer agreement and publishes the golden alignment state when internal coherence is high.\", \"primary_output\": \"golden_alignment_state\" }, { \"id"
+            "l approval.\", \"primary_output\": \"counter_argument_risk\" }, { \"id\": 4, \"internal_name\": \"Golden Signal\", \"short_name\": \"GOLDEN_ALIGNMENT\", \"arabic_name\": \"الإشارة الذهبية\", \"visibility\": \"public_allowed_and_owner_internal\", \"logic\": \"Detects multi-layer agreement and publishes the golden alignment state when internal",
+            "l approval.\", \"primary_output\": \"counter_argument_risk\" }, { \"id\": 4, \"internal_name\": \"Golden Signal\", \"short_name\": \"GOLDEN_ALIGNMENT\", \"arabic_name\": \"الإشارة الذهبية\", \"visibility\": \"public_allowed_and_owner_internal\", \"logic\": \"Detects multi-layer agreement and publishes the golden alignment state when internal",
+            "\"internal_name\": \"Golden Signal\", \"short_name\": \"GOLDEN_ALIGNMENT\", \"arabic_name\": \"الإشارة الذهبية\", \"visibility\": \"public_allowed_and_owner_internal\", \"logic\": \"Detects multi-layer agreement and publishes the golden alignment state when internal coherence is high.\", \"primary_output\": \"golden_alignment_state\" }, { \"id"
           ]
         },
         {
@@ -538,9 +538,9 @@
           "file": "/home/nawaf511/empire-core-new/apps/ndsp-governance-bridge/layers/NDSP_OWNER_INTERNAL_16_LAYER_REGISTRY.md",
           "score": 3,
           "excerpts": [
-            "int / NMP / نقطة التقاء نواف 3. Devil's Advocate / محامي الشيطان 4. Nawaf Golden Alignment / إشارة نواف الذهبية 5. Data Freshness And Source Integrity / سلامة وحداثة البيانات 6. Live Market Feed Bridge / جسر الأسعار والبيانات الحية 7. Institutional Positioning Context / السياق المؤسسي وتموضع الفئات 8. Macro And Dollar Pressure / ضغط الدولار والمشهد الكلي 9. Volatility And Risk",
-            "طة التقاء نواف 3. Devil's Advocate / محامي الشيطان 4. Nawaf Golden Alignment / إشارة نواف الذهبية 5. Data Freshness And Source Integrity / سلامة وحداثة البيانات 6. Live Market Feed Bridge / جسر الأسعار والبيانات الحية 7. Institutional Positioning Context / السياق المؤسسي وتموضع الفئات 8. Macro And Dollar Pressure / ضغط الدولار والمشهد الكلي 9. Volatility And Risk Pressure / الت",
-            "اء نواف 3. Devil's Advocate / محامي الشيطان 4. Nawaf Golden Alignment / إشارة نواف الذهبية 5. Data Freshness And Source Integrity / سلامة وحداثة البيانات 6. Live Market Feed Bridge / جسر الأسعار والبيانات الحية 7. Institutional Positioning Context / السياق المؤسسي وتموضع الفئات 8. Macro And Dollar Pressure / ضغط الدولار والمشهد الكلي 9. Volatility And Risk Pressure / التذبذب وض"
+            "int / NMP / NMP 3. Devil's Advocate / محامي الشيطان 4. Golden Signal / الإشارة الذهبية 5. Data Freshness And Source Integrity / سلامة وحداثة البيانات 6. Live Market Feed Bridge / جسر الأسعار والبيانات الحية 7. Institutional Positioning Context / السياق المؤسسي وتموضع الفئات 8. Macro And Dollar Pressure / ضغط الدولار والمشهد الكلي 9. Volatility And Risk",
+            "NMP 3. Devil's Advocate / محامي الشيطان 4. Golden Signal / الإشارة الذهبية 5. Data Freshness And Source Integrity / سلامة وحداثة البيانات 6. Live Market Feed Bridge / جسر الأسعار والبيانات الحية 7. Institutional Positioning Context / السياق المؤسسي وتموضع الفئات 8. Macro And Dollar Pressure / ضغط الدولار والمشهد الكلي 9. Volatility And Risk Pressure / الت",
+            "NMP 3. Devil's Advocate / محامي الشيطان 4. Golden Signal / الإشارة الذهبية 5. Data Freshness And Source Integrity / سلامة وحداثة البيانات 6. Live Market Feed Bridge / جسر الأسعار والبيانات الحية 7. Institutional Positioning Context / السياق المؤسسي وتموضع الفئات 8. Macro And Dollar Pressure / ضغط الدولار والمشهد الكلي 9. Volatility And Risk Pressure / التذبذب وض"
           ]
         },
         {
@@ -663,7 +663,7 @@
           "score": 3,
           "excerpts": [
             "الـ١٦ يومًا.\", \"No. The trial needs no payment card and no commitment. Upgrading to a paid package at the founder price stays <b>optional</b> at the end of the 16 days.\"]}, {cat:\"trial\",q:[\"ماذا أحصل عليه خلال التجربة؟\",\"What do I get during the trial?\"], a:[\"وصول كامل للطبقات الأربع الظاهرة وجودة القرار الكاملة طوال المدة، مع تفتّح تدريجي للطبقات على أربع مراحل عبر أي",
-            "لجودة</b> وليست وعدًا بربح. التحفّظ جزء أصيل من كل قراءة عبر «محامي الشيطان».\", \"Absolutely not. No one guarantees market outcomes, and we make no such claim. Even 'Nawaf Golden Alignment' is a <b>contextual quality enhancer</b>, not a profit promise. Caution is built into every read via the Devil's Advocate.\"]}, {cat:\"trial\",q:[\"متى تبدأ تجربة الـ١٦ يوم بالضبط؟\",\"When ex",
+            "لجودة</b> وليست وعدًا بربح. التحفّظ جزء أصيل من كل قراءة عبر «محامي الشيطان».\", \"Absolutely not. No one guarantees market outcomes, and we make no such claim. Even Golden Signal is a <b>contextual quality enhancer</b>, not a profit promise. Caution is built into every read via the Devil's Advocate.\"]}, {cat:\"trial\",q:[\"متى تبدأ تجربة الـ١٦ يوم بالضبط؟\",\"When ex",
             "ccess activates after server-side payment approval with a confirmation email.\"]}, {cat:\"billing\",q:[\"هل أقدر ألغي؟ وهل السعر يتغيّر؟\",\"Can I cancel? Does the price change?\"], a:[\"تقدر تلغي في أي وقت. وسعر المؤسِّس لمشتركي التجربة <b>يبقى ثابتًا</b> ما دام اشتراكك فعّالًا.\", \"You can cancel anytime. And the founder price for trial members <b>stays fixed</b> as long as yo"
           ]
         },
@@ -689,9 +689,9 @@
           "file": "/home/nawaf511/empire-core-new/apps/ndsp-governance-bridge/layers/NDSP_OWNER_INTERNAL_16_LAYER_REGISTRY.md",
           "score": 3,
           "excerpts": [
-            "لشيطان 4. Nawaf Golden Alignment / إشارة نواف الذهبية 5. Data Freshness And Source Integrity / سلامة وحداثة البيانات 6. Live Market Feed Bridge / جسر الأسعار والبيانات الحية 7. Institutional Positioning Context / السياق المؤسسي وتموضع الفئات 8. Macro And Dollar Pressure / ضغط الدولار والمشهد الكلي 9. Volatility And Risk Pressure / التذبذب وضغط المخاطر 10. Liquidity And Market S",
-            "waf Golden Alignment / إشارة نواف الذهبية 5. Data Freshness And Source Integrity / سلامة وحداثة البيانات 6. Live Market Feed Bridge / جسر الأسعار والبيانات الحية 7. Institutional Positioning Context / السياق المؤسسي وتموضع الفئات 8. Macro And Dollar Pressure / ضغط الدولار والمشهد الكلي 9. Volatility And Risk Pressure / التذبذب وضغط المخاطر 10. Liquidity And Market State / السيو",
-            "ن 4. Nawaf Golden Alignment / إشارة نواف الذهبية 5. Data Freshness And Source Integrity / سلامة وحداثة البيانات 6. Live Market Feed Bridge / جسر الأسعار والبيانات الحية 7. Institutional Positioning Context / السياق المؤسسي وتموضع الفئات 8. Macro And Dollar Pressure / ضغط الدولار والمشهد الكلي 9. Volatility And Risk Pressure / التذبذب وضغط المخاطر 10. Liquidity And Market State"
+            "لشيطان 4. Golden Signal / الإشارة الذهبية 5. Data Freshness And Source Integrity / سلامة وحداثة البيانات 6. Live Market Feed Bridge / جسر الأسعار والبيانات الحية 7. Institutional Positioning Context / السياق المؤسسي وتموضع الفئات 8. Macro And Dollar Pressure / ضغط الدولار والمشهد الكلي 9. Volatility And Risk Pressure / التذبذب وضغط المخاطر 10. Liquidity And Market S",
+            "waf Golden Alignment / الإشارة الذهبية 5. Data Freshness And Source Integrity / سلامة وحداثة البيانات 6. Live Market Feed Bridge / جسر الأسعار والبيانات الحية 7. Institutional Positioning Context / السياق المؤسسي وتموضع الفئات 8. Macro And Dollar Pressure / ضغط الدولار والمشهد الكلي 9. Volatility And Risk Pressure / التذبذب وضغط المخاطر 10. Liquidity And Market State / السيو",
+            "ن 4. Golden Signal / الإشارة الذهبية 5. Data Freshness And Source Integrity / سلامة وحداثة البيانات 6. Live Market Feed Bridge / جسر الأسعار والبيانات الحية 7. Institutional Positioning Context / السياق المؤسسي وتموضع الفئات 8. Macro And Dollar Pressure / ضغط الدولار والمشهد الكلي 9. Volatility And Risk Pressure / التذبذب وضغط المخاطر 10. Liquidity And Market State"
           ]
         },
         {
@@ -790,7 +790,7 @@
           "file": "/home/nawaf511/empire-core-new/apps/user-portal/app/layout.tsx",
           "score": 1,
           "excerpts": [
-            "onst metadata: Metadata = { title: \"NDSP — منصة نواف لدعم القرار\", description: \"منصة نواف لدعم القرار — قراءة قرار مؤسسية.\", generator: \"NDSP\", }; export const viewport: Viewport = { colorScheme: \"dark\", themeColor: \"#0a0a0b\", }; export default function RootLayout({ children, }: Readonly<{ children: React.ReactNode; }>) { return ( <html lang=\"ar\" dir=\"rtl"
+            "onst metadata: Metadata = { title: \"NDSP — منصة دعم القرار\", description: \"منصة دعم القرار — قراءة قرار مؤسسية.\", generator: \"NDSP\", }; export const viewport: Viewport = { colorScheme: \"dark\", themeColor: \"#0a0a0b\", }; export default function RootLayout({ children, }: Readonly<{ children: React.ReactNode; }>) { return ( <html lang=\"ar\" dir=\"rtl"
           ]
         },
         {
@@ -811,7 +811,7 @@
           "file": "/home/nawaf511/empire-core-new/apps/public-landing/index.html",
           "score": 1,
           "excerpts": [
-            "\"dark\"/><title>NDSP — منصة نواف لدعم القرار</title><meta name=\"description\" content=\"منصة نواف لدعم القرار — قراءة قرار مؤسسية.\"/><meta name=\"generator\" content=\"NDSP\"/><script src=\"/_next/static/chunks/03~yq9q893hmn.js\" noModule=\"\"></script><link rel=\"stylesheet\" href=\"/ndsp-public-landing-remove-devil-only.css?v=20260618_remove_devil\"> </head><body class=\"bg-background font-s"
+            "\"dark\"/><title>NDSP — منصة دعم القرار</title><meta name=\"description\" content=\"منصة دعم القرار — قراءة قرار مؤسسية.\"/><meta name=\"generator\" content=\"NDSP\"/><script src=\"/_next/static/chunks/03~yq9q893hmn.js\" noModule=\"\"></script><link rel=\"stylesheet\" href=\"/ndsp-public-landing-remove-devil-only.css?v=20260618_remove_devil\"> </head><body class=\"bg-background font-s"
           ]
         }
       ],
@@ -949,7 +949,7 @@
           "score": 6,
           "excerpts": [
             "he selected asset.\", \"primary_output\": \"macro_pressure_state\" }, { \"id\": 9, \"internal_name\": \"Volatility And Risk Pressure\", \"short_name\": \"VOLATILITY_RISK\", \"arabic_name\": \"التذبذب وضغط المخاطر\", \"visibility\": \"owner_internal_only\", \"logic\": \"Measures volatility, pressure, shock risk, and whether the environment is calm or dang",
-            "\"visibility\": \"public_allowed_and_owner_internal\", \"logic\": \"Tests the opposite case, objections, invalidation risks, and confidence blockers before final approval.\", \"primary_output\": \"counter_argument_risk\" }, { \"id\": 4, \"internal_name\": \"Nawaf Golden Alignment\", \"short_name\": \"GOLDEN_ALIGNMENT\", \"arabic_name\": \"إشارة نواف الذهبي",
+            "\"visibility\": \"public_allowed_and_owner_internal\", \"logic\": \"Tests the opposite case, objections, invalidation risks, and confidence blockers before final approval.\", \"primary_output\": \"counter_argument_risk\" }, { \"id\": 4, \"internal_name\": \"Golden Signal\", \"short_name\": \"GOLDEN_ALIGNMENT\", \"arabic_name\": \"الإشارة الذهبية",
             "\"primary_output\": \"institutional_context_state\" }, { \"id\": 8, \"internal_name\": \"Macro And Dollar Pressure\", \"short_name\": \"MACRO_USD_PRESSURE\", \"arabic_name\": \"ضغط الدولار والمشهد الكلي\", \"visibility\": \"owner_internal_only\", \"logic\": \"Evaluates dollar pressure, macro events, and economic drivers against the selected asset.\","
           ]
         },
@@ -1391,9 +1391,9 @@
           "file": "/home/nawaf511/empire-core-new/apps/ndsp-governance-bridge/layers/NDSP_OWNER_INTERNAL_16_LAYER_REGISTRY.json",
           "score": 6,
           "excerpts": [
-            "lowed_and_owner_internal\", \"logic\": \"Determines the governing temporal bias and separates short, medium, and long-horizon decision context.\", \"primary_output\": \"governing_decision_bias\" }, { \"id\": 2, \"internal_name\": \"Nawaf Meet Point\", \"short_name\": \"NMP\", \"arabic_name\": \"نقطة التقاء نواف\", \"visibility\": \"public_allowed_and_own",
-            "less explicitly approved.\", \"layers\": [ { \"id\": 1, \"internal_name\": \"Temporal Decision Logic\", \"short_name\": \"TDL\", \"arabic_name\": \"منطق البعد الزمني\", \"visibility\": \"public_allowed_and_owner_internal\", \"logic\": \"Determines the governing temporal bias and separates short, medium, and long-horizon decision context.\", \"primary_outpu",
-            "lity\": \"public_allowed_and_owner_internal\", \"logic\": \"Determines the governing temporal bias and separates short, medium, and long-horizon decision context.\", \"primary_output\": \"governing_decision_bias\" }, { \"id\": 2, \"internal_name\": \"Nawaf Meet Point\", \"short_name\": \"NMP\", \"arabic_name\": \"نقطة التقاء نواف\", \"visibility\": \"publi"
+            "lowed_and_owner_internal\", \"logic\": \"Determines the governing temporal bias and separates short, medium, and long-horizon decision context.\", \"primary_output\": \"governing_decision_bias\" }, { \"id\": 2, \"internal_name\": \"NMP\", \"short_name\": \"NMP\", \"arabic_name\": \"NMP\", \"visibility\": \"public_allowed_and_own",
+            "less explicitly approved.\", \"layers\": [ { \"id\": 1, \"internal_name\": \"Temporal Decision Logic\", \"short_name\": \"TDL\", \"arabic_name\": \"TDL\", \"visibility\": \"public_allowed_and_owner_internal\", \"logic\": \"Determines the governing temporal bias and separates short, medium, and long-horizon decision context.\", \"primary_outpu",
+            "lity\": \"public_allowed_and_owner_internal\", \"logic\": \"Determines the governing temporal bias and separates short, medium, and long-horizon decision context.\", \"primary_output\": \"governing_decision_bias\" }, { \"id\": 2, \"internal_name\": \"NMP\", \"short_name\": \"NMP\", \"arabic_name\": \"NMP\", \"visibility\": \"publi"
           ]
         },
         {
@@ -1490,7 +1490,7 @@
           "file": "/home/nawaf511/empire-core-new/apps/user-portal/lib/ndsp-data.ts",
           "score": 2,
           "excerpts": [
-            "export const decisionSignals = [ { title: \"إشارة شراء استراتيجية — قطاع الطاقة المتجددة\", confidence: 91, horizon: \"متوسط المدى\", impact: \"مرتفع\", summary: \"تشير نماذج المحاكاة إلى تحسن في هوامش التشغيل بنسبة 12% خلال الربعين القادمين مدفوعةً بتوسعات مشاريع الطاقة الشمسية.\", tag: \"فرصة\", }, { title: \"تنبيه مخاطر — سلاسل الإمداد اللوجستية\"",
+            "export const decisionSignals = [ { title: \"تحديث قرار استراتيجي — قطاع الطاقة المتجددة\", confidence: 91, horizon: \"متوسط المدى\", impact: \"مرتفع\", summary: \"تشير نماذج المحاكاة إلى تحسن في هوامش التشغيل بنسبة 12% خلال الربعين القادمين مدفوعةً بتوسعات مشاريع الطاقة الشمسية.\", tag: \"فرصة\", }, { title: \"تنبيه مخاطر — سلاسل الإمداد اللوجستية\"",
             "onst horizonStrength = { classification: \"ممتاز\", note: \"ثقة عالية في المدى القصير، مع تراجع طبيعي للوضوح كلما امتد الأفق الزمني.\", horizons: [ { label: \"الأفق القصير\", value: 82 }, { label: \"الأفق المتوسط\", value: 67 }, { label: \"الأفق الطويل\", value: 49 }, ], } export const macroIndicators = [ { name: \"مؤشر أسعار المستهلك (CPI)\", level: \"مرتفع\", dollar:"
           ]
         }
@@ -1547,7 +1547,7 @@
           "score": 3,
           "excerpts": [
             "rity.\", \"primary_output\": \"horizon_strength_scores\" }, { \"id\": 14, \"internal_name\": \"Decision Quality Engine\", \"short_name\": \"DECISION_QUALITY\", \"arabic_name\": \"جودة القرار\", \"visibility\": \"owner_internal_only\", \"logic\": \"Scores data clarity, model quality, source reliability, scenario consistency, and final quality.\", \"pr",
-            "ity\": \"public_allowed_and_owner_internal\", \"logic\": \"Tests the opposite case, objections, invalidation risks, and confidence blockers before final approval.\", \"primary_output\": \"counter_argument_risk\" }, { \"id\": 4, \"internal_name\": \"Nawaf Golden Alignment\", \"short_name\": \"GOLDEN_ALIGNMENT\", \"arabic_name\": \"إشارة نواف الذهبية\", \"",
+            "ity\": \"public_allowed_and_owner_internal\", \"logic\": \"Tests the opposite case, objections, invalidation risks, and confidence blockers before final approval.\", \"primary_output\": \"counter_argument_risk\" }, { \"id\": 4, \"internal_name\": \"Golden Signal\", \"short_name\": \"GOLDEN_ALIGNMENT\", \"arabic_name\": \"الإشارة الذهبية\", \"",
             "d\": 14, \"internal_name\": \"Decision Quality Engine\", \"short_name\": \"DECISION_QUALITY\", \"arabic_name\": \"جودة القرار\", \"visibility\": \"owner_internal_only\", \"logic\": \"Scores data clarity, model quality, source reliability, scenario consistency, and final quality.\", \"primary_output\": \"decision_quality_score\" }, { \"id\": 15, \"int"
           ]
         },
@@ -1787,9 +1787,9 @@
           "file": "/home/nawaf511/empire-core-new/apps/user-portal/app/account/page.tsx",
           "score": 5,
           "excerpts": [
-            "Sparkles, ArrowLeft, UserCog, } from \"lucide-react\" import { userSegments, subscriptionPlans, trialState, currentAccount } from \"@/lib/ndsp-data\" const profile = { name: \"عبدالرحمن الفيصل\", role: \"محلل قرار استراتيجي أول\", org: \"منصة نواف لدعم القرار\", initials: \"ع.ر\", email: \"a.alfaisal@ndsp.app\", phone: \"+966 11 245 8800\", location: \"الرياض، المملكة العر",
+            "Sparkles, ArrowLeft, UserCog, } from \"lucide-react\" import { userSegments, subscriptionPlans, trialState, currentAccount } from \"@/lib/ndsp-data\" const profile = { name: \"عبدالرحمن الفيصل\", role: \"محلل قرار استراتيجي أول\", org: \"منصة دعم القرار\", initials: \"ع.ر\", email: \"a.alfaisal@ndsp.app\", phone: \"+966 11 245 8800\", location: \"الرياض، المملكة العر",
             "{trialState.eliteAccessNote} </p> </div> <Link href=\"/upgrade\" className=\"flex items-center justify-center gap-2 rounded-xl bg-primary py-3.5 text-sm font-bold text-primary-foreground transition-opacity hover:opacity-90\" > <Crown className=\"h-4 w-4\" /> ترقية ا",
-            "ckCircle2, Crown, Sparkles, ArrowLeft, UserCog, } from \"lucide-react\" import { userSegments, subscriptionPlans, trialState, currentAccount } from \"@/lib/ndsp-data\" const profile = { name: \"عبدالرحمن الفيصل\", role: \"محلل قرار استراتيجي أول\", org: \"منصة نواف لدعم القرار\", initials: \"ع.ر\", email: \"a.alfaisal@ndsp.app\", phone: \"+966 11 245 8800\", location: \"ا"
+            "ckCircle2, Crown, Sparkles, ArrowLeft, UserCog, } from \"lucide-react\" import { userSegments, subscriptionPlans, trialState, currentAccount } from \"@/lib/ndsp-data\" const profile = { name: \"عبدالرحمن الفيصل\", role: \"محلل قرار استراتيجي أول\", org: \"منصة دعم القرار\", initials: \"ع.ر\", email: \"a.alfaisal@ndsp.app\", phone: \"+966 11 245 8800\", location: \"ا"
           ]
         },
         {

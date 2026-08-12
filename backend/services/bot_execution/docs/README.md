@@ -1,6 +1,6 @@
 # NDSP Bot Execution Service
 
-This is a separate product from NDSP — Nawaf Decision Support Platform.
+This is a separate product from NDSP — Decision Support Platform.
 
 NDSP Platform produces and publishes Completed Decisions.
 NDSP Bot consumes Completed Decisions for execution workflows.

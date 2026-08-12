@@ -1,0 +1,850 @@
+import crypto from "node:crypto";
+import path from "node:path";
+import { readFile } from "node:fs/promises";
+import { fileURLToPath } from "node:url";
+import Fastify from "fastify";
+import cookie from "@fastify/cookie";
+import helmet from "@fastify/helmet";
+import rateLimit from "@fastify/rate-limit";
+import bcrypt from "bcryptjs";
+import pg from "pg";
+import { z } from "zod";
+const { Pool } = pg;
+const envSchema = z.object({
+    DATABASE_URL: z.string().min(1),
+    AUTH_PORT: z.coerce.number().int().positive().default(9091),
+    AUTH_HOST: z.string().default("127.0.0.1"),
+    AUTH_DOMAIN: z.string().default("my.ndsp.app"),
+    PASSWORD_COLUMN: z.enum([
+        "password_hash", "hashed_password", "passwd_hash", "pass_hash",
+        "password_digest", "password", "passwd"
+    ]),
+    SESSION_TTL_HOURS: z.coerce.number().int().min(1).max(720).default(24),
+    REMEMBER_TTL_HOURS: z.coerce.number().int().min(1).max(2160).default(168),
+    NODE_ENV: z.string().default("production")
+});
+const env = envSchema.parse(process.env);
+const pool = new Pool({ connectionString: env.DATABASE_URL, max: 12 });
+const app = Fastify({
+    logger: true,
+    trustProxy: true,
+    bodyLimit: 32 * 1024,
+    requestTimeout: 12_000
+});
+await app.register(cookie);
+await app.register(helmet, { contentSecurityPolicy: false });
+await app.register(rateLimit, { global: false });
+const AUTH_CORE = {
+    service: "ndsp-auth-core-clean",
+    version: "2.2.0",
+    marker: "clean-v2.2-users-delete"
+};
+const compiledEntry = fileURLToPath(import.meta.url);
+const releaseRoot = path.resolve(path.dirname(compiledEntry), "../..");
+const uiRoot = path.join(releaseRoot, "ui-dist");
+const uiIndexFile = path.join(uiRoot, "index.html");
+const allowedUiAssetName = /^[A-Za-z0-9][A-Za-z0-9._-]*$/;
+function uiContentType(filename) {
+    const extension = path.extname(filename).toLowerCase();
+    if (extension === ".js" || extension === ".mjs")
+        return "application/javascript; charset=utf-8";
+    if (extension === ".css")
+        return "text/css; charset=utf-8";
+    if (extension === ".json" || extension === ".map")
+        return "application/json; charset=utf-8";
+    if (extension === ".svg")
+        return "image/svg+xml";
+    if (extension === ".png")
+        return "image/png";
+    if (extension === ".jpg" || extension === ".jpeg")
+        return "image/jpeg";
+    if (extension === ".webp")
+        return "image/webp";
+    if (extension === ".woff")
+        return "font/woff";
+    if (extension === ".woff2")
+        return "font/woff2";
+    return "application/octet-stream";
+}
+app.addHook("onSend", async (_request, reply, payload) => {
+    reply.header("X-NDSP-Auth-Core", AUTH_CORE.marker);
+    return payload;
+});
+const COOKIE = "ndsp_session";
+const allowedRoles = new Set(["ADMIN", "OWNER"]);
+const allowedPasswordColumns = new Set([
+    "password_hash", "hashed_password", "passwd_hash", "pass_hash",
+    "password_digest", "password", "passwd"
+]);
+if (!allowedPasswordColumns.has(env.PASSWORD_COLUMN)) {
+    throw new Error("Unsafe PASSWORD_COLUMN");
+}
+const loginSchema = z.object({
+    email: z.string().email().transform((value) => value.trim().toLowerCase()),
+    password: z.string().min(1).max(512),
+    remember: z.boolean().optional().default(false),
+    adminIntent: z.boolean().optional().default(false)
+});
+// NDSP_USER_MANAGEMENT_V1_HELPERS_BEGIN
+const adminUsersQuerySchema = z.object({
+    q: z.string().trim().max(160).optional().default(""),
+    status: z.enum([
+        "all", "active", "pending", "inactive", "suspended", "unverified", "admins"
+    ]).optional().default("all"),
+    page: z.coerce.number().int().min(1).max(100000).optional().default(1),
+    limit: z.coerce.number().int().min(1).max(100).optional().default(25)
+});
+const adminUserActionSchema = z.object({
+    action: z.enum(["activate", "deactivate", "suspend", "verify"])
+});
+const adminUserIdSchema = z.object({
+    id: z.string().trim().min(1).max(160)
+});
+const adminUserDeleteSchema = z.object({
+    confirmEmail: z.string().trim().email().max(320),
+    confirmation: z.literal("DELETE")
+});
+let userColumnsCache = null;
+async function getUserColumns() {
+    if (userColumnsCache)
+        return userColumnsCache;
+    const result = await pool.query(`select column_name
+       from information_schema.columns
+      where table_schema='public' and table_name='users'`);
+    userColumnsCache = new Set(result.rows.map((row) => String(row.column_name)));
+    return userColumnsCache;
+}
+async function requireAdminSession(request, reply) {
+    const user = await sessionFromRequest(request);
+    if (!user) {
+        reply.code(401).send({ ok: false, error: "AUTHENTICATION_REQUIRED" });
+        return null;
+    }
+    if (!user.isAdmin) {
+        reply.code(403).send({ ok: false, error: "ADMIN_ACCESS_REQUIRED" });
+        return null;
+    }
+    return user;
+}
+function normalizeManagedUser(row) {
+    return {
+        id: String(row.id || ""),
+        email: String(row.email || "").toLowerCase(),
+        name: row.name ? String(row.name) : null,
+        role: String(row.role || "USER").toUpperCase(),
+        accountType: String(row.account_type || "user").toLowerCase(),
+        status: String(row.status || "PENDING").toUpperCase(),
+        emailVerified: row.email_verified === true,
+        plan: row.plan_value ? String(row.plan_value) : null,
+        phone: row.phone_value ? String(row.phone_value) : null,
+        createdAt: row.created_at_value ? String(row.created_at_value) : null,
+        lastLoginAt: row.last_login_value ? String(row.last_login_value) : null
+    };
+}
+// NDSP_USER_MANAGEMENT_V1_HELPERS_END
+function tokenHash(token) {
+    return crypto.createHash("sha256").update(token).digest("hex");
+}
+function requestFingerprint(request) {
+    const ip = request.ip || "unknown";
+    const userAgent = String(request.headers["user-agent"] || "unknown");
+    return {
+        ipHash: crypto.createHash("sha256").update(ip).digest("hex"),
+        userAgentHash: crypto.createHash("sha256").update(userAgent).digest("hex")
+    };
+}
+function asSessionUser(row) {
+    const role = String(row.role || "USER").toUpperCase();
+    const accountType = String(row.account_type || "user").toLowerCase();
+    return {
+        id: String(row.id),
+        email: String(row.email).toLowerCase(),
+        name: row.name,
+        role,
+        accountType,
+        isAdmin: allowedRoles.has(role) || ["admin", "owner"].includes(accountType)
+    };
+}
+function setSessionCookie(reply, token, ttlHours) {
+    reply.setCookie(COOKIE, token, {
+        path: "/",
+        httpOnly: true,
+        secure: true,
+        sameSite: "lax",
+        maxAge: ttlHours * 60 * 60
+    });
+}
+function clearSessionCookie(reply) {
+    reply.clearCookie(COOKIE, {
+        path: "/",
+        httpOnly: true,
+        secure: true,
+        sameSite: "lax"
+    });
+}
+async function audit(request, event, userId, email, success) {
+    const fp = requestFingerprint(request);
+    const emailHash = email
+        ? crypto.createHash("sha256").update(email.toLowerCase()).digest("hex")
+        : null;
+    await pool.query(`insert into public.ndsp_clean_auth_audit_v2
+       (event_type,user_id,email_hash,success,ip_hash,user_agent_hash)
+     values ($1,$2,$3,$4,$5,$6)`, [event, userId, emailHash, success, fp.ipHash, fp.userAgentHash]).catch(() => undefined);
+}
+async function sessionFromRequest(request) {
+    const rawToken = request.cookies[COOKIE];
+    if (!rawToken || rawToken.length < 40 || rawToken.length > 256)
+        return null;
+    const hash = tokenHash(rawToken);
+    const result = await pool.query(`select u.id::text as id,u.email,u.name,u.role,u.account_type,u.status,u.email_verified
+       from public.ndsp_clean_auth_sessions_v2 s
+       join public.users u on u.id::text=s.user_id
+      where s.token_hash=$1
+        and s.revoked_at is null
+        and s.expires_at > now()
+      limit 1`, [hash]);
+    if (result.rowCount !== 1)
+        return null;
+    const row = result.rows[0];
+    if (String(row.status || "").toUpperCase() !== "ACTIVE")
+        return null;
+    if (row.email_verified !== true)
+        return null;
+    return asSessionUser(row);
+}
+app.addHook("onRequest", async (request, reply) => {
+    if (["POST", "PUT", "PATCH", "DELETE"].includes(request.method)) {
+        const origin = request.headers.origin;
+        if (origin && origin !== `https://${env.AUTH_DOMAIN}`) {
+            return reply.code(403).send({ ok: false, error: "ORIGIN_REJECTED" });
+        }
+    }
+});
+app.get("/health", async () => {
+    await pool.query("select 1");
+    return { ok: true, ...AUTH_CORE };
+});
+app.get("/api/auth/version", async () => {
+    return { ok: true, authCore: AUTH_CORE };
+});
+app.get("/auth-ui/index.html", async (_request, reply) => {
+    const html = await readFile(uiIndexFile);
+    return reply
+        .type("text/html; charset=utf-8")
+        .header("Cache-Control", "no-store, no-cache, must-revalidate")
+        .header("Pragma", "no-cache")
+        .send(html);
+});
+app.get("/auth-ui/assets/:file", async (request, reply) => {
+    const filename = String(request.params.file || "");
+    if (!allowedUiAssetName.test(filename) ||
+        filename !== path.basename(filename)) {
+        return reply.code(404).send({ ok: false, error: "UI_ASSET_NOT_FOUND" });
+    }
+    const assetPath = path.join(uiRoot, "assets", filename);
+    const content = await readFile(assetPath).catch(() => null);
+    if (!content) {
+        return reply.code(404).send({ ok: false, error: "UI_ASSET_NOT_FOUND" });
+    }
+    return reply
+        .type(uiContentType(filename))
+        .header("Cache-Control", "public, max-age=31536000, immutable")
+        .send(content);
+});
+app.post("/api/auth/login", { config: { rateLimit: { max: 8, timeWindow: "1 minute" } } }, async (request, reply) => {
+    const parsed = loginSchema.safeParse(request.body);
+    if (!parsed.success) {
+        return reply.code(400).send({ ok: false, error: "INVALID_LOGIN_INPUT" });
+    }
+    const { email, password, remember, adminIntent } = parsed.data;
+    const query = `select id::text as id,email,name,role,account_type,status,email_verified,
+                          "${env.PASSWORD_COLUMN}" as password_value
+                     from public.users
+                    where lower(email)=lower($1)
+                    limit 1`;
+    const result = await pool.query(query, [email]);
+    const row = result.rows[0];
+    const genericFailure = async () => {
+        await audit(request, "LOGIN", row?.id || null, email, false);
+        return reply.code(401).send({ ok: false, error: "INVALID_CREDENTIALS" });
+    };
+    if (!row || !row.password_value)
+        return genericFailure();
+    if (String(row.status || "").toUpperCase() !== "ACTIVE")
+        return genericFailure();
+    if (row.email_verified !== true)
+        return genericFailure();
+    const passwordAccepted = await bcrypt.compare(password, row.password_value).catch(() => false);
+    if (!passwordAccepted)
+        return genericFailure();
+    const user = asSessionUser(row);
+    if (adminIntent && !user.isAdmin) {
+        await audit(request, "ADMIN_LOGIN", user.id, user.email, false);
+        return reply.code(403).send({ ok: false, error: "ADMIN_ACCESS_REQUIRED" });
+    }
+    const rawToken = crypto.randomBytes(48).toString("base64url");
+    const hash = tokenHash(rawToken);
+    const ttlHours = remember ? env.REMEMBER_TTL_HOURS : env.SESSION_TTL_HOURS;
+    const fp = requestFingerprint(request);
+    await pool.query("delete from public.ndsp_clean_auth_sessions_v2 where expires_at <= now() or revoked_at is not null");
+    await pool.query(`insert into public.ndsp_clean_auth_sessions_v2
+         (token_hash,user_id,expires_at,ip_hash,user_agent_hash)
+       values ($1,$2,now()+($3::text || ' hours')::interval,$4,$5)`, [hash, user.id, ttlHours, fp.ipHash, fp.userAgentHash]);
+    setSessionCookie(reply, rawToken, ttlHours);
+    await audit(request, user.isAdmin ? "ADMIN_LOGIN" : "LOGIN", user.id, user.email, true);
+    return reply.send({
+        ok: true,
+        authCore: AUTH_CORE,
+        user,
+        redirect: user.isAdmin ? "/owner/" : "/portal/command-center/"
+    });
+});
+// NDSP_FINAL_USER_EXPERIENCE_V3_BEGIN
+const NDSP_UX_VERSION = "final-ux-v3-20260724";
+const NDSP_LEGAL_POLICY_VERSION = "legal-trial-v3-20260724";
+const NDSP_TRIAL_DAYS = 16;
+const NDSP_DECISION_INTERNAL_BASE = String(process.env.NDSP_DECISION_INTERNAL_BASE || "http://127.0.0.1:9057").replace(/\/$/, "");
+async function ndspEnsureUxSchemaV3() {
+    await pool.query(`
+    alter table public.users
+      add column if not exists plan text,
+      add column if not exists trial_started_at timestamptz,
+      add column if not exists trial_ends_at timestamptz,
+      add column if not exists trial_active boolean,
+      add column if not exists plan_changed_at timestamptz,
+      add column if not exists legal_policy_version text,
+      add column if not exists legal_accepted_at timestamptz,
+      add column if not exists legal_language text,
+      add column if not exists survey_mid_completed_at timestamptz,
+      add column if not exists survey_end_completed_at timestamptz,
+      add column if not exists experience_version text;
+    create table if not exists public.ndsp_user_experience_events(
+      id bigserial primary key,
+      user_id text not null,
+      event_type text not null,
+      event_version text,
+      language text,
+      payload jsonb not null default '{}'::jsonb,
+      created_at timestamptz not null default now()
+    );
+    create index if not exists ndsp_user_experience_events_user_created_idx
+      on public.ndsp_user_experience_events(user_id,created_at desc);
+    create table if not exists public.ndsp_user_notifications(
+      id bigserial primary key,
+      user_id text not null,
+      kind text not null,
+      title text not null,
+      body text not null,
+      action_href text,
+      read_at timestamptz,
+      created_at timestamptz not null default now()
+    );
+    create index if not exists ndsp_user_notifications_user_created_idx
+      on public.ndsp_user_notifications(user_id,created_at desc);
+    create table if not exists public.ndsp_user_feedback(
+      id bigserial primary key,
+      user_id text not null,
+      category text not null,
+      page_href text,
+      message text not null,
+      payload jsonb not null default '{}'::jsonb,
+      created_at timestamptz not null default now()
+    );
+  `);
+}
+function ndspNormalizePlanV3(value) {
+    const p = String(value || '').trim().toUpperCase();
+    return ['FREE', 'PRO', 'ELITE', 'INSTITUTIONAL', 'TRIAL'].includes(p) ? p : 'TRIAL';
+}
+function ndspCapabilitiesV3(plan) {
+    const allPublic = ['TDL', 'NMP', 'NAWAF_GOLDEN_SIGNAL', 'DEVILS_ADVOCATE'];
+    if (plan === 'INSTITUTIONAL')
+        return { markets: 999, assets: 9999, analysesPerDay: 9999, alerts: 999, publicLayers: allPublic, professionalView: true, api: true, webhooks: true };
+    if (plan === 'ELITE' || plan === 'TRIAL')
+        return { markets: 999, assets: 100, analysesPerDay: 250, alerts: 25, publicLayers: allPublic, professionalView: true, api: false, webhooks: false };
+    if (plan === 'PRO')
+        return { markets: 2, assets: 20, analysesPerDay: 15, alerts: 5, publicLayers: ['TDL', 'NMP'], professionalView: true, api: false, webhooks: false };
+    return { markets: 1, assets: 3, analysesPerWeek: 5, alerts: 1, publicLayers: [], professionalView: false, api: false, webhooks: false };
+}
+async function ndspSyncExperienceV3(userId) {
+    await ndspEnsureUxSchemaV3();
+    let r = await pool.query(`select plan,trial_started_at,trial_ends_at,trial_active,legal_policy_version,legal_accepted_at,legal_language,survey_mid_completed_at,survey_end_completed_at from public.users where id::text=$1`, [userId]);
+    if (r.rowCount !== 1)
+        return null;
+    let x = r.rows[0], plan = ndspNormalizePlanV3(x.plan);
+    if (plan === 'TRIAL' && !x.trial_started_at) {
+        await pool.query(`update public.users set plan='TRIAL',trial_started_at=now(),trial_ends_at=now()+($2::text||' days')::interval,trial_active=true,plan_changed_at=coalesce(plan_changed_at,now()),experience_version=$3 where id::text=$1`, [userId, String(NDSP_TRIAL_DAYS), NDSP_UX_VERSION]);
+    }
+    r = await pool.query(`select plan,trial_started_at,trial_ends_at,trial_active,legal_policy_version,legal_accepted_at,legal_language,survey_mid_completed_at,survey_end_completed_at from public.users where id::text=$1`, [userId]);
+    x = r.rows[0];
+    plan = ndspNormalizePlanV3(x.plan);
+    if (plan === 'TRIAL' && x.trial_ends_at && new Date(x.trial_ends_at).getTime() <= Date.now()) {
+        await pool.query(`update public.users set plan='FREE',trial_active=false,plan_changed_at=now(),experience_version=$2 where id::text=$1`, [userId, NDSP_UX_VERSION]);
+        const exists = await pool.query(`select 1 from public.ndsp_user_experience_events where user_id=$1 and event_type='TRIAL_TO_FREE' limit 1`, [userId]);
+        if (exists.rowCount === 0) {
+            await pool.query(`insert into public.ndsp_user_notifications(user_id,kind,title,body,action_href) values($1,'PLAN_CHANGED','تم تفعيل الباقة المجانية','انتهت فترة التجربة وتم تحويل الحساب تلقائياً إلى الباقة المجانية مع الاحتفاظ بالبيانات والإعدادات.','/support-center.html#subscription')`, [userId]);
+            await pool.query(`insert into public.ndsp_user_experience_events(user_id,event_type,event_version,payload) values($1,'TRIAL_TO_FREE',$2,$3::jsonb)`, [userId, NDSP_UX_VERSION, JSON.stringify({ from: 'TRIAL', to: 'FREE', automated: true })]);
+        }
+        plan = 'FREE';
+        x.trial_active = false;
+    }
+    const start = x.trial_started_at ? new Date(x.trial_started_at) : null;
+    const end = x.trial_ends_at ? new Date(x.trial_ends_at) : null;
+    const elapsed = start ? Math.max(0, Math.floor((Date.now() - start.getTime()) / 86400000)) : 0;
+    return {
+        version: NDSP_UX_VERSION,
+        plan,
+        capabilities: ndspCapabilitiesV3(plan),
+        trial: { active: plan === 'TRIAL' && x.trial_active !== false, startedAt: x.trial_started_at, endsAt: x.trial_ends_at, remainingDays: end ? Math.max(0, Math.ceil((end.getTime() - Date.now()) / 86400000)) : 0, elapsedDays: elapsed, durationDays: NDSP_TRIAL_DAYS, expiryPlan: 'FREE' },
+        legal: { requiredVersion: NDSP_LEGAL_POLICY_VERSION, acceptedVersion: x.legal_policy_version, acceptedAt: x.legal_accepted_at, language: x.legal_language, accepted: x.legal_policy_version === NDSP_LEGAL_POLICY_VERSION },
+        survey: { midDue: plan === 'TRIAL' && elapsed >= 8 && !x.survey_mid_completed_at, endDue: (plan === 'TRIAL' && elapsed >= 15 && !x.survey_end_completed_at) || (plan === 'FREE' && !x.survey_end_completed_at), midCompletedAt: x.survey_mid_completed_at, endCompletedAt: x.survey_end_completed_at }
+    };
+}
+async function ndspUxUserV3(request, reply) {
+    const u = await sessionFromRequest(request);
+    if (!u) {
+        reply.code(401).send({ ok: false, error: 'AUTHENTICATION_REQUIRED' });
+        return null;
+    }
+    return u;
+}
+function ndspStripInternalV3(value) {
+    const forbiddenKey = /(^|_)(source_mode|internal|registry|registry_id|capabilities|capability|layer_ids?|decision_layer_registry|governing_rule|debug|trace|engine_path|service_path|backend_path)(_|$)/i;
+    const forbiddenText = [/NDSP-CORE-L(?:0[1-9]|1[0-6])/gi, /correction\s+gate/gi, /divergence\s+engine/gi, /temporal\s+(?:and\s+)?day\s+logic/gi, /liquidity\s+(?:and\s+)?structure/gi, /usd\s+(?:and\s+)?macro\s+filter/gi, /readiness\s+(?:and\s+)?decision\s+state/gi];
+    if (Array.isArray(value))
+        return value.map(ndspStripInternalV3);
+    if (value && typeof value === 'object') {
+        const out = {};
+        for (const [k, v] of Object.entries(value)) {
+            if (forbiddenKey.test(k))
+                continue;
+            out[k] = ndspStripInternalV3(v);
+        }
+        return out;
+    }
+    if (typeof value === 'string') {
+        let s = value;
+        for (const re of forbiddenText)
+            s = s.replace(re, '');
+        return s.replace(/\s{2,}/g, ' ').trim();
+    }
+    return value;
+}
+app.get('/api/auth/ux/experience', async (request, reply) => {
+    const u = await ndspUxUserV3(request, reply);
+    if (!u)
+        return;
+    return reply.send({ ok: true, experience: await ndspSyncExperienceV3(u.id) });
+});
+app.post('/api/auth/ux/legal-acceptance', async (request, reply) => {
+    const u = await ndspUxUserV3(request, reply);
+    if (!u)
+        return;
+    const b = (request.body || {});
+    if (b.accepted !== true || b.version !== NDSP_LEGAL_POLICY_VERSION || !['ar', 'en'].includes(String(b.language)))
+        return reply.code(400).send({ ok: false, error: 'INVALID_LEGAL_ACCEPTANCE' });
+    await ndspEnsureUxSchemaV3();
+    await pool.query(`update public.users set legal_policy_version=$2,legal_accepted_at=now(),legal_language=$3,experience_version=$4 where id::text=$1`, [u.id, b.version, b.language, NDSP_UX_VERSION]);
+    await pool.query(`insert into public.ndsp_user_experience_events(user_id,event_type,event_version,language,payload) values($1,'LEGAL_ACCEPTED',$2,$3,$4::jsonb)`, [u.id, b.version, b.language, JSON.stringify({ explicit: true })]);
+    return reply.send({ ok: true, version: b.version });
+});
+app.post('/api/auth/ux/survey', async (request, reply) => {
+    const u = await ndspUxUserV3(request, reply);
+    if (!u)
+        return;
+    const b = (request.body || {});
+    if (!['mid', 'end'].includes(String(b.stage)) || !b.answers || typeof b.answers !== 'object')
+        return reply.code(400).send({ ok: false, error: 'INVALID_SURVEY' });
+    const a = b.answers;
+    for (const k of ['ease', 'clarity'])
+        if (!Number.isInteger(Number(a[k])) || Number(a[k]) < 1 || Number(a[k]) > 5)
+            return reply.code(400).send({ ok: false, error: 'INVALID_SURVEY_SCORE' });
+    const safe = { ease: Number(a.ease), clarity: Number(a.clarity), usefulPage: String(a.usefulPage || '').slice(0, 120), issues: String(a.issues || '').slice(0, 1200), subscribe: String(a.subscribe || '').slice(0, 40) };
+    const f = b.stage === 'mid' ? 'survey_mid_completed_at' : 'survey_end_completed_at';
+    await ndspEnsureUxSchemaV3();
+    await pool.query(`update public.users set ${f}=now(),experience_version=$2 where id::text=$1`, [u.id, NDSP_UX_VERSION]);
+    await pool.query(`insert into public.ndsp_user_experience_events(user_id,event_type,event_version,language,payload) values($1,$2,'survey-v3',$3,$4::jsonb)`, [u.id, b.stage === 'mid' ? 'SURVEY_MID' : 'SURVEY_END', ['ar', 'en'].includes(b.language) ? b.language : 'ar', JSON.stringify(safe)]);
+    return reply.send({ ok: true, stage: b.stage });
+});
+app.get('/api/auth/ux/notifications', async (request, reply) => {
+    const u = await ndspUxUserV3(request, reply);
+    if (!u)
+        return;
+    await ndspEnsureUxSchemaV3();
+    const r = await pool.query(`select id,kind,title,body,action_href as "actionHref",read_at as "readAt",created_at as "createdAt" from public.ndsp_user_notifications where user_id=$1 order by created_at desc limit 50`, [u.id]);
+    return reply.send({ ok: true, unread: r.rows.filter((x) => !x.readAt).length, items: r.rows });
+});
+app.post('/api/auth/ux/notifications/:id/read', async (request, reply) => {
+    const u = await ndspUxUserV3(request, reply);
+    if (!u)
+        return;
+    const id = String(request.params?.id || '');
+    if (!/^\d+$/.test(id))
+        return reply.code(400).send({ ok: false, error: 'INVALID_NOTIFICATION_ID' });
+    await ndspEnsureUxSchemaV3();
+    await pool.query(`update public.ndsp_user_notifications set read_at=coalesce(read_at,now()) where id=$1::bigint and user_id=$2`, [id, u.id]);
+    return reply.send({ ok: true });
+});
+app.post('/api/auth/ux/feedback', async (request, reply) => {
+    const u = await ndspUxUserV3(request, reply);
+    if (!u)
+        return;
+    const b = (request.body || {});
+    const category = String(b.category || 'GENERAL').toUpperCase().slice(0, 40);
+    const message = String(b.message || '').trim().slice(0, 3000);
+    if (message.length < 3)
+        return reply.code(400).send({ ok: false, error: 'FEEDBACK_TOO_SHORT' });
+    await ndspEnsureUxSchemaV3();
+    await pool.query(`insert into public.ndsp_user_feedback(user_id,category,page_href,message,payload) values($1,$2,$3,$4,$5::jsonb)`, [u.id, category, String(b.pageHref || '').slice(0, 500), message, JSON.stringify({ language: ['ar', 'en'].includes(b.language) ? b.language : 'ar' })]);
+    return reply.send({ ok: true });
+});
+app.get('/api/auth/ux/decision-view', async (request, reply) => {
+    const u = await ndspUxUserV3(request, reply);
+    if (!u)
+        return;
+    const q = (request.query || {});
+    const symbol = String(q.symbol || '').trim().toUpperCase();
+    const timeframe = String(q.timeframe || '').trim().toLowerCase();
+    const mode = String(q.mode || q.analysisMode || 'investment').trim().toLowerCase();
+    if (!/^[A-Z0-9._:-]{2,24}$/.test(symbol))
+        return reply.code(400).send({ ok: false, error: 'INVALID_SYMBOL' });
+    if (!/^(1m|5m|15m|30m|1h|2h|4h|6h|8h|12h|daily|1d|weekly|1w|monthly|1mo)$/.test(timeframe))
+        return reply.code(400).send({ ok: false, error: 'INVALID_TIMEFRAME' });
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 12000);
+    try {
+        const url = `${NDSP_DECISION_INTERNAL_BASE}/api/decision/quality-live?symbol=${encodeURIComponent(symbol)}&timeframe=${encodeURIComponent(timeframe)}`;
+        const r = await fetch(url, { headers: { Accept: 'application/json' }, signal: controller.signal });
+        const raw = await r.json().catch(() => ({}));
+        if (!r.ok)
+            return reply.code(502).send({ ok: false, error: 'DECISION_SOURCE_UNAVAILABLE', upstreamStatus: r.status });
+        const safe = ndspStripInternalV3(raw);
+        return reply.send({ ...safe, ok: true, context: { market: String(q.market || ''), symbol, timeframe, mode, view: String(q.view || q.viewMode || ''), session: String(q.session || q.session_id || '') } });
+    }
+    catch {
+        return reply.code(502).send({ ok: false, error: 'DECISION_SOURCE_UNAVAILABLE' });
+    }
+    finally {
+        clearTimeout(timer);
+    }
+});
+// NDSP_FINAL_USER_EXPERIENCE_V3_END
+app.get("/api/auth/session", async (request, reply) => {
+    const user = await sessionFromRequest(request);
+    if (!user)
+        return reply.code(401).send({ ok: false, authenticated: false });
+    const experience = await ndspSyncExperienceV3(user.id);
+    return reply.send({ ok: true, authCore: AUTH_CORE, authenticated: true, user: { ...user, plan: experience?.plan || "FREE" }, experience });
+});
+// NDSP_USER_MANAGEMENT_V1_ROUTES_BEGIN
+app.get("/api/auth/admin/users", { config: { rateLimit: { max: 90, timeWindow: "1 minute" } } }, async (request, reply) => {
+    const actor = await requireAdminSession(request, reply);
+    if (!actor)
+        return;
+    const parsed = adminUsersQuerySchema.safeParse(request.query);
+    if (!parsed.success) {
+        return reply.code(400).send({ ok: false, error: "INVALID_USERS_QUERY" });
+    }
+    const { q, status, page, limit } = parsed.data;
+    const offset = (page - 1) * limit;
+    const columns = await getUserColumns();
+    const parameters = [];
+    const where = ["1=1"];
+    if (q) {
+        parameters.push(`%${q}%`);
+        const index = parameters.length;
+        where.push(`(lower(email) like lower($${index}) or lower(coalesce(name,'')) like lower($${index}))`);
+    }
+    if (status === "active") {
+        where.push("upper(coalesce(status,''))='ACTIVE' and email_verified is true");
+    }
+    else if (status === "pending") {
+        where.push("not (upper(coalesce(status,''))='ACTIVE' and email_verified is true)");
+    }
+    else if (status === "inactive") {
+        where.push("upper(coalesce(status,'')) in ('INACTIVE','DISABLED')");
+    }
+    else if (status === "suspended") {
+        where.push("upper(coalesce(status,'')) in ('SUSPENDED','BLOCKED','LOCKED')");
+    }
+    else if (status === "unverified") {
+        where.push("email_verified is not true");
+    }
+    else if (status === "admins") {
+        where.push("(upper(coalesce(role,'')) in ('ADMIN','OWNER') or lower(coalesce(account_type,'')) in ('admin','owner'))");
+    }
+    const optional = (column, alias) => columns.has(column) ? `${column} as ${alias}` : `null as ${alias}`;
+    const planColumn = ["plan", "package", "subscription_plan", "plan_name"]
+        .find((column) => columns.has(column));
+    const phoneColumn = ["phone", "phone_number", "mobile", "mobile_number"]
+        .find((column) => columns.has(column));
+    const createdColumn = ["created_at", "registered_at", "signup_at"]
+        .find((column) => columns.has(column));
+    const lastLoginColumn = ["last_login_at", "last_login", "logged_in_at"]
+        .find((column) => columns.has(column));
+    const selectFields = [
+        "id::text as id", "email", "name", "role", "account_type", "status", "email_verified",
+        planColumn ? `${planColumn} as plan_value` : "null as plan_value",
+        phoneColumn ? `${phoneColumn} as phone_value` : "null as phone_value",
+        createdColumn ? `${createdColumn} as created_at_value` : "null as created_at_value",
+        lastLoginColumn ? `${lastLoginColumn} as last_login_value` : "null as last_login_value"
+    ];
+    const whereSql = where.join(" and ");
+    const countResult = await pool.query(`select count(*)::int as total from public.users where ${whereSql}`, parameters);
+    parameters.push(limit, offset);
+    const limitIndex = parameters.length - 1;
+    const offsetIndex = parameters.length;
+    const orderBy = createdColumn ? `${createdColumn} desc nulls last, email asc` : "email asc";
+    const usersResult = await pool.query(`select ${selectFields.join(", ")}
+         from public.users
+        where ${whereSql}
+        order by ${orderBy}
+        limit $${limitIndex} offset $${offsetIndex}`, parameters);
+    const summaryResult = await pool.query(`select
+         count(*)::int as total,
+         count(*) filter (where upper(coalesce(status,''))='ACTIVE' and email_verified is true)::int as active,
+         count(*) filter (where not (upper(coalesce(status,''))='ACTIVE' and email_verified is true))::int as pending,
+         count(*) filter (where email_verified is not true)::int as unverified,
+         count(*) filter (where upper(coalesce(role,'')) in ('ADMIN','OWNER') or lower(coalesce(account_type,'')) in ('admin','owner'))::int as admins
+       from public.users`);
+    const total = Number(countResult.rows[0]?.total || 0);
+    return reply.send({
+        ok: true,
+        authCore: AUTH_CORE,
+        items: usersResult.rows.map(normalizeManagedUser),
+        pagination: {
+            page, limit, total, pages: Math.max(1, Math.ceil(total / limit))
+        },
+        summary: summaryResult.rows[0] || { total: 0, active: 0, pending: 0, unverified: 0, admins: 0 }
+    });
+});
+app.patch("/api/auth/admin/users/:id", { config: { rateLimit: { max: 40, timeWindow: "1 minute" } } }, async (request, reply) => {
+    const actor = await requireAdminSession(request, reply);
+    if (!actor)
+        return;
+    const params = adminUserIdSchema.safeParse(request.params);
+    const body = adminUserActionSchema.safeParse(request.body);
+    if (!params.success || !body.success) {
+        return reply.code(400).send({ ok: false, error: "INVALID_USER_ACTION" });
+    }
+    const targetResult = await pool.query(`select id::text as id,email,name,role,account_type,status,email_verified
+         from public.users
+        where id::text=$1
+        limit 1`, [params.data.id]);
+    if (targetResult.rowCount !== 1) {
+        return reply.code(404).send({ ok: false, error: "USER_NOT_FOUND" });
+    }
+    const target = targetResult.rows[0];
+    const targetId = String(target.id);
+    const targetEmail = String(target.email || "").toLowerCase();
+    const targetRole = String(target.role || "USER").toUpperCase();
+    const targetType = String(target.account_type || "user").toLowerCase();
+    const targetIsAdmin = allowedRoles.has(targetRole) || ["admin", "owner"].includes(targetType);
+    const action = body.data.action;
+    if (["deactivate", "suspend"].includes(action) && targetId === actor.id) {
+        return reply.code(409).send({ ok: false, error: "CANNOT_DISABLE_CURRENT_ADMIN" });
+    }
+    if (["deactivate", "suspend"].includes(action) && targetIsAdmin) {
+        return reply.code(409).send({ ok: false, error: "ADMIN_ACCOUNT_PROTECTED" });
+    }
+    const columns = await getUserColumns();
+    const assignments = [];
+    if (action === "activate") {
+        assignments.push("status='ACTIVE'", "email_verified=true");
+        if (columns.has("is_active"))
+            assignments.push("is_active=true");
+        if (columns.has("activated_at"))
+            assignments.push("activated_at=coalesce(activated_at,now())");
+        if (columns.has("trial_started_at"))
+            assignments.push("trial_started_at=coalesce(trial_started_at,now())");
+        if (columns.has("trial_start_at"))
+            assignments.push("trial_start_at=coalesce(trial_start_at,now())");
+        if (columns.has("trial_ends_at"))
+            assignments.push("trial_ends_at=coalesce(trial_ends_at,now()+interval '16 days')");
+        if (columns.has("trial_end_at"))
+            assignments.push("trial_end_at=coalesce(trial_end_at,now()+interval '16 days')");
+        if (columns.has("trial_expires_at"))
+            assignments.push("trial_expires_at=coalesce(trial_expires_at,now()+interval '16 days')");
+        if (columns.has("trial_active"))
+            assignments.push("trial_active=true");
+    }
+    else if (action === "deactivate") {
+        assignments.push("status='INACTIVE'");
+        if (columns.has("is_active"))
+            assignments.push("is_active=false");
+        if (columns.has("trial_active"))
+            assignments.push("trial_active=false");
+    }
+    else if (action === "suspend") {
+        assignments.push("status='SUSPENDED'");
+        if (columns.has("is_active"))
+            assignments.push("is_active=false");
+    }
+    else if (action === "verify") {
+        assignments.push("email_verified=true");
+    }
+    if (columns.has("updated_at"))
+        assignments.push("updated_at=now()");
+    if (!assignments.length) {
+        return reply.code(400).send({ ok: false, error: "EMPTY_USER_ACTION" });
+    }
+    const updated = await pool.query(`update public.users
+          set ${assignments.join(", ")}
+        where id::text=$1
+        returning id::text as id,email,name,role,account_type,status,email_verified`, [targetId]);
+    if (["deactivate", "suspend"].includes(action)) {
+        await pool.query("update public.ndsp_clean_auth_sessions_v2 set revoked_at=now() where user_id=$1 and revoked_at is null", [targetId]);
+    }
+    await audit(request, `ADMIN_USER_${action.toUpperCase()}`, actor.id, targetEmail, true);
+    return reply.send({
+        ok: true,
+        action,
+        user: normalizeManagedUser(updated.rows[0])
+    });
+});
+// NDSP_USER_PERMANENT_DELETE_V22_ROUTES_BEGIN
+app.delete("/api/auth/admin/users/:id", { config: { rateLimit: { max: 15, timeWindow: "1 minute" } } }, async (request, reply) => {
+    const actor = await requireAdminSession(request, reply);
+    if (!actor)
+        return;
+    const params = adminUserIdSchema.safeParse(request.params);
+    const body = adminUserDeleteSchema.safeParse(request.body);
+    if (!params.success || !body.success) {
+        return reply.code(400).send({
+            ok: false,
+            error: "INVALID_PERMANENT_DELETE_CONFIRMATION"
+        });
+    }
+    const client = await pool.connect();
+    let targetEmail = "";
+    try {
+        await client.query("begin");
+        const targetResult = await client.query(`select id::text as id,email,name,role,account_type,status,email_verified
+           from public.users
+          where id::text=$1
+          for update`, [params.data.id]);
+        if (targetResult.rowCount !== 1) {
+            await client.query("rollback");
+            return reply.code(404).send({
+                ok: false,
+                error: "USER_NOT_FOUND"
+            });
+        }
+        const target = targetResult.rows[0];
+        const targetId = String(target.id);
+        targetEmail = String(target.email || "").trim().toLowerCase();
+        const targetRole = String(target.role || "USER").toUpperCase();
+        const targetType = String(target.account_type || "user").toLowerCase();
+        const targetIsAdmin = allowedRoles.has(targetRole) ||
+            ["admin", "owner"].includes(targetType);
+        if (targetId === actor.id) {
+            await client.query("rollback");
+            return reply.code(409).send({
+                ok: false,
+                error: "CANNOT_DELETE_CURRENT_ADMIN"
+            });
+        }
+        if (targetIsAdmin) {
+            await client.query("rollback");
+            return reply.code(409).send({
+                ok: false,
+                error: "ADMIN_ACCOUNT_DELETE_PROTECTED"
+            });
+        }
+        if (body.data.confirmEmail.trim().toLowerCase() !== targetEmail) {
+            await client.query("rollback");
+            return reply.code(400).send({
+                ok: false,
+                error: "DELETE_EMAIL_CONFIRMATION_MISMATCH"
+            });
+        }
+        await client.query(`delete from public.ndsp_clean_auth_sessions_v2
+          where user_id=$1`, [targetId]);
+        const deleted = await client.query(`delete from public.users
+          where id::text=$1
+          returning id::text as id,email,name,role,account_type,status,email_verified`, [targetId]);
+        if (deleted.rowCount !== 1) {
+            throw new Error("USER_DELETE_DID_NOT_REMOVE_ONE_ROW");
+        }
+        await client.query("commit");
+        try {
+            await audit(request, "ADMIN_USER_DELETE_PERMANENT", actor.id, targetEmail, true);
+        }
+        catch {
+        }
+        return reply.send({
+            ok: true,
+            action: "delete",
+            permanent: true,
+            deletedUser: normalizeManagedUser(deleted.rows[0])
+        });
+    }
+    catch (error) {
+        await client.query("rollback").catch(() => undefined);
+        if (error.code === "23503") {
+            return reply.code(409).send({
+                ok: false,
+                error: "USER_HAS_LINKED_RECORDS",
+                message: "Permanent deletion was blocked because the user has linked records."
+            });
+        }
+        throw error;
+    }
+    finally {
+        client.release();
+    }
+});
+// NDSP_USER_PERMANENT_DELETE_V22_ROUTES_END
+// NDSP_USER_MANAGEMENT_V1_ROUTES_END
+app.post("/api/auth/logout", async (request, reply) => {
+    const rawToken = request.cookies[COOKIE];
+    if (rawToken) {
+        await pool.query("update public.ndsp_clean_auth_sessions_v2 set revoked_at=now() where token_hash=$1", [tokenHash(rawToken)]);
+    }
+    clearSessionCookie(reply);
+    return reply.send({ ok: true });
+});
+app.get("/api/auth/logout-page", async (request, reply) => {
+    const rawToken = request.cookies[COOKIE];
+    if (rawToken) {
+        await pool.query("update public.ndsp_clean_auth_sessions_v2 set revoked_at=now() where token_hash=$1", [tokenHash(rawToken)]);
+    }
+    clearSessionCookie(reply);
+    return reply.redirect("/login/?logged_out=1");
+});
+app.get("/internal/authorize-admin", async (request, reply) => {
+    const user = await sessionFromRequest(request);
+    if (!user)
+        return reply.code(401).send();
+    if (!user.isAdmin)
+        return reply.code(403).send();
+    reply.header("X-NDSP-User-Email", user.email);
+    reply.header("X-NDSP-User-Role", user.role);
+    return reply.code(204).send();
+});
+app.get("/internal/authorize-user", async (request, reply) => {
+    const user = await sessionFromRequest(request);
+    if (!user)
+        return reply.code(401).send();
+    reply.header("X-NDSP-User-Email", user.email);
+    reply.header("X-NDSP-User-Role", user.role);
+    return reply.code(204).send();
+});
+app.setErrorHandler(async (error, request, reply) => {
+    const traceId = crypto.randomUUID();
+    request.log.error({ err: error, traceId, method: request.method, url: request.url }, "AUTH_INTERNAL_ERROR");
+    return reply.code(500).send({
+        ok: false,
+        error: "AUTH_INTERNAL_ERROR",
+        traceId
+    });
+});
+const shutdown = async () => {
+    await app.close();
+    await pool.end();
+    process.exit(0);
+};
+process.on("SIGTERM", shutdown);
+process.on("SIGINT", shutdown);
+await await ndspEnsureUxSchemaV3();
+app.listen({ host: env.AUTH_HOST, port: env.AUTH_PORT });

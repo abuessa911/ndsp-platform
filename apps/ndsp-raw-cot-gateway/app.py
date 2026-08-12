@@ -6,6 +6,28 @@ import time
 import urllib.request
 from pathlib import Path
 from typing import Any
+import importlib.util
+import sys
+
+# NDSP_GOVERNED_COT_HISTORY_V2
+_COT_HISTORY_ADAPTER_PATH = Path(
+    "/home/nawaf511/empire-core-new/backend/app/support_layers/cot/cot_history_adapter.py"
+)
+
+def _load_cot_history_adapter():
+    spec = importlib.util.spec_from_file_location(
+        "ndsp_cot_history_adapter",
+        _COT_HISTORY_ADAPTER_PATH,
+    )
+    if spec is None or spec.loader is None:
+        raise RuntimeError("COT_HISTORY_ADAPTER_SPEC_FAILED")
+
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
 
 from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
@@ -238,6 +260,56 @@ def import_current_post() -> dict[str, Any]:
 @app.get("/api/admin/raw-cot/status")
 def status(asset: str = Query("ETHUSDT")) -> dict[str, Any]:
     result = find_tff_asset(asset)
+
+    if result.get("raw_cot_connected") is True:
+        try:
+            adapter = _load_cot_history_adapter()
+
+            market_name = str(result.get("market_name") or "").strip()
+            exchange = str(result.get("exchange") or "").strip()
+
+            raw_head = result.get("raw_row_head") or []
+            market_code = (
+                str(raw_head[3]).strip()
+                if isinstance(raw_head, list) and len(raw_head) > 3
+                else ""
+            )
+
+            identity = adapter.CotMarketIdentity(
+                market_name=market_name,
+                market_code=market_code,
+                exchange=exchange,
+            )
+
+            history = adapter.build_governed_history_payload(
+                Path("/home/nawaf511/empire-core-new/backend/data/raw_cot"),
+                identity,
+            )
+
+            result.update(history)
+            result["history_adapter_status"] = "CONNECTED"
+            result["raw_cot_governing_inputs_complete"] = all(
+                result.get(k) is not None
+                for k in (
+                    "report_date",
+                    "asset_managers_long",
+                    "asset_managers_short",
+                    "asset_managers_change_long",
+                    "asset_managers_change_short",
+                    "leveraged_funds_long",
+                    "leveraged_funds_short",
+                    "leveraged_funds_change_long",
+                    "leveraged_funds_change_short",
+                )
+            )
+
+        except Exception as exc:
+            result["history_adapter_status"] = "ERROR"
+            result["history_adapter_error"] = (
+                f"{type(exc).__name__}:{exc}"
+            )
+            result["raw_cot_governing_inputs_complete"] = False
+
     return {
         "ok": True,
         "asset": asset,

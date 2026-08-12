@@ -1,0 +1,13 @@
+[Unit]
+Description=NDSP 16 Layers Python Service
+After=network.target
+
+[Service]
+User=nawaf511
+WorkingDirectory=/home/nawaf511/empire-core-new/backend/app/api/routers
+# تأكد أن المسار للملف python الخاص بك صحيح
+ExecStart=/usr/bin/python3 -m uvicorn layers_control:router --port 8000
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

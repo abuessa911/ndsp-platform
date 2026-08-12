@@ -1,0 +1,2 @@
+./frontend/public-site/src/i18n/locales/en.ts:117:      "Does not execute trades or manage capital.",
+./apps/admin-console/data/owner-layer-source-map.json:1493:            "export const decisionSignals = [ { title: \"إشارة شراء استراتيجية — قطاع الطاقة المتجددة\", confidence: 91, horizon: \"متوسط المدى\", impact: \"مرتفع\", summary: \"تشير نماذج المحاكاة إلى تحسن في هوامش التشغيل بنسبة 12% خلال الربعين القادمين مدفوعةً بتوسعات مشاريع الطاقة الشمسية.\", tag: \"فرصة\", }, { title: \"تنبيه مخاطر — سلاسل الإمداد اللوجستية\"",

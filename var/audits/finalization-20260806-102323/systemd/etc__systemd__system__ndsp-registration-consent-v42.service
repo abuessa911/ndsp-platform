@@ -1,0 +1,19 @@
+[Unit]
+Description=NDSP registration legal-consent gateway V42
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+ExecStart=/usr/bin/node /opt/ndsp/legal-v42/ndsp-registration-consent-gateway.cjs
+Restart=on-failure
+RestartSec=2
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/ndsp
+
+[Install]
+WantedBy=multi-user.target

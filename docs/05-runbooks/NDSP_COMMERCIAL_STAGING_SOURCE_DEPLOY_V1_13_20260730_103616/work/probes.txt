@@ -1,0 +1,20 @@
+PATH=/health
+HTTP=200
+{"ok":true,"service":"ndsp-auth-core-clean","version":"2.2.0","marker":"clean-v2.2-users-delete"}
+---
+PATH=/api/health
+HTTP=404
+{"message":"Route GET:/api/health not found","error":"Not Found","statusCode":404}
+---
+PATH=/api/auth/health
+HTTP=404
+{"message":"Route GET:/api/auth/health not found","error":"Not Found","statusCode":404}
+---
+PATH=/api/auth/session
+HTTP=401
+{"ok":false,"authenticated":false}
+---
+PATH=/api/v6/auth/health
+HTTP=404
+{"message":"Route GET:/api/v6/auth/health not found","error":"Not Found","statusCode":404}
+---

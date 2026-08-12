@@ -1,0 +1,31 @@
+NDSP Live Verify Summary
+Timestamp: 20260811_101236
+Project: /home/nawaf511/empire-core-new
+
+Source public name hits:
+None
+
+Source forbidden claims:
+None
+
+Build status:
+OK_OR_NO_SCRIPT: /home/nawaf511/empire-core-new/ndsp-live-verify-20260811_101236/build-__frontend_public-site.log
+OK_OR_NO_SCRIPT: /home/nawaf511/empire-core-new/ndsp-live-verify-20260811_101236/build-__frontend_user-portal-vite.log
+OK_OR_NO_SCRIPT: /home/nawaf511/empire-core-new/ndsp-live-verify-20260811_101236/build-__ndsp-platform_frontend_public.log
+
+Live HTTP status:
+https://ndsp.app => 000
+https://ndsp.app/ => 000
+https://my.ndsp.app => 000
+https://my.ndsp.app/login => 000
+https://my.ndsp.app/register => 000
+https://my.ndsp.app/subscription => 000
+
+Live public name hits:
+None
+
+Live forbidden claims:
+None
+
+Note:
+If source is clean but live pages still show old text, the issue is deployment output, service cache, CDN/browser cache, or old Nginx root.

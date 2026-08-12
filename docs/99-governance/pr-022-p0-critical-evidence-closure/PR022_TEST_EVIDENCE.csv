@@ -1,0 +1,3 @@
+capability_id,test_path,location,matched_endpoints,evidence_strength
+CAP-235EF538DEF9,backend/venv/lib/python3.12/site-packages/pandas/tests/test_register_accessor.py,LOCAL_ONLY_OR_MODIFIED,,MEDIUM
+CAP-2CD69A7EA838,backend/venv/lib/python3.12/site-packages/pandas/tests/test_register_accessor.py,LOCAL_ONLY_OR_MODIFIED,,MEDIUM

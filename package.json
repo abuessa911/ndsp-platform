@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "latest",
-    "express": "latest"
+    "@tanstack/react-query": "^5.101.4",
+    "express": "latest",
+    "react-router-dom": "^7.18.2"
   }
 }

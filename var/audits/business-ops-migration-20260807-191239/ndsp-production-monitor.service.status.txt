@@ -1,0 +1,13 @@
+× ndsp-production-monitor.service - NDSP Production Monitor V205
+     Loaded: loaded (/etc/systemd/system/ndsp-production-monitor.service; static)
+     Active: failed (Result: exit-code) since Fri 2026-08-07 19:09:14 CEST; 3min 25s ago
+TriggeredBy: ● ndsp-production-monitor.timer
+    Process: 559040 ExecStart=/usr/bin/python3 /usr/local/lib/ndsp-business-ops/monitor.py (code=exited, status=1/FAILURE)
+   Main PID: 559040 (code=exited, status=1/FAILURE)
+        CPU: 453ms
+
+أغسطس 07 19:09:11 vmi2934783 systemd[1]: Starting ndsp-production-monitor.service - NDSP Production Monitor V205...
+أغسطس 07 19:09:14 vmi2934783 python3[559040]: {"overall_status": "DEGRADED", "failures": ["url:decision_local", "url:decision_room"]}
+أغسطس 07 19:09:14 vmi2934783 systemd[1]: ndsp-production-monitor.service: Main process exited, code=exited, status=1/FAILURE
+أغسطس 07 19:09:14 vmi2934783 systemd[1]: ndsp-production-monitor.service: Failed with result 'exit-code'.
+أغسطس 07 19:09:14 vmi2934783 systemd[1]: Failed to start ndsp-production-monitor.service - NDSP Production Monitor V205.

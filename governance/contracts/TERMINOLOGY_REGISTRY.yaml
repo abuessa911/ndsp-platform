@@ -1,0 +1,14 @@
+generated_utc: "2026-08-05T15:54:35Z"
+terms:
+  -
+    term: CORE OFFICIAL
+    arabic: المسار الرسمي
+    definition: Official approved result path.
+  -
+    term: EXPANDED SHADOW
+    arabic: المسار التجريبي المخفي
+    definition: Internal experimental path only.
+  -
+    term: Promotion Governance Request
+    arabic: طلب ترقية حوكمي
+    definition: Required controlled request before promotion to CORE.

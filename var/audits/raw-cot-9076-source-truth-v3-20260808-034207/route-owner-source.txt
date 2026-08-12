@@ -1,0 +1,245 @@
+     1	from __future__ import annotations
+     2	
+     3	import csv
+     4	import json
+     5	import time
+     6	import urllib.request
+     7	from pathlib import Path
+     8	from typing import Any
+     9	
+    10	from fastapi import FastAPI, Query
+    11	from fastapi.middleware.cors import CORSMiddleware
+    12	
+    13	DATA_DIR = Path("/home/nawaf511/empire-core-new/backend/data/raw_cot")
+    14	DATA_DIR.mkdir(parents=True, exist_ok=True)
+    15	
+    16	TFF_URL = "https://www.cftc.gov/dea/newcot/FinFutWk.txt"
+    17	DISAGG_URL = "https://www.cftc.gov/dea/newcot/f_disagg.txt"
+    18	
+    19	TFF_CURRENT = DATA_DIR / "current_tff_futures_only_FinFutWk.txt"
+    20	DISAGG_CURRENT = DATA_DIR / "current_disaggregated_futures_only_f_disagg.txt"
+    21	MANIFEST = DATA_DIR / "raw_cot_manifest.json"
+    22	
+    23	app = FastAPI(title="NDSP Raw COT Gateway", version="0.2.0-current-cftc")
+    24	
+    25	app.add_middleware(
+    26	    CORSMiddleware,
+    27	    allow_origins=["https://admin.ndsp.app", "https://my.ndsp.app", "http://localhost"],
+    28	    allow_credentials=True,
+    29	    allow_methods=["*"],
+    30	    allow_headers=["*"],
+    31	)
+    32	
+    33	
+    34	def download(url: str, path: Path) -> dict[str, Any]:
+    35	    req = urllib.request.Request(url, headers={"User-Agent": "NDSP-Raw-COT-Gateway/0.2"})
+    36	    with urllib.request.urlopen(req, timeout=20) as r:
+    37	        raw = r.read()
+    38	    path.write_bytes(raw)
+    39	    return {"url": url, "path": str(path), "bytes": len(raw)}
+    40	
+    41	
+    42	def import_current() -> dict[str, Any]:
+    43	    stamp = time.strftime("%Y%m%d_%H%M%S")
+    44	    tff_snapshot = DATA_DIR / f"tff_futures_only_FinFutWk_{stamp}.txt"
+    45	    disagg_snapshot = DATA_DIR / f"disaggregated_futures_only_f_disagg_{stamp}.txt"
+    46	
+    47	    tff = download(TFF_URL, tff_snapshot)
+    48	    disagg = download(DISAGG_URL, disagg_snapshot)
+    49	
+    50	    TFF_CURRENT.write_bytes(tff_snapshot.read_bytes())
+    51	    DISAGG_CURRENT.write_bytes(disagg_snapshot.read_bytes())
+    52	
+    53	    manifest = {
+    54	        "ok": True,
+    55	        "imported_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+    56	        "sources": {
+    57	            "tff_futures_only": tff,
+    58	            "disaggregated_futures_only": disagg,
+    59	        },
+    60	        "current_files": {
+    61	            "tff": str(TFF_CURRENT),
+    62	            "disaggregated": str(DISAGG_CURRENT),
+    63	        },
+    64	    }
+    65	    MANIFEST.write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
+    66	    return manifest
+    67	
+    68	
+    69	def list_files() -> list[dict[str, Any]]:
+    70	    out = []
+    71	    for p in sorted(DATA_DIR.glob("*")):
+    72	        if p.is_file():
+    73	            out.append({
+    74	                "name": p.name,
+    75	                "path": str(p),
+    76	                "size": p.stat().st_size,
+    77	                "suffix": p.suffix.lower(),
+    78	            })
+    79	    return out
+    80	
+    81	
+    82	def asset_aliases(asset: str) -> list[str]:
+    83	    a = (asset or "").upper().replace("-", "").replace("/", "")
+    84	    if a in {"ETH", "ETHUSD", "ETHUSDT", "ETHER"}:
+    85	        return ["ETHER", "ETH"]
+    86	    if a in {"BTC", "BTCUSD", "BTCUSDT", "BITCOIN"}:
+    87	        return ["BITCOIN", "BTC"]
+    88	    if a in {"GOLD", "XAU", "XAUUSD", "GC"}:
+    89	        return ["GOLD", "GOLD - COMMODITY EXCHANGE"]
+    90	    if a in {"SILVER", "XAG", "XAGUSD", "SI"}:
+    91	        return ["SILVER", "SILVER - COMMODITY EXCHANGE"]
+    92	    return [a]
+    93	
+    94	
+    95	def safe_int(v: Any) -> int:
+    96	    try:
+    97	        return int(str(v).replace(",", "").strip())
+    98	    except Exception:
+    99	        return 0
+   100	
+   101	
+   102	def bias_from_net(net: int) -> str:
+   103	    if net > 0:
+   104	        return "bullish"
+   105	    if net < 0:
+   106	        return "bearish"
+   107	    return "neutral"
+   108	
+   109	
+   110	def parse_tff_rows() -> list[list[str]]:
+   111	    if not TFF_CURRENT.exists():
+   112	        return []
+   113	    text = TFF_CURRENT.read_text(encoding="utf-8", errors="ignore")
+   114	    rows = []
+   115	    for row in csv.reader(text.splitlines()):
+   116	        if len(row) > 20:
+   117	            rows.append([x.strip() for x in row])
+   118	    return rows
+   119	
+   120	
+   121	def find_tff_asset(asset: str) -> dict[str, Any]:
+   122	    rows = parse_tff_rows()
+   123	    aliases = asset_aliases(asset)
+   124	
+   125	    if not rows:
+   126	        return {
+   127	            "raw_cot_connected": False,
+   128	            "raw_cot_status": "WAITING_FOR_IMPORT",
+   129	            "source_family": "TFF",
+   130	            "source_file": str(TFF_CURRENT),
+   131	            "matched_rows": 0,
+   132	            "message": "No current TFF file imported yet.",
+   133	        }
+   134	
+   135	    match = None
+   136	    for row in rows:
+   137	        name = row[0].upper() if row else ""
+   138	        if any(alias in name for alias in aliases):
+   139	            match = row
+   140	            break
+   141	
+   142	    if not match:
+   143	        return {
+   144	            "raw_cot_connected": False,
+   145	            "raw_cot_status": "CONNECTED_NO_ASSET_MATCH",
+   146	            "source_family": "TFF",
+   147	            "source_file": str(TFF_CURRENT),
+   148	            "total_rows": len(rows),
+   149	            "matched_rows": 0,
+   150	            "aliases": aliases,
+   151	        }
+   152	
+   153	    # CFTC TFF futures-only record positions:
+   154	    # 7 open interest
+   155	    # 8 dealer long, 9 dealer short
+   156	    # 11 asset manager long, 12 asset manager short
+   157	    # 14 leveraged funds long, 15 leveraged funds short
+   158	    open_interest = safe_int(match[7])
+   159	    dealer_long = safe_int(match[8])
+   160	    dealer_short = safe_int(match[9])
+   161	    asset_mgr_long = safe_int(match[11])
+   162	    asset_mgr_short = safe_int(match[12])
+   163	    leveraged_long = safe_int(match[14])
+   164	    leveraged_short = safe_int(match[15])
+   165	
+   166	    dealer_net = dealer_long - dealer_short
+   167	    asset_mgr_net = asset_mgr_long - asset_mgr_short
+   168	    leveraged_net = leveraged_long - leveraged_short
+   169	
+   170	    return {
+   171	        "raw_cot_connected": True,
+   172	        "raw_cot_status": "CONNECTED_MATCHED",
+   173	        "source_family": "TFF",
+   174	        "source_file": str(TFF_CURRENT),
+   175	        "market_name": match[0],
+   176	        "report_yyMMdd": match[1],
+   177	        "report_date": match[2],
+   178	        "exchange": match[4].strip() if len(match) > 4 else None,
+   179	        "open_interest": open_interest,
+   180	
+   181	        "dealer_intermediary_long": dealer_long,
+   182	        "dealer_intermediary_short": dealer_short,
+   183	        "dealer_intermediary_net": dealer_net,
+   184	        "dealer_intermediary_bias": bias_from_net(dealer_net),
+   185	
+   186	        "asset_managers_long": asset_mgr_long,
+   187	        "asset_managers_short": asset_mgr_short,
+   188	        "asset_managers_net": asset_mgr_net,
+   189	        "asset_managers_bias": bias_from_net(asset_mgr_net),
+   190	
+   191	        "leveraged_funds_long": leveraged_long,
+   192	        "leveraged_funds_short": leveraged_short,
+   193	        "leveraged_funds_net": leveraged_net,
+   194	        "leveraged_funds_bias": bias_from_net(leveraged_net),
+   195	
+   196	        "matched_rows": 1,
+   197	        "total_rows": len(rows),
+   198	        "raw_row_head": match[:18],
+   199	    }
+   200	
+   201	
+   202	@app.get("/api/admin/raw-cot/health")
+   203	def health() -> dict[str, Any]:
+   204	    files = list_files()
+   205	    manifest = None
+   206	    if MANIFEST.exists():
+   207	        try:
+   208	            manifest = json.loads(MANIFEST.read_text(encoding="utf-8", errors="ignore"))
+   209	        except Exception:
+   210	            manifest = None
+   211	    return {
+   212	        "ok": True,
+   213	        "service": "ndsp-raw-cot-gateway",
+   214	        "version": "0.2.0-current-cftc",
+   215	        "data_dir": str(DATA_DIR),
+   216	        "files_count": len(files),
+   217	        "raw_cot_status": "WAITING_FOR_IMPORT" if not TFF_CURRENT.exists() else "CURRENT_FILES_PRESENT",
+   218	        "tff_current_exists": TFF_CURRENT.exists(),
+   219	        "disagg_current_exists": DISAGG_CURRENT.exists(),
+   220	        "manifest": manifest,
+   221	        "files": files,
+   222	    }
+   223	
+   224	
+   225	@app.get("/api/admin/raw-cot/import-current")
+   226	def import_current_get() -> dict[str, Any]:
+   227	    result = import_current()
+   228	    eth = find_tff_asset("ETHUSDT")
+   229	    btc = find_tff_asset("BTCUSDT")
+   230	    return {"ok": True, "import": result, "ethusdt_status": eth, "btcusdt_status": btc}
+   231	
+   232	
+   233	@app.post("/api/admin/raw-cot/import-current")
+   234	def import_current_post() -> dict[str, Any]:
+   235	    return import_current_get()
+   236	
+   237	
+   238	@app.get("/api/admin/raw-cot/status")
+   239	def status(asset: str = Query("ETHUSDT")) -> dict[str, Any]:
+   240	    result = find_tff_asset(asset)
+   241	    return {
+   242	        "ok": True,
+   243	        "asset": asset,
+   244	        **result,
+   245	    }

@@ -1,0 +1,8 @@
+[Unit]
+Description=NDSP Live Market Prices Updater
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /usr/local/bin/ndsp_live_market_prices_updater.py
+User=root
+Group=root

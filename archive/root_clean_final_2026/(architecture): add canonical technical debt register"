@@ -1,0 +1,10 @@
+backend/architecture/TECHNICAL_DEBT_REGISTER.md:17: trailing whitespace.
+[32m+[m[32m**Title:** Consolidate duplicated decision output governance functions[m[41m  [m
+backend/architecture/TECHNICAL_DEBT_REGISTER.md:18: trailing whitespace.
+[32m+[m[32m**Status:** OPEN[m[41m  [m
+backend/architecture/TECHNICAL_DEBT_REGISTER.md:19: trailing whitespace.
+[32m+[m[32m**Priority:** P1[m[41m  [m
+backend/architecture/TECHNICAL_DEBT_REGISTER.md:20: trailing whitespace.
+[32m+[m[32m**Domain:** Decision Governance[m[41m  [m
+backend/architecture/TECHNICAL_DEBT_REGISTER.md:21: trailing whitespace.
+[32m+[m[32m**Owner:** Decision Engine Sprint[m[41m  [m

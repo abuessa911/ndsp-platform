@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#0b0b0c" />
+<title>NDSP — تسجيل الدخول</title>
+<meta name="description" content="تسجيل الدخول إلى منصة NDSP لذكاء القرار." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    color-scheme:dark;
+    --void:#0b0b0c;--surface:#151516;--surface-2:#1a1a1c;
+    --line:#26262a;--line-strong:#34343a;
+    --gold:#caa24a;--gold-hi:#d8b56a;--gold-soft:rgba(202,162,74,.10);
+    --text:#ededee;--text-2:#a7a7ab;--text-3:#6d6d72;
+    --pos:#4ea96b;--neg:#c8553d;
+    --sans:'IBM Plex Sans Arabic',system-ui,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --maxw:1180px;
+  }
+  html[lang="en"]{--sans:'IBM Plex Sans',system-ui,sans-serif}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{background:var(--void)}
+  html,body{min-height:100%}
+  body{background:var(--void);color:var(--text);font-family:var(--sans);font-weight:400;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--gold-soft);color:var(--gold-hi)}
+  .bg-base{position:fixed;inset:0;z-index:0;pointer-events:none;background:#0b0b0c}
+  .bg-mark{position:fixed;inset:-25%;z-index:0;pointer-events:none;opacity:.035;transform:rotate(-14deg);background-repeat:repeat;background-size:560px 390px}
+  .watermark{position:fixed;bottom:14px;inset-inline-start:16px;z-index:5;font-family:var(--mono);font-size:10px;letter-spacing:.28em;color:var(--text-3);opacity:.5;pointer-events:none;user-select:none}
+  .eyebrow{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);display:inline-block}
+  .mono{font-family:var(--mono)}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:600;letter-spacing:.02em}
+  .brand .mark{width:26px;height:26px;border:1px solid var(--gold);display:grid;place-items:center;font-family:var(--mono);font-size:13px;color:var(--gold);font-weight:600;border-radius:3px}
+  .brand small{font-family:var(--mono);font-size:9.5px;letter-spacing:.22em;color:var(--text-3);display:block;margin-top:1px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:var(--sans);font-size:14px;font-weight:500;padding:12px 22px;border-radius:6px;cursor:pointer;transition:all .2s;border:1px solid transparent;white-space:nowrap}
+  .btn-gold{background:var(--gold);color:#15120a;font-weight:600}
+  .btn-gold:hover{background:var(--gold-hi);transform:translateY(-1px)}
+  .btn-ghost{background:transparent;color:var(--text);border-color:var(--line-strong)}
+  .btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+  .btn-block{width:100%}
+  .lang-btn{font-family:var(--mono);font-size:12px;color:var(--text-2);background:var(--surface);border:1px solid var(--line-strong);border-radius:5px;padding:7px 11px;cursor:pointer;transition:all .2s;min-width:40px}
+  .lang-btn:hover{border-color:var(--gold);color:var(--gold)}
+  .lang-fixed{position:fixed;top:16px;inset-inline-start:16px;z-index:50}
+  .field{margin-bottom:15px}
+  .field label{display:block;font-size:13px;color:var(--text-2);margin-bottom:7px}
+  .input{width:100%;background:var(--surface-2);border:1px solid var(--line);border-radius:7px;padding:12px 14px;color:var(--text);font-family:var(--sans);font-size:14px;transition:border-color .2s}
+  .input:focus{outline:none;border-color:var(--gold)}
+  .input::placeholder{color:var(--text-3)}
+  .row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .check{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-2);cursor:pointer;user-select:none}
+  .check input{accent-color:var(--gold);width:15px;height:15px}
+  .link{font-size:13px;color:var(--gold);cursor:pointer}
+  .link:hover{color:var(--gold-hi)}
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+  .auth{display:grid;grid-template-columns:1fr 1fr;min-height:100vh}
+  .a-brand{padding:64px 52px;display:flex;flex-direction:column;justify-content:center;gap:16px;border-inline-end:1px solid var(--line);position:relative;z-index:1}
+  .a-brand .big{font-size:34px;font-weight:600;line-height:1.3;letter-spacing:-.01em;margin-top:8px}
+  .a-brand .sub{color:var(--text-2);font-size:15px;max-width:24em;line-height:1.7}
+  .a-points{display:flex;flex-direction:column;gap:12px;margin-top:14px}
+  .a-points div{display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--text-2)}
+  .a-points div::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--gold);flex:0 0 5px}
+  .a-form{display:flex;align-items:center;justify-content:center;padding:48px;position:relative;z-index:1}
+  .card{width:100%;max-width:400px}
+  .card h1{font-size:24px;font-weight:600}
+  .card .csub{color:var(--text-2);font-size:14px;margin:8px 0 26px}
+  .divider{display:flex;align-items:center;gap:14px;margin:22px 0;color:var(--text-3);font-size:12px}
+  .divider::before,.divider::after{content:"";height:1px;background:var(--line);flex:1}
+  .alt{text-align:center;font-size:13.5px;color:var(--text-2)}
+  @media(max-width:860px){
+    .auth{grid-template-columns:1fr}
+    .a-brand{min-height:auto;padding:48px 28px 24px;border-inline-end:none;border-bottom:1px solid var(--line)}
+    .a-brand .big{font-size:26px}
+    .a-form{padding:32px 24px}
+  }
+</style>
+</head>
+<body>
+<div class="bg-base" aria-hidden="true"></div>
+<div class="bg-mark" aria-hidden="true"></div>
+<div class="watermark">HUNTER_KSA1</div>
+
+<div class="lang-fixed"><button class="lang-btn" id="langBtn" aria-label="Language">EN</button></div>
+<div class="auth">
+  <div class="a-brand">
+    <a href="/" class="brand"><div class="mark">N</div><div>NDSP<small>DECISION INTELLIGENCE</small></div></a>
+    <div class="big" data-i18n="brand.big">منصة ذكاء قرار مؤسسية</div>
+    <div class="sub" data-i18n="brand.sub">من البيانات الخام إلى حالة قرار موثّقة وقابلة للفهم والمراجعة — لا تداول ولا توصيات.</div>
+    <div class="a-points">
+      <div data-i18n="brand.p1">تفسير وتوثيق أسباب كل قرار</div>
+      <div data-i18n="brand.p2">طبقات ومحرّكات تحليل مترابطة</div>
+      <div data-i18n="brand.p3">شفافية كاملة في مصادر البيانات</div>
+    </div>
+  </div>
+  <div class="a-form">
+    <div class="card">
+      <h1 data-i18n="login.h1">تسجيل الدخول</h1>
+      <p class="csub" data-i18n="login.sub">ادخل إلى مركز القرار الخاص بك.</p>
+      <div class="field">
+        <label data-i18n="login.email">البريد الإلكتروني</label>
+        <input class="input" id="email" type="email" autocomplete="email" placeholder="name@company.com" data-i18n-ph="login.emailPh" />
+      </div>
+      <div class="field">
+        <label data-i18n="login.pw">كلمة المرور</label>
+        <input class="input" id="password" type="password" autocomplete="current-password" placeholder="••••••••" />
+      </div>
+      <div class="row" style="margin:6px 0 22px">
+        <label class="check"><input type="checkbox" /> <span data-i18n="login.remember">تذكّرني</span></label>
+        <a href="/forgot" class="link" data-i18n="login.forgot">نسيت كلمة المرور؟</a>
+      </div>
+      <button class="btn btn-gold btn-block" id="loginBtn" data-i18n="login.btn">تسجيل الدخول</button>
+      <p id="loginMsg" style="display:none;font-size:13px;color:var(--neg);margin-top:12px;text-align:center"></p>
+      <div class="divider" data-i18n="login.or">أو</div>
+      <p class="alt"><span data-i18n="login.noacc">ليس لديك حساب؟</span> <a href="/register" class="link" data-i18n="login.create">إنشاء حساب</a></p>
+    </div>
+  </div>
+</div>
+
+<script>
+  var EN={"brand.big": "Institutional decision-intelligence platform", "brand.sub": "From raw data to a documented decision state you can understand and review — no trading, no recommendations.", "brand.p1": "Explains and documents the reasons behind every decision", "brand.p2": "Interconnected analysis layers and engines", "brand.p3": "Full transparency over data sources", "login.h1": "Log in", "login.sub": "Enter your Decision Center.", "login.email": "Email", "login.emailPh": "name@company.com", "login.pw": "Password", "login.remember": "Remember me", "login.forgot": "Forgot password?", "login.btn": "Log in", "login.or": "or", "login.noacc": "Don't have an account?", "login.create": "Create account"};
+  function applyLang(lang){
+    var en=(lang==='en');
+    document.documentElement.lang=en?'en':'ar';
+    document.documentElement.dir=en?'ltr':'rtl';
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k=el.getAttribute('data-i18n');
+      if(!el.hasAttribute('data-ar')) el.setAttribute('data-ar', el.textContent);
+      el.textContent=(en&&EN[k]!=null)?EN[k]:el.getAttribute('data-ar');
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(function(el){
+      var k=el.getAttribute('data-i18n-html');
+      if(!el.hasAttribute('data-ar-html')) el.setAttribute('data-ar-html', el.innerHTML);
+      el.innerHTML=(en&&EN[k]!=null)?EN[k]:el.getAttribute('data-ar-html');
+    });
+    document.querySelectorAll('[data-i18n-ph]').forEach(function(el){
+      var k=el.getAttribute('data-i18n-ph');
+      if(!el.hasAttribute('data-ar-ph')) el.setAttribute('data-ar-ph', el.getAttribute('placeholder')||'');
+      el.setAttribute('placeholder',(en&&EN[k]!=null)?EN[k]:el.getAttribute('data-ar-ph'));
+    });
+    var b=document.getElementById('langBtn'); if(b) b.textContent=en?'ع':'EN';
+    try{localStorage.setItem('ndsp_lang',en?'en':'ar');}catch(e){}
+  }
+  var saved='ar'; try{saved=localStorage.getItem('ndsp_lang')||'ar';}catch(e){}
+  applyLang(saved);
+  var lb=document.getElementById('langBtn');
+  lb&&lb.addEventListener('click',function(){applyLang(document.documentElement.lang==='en'?'ar':'en');});
+  (function(){
+    var el=document.querySelector('.bg-mark'); if(!el) return;
+    var svg="<svg xmlns='http://www.w3.org/2000/svg' width='560' height='390' viewBox='0 0 560 390'>"
+      +"<g fill='#ffffff' font-family='monospace' font-weight='600'>"
+      +"<text x='28' y='78' font-size='40' letter-spacing='4'>NDSP</text>"
+      +"<text x='374' y='150' font-size='30' letter-spacing='3'>TDL</text>"
+      +"<text x='30' y='250' font-size='18' letter-spacing='6'>DECISION INTELLIGENCE</text>"
+      +"<text x='386' y='332' font-size='30' letter-spacing='3'>NMP</text>"
+      +"</g></svg>";
+    el.style.backgroundImage="url(\"data:image/svg+xml,"+encodeURIComponent(svg)+"\")";
+  })();
+  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+  }else{document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in')});}
+
+  // ===== login -> NDSP auth API =====
+  (function(){
+    var btn=document.getElementById('loginBtn'),
+        em=document.getElementById('email'),
+        pw=document.getElementById('password'),
+        msg=document.getElementById('loginMsg');
+    if(!btn) return;
+    function en(){return document.documentElement.lang==='en';}
+    function show(t){if(msg){msg.textContent=t;msg.style.display='block';}}
+    function hide(){if(msg){msg.style.display='none';}}
+    function submit(){
+      hide();
+      var email=((em&&em.value)||'').trim(), pass=((pw&&pw.value)||'');
+      if(!email||!pass){show(en()?'Please enter your email and password.':'الرجاء إدخال البريد وكلمة المرور.');return;}
+      var orig=btn.textContent; btn.disabled=true; btn.textContent=en()?'Signing in…':'جارٍ الدخول…';
+      fetch('https://api.ndsp.app/api/auth/login',{
+        method:'POST',
+        headers:{'Content-Type':'application/json','Accept':'application/json'},
+        credentials:'include',
+        body:JSON.stringify({email:email,password:pass})
+      })
+      .then(function(r){return r.json().then(function(d){return{ok:r.ok,d:d};}).catch(function(){return{ok:r.ok,d:{}};});})
+      .then(function(res){
+        var d=res.d||{};
+        var status=d.status||d.code||d.message||'';
+        var token=d.token||d.access_token||(d.data&&d.data.token)||'';
+        if(status==='LOGIN_OK'&&token){
+          try{localStorage.setItem('ndsp_token',token);}catch(e){}
+          try{document.cookie='ndsp_token='+encodeURIComponent(token)+'; domain=.ndsp.app; path=/; max-age=2592000; secure; samesite=Lax';}catch(e){}
+          window.location.href='https://my.ndsp.app/';
+          return;
+        }
+        btn.disabled=false; btn.textContent=orig;
+        show(d.error||d.message||(en()?'Login failed. Check your credentials.':'تعذّر تسجيل الدخول. تحقّق من البيانات.'));
+      })
+      .catch(function(){
+        btn.disabled=false; btn.textContent=orig;
+        show(en()?'Connection error. Please try again.':'خطأ في الاتصال. حاول مرة أخرى.');
+      });
+    }
+    btn.addEventListener('click',submit);
+    pw&&pw.addEventListener('keydown',function(e){if(e.key==='Enter')submit();});
+  })();
+
+</script>
+</body>
+</html>

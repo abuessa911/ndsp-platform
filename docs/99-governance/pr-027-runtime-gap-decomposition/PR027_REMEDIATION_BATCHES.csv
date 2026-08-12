@@ -1,0 +1,9 @@
+batch_order,batch_id,capability_count,minimum_missing_count,maximum_missing_count,average_closability_score,recommended_action
+1,B01_QUICK_WINS,55,1,2,83.93,Resolve one or two missing evidence elements and rerun verification
+2,B02_SERVICE_MAPPING,56,4,6,35.43,Map capability to exact systemd unit/process and verify active state
+3,B03_ENDPOINT_CONTRACTS,7,3,3,58.00,Bind capability to canonical API contract and safe local probe
+4,B04_DATA_CALCULATION,2,4,4,56.00,"Document real data source, freshness, and calculation evidence"
+5,B05_TEST_IMPLEMENTATION,0,0,0,0.00,Add executable contract/integration test linked to capability
+6,B06_UI_CONSUMERS,0,0,0,0.00,Bind verified response to visible UI component and states
+7,B07_DEEP_REMEDIATION,281,4,7,22.81,Review source architecture and reconstruct complete evidence chain
+8,B08_HUMAN_REVIEW,125,2,3,62.00,Confirm whether machine matching is false-negative before code change

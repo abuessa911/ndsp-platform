@@ -1,0 +1,26 @@
+batch_id,capability_id,capability_name,p0_signature,service_required,endpoint_required,real_data_required,service_evidence_found,endpoint_evidence_found,real_data_evidence_found,candidate_count,selected_evidence_paths,machine_closed,human_confirmation_required
+B14_SERVICE_ONLY,CAP-119888657162,Row To Decision,SERVICE_ONLY,true,false,false,true,true,true,270,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B14_SERVICE_ONLY,CAP-11F9C86C3DEA,Admin Candidates,SERVICE_ONLY,true,false,false,true,true,true,393,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B14_SERVICE_ONLY,CAP-212E6DC3A3DB,Require Admin,SERVICE_ONLY,true,false,false,true,true,true,354,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B14_SERVICE_ONLY,CAP-23348CA30E36,Install Trial Info,SERVICE_ONLY,true,false,false,true,true,true,322,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B14_SERVICE_ONLY,CAP-24B10225D49C,Require Admin,SERVICE_ONLY,true,false,false,true,true,true,399,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B14_SERVICE_ONLY,CAP-26EC4D157EE6,Auth,SERVICE_ONLY,true,false,false,true,true,true,270,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B14_SERVICE_ONLY,CAP-43DC89894352,Require Admin,SERVICE_ONLY,true,false,false,true,true,true,354,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B14_SERVICE_ONLY,CAP-498E4FD1C421,Ndsp Admin Ok,SERVICE_ONLY,true,false,false,true,true,true,225,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B14_SERVICE_ONLY,CAP-541E221FDE39,Ndsp Admin Key From Req,SERVICE_ONLY,true,false,false,true,true,true,225,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B14_SERVICE_ONLY,CAP-5649C9641068,User Operational Compat,SERVICE_ONLY,true,false,false,true,true,true,360,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B14_SERVICE_ONLY,CAP-5C75E2FE3A98,Make Decision Id,SERVICE_ONLY,true,false,false,true,true,true,270,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B14_SERVICE_ONLY,CAP-628E213D3D54,User Operational Compat,SERVICE_ONLY,true,false,false,true,true,true,360,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B14_SERVICE_ONLY,CAP-65156AA526BC,Telegram Routing Internal,SERVICE_ONLY,true,false,false,true,true,true,365,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B14_SERVICE_ONLY,CAP-704639CE50C9,Validate Decision,SERVICE_ONLY,true,false,false,true,true,true,326,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B14_SERVICE_ONLY,CAP-75332A37EEA5,Ndsp Read Admin Action Key,SERVICE_ONLY,true,false,false,true,true,true,225,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B14_SERVICE_ONLY,CAP-7D844F2CA7E4,Create Subscription Payment,SERVICE_ONLY,true,false,false,true,true,true,256,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B14_SERVICE_ONLY,CAP-7F5DA6A52F4D,Get Auth User,SERVICE_ONLY,true,false,false,true,true,true,279,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B14_SERVICE_ONLY,CAP-85BADA8EEE4D,Admin Key Ok,SERVICE_ONLY,true,false,false,true,true,true,330,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B14_SERVICE_ONLY,CAP-A231C4D75E0C,Ndsp Create Otp Auth Url,SERVICE_ONLY,true,false,false,true,true,true,225,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B14_SERVICE_ONLY,CAP-A6810593B898,Trial Register Compat,SERVICE_ONLY,true,false,false,true,true,true,112,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B14_SERVICE_ONLY,CAP-AB3C235ED628,Get User Plan Column,SERVICE_ONLY,true,false,false,true,true,true,273,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B14_SERVICE_ONLY,CAP-ADD5265540CB,Debug Auth,SERVICE_ONLY,true,false,false,true,true,true,388,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B14_SERVICE_ONLY,CAP-B3BF7C85F687,Telegram Routing Internal,SERVICE_ONLY,true,false,false,true,true,true,371,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B14_SERVICE_ONLY,CAP-B64118FECEA6,Ndsp Ux User,SERVICE_ONLY,true,false,false,true,true,true,90,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B14_SERVICE_ONLY,CAP-B6D6412125A9,Pick Admin Key,SERVICE_ONLY,true,false,false,true,true,true,391,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true

@@ -1,0 +1,22 @@
+# NDSP Public Beta Launch Lock V38
+
+- Date: 2026-07-14T07:40:24+02:00
+- Product: NDSP — Nawaf Decision Support Platform
+- Launch status: GO — CONTROLLED PUBLIC BETA
+- Public portal: https://my.ndsp.app
+- Public API: https://api.ndsp.app
+- Frontend release: V37.9 + V38 governed price bridge
+- Speculative decision mode: READY / 16 of 16 / publishable
+- Investment decision mode: DATA_BLOCKED
+- Sole investment blocker: CANONICAL_COT_NOT_VERIFIED
+- COT fabrication or placeholder data: PROHIBITED
+- Completed current registry: V35
+- Append-only completed history: V36
+- Browser desktop/mobile acceptance: PASS
+- Critical routes: PASS
+- Legacy market/prices browser request: ABSENT
+- Legacy scenario/levels browser request: ABSENT
+- First-party browser 404: ZERO
+- Nginx changed: NO
+- Backend restarted: NO
+- Full commercial investment-mode launch: NOT AUTHORIZED until canonical COT mapping is verified

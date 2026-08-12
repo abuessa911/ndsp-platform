@@ -2,3 +2,103 @@
 @import "./styles/ndsp-motion.css";
 @import "./styles/ndsp-sovereign.css";
 @import "./styles/ndsp-pages.css";
+
+/* NDSP Sovereign Meridian Mobile Hardening */
+:root {
+  --ndsp-carbon-black:#080A0D;
+  --ndsp-titanium-graphite:#151A20;
+  --ndsp-meridian-gold:#CDAA56;
+  --ndsp-intelligence-blue:#35AFE3;
+  --ndsp-platinum-mist:#D9DDE2;
+  --ndsp-alabaster:#F4F3EF;
+  --ndsp-authorized-green:#2DAA77;
+  --ndsp-warning-amber:#D19038;
+  --ndsp-critical-red:#CF565D;
+  --ndsp-controlled-review-purple:#796286;
+  --ndsp-neutral-slate:#77818C;
+  --ndsp-safe-top:env(safe-area-inset-top,0px);
+  --ndsp-safe-bottom:env(safe-area-inset-bottom,0px);
+}
+
+html, body {
+  max-width:100%;
+  overflow-x:clip;
+  background-color:var(--ndsp-carbon-black);
+}
+
+*, *::before, *::after {
+  box-sizing:border-box;
+}
+
+img, svg, video, canvas {
+  max-width:100%;
+  height:auto;
+}
+
+button, a, input, select, textarea, [role="button"] {
+  min-height:44px;
+}
+
+input, select, textarea {
+  font-size:max(16px,1rem);
+}
+
+:focus-visible {
+  outline:2px solid var(--ndsp-intelligence-blue);
+  outline-offset:3px;
+}
+
+body.menu-open,
+body.ndsp-menu-open,
+html.menu-open,
+html.ndsp-menu-open {
+  overflow:hidden;
+  touch-action:none;
+}
+
+.mobile-menu,
+.ndsp-mobile-menu,
+.drawer,
+.sidebar-drawer,
+[role="dialog"][aria-modal="true"] {
+  max-height:100dvh;
+  height:100dvh;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  padding-top:calc(16px + var(--ndsp-safe-top));
+  padding-bottom:calc(24px + var(--ndsp-safe-bottom));
+}
+
+select:dir(rtl),
+[dir="rtl"] select {
+  background-position:left 1rem center;
+  padding-inline-start:2.75rem;
+  padding-inline-end:1rem;
+}
+
+@media (max-width: 767px) {
+  main, .app-shell, .page-shell, .dashboard-shell {
+    min-height:100dvh;
+    padding-bottom:calc(24px + var(--ndsp-safe-bottom));
+  }
+
+  .container, .ndsp-container {
+    width:min(100% - 32px,1280px);
+    max-width:1280px;
+    margin-inline:auto;
+  }
+
+  table, .wide, .table-wrap, .overflow-table {
+    max-width:100%;
+    overflow-x:auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration:0.001ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:0.001ms!important;
+    scroll-behavior:auto!important;
+  }
+}

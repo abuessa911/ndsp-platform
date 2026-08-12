@@ -1,0 +1,4 @@
+$ docker ps --no-trunc
+
+CONTAINER ID                                                       IMAGE         COMMAND                           CREATED        STATUS                PORTS                                         NAMES
+f1cd005aa4d48a8990a5e55950e350d693efb9265bed246c3fd7280754892b27   postgres:16   "docker-entrypoint.sh postgres"   3 months ago   Up 3 days (healthy)   0.0.0.0:5433->5432/tcp, [::]:5433->5432/tcp   ndip_postgres

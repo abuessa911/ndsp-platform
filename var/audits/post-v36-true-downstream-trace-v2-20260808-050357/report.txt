@@ -1,0 +1,1137 @@
+=== NDSP POST-V36 TRUE DOWNSTREAM TRACE V2 ===
+DATE=2026-08-08T05:03:57+02:00
+MODE=READ_ONLY
+FILES_MODIFIED=0
+SERVICES_RESTARTED=0
+RUNTIME_LOGIC_MODIFIED=0
+AUDIT=/home/nawaf511/empire-core-new/var/audits/post-v36-true-downstream-trace-v2-20260808-050357
+
+=== 1. V36 BASELINE ===
+V36_STATE=active
+V36_PID=2402288
+V36_CURL_RC=0
+V36_HTTP=200
+V36_HEALTH=PASS
+V36_RECORD_COUNT= 5
+
+=== 2. TRUE DOWNSTREAM REFERENCES ===
+TRUE_DOWNSTREAM_REFERENCE_LINES=2
+TRUE_DOWNSTREAM_REFERENCE_FILES=1
+TRUE_DOWNSTREAM_FILE=/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/hooks/useCompletedDecisionsV37.js
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/hooks/useCompletedDecisionsV37.js:5:history: "/api/completed-decisions/history?limit=100",
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/hooks/useCompletedDecisionsV37.js:6:integrity: "/api/completed-decisions/history/integrity"
+
+=== 3. V200 / V201 SOURCE CONTRACTS ===
+
+--------------------------------------------------
+SOURCE=/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v200_score_inputs.py
+SOURCE_FOUND=YES
+SYNTAX=PASS
+INTERESTING_RANGES=14
+--- LINES 16-30 ---
+16:)
+17:
+18:CONTRACT_VERSION = "NDSP_SCORE_INPUTS_V200"
+19:USER_AGENT = "NDSP-V200-Score-Inputs/1.0"
+20:BINANCE_KLINES = "https://api.binance.com/api/v3/klines"
+21:YAHOO_CHART = "https://query1.finance.yahoo.com/v8/finance/chart/{symbol}"
+22:
+23:TF_BINANCE = {
+24:    "1m": "1m", "5m": "5m", "15m": "15m", "30m": "30m",
+25:    "1h": "1h", "4h": "4h", "1d": "1d", "daily": "1d",
+26:    "1w": "1w", "weekly": "1w", "1M": "1M", "monthly": "1M",
+27:}
+28:TF_YAHOO = {
+29:    "1m": ("1m", "5d"),
+30:    "5m": ("5m", "5d"),
+--- LINES 36-42 ---
+36:    "daily": ("1d", "1y"),
+37:    "1w": ("1wk", "5y"),
+38:    "weekly": ("1wk", "5y"),
+39:    "1M": ("1mo", "10y"),
+40:    "monthly": ("1mo", "10y"),
+41:}
+42:
+--- LINES 61-67 ---
+61:
+62:def _normalize_tf(value: Any) -> str:
+63:    raw = str(value or "weekly").strip()
+64:    aliases = {
+65:        "h1": "1h", "hourly": "1h",
+66:        "h4": "4h",
+67:        "d1": "1d", "day": "1d",
+--- LINES 78-91 ---
+78:    if any(token in raw for token in ("speculative", "speculation", "trade", "مضارب")):
+79:        return "speculative"
+80:    return "investment" if timeframe in {"1w", "weekly", "1M", "monthly"} else "speculative"
+81:
+82:
+83:def _http_json(url: str, timeout: int = 10) -> Any:
+84:    request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+85:    with urllib.request.urlopen(request, timeout=timeout) as response:
+86:        if int(getattr(response, "status", 200)) < 200 or int(getattr(response, "status", 200)) >= 300:
+87:            raise RuntimeError(f"HTTP_{getattr(response, 'status', 'UNKNOWN')}")
+88:        return json.loads(response.read().decode("utf-8", "replace"))
+89:
+90:
+91:def _closed_binance_rows(rows: Any) -> list[list[Any]]:
+--- LINES 299-305 ---
+299:        return {
+300:            "status": "UNAVAILABLE",
+301:            "usd_pressure_score": None,
+302:            "same_timeframe": True,
+303:            "timeframe": timeframe,
+304:            "calculated_at": calculated_at,
+305:            "source_paths": ["yahoo_chart:DXY"],
+--- LINES 313-319 ---
+313:            "interval": interval,
+314:            "range": range_value,
+315:            "events": "history",
+316:            "includePrePost": "false",
+317:        })
+318:        url = YAHOO_CHART.format(symbol=urllib.parse.quote(dxy_symbol, safe="")) + "?" + query
+319:        try:
+--- LINES 341-348 ---
+341:        return {
+342:            "status": "AVAILABLE",
+343:            "usd_pressure_score": round(asset_pressure, 6),
+344:            "dxy_strength_score": round(dxy_strength, 6),
+345:            "inverse_to_usd": True,
+346:            "same_timeframe": True,
+347:            "timeframe": timeframe,
+348:            "source_interval": interval,
+--- LINES 363-369 ---
+363:    return {
+364:        "status": "UNAVAILABLE",
+365:        "usd_pressure_score": None,
+366:        "same_timeframe": True,
+367:        "timeframe": timeframe,
+368:        "calculated_at": calculated_at,
+369:        "source_paths": ["yahoo_chart:DX-Y.NYB", "yahoo_chart:DX=F"],
+--- LINES 373-379 ---
+373:
+374:def _layer(payload: Mapping[str, Any], layer_id: str) -> Mapping[str, Any] | None:
+375:    layers = payload.get("decision_layers")
+376:    if not isinstance(layers, list):
+377:        return None
+378:    for item in layers:
+379:        if isinstance(item, Mapping) and str(item.get("id") or "") == layer_id:
+--- LINES 391-404 ---
+391:) -> dict[str, Any]:
+392:    layer = _layer(payload, layer_id)
+393:    score = _safe_float(layer.get("score")) if layer else None
+394:    return {
+395:        "status": "AVAILABLE" if score is not None else "UNAVAILABLE",
+396:        output_name: round(_clamp(score, 0.0, 100.0), 6) if score is not None else None,
+397:        "same_timeframe": True,
+398:        "timeframe": timeframe,
+399:        "calculated_at": calculated_at,
+400:        "source_paths": [f"decision_layers[{layer_id}].score"],
+401:        "layer_id": layer_id,
+402:        "canonical_name": layer.get("canonical_name") if layer else None,
+403:    }
+404:
+--- LINES 422-428 ---
+422:
+423:
+424:def attach_v200_score_inputs(
+425:    payload: Any,
+426:    *,
+427:    symbol: Any = None,
+428:    timeframe: Any = None,
+--- LINES 435-455 ---
+435:    instrument = payload.get("instrument") if isinstance(payload.get("instrument"), Mapping) else {}
+436:    normalized_symbol = str(symbol or instrument.get("symbol") or payload.get("symbol") or "").upper().strip()
+437:    normalized_tf = _normalize_tf(timeframe or instrument.get("timeframe") or "weekly")
+438:    mode = _analysis_mode(analysis_mode, normalized_tf)
+439:
+440:    tdl_layer = "NDSP-CORE-L01" if mode == "investment" else "NDSP-CORE-L02"
+441:    tdl = _layer_numeric_input(
+442:        payload,
+443:        layer_id=tdl_layer,
+444:        output_name="alignment_score",
+445:        calculated_at=calculated_at,
+446:        timeframe=normalized_tf,
+447:    )
+448:    correction = _layer_numeric_input(
+449:        payload,
+450:        layer_id="NDSP-CORE-L04",
+451:        output_name="confirmation_score",
+452:        calculated_at=calculated_at,
+453:        timeframe=normalized_tf,
+454:    )
+455:
+--- LINES 458-530 ---
+458:    macro = _macro_usd_input(normalized_tf, calculated_at)
+459:
+460:    blocker_codes: list[str] = []
+461:    if not _numeric(tdl.get("alignment_score")):
+462:        blocker_codes.append("TDL_INPUT_MISSING")
+463:    if not _numeric(correction.get("confirmation_score")):
+464:        blocker_codes.append("CORRECTION_INPUT_MISSING")
+465:    if not all(_numeric(momentum.get(name)) for name in ("macd_histogram", "obv_slope", "cci_value")):
+466:        blocker_codes.append("MOMENTUM_INPUTS_MISSING")
+467:    if not _numeric(macro.get("usd_pressure_score")):
+468:        blocker_codes.append("MACRO_USD_INPUT_MISSING")
+469:
+470:    nmp = payload.get("nmp")
+471:    if not isinstance(nmp, Mapping) or nmp.get("status") != "AVAILABLE" or not _numeric(nmp.get("value")):
+472:        blocker_codes.append("NMP_UNAVAILABLE")
+473:
+474:    if not _scenario_levels_complete(payload):
+475:        blocker_codes.append("SCENARIO_LEVELS_INCOMPLETE")
+476:
+477:    governance = payload.get("governance_summary")
+478:    if isinstance(governance, Mapping) and governance.get("evidence_fresh") is False:
+479:        blocker_codes.append("EVIDENCE_STALE")
+480:
+481:    golden = payload.get("golden_alignment")
+482:    if isinstance(golden, Mapping) and golden.get("missing_inputs"):
+483:        blocker_codes.append("GOLDEN_GOVERNING_INPUTS_INCOMPLETE")
+484:
+485:    blocker_codes = list(dict.fromkeys(blocker_codes))
+486:    blockers = {
+487:        "status": "AVAILABLE",
+488:        "count": len(blocker_codes),
+489:        "codes": blocker_codes,
+490:        "same_timeframe": True,
+491:        "timeframe": normalized_tf,
+492:        "calculated_at": calculated_at,
+493:        "source_paths": [
+494:            "score_inputs.tdl.alignment_score",
+495:            "score_inputs.correction.confirmation_score",
+496:            "score_inputs.momentum",
+497:            "score_inputs.macro.usd_pressure_score",
+498:            "nmp.status",
+499:            "scenario_levels",
+500:            "governance_summary.evidence_fresh",
+501:            "golden_alignment.missing_inputs",
+502:        ],
+503:    }
+504:
+505:    required_values = {
+506:        "tdl": tdl.get("alignment_score"),
+507:        "correction": correction.get("confirmation_score"),
+508:        "macd_histogram": momentum.get("macd_histogram"),
+509:        "obv": momentum.get("obv_slope"),
+510:        "cci": momentum.get("cci_value"),
+511:        "macro_usd": macro.get("usd_pressure_score"),
+512:        "blockers": blockers.get("count"),
+513:    }
+514:    missing_components = [name for name, value in required_values.items() if not _numeric(value)]
+515:    contract_complete = not missing_components
+516:
+517:    payload["score_inputs"] = {
+518:        "contract_version": CONTRACT_VERSION,
+519:        "purpose": "backend_numeric_input_contract_only",
+520:        "commercial_score_calculated": False,
+521:        "commercial_score_status": (
+522:            "INPUT_CONTRACT_COMPLETE_WITH_RUNTIME_BLOCKERS"
+523:            if contract_complete and blockers["count"] > 0
+524:            else "INPUT_CONTRACT_COMPLETE"
+525:            if contract_complete
+526:            else "INPUT_CONTRACT_INCOMPLETE"
+527:        ),
+528:        "symbol": normalized_symbol,
+529:        "timeframe": normalized_tf,
+530:        "analysis_mode": mode,
+--- LINES 533-551 ---
+533:        "cross_timeframe_fallback_used": False,
+534:        "calculated_at": calculated_at,
+535:        "contract_complete": contract_complete,
+536:        "missing_components": missing_components,
+537:        "tdl": tdl,
+538:        "correction": correction,
+539:        "momentum": momentum,
+540:        "macro": macro,
+541:        "blockers": blockers,
+542:        "governance": {
+543:            "correction_required": True,
+544:            "macro_usd_required": True,
+545:            "momentum_required": ["rsi", "macd_histogram", "obv", "cci"],
+546:            "missing_component_behavior": "do_not_calculate_commercial_score",
+547:        },
+548:    }
+549:    payload["score_inputs_contract_version"] = CONTRACT_VERSION
+550:    return payload
+551:
+
+--------------------------------------------------
+SOURCE=/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v201_launch_completion.py
+SOURCE_FOUND=YES
+SYNTAX=PASS
+INTERESTING_RANGES=22
+--- LINES 10-24 ---
+10:from typing import Any, Mapping
+11:
+12:from backend.layers.canonical_v1.runtime_bridge import apply_canonical_golden
+13:from backend.layers.canonical_v1.direction.investment_policy import evaluate_investment_policy
+14:from backend.layers.canonical_v1.quality.golden_signals import evaluate_golden_signals
+15:
+16:CONTRACT_VERSION = "NDSP_COMMERCIAL_LAUNCH_V203"
+17:GOVERNING_INPUTS_VERSION = "NDSP_GOVERNING_INPUTS_V201"
+18:COMMERCIAL_SCORE_VERSION = "NDSP_COMMERCIAL_SCORE_V202"
+19:RAW_COT_URL = "http://127.0.0.1:9076/api/admin/raw-cot/status"
+20:USER_AGENT = "NDSP-Commercial-Launch-V203/1.0"
+21:DEFAULT_MAX_COT_AGE_DAYS = 10
+22:
+23:
+24:def _now_iso() -> str:
+--- LINES 40-46 ---
+40:
+41:
+42:def _normalize_direction(value: Any) -> str | None:
+43:    raw = str(value or "").strip().lower()
+44:    aliases = {
+45:        "bullish": "bullish", "bull": "bullish", "up": "bullish",
+46:        "positive": "bullish", "صاعد": "bullish",
+--- LINES 52-59 ---
+52:
+53:
+54:def _direction_sign(direction: Any) -> float:
+55:    normalized = _normalize_direction(direction)
+56:    if normalized == "bullish":
+57:        return 1.0
+58:    if normalized == "bearish":
+59:        return -1.0
+--- LINES 68-74 ---
+68:        return "speculative"
+69:    tf = str(timeframe or "").lower()
+70:    return "investment" if tf in {"1w", "weekly", "1m", "monthly"} else "speculative"
+71:
+72:
+73:def _http_json(url: str, timeout: int = 10) -> Any:
+74:    request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+--- LINES 76-82 ---
+76:        status = int(getattr(response, "status", 200))
+77:        if status < 200 or status >= 300:
+78:            raise RuntimeError(f"HTTP_{status}")
+79:        return json.loads(response.read().decode("utf-8", "replace"))
+80:
+81:
+82:def _fetch_raw_cot(symbol: str) -> dict[str, Any]:
+--- LINES 100-106 ---
+100:
+101:def _layer(data: dict[str, Any], layer_id: str) -> dict[str, Any] | None:
+102:    layers = data.get("decision_layers")
+103:    if not isinstance(layers, list):
+104:        return None
+105:    for item in layers:
+106:        if isinstance(item, dict) and str(item.get("id") or "") == layer_id:
+--- LINES 109-140 ---
+109:
+110:
+111:def _update_public_layers(data: dict[str, Any], mode: str, directions: Mapping[str, Any]) -> None:
+112:    overall = directions.get("asset_managers_overall")
+113:    am_weekly = directions.get("asset_managers_weekly")
+114:    lf_weekly = directions.get("leveraged_funds_weekly")
+115:
+116:    investment = evaluate_investment_policy(
+117:        asset_managers_overall=overall,
+118:        asset_managers_weekly=am_weekly,
+119:        leveraged_funds_weekly=lf_weekly,
+120:    )
+121:    golden = evaluate_golden_signals(
+122:        asset_managers_overall=overall,
+123:        asset_managers_weekly=am_weekly,
+124:        leveraged_funds_weekly=lf_weekly,
+125:    )
+126:
+127:    l01 = _layer(data, "NDSP-CORE-L01")
+128:    if l01 is not None:
+129:        l01.update({
+130:            "state": "ACTIVE" if _normalize_direction(overall) in {"bullish", "bearish"} else "UNDER_REVIEW",
+131:            "state_ar": "نشطة" if _normalize_direction(overall) in {"bullish", "bearish"} else "قيد المراجعة",
+132:            "score": 90 if investment["readiness_allowed"] else 65,
+133:            "blocking": not investment["readiness_allowed"],
+134:            "evidence": (
+135:                f"governing={overall}; asset_managers_weekly={am_weekly}; "
+136:                f"leveraged_funds_weekly={lf_weekly}; correction={investment['correction_state']}"
+137:            ),
+138:            "public_summary": (
+139:                "اكتملت بيانات الاتجاه المؤسسي الحاكمة؛ "
+140:                + ("انتهى التصحيح الأسبوعي." if investment["readiness_allowed"] else "التصحيح الأسبوعي ما زال قائمًا.")
+--- LINES 145-157 ---
+145:        l04 = _layer(data, "NDSP-CORE-L04")
+146:        if l04 is not None:
+147:            allowed = bool(investment["asset_managers_weekly_alignment"])
+148:            l04.update({
+149:                "state": "ALLOWED" if allowed else "MONITORING_ONLY",
+150:                "state_ar": "مسموحة" if allowed else "للمتابعة فقط",
+151:                "score": 88 if allowed else 55,
+152:                "blocking": not allowed,
+153:                "evidence": "investment weekly correction gate derived from current and weekly Asset Manager directions",
+154:                "public_summary": "انتهى التصحيح الأسبوعي." if allowed else "التصحيح الأسبوعي لم ينتهِ بعد.",
+155:            })
+156:
+157:    l13 = _layer(data, "NDSP-CORE-L13")
+--- LINES 161-169 ---
+161:            "state": "ACTIVE" if active else "INACTIVE",
+162:            "state_ar": "نشطة" if active else "غير نشطة",
+163:            "score": 95 if active else 0,
+164:            "blocking": False,
+165:            "evidence": "AM_WEEKLY_EQUALS_LF_WEEKLY evaluated from current CFTC TFF inputs",
+166:            "public_summary": "تم تقييم الإشارة من المدخلات الحاكمة الفعلية.",
+167:        })
+168:
+169:    l14 = _layer(data, "NDSP-CORE-L14")
+--- LINES 173-181 ---
+173:            "state": "ACTIVE" if active else "INACTIVE",
+174:            "state_ar": "نشطة" if active else "غير نشطة",
+175:            "score": 98 if active else 0,
+176:            "blocking": False,
+177:            "evidence": "AM_OVERALL_EQUALS_AM_WEEKLY_EQUALS_LF_WEEKLY evaluated from current CFTC TFF inputs",
+178:            "public_summary": "تم تقييم الإشارة المعززة من المدخلات الحاكمة الفعلية.",
+179:        })
+180:
+181:
+--- LINES 186-192 ---
+186:
+187:    status = str(golden.get("golden_status") or "inactive")
+188:    direction = str(golden.get("direction") or "unknown")
+189:    evaluated = not bool(golden.get("missing_inputs")) and golden.get("reason_code") in (None, "")
+190:    active = bool(golden.get("golden_signal"))
+191:    enhanced = bool(golden.get("enhanced_golden_signal"))
+192:
+--- LINES 204-217 ---
+204:        summary = "اكتملت المدخلات الحاكمة، لكن شروط المحاذاة الذهبية غير متحققة حاليًا."
+205:
+206:    evidence = [
+207:        {"label": "حالة التقييم", "value": "تم التقييم من بيانات CFTC TFF الفعلية"},
+208:        {"label": "الاتجاه", "value": direction},
+209:    ]
+210:
+211:    data["golden_status"] = status
+212:    data["golden_reason_public"] = summary
+213:    data["golden_evidence_public"] = evidence
+214:
+215:    spotlight = data.get("golden_spotlight")
+216:    if not isinstance(spotlight, dict):
+217:        spotlight = {}
+--- LINES 223-229 ---
+223:        "summary": summary,
+224:        "quality_effect": "تدخل الإشارة في جودة القراءة فقط، ولا تمنح أمر شراء أو بيع.",
+225:        "evidence": evidence,
+226:    })
+227:
+228:    explainability = data.get("explainability")
+229:    if not isinstance(explainability, dict):
+--- LINES 251-266 ---
+251:        "label": label,
+252:        "reason": summary,
+253:        "evidence": evidence,
+254:        "notice": "هذه قراءة تفسيرية محكومة وليست توصية مالية.",
+255:    })
+256:
+257:
+258:def _weekly_direction_from_real_changes(
+259:    change_long: Any,
+260:    change_short: Any,
+261:) -> str | None:
+262:    """Derive weekly direction from real CFTC position changes only.
+263:
+264:    delta_net = change_long - change_short
+265:
+266:    Positive delta_net => bullish
+--- LINES 300-333 ---
+300:    instrument = data.get("instrument") if isinstance(data.get("instrument"), Mapping) else {}
+301:    normalized_symbol = str(symbol or instrument.get("symbol") or data.get("symbol") or "").upper().strip()
+302:    normalized_tf = str(timeframe or instrument.get("timeframe") or "weekly").strip()
+303:    mode = _analysis_mode(analysis_mode, normalized_tf)
+304:    raw = dict(raw_cot_override) if isinstance(raw_cot_override, Mapping) else _fetch_raw_cot(normalized_symbol)
+305:
+306:    directions = {
+307:        "asset_managers_overall": _normalize_direction(
+308:            raw.get("asset_managers_overall_direction") or raw.get("asset_managers_bias")
+309:        ),
+310:        "asset_managers_weekly": (
+311:            _normalize_direction(raw.get("asset_managers_weekly_direction"))
+312:            or _weekly_direction_from_real_changes(
+313:                raw.get("asset_managers_change_long"),
+314:                raw.get("asset_managers_change_short"),
+315:            )
+316:        ),
+317:        "leveraged_funds_overall": _normalize_direction(
+318:            raw.get("leveraged_funds_overall_direction")
+319:            or raw.get("leveraged_funds_bias")
+320:        ),
+321:        "leveraged_funds_weekly": (
+322:            _normalize_direction(raw.get("leveraged_funds_weekly_direction"))
+323:            or _weekly_direction_from_real_changes(
+324:                raw.get("leveraged_funds_change_long"),
+325:                raw.get("leveraged_funds_change_short"),
+326:            )
+327:        ),
+328:    }
+329:    missing = [name for name, value in directions.items() if value not in {"bullish", "bearish", "neutral"}]
+330:    age = _safe_float(raw.get("report_age_days"))
+331:
+332:    # Canonical freshness fallback:
+333:    # report_age_days may be derived only from a real report_date.
+--- LINES 370-376 ---
+370:
+371:    data["governing_inputs"] = {
+372:        "contract_version": GOVERNING_INPUTS_VERSION,
+373:        "status": "COMPLETE" if complete else "INCOMPLETE",
+374:        "source": "CFTC_TFF_FUTURES_ONLY",
+375:        "source_family": raw.get("source_family"),
+376:        "source_market": raw.get("market_name"),
+--- LINES 380-389 ---
+380:        "fresh": fresh,
+381:        "symbol": normalized_symbol,
+382:        "source_timeframe": "weekly",
+383:        "analysis_timeframe": normalized_tf,
+384:        "analysis_mode": mode,
+385:        "directions": directions,
+386:        "missing_inputs": missing,
+387:        "raw_cot_connected": raw.get("raw_cot_connected") is True,
+388:        "raw_cot_status": raw.get("raw_cot_status"),
+389:        "not_recommendation": True,
+--- LINES 397-428 ---
+397:        return data
+398:
+399:    data.update(directions)
+400:    data["asset_managers_overall_direction"] = directions["asset_managers_overall"]
+401:    data["asset_managers_weekly_direction"] = directions["asset_managers_weekly"]
+402:    data["leveraged_funds_overall_direction"] = directions["leveraged_funds_overall"]
+403:    data["leveraged_funds_weekly_direction"] = directions["leveraged_funds_weekly"]
+404:    data["canonical_cot_directions"] = dict(directions)
+405:
+406:    data = apply_canonical_golden(data)
+407:    golden = data.get("golden_alignment")
+408:    if isinstance(golden, dict):
+409:        golden.update({
+410:            "governing_inputs_complete": True,
+411:            "governing_inputs_contract_version": GOVERNING_INPUTS_VERSION,
+412:            "source_report_date": raw.get("report_date"),
+413:            "source_report_age_days": age,
+414:            "source_fresh": fresh,
+415:            "source_family": raw.get("source_family"),
+416:            "decision_authority": False,
+417:            "not_recommendation": True,
+418:            "no_buy_sell": True,
+419:        })
+420:
+421:    _update_public_layers(data, mode, directions)
+422:    _refresh_public_golden(data)
+423:    data["governing_inputs_reason_code"] = None
+424:    data["governing_inputs_contract_version"] = GOVERNING_INPUTS_VERSION
+425:    return data
+426:
+427:
+428:def _scenario_levels_complete(data: Mapping[str, Any]) -> bool:
+--- LINES 440-462 ---
+440:
+441:
+442:def _score_band(score: float) -> str:
+443:    if score >= 90:
+444:        return "EXCEPTIONAL"
+445:    if score >= 80:
+446:        return "STRONG"
+447:    if score >= 70:
+448:        return "QUALIFIED"
+449:    if score >= 60:
+450:        return "CAUTIOUS"
+451:    return "WEAK"
+452:
+453:
+454:def _momentum_score(data: Mapping[str, Any], score_inputs: Mapping[str, Any], direction: str) -> float | None:
+455:    momentum = score_inputs.get("momentum")
+456:    if not isinstance(momentum, Mapping):
+457:        return None
+458:    sign = _direction_sign(direction)
+459:    if sign == 0:
+460:        return 50.0
+461:
+462:    live = data.get("live_market_analysis") if isinstance(data.get("live_market_analysis"), Mapping) else {}
+--- LINES 470-484 ---
+470:        return None
+471:
+472:    rsi_score = _clamp(50.0 + sign * (rsi - 50.0) * 2.0)
+473:    macd_scale = max(price * 0.001, 1e-9)
+474:    macd_score = _clamp(50.0 + 50.0 * math.tanh(sign * macd / macd_scale))
+475:    obv_score = _clamp(50.0 + sign * obv / 2.0)
+476:    cci_score = _clamp(50.0 + sign * cci / 4.0)
+477:    return round((rsi_score + macd_score + obv_score + cci_score) / 4.0, 6)
+478:
+479:
+480:def attach_v202_commercial_score(
+481:    payload: Any,
+482:    *,
+483:    symbol: Any = None,
+484:    timeframe: Any = None,
+--- LINES 489-537 ---
+489:
+490:    data = payload
+491:    score_inputs = data.get("score_inputs")
+492:    if not isinstance(score_inputs, dict):
+493:        data["commercial_score"] = {
+494:            "contract_version": COMMERCIAL_SCORE_VERSION,
+495:            "status": "WITHHELD_INPUT_CONTRACT_MISSING",
+496:            "score": None,
+497:            "public_allowed": False,
+498:            "not_recommendation": True,
+499:        }
+500:        return data
+501:
+502:    instrument = data.get("instrument") if isinstance(data.get("instrument"), Mapping) else {}
+503:    normalized_tf = str(timeframe or instrument.get("timeframe") or score_inputs.get("timeframe") or "weekly")
+504:    mode = _analysis_mode(analysis_mode or score_inputs.get("analysis_mode"), normalized_tf)
+505:    governing = data.get("governing_inputs") if isinstance(data.get("governing_inputs"), Mapping) else {}
+506:    directions = governing.get("directions") if isinstance(governing.get("directions"), Mapping) else {}
+507:    direction = (
+508:        directions.get("asset_managers_overall")
+509:        if mode == "investment"
+510:        else directions.get("leveraged_funds_weekly")
+511:    )
+512:    direction = _normalize_direction(direction) or "neutral"
+513:    sign = _direction_sign(direction)
+514:
+515:    tdl_block = score_inputs.get("tdl") if isinstance(score_inputs.get("tdl"), Mapping) else {}
+516:    correction_block = score_inputs.get("correction") if isinstance(score_inputs.get("correction"), Mapping) else {}
+517:    macro_block = score_inputs.get("macro") if isinstance(score_inputs.get("macro"), Mapping) else {}
+518:    blocker_block = score_inputs.get("blockers") if isinstance(score_inputs.get("blockers"), dict) else {}
+519:
+520:    golden = data.get("golden_alignment") if isinstance(data.get("golden_alignment"), Mapping) else {}
+521:    golden_complete = not bool(golden.get("missing_inputs")) and golden.get("reason_code") in (None, "")
+522:    if golden_complete:
+523:        codes = [
+524:            str(code) for code in (blocker_block.get("codes") or [])
+525:            if str(code) != "GOLDEN_GOVERNING_INPUTS_INCOMPLETE"
+526:        ]
+527:        blocker_block["codes"] = list(dict.fromkeys(codes))
+528:        blocker_block["count"] = len(blocker_block["codes"])
+529:
+530:    tdl = _safe_float(tdl_block.get("alignment_score"))
+531:    correction = _safe_float(correction_block.get("confirmation_score"))
+532:    momentum = _momentum_score(data, score_inputs, direction)
+533:    usd_pressure = _safe_float(macro_block.get("usd_pressure_score"))
+534:    macro = _clamp(50.0 + sign * usd_pressure / 2.0) if usd_pressure is not None else None
+535:    scenario = 100.0 if _scenario_levels_complete(data) else 0.0
+536:    nmp_obj = data.get("nmp") if isinstance(data.get("nmp"), Mapping) else {}
+537:    nmp = 100.0 if nmp_obj.get("status") == "AVAILABLE" and _safe_float(nmp_obj.get("value")) is not None else 0.0
+--- LINES 563-642 ---
+563:    }
+564:
+565:    raw_score = None
+566:    if not missing:
+567:        raw_score = round(sum(float(components[key]) * weights[key] for key in weights), 2)
+568:
+569:    governance_summary = data.get("governance_summary") if isinstance(data.get("governance_summary"), Mapping) else {}
+570:    capabilities = data.get("platform_capabilities")
+571:    capability_count = len(capabilities) if isinstance(capabilities, list) else int(governance_summary.get("capability_total") or 0)
+572:    layer_count = len(data.get("decision_layers")) if isinstance(data.get("decision_layers"), list) else 0
+573:    blockers_count = int(_safe_float(blocker_block.get("count")) or 0)
+574:
+575:    gates = {
+576:        "score_input_contract_complete": score_inputs.get("contract_complete") is True,
+577:        "score_input_missing_components_empty": not bool(score_inputs.get("missing_components")),
+578:        "same_timeframe_enforced": score_inputs.get("same_timeframe_enforced") is True,
+579:        "static_fallback_unused": score_inputs.get("static_fallback_used") is False,
+580:        "cross_timeframe_fallback_unused": score_inputs.get("cross_timeframe_fallback_used") is False,
+581:        "governing_inputs_complete": governing.get("status") == "COMPLETE",
+582:        "governing_inputs_fresh": governing.get("fresh") is True,
+583:        "golden_evaluated": golden_complete,
+584:        "runtime_blockers_clear": blockers_count == 0,
+585:        "scenario_levels_complete": scenario == 100.0,
+586:        "nmp_available": nmp == 100.0,
+587:        "governance_evidence_fresh": governance_summary.get("evidence_fresh") is True,
+588:        "sixteen_layers_exposed": layer_count == 16,
+589:        "twenty_eight_capabilities_exposed": capability_count == 28,
+590:        "commercial_components_complete": not missing,
+591:        "score_finite": raw_score is not None and math.isfinite(raw_score),
+592:    }
+593:    public_allowed = all(gates.values())
+594:    status = "CALCULATED_GOVERNED" if public_allowed else "WITHHELD_GOVERNANCE_GATE"
+595:
+596:    score_inputs["commercial_score_calculated"] = raw_score is not None
+597:    score_inputs["commercial_score_status"] = status
+598:    score_inputs["commercial_score_contract_version"] = COMMERCIAL_SCORE_VERSION
+599:    score_inputs["blockers"] = blocker_block
+600:
+601:    score_payload = {
+602:        "contract_version": COMMERCIAL_SCORE_VERSION,
+603:        "status": status,
+604:        "score": raw_score if public_allowed else None,
+605:        "raw_score_internal_available": raw_score is not None,
+606:        "band": _score_band(raw_score) if public_allowed and raw_score is not None else None,
+607:        "public_allowed": public_allowed,
+608:        "governing_direction": direction,
+609:        "analysis_mode": mode,
+610:        "timeframe": normalized_tf,
+611:        "blockers_count": blockers_count,
+612:        "missing_components": missing,
+613:        "gates": gates,
+614:        "calculated_at": _now_iso(),
+615:        "decision_authority": False,
+616:        "not_recommendation": True,
+617:        "no_buy_sell": True,
+618:    }
+619:    data["commercial_score"] = score_payload
+620:    data["commercial_score_contract_version"] = COMMERCIAL_SCORE_VERSION
+621:
+622:    allowed = data.get("allowed_public_outputs")
+623:    if not isinstance(allowed, dict):
+624:        allowed = {}
+625:        data["allowed_public_outputs"] = allowed
+626:    allowed["commercial_score_status"] = status
+627:    allowed["commercial_score"] = score_payload["score"]
+628:    allowed["commercial_score_band"] = score_payload["band"]
+629:    allowed["commercial_score_notice"] = "مؤشر جودة تفسيري محكوم، وليس أمر شراء أو بيع."
+630:
+631:    data["launch_readiness"] = {
+632:        "contract_version": CONTRACT_VERSION,
+633:        "status": "READY_FOR_COMMERCIAL_LAUNCH" if public_allowed else "BLOCKED_BY_GOVERNANCE_GATE",
+634:        "ready": public_allowed,
+635:        "gates": gates,
+636:        "checked_at": _now_iso(),
+637:        "decision_authority": False,
+638:        "not_recommendation": True,
+639:    }
+640:    data["commercial_launch_contract_version"] = CONTRACT_VERSION
+641:    return data
+642:
+
+--------------------------------------------------
+SOURCE=/home/nawaf511/empire-core-new/backend/tests/contracts/test_v201_weekly_direction_handoff.py
+SOURCE_FOUND=YES
+SYNTAX=PASS
+INTERESTING_RANGES=4
+--- LINES 1-28 ---
+1:from backend.app.runtime.ndsp_v201_launch_completion import (
+2:    _weekly_direction_from_real_changes,
+3:    attach_v201_governing_inputs,
+4:)
+5:
+6:
+7:def test_weekly_direction_bearish():
+8:    assert _weekly_direction_from_real_changes(-303, 711) == "bearish"
+9:
+10:
+11:def test_weekly_direction_bullish():
+12:    assert _weekly_direction_from_real_changes(-691, -1599) == "bullish"
+13:
+14:
+15:def test_weekly_direction_neutral():
+16:    assert _weekly_direction_from_real_changes(10, 10) == "neutral"
+17:
+18:
+19:def test_weekly_direction_missing_is_not_synthetic():
+20:    assert _weekly_direction_from_real_changes(None, 10) is None
+21:    assert _weekly_direction_from_real_changes(10, None) is None
+22:
+23:
+24:def test_explicit_weekly_direction_has_precedence():
+25:    raw = {
+26:        "raw_cot_connected": True,
+27:        "raw_cot_status": "CONNECTED_MATCHED",
+28:        "raw_cot_governing_inputs_complete": True,
+--- LINES 33-44 ---
+33:        "leveraged_funds_bias": "bearish",
+34:
+35:        # Explicit direction must win over numeric fallback.
+36:        "asset_managers_weekly_direction": "bullish",
+37:        "asset_managers_change_long": -100,
+38:        "asset_managers_change_short": 100,
+39:
+40:        "leveraged_funds_weekly_direction": "bearish",
+41:        "leveraged_funds_change_long": 100,
+42:        "leveraged_funds_change_short": -100,
+43:    }
+44:
+--- LINES 46-62 ---
+46:        {},
+47:        symbol="ETHUSDT",
+48:        timeframe="weekly",
+49:        raw_cot_override=raw,
+50:    )
+51:
+52:    d = out["governing_inputs"]["directions"]
+53:
+54:    assert d["asset_managers_weekly"] == "bullish"
+55:    assert d["leveraged_funds_weekly"] == "bearish"
+56:
+57:
+58:def test_real_9076_numeric_fallback_contract():
+59:    raw = {
+60:        "raw_cot_connected": True,
+61:        "raw_cot_status": "CONNECTED_MATCHED",
+62:        "raw_cot_governing_inputs_complete": True,
+--- LINES 77-94 ---
+77:        {},
+78:        symbol="ETHUSDT",
+79:        timeframe="weekly",
+80:        raw_cot_override=raw,
+81:    )
+82:
+83:    g = out["governing_inputs"]
+84:    d = g["directions"]
+85:
+86:    assert d["asset_managers_overall"] == "bearish"
+87:    assert d["asset_managers_weekly"] == "bearish"
+88:
+89:    assert d["leveraged_funds_overall"] == "bearish"
+90:    assert d["leveraged_funds_weekly"] == "bullish"
+91:
+92:    assert g["missing_inputs"] == []
+93:    assert g["report_age_days"] == 0.0
+94:    assert g["fresh"] is True
+
+=== 4. V200 / V201 REFERENCE GRAPH ===
+/home/nawaf511/empire-core-new/backend/tests/contracts/test_v201_weekly_direction_handoff.py:1:from backend.app.runtime.ndsp_v201_launch_completion import (
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v200_score_inputs.py:18:CONTRACT_VERSION = "NDSP_SCORE_INPUTS_V200"
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v200_score_inputs.py:19:USER_AGENT = "NDSP-V200-Score-Inputs/1.0"
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v200_score_inputs.py:424:def attach_v200_score_inputs(
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_quality_live_nmp_wrapper.py:3:from backend.app.runtime.ndsp_v200_score_inputs import attach_v200_score_inputs as _ndsp_attach_v200_score_inputs_v200
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_quality_live_nmp_wrapper.py:4:# NDSP_V200_SCORE_INPUT_CONTRACT_PATCH
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_quality_live_nmp_wrapper.py:5:from backend.app.runtime.ndsp_v201_launch_completion import (
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_quality_live_nmp_wrapper.py:9:# NDSP_V201_V203_COMMERCIAL_LAUNCH_PATCH
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_quality_live_nmp_wrapper.py:642:            data = _ndsp_attach_v200_score_inputs_v200(
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v201_launch_completion.py:17:GOVERNING_INPUTS_VERSION = "NDSP_GOVERNING_INPUTS_V201"
+
+=== 5. PORT 9088-9095 PROCESS MAP ===
+--- PORT=9088 ---
+LISTEN 0      5          127.0.0.1:9088       0.0.0.0:*    users:(("python3",pid=2402288,fd=3)) 
+PORT_9088_PID=2402288
+2402288       1 nawaf511 س أغسطس  8 04:38:11 2026 /usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_history_v36.py serve
+CMDLINE=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_history_v36.py serve 
+ENV=MEMORY_PRESSURE_WATCH=/sys/fs/cgroup/system.slice/ndsp-completed-decisions-history-v36.service/memory.pressure
+ENV=NDSP_HISTORY_HOST=127.0.0.1
+ENV=NDSP_HISTORY_PORT=9088
+ENV=NDSP_HISTORY_SOURCE_URL=http://127.0.0.1:9087/api/completed-decisions?limit=100
+ENV=NDSP_HISTORY_DATA_DIR=/home/nawaf511/empire-core-new/var/ledger/completed-decisions-v36
+--- PORT=9089 ---
+LISTEN 0      5          127.0.0.1:9089       0.0.0.0:*    users:(("python3",pid=4122,fd=5))    
+PORT_9089_PID=4122
+   4122    3737 nawaf511 ج أغسطس  7 16:46:08 2026 python3 /home/nawaf511/empire-core-new/backend/services/ndsp-trial-clock-v164/server.py
+CMDLINE=python3 /home/nawaf511/empire-core-new/backend/services/ndsp-trial-clock-v164/server.py 
+ENV=name=ndsp-trial-clock-v164
+ENV=pm_exec_path=/home/nawaf511/empire-core-new/backend/services/ndsp-trial-clock-v164/server.py
+ENV=pm_out_log_path=/home/nawaf511/.pm2/logs/ndsp-trial-clock-v164-out.log
+ENV=pm_err_log_path=/home/nawaf511/.pm2/logs/ndsp-trial-clock-v164-error.log
+ENV=pm_pid_path=/home/nawaf511/.pm2/pids/ndsp-trial-clock-v164-1.pid
+ENV=REGISTER_URL=http://127.0.0.1:9028/api/register
+ENV=STATUS_URL=http://127.0.0.1:9001/api/trial/status
+ENV=PORT=9089
+ENV=LEDGER_DB=/home/nawaf511/empire-core-new/backend/services/ndsp-trial-clock-v164/data/trial_clock.sqlite3
+ENV=TELEGRAM_BOT_TOKEN=8570826779:AAF7wVKT57HAcMVN-MsfxCgkdurLDWr-nxo
+ENV=SESSION_URL=https://api.ndsp.app/api/auth/session
+ENV=XDG_RUNTIME_DIR=/run/user/1000
+ENV=DEBUGINFOD_URLS=https://debuginfod.ubuntu.com 
+ENV=NDSP_V164_PORT=9089
+--- PORT=9090 ---
+LISTEN 0      5          127.0.0.1:9090       0.0.0.0:*    users:(("python3",pid=4138,fd=7))    
+PORT_9090_PID=4138
+   4138    3737 nawaf511 ج أغسطس  7 16:46:08 2026 python3 /home/nawaf511/empire-core-new/backend/services/ndsp-launch-control-v167/server.py
+CMDLINE=python3 /home/nawaf511/empire-core-new/backend/services/ndsp-launch-control-v167/server.py 
+ENV=name=ndsp-launch-control-v167
+ENV=pm_exec_path=/home/nawaf511/empire-core-new/backend/services/ndsp-launch-control-v167/server.py
+ENV=pm_out_log_path=/home/nawaf511/.pm2/logs/ndsp-launch-control-v167-out.log
+ENV=pm_err_log_path=/home/nawaf511/.pm2/logs/ndsp-launch-control-v167-error.log
+ENV=pm_pid_path=/home/nawaf511/.pm2/pids/ndsp-launch-control-v167-2.pid
+ENV=REGISTER_URL=http://127.0.0.1:9028/api/register
+ENV=DECISION_ACCESS_URL=http://127.0.0.1:9020/api/auth/decision-room-access
+ENV=TRIAL_STATUS_URL=http://127.0.0.1:9001/api/trial/status
+ENV=CONSENT_VERSION=NDSP-LEGAL-2026-07-19-V1
+ENV=PORT=9090
+ENV=TELEGRAM_BOT_TOKEN=8570826779:AAF7wVKT57HAcMVN-MsfxCgkdurLDWr-nxo
+ENV=INTERNAL_EMAILS=nawaf.barrak.911@gmail.com,shla511511+ndsptrial20260719_122049@gmail.com,ncm2025.2025@gmail.com
+ENV=SESSION_URL=https://api.ndsp.app/api/auth/session
+ENV=XDG_RUNTIME_DIR=/run/user/1000
+ENV=DEBUGINFOD_URLS=https://debuginfod.ubuntu.com 
+ENV=DB_PATH=/home/nawaf511/empire-core-new/backend/services/ndsp-launch-control-v167/data/launch_control.sqlite3
+--- PORT=9091 ---
+LISTEN 0      5          127.0.0.1:9091       0.0.0.0:*    users:(("python3",pid=4161,fd=7))    
+PORT_9091_PID=4161
+   4161    3737 nawaf511 ج أغسطس  7 16:46:08 2026 python3 /home/nawaf511/empire-core-new/backend/services/ndsp-telegram-notifications-v182/server.py
+CMDLINE=python3 /home/nawaf511/empire-core-new/backend/services/ndsp-telegram-notifications-v182/server.py 
+ENV=TELEGRAM_BOT_TOKEN=8570826779:AAF7wVKT57HAcMVN-MsfxCgkdurLDWr-nxo
+ENV=NDSP_TELEGRAM_BOT_TOKEN=8938659092:AAGsWw8-Xu3hRUhblUgN3onZYNYGkmlaZlw
+ENV=XDG_RUNTIME_DIR=/run/user/1000
+ENV=DEBUGINFOD_URLS=https://debuginfod.ubuntu.com 
+ENV=pm_pid_path=/home/nawaf511/.pm2/pids/ndsp-telegram-notifications-v182-3.pid
+ENV=pm_err_log_path=/home/nawaf511/.pm2/logs/ndsp-telegram-notifications-v182-error.log
+ENV=pm_exec_path=/home/nawaf511/empire-core-new/backend/services/ndsp-telegram-notifications-v182/run.sh
+ENV=name=ndsp-telegram-notifications-v182
+ENV=pm_out_log_path=/home/nawaf511/.pm2/logs/ndsp-telegram-notifications-v182-out.log
+--- PORT=9092 ---
+LISTEN 0      5          127.0.0.1:9092       0.0.0.0:*    users:(("python3",pid=1350,fd=3))    
+PORT_9092_PID=1350
+   1350       1 nawaf511 ج أغسطس  7 16:46:00 2026 /usr/bin/python3 /home/nawaf511/empire-core-new/apps/ndsp-public-summary-v548/app.py
+CMDLINE=/usr/bin/python3 /home/nawaf511/empire-core-new/apps/ndsp-public-summary-v548/app.py 
+ENV=MEMORY_PRESSURE_WATCH=/sys/fs/cgroup/system.slice/ndsp-public-summary-v548.service/memory.pressure
+--- PORT=9093 ---
+LISTEN 0      5          127.0.0.1:9093       0.0.0.0:*                                         
+PORT_9093_PID=NOT_VISIBLE_OR_NONE
+--- PORT=9094 ---
+LISTEN 0      5          127.0.0.1:9094       0.0.0.0:*    users:(("python3",pid=575763,fd=6))  
+PORT_9094_PID=575763
+ 575763       1 nawaf511 ج أغسطس  7 19:14:30 2026 /usr/bin/python3 /home/nawaf511/empire-core-new/backend/services/ndsp-business-ops/app.py
+CMDLINE=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/services/ndsp-business-ops/app.py 
+ENV=MEMORY_PRESSURE_WATCH=/sys/fs/cgroup/system.slice/ndsp-business-ops.service/memory.pressure
+ENV=NDSP_OPS_HOST=127.0.0.1
+ENV=NDSP_OPS_PORT=9094
+ENV=NDSP_OPS_DB=/var/lib/ndsp-business-ops/ops.sqlite3
+ENV=NDSP_OPS_HASH_SALT=04680564e28e4e41261f3f804683b679134da5c455cad1b51eeb6358cdd68c3e
+ENV=NDSP_LOCAL_PACKAGES_URL=http://127.0.0.1:9022/api/packages
+ENV=NDSP_OPS_MONITOR_STATE=/var/lib/ndsp-business-ops/monitor-state.json
+ENV=NDSP_OPS_LATEST_MONITOR=/var/lib/ndsp-business-ops/latest-monitor.json
+ENV=NDSP_PUBLIC_BASE=https://my.ndsp.app
+ENV=NDSP_LANDING_BASE=https://ndsp.app
+ENV=NDSP_LOCAL_DECISION_BASE=http://127.0.0.1:9082
+ENV=NDSP_LOCAL_MAIL_USER=nawaf511
+ENV=NDSP_OPS_REPORT_DIR=/home/nawaf511/ndsp_launch_reports
+--- PORT=9095 ---
+LISTEN 0      5          127.0.0.1:9095       0.0.0.0:*                                         
+PORT_9095_PID=NOT_VISIBLE_OR_NONE
+--- PORT=9088 ---
+LISTEN 0      5          127.0.0.1:9088       0.0.0.0:*    users:(("python3",pid=2402288,fd=3)) 
+PORT_9088_PID=2402288
+2402288       1 nawaf511 س أغسطس  8 04:38:11 2026 /usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_history_v36.py serve
+CMDLINE=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_history_v36.py serve 
+ENV=MEMORY_PRESSURE_WATCH=/sys/fs/cgroup/system.slice/ndsp-completed-decisions-history-v36.service/memory.pressure
+ENV=NDSP_HISTORY_HOST=127.0.0.1
+ENV=NDSP_HISTORY_PORT=9088
+ENV=NDSP_HISTORY_SOURCE_URL=http://127.0.0.1:9087/api/completed-decisions?limit=100
+ENV=NDSP_HISTORY_DATA_DIR=/home/nawaf511/empire-core-new/var/ledger/completed-decisions-v36
+--- PORT=9089 ---
+LISTEN 0      5          127.0.0.1:9089       0.0.0.0:*    users:(("python3",pid=4122,fd=5))    
+PORT_9089_PID=4122
+   4122    3737 nawaf511 ج أغسطس  7 16:46:08 2026 python3 /home/nawaf511/empire-core-new/backend/services/ndsp-trial-clock-v164/server.py
+CMDLINE=python3 /home/nawaf511/empire-core-new/backend/services/ndsp-trial-clock-v164/server.py 
+ENV=name=ndsp-trial-clock-v164
+ENV=pm_exec_path=/home/nawaf511/empire-core-new/backend/services/ndsp-trial-clock-v164/server.py
+ENV=pm_out_log_path=/home/nawaf511/.pm2/logs/ndsp-trial-clock-v164-out.log
+ENV=pm_err_log_path=/home/nawaf511/.pm2/logs/ndsp-trial-clock-v164-error.log
+ENV=pm_pid_path=/home/nawaf511/.pm2/pids/ndsp-trial-clock-v164-1.pid
+ENV=REGISTER_URL=http://127.0.0.1:9028/api/register
+ENV=STATUS_URL=http://127.0.0.1:9001/api/trial/status
+ENV=PORT=9089
+ENV=LEDGER_DB=/home/nawaf511/empire-core-new/backend/services/ndsp-trial-clock-v164/data/trial_clock.sqlite3
+ENV=TELEGRAM_BOT_TOKEN=8570826779:AAF7wVKT57HAcMVN-MsfxCgkdurLDWr-nxo
+ENV=SESSION_URL=https://api.ndsp.app/api/auth/session
+ENV=XDG_RUNTIME_DIR=/run/user/1000
+ENV=DEBUGINFOD_URLS=https://debuginfod.ubuntu.com 
+ENV=NDSP_V164_PORT=9089
+--- PORT=9090 ---
+LISTEN 0      5          127.0.0.1:9090       0.0.0.0:*    users:(("python3",pid=4138,fd=7))    
+PORT_9090_PID=4138
+   4138    3737 nawaf511 ج أغسطس  7 16:46:08 2026 python3 /home/nawaf511/empire-core-new/backend/services/ndsp-launch-control-v167/server.py
+CMDLINE=python3 /home/nawaf511/empire-core-new/backend/services/ndsp-launch-control-v167/server.py 
+ENV=name=ndsp-launch-control-v167
+ENV=pm_exec_path=/home/nawaf511/empire-core-new/backend/services/ndsp-launch-control-v167/server.py
+ENV=pm_out_log_path=/home/nawaf511/.pm2/logs/ndsp-launch-control-v167-out.log
+ENV=pm_err_log_path=/home/nawaf511/.pm2/logs/ndsp-launch-control-v167-error.log
+ENV=pm_pid_path=/home/nawaf511/.pm2/pids/ndsp-launch-control-v167-2.pid
+ENV=REGISTER_URL=http://127.0.0.1:9028/api/register
+ENV=DECISION_ACCESS_URL=http://127.0.0.1:9020/api/auth/decision-room-access
+ENV=TRIAL_STATUS_URL=http://127.0.0.1:9001/api/trial/status
+ENV=CONSENT_VERSION=NDSP-LEGAL-2026-07-19-V1
+ENV=PORT=9090
+ENV=TELEGRAM_BOT_TOKEN=8570826779:AAF7wVKT57HAcMVN-MsfxCgkdurLDWr-nxo
+ENV=INTERNAL_EMAILS=nawaf.barrak.911@gmail.com,shla511511+ndsptrial20260719_122049@gmail.com,ncm2025.2025@gmail.com
+ENV=SESSION_URL=https://api.ndsp.app/api/auth/session
+ENV=XDG_RUNTIME_DIR=/run/user/1000
+ENV=DEBUGINFOD_URLS=https://debuginfod.ubuntu.com 
+ENV=DB_PATH=/home/nawaf511/empire-core-new/backend/services/ndsp-launch-control-v167/data/launch_control.sqlite3
+--- PORT=9091 ---
+LISTEN 0      5          127.0.0.1:9091       0.0.0.0:*    users:(("python3",pid=4161,fd=7))    
+PORT_9091_PID=4161
+   4161    3737 nawaf511 ج أغسطس  7 16:46:08 2026 python3 /home/nawaf511/empire-core-new/backend/services/ndsp-telegram-notifications-v182/server.py
+CMDLINE=python3 /home/nawaf511/empire-core-new/backend/services/ndsp-telegram-notifications-v182/server.py 
+ENV=TELEGRAM_BOT_TOKEN=8570826779:AAF7wVKT57HAcMVN-MsfxCgkdurLDWr-nxo
+ENV=NDSP_TELEGRAM_BOT_TOKEN=8938659092:AAGsWw8-Xu3hRUhblUgN3onZYNYGkmlaZlw
+ENV=XDG_RUNTIME_DIR=/run/user/1000
+ENV=DEBUGINFOD_URLS=https://debuginfod.ubuntu.com 
+ENV=pm_pid_path=/home/nawaf511/.pm2/pids/ndsp-telegram-notifications-v182-3.pid
+ENV=pm_err_log_path=/home/nawaf511/.pm2/logs/ndsp-telegram-notifications-v182-error.log
+ENV=pm_exec_path=/home/nawaf511/empire-core-new/backend/services/ndsp-telegram-notifications-v182/run.sh
+ENV=name=ndsp-telegram-notifications-v182
+ENV=pm_out_log_path=/home/nawaf511/.pm2/logs/ndsp-telegram-notifications-v182-out.log
+--- PORT=9092 ---
+LISTEN 0      5          127.0.0.1:9092       0.0.0.0:*    users:(("python3",pid=1350,fd=3))    
+PORT_9092_PID=1350
+   1350       1 nawaf511 ج أغسطس  7 16:46:00 2026 /usr/bin/python3 /home/nawaf511/empire-core-new/apps/ndsp-public-summary-v548/app.py
+CMDLINE=/usr/bin/python3 /home/nawaf511/empire-core-new/apps/ndsp-public-summary-v548/app.py 
+ENV=MEMORY_PRESSURE_WATCH=/sys/fs/cgroup/system.slice/ndsp-public-summary-v548.service/memory.pressure
+--- PORT=9093 ---
+LISTEN 0      5          127.0.0.1:9093       0.0.0.0:*                                         
+PORT_9093_PID=NOT_VISIBLE_OR_NONE
+--- PORT=9094 ---
+LISTEN 0      5          127.0.0.1:9094       0.0.0.0:*    users:(("python3",pid=575763,fd=6))  
+PORT_9094_PID=575763
+ 575763       1 nawaf511 ج أغسطس  7 19:14:30 2026 /usr/bin/python3 /home/nawaf511/empire-core-new/backend/services/ndsp-business-ops/app.py
+CMDLINE=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/services/ndsp-business-ops/app.py 
+ENV=MEMORY_PRESSURE_WATCH=/sys/fs/cgroup/system.slice/ndsp-business-ops.service/memory.pressure
+ENV=NDSP_OPS_HOST=127.0.0.1
+ENV=NDSP_OPS_PORT=9094
+ENV=NDSP_OPS_DB=/var/lib/ndsp-business-ops/ops.sqlite3
+ENV=NDSP_OPS_HASH_SALT=04680564e28e4e41261f3f804683b679134da5c455cad1b51eeb6358cdd68c3e
+ENV=NDSP_LOCAL_PACKAGES_URL=http://127.0.0.1:9022/api/packages
+ENV=NDSP_OPS_MONITOR_STATE=/var/lib/ndsp-business-ops/monitor-state.json
+ENV=NDSP_OPS_LATEST_MONITOR=/var/lib/ndsp-business-ops/latest-monitor.json
+ENV=NDSP_PUBLIC_BASE=https://my.ndsp.app
+ENV=NDSP_LANDING_BASE=https://ndsp.app
+ENV=NDSP_LOCAL_DECISION_BASE=http://127.0.0.1:9082
+ENV=NDSP_LOCAL_MAIL_USER=nawaf511
+ENV=NDSP_OPS_REPORT_DIR=/home/nawaf511/ndsp_launch_reports
+--- PORT=9095 ---
+LISTEN 0      5          127.0.0.1:9095       0.0.0.0:*                                         
+PORT_9095_PID=NOT_VISIBLE_OR_NONE
+
+=== 6. PROCESS -> SYSTEMD UNIT MAP ===
+===== PID=1350 =====
+0::/system.slice/ndsp-public-summary-v548.service
+UNIT=ndsp-public-summary-v548.service
+MainPID=1350
+ExecStart={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/empire-core-new/apps/ndsp-public-summary-v548/app.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }
+Environment=
+Id=ndsp-public-summary-v548.service
+Description=NDSP Public Summary V5.4.8
+ActiveState=active
+SubState=running
+
+===== PID=2402288 =====
+0::/system.slice/ndsp-completed-decisions-history-v36.service
+UNIT=ndsp-completed-decisions-history-v36.service
+MainPID=2402288
+ExecStart={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_history_v36.py serve ; ignore_errors=no ; start_time=[Sat 2026-08-08 04:38:11 CEST] ; stop_time=[n/a] ; pid=2402288 ; code=(null) ; status=0/0 }
+Environment=PYTHONUNBUFFERED=1 NDSP_HISTORY_HOST=127.0.0.1 NDSP_HISTORY_PORT=9088 "NDSP_HISTORY_SOURCE_URL=http://127.0.0.1:9087/api/completed-decisions?limit=100" NDSP_HISTORY_DATA_DIR=/home/nawaf511/empire-core-new/var/ledger/completed-decisions-v36
+Id=ndsp-completed-decisions-history-v36.service
+Description=NDSP Completed Decisions Append-Only History API V36
+ActiveState=active
+SubState=running
+
+===== PID=4122 =====
+0::/system.slice/pm2-nawaf511.service
+UNIT=pm2-nawaf511.service
+MainPID=0
+ExecStart={ path=/usr/local/bin/pm2 ; argv[]=/usr/local/bin/pm2 resurrect ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }
+Environment=HOME=/home/nawaf511 USER=nawaf511 PM2_HOME=/home/nawaf511/.pm2 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+Id=pm2-nawaf511.service
+Description=PM2 process manager bootstrap for nawaf511
+ActiveState=active
+SubState=exited
+
+===== PID=4138 =====
+0::/system.slice/pm2-nawaf511.service
+UNIT=pm2-nawaf511.service
+MainPID=0
+ExecStart={ path=/usr/local/bin/pm2 ; argv[]=/usr/local/bin/pm2 resurrect ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }
+Environment=HOME=/home/nawaf511 USER=nawaf511 PM2_HOME=/home/nawaf511/.pm2 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+Id=pm2-nawaf511.service
+Description=PM2 process manager bootstrap for nawaf511
+ActiveState=active
+SubState=exited
+
+===== PID=4161 =====
+0::/system.slice/pm2-nawaf511.service
+UNIT=pm2-nawaf511.service
+MainPID=0
+ExecStart={ path=/usr/local/bin/pm2 ; argv[]=/usr/local/bin/pm2 resurrect ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }
+Environment=HOME=/home/nawaf511 USER=nawaf511 PM2_HOME=/home/nawaf511/.pm2 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+Id=pm2-nawaf511.service
+Description=PM2 process manager bootstrap for nawaf511
+ActiveState=active
+SubState=exited
+
+===== PID=575763 =====
+0::/system.slice/ndsp-business-ops.service
+UNIT=ndsp-business-ops.service
+MainPID=575763
+ExecStart={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/services/ndsp-business-ops/app.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }
+Environment=
+Id=ndsp-business-ops.service
+Description=NDSP Business Operations V205
+ActiveState=active
+SubState=running
+
+
+=== 7. V200 / V201 SYSTEMD BINDING ===
+V200_V201_BOUND_SERVICE_COUNT=0
+
+=== 8. V201 CONTRACT TEST ===
+V201_PYTEST_RC=0
+......                                                                   [100%]
+6 passed in 0.04s
+V201_CONTRACT_TEST=PASS
+
+=== 9. FAILED SERVICES SEPARATE TRACK ===
+--- ndsp-contract-regression-v1-1.service ---
+Result=exit-code
+ExecMainStatus=1
+ExecStart={ path=/usr/bin/python3.12 ; argv[]=/usr/bin/python3.12 /home/nawaf511/ndsp_contract_regression_v1_1_1.py verify --baseline /home/nawaf511/.local/state/ndsp-contract-v1-1/baseline.json --output-dir /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1 --max-latency-ms 3000.0 ; ignore_errors=no ; start_time=[Sat 2026-08-08 04:49:13 CEST] ; stop_time=[Sat 2026-08-08 04:49:20 CEST] ; pid=2436365 ; code=exited ; status=1 }
+ActiveState=failed
+SubState=failed
+--- ndsp-production-monitor.service ---
+Result=exit-code
+ExecMainStatus=1
+ExecStart={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/services/ndsp-business-ops/monitor.py ; ignore_errors=no ; start_time=[Sat 2026-08-08 04:59:34 CEST] ; stop_time=[Sat 2026-08-08 04:59:37 CEST] ; pid=2470410 ; code=exited ; status=1 }
+ActiveState=failed
+SubState=failed
+أغسطس 08 03:20:51 vmi2934783 python3[2162971]: {"overall_status": "DEGRADED", "failures": ["url:decision_local", "url:decision_room"]}
+أغسطس 08 03:26:01 vmi2934783 python3[2179461]: {"overall_status": "DEGRADED", "failures": ["url:decision_local", "url:decision_room"]}
+أغسطس 08 03:31:06 vmi2934783 python3[2194953]: {"overall_status": "DEGRADED", "failures": ["url:decision_local", "url:decision_room"]}
+أغسطس 08 03:36:30 vmi2934783 python3[2210910]: {"overall_status": "DEGRADED", "failures": ["url:decision_local", "url:decision_room"]}
+أغسطس 08 03:41:38 vmi2934783 python3[2226936]: {"overall_status": "DEGRADED", "failures": ["url:decision_local", "url:decision_room"]}
+أغسطس 08 03:46:50 vmi2934783 python3[2243136]: {"overall_status": "DEGRADED", "failures": ["url:decision_local", "url:decision_room"]}
+أغسطس 08 03:52:06 vmi2934783 python3[2258492]: {"overall_status": "DEGRADED", "failures": ["url:decision_local", "url:decision_room"]}
+أغسطس 08 03:57:04 vmi2934783 python3[2275422]: {"overall_status": "DEGRADED", "failures": ["url:decision_local", "url:decision_room"]}
+أغسطس 08 04:02:25 vmi2934783 python3[2291558]: {"overall_status": "DEGRADED", "failures": ["url:decision_local", "url:decision_room"]}
+أغسطس 08 04:07:44 vmi2934783 python3[2307687]: {"overall_status": "DEGRADED", "failures": ["url:decision_local", "url:decision_room"]}
+أغسطس 08 04:12:57 vmi2934783 python3[2323664]: {"overall_status": "DEGRADED", "failures": ["url:decision_local", "url:decision_room"]}
+أغسطس 08 04:18:21 vmi2934783 python3[2340875]: {"overall_status": "DEGRADED", "failures": ["url:decision_local", "url:decision_room"]}
+أغسطس 08 04:23:30 vmi2934783 python3[2355888]: {"overall_status": "DEGRADED", "failures": ["url:decision_local", "url:decision_room"]}
+أغسطس 08 04:28:35 vmi2934783 python3[2372558]: {"overall_status": "DEGRADED", "failures": ["url:decision_local", "url:decision_room"]}
+أغسطس 08 04:33:50 vmi2934783 python3[2389113]: {"overall_status": "DEGRADED", "failures": ["url:decision_local", "url:decision_room"]}
+أغسطس 08 04:38:54 vmi2934783 python3[2404449]: {"overall_status": "DEGRADED", "failures": ["url:decision_local", "url:decision_room"]}
+أغسطس 08 04:44:01 vmi2934783 python3[2420449]: {"overall_status": "DEGRADED", "failures": ["url:decision_local", "url:decision_room"]}
+أغسطس 08 04:49:16 vmi2934783 python3[2436366]: {"overall_status": "DEGRADED", "failures": ["url:decision_local", "url:decision_room"]}
+أغسطس 08 04:54:34 vmi2934783 python3[2452888]: {"overall_status": "DEGRADED", "failures": ["url:decision_local", "url:decision_room"]}
+أغسطس 08 04:59:37 vmi2934783 python3[2470410]: {"overall_status": "DEGRADED", "failures": ["url:decision_local", "url:decision_room"]}
+
+=== 10. FINAL CLASSIFICATION ===
+TRUE_DOWNSTREAM_FILES=1
+PORTS_WITH_VISIBLE_PID=6
+SYSTEMD_UNITS_RESOLVED=4
+V200_REFERENCE_GRAPH=FOUND
+V201_REFERENCE_GRAPH=FOUND
+POST_V36_CHAIN_STATUS=DIRECT_DOWNSTREAM_REFERENCE_FOUND
+NEXT_ACTION=PROVE_IDENTIFIED_DOWNSTREAM_CONTRACT
+PATCH_ALLOWED=NO
+FINAL_RESULT=PASS_READ_ONLY_TRACE
+
+=== 11. CHECKSUMS ===
+CHECKSUMS=PASS
+
+============================================================
+=== FINAL SUMMARY ===
+V36_STATE=active
+V36_HTTP=200
+V36_HEALTH=PASS
+V36_RECORD_COUNT= 5
+TRUE_DOWNSTREAM_REFERENCE_LINES=2
+TRUE_DOWNSTREAM_REFERENCE_FILES=1
+TRUE_DOWNSTREAM_FILE=/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/hooks/useCompletedDecisionsV37.js
+V200_V201_BOUND_SERVICE_COUNT=0
+V201_PYTEST_RC=0
+V201_CONTRACT_TEST=PASS
+TRUE_DOWNSTREAM_FILES=1
+PORTS_WITH_VISIBLE_PID=6
+SYSTEMD_UNITS_RESOLVED=4
+V200_REFERENCE_GRAPH=FOUND
+V201_REFERENCE_GRAPH=FOUND
+POST_V36_CHAIN_STATUS=DIRECT_DOWNSTREAM_REFERENCE_FOUND
+NEXT_ACTION=PROVE_IDENTIFIED_DOWNSTREAM_CONTRACT
+PATCH_ALLOWED=NO
+FINAL_RESULT=PASS_READ_ONLY_TRACE
+FILES_MODIFIED=0
+SERVICES_RESTARTED=0
+RUNTIME_LOGIC_MODIFIED=0
+AUDIT=/home/nawaf511/empire-core-new/var/audits/post-v36-true-downstream-trace-v2-20260808-050357
+REPORT=/home/nawaf511/empire-core-new/var/audits/post-v36-true-downstream-trace-v2-20260808-050357/report.txt
+DOWNSTREAM_REFERENCES=/home/nawaf511/empire-core-new/var/audits/post-v36-true-downstream-trace-v2-20260808-050357/downstream-references.txt
+PROCESS_MAP=/home/nawaf511/empire-core-new/var/audits/post-v36-true-downstream-trace-v2-20260808-050357/process-map.txt
+UNIT_MAP=/home/nawaf511/empire-core-new/var/audits/post-v36-true-downstream-trace-v2-20260808-050357/unit-map.txt
+CHECKSUMS=/home/nawaf511/empire-core-new/var/audits/post-v36-true-downstream-trace-v2-20260808-050357/SHA256SUMS
+=== POST-V36 TRUE DOWNSTREAM TRACE V2 COMPLETE ===

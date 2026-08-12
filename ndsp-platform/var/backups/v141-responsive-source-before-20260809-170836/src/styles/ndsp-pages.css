@@ -1,0 +1,515 @@
+.sovereign-page__glow {
+  position: absolute;
+  top: 180px;
+  left: 38%;
+  width: 500px;
+  height: 340px;
+  pointer-events: none;
+  border-radius: 50%;
+  background: rgba(41, 182, 246, 0.025);
+  filter: blur(100px);
+}
+
+.sovereign-page-loading {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding-top: 106px;
+  background: var(--ndsp-canvas);
+  color: rgba(245, 246, 247, 0.45);
+}
+
+.sovereign-panel--chart {
+  margin-top: 22px;
+}
+
+.sovereign-panel__heading h2 {
+  margin: 8px 0 0;
+  color: rgba(245, 246, 247, 0.88);
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.sovereign-freshness {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(245, 246, 247, 0.38);
+  font-size: 11px;
+}
+
+.sovereign-freshness svg {
+  color: var(--ndsp-sky);
+}
+
+.sovereign-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.sovereign-kpi > span {
+  color: rgba(245, 246, 247, 0.42);
+  font-size: 12px;
+}
+
+.sovereign-kpi > small {
+  display: block;
+  margin-top: 10px;
+  color: rgba(90, 200, 250, 0.42);
+  font-family: var(--ndsp-font-mono);
+  font-size: 8px;
+}
+
+.sovereign-core-page-card__brand {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 42px;
+  border-left: 1px solid rgba(212, 175, 55, 0.22);
+}
+
+.sovereign-core-page-card__brand small {
+  margin-top: 9px;
+  color: rgba(245, 246, 247, 0.22);
+  font-family: var(--ndsp-font-mono);
+  font-size: 8px;
+  letter-spacing: 0.1em;
+}
+
+.sovereign-core-page-card__body {
+  padding: 50px;
+}
+
+.sovereign-core-page-card__body > span {
+  color: rgba(90, 200, 250, 0.48);
+  font-family: var(--ndsp-font-mono);
+  font-size: 9px;
+}
+
+.sovereign-core-page-card__body h2 {
+  margin: 16px 0 0;
+  color: rgba(245, 246, 247, 0.92);
+  font-size: 38px;
+  font-weight: 400;
+}
+
+.sovereign-core-page-card__body p {
+  max-width: 650px;
+  margin: 18px 0 30px;
+  color: rgba(245, 246, 247, 0.42);
+  line-height: 1.9;
+}
+
+.sovereign-trust-cards {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.sovereign-trust-cards span {
+  color: rgba(245, 246, 247, 0.76);
+}
+
+.sovereign-trust-cards strong {
+  color: rgba(245, 246, 247, 0.31);
+  font-family: var(--ndsp-font-mono);
+  font-size: 8px;
+  font-weight: 400;
+}
+
+.sovereign-grid-wrap {
+  overflow: hidden;
+  border: 1px solid rgba(245, 246, 247, 0.06);
+}
+
+.sovereign-flow .react-flow__node {
+  min-width: 155px;
+  padding: 13px 18px;
+  border: 1px solid rgba(41, 182, 246, 0.22);
+  border-radius: 4px;
+  background: #0d1419;
+  color: rgba(245, 246, 247, 0.72);
+  font-family: var(--ndsp-font-ar);
+  font-size: 12px;
+}
+
+.sovereign-flow .sovereign-flow-core {
+  border-color: rgba(212, 175, 55, 0.72);
+  color: var(--ndsp-gold-bright);
+  box-shadow: 0 0 35px rgba(212, 175, 55, 0.07);
+}
+
+.sovereign-flow .sovereign-flow-direction {
+  border-color: rgba(212, 175, 55, 0.42);
+  background: rgba(63, 45, 17, 0.38);
+  color: var(--ndsp-gold-pale);
+}
+
+.sovereign-flow .react-flow__controls {
+  overflow: hidden;
+  border: 1px solid var(--ndsp-border);
+  border-radius: 4px;
+  box-shadow: none;
+}
+
+.sovereign-flow .react-flow__controls-button {
+  border-color: var(--ndsp-border);
+  background: #10161b;
+  fill: rgba(245, 246, 247, 0.65);
+}
+
+.sovereign-account-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.sovereign-account-card > svg {
+  color: var(--ndsp-sky);
+}
+
+.sovereign-account-card h2 {
+  margin: 38px 0 0;
+  color: rgba(245, 246, 247, 0.9);
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.sovereign-account-card p {
+  min-height: 70px;
+  margin-top: 15px;
+  color: rgba(245, 246, 247, 0.4);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.sovereign-account-card a {
+  display: inline-flex;
+  margin-top: 18px;
+  color: var(--ndsp-gold-bright);
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.sovereign-account-card--gold > svg {
+  color: var(--ndsp-gold-bright);
+}
+
+@media (max-width: 1100px) {
+  .sovereign-kpi-grid {
+    grid-template-columns: 1fr;
+  }
+  .sovereign-trust-cards {
+    grid-template-columns: 1fr;
+  }
+  .sovereign-account-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sovereign-core-page-card {
+    grid-template-columns: 1fr;
+  }
+
+  .sovereign-core-page-card__brand {
+    border-left: 0;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.22);
+  }
+}
+
+@media (max-width: 680px) {
+
+  .sovereign-page__header {
+    margin-bottom: 45px;
+  }
+
+  .sovereign-page__header h1 {
+    font-size: 38px;
+  }
+
+  .sovereign-panel {
+    padding: 18px;
+  }
+
+  .sovereign-panel__heading {
+    flex-direction: column;
+  }
+
+  .sovereign-core-page-card__body {
+    padding: 28px;
+  }
+
+  .sovereign-flow {
+    height: 470px;
+  }
+
+  .sovereign-page {
+    padding-top: 130px;
+  }
+
+  .sovereign-page__container {
+    width: calc(100% - 38px);
+  }
+}
+
+
+/* ============================================================
+   NDSP V1.4.1 — APPROVED INTERNAL PAGE FOUNDATION
+   Canonical source. Not a runtime patch layer.
+   ============================================================ */
+/*
+ * NDSP V1.4.1
+ * Consolidated from the approved exact visual reference.
+ * This content now belongs to the canonical source layer.
+ */
+.sovereign-page {
+  min-height: 100vh;
+
+  padding-top: 154px;
+
+  background:
+    radial-gradient(
+      ellipse at 72% 15%,
+      color-mix(
+        in oklch,
+        var(--brand-sky) 2.6%,
+        transparent
+      ),
+      transparent 34%
+    ),
+    var(--background);
+}
+
+.sovereign-page__container {
+  width:
+    min(
+      1280px,
+      calc(100% - 80px)
+    );
+}
+
+.sovereign-page__header {
+  margin-bottom: 58px;
+}
+
+.sovereign-page__header h1 {
+  font-weight: 400;
+
+  letter-spacing: -0.02em;
+}
+
+.sovereign-page__header h1 strong {
+  color: var(--brand-gold);
+}
+
+.sovereign-page__header > p {
+  color:
+    color-mix(
+      in oklch,
+      var(--foreground) 44%,
+      transparent
+    );
+}
+
+.sovereign-panel {
+  border-color:
+    color-mix(
+      in oklch,
+      var(--foreground) 8%,
+      transparent
+    );
+
+  border-radius: 0;
+
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(
+        in oklch,
+        var(--brand-panel) 96%,
+        var(--brand-sky) 1%
+      ),
+      var(--brand-panel)
+    );
+
+  box-shadow: none;
+}
+
+.sovereign-kpi {
+  border-color:
+    color-mix(
+      in oklch,
+      var(--foreground) 8%,
+      transparent
+    );
+
+  border-radius: 0;
+
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(
+        in oklch,
+        var(--brand-panel) 96%,
+        var(--brand-sky) 1%
+      ),
+      var(--brand-panel)
+    );
+
+  box-shadow: none;
+}
+
+.sovereign-account-card {
+  border-color:
+    color-mix(
+      in oklch,
+      var(--foreground) 8%,
+      transparent
+    );
+
+  border-radius: 0;
+
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(
+        in oklch,
+        var(--brand-panel) 96%,
+        var(--brand-sky) 1%
+      ),
+      var(--brand-panel)
+    );
+
+  box-shadow: none;
+}
+
+.sovereign-panel__heading {
+  border-bottom:
+    1px solid
+    color-mix(
+      in oklch,
+      var(--foreground) 6%,
+      transparent
+    );
+
+  padding-bottom: 20px;
+}
+
+.sovereign-panel__heading span {
+  color:
+    color-mix(
+      in oklch,
+      var(--brand-sky) 58%,
+      transparent
+    );
+
+  letter-spacing: 0.18em;
+}
+
+.sovereign-kpi > strong {
+  color: var(--brand-gold);
+}
+
+.sovereign-core-page-card {
+  border-color:
+    color-mix(
+      in oklch,
+      var(--brand-gold) 56%,
+      transparent
+    );
+
+  border-radius: 0;
+
+  background:
+    radial-gradient(
+      ellipse at 12% 50%,
+      color-mix(
+        in oklch,
+        var(--brand-gold) 5%,
+        transparent
+      ),
+      transparent 30%
+    ),
+    var(--brand-panel);
+}
+
+.sovereign-core-page-card__brand span {
+  color: var(--brand-gold);
+}
+
+.sovereign-trust-cards article {
+  border-color:
+    color-mix(
+      in oklch,
+      var(--foreground) 8%,
+      transparent
+    );
+
+  border-radius: 0;
+
+  background: var(--brand-panel);
+}
+
+.sovereign-trust-cards svg {
+  color: var(--brand-gold);
+}
+
+.sovereign-account-card--gold {
+  border-color:
+    color-mix(
+      in oklch,
+      var(--brand-gold) 48%,
+      transparent
+    );
+
+  background:
+    radial-gradient(
+      circle at 15% 15%,
+      color-mix(
+        in oklch,
+        var(--brand-gold) 5%,
+        transparent
+      ),
+      transparent 42%
+    ),
+    var(--brand-panel);
+}
+
+.sovereign-demo-notice {
+  border-color:
+    color-mix(
+      in oklch,
+      var(--brand-gold) 28%,
+      transparent
+    );
+
+  border-radius: 0;
+
+  background:
+    color-mix(
+      in oklch,
+      var(--brand-gold) 3%,
+      transparent
+    );
+
+  color:
+    color-mix(
+      in oklch,
+      var(--brand-gold) 72%,
+      var(--foreground)
+    );
+}
+
+.sovereign-flow {
+  background:
+    radial-gradient(
+      circle at center,
+      color-mix(
+        in oklch,
+        var(--brand-sky) 2.2%,
+        transparent
+      ),
+      transparent 46%
+    );
+}

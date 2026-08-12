@@ -1,0 +1,49 @@
+===== /home/nawaf511/empire-core-new/frontend/user-portal-vite/package.json =====
+{
+  "name": "ndsp-user-portal-vite",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0 --port 5173",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0 --port 4173"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "vite": "^6.0.7",
+    "@vitejs/plugin-react": "^4.3.4"
+  }
+}
+
+===== /home/nawaf511/empire-core-new/frontend/user-portal-vite/vite.config.js =====
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+
+export default defineConfig({
+  plugins: [react()],
+
+  server: {
+    host: "0.0.0.0",
+    port: 5173,
+    strictPort: true,
+
+    proxy: {
+      "/api": {
+        target: "https://api.ndsp.app",
+        changeOrigin: true,
+        secure: true
+      }
+    }
+  },
+
+  preview: {
+    host: "0.0.0.0",
+    port: 4173,
+    strictPort: true
+  }
+});
+

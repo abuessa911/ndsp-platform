@@ -1,0 +1,112 @@
+
+=== local_health ===
+URL=http://127.0.0.1:9094/health
+HTTP=200
+--- HEADERS ---
+HTTP/1.0 200 OK
+Server: NDSPBusinessOps/204 Python/3.12.3
+Date: Wed, 29 Jul 2026 23:24:30 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 74
+Cache-Control: no-store
+X-Content-Type-Options: nosniff
+Referrer-Policy: same-origin
+
+--- BODY (FIRST 4000 BYTES) ---
+{"ok":true,"service":"ndsp-business-ops","version":"V205","database":true}
+
+=== local_root ===
+URL=http://127.0.0.1:9094/
+HTTP=404
+--- HEADERS ---
+HTTP/1.0 404 Not Found
+Server: NDSPBusinessOps/204 Python/3.12.3
+Date: Wed, 29 Jul 2026 23:24:30 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 43
+Cache-Control: no-store
+X-Content-Type-Options: nosniff
+Referrer-Policy: same-origin
+
+--- BODY (FIRST 4000 BYTES) ---
+{"ok":false,"error":"NOT_FOUND","path":"/"}
+
+=== local_public_plans ===
+URL=http://127.0.0.1:9094/api/ops/public/plans
+HTTP=200
+--- HEADERS ---
+HTTP/1.0 200 OK
+Server: NDSPBusinessOps/204 Python/3.12.3
+Date: Wed, 29 Jul 2026 23:24:30 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 1112
+Cache-Control: no-store
+X-Content-Type-Options: nosniff
+Referrer-Policy: same-origin
+
+--- BODY (FIRST 4000 BYTES) ---
+{"ok":true,"source":"existing_ndsp_packages_api","packages":[{"code":"trial","name":"Free","price":"0.00","description":"تجربة مجانية لمدة 16 يوم","trial_days":16,"features":["دخول أساسي","استبيان نهاية التجربة"],"limits":{"assets":3,"layers":"basic"},"is_active":true},{"code":"free","name":"Free","price":"0.00","description":"باقة دخول وتجربة أساسية","trial_days":16,"features":["BTC","ETH","GOLD","طبقات أساسية"],"limits":{"assets":3,"layers":"basic"},"is_active":true},{"code":"pro","name":"Pro","price":"49.00","description":"باقة احترافية لدعم القرار والسياق والتحليل","trial_days":16,"features":["BTC","ETH","XRP","SOL","GOLD","NASDAQ","طبقات متقدمة"],"limits":{"assets":6,"layers":"advanced"},"is_active":true},{"code":"elite","name":"Elite","price":"149.00","description":"باقة Elite بكامل تجربة NDSP","trial_days":16,"features":["كل الأصول","كل الطبقات","صلاحيات سيادية"],"limits":{"assets":"all","layers":"all"},"is_active":true}]}
+
+=== local_subscriptions ===
+URL=http://127.0.0.1:9094/api/subscriptions
+HTTP=404
+--- HEADERS ---
+HTTP/1.0 404 Not Found
+Server: NDSPBusinessOps/204 Python/3.12.3
+Date: Wed, 29 Jul 2026 23:24:30 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 60
+Cache-Control: no-store
+X-Content-Type-Options: nosniff
+Referrer-Policy: same-origin
+
+--- BODY (FIRST 4000 BYTES) ---
+{"ok":false,"error":"NOT_FOUND","path":"/api/subscriptions"}
+
+=== public_ops_health ===
+URL=https://my.ndsp.app/api/ops/health
+HTTP=200
+--- HEADERS ---
+HTTP/2 200 
+server: nginx/1.24.0 (Ubuntu)
+date: Wed, 29 Jul 2026 23:24:30 GMT
+content-type: application/json; charset=utf-8
+content-length: 74
+cache-control: no-store
+x-content-type-options: nosniff
+referrer-policy: same-origin
+strict-transport-security: max-age=31536000
+x-content-type-options: nosniff
+referrer-policy: strict-origin-when-cross-origin
+x-frame-options: SAMEORIGIN
+content-security-policy: default-src 'self' https: data: blob: 'unsafe-inline' 'unsafe-eval'; connect-src 'self' https: wss:; frame-ancestors 'self'; base-uri 'self'; object-src 'none';
+permissions-policy: geolocation=(), microphone=(), camera=()
+x-ndsp-portal: approved-design-only-d10-d4
+x-content-type-options: nosniff
+
+--- BODY (FIRST 4000 BYTES) ---
+{"ok":true,"service":"ndsp-business-ops","version":"V205","database":true}
+
+=== public_plans ===
+URL=https://my.ndsp.app/api/ops/public/plans
+HTTP=200
+--- HEADERS ---
+HTTP/2 200 
+server: nginx/1.24.0 (Ubuntu)
+date: Wed, 29 Jul 2026 23:24:30 GMT
+content-type: application/json; charset=utf-8
+content-length: 1112
+cache-control: no-store
+x-content-type-options: nosniff
+referrer-policy: same-origin
+strict-transport-security: max-age=31536000
+x-content-type-options: nosniff
+referrer-policy: strict-origin-when-cross-origin
+x-frame-options: SAMEORIGIN
+content-security-policy: default-src 'self' https: data: blob: 'unsafe-inline' 'unsafe-eval'; connect-src 'self' https: wss:; frame-ancestors 'self'; base-uri 'self'; object-src 'none';
+permissions-policy: geolocation=(), microphone=(), camera=()
+x-ndsp-portal: approved-design-only-d10-d4
+x-content-type-options: nosniff
+
+--- BODY (FIRST 4000 BYTES) ---
+{"ok":true,"source":"existing_ndsp_packages_api","packages":[{"code":"trial","name":"Free","price":"0.00","description":"تجربة مجانية لمدة 16 يوم","trial_days":16,"features":["دخول أساسي","استبيان نهاية التجربة"],"limits":{"assets":3,"layers":"basic"},"is_active":true},{"code":"free","name":"Free","price":"0.00","description":"باقة دخول وتجربة أساسية","trial_days":16,"features":["BTC","ETH","GOLD","طبقات أساسية"],"limits":{"assets":3,"layers":"basic"},"is_active":true},{"code":"pro","name":"Pro","price":"49.00","description":"باقة احترافية لدعم القرار والسياق والتحليل","trial_days":16,"features":["BTC","ETH","XRP","SOL","GOLD","NASDAQ","طبقات متقدمة"],"limits":{"assets":6,"layers":"advanced"},"is_active":true},{"code":"elite","name":"Elite","price":"149.00","description":"باقة Elite بكامل تجربة NDSP","trial_days":16,"features":["كل الأصول","كل الطبقات","صلاحيات سيادية"],"limits":{"assets":"all","layers":"all"},"is_active":true}]}

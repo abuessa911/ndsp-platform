@@ -1,0 +1,16 @@
+app.py
+app.py.bak_source_route_20260625_094003
+app.py.bak_v2_governance_20260625_100624
+__pycache__/app.cpython-312.pyc
+requirements.txt
+venv/bin/activate
+venv/bin/activate.csh
+venv/bin/activate.fish
+venv/bin/Activate.ps1
+venv/bin/fastapi
+venv/bin/idna
+venv/bin/pip
+venv/bin/pip3
+venv/bin/pip3.12
+venv/bin/uvicorn
+venv/pyvenv.cfg

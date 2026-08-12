@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0.0",
+  "registry_id": "NDSP-MASTER-GOVERNANCE-REGISTRY",
+  "project": "NDSP — Nawaf Decision Support Platform",
+  "generated_at": "2026-07-12T17:54:46+02:00",
+  "authority": "SUPREME_GOVERNANCE_INDEX",
+  "decision_layer_count": 16,
+  "platform_capability_count": 28,
+  "canonical_decision_root": "backend/layers/canonical_v1",
+  "canonical_platform_root": "backend/platform/canonical_v1",
+  "registries": {
+    "layers": {
+      "path": "docs/03-contracts/NDSP_16_LAYER_CORE_REGISTRY_V1.json",
+      "exists": true
+    },
+    "capabilities": {
+      "path": "docs/03-contracts/NDSP_PLATFORM_CAPABILITY_REGISTRY_V1.json",
+      "exists": true
+    },
+    "assets": {
+      "path": "docs/03-contracts/NDSP_ASSET_MASTER_REGISTRY_V1.json",
+      "exists": true
+    },
+    "sources": {
+      "path": "docs/03-contracts/NDSP_SOURCE_REGISTRY_V1.json",
+      "exists": true
+    },
+    "contracts": {
+      "path": "docs/03-contracts/NDSP_SCHEMA_CONTRACT_REGISTRY_V1.json",
+      "exists": true
+    },
+    "services": {
+      "path": "docs/99-governance-baseline/SERVICE_REGISTRY.json",
+      "exists": true
+    },
+    "apis": {
+      "path": "docs/99-governance-baseline/API_REGISTRY.json",
+      "exists": true
+    },
+    "documentation": {
+      "path": "docs/99-governance-baseline/DOCUMENTATION_REGISTRY.json",
+      "exists": true
+    }
+  },
+  "governance_roots": [
+    "docs/10-enterprise-governance",
+    "docs/11-architecture-decisions",
+    "docs/98-knowledge",
+    "docs/99-governance-baseline"
+  ],
+  "quality_gates": [
+    "syntax",
+    "layer_registry",
+    "capability_boundary",
+    "contracts",
+    "architecture",
+    "runtime",
+    "identity",
+    "documentation",
+    "security_hygiene",
+    "certification"
+  ],
+  "change_control_required": true,
+  "live_decision_authority": "canonical_16_layer_core_only"
+}

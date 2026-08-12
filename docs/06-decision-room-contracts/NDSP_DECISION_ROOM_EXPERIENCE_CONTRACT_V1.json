@@ -1,0 +1,1010 @@
+{
+  "contract_name": "NDSP_DECISION_ROOM_EXPERIENCE_CONTRACT_V1",
+  "contract_type": "experience_layer_above_decision_contract",
+  "public_safe": true,
+  "not_financial_advice": true,
+  "not_execution_system": true,
+  "purpose_ar": "تحويل قراءة NDSP من مخرجات قرار خام إلى تجربة غرفة قرار مفهومة، محمية، قابلة للمتابعة، وقابلة للبيع بدون لغة تنفيذ.",
+  "purpose_en": "Transform NDSP readings from raw decision outputs into a clear, protected, monitorable, and commercially understandable decision-room experience without execution language.",
+  "decision_room_identity_layer": {
+    "room_name_ar": "غرفة دعم القرار",
+    "room_name_en": "Decision Support Room",
+    "identity_statement_ar": "NDSP ليست لوحة أسعار فقط؛ هي غرفة دعم قرار تبني فهمًا من البيانات والسياق والمستويات والتحقق والمخاطر.",
+    "identity_statement_en": "NDSP is not just a market dashboard; it is a decision-support room that builds understanding from data, context, levels, validation, and risk.",
+    "core_promise_ar": "منصة لا تعطي أمرًا، بل تبني فهمًا.",
+    "core_promise_en": "A platform that does not issue orders; it builds understanding.",
+    "user_question_answered_ar": "أين أنا الآن داخل رحلة القرار؟",
+    "visible_in": [
+      "decision_center",
+      "decision_radar",
+      "report_export",
+      "share_page",
+      "user_guide"
+    ],
+    "ui_rule_ar": "اعرض NDSP كغرفة دعم قرار، وليس كواجهة توصيات أو أوامر."
+  },
+  "system_commercial_identity_inside_reading": {
+    "section_label_ar": "هوية القراءة داخل NDSP",
+    "section_label_en": "NDSP Reading Identity",
+    "purpose_ar": "تحديد المنتجات والأختام والإشارات العامة التي يراها المستخدم وربطها باسم نواف دون كشف المعادلات.",
+    "linked_to_brand": "Nawaf",
+    "public_products": [
+      {
+        "id": "NAWAF_GOLDEN_READING_SIGNAL",
+        "label_ar": "إشارة نواف الذهبية",
+        "label_en": "Nawaf Golden Reading Signal",
+        "type": "public_reading_signal",
+        "public_safe": true,
+        "not_execution_signal": true,
+        "description_ar": "ختم قراءة يدل على أن عدة شروط دعم قرار وصلت إلى مستوى قوة مرتفع، دون أن يعني توصية أو أمر تنفيذ.",
+        "display_priority": 1
+      },
+      {
+        "id": "NAWAF_ENHANCED_GOLDEN_READING_SIGNAL",
+        "label_ar": "إشارة نواف الذهبية المعززة",
+        "label_en": "Nawaf Enhanced Golden Reading Signal",
+        "type": "public_enhanced_reading_signal",
+        "public_safe": true,
+        "not_execution_signal": true,
+        "description_ar": "ختم قراءة معزز لا يظهر إلا عند تحقق إضافي من الأفق، NMP، المستويات، المخاطر، ومحامي الشيطان.",
+        "display_priority": 2
+      },
+      {
+        "id": "COMPLETED_READING_STAMP",
+        "label_ar": "ختم القراءة المكتملة",
+        "label_en": "Completed Reading Stamp",
+        "type": "reading_state_stamp",
+        "description_ar": "يدل على أن القراءة اكتملت حسب منطق NDSP، ولا يعني صفقة أو توصية.",
+        "display_priority": 3
+      },
+      {
+        "id": "UNDER_MONITORING_STAMP",
+        "label_ar": "ختم القراءة تحت المتابعة",
+        "label_en": "Under Monitoring Stamp",
+        "type": "reading_state_stamp",
+        "description_ar": "يدل على وجود قراءة صالحة للمتابعة لكنها غير مكتملة.",
+        "display_priority": 4
+      },
+      {
+        "id": "CAUTION_STAMP",
+        "label_ar": "ختم الحذر",
+        "label_en": "Caution Stamp",
+        "type": "risk_state_stamp",
+        "description_ar": "يدل على وجود عامل حذر يمنع الجزم أو الاكتمال.",
+        "display_priority": 5
+      },
+      {
+        "id": "DEVILS_ADVOCATE_STAMP",
+        "label_ar": "ختم محامي الشيطان",
+        "label_en": "Devil's Advocate Stamp",
+        "type": "governance_gate_stamp",
+        "description_ar": "يدل على أن القراءة خضعت لاختبار اعتراض داخلي وقد تكون محذرة أو محجوبة.",
+        "display_priority": 6
+      }
+    ],
+    "value_translation": {
+      "question_ar": "كيف تتحول قوة المنظومة إلى قيمة مفهومة؟",
+      "answer_ar": "تتحول القوة إلى أختام قراءة، أسباب واضحة، نقاط متابعة، تقارير، وتنبيهات آمنة تساعد المستخدم على فهم الحالة دون تلقي أمر تنفيذ.",
+      "value_units": [
+        "وضوح القراءة",
+        "سبب الحذر",
+        "سبب عدم الاكتمال",
+        "المستوى المرجعي الأهم",
+        "توفر NMP",
+        "حالة الإشارة الذهبية",
+        "الخطوة التعليمية التالية"
+      ]
+    }
+  },
+  "public_signal_taxonomy": {
+    "section_label_ar": "تصنيف إشارات نواف العامة",
+    "public_safe": true,
+    "signals": [
+      {
+        "id": "GOLDEN",
+        "label_ar": "إشارة نواف الذهبية",
+        "allowed_states": [
+          "UNAVAILABLE",
+          "UNDER_MONITORING",
+          "NEEDS_CONFIRMATION",
+          "COMPLETED_READING",
+          "BLOCKED"
+        ],
+        "meaning_ar": "قراءة قوية أولية داخل NDSP.",
+        "does_not_mean_ar": "لا تعني توصية أو أمر تنفيذ."
+      },
+      {
+        "id": "ENHANCED_GOLDEN",
+        "label_ar": "إشارة نواف الذهبية المعززة",
+        "allowed_states": [
+          "UNAVAILABLE",
+          "NEEDS_CONFIRMATION",
+          "COMPLETED_READING",
+          "BLOCKED"
+        ],
+        "meaning_ar": "قراءة أعلى تحققًا من الإشارة الذهبية العادية.",
+        "does_not_mean_ar": "لا تعني وعدًا بنتيجة أو أمرًا للمستخدم."
+      },
+      {
+        "id": "COMPLETED_READING",
+        "label_ar": "قراءة مكتملة",
+        "meaning_ar": "اكتملت شروط القراءة حسب منطق NDSP.",
+        "does_not_mean_ar": "لا تعني صفقة أو توصية."
+      },
+      {
+        "id": "BLOCKED_READING",
+        "label_ar": "قراءة محجوبة",
+        "meaning_ar": "تم حجب القراءة بسبب مخاطر أو نقص تحقق أو حوكمة.",
+        "does_not_mean_ar": "لا تعني أمر خروج أو تصرف."
+      },
+      {
+        "id": "UNDER_MONITORING_READING",
+        "label_ar": "قراءة تحت المتابعة",
+        "meaning_ar": "توجد قراءة لكنها لم تكتمل بعد.",
+        "does_not_mean_ar": "لا تعني انتظار تنفيذ."
+      }
+    ]
+  },
+  "reading_modes_context": {
+    "approved_public_name_ar": "أنماط القراءة",
+    "approved_public_name_en": "Reading Modes",
+    "forbidden_public_name_ar": "أنماط التداول",
+    "forbidden_public_name_en": "Trading Modes",
+    "terminology_reason_ar": "لأن NDSP منصة دعم قرار وليست منصة تنفيذ أو توصيات.",
+    "display_modes": [
+      {
+        "id": "beginner",
+        "label_ar": "مبتدئ",
+        "label_en": "Beginner",
+        "purpose_ar": "عرض مبسط يركز على الخلاصة، المخاطر، أهم مستوى، وحالة NMP.",
+        "hide": [
+          "protected_layer_names",
+          "heavy_internal_details",
+          "admin_diagnostics"
+        ],
+        "show": [
+          "single_truth_state",
+          "simple_summary",
+          "main_risk_reason",
+          "main_reference_level",
+          "nmp_status",
+          "learning_next_step"
+        ]
+      },
+      {
+        "id": "professional",
+        "label_ar": "محترف",
+        "label_en": "Professional",
+        "purpose_ar": "عرض متقدم يشرح الحالة والمستويات والأسباب وقوة الأفق دون كشف الطبقات المحمية.",
+        "hide": [
+          "protected_layer_real_names",
+          "raw_formula_details",
+          "internal_source_terms"
+        ],
+        "show": [
+          "tdl_curve",
+          "layer_public_values",
+          "contribution_breakdown",
+          "timeframe_matrix",
+          "horizon_reconciliation",
+          "nmp_details",
+          "macro_story"
+        ]
+      }
+    ],
+    "reading_horizons": [
+      {
+        "id": "investor",
+        "label_ar": "مستثمر",
+        "label_en": "Investor",
+        "purpose_ar": "قراءة واسعة للصورة الأكبر مع فحص نضج التصحيح والسياق العام.",
+        "requires_correction_maturity": true
+      },
+      {
+        "id": "tactical",
+        "label_ar": "تكتيكي",
+        "label_en": "Tactical",
+        "purpose_ar": "قراءة قريبة للحركة الجزئية أو الأسبوعية ومناطق الحذر القريبة.",
+        "requires_correction_maturity": false
+      }
+    ],
+    "allowed_combinations": [
+      "beginner_investor",
+      "beginner_tactical",
+      "professional_investor",
+      "professional_tactical"
+    ],
+    "ui_rule_ar": "المبتدئ والمحترف يحددان طريقة العرض، والمستثمر والتكتيكي يحددان أفق القراءة."
+  },
+  "experience_visibility_matrix": {
+    "section_label_ar": "حوكمة من يرى ماذا داخل التجربة",
+    "purpose_ar": "تحديد ما يظهر لكل فئة مستخدم في الشاشة والتقرير والتنبيه والمشاركة بدون كشف محمي أو لغة تنفيذ.",
+    "roles": {
+      "beginner_user": {
+        "label_ar": "مستخدم مبتدئ",
+        "can_view": [
+          "single_truth_state",
+          "simple_final_summary",
+          "risk_state_simple",
+          "main_reference_level",
+          "nmp_status",
+          "golden_signal_badge_if_available",
+          "why_not_completed_simple",
+          "learning_next_step"
+        ],
+        "cannot_view": [
+          "protected_layer_names",
+          "admin_labs",
+          "raw_diagnostics",
+          "formula_details"
+        ],
+        "tone_ar": "سهل، مختصر، بدون تعقيد"
+      },
+      "professional_user": {
+        "label_ar": "مستخدم محترف",
+        "can_view": [
+          "single_truth_state",
+          "professional_final_summary",
+          "tdl_curve",
+          "layer_public_values",
+          "nmp_details",
+          "reference_levels_full",
+          "macro_story_binding",
+          "horizon_reconciliation",
+          "contribution_breakdown",
+          "golden_signal",
+          "enhanced_golden_signal"
+        ],
+        "cannot_view": [
+          "protected_layer_real_names",
+          "internal_source_terms",
+          "admin_labs_raw_results"
+        ],
+        "tone_ar": "تفصيلي، تحليلي، بدون كشف أسرار"
+      },
+      "admin": {
+        "label_ar": "أدمن",
+        "can_view": [
+          "admin_labs_summary",
+          "data_health_lab",
+          "governance_compliance_lab",
+          "lab_run_history",
+          "diagnostics",
+          "public_payload_preview"
+        ],
+        "cannot_view": [
+          "owner_only_rule_changes",
+          "protected_formula_if_not_owner"
+        ],
+        "tone_ar": "تشخيصي وتشغيلي"
+      },
+      "owner": {
+        "label_ar": "المالك",
+        "can_view": [
+          "all_admin_labs",
+          "owner_only_controls",
+          "protected_engine_registry",
+          "hypothesis_testing_contract",
+          "rule_change_approval",
+          "experiment_controls"
+        ],
+        "cannot_view": [],
+        "tone_ar": "تحكمي واستراتيجي"
+      }
+    },
+    "surfaces": {
+      "screen": {
+        "show": [
+          "summary",
+          "risk",
+          "levels",
+          "nmp",
+          "signals",
+          "radar"
+        ],
+        "hide": [
+          "admin_diagnostics",
+          "internal_terms"
+        ]
+      },
+      "report": {
+        "show": [
+          "decision_storyline",
+          "final_summary",
+          "levels",
+          "nmp",
+          "signals",
+          "why_not_completed",
+          "trust_language"
+        ],
+        "hide": [
+          "admin_labs_raw",
+          "internal_payload",
+          "protected_names"
+        ]
+      },
+      "alert": {
+        "show": [
+          "asset",
+          "state_change",
+          "signal_badge",
+          "risk_change",
+          "main_reason",
+          "safe_next_step"
+        ],
+        "hide": [
+          "raw_scores_if_not_needed",
+          "protected_terms"
+        ]
+      },
+      "share_page": {
+        "show": [
+          "public_summary",
+          "signal_badge",
+          "public_levels",
+          "nmp_status",
+          "disclaimer",
+          "decision_room_identity"
+        ],
+        "hide": [
+          "advanced_diagnostics",
+          "admin_labs",
+          "private_user_context"
+        ]
+      }
+    }
+  },
+  "signal_badge_rules": {
+    "section_label_ar": "قواعد ظهور بادجات الإشارات والأختام",
+    "rules": [
+      {
+        "badge_id": "GOLDEN_UNDER_MONITORING",
+        "label_ar": "ذهبية تحت المتابعة",
+        "show_when": [
+          "golden_signal.available == true",
+          "golden_signal.state == UNDER_MONITORING",
+          "risk_state != BLOCKED"
+        ],
+        "hide_when": [
+          "data_status == STALE",
+          "governance_block == true"
+        ],
+        "message_ar": "تظهر عندما تكون القراءة قوية لكنها غير مكتملة."
+      },
+      {
+        "badge_id": "ENHANCED_NEEDS_CONFIRMATION",
+        "label_ar": "ذهبية معززة تحتاج تأكيد",
+        "show_when": [
+          "enhanced_golden_signal.available == true",
+          "enhanced_golden_signal.state == NEEDS_CONFIRMATION",
+          "nmp.status == AVAILABLE",
+          "remaining_confirmations.length > 0"
+        ],
+        "message_ar": "تظهر عندما تقترب القراءة المعززة من الاكتمال لكنها تنتظر شروطًا إضافية."
+      },
+      {
+        "badge_id": "COMPLETED_READING",
+        "label_ar": "قراءة مكتملة",
+        "show_when": [
+          "single_truth_state.canonical_state == COMPLETED_READING",
+          "completion_checklist.is_completed == true",
+          "validation_gates.all_required_gates_passed == true"
+        ],
+        "message_ar": "تظهر كقراءة مكتملة حسب منطق NDSP، وليست صفقة."
+      },
+      {
+        "badge_id": "CAUTION",
+        "label_ar": "بحذر",
+        "show_when": [
+          "risk_state == CAUTION",
+          "why_not_completed.exists == true"
+        ],
+        "message_ar": "تظهر عندما توجد عوامل داعمة لكن الحذر يمنع الاكتمال."
+      },
+      {
+        "badge_id": "DEVILS_ADVOCATE_WARNING",
+        "label_ar": "محامي الشيطان يحذر",
+        "show_when": [
+          "devils_advocate.status == WARNING"
+        ],
+        "message_ar": "تظهر عندما توجد اعتراضات داخلية لا تصل إلى الحجب."
+      },
+      {
+        "badge_id": "DEVILS_ADVOCATE_BLOCK",
+        "label_ar": "محامي الشيطان حجب القراءة",
+        "show_when": [
+          "devils_advocate.status == BLOCKED"
+        ],
+        "message_ar": "تظهر عندما يمنع الاعتراض الداخلي عرض القراءة كقراءة صالحة."
+      }
+    ],
+    "ui_rule_ar": "البادج يشرح حالة قراءة، ولا يجوز عرضه كأمر أو توصية."
+  },
+  "signal_naming_governance": {
+    "section_label_ar": "حوكمة تسمية الإشارات",
+    "approved_terms_ar": [
+      "إشارة قراءة",
+      "إشارة نواف الذهبية",
+      "إشارة نواف الذهبية المعززة",
+      "ختم القراءة",
+      "تحت المتابعة",
+      "يحتاج تأكيد",
+      "قراءة مكتملة",
+      "قراءة محجوبة"
+    ],
+    "forbidden_terms_ar": [
+      "إشارة تداول",
+      "توصية",
+      "أمر تنفيذ",
+      "دخول",
+      "خروج",
+      "صفقة مؤكدة",
+      "ربح مضمون"
+    ],
+    "naming_rule_ar": "استخدم دائمًا لغة قراءة ودعم قرار، ولا تستخدم لغة تنفيذ أو توصية.",
+    "replacement_map": [
+      {
+        "forbidden_ar": "إشارة تداول",
+        "replace_with_ar": "إشارة قراءة"
+      },
+      {
+        "forbidden_ar": "صفقة",
+        "replace_with_ar": "قراءة"
+      },
+      {
+        "forbidden_ar": "نقطة دخول",
+        "replace_with_ar": "منطقة متابعة"
+      }
+    ]
+  },
+  "commercial_value_bridge": {
+    "section_label_ar": "جسر القيمة التجارية للقراءة",
+    "purpose_ar": "ترجمة قوة المنظومة إلى قيمة مفهومة للمستخدم بدون وعود ربح أو توصيات.",
+    "value_messages": [
+      {
+        "value_key": "clarity",
+        "label_ar": "وضوح",
+        "message_ar": "توضح المنصة حالة الأصل بدل ترك المستخدم أمام أرقام مبعثرة."
+      },
+      {
+        "value_key": "risk_awareness",
+        "label_ar": "وعي بالمخاطر",
+        "message_ar": "تشرح لماذا توجد حالة حذر أو حجب."
+      },
+      {
+        "value_key": "structured_followup",
+        "label_ar": "متابعة منظمة",
+        "message_ar": "تحدد ما الذي يجب مراقبته داخل القراءة دون إصدار أمر."
+      },
+      {
+        "value_key": "explainability",
+        "label_ar": "قابلية الفهم",
+        "message_ar": "تشرح لماذا ظهرت الإشارة أو لماذا لم تكتمل."
+      },
+      {
+        "value_key": "protected_method",
+        "label_ar": "منهج محمي",
+        "message_ar": "تعرض الأثر والقيمة دون كشف المعادلات أو الطبقات الحساسة."
+      }
+    ],
+    "public_pitch_ar": "القيمة ليست في أمر سريع، بل في قراءة منظمة تمنع سوء الفهم وتكشف سبب الحذر أو الاكتمال."
+  },
+  "trial_experience_policy": {
+    "section_label_ar": "سياسة تجربة 16 يوم",
+    "trial_days": 16,
+    "trial_user_can_view": [
+      "single_truth_state",
+      "simple_summary",
+      "risk_state",
+      "main_reference_level",
+      "nmp_status",
+      "golden_signal_basic",
+      "decision_guide",
+      "limited_alerts"
+    ],
+    "trial_user_limited_sections": [
+      "enhanced_golden_signal",
+      "professional_layers_detail",
+      "advanced_reports",
+      "historical_context"
+    ],
+    "trial_user_hidden_sections": [
+      "admin_labs",
+      "protected_engine_registry",
+      "owner_only_controls"
+    ],
+    "upgrade_message_rule_ar": "اشرح أن التفاصيل المتقدمة متاحة في المحترف دون مبالغة أو ضغط."
+  },
+  "upgrade_moment_policy": {
+    "section_label_ar": "سياسة لحظة الترقية",
+    "allowed_upgrade_moments": [
+      {
+        "trigger": "user_opens_advanced_details",
+        "message_ar": "التفاصيل المتقدمة متاحة في نمط المحترف لفهم أعمق للقراءة."
+      },
+      {
+        "trigger": "enhanced_signal_available_but_locked",
+        "message_ar": "الإشارة الذهبية المعززة تتطلب عرضًا متقدمًا لأنها تحتوي أسباب تحقق إضافية."
+      },
+      {
+        "trigger": "report_export_requested",
+        "message_ar": "تصدير التقرير الكامل متاح في الخطة المتقدمة."
+      }
+    ],
+    "forbidden_upgrade_style_ar": [
+      "لا تستخدم التخويف",
+      "لا تعد بنتيجة مالية",
+      "لا تقل إن الترقية تعطي قرارًا مؤكدًا"
+    ]
+  },
+  "owner_only_controls": {
+    "section_label_ar": "صلاحيات المالك فقط",
+    "owner_can": [
+      "approve_rule_change",
+      "enable_or_disable_public_signal",
+      "run_sensitive_admin_labs",
+      "view_protected_engine_registry",
+      "approve_experiment_to_production",
+      "edit_trust_language_pack",
+      "approve_report_templates"
+    ],
+    "admin_cannot": [
+      "change_core_decision_rules",
+      "expose_protected_layer_names",
+      "rename_public_signals_without_owner_approval",
+      "publish_experiment_as_production"
+    ],
+    "ui_rule_ar": "الأدمن يشخص ويدير، لكن المالك يعتمد تغييرات المنطق والهوية."
+  },
+  "admin_lab_contract": {
+    "section_label_ar": "عقد مختبرات لوحة الإدارة",
+    "public_visible": false,
+    "purpose_ar": "اختبار الفرضيات، مقارنة الأنماط، فحص الطبقات، ومراجعة جودة المنظومة دون خلط نتائج المختبر مع واجهة المستخدم العامة.",
+    "labs": [
+      "LAYER_IMPACT_LAB",
+      "READING_MODES_LAB",
+      "GOLDEN_SIGNAL_LAB",
+      "ENHANCED_GOLDEN_SIGNAL_LAB",
+      "NMP_VALIDATION_LAB",
+      "REFERENCE_LEVELS_LAB",
+      "RISK_DEVILS_ADVOCATE_LAB",
+      "BACKTEST_READING_LAB",
+      "MACRO_DOLLAR_LAB",
+      "DATA_HEALTH_LAB",
+      "GOVERNANCE_COMPLIANCE_LAB"
+    ],
+    "lab_rules": {
+      "can_affect_public_decision_directly": false,
+      "requires_owner_approval_for_rule_change": true,
+      "all_lab_runs_have_audit_id": true,
+      "experiments_must_be_labeled": true
+    }
+  },
+  "hypothesis_testing_contract": {
+    "section_label_ar": "عقد اختبار الفرضيات",
+    "purpose_ar": "اختبار فرضيات المنظومة تاريخيًا أو داخليًا دون تحويلها إلى نتيجة عامة أو توصية.",
+    "hypothesis_fields": {
+      "hypothesis_id": "HYP_READING_MODE_DIFF_001",
+      "label_ar": "فرضية اختلاف قراءة المستثمر والتكتيكي",
+      "status": "testing",
+      "tested_assets": [],
+      "tested_periods": [],
+      "metrics": [
+        "state_consistency",
+        "reading_maturity",
+        "risk_alignment",
+        "signal_stability",
+        "historical_similarity"
+      ],
+      "public_output_allowed": false,
+      "requires_owner_approval_to_publish": true
+    }
+  },
+  "decision_storyline": {
+    "section_label_ar": "قصة القراءة",
+    "purpose_ar": "تحويل القراءة من أرقام إلى سرد مفهوم: لماذا بدأت، ماذا تغير، لماذا لم تكتمل، وما الذي يراقبه النظام.",
+    "story_fields": {
+      "opening_ar": "بدأت القراءة بعد اكتمال الحد الأدنى من البيانات.",
+      "current_position_ar": "القراءة الآن تحت المتابعة مع قوة داعمة وحذر قريب.",
+      "what_changed_ar": "تحسنت قوة الأفق الممتد، وبقي التباين القريب قائمًا.",
+      "why_not_completed_ar": "لم تكتمل لأن بعض شروط التأكيد لم تتحقق بعد.",
+      "what_is_being_watched_ar": [
+        "ثبات السعر حول المستوى المرجعي",
+        "تحسن الأفق القريب",
+        "حالة NMP",
+        "حالة المخاطر",
+        "اعتراض محامي الشيطان"
+      ],
+      "safe_closing_ar": "هذه قراءة دعم قرار وليست توصية مالية أو أمر تنفيذ."
+    }
+  },
+  "user_learning_progress": {
+    "section_label_ar": "تقدم تعلم المستخدم",
+    "purpose_ar": "تحديد هل يحتاج المستخدم شرح مبتدئ أو محترف بناءً على استخدامه داخل المنصة.",
+    "fields": {
+      "has_read_decision_guide": false,
+      "has_read_modes_guide": false,
+      "has_opened_nmp_explanation": false,
+      "has_opened_risk_explanation": false,
+      "recommended_next_learning_step": "decision_modes_guide",
+      "recommended_next_learning_step_ar": "اقرأ دليل أنماط القراءة لفهم الفرق بين المستثمر والتكتيكي.",
+      "learning_level": "beginner"
+    }
+  },
+  "trust_language_pack": {
+    "section_label_ar": "حزمة لغة الثقة والحوكمة",
+    "fixed_phrases": {
+      "not_advice_ar": "هذه قراءة دعم قرار وليست توصية مالية.",
+      "not_execution_ar": "لا تمثل هذه الحالة أمر تنفيذ.",
+      "levels_are_monitoring_ar": "المستويات المرجعية مناطق متابعة وليست أوامر.",
+      "nmp_is_validation_ar": "NMP منطقة تحقق إضافية ولا يتم اختراعها.",
+      "completed_not_trade_ar": "القراءة المكتملة ليست صفقة ولا توصية.",
+      "golden_signal_not_execution_ar": "إشارة نواف الذهبية ختم قراءة وليست إشارة تنفيذ."
+    },
+    "forbidden_public_phrases": [
+      "توصية مباشرة",
+      "أمر تنفيذ",
+      "صفقة مؤكدة",
+      "ربح مضمون"
+    ],
+    "ui_rule_ar": "كل شاشة وتقرير وتنبيه يجب أن يستخدم لغة دعم قرار واضحة."
+  },
+  "public_vs_internal_dictionary": {
+    "section_label_ar": "قاموس العام مقابل الداخلي",
+    "purpose_ar": "فصل الاسم العام الآمن عن الاسم الداخلي المحمي.",
+    "dictionary": [
+      {
+        "internal_key": "HL01",
+        "public_label_ar": "طبقة محمية 01",
+        "public_allowed": true,
+        "internal_name_visible": false
+      },
+      {
+        "internal_key": "RAW_ENGINE_SIGNAL",
+        "public_label_ar": "أثر القراءة",
+        "public_allowed": true,
+        "internal_name_visible": false
+      },
+      {
+        "internal_key": "NMP",
+        "public_label_ar": "نقطة التقاء نواف NMP",
+        "public_allowed": true,
+        "internal_name_visible": true
+      },
+      {
+        "internal_key": "NAWAF_GOLDEN_READING_SIGNAL",
+        "public_label_ar": "إشارة نواف الذهبية",
+        "public_allowed": true,
+        "internal_name_visible": true
+      }
+    ]
+  },
+  "protected_engine_registry": {
+    "section_label_ar": "سجل المحركات المحمية",
+    "public_visible": false,
+    "total_engines": 16,
+    "public_display_policy": {
+      "show_public_id": true,
+      "show_public_effect": true,
+      "show_numeric_value_if_allowed": true,
+      "show_real_internal_name": false,
+      "show_formula": false
+    },
+    "engine_slots": [
+      {
+        "engine_id": "HL01",
+        "public_label_ar": "طبقة محمية 01",
+        "public_group": "market_structure",
+        "can_show_value": true,
+        "can_show_effect": true,
+        "can_show_internal_name": false
+      },
+      {
+        "engine_id": "HL02",
+        "public_label_ar": "طبقة محمية 02",
+        "public_group": "temporal_pressure",
+        "can_show_value": true,
+        "can_show_effect": true,
+        "can_show_internal_name": false
+      },
+      {
+        "engine_id": "HL03_TO_HL16",
+        "public_label_ar": "طبقات محمية 03 إلى 16",
+        "can_show_value": true,
+        "can_show_effect": true,
+        "can_show_internal_name": false
+      }
+    ]
+  },
+  "signal_to_alert_binding": {
+    "section_label_ar": "ربط الإشارات بالتنبيهات",
+    "purpose_ar": "تحديد متى تتحول حالة الإشارة إلى تنبيه آمن ومتى لا يتم إرسال تنبيه.",
+    "rules": [
+      {
+        "trigger": "golden_signal_state_changed",
+        "alert_allowed": true,
+        "alert_type": "reading_update",
+        "message_template_ar": "تغيرت حالة إشارة نواف الذهبية إلى: {{state_ar}}."
+      },
+      {
+        "trigger": "enhanced_golden_signal_needs_confirmation",
+        "alert_allowed": true,
+        "alert_type": "confirmation_watch",
+        "message_template_ar": "الإشارة الذهبية المعززة تحتاج تأكيدًا إضافيًا."
+      },
+      {
+        "trigger": "data_stale",
+        "alert_allowed": false,
+        "reason_ar": "لا يتم إرسال تنبيه قراءة قوية عند انتهاء صلاحية البيانات."
+      },
+      {
+        "trigger": "devils_advocate_block",
+        "alert_allowed": true,
+        "alert_type": "reading_blocked",
+        "message_template_ar": "تم حجب القراءة بسبب اعتراض محامي الشيطان."
+      }
+    ],
+    "ui_rule_ar": "التنبيه يخبر بتغير حالة قراءة، ولا يتحول إلى أمر أو توصية."
+  },
+  "completed_reading_badge": {
+    "section_label_ar": "ختم القراءة المكتملة",
+    "badge_id": "COMPLETED_READING_STAMP",
+    "label_ar": "قراءة مكتملة",
+    "label_en": "Completed Reading",
+    "meaning_ar": "قراءة وصلت إلى حالة مكتملة حسب منطق NDSP.",
+    "does_not_mean_ar": "لا تعني صفقة ولا توصية ولا أمر تنفيذ.",
+    "show_when": [
+      "single_truth_state.canonical_state == COMPLETED_READING",
+      "completion_checklist.is_completed == true",
+      "validation_gates.all_required_gates_passed == true"
+    ],
+    "report_text_ar": "هذه قراءة مكتملة حسب منطق NDSP، وليست توصية مالية أو أمر تنفيذ."
+  },
+  "macro_story_binding": {
+    "section_label_ar": "ربط الماكرو والدولار بقصة القراءة",
+    "purpose_ar": "شرح كيف يدخل الدولار والماكرو في القراءة كدعم أو ضغط أو حياد أو حذر.",
+    "fields": {
+      "macro_state": "UNDER_MONITORING",
+      "dollar_effect": "CAUTION",
+      "dollar_effect_ar": "ضغط دولار متوسط",
+      "asset_impact_ar": "يؤثر كعامل حذر على اكتمال القراءة.",
+      "story_sentence_ar": "رغم وجود عوامل داعمة في القراءة، يضيف الدولار عامل ضغط يجعل القراءة أقرب إلى المتابعة الحذرة.",
+      "show_in": [
+        "decision_center",
+        "usd_pulse",
+        "dollar_impact",
+        "professional_report"
+      ]
+    }
+  },
+  "report_narrative_templates": {
+    "section_label_ar": "قوالب تقارير القراءة",
+    "templates": {
+      "beginner_report": {
+        "title_ar": "ملخص قراءة دعم القرار",
+        "sections": [
+          "الخلاصة",
+          "سبب الحذر",
+          "المستوى الأهم",
+          "حالة NMP",
+          "ما الذي تراقبه المنصة؟",
+          "إخلاء المسؤولية"
+        ]
+      },
+      "professional_report": {
+        "title_ar": "تقرير قراءة احترافي",
+        "sections": [
+          "الخلاصة النهائية",
+          "أنماط القراءة",
+          "إشارات نواف",
+          "TDL",
+          "الطبقات العامة",
+          "NMP",
+          "المستويات المرجعية",
+          "المخاطر ومحامي الشيطان",
+          "الماكرو والدولار",
+          "سبب عدم الاكتمال",
+          "قصة القراءة"
+        ]
+      },
+      "owner_report": {
+        "title_ar": "تقرير مالك المنظومة",
+        "sections": [
+          "جودة القراءة",
+          "نتائج المختبرات",
+          "صحة البيانات",
+          "التزام الحوكمة",
+          "الفرضيات النشطة",
+          "نقاط التطوير"
+        ]
+      },
+      "public_share_report": {
+        "title_ar": "قراءة دعم قرار قابلة للمشاركة",
+        "sections": [
+          "الخلاصة العامة",
+          "الختم الظاهر",
+          "سبب الحالة",
+          "المستوى المرجعي",
+          "إخلاء المسؤولية"
+        ]
+      }
+    }
+  },
+  "reading_to_platform_journey_binding": {
+    "section_label_ar": "ربط القراءة بالرحلة التجارية داخل المنصة",
+    "purpose_ar": "تحديد ماذا يحدث بعد ظهور قراءة قوية دون تحويل ذلك إلى تنفيذ.",
+    "available_next_actions": [
+      {
+        "action_id": "ADD_TO_WATCHLIST",
+        "label_ar": "إضافة إلى قائمة المتابعة",
+        "allowed_when": [
+          "asset_supported == true"
+        ],
+        "destination": "my-watchlist.html",
+        "execution_related": false
+      },
+      {
+        "action_id": "OPEN_REPORT",
+        "label_ar": "فتح تقرير القراءة",
+        "allowed_when": [
+          "reading_exists == true"
+        ],
+        "destination": "report",
+        "execution_related": false
+      },
+      {
+        "action_id": "ENABLE_ALERT",
+        "label_ar": "تفعيل تنبيه متابعة",
+        "allowed_when": [
+          "alerts_allowed == true",
+          "asset_supported == true"
+        ],
+        "destination": "alerts-log.html",
+        "execution_related": false
+      },
+      {
+        "action_id": "OPEN_DECISION_GUIDE",
+        "label_ar": "فتح دليل فهم القرار",
+        "allowed_when": [
+          "user_needs_learning == true"
+        ],
+        "destination": "decision-guide.html",
+        "execution_related": false
+      },
+      {
+        "action_id": "COMPARE_READING_MODES",
+        "label_ar": "مقارنة المستثمر والتكتيكي",
+        "allowed_when": [
+          "mode_comparison_available == true"
+        ],
+        "destination": "decision-modes-guide.html",
+        "execution_related": false
+      },
+      {
+        "action_id": "OPEN_DOLLAR_IMPACT",
+        "label_ar": "قراءة أثر الدولار",
+        "allowed_when": [
+          "macro_story_available == true"
+        ],
+        "destination": "dollar-impact.html",
+        "execution_related": false
+      },
+      {
+        "action_id": "WHY_NOT_COMPLETED",
+        "label_ar": "لماذا لم تكتمل القراءة؟",
+        "allowed_when": [
+          "completed_reading == false",
+          "why_not_completed.exists == true"
+        ],
+        "destination": "decision-center.html#why-not-completed",
+        "execution_related": false
+      }
+    ],
+    "forbidden_next_actions": [
+      "execute_order",
+      "open_trade",
+      "buy_now",
+      "sell_now"
+    ],
+    "ui_rule_ar": "كل إجراء بعد القراءة يجب أن يكون متابعة أو شرحًا أو تنبيهًا أو تقريرًا، وليس تنفيذًا."
+  },
+  "decision_room_experience_questions": {
+    "section_label_ar": "أسئلة غرفة القرار التي يجب أن يجيب عنها العقد",
+    "questions": [
+      {
+        "key": "where_am_i",
+        "question_ar": "أين أنا داخل غرفة القرار؟",
+        "answer_field": "decision_room_stage"
+      },
+      {
+        "key": "visible_stamp",
+        "question_ar": "ما الختم الظاهر الآن؟",
+        "answer_field": "active_badge"
+      },
+      {
+        "key": "reading_mode",
+        "question_ar": "ما نمط القراءة؟",
+        "answer_field": "reading_modes_context"
+      },
+      {
+        "key": "public_signal",
+        "question_ar": "ما الإشارة العامة؟",
+        "answer_field": "public_signal_taxonomy"
+      },
+      {
+        "key": "why_not_completed",
+        "question_ar": "ما سبب عدم اكتمالها؟",
+        "answer_field": "why_not_completed"
+      },
+      {
+        "key": "what_to_monitor",
+        "question_ar": "ما الذي أراقبه؟",
+        "answer_field": "next_observation_plan"
+      },
+      {
+        "key": "learning_needed",
+        "question_ar": "هل أحتاج دليل مبتدئ أو محترف؟",
+        "answer_field": "user_learning_progress"
+      },
+      {
+        "key": "shareable",
+        "question_ar": "هل هذه قراءة قابلة للمشاركة؟",
+        "answer_field": "share_contract"
+      },
+      {
+        "key": "completed_saved",
+        "question_ar": "هل هذه قراءة مكتملة محفوظة؟",
+        "answer_field": "completed_reading_badge"
+      }
+    ]
+  },
+  "official_package_sections": {
+    "package_name": "NDSP_DECISION_ROOM_EXPERIENCE_CONTRACT_V1",
+    "contains": [
+      "public_signal_taxonomy",
+      "reading_modes_context",
+      "experience_visibility_matrix",
+      "signal_badge_rules",
+      "trust_language_pack",
+      "decision_storyline",
+      "report_narrative_templates",
+      "signal_to_alert_binding",
+      "completed_reading_badge",
+      "decision_room_identity_layer"
+    ],
+    "recommended_files": [
+      {
+        "path": "/data/ndsp-decision-room-experience-contract-v1.json",
+        "purpose_ar": "القواعد الثابتة لتجربة غرفة القرار."
+      },
+      {
+        "path": "/data/ndsp-public-signal-taxonomy.json",
+        "purpose_ar": "تصنيف إشارات نواف العامة والأختام."
+      },
+      {
+        "path": "/data/ndsp-report-narrative-templates.json",
+        "purpose_ar": "قوالب التقارير العامة والمحترفة."
+      }
+    ]
+  },
+  "runtime_binding_contract": {
+    "selected_symbol_source": [
+      "url_query",
+      "localStorage",
+      "page_state"
+    ],
+    "runtime_flow": [
+      "selectedSymbol",
+      "selectedDisplayMode",
+      "selectedReadingHorizon",
+      "fetch decision core",
+      "fetch experience contract",
+      "apply visibility matrix",
+      "bind public signal badges",
+      "bind storyline",
+      "bind next safe actions",
+      "bind trust language"
+    ],
+    "ui_rule_ar": "الواجهة لا تخترع ختمًا أو إشارة أو رحلة؛ كل شيء يأتي من عقد التجربة أو عقد القرار."
+  }
+}

@@ -1,0 +1,80 @@
+=== NDSP V37 MOUNT + BUILD FINAL V1 ===
+DATE=2026-08-08T05:15:45+02:00
+AUDIT=/home/nawaf511/empire-core-new/var/audits/v37-mount-build-final-v1-20260808-051545
+
+=== 1. PRECONDITIONS ===
+FOUND=/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/main.jsx
+FOUND=/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/components/CompletedDecisionsPanelV37.jsx
+FOUND=/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/hooks/useCompletedDecisionsV37.js
+FOUND=/home/nawaf511/empire-core-new/frontend/user-portal-vite/package.json
+APP_RENDER_ROOT=PASS
+V37_PANEL_EXPORT=PASS
+V37_HOOK_EXPORT=PASS
+
+=== 2. VERIFY OLD MOUNTPOINT ===
+OLD_COMPLETED_SECTION=PROVEN
+OLD_BLOCK_SIZE=806
+MOUNTPOINT_GATE=PASS
+
+=== 3. BACKUP ===
+DIST_BACKUP=YES
+MAIN_BACKUP=/home/nawaf511/empire-core-new/var/audits/v37-mount-build-final-v1-20260808-051545/backup/main.jsx
+
+=== 4. APPLY SURGICAL V37 MOUNT ===
+IMPORT_INSERTED=PASS
+LEGACY_SECTION_REPLACED=PASS
+
+=== 5. STATIC PATCH ASSERTIONS ===
+V37_IMPORT_COUNT=1
+V37_MOUNT_COUNT=1
+LEGACY_SECTION_COUNT=0
+STATIC_PATCH_ASSERTIONS=PASS
+
+=== 6. PATCH CONTEXT ===
+2:import { createRoot } from "react-dom/client";
+5:import { CompletedDecisionsPanelV37 } from "./components/CompletedDecisionsPanelV37";
+162:        <CompletedDecisionsPanelV37 />
+168:createRoot(document.getElementById("root")).render(<App />);
+
+=== 7. PACKAGE BUILD CONTRACT ===
+PACKAGE_NAME=ndsp-user-portal-vite
+BUILD_SCRIPT=vite build
+BUILD_SCRIPT=PASS
+
+=== 8. BUILD ===
+
+> ndsp-user-portal-vite@1.0.0 build
+> vite build
+
+vite v6.4.3 building for production...
+transforming...
+✓ 29 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.44 kB │ gzip:  0.33 kB
+dist/assets/index-B87m92fc.css    4.78 kB │ gzip:  1.69 kB
+dist/assets/index-CfJbdoKo.js   174.41 kB │ gzip: 55.11 kB
+✓ built in 2.08s
+BUILD_RC=0
+BUILD=PASS
+
+=== 9. DIST VERIFICATION ===
+DIST_FILE_COUNT=23
+V37_RUNTIME_MARKER_BUNDLES=1
+V37_DATA_MARKER_BUNDLES=1
+V37_HISTORY_INTEGRITY_BUNDLES=1
+V37_PRESENT_IN_BUILD=PASS
+
+=== 10. V35 BACKEND CONTRACT ===
+HTTP_V35_HEALTH=200
+HTTP_V35_CURRENT=200
+HTTP_V35_INTEGRITY=400
+
+============================================================
+=== AUTOMATIC SAFE ROLLBACK ===
+ROLLBACK_REASON=RC_52
+SOURCE_RESTORED=YES
+DIST_RESTORED=YES
+SERVICES_RESTARTED=0
+FINAL_RESULT=ROLLED_BACK_SAFE
+AUDIT=/home/nawaf511/empire-core-new/var/audits/v37-mount-build-final-v1-20260808-051545

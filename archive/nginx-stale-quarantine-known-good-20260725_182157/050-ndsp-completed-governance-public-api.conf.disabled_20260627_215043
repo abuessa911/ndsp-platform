@@ -1,0 +1,84 @@
+# NDSP Completed Decision + Governance Public Read API
+# Safe public routes only. Write routes remain internal.
+
+server {
+    include /etc/nginx/snippets/ndsp-staged-commercial-security.conf;
+
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name api.ndsp.app;
+
+    ssl_certificate /etc/letsencrypt/live/api.ndsp.app/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/api.ndsp.app/privkey.pem;
+
+    # Completed Decision public read endpoints
+    location = /api/completed {
+        limit_except GET { deny all; }
+        proxy_pass http://127.0.0.1:9078/api/completed;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    location = /api/completed/latest {
+        limit_except GET { deny all; }
+        proxy_pass http://127.0.0.1:9078/api/completed/latest;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    location ~ ^/api/completed/([A-Za-z0-9._:-]+)$ {
+        limit_except GET { deny all; }
+        proxy_pass http://127.0.0.1:9078$request_uri;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    location ~ ^/api/completed/id/([A-Za-z0-9._:-]+)$ {
+        limit_except GET { deny all; }
+        proxy_pass http://127.0.0.1:9078$request_uri;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    location ~ ^/api/completed/id/([A-Za-z0-9._:-]+)/timeline$ {
+        limit_except GET { deny all; }
+        proxy_pass http://127.0.0.1:9078$request_uri;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    # Governance health/evaluate only. Submit remains internal.
+    location = /api/governance/health {
+        limit_except GET { deny all; }
+        proxy_pass http://127.0.0.1:9079/health;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    location = /api/governance/evaluate {
+        limit_except POST { deny all; }
+        proxy_pass http://127.0.0.1:9079/api/governance/evaluate;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    # Explicitly block public write routes
+    location = /api/completed/ingest {
+        return 403;
+    }
+
+    location ~ ^/api/completed/.+/publish$ {
+        return 403;
+    }
+
+    location = /api/governance/submit {
+        return 403;
+    }
+}

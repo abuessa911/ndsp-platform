@@ -1,0 +1,210 @@
+=== NDSP CONTRACTS 01-04 CHAIN TRUTH V1 ===
+DATE=2026-08-08T03:49:27+02:00
+MODE=READ_ONLY
+
+=== LIVE FETCH ===
+RAW_9076_HTTP=200
+RAW_9076_FETCH=PASS
+QUALITY_9082_HTTP=200
+QUALITY_9082_FETCH=PASS
+CANONICAL_9085_HTTP=200
+CANONICAL_9085_FETCH=PASS
+
+=== RAW_9076 ===
+raw_cot_connected=PRESENT count=1
+PATH=$.raw_cot_connected VALUE=True
+raw_cot_status=PRESENT count=1
+PATH=$.raw_cot_status VALUE='CONNECTED_MATCHED'
+history_adapter_status=PRESENT count=1
+PATH=$.history_adapter_status VALUE='CONNECTED'
+raw_cot_governing_inputs_complete=PRESENT count=1
+PATH=$.raw_cot_governing_inputs_complete VALUE=True
+market_name=PRESENT count=1
+PATH=$.market_name VALUE='ETHER CASH SETTLED - CHICAGO MERCANTILE EXCHANGE'
+market_code=PRESENT count=1
+PATH=$.market_code VALUE='146021'
+exchange=PRESENT count=1
+PATH=$.exchange VALUE='CME'
+report_date=PRESENT count=1
+PATH=$.report_date VALUE='2026-07-21'
+previous_report_date=PRESENT count=1
+PATH=$.previous_report_date VALUE='2026-07-14'
+report_age_days=NOT_PRESENT
+max_age_days=NOT_PRESENT
+fresh=NOT_PRESENT
+asset_managers_long=PRESENT count=1
+PATH=$.asset_managers_long VALUE=1634
+asset_managers_short=PRESENT count=1
+PATH=$.asset_managers_short VALUE=4054
+asset_managers_change_long=PRESENT count=1
+PATH=$.asset_managers_change_long VALUE=-303
+asset_managers_change_short=PRESENT count=1
+PATH=$.asset_managers_change_short VALUE=711
+asset_managers_overall=NOT_PRESENT
+asset_managers_weekly=NOT_PRESENT
+leveraged_funds_long=PRESENT count=1
+PATH=$.leveraged_funds_long VALUE=2223
+leveraged_funds_short=PRESENT count=1
+PATH=$.leveraged_funds_short VALUE=9276
+leveraged_funds_change_long=PRESENT count=1
+PATH=$.leveraged_funds_change_long VALUE=-691
+leveraged_funds_change_short=PRESENT count=1
+PATH=$.leveraged_funds_change_short VALUE=-1599
+leveraged_funds_overall=NOT_PRESENT
+leveraged_funds_weekly=NOT_PRESENT
+weekly_change_source=PRESENT count=1
+PATH=$.weekly_change_source VALUE='REAL_SAME_MARKET_CONSECUTIVE_CFTC_REPORTS'
+synthetic_values_used=PRESENT count=1
+PATH=$.synthetic_values_used VALUE=False
+source_market=NOT_PRESENT
+source_timeframe=NOT_PRESENT
+analysis_timeframe=NOT_PRESENT
+
+=== QUALITY_9082 ===
+raw_cot_connected=PRESENT count=1
+PATH=$.governing_inputs.raw_cot_connected VALUE=True
+raw_cot_status=PRESENT count=1
+PATH=$.governing_inputs.raw_cot_status VALUE='CONNECTED_MATCHED'
+history_adapter_status=NOT_PRESENT
+raw_cot_governing_inputs_complete=NOT_PRESENT
+market_name=NOT_PRESENT
+market_code=NOT_PRESENT
+exchange=NOT_PRESENT
+report_date=PRESENT count=1
+PATH=$.governing_inputs.report_date VALUE='2026-07-21'
+previous_report_date=NOT_PRESENT
+report_age_days=PRESENT count=1
+PATH=$.governing_inputs.report_age_days VALUE=None
+max_age_days=PRESENT count=1
+PATH=$.governing_inputs.max_age_days VALUE=10
+fresh=PRESENT count=1
+PATH=$.governing_inputs.fresh VALUE=False
+asset_managers_long=NOT_PRESENT
+asset_managers_short=NOT_PRESENT
+asset_managers_change_long=NOT_PRESENT
+asset_managers_change_short=NOT_PRESENT
+asset_managers_overall=PRESENT count=1
+PATH=$.governing_inputs.directions.asset_managers_overall VALUE='bearish'
+asset_managers_weekly=PRESENT count=1
+PATH=$.governing_inputs.directions.asset_managers_weekly VALUE=None
+leveraged_funds_long=NOT_PRESENT
+leveraged_funds_short=NOT_PRESENT
+leveraged_funds_change_long=NOT_PRESENT
+leveraged_funds_change_short=NOT_PRESENT
+leveraged_funds_overall=NOT_PRESENT
+leveraged_funds_weekly=PRESENT count=1
+PATH=$.governing_inputs.directions.leveraged_funds_weekly VALUE=None
+weekly_change_source=NOT_PRESENT
+synthetic_values_used=NOT_PRESENT
+source_market=PRESENT count=1
+PATH=$.governing_inputs.source_market VALUE='ETHER CASH SETTLED - CHICAGO MERCANTILE EXCHANGE'
+source_timeframe=PRESENT count=1
+PATH=$.governing_inputs.source_timeframe VALUE='weekly'
+analysis_timeframe=PRESENT count=1
+PATH=$.governing_inputs.analysis_timeframe VALUE='weekly'
+
+=== CANONICAL_9085 ===
+raw_cot_connected=NOT_PRESENT
+raw_cot_status=NOT_PRESENT
+history_adapter_status=NOT_PRESENT
+raw_cot_governing_inputs_complete=NOT_PRESENT
+market_name=NOT_PRESENT
+market_code=NOT_PRESENT
+exchange=NOT_PRESENT
+report_date=NOT_PRESENT
+previous_report_date=NOT_PRESENT
+report_age_days=NOT_PRESENT
+max_age_days=NOT_PRESENT
+fresh=PRESENT count=2
+PATH=$.decision_layers[10].output.economic_calendar.fresh VALUE=True
+PATH=$.decision_layers[10].output.news_context.fresh VALUE=True
+asset_managers_long=NOT_PRESENT
+asset_managers_short=NOT_PRESENT
+asset_managers_change_long=NOT_PRESENT
+asset_managers_change_short=NOT_PRESENT
+asset_managers_overall=PRESENT count=1
+PATH=$.input_evidence.cot.directions.asset_managers_overall VALUE=None
+asset_managers_weekly=PRESENT count=1
+PATH=$.input_evidence.cot.directions.asset_managers_weekly VALUE=None
+leveraged_funds_long=NOT_PRESENT
+leveraged_funds_short=NOT_PRESENT
+leveraged_funds_change_long=NOT_PRESENT
+leveraged_funds_change_short=NOT_PRESENT
+leveraged_funds_overall=NOT_PRESENT
+leveraged_funds_weekly=PRESENT count=1
+PATH=$.input_evidence.cot.directions.leveraged_funds_weekly VALUE=None
+weekly_change_source=NOT_PRESENT
+synthetic_values_used=NOT_PRESENT
+source_market=NOT_PRESENT
+source_timeframe=NOT_PRESENT
+analysis_timeframe=NOT_PRESENT
+
+=== EXACT 9076 GOVERNED SOURCE ===
+history_adapter_status: actual='CONNECTED' expected='CONNECTED' gate=PASS
+raw_cot_governing_inputs_complete: actual=True expected=True gate=PASS
+report_date: actual='2026-07-21' expected='2026-07-21' gate=PASS
+previous_report_date: actual='2026-07-14' expected='2026-07-14' gate=PASS
+asset_managers_change_long: actual=-303 expected=-303 gate=PASS
+asset_managers_change_short: actual=711 expected=711 gate=PASS
+leveraged_funds_change_long: actual=-691 expected=-691 gate=PASS
+leveraged_funds_change_short: actual=-1599 expected=-1599 gate=PASS
+synthetic_values_used: actual=False expected=False gate=PASS
+SOURCE_9076_GOVERNED_HISTORY=PASS
+
+=== INDEPENDENT FRESHNESS DERIVATION ===
+SOURCE_REPORT_DATE='2026-07-21'
+INDEPENDENT_REPORT_AGE_DAYS=18
+
+=== FIELD SURVIVAL MATRIX ===
+report_date: 9076=VALUE 9082=VALUE 9085=ABSENT BOUNDARY=LOSS_9082_TO_9085
+report_age_days: 9076=ABSENT 9082=NULL 9085=ABSENT BOUNDARY=NOT_SOURCE_VALUE_AT_9076
+max_age_days: 9076=ABSENT 9082=VALUE 9085=ABSENT BOUNDARY=LOSS_9082_TO_9085
+asset_managers_long: 9076=VALUE 9082=ABSENT 9085=ABSENT BOUNDARY=LOSS_9076_TO_9082
+asset_managers_short: 9076=VALUE 9082=ABSENT 9085=ABSENT BOUNDARY=LOSS_9076_TO_9082
+asset_managers_change_long: 9076=VALUE 9082=ABSENT 9085=ABSENT BOUNDARY=LOSS_9076_TO_9082
+asset_managers_change_short: 9076=VALUE 9082=ABSENT 9085=ABSENT BOUNDARY=LOSS_9076_TO_9082
+asset_managers_overall: 9076=ABSENT 9082=VALUE 9085=NULL BOUNDARY=LOSS_9082_TO_9085
+asset_managers_weekly: 9076=ABSENT 9082=NULL 9085=NULL BOUNDARY=NOT_SOURCE_VALUE_AT_9076
+leveraged_funds_long: 9076=VALUE 9082=ABSENT 9085=ABSENT BOUNDARY=LOSS_9076_TO_9082
+leveraged_funds_short: 9076=VALUE 9082=ABSENT 9085=ABSENT BOUNDARY=LOSS_9076_TO_9082
+leveraged_funds_change_long: 9076=VALUE 9082=ABSENT 9085=ABSENT BOUNDARY=LOSS_9076_TO_9082
+leveraged_funds_change_short: 9076=VALUE 9082=ABSENT 9085=ABSENT BOUNDARY=LOSS_9076_TO_9082
+leveraged_funds_overall: 9076=ABSENT 9082=ABSENT 9085=ABSENT BOUNDARY=NOT_SOURCE_VALUE_AT_9076
+leveraged_funds_weekly: 9076=ABSENT 9082=NULL 9085=NULL BOUNDARY=NOT_SOURCE_VALUE_AT_9076
+weekly_change_source: 9076=VALUE 9082=ABSENT 9085=ABSENT BOUNDARY=LOSS_9076_TO_9082
+synthetic_values_used: 9076=VALUE 9082=ABSENT 9085=ABSENT BOUNDARY=LOSS_9076_TO_9082
+
+=== DIRECTION DERIVABILITY ===
+DERIVED_ASSET_MANAGERS_OVERALL='bearish'
+DERIVED_ASSET_MANAGERS_WEEKLY='bearish'
+DERIVED_LEVERAGED_FUNDS_OVERALL='bearish'
+DERIVED_LEVERAGED_FUNDS_WEEKLY='bullish'
+
+=== LIVE CHAIN VALUES ===
+asset_managers_overall: 9076=None 9082='bearish' 9085=None
+asset_managers_weekly: 9076=None 9082=None 9085=None
+leveraged_funds_overall: 9076=None 9082=None 9085=None
+leveraged_funds_weekly: 9076=None 9082=None 9085=None
+report_age_days: 9076=None 9082=None 9085=None
+
+=== ROOT CAUSE CLASSIFICATION ===
+LOSS_9076_TO_9082=asset_managers_long,asset_managers_short,asset_managers_change_long,asset_managers_change_short,leveraged_funds_long,leveraged_funds_short,leveraged_funds_change_long,leveraged_funds_change_short,weekly_change_source,synthetic_values_used
+LOSS_9082_TO_9085=report_date,max_age_days,asset_managers_overall
+NEXT_PATCH_BOUNDARY=9082_ADAPTER
+PATCH_ALLOWED=NO
+RUNTIME_LOGIC_MODIFIED=0
+SERVICES_RESTARTED=0
+FINAL_RESULT=PASS
+
+=== SERVICE HEALTH ===
+PORT_9076=LISTENING
+PORT_9082=LISTENING
+PORT_9085=LISTENING
+
+=== CONTRACTS 01-04 CHAIN TRUTH COMPLETE ===
+AUDIT=/home/nawaf511/empire-core-new/var/audits/contracts-01-04-chain-truth-v1-20260808-034927
+REPORT=/home/nawaf511/empire-core-new/var/audits/contracts-01-04-chain-truth-v1-20260808-034927/report.txt
+RAW_9076=/home/nawaf511/empire-core-new/var/audits/contracts-01-04-chain-truth-v1-20260808-034927/raw-9076.json
+QUALITY_9082=/home/nawaf511/empire-core-new/var/audits/contracts-01-04-chain-truth-v1-20260808-034927/quality-9082.json
+CANONICAL_9085=/home/nawaf511/empire-core-new/var/audits/contracts-01-04-chain-truth-v1-20260808-034927/canonical-9085.json
+CHECKSUMS=/home/nawaf511/empire-core-new/var/audits/contracts-01-04-chain-truth-v1-20260808-034927/SHA256SUMS

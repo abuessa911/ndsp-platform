@@ -1,0 +1,3 @@
+service	source	destination	active	copy_status	verification
+ndsp-commercial-auth-payment-staging.service	/opt/ndsp-commercial-auth-payment-staging	/home/nawaf511/empire-core-new/runtime/opt-services/ndsp-commercial-auth-payment-staging-e9587598ba	active	copied	rsync-dry-run-clean
+ndsp-registration-consent-v42.service	/opt/ndsp/legal-v42	/home/nawaf511/empire-core-new/runtime/opt-services/legal-v42-729774de5b	active	copied	rsync-dry-run-clean

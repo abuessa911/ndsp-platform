@@ -1,0 +1,14 @@
+# /etc/systemd/system/ndsp-investing-calendar.service
+[Unit]
+Description=NDSP Investing Live Economic Calendar
+
+[Service]
+Type=oneshot
+User=nawaf511
+ExecStart=/usr/bin/python3 /home/nawaf511/ndsp-portal-real-data-sync/investing_live_calendar.py
+
+# /etc/systemd/system/ndsp-investing-calendar.service.d/override.conf
+[Service]
+ExecStart=
+ExecStart=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/services/ndsp-runtime-jobs/real-data-sync/investing_live_calendar.py
+ProtectHome=read-only

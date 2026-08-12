@@ -670,10 +670,10 @@ app.get('/api/admin-ui/governance', adminOnly, async (_req, res) => {
   send(res, 200, {
     ok:true,
     governance:{
-      platform:'NDSP — منصة نواف لدعم القرار',
+      platform:'NDSP — منصة دعم القرار',
       mode:'Decision Active',
       execution:'Execution Sanitized',
-      visible_layers:['TDL','NMP',"Devil's Advocate",'Nawaf Golden Alignment'],
+      visible_layers:['TDL','NMP',"Devil's Advocate",'Golden Signal'],
       protected_layers_count:12,
       public_output_sanitized:true,
       secrets_exposed:false,

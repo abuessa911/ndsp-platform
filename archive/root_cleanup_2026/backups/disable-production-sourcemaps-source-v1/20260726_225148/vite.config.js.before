@@ -1,0 +1,31 @@
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+
+const base = process.env.NDSP_BASE || "/portal-commercial-preview/";
+
+export default defineConfig({
+  base,
+  plugins: [react()],
+  build: {
+    sourcemap: true,
+    outDir: "dist",
+    emptyOutDir: true
+  },
+  server: {
+    host: "0.0.0.0",
+    port: 5173,
+    strictPort: true,
+    proxy: {
+      "/api": {
+        target: "https://my.ndsp.app",
+        changeOrigin: true,
+        secure: true
+      }
+    }
+  },
+  preview: {
+    host: "0.0.0.0",
+    port: 4173,
+    strictPort: true
+  }
+});

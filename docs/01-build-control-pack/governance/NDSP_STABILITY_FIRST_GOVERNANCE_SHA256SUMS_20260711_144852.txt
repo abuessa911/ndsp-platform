@@ -1,0 +1,3 @@
+ad2e0259bd72dd8d5bdbcabaf6fc7820e49a9ac4e49eaf93412caed4627f47ed  /home/nawaf511/empire-core-new/docs/01-build-control-pack/governance/NDSP_STABILITY_FIRST_TRANSFORMATION_GOVERNANCE_AR.md
+3ae38a819685aef840cb4c4e73c85a2a8250d9db23abf4f021fb732f218efe70  /home/nawaf511/empire-core-new/docs/01-build-control-pack/governance/NDSP_STABILITY_FIRST_TRANSFORMATION_GOVERNANCE_EN.md
+bbd2455c7457b8951925071fc0b0197720f441325abb297a36a7983287ca134e  /home/nawaf511/empire-core-new/docs/00-build-catalog/NDSP_PROJECT_WORK_GOVERNANCE_PIN_AR.md

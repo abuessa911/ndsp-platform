@@ -1,0 +1,745 @@
+/*
+ * NDSP Responsive Visual Governance V1
+ *
+ * Canonical rules:
+ * - rem + clamp() typography
+ * - min-inline-size: 0
+ * - overflow-wrap: anywhere
+ * - text-size-adjust: 100%
+ * - container: min(100% - 24px, 1220px)
+ * - no absolute positioning for variable CORE content text
+ * - CORE: 4 columns -> 2x2 -> stacked
+ */
+
+:root {
+  --ndsp-container-max: 76.25rem;
+  --ndsp-container-gutter: 1.5rem;
+
+  --ndsp-h1:
+    clamp(
+      2.25rem,
+      1.35rem + 3vw,
+      4.5rem
+    );
+
+  --ndsp-h2:
+    clamp(
+      1.75rem,
+      1.25rem + 1.7vw,
+      3rem
+    );
+
+  --ndsp-h3:
+    clamp(
+      1.25rem,
+      1rem + .85vw,
+      2rem
+    );
+
+  --ndsp-body-l:
+    clamp(
+      1rem,
+      .94rem + .2vw,
+      1.125rem
+    );
+
+  --ndsp-body-m: 1rem;
+  --ndsp-label: .875rem;
+  --ndsp-micro: .75rem;
+
+  --ndsp-line-height-ar: 1.55;
+
+  --ndsp-logo-mobile:
+    clamp(
+      7.5rem,
+      25vw,
+      9.375rem
+    );
+
+  --ndsp-logo-tablet:
+    clamp(
+      10rem,
+      20vw,
+      12.5rem
+    );
+
+  --ndsp-logo-desktop:
+    clamp(
+      13.75rem,
+      17vw,
+      17.5rem
+    );
+
+  --ndsp-hero-width:
+    min(46vw, 42.5rem);
+
+  --ndsp-icon-1: 1rem;
+  --ndsp-icon-2: 1.25rem;
+  --ndsp-icon-3: 1.5rem;
+  --ndsp-icon-4: 2rem;
+
+  --ndsp-stroke:
+    clamp(
+      1.75px,
+      .115rem,
+      2px
+    );
+
+  --ndsp-gold: #d7b35d;
+  --ndsp-blue: #38afe9;
+
+  --ndsp-glow-gold:
+    0 0 1.1rem
+    rgba(215, 179, 93, .19);
+
+  --ndsp-glow-blue:
+    0 0 .9rem
+    rgba(56, 175, 233, .15);
+
+  --ndsp-motion-fast: 140ms;
+  --ndsp-motion-normal: 240ms;
+}
+
+/* =========================================================
+   BASE
+   ========================================================= */
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+  max-inline-size: 100%;
+}
+
+body {
+  overflow-x: clip;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+  font-family:
+    "Segoe UI",
+    "Noto Sans Arabic",
+    "SF Arabic",
+    Roboto,
+    Ubuntu,
+    Tahoma,
+    Arial,
+    sans-serif;
+}
+
+html[dir="rtl"] body,
+html[lang^="ar"] body {
+  line-height: var(--ndsp-line-height-ar);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+main,
+section,
+article,
+aside,
+header,
+footer,
+nav,
+div,
+figure,
+figcaption,
+li {
+  min-inline-size: 0;
+}
+
+/* Variable content must be allowed to wrap. */
+
+p,
+li,
+label,
+button,
+a,
+td,
+th,
+figcaption,
+[data-ndsp-content-text],
+[data-ndsp-core-text] {
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  hyphens: none;
+}
+
+/* =========================================================
+   CANONICAL CONTAINER
+   ========================================================= */
+
+.ndsp-container,
+[data-ndsp-container] {
+  inline-size:
+    min(
+      calc(100% - var(--ndsp-container-gutter)),
+      var(--ndsp-container-max)
+    );
+
+  margin-inline: auto;
+  min-inline-size: 0;
+}
+
+/* =========================================================
+   TYPOGRAPHY
+   ========================================================= */
+
+.ndsp-h1,
+[data-ndsp-text-level="h1"] {
+  font-size: var(--ndsp-h1);
+  line-height: 1.08;
+}
+
+.ndsp-h2,
+[data-ndsp-text-level="h2"] {
+  font-size: var(--ndsp-h2);
+  line-height: 1.14;
+}
+
+.ndsp-h3,
+[data-ndsp-text-level="h3"] {
+  font-size: var(--ndsp-h3);
+  line-height: 1.22;
+}
+
+.ndsp-body-l,
+[data-ndsp-text-level="body-l"] {
+  font-size: var(--ndsp-body-l);
+}
+
+.ndsp-body-m,
+[data-ndsp-text-level="body-m"] {
+  font-size: var(--ndsp-body-m);
+}
+
+.ndsp-label,
+[data-ndsp-text-level="label"] {
+  font-size: var(--ndsp-label);
+}
+
+.ndsp-micro,
+[data-ndsp-text-level="micro"] {
+  font-size: var(--ndsp-micro);
+}
+
+/*
+ * We do not globally overwrite existing H1/H2/H3 art typography.
+ * These selectors normalize content typography where semantic
+ * text is used.
+ */
+
+main h1:not([data-ndsp-art-text]) {
+  font-size:
+    clamp(
+      2.25rem,
+      1.35rem + 3vw,
+      4.5rem
+    );
+
+  line-height: 1.08;
+}
+
+main h2:not([data-ndsp-art-text]) {
+  font-size:
+    clamp(
+      1.75rem,
+      1.25rem + 1.7vw,
+      3rem
+    );
+
+  line-height: 1.14;
+}
+
+main h3:not([data-ndsp-art-text]) {
+  font-size:
+    clamp(
+      1.25rem,
+      1rem + .85vw,
+      2rem
+    );
+
+  line-height: 1.22;
+}
+
+/* =========================================================
+   GRAPHICS
+   ========================================================= */
+
+img,
+svg,
+canvas,
+video {
+  max-inline-size: 100%;
+}
+
+img,
+video {
+  block-size: auto;
+  object-fit: contain;
+}
+
+svg {
+  shape-rendering: geometricPrecision;
+}
+
+svg text {
+  text-rendering: geometricPrecision;
+}
+
+/*
+ * Supersedes old OS-specific SVG font scaling.
+ * SVG artwork keeps its own authored size unless explicitly
+ * governed by data-ndsp-content-text.
+ */
+
+html[data-ndsp-os] svg text {
+  font-size: 1em !important;
+}
+
+.ndsp-logo,
+[data-ndsp-logo] {
+  inline-size: var(--ndsp-logo-desktop);
+  max-inline-size: 100%;
+  block-size: auto;
+  object-fit: contain;
+}
+
+.ndsp-hero-art,
+[data-ndsp-hero-art] {
+  inline-size: var(--ndsp-hero-width);
+  max-inline-size: 42.5rem;
+  block-size: auto;
+  object-fit: contain;
+}
+
+.ndsp-icon-16 {
+  inline-size: var(--ndsp-icon-1);
+  block-size: var(--ndsp-icon-1);
+}
+
+.ndsp-icon-20 {
+  inline-size: var(--ndsp-icon-2);
+  block-size: var(--ndsp-icon-2);
+}
+
+.ndsp-icon-24 {
+  inline-size: var(--ndsp-icon-3);
+  block-size: var(--ndsp-icon-3);
+}
+
+.ndsp-icon-32 {
+  inline-size: var(--ndsp-icon-4);
+  block-size: var(--ndsp-icon-4);
+}
+
+.ndsp-governed-stroke {
+  stroke-width: var(--ndsp-stroke);
+}
+
+/* =========================================================
+   EFFECTS
+   ========================================================= */
+
+.ndsp-fx-gold,
+[data-ndsp-fx="gold"] {
+  filter:
+    drop-shadow(
+      var(--ndsp-glow-gold)
+    );
+}
+
+.ndsp-fx-blue,
+[data-ndsp-fx="blue"] {
+  filter:
+    drop-shadow(
+      var(--ndsp-glow-blue)
+    );
+}
+
+.ndsp-fx-interactive,
+button,
+[role="button"] {
+  transition:
+    transform var(--ndsp-motion-normal)
+      cubic-bezier(.2, .75, .25, 1),
+    box-shadow var(--ndsp-motion-normal) ease,
+    border-color var(--ndsp-motion-fast) ease,
+    background-color var(--ndsp-motion-fast) ease,
+    color var(--ndsp-motion-fast) ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ndsp-fx-interactive:hover,
+  button:hover,
+  [role="button"]:hover {
+    transform: translateY(-1px);
+  }
+}
+
+/* High DPR: reduce bloom so edges remain sharp. */
+
+@media (min-resolution: 1.5dppx) {
+  :root {
+    --ndsp-glow-gold:
+      0 0 .75rem
+      rgba(215, 179, 93, .15);
+
+    --ndsp-glow-blue:
+      0 0 .65rem
+      rgba(56, 175, 233, .12);
+  }
+}
+
+@media (min-resolution: 2dppx) {
+  :root {
+    --ndsp-glow-gold:
+      0 0 .6rem
+      rgba(215, 179, 93, .13);
+
+    --ndsp-glow-blue:
+      0 0 .5rem
+      rgba(56, 175, 233, .1);
+  }
+}
+
+/* =========================================================
+   CORE AUTHORITY BAR
+   ========================================================= */
+
+.ndsp-core-authority,
+[data-ndsp-core-authority] {
+  container-type: inline-size;
+  container-name: ndsp-core;
+
+  inline-size: 100%;
+  max-inline-size: 100%;
+  min-inline-size: 0;
+
+  display: grid;
+  grid-template-columns:
+    repeat(
+      4,
+      minmax(0, 1fr)
+    );
+
+  align-items: stretch;
+  gap: 0;
+
+  overflow: visible;
+}
+
+.ndsp-core-authority > *,
+[data-ndsp-core-authority] > * {
+  min-inline-size: 0;
+}
+
+.ndsp-core-item,
+[data-ndsp-core-item] {
+  position: relative !important;
+
+  inset: auto !important;
+
+  transform: none !important;
+
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  min-block-size: 4.75rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap:
+    clamp(
+      .45rem,
+      1cqi,
+      .9rem
+    );
+
+  padding:
+    clamp(
+      .75rem,
+      1.6cqi,
+      1.25rem
+    );
+
+  text-align: center;
+}
+
+[data-ndsp-core-text] {
+  position: static !important;
+
+  inset: auto !important;
+  translate: none !important;
+  transform: none !important;
+
+  inline-size: auto !important;
+  max-inline-size: 100% !important;
+
+  margin: 0 !important;
+
+  font-size:
+    clamp(
+      .875rem,
+      .75rem + .35cqi,
+      1.125rem
+    ) !important;
+
+  line-height: 1.55 !important;
+
+  white-space: normal !important;
+  overflow-wrap: anywhere !important;
+
+  text-align: center;
+}
+
+/*
+ * CORE itself may be larger, but remains fluid.
+ */
+
+[data-ndsp-core-text="core"] {
+  font-size:
+    clamp(
+      1.5rem,
+      1rem + 1.25cqi,
+      2.5rem
+    ) !important;
+
+  font-weight: 700;
+  line-height: 1.1 !important;
+}
+
+/*
+ * Container queries solve viewport zoom and embedded-layout
+ * problems better than viewport breakpoints alone.
+ */
+
+/* 2 × 2 */
+
+@container ndsp-core (max-width: 63.99rem) {
+  .ndsp-core-authority,
+  [data-ndsp-core-authority] {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
+  }
+}
+
+/* Stacked */
+
+@container ndsp-core (max-width: 47.99rem) {
+  .ndsp-core-authority,
+  [data-ndsp-core-authority] {
+    grid-template-columns: 1fr;
+  }
+
+  .ndsp-core-item,
+  [data-ndsp-core-item] {
+    justify-content: flex-start;
+    text-align: start;
+  }
+
+  [data-ndsp-core-text] {
+    text-align: start;
+  }
+}
+
+/*
+ * Fallback for browsers without container queries.
+ */
+
+@supports not (container-type: inline-size) {
+  @media (max-width: 1023px) {
+    .ndsp-core-authority,
+    [data-ndsp-core-authority] {
+      grid-template-columns:
+        repeat(
+          2,
+          minmax(0, 1fr)
+        );
+    }
+  }
+
+  @media (max-width: 767px) {
+    .ndsp-core-authority,
+    [data-ndsp-core-authority] {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+/* =========================================================
+   VIEWPORT MATRIX
+   ========================================================= */
+
+/* Mobile <= 767 */
+
+@media (max-width: 767px) {
+  :root {
+    --ndsp-container-gutter: 1.5rem;
+  }
+
+  .ndsp-logo,
+  [data-ndsp-logo] {
+    inline-size: var(--ndsp-logo-mobile);
+  }
+
+  .ndsp-hero-art,
+  [data-ndsp-hero-art] {
+    inline-size:
+      min(
+        calc(100vw - 1.5rem),
+        42.5rem
+      );
+  }
+
+  button,
+  [role="button"],
+  nav a {
+    min-block-size: 2.75rem;
+  }
+}
+
+/* Tablet 768–1023 */
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .ndsp-logo,
+  [data-ndsp-logo] {
+    inline-size: var(--ndsp-logo-tablet);
+  }
+}
+
+/* Laptop 1024–1439 */
+
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .ndsp-logo,
+  [data-ndsp-logo] {
+    inline-size:
+      clamp(
+        12rem,
+        17vw,
+        15rem
+      );
+  }
+}
+
+/* Desktop >= 1440 */
+
+@media (min-width: 1440px) {
+  .ndsp-logo,
+  [data-ndsp-logo] {
+    inline-size: var(--ndsp-logo-desktop);
+  }
+}
+
+/* =========================================================
+   OS SUPPORT
+   ========================================================= */
+
+html[data-ndsp-os="windows"] body {
+  font-family:
+    "Segoe UI",
+    "Noto Sans Arabic",
+    Tahoma,
+    Arial,
+    sans-serif;
+}
+
+html[data-ndsp-os="linux"] body {
+  font-family:
+    "Noto Sans Arabic",
+    Ubuntu,
+    "DejaVu Sans",
+    Arial,
+    sans-serif;
+}
+
+html[data-ndsp-os="macos"] body,
+html[data-ndsp-os="ios"] body {
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Arabic",
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+}
+
+html[data-ndsp-os="android"] body {
+  font-family:
+    Roboto,
+    "Noto Sans Arabic",
+    Arial,
+    sans-serif;
+}
+
+/*
+ * OS changes font family, not arbitrary content geometry.
+ * This prevents per-OS pixel offsets from becoming technical debt.
+ */
+
+/* =========================================================
+   ACCESSIBILITY / ZOOM
+   ========================================================= */
+
+:focus-visible {
+  outline:
+    .125rem solid
+    rgba(215, 179, 93, .95);
+
+  outline-offset: .1875rem;
+}
+
+html[data-ndsp-pointer="coarse"] button,
+html[data-ndsp-pointer="coarse"] [role="button"],
+html[data-ndsp-pointer="coarse"] nav a {
+  min-inline-size: 2.75rem;
+  min-block-size: 2.75rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+
+    transition-duration: .01ms !important;
+  }
+
+  .ndsp-fx-gold,
+  .ndsp-fx-blue,
+  [data-ndsp-fx] {
+    filter: none !important;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .ndsp-fx-gold,
+  .ndsp-fx-blue,
+  [data-ndsp-fx] {
+    filter: none !important;
+  }
+}

@@ -1,0 +1,17 @@
+# /etc/systemd/system/ndsp-telegram-alert.service
+[Unit]
+Description=NDSP Telegram automatic health alert
+After=network-online.target nginx.service ndsp-api.service postgresql.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/ndsp_auto_telegram_health_alert.sh
+User=root
+Group=root
+
+# /etc/systemd/system/ndsp-telegram-alert.service.d/30-ndsp-official-runtime-source.conf
+[Service]
+EnvironmentFile=/etc/ndsp/ndsp-db.env
+EnvironmentFile=/etc/ndsp/ndsp-mail.env
+Environment=NDSP_ADMIN_USERS_JSON=/home/nawaf511/empire-core-new/runtime/admin-users.json

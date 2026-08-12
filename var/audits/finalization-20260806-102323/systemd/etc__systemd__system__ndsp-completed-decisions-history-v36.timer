@@ -1,0 +1,11 @@
+[Unit]
+Description=NDSP Completed Decisions History Timer V36
+
+[Timer]
+OnBootSec=3min
+OnUnitActiveSec=15min
+AccuracySec=1min
+Unit=ndsp-completed-decisions-history-capture-v36.service
+
+[Install]
+WantedBy=timers.target

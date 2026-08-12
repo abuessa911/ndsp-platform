@@ -1,0 +1,4 @@
+paid=2
+priced=0
+limited=2
+pending=False

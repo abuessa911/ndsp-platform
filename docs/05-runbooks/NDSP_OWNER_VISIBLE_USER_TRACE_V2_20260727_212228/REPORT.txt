@@ -1,0 +1,520 @@
+
+============================================================
+NDSP — OWNER VISIBLE USER TRACE V2
+============================================================
+DATE=2026-07-27T21:22:28+02:00
+HOST=vmi2934783.contaboserver.net
+TARGET_EMAIL=she20232030@gmail.com
+OWNER_URL=https://my.ndsp.app/owner/?trace=1
+MODE=READ_ONLY
+REPORT=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_OWNER_VISIBLE_USER_TRACE_V2_20260727_212228/REPORT.txt
+
+============================================================
+0) PRECONDITIONS
+============================================================
+SUDO_GATE=PASS
+PRECONDITION_GATE=PASS
+
+============================================================
+1) PUBLIC OWNER HTML AND JS
+============================================================
+OWNER_HTTP=302
+OWNER_HTML_BYTES=154
+OWNER_HTML_SHA256=da5060c1890506c6a1b9b1b261867b4de19bcd3a96f08ccc01b3e09ea1a88211
+PUBLIC_OWNER_HTML_CONTAINS_TARGET=NO
+--- OWNER HEADERS ---
+HTTP/2 302 
+server: nginx/1.24.0 (Ubuntu)
+date: Mon, 27 Jul 2026 19:22:28 GMT
+content-type: text/html
+content-length: 154
+location: https://my.ndsp.app/login/?admin=1&next=%2Fowner%2F
+strict-transport-security: max-age=31536000
+x-content-type-options: nosniff
+referrer-policy: strict-origin-when-cross-origin
+x-frame-options: SAMEORIGIN
+content-security-policy: default-src 'self' https: data: blob: 'unsafe-inline' 'unsafe-eval'; connect-src 'self' https: wss:; frame-ancestors 'self'; base-uri 'self'; object-src 'none';
+permissions-policy: geolocation=(), microphone=(), camera=()
+x-ndsp-portal: approved-design-only-d10-d4
+x-content-type-options: nosniff
+
+PUBLIC_JS_COUNT=0
+
+============================================================
+2) FILESYSTEM EXACT EMAIL SEARCH
+============================================================
+SEARCH_ROOT=/var/www/ndsp-my
+SEARCH_ROOT=/var/www/html
+SEARCH_ROOT=/home/nawaf511/empire-core-new
+SEARCH_ROOT=/home/nawaf511/Downloads/NDSP_COMMERCIAL_FRONTEND_LIVE_V1
+SEARCH_ROOT=/home/nawaf511/empire-core-new/frontend
+SEARCH_ROOT=/opt/ndsp-auth-core-clean/current
+FILES_CONTAINING_TARGET_COUNT=5
+FILE_CONTAINS_TARGET=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_DELETE_USER_TREE_V1_20260727_211206.md
+FILE_SHA256=f4336e0c47aaa5b365414c49301990de2de902ae2666483904bb13bd2c4de910
+FILE_BYTES=107975
+FILE_EMAIL_HIT=8:TARGET_EMAIL=she20232030@gmail.com
+FILE_EMAIL_HIT=883:TARGET_EMAIL=she20232030@gmail.com
+FILE_CONTAINS_TARGET=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_LEGACY_EMAIL_DELETE_SOURCE_FIX_V1_1_20260727_103119.md
+FILE_SHA256=892a6f831ba85c323281296ec29d39fb1228f753b919d97e5541a5bd06c972d3
+FILE_BYTES=2721
+FILE_EMAIL_HIT=24:EXPECTED_CONFIRM_EMAIL=she20232030@gmail.com
+FILE_EMAIL_HIT=62:ACCEPTED_CONFIRM_EMAIL=she20232030@gmail.com
+FILE_CONTAINS_TARGET=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_OWNER_VISIBLE_USER_TRACE_V2_20260727_212228/REPORT.txt
+FILE_SHA256=162126441cb076aecb84fbf1d854ef06e0b024c2f518bb7a2b3de70d0f306eb4
+FILE_BYTES=2957
+FILE_EMAIL_HIT=7:TARGET_EMAIL=she20232030@gmail.com
+FILE_EMAIL_HIT=56:FILE_EMAIL_HIT=8:TARGET_EMAIL=she20232030@gmail.com
+FILE_EMAIL_HIT=57:FILE_EMAIL_HIT=883:TARGET_EMAIL=she20232030@gmail.com
+FILE_EMAIL_HIT=61:FILE_EMAIL_HIT=24:EXPECTED_CONFIRM_EMAIL=she20232030@gmail.com
+FILE_EMAIL_HIT=62:FILE_EMAIL_HIT=62:ACCEPTED_CONFIRM_EMAIL=she20232030@gmail.com
+FILE_CONTAINS_TARGET=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_SOURCE_FIRST_ACCOUNT_DELETE_AND_DB_WIRING_V1_20260727_111714.md
+FILE_SHA256=eb7afc6b44ddb2ecd917d10c1c5420255c90bf191e9e2bd233d74f4b41850b40
+FILE_BYTES=1133
+FILE_EMAIL_HIT=10:TARGET_CONFIRM_EMAIL=she20232030@gmail.com
+FILE_CONTAINS_TARGET=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_SOURCE_FIRST_ACCOUNT_DELETE_AND_DB_WIRING_V1_20260727_111750.md
+FILE_SHA256=758db0baeca8ee3f1ea16e38b2bfa309ae7bd492baf2028b59bd0f8ac5680ff4
+FILE_BYTES=1133
+FILE_EMAIL_HIT=10:TARGET_CONFIRM_EMAIL=she20232030@gmail.com
+
+============================================================
+3) NGINX OWNER/API ROUTING
+============================================================
+142:# - preserves auth/static aliases
+150:    server_name my.ndsp.app;
+188:    # NDSP_ROOT_TO_LANDING_FINAL_V1_BEGIN
+195:    # NDSP_ROOT_TO_LANDING_FINAL_V1_END
+201:    server_name my.ndsp.app;
+204:    root /var/www/ndsp-my;
+223:        proxy_pass https://api.ndsp.app/api/;
+232:        try_files $uri $uri/ /approved-design/index.html;
+237:        try_files $uri =404;
+242:        try_files $uri =404;
+248:        try_files $uri $uri/ /index.html;
+284:        try_files $uri $uri/ /decision-room-v31/account/index.html;
+290:        try_files /decision-room-v31/index.html =404;
+296:        try_files $uri $uri/ /decision-room-v31/index.html;
+306:        alias /var/www/ndsp-my/portal-v50/config/assets.json;
+312:        alias /var/www/ndsp-my/portal-v50/config/layers.json;
+318:        alias /var/www/ndsp-my/portal-v50/config/capabilities.json;
+328:        try_files /portal-v50/support-center-v60.html =404;
+337:        proxy_pass http://127.0.0.1:9090/api/register;
+344:        proxy_pass_request_headers on;
+350:        proxy_pass http://127.0.0.1:9090/api/trial/status;
+357:        proxy_pass_request_headers on;
+364:        proxy_pass http://127.0.0.1:9090/api/trial/seats;
+374:        proxy_pass http://127.0.0.1:9090/api/launch/status;
+384:        proxy_pass http://127.0.0.1:9090/api/entitlements/me;
+391:        proxy_pass_request_headers on;
+403:        proxy_pass http://127.0.0.1:9090/api/auth/decision-room-access;
+408:        proxy_pass_request_body off;
+429:        root /var/www/ndsp-my;
+431:        try_files $uri $uri/index.html =404;
+436:        alias /var/www/ndsp-my/assets/ndsp-telegram-v182.css;
+442:        alias /var/www/ndsp-my/assets/ndsp-telegram-v182.js;
+448:        alias /var/www/ndsp-my/assets/ndsp-telegram-entry-v182.js;
+454:        proxy_pass http://127.0.0.1:9091;
+461:        proxy_pass_request_headers on;
+471:        proxy_pass http://127.0.0.1:9095;
+484:        proxy_pass http://127.0.0.1:9095;
+497:        proxy_pass http://127.0.0.1:9095;
+510:        proxy_pass http://127.0.0.1:9095;
+523:        proxy_pass http://127.0.0.1:9095;
+536:        proxy_pass http://127.0.0.1:9095;
+549:        proxy_pass http://127.0.0.1:9095;
+562:        proxy_pass http://127.0.0.1:9095;
+575:        proxy_pass http://127.0.0.1:9095;
+588:        proxy_pass http://127.0.0.1:9095;
+601:        proxy_pass http://127.0.0.1:9095;
+619:        proxy_pass http://127.0.0.1:19091/api/auth/session;
+620:        proxy_pass_request_body off;
+629:        proxy_pass http://127.0.0.1:9078/api/completed$is_args$args;
+644:        proxy_pass http://127.0.0.1:9078/api/completed/latest$is_args$args;
+669:        root /var/www/ndsp-my;
+670:        try_files $uri =404;
+677:        root /var/www/ndsp-my;
+678:        try_files $uri =404;
+684:        root /var/www/ndsp-my;
+686:        try_files $uri $uri/ /portal/index.html;
+701:        root /var/www/ndsp-my;
+702:        try_files /portal-next/index.html =404;
+710:        root /var/www/ndsp-my;
+711:        try_files $uri =404;
+717:        root /var/www/ndsp-my;
+718:        try_files $uri =404;
+722:        root /var/www/ndsp-my;
+723:        try_files /portal-next/index.html =404;
+739:        root /var/www/ndsp-my;
+740:        try_files /forgot-password.html =404;
+748:        root /var/www/ndsp-my;
+749:        try_files /reset-password.html =404;
+752:    location = /api/auth/forgot-password {
+753:        proxy_pass http://127.0.0.1:9027/api/auth/forgot-password;
+764:    location = /api/auth/reset-password {
+765:        proxy_pass http://127.0.0.1:9027/api/auth/reset-password;
+782:    proxy_pass http://127.0.0.1:9082/api/decision/quality-live;
+797:location ^~ /start/ { alias /var/www/ndsp-business-ops/start/; index index.html; add_header Cache-Control "no-store" always; }
+799:location ^~ /support/ { alias /var/www/ndsp-business-ops/support/; index index.html; add_header Cache-Control "no-store" always; }
+801:location ^~ /subscribe/ { alias /var/www/ndsp-business-ops/subscribe/; index index.html; add_header Cache-Control "no-store" always; }
+803:location ^~ /launch/ { alias /var/www/ndsp-business-ops/launch/; index index.html; add_header Cache-Control "no-store" always; }
+804:location = /ndsp-ops-assets/common.css { alias /var/www/ndsp-business-ops/common.css; add_header Cache-Control "public, max-age=3600" always; }
+806:location = /ops-admin { return 301 /ops-admin/; }
+807:location ^~ /ops-admin/ {
+810:    alias /var/www/ndsp-business-ops/ops-admin/;
+816:    proxy_pass http://127.0.0.1:9094/health;
+826:    proxy_pass http://127.0.0.1:9094;
+836:location ^~ /api/ops/admin/ {
+839:    proxy_pass http://127.0.0.1:9094;
+857:    proxy_pass http://127.0.0.1:19091/auth-ui/index.html;
+869:    proxy_pass http://127.0.0.1:19091/auth-ui/assets/;
+879:location ^~ /api/auth/ {
+880:    proxy_pass http://127.0.0.1:19091;
+893:location = /_ndsp_auth_admin_clean {
+895:    proxy_pass http://127.0.0.1:19091/internal/authorize-admin;
+896:    proxy_pass_request_body off;
+919:    proxy_pass http://127.0.0.1:19091/api/auth/logout-page;
+927:location ^~ /owner/ {
+931:    try_files $uri $uri/ /owner/index.html;
+934:location ^~ /admin/ {
+938:    try_files $uri $uri/ /admin/index.html;
+948:        root /var/www/html;
+970:    root /var/www/ndsp-admin;
+975:    location = /api/admin/users/health {
+976:        proxy_pass http://127.0.0.1:9068/health;
+984:    location ^~ /api/admin/users/ {
+985:        proxy_pass http://127.0.0.1:9068/;
+994:        try_files $uri =404;
+998:        try_files $uri $uri/ /index.html;
+1008:location ^~ /api/admin/layers/ {
+1009:    proxy_pass http://127.0.0.1:9065/api/admin/layers/;
+1018:location ^~ /api/admin/raw-cot/ {
+1019:    proxy_pass http://127.0.0.1:9076/api/admin/raw-cot/;
+1045:        proxy_pass http://127.0.0.1:9061/api/decision/package-v2;
+1057:        root /var/www/html;
+1059:        try_files $uri =404;
+1070:        try_files /register.html =404;
+1077:    # NDSP launch alias: governed live decision quality
+1079:        proxy_pass http://127.0.0.1:9082/api/decision/quality-live$is_args$args;
+1137:        proxy_pass http://127.0.0.1:9028/api/register;
+1148:    location = /api/auth/register {
+1150:        proxy_pass http://127.0.0.1:9028/api/auth/register;
+1165:        proxy_pass http://127.0.0.1:9001/api/completed-decisions$is_args$args;
+1181:        proxy_pass http://127.0.0.1:9001/api/completed-decisions/latest$is_args$args;
+1200:        root /var/www/ndsp-my;
+1201:        try_files /data/completed-decisions-v15-api.json =404;
+1211:        root /var/www/ndsp-my;
+1212:        try_files /data/completed-decisions-v16-live-adapter.json =404;
+1219:        root /var/www/ndsp-my;
+1220:        try_files /data/completed-decisions-v16-live-adapter.json =404;
+1227:        root /var/www/ndsp-my;
+1228:        try_files /data/completed-decisions-v16-live-adapter.json =404;
+1248:    location = /api/auth/login {
+1249:        proxy_pass http://127.0.0.1:9020/api/auth/login;
+1257:    location = /api/auth/me {
+1258:        proxy_pass http://127.0.0.1:9020/api/auth/me;
+1266:    location = /api/auth/logout {
+1267:        proxy_pass http://127.0.0.1:9020/api/auth/logout;
+1276:        proxy_pass http://127.0.0.1:9001;
+1284:    # NDSP launch alias: governed live decision quality
+1286:        proxy_pass http://127.0.0.1:9082/api/decision/quality-live$is_args$args;
+1334:        proxy_pass http://127.0.0.1:9066;
+1341:        proxy_pass http://127.0.0.1:9066;
+1349:    location = /api/ui-bridge/health { proxy_pass http://127.0.0.1:9066; proxy_http_version 1.1; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; }
+1353:    location = /api/market-structure { proxy_pass http://127.0.0.1:9066; proxy_http_version 1.1; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; }
+1354:    location = /api/technical-confirmation { proxy_pass http://127.0.0.1:9066; proxy_http_version 1.1; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; }
+1355:    location = /api/macro-analysis { proxy_pass http://127.0.0.1:9066; proxy_http_version 1.1; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; }
+1356:    location = /api/risk-layer { proxy_pass http://127.0.0.1:9066; proxy_http_version 1.1; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; }
+1357:    location = /api/nawaf-signal { proxy_pass http://127.0.0.1:9066; proxy_http_version 1.1; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; }
+1358:    location = /api/alerts { proxy_pass http://127.0.0.1:9066; proxy_http_version 1.1; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; }
+1359:    location = /api/settings { proxy_pass http://127.0.0.1:9066; proxy_http_version 1.1; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; }
+1374:        proxy_pass http://127.0.0.1:9061/api/decision/package-live;
+1388:        proxy_pass http://127.0.0.1:9078/api/completed;
+1396:        proxy_pass http://127.0.0.1:9078/api/completed/latest;
+1404:        proxy_pass http://127.0.0.1:9078$request_uri;
+1412:        proxy_pass http://127.0.0.1:9078$request_uri;
+1420:        proxy_pass http://127.0.0.1:9078$request_uri;
+1428:        proxy_pass http://127.0.0.1:9079/health;
+1436:        proxy_pass http://127.0.0.1:9079/api/governance/evaluate;
+1463:        proxy_pass http://127.0.0.1:9028/api/register;
+1474:    location = /api/auth/register {
+1476:        proxy_pass http://127.0.0.1:9028/api/auth/register;
+1491:        proxy_pass http://127.0.0.1:9001/api/completed-decisions$is_args$args;
+1507:        proxy_pass http://127.0.0.1:9001/api/completed-decisions/latest$is_args$args;
+1526:        root /var/www/ndsp-my;
+1527:        try_files /data/completed-decisions-v15-api.json =404;
+1537:        root /var/www/ndsp-my;
+1538:        try_files /data/completed-decisions-v16-live-adapter.json =404;
+1545:        root /var/www/ndsp-my;
+1546:        try_files /data/completed-decisions-v16-live-adapter.json =404;
+1553:        root /var/www/ndsp-my;
+1554:        try_files /data/completed-decisions-v16-live-adapter.json =404;
+1560:        proxy_pass http://127.0.0.1:9090/api/trial/status;
+1567:        proxy_pass_request_headers on;
+1574:        proxy_pass http://127.0.0.1:9090/api/trial/seats;
+1584:        proxy_pass http://127.0.0.1:9090/api/launch/status;
+1618:        root /var/www/html;
+1628:        root /var/www/html;
+1632:        try_files /reset-password.html =404;
+1636:        proxy_pass https://api.ndsp.app/api/auth/reset-password;
+1648:        add_header X-NDSP-RP-Upstream "/api/auth/reset-password" always;
+1658:        root /var/www/ndsp-my;
+1659:        try_files /data/completed-decisions-v15-api.json =404;
+1666:        root /var/www/ndsp-my;
+1667:        try_files /data/completed-decisions-v15-api.json =404;
+1674:        root /var/www/ndsp-my;
+1675:        try_files /data/completed-decisions-v15-api.json =404;
+1685:        root /var/www/ndsp-my;
+1686:        try_files /data/completed-decisions-v16-live-adapter.json =404;
+1693:        root /var/www/ndsp-my;
+1694:        try_files /data/completed-decisions-v16-live-adapter.json =404;
+1701:        root /var/www/ndsp-my;
+1702:        try_files /data/completed-decisions-v16-live-adapter.json =404;
+1714:    root /var/www/ndsp;
+1722:    add_header X-NDSP-Serving-Root "/var/www/ndsp" always;
+1733:    location = /api/auth/login {
+1734:        proxy_pass http://127.0.0.1:9020/api/auth/login;
+1743:        proxy_pass http://127.0.0.1:9019/api/trial/register/health;
+1755:        proxy_pass http://127.0.0.1:9019/api/trial/register/;
+1767:        proxy_pass http://127.0.0.1:9019/api/trial/invites/validate;
+1783:        try_files /index.html =404;
+1787:        try_files $uri $uri/ /index.html;
+1794:        root /var/www/html;
+1798:        try_files /reset-password.html =404;
+1802:        proxy_pass https://api.ndsp.app/api/auth/reset-password;
+1814:        add_header X-NDSP-RP-Upstream "/api/auth/reset-password" always;
+1820:        proxy_pass http://127.0.0.1:9083/api/decision/nmp-timeframes-live$is_args$args;
+1827:        proxy_pass http://127.0.0.1:9083/api/decision/quality-contract-v52$is_args$args;
+1834:        proxy_pass http://127.0.0.1:9083/health;
+1846:        root /var/www/ndsp-my;
+1847:        try_files /data/completed-decisions-v15-api.json =404;
+1854:        root /var/www/ndsp-my;
+1855:        try_files /data/completed-decisions-v15-api.json =404;
+1862:        root /var/www/ndsp-my;
+1863:        try_files /data/completed-decisions-v15-api.json =404;
+1873:        root /var/www/ndsp-my;
+1874:        try_files /data/completed-decisions-v16-live-adapter.json =404;
+1881:        root /var/www/ndsp-my;
+1882:        try_files /data/completed-decisions-v16-live-adapter.json =404;
+1889:        root /var/www/ndsp-my;
+1890:        try_files /data/completed-decisions-v16-live-adapter.json =404;
+1896:        proxy_pass http://127.0.0.1:9090/api/trial/status;
+1903:        proxy_pass_request_headers on;
+1910:        proxy_pass http://127.0.0.1:9090/api/trial/seats;
+1920:        proxy_pass http://127.0.0.1:9090/api/launch/status;
+
+============================================================
+4) BROAD POSTGRES TEXT/JSON EXACT EMAIL SCAN
+============================================================
+POSTGRES_AVAILABLE=YES
+POSTGRES_DATABASE_COUNT=2
+POSTGRES_DATABASE=ndsp_auth
+POSTGRES_TEXT_OR_JSON_EMAIL_TOTAL=ndsp_auth:0
+POSTGRES_DATABASE=postgres
+POSTGRES_TEXT_OR_JSON_EMAIL_TOTAL=postgres:0
+
+============================================================
+5) BROAD SQLITE TEXT/JSON EXACT EMAIL SCAN
+============================================================
+SQLITE_CANDIDATE_COUNT=160
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/.codex/goals_1.sqlite:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/.codex/logs_2.sqlite:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/.codex/memories_1.sqlite:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/.codex/state_5.sqlite:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/.config/BraveSoftware/Brave-Browser/Default/ads_service/database.sqlite:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/.config/BraveSoftware/Brave-Browser/Default/heavy_ad_intervention_opt_out.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/Desktop/backend/ndip.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/Desktop/backend/users.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/empire-core-new/backend/services/ndsp-launch-control-v167/data/launch_control.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/empire-core-new/backend/services/ndsp-telegram-notifications-v182/data/telegram.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/empire-core-new/backend/services/ndsp-trial-clock-v163/data/trial_clock.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/empire-core-new/backend/services/ndsp-trial-clock-v164/data/trial_clock.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_COMMERCIAL_DATA_TRUTH_GATE_20260725_194121/profile-decision_btc/GPUPersistentCache/GPUCache/7WE2TYRSGLNGHXRXWS7GUPWSQLGIQULP/cache.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_COMMERCIAL_DATA_TRUTH_GATE_20260725_194121/profile-decision_eth/GPUPersistentCache/GPUCache/7WE2TYRSGLNGHXRXWS7GUPWSQLGIQULP/cache.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_COMMERCIAL_DATA_TRUTH_GATE_20260725_194121/profile-page_command-center/GPUPersistentCache/GPUCache/7WE2TYRSGLNGHXRXWS7GUPWSQLGIQULP/cache.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_COMMERCIAL_DATA_TRUTH_GATE_20260725_194121/profile-page_completed/GPUPersistentCache/GPUCache/7WE2TYRSGLNGHXRXWS7GUPWSQLGIQULP/cache.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_COMMERCIAL_DATA_TRUTH_GATE_20260725_194121/profile-page_data-health/GPUPersistentCache/GPUCache/7WE2TYRSGLNGHXRXWS7GUPWSQLGIQULP/cache.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_COMMERCIAL_DATA_TRUTH_GATE_20260725_194121/profile-page_markets/GPUPersistentCache/GPUCache/7WE2TYRSGLNGHXRXWS7GUPWSQLGIQULP/cache.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_COMMERCIAL_DATA_TRUTH_GATE_20260725_194121/profile-page_prices-chart/GPUPersistentCache/GPUCache/7WE2TYRSGLNGHXRXWS7GUPWSQLGIQULP/cache.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_COMMERCIAL_DATA_TRUTH_GATE_20260725_194121/profile-page_risk/GPUPersistentCache/GPUCache/7WE2TYRSGLNGHXRXWS7GUPWSQLGIQULP/cache.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_COMMERCIAL_DATA_TRUTH_GATE_20260725_194121/profile-page_scenarios/GPUPersistentCache/GPUCache/7WE2TYRSGLNGHXRXWS7GUPWSQLGIQULP/cache.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/.local/share/opencode/opencode.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/.local/share/pki/nssdb/cert9.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/.local/share/pki/nssdb/key4.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/.local/share/pnpm/store/v11/index.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/NDSP-Customer-Agent/.adk/bot/traces/traces.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_full_backups/NDSP_FULL_BACKUP_AFTER_LAUNCH_READY_20260610_084556/project/empire-core-new/backend/data/legacy_sqlite_backups/ndip_saas_legacy_20260502_111653.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_full_backups/NDSP_FULL_BACKUP_AFTER_LAUNCH_READY_20260610_084556/project/empire-core-new/backend/data/ndip_saas_before_test_cleanup_20260502_012247.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_full_backups/NDSP_FULL_BACKUP_AFTER_LAUNCH_READY_20260610_084556/project/empire-core-new/backend/data/ndip_saas_before_test_cleanup_v2_20260502_012410.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_full_backups/NDSP_FULL_BACKUP_AFTER_LAUNCH_READY_20260610_084556/project/empire-core-new/backend/data/ndip_saas.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_full_backups/NDSP_FULL_BACKUP_AFTER_LAUNCH_READY_20260610_084556/project/empire-core-new/backend/ndip.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_full_backups/NDSP_FULL_BACKUP_AFTER_LAUNCH_READY_20260610_084556/project/empire-core-new/backend/users.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_launch_backups/NDSP_SOFT_LAUNCH_COMPLETION_HOTFIX_V167_20260719_131341/current_v164_service/data/trial_clock.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_launch_backups/NDSP_SOFT_LAUNCH_COMPLETION_V166_20260719_130759/current_v164_service/data/trial_clock.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_launch_reports/NDSP_DECISION_SCORE_PROVENANCE_V189_20260719_194825/raw/chrome-profile/Default/heavy_ad_intervention_opt_out.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_launch_reports/NDSP_DECISION_SCORE_PROVENANCE_V189_20260719_194825/raw/chrome-profile/first_party_sets.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_launch_reports/NDSP_DECISION_SCORE_PROVENANCE_V189_20260719_194825/raw/chrome-profile/GPUPersistentCache/GPUCache/7WE2TYRSGLNGHXRXWS7GUPWSQLGIQULP/cache.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_launch_reports/NDSP_MOBILE_V93_FINALIZE_20260717_093715/browser/profile-closed-dom/GPUPersistentCache/GPUCache/7WE2TYRSGLNGHXRXWS7GUPWSQLGIQULP/cache.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_launch_reports/NDSP_MOBILE_V93_FINALIZE_20260717_093715/browser/profile-closed-shot/GPUPersistentCache/GPUCache/7WE2TYRSGLNGHXRXWS7GUPWSQLGIQULP/cache.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_launch_reports/NDSP_MOBILE_V93_FINALIZE_20260717_093715/browser/profile-open-dom/GPUPersistentCache/GPUCache/7WE2TYRSGLNGHXRXWS7GUPWSQLGIQULP/cache.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_launch_reports/NDSP_MOBILE_V93_FINALIZE_20260717_093715/browser/profile-open-shot/GPUPersistentCache/GPUCache/7WE2TYRSGLNGHXRXWS7GUPWSQLGIQULP/cache.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_launch_reports/NDSP_PORTAL_RUNTIME_SURGICAL_RECOVERY_V187_20260719_191455/raw/chrome-profile/Default/heavy_ad_intervention_opt_out.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_launch_reports/NDSP_PORTAL_RUNTIME_SURGICAL_RECOVERY_V187_20260719_191455/raw/chrome-profile/first_party_sets.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_launch_reports/NDSP_PORTAL_RUNTIME_SURGICAL_RECOVERY_V187_20260719_191455/raw/chrome-profile/GPUPersistentCache/GPUCache/7WE2TYRSGLNGHXRXWS7GUPWSQLGIQULP/cache.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_launch_reports/NDSP_SCORE_INTEGRITY_GUARD_V195_20260720_004037/raw/chrome-profile/Default/heavy_ad_intervention_opt_out.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_launch_reports/NDSP_SCORE_INTEGRITY_GUARD_V195_20260720_004037/raw/chrome-profile/first_party_sets.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_launch_reports/NDSP_SCORE_INTEGRITY_GUARD_V195_20260720_004037/raw/chrome-profile/GPUPersistentCache/GPUCache/7WE2TYRSGLNGHXRXWS7GUPWSQLGIQULP/cache.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_launch_reports/NDSP_SCORE_INTEGRITY_GUARD_V196_20260720_020248/raw/chrome-profile/Default/heavy_ad_intervention_opt_out.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_launch_reports/NDSP_SCORE_INTEGRITY_GUARD_V196_20260720_020248/raw/chrome-profile/first_party_sets.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_launch_reports/NDSP_SCORE_INTEGRITY_GUARD_V196_20260720_020248/raw/chrome-profile/GPUPersistentCache/GPUCache/7WE2TYRSGLNGHXRXWS7GUPWSQLGIQULP/cache.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/NDSP_PORTAL_V50_BLACK_SCREEN_FOCUS_20260717_082850/browser-profile/GPUPersistentCache/GPUCache/7WE2TYRSGLNGHXRXWS7GUPWSQLGIQULP/cache.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/NDSP_PORTAL_V50_BLACK_SCREEN_FOCUS_20260717_082850/browser-profile-screenshot/GPUPersistentCache/GPUCache/7WE2TYRSGLNGHXRXWS7GUPWSQLGIQULP/cache.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/NDSP_PORTAL_V50_BLACK_SCREEN_FOCUS_20260717_084559/browser-profile/GPUPersistentCache/GPUCache/7WE2TYRSGLNGHXRXWS7GUPWSQLGIQULP/cache.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/NDSP_PORTAL_V50_BLACK_SCREEN_FOCUS_20260717_084559/browser-profile-screenshot/GPUPersistentCache/GPUCache/7WE2TYRSGLNGHXRXWS7GUPWSQLGIQULP/cache.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_.codex_goals_1.sqlite:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_.codex_logs_2.sqlite:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_.codex_memories_1.sqlite:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_.codex_state_5.sqlite:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_.config_BraveSoftware_Brave-Browser_Default_ads_service_database.sqlite:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_.config_BraveSoftware_Brave-Browser_Default_heavy_ad_intervention_opt_out.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_Desktop_backend_ndip.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_Desktop_backend_users.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_.local_share_opencode_opencode.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_.local_share_pki_nssdb_cert9.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_.local_share_pki_nssdb_key4.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_.local_share_pnpm_store_v11_index.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_NDSP-Customer-Agent_.adk_bot_traces_traces.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_ndsp_full_backups_NDSP_FULL_BACKUP_AFTER_LAUNCH_READY_20260610_084556_project_empire-core-new_backend_ndip.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_ndsp_full_backups_NDSP_FULL_BACKUP_AFTER_LAUNCH_READY_20260610_084556_project_empire-core-new_backend_users.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_ndsp_upgrade_bundle_20260602_070656_backend_data_legacy_sqlite_backups_ndip_saas_legacy_20260502_111653.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_ndsp_upgrade_bundle_20260602_070656_backend_data_ndip_saas_before_test_cleanup_20260502_012247.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_ndsp_upgrade_bundle_20260602_070656_backend_data_ndip_saas_before_test_cleanup_v2_20260502_012410.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_ndsp_upgrade_bundle_20260602_070656_backend_data_ndip_saas.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_ndsp_upgrade_bundle_20260602_070656_backend_ndip.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_ndsp_upgrade_bundle_20260602_070656_backend_users.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_ndsp_upgrade_bundle_20260602_071449_backend_data_legacy_sqlite_backups_ndip_saas_legacy_20260502_111653.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_ndsp_upgrade_bundle_20260602_071449_backend_data_ndip_saas_before_test_cleanup_20260502_012247.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_ndsp_upgrade_bundle_20260602_071449_backend_data_ndip_saas_before_test_cleanup_v2_20260502_012410.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_ndsp_upgrade_bundle_20260602_071449_backend_data_ndip_saas.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_ndsp_upgrade_bundle_20260602_071449_backend_ndip.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_ndsp_upgrade_bundle_20260602_071449_backend_users.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_ndsp_upgrade_bundle_20260602_071526_backend_data_legacy_sqlite_backups_ndip_saas_legacy_20260502_111653.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_ndsp_upgrade_bundle_20260602_071526_backend_data_ndip_saas_before_test_cleanup_20260502_012247.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_ndsp_upgrade_bundle_20260602_071526_backend_data_ndip_saas_before_test_cleanup_v2_20260502_012410.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_ndsp_upgrade_bundle_20260602_071526_backend_data_ndip_saas.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_ndsp_upgrade_bundle_20260602_071526_backend_ndip.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_ndsp_upgrade_bundle_20260602_071526_backend_users.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_ndsp_upgrade_bundle_20260602_071732_backend_data_legacy_sqlite_backups_ndip_saas_legacy_20260502_111653.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_ndsp_upgrade_bundle_20260602_071732_backend_data_ndip_saas_before_test_cleanup_20260502_012247.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_ndsp_upgrade_bundle_20260602_071732_backend_data_ndip_saas_before_test_cleanup_v2_20260502_012410.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_ndsp_upgrade_bundle_20260602_071732_backend_data_ndip_saas.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_ndsp_upgrade_bundle_20260602_071732_backend_ndip.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_ndsp_upgrade_bundle_20260602_071732_backend_users.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_ndsp_upgrade_bundle_20260602_071838_backend_data_legacy_sqlite_backups_ndip_saas_legacy_20260502_111653.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_ndsp_upgrade_bundle_20260602_071838_backend_data_ndip_saas_before_test_cleanup_20260502_012247.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_ndsp_upgrade_bundle_20260602_071838_backend_data_ndip_saas_before_test_cleanup_v2_20260502_012410.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_ndsp_upgrade_bundle_20260602_071838_backend_data_ndip_saas.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_ndsp_upgrade_bundle_20260602_071838_backend_ndip.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_ndsp_upgrade_bundle_20260602_071838_backend_users.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_ndsp_upgrade_work_ndsp_upgrade_bundle_20260602_071838_backend_data_ndip_saas_before_test_cleanup_20260502_012247.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_ndsp_upgrade_work_ndsp_upgrade_bundle_20260602_071838_backend_data_ndip_saas_before_test_cleanup_v2_20260502_012410.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_ndsp_upgrade_work_ndsp_upgrade_bundle_20260602_071838_backend_data_ndip_saas.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_ndsp_upgrade_work_ndsp_upgrade_bundle_20260602_071838_backend_ndip.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_ndsp_upgrade_work_ndsp_upgrade_bundle_20260602_071838_backend_users.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_snap_codex_34_logs_1.sqlite:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_snap_codex_34_state_5.sqlite:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_upgrade_review_empire-core-new_backend_data_legacy_sqlite_backups_ndip_saas_legacy_20260502_111653.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_upgrade_review_empire-core-new_backend_data_ndip_saas_before_test_cleanup_20260502_012247.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_upgrade_review_empire-core-new_backend_data_ndip_saas_before_test_cleanup_v2_20260502_012410.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_upgrade_review_empire-core-new_backend_data_ndip_saas.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_upgrade_review_empire-core-new_backend_ndip.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_prechange_backups/NDSP_PRECHANGE_BACKUP_20260705_005359/tree/detected_db_files/home_nawaf511_upgrade_review_empire-core-new_backend_users.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_upgrade_bundle_20260602_070656/backend/data/legacy_sqlite_backups/ndip_saas_legacy_20260502_111653.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_upgrade_bundle_20260602_070656/backend/data/ndip_saas_before_test_cleanup_20260502_012247.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_upgrade_bundle_20260602_070656/backend/data/ndip_saas_before_test_cleanup_v2_20260502_012410.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_upgrade_bundle_20260602_070656/backend/data/ndip_saas.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_upgrade_bundle_20260602_070656/backend/ndip.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_upgrade_bundle_20260602_070656/backend/users.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_upgrade_bundle_20260602_071449/backend/data/legacy_sqlite_backups/ndip_saas_legacy_20260502_111653.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_upgrade_bundle_20260602_071449/backend/data/ndip_saas_before_test_cleanup_20260502_012247.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_upgrade_bundle_20260602_071449/backend/data/ndip_saas_before_test_cleanup_v2_20260502_012410.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_upgrade_bundle_20260602_071449/backend/data/ndip_saas.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_upgrade_bundle_20260602_071449/backend/ndip.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_upgrade_bundle_20260602_071449/backend/users.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_upgrade_bundle_20260602_071526/backend/data/legacy_sqlite_backups/ndip_saas_legacy_20260502_111653.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_upgrade_bundle_20260602_071526/backend/data/ndip_saas_before_test_cleanup_20260502_012247.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_upgrade_bundle_20260602_071526/backend/data/ndip_saas_before_test_cleanup_v2_20260502_012410.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_upgrade_bundle_20260602_071526/backend/data/ndip_saas.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_upgrade_bundle_20260602_071526/backend/ndip.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_upgrade_bundle_20260602_071526/backend/users.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_upgrade_bundle_20260602_071732/backend/data/legacy_sqlite_backups/ndip_saas_legacy_20260502_111653.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_upgrade_bundle_20260602_071732/backend/data/ndip_saas_before_test_cleanup_20260502_012247.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_upgrade_bundle_20260602_071732/backend/data/ndip_saas_before_test_cleanup_v2_20260502_012410.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_upgrade_bundle_20260602_071732/backend/data/ndip_saas.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_upgrade_bundle_20260602_071732/backend/ndip.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_upgrade_bundle_20260602_071732/backend/users.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_upgrade_bundle_20260602_071838/backend/data/legacy_sqlite_backups/ndip_saas_legacy_20260502_111653.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_upgrade_bundle_20260602_071838/backend/data/ndip_saas_before_test_cleanup_20260502_012247.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_upgrade_bundle_20260602_071838/backend/data/ndip_saas_before_test_cleanup_v2_20260502_012410.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_upgrade_bundle_20260602_071838/backend/data/ndip_saas.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_upgrade_bundle_20260602_071838/backend/ndip.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_upgrade_bundle_20260602_071838/backend/users.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_upgrade/work/ndsp_upgrade_bundle_20260602_071838/backend/data/legacy_sqlite_backups/ndip_saas_legacy_20260502_111653.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_upgrade/work/ndsp_upgrade_bundle_20260602_071838/backend/data/ndip_saas_before_test_cleanup_20260502_012247.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_upgrade/work/ndsp_upgrade_bundle_20260602_071838/backend/data/ndip_saas_before_test_cleanup_v2_20260502_012410.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_upgrade/work/ndsp_upgrade_bundle_20260602_071838/backend/data/ndip_saas.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_upgrade/work/ndsp_upgrade_bundle_20260602_071838/backend/ndip.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/ndsp_upgrade/work/ndsp_upgrade_bundle_20260602_071838/backend/users.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/snap/chromium/3491/.local/share/pki/nssdb/cert9.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/snap/chromium/3491/.local/share/pki/nssdb/key4.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/snap/chromium/3499/.local/share/pki/nssdb/cert9.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/snap/chromium/3499/.local/share/pki/nssdb/key4.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/snap/codex/34/logs_1.sqlite:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/snap/codex/34/state_5.sqlite:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/upgrade_review/empire-core-new/backend/data/legacy_sqlite_backups/ndip_saas_legacy_20260502_111653.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/upgrade_review/empire-core-new/backend/data/ndip_saas_before_test_cleanup_20260502_012247.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/upgrade_review/empire-core-new/backend/data/ndip_saas_before_test_cleanup_v2_20260502_012410.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/upgrade_review/empire-core-new/backend/data/ndip_saas.sqlite3:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/upgrade_review/empire-core-new/backend/ndip.db:0
+SQLITE_TEXT_OR_JSON_EMAIL_TOTAL=/home/nawaf511/upgrade_review/empire-core-new/backend/users.db:0
+
+============================================================
+6) REDIS/CACHE EXACT EMAIL SCAN
+============================================================
+REDIS_AVAILABLE=YES
+REDIS_EMAIL_HIT_COUNT=0
+
+============================================================
+7) OWNER/API PUBLIC PROBES WITHOUT COOKIES
+============================================================
+API_PROBE=/api/admin/customers HTTP=404 BYTES=62
+API_PROBE=/api/admin/users HTTP=404 BYTES=58
+API_PROBE=/api/auth/users HTTP=404 BYTES=86
+API_PROBE=/api/owner/customers HTTP=404 BYTES=108
+API_PROBE=/api/owner/subscriptions HTTP=404 BYTES=112
+API_PROBE=/api/owner/users HTTP=404 BYTES=104
+API_PROBE=/api/trial/status HTTP=200 BYTES=628
+API_PROBE=/api/users HTTP=404 BYTES=98
+
+============================================================
+8) CLASSIFICATION
+============================================================
+SIGNAL_PUBLIC_OWNER_HTML=NO
+SIGNAL_PUBLIC_JS=NO
+SIGNAL_FILES=YES
+SIGNAL_POSTGRES_TEXT_JSON=NO
+SIGNAL_SQLITE_TEXT_JSON=NO
+SIGNAL_REDIS=NO
+SIGNAL_API=NO
+ROOT_CAUSE_CLASS=STATIC_OR_SOURCE_SNAPSHOT_STILL_CONTAINS_TARGET
+
+============================================================
+9) FINAL RESULT
+============================================================
+PRODUCTION_MODIFIED=NO
+DATABASE_CHANGED=NO
+SOURCE_CHANGED=NO
+LIVE_FILE_CHANGED=NO
+NGINX_CHANGED=NO
+SERVICE_RESTARTED=NO
+FINAL_STATUS=NDSP_OWNER_VISIBLE_USER_TRACE_V2_COMPLETE
+REPORT=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_OWNER_VISIBLE_USER_TRACE_V2_20260727_212228/REPORT.txt

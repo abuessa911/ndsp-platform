@@ -1,13 +1,23 @@
+import { useNdspLanguage } from "@/lib/language-context"
+
 type NdspLogoProps = {
   compact?: boolean
 }
 
-export function NdspLogo({ compact = false }: NdspLogoProps) {
+export function NdspLogo({
+  compact = false,
+}: NdspLogoProps) {
+  const { isArabic } = useNdspLanguage()
+
+  const platformName = isArabic
+    ? "منصة دعم القرار"
+    : "Decision Support Platform"
+
   return (
     <a
       className="sovereign-logo"
       href="/"
-      aria-label="NDSP — منصة نواف لدعم القرار"
+      aria-label={`NDSP — ${platformName}`}
     >
       <svg
         className="sovereign-logo__mark"
@@ -15,15 +25,36 @@ export function NdspLogo({ compact = false }: NdspLogoProps) {
         aria-hidden="true"
       >
         <defs>
-          <linearGradient id="ndspGold" x1="8" y1="5" x2="55" y2="58">
-            <stop offset="0" stopColor="#F1D58B" />
-            <stop offset="0.35" stopColor="#D4AF37" />
-            <stop offset="0.7" stopColor="#A97D2D" />
-            <stop offset="1" stopColor="#E5C36D" />
+          <linearGradient
+            id="ndspGold"
+            x1="8"
+            y1="5"
+            x2="55"
+            y2="58"
+          >
+            <stop
+              offset="0"
+              stopColor="#F1D58B"
+            />
+            <stop
+              offset="0.35"
+              stopColor="#D4AF37"
+            />
+            <stop
+              offset="0.7"
+              stopColor="#A97D2D"
+            />
+            <stop
+              offset="1"
+              stopColor="#E5C36D"
+            />
           </linearGradient>
 
           <filter id="ndspMarkGlow">
-            <feGaussianBlur stdDeviation="2.3" result="blur" />
+            <feGaussianBlur
+              stdDeviation="2.3"
+              result="blur"
+            />
             <feMerge>
               <feMergeNode in="blur" />
               <feMergeNode in="SourceGraphic" />
@@ -70,7 +101,7 @@ export function NdspLogo({ compact = false }: NdspLogoProps) {
       {!compact && (
         <span className="sovereign-logo__copy">
           <strong>NDSP</strong>
-          <span>منصة نواف لدعم القرار</span>
+          <span>{platformName}</span>
         </span>
       )}
     </a>

@@ -1,0 +1,893 @@
+{
+  "schema_version": "1.0",
+  "validator": "validate_ui_backend_governance_policy.py",
+  "policy_path": "/home/nawaf511/empire-core-new/docs/99-governance/ui-architecture/UI_BACKEND_GOVERNANCE_POLICY.yaml",
+  "repo_root": "/home/nawaf511/empire-core-new",
+  "policy_only": false,
+  "strict_warnings": false,
+  "error_count": 84,
+  "warning_count": 26,
+  "validation": "FAIL",
+  "findings": [
+    {
+      "severity": "ERROR",
+      "rule_id": "POLICY_FILE_MISSING",
+      "message": "Governance policy file does not exist.",
+      "path": "/home/nawaf511/empire-core-new/docs/99-governance/ui-architecture/UI_BACKEND_GOVERNANCE_POLICY.yaml",
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "TOP_LEVEL_SECTIONS_MISSING",
+      "message": "Missing top-level policy sections: admin_frontend, api_and_contracts, architecture, change_governance, core_expanded_separation, design_references, documentation_center, effective_from, enforcement, frontend_libraries, internationalization, library_admission_policy, machine_enforcement, owners, policy_id, public_frontend, purpose, schema_version, scope, security, sensitive_actions, settings, status, temporary_model_policy, testing_and_quality, title, title_ar, traceability, visual_identity",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "POLICY_STATUS_INVALID",
+      "message": "status must be one of ['ACTIVE'].",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "POLICY_ENFORCEMENT_INVALID",
+      "message": "enforcement must be one of ['MANDATORY'].",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "NON_EMPTY_STRING_REQUIRED",
+      "message": "schema_version must be a non-empty string.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "NON_EMPTY_STRING_REQUIRED",
+      "message": "policy_id must be a non-empty string.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "NON_EMPTY_STRING_REQUIRED",
+      "message": "title must be a non-empty string.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "NON_EMPTY_STRING_REQUIRED",
+      "message": "title_ar must be a non-empty string.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "TYPE_SEQUENCE_REQUIRED",
+      "message": "owners must be a list.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "OWNERS_INSUFFICIENT",
+      "message": "Policy must define at least two responsible owners.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "TYPE_MAPPING_REQUIRED",
+      "message": "architecture must be a mapping.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "TYPE_MAPPING_REQUIRED",
+      "message": "architecture.frontend must be a mapping.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "FRONTEND_STACK_INVALID",
+      "message": "architecture.frontend.framework must equal 'React'.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "FRONTEND_STACK_INVALID",
+      "message": "architecture.frontend.build_tool must equal 'Vite'.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "FRONTEND_STACK_INVALID",
+      "message": "architecture.frontend.language must equal 'TypeScript'.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "TYPE_MAPPING_REQUIRED",
+      "message": "architecture.governance_backend must be a mapping.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "BACKEND_STACK_INVALID",
+      "message": "architecture.governance_backend.runtime must equal 'Node.js'.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "BACKEND_STACK_INVALID",
+      "message": "architecture.governance_backend.framework must equal 'Express'.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "BACKEND_STACK_INVALID",
+      "message": "architecture.governance_backend.module_system must equal 'CommonJS'.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "BACKEND_STACK_INVALID",
+      "message": "architecture.governance_backend.contract_format must equal 'JSON Schema'.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "TYPE_MAPPING_REQUIRED",
+      "message": "architecture.raw_cot_gateway must be a mapping.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "RAW_GATEWAY_RUNTIME_INVALID",
+      "message": "Raw COT gateway runtime must be Python.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "RAW_GATEWAY_SERVER_INVALID",
+      "message": "Raw COT gateway server must be Uvicorn.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "TYPE_MAPPING_REQUIRED",
+      "message": "core_expanded_separation must be a mapping.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "CORE_EXPANDED_SEPARATION_NOT_MANDATORY",
+      "message": "CORE/EXPANDED separation must be mandatory.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "TYPE_SEQUENCE_REQUIRED",
+      "message": "core_expanded_separation.prohibited_flows must be a list.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "REQUIRED_VALUES_MISSING",
+      "message": "core_expanded_separation.prohibited_flows is missing required values: EXPANDED Shadow Engine -> Public API, Experimental Result Store -> Public API",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "TYPE_MAPPING_REQUIRED",
+      "message": "core_expanded_separation.promotion must be a mapping.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "DIRECT_PROMOTION_ALLOWED",
+      "message": "Direct EXPANDED-to-CORE promotion must remain disabled.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "TYPE_MAPPING_REQUIRED",
+      "message": "public_frontend must be a mapping.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "PUBLIC_MODEL_INVALID",
+      "message": "Public frontend visible_model must be CORE.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "TYPE_SEQUENCE_REQUIRED",
+      "message": "public_frontend.hidden_models must be a list.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "REQUIRED_VALUES_MISSING",
+      "message": "public_frontend.hidden_models is missing required values: EXPANDED",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "TYPE_SEQUENCE_REQUIRED",
+      "message": "public_frontend.required_sections must be a list.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "REQUIRED_VALUES_MISSING",
+      "message": "public_frontend.required_sections is missing required values: Current Analysis, Documentation, Home, Methodology, Sign In",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "TYPE_MAPPING_REQUIRED",
+      "message": "admin_frontend must be a mapping.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "ADMIN_BASE_ROUTE_INVALID",
+      "message": "Admin base route must be /admin/cot.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "TYPE_SEQUENCE_REQUIRED",
+      "message": "admin_frontend.required_routes must be a list.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "REQUIRED_VALUES_MISSING",
+      "message": "admin_frontend.required_routes is missing required values: /admin/cot/audit-logs, /admin/cot/comparisons, /admin/cot/contracts, /admin/cot/daily-control, /admin/cot/experiments, /admin/cot/governance, /admin/cot/overview, /admin/cot/reports, /admin/cot/settings",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "TYPE_MAPPING_REQUIRED",
+      "message": "internationalization must be a mapping.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "TYPE_SEQUENCE_REQUIRED",
+      "message": "internationalization.supported_languages must be a list.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "REQUIRED_VALUES_MISSING",
+      "message": "internationalization.supported_languages is missing required values: ar, en",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "COMPONENT_DIRECTION_NOT_REQUIRED",
+      "message": "Component-level RTL/LTR direction must be required.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "TYPE_MAPPING_REQUIRED",
+      "message": "traceability must be a mapping.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "TRACEABILITY_NOT_MANDATORY",
+      "message": "UI traceability must be mandatory.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "TYPE_SEQUENCE_REQUIRED",
+      "message": "traceability.mapping must be a list.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "REQUIRED_VALUES_MISSING",
+      "message": "traceability.mapping is missing required values: capability, component, data_source, endpoint, function, permission, screen, service, test",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "TYPE_MAPPING_REQUIRED",
+      "message": "traceability.ui_complete_rule must be a mapping.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "TYPE_SEQUENCE_REQUIRED",
+      "message": "traceability.ui_complete_rule.all_required must be a list.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "REQUIRED_VALUES_MISSING",
+      "message": "traceability.ui_complete_rule.all_required is missing required values: empty_state_defined, endpoint_or_contract_defined, error_state_defined, executable_test_defined, loading_state_defined, permission_defined, real_data_defined, screen_defined, service_defined, success_state_defined, visible_component_defined",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "TYPE_MAPPING_REQUIRED",
+      "message": "testing_and_quality must be a mapping.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "TYPE_SEQUENCE_REQUIRED",
+      "message": "testing_and_quality.ci_must_fail_on must be a list.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "REQUIRED_VALUES_MISSING",
+      "message": "testing_and_quality.ci_must_fail_on is missing required values: license_violation, missing_required_contract, public_exposure_of_expanded, ui_complete_without_required_evidence, unapproved_library",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "TYPE_MAPPING_REQUIRED",
+      "message": "frontend_libraries must be a mapping.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "APPROVED_LIBRARIES_MISSING",
+      "message": "Policy is missing approved libraries: AG Grid, Apache ECharts, FullCalendar, Leaflet, Lucide React, MSW, Monaco Editor, Playwright, Radix UI, React Flow, React Hook Form, Recharts, Storybook, TanStack Query, Testing Library, TipTap, Vitest, Zod, date-fns, dnd-kit, shadcn/ui",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "TYPE_MAPPING_REQUIRED",
+      "message": "machine_enforcement must be a mapping.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "VALIDATOR_PATH_INVALID",
+      "message": "machine_enforcement.recommended_validator_path is invalid.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "WORKFLOW_PATH_INVALID",
+      "message": "machine_enforcement.recommended_ci_path is invalid.",
+      "path": null,
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "WARNING",
+      "rule_id": "FRONTEND_TYPESCRIPT_CONFIG_MISSING",
+      "message": "Frontend-like package has no tsconfig.json or tsconfig.app.json.",
+      "path": "/home/nawaf511/empire-core-new/var/backups/cot-governance-snapshots/20260802T153142Z/COT-GOV-SERVER-SNAPSHOT-20260802T153142Z-v1.0.0/PROJECT_FILES/var/backups/cot-governance-snapshots/20260802T095340Z/COT-GOV-SERVER-SNAPSHOT-20260802T095340Z-v1.0.0/PROJECT_FILES/backend/_backups/DEV002C_frontend_source_intake_20260628_001739/frontend-user-portal-vite",
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "WARNING",
+      "rule_id": "FRONTEND_TYPESCRIPT_CONFIG_MISSING",
+      "message": "Frontend-like package has no tsconfig.json or tsconfig.app.json.",
+      "path": "/home/nawaf511/empire-core-new/var/backups/cot-governance-snapshots/20260802T153142Z/COT-GOV-SERVER-SNAPSHOT-20260802T153142Z-v1.0.0/PROJECT_FILES/var/backups/cot-governance-snapshots/20260802T095340Z/COT-GOV-SERVER-SNAPSHOT-20260802T095340Z-v1.0.0/PROJECT_FILES/frontend/public-site",
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "LIBRARY_NOT_APPROVED_BY_POLICY",
+      "message": "i18next maps to i18next, which is not approved.",
+      "path": "/home/nawaf511/empire-core-new/var/backups/cot-governance-snapshots/20260802T153142Z/COT-GOV-SERVER-SNAPSHOT-20260802T153142Z-v1.0.0/PROJECT_FILES/var/backups/cot-governance-snapshots/20260802T095340Z/COT-GOV-SERVER-SNAPSHOT-20260802T095340Z-v1.0.0/PROJECT_FILES/frontend/public-site/package.json",
+      "line": null,
+      "evidence": "i18next"
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "LIBRARY_NOT_APPROVED_BY_POLICY",
+      "message": "lucide-react maps to Lucide React, which is not approved.",
+      "path": "/home/nawaf511/empire-core-new/var/backups/cot-governance-snapshots/20260802T153142Z/COT-GOV-SERVER-SNAPSHOT-20260802T153142Z-v1.0.0/PROJECT_FILES/var/backups/cot-governance-snapshots/20260802T095340Z/COT-GOV-SERVER-SNAPSHOT-20260802T095340Z-v1.0.0/PROJECT_FILES/frontend/public-site/package.json",
+      "line": null,
+      "evidence": "lucide-react"
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "LIBRARY_NOT_APPROVED_BY_POLICY",
+      "message": "react-i18next maps to i18next, which is not approved.",
+      "path": "/home/nawaf511/empire-core-new/var/backups/cot-governance-snapshots/20260802T153142Z/COT-GOV-SERVER-SNAPSHOT-20260802T153142Z-v1.0.0/PROJECT_FILES/var/backups/cot-governance-snapshots/20260802T095340Z/COT-GOV-SERVER-SNAPSHOT-20260802T095340Z-v1.0.0/PROJECT_FILES/frontend/public-site/package.json",
+      "line": null,
+      "evidence": "react-i18next"
+    },
+    {
+      "severity": "WARNING",
+      "rule_id": "FRONTEND_TYPESCRIPT_CONFIG_MISSING",
+      "message": "Frontend-like package has no tsconfig.json or tsconfig.app.json.",
+      "path": "/home/nawaf511/empire-core-new/var/backups/cot-governance-snapshots/20260802T153142Z/COT-GOV-SERVER-SNAPSHOT-20260802T153142Z-v1.0.0/PROJECT_FILES/var/backups/cot-governance-snapshots/20260802T095340Z/COT-GOV-SERVER-SNAPSHOT-20260802T095340Z-v1.0.0/PROJECT_FILES/frontend/user-portal-vite",
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "WARNING",
+      "rule_id": "FRONTEND_TYPESCRIPT_CONFIG_MISSING",
+      "message": "Frontend-like package has no tsconfig.json or tsconfig.app.json.",
+      "path": "/home/nawaf511/empire-core-new/var/backups/cot-governance-snapshots/20260802T153142Z/COT-GOV-SERVER-SNAPSHOT-20260802T153142Z-v1.0.0/PROJECT_FILES/var/backups/cot-governance-snapshots/20260802T150937Z/COT-GOV-SERVER-SNAPSHOT-20260802T150937Z-v1.0.0/PROJECT_FILES/var/backups/cot-governance-snapshots/20260802T095340Z/COT-GOV-SERVER-SNAPSHOT-20260802T095340Z-v1.0.0/PROJECT_FILES/backend/_backups/DEV002C_frontend_source_intake_20260628_001739/frontend-user-portal-vite",
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "WARNING",
+      "rule_id": "FRONTEND_TYPESCRIPT_CONFIG_MISSING",
+      "message": "Frontend-like package has no tsconfig.json or tsconfig.app.json.",
+      "path": "/home/nawaf511/empire-core-new/var/backups/cot-governance-snapshots/20260802T153142Z/COT-GOV-SERVER-SNAPSHOT-20260802T153142Z-v1.0.0/PROJECT_FILES/var/backups/cot-governance-snapshots/20260802T150937Z/COT-GOV-SERVER-SNAPSHOT-20260802T150937Z-v1.0.0/PROJECT_FILES/var/backups/cot-governance-snapshots/20260802T095340Z/COT-GOV-SERVER-SNAPSHOT-20260802T095340Z-v1.0.0/PROJECT_FILES/frontend/public-site",
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "LIBRARY_NOT_APPROVED_BY_POLICY",
+      "message": "i18next maps to i18next, which is not approved.",
+      "path": "/home/nawaf511/empire-core-new/var/backups/cot-governance-snapshots/20260802T153142Z/COT-GOV-SERVER-SNAPSHOT-20260802T153142Z-v1.0.0/PROJECT_FILES/var/backups/cot-governance-snapshots/20260802T150937Z/COT-GOV-SERVER-SNAPSHOT-20260802T150937Z-v1.0.0/PROJECT_FILES/var/backups/cot-governance-snapshots/20260802T095340Z/COT-GOV-SERVER-SNAPSHOT-20260802T095340Z-v1.0.0/PROJECT_FILES/frontend/public-site/package.json",
+      "line": null,
+      "evidence": "i18next"
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "LIBRARY_NOT_APPROVED_BY_POLICY",
+      "message": "lucide-react maps to Lucide React, which is not approved.",
+      "path": "/home/nawaf511/empire-core-new/var/backups/cot-governance-snapshots/20260802T153142Z/COT-GOV-SERVER-SNAPSHOT-20260802T153142Z-v1.0.0/PROJECT_FILES/var/backups/cot-governance-snapshots/20260802T150937Z/COT-GOV-SERVER-SNAPSHOT-20260802T150937Z-v1.0.0/PROJECT_FILES/var/backups/cot-governance-snapshots/20260802T095340Z/COT-GOV-SERVER-SNAPSHOT-20260802T095340Z-v1.0.0/PROJECT_FILES/frontend/public-site/package.json",
+      "line": null,
+      "evidence": "lucide-react"
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "LIBRARY_NOT_APPROVED_BY_POLICY",
+      "message": "react-i18next maps to i18next, which is not approved.",
+      "path": "/home/nawaf511/empire-core-new/var/backups/cot-governance-snapshots/20260802T153142Z/COT-GOV-SERVER-SNAPSHOT-20260802T153142Z-v1.0.0/PROJECT_FILES/var/backups/cot-governance-snapshots/20260802T150937Z/COT-GOV-SERVER-SNAPSHOT-20260802T150937Z-v1.0.0/PROJECT_FILES/var/backups/cot-governance-snapshots/20260802T095340Z/COT-GOV-SERVER-SNAPSHOT-20260802T095340Z-v1.0.0/PROJECT_FILES/frontend/public-site/package.json",
+      "line": null,
+      "evidence": "react-i18next"
+    },
+    {
+      "severity": "WARNING",
+      "rule_id": "FRONTEND_TYPESCRIPT_CONFIG_MISSING",
+      "message": "Frontend-like package has no tsconfig.json or tsconfig.app.json.",
+      "path": "/home/nawaf511/empire-core-new/var/backups/cot-governance-snapshots/20260802T153142Z/COT-GOV-SERVER-SNAPSHOT-20260802T153142Z-v1.0.0/PROJECT_FILES/var/backups/cot-governance-snapshots/20260802T150937Z/COT-GOV-SERVER-SNAPSHOT-20260802T150937Z-v1.0.0/PROJECT_FILES/var/backups/cot-governance-snapshots/20260802T095340Z/COT-GOV-SERVER-SNAPSHOT-20260802T095340Z-v1.0.0/PROJECT_FILES/frontend/user-portal-vite",
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "WARNING",
+      "rule_id": "FRONTEND_TYPESCRIPT_CONFIG_MISSING",
+      "message": "Frontend-like package has no tsconfig.json or tsconfig.app.json.",
+      "path": "/home/nawaf511/empire-core-new/var/backups/cot-governance-snapshots/20260802T153142Z/COT-GOV-SERVER-SNAPSHOT-20260802T153142Z-v1.0.0/PROJECT_FILES/var/backups/cot-governance-snapshots/20260802T150937Z/COT-GOV-SERVER-SNAPSHOT-20260802T150937Z-v1.0.0/PROJECT_FILES/backend/_backups/DEV002C_frontend_source_intake_20260628_001739/frontend-user-portal-vite",
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "WARNING",
+      "rule_id": "FRONTEND_TYPESCRIPT_CONFIG_MISSING",
+      "message": "Frontend-like package has no tsconfig.json or tsconfig.app.json.",
+      "path": "/home/nawaf511/empire-core-new/var/backups/cot-governance-snapshots/20260802T153142Z/COT-GOV-SERVER-SNAPSHOT-20260802T153142Z-v1.0.0/PROJECT_FILES/var/backups/cot-governance-snapshots/20260802T150937Z/COT-GOV-SERVER-SNAPSHOT-20260802T150937Z-v1.0.0/PROJECT_FILES/frontend/public-site",
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "LIBRARY_NOT_APPROVED_BY_POLICY",
+      "message": "i18next maps to i18next, which is not approved.",
+      "path": "/home/nawaf511/empire-core-new/var/backups/cot-governance-snapshots/20260802T153142Z/COT-GOV-SERVER-SNAPSHOT-20260802T153142Z-v1.0.0/PROJECT_FILES/var/backups/cot-governance-snapshots/20260802T150937Z/COT-GOV-SERVER-SNAPSHOT-20260802T150937Z-v1.0.0/PROJECT_FILES/frontend/public-site/package.json",
+      "line": null,
+      "evidence": "i18next"
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "LIBRARY_NOT_APPROVED_BY_POLICY",
+      "message": "lucide-react maps to Lucide React, which is not approved.",
+      "path": "/home/nawaf511/empire-core-new/var/backups/cot-governance-snapshots/20260802T153142Z/COT-GOV-SERVER-SNAPSHOT-20260802T153142Z-v1.0.0/PROJECT_FILES/var/backups/cot-governance-snapshots/20260802T150937Z/COT-GOV-SERVER-SNAPSHOT-20260802T150937Z-v1.0.0/PROJECT_FILES/frontend/public-site/package.json",
+      "line": null,
+      "evidence": "lucide-react"
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "LIBRARY_NOT_APPROVED_BY_POLICY",
+      "message": "react-i18next maps to i18next, which is not approved.",
+      "path": "/home/nawaf511/empire-core-new/var/backups/cot-governance-snapshots/20260802T153142Z/COT-GOV-SERVER-SNAPSHOT-20260802T153142Z-v1.0.0/PROJECT_FILES/var/backups/cot-governance-snapshots/20260802T150937Z/COT-GOV-SERVER-SNAPSHOT-20260802T150937Z-v1.0.0/PROJECT_FILES/frontend/public-site/package.json",
+      "line": null,
+      "evidence": "react-i18next"
+    },
+    {
+      "severity": "WARNING",
+      "rule_id": "FRONTEND_TYPESCRIPT_CONFIG_MISSING",
+      "message": "Frontend-like package has no tsconfig.json or tsconfig.app.json.",
+      "path": "/home/nawaf511/empire-core-new/var/backups/cot-governance-snapshots/20260802T153142Z/COT-GOV-SERVER-SNAPSHOT-20260802T153142Z-v1.0.0/PROJECT_FILES/var/backups/cot-governance-snapshots/20260802T150937Z/COT-GOV-SERVER-SNAPSHOT-20260802T150937Z-v1.0.0/PROJECT_FILES/frontend/user-portal-vite",
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "WARNING",
+      "rule_id": "FRONTEND_TYPESCRIPT_CONFIG_MISSING",
+      "message": "Frontend-like package has no tsconfig.json or tsconfig.app.json.",
+      "path": "/home/nawaf511/empire-core-new/var/backups/cot-governance-snapshots/20260802T153142Z/COT-GOV-SERVER-SNAPSHOT-20260802T153142Z-v1.0.0/PROJECT_FILES/backend/_backups/DEV002C_frontend_source_intake_20260628_001739/frontend-user-portal-vite",
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "WARNING",
+      "rule_id": "FRONTEND_TYPESCRIPT_CONFIG_MISSING",
+      "message": "Frontend-like package has no tsconfig.json or tsconfig.app.json.",
+      "path": "/home/nawaf511/empire-core-new/var/backups/cot-governance-snapshots/20260802T153142Z/COT-GOV-SERVER-SNAPSHOT-20260802T153142Z-v1.0.0/PROJECT_FILES/frontend/public-site",
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "LIBRARY_NOT_APPROVED_BY_POLICY",
+      "message": "i18next maps to i18next, which is not approved.",
+      "path": "/home/nawaf511/empire-core-new/var/backups/cot-governance-snapshots/20260802T153142Z/COT-GOV-SERVER-SNAPSHOT-20260802T153142Z-v1.0.0/PROJECT_FILES/frontend/public-site/package.json",
+      "line": null,
+      "evidence": "i18next"
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "LIBRARY_NOT_APPROVED_BY_POLICY",
+      "message": "lucide-react maps to Lucide React, which is not approved.",
+      "path": "/home/nawaf511/empire-core-new/var/backups/cot-governance-snapshots/20260802T153142Z/COT-GOV-SERVER-SNAPSHOT-20260802T153142Z-v1.0.0/PROJECT_FILES/frontend/public-site/package.json",
+      "line": null,
+      "evidence": "lucide-react"
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "LIBRARY_NOT_APPROVED_BY_POLICY",
+      "message": "react-i18next maps to i18next, which is not approved.",
+      "path": "/home/nawaf511/empire-core-new/var/backups/cot-governance-snapshots/20260802T153142Z/COT-GOV-SERVER-SNAPSHOT-20260802T153142Z-v1.0.0/PROJECT_FILES/frontend/public-site/package.json",
+      "line": null,
+      "evidence": "react-i18next"
+    },
+    {
+      "severity": "WARNING",
+      "rule_id": "FRONTEND_TYPESCRIPT_CONFIG_MISSING",
+      "message": "Frontend-like package has no tsconfig.json or tsconfig.app.json.",
+      "path": "/home/nawaf511/empire-core-new/var/backups/cot-governance-snapshots/20260802T153142Z/COT-GOV-SERVER-SNAPSHOT-20260802T153142Z-v1.0.0/PROJECT_FILES/frontend/user-portal-vite",
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "WARNING",
+      "rule_id": "FRONTEND_TYPESCRIPT_CONFIG_MISSING",
+      "message": "Frontend-like package has no tsconfig.json or tsconfig.app.json.",
+      "path": "/home/nawaf511/empire-core-new/var/backups/cot-governance-snapshots/20260802T095340Z/COT-GOV-SERVER-SNAPSHOT-20260802T095340Z-v1.0.0/PROJECT_FILES/backend/_backups/DEV002C_frontend_source_intake_20260628_001739/frontend-user-portal-vite",
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "WARNING",
+      "rule_id": "FRONTEND_TYPESCRIPT_CONFIG_MISSING",
+      "message": "Frontend-like package has no tsconfig.json or tsconfig.app.json.",
+      "path": "/home/nawaf511/empire-core-new/var/backups/cot-governance-snapshots/20260802T095340Z/COT-GOV-SERVER-SNAPSHOT-20260802T095340Z-v1.0.0/PROJECT_FILES/frontend/public-site",
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "LIBRARY_NOT_APPROVED_BY_POLICY",
+      "message": "i18next maps to i18next, which is not approved.",
+      "path": "/home/nawaf511/empire-core-new/var/backups/cot-governance-snapshots/20260802T095340Z/COT-GOV-SERVER-SNAPSHOT-20260802T095340Z-v1.0.0/PROJECT_FILES/frontend/public-site/package.json",
+      "line": null,
+      "evidence": "i18next"
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "LIBRARY_NOT_APPROVED_BY_POLICY",
+      "message": "lucide-react maps to Lucide React, which is not approved.",
+      "path": "/home/nawaf511/empire-core-new/var/backups/cot-governance-snapshots/20260802T095340Z/COT-GOV-SERVER-SNAPSHOT-20260802T095340Z-v1.0.0/PROJECT_FILES/frontend/public-site/package.json",
+      "line": null,
+      "evidence": "lucide-react"
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "LIBRARY_NOT_APPROVED_BY_POLICY",
+      "message": "react-i18next maps to i18next, which is not approved.",
+      "path": "/home/nawaf511/empire-core-new/var/backups/cot-governance-snapshots/20260802T095340Z/COT-GOV-SERVER-SNAPSHOT-20260802T095340Z-v1.0.0/PROJECT_FILES/frontend/public-site/package.json",
+      "line": null,
+      "evidence": "react-i18next"
+    },
+    {
+      "severity": "WARNING",
+      "rule_id": "FRONTEND_TYPESCRIPT_CONFIG_MISSING",
+      "message": "Frontend-like package has no tsconfig.json or tsconfig.app.json.",
+      "path": "/home/nawaf511/empire-core-new/var/backups/cot-governance-snapshots/20260802T095340Z/COT-GOV-SERVER-SNAPSHOT-20260802T095340Z-v1.0.0/PROJECT_FILES/frontend/user-portal-vite",
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "WARNING",
+      "rule_id": "FRONTEND_TYPESCRIPT_CONFIG_MISSING",
+      "message": "Frontend-like package has no tsconfig.json or tsconfig.app.json.",
+      "path": "/home/nawaf511/empire-core-new/var/backups/cot-governance-snapshots/20260802T150937Z/COT-GOV-SERVER-SNAPSHOT-20260802T150937Z-v1.0.0/PROJECT_FILES/var/backups/cot-governance-snapshots/20260802T095340Z/COT-GOV-SERVER-SNAPSHOT-20260802T095340Z-v1.0.0/PROJECT_FILES/backend/_backups/DEV002C_frontend_source_intake_20260628_001739/frontend-user-portal-vite",
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "WARNING",
+      "rule_id": "FRONTEND_TYPESCRIPT_CONFIG_MISSING",
+      "message": "Frontend-like package has no tsconfig.json or tsconfig.app.json.",
+      "path": "/home/nawaf511/empire-core-new/var/backups/cot-governance-snapshots/20260802T150937Z/COT-GOV-SERVER-SNAPSHOT-20260802T150937Z-v1.0.0/PROJECT_FILES/var/backups/cot-governance-snapshots/20260802T095340Z/COT-GOV-SERVER-SNAPSHOT-20260802T095340Z-v1.0.0/PROJECT_FILES/frontend/public-site",
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "LIBRARY_NOT_APPROVED_BY_POLICY",
+      "message": "i18next maps to i18next, which is not approved.",
+      "path": "/home/nawaf511/empire-core-new/var/backups/cot-governance-snapshots/20260802T150937Z/COT-GOV-SERVER-SNAPSHOT-20260802T150937Z-v1.0.0/PROJECT_FILES/var/backups/cot-governance-snapshots/20260802T095340Z/COT-GOV-SERVER-SNAPSHOT-20260802T095340Z-v1.0.0/PROJECT_FILES/frontend/public-site/package.json",
+      "line": null,
+      "evidence": "i18next"
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "LIBRARY_NOT_APPROVED_BY_POLICY",
+      "message": "lucide-react maps to Lucide React, which is not approved.",
+      "path": "/home/nawaf511/empire-core-new/var/backups/cot-governance-snapshots/20260802T150937Z/COT-GOV-SERVER-SNAPSHOT-20260802T150937Z-v1.0.0/PROJECT_FILES/var/backups/cot-governance-snapshots/20260802T095340Z/COT-GOV-SERVER-SNAPSHOT-20260802T095340Z-v1.0.0/PROJECT_FILES/frontend/public-site/package.json",
+      "line": null,
+      "evidence": "lucide-react"
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "LIBRARY_NOT_APPROVED_BY_POLICY",
+      "message": "react-i18next maps to i18next, which is not approved.",
+      "path": "/home/nawaf511/empire-core-new/var/backups/cot-governance-snapshots/20260802T150937Z/COT-GOV-SERVER-SNAPSHOT-20260802T150937Z-v1.0.0/PROJECT_FILES/var/backups/cot-governance-snapshots/20260802T095340Z/COT-GOV-SERVER-SNAPSHOT-20260802T095340Z-v1.0.0/PROJECT_FILES/frontend/public-site/package.json",
+      "line": null,
+      "evidence": "react-i18next"
+    },
+    {
+      "severity": "WARNING",
+      "rule_id": "FRONTEND_TYPESCRIPT_CONFIG_MISSING",
+      "message": "Frontend-like package has no tsconfig.json or tsconfig.app.json.",
+      "path": "/home/nawaf511/empire-core-new/var/backups/cot-governance-snapshots/20260802T150937Z/COT-GOV-SERVER-SNAPSHOT-20260802T150937Z-v1.0.0/PROJECT_FILES/var/backups/cot-governance-snapshots/20260802T095340Z/COT-GOV-SERVER-SNAPSHOT-20260802T095340Z-v1.0.0/PROJECT_FILES/frontend/user-portal-vite",
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "WARNING",
+      "rule_id": "FRONTEND_TYPESCRIPT_CONFIG_MISSING",
+      "message": "Frontend-like package has no tsconfig.json or tsconfig.app.json.",
+      "path": "/home/nawaf511/empire-core-new/var/backups/cot-governance-snapshots/20260802T150937Z/COT-GOV-SERVER-SNAPSHOT-20260802T150937Z-v1.0.0/PROJECT_FILES/backend/_backups/DEV002C_frontend_source_intake_20260628_001739/frontend-user-portal-vite",
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "WARNING",
+      "rule_id": "FRONTEND_TYPESCRIPT_CONFIG_MISSING",
+      "message": "Frontend-like package has no tsconfig.json or tsconfig.app.json.",
+      "path": "/home/nawaf511/empire-core-new/var/backups/cot-governance-snapshots/20260802T150937Z/COT-GOV-SERVER-SNAPSHOT-20260802T150937Z-v1.0.0/PROJECT_FILES/frontend/public-site",
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "LIBRARY_NOT_APPROVED_BY_POLICY",
+      "message": "i18next maps to i18next, which is not approved.",
+      "path": "/home/nawaf511/empire-core-new/var/backups/cot-governance-snapshots/20260802T150937Z/COT-GOV-SERVER-SNAPSHOT-20260802T150937Z-v1.0.0/PROJECT_FILES/frontend/public-site/package.json",
+      "line": null,
+      "evidence": "i18next"
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "LIBRARY_NOT_APPROVED_BY_POLICY",
+      "message": "lucide-react maps to Lucide React, which is not approved.",
+      "path": "/home/nawaf511/empire-core-new/var/backups/cot-governance-snapshots/20260802T150937Z/COT-GOV-SERVER-SNAPSHOT-20260802T150937Z-v1.0.0/PROJECT_FILES/frontend/public-site/package.json",
+      "line": null,
+      "evidence": "lucide-react"
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "LIBRARY_NOT_APPROVED_BY_POLICY",
+      "message": "react-i18next maps to i18next, which is not approved.",
+      "path": "/home/nawaf511/empire-core-new/var/backups/cot-governance-snapshots/20260802T150937Z/COT-GOV-SERVER-SNAPSHOT-20260802T150937Z-v1.0.0/PROJECT_FILES/frontend/public-site/package.json",
+      "line": null,
+      "evidence": "react-i18next"
+    },
+    {
+      "severity": "WARNING",
+      "rule_id": "FRONTEND_TYPESCRIPT_CONFIG_MISSING",
+      "message": "Frontend-like package has no tsconfig.json or tsconfig.app.json.",
+      "path": "/home/nawaf511/empire-core-new/var/backups/cot-governance-snapshots/20260802T150937Z/COT-GOV-SERVER-SNAPSHOT-20260802T150937Z-v1.0.0/PROJECT_FILES/frontend/user-portal-vite",
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "WARNING",
+      "rule_id": "FRONTEND_TYPESCRIPT_CONFIG_MISSING",
+      "message": "Frontend-like package has no tsconfig.json or tsconfig.app.json.",
+      "path": "/home/nawaf511/empire-core-new/runtime/opt-services/current-e13df671b8",
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "LIBRARY_NOT_APPROVED_BY_POLICY",
+      "message": "zod maps to Zod, which is not approved.",
+      "path": "/home/nawaf511/empire-core-new/runtime/opt-services/current-e13df671b8/package.json",
+      "line": null,
+      "evidence": "zod"
+    },
+    {
+      "severity": "WARNING",
+      "rule_id": "FRONTEND_TYPESCRIPT_CONFIG_MISSING",
+      "message": "Frontend-like package has no tsconfig.json or tsconfig.app.json.",
+      "path": "/home/nawaf511/empire-core-new/backend/_backups/DEV002C_frontend_source_intake_20260628_001739/frontend-user-portal-vite",
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "LIBRARY_NOT_APPROVED_BY_POLICY",
+      "message": "i18next maps to i18next, which is not approved.",
+      "path": "/home/nawaf511/empire-core-new/frontend/public-site/package.json",
+      "line": null,
+      "evidence": "i18next"
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "LIBRARY_NOT_APPROVED_BY_POLICY",
+      "message": "lucide-react maps to Lucide React, which is not approved.",
+      "path": "/home/nawaf511/empire-core-new/frontend/public-site/package.json",
+      "line": null,
+      "evidence": "lucide-react"
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "LIBRARY_NOT_APPROVED_BY_POLICY",
+      "message": "react-i18next maps to i18next, which is not approved.",
+      "path": "/home/nawaf511/empire-core-new/frontend/public-site/package.json",
+      "line": null,
+      "evidence": "react-i18next"
+    },
+    {
+      "severity": "WARNING",
+      "rule_id": "FRONTEND_TYPESCRIPT_CONFIG_MISSING",
+      "message": "Frontend-like package has no tsconfig.json or tsconfig.app.json.",
+      "path": "/home/nawaf511/empire-core-new/frontend/user-portal-vite",
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "WARNING",
+      "rule_id": "FRONTEND_TYPESCRIPT_CONFIG_MISSING",
+      "message": "Frontend-like package has no tsconfig.json or tsconfig.app.json.",
+      "path": "/home/nawaf511/empire-core-new/apps/ndsp-auth-core-clean",
+      "line": null,
+      "evidence": null
+    },
+    {
+      "severity": "ERROR",
+      "rule_id": "LIBRARY_NOT_APPROVED_BY_POLICY",
+      "message": "zod maps to Zod, which is not approved.",
+      "path": "/home/nawaf511/empire-core-new/apps/ndsp-auth-core-clean/package.json",
+      "line": null,
+      "evidence": "zod"
+    },
+    {
+      "severity": "WARNING",
+      "rule_id": "SOURCE_READ_FAILED",
+      "message": "Unable to read source file: [Errno 13] Permission denied: '/home/nawaf511/empire-core-new/runtime/opt-services/ndsp-admin-user-ops-56dc62c37f/server.py'",
+      "path": "runtime/opt-services/ndsp-admin-user-ops-56dc62c37f/server.py",
+      "line": null,
+      "evidence": null
+    }
+  ]
+}

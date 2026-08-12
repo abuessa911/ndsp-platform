@@ -1,0 +1,343 @@
+#!/usr/bin/env bash
+set -euo pipefail
+set +H
+
+PROJECT="/home/nawaf511/empire-core-new"
+EXISTING_NODE_MODULES="$PROJECT/frontend/user-portal-vite/node_modules"
+SOURCE_DIR="/home/nawaf511/Downloads/NDSP_COMMERCIAL_FRONTEND_LIVE_V1"
+WEBROOT="/var/www/ndsp-my"
+TARGET_WEB="$WEBROOT/portal-commercial-preview"
+
+TS="$(date +%Y%m%d_%H%M%S)"
+STATE="$PROJECT/backups/commercial-live-preview-no-nginx/$TS"
+STAGE="/tmp/ndsp_commercial_preview_no_nginx_$TS"
+WEB_BACKUP="$STATE/portal-commercial-preview.previous"
+
+WEB_CHANGED=0
+
+cleanup() {
+  rm -rf "$STAGE" 2>/dev/null || true
+}
+
+rollback() {
+  echo "ROLLBACK=STARTED"
+
+  if [[ "$WEB_CHANGED" -eq 1 ]]; then
+    sudo rm -rf "$TARGET_WEB"
+
+    if [[ -d "$WEB_BACKUP" ]]; then
+      sudo cp -a "$WEB_BACKUP" "$TARGET_WEB"
+    fi
+  fi
+
+  echo "ROLLBACK=RESTORED"
+}
+
+trap 'rc=$?; if [[ $rc -ne 0 ]]; then rollback; fi; cleanup; exit $rc' EXIT
+
+echo "============================================================"
+echo "NDSP — COMMERCIAL LIVE PREVIEW V2"
+echo "MODE=PHYSICAL_SPA_ROUTES_NO_NGINX_CHANGE"
+echo "DATE=$(date -Is)"
+echo "============================================================"
+
+echo
+echo "== 1) Preconditions =="
+
+[[ -d "$SOURCE_DIR" ]] || {
+  echo "FAIL=SOURCE_DIR_MISSING:$SOURCE_DIR"
+  exit 1
+}
+
+[[ -d "$EXISTING_NODE_MODULES" ]] || {
+  echo "FAIL=EXISTING_NODE_MODULES_MISSING"
+  exit 1
+}
+
+[[ -f "$SOURCE_DIR/package.json" ]]
+[[ -f "$SOURCE_DIR/src/main.jsx" ]]
+[[ -f "$SOURCE_DIR/scripts/verify_source.sh" ]]
+[[ -f "$SOURCE_DIR/scripts/contract_fixture_test.py" ]]
+
+mkdir -p "$STATE" "$STAGE"
+
+if [[ -d "$TARGET_WEB" ]]; then
+  sudo cp -a "$TARGET_WEB" "$WEB_BACKUP"
+fi
+
+echo "PRECONDITION_GATE=PASS"
+
+echo
+echo "== 2) Isolated source verification and build =="
+
+rsync -a \
+  --delete \
+  --exclude='node_modules/' \
+  --exclude='dist/' \
+  "$SOURCE_DIR/" \
+  "$STAGE/source/"
+
+ln -s "$EXISTING_NODE_MODULES" "$STAGE/source/node_modules"
+
+cd "$STAGE/source"
+
+bash scripts/verify_source.sh
+python3 scripts/contract_fixture_test.py
+
+NDSP_BASE=/portal-commercial-preview/ npm run build
+
+[[ -s dist/index.html ]]
+
+JS="$(
+  find dist/assets \
+    -maxdepth 1 \
+    -type f \
+    -name '*.js' |
+  head -n1
+)"
+
+CSS="$(
+  find dist/assets \
+    -maxdepth 1 \
+    -type f \
+    -name '*.css' |
+  head -n1
+)"
+
+[[ -s "$JS" ]]
+[[ -s "$CSS" ]]
+
+node --check "$JS"
+
+grep -aFq '/api/decision/quality-live' "$JS"
+grep -aFq '/api/market/candles' "$JS"
+grep -aFq '/api/news' "$JS"
+grep -aFq '/api/events' "$JS"
+grep -aFq '/api/completed-decisions' "$JS"
+grep -aFq '/api/entitlements/me' "$JS"
+grep -aFq '/api/trial/status' "$JS"
+
+if grep -aEi \
+  '\b(mock|fixture|dummy|fake)\b|بيانات تجريبية|Mock data' \
+  "$JS"
+then
+  echo "FAIL=BUILT_BUNDLE_MOCK_MARKER"
+  exit 1
+fi
+
+echo "BUILD_GATE=PASS"
+echo "BUILT_JS=$(basename "$JS")"
+echo "BUILT_CSS=$(basename "$CSS")"
+
+echo
+echo "== 3) Create physical SPA route entrypoints =="
+
+ROUTES=(
+  command-center
+  markets
+  prices-chart
+  opportunities
+  decision-room
+  portfolio
+  scenarios
+  layers
+  risk
+  completed
+  data-health
+  alerts
+  guide
+  support
+  account
+  plans
+  settings
+  context
+  trial-expired
+)
+
+for route in "${ROUTES[@]}"; do
+  mkdir -p "dist/$route"
+  cp -a dist/index.html "dist/$route/index.html"
+done
+
+for route in "${ROUTES[@]}"; do
+  cmp -s dist/index.html "dist/$route/index.html"
+done
+
+echo "PHYSICAL_SPA_ROUTE_COUNT=${#ROUTES[@]}"
+echo "PHYSICAL_SPA_ROUTE_GATE=PASS"
+
+echo
+echo "== 4) Atomic preview installation =="
+
+sudo rm -rf "${TARGET_WEB}.new"
+sudo cp -a dist "${TARGET_WEB}.new"
+
+sudo chown -R root:www-data "${TARGET_WEB}.new" 2>/dev/null || true
+sudo find "${TARGET_WEB}.new" -type d -exec chmod 0755 {} +
+sudo find "${TARGET_WEB}.new" -type f -exec chmod 0644 {} +
+
+sudo rm -rf "$TARGET_WEB"
+sudo mv "${TARGET_WEB}.new" "$TARGET_WEB"
+
+WEB_CHANGED=1
+
+echo "PREVIEW_INSTALL=PASS"
+echo "NGINX_CHANGED=NO"
+echo "NGINX_RELOADED=NO"
+
+echo
+echo "== 5) Public route identity verification =="
+
+ROOT_BODY="/tmp/ndsp_commercial_preview_root_$TS.html"
+
+ROOT_CODE="$(
+  curl -k -sS -L \
+    --noproxy '*' \
+    --resolve my.ndsp.app:443:127.0.0.1 \
+    -H 'Cache-Control: no-cache, no-store' \
+    -o "$ROOT_BODY" \
+    -w '%{http_code}' \
+    "https://my.ndsp.app/portal-commercial-preview/?lang=ar&verify=$TS"
+)"
+
+echo "ROOT_HTTP_CODE=$ROOT_CODE"
+[[ "$ROOT_CODE" == "200" ]]
+
+ROOT_JS="$(
+  grep -aoE \
+    '/portal-commercial-preview/assets/[A-Za-z0-9._-]+\.js' \
+    "$ROOT_BODY" |
+  head -n1 || true
+)"
+
+ROOT_CSS="$(
+  grep -aoE \
+    '/portal-commercial-preview/assets/[A-Za-z0-9._-]+\.css' \
+    "$ROOT_BODY" |
+  head -n1 || true
+)"
+
+echo "ROOT_JS=$ROOT_JS"
+echo "ROOT_CSS=$ROOT_CSS"
+
+[[ -n "$ROOT_JS" ]]
+[[ -n "$ROOT_CSS" ]]
+
+! grep -Fq 'market-suite' "$ROOT_BODY"
+! grep -Fq 'NDSP_EARLY_LANGUAGE_INTERCEPT_V20' "$ROOT_BODY"
+! grep -Fq 'بيانات تجريبية' "$ROOT_BODY"
+
+FAIL=0
+COUNT=0
+
+for route in "${ROUTES[@]}"; do
+  COUNT=$((COUNT + 1))
+
+  for suffix in "$route/" "$route"; do
+    label="${suffix//\//_}"
+    body="/tmp/ndsp_commercial_preview_${COUNT}_${label}_$TS.html"
+
+    code="$(
+      curl -k -sS -L \
+        --noproxy '*' \
+        --resolve my.ndsp.app:443:127.0.0.1 \
+        -H 'Cache-Control: no-cache, no-store' \
+        -o "$body" \
+        -w '%{http_code}' \
+        "https://my.ndsp.app/portal-commercial-preview/${suffix}?lang=ar&verify=$TS"
+    )"
+
+    js_id="$(
+      grep -aoE \
+        '/portal-commercial-preview/assets/[A-Za-z0-9._-]+\.js' \
+        "$body" |
+      head -n1 || true
+    )"
+
+    css_id="$(
+      grep -aoE \
+        '/portal-commercial-preview/assets/[A-Za-z0-9._-]+\.css' \
+        "$body" |
+      head -n1 || true
+    )"
+
+    if [[ \
+      "$code" != "200" || \
+      "$js_id" != "$ROOT_JS" || \
+      "$css_id" != "$ROOT_CSS" \
+    ]] || \
+      grep -Fq 'market-suite' "$body" || \
+      grep -Fq 'NDSP_EARLY_LANGUAGE_INTERCEPT_V20' "$body" || \
+      grep -Fq 'بيانات تجريبية' "$body"
+    then
+      echo "ROUTE_FAIL=$suffix HTTP=$code JS=$js_id CSS=$css_id"
+      FAIL=1
+    else
+      echo "ROUTE_PASS=$suffix"
+    fi
+  done
+done
+
+[[ "$FAIL" -eq 0 ]]
+
+echo "ROUTE_VARIANTS_TESTED=$((COUNT * 2))"
+echo "ALL_PREVIEW_ROUTES=PASS"
+
+echo
+echo "== 6) Live API smoke check =="
+
+QUALITY_BODY="/tmp/ndsp_commercial_preview_quality_$TS.json"
+QUALITY_CODE="$(
+  curl -k -sS \
+    --noproxy '*' \
+    --resolve my.ndsp.app:443:127.0.0.1 \
+    -H 'Accept: application/json' \
+    -o "$QUALITY_BODY" \
+    -w '%{http_code}' \
+    "https://my.ndsp.app/api/decision/quality-live?symbol=ETHUSDT&timeframe=weekly&audit=$TS"
+)"
+
+echo "QUALITY_LIVE_HTTP_CODE=$QUALITY_CODE"
+[[ "$QUALITY_CODE" == "200" ]]
+
+python3 - "$QUALITY_BODY" <<'PY'
+import json
+import sys
+from pathlib import Path
+
+data = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
+
+symbol = (
+    (data.get("instrument") or {}).get("symbol")
+    or data.get("symbol")
+)
+
+price = (
+    (data.get("instrument") or {}).get("live_price")
+    or data.get("live_price")
+)
+
+scenario = data.get("scenario") or {}
+
+activation = (
+    scenario.get("scenario_activation_level")
+    or data.get("scenario_activation_level")
+)
+
+if not symbol or price is None or activation is None:
+    raise SystemExit("FAIL=QUALITY_LIVE_REQUIRED_FIELDS_MISSING")
+
+print(f"QUALITY_SYMBOL={symbol}")
+print(f"QUALITY_PRICE={price}")
+print(f"QUALITY_ACTIVATION={activation}")
+print("QUALITY_LIVE_SMOKE_GATE=PASS")
+PY
+
+WEB_CHANGED=0
+
+echo
+echo "FINAL_STATUS=NDSP_COMMERCIAL_LIVE_PREVIEW_V2_INSTALLED"
+echo "PREVIEW_URL=https://my.ndsp.app/portal-commercial-preview/command-center/?lang=ar"
+echo "CANONICAL_PORTAL_CHANGED=NO"
+echo "NGINX_CHANGED=NO"
+echo "BACKUP_STATE=$STATE"

@@ -1,0 +1,152 @@
+00001: #!/usr/bin/env python3
+00002: from backend.layers.canonical_v1.runtime_bridge import run_canonical_layers, canonical_nmp_from_legacy, apply_canonical_golden
+00003: from backend.app.runtime.ndsp_v200_score_inputs import attach_v200_score_inputs as _ndsp_attach_v200_score_inputs_v200
+00004: # NDSP_V200_SCORE_INPUT_CONTRACT_PATCH
+00005: from backend.app.runtime.ndsp_v201_launch_completion import (
+00006:     attach_v201_governing_inputs as _ndsp_attach_v201_governing_inputs,
+00007:     attach_v202_commercial_score as _ndsp_attach_v202_commercial_score,
+00008: )
+00009: # NDSP_V201_V203_COMMERCIAL_LAUNCH_PATCH
+00010: # NDSP_CANONICAL_CONSUMER_V5
+00011: import os, json, math, urllib.parse, urllib.request
+00012: from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+00013: from datetime import datetime, timezone
+00014: 
+00015: 
+00016: # NDSP_NMP_PUBLIC_CONTRACT_REMEDIATION_V143
+00017: 
+00018: def _ndsp_public_text_v143(value):
+00019:     import re
+00020: 
+00021:     text = str(value)
+00022:     has_arabic = bool(re.search(r"[\u0600-\u06ff]", text))
+00023:     reference = (
+00024:         "\u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0627\u0644\u0645\u0631\u062c\u0639\u064a\u0629 \u0627\u0644\u0645\u0624\u0633\u0633\u064a\u0629 \u0627\u0644\u062d\u0627\u0643\u0645\u0629"
+00025:         if has_arabic
+00026:         else "governed institutional reference data"
+00027:     )
+00028: 
+00029:     replacements = [
+00030:         (r"canonical\s+COT\s+directions\s+are\s+missing", "governed reference directions are incomplete"),
+
+00560:     data["nmp_status"] = nmp.get("status")
+00561:     data["nmp_level"] = nmp.get("value")
+00562:     data["nmp_value"] = nmp.get("value")
+00563:     data["nmp_source"] = nmp.get("source")
+00564:     data["nmp_timeframe"] = timeframe
+00565:     # NDSP_V12_SCENARIO_LEVELS_CONTRACT_CALL
+00566:     data = _ndsp_v12_inject_scenario_levels_contract(data)
+00567: 
+00568:     scenario = data.get("scenario")
+00569:     if isinstance(scenario, dict):
+00570:         scenario["nmp_status"] = nmp.get("status")
+00571:         scenario["nmp_level"] = nmp.get("value")
+00572:         scenario["nmp_source"] = nmp.get("source")
+00573:         scenario["nmp_timeframe"] = timeframe
+00574: 
+00575:     apo = data.get("allowed_public_outputs")
+00576:     if isinstance(apo, dict):
+00577:         apo["nmp_status"] = nmp.get("status")
+00578:         apo["nmp_level"] = nmp.get("value")
+00579:         apo["nmp_note"] = nmp.get("note")
+00580: 
+00581:     data["_ndsp_nmp_injected_at"] = now_iso()
+00582:     data["_ndsp_nmp_contract"] = "quality-live-nmp-wrapper-v1"
+00583:     return _ndsp_finalize_public_contract_v9(data)
+00584: 
+00585: # NDSP_FULL_44_V26_START
+00586: from backend.app.runtime.ndsp_public_governance_projection_v1 import attach_governance_projection as _ndsp_attach_governance_projection_v26
+00587: _ndsp_enrich_with_nmp_before_governance_v26 = enrich_with_nmp
+00588: def enrich_with_nmp(*args, **kwargs):
+00589:     return _ndsp_attach_governance_projection_v26(_ndsp_enrich_with_nmp_before_governance_v26(*args, **kwargs))
+00590: # NDSP_FULL_44_V26_END
+00591: 
+00592: class Handler(BaseHTTPRequestHandler):
+00593:     server_version = "NDSPQualityLiveNMPWrapper/1.0"
+00594: 
+00595:     def _send(self, code, payload, ctype="application/json; charset=utf-8"):
+00596:         raw = json.dumps(_ndsp_public_contract_v143(payload), ensure_ascii=False, separators=(",", ":")).encode("utf-8")
+00597:         self.send_response(code)
+00598:         self.send_header("Content-Type", ctype)
+00599:         self.send_header("Content-Length", str(len(raw)))
+00600:         self.send_header("Cache-Control", "no-store, no-cache, max-age=0, must-revalidate")
+00601:         self.end_headers()
+00602:         if self.command != "HEAD":
+00603:             self.wfile.write(raw)
+00604: 
+00605:     def do_HEAD(self):
+00606:         return self.do_GET()
+00607: 
+00608:     def do_GET(self):
+00609:         parsed = urllib.parse.urlparse(self.path)
+00610:         qs = urllib.parse.parse_qs(parsed.query)
+00611: 
+00612:         if parsed.path in ("/health", "/api/decision/quality-live/health"):
+00613:             return self._send(200, {
+00614:                 "ok": True,
+00615:                 "service": "ndsp-quality-live-nmp-wrapper",
+00616:                 "port": PORT,
+00617:                 "upstream": UPSTREAM,
+00618:                 "updated_at": now_iso()
+00619:             })
+00620: 
+00621:         if parsed.path != "/api/decision/quality-live":
+00622:             return self._send(404, {"ok": False, "error": "NOT_FOUND", "path": parsed.path})
+00623: 
+00624:         symbol = (qs.get("symbol") or ["ETHUSDT"])[0]
+00625:         timeframe = (qs.get("timeframe") or ["1D"])[0]
+00626:         upstream_url = UPSTREAM + self.path
+00627: 
+00628:         try:
+00629:             data = http_json(upstream_url, timeout=15)
+00630:             data = enrich_with_nmp(data, symbol, timeframe)
+00631:             requested_mode = (
+00632:                 (qs.get("analysis_mode") or qs.get("mode")
+00633:                  or qs.get("reading") or qs.get("reading_mode")
+00634:                  or qs.get("analysis_type") or [""])[0]
+00635:             )
+00636:             data = _ndsp_attach_v201_governing_inputs(
+00637:                 data,
+00638:                 symbol=symbol,
+00639:                 timeframe=timeframe,
+00640:                 analysis_mode=requested_mode,
+00641:             )
+00642:             data = _ndsp_attach_v200_score_inputs_v200(
+00643:                 data,
+00644:                 symbol=symbol,
+00645:                 timeframe=timeframe,
+00646:                 analysis_mode=requested_mode,
+00647:             )
+00648:             data = _ndsp_attach_v202_commercial_score(
+00649:                 data,
+00650:                 symbol=symbol,
+00651:                 timeframe=timeframe,
+00652:                 analysis_mode=requested_mode,
+00653:             )
+00654:             return self._send(200, data)
+00655:         except Exception as e:
+00656:             return self._send(502, {
+00657:                 "ok": False,
+00658:                 "error": "NMP_WRAPPER_UPSTREAM_FAILED",
+00659:                 "upstream": upstream_url,
+00660:                 "detail": str(e)[:300],
+00661:                 "updated_at": now_iso()
+00662:             })
+00663: 
+00664:     def log_message(self, fmt, *args):
+00665:         return
+00666: 
+00667: def main():
+00668:     srv = ThreadingHTTPServer((HOST, PORT), Handler)
+00669:     print(f"[NDSP] quality-live NMP wrapper listening on http://{HOST}:{PORT} upstream={UPSTREAM}", flush=True)
+00670:     srv.serve_forever()
+00671: 
+00672: 
+00673: # NDSP_V12_SCENARIO_LEVELS_CONTRACT_PATCH_START
+00674: def _ndsp_v12_parse_scenario_price(value):
+00675:     # Convert existing scenario flat level values into numeric prices without inventing values.
+00676:     if value is None:
+00677:         return None
+00678: 
+00679:     if isinstance(value, bool):
+00680:         return None

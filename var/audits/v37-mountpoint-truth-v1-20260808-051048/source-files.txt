@@ -1,0 +1,14 @@
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/components/CompletedDecisionsPanelV37.jsx
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/config/env.js
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/core/api/apiClient.js
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/core/services/marketService.js
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/core/services/scenarioService.js
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/hooks/useCanonicalDecision.js
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/hooks/useCompletedDecisionsV37.js
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/hooks/useMarket.js
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/main.jsx
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/pages/AssetPage.jsx
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/pages/BriefPage.jsx
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/pages/CommandPage.jsx
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/pages/Home.jsx
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/pages/SettingsPage.jsx

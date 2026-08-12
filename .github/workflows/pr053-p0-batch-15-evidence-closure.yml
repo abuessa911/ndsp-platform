@@ -1,0 +1,43 @@
+name: PR-053 P0 Batch 15 Evidence Closure
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-p0-batch-15-evidence-closure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Fetch base branch
+        run: git fetch --no-tags origin main:refs/remotes/origin/main
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run PR-053 tests
+        run: node --test scripts/governance/tests/pr053-p0-batch-15-evidence-closure.test.cjs
+
+      - name: Validate PR-053 closure
+        run: python3 scripts/governance/validate_pr053_p0_batch_15_evidence_closure.py
+
+      - name: Validate capability governance
+        run: |
+          python3 scripts/governance/validate_full_capability_ui.py \
+            --base-ref origin/main

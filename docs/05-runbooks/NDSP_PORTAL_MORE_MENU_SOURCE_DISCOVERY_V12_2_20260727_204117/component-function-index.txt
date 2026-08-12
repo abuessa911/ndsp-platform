@@ -1,0 +1,117 @@
+19:const APP_BASE = (import.meta.env.BASE_URL || "/portal/").replace(/\/+$/, "");
+45:const DEFAULT_CONTEXT = {
+55:const I18N = {
+356:function newSession() {
+360:function normalizeContext(input = {}) {
+374:function readJsonStorage(key, fallback) {
+383:function queryContext() {
+392:function updateContextQuery(state, replace = true) {
+398:function routeFromLocation() {
+406:function BrowserRouter({ children }) {
+422:function useNavigation() {
+429:function DecisionProvider({ children }) {
+485:function useDecision() {
+491:function useTranslate() {
+525:function numeric(value) {
+542:function formatNumber(value, lang = "ar", digits = 2) {
+550:function formatDate(value, lang = "ar") {
+557:function assetName(asset, lang) {
+560:function marketLabel(market, lang) {
+572:function findAsset(symbol) {
+576:function normalizeQuality(payload) {
+836:function cacheFresh(entry, maxAge) {
+908:function useQuality(symbol, timeframe, mode) {
+987:function normalizeCandles(payload) {
+1001:function candleInterval(timeframe) {
+1017:function useCandles(symbol, timeframe) {
+1051:function useMarketUniverse(timeframe) {
+1076:function useCompletedDecisions() {
+1098:function useAccessState() {
+1130:function useNewsEvents(symbol, lang) {
+1193:function stateKey(value) {
+1201:function directionKey(value) {
+1207:function toneFromNumber(value) {
+1213:function riskLevel(quality) {
+1224:function translateStateToken(value, t, lang) {
+1245:function translateNmpStatus(value, lang, t) {
+1257:function sanitizeUserFacingText(value, lang, fallback = "") {
+1286:function goldenStatusLabel(value, lang, t) {
+1312:function goldenPublicSummary(q, lang, t) {
+1334:function enhancedGoldenPublicText(q, lang) {
+1352:function publicNmpNote(q, lang) {
+1372:function nmpPrimaryValue(q, lang) {
+1395:function horizonProfile(q, state, lang) {
+1433:function analysisModeLabel(value, lang) {
+1455:function governingDirectionLabel(value, lang) {
+1486:function technicalScenarioText(q, lang) {
+1497:function technicalScenarioHeading(q, lang) {
+1508:function governedReadingScore(q, lang) {
+1522:function ModeContractContext({
+1695:function HorizonContext({ q, state, lang, compact = false }) {
+1717:function sourceMetricValue(value, lang, digits = 2) {
+1723:function isCompletedDecision(row) {
+1731:function blockerReasonLabel(code, lang) {
+1772:function blockerReasonList(q, lang) {
+1853:function pickFirstValue(item, keys) {
+1867:function localizedNewsTitle(item, lang) {
+1900:function localizedNewsMeta(item, lang) {
+1926:function hasLocalizedNewsText(item, lang) {
+1930:function resolveCompletedAsset(row, lang) {
+1954:function resolveCompletedState(row) {
+1967:function completedTimeframeInfo(row, fallbackTimeframe) {
+2001:function eventLabel(value, lang) {
+2020:function normalizeAlertStore(raw) {
+2126:function Icon({ name, size = 20 }) {
+2135:function Badge({ children, tone = "muted" }) {
+2138:function Metric({ label, value, hint, tone = "muted" }) {
+2141:function Card({ title, subtitle, actions, children, className = "", id }) {
+2147:function PageHeader({ title, subtitle, actions }) {
+2150:function EmptyState({ type = "empty", message, onRetry }) {
+2154:function DataMeta({ updatedAt }) {
+2159:function Radar({ values, labels }) {
+2189:const CHART_COPY = {
+2236:function chartNumber(value) {
+2241:function chartTimeValue(value) {
+2262:function chartTimeLabel(value, lang, includeTime = true) {
+2293:function normalizeChartCandles(payload) {
+2397:function useChartCandles(symbol, timeframe, limit) {
+2502:function calculateRsi(candles, period = 14) {
+2577:function calculateEma(values, period) {
+2604:function calculateMacdHistogram(candles) {
+2634:function calculateObv(candles) {
+2667:function calculateCci(candles, period = 20) {
+2722:function chartIndicatorSeries(candles) {
+2731:function IndicatorPanel({
+2982:function CandleChart({
+4059:function querySuffix(state) {
+4065:function Topbar() {
+4109:function ContextStrip() {
+4122:function LegalModal() {
+4129:function ContextSummary() {
+4135:function qualityRadar(quality, t) {
+4149:function CommandCenterPage() {
+4638:function NewsList({ items, empty, lang }) {
+4764:function MarketsPage() {
+4778:function PricesChartPage() {
+5258:function OpportunitiesPage() {
+5271:function DecisionRoomPage() {
+5856:function PortfolioPage() {
+5886:function ScenariosPage() {
+5989:function LayersPage() {
+6141:function RiskPage() {
+6279:function CompletedPage() {
+6390:function useHealthProbe() {
+6416:function DataHealthPage() {
+6424:function AlertsPage() {
+6827:function GuidePage() {
+6894:function SupportPage() {
+7272:function AccountPage() {
+7278:function PlansPage() {
+7283:function SettingsPage() {
+7382:function ContextPage() {
+7391:function TrialExpiredPage() {
+7396:function NotFoundPage() {
+7402:function PortalLogoutButton() {
+7449:function AppRoutes() {
+7476:function AppShell() {
+7554:function App() {

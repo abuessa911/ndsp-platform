@@ -1,0 +1,747 @@
+{
+  "discovered": [
+    {
+      "href": "/",
+      "text": "الرئيسية01"
+    },
+    {
+      "href": "/markets",
+      "text": "مراقبة الأسواق02"
+    },
+    {
+      "href": "/phase",
+      "text": "محرك المراحل03"
+    },
+    {
+      "href": "/intelligence",
+      "text": "محرك الذكاء04"
+    },
+    {
+      "href": "/decisions",
+      "text": "محرك القرار05"
+    },
+    {
+      "href": "/governance",
+      "text": "الحوكمة والمخاطر06"
+    },
+    {
+      "href": "/data",
+      "text": "بنية البيانات07"
+    },
+    {
+      "href": "/strategy-lab",
+      "text": "مختبر الاستراتيجية08"
+    },
+    {
+      "href": "/architecture",
+      "text": "المعمارية09"
+    },
+    {
+      "href": "/",
+      "text": "النظرة التنفيذية"
+    },
+    {
+      "href": "/markets",
+      "text": "مراقبة الأسواق"
+    },
+    {
+      "href": "/phase",
+      "text": "محرك المراحل"
+    },
+    {
+      "href": "/intelligence",
+      "text": "محرك الذكاء"
+    },
+    {
+      "href": "/decisions",
+      "text": "محرك القرار"
+    },
+    {
+      "href": "/governance",
+      "text": "الحوكمة والمخاطر"
+    },
+    {
+      "href": "/data",
+      "text": "بنية البيانات"
+    },
+    {
+      "href": "/strategy-lab",
+      "text": "مختبر الاستراتيجية"
+    },
+    {
+      "href": "/architecture",
+      "text": "معمارية النظام"
+    },
+    {
+      "href": "/decisions",
+      "text": "VIEW محرك →"
+    },
+    {
+      "href": "/",
+      "text": "01 الرئيسية"
+    },
+    {
+      "href": "/markets",
+      "text": "02 مراقبة الأسواق"
+    },
+    {
+      "href": "/phase",
+      "text": "03 محرك المراحل"
+    },
+    {
+      "href": "/intelligence",
+      "text": "04 محرك الذكاء"
+    },
+    {
+      "href": "/decisions",
+      "text": "05 محرك القرار"
+    },
+    {
+      "href": "/governance",
+      "text": "06 الحوكمة والمخاطر"
+    },
+    {
+      "href": "/data",
+      "text": "07 بنية البيانات"
+    },
+    {
+      "href": "/strategy-lab",
+      "text": "08 مختبر الاستراتيجية"
+    },
+    {
+      "href": "/architecture",
+      "text": "09 المعمارية"
+    }
+  ],
+  "aliases": {
+    "/NDSP_Asset_View.html": "/markets",
+    "/NDSP_Command_Center.html": "/decisions"
+  },
+  "results": [
+    {
+      "legacy": "/NDSP_Asset_View.html",
+      "filename": "NDSP_Asset_View.html",
+      "selected": "/markets",
+      "candidates": [
+        {
+          "href": "/market-assets.html",
+          "text": "/market-assets.html",
+          "score": 140,
+          "candidate": "/market-assets.html",
+          "status": 200,
+          "finalUrl": "https://my.ndsp.app/market-assets.html?_ndsp_discovery=20260712_214139",
+          "route404": true,
+          "visible404": true,
+          "loginRedirect": false,
+          "navigationError": null,
+          "bodyTextLength": 842,
+          "consoleMessages": [
+            "404 Error: User attempted to access non-existent route: /market-assets.html"
+          ],
+          "pageErrors": [],
+          "valid": false
+        },
+        {
+          "href": "/market-assets",
+          "text": "/market-assets",
+          "score": 140,
+          "candidate": "/market-assets",
+          "status": 200,
+          "finalUrl": "https://my.ndsp.app/market-assets?_ndsp_discovery=20260712_214139",
+          "route404": true,
+          "visible404": true,
+          "loginRedirect": false,
+          "navigationError": null,
+          "bodyTextLength": 842,
+          "consoleMessages": [
+            "404 Error: User attempted to access non-existent route: /market-assets"
+          ],
+          "pageErrors": [],
+          "valid": false
+        },
+        {
+          "href": "/asset.html",
+          "text": "/asset.html",
+          "score": 65,
+          "candidate": "/asset.html",
+          "status": 200,
+          "finalUrl": "https://my.ndsp.app/asset.html?_ndsp_discovery=20260712_214139",
+          "route404": true,
+          "visible404": true,
+          "loginRedirect": false,
+          "navigationError": null,
+          "bodyTextLength": 842,
+          "consoleMessages": [
+            "404 Error: User attempted to access non-existent route: /asset.html"
+          ],
+          "pageErrors": [],
+          "valid": false
+        },
+        {
+          "href": "/asset",
+          "text": "/asset",
+          "score": 65,
+          "candidate": "/asset",
+          "status": 200,
+          "finalUrl": "https://my.ndsp.app/asset?_ndsp_discovery=20260712_214139",
+          "route404": true,
+          "visible404": true,
+          "loginRedirect": false,
+          "navigationError": null,
+          "bodyTextLength": 842,
+          "consoleMessages": [
+            "404 Error: User attempted to access non-existent route: /asset"
+          ],
+          "pageErrors": [],
+          "valid": false
+        },
+        {
+          "href": "/asset-selector.html",
+          "text": "/asset-selector.html",
+          "score": 65,
+          "candidate": "/asset-selector.html",
+          "status": 200,
+          "finalUrl": "https://my.ndsp.app/asset-selector.html?_ndsp_discovery=20260712_214139",
+          "route404": true,
+          "visible404": true,
+          "loginRedirect": false,
+          "navigationError": null,
+          "bodyTextLength": 842,
+          "consoleMessages": [
+            "404 Error: User attempted to access non-existent route: /asset-selector.html"
+          ],
+          "pageErrors": [],
+          "valid": false
+        },
+        {
+          "href": "/asset-selector",
+          "text": "/asset-selector",
+          "score": 65,
+          "candidate": "/asset-selector",
+          "status": 200,
+          "finalUrl": "https://my.ndsp.app/asset-selector?_ndsp_discovery=20260712_214139",
+          "route404": true,
+          "visible404": true,
+          "loginRedirect": false,
+          "navigationError": null,
+          "bodyTextLength": 842,
+          "consoleMessages": [
+            "404 Error: User attempted to access non-existent route: /asset-selector"
+          ],
+          "pageErrors": [],
+          "valid": false
+        },
+        {
+          "href": "/markets",
+          "text": "مراقبة الأسواق02 مراقبة الأسواق 02 مراقبة الأسواق",
+          "score": 50,
+          "candidate": "/markets",
+          "status": 200,
+          "finalUrl": "https://my.ndsp.app/markets?_ndsp_discovery=20260712_214139",
+          "route404": false,
+          "visible404": false,
+          "loginRedirect": false,
+          "navigationError": null,
+          "bodyTextLength": 3257,
+          "consoleMessages": [],
+          "pageErrors": [],
+          "valid": true
+        }
+      ]
+    },
+    {
+      "legacy": "/NDSP_Command_Center.html",
+      "filename": "NDSP_Command_Center.html",
+      "selected": "/decisions",
+      "candidates": [
+        {
+          "href": "/decision-center.html",
+          "text": "/decision-center.html",
+          "score": 90,
+          "candidate": "/decision-center.html",
+          "status": 200,
+          "finalUrl": "https://my.ndsp.app/decision-center.html?_ndsp_discovery=20260712_214139",
+          "route404": true,
+          "visible404": true,
+          "loginRedirect": false,
+          "navigationError": null,
+          "bodyTextLength": 842,
+          "consoleMessages": [
+            "404 Error: User attempted to access non-existent route: /decision-center.html"
+          ],
+          "pageErrors": [],
+          "valid": false
+        },
+        {
+          "href": "/decision-center",
+          "text": "/decision-center",
+          "score": 90,
+          "candidate": "/decision-center",
+          "status": 200,
+          "finalUrl": "https://my.ndsp.app/decision-center?_ndsp_discovery=20260712_214139",
+          "route404": true,
+          "visible404": true,
+          "loginRedirect": false,
+          "navigationError": null,
+          "bodyTextLength": 842,
+          "consoleMessages": [
+            "404 Error: User attempted to access non-existent route: /decision-center"
+          ],
+          "pageErrors": [],
+          "valid": false
+        },
+        {
+          "href": "/platform.html",
+          "text": "/platform.html",
+          "score": 65,
+          "candidate": "/platform.html",
+          "status": 200,
+          "finalUrl": "https://my.ndsp.app/platform.html?_ndsp_discovery=20260712_214139",
+          "route404": true,
+          "visible404": true,
+          "loginRedirect": false,
+          "navigationError": null,
+          "bodyTextLength": 842,
+          "consoleMessages": [
+            "404 Error: User attempted to access non-existent route: /platform.html"
+          ],
+          "pageErrors": [],
+          "valid": false
+        },
+        {
+          "href": "/platform",
+          "text": "/platform",
+          "score": 65,
+          "candidate": "/platform",
+          "status": 200,
+          "finalUrl": "https://my.ndsp.app/platform?_ndsp_discovery=20260712_214139",
+          "route404": true,
+          "visible404": true,
+          "loginRedirect": false,
+          "navigationError": null,
+          "bodyTextLength": 842,
+          "consoleMessages": [
+            "404 Error: User attempted to access non-existent route: /platform"
+          ],
+          "pageErrors": [],
+          "valid": false
+        },
+        {
+          "href": "/command-center",
+          "text": "/command-center",
+          "score": 65,
+          "candidate": "/command-center",
+          "status": 200,
+          "finalUrl": "https://my.ndsp.app/command-center?_ndsp_discovery=20260712_214139",
+          "route404": true,
+          "visible404": true,
+          "loginRedirect": false,
+          "navigationError": null,
+          "bodyTextLength": 842,
+          "consoleMessages": [
+            "404 Error: User attempted to access non-existent route: /command-center"
+          ],
+          "pageErrors": [],
+          "valid": false
+        },
+        {
+          "href": "/dashboard",
+          "text": "/dashboard",
+          "score": 65,
+          "candidate": "/dashboard",
+          "status": 200,
+          "finalUrl": "https://my.ndsp.app/dashboard?_ndsp_discovery=20260712_214139",
+          "route404": true,
+          "visible404": true,
+          "loginRedirect": false,
+          "navigationError": null,
+          "bodyTextLength": 842,
+          "consoleMessages": [
+            "404 Error: User attempted to access non-existent route: /dashboard"
+          ],
+          "pageErrors": [],
+          "valid": false
+        },
+        {
+          "href": "/decisions",
+          "text": "محرك القرار05 محرك القرار VIEW محرك → 05 محرك القرار",
+          "score": 25,
+          "candidate": "/decisions",
+          "status": 200,
+          "finalUrl": "https://my.ndsp.app/decisions?_ndsp_discovery=20260712_214139",
+          "route404": false,
+          "visible404": false,
+          "loginRedirect": false,
+          "navigationError": null,
+          "bodyTextLength": 2000,
+          "consoleMessages": [],
+          "pageErrors": [],
+          "valid": true
+        },
+        {
+          "href": "/decision-guide.html",
+          "text": "/decision-guide.html",
+          "score": 25,
+          "candidate": "/decision-guide.html",
+          "status": 200,
+          "finalUrl": "https://my.ndsp.app/decision-guide.html?_ndsp_discovery=20260712_214139",
+          "route404": true,
+          "visible404": true,
+          "loginRedirect": false,
+          "navigationError": null,
+          "bodyTextLength": 842,
+          "consoleMessages": [
+            "404 Error: User attempted to access non-existent route: /decision-guide.html"
+          ],
+          "pageErrors": [],
+          "valid": false
+        },
+        {
+          "href": "/decision-guide",
+          "text": "/decision-guide",
+          "score": 25,
+          "candidate": "/decision-guide",
+          "status": 200,
+          "finalUrl": "https://my.ndsp.app/decision-guide?_ndsp_discovery=20260712_214139",
+          "route404": true,
+          "visible404": true,
+          "loginRedirect": false,
+          "navigationError": null,
+          "bodyTextLength": 842,
+          "consoleMessages": [
+            "404 Error: User attempted to access non-existent route: /decision-guide"
+          ],
+          "pageErrors": [],
+          "valid": false
+        },
+        {
+          "href": "/decision-support",
+          "text": "/decision-support",
+          "score": 25,
+          "candidate": "/decision-support",
+          "status": 200,
+          "finalUrl": "https://my.ndsp.app/decision-support?_ndsp_discovery=20260712_214139",
+          "route404": true,
+          "visible404": true,
+          "loginRedirect": false,
+          "navigationError": null,
+          "bodyTextLength": 842,
+          "consoleMessages": [
+            "404 Error: User attempted to access non-existent route: /decision-support"
+          ],
+          "pageErrors": [],
+          "valid": false
+        }
+      ]
+    },
+    {
+      "legacy": "/NDSP_Daily_Brief.html",
+      "filename": "NDSP_Daily_Brief.html",
+      "selected": null,
+      "candidates": [
+        {
+          "href": "/daily-brief.html",
+          "text": "/daily-brief.html",
+          "score": 115,
+          "candidate": "/daily-brief.html",
+          "status": 200,
+          "finalUrl": "https://my.ndsp.app/daily-brief.html?_ndsp_discovery=20260712_214139",
+          "route404": true,
+          "visible404": true,
+          "loginRedirect": false,
+          "navigationError": null,
+          "bodyTextLength": 842,
+          "consoleMessages": [
+            "404 Error: User attempted to access non-existent route: /daily-brief.html"
+          ],
+          "pageErrors": [],
+          "valid": false
+        },
+        {
+          "href": "/daily-brief",
+          "text": "/daily-brief",
+          "score": 115,
+          "candidate": "/daily-brief",
+          "status": 200,
+          "finalUrl": "https://my.ndsp.app/daily-brief?_ndsp_discovery=20260712_214139",
+          "route404": true,
+          "visible404": true,
+          "loginRedirect": false,
+          "navigationError": null,
+          "bodyTextLength": 842,
+          "consoleMessages": [
+            "404 Error: User attempted to access non-existent route: /daily-brief"
+          ],
+          "pageErrors": [],
+          "valid": false
+        },
+        {
+          "href": "/brief",
+          "text": "/brief",
+          "score": 65,
+          "candidate": "/brief",
+          "status": 200,
+          "finalUrl": "https://my.ndsp.app/brief?_ndsp_discovery=20260712_214139",
+          "route404": true,
+          "visible404": true,
+          "loginRedirect": false,
+          "navigationError": null,
+          "bodyTextLength": 842,
+          "consoleMessages": [
+            "404 Error: User attempted to access non-existent route: /brief"
+          ],
+          "pageErrors": [],
+          "valid": false
+        },
+        {
+          "href": "/daily",
+          "text": "/daily",
+          "score": 65,
+          "candidate": "/daily",
+          "status": 200,
+          "finalUrl": "https://my.ndsp.app/daily?_ndsp_discovery=20260712_214139",
+          "route404": true,
+          "visible404": true,
+          "loginRedirect": false,
+          "navigationError": null,
+          "bodyTextLength": 842,
+          "consoleMessages": [
+            "404 Error: User attempted to access non-existent route: /daily"
+          ],
+          "pageErrors": [],
+          "valid": false
+        }
+      ]
+    },
+    {
+      "legacy": "/NDSP_Settings_Alerts.html",
+      "filename": "NDSP_Settings_Alerts.html",
+      "selected": null,
+      "candidates": [
+        {
+          "href": "/settings-alerts",
+          "text": "/settings-alerts",
+          "score": 140,
+          "candidate": "/settings-alerts",
+          "status": 200,
+          "finalUrl": "https://my.ndsp.app/settings-alerts?_ndsp_discovery=20260712_214139",
+          "route404": true,
+          "visible404": true,
+          "loginRedirect": false,
+          "navigationError": null,
+          "bodyTextLength": 842,
+          "consoleMessages": [
+            "404 Error: User attempted to access non-existent route: /settings-alerts"
+          ],
+          "pageErrors": [],
+          "valid": false
+        },
+        {
+          "href": "/settings.html",
+          "text": "/settings.html",
+          "score": 90,
+          "candidate": "/settings.html",
+          "status": 200,
+          "finalUrl": "https://my.ndsp.app/settings.html?_ndsp_discovery=20260712_214139",
+          "route404": true,
+          "visible404": true,
+          "loginRedirect": false,
+          "navigationError": null,
+          "bodyTextLength": 842,
+          "consoleMessages": [
+            "404 Error: User attempted to access non-existent route: /settings.html"
+          ],
+          "pageErrors": [],
+          "valid": false
+        },
+        {
+          "href": "/settings",
+          "text": "/settings",
+          "score": 90,
+          "candidate": "/settings",
+          "status": 200,
+          "finalUrl": "https://my.ndsp.app/settings?_ndsp_discovery=20260712_214139",
+          "route404": true,
+          "visible404": true,
+          "loginRedirect": false,
+          "navigationError": null,
+          "bodyTextLength": 842,
+          "consoleMessages": [
+            "404 Error: User attempted to access non-existent route: /settings"
+          ],
+          "pageErrors": [],
+          "valid": false
+        },
+        {
+          "href": "/alerts-log.html",
+          "text": "/alerts-log.html",
+          "score": 90,
+          "candidate": "/alerts-log.html",
+          "status": 200,
+          "finalUrl": "https://my.ndsp.app/alerts-log.html?_ndsp_discovery=20260712_214139",
+          "route404": true,
+          "visible404": true,
+          "loginRedirect": false,
+          "navigationError": null,
+          "bodyTextLength": 842,
+          "consoleMessages": [
+            "404 Error: User attempted to access non-existent route: /alerts-log.html"
+          ],
+          "pageErrors": [],
+          "valid": false
+        },
+        {
+          "href": "/alerts-log",
+          "text": "/alerts-log",
+          "score": 90,
+          "candidate": "/alerts-log",
+          "status": 200,
+          "finalUrl": "https://my.ndsp.app/alerts-log?_ndsp_discovery=20260712_214139",
+          "route404": true,
+          "visible404": true,
+          "loginRedirect": false,
+          "navigationError": null,
+          "bodyTextLength": 842,
+          "consoleMessages": [
+            "404 Error: User attempted to access non-existent route: /alerts-log"
+          ],
+          "pageErrors": [],
+          "valid": false
+        }
+      ]
+    },
+    {
+      "legacy": "/decision-support.html",
+      "filename": "decision-support.html",
+      "selected": null,
+      "candidates": [
+        {
+          "href": "/decision-guide.html",
+          "text": "/decision-guide.html",
+          "score": 90,
+          "candidate": "/decision-guide.html",
+          "status": 200,
+          "finalUrl": "https://my.ndsp.app/decision-guide.html?_ndsp_discovery=20260712_214139",
+          "route404": true,
+          "visible404": true,
+          "loginRedirect": false,
+          "navigationError": null,
+          "bodyTextLength": 842,
+          "consoleMessages": [
+            "404 Error: User attempted to access non-existent route: /decision-guide.html"
+          ],
+          "pageErrors": [],
+          "valid": false
+        },
+        {
+          "href": "/decision-guide",
+          "text": "/decision-guide",
+          "score": 90,
+          "candidate": "/decision-guide",
+          "status": 200,
+          "finalUrl": "https://my.ndsp.app/decision-guide?_ndsp_discovery=20260712_214139",
+          "route404": true,
+          "visible404": true,
+          "loginRedirect": false,
+          "navigationError": null,
+          "bodyTextLength": 842,
+          "consoleMessages": [
+            "404 Error: User attempted to access non-existent route: /decision-guide"
+          ],
+          "pageErrors": [],
+          "valid": false
+        },
+        {
+          "href": "/support-center.html",
+          "text": "/support-center.html",
+          "score": 90,
+          "candidate": "/support-center.html",
+          "status": 200,
+          "finalUrl": "https://my.ndsp.app/support-center.html?_ndsp_discovery=20260712_214139",
+          "route404": true,
+          "visible404": true,
+          "loginRedirect": false,
+          "navigationError": null,
+          "bodyTextLength": 842,
+          "consoleMessages": [
+            "404 Error: User attempted to access non-existent route: /support-center.html"
+          ],
+          "pageErrors": [],
+          "valid": false
+        },
+        {
+          "href": "/support-center",
+          "text": "/support-center",
+          "score": 90,
+          "candidate": "/support-center",
+          "status": 200,
+          "finalUrl": "https://my.ndsp.app/support-center?_ndsp_discovery=20260712_214139",
+          "route404": true,
+          "visible404": true,
+          "loginRedirect": false,
+          "navigationError": null,
+          "bodyTextLength": 842,
+          "consoleMessages": [
+            "404 Error: User attempted to access non-existent route: /support-center"
+          ],
+          "pageErrors": [],
+          "valid": false
+        },
+        {
+          "href": "/decision-support",
+          "text": "/decision-support",
+          "score": 90,
+          "candidate": "/decision-support",
+          "status": 200,
+          "finalUrl": "https://my.ndsp.app/decision-support?_ndsp_discovery=20260712_214139",
+          "route404": true,
+          "visible404": true,
+          "loginRedirect": false,
+          "navigationError": null,
+          "bodyTextLength": 842,
+          "consoleMessages": [
+            "404 Error: User attempted to access non-existent route: /decision-support"
+          ],
+          "pageErrors": [],
+          "valid": false
+        },
+        {
+          "href": "/guide.html",
+          "text": "/guide.html",
+          "score": 65,
+          "candidate": "/guide.html",
+          "status": 200,
+          "finalUrl": "https://my.ndsp.app/guide.html?_ndsp_discovery=20260712_214139",
+          "route404": true,
+          "visible404": true,
+          "loginRedirect": false,
+          "navigationError": null,
+          "bodyTextLength": 842,
+          "consoleMessages": [
+            "404 Error: User attempted to access non-existent route: /guide.html"
+          ],
+          "pageErrors": [],
+          "valid": false
+        },
+        {
+          "href": "/guide",
+          "text": "/guide",
+          "score": 65,
+          "candidate": "/guide",
+          "status": 200,
+          "finalUrl": "https://my.ndsp.app/guide?_ndsp_discovery=20260712_214139",
+          "route404": true,
+          "visible404": true,
+          "loginRedirect": false,
+          "navigationError": null,
+          "bodyTextLength": 842,
+          "consoleMessages": [
+            "404 Error: User attempted to access non-existent route: /guide"
+          ],
+          "pageErrors": [],
+          "valid": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,164 @@
+/* NDSP clean top controls v12 — single source, no stacking */
+#ndspTopControlsV12,
+#ndspTopControlsV12 * {
+  box-sizing: border-box !important;
+}
+
+#ndspTopControlsV12 {
+  position: fixed !important;
+  top: calc(env(safe-area-inset-top, 0px) + 10px) !important;
+  right: 12px !important;
+  left: auto !important;
+  z-index: 2147483000 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 8px !important;
+  direction: rtl !important;
+  pointer-events: auto !important;
+  font-family: inherit !important;
+}
+
+#ndspTopControlsV12 .ndsp-pages-btn,
+#ndspTopControlsV12 .ndsp-lang-wrap {
+  height: 48px !important;
+  border-radius: 999px !important;
+  border: 1px solid rgba(229, 191, 81, 0.58) !important;
+  background:
+    linear-gradient(135deg, rgba(255, 226, 120, 0.96), rgba(203, 162, 45, 0.96)) !important;
+  color: #070707 !important;
+  box-shadow:
+    0 10px 26px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.35) !important;
+}
+
+#ndspTopControlsV12 .ndsp-pages-btn {
+  min-width: 148px !important;
+  padding: 0 22px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  font-size: 18px !important;
+  font-weight: 900 !important;
+  cursor: pointer !important;
+}
+
+#ndspTopControlsV12 .ndsp-lang-wrap {
+  min-width: 148px !important;
+  padding: 5px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 4px !important;
+  background:
+    linear-gradient(180deg, rgba(8,8,7,.98), rgba(0,0,0,.98)) !important;
+}
+
+#ndspTopControlsV12 .ndsp-lang-btn {
+  width: 66px !important;
+  height: 38px !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  background: transparent !important;
+  color: rgba(246, 224, 165, .72) !important;
+  font-size: 17px !important;
+  font-weight: 950 !important;
+  letter-spacing: .08em !important;
+  cursor: pointer !important;
+}
+
+#ndspTopControlsV12 .ndsp-lang-btn.is-active {
+  background:
+    linear-gradient(135deg, rgba(255, 226, 120, 1), rgba(211, 169, 48, 1)) !important;
+  color: #050505 !important;
+}
+
+#ndspTopControlsV12 .ndsp-pages-panel {
+  position: absolute !important;
+  top: 58px !important;
+  right: 0 !important;
+  width: min(340px, calc(100vw - 24px)) !important;
+  max-height: min(70vh, 620px) !important;
+  overflow: auto !important;
+  padding: 14px !important;
+  border-radius: 22px !important;
+  border: 1px solid rgba(229, 191, 81, .36) !important;
+  background:
+    radial-gradient(circle at top right, rgba(229,191,81,.13), transparent 35%),
+    linear-gradient(180deg, rgba(13,14,14,.98), rgba(2,2,2,.98)) !important;
+  box-shadow: 0 24px 60px rgba(0,0,0,.58) !important;
+  display: none !important;
+}
+
+#ndspTopControlsV12.is-open .ndsp-pages-panel {
+  display: grid !important;
+  gap: 8px !important;
+}
+
+#ndspTopControlsV12 .ndsp-page-link {
+  min-height: 46px !important;
+  padding: 10px 14px !important;
+  border-radius: 14px !important;
+  border: 1px solid rgba(229, 191, 81, .18) !important;
+  background: rgba(255,255,255,.035) !important;
+  color: rgba(255,248,229,.92) !important;
+  text-decoration: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  font-size: 15px !important;
+  font-weight: 800 !important;
+}
+
+#ndspTopControlsV12 .ndsp-page-link span:first-child {
+  color: rgba(229,191,81,.94) !important;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace !important;
+  font-weight: 900 !important;
+}
+
+#ndspTopControlsV12 .ndsp-page-link:hover {
+  border-color: rgba(229,191,81,.52) !important;
+  background: rgba(229,191,81,.09) !important;
+}
+
+.ndsp-legacy-control-hidden-v12 {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+@media (max-width: 640px) {
+  #ndspTopControlsV12 {
+    top: calc(env(safe-area-inset-top, 0px) + 8px) !important;
+    right: 8px !important;
+    gap: 6px !important;
+    transform: scale(.86) !important;
+    transform-origin: top right !important;
+  }
+
+  #ndspTopControlsV12 .ndsp-pages-btn {
+    min-width: 132px !important;
+    height: 46px !important;
+    font-size: 17px !important;
+    padding: 0 18px !important;
+  }
+
+  #ndspTopControlsV12 .ndsp-lang-wrap {
+    min-width: 132px !important;
+    height: 46px !important;
+  }
+
+  #ndspTopControlsV12 .ndsp-lang-btn {
+    width: 58px !important;
+    height: 36px !important;
+    font-size: 16px !important;
+  }
+
+  #ndspTopControlsV12 .ndsp-pages-panel {
+    top: 56px !important;
+    right: 0 !important;
+    width: min(330px, calc(100vw - 16px)) !important;
+  }
+}

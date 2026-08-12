@@ -1,0 +1,4 @@
+[Service]
+WorkingDirectory=/home/nawaf511/empire-core-new/apps/ndsp-platform-gateway-9002
+ExecStart=
+ExecStart=/usr/bin/python3 /home/nawaf511/empire-core-new/apps/ndsp-platform-gateway-9002/app.py

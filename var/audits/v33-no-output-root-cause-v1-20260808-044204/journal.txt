@@ -1,0 +1,4 @@
+Hint: You are currently not seeing messages from other users and the system.
+      Users in groups 'adm', 'systemd-journal' can see all messages.
+      Pass -q to turn off this notice.
+أغسطس 08 04:38:11 vmi2934783 python3[2402283]: {"ok": true, "service": "ndsp-canonical-live-runtime-v30", "host": "127.0.0.1", "port": 9086, "runtime_version": "ndsp-canonical-live-runtime-v33.0.0", "registry_layers": 16}

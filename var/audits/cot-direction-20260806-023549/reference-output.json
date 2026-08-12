@@ -1,0 +1,39 @@
+{
+  "marketSymbol": "GOLD",
+  "reportDate": "2026-08-04",
+  "coalitionKey": "ASSET_MANAGERS_OTHER",
+  "coalitionMembers": [
+    "ASSET_MANAGERS",
+    "OTHER_REPORTABLES"
+  ],
+  "contractVersion": "1.0.0",
+  "state": [
+    3,
+    -1
+  ],
+  "longTotal": 3,
+  "shortTotal": -1,
+  "direction": "BUY",
+  "clarity": "EXPLICIT",
+  "horizon": "EXTENDED",
+  "classification": "EXPLICIT_EXTENDED_BUY",
+  "arabicLabel": "اتجاه شراء صريح ذو أفق ممتد",
+  "explanation": "زاد اللونق بمحصلة +3، بينما انخفض الشورت بمحصلة -1. التحالف يبني عقود شراء ويخفض عقود البيع.",
+  "movementSource": [
+    "LONG_BUILDING",
+    "SHORT_REDUCTION"
+  ],
+  "participants": [
+    {
+      "participant": "ASSET_MANAGERS",
+      "longChange": 2,
+      "shortChange": -2
+    },
+    {
+      "participant": "OTHER_REPORTABLES",
+      "longChange": 1,
+      "shortChange": 1
+    }
+  ],
+  "generatedAt": "2026-08-06T00:35:51.199Z"
+}

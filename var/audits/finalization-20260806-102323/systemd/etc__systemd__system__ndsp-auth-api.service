@@ -1,0 +1,26 @@
+[Unit]
+Description=NDSP Auth API
+After=network.target postgresql.service redis-server.service
+Wants=postgresql.service redis-server.service
+
+[Service]
+Type=simple
+User=nawaf511
+Group=nawaf511
+WorkingDirectory=/home/nawaf511/empire-core-new/backend/auth_api
+Environment=NODE_ENV=production
+Environment=PORT=9018
+Environment=AUTH_PORT=9018
+Environment=NDSP_AUTH_PORT=9018
+EnvironmentFile=-/etc/ndsp/ndsp-db.env
+EnvironmentFile=-/etc/ndsp/ndsp-telegram.env
+EnvironmentFile=-/home/nawaf511/empire-core-new/backend/.env
+EnvironmentFile=-/home/nawaf511/empire-core-new/backend/auth_api/.env
+ExecStart=/usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/server.js
+Restart=always
+RestartSec=3
+KillSignal=SIGTERM
+TimeoutStopSec=20
+
+[Install]
+WantedBy=multi-user.target

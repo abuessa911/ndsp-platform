@@ -1,0 +1,26 @@
+{
+  "canonicalProjectRoot": "/home/nawaf511/empire-core-new",
+  "legacyPathsAllowedAfterMigration": false,
+  "forbiddenProjectPaths": [
+    "/opt/empire-core",
+    "/root/empire-core",
+    "/var/www/ndsp",
+    "/var/www/ndsp-my",
+    "/var/www/ndsp-admin",
+    "/var/www/ndsp-public-gateway"
+  ],
+  "osManagedPathsAllowed": [
+    "/etc/nginx",
+    "/etc/systemd/system",
+    "/etc/ndsp"
+  ],
+  "requirements": {
+    "applicationCodeMustBeUnderCanonicalRoot": true,
+    "staticAssetsMustBeUnderCanonicalRoot": true,
+    "runtimeWorkingDirectoriesMustBeUnderCanonicalRoot": true,
+    "secretsMustNotBeCommitted": true,
+    "dryRunRequired": true,
+    "backupRequired": true,
+    "rollbackRequired": true
+  }
+}

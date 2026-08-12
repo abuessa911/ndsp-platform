@@ -1,0 +1,206 @@
+=== V33 EXACT COT SOURCE CONTEXT ===
+SOURCE=/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_canonical_live_runtime_v33.py
+CANDIDATE_COUNT=3
+
+==============================================================================
+CANDIDATE=1
+TYPE=FUNCTION
+NODE_LINE=762
+CONTEXT_LINES=737-800
+REASON=enhanced_health
+------------------------------------------------------------------------------
+00737:     input_matrix["L11"] = {
+00738:         "state": "LIVE" if dxy["verified"] else "PARTIAL",
+00739:         "source": "LIVE_DXY_PLUS_CALENDAR_PLUS_NEWS",
+00740:     }
+00741: 
+00742:     evidence["technical_evidence_v33"] = {
+00743:         "symbol": clean_symbol(symbol),
+00744:         "timeframe": timeframe,
+00745:         "provider": ohlcv["provider"],
+00746:         "provider_symbol": ohlcv["provider_symbol"],
+00747:         "interval": ohlcv["interval"],
+00748:         "bar_count": len(closes),
+00749:         "last_close_time": datetime.fromtimestamp(
+00750:             last_close_ms / 1000.0, timezone.utc
+00751:         ).isoformat().replace("+00:00", "Z"),
+00752:         "age_hours": round(age_seconds / 3600.0, 2),
+00753:         "fresh": True,
+00754:         "indicator_set": ["RSI", "MACD_HISTOGRAM", "OBV", "CCI"],
+00755:         "liquidity_verified": bool(liquidity["liquidity_verified"]),
+00756:         "usd_direction_verified": bool(dxy["verified"]),
+00757:         "dxy_direction": dxy["direction"],
+00758:     }
+00759:     return payload, evidence
+00760: 
+00761: 
+00762: def enhanced_health():
+00763:     status, payload = ORIGINAL_HEALTH()
+00764:     payload = dict(payload)
+00765:     payload.update({
+00766:         "service": "ndsp-canonical-live-runtime-v33",
+00767:         "runtime_version": VERSION,
+00768:         "contract_version": CONTRACT_VERSION,
+00769:         "host": HOST,
+00770:         "port": PORT,
+00771:         "runtime_dir": str(RUNTIME_DIR),
+00772:         "publicly_exposed": False,
+00773:         "evidence_binding": {
+00774:             "divergence": "REAL_OHLCV_RSI_MACD_OBV_CCI",
+00775:             "momentum": "REAL_OHLCV_RSI_MACD_OBV_CCI",
+00776:             "crypto_liquidity": "BINANCE_PUBLIC_ORDER_BOOK",
+00777:             "usd_direction": "DXY_PUBLIC_CHART",
+00778:             "cot": "UNCHANGED_TRUTHFUL_GATE",
+00779:         },
+00780:     })
+00781:     return status, payload
+00782: 
+00783: 
+00784: v30.VERSION = VERSION
+00785: v30.CONTRACT_VERSION = CONTRACT_VERSION
+00786: v30.HOST = HOST
+00787: v30.PORT = PORT
+00788: v30.RUNTIME_DIR = RUNTIME_DIR
+00789: v30.build_payload = enhanced_build_payload
+00790: v30.health = enhanced_health
+00791: v30.Handler.server_version = "NDSPCanonicalLive/33"
+00792: 
+00793: 
+00794: def main() -> None:
+00795:     v30.main()
+00796: 
+00797: 
+00798: if __name__ == "__main__":
+00799:     main()
+00800: 
+
+==============================================================================
+CANDIDATE=2
+TYPE=DICT
+NODE_LINE=765
+CONTEXT_LINES=740-800
+REASON="cot"
+------------------------------------------------------------------------------
+00740:     }
+00741: 
+00742:     evidence["technical_evidence_v33"] = {
+00743:         "symbol": clean_symbol(symbol),
+00744:         "timeframe": timeframe,
+00745:         "provider": ohlcv["provider"],
+00746:         "provider_symbol": ohlcv["provider_symbol"],
+00747:         "interval": ohlcv["interval"],
+00748:         "bar_count": len(closes),
+00749:         "last_close_time": datetime.fromtimestamp(
+00750:             last_close_ms / 1000.0, timezone.utc
+00751:         ).isoformat().replace("+00:00", "Z"),
+00752:         "age_hours": round(age_seconds / 3600.0, 2),
+00753:         "fresh": True,
+00754:         "indicator_set": ["RSI", "MACD_HISTOGRAM", "OBV", "CCI"],
+00755:         "liquidity_verified": bool(liquidity["liquidity_verified"]),
+00756:         "usd_direction_verified": bool(dxy["verified"]),
+00757:         "dxy_direction": dxy["direction"],
+00758:     }
+00759:     return payload, evidence
+00760: 
+00761: 
+00762: def enhanced_health():
+00763:     status, payload = ORIGINAL_HEALTH()
+00764:     payload = dict(payload)
+00765:     payload.update({
+00766:         "service": "ndsp-canonical-live-runtime-v33",
+00767:         "runtime_version": VERSION,
+00768:         "contract_version": CONTRACT_VERSION,
+00769:         "host": HOST,
+00770:         "port": PORT,
+00771:         "runtime_dir": str(RUNTIME_DIR),
+00772:         "publicly_exposed": False,
+00773:         "evidence_binding": {
+00774:             "divergence": "REAL_OHLCV_RSI_MACD_OBV_CCI",
+00775:             "momentum": "REAL_OHLCV_RSI_MACD_OBV_CCI",
+00776:             "crypto_liquidity": "BINANCE_PUBLIC_ORDER_BOOK",
+00777:             "usd_direction": "DXY_PUBLIC_CHART",
+00778:             "cot": "UNCHANGED_TRUTHFUL_GATE",
+00779:         },
+00780:     })
+00781:     return status, payload
+00782: 
+00783: 
+00784: v30.VERSION = VERSION
+00785: v30.CONTRACT_VERSION = CONTRACT_VERSION
+00786: v30.HOST = HOST
+00787: v30.PORT = PORT
+00788: v30.RUNTIME_DIR = RUNTIME_DIR
+00789: v30.build_payload = enhanced_build_payload
+00790: v30.health = enhanced_health
+00791: v30.Handler.server_version = "NDSPCanonicalLive/33"
+00792: 
+00793: 
+00794: def main() -> None:
+00795:     v30.main()
+00796: 
+00797: 
+00798: if __name__ == "__main__":
+00799:     main()
+00800: 
+
+==============================================================================
+CANDIDATE=3
+TYPE=DICT
+NODE_LINE=773
+CONTEXT_LINES=748-800
+REASON="cot"
+------------------------------------------------------------------------------
+00748:         "bar_count": len(closes),
+00749:         "last_close_time": datetime.fromtimestamp(
+00750:             last_close_ms / 1000.0, timezone.utc
+00751:         ).isoformat().replace("+00:00", "Z"),
+00752:         "age_hours": round(age_seconds / 3600.0, 2),
+00753:         "fresh": True,
+00754:         "indicator_set": ["RSI", "MACD_HISTOGRAM", "OBV", "CCI"],
+00755:         "liquidity_verified": bool(liquidity["liquidity_verified"]),
+00756:         "usd_direction_verified": bool(dxy["verified"]),
+00757:         "dxy_direction": dxy["direction"],
+00758:     }
+00759:     return payload, evidence
+00760: 
+00761: 
+00762: def enhanced_health():
+00763:     status, payload = ORIGINAL_HEALTH()
+00764:     payload = dict(payload)
+00765:     payload.update({
+00766:         "service": "ndsp-canonical-live-runtime-v33",
+00767:         "runtime_version": VERSION,
+00768:         "contract_version": CONTRACT_VERSION,
+00769:         "host": HOST,
+00770:         "port": PORT,
+00771:         "runtime_dir": str(RUNTIME_DIR),
+00772:         "publicly_exposed": False,
+00773:         "evidence_binding": {
+00774:             "divergence": "REAL_OHLCV_RSI_MACD_OBV_CCI",
+00775:             "momentum": "REAL_OHLCV_RSI_MACD_OBV_CCI",
+00776:             "crypto_liquidity": "BINANCE_PUBLIC_ORDER_BOOK",
+00777:             "usd_direction": "DXY_PUBLIC_CHART",
+00778:             "cot": "UNCHANGED_TRUTHFUL_GATE",
+00779:         },
+00780:     })
+00781:     return status, payload
+00782: 
+00783: 
+00784: v30.VERSION = VERSION
+00785: v30.CONTRACT_VERSION = CONTRACT_VERSION
+00786: v30.HOST = HOST
+00787: v30.PORT = PORT
+00788: v30.RUNTIME_DIR = RUNTIME_DIR
+00789: v30.build_payload = enhanced_build_payload
+00790: v30.health = enhanced_health
+00791: v30.Handler.server_version = "NDSPCanonicalLive/33"
+00792: 
+00793: 
+00794: def main() -> None:
+00795:     v30.main()
+00796: 
+00797: 
+00798: if __name__ == "__main__":
+00799:     main()
+00800: 
+

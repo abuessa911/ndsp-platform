@@ -1,0 +1,189 @@
+/*
+ * NDSP UI FIX
+ * RTL + Arabic typography + responsive CORE section
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  direction: rtl;
+  overflow-x: hidden;
+}
+
+body {
+  direction: rtl;
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* Arabic text */
+body,
+button,
+input,
+textarea,
+select {
+  font-family:
+    "Tajawal",
+    "Noto Sans Arabic",
+    "Arial",
+    sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+a {
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+/* Prevent media distortion */
+img,
+svg,
+video {
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+  object-fit: contain;
+}
+
+/*
+ * CORE / cards
+ * Works with common class naming conventions.
+ */
+[class*="core"],
+[class*="CORE"],
+[id*="core"],
+[id*="CORE"] {
+  max-width: 100%;
+}
+
+/* Flex containers */
+[class*="core"].flex,
+[class*="core"][style*="display: flex"],
+[class*="CORE"].flex,
+[class*="CORE"][style*="display: flex"] {
+  align-items: center;
+  gap: clamp(16px, 2.5vw, 40px);
+}
+
+/* Text inside CORE */
+[class*="core"] h1,
+[class*="core"] h2,
+[class*="core"] h3,
+[class*="core"] h4,
+[class*="core"] p,
+[class*="core"] span,
+[class*="CORE"] h1,
+[class*="CORE"] h2,
+[class*="CORE"] h3,
+[class*="CORE"] h4,
+[class*="CORE"] p,
+[class*="CORE"] span {
+  white-space: normal !important;
+  overflow-wrap: anywhere;
+  line-height: 1.65;
+}
+
+/*
+ * Generic card children.
+ * Gives Arabic labels enough room so they don't collide
+ * with icons/dividers.
+ */
+[class*="core"] > *,
+[class*="CORE"] > * {
+  min-width: 0;
+}
+
+/* Desktop */
+@media (min-width: 901px) {
+
+  [class*="core"] {
+    padding-left: clamp(24px, 3vw, 50px);
+    padding-right: clamp(24px, 3vw, 50px);
+  }
+
+  [class*="core"] > * {
+    flex: 1 1 0;
+  }
+
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+
+  [class*="core"],
+  [class*="CORE"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    gap: 18px !important;
+  }
+
+  [class*="core"] > *,
+  [class*="CORE"] > * {
+    min-width: 120px;
+  }
+
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+
+  [class*="core"],
+  [class*="CORE"] {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: center !important;
+    width: 100% !important;
+    gap: 10px !important;
+    padding: 18px !important;
+  }
+
+  [class*="core"] > *,
+  [class*="CORE"] > * {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    text-align: center !important;
+    flex: none !important;
+  }
+
+  h1 {
+    line-height: 1.25 !important;
+  }
+
+  p {
+    line-height: 1.8 !important;
+  }
+
+}
+
+/*
+ * Protect layout from fixed/absolute elements
+ * becoming wider than the viewport.
+ */
+section,
+header,
+main,
+footer,
+nav {
+  max-width: 100%;
+}
+
+[style*="position: absolute"],
+[style*="position:absolute"] {
+  max-width: 100%;
+}
+

@@ -1,0 +1,198 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+export LC_ALL=C.UTF-8
+export LANG=C.UTF-8
+
+ENV_FILE="/etc/default/ndsp-refresh-live-data"
+[ -f "$ENV_FILE" ] && . "$ENV_FILE"
+
+ROOT="${ROOT:-/home/nawaf511/ndsp_final_frontend}"
+LIVE="${LIVE:-/var/www/ndsp-my}"
+SYMBOLS="${SYMBOLS:-BTCUSDT ETHUSDT SOLUSDT BNBUSDT XRPUSDT XAUUSD UKOIL}"
+
+ROOT_DATA="$ROOT/data"
+LIVE_DATA="$LIVE/data"
+
+mkdir -p "$ROOT_DATA" "$LIVE_DATA"
+
+TMP_JSON="$(mktemp)"
+trap 'rm -f "$TMP_JSON"' EXIT
+
+python3 - "$ROOT_DATA" "$LIVE_DATA" "$SYMBOLS" "$TMP_JSON" <<'PY'
+import json
+import sys
+import urllib.request
+import urllib.error
+from datetime import datetime, UTC
+
+root_data = sys.argv[1]
+live_data = sys.argv[2]
+symbols = [x.strip().upper() for x in sys.argv[3].split() if x.strip()]
+tmp_json = sys.argv[4]
+
+def fetch_json(url, timeout=20):
+    req = urllib.request.Request(
+        url,
+        headers={
+            "Accept": "application/json",
+            "User-Agent": "NDSP-Refresh/1.0"
+        }
+    )
+    with urllib.request.urlopen(req, timeout=timeout) as resp:
+        return json.loads(resp.read().decode("utf-8", "replace"))
+
+def dig(obj, path):
+    cur = obj
+    for part in path.split("."):
+        if not isinstance(cur, dict) or part not in cur:
+            return None
+        cur = cur[part]
+    return cur
+
+def first_non_empty(values):
+    for v in values:
+        if v is None:
+            continue
+        s = str(v).strip()
+        if s != "":
+            return v
+    return None
+
+def pick_nmp(payload):
+    # نلتقط فقط الحقول الصريحة المرتبطة بـ NMP
+    # ممنوع استخدام momentum_price_4h أو أي اشتقاق تقديري
+    candidate_paths = [
+        "nmp",
+        "nmp_value",
+        "nmp_price",
+        "nmp_open",
+        "nmp_open_price",
+        "nawaf_meet_point",
+        "nawaf_meet_point_price",
+        "allowed_public_outputs.nmp",
+        "allowed_public_outputs.nmp_value",
+        "allowed_public_outputs.nmp_price",
+        "allowed_public_outputs.nmp_open",
+        "allowed_public_outputs.nmp_open_price",
+        "live_market_analysis.nmp",
+        "live_market_analysis.nmp_value",
+        "live_market_analysis.nmp_price",
+        "live_market_analysis.nmp_open",
+        "live_market_analysis.nmp_open_price",
+    ]
+    for path in candidate_paths:
+        v = dig(payload, path)
+        if v is not None and str(v).strip() != "":
+            return {
+                "nmp": v,
+                "nmp_found": True,
+                "nmp_source_key": path
+            }
+    return {
+        "nmp": None,
+        "nmp_found": False,
+        "nmp_source_key": ""
+    }
+
+items = []
+errors = []
+state_counts = {}
+
+for symbol in symbols:
+    urls = [
+        f"https://api.ndsp.app/api/decision/quality-live?symbol={symbol}",
+        f"http://127.0.0.1:9057/api/decision/quality-live?symbol={symbol}",
+    ]
+
+    payload = None
+    last_err = None
+    for url in urls:
+        try:
+            payload = fetch_json(url)
+            if isinstance(payload, dict) and payload.get("ok") is True:
+                break
+        except Exception as e:
+            last_err = str(e)
+            payload = None
+
+    if not payload or payload.get("ok") is not True:
+        errors.append({
+            "symbol": symbol,
+            "error": last_err or "FETCH_FAILED"
+        })
+        continue
+
+    instrument = payload.get("instrument") or {}
+    scenario = payload.get("scenario") or {}
+    allowed = payload.get("allowed_public_outputs") or {}
+    nmp = pick_nmp(payload)
+
+    state = scenario.get("scenario_state") or "UNKNOWN"
+    state_counts[state] = state_counts.get(state, 0) + 1
+
+    item = {
+        "symbol": instrument.get("symbol") or symbol,
+        "market": instrument.get("market"),
+        "timeframe": instrument.get("timeframe"),
+        "live_price": instrument.get("live_price"),
+        "scenario_state": scenario.get("scenario_state"),
+        "directional_context": scenario.get("scenario_directional_context"),
+        "directional_bias": allowed.get("directional_bias"),
+        "market_state": allowed.get("market_state"),
+        "activation_level": scenario.get("scenario_activation_level"),
+        "arrival_level": scenario.get("scenario_arrival_level"),
+        "review_zone": scenario.get("scenario_review_zone"),
+        "invalidation_level": scenario.get("scenario_invalidation_level"),
+        "confidence_band": scenario.get("scenario_confidence_band"),
+        "reading_horizon": allowed.get("reading_horizon"),
+        "time_horizon": scenario.get("scenario_time_horizon"),
+        "horizon_strength": allowed.get("horizon_strength"),
+        "risk_note": scenario.get("scenario_risk_note"),
+        "caution_reason": allowed.get("caution_reason"),
+        "decision_quality": allowed.get("decision_quality"),
+        "sanitized_summary": allowed.get("sanitized_summary"),
+        "nmp": nmp["nmp"],
+        "nmp_found": nmp["nmp_found"],
+        "nmp_source_key": nmp["nmp_source_key"],
+        "source_mode": payload.get("source_mode"),
+        "project": payload.get("project"),
+        "package": payload.get("package"),
+        "scenario_last_updated": scenario.get("scenario_last_updated"),
+        "raw_ok": payload.get("ok") is True
+    }
+
+    items.append(item)
+
+out = {
+    "ok": True,
+    "source": "unified_from_api.ndsp.app_api_decision_quality_live_v2_timer_with_nmp_harvest",
+    "generated_at": datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S UTC"),
+    "symbols_requested": symbols,
+    "items_count": len(items),
+    "state_counts": state_counts,
+    "items": items,
+    "errors": errors
+}
+
+with open(tmp_json, "w", encoding="utf-8") as f:
+    json.dump(out, f, ensure_ascii=False, indent=2)
+
+print("OK=", out.get("ok"))
+print("ITEMS_COUNT=", out.get("items_count"))
+print("NMP_FOUND_COUNT=", sum(1 for x in items if x.get("nmp_found") is True))
+for row in items:
+    print("ITEM=", {
+        "symbol": row.get("symbol"),
+        "decision_quality": row.get("decision_quality"),
+        "nmp_found": row.get("nmp_found"),
+        "nmp_source_key": row.get("nmp_source_key"),
+        "nmp": row.get("nmp")
+    })
+PY
+
+sudo mkdir -p "$ROOT_DATA" "$LIVE_DATA"
+sudo install -m 644 "$TMP_JSON" "$ROOT_DATA/command-center-real.json"
+sudo install -m 644 "$TMP_JSON" "$LIVE_DATA/command-center-real.json"
+
+echo "REFRESH_OK=YES"

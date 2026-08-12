@@ -83,7 +83,7 @@ app.get('/health', async (_req, res) => {
     ok:true,
     service:'ndsp-bot-execution-service',
     product:'NDSP Bot',
-    connected_platform:'NDSP — Nawaf Decision Support Platform',
+    connected_platform:'NDSP — Decision Support Platform',
     port:PORT,
     mode:'DRY_RUN',
     completed_decision_url:COMPLETED_URL

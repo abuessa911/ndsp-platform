@@ -1,0 +1,31 @@
+=== EXACT ROUTE REFERENCES ===
+/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/app.py:238:@app.get("/api/admin/raw-cot/status")
+
+=== RAW COT IMPLEMENTATION REFERENCES ===
+/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/app.py:13:DATA_DIR = Path("/home/nawaf511/empire-core-new/backend/data/raw_cot")
+/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/app.py:21:MANIFEST = DATA_DIR / "raw_cot_manifest.json"
+/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/app.py:127:            "raw_cot_connected": False,
+/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/app.py:128:            "raw_cot_status": "WAITING_FOR_IMPORT",
+/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/app.py:144:            "raw_cot_connected": False,
+/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/app.py:145:            "raw_cot_status": "CONNECTED_NO_ASSET_MATCH",
+/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/app.py:171:        "raw_cot_connected": True,
+/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/app.py:172:        "raw_cot_status": "CONNECTED_MATCHED",
+/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/app.py:177:        "report_date": match[2],
+/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/app.py:186:        "asset_managers_long": asset_mgr_long,
+/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/app.py:187:        "asset_managers_short": asset_mgr_short,
+/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/app.py:191:        "leveraged_funds_long": leveraged_long,
+/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/app.py:192:        "leveraged_funds_short": leveraged_short,
+/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/app.py:202:@app.get("/api/admin/raw-cot/health")
+/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/app.py:213:        "service": "ndsp-raw-cot-gateway",
+/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/app.py:217:        "raw_cot_status": "WAITING_FOR_IMPORT" if not TFF_CURRENT.exists() else "CURRENT_FILES_PRESENT",
+/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/app.py:225:@app.get("/api/admin/raw-cot/import-current")
+/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/app.py:233:@app.post("/api/admin/raw-cot/import-current")
+/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/app.py:238:@app.get("/api/admin/raw-cot/status")
+
+=== FASTAPI REFERENCES ===
+/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/app.py:10:from fastapi import FastAPI, Query
+/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/app.py:23:app = FastAPI(title="NDSP Raw COT Gateway", version="0.2.0-current-cftc")
+/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/app.py:202:@app.get("/api/admin/raw-cot/health")
+/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/app.py:225:@app.get("/api/admin/raw-cot/import-current")
+/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/app.py:233:@app.post("/api/admin/raw-cot/import-current")
+/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/app.py:238:@app.get("/api/admin/raw-cot/status")

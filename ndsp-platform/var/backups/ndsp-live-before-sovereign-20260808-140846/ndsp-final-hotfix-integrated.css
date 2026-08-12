@@ -1,0 +1,40 @@
+#ndsp-devil-advocate-visible-card {
+ display: none !important;
+ visibility: hidden !important;
+ pointer-events: none !important;
+}
+
+#ndsp-devil-advocate-integrated-card {
+ position: relative !important;
+ inset: auto !important;
+ width: 100% !important;
+ max-width: none !important;
+ grid-column: 1 / -1 !important;
+ margin: 18px 0 !important;
+ border: 1px solid rgba(239, 68, 68, 0.34);
+ border-radius: 28px;
+ background: radial-gradient(circle at top left, rgba(239,68,68,.10), transparent 30%), rgba(18,18,20,.94);
+ box-shadow: 0 18px 45px rgba(0,0,0,.28);
+ overflow: hidden;
+}
+
+#ndsp-devil-advocate-integrated-card.ndsp-devil-inner { padding: 24px; }
+#ndsp-devil-advocate-integrated-card.ndsp-devil-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
+#ndsp-devil-advocate-integrated-card.ndsp-devil-title-wrap { display: flex; align-items: center; gap: 14px; }
+#ndsp-devil-advocate-integrated-card.ndsp-devil-icon { display: inline-flex; width: 46px; height: 46px; align-items: center; justify-content: center; border-radius: 18px; border: 1px solid rgba(239,68,68,.35); background: rgba(239,68,68,.10); color: #fb7185; font-size: 22px; }
+#ndsp-devil-advocate-integrated-card h2 { margin: 0; color: #f8fafc; font-size: 24px; font-weight: 900; line-height: 1.35; }
+#ndsp-devil-advocate-integrated-card p { margin: 0; }
+#ndsp-devil-advocate-integrated-card.ndsp-devil-sub { margin-top: 4px; color: rgba(226,232,240,.62); font-size: 13px; }
+#ndsp-devil-advocate-integrated-card.ndsp-devil-badge { display: inline-flex; align-items: center; border-radius: 999px; border: 1px solid rgba(239,68,68,.35); background: rgba(239,68,68,.10); color: #fb7185; padding: 7px 12px; font-size: 12px; font-weight: 800; white-space: nowrap; }
+#ndsp-devil-advocate-integrated-card.ndsp-devil-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+#ndsp-devil-advocate-integrated-card.ndsp-devil-box { border: 1px solid rgba(148,163,184,.16); border-radius: 20px; background: rgba(255,255,255,.035); padding: 16px; }
+#ndsp-devil-advocate-integrated-card.ndsp-devil-label { color: rgba(226,232,240,.52); font-size: 12px; }
+#ndsp-devil-advocate-integrated-card.ndsp-devil-value { margin-top: 7px; color: #fb7185; font-size: 24px; font-weight: 900; }
+#ndsp-devil-advocate-integrated-card.ndsp-devil-text { margin-top: 10px; color: rgba(248,250,252,.86); font-size: 14px; line-height: 1.9; }
+#ndsp-devil-advocate-integrated-card.ndsp-devil-summary { margin-top: 14px; border: 1px solid rgba(245,197,90,.24); border-radius: 20px; background: rgba(245,197,90,.08); padding: 16px; }
+#ndsp-devil-advocate-integrated-card.ndsp-devil-summary strong { display: block; color: #f5c55a; font-size: 13px; margin-bottom: 8px; }
+#ndsp-devil-advocate-integrated-card.ndsp-devil-summary span { color: rgba(226,232,240,.72); font-size: 14px; line-height: 1.9; }
+
+@media (max-width: 900px) {
+ #ndsp-devil-advocate-integrated-card.ndsp-devil-grid { grid-template-columns: 1fr; }
+}

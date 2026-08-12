@@ -1,0 +1,16 @@
+[Unit]
+Description=NDSP quality-live golden explainability API wrapper
+After=network.target
+
+[Service]
+Type=simple
+User=root
+Environment=NDSP_QUALITY_LIVE_UPSTREAM=http://127.0.0.1:9057
+Environment=NDSP_GOLDEN_WRAPPER_HOST=127.0.0.1
+Environment=NDSP_GOLDEN_WRAPPER_PORT=9067
+ExecStart=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_quality_live_golden_wrapper.py
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target

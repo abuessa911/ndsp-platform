@@ -23,7 +23,7 @@ export default function AssetPage({ tr, lang, symbol, setSymbol, assetName, asse
 
       <div className="card">
         <h3>{tr.scenario}</h3>
-        <pre>{JSON.stringify(scenario, null, 2)}</pre>
+        <div className="muted">ملخص السيناريو متاح عبر لوحة القرار الآمنة.</div>
       </div>
     </section>
   );

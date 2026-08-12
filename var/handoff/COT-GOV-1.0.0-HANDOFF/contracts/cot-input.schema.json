@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cot-input.schema.json",
+  "title": "COT analysis input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "reportDate",
+    "positions",
+    "changes"
+  ],
+  "properties": {
+    "reportDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "marketCode": {
+      "type": "string"
+    },
+    "positions": {
+      "$ref": "#/$defs/dataset"
+    },
+    "changes": {
+      "$ref": "#/$defs/dataset"
+    }
+  },
+  "$defs": {
+    "pair": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "long",
+        "short"
+      ],
+      "properties": {
+        "long": {
+          "type": "number"
+        },
+        "short": {
+          "type": "number"
+        },
+        "spreading": {
+          "type": "number"
+        }
+      }
+    },
+    "dataset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ASSET_MANAGER",
+        "LEVERAGED_FUNDS",
+        "OTHER_REPORTABLES",
+        "DEALER_INTERMEDIARY"
+      ],
+      "properties": {
+        "ASSET_MANAGER": {
+          "$ref": "#/$defs/pair"
+        },
+        "LEVERAGED_FUNDS": {
+          "$ref": "#/$defs/pair"
+        },
+        "OTHER_REPORTABLES": {
+          "$ref": "#/$defs/pair"
+        },
+        "DEALER_INTERMEDIARY": {
+          "$ref": "#/$defs/pair"
+        }
+      }
+    }
+  }
+}

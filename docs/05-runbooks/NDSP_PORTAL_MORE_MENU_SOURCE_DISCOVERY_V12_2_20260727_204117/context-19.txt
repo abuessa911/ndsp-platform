@@ -1,0 +1,125 @@
+PATTERN=logout
+ANCHOR_LINE=4104
+CONTEXT_START=4059
+CONTEXT_END=4178
+
+  004059: function querySuffix(state) {
+  004060:   const params = new URLSearchParams();
+  004061:   CONTEXT_KEYS.forEach((key) => params.set(key, state[key]));
+  004062:   return `?${params.toString()}`;
+  004063: }
+  004064: 
+  004065: function Topbar() {
+  004066:   const { state, patch } = useDecision();
+  004067:   const { route, navigate } = useNavigation();
+  004068:   const { t, lang } = useTranslate();
+  004069:   const [drawer, setDrawer] = useState(false);
+  004070:   const [more, setMore] = useState(false);
+  004071:   const drawerRef = useRef(null);
+  004072:   const menuRef = useRef(null);
+  004073: 
+  004074:   useEffect(() => {
+  004075:     if (!drawer) return undefined;
+  004076:     document.body.classList.add("drawer-open");
+  004077:     const previous = document.activeElement;
+  004078:     drawerRef.current?.querySelector("a,button")?.focus();
+  004079:     const onKey = (event) => {
+  004080:       if (event.key === "Escape") setDrawer(false);
+  004081:     };
+  004082:     document.addEventListener("keydown", onKey);
+  004083:     return () => {
+  004084:       document.body.classList.remove("drawer-open");
+  004085:       document.removeEventListener("keydown", onKey);
+  004086:       previous?.focus?.();
+  004087:     };
+  004088:   }, [drawer]);
+  004089: 
+  004090:   const go = (path) => {
+  004091:     navigate(path);
+  004092:     setDrawer(false);
+  004093:     setMore(false);
+  004094:   };
+  004095:   const navButton = ([key, path], mobile = false) => <button key={path} onClick={() => go(path)} className={`nav-link ${route === path ? "active" : ""} ${mobile ? "drawer-link" : ""}`}>{t(key)}</button>;
+  004096: 
+  004097:   return <>
+  004098:     <header className="topbar"><div className="topbar-inner">
+  004099:       <button className="brand" onClick={() => go("/command-center")} aria-label={`${t("brand")} — ${t("brandFull")}`}><span className="brand-mark">N</span><span><strong>{t("brand")}</strong><small>{t("brandFull")}</small></span></button>
+  004100:       <nav className="desktop-nav" aria-label="menu">{PRIMARY_NAV.map((item) => navButton(item))}<div className="more-wrap"><button className={`nav-link nav-button ${MORE_NAV.some(([, path]) => path === route) ? "active" : ""}`} onClick={() => setMore((value) => !value)}>{t("more")} <span className="caret">⌄</span></button>{more ? <div className="dropdown" onMouseLeave={() => setMore(false)}>{MORE_NAV.map((item) => navButton(item))}</div> : null}</div></nav>
+  004101:       <div className="header-actions"><Badge tone="success">{t("live")}</Badge><button className="icon-button" onClick={() => patch({ lang: lang === "ar" ? "en" : "ar" })}><Icon name="globe"/><span className="action-text">{lang === "ar" ? "English" : "العربية"}</span></button><button ref={menuRef} className="icon-button mobile-menu" onClick={() => setDrawer(true)} aria-expanded={drawer}><Icon name="menu"/></button></div>
+  004102:     </div></header>
+  004103:     {drawer ? <div className="drawer-layer" data-dir={state.lang === "ar" ? "rtl" : "ltr"}><button className="drawer-backdrop" onClick={() => setDrawer(false)} aria-label="close"/><aside ref={drawerRef} className="drawer" role="dialog" aria-modal="true"><div className="drawer-head"><div className="brand"><span className="brand-mark">N</span><span><strong>{t("brand")}</strong><small>{t("brandFull")}</small></span></div><button className="icon-button" onClick={() => setDrawer(false)}><Icon name="close"/></button></div><div className="drawer-trial"><span>{t("commercialNotice")}</span></div><nav className="drawer-nav">{PRIMARY_NAV.map((item) => navButton(item, true))}<div className="drawer-separator">{t("more")}</div>{MORE_NAV.map((item) => navButton(item, true))}
+>>004104:             <PortalLogoutButton/>
+  004105:           </nav></aside></div> : null}
+  004106:   </>;
+  004107: }
+  004108: 
+  004109: function ContextStrip() {
+  004110:   const { state, patch } = useDecision();
+  004111:   const { t, lang } = useTranslate();
+  004112:   const setMarket = (market) => patch({ market, symbol: ASSETS.find((asset) => asset.market === market)?.symbol || state.symbol });
+  004113:   return <div className="context-shell"><div className="context-strip" data-testid="context-strip">
+  004114:     <label><span>{t("market")}</span><select value={state.market} onChange={(event) => setMarket(event.target.value)}>{MARKETS.map((market) => <option value={market} key={market}>{marketLabel(market, lang)}</option>)}</select></label>
+  004115:     <label><span>{t("asset")}</span><select value={state.symbol} onChange={(event) => patch({ symbol: event.target.value })}>{ASSETS.filter((asset) => asset.market === state.market).map((asset) => <option value={asset.symbol} key={asset.symbol}>{assetName(asset, lang)} · {asset.symbol}</option>)}</select></label>
+  004116:     <label><span>{t("timeframe")}</span><select value={state.timeframe} onChange={(event) => patch({ timeframe: event.target.value })}>{TIMEFRAMES.map((timeframe) => <option key={timeframe}>{timeframe}</option>)}</select></label>
+  004117:     <label><span>{t("readingType")}</span><select value={state.mode} onChange={(event) => patch({ mode: event.target.value })}><option value="investment">{t("investment")}</option><option value="speculative">{t("speculative")}</option></select></label>
+  004118:     <label><span>{t("viewLevel")}</span><select value={state.view} onChange={(event) => patch({ view: event.target.value })}><option value="beginner">{t("beginner")}</option><option value="professional">{t("professional")}</option></select></label>
+  004119:   </div></div>;
+  004120: }
+  004121: 
+  004122: function LegalModal() {
+  004123:   const { accepted, acceptLegal } = useDecision();
+  004124:   const { t } = useTranslate();
+  004125:   if (accepted) return null;
+  004126:   return <div className="modal-layer"><div className="modal-backdrop"/><div className="modal" role="dialog" aria-modal="true"><div className="modal-head"><h2>{t("legalTitle")}</h2></div><div className="modal-body"><p>{t("legalBody")}</p><div className="modal-actions"><button className="button primary" onClick={acceptLegal}>{t("accept")}</button></div></div></div></div>;
+  004127: }
+  004128: 
+  004129: function ContextSummary() {
+  004130:   const { state } = useDecision();
+  004131:   const { t, lang } = useTranslate();
+  004132:   return <div className="context-summary"><Badge>{marketLabel(state.market, lang)}</Badge><Badge tone="muted">{assetName(findAsset(state.symbol), lang)}</Badge><Badge tone="muted">{state.timeframe}</Badge><Badge tone="muted">{t(state.mode)}</Badge><Badge tone="muted">{t(state.view)}</Badge></div>;
+  004133: }
+  004134: 
+  004135: function qualityRadar(quality, t) {
+  004136:   return {
+  004137:     labels: [t("dataQuality"), "TDL", t("momentum"), "NMP", t("macro"), t("readiness")],
+  004138:     values: [
+  004139:       quality?.decisionQuality,
+  004140:       quality?.alignmentScore,
+  004141:       quality?.cciValue === null ? null : Math.min(100, Math.abs(quality.cciValue)),
+  004142:       quality?.nmp?.status === "AVAILABLE" ? 100 : 0,
+  004143:       quality?.usdPressureScore === null ? null : Math.max(0, 100 - Math.min(100, Math.abs(quality.usdPressureScore))),
+  004144:       quality?.confirmationScore
+  004145:     ]
+  004146:   };
+  004147: }
+  004148: 
+  004149: function CommandCenterPage() {
+  004150:   const { state } = useDecision();
+  004151:   const { navigate } = useNavigation();
+  004152:   const { t, lang } = useTranslate();
+  004153: 
+  004154:   const quality = useQuality(state.symbol, state.timeframe, state.mode);
+  004155: 
+  004156:   const universe = useMarketUniverse(
+  004157:     state.timeframe
+  004158:   );
+  004159: 
+  004160:   const completed = useCompletedDecisions();
+  004161:   const newsEvents = useNewsEvents(state.symbol, lang);
+  004162: 
+  004163:   if (quality.status === "loading") {
+  004164:     return <EmptyState type="loading"/>;
+  004165:   }
+  004166: 
+  004167:   if (quality.status === "error") {
+  004168:     return (
+  004169:       <EmptyState
+  004170:         type="error"
+  004171:         onRetry={quality.retry}
+  004172:       />
+  004173:     );
+  004174:   }
+  004175: 
+  004176:   const value = quality.value;
+  004177:   const radar = qualityRadar(value, t);
+  004178:   const watchlist = readJsonStorage(

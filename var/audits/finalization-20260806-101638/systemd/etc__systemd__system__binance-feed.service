@@ -1,0 +1,17 @@
+[Unit]
+Description=Empire Core - Binance Live Feed
+After=network.target
+
+[Service]
+User=root
+WorkingDirectory=/opt/empire-core/feeds
+Environment="BINANCE_SYMBOLS=BTCUSDT,ETHUSDT"
+Environment="BINANCE_KLINE_INTERVAL=1m"
+Environment="BACKEND_API=http://127.0.0.1:9001"
+ExecStart=/opt/empire-core/backend/venv/bin/python /opt/empire-core/feeds/binance_ws.py
+Restart=on-failure
+RestartSec=5
+LimitNOFILE=4096
+
+[Install]
+WantedBy=multi-user.target

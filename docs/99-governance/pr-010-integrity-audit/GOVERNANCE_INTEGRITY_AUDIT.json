@@ -1,0 +1,285 @@
+{
+  "schema_version": "1.0",
+  "document": "NDSP Governance Integrity Audit",
+  "generated_at": "2026-07-31T13:55:58.181593+00:00",
+  "source_commit": "a0e9747605555d689cd5656d98e4cea0156204fb",
+  "scope": "docs/99-governance",
+  "audited_sequence": "PR-004 through PR-009",
+  "runtime_changes": "none",
+  "validation": "PASS",
+  "status": "GOVERNANCE_INTEGRITY_VERIFIED",
+  "summary": {
+    "package_count": 6,
+    "file_count": 31,
+    "total_bytes": 250933,
+    "missing_paths": 0,
+    "invalid_json_files": 0,
+    "failed_packages": 0
+  },
+  "packages": [
+    {
+      "pr": "PR-004",
+      "directory": "pr-004-runtime-dependency-map",
+      "title": "Runtime Dependency Map",
+      "primary_artifact": "FINAL_RUNTIME_DEPENDENCY_MAP.json",
+      "path": "pr-004-runtime-dependency-map",
+      "status": "PASS",
+      "file_count": 8,
+      "total_bytes": 33915,
+      "primary_artifact_sha256": "579336a09ee02b81a26ee6070decff87f83c96e9e6735c09e23ab670f5d84464",
+      "files": [
+        {
+          "path": "FINAL_RUNTIME_DEPENDENCY_MAP.csv",
+          "size_bytes": 4622,
+          "sha256": "b9ba89c8888975d492fa944adb3cbbf18b21baf7fed5eb50e5fa491d55b6600d",
+          "json_valid": true
+        },
+        {
+          "path": "FINAL_RUNTIME_DEPENDENCY_MAP.json",
+          "size_bytes": 8991,
+          "sha256": "579336a09ee02b81a26ee6070decff87f83c96e9e6735c09e23ab670f5d84464",
+          "json_valid": true
+        },
+        {
+          "path": "PR-004-CONFIGURATION-EVIDENCE-APPENDIX.md",
+          "size_bytes": 751,
+          "sha256": "7ed45e294f88da84da1b6dc88c059a98bb8e1dda598a5ff05c9e28b66533903f",
+          "json_valid": true
+        },
+        {
+          "path": "PR-004-FINAL-RUNTIME-DEPENDENCY-MAP.md",
+          "size_bytes": 3013,
+          "sha256": "615c6306ecd526ebc235964f8dfa6d4c40c29c3589b5a234bc85940c526ced22",
+          "json_valid": true
+        },
+        {
+          "path": "PR-004-NON-CANONICAL-COMPONENT-EDGES.md",
+          "size_bytes": 1352,
+          "sha256": "54b9afba7decaab9c32e08a927f5caa4c5726bfdb75c5009ee8b33ef656ab475",
+          "json_valid": true
+        },
+        {
+          "path": "PR004_CONFIGURATION_EVIDENCE_APPENDIX.csv",
+          "size_bytes": 12331,
+          "sha256": "e298fe17149c122fcf2ee46d67cbc1b4a3f1f1a007b9874b340a13f5b81f4e08",
+          "json_valid": true
+        },
+        {
+          "path": "PR004_FINAL_SHA256SUMS.txt",
+          "size_bytes": 732,
+          "sha256": "56a6cdc6aed36f7807ecce032c1e5e6d6359addc1ee84fa3ac6f01efdc8fab18",
+          "json_valid": true
+        },
+        {
+          "path": "PR004_NON_CANONICAL_COMPONENT_EDGES.csv",
+          "size_bytes": 2123,
+          "sha256": "e9f31a6bd3c32e504efae4cb9e47381ed0d5c4a5c6c48444771ce383b78de607",
+          "json_valid": true
+        }
+      ]
+    },
+    {
+      "pr": "PR-005",
+      "directory": "pr-005-runtime-ownership-map",
+      "title": "Runtime Ownership Map",
+      "primary_artifact": "FINAL_RUNTIME_OWNERSHIP_MAP.json",
+      "path": "pr-005-runtime-ownership-map",
+      "status": "PASS",
+      "file_count": 5,
+      "total_bytes": 17959,
+      "primary_artifact_sha256": "11009cf78d6ce22629098db8f172beed92647dc6eaf24cd120350c6a6fca44cb",
+      "files": [
+        {
+          "path": "FINAL_RUNTIME_OWNERSHIP_MAP.csv",
+          "size_bytes": 4504,
+          "sha256": "8d1b91d956282ceb8b5a5484d7f5b85c5ff83ad042110b913305ba20b9586088",
+          "json_valid": true
+        },
+        {
+          "path": "FINAL_RUNTIME_OWNERSHIP_MAP.json",
+          "size_bytes": 9195,
+          "sha256": "11009cf78d6ce22629098db8f172beed92647dc6eaf24cd120350c6a6fca44cb",
+          "json_valid": true
+        },
+        {
+          "path": "PR-005-FINAL-RUNTIME-OWNERSHIP-MAP.md",
+          "size_bytes": 2437,
+          "sha256": "4cc1e61d8abe0cbd6d1a41fdfb17a56dd052132e2724b259cd51281f3a6e95d3",
+          "json_valid": true
+        },
+        {
+          "path": "PR-005-OWNERSHIP-REVIEW-NOTES.md",
+          "size_bytes": 1423,
+          "sha256": "73e60b36fde0f25841261345f4021c83509cad5949361eb76554ecb3122e3590",
+          "json_valid": true
+        },
+        {
+          "path": "PR005_FINAL_SHA256SUMS.txt",
+          "size_bytes": 400,
+          "sha256": "3cf11a934eabd5f01c67c99139eed63d23333a6468cceb652ecd2e4fbb13b29a",
+          "json_valid": true
+        }
+      ]
+    },
+    {
+      "pr": "PR-006",
+      "directory": "pr-006-network-exposure-map",
+      "title": "Network Exposure Map",
+      "primary_artifact": "FINAL_NETWORK_EXPOSURE_MAP.json",
+      "path": "pr-006-network-exposure-map",
+      "status": "PASS",
+      "file_count": 5,
+      "total_bytes": 98032,
+      "primary_artifact_sha256": "4d672f5fd5313bc9ca3ab5cda21f0a89934b81ab6ecbb3cdd6ea620cae90fdc9",
+      "files": [
+        {
+          "path": "FINAL_NETWORK_EXPOSURE_MAP.csv",
+          "size_bytes": 23975,
+          "sha256": "7c26c071caf42f810b58439d5e71261deff474167cb6f1c2d9c218389fc676d4",
+          "json_valid": true
+        },
+        {
+          "path": "FINAL_NETWORK_EXPOSURE_MAP.json",
+          "size_bytes": 59904,
+          "sha256": "4d672f5fd5313bc9ca3ab5cda21f0a89934b81ab6ecbb3cdd6ea620cae90fdc9",
+          "json_valid": true
+        },
+        {
+          "path": "PR-006-FINAL-NETWORK-EXPOSURE-MAP.md",
+          "size_bytes": 11706,
+          "sha256": "1cc5348d68c32f4d0d332a2ddd966bf13805bf3e52bfcdca4692a5035b8f0de9",
+          "json_valid": true
+        },
+        {
+          "path": "PR-006-NETWORK-EXPOSURE-REVIEW-NOTES.md",
+          "size_bytes": 2043,
+          "sha256": "1f058bc3a47b23dbb561b50f683004a41c3a57ebe0b582227d8ed6451ec0f42e",
+          "json_valid": true
+        },
+        {
+          "path": "PR006_FINAL_SHA256SUMS.txt",
+          "size_bytes": 404,
+          "sha256": "912343a0bc7c681ac702c5fd1ec5d9ce6d36bd830c49cfa830f38ce78c9b23ff",
+          "json_valid": true
+        }
+      ]
+    },
+    {
+      "pr": "PR-007",
+      "directory": "pr-007-noncanonical-ownership",
+      "title": "Noncanonical Ownership Review",
+      "primary_artifact": "FINAL_NONCANONICAL_OWNERSHIP_MAP.json",
+      "path": "pr-007-noncanonical-ownership",
+      "status": "PASS",
+      "file_count": 5,
+      "total_bytes": 84624,
+      "primary_artifact_sha256": "5239677f1cdf01ad470167a5b0865378ae4d36e70ccc2aabe194d4b478a35b15",
+      "files": [
+        {
+          "path": "FINAL_NONCANONICAL_OWNERSHIP_MAP.csv",
+          "size_bytes": 22632,
+          "sha256": "e481dce7e08878cb9d6aa348e33d38fc64778798cc377d7441b27bb50b67a43e",
+          "json_valid": true
+        },
+        {
+          "path": "FINAL_NONCANONICAL_OWNERSHIP_MAP.json",
+          "size_bytes": 45555,
+          "sha256": "5239677f1cdf01ad470167a5b0865378ae4d36e70ccc2aabe194d4b478a35b15",
+          "json_valid": true
+        },
+        {
+          "path": "PR-007-NONCANONICAL-OWNERSHIP.md",
+          "size_bytes": 13586,
+          "sha256": "b5a7503aec83afd11812a1ae4495f7b392a7761c2e46891a3bfdbb520427a6e1",
+          "json_valid": true
+        },
+        {
+          "path": "PR-007-REVIEW-NOTES.md",
+          "size_bytes": 2456,
+          "sha256": "b8f29c1e74a1bb41137bc6d22f51b741154eb14e422e9adbd7cd156b74946c26",
+          "json_valid": true
+        },
+        {
+          "path": "PR007_SHA256SUMS.txt",
+          "size_bytes": 395,
+          "sha256": "fff6a0c5447456930293c8080cf1097f3191591079e2df097e12a6f9bd1fcd55",
+          "json_valid": true
+        }
+      ]
+    },
+    {
+      "pr": "PR-008",
+      "directory": "pr-008-governance-closure",
+      "title": "Governance Closure",
+      "primary_artifact": "PR-008-COMMIT-MANIFEST.json",
+      "path": "pr-008-governance-closure",
+      "status": "PASS",
+      "file_count": 4,
+      "total_bytes": 8053,
+      "primary_artifact_sha256": "6f9934ec7bd8f2f08418be0bb2aafdf4d0d9a13e4c982c1f36b31d5d88761966",
+      "files": [
+        {
+          "path": "PR-008-COMMIT-MANIFEST.json",
+          "size_bytes": 4310,
+          "sha256": "6f9934ec7bd8f2f08418be0bb2aafdf4d0d9a13e4c982c1f36b31d5d88761966",
+          "json_valid": true
+        },
+        {
+          "path": "PR-008-GOVERNANCE-CLOSURE-SUMMARY.md",
+          "size_bytes": 1881,
+          "sha256": "f79f561cec5f27d917435d8c358d6aabd0568b2c56c663eb3231a40ba7f800df",
+          "json_valid": true
+        },
+        {
+          "path": "PR-008-MERGE-CHECKLIST.md",
+          "size_bytes": 1573,
+          "sha256": "c98ca6928449e8c6e5b5e7795cebf6a5ad1d76421f93ed5dfb1117a4fa065267",
+          "json_valid": true
+        },
+        {
+          "path": "PR008_SHA256SUMS.txt",
+          "size_bytes": 289,
+          "sha256": "461c32071120d50c9e1b4b5e87b875ab368dc17e2bd6b08876ff071f08bf4b21",
+          "json_valid": true
+        }
+      ]
+    },
+    {
+      "pr": "PR-009",
+      "directory": "pr-009-governance-index",
+      "title": "Governance Index",
+      "primary_artifact": "GOVERNANCE_INDEX.json",
+      "path": "pr-009-governance-index",
+      "status": "PASS",
+      "file_count": 4,
+      "total_bytes": 8350,
+      "primary_artifact_sha256": "06ef7c192129729f1d0573179572ad20f5b6adfe2992e5707ee3d00a79b18da8",
+      "files": [
+        {
+          "path": "CHANGELOG.md",
+          "size_bytes": 1213,
+          "sha256": "f2f053972f6156f0c90c4c04a0f2749c25e26706a92fcf86bf4a0a6e3f18391d",
+          "json_valid": true
+        },
+        {
+          "path": "GOVERNANCE_INDEX.json",
+          "size_bytes": 4246,
+          "sha256": "06ef7c192129729f1d0573179572ad20f5b6adfe2992e5707ee3d00a79b18da8",
+          "json_valid": true
+        },
+        {
+          "path": "PR009_SHA256SUMS.txt",
+          "size_bytes": 243,
+          "sha256": "3d2e13eaf697e3bc1c768156f278d9f29ce5d2828fbfb0b6e979d2166f2c7f8b",
+          "json_valid": true
+        },
+        {
+          "path": "README.md",
+          "size_bytes": 2648,
+          "sha256": "4ecc188133d7cf05e1d0da70536e364bfb4cc7973420be2c505dfccd3d3fbc0b",
+          "json_valid": true
+        }
+      ]
+    }
+  ]
+}

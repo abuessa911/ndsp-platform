@@ -1,0 +1,81 @@
+00135:             state, score, evidence = "BLOCKED", 0, f"scenario_state={scenario_state}"
+00136:         else:
+00137:             state, score, evidence = "UNDER_MONITORING", 60, f"scenario_state={scenario_state}"
+00138:     else:
+00139:         state, score, evidence = "UNKNOWN", 0, "no projection rule"
+00140:     return state, score, evidence, public, evidence
+00141: 
+00142: 
+00143: def attach_governance_projection(payload: Any) -> Any:
+00144:     if not isinstance(payload, dict):
+00145:         return payload
+00146:     try:
+00147:         layer_registry = _load(LAYER_REGISTRY)
+00148:         cap_registry = _load(CAP_REGISTRY)
+00149:         runtime, fresh = _evidence()
+00150:         runtime_by_id = {str(item.get("id")): item for item in runtime.get("capabilities") or []}
+00151:         layers = []
+00152:         for item in layer_registry.get("layers") or []:
+00153:             state, score, evidence, detail_visibility, public_summary = _layer_state(str(item.get("id")), payload)
+00154:             layers.append({
+00155:                 "id": item.get("id"), "canonical_name": item.get("canonical_name"),
+00156:                 "name_ar": item.get("name_ar"), "name_en": item.get("name_en"), "family": item.get("family"),
+00157:                 "state": state, "state_ar": STATE_AR.get(state, state), "score": score,
+00158:                 "blocking": bool(item.get("blocking")), "public_visibility": item.get("public_visibility"),
+00159:                 "binding_mode": "PUBLIC_CONTRACT_PROJECTION", "evidence": evidence,
+00160:                 "detail_visibility": detail_visibility, "public_summary": public_summary,
+00161:             })
+00162: 
+00163:         capabilities = []
+00164:         for item in cap_registry.get("capabilities") or []:
+00165:             capability_id = str(item.get("capability_id"))
+00166:             name = str(item.get("canonical_name"))
+00167:             runtime_item = runtime_by_id.get(capability_id, {})
+00168:             state = str(runtime_item.get("runtime_state") or "NOT_INSTALLED")
+00169:             if not fresh and runtime_item:
+00170:                 state = "EVIDENCE_STALE"
+00171:             capabilities.append({
+00172:                 "id": capability_id, "canonical_name": name, "name_ar": CAPABILITY_NAMES_AR.get(name, name),
+00173:                 "domain": item.get("domain"), "criticality": item.get("criticality"), "decision_authority": False,
+00174:                 "fail_policy": item.get("fail_policy"), "dependencies": item.get("dependencies") or [],
+00175:                 "implementation_status": item.get("implementation_status"),
+00176:                 "installed": bool(runtime_item.get("installed")), "operational_ready": bool(runtime_item.get("operational_ready")),
+00177:                 "runtime_state": state, "runtime_state_ar": STATE_AR.get(state, state),
+00178:                 "functional_probe_status": runtime_item.get("functional_probe_status"),
+00179:                 "functional_probe_detail": runtime_item.get("functional_probe_detail"),
+00180:                 "runtime_binding": runtime_item.get("runtime_binding"),
+00181:                 "activation_blockers": runtime_item.get("activation_blockers") or [],
+00182:                 "evidence_strength": runtime_item.get("evidence_strength"),
+00183:                 "evidence_checked_at": runtime_item.get("checked_at"),
+00184:                 "exposure_state": "EXPOSED_IN_PUBLIC_GOVERNANCE",
+00185:             })
+00186: 
+00187:         payload["governance_projection_version"] = VERSION
+00188:         payload["capability_runtime_evidence_version"] = runtime.get("evidence_version") or EVIDENCE_VERSION
+00189:         payload["decision_layers"] = layers
+00190:         payload["platform_capabilities"] = capabilities
+00191:         payload["governance_summary"] = {
+00192:             "layer_total": len(layers),
+00193:             "layer_bound": sum(1 for item in layers if item["state"] not in {"UNKNOWN"}),
+00194:             "layer_not_exposed": sum(1 for item in layers if item["state"] == "NOT_EXPOSED"),
+00195:             "layer_governed_redacted": sum(1 for item in layers if item["state"] == "GOVERNED_REDACTED"),
+00196:             "capability_total": len(capabilities),
+00197:             "capability_installed": sum(1 for item in capabilities if item["installed"]),
+00198:             "capability_probe_verified": sum(1 for item in capabilities if item["functional_probe_status"] == "PASS"),
+00199:             "capability_operational_ready": sum(1 for item in capabilities if item["operational_ready"]),
+00200:             "capability_live": sum(1 for item in capabilities if item["runtime_state"] == "LIVE_VERIFIED"),
+00201:             "capability_live_verified": sum(1 for item in capabilities if item["runtime_state"] == "LIVE_VERIFIED"),
+00202:             "capability_partial_live": sum(1 for item in capabilities if item["runtime_state"] == "PARTIALLY_LIVE"),
+00203:             "capability_ready_verified": sum(1 for item in capabilities if item["runtime_state"] == "READY_VERIFIED"),
+00204:             "capability_probe_failed": sum(1 for item in capabilities if item["runtime_state"] == "PROBE_FAILED"),
+00205:             "evidence_fresh": fresh,
+00206:             "evidence_checked_at": runtime.get("checked_at"),
+00207:             "activation_controller_timer_active": bool((runtime.get("summary") or {}).get("timer_active")),
+00208:             "all_items_exposed": len(layers) == 16 and len(capabilities) == 28,
+00209:             "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16",
+00210:         }
+00211:         return payload
+00212:     except Exception as exc:
+00213:         payload["governance_projection_version"] = VERSION
+00214:         payload["governance_projection_error"] = type(exc).__name__
+00215:         return payload

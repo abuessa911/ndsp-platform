@@ -1,0 +1,237 @@
+=== NDSP FRONTEND DELIVERY TRUTH V2 ===
+DATE=2026-08-08T05:37:15+02:00
+MODE=READ_ONLY
+FILES_MODIFIED=0
+SERVICES_RESTARTED=0
+BUILD_EXECUTED=0
+AUDIT=/home/nawaf511/empire-core-new/var/audits/frontend-delivery-truth-v2-20260808-053715
+
+=== 1. REQUIRED TOOLS ===
+TOOL_OK=/usr/bin/curl
+TOOL_OK=/usr/bin/python3
+TOOL_OK=/usr/bin/grep
+TOOL_OK=/usr/bin/sed
+TOOL_OK=/usr/bin/find
+TOOL_OK=/usr/bin/sort
+TOOL_OK=/usr/bin/head
+TOOL_OK=/usr/bin/cmp
+TOOL_OK=/usr/bin/sha256sum
+TOOL_OK=/usr/bin/readlink
+TOOL_OK=/usr/bin/tr
+
+=== 2. LOCAL V37 BUILD ===
+DIST_INDEX=FOUND
+DIST_INDEX=/home/nawaf511/empire-core-new/frontend/user-portal-vite/dist/index.html
+LOCAL_V37_MARKER_FILES=1
+LOCAL_V37_MARKER=PASS
+
+=== 3. PORT 3000 PROCESS ===
+PORT3000_PID=NONE
+PORT3000_PROCESS=NOT_PROVEN
+
+=== 4. FETCH PORT 3000 ===
+PORT3000_HTTP=200
+--- PORT3000 HEADERS ---
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 92
+ETag: W/"5c-E443UDrXzMSy2AqJEQteBJaFitA"
+Date: Sat, 08 Aug 2026 03:37:15 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+
+=== 5. FETCH PUBLIC HTTPS ===
+PUBLIC_HTTP=200
+--- PUBLIC HEADERS ---
+HTTP/2 200 
+server: nginx/1.24.0 (Ubuntu)
+date: Sat, 08 Aug 2026 03:37:15 GMT
+content-type: text/html
+content-length: 7759
+last-modified: Wed, 15 Jul 2026 06:08:55 GMT
+etag: "6a5723f7-1e4f"
+strict-transport-security: max-age=300
+content-security-policy-report-only: default-src 'self' https: data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' https: data: blob:; font-src 'self' https: data:; connect-src 'self' https: wss:; frame-src 'self' https:; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self' https:;
+x-content-type-options: nosniff
+referrer-policy: strict-origin-when-cross-origin
+x-ndsp-scope: public-landing
+x-ndsp-serving-root: /var/www/ndsp
+accept-ranges: bytes
+
+
+=== 6. HTML ASSET REFERENCES ===
+PORT3000_HTML=FOUND
+PORT3000_SCRIPT_COUNT=0
+PORT3000_LINK_COUNT=0
+PUBLIC_HTML=FOUND
+PUBLIC_SCRIPT_COUNT=8
+PUBLIC_SCRIPT=/assets/ndsp-mobile-pages-nav-clean.js?v=20260710_153230
+PUBLIC_SCRIPT=/assets/ndsp-single-arabic-guard-v10.js?v=20260710_164851
+PUBLIC_SCRIPT=/assets/ndsp-pages-routes-safe-v13.js?v=20260710_165834
+PUBLIC_SCRIPT=/assets/ndsp-decision-room-landing-v34.js?v=34.1
+PUBLIC_SCRIPT=/assets/ndsp-landing-content-v35.js
+PUBLIC_SCRIPT=/assets/ndsp-legal-v42.js?v=20260715
+PUBLIC_SCRIPT=/assets/ndsp-plans-v43-legacy.js?v=20260715
+PUBLIC_SCRIPT=/assets/ndsp-plans-v43.js?v=20260715
+PUBLIC_LINK_COUNT=8
+PUBLIC_LINK=/assets/ndsp-public.css
+PUBLIC_LINK=/assets/ndsp-mobile-pages-nav-clean.css?v=20260710_153230
+PUBLIC_LINK=/assets/ndsp-pages-routes-safe-v13.css?v=20260710_165834
+PUBLIC_LINK=/assets/ndsp-decision-room-landing-v34.css?v=34.1
+PUBLIC_LINK=/assets/ndsp-landing-content-v35.css
+PUBLIC_LINK=/assets/ndsp-public-access-v37.css?v=20260715_v37
+PUBLIC_LINK=/assets/ndsp-legal-v42.css?v=20260715
+PUBLIC_LINK=/assets/ndsp-plans-v43.css?v=20260715
+
+=== 7. HTML IDENTITY ===
+PORT3000_EQUALS_V37_DIST=NO
+PUBLIC_EQUALS_V37_DIST=NO
+--- SHA256 ---
+1ddec399a0fd099915ea58d3090af561340f8ee35272ed442fdbff9457d598b7  /home/nawaf511/empire-core-new/frontend/user-portal-vite/dist/index.html
+d70bbf10669eec8953fc307f563670a8f81f6bf54e378f75081621b1c73ba8c2  /home/nawaf511/empire-core-new/var/audits/frontend-delivery-truth-v2-20260808-053715/port3000.html
+7a56baa293d51bf10012d0f8e89269a4ebe06ab17274ad58a394dee0fd5badb0  /home/nawaf511/empire-core-new/var/audits/frontend-delivery-truth-v2-20260808-053715/public.html
+
+=== 8. SERVER.JS DELIVERY LOGIC ===
+SERVER_JS=NOT_PROVEN
+
+=== 9. NGINX EFFECTIVE FRONTEND CONFIG ===
+NGINX_DUMP=PASS
+206:    root /var/www/ndsp-my;
+207:    index index.html;
+234:        try_files $uri $uri/ /approved-design/index.html;
+239:        try_files $uri =404;
+244:        try_files $uri =404;
+250:        try_files $uri $uri/ /index.html;
+286:        try_files $uri $uri/ /decision-room-v31/account/index.html;
+292:        try_files /decision-room-v31/index.html =404;
+298:        try_files $uri $uri/ /decision-room-v31/index.html;
+308:        alias /var/www/ndsp-my/portal-v50/config/assets.json;
+314:        alias /var/www/ndsp-my/portal-v50/config/layers.json;
+320:        alias /var/www/ndsp-my/portal-v50/config/capabilities.json;
+330:        try_files /portal-v50/support-center-v60.html =404;
+431:        root /var/www/ndsp-my;
+432:        index index.html;
+433:        try_files $uri $uri/index.html =404;
+438:        alias /var/www/ndsp-my/assets/ndsp-telegram-v182.css;
+444:        alias /var/www/ndsp-my/assets/ndsp-telegram-v182.js;
+450:        alias /var/www/ndsp-my/assets/ndsp-telegram-entry-v182.js;
+671:        root /var/www/ndsp-my;
+672:        try_files $uri =404;
+679:        root /var/www/ndsp-my;
+680:        try_files $uri =404;
+686:        root /var/www/ndsp-my;
+688:        try_files $uri $uri/ /portal/index.html;
+703:        root /var/www/ndsp-my;
+704:        try_files /portal-next/index.html =404;
+712:        root /var/www/ndsp-my;
+713:        try_files $uri =404;
+719:        root /var/www/ndsp-my;
+720:        try_files $uri =404;
+724:        root /var/www/ndsp-my;
+725:        try_files /portal-next/index.html =404;
+741:        root /var/www/ndsp-my;
+742:        try_files /forgot-password.html =404;
+750:        root /var/www/ndsp-my;
+751:        try_files /reset-password.html =404;
+799:location ^~ /start/ { alias /var/www/ndsp-business-ops/start/; index index.html; add_header Cache-Control "no-store" always; }
+801:location ^~ /support/ { alias /var/www/ndsp-business-ops/support/; index index.html; add_header Cache-Control "no-store" always; }
+803:location ^~ /subscribe/ { alias /var/www/ndsp-business-ops/subscribe/; index index.html; add_header Cache-Control "no-store" always; }
+805:location ^~ /launch/ { alias /var/www/ndsp-business-ops/launch/; index index.html; add_header Cache-Control "no-store" always; }
+806:location = /ndsp-ops-assets/common.css { alias /var/www/ndsp-business-ops/common.css; add_header Cache-Control "public, max-age=3600" always; }
+812:    alias /var/www/ndsp-business-ops/ops-admin/;
+813:    index index.html;
+933:    try_files $uri $uri/ /owner/index.html;
+940:    try_files $uri $uri/ /admin/index.html;
+950:        root /var/www/html;
+972:    root /var/www/ndsp-admin;
+973:    index index.html;
+996:        try_files $uri =404;
+1000:        try_files $uri $uri/ /index.html;
+1059:        root /var/www/html;
+1061:        try_files $uri =404;
+1072:        try_files /register.html =404;
+1202:        root /var/www/ndsp-my;
+1203:        try_files /data/completed-decisions-v15-api.json =404;
+1213:        root /var/www/ndsp-my;
+1214:        try_files /data/completed-decisions-v16-live-adapter.json =404;
+1221:        root /var/www/ndsp-my;
+1222:        try_files /data/completed-decisions-v16-live-adapter.json =404;
+1229:        root /var/www/ndsp-my;
+1230:        try_files /data/completed-decisions-v16-live-adapter.json =404;
+1528:        root /var/www/ndsp-my;
+1529:        try_files /data/completed-decisions-v15-api.json =404;
+1539:        root /var/www/ndsp-my;
+1540:        try_files /data/completed-decisions-v16-live-adapter.json =404;
+1547:        root /var/www/ndsp-my;
+1548:        try_files /data/completed-decisions-v16-live-adapter.json =404;
+1555:        root /var/www/ndsp-my;
+1556:        try_files /data/completed-decisions-v16-live-adapter.json =404;
+1617:    server_name ndsp.app www.ndsp.app;
+1620:        root /var/www/html;
+1630:        root /var/www/html;
+1634:        try_files /reset-password.html =404;
+1660:        root /var/www/ndsp-my;
+1661:        try_files /data/completed-decisions-v15-api.json =404;
+1668:        root /var/www/ndsp-my;
+1669:        try_files /data/completed-decisions-v15-api.json =404;
+1676:        root /var/www/ndsp-my;
+1677:        try_files /data/completed-decisions-v15-api.json =404;
+1687:        root /var/www/ndsp-my;
+1688:        try_files /data/completed-decisions-v16-live-adapter.json =404;
+1695:        root /var/www/ndsp-my;
+1696:        try_files /data/completed-decisions-v16-live-adapter.json =404;
+1703:        root /var/www/ndsp-my;
+1704:        try_files /data/completed-decisions-v16-live-adapter.json =404;
+1714:    server_name ndsp.app www.ndsp.app;
+1716:    root /var/www/ndsp;
+1717:    index index.html;
+1785:        try_files /index.html =404;
+1789:        try_files $uri $uri/ /index.html;
+1796:        root /var/www/html;
+1800:        try_files /reset-password.html =404;
+1878:        root /var/www/ndsp-my;
+1879:        try_files /data/completed-decisions-v15-api.json =404;
+1889:        root /var/www/ndsp-my;
+1890:        try_files /data/completed-decisions-v16-live-adapter.json =404;
+1897:        root /var/www/ndsp-my;
+1898:        try_files /data/completed-decisions-v16-live-adapter.json =404;
+1905:        root /var/www/ndsp-my;
+1906:        try_files /data/completed-decisions-v16-live-adapter.json =404;
+
+=== 10. KNOWN FRONTEND INDEX FILES ===
+2026-08-08 05:34:40.4747293210 /home/nawaf511/empire-core-new/frontend/user-portal-vite/dist/index.html
+2026-08-08 05:34:40.1987297630 /home/nawaf511/empire-core-new/frontend/user-portal-vite/dist/market-suite/index.html
+2026-07-31 13:42:40.6700358710 /home/nawaf511/empire-core-new/frontend/user-portal-vite/index.html
+2026-07-28 05:27:55.0849095500 /home/nawaf511/empire-core-new/frontend/owner-console/index.html
+2026-07-22 08:57:31.8310632030 /home/nawaf511/empire-core-new/frontend/user-portal-vite/public/market-suite/index.html
+2026-07-19 18:40:41.0000000000 /home/nawaf511/empire-core-new/frontend/ndsp-user-portal-v50/index.html
+2026-07-19 14:47:01.4159128650 /home/nawaf511/empire-core-new/frontend/ndsp-auth-canonical-v94/login/index.html
+2026-06-25 17:31:30.3513223690 /home/nawaf511/empire-core-new/frontend/public-site/index.html
+2026-06-25 17:31:30.3513223690 /home/nawaf511/empire-core-new/frontend/public-landing/index.html
+2026-06-25 17:31:30.3473223820 /home/nawaf511/empire-core-new/frontend/admin-console/research/index.html
+2026-06-25 17:31:30.3463223850 /home/nawaf511/empire-core-new/frontend/admin-console/index.html
+
+=== 11. V37 MARKER LOCATIONS ===
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/dist/assets/index-CfJbdoKo.js
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/components/CompletedDecisionsPanelV37.jsx
+
+=== 12. CLASSIFICATION ===
+PORT3000_V37_DIST_MATCH=NO
+PUBLIC_V37_DIST_MATCH=NO
+DELIVERY_CLASSIFICATION=V37_DIST_NOT_PROVEN_AS_ACTIVE_FRONTEND
+NEXT_ACTION=IDENTIFY_EXACT_PRODUCTION_FRONTEND_ROOT
+
+=== FINAL ===
+FILES_MODIFIED=0
+SERVICES_RESTARTED=0
+BUILD_EXECUTED=0
+PORT3000_HTTP=200
+PUBLIC_HTTP=200
+PORT3000_V37_DIST_MATCH=NO
+PUBLIC_V37_DIST_MATCH=NO
+FINAL_RESULT=PASS_READ_ONLY_DIAGNOSTIC
+AUDIT=/home/nawaf511/empire-core-new/var/audits/frontend-delivery-truth-v2-20260808-053715
+REPORT=/home/nawaf511/empire-core-new/var/audits/frontend-delivery-truth-v2-20260808-053715/report.txt
+=== COMPLETE ===

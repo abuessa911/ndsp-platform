@@ -1,0 +1,157 @@
+============================================================
+=== FINALIZE NDSP REAL-DATA ARCHITECTURE ===================
+============================================================
+DATE=2026-08-07T20:48:04+02:00
+AUDIT=/home/nawaf511/empire-core-new/var/audits/real-data-architecture-final-20260807-204804
+
+1) PRECHECK REQUIRED PROJECT FILES
+PASS=/home/nawaf511/empire-core-new/backend/services/ndsp-runtime-jobs/real-data-sync/sync_real_feeds.py
+df70255d0c5b26e47c61225fe1ffde0e0c7e7cb08fefb19e887b8dba051c68bc  /home/nawaf511/empire-core-new/backend/services/ndsp-runtime-jobs/real-data-sync/sync_real_feeds.py
+PASS=/home/nawaf511/empire-core-new/backend/services/ndsp-runtime-jobs/real-data-sync/tradingview_live_calendar.py
+d435b629865801f23c9b60f142c56981cca7247c6d8e8993a6be821a9104fbff  /home/nawaf511/empire-core-new/backend/services/ndsp-runtime-jobs/real-data-sync/tradingview_live_calendar.py
+PASS=/home/nawaf511/empire-core-new/backend/services/ndsp-runtime-jobs/real-data-sync/sync_real_ledger.py
+da16a83b135ff696e4b7b94a71f1884900b9a9d1a1e923305f19fb69354088bb  /home/nawaf511/empire-core-new/backend/services/ndsp-runtime-jobs/real-data-sync/sync_real_ledger.py
+PASS=/home/nawaf511/empire-core-new/backend/services/ndsp-runtime-jobs/real-data-sync/investing_live_calendar.py
+2063f8f7c45ab00c4ca299557699f3e9e811e903d8befa8f031698840484a4f5  /home/nawaf511/empire-core-new/backend/services/ndsp-runtime-jobs/real-data-sync/investing_live_calendar.py
+PASS=/home/nawaf511/empire-core-new/backend/services/ndsp-runtime-jobs/real-data-sync/live_economic_calendar_sync.py
+556dd843fd05cdc5ea6c18562bf3601388abda52ea89bfb8aa3aa1271441ddbe  /home/nawaf511/empire-core-new/backend/services/ndsp-runtime-jobs/real-data-sync/live_economic_calendar_sync.py
+
+2) BACKUP SYSTEMD DEFINITIONS
+SYSTEMD_BACKUP=PASS
+
+3) BACKUP PROJECT BACKUP SCRIPT
+BACKUP_SCRIPT_BACKUP=PASS
+
+4) PRESERVE COMPLETE OLD DIRECTORY
+OLD_RUNTIME_BACKUP=PASS
+
+5) VERIFY OLD/NEW HASHES BEFORE RETIREMENT
+sync_real_feeds.py OLD=df70255d0c5b26e47c61225fe1ffde0e0c7e7cb08fefb19e887b8dba051c68bc NEW=df70255d0c5b26e47c61225fe1ffde0e0c7e7cb08fefb19e887b8dba051c68bc
+HASH_RESULT=PASS
+tradingview_live_calendar.py OLD=d435b629865801f23c9b60f142c56981cca7247c6d8e8993a6be821a9104fbff NEW=d435b629865801f23c9b60f142c56981cca7247c6d8e8993a6be821a9104fbff
+HASH_RESULT=PASS
+investing_live_calendar.py OLD=2063f8f7c45ab00c4ca299557699f3e9e811e903d8befa8f031698840484a4f5 NEW=2063f8f7c45ab00c4ca299557699f3e9e811e903d8befa8f031698840484a4f5
+HASH_RESULT=PASS
+live_economic_calendar_sync.py OLD=556dd843fd05cdc5ea6c18562bf3601388abda52ea89bfb8aa3aa1271441ddbe NEW=556dd843fd05cdc5ea6c18562bf3601388abda52ea89bfb8aa3aa1271441ddbe
+HASH_RESULT=PASS
+sync_real_ledger.py OLD=da16a83b135ff696e4b7b94a71f1884900b9a9d1a1e923305f19fb69354088bb NEW=da16a83b135ff696e4b7b94a71f1884900b9a9d1a1e923305f19fb69354088bb
+HASH_RESULT=PASS
+
+6) PRESERVE sync.sh INSIDE PROJECT
+COPIED=/home/nawaf511/empire-core-new/backend/services/ndsp-runtime-jobs/real-data-sync/sync.sh
+732dbf3c6fcbc8b0ca0e71a49aedddeb84ecae36fae9cd99abec288e34491589  /home/nawaf511/empire-core-new/backend/services/ndsp-runtime-jobs/real-data-sync/sync.sh
+SYNC_SH_SYNTAX=PASS
+
+7) CREATE CLEAN CANONICAL ACTIVE SERVICE FILES
+CANONICAL_ACTIVE_UNITS=PASS
+
+8) REMOVE NOW-REDUNDANT ACTIVE DROP-INS
+ACTIVE_DROPINS_REMOVED=PASS
+
+9) RETIRE UNUSED BROKEN CALENDAR UNITS
+RETIRED_UNUSED_CALENDAR_UNITS=PASS
+
+10) PATCH BACKUP SCRIPT
+BACKUP_SCRIPT_PATCHED=YES
+BACKUP_SCRIPT_SYNTAX=PASS
+
+11) DAEMON RELOAD
+DAEMON_RELOAD=PASS
+
+12) VERIFY ACTIVE EFFECTIVE EXECSTART
+
+===== ndsp-real-feeds-sync.service =====
+{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/services/ndsp-runtime-jobs/real-data-sync/sync_real_feeds.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }
+EXECSTART_RESULT=PASS
+OLD_PATH_RESULT=PASS
+
+===== ndsp-tradingview-calendar.service =====
+{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/services/ndsp-runtime-jobs/real-data-sync/tradingview_live_calendar.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }
+EXECSTART_RESULT=PASS
+OLD_PATH_RESULT=PASS
+
+===== ndsp-portal-real-data-ledger.service =====
+{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/services/ndsp-runtime-jobs/real-data-sync/sync_real_ledger.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }
+EXECSTART_RESULT=PASS
+OLD_PATH_RESULT=PASS
+
+13) VERIFY RETIRED SERVICES ARE GONE
+ndsp-live-economic-calendar.service LoadState=not-found
+RETIRED_RESULT=PASS
+ndsp-investing-calendar.service LoadState=not-found
+RETIRED_RESULT=PASS
+
+14) RUN ACTIVE SERVICES
+
+===== START ndsp-real-feeds-sync.service =====
+START_RC=0
+Result=success
+ExecMainStatus=0
+RUN_RESULT=PASS
+
+===== START ndsp-tradingview-calendar.service =====
+START_RC=0
+Result=success
+ExecMainStatus=0
+RUN_RESULT=PASS
+
+===== START ndsp-portal-real-data-ledger.service =====
+START_RC=0
+Result=success
+ExecMainStatus=0
+RUN_RESULT=PASS
+
+15) VERIFY ACTIVE TIMERS
+
+===== ndsp-real-feeds-sync.timer =====
+enabled
+active
+● ndsp-real-feeds-sync.timer - Run NDSP Real Feeds Sync every 5 minutes
+     Loaded: loaded (/etc/systemd/system/ndsp-real-feeds-sync.timer; enabled; preset: enabled)
+     Active: active (waiting) since Fri 2026-08-07 16:45:56 CEST; 4h 2min ago
+    Trigger: Fri 2026-08-07 20:53:11 CEST; 4min 47s left
+   Triggers: ● ndsp-real-feeds-sync.service
+
+Warning: some journal files were not opened due to insufficient permissions.
+TIMER_RESULT=PASS
+
+===== ndsp-tradingview-calendar.timer =====
+enabled
+active
+● ndsp-tradingview-calendar.timer - Run NDSP TradingView Calendar every 5 minutes
+     Loaded: loaded (/etc/systemd/system/ndsp-tradingview-calendar.timer; enabled; preset: enabled)
+     Active: active (waiting) since Fri 2026-08-07 16:45:56 CEST; 4h 2min ago
+    Trigger: Fri 2026-08-07 20:53:12 CEST; 4min 47s left
+   Triggers: ● ndsp-tradingview-calendar.service
+
+Warning: some journal files were not opened due to insufficient permissions.
+TIMER_RESULT=PASS
+
+16) VERIFY OUTPUT
+SIZE=32864 MTIME=2026-08-07 20:48:13.324158122 +0200 OWNER=nawaf511:nawaf511 MODE=644 PATH=/var/www/ndsp-my/data/economic-calendar.json
+SIZE=700 MTIME=2026-08-07 20:48:24.422130778 +0200 OWNER=nawaf511:nawaf511 MODE=644 PATH=/var/www/ndsp-my/data/data-quality.json
+SIZE=3966 MTIME=2026-08-07 20:48:24.421130781 +0200 OWNER=root:root MODE=644 PATH=/var/www/ndsp-my/data/completed-decisions.json
+
+17) VERIFY NO ACTIVE SYSTEMD OLD PATH
+SYSTEMD_OLD_PATH_RESULT=PASS
+
+18) VERIFY PROJECT OLD PATH REFERENCES
+PROJECT_OLD_PATH_RESULT=PASS
+
+19) RETIRE OLD HOME RUNTIME DIRECTORY
+OLD_DIRECTORY_RETIRED=PASS
+
+20) FINAL POST-RETIREMENT CHECK
+OLD_DIRECTORY_ABSENT=PASS
+
+21) FAILED NDSP UNITS — INFORMATION ONLY
+NONE
+
+22) FINAL RESULT
+FINAL_RESULT=PASS
+AUDIT=/home/nawaf511/empire-core-new/var/audits/real-data-architecture-final-20260807-204804
+ROLLBACK_SOURCE=/home/nawaf511/empire-core-new/var/audits/real-data-architecture-final-20260807-204804/retired-original-directory
+REPORT=/home/nawaf511/empire-core-new/var/audits/real-data-architecture-final-20260807-204804/report.txt
+============================================================
+=== END ====================================================
+============================================================

@@ -26,9 +26,9 @@ Masking applies only to public customer-facing UI and public sanitized APIs.
 These may remain visible in customer-facing UI when needed:
 
 1. TDL / منطق البعد الزمني
-2. NMP / نقطة التقاء نواف
+2. NMP / NMP
 3. Devil's Advocate / محامي الشيطان
-4. Nawaf Golden Alignment / إشارة نواف الذهبية
+4. Golden Signal / الإشارة الذهبية
 
 ## Owner Internal Rule
 

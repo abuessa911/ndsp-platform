@@ -1,0 +1,222 @@
+/* ============================================================
+ NDSP Public Landing — Empire Core / NDIP Color Alignment
+ Only color/theme override. No content deletion.
+ ============================================================ */
+
+:root{
+ --empire-bg-0:#05080d !important;
+ --empire-bg-1:#080d14 !important;
+ --empire-bg-2:#0b111a !important;
+ --empire-panel:#0d1520 !important;
+ --empire-panel-2:#111b28 !important;
+ --empire-border:#1d2a38 !important;
+ --empire-border-strong:#27384b !important;
+
+ --empire-text:#e5e7eb !important;
+ --empire-muted:#94a3b8 !important;
+ --empire-dim:#64748b !important;
+
+ --empire-cyan:#22d3ee !important;
+ --empire-blue:#38bdf8 !important;
+ --empire-green:#22c55e !important;
+ --empire-emerald:#10b981 !important;
+
+ --empire-warn:#f59e0b !important;
+}
+
+/* الصفحة العامة */
+html,
+body{
+ background:
+ radial-gradient(circle at 18% 8%, rgba(34,211,238,.085), transparent 32%),
+ radial-gradient(circle at 82% 12%, rgba(34,197,94,.055), transparent 34%),
+ linear-gradient(180deg, var(--empire-bg-0), var(--empire-bg-1) 48%, #05070b) !important;
+ color:var(--empire-text) !important;
+}
+
+/* تقليل اللون الذهبي العام وتحويله للـ Empire cyan */
+.text-yellow-300,
+.text-yellow-400,
+.text-yellow-500,
+.text-amber-300,
+.text-amber-400,
+.text-amber-500,
+[class*="text-yellow"],
+[class*="text-amber"]{
+ color:var(--empire-cyan) !important;
+ text-shadow:0 0 18px rgba(34,211,238,.13) !important;
+}
+
+/* الحدود القديمة الذهبية */
+.border-yellow-300,
+.border-yellow-400,
+.border-yellow-500,
+.border-amber-300,
+.border-amber-400,
+.border-amber-500,
+[class*="border-yellow"],
+[class*="border-amber"]{
+ border-color:rgba(34,211,238,.42) !important;
+}
+
+/* الخلفيات الذهبية */
+.bg-yellow-300,
+.bg-yellow-400,
+.bg-yellow-500,
+.bg-amber-300,
+.bg-amber-400,
+.bg-amber-500,
+[class*="bg-yellow"],
+[class*="bg-amber"]{
+ background:linear-gradient(135deg, rgba(34,211,238,.96), rgba(56,189,248,.78)) !important;
+ color:#031018 !important;
+}
+
+/* الهيدر والناف */
+header,
+nav{
+ background:rgba(5,8,13,.82) !important;
+ border-color:rgba(29,42,56,.95) !important;
+ backdrop-filter:blur(18px) !important;
+}
+
+header a,
+nav a{
+ color:var(--empire-muted) !important;
+}
+
+header a:hover,
+nav a:hover{
+ color:var(--empire-cyan) !important;
+}
+
+/* العناوين */
+h1,h2,h3,h4,h5,h6{
+ color:var(--empire-text) !important;
+}
+
+p,li,small,span{
+ border-color:var(--empire-border);
+}
+
+/* النصوص الثانوية */
+[class*="text-zinc-400"],
+[class*="text-zinc-500"],
+[class*="text-neutral-400"],
+[class*="text-neutral-500"],
+[class*="text-slate-400"],
+[class*="text-slate-500"],
+[class*="text-gray-400"],
+[class*="text-gray-500"]{
+ color:var(--empire-muted) !important;
+}
+
+/* الكروت والبلوكات */
+section[class*="border"],
+div[class*="border"],
+article[class*="border"],
+aside[class*="border"]{
+ border-color:var(--empire-border) !important;
+ background:
+ linear-gradient(180deg, rgba(17,27,40,.84), rgba(8,13,20,.94)) !important;
+ box-shadow:
+ 0 18px 60px rgba(0,0,0,.36),
+ inset 0 1px 0 rgba(255,255,255,.035) !important;
+}
+
+/* CTA والأزرار */
+a[class*="rounded"],
+button[class*="rounded"],
+a[class*="border"],
+button[class*="border"]{
+ border-color:rgba(34,211,238,.36) !important;
+}
+
+a:hover,
+button:hover{
+ border-color:rgba(34,211,238,.75) !important;
+ box-shadow:0 0 26px rgba(34,211,238,.18) !important;
+}
+
+/* زر التجربة أو التسجيل */
+a[href*="register"],
+a[href*="trial"],
+a[href*="login"],
+button[type="submit"]{
+ border-color:rgba(34,211,238,.62) !important;
+}
+
+/* الأخضر يبقى للـ live/status */
+.text-green-300,
+.text-green-400,
+.text-emerald-300,
+.text-emerald-400,
+[class*="text-green"],
+[class*="text-emerald"]{
+ color:var(--empire-green) !important;
+}
+
+/* SVG والرادار القديم: تحويل الذهبي إلى cyan */
+svg [stroke="#D4AF37"],
+svg [stroke="#d4af37"],
+svg [stroke="#F4D77D"],
+svg [stroke="#f4d77d"],
+svg [stroke="#FACC15"],
+svg [stroke="#facc15"],
+svg [stroke="#F59E0B"],
+svg [stroke="#f59e0b"],
+svg [stroke="gold"],
+svg [stroke="yellow"]{
+ stroke:rgba(34,211,238,.76) !important;
+}
+
+svg [fill="#D4AF37"],
+svg [fill="#d4af37"],
+svg [fill="#F4D77D"],
+svg [fill="#f4d77d"],
+svg [fill="#FACC15"],
+svg [fill="#facc15"],
+svg [fill="#F59E0B"],
+svg [fill="#f59e0b"],
+svg [fill="gold"],
+svg [fill="yellow"]{
+ fill:rgba(34,211,238,.82) !important;
+}
+
+/* لو الصفحة تستخدم CSS variables ذهبية قديمة */
+*{
+ --gold:#22d3ee !important;
+ --gold2:#38bdf8 !important;
+ --gold-hi:#67e8f9 !important;
+ --yellow:#22d3ee !important;
+ --line:rgba(34,211,238,.24) !important;
+}
+
+/* Scrollbar */
+*{
+ scrollbar-color:rgba(34,211,238,.38) #070b11 !important;
+}
+
+::-webkit-scrollbar{
+ width:8px;
+ height:8px;
+}
+
+::-webkit-scrollbar-track{
+ background:#070b11 !important;
+}
+
+::-webkit-scrollbar-thumb{
+ background:rgba(34,211,238,.32) !important;
+ border-radius:999px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+ background:rgba(34,211,238,.52) !important;
+}
+
+/* Selection */
+::selection{
+ background:rgba(34,211,238,.24) !important;
+ color:var(--empire-text) !important;
+}

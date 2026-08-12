@@ -1,0 +1,10 @@
+[Unit]
+Description=Run NDSP Live Data Refresh every 2 minutes
+
+[Timer]
+OnBootSec=30s
+OnUnitActiveSec=2min
+Unit=ndsp-refresh-live-data.service
+
+[Install]
+WantedBy=timers.target

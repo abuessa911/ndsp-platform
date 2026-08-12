@@ -1,0 +1,15 @@
+[Unit]
+Description=Decision Support Platform Elite Trial Expiry Worker
+After=network.target ndip-api-new.service
+
+[Service]
+Type=simple
+User=nawaf511
+WorkingDirectory=/home/nawaf511/empire-core-new/backend
+EnvironmentFile=/home/nawaf511/empire-core-new/backend/.env
+ExecStart=/home/nawaf511/empire-core-new/backend/venv/bin/python -m app.workers.elite_trial_expiry_worker
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

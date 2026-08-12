@@ -1,0 +1,128 @@
+=== SUMMARY ===
+deleted=46
+modified=9
+untracked=7333
+report=var/audits/post-governance-20260806-125552
+
+=== DELETED FILES ===
+apps/NDSP_APPS_ONLY_GOVERNANCE.md
+apps/ndsp-governance-bridge/layers/NDSP_OWNER_INTERNAL_16_LAYER_REGISTRY.json
+apps/ndsp-governance-bridge/layers/NDSP_OWNER_INTERNAL_16_LAYER_REGISTRY.md
+apps/ndsp-governance-bridge/NDSP_LAYER_VISIBILITY_OWNER_INTERNAL_POLICY.json
+apps/ndsp-governance-bridge/NDSP_LAYER_VISIBILITY_OWNER_INTERNAL_POLICY.md
+apps/ndsp-governance-bridge/policies/admin_snapshot/audit_admin_v6.py
+apps/ndsp-governance-bridge/policies/audit_logger.py
+apps/ndsp-governance-bridge/policies/decision_active_governance.py
+apps/ndsp-governance-bridge/policies/elite_trial_capacity.py
+apps/ndsp-governance-bridge/policies/feature_gate.py
+apps/ndsp-governance-bridge/policies/governance_runtime.py
+apps/ndsp-governance-bridge/policies/ndsp_alert_audit.py
+apps/ndsp-governance-bridge/policies/ndsp_governance_mode.py
+apps/ndsp-governance-bridge/policies/tdl_v2_policy.py
+apps/ndsp-governance-bridge/server.mjs
+backend/architecture/API_CONTRACTS.md
+backend/architecture/GOVERNANCE_RULES.md
+backend/docs/API_CONTRACT.md
+docs/99-governance/pr-002-canonical-layer-map/CANONICAL_LAYER_SOURCE_MAP.csv
+docs/99-governance/pr-002-canonical-layer-map/CANONICAL_LAYER_SOURCE_MAP.json
+docs/99-governance/pr-002-canonical-layer-map/owners.json
+docs/99-governance/pr-002-canonical-layer-map/PR-002-CANONICAL-LAYER-SOURCE-MAP.md
+docs/99-governance/pr-002-canonical-layer-map/SHA256SUMS.txt
+docs/99-governance/pr-003-canonical-service-map/CANONICAL_SERVICE_MAP.csv
+docs/99-governance/pr-003-canonical-service-map/CANONICAL_SERVICE_MAP_FINAL.csv
+docs/99-governance/pr-003-canonical-service-map/CANONICAL_SERVICE_MAP_FINAL.json
+docs/99-governance/pr-003-canonical-service-map/CANONICAL_SERVICE_MAP.json
+docs/99-governance/pr-003-canonical-service-map/PR-003-CANONICAL-SERVICE-MAP-FINAL.md
+docs/99-governance/pr-003-canonical-service-map/PR-003-CANONICAL-SERVICE-MAP.md
+docs/99-governance/pr-003-canonical-service-map/PR003_FINAL_SHA256SUMS.txt
+docs/NDSP_GOVERNANCE_DOCUMENTATION.md
+DSP_FINAL_TRIAL_POLICY.md
+DSP_NMP_V1_POLICY.md
+frontend/NDSP_APPS_ONLY_GOVERNANCE.md
+.github/workflows/ndsp-project-validator.yml
+governance/CANONICAL_GOVERNANCE.md
+governance/GOVERNANCE_PACKAGE_INDEX.md
+governance/NDSP_FINAL_GOVERNANCE_ALL_POLICIES_LOCKED.md
+governance/NDSP_FINAL_GOVERNANCE_EXCLUSIONS_AND_ADOPTIONS.md
+ndsp_governance/NDSP_CURRENT_ADOPTIONS_MASTER.md
+ndsp_governance/NDSP_LAYER_NAME_MASKING_POLICY.json
+ndsp_governance/NDSP_LAYER_NAME_MASKING_POLICY.md
+ndsp_governance/NDSP_SAAS_PACKAGES_POLICY.json
+ndsp_governance/NDSP_SAAS_PACKAGES_POLICY.md
+NDSP_UI_CHANGE_GOVERNANCE_FINAL.md
+research/nmp-lab/NMP_RESEARCH_LAB_POLICY.md
+
+=== MODIFIED FILES ===
+apps/ndsp-raw-cot-gateway/app.py
+backend/architecture/CHANGELOG.md
+backend/architecture/registry/SERVICE_REGISTRY_V2.md
+backend/data/raw_cot/current_disaggregated_futures_only_f_disagg.txt
+backend/data/raw_cot/current_tff_futures_only_FinFutWk.txt
+backend/data/raw_cot/raw_cot_manifest.json
+frontend/user-portal-vite/package.json
+frontend/user-portal-vite/package-lock.json
+README.md
+
+=== TRACKED CHANGES BY TOP DIRECTORY ===
+     16 apps
+     13 docs
+      8 backend
+      5 ndsp_governance
+      4 governance
+      3 frontend
+      1 research
+      1 README.md
+      1 NDSP_UI_CHANGE_GOVERNANCE_FINAL.md
+      1 .github
+      1 DSP_NMP_V1_POLICY.md
+      1 DSP_FINAL_TRIAL_POLICY.md
+
+=== UNTRACKED BY TOP DIRECTORY ===
+  25012 var
+   4311 governance
+   2903 docs
+    853 backups
+    113 backend
+     63 frontend
+     39 .github
+     31 .ndsp-evidence
+     29 scripts
+     17 archive
+      3 apps
+      1 tools
+      1 rebuild_ndsp_ui.sh
+      1 rebuild_ndsp_density_nav.sh
+      1 project-detection-report-20260801T162640Z.txt
+      1 project-detection-report-20260801T162616Z.txt
+      1 project-detection-report-20260801T155748Z.txt
+      1 NDSP_USER_PORTAL_FINAL_EXPERIENCE_V1_ONE_SCRIPT.sh
+      1 .ndsp_protected_assets
+      1 ndsp_phase0_baseline.sh
+      1 NDSP_CODEX_V18_P8_D12_ARABIC_MOBILE_DECISION_ROOM_FIX_PROMPT.txt
+      1 integrations
+      1 install-server-tooling.sh
+      1 fix_nav_js_only.sh
+      1 fix_duplicate_header.sh
+      1 detect-project-stack.sh
+      1 build-cot-gov-handoff.sh
+      1 audit-cot-logic.sh
+
+=== MODIFIED DIFF STAT ===
+ README.md                                          |  14 +-
+ apps/ndsp-raw-cot-gateway/app.py                   |  15 +-
+ backend/architecture/CHANGELOG.md                  | 179 -------
+ .../architecture/registry/SERVICE_REGISTRY_V2.md   |  12 -
+ ...current_disaggregated_futures_only_f_disagg.txt | 539 +++++++++++----------
+ .../raw_cot/current_tff_futures_only_FinFutWk.txt  | 182 ++++---
+ backend/data/raw_cot/raw_cot_manifest.json         |  10 +-
+ frontend/user-portal-vite/package-lock.json        | 369 +++++---------
+ frontend/user-portal-vite/package.json             |  11 +-
+ 9 files changed, 525 insertions(+), 806 deletions(-)
+
+=== GOVERNANCE CHECK ===
+validation=PASS
+
+=== HEAD ===
+d9d5c06 governance: enforce discover and reuse before creation
+9860067 governance: enforce discover and reuse before creation
+d93227e feat: add governed COT direction engine and UI readiness

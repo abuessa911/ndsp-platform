@@ -1,0 +1,5 @@
+gate	status	evidence
+SAFETY_CONTRACT	PASS	Explicit confirmation, protected production names, required tools and canonical paths validated.
+SOURCE_PROVENANCE	PASS	Buildable source was proven without treating dist/server.js as editable source. Origin=ACTIVE_RELEASE_SOURCE_PACKAGE; package=/opt/ndsp-auth-core-clean/releases/20260727_200610-auth-recovery-true-source-fix-v7.
+PRODUCTION_DB_READ_ONLY	PASS	The active DB identity was matched locally and only public schema metadata was dumped read-only as postgres; archive schemas and all table data were excluded.
+STAGING_RESOURCE_POLICY	PASS	Only staging-scoped resources are new or explicitly reset; production resources are excluded.

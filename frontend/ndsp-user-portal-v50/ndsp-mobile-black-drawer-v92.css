@@ -1,0 +1,130 @@
+/*
+ * NDSP Mobile Black Drawer Guard V92
+ *
+ * Purpose:
+ * Prevent the closed mobile drawer/backdrop from covering the application.
+ */
+
+@media (max-width: 900px) {
+    html,
+    body {
+        min-height: 100% !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    body {
+        display: block !important;
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+    }
+
+    #app,
+    #app > .appShell,
+    .appShell,
+    .appShell > .main,
+    main.main {
+        visibility: visible !important;
+        opacity: 1 !important;
+        filter: none !important;
+        clip: auto !important;
+        clip-path: none !important;
+    }
+
+    #app {
+        display: block !important;
+        position: relative !important;
+        z-index: 1 !important;
+        min-height: 100vh !important;
+    }
+
+    .appShell {
+        display: block !important;
+        position: relative !important;
+        inset: auto !important;
+        width: 100% !important;
+        max-width: none !important;
+        min-width: 0 !important;
+        margin: 0 !important;
+        transform: none !important;
+    }
+
+    /*
+     * Closed is the safe default.
+     * The drawer becomes visible only through an explicit open state.
+     */
+    #drawer.drawer {
+        position: fixed !important;
+        inset: 0 !important;
+        z-index: 2147483000 !important;
+
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+
+        transition:
+            opacity 160ms ease,
+            visibility 160ms ease !important;
+    }
+
+    #drawer.drawer.ndsp-open,
+    #drawer.drawer.open,
+    #drawer.drawer.is-open,
+    #drawer.drawer.active,
+    #drawer.drawer.show,
+    #drawer.drawer[data-open="true"],
+    #drawer.drawer[aria-hidden="false"] {
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+    }
+
+    #drawer.drawer[aria-hidden="true"] {
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+    }
+
+    #drawer.drawer[aria-hidden="true"] .drawerBackdrop {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+    }
+
+    #drawer.drawer[aria-hidden="true"] .drawerPanel {
+        visibility: hidden !important;
+        pointer-events: none !important;
+    }
+
+    #drawer.drawer.ndsp-open .drawerBackdrop,
+    #drawer.drawer.open .drawerBackdrop,
+    #drawer.drawer.is-open .drawerBackdrop,
+    #drawer.drawer.active .drawerBackdrop,
+    #drawer.drawer.show .drawerBackdrop,
+    #drawer.drawer[data-open="true"] .drawerBackdrop,
+    #drawer.drawer[aria-hidden="false"] .drawerBackdrop {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+    }
+
+    #drawer.drawer.ndsp-open .drawerPanel,
+    #drawer.drawer.open .drawerPanel,
+    #drawer.drawer.is-open .drawerPanel,
+    #drawer.drawer.active .drawerPanel,
+    #drawer.drawer.show .drawerPanel,
+    #drawer.drawer[data-open="true"] .drawerPanel,
+    #drawer.drawer[aria-hidden="false"] .drawerPanel {
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+    }
+
+    body:not(.ndsp-drawer-open) #drawer.drawer:not(.ndsp-open):not(.open):not(.is-open):not(.active):not(.show):not([data-open="true"]) {
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+    }
+}

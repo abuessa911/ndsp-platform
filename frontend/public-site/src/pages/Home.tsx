@@ -1,3 +1,4 @@
+import { DecisionFlow } from "../components/DecisionFlow";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
@@ -65,7 +66,6 @@ export default function Home() {
 
   return (
     <div className={`min-h-screen bg-background ${isRtl ? "rtl" : "ltr"}`}>
-      {/* Warning Banner */}
       <div className="bg-amber-950/80 border-b border-amber-700/40 px-4 py-2.5">
         <div className="max-w-7xl mx-auto flex items-start gap-2">
           <AlertTriangle className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
@@ -73,10 +73,8 @@ export default function Home() {
         </div>
       </div>
 
-      {/* News Ticker */}
       <NewsTicker />
 
-      {/* Navbar */}
       <header className="sticky top-0 z-40 border-b border-border/50 bg-background/80 backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
@@ -114,10 +112,9 @@ export default function Home() {
       </header>
 
       <main>
-        {/* Hero */}
         <section className="relative py-20 px-4 hero-grid overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent pointer-events-none" />
-          <div className="max-w-4xl mx-auto text-center relative">
+          <div className="max-w-5xl mx-auto text-center relative">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 mb-8 animate-fade-in-up">
               <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
               <span className="text-sm text-primary font-medium">{t("hero.badge")}</span>
@@ -152,6 +149,10 @@ export default function Home() {
               {t("hero.description")}
             </p>
 
+            <div className="my-12 w-full animate-fade-in-up" style={{ animationDelay: "0.28s" }}>
+              <DecisionFlow />
+            </div>
+
             <div
               className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up"
               style={{ animationDelay: "0.3s" }}
@@ -176,7 +177,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Status Cards */}
         <section className="py-12 px-4 border-y border-border/50 bg-card/30">
           <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="flex items-start gap-4 p-5 rounded-xl bg-card border border-border">
@@ -209,7 +209,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Welcome */}
         <section className="py-16 px-4">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-2xl font-bold text-foreground mb-6">{t("welcome.title")}</h2>
@@ -233,7 +232,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Seats */}
         <section className="py-16 px-4 bg-card/20">
           <div className="max-w-5xl mx-auto">
             <h2 className="text-2xl font-bold text-foreground text-center mb-3">{t("seats.title")}</h2>
@@ -258,7 +256,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Plans */}
         <section id="plans" className="py-20 px-4">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-bold text-foreground text-center mb-4">{t("plans.title")}</h2>
@@ -349,7 +346,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* About / FAQ */}
         <section id="about" className="py-16 px-4 bg-card/20">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-2xl font-bold text-foreground text-center mb-3">{t("about.title")}</h2>
@@ -392,7 +388,6 @@ export default function Home() {
         </section>
       </main>
 
-      {/* Footer */}
       <footer className="border-t border-border/50 py-8 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
@@ -406,7 +401,6 @@ export default function Home() {
         </div>
       </footer>
 
-      {/* Trial Modal */}
       {showTrial && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
           <div className="bg-card border border-border rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto">

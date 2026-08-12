@@ -5,6 +5,14 @@ import urllib.parse
 import urllib.request
 from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
 
+
+from backend.platform.canonical_v1.live_public_providers import (
+    build_live_overview,
+    read_authorized_core,
+    read_market_context,
+    read_public_evidence,
+)
+
 PORT = 9002
 
 ASSETS = [
@@ -171,6 +179,63 @@ class Handler(BaseHTTPRequestHandler):
                 "port": PORT,
                 "updated_at": now_iso(),
             })
+
+        if path == "/api/public/overview":
+            return self._send(
+                200,
+                build_live_overview(),
+            )
+
+        if path == "/api/public/core":
+            core_result = read_authorized_core()
+
+            if not core_result.available or core_result.payload is None:
+                return self._send(
+                    503,
+                    {
+                        "ok": False,
+                        "error": "public_core_temporarily_unavailable",
+                    },
+                )
+
+            return self._send(
+                200,
+                core_result.payload,
+            )
+
+        if path == "/api/public/market-context":
+            market_result = read_market_context()
+
+            if not market_result.available or market_result.payload is None:
+                return self._send(
+                    503,
+                    {
+                        "ok": False,
+                        "error": "public_market_context_temporarily_unavailable",
+                    },
+                )
+
+            return self._send(
+                200,
+                market_result.payload,
+            )
+
+        if path == "/api/public/evidence":
+            evidence_result = read_public_evidence()
+
+            if not evidence_result.available or evidence_result.payload is None:
+                return self._send(
+                    503,
+                    {
+                        "ok": False,
+                        "error": "public_evidence_temporarily_unavailable",
+                    },
+                )
+
+            return self._send(
+                200,
+                evidence_result.payload,
+            )
 
         if path == "/api/trial/status":
             return self._send(200, trial_status())

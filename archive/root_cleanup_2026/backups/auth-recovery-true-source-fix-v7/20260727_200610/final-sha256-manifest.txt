@@ -1,0 +1,7 @@
+38cffd1f42fad634eaca69d31510eaf86ae4dcaeb6641b1b954d3116d5eb30ce  /opt/ndsp-auth-core-clean/releases/20260727_200610-auth-recovery-true-source-fix-v7/ui/src/main.tsx
+437267a3b8650516e5aa83555c1503bae59cc90352c55ac55728f8cfa7a248ec  /opt/ndsp-auth-core-clean/releases/20260727_200610-auth-recovery-true-source-fix-v7/ui-dist/index.html
+b42f589fcbc15906272b6999b713d008cc170ece73860ed038e4153972c6c3bc  /home/nawaf511/empire-core-new/backend/password_reset_gateway/server.js
+914d20dd7a4d2d557137b958d6c3d71da7d6430f0007b0313141f59a40787148  /var/www/ndsp-my/forgot-password.html
+95b17fe76a0e1f1dc6eef34e84b2cc1cf2fa4d7808b40e6f116a764d89387735  /var/www/ndsp-my/reset-password.html
+4c97b5dcdc9094abe4ffbdb0647bf79109d8170736b6e49991ef30569552ed3c  /home/nawaf511/empire-core-new/frontend/auth-recovery/manifest.json
+88799c4add67baf072090bdd605154d30683fb5fc62da6d8ad70bee245457568  /etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf

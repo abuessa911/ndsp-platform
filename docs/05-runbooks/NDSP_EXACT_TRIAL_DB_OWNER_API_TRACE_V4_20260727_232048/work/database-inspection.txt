@@ -1,0 +1,40 @@
+DATABASE=/home/nawaf511/empire-core-new/backend/services/ndsp-launch-control-v167/data/launch_control.sqlite3
+TARGET_EMAIL=she20232030@gmail.com
+SQLITE_INTEGRITY_CHECK=ok
+TABLE_COUNT=5
+TABLES=audit_log,legal_consents,seat_reservations,settings,trial_clock
+
+TABLE=audit_log
+TABLE_ROW_COUNT=0
+TABLE_COLUMNS=id,actor_email,action,target_email,details_json,created_at
+IDENTITY_OR_STATUS_COLUMNS=id,actor_email,target_email,created_at
+
+TABLE=legal_consents
+TABLE_ROW_COUNT=1
+TABLE_COLUMNS=id,user_id,email,consent_version,terms_accepted,privacy_accepted,disclaimer_accepted,accepted_at,source_ip,user_agent
+IDENTITY_OR_STATUS_COLUMNS=id,user_id,email,user_agent
+CANDIDATE_TABLE_ROW={"table": "legal_consents", "row": {"id": 1, "user_id": "a88988e1-e1d4-49f3-9451-f97b83e92f73", "email": "studying1991@hotmail.com", "user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5.2 Mobile/15E148 Safari/604.1"}}
+
+TABLE=seat_reservations
+TABLE_ROW_COUNT=0
+TABLE_COLUMNS=token,email,created_at,expires_at
+IDENTITY_OR_STATUS_COLUMNS=email,created_at,expires_at
+
+TABLE=settings
+TABLE_ROW_COUNT=1
+TABLE_COLUMNS=key,value,updated_at
+IDENTITY_OR_STATUS_COLUMNS=updated_at
+CANDIDATE_TABLE_ROW={"table": "settings", "row": {"updated_at": "2026-07-27T17:47:30.872539Z"}}
+
+TABLE=trial_clock
+TABLE_ROW_COUNT=3
+TABLE_COLUMNS=user_key,user_id,email,trial_started_at,trial_ends_at,duration_days,source,source_reference,created_at,updated_at,is_internal,entitlement_status,plan,suspended,notes
+IDENTITY_OR_STATUS_COLUMNS=user_key,user_id,email,trial_started_at,trial_ends_at,created_at,updated_at,entitlement_status,plan
+STATUS_DISTRIBUTION={"table": "trial_clock", "column": "entitlement_status", "values": [{"value": "trial", "count": 3}]}
+CANDIDATE_TABLE_ROW={"table": "trial_clock", "row": {"user_key": "id:f5414ed3-39fe-4491-8247-a3620a75b824", "user_id": "f5414ed3-39fe-4491-8247-a3620a75b824", "email": "shla511511+ndsptrial20260719_122049@gmail.com", "trial_started_at": "2026-07-19T10:21:47Z", "trial_ends_at": "2026-08-04T10:21:47Z", "created_at": "2026-07-19T10:43:16.689857Z", "updated_at": "2026-07-27T17:47:31.280383Z", "entitlement_status": "trial", "plan": "trial"}}
+CANDIDATE_TABLE_ROW={"table": "trial_clock", "row": {"user_key": "id:a88988e1-e1d4-49f3-9451-f97b83e92f73", "user_id": "a88988e1-e1d4-49f3-9451-f97b83e92f73", "email": "studying1991@hotmail.com", "trial_started_at": "2026-07-22T08:26:44.089331Z", "trial_ends_at": "2026-08-07T08:26:44.089331Z", "created_at": "2026-07-22T08:26:44.089331Z", "updated_at": "2026-07-22T08:26:44.089331Z", "entitlement_status": "trial", "plan": "trial"}}
+CANDIDATE_TABLE_ROW={"table": "trial_clock", "row": {"user_key": "id:846d91d7-9dbc-4ca2-98d9-e861c5d0e350", "user_id": "846d91d7-9dbc-4ca2-98d9-e861c5d0e350", "email": "nawaf.barrak.911@gmail.com", "trial_started_at": "2026-07-23T20:54:11.330183Z", "trial_ends_at": "2026-08-08T20:54:11.330183Z", "created_at": "2026-07-23T20:54:11.330183Z", "updated_at": "2026-07-27T17:47:31.200223Z", "entitlement_status": "trial", "plan": "trial"}}
+
+EXACT_TARGET_HIT_COUNT=0
+CANDIDATE_TABLE_COUNT=5
+ACTIVE_LIKE_SAMPLE_ROW_COUNT=0

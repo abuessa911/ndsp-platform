@@ -1,0 +1,3 @@
+/api/completed-decisions
+/api/completed-decisions/history?limit=100
+/api/completed-decisions/history/integrity

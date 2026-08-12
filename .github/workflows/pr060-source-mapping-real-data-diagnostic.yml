@@ -1,0 +1,43 @@
+name: PR-060 Full Coverage Recalculation
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-source-mapping-real-data-diagnostic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Fetch base branch
+        run: git fetch --no-tags origin main:refs/remotes/origin/main
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run PR-060 tests
+        run: node --test scripts/governance/tests/pr060-source-mapping-real-data-diagnostic.test.cjs
+
+      - name: Validate PR-060 recalculation
+        run: python3 scripts/governance/validate_pr060_full_coverage_recalculation.py
+
+      - name: Validate capability governance
+        run: |
+          python3 scripts/governance/validate_full_capability_ui.py \
+            --base-ref origin/main

@@ -1,0 +1,41 @@
+============================================================
+NDSP — SOURCE AUTHENTICATION CONTROLS UNIFICATION V1
+DATE=2026-07-27T08:42:27+02:00
+MODE=SOURCE_ONLY_BUILD_ATOMIC_DEPLOY_ROLLBACK
+PORTAL_SOURCE=/home/nawaf511/Downloads/NDSP_COMMERCIAL_FRONTEND_LIVE_V1
+PORTAL_LIVE=/var/www/ndsp-my/portal
+AUTH_CURRENT=/opt/ndsp-auth-core-clean/current
+AUTH_SERVICE=ndsp-auth-core-clean
+============================================================
+
+== 0) Explicit confirmation and privileges ==
+EXPLICIT_CONFIRMATION=YES
+SUDO_GATE=PASS
+
+== 1) Preconditions ==
+PRECONDITION_GATE=PASS
+AUTH_OLD_TARGET=/opt/ndsp-auth-core-clean/releases/20260724_050053-final-ux-v31
+
+== 2) Secure backup ==
+BACKUP_GATE=PASS
+BACKUP=/home/nawaf511/empire-core-new/backups/source-auth-controls-v1/20260727_084227
+
+== 3) Shared database verification — no database changes ==
+AUTH_DATABASE_FINGERPRINT=cab8350b3d0c0daeb734bc34f68db23339f5e0dedfec54111b5657e7025fbc88
+CORE_DATABASE_FINGERPRINT=cab8350b3d0c0daeb734bc34f68db23339f5e0dedfec54111b5657e7025fbc88
+ERROR_EXIT=1
+ERROR_LINE=276
+
+ROLLBACK_BEGIN=YES
+PORTAL_SOURCE_ROLLBACK=PASS
+ROLLBACK_COMPLETE=YES
+FINAL_STATUS=FAILED_AND_ROLLED_BACK
+REPORT=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_SOURCE_AUTH_CONTROLS_V1_20260727_084227.md
+ERROR_EXIT=1
+ERROR_LINE=276
+
+ROLLBACK_BEGIN=YES
+PORTAL_SOURCE_ROLLBACK=PASS
+ROLLBACK_COMPLETE=YES
+FINAL_STATUS=FAILED_AND_ROLLED_BACK
+REPORT=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_SOURCE_AUTH_CONTROLS_V1_20260727_084227.md

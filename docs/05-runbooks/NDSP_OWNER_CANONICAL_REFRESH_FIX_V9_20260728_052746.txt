@@ -1,0 +1,116 @@
+
+============================================================
+NDSP — OWNER USERS CANONICAL SOURCE + REFRESH FIX V9
+============================================================
+DATE=2026-07-28T05:27:46+02:00
+HOST=vmi2934783.contaboserver.net
+PROJECT=/home/nawaf511/empire-core-new
+TARGET_EMAIL=she20232030@gmail.com
+DB_NAME=ndsp_auth
+UNIT=ndsp-admin-ui-proxy.service
+PORT=9023
+LIVE_OWNER=/var/www/ndsp-my/owner/index.html
+LIVE_ADMIN=/var/www/ndsp-my/admin/index.html
+CANONICAL_FILE=/home/nawaf511/empire-core-new/frontend/owner-console/index.html
+REPORT=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_OWNER_CANONICAL_REFRESH_FIX_V9_20260728_052746.txt
+BACKUP=/home/nawaf511/empire-core-new/backups/owner-canonical-refresh-fix-v9/20260728_052746
+
+============================================================
+0) EXPLICIT CONFIRMATION AND PRECONDITIONS
+============================================================
+EXPLICIT_CONFIRMATION=YES
+SUDO_GATE=PASS
+PRECONDITION_GATE=PASS
+
+============================================================
+1) AUTHORITATIVE ABSENCE GATES
+============================================================
+AUTHORITATIVE_DB_TARGET_COUNT_BEFORE=0
+ADMIN_KEY_LOADED=YES
+ADMIN_KEY_PRINTED=NO
+OFFICIAL_API_HTTP_BEFORE=200
+OFFICIAL_API_BYTES_BEFORE=934
+OFFICIAL_API_OK=True
+OFFICIAL_API_SOURCE=PostgreSQL / ndsp_auth / public.users
+OFFICIAL_API_USER_COUNT=4
+OFFICIAL_API_TARGET_ABSENT_BEFORE=YES
+AUTHORITATIVE_ABSENCE_GATES=PASS
+
+============================================================
+2) LIVE FILE IDENTITY AND BACKUP
+============================================================
+LIVE_OWNER_SHA256_BEFORE=ad9d8d2f29dadb56c4434e15f8b5ec079ea865efd93bb1ec896e99ae3797f360
+LIVE_ADMIN_SHA256_BEFORE=ad9d8d2f29dadb56c4434e15f8b5ec079ea865efd93bb1ec896e99ae3797f360
+CANONICAL_SOURCE_PREEXISTED=NO
+BACKUP_GATE=PASS
+
+============================================================
+3) RESTART ONLY AUTHORITATIVE OWNER API SERVICE
+============================================================
+PORT_9023_PID_BEFORE=460722
+PORT_9023_CMDLINE_BEFORE=/usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_ui_proxy.cjs 
+PORT_9023_PID_AFTER=2012377
+OWNER_API_SYSTEMD_RESTART_GATE=PASS
+
+============================================================
+4) ESTABLISH GOVERNED CANONICAL SOURCE
+============================================================
+STAGED_SOURCE_SHA256=91d6ec9d0d5999b1f35cba604c5376032c0a166c80d2b64077927b389a560c7b
+STAGED_SOURCE_GATE=PASS
+
+============================================================
+5) INSTALL CANONICAL SOURCE FIRST
+============================================================
+CANONICAL_SOURCE_SHA256=91d6ec9d0d5999b1f35cba604c5376032c0a166c80d2b64077927b389a560c7b
+CANONICAL_SOURCE_ESTABLISHED=YES
+
+============================================================
+6) ATOMIC DEPLOY TO OWNER AND ADMIN
+============================================================
+LIVE_OWNER_SHA256_AFTER=91d6ec9d0d5999b1f35cba604c5376032c0a166c80d2b64077927b389a560c7b
+LIVE_ADMIN_SHA256_AFTER=91d6ec9d0d5999b1f35cba604c5376032c0a166c80d2b64077927b389a560c7b
+ATOMIC_DEPLOY_GATE=PASS
+
+============================================================
+7) POST-DEPLOY AND AUTHORITATIVE VERIFICATION
+============================================================
+OFFICIAL_API_HTTP_AFTER=200
+OFFICIAL_API_BYTES_AFTER=934
+OFFICIAL_API_OK=True
+OFFICIAL_API_SOURCE=PostgreSQL / ndsp_auth / public.users
+OFFICIAL_API_USER_COUNT=4
+OFFICIAL_API_TARGET_ABSENT_AFTER=YES
+AUTHORITATIVE_DB_TARGET_COUNT_AFTER=0
+PUBLIC_OWNER_HTTP=302
+POST_DEPLOY_VERIFICATION=PASS
+
+============================================================
+8) FINAL RESULT
+============================================================
+TARGET_EMAIL=she20232030@gmail.com
+AUTHORITATIVE_DB_TARGET_COUNT_BEFORE=0
+AUTHORITATIVE_DB_TARGET_COUNT_AFTER=0
+OFFICIAL_API_TARGET_PRESENT=NO
+CANONICAL_SOURCE_FILE=/home/nawaf511/empire-core-new/frontend/owner-console/index.html
+CANONICAL_SOURCE_SHA256=91d6ec9d0d5999b1f35cba604c5376032c0a166c80d2b64077927b389a560c7b
+LIVE_OWNER_FILE=/var/www/ndsp-my/owner/index.html
+LIVE_ADMIN_FILE=/var/www/ndsp-my/admin/index.html
+SOURCE_LIVE_HASH_MATCH=YES
+REFRESH_BUTTON_ENABLED=YES
+REFRESH_BUTTON_SOURCE_BOUND=YES
+AUTHORITATIVE_REFRESH_ENDPOINT=/api/admin-ui/users
+AUTHENTICATED_FETCH=YES
+CACHE_MODE=NO_STORE
+STALE_USER_STORAGE_PURGE=SELECTIVE
+TARGET_ABSENCE_BROWSER_GATE=ENABLED
+DATABASE_CHANGED=NO
+DATABASE_DELETE_EXECUTED=NO
+SOURCE_CHANGED=YES
+LIVE_OWNER_CHANGED=YES
+LIVE_ADMIN_CHANGED=YES
+NGINX_CHANGED=NO
+OWNER_API_9023_RESTARTED=YES
+OTHER_SERVICES_RESTARTED=NO
+BACKUP=/home/nawaf511/empire-core-new/backups/owner-canonical-refresh-fix-v9/20260728_052746
+REPORT=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_OWNER_CANONICAL_REFRESH_FIX_V9_20260728_052746.txt
+FINAL_STATUS=NDSP_OWNER_CANONICAL_REFRESH_FIX_V9_DEPLOYED_AND_VERIFIED

@@ -1,0 +1,2198 @@
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_ui_proxy.cjs
+CONTEXT_BLOCK_COUNT=13
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_ui_proxy.cjs|LINES=1-13
+000001: const express = require('express')
+000002: const fs = require('fs')
+000003: const https = require('https')
+000004: const jwt = require('jsonwebtoken')
+000005: const { Pool } = require('pg')
+000006: 
+000007: function loadEnvFile(file) {
+000008:   try {
+000009:     if (!fs.existsSync(file)) return
+000010:     const txt = fs.readFileSync(file, 'utf8')
+000011:     for (const line of txt.split(/\r?\n/)) {
+000012:       const x = line.trim()
+000013:       if (!x || x.startsWith('#') || !x.includes('=')) continue
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_ui_proxy.cjs|LINES=23-54
+000023: loadEnvFile('/etc/ndsp/ndsp-db.env')
+000024: loadEnvFile('/etc/ndsp/ndsp-telegram.env')
+000025: loadEnvFile('/etc/ndsp/ndsp-session.env')
+000026: loadEnvFile('/home/nawaf511/empire-core-new/backend/.env')
+000027: loadEnvFile('/home/nawaf511/empire-core-new/backend/auth_api/.env')
+000028: 
+000029: const PORT = Number(process.env.NDSP_ADMIN_UI_PROXY_PORT || 9023)
+000030: const DATABASE_URL = process.env.DATABASE_URL || process.env.NDSP_DATABASE_URL
+000031: 
+000032: [REDACTED_SENSITIVE_LINE]
+000033: [REDACTED_SENSITIVE_LINE]
+000034: [REDACTED_SENSITIVE_LINE]
+000035: [REDACTED_SENSITIVE_LINE]
+000036: [REDACTED_SENSITIVE_LINE]
+000037: [REDACTED_SENSITIVE_LINE]
+000038: ].filter(Boolean)))
+000039: 
+000040: const pool = new Pool(DATABASE_URL ? { connectionString: DATABASE_URL } : undefined)
+000041: const app = express()
+000042: app.use(express.json({ limit: '1mb' }))
+000043: 
+000044: function send(res, code, body) {
+000045:   res.status(code).json(body)
+000046: }
+000047: 
+000048: function auth(req) {
+000049: [REDACTED_SENSITIVE_LINE]
+000050: [REDACTED_SENSITIVE_LINE]
+000051:   if (!token) return null
+000052: [REDACTED_SENSITIVE_LINE]
+000053: [REDACTED_SENSITIVE_LINE]
+000054:   }
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_ui_proxy.cjs|LINES=109-165
+000109:       }
+000110:     }
+000111:   }
+000112:   return { source_table:null, rows:[] }
+000113: }
+000114: 
+000115: async function updateByIdentity(table, statusValue, id, email, paymentId) {
+000116:   if (!(await tableExists(table))) return { table, updated:0, rows:[] }
+000117: 
+000118:   const cols = await columns(table)
+000119:   const statusCol = ['status','payment_status','state'].find(c => cols.has(c))
+000120:   if (!statusCol) return { table, updated:0, rows:[], skipped:'NO_STATUS_COLUMN' }
+000121: 
+000122:   const vals = [statusValue]
+000123:   const where = []
+000124: 
+000125:   function add(cond, val) {
+000126:     vals.push(String(val || ''))
+000127:     where.push(cond.replace('?', `$${vals.length}`))
+000128:   }
+000129: 
+000130:   if (id && cols.has('id')) add('id::text = ?', id)
+000131:   if (id && cols.has('user_id')) add('user_id::text = ?', id)
+000132:   if (paymentId && cols.has('payment_id')) add('payment_id::text = ?', paymentId)
+000133:   if (email && cols.has('email')) add('lower(email) = lower(?)', email)
+000134:   if (email && cols.has('user_email')) add('lower(user_email) = lower(?)', email)
+000135: 
+000136:   if (!where.length) return { table, updated:0, rows:[], skipped:'NO_MATCHING_IDENTITY_COLUMN' }
+000137: 
+000138:   const sql = `
+000139:     UPDATE ${table}
+000140:     SET ${statusCol} = $1
+000141:     WHERE ${where.join(' OR ')}
+000142:     RETURNING *
+000143:   `
+000144:   const r = await pool.query(sql, vals)
+000145:   return { table, updated:r.rowCount, rows:r.rows }
+000146: }
+000147: 
+000148: async function updateUserStatus(statusValue, id, email) {
+000149:   const r = await pool.query(`
+000150:     UPDATE users
+000151:     SET status=$3
+000152:     WHERE ($1::text <> '' AND id::text=$1)
+000153:        OR ($2::text <> '' AND lower(email)=lower($2))
+000154:     RETURNING id,email,role,status,plan
+000155:   `, [String(id || ''), String(email || ''), String(statusValue || '')])
+000156:   return { table:'users', updated:r.rowCount, rows:r.rows }
+000157: }
+000158: 
+000159: 
+000160: function ndspTelegramConfig() {
+000161:   const token =
+000162:     process.env.NDSP_TELEGRAM_BOT_TOKEN ||
+000163:     process.env.TELEGRAM_BOT_TOKEN ||
+000164:     process.env.TELEGRAM_TOKEN ||
+000165:     process.env.BOT_TOKEN ||
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_ui_proxy.cjs|LINES=184-214
+000184: 
+000185: function ndspTelegramRequest(method, body) {
+000186:   const cfg = ndspTelegramConfig()
+000187:   return new Promise((resolve) => {
+000188:     if (!cfg.token) return resolve({ ok:false, error:'TELEGRAM_TOKEN_MISSING' })
+000189: 
+000190:     const payload = JSON.stringify(body || {})
+000191:     const req = https.request({
+000192:       hostname: 'api.telegram.org',
+000193:       path: `/bot${cfg.token}/${method}`,
+000194:       method: 'POST',
+000195:       timeout: 8000,
+000196:       headers: {
+000197:         'Content-Type': 'application/json',
+000198:         'Content-Length': Buffer.byteLength(payload)
+000199:       }
+000200:     }, (res) => {
+000201:       let data = ''
+000202:       res.on('data', chunk => data += chunk)
+000203:       res.on('end', () => {
+000204:         try {
+000205:           resolve(JSON.parse(data))
+000206:         } catch (_) {
+000207:           resolve({ ok:false, error:'BAD_TELEGRAM_RESPONSE', statusCode:res.statusCode })
+000208:         }
+000209:       })
+000210:     })
+000211: 
+000212:     req.on('timeout', () => {
+000213:       req.destroy()
+000214:       resolve({ ok:false, error:'TELEGRAM_TIMEOUT' })
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_ui_proxy.cjs|LINES=218-258
+000218:     req.write(payload)
+000219:     req.end()
+000220:   })
+000221: }
+000222: 
+000223: 
+000224: const NDSP_ALERT_STATE_FILE = '/home/nawaf511/empire-core-new/backend/auth_api/ndsp_alert_channels_state.json'
+000225: 
+000226: function ndspReadAlertState() {
+000227:   try {
+000228:     if (!fs.existsSync(NDSP_ALERT_STATE_FILE)) {
+000229:       fs.writeFileSync(NDSP_ALERT_STATE_FILE, JSON.stringify({ in_app:true, email:true, telegram:true }, null, 2))
+000230:     }
+000231:     const raw = JSON.parse(fs.readFileSync(NDSP_ALERT_STATE_FILE, 'utf8'))
+000232:     return {
+000233:       in_app: raw.in_app !== false,
+000234:       email: raw.email !== false,
+000235:       telegram: raw.telegram !== false
+000236:     }
+000237:   } catch (_) {
+000238:     return { in_app:true, email:true, telegram:true }
+000239:   }
+000240: }
+000241: 
+000242: function ndspWriteAlertState(next) {
+000243:   const current = ndspReadAlertState()
+000244:   const merged = {
+000245:     in_app: typeof next.in_app === 'boolean' ? next.in_app : current.in_app,
+000246:     email: typeof next.email === 'boolean' ? next.email : current.email,
+000247:     telegram: typeof next.telegram === 'boolean' ? next.telegram : current.telegram
+000248:   }
+000249:   fs.writeFileSync(NDSP_ALERT_STATE_FILE, JSON.stringify(merged, null, 2))
+000250:   return merged
+000251: }
+000252: 
+000253: function ndspTelegramConfig() {
+000254:   const token =
+000255:     process.env.NDSP_TELEGRAM_BOT_TOKEN ||
+000256:     process.env.TELEGRAM_BOT_TOKEN ||
+000257:     process.env.TELEGRAM_TOKEN ||
+000258:     process.env.BOT_TOKEN ||
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_ui_proxy.cjs|LINES=265-308
+000265:     process.env.CHAT_ID ||
+000266:     ''
+000267: 
+000268:   return { token: String(token || ''), chatId: String(chatId || '') }
+000269: }
+000270: 
+000271: function ndspEmailConfigured() {
+000272:   return !!(
+000273:     (process.env.SMTP_HOST || process.env.NDSP_SMTP_HOST) &&
+000274:     (process.env.SMTP_USER || process.env.NDSP_SMTP_USER) &&
+000275:     (process.env.SMTP_PASS || process.env.NDSP_SMTP_PASS)
+000276:   )
+000277: }
+000278: 
+000279: function ndspTelegramRequest(method, body) {
+000280:   const cfg = ndspTelegramConfig()
+000281:   return new Promise((resolve) => {
+000282:     if (!cfg.token) return resolve({ ok:false, error:'TELEGRAM_TOKEN_MISSING' })
+000283: 
+000284:     const payload = JSON.stringify(body || {})
+000285:     const req = https.request({
+000286:       hostname: 'api.telegram.org',
+000287:       path: `/bot${cfg.token}/${method}`,
+000288:       method: 'POST',
+000289:       timeout: 10000,
+000290:       headers: {
+000291:         'Content-Type': 'application/json',
+000292:         'Content-Length': Buffer.byteLength(payload)
+000293:       }
+000294:     }, (res) => {
+000295:       let data = ''
+000296:       res.on('data', chunk => data += chunk)
+000297:       res.on('end', () => {
+000298:         try {
+000299:           resolve(JSON.parse(data))
+000300:         } catch (_) {
+000301:           resolve({ ok:false, error:'BAD_TELEGRAM_RESPONSE', statusCode:res.statusCode })
+000302:         }
+000303:       })
+000304:     })
+000305: 
+000306:     req.on('timeout', () => {
+000307:       req.destroy()
+000308:       resolve({ ok:false, error:'TELEGRAM_TIMEOUT' })
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_ui_proxy.cjs|LINES=328-343
+000328:         fields.push(col)
+000329:         vals.push(val)
+000330:         params.push(`$${vals.length}`)
+000331:       }
+000332:     }
+000333: 
+000334:     add('user_id', userId || null)
+000335:     add('title', title)
+000336:     add('message', body)
+000337:     add('body', body)
+000338:     add('type', 'admin_test')
+000339:     add('status', 'sent')
+000340:     add('created_at', new Date())
+000341: 
+000342:     if (!fields.length) return { inserted:false, reason:'NO_COMPATIBLE_COLUMNS' }
+000343: 
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_ui_proxy.cjs|LINES=351-426
+000351: 
+000352: app.get('/api/admin-ui/health', adminOnly, async (_req, res) => {
+000353:   try {
+000354:     await pool.query('SELECT 1')
+000355:     send(res, 200, {
+000356:       ok:true,
+000357:       service:'ndsp-admin-ui-proxy',
+000358:       mode:'direct_db_safe_admin',
+000359:       database:'ok',
+000360: [REDACTED_SENSITIVE_LINE]
+000361:       timestamp:new Date().toISOString()
+000362:     })
+000363:   } catch (e) {
+000364:     send(res, 500, { ok:false, error:'DB_ERROR', message:e.message })
+000365:   }
+000366: })
+000367: 
+000368: app.get('/api/admin-ui/summary', adminOnly, async (_req, res) => {
+000369:   try {
+000370:     const users = await safeCount('users')
+000371:     const trialA = await safeCount('ndsp_trial_activation_requests')
+000372:     const trialB = await safeCount('ndsp_trial_registrations')
+000373:     const paymentsA = await safeCount('ndsp_nowpayments_payments')
+000374:     const paymentsB = await safeCount('payments')
+000375:     const marketsA = await safeCount('markets')
+000376:     const assetsA = await safeCount('assets')
+000377: 
+000378:     send(res, 200, {
+000379:       ok:true,
+000380:       summary:{
+000381:         users,
+000382:         trials: trialA + trialB,
+000383:         payments: paymentsA + paymentsB,
+000384:         markets: marketsA,
+000385:         assets: assetsA,
+000386:         source:'database',
+000387: [REDACTED_SENSITIVE_LINE]
+000388:       }
+000389:     })
+000390:   } catch (e) {
+000391:     send(res, 500, { ok:false, error:'SUMMARY_FAILED', message:e.message })
+000392:   }
+000393: })
+000394: 
+000395: app.get('/api/admin-ui/users', adminOnly, async (_req, res) => {
+000396:   try {
+000397:     const cols = await columns('users')
+000398:     const q = `
+000399:       SELECT
+000400:         ${pick(cols, ['id'])} AS id,
+000401:         ${pick(cols, ['email'])} AS email,
+000402:         ${pick(cols, ['phone'])} AS phone,
+000403:         ${pick(cols, ['name','full_name'])} AS name,
+000404:         ${pick(cols, ['role'])} AS role,
+000405:         ${pick(cols, ['status'])} AS status,
+000406:         ${pick(cols, ['plan'])} AS plan,
+000407:         ${pick(cols, ['category'])} AS category,
+000408:         ${pick(cols, ['created_at'])} AS created_at,
+000409:         ${pick(cols, ['last_login_at','updated_at'])} AS last_login_at
+000410:       FROM users
+000411:       ORDER BY created_at DESC NULLS LAST
+000412:       LIMIT 300
+000413:     `
+000414:     const r = await pool.query(q)
+000415:     send(res, 200, { ok:true, source_table:'users', users:r.rows })
+000416:   } catch (e) {
+000417:     send(res, 500, { ok:false, error:'USERS_QUERY_FAILED', message:e.message })
+000418:   }
+000419: })
+000420: 
+000421: app.get('/api/admin-ui/payments', adminOnly, async (_req, res) => {
+000422:   try {
+000423:     const out = await queryExistingTables(['ndsp_nowpayments_payments','payments','payment_requests'], 200)
+000424:     send(res, 200, { ok:true, source_table:out.source_table, payments:out.rows })
+000425:   } catch (e) {
+000426:     send(res, 500, { ok:false, error:'PAYMENTS_QUERY_FAILED', message:e.message })
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_ui_proxy.cjs|LINES=485-548
+000485: 
+000486: app.get('/api/admin-ui/alerts', adminOnly, async (_req, res) => {
+000487:   try {
+000488:     const cfg = ndspTelegramConfig()
+000489:     const channelState = ndspReadAlertState()
+000490:     const telegramConfigured = !!(cfg.token && cfg.chatId)
+000491:     const emailConfigured = ndspEmailConfigured()
+000492:     const notifications = await queryExistingTables(['notifications'], 200)
+000493: 
+000494:     send(res, 200, {
+000495:       ok:true,
+000496:       alerts:{
+000497:         channels:{
+000498:           in_app:{
+000499:             label:'داخل المنصة',
+000500:             configured:true,
+000501:             enabled:channelState.in_app,
+000502:             active:channelState.in_app
+000503:           },
+000504:           email:{
+000505:             label:'البريد',
+000506:             configured:emailConfigured,
+000507:             enabled:channelState.email,
+000508:             active:emailConfigured && channelState.email
+000509:           },
+000510:           telegram:{
+000511:             label:'تيليجرام',
+000512:             configured:telegramConfigured,
+000513:             enabled:channelState.telegram,
+000514:             active:telegramConfigured && channelState.telegram,
+000515:             token_present:!!cfg.token,
+000516:             chat_present:!!cfg.chatId
+000517:           }
+000518:         },
+000519:         in_app:channelState.in_app,
+000520:         email:emailConfigured && channelState.email,
+000521:         telegram:telegramConfigured && channelState.telegram,
+000522:         telegram_configured:telegramConfigured,
+000523:         email_configured:emailConfigured,
+000524: [REDACTED_SENSITIVE_LINE]
+000525:         source_table:notifications.source_table,
+000526:         recent_notifications:notifications.rows
+000527:       }
+000528:     })
+000529:   } catch (e) {
+000530:     send(res, 500, { ok:false, error:'ALERTS_QUERY_FAILED', message:e.message })
+000531:   }
+000532: })
+000533: 
+000534: app.post('/api/admin-ui/alerts/channel', adminOnly, async (req, res) => {
+000535:   try {
+000536:     const channel = String(req.body?.channel || '')
+000537:     const enabled = req.body?.enabled === true
+000538: 
+000539:     if (!['in_app','email','telegram'].includes(channel)) {
+000540:       return send(res, 400, { ok:false, error:'INVALID_CHANNEL' })
+000541:     }
+000542: 
+000543:     const next = {}
+000544:     next[channel] = enabled
+000545:     const state = ndspWriteAlertState(next)
+000546: 
+000547:     send(res, 200, {
+000548:       ok:true,
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_ui_proxy.cjs|LINES=558-573
+000558: 
+000559: app.post('/api/admin-ui/alerts/test', adminOnly, async (req, res) => {
+000560:   try {
+000561:     const channel = String(req.body?.channel || '')
+000562:     const state = ndspReadAlertState()
+000563: 
+000564:     if (!['in_app','email','telegram'].includes(channel)) {
+000565:       return send(res, 400, { ok:false, error:'INVALID_CHANNEL' })
+000566:     }
+000567: 
+000568:     if (channel === 'telegram') {
+000569:       const cfg = ndspTelegramConfig()
+000570:       if (!cfg.token || !cfg.chatId) {
+000571:         return send(res, 400, {
+000572:           ok:false,
+000573:           error:'TELEGRAM_NOT_CONFIGURED',
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_ui_proxy.cjs|LINES=575-612
+000575:           chat_present:!!cfg.chatId,
+000576: [REDACTED_SENSITIVE_LINE]
+000577:         })
+000578:       }
+000579: 
+000580:       if (!state.telegram) {
+000581: [REDACTED_SENSITIVE_LINE]
+000582:       }
+000583: 
+000584:       const result = await ndspTelegramRequest('sendMessage', {
+000585:         chat_id: cfg.chatId,
+000586:         text: 'NDSP اختبار تنبيه حقيقي: قناة تيليجرام مفعّلة وتعمل.',
+000587:         disable_web_page_preview: true
+000588:       })
+000589: 
+000590:       if (!result.ok) {
+000591:         return send(res, 502, {
+000592:           ok:false,
+000593:           error:'TELEGRAM_TEST_FAILED',
+000594:           telegram_error:result.description || result.error || 'UNKNOWN',
+000595: [REDACTED_SENSITIVE_LINE]
+000596:         })
+000597:       }
+000598: 
+000599: [REDACTED_SENSITIVE_LINE]
+000600:     }
+000601: 
+000602:     if (channel === 'in_app') {
+000603:       if (!state.in_app) return send(res, 400, { ok:false, error:'IN_APP_DISABLED' })
+000604: 
+000605:       const inserted = await ndspInsertInAppNotification(
+000606:         req.user?.sub || null,
+000607:         'NDSP اختبار تنبيه',
+000608:         'تم إرسال اختبار تنبيه داخل المنصة من لوحة الإدارة.'
+000609:       )
+000610: 
+000611:       return send(res, 200, {
+000612:         ok:true,
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_ui_proxy.cjs|LINES=614-646
+000614:         message:'IN_APP_TEST_DONE',
+000615:         inserted,
+000616: [REDACTED_SENSITIVE_LINE]
+000617:       })
+000618:     }
+000619: 
+000620:     if (channel === 'email') {
+000621:       const configured = ndspEmailConfigured()
+000622:       if (!configured) {
+000623:         return send(res, 400, {
+000624:           ok:false,
+000625:           error:'EMAIL_SMTP_NOT_CONFIGURED',
+000626:           message:'SMTP settings are missing. Email cannot be tested until SMTP is configured.',
+000627: [REDACTED_SENSITIVE_LINE]
+000628:         })
+000629:       }
+000630: 
+000631:       if (!state.email) return send(res, 400, { ok:false, error:'EMAIL_DISABLED' })
+000632: 
+000633:       return send(res, 200, {
+000634:         ok:true,
+000635:         channel,
+000636:         message:'EMAIL_CONFIGURED_BUT_SEND_ADAPTER_NOT_INSTALLED',
+000637:         note:'SMTP exists, but no email sender adapter is installed in this proxy.',
+000638: [REDACTED_SENSITIVE_LINE]
+000639:       })
+000640:     }
+000641:   } catch (e) {
+000642:     send(res, 500, { ok:false, error:'ALERT_TEST_FAILED', message:e.message })
+000643:   }
+000644: })
+000645: 
+000646: 
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_ui_proxy.cjs|LINES=680-743
+000680:       raw_logic_exposed:false
+000681:     }
+000682:   })
+000683: })
+000684: 
+000685: app.post('/api/admin-ui/action', adminOnly, async (req, res) => {
+000686:   const { action, id, email, payment_id, plan, status } = req.body || {}
+000687: 
+000688:   try {
+000689:     if (['activate_user','approve_user','approve','review_approve'].includes(action)) {
+000690:       const u = await updateUserStatus('active', id, email)
+000691:       const t1 = await updateByIdentity('ndsp_trial_activation_requests', 'approved', id, email, payment_id)
+000692:       const t2 = await updateByIdentity('ndsp_trial_registrations', 'approved', id, email, payment_id)
+000693:       return send(res, 200, { ok:true, action, results:[u,t1,t2] })
+000694:     }
+000695: 
+000696:     if (['block_user','reject_user','reject','disable_user','review_reject'].includes(action)) {
+000697:       const u = await updateUserStatus('blocked', id, email)
+000698:       const t1 = await updateByIdentity('ndsp_trial_activation_requests', 'rejected', id, email, payment_id)
+000699:       const t2 = await updateByIdentity('ndsp_trial_registrations', 'rejected', id, email, payment_id)
+000700:       return send(res, 200, { ok:true, action, results:[u,t1,t2] })
+000701:     }
+000702: 
+000703:     if (action === 'set_plan') {
+000704:       const r = await pool.query(`
+000705:         UPDATE users
+000706:         SET plan=$3
+000707:         WHERE ($1::text <> '' AND id::text=$1)
+000708:            OR ($2::text <> '' AND lower(email)=lower($2))
+000709:         RETURNING id,email,role,status,plan
+000710:       `, [String(id || ''), String(email || ''), String(plan || '')])
+000711:       return send(res, 200, { ok:true, action, updated:r.rows })
+000712:     }
+000713: 
+000714:     if (action === 'set_status') {
+000715:       const u = await updateUserStatus(status || 'active', id, email)
+000716:       return send(res, 200, { ok:true, action, results:[u] })
+000717:     }
+000718: 
+000719:     if (action === 'approve_payment') {
+000720:       const p1 = await updateByIdentity('ndsp_nowpayments_payments', 'approved', id, email, payment_id)
+000721:       const p2 = await updateByIdentity('payments', 'approved', id, email, payment_id)
+000722:       const p3 = await updateByIdentity('payment_requests', 'approved', id, email, payment_id)
+000723:       return send(res, 200, { ok:true, action, results:[p1,p2,p3] })
+000724:     }
+000725: 
+000726:     if (action === 'reject_payment') {
+000727:       const p1 = await updateByIdentity('ndsp_nowpayments_payments', 'rejected', id, email, payment_id)
+000728:       const p2 = await updateByIdentity('payments', 'rejected', id, email, payment_id)
+000729:       const p3 = await updateByIdentity('payment_requests', 'rejected', id, email, payment_id)
+000730:       return send(res, 200, { ok:true, action, results:[p1,p2,p3] })
+000731:     }
+000732: 
+000733:     send(res, 400, { ok:false, error:'UNSUPPORTED_ACTION', action })
+000734:   } catch (e) {
+000735:     send(res, 500, { ok:false, error:'ACTION_FAILED', action, message:e.message })
+000736:   }
+000737: })
+000738: 
+000739: app.use((_req, res) => send(res, 404, { ok:false, error:'NOT_FOUND' }))
+000740: 
+000741: app.listen(PORT, '127.0.0.1', () => {
+000742:   console.log(`[NDSP] admin ui proxy production routes listening on 127.0.0.1:${PORT}`)
+000743: })
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_actions_authoritative.cjs
+CONTEXT_BLOCK_COUNT=5
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_actions_authoritative.cjs|LINES=29-54
+000029: [REDACTED_SENSITIVE_LINE]
+000030:   try {
+000031:     const parts = String(token || '').split('.');
+000032:     if (parts.length !== 3) return null;
+000033: 
+000034:     const [h, p, s] = parts;
+000035:     const header = JSON.parse(b64urlDecode(h));
+000036:     if (header.alg !== 'HS256') return null;
+000037: 
+000038: [REDACTED_SENSITIVE_LINE]
+000039:       const expected = crypto
+000040: [REDACTED_SENSITIVE_LINE]
+000041:         .update(`${h}.${p}`)
+000042:         .digest('base64url');
+000043: 
+000044:       if (safeEq(expected, s)) {
+000045:         const payload = JSON.parse(b64urlDecode(p));
+000046:         if (payload.exp && Date.now() >= Number(payload.exp) * 1000) return null;
+000047:         return payload;
+000048:       }
+000049:     }
+000050:   } catch (_) {}
+000051:   return null;
+000052: }
+000053: 
+000054: function getBrowserToken(req) {
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_actions_authoritative.cjs|LINES=96-117
+000096: 
+000097: async function authorize(req, pool) {
+000098:   const expected = String(process.env.NDSP_ADMIN_ACTION_KEY || '');
+000099:   const provided = String(req.headers['x-ndsp-admin-key'] || '');
+000100: 
+000101:   if (expected && provided && safeEq(expected, provided)) {
+000102:     return { ok: true, via: 'NDSP_ADMIN_ACTION_KEY', admin_user_id: null };
+000103:   }
+000104: 
+000105:   if (req.user) {
+000106:     const role = String(req.user.role || req.user.user_role || '').toLowerCase();
+000107:     if (role === 'admin' || role === 'super_admin' || role === 'owner') {
+000108:       return { ok: true, via: 'req.user', admin_user_id: req.user.id || req.user.user_id || null };
+000109:     }
+000110:   }
+000111: 
+000112:   const token = getBrowserToken(req);
+000113: [REDACTED_SENSITIVE_LINE]
+000114: [REDACTED_SENSITIVE_LINE]
+000115: [REDACTED_SENSITIVE_LINE]
+000116: [REDACTED_SENSITIVE_LINE]
+000117: [REDACTED_SENSITIVE_LINE]
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_actions_authoritative.cjs|LINES=119-183
+000119:   ].filter(Boolean);
+000120: 
+000121: [REDACTED_SENSITIVE_LINE]
+000122: [REDACTED_SENSITIVE_LINE]
+000123:     if (payload) {
+000124:       const role = String(payload.role || payload.user_role || '').toLowerCase();
+000125:       const uid = payload.id || payload.user_id || payload.sub || null;
+000126: 
+000127:       if (role === 'admin' || role === 'super_admin' || role === 'owner') {
+000128:         return { ok: true, via: 'jwt_role', admin_user_id: uid };
+000129:       }
+000130: 
+000131:       if (uid) {
+000132:         const ucols = await columns(pool, 'users');
+000133:         const checks = [];
+000134:         if (ucols.has('role')) checks.push(`LOWER(COALESCE(role,'')) IN ('admin','super_admin','owner')`);
+000135:         if (ucols.has('is_admin')) checks.push(`is_admin = true`);
+000136:         if (ucols.has('admin')) checks.push(`admin = true`);
+000137: 
+000138:         if (checks.length) {
+000139:           const r = await pool.query(
+000140:             `SELECT id FROM users WHERE id::text=$1 AND (${checks.join(' OR ')}) LIMIT 1`,
+000141:             [String(uid)]
+000142:           );
+000143:           if (r.rowCount) return { ok: true, via: 'db_admin_role', admin_user_id: String(uid) };
+000144:         }
+000145:       }
+000146:     }
+000147:   }
+000148: 
+000149:   return { ok: false, reason: 'ADMIN_AUTH_REQUIRED' };
+000150: }
+000151: 
+000152: async function deleteUserDependencies(client, userId) {
+000153:   const fk = await client.query(`
+000154:     SELECT
+000155:       kcu.table_name AS table_name,
+000156:       kcu.column_name AS column_name
+000157:     FROM information_schema.table_constraints tc
+000158:     JOIN information_schema.key_column_usage kcu
+000159:       ON tc.constraint_name = kcu.constraint_name
+000160:      AND tc.table_schema = kcu.table_schema
+000161:     JOIN information_schema.constraint_column_usage ccu
+000162:       ON ccu.constraint_name = tc.constraint_name
+000163:      AND ccu.table_schema = tc.table_schema
+000164:     WHERE tc.constraint_type = 'FOREIGN KEY'
+000165:       AND tc.table_schema = 'public'
+000166:       AND ccu.table_name = 'users'
+000167:       AND ccu.column_name = 'id'
+000168:   `);
+000169: 
+000170:   for (const row of fk.rows) {
+000171:     const table = row.table_name;
+000172:     const col = row.column_name;
+000173:     if (table === 'users') continue;
+000174:     await client.query(`DELETE FROM ${qident(table)} WHERE ${qident(col)}::text=$1`, [userId]);
+000175:   }
+000176: 
+000177:   const known = [
+000178:     'notifications',
+000179:     'plan_upgrade_requests',
+000180:     'feedback_surveys',
+000181:     'trial_feedback_surveys',
+000182:     'trial_registrations',
+000183:     'user_sessions',
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_actions_authoritative.cjs|LINES=188-262
+000188:     'audit_logs'
+000189:   ];
+000190: 
+000191:   for (const table of known) {
+000192:     if (await tableExists(client, table)) {
+000193:       const cols = await columns(client, table);
+000194:       if (cols.has('user_id')) {
+000195:         await client.query(`DELETE FROM ${qident(table)} WHERE ${qident('user_id')}::text=$1`, [userId]);
+000196:       }
+000197:     }
+000198:   }
+000199: }
+000200: 
+000201: module.exports = function installNdspAdminActionsAuthoritative(app, pool) {
+000202:   if (!app || !pool || app.__ndspAdminActionsAuthoritativeInstalled) return;
+000203:   app.__ndspAdminActionsAuthoritativeInstalled = true;
+000204: 
+000205:   app.get('/api/admin/users/action/health', function(req, res) {
+000206:     res.json({
+000207:       ok: true,
+000208:       authoritative: true,
+000209:       php: false,
+000210:       endpoint: '/api/admin/users/action',
+000211:       env: 'NDSP_ADMIN_ACTION_KEY',
+000212:       header: 'X-NDSP-ADMIN-KEY',
+000213: [REDACTED_SENSITIVE_LINE]
+000214:     });
+000215:   });
+000216: 
+000217:   app.post(['/api/admin/users/action', '/admin/users/action'], async function(req, res) {
+000218:     const auth = await authorize(req, pool);
+000219: 
+000220:     if (!auth.ok) {
+000221:       return res.status(401).json({
+000222:         ok: false,
+000223:         error: 'ADMIN_AUTH_REQUIRED'
+000224:       });
+000225:     }
+000226: 
+000227:     const action = String((req.body && (req.body.action || req.body.type)) || '').trim().toLowerCase();
+000228:     const userId = String((req.body && (req.body.user_id || req.body.id)) || '').trim();
+000229: 
+000230:     if (!['activate', 'deactivate', 'delete'].includes(action)) {
+000231:       return res.status(400).json({ ok: false, error: 'INVALID_ACTION' });
+000232:     }
+000233: 
+000234:     if (!userId || userId === 'PUT_USER_ID_HERE') {
+000235:       return res.status(400).json({ ok: false, error: 'USER_ID_REQUIRED' });
+000236:     }
+000237: 
+000238:     if (action === 'delete' && auth.admin_user_id && String(auth.admin_user_id) === userId) {
+000239:       return res.status(400).json({ ok: false, error: 'CANNOT_DELETE_SELF' });
+000240:     }
+000241: 
+000242:     const client = await pool.connect();
+000243: 
+000244:     try {
+000245:       await client.query('BEGIN');
+000246: 
+000247:       const exists = await client.query(`SELECT id FROM users WHERE id::text=$1 LIMIT 1`, [userId]);
+000248:       if (!exists.rowCount) {
+000249:         await client.query('ROLLBACK');
+000250:         return res.status(404).json({ ok: false, error: 'USER_NOT_FOUND' });
+000251:       }
+000252: 
+000253:       const ucols = await columns(client, 'users');
+000254: 
+000255:       if (action === 'activate' || action === 'deactivate') {
+000256:         const active = action === 'activate';
+000257:         const sets = [];
+000258:         const vals = [];
+000259:         let i = 1;
+000260: 
+000261:         if (ucols.has('status')) {
+000262:           sets.push(`status=$${i++}`);
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_actions_authoritative.cjs|LINES=279-312
+000279:         if (ucols.has('updated_at')) {
+000280:           sets.push(`updated_at=NOW()`);
+000281:         }
+000282: 
+000283:         if (!sets.length) {
+000284:           await client.query('ROLLBACK');
+000285:           return res.status(500).json({ ok: false, error: 'NO_USER_STATUS_COLUMNS' });
+000286:         }
+000287: 
+000288:         vals.push(userId);
+000289:         await client.query(`UPDATE users SET ${sets.join(', ')} WHERE id::text=$${i}`, vals);
+000290: 
+000291:         await client.query('COMMIT');
+000292:         return res.json({ ok: true, action, user_id: userId, via: auth.via });
+000293:       }
+000294: 
+000295:       await deleteUserDependencies(client, userId);
+000296:       await client.query(`DELETE FROM users WHERE id::text=$1`, [userId]);
+000297: 
+000298:       await client.query('COMMIT');
+000299:       return res.json({ ok: true, action: 'delete', user_id: userId, via: auth.via });
+000300: 
+000301:     } catch (e) {
+000302:       try { await client.query('ROLLBACK'); } catch (_) {}
+000303:       return res.status(500).json({
+000304:         ok: false,
+000305:         error: 'ADMIN_ACTION_FAILED',
+000306:         detail: String(e && e.message ? e.message : e)
+000307:       });
+000308:     } finally {
+000309:       client.release();
+000310:     }
+000311:   });
+000312: };
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_actions_gateway.cjs
+CONTEXT_BLOCK_COUNT=10
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_actions_gateway.cjs|LINES=2-34
+000002: 
+000003: const http = require('http');
+000004: const crypto = require('crypto');
+000005: const fs = require('fs');
+000006: const { Pool } = require('pg');
+000007: 
+000008: const PORT = Number(process.env.NDSP_ADMIN_ACTIONS_PORT || 9017);
+000009: const ADMIN_JSON_PATH = process.env.NDSP_ADMIN_USERS_JSON || '/var/www/ndsp-admin/admin-users.json';
+000010: 
+000011: function safeEq(a, b) {
+000012:   a = String(a || '');
+000013:   b = String(b || '');
+000014:   const aa = Buffer.from(a);
+000015:   const bb = Buffer.from(b);
+000016:   if (aa.length !== bb.length) return false;
+000017:   return crypto.timingSafeEqual(aa, bb);
+000018: }
+000019: 
+000020: function send(res, code, obj) {
+000021:   res.writeHead(code, {
+000022:     'Content-Type': 'application/json; charset=utf-8',
+000023:     'Cache-Control': 'no-store'
+000024:   });
+000025:   res.end(JSON.stringify(obj));
+000026: }
+000027: 
+000028: function qident(x) {
+000029:   return '"' + String(x).replace(/"/g, '""') + '"';
+000030: }
+000031: 
+000032: function parseCookies(req) {
+000033:   const out = {};
+000034:   String(req.headers.cookie || '').split(';').forEach(part => {
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_actions_gateway.cjs|LINES=46-89
+000046: 
+000047: [REDACTED_SENSITIVE_LINE]
+000048:   try {
+000049:     const parts = String(token || '').split('.');
+000050:     if (parts.length !== 3) return null;
+000051:     const [h, p, s] = parts;
+000052:     const header = JSON.parse(b64urlDecode(h));
+000053:     if (header.alg !== 'HS256') return null;
+000054: 
+000055: [REDACTED_SENSITIVE_LINE]
+000056: [REDACTED_SENSITIVE_LINE]
+000057:       if (safeEq(expected, s)) {
+000058:         const payload = JSON.parse(b64urlDecode(p));
+000059:         if (payload.exp && Date.now() >= Number(payload.exp) * 1000) return null;
+000060:         return payload;
+000061:       }
+000062:     }
+000063:   } catch (_) {}
+000064:   return null;
+000065: }
+000066: 
+000067: function readJson(req) {
+000068:   return new Promise((resolve, reject) => {
+000069:     let raw = '';
+000070:     req.on('data', chunk => {
+000071:       raw += chunk;
+000072:       if (raw.length > 1024 * 1024) {
+000073:         reject(new Error('BODY_TOO_LARGE'));
+000074:         req.destroy();
+000075:       }
+000076:     });
+000077:     req.on('end', () => {
+000078:       if (!raw.trim()) return resolve({});
+000079:       try { resolve(JSON.parse(raw)); }
+000080:       catch (_) { reject(new Error('INVALID_JSON')); }
+000081:     });
+000082:     req.on('error', reject);
+000083:   });
+000084: }
+000085: 
+000086: async function columns(client, table) {
+000087:   const r = await client.query(
+000088:     `SELECT column_name
+000089:      FROM information_schema.columns
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_actions_gateway.cjs|LINES=104-119
+000104: }
+000105: 
+000106: function normalizeStatus(row) {
+000107:   if (row.status !== undefined && row.status !== null && String(row.status).trim() !== '') {
+000108:     const s = String(row.status).trim().toLowerCase();
+000109:     if (['active', 'activated', 'enabled', 'true'].includes(s)) return 'active';
+000110:     if (['inactive', 'disabled', 'deactivated', 'false', 'suspended'].includes(s)) return 'inactive';
+000111:     return s;
+000112:   }
+000113: 
+000114:   if (row.is_active !== undefined && row.is_active !== null) {
+000115:     return row.is_active ? 'active' : 'inactive';
+000116:   }
+000117: 
+000118:   return 'unknown';
+000119: }
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_actions_gateway.cjs|LINES=122-143
+000122:   for (const c of candidates) {
+000123:     if (cols.has(c)) return `${qident(c)} AS ${qident(alias)}`;
+000124:   }
+000125:   return `${fallbackSql} AS ${qident(alias)}`;
+000126: }
+000127: 
+000128: async function syncAdminUsersJson(client) {
+000129:   const ucols = await columns(client, 'users');
+000130: 
+000131:   const select = [
+000132:     pickSql(ucols, ['id'], `''`, 'id'),
+000133:     pickSql(ucols, ['name', 'full_name', 'display_name'], `COALESCE(NULLIF(email,''),'User')`, 'name'),
+000134:     pickSql(ucols, ['email'], `''`, 'email'),
+000135:     pickSql(ucols, ['plan', 'subscription_plan', 'package', 'tier'], `'Free'`, 'plan'),
+000136:     pickSql(ucols, ['role', 'user_role'], `'user'`, 'role'),
+000137:     pickSql(ucols, ['status'], `NULL`, 'status'),
+000138:     pickSql(ucols, ['is_active', 'active'], `NULL`, 'is_active'),
+000139:     pickSql(ucols, ['category', 'trial_category', 'user_category'], `NULL`, 'category'),
+000140:     pickSql(ucols, ['created_at', 'created'], `NULL`, 'created_at'),
+000141:     pickSql(ucols, ['updated_at', 'updated'], `NULL`, 'updated_at')
+000142:   ];
+000143: 
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_actions_gateway.cjs|LINES=149-212
+000149:   } else if (ucols.has('created_at')) {
+000150:     orderBy = `${qident('created_at')} DESC`;
+000151:   }
+000152: 
+000153:   const r = await client.query(`
+000154:     SELECT ${select.join(', ')}
+000155:     FROM users
+000156:     ORDER BY ${orderBy}
+000157:     LIMIT 500
+000158:   `);
+000159: 
+000160:   const users = r.rows.map(row => ({
+000161:     id: String(row.id || ''),
+000162:     name: String(row.name || row.email || 'User'),
+000163:     email: String(row.email || ''),
+000164:     plan: String(row.plan || 'Free'),
+000165:     role: String(row.role || 'user'),
+000166:     status: normalizeStatus(row),
+000167:     category: row.category === null || row.category === undefined ? '' : String(row.category),
+000168:     created_at: row.created_at,
+000169:     updated_at: row.updated_at
+000170:   }));
+000171: 
+000172:   const payload = {
+000173:     ok: true,
+000174:     source: 'postgresql_ndsp_auth',
+000175:     generated_at: new Date().toISOString(),
+000176:     count: users.length,
+000177:     users
+000178:   };
+000179: 
+000180:   fs.writeFileSync(ADMIN_JSON_PATH, JSON.stringify(payload, null, 2), { mode: 0o644 });
+000181:   return { path: ADMIN_JSON_PATH, count: users.length };
+000182: }
+000183: 
+000184: async function deleteDeps(client, userId) {
+000185:   const fk = await client.query(`
+000186:     SELECT kcu.table_name, kcu.column_name
+000187:     FROM information_schema.table_constraints tc
+000188:     JOIN information_schema.key_column_usage kcu
+000189:       ON tc.constraint_name = kcu.constraint_name
+000190:      AND tc.table_schema = kcu.table_schema
+000191:     JOIN information_schema.constraint_column_usage ccu
+000192:       ON ccu.constraint_name = tc.constraint_name
+000193:      AND ccu.table_schema = tc.table_schema
+000194:     WHERE tc.constraint_type='FOREIGN KEY'
+000195:       AND tc.table_schema='public'
+000196:       AND ccu.table_name='users'
+000197:       AND ccu.column_name='id'
+000198:   `);
+000199: 
+000200:   for (const row of fk.rows) {
+000201:     if (row.table_name === 'users') continue;
+000202:     await client.query(
+000203:       `DELETE FROM ${qident(row.table_name)} WHERE ${qident(row.column_name)}::text=$1`,
+000204:       [userId]
+000205:     );
+000206:   }
+000207: 
+000208:   const known = [
+000209:     'notifications',
+000210:     'plan_upgrade_requests',
+000211:     'feedback_surveys',
+000212:     'trial_feedback_surveys',
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_actions_gateway.cjs|LINES=219-251
+000219:     'audit_logs'
+000220:   ];
+000221: 
+000222:   for (const table of known) {
+000223:     if (await tableExists(client, table)) {
+000224:       const cols = await columns(client, table);
+000225:       if (cols.has('user_id')) {
+000226:         await client.query(`DELETE FROM ${qident(table)} WHERE ${qident('user_id')}::text=$1`, [userId]);
+000227:       }
+000228:     }
+000229:   }
+000230: }
+000231: 
+000232: async function adminFromDbRole(client, uid) {
+000233:   if (!uid) return false;
+000234:   const cols = await columns(client, 'users');
+000235:   const checks = [];
+000236:   if (cols.has('role')) checks.push(`LOWER(COALESCE(role,'')) IN ('admin','super_admin','owner')`);
+000237:   if (cols.has('is_admin')) checks.push(`is_admin = true`);
+000238:   if (cols.has('admin')) checks.push(`admin = true`);
+000239:   if (!checks.length) return false;
+000240: 
+000241:   const r = await client.query(
+000242:     `SELECT id FROM users WHERE id::text=$1 AND (${checks.join(' OR ')}) LIMIT 1`,
+000243:     [String(uid)]
+000244:   );
+000245:   return r.rowCount > 0;
+000246: }
+000247: 
+000248: async function authorize(req, pool) {
+000249:   const expected = String(process.env.NDSP_ADMIN_ACTION_KEY || '');
+000250:   const provided = String(req.headers['x-ndsp-admin-key'] || '');
+000251: 
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_actions_gateway.cjs|LINES=274-289
+000274:   try {
+000275:     for (const token of tokens) {
+000276: [REDACTED_SENSITIVE_LINE]
+000277:       if (!payload) continue;
+000278: 
+000279:       const role = String(payload.role || payload.user_role || '').toLowerCase();
+000280:       const uid = payload.id || payload.user_id || payload.sub || null;
+000281: 
+000282:       if (['admin','super_admin','owner'].includes(role)) {
+000283:         return { ok: true, via: 'jwt_admin_role' };
+000284:       }
+000285: 
+000286:       if (uid && await adminFromDbRole(client, uid)) {
+000287:         return { ok: true, via: 'jwt_db_admin_role' };
+000288:       }
+000289:     }
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_actions_gateway.cjs|LINES=292-377
+000292:   }
+000293: 
+000294:   return { ok: false, reason: 'ADMIN_AUTH_REQUIRED' };
+000295: }
+000296: 
+000297: const pool = new Pool({
+000298:   connectionString: process.env.DATABASE_URL || process.env.POSTGRES_URL || undefined,
+000299:   host: process.env.PGHOST || process.env.DB_HOST || undefined,
+000300:   port: process.env.PGPORT ? Number(process.env.PGPORT) : (process.env.DB_PORT ? Number(process.env.DB_PORT) : undefined),
+000301:   database: process.env.PGDATABASE || process.env.DB_NAME || process.env.POSTGRES_DB || 'ndsp_auth',
+000302:   user: process.env.PGUSER || process.env.DB_USER || process.env.POSTGRES_USER || undefined,
+000303: [REDACTED_SENSITIVE_LINE]
+000304: });
+000305: 
+000306: const server = http.createServer(async (req, res) => {
+000307:   try {
+000308:     const u = new URL(req.url, `http://${req.headers.host || '127.0.0.1'}`);
+000309: 
+000310:     if (req.method === 'GET' && u.pathname === '/api/admin-actions/users/action/health') {
+000311:       return send(res, 200, {
+000312:         ok: true,
+000313:         service: 'ndsp-admin-actions-gateway',
+000314:         endpoint: '/api/admin-actions/users/action',
+000315:         sync_endpoint: '/api/admin-actions/users/sync-json',
+000316:         api_namespace: '/api',
+000317:         php: false,
+000318:         key_env_configured: Boolean(process.env.NDSP_ADMIN_ACTION_KEY),
+000319:         json_sync: ADMIN_JSON_PATH,
+000320:         schema_safe: true,
+000321:         database: 'PostgreSQL'
+000322:       });
+000323:     }
+000324: 
+000325:     if (req.method === 'POST' && u.pathname === '/api/admin-actions/users/sync-json') {
+000326:       const auth = await authorize(req, pool);
+000327:       if (!auth.ok) return send(res, 401, { ok: false, error: 'ADMIN_AUTH_REQUIRED' });
+000328: 
+000329:       const client = await pool.connect();
+000330:       try {
+000331:         const synced = await syncAdminUsersJson(client);
+000332:         return send(res, 200, { ok: true, synced });
+000333:       } finally {
+000334:         client.release();
+000335:       }
+000336:     }
+000337: 
+000338:     if (req.method !== 'POST' || u.pathname !== '/api/admin-actions/users/action') {
+000339:       return send(res, 404, { ok: false, error: 'NOT_FOUND', path: u.pathname });
+000340:     }
+000341: 
+000342:     const auth = await authorize(req, pool);
+000343:     if (!auth.ok) return send(res, 401, { ok: false, error: 'ADMIN_AUTH_REQUIRED' });
+000344: 
+000345:     const body = await readJson(req);
+000346:     const action = String(body.action || body.type || '').trim().toLowerCase();
+000347:     const userId = String(body.user_id || body.id || '').trim();
+000348: 
+000349:     if (!['activate', 'deactivate', 'delete'].includes(action)) {
+000350:       return send(res, 400, { ok: false, error: 'INVALID_ACTION' });
+000351:     }
+000352: 
+000353:     if (!userId || userId === 'PUT_USER_ID_HERE') {
+000354:       return send(res, 400, { ok: false, error: 'USER_ID_REQUIRED' });
+000355:     }
+000356: 
+000357:     const client = await pool.connect();
+000358: 
+000359:     try {
+000360:       await client.query('BEGIN');
+000361: 
+000362:       const exists = await client.query(`SELECT id FROM users WHERE id::text=$1 LIMIT 1`, [userId]);
+000363:       if (!exists.rowCount) {
+000364:         await client.query('ROLLBACK');
+000365:         return send(res, 404, { ok: false, error: 'USER_NOT_FOUND' });
+000366:       }
+000367: 
+000368:       const ucols = await columns(client, 'users');
+000369: 
+000370:       if (action === 'activate' || action === 'deactivate') {
+000371:         const active = action === 'activate';
+000372:         const sets = [];
+000373:         const vals = [];
+000374:         let i = 1;
+000375: 
+000376:         if (ucols.has('status')) {
+000377:           sets.push(`status=$${i++}`);
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_actions_gateway.cjs|LINES=395-449
+000395:         vals.push(userId);
+000396: 
+000397:         const retStatus = ucols.has('status') ? 'status' : 'NULL AS status';
+000398:         const retActive = ucols.has('is_active') ? 'is_active' : 'NULL AS is_active';
+000399: 
+000400:         const update = await client.query(
+000401:           `UPDATE users SET ${sets.join(', ')} WHERE id::text=$${i} RETURNING id::text AS id, ${retStatus}, ${retActive}`,
+000402:           vals
+000403:         );
+000404: 
+000405:         if (update.rowCount !== 1) {
+000406:           await client.query('ROLLBACK');
+000407:           return send(res, 409, { ok: false, error: 'NO_ROW_UPDATED' });
+000408:         }
+000409: 
+000410:         const synced = await syncAdminUsersJson(client);
+000411:         await client.query('COMMIT');
+000412: 
+000413:         return send(res, 200, {
+000414:           ok: true,
+000415:           action,
+000416:           user_id: userId,
+000417:           updated_rows: update.rowCount,
+000418:           db_status: normalizeStatus(update.rows[0]),
+000419:           json_synced: true,
+000420:           synced
+000421:         });
+000422:       }
+000423: 
+000424:       await deleteDeps(client, userId);
+000425:       const del = await client.query(`DELETE FROM users WHERE id::text=$1 RETURNING id::text AS id`, [userId]);
+000426: 
+000427:       if (del.rowCount !== 1) {
+000428:         await client.query('ROLLBACK');
+000429:         return send(res, 409, { ok: false, error: 'NO_ROW_DELETED' });
+000430:       }
+000431: 
+000432:       const synced = await syncAdminUsersJson(client);
+000433:       await client.query('COMMIT');
+000434: 
+000435:       return send(res, 200, {
+000436:         ok: true,
+000437:         action: 'delete',
+000438:         user_id: userId,
+000439:         deleted_rows: del.rowCount,
+000440:         json_synced: true,
+000441:         synced
+000442:       });
+000443: 
+000444:     } catch (e) {
+000445:       try { await client.query('ROLLBACK'); } catch (_) {}
+000446:       return send(res, 500, {
+000447:         ok: false,
+000448:         error: 'ADMIN_ACTION_FAILED',
+000449:         detail: String(e && e.message ? e.message : e)
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_actions_gateway.cjs|LINES=458-466
+000458:       error: 'GATEWAY_EXCEPTION',
+000459:       detail: String(e && e.message ? e.message : e)
+000460:     });
+000461:   }
+000462: });
+000463: 
+000464: server.listen(PORT, '127.0.0.1', () => {
+000465:   console.log(`[NDSP] admin actions gateway listening on 127.0.0.1:${PORT}`);
+000466: });
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_trial_register_gateway.cjs
+CONTEXT_BLOCK_COUNT=14
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_trial_register_gateway.cjs|LINES=17-99
+000017:     err && err.detail,
+000018:     err && err.message,
+000019:     err
+000020:   ].filter(Boolean).join(' | '));
+000021: 
+000022:   if (
+000023:     msg.includes('ux_users_phone_digits') ||
+000024:     msg.includes('ux_users_phone_canonical_guard') ||
+000025:     msg.includes('DUPLICATE_PHONE')
+000026:   ) {
+000027:     return { ok:false, code:'DUPLICATE_PHONE', message:'رقم الجوال مستخدم سابقًا' };
+000028:   }
+000029: 
+000030:   if (
+000031:     msg.includes('ux_users_email_lower') ||
+000032:     msg.includes('DUPLICATE_EMAIL')
+000033:   ) {
+000034:     return { ok:false, code:'DUPLICATE_EMAIL', message:'البريد الإلكتروني مستخدم سابقًا' };
+000035:   }
+000036: 
+000037:   return null;
+000038: }
+000039: 
+000040: 
+000041: const http = require('http');
+000042: 
+000043: const bcrypt = require('bcryptjs');
+000044: const crypto = require('crypto');
+000045: const { spawnSync } = require('child_process');
+000046: /* NDSP_MAIL_NOTIFICATION_PATCH */
+000047: const { Pool } = require('pg');
+000048: 
+000049: const PORT = Number(process.env.NDSP_TRIAL_REGISTER_PORT || 9019);
+000050: const TRIAL_DAYS = Number(process.env.NDSP_TRIAL_DAYS || 16);
+000051: 
+000052: const pool = new Pool({
+000053:   connectionString: process.env.DATABASE_URL || process.env.POSTGRES_URL || undefined,
+000054:   host: process.env.PGHOST || process.env.DB_HOST || undefined,
+000055:   port: process.env.PGPORT ? Number(process.env.PGPORT) : (process.env.DB_PORT ? Number(process.env.DB_PORT) : undefined),
+000056:   database: process.env.PGDATABASE || process.env.DB_NAME || process.env.POSTGRES_DB || 'ndsp_auth',
+000057:   user: process.env.PGUSER || process.env.DB_USER || process.env.POSTGRES_USER || undefined,
+000058: [REDACTED_SENSITIVE_LINE]
+000059: });
+000060: 
+000061: function send(res, code, obj) {
+000062:   res.writeHead(code, {
+000063:     'Content-Type': 'application/json; charset=utf-8',
+000064:     'Cache-Control': 'no-store'
+000065:   });
+000066:   res.end(JSON.stringify(obj));
+000067: }
+000068: 
+000069: function qident(x) {
+000070:   return '"' + String(x).replace(/"/g, '""') + '"';
+000071: }
+000072: 
+000073: function clean(v) {
+000074:   return String(v == null ? '' : v).trim();
+000075: }
+000076: 
+000077: function readJson(req) {
+000078:   return new Promise((resolve, reject) => {
+000079:     let raw = '';
+000080:     req.on('data', c => {
+000081:       raw += c;
+000082:       if (raw.length > 1024 * 1024) {
+000083:         reject(new Error('BODY_TOO_LARGE'));
+000084:         req.destroy();
+000085:       }
+000086:     });
+000087:     req.on('end', () => {
+000088:       if (!raw.trim()) return resolve({});
+000089:       try { resolve(JSON.parse(raw)); }
+000090:       catch (_) { reject(new Error('INVALID_JSON')); }
+000091:     });
+000092:     req.on('error', reject);
+000093:   });
+000094: }
+000095: 
+000096: async function columnMeta(client, table) {
+000097:   const r = await client.query(`
+000098:     SELECT column_name, data_type, is_nullable, column_default
+000099:     FROM information_schema.columns
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_trial_register_gateway.cjs|LINES=109-138
+000109: 
+000110: function publicAppUrl() {
+000111:   return (
+000112:     process.env.NDSP_PUBLIC_APP_URL ||
+000113:     process.env.PUBLIC_APP_URL ||
+000114:     process.env.APP_URL ||
+000115:     'https://my.ndsp.app'
+000116:   ).replace(/\/+$/, '');
+000117: }
+000118: 
+000119: function createActivationTokenValue() {
+000120:   return crypto.randomBytes(32).toString('hex');
+000121: }
+000122: 
+000123: async function createActivationToken(client, userId) {
+000124:   const token = createActivationTokenValue();
+000125:   const tokenHash = sha256Hex(token);
+000126: 
+000127:   await client.query(
+000128:     `INSERT INTO ndsp_auth_activation_tokens (user_id, token_hash, purpose, expires_at)
+000129:      VALUES ($1::uuid, $2, 'email_activation', now() + interval '48 hours')`,
+000130:     [userId, tokenHash]
+000131:   );
+000132: 
+000133:   return {
+000134:     token,
+000135:     activation_url: `${publicAppUrl()}/activate?token=${encodeURIComponent(token)}`
+000136:   };
+000137: }
+000138: 
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_trial_register_gateway.cjs|LINES=218-233
+000218: 
+000219:   const map = {
+000220:     id,
+000221:     name: body.name || body.full_name || body.display_name || '',
+000222:     full_name: body.name || body.full_name || '',
+000223:     display_name: body.name || body.display_name || '',
+000224:     email: body.email || '',
+000225:     phone: body.phone || body.mobile || '',
+000226:     mobile: body.phone || body.mobile || '',
+000227:     plan: 'Elite',
+000228:     package: 'Elite',
+000229:     tier: 'Elite',
+000230:     role: 'user',
+000231:     user_role: 'user',
+000232:     status,
+000233:     category,
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_trial_register_gateway.cjs|LINES=260-291
+000260:   if (dt.includes('integer') || dt.includes('numeric')) return 0;
+000261: 
+000262:   return '';
+000263: }
+000264: 
+000265: async function insertUser(client, body, mode) {
+000266:   const email = clean(body.email).toLowerCase();
+000267: [REDACTED_SENSITIVE_LINE]
+000268: 
+000269:   if (!email || !email.includes('@')) return { ok:false, code:400, error:'EMAIL_REQUIRED' };
+000270: [REDACTED_SENSITIVE_LINE]
+000271: 
+000272:   const existing = await client.query(`SELECT id FROM users WHERE LOWER(email)=LOWER($1) LIMIT 1`, [email]);
+000273: 
+000274:   // NDSP_PHONE_DUPLICATE_CANONICAL_GUARD_V45
+000275:   const rawPhoneForGuard = clean(body.phone || body.mobile || body.whatsapp || '');
+000276:   const phoneDigitsForGuard = String(rawPhoneForGuard || '').replace(/\D/g, '');
+000277:   const phoneKeyForGuard = phoneDigitsForGuard.slice(-9);
+000278: 
+000279:   if (phoneKeyForGuard && phoneKeyForGuard.length === 9) {
+000280:     const phoneExisting = await client.query(`
+000281:       SELECT id, email
+000282:       FROM users
+000283:       WHERE lower(coalesce(role,'')) NOT IN ('admin','owner','super_admin')
+000284:         AND (
+000285:           RIGHT(REGEXP_REPLACE(COALESCE(phone,''), '[^0-9]+', '', 'g'), 9) = $1
+000286:           OR RIGHT(REGEXP_REPLACE(COALESCE(canonical_phone,''), '[^0-9]+', '', 'g'), 9) = $1
+000287:           OR COALESCE(canonical_phone,'') = $1
+000288:         )
+000289:       LIMIT 1
+000290:     `, [phoneKeyForGuard]);
+000291: 
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_trial_register_gateway.cjs|LINES=303-363
+000303:   }
+000304: 
+000305: 
+000306: 
+000307: 
+000308: 
+000309:   if (existing.rowCount) return { ok:false, code:409, error:'EMAIL_ALREADY_EXISTS' };
+000310: 
+000311:   const meta = await columnMeta(client, 'users');
+000312:   const cols = new Set(meta.map(x => x.column_name));
+000313: 
+000314:   const id = crypto.randomUUID();
+000315: [REDACTED_SENSITIVE_LINE]
+000316:   const trialEnds = new Date(Date.now() + TRIAL_DAYS * 24 * 60 * 60 * 1000);
+000317: 
+000318:   const insertCols = [];
+000319:   const values = [];
+000320: 
+000321:   for (const col of meta) {
+000322: [REDACTED_SENSITIVE_LINE]
+000323:     if (v !== undefined) {
+000324:       insertCols.push(col.column_name);
+000325:       values.push(v);
+000326:     }
+000327:   }
+000328: 
+000329:   if (!insertCols.includes('email')) return { ok:false, code:500, error:'USERS_EMAIL_COLUMN_MISSING' };
+000330: 
+000331:   const placeholders = values.map((_, i) => `$${i + 1}`).join(', ');
+000332:   const sql = `
+000333:     INSERT INTO users (${insertCols.map(qident).join(', ')})
+000334:     VALUES (${placeholders})
+000335:     RETURNING ${cols.has('id') ? 'id::text AS id' : "'' AS id"}, ${cols.has('status') ? 'status' : "'' AS status"}
+000336:   `;
+000337: 
+000338:   const r = await client.query(sql, values);
+000339:   return { ok:true, user:r.rows[0], status:r.rows[0].status || null };
+000340: }
+000341: 
+000342: 
+000343: function sendMailSafe(to, subject, text, html) {
+000344:   try {
+000345:     const payload = JSON.stringify({ to, subject, text, html: html || '' });
+000346:     const r = spawnSync('/usr/local/bin/ndsp_send_mail.py', [], {
+000347:       input: payload,
+000348:       encoding: 'utf8',
+000349:       timeout: 30000,
+000350:       env: process.env
+000351:     });
+000352: 
+000353:     let out = {};
+000354:     try { out = JSON.parse(String(r.stdout || '{}')); } catch (_) {}
+000355: 
+000356:     return {
+000357:       ok: r.status === 0 && out.ok === true,
+000358:       status: r.status,
+000359:       result: out,
+000360:       stderr: String(r.stderr || '').slice(0, 300)
+000361:     };
+000362:   } catch (e) {
+000363:     return { ok: false, error: String(e && e.message ? e.message : e) };
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_trial_register_gateway.cjs|LINES=365-412
+000365: }
+000366: 
+000367: function adminMailTo() {
+000368:   return (
+000369:     process.env.SMTP_ADMIN_TO ||
+000370:     process.env.SMTP_TO ||
+000371:     process.env.ALERT_EMAIL_TO ||
+000372:     'ndsp.app@gmail.com'
+000373:   );
+000374: }
+000375: 
+000376: function registrationEmailTexts(body, mode, result) {
+000377:   const name = String(body.name || body.full_name || body.display_name || 'User');
+000378:   const email = String(body.email || '').toLowerCase();
+000379:   const status = String(result && result.status ? result.status : '');
+000380:   const isPending = mode !== 'ordinary';
+000381: 
+000382:   const modeLabel =
+000383:     mode === 'private' ? 'Premium invite-only / مميز بدعوة خاصة' :
+000384:     mode === 'professional' ? 'Professional/Academic / متخصص أو أكاديمي' :
+000385:     'Ordinary beginner / مستخدم عادي مبتدئ';
+000386: 
+000387:   const adminSubject = `NDSP New Trial Registration - ${modeLabel}`;
+000388:   const adminText =
+000389: `New NDSP trial registration received.
+000390: 
+000391: Name: ${name}
+000392: Email: ${email}
+000393: Type: ${modeLabel}
+000394: Status: ${status || (isPending ? 'pending_review' : 'active')}
+000395: Admin activation required: ${isPending ? 'Yes' : 'No'}
+000396: Invite required: ${mode === 'private' ? 'Yes' : 'No'}
+000397: Time: ${new Date().toISOString()}
+000398: 
+000399: Admin console:
+000400: https://admin.ndsp.app/
+000401: `;
+000402: 
+000403:   const userSubject = isPending
+000404:     ? 'NDSP — تم استلام طلب التسجيل'
+000405:     : 'NDSP — تم إنشاء حساب التجربة';
+000406: 
+000407:   const userText = isPending
+000408:     ? `مرحبًا ${name},
+000409: 
+000410: تم استلام طلب التسجيل في NDSP — منصة نواف لدعم القرار.
+000411: 
+000412: نوع الحساب:
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_trial_register_gateway.cjs|LINES=420-506
+000420: `
+000421:     : `مرحبًا ${name},
+000422: 
+000423: تم إنشاء حساب التجربة في NDSP — منصة نواف لدعم القرار.
+000424: 
+000425: يمكنك الآن الدخول إلى بوابة المستخدم:
+000426: https://my.ndsp.app/
+000427: 
+000428: تنبيه: NDSP منصة دعم قرار وتحليل سياقي، وليست جهة استثمارية ولا تقدم توصيات مالية ملزمة.
+000429: 
+000430: NDSP
+000431: `;
+000432: 
+000433:   return { adminSubject, adminText, userSubject, userText };
+000434: }
+000435: 
+000436: function notifyRegistrationEmails(body, mode, result) {
+000437:   const texts = registrationEmailTexts(body, mode, result);
+000438: 
+000439:   const admin = sendMailSafe(
+000440:     adminMailTo(),
+000441:     texts.adminSubject,
+000442:     texts.adminText
+000443:   );
+000444: 
+000445:   const user = sendMailSafe(
+000446:     String(body.email || '').toLowerCase(),
+000447:     texts.userSubject,
+000448:     texts.userText
+000449:   );
+000450: 
+000451:   return {
+000452:     admin_email_sent: admin.ok,
+000453:     user_email_sent: user.ok,
+000454:     admin_status: admin.status,
+000455:     user_status: (mode === 'ordinary' ? 'ACTIVE' : 'PENDING_REVIEW')
+000456:   };
+000457: }
+000458: 
+000459: 
+000460: async function syncAdminUsersJsonSafe() {
+000461:   return await new Promise((resolve) => {
+000462:     try {
+000463:       const key = String(process.env.NDSP_ADMIN_ACTION_KEY || '');
+000464:       if (!key) {
+000465:         return resolve({ ok:false, error:'NDSP_ADMIN_ACTION_KEY_MISSING' });
+000466:       }
+000467: 
+000468:       const payload = '{}';
+000469: 
+000470:       const req = http.request({
+000471:         hostname: '127.0.0.1',
+000472:         port: 9017,
+000473:         path: '/api/admin-actions/users/sync-json',
+000474:         method: 'POST',
+000475:         timeout: 15000,
+000476:         headers: {
+000477:           'Content-Type': 'application/json',
+000478:           'Content-Length': Buffer.byteLength(payload),
+000479:           'X-NDSP-ADMIN-KEY': key
+000480:         }
+000481:       }, (res) => {
+000482:         let raw = '';
+000483:         res.on('data', chunk => { raw += chunk; });
+000484:         res.on('end', () => {
+000485:           let body = {};
+000486:           try { body = JSON.parse(raw || '{}'); } catch (_) {}
+000487:           resolve({
+000488:             ok: res.statusCode >= 200 && res.statusCode < 300 && body.ok === true,
+000489:             statusCode: res.statusCode,
+000490:             body
+000491:           });
+000492:         });
+000493:       });
+000494: 
+000495:       req.on('timeout', () => {
+000496:         try { req.destroy(); } catch (_) {}
+000497:         resolve({ ok:false, error:'ADMIN_JSON_SYNC_TIMEOUT' });
+000498:       });
+000499: 
+000500:       req.on('error', (e) => {
+000501:         resolve({ ok:false, error:String(e && e.message ? e.message : e) });
+000502:       });
+000503: 
+000504:       req.write(payload);
+000505:       req.end();
+000506: 
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_trial_register_gateway.cjs|LINES=512-530
+000512: 
+000513: 
+000514: async function activateUserByToken(client, token) {
+000515:   const tokenHash = sha256Hex(token);
+000516: 
+000517:   const found = await client.query(
+000518:     `SELECT t.id AS token_id, t.user_id::text AS user_id, t.used_at, t.expires_at,
+000519:             u.status, u.trial_started_at, u.trial_ends_at
+000520:      FROM ndsp_auth_activation_tokens t
+000521:      JOIN users u ON u.id = t.user_id
+000522:      WHERE t.token_hash = $1
+000523:      LIMIT 1`,
+000524:     [tokenHash]
+000525:   );
+000526: 
+000527:   if (!found.rowCount) {
+000528:     return { ok:false, code:400, error:'INVALID_ACTIVATION_TOKEN' };
+000529:   }
+000530: 
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_trial_register_gateway.cjs|LINES=536-572
+000536: 
+000537:   if (new Date(row.expires_at).getTime() < Date.now()) {
+000538:     return { ok:false, code:410, error:'ACTIVATION_TOKEN_EXPIRED' };
+000539:   }
+000540: 
+000541:   await client.query(
+000542:     `UPDATE users
+000543:      SET status='ACTIVE',
+000544:          trial_started_at = COALESCE(trial_started_at, now()),
+000545:          trial_ends_at = COALESCE(trial_ends_at, now() + ($2::int || ' days')::interval),
+000546:          updated_at = now()
+000547:      WHERE id = $1::uuid`,
+000548:     [row.user_id, TRIAL_DAYS]
+000549:   );
+000550: 
+000551:   await client.query(
+000552:     `UPDATE ndsp_auth_activation_tokens
+000553:      SET used_at = now()
+000554:      WHERE id = $1`,
+000555:     [row.token_id]
+000556:   );
+000557: 
+000558:   return { ok:true, user_id:row.user_id, status:'ACTIVE' };
+000559: }
+000560: 
+000561: const server = http.createServer(async (req, res) => {
+000562:   try {
+000563:     const u = new URL(req.url, `http://${req.headers.host || '127.0.0.1'}`);
+000564: 
+000565: 
+000566:     if (req.method === 'GET' && (u.pathname === '/activate' || u.pathname === '/api/auth/activate' || u.pathname === '/api/trial/activate')) {
+000567:       const token = clean(u.searchParams.get('token') || '');
+000568:       if (!token) return send(res, 400, { ok:false, error:'TOKEN_REQUIRED' });
+000569: 
+000570:       const client = await pool.connect();
+000571:       try {
+000572:         await client.query('BEGIN');
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_trial_register_gateway.cjs|LINES=575-595
+000575:         if (!activated.ok) {
+000576:           await client.query('ROLLBACK');
+000577:           return send(res, activated.code || 400, { ok:false, error:activated.error });
+000578:         }
+000579: 
+000580:         await client.query('COMMIT');
+000581:         await syncAdminUsersJsonSafe();
+000582: 
+000583:         return send(res, 200, {
+000584:           ok:true,
+000585:           message:'ACCOUNT_ACTIVATED_TRIAL_STARTED',
+000586:           user_id:activated.user_id,
+000587:           status:activated.status,
+000588:           trial_days:TRIAL_DAYS
+000589:         });
+000590:       } catch (e) {
+000591:         try { await client.query('ROLLBACK'); } catch (_) {}
+000592:         return send(res, 500, { ok:false, error:'ACTIVATION_FAILED', detail:String(e && e.message ? e.message : e) });
+000593:       } finally {
+000594:         client.release();
+000595:       }
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_trial_register_gateway.cjs|LINES=602-624
+000602:         endpoints:[
+000603:           '/api/trial/register/ordinary',
+000604:           '/api/trial/register/professional',
+000605:           '/api/trial/register/private-invite',
+000606:           '/api/trial/invites/validate'
+000607:         ],
+000608:         database:'PostgreSQL',
+000609:         admin_panel_sync: true,
+000610:         trial_days:TRIAL_DAYS
+000611:       });
+000612:     }
+000613: 
+000614:     if (req.method === 'POST' && u.pathname === '/api/trial/invites/validate') {
+000615:       const body = await readJson(req);
+000616:       const code = extractInviteCode(body.invite_code || body.invite || body.invitation_link || body.link);
+000617:       if (!code) return send(res, 400, { ok:false, error:'INVITE_CODE_REQUIRED' });
+000618: 
+000619:       const client = await pool.connect();
+000620:       try {
+000621:         const v = await validateInvite(client, code);
+000622:         return send(res, v.ok ? 200 : 400, v.ok ? { ok:true, invite_code:code } : { ok:false, error:v.error });
+000623:       } finally {
+000624:         client.release();
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_trial_register_gateway.cjs|LINES=633-648
+000633: 
+000634:     if (req.method !== 'POST' || !routes[u.pathname]) {
+000635:       return send(res, 404, { ok:false, error:'NOT_FOUND', path:u.pathname });
+000636:     }
+000637: 
+000638:     const mode = routes[u.pathname];
+000639:     const body = await readJson(req);
+000640: 
+000641:     const client = await pool.connect();
+000642:     try {
+000643:       await client.query('BEGIN');
+000644: 
+000645:       let inviteCode = '';
+000646:       if (mode === 'private') {
+000647:         inviteCode = extractInviteCode(body.invite_code || body.invite || body.invitation_link || body.link);
+000648:         if (!inviteCode) {
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_trial_register_gateway.cjs|LINES=673-706
+000673:         activation = await createActivationToken(client, result.user.id);
+000674:         body.activation_url = activation.activation_url;
+000675:       }
+000676: 
+000677:       await client.query('COMMIT');
+000678: 
+000679:       const adminJsonSync = await syncAdminUsersJsonSafe();
+000680: 
+000681:       const emailNotify = notifyRegistrationEmails(body, mode, result);
+000682: 
+000683:       const responsePayload = {
+000684:         ok:true,
+000685:         message:'REGISTRATION_SUBMITTED',
+000686:         mode,
+000687:         user_id:result.user.id,
+000688:         status:result.status,
+000689:         admin_activation_required: mode !== 'ordinary',
+000690:         invite_required: mode === 'private',
+000691:         email_notifications: emailNotify,
+000692:         survey_notice: NDSP_TRIAL_SURVEY_NOTICE,
+000693:         trial_starts_on: mode === 'ordinary' ? 'activation' : 'admin_activation',
+000694:         trial_day_1_policy: mode === 'ordinary'
+000695:           ? 'starts_from_account_activation'
+000696:           : 'starts_only_after_admin_approval',
+000697:         admin_json_sync: adminJsonSync
+000698:       };
+000699: 
+000700:       if (String(process.env.NDSP_DEBUG_ACTIVATION_URL || '').toLowerCase() === 'true' && activation) {
+000701:         responsePayload.activation_url_debug = activation.activation_url;
+000702:       }
+000703: 
+000704:       return send(res, 200, responsePayload);
+000705: 
+000706:       } catch (e) {
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_trial_register_gateway.cjs|LINES=722-730
+000722:       error:'GATEWAY_EXCEPTION',
+000723:       detail:String(e && e.message ? e.message : e)
+000724:     });
+000725:   }
+000726: });
+000727: 
+000728: server.listen(PORT, '127.0.0.1', () => {
+000729:   console.log(`[NDSP] trial register gateway listening on 127.0.0.1:${PORT}`);
+000730: });
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/admin_users_official_api/server.js
+CONTEXT_BLOCK_COUNT=4
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/admin_users_official_api/server.js|LINES=2-27
+000002: 
+000003: const http = require('http');
+000004: const crypto = require('crypto');
+000005: const { execFile } = require('child_process');
+000006: 
+000007: const HOST = process.env.HOST || '127.0.0.1';
+000008: const PORT = Number(process.env.PORT || 9031);
+000009: const DB_NAME = process.env.PGDATABASE || process.env.POSTGRES_DB || 'ndsp_auth';
+000010: const ADMIN_KEY = String(process.env.NDSP_ADMIN_ACTION_KEY || '').trim();
+000011: 
+000012: function send(res, code, obj) {
+000013:   res.writeHead(code, {
+000014:     'Content-Type': 'application/json; charset=utf-8',
+000015:     'Cache-Control': 'no-store',
+000016:     'X-Content-Type-Options': 'nosniff'
+000017:   });
+000018:   res.end(JSON.stringify(obj));
+000019: }
+000020: 
+000021: function safeEqual(a, b) {
+000022:   const aa = Buffer.from(String(a || ''));
+000023:   const bb = Buffer.from(String(b || ''));
+000024:   if (!aa.length || !bb.length || aa.length !== bb.length) return false;
+000025:   return crypto.timingSafeEqual(aa, bb);
+000026: }
+000027: 
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/admin_users_official_api/server.js|LINES=38-179
+000038:         reject(new Error('BODY_TOO_LARGE'));
+000039:         req.destroy();
+000040:       }
+000041:     });
+000042:     req.on('end', () => {
+000043:       if (!data) return resolve({});
+000044:       try { resolve(JSON.parse(data)); }
+000045:       catch { reject(new Error('INVALID_JSON')); }
+000046:     });
+000047:   });
+000048: }
+000049: 
+000050: function q(s) {
+000051:   return "'" + String(s ?? '').replace(/'/g, "''") + "'";
+000052: }
+000053: 
+000054: function runSql(sql) {
+000055:   return new Promise((resolve, reject) => {
+000056:     const databaseUrl =
+000057:       process.env.DATABASE_URL ||
+000058:       process.env.NDSP_DATABASE_URL ||
+000059:       process.env.POSTGRES_URL ||
+000060:       process.env.DB_URL ||
+000061:       '';
+000062: 
+000063:     let cmd;
+000064:     let args;
+000065: 
+000066:     if (databaseUrl) {
+000067:       cmd = 'psql';
+000068:       args = [databaseUrl, '-X', '-q', '-A', '-t', '-v', 'ON_ERROR_STOP=1', '-c', sql];
+000069:     } else {
+000070:       cmd = 'sudo';
+000071:       args = ['-u', 'postgres', 'psql', '-d', DB_NAME, '-X', '-q', '-A', '-t', '-v', 'ON_ERROR_STOP=1', '-c', sql];
+000072:     }
+000073: 
+000074:     execFile(cmd, args, { timeout: 20000, maxBuffer: 1024 * 1024 * 10 }, (err, stdout, stderr) => {
+000075:       if (err) {
+000076:         err.stderr = stderr;
+000077:         return reject(err);
+000078:       }
+000079:       resolve(String(stdout || '').trim());
+000080:     });
+000081:   });
+000082: }
+000083: 
+000084: async function listUsers(limit) {
+000085:   const safeLimit = Math.max(1, Math.min(Number(limit || 100), 300));
+000086: 
+000087:   const sql = `
+000088: WITH base AS (
+000089:   SELECT to_jsonb(u) AS j
+000090:   FROM public.users u
+000091:   ORDER BY
+000092:     CASE
+000093:       WHEN to_jsonb(u) ? 'created_at'
+000094:       THEN (to_jsonb(u)->>'created_at')::timestamptz
+000095:       ELSE NOW()
+000096:     END DESC
+000097:   LIMIT ${safeLimit}
+000098: )
+000099: SELECT COALESCE(json_agg(jsonb_strip_nulls(jsonb_build_object(
+000100:   'id', j->>'id',
+000101:   'email', j->>'email',
+000102:   'phone', j->>'phone',
+000103:   'name', COALESCE(j->>'name', j->>'full_name', j->>'display_name'),
+000104:   'role', COALESCE(j->>'role', j->>'user_role', j->>'account_role'),
+000105:   'status', j->>'status',
+000106:   'plan', COALESCE(j->>'plan', j->>'package', j->>'subscription_plan'),
+000107:   'trial_status', COALESCE(j->>'trial_status', j->>'review_status'),
+000108:   'created_at', j->>'created_at',
+000109:   'updated_at', j->>'updated_at'
+000110: ))), '[]'::json)
+000111: FROM base;`;
+000112: 
+000113:   const out = await runSql(sql);
+000114:   return JSON.parse(out || '[]');
+000115: }
+000116: 
+000117: async function dumpUsersBeforeAction() {
+000118:   return new Promise((resolve) => {
+000119:     const stamp = new Date().toISOString().replace(/[-:TZ.]/g, '').slice(0, 14);
+000120:     const dir = `/home/nawaf511/ndsp_backups/admin_user_action_${stamp}`;
+000121:     const file = `${dir}/public_users_before_action.sql`;
+000122: 
+000123:     execFile('mkdir', ['-p', dir], () => {
+000124:       const databaseUrl =
+000125:         process.env.DATABASE_URL ||
+000126:         process.env.NDSP_DATABASE_URL ||
+000127:         process.env.POSTGRES_URL ||
+000128:         process.env.DB_URL ||
+000129:         '';
+000130: 
+000131:       let cmd;
+000132:       let args;
+000133: 
+000134:       if (databaseUrl) {
+000135:         cmd = 'pg_dump';
+000136:         args = [databaseUrl, '-t', 'public.users', '-f', file];
+000137:       } else {
+000138:         cmd = 'sudo';
+000139:         args = ['-u', 'postgres', 'pg_dump', '-d', DB_NAME, '-t', 'public.users', '-f', file];
+000140:       }
+000141: 
+000142:       execFile(cmd, args, { timeout: process.env.PORT || process.env.PORT || 30000, maxBuffer: 1024 * 1024 }, (err) => {
+000143:         resolve({ ok: !err, file, error: err ? String(err.message || err) : null });
+000144:       });
+000145:     });
+000146:   });
+000147: }
+000148: 
+000149: async function applyAction(action, targetId) {
+000150:   const allowed = {
+000151:     activate: 'ACTIVE',
+000152:     suspend: 'SUSPENDED',
+000153:     pending_review: 'PENDING_REVIEW'
+000154:   };
+000155: 
+000156:   const newStatus = allowed[action];
+000157: 
+000158:   if (!newStatus) {
+000159:     const e = new Error('UNSUPPORTED_ACTION');
+000160:     e.status = 400;
+000161:     throw e;
+000162:   }
+000163: 
+000164:   if (!targetId || !/^[0-9a-f-]{20,80}$/i.test(String(targetId))) {
+000165:     const e = new Error('INVALID_USER_ID');
+000166:     e.status = 400;
+000167:     throw e;
+000168:   }
+000169: 
+000170:   const backup = await dumpUsersBeforeAction();
+000171:   if (!backup.ok) {
+000172:     const e = new Error('BACKUP_BEFORE_ACTION_FAILED');
+000173:     e.status = 500;
+000174:     e.detail = backup.error;
+000175:     throw e;
+000176:   }
+000177: 
+000178:   const actorHint = ADMIN_KEY ? `${ADMIN_KEY.slice(0, 4)}***${ADMIN_KEY.slice(-4)}` : 'missing';
+000179: 
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/admin_users_official_api/server.js|LINES=181-306
+000181: DO $do$
+000182: DECLARE
+000183:   target_text text := ${q(targetId)};
+000184:   requested_action text := ${q(action)};
+000185:   new_status text := ${q(newStatus)};
+000186:   actor_hint text := ${q(actorHint)};
+000187:   before_data jsonb;
+000188:   after_data jsonb;
+000189:   id_column_type text;
+000190:   has_status boolean;
+000191:   has_updated_at boolean;
+000192: BEGIN
+000193:   SELECT data_type INTO id_column_type
+000194:   FROM information_schema.columns
+000195:   WHERE table_schema='public' AND table_name='users' AND column_name='id'
+000196:   LIMIT 1;
+000197: 
+000198:   SELECT EXISTS (
+000199:     SELECT 1 FROM information_schema.columns
+000200:     WHERE table_schema='public' AND table_name='users' AND column_name='status'
+000201:   ) INTO has_status;
+000202: 
+000203:   SELECT EXISTS (
+000204:     SELECT 1 FROM information_schema.columns
+000205:     WHERE table_schema='public' AND table_name='users' AND column_name='updated_at'
+000206:   ) INTO has_updated_at;
+000207: 
+000208:   IF NOT has_status THEN
+000209:     RAISE EXCEPTION 'STATUS_COLUMN_MISSING';
+000210:   END IF;
+000211: 
+000212:   EXECUTE 'SELECT to_jsonb(u) FROM public.users u WHERE u.id::text=$1 LIMIT 1'
+000213:   INTO before_data
+000214:   USING target_text;
+000215: 
+000216:   IF before_data IS NULL THEN
+000217:     RAISE EXCEPTION 'USER_NOT_FOUND';
+000218:   END IF;
+000219: 
+000220:   CREATE TABLE IF NOT EXISTS public.ndsp_admin_user_action_audit (
+000221:     id bigserial PRIMARY KEY,
+000222:     actor_hint text NOT NULL,
+000223:     action text NOT NULL,
+000224:     target_user_id text NOT NULL,
+000225:     before_data jsonb,
+000226:     after_data jsonb,
+000227:     created_at timestamptz NOT NULL DEFAULT now()
+000228:   );
+000229: 
+000230:   IF has_updated_at THEN
+000231:     EXECUTE 'UPDATE public.users SET status=$1, updated_at=NOW() WHERE id::text=$2'
+000232:     USING new_status, target_text;
+000233:   ELSE
+000234:     EXECUTE 'UPDATE public.users SET status=$1 WHERE id::text=$2'
+000235:     USING new_status, target_text;
+000236:   END IF;
+000237: 
+000238:   EXECUTE 'SELECT to_jsonb(u) FROM public.users u WHERE u.id::text=$1 LIMIT 1'
+000239:   INTO after_data
+000240:   USING target_text;
+000241: 
+000242:   INSERT INTO public.ndsp_admin_user_action_audit(actor_hint, action, target_user_id, before_data, after_data)
+000243:   VALUES(actor_hint, requested_action, target_text, before_data, after_data);
+000244: END
+000245: $do$;
+000246: 
+000247: SELECT json_build_object(
+000248:   'ok', true,
+000249:   'target_id', ${q(targetId)},
+000250:   'action', ${q(action)},
+000251:   'new_status', ${q(newStatus)},
+000252:   'backup_file', ${q(backup.file)}
+000253: );
+000254: `;
+000255: 
+000256:   const out = await runSql(sql);
+000257:   return JSON.parse(out || '{"ok":true}');
+000258: }
+000259: 
+000260: const server = http.createServer(async (req, res) => {
+000261:   try {
+000262:     const url = new URL(req.url, `http://${req.headers.host || '127.0.0.1'}`);
+000263: 
+000264:     if (req.method === 'OPTIONS') {
+000265:       res.writeHead(204, {
+000266:         'Access-Control-Allow-Headers': 'Content-Type, X-NDSP-ADMIN-KEY',
+000267:         'Access-Control-Allow-Methods': 'GET, POST, OPTIONS'
+000268:       });
+000269:       return res.end();
+000270:     }
+000271: 
+000272:     if (url.pathname === '/health') {
+000273:       return send(res, 200, {
+000274:         ok: true,
+000275:         service: 'ndsp-admin-users-official',
+000276:         db: DB_NAME,
+000277:         host: HOST,
+000278:         port: PORT,
+000279:         protected: true,
+000280:         admin_key_configured: Boolean(ADMIN_KEY)
+000281:       });
+000282:     }
+000283: 
+000284:     if (url.pathname === '/api/admin/users/official' && req.method === 'GET') {
+000285:       if (!authorized(req)) return send(res, 401, { ok: false, error: 'UNAUTHORIZED' });
+000286:       const users = await listUsers(url.searchParams.get('limit') || 100);
+000287:       return send(res, 200, {
+000288:         ok: true,
+000289:         source: 'PostgreSQL / ndsp_auth / public.users',
+000290:         users
+000291:       });
+000292:     }
+000293: 
+000294:     if (url.pathname === '/api/admin/users/action' && req.method === 'POST') {
+000295:       if (!authorized(req)) return send(res, 401, { ok: false, error: 'UNAUTHORIZED' });
+000296:       const body = await readBody(req);
+000297:       const result = await applyAction(body.action, body.user_id || body.target_id || body.id);
+000298:       return send(res, 200, result);
+000299:     }
+000300: 
+000301:     return send(res, 404, { ok: false, error: 'NOT_FOUND', path: url.pathname });
+000302:   } catch (err) {
+000303:     return send(res, err.status || 500, {
+000304:       ok: false,
+000305:       error: String(err.message || err),
+000306:       detail: err.detail || err.stderr || undefined
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/admin_users_official_api/server.js|LINES=310-318
+000310: 
+000311: server.on('error', (err) => {
+000312:   console.error('SERVER_LISTEN_ERROR', err);
+000313:   process.exit(1);
+000314: });
+000315: 
+000316: server.listen(PORT, HOST, () => {
+000317:   console.log(`ndsp-admin-users-official listening on ${HOST}:${PORT}`);
+000318: });
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/ndsp_platform_gateway_9001.cjs
+CONTEXT_BLOCK_COUNT=3
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/ndsp_platform_gateway_9001.cjs|LINES=1-31
+000001: 'use strict';
+000002: 
+000003: const http = require('http');
+000004: const { URL } = require('url');
+000005: 
+000006: const PORT = Number(process.env.NDSP_PLATFORM_GATEWAY_PORT || 9001);
+000007: const HOST = process.env.NDSP_PLATFORM_GATEWAY_HOST || '127.0.0.1';
+000008: 
+000009: const ROUTES = [
+000010:   { prefix: '/api/admin-ui/', target: 'http://127.0.0.1:9023' }, // NDSP_ADMIN_UI_PROXY_ROUTE_SAFE_20260604
+000011:   { prefix: '/api/auth/', target: 'http://127.0.0.1:9020' },
+000012:   { prefix: '/api/user-dashboard/', target: 'http://127.0.0.1:9021' },
+000013:   { prefix: '/api/trial/', target: 'http://127.0.0.1:9019' },
+000014:   { prefix: '/api/admin-actions/', target: 'http://127.0.0.1:9017' },
+000015:   { prefix: '/api/admin/', target: 'http://127.0.0.1:9017' },
+000016:   { prefix: '/api/', target: 'http://127.0.0.1:9002' }
+000017: ];
+000018: 
+000019: function sendJson(res, code, body) {
+000020:   const payload = JSON.stringify(body);
+000021:   res.writeHead(code, {
+000022:     'Content-Type': 'application/json; charset=utf-8',
+000023:     'Content-Length': Buffer.byteLength(payload),
+000024:     'Cache-Control': 'no-store',
+000025:     'X-NDSP-Gateway': 'platform-9001'
+000026:   });
+000027:   res.end(payload);
+000028: }
+000029: 
+000030: function matchRoute(pathname) {
+000031:   if (pathname === '/health' || pathname === '/api/health') return { health: true };
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/ndsp_platform_gateway_9001.cjs|LINES=34-96
+000034:     if (pathname === route.prefix || pathname.startsWith(route.prefix)) return route;
+000035:   }
+000036: 
+000037:   return null;
+000038: }
+000039: 
+000040: function proxyRequest(req, res, route) {
+000041:   const target = new URL(route.target);
+000042:   const path = req.url || '/';
+000043: 
+000044:   const options = {
+000045:     protocol: target.protocol,
+000046:     hostname: target.hostname,
+000047:     port: target.port,
+000048:     method: req.method,
+000049:     path,
+000050:     headers: {
+000051:       ...req.headers,
+000052:       host: target.host,
+000053:       'x-ndsp-platform-gateway': '9001',
+000054:       'x-forwarded-host': req.headers.host || '',
+000055:       'x-forwarded-proto': req.headers['x-forwarded-proto'] || 'https'
+000056:     },
+000057:     timeout: 30000
+000058:   };
+000059: 
+000060:   const upstream = http.request(options, upstreamRes => {
+000061:     const headers = { ...upstreamRes.headers };
+000062:     headers['x-ndsp-gateway'] = 'platform-9001';
+000063:     delete headers['content-length'];
+000064:     res.writeHead(upstreamRes.statusCode || 502, headers);
+000065:     upstreamRes.pipe(res);
+000066:   });
+000067: 
+000068:   upstream.on('timeout', () => {
+000069:     upstream.destroy(new Error('UPSTREAM_TIMEOUT'));
+000070:   });
+000071: 
+000072:   upstream.on('error', err => {
+000073:     sendJson(res, 502, {
+000074:       ok: false,
+000075:       error: 'UPSTREAM_GATEWAY_ERROR',
+000076:       service: 'ndsp-platform-gateway',
+000077:       target: route.target,
+000078:       detail: String(err && err.message ? err.message : err)
+000079:     });
+000080:   });
+000081: 
+000082:   req.pipe(upstream);
+000083: }
+000084: 
+000085: const server = http.createServer((req, res) => {
+000086:   try {
+000087:     const parsed = new URL(req.url || '/', `http://${req.headers.host || 'localhost'}`);
+000088:     const route = matchRoute(parsed.pathname);
+000089: 
+000090:       // NDSP_CORE_ROUTE_REWRITE_20260604
+000091:       // Keep the gateway raw-http architecture. Rewrite only verified public aliases.
+000092:       const originalPathname = parsed.pathname;
+000093:       let rewrittenUrl = null;
+000094: 
+000095:       if (originalPathname === '/api/trial/status') rewrittenUrl = '/api/trial/status';
+000096:       if (originalPathname === '/api/trial/info') rewrittenUrl = '/api/trial/status';
+========================================================================
+FILE=/home/nawaf511/empire-core-new/backend/ndsp_platform_gateway_9001.cjs|LINES=101-144
+000101:       if (originalPathname === '/api/ops/alerts-status') rewrittenUrl = '/ops/alerts-status';
+000102:       if (originalPathname === '/api/alerts/status') rewrittenUrl = '/ops/alerts-status';
+000103: 
+000104:       if (rewrittenUrl) {
+000105:         const rewrittenReq = Object.create(req);
+000106:         rewrittenReq.url = rewrittenUrl + (parsed.search || '');
+000107:         return proxyRequest(rewrittenReq, res, { prefix: originalPathname, target: 'http://127.0.0.1:9002' });
+000108:       }
+000109:       // NDSP_CORE_ROUTE_REWRITE_END_20260604
+000110: 
+000111: 
+000112:     if (route && route.health) {
+000113:       return sendJson(res, 200, {
+000114:         ok: true,
+000115:         service: 'ndsp-platform-gateway',
+000116:         platform_backend_port: 9001,
+000117:         bot_backend_port: 9002,
+000118:         public_api_namespace: '/api',
+000119:         legacy_services_behind_gateway: [9017, 9019, 9020, 9021]
+000120:       });
+000121:     }
+000122: 
+000123:     if (!route || !route.target) {
+000124:       return sendJson(res, 404, {
+000125:         ok: false,
+000126:         error: 'NOT_FOUND',
+000127:         service: 'ndsp-platform-gateway',
+000128:         path: parsed.pathname
+000129:       });
+000130:     }
+000131: 
+000132:     return proxyRequest(req, res, route);
+000133:   } catch (err) {
+000134:     return sendJson(res, 500, {
+000135:       ok: false,
+000136:       error: 'GATEWAY_EXCEPTION',
+000137:       detail: String(err && err.message ? err.message : err)
+000138:     });
+000139:   }
+000140: });
+000141: 
+000142: server.listen(PORT, HOST, () => {
+000143:   console.log(`NDSP platform gateway listening on http://${HOST}:${PORT}`);
+000144: });
+========================================================================

@@ -1,0 +1,21 @@
+4:  current: "/api/completed-decisions",
+5:  history: "/api/completed-decisions/history?limit=100",
+6:  integrity: "/api/completed-decisions/history/integrity"
+14:    const response = await fetch(url, {
+21:      throw new Error(`${url}:HTTP_${response.status}`);
+32:  const [history, setHistory] = useState(null);
+34:  const [loading, setLoading] = useState(true);
+35:  const [error, setError] = useState(null);
+39:    setLoading(true);
+40:    setError(null);
+44:      fetchJson(ENDPOINTS.history),
+50:    if (settled[0].status === "fulfilled") {
+56:    if (settled[1].status === "fulfilled") {
+57:      setHistory(settled[1].value);
+59:      failures.push(settled[1].reason?.message || "HISTORY_FETCH_FAILED");
+62:    if (settled[2].status === "fulfilled") {
+69:      setError(failures.join(" | "));
+73:    setLoading(false);
+84:    history,
+86:    loading,
+87:    error,

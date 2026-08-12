@@ -1,0 +1,47 @@
+65:    more: "المزيد",
+76:    settings: "الإعدادات",
+77:    changeContext: "تغيير الاختيار",
+214:    more: "More",
+225:    settings: "Settings",
+2128:    menu: "☰", close: "×", globe: "◎", bell: "◉", chart: "⌁", arrow: "←",
+2203:    loadMore: "تحميل تاريخ أكثر",
+2225:    loadMore: "Load more history",
+4052:const MORE_NAV = [
+4056:  ["plans", "/plans"], ["settings", "/settings"], ["changeContext", "/context"]
+4069:  const [drawer, setDrawer] = useState(false);
+4070:  const [more, setMore] = useState(false);
+4071:  const drawerRef = useRef(null);
+4072:  const menuRef = useRef(null);
+4075:    if (!drawer) return undefined;
+4076:    document.body.classList.add("drawer-open");
+4078:    drawerRef.current?.querySelector("a,button")?.focus();
+4080:      if (event.key === "Escape") setDrawer(false);
+4084:      document.body.classList.remove("drawer-open");
+4088:  }, [drawer]);
+4092:    setDrawer(false);
+4093:    setMore(false);
+4095:  const navButton = ([key, path], mobile = false) => <button key={path} onClick={() => go(path)} className={`nav-link ${route === path ? "active" : ""} ${mobile ? "drawer-link" : ""}`}>{t(key)}</button>;
+4100:      <nav className="desktop-nav" aria-label="menu">{PRIMARY_NAV.map((item) => navButton(item))}<div className="more-wrap"><button className={`nav-link nav-button ${MORE_NAV.some(([, path]) => path === route) ? "active" : ""}`} onClick={() => setMore((value) => !value)}>{t("more")} <span className="caret">⌄</span></button>{more ? <div className="dropdown" onMouseLeave={() => setMore(false)}>{MORE_NAV.map((item) => navButton(item))}</div> : null}</div></nav>
+4101:      <div className="header-actions"><Badge tone="success">{t("live")}</Badge><button className="icon-button" onClick={() => patch({ lang: lang === "ar" ? "en" : "ar" })}><Icon name="globe"/><span className="action-text">{lang === "ar" ? "English" : "العربية"}</span></button><button ref={menuRef} className="icon-button mobile-menu" onClick={() => setDrawer(true)} aria-expanded={drawer}><Icon name="menu"/></button></div>
+4103:    {drawer ? <div className="drawer-layer" data-dir={state.lang === "ar" ? "rtl" : "ltr"}><button className="drawer-backdrop" onClick={() => setDrawer(false)} aria-label="close"/><aside ref={drawerRef} className="drawer" role="dialog" aria-modal="true"><div className="drawer-head"><div className="brand"><span className="brand-mark">N</span><span><strong>{t("brand")}</strong><small>{t("brandFull")}</small></span></div><button className="icon-button" onClick={() => setDrawer(false)}><Icon name="close"/></button></div><div className="drawer-trial"><span>{t("commercialNotice")}</span></div><nav className="drawer-nav">{PRIMARY_NAV.map((item) => navButton(item, true))}<div className="drawer-separator">{t("more")}</div>{MORE_NAV.map((item) => navButton(item, true))}
+4104:            <PortalLogoutButton/>
+5106:            {CHART_COPY[lang].loadMore}
+7283:function SettingsPage() {
+7293:      <PageHeader title={t("settings")}/>
+7295:      <div className="settings-grid">
+7346:                      : "More spacing and calmer reading, with less content visible at once."
+7370:                      : "Less spacing to show more content without changing data size or meaning."
+7401:/* NDSP_SOURCE_LOGOUT_V1_BEGIN */
+7402:function PortalLogoutButton() {
+7406:  async function logout() {
+7411:      const response = await fetch("/api/auth/logout", {
+7419:        throw new Error(`LOGOUT_HTTP_${response.status}`);
+7424:      window.location.assign("/logout/");
+7430:      ? (lang === "ar" ? "جارٍ تسجيل الخروج…" : "Signing out…")
+7431:      : (lang === "ar" ? "تسجيل الخروج" : "Sign out");
+7436:      className="nav-link drawer-logout"
+7437:      onClick={logout}
+7439:      data-ndsp-source-logout-v2="integrated-nav-item"
+7442:      <span className="drawer-logout-icon" aria-hidden="true">↪</span>
+7447:/* NDSP_SOURCE_LOGOUT_V1_END */
+7469:    "/settings": <SettingsPage/>,

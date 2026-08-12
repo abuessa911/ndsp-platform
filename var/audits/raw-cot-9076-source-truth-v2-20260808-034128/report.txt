@@ -1,0 +1,17 @@
+=== NDSP RAW COT 9076 SOURCE TRUTH V2 ===
+MODE=READ_ONLY
+
+=== SERVICE IDENTITY ===
+LISTENER_PID=1339
+SERVICE_PID=1339
+WORKING_DIRECTORY=/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway
+EXECSTART={ path=/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/.venv/bin/uvicorn ; argv[]=/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/.venv/bin/uvicorn app:app --host 127.0.0.1 --port 9076 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }
+SERVICE_OWNERSHIP=PROVEN
+
+=== GATEWAY DIRECTORY ===
+EXPECTED=/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway
+GATEWAY_DIRECTORY=FOUND
+
+=== UVICORN app:app RESOLUTION ===
+APP_MODULE_FILE=/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/app.py
+APP_MODULE_FILE=FOUND
