@@ -1,0 +1,48 @@
+name: PR-024 Critical Implementation
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  critical-implementation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            frontend/user-portal-vite/package-lock.json
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install root dependencies
+        run: npm ci --ignore-scripts
+
+      - name: Run critical contract tests
+        run: node --test backend/tests/pr024-critical-contracts.test.cjs
+
+      - name: Validate implementation
+        run: python3 scripts/governance/validate_pr024_critical_implementation.py
+
+      - name: Install user portal dependencies
+        working-directory: frontend/user-portal-vite
+        run: npm ci --ignore-scripts
+
+      - name: Build user portal
+        working-directory: frontend/user-portal-vite
+        run: npm run build

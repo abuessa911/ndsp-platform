@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "document": "PR-066A Traceability Reconciliation",
+  "generated_at": "2026-08-02T15:51:12.128441+00:00",
+  "central_traceability_mutated": true,
+  "traceability_rows_changed": 2,
+  "new_capability_created": false,
+  "validate_decision_canonicality_preserved": "REVIEW_REQUIRED",
+  "expected_cot_cycle_canonicality_preserved": "CANONICAL",
+  "rows": [
+    {
+      "row_number": 427,
+      "capability_id": "CAP-704639CE50C9",
+      "capability_name": "Validate Decision",
+      "canonicality_before": "REVIEW_REQUIRED",
+      "canonicality_after": "REVIEW_REQUIRED",
+      "changed_columns": [
+        "source_or_algorithm",
+        "endpoint_or_contract",
+        "evidence_path",
+        "notes"
+      ],
+      "new_capability_created": false
+    },
+    {
+      "row_number": 465,
+      "capability_id": "CAP-C807F0E54F0D",
+      "capability_name": "Expected Cot Cycle",
+      "canonicality_before": "CANONICAL",
+      "canonicality_after": "CANONICAL",
+      "changed_columns": [
+        "source_or_algorithm",
+        "endpoint_or_contract",
+        "evidence_path",
+        "notes"
+      ],
+      "new_capability_created": false
+    }
+  ],
+  "runtime_changes": "none",
+  "validation": "PASS",
+  "status": "PR066A_TRACEABILITY_RECONCILED"
+}

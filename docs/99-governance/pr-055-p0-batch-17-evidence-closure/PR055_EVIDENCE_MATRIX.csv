@@ -1,0 +1,4 @@
+batch_id,capability_id,capability_name,p0_signature,service_required,endpoint_required,real_data_required,service_evidence_found,endpoint_evidence_found,real_data_evidence_found,candidate_count,selected_evidence_paths,machine_closed,human_confirmation_required
+B17_SERVICE_ONLY,CAP-F197D783C391,User Operational Compat,SERVICE_ONLY,true,false,false,true,true,true,392,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B17_SERVICE_ONLY,CAP-F19E055AF8D6,User Operational Compat,SERVICE_ONLY,true,false,false,true,true,true,364,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B17_SERVICE_ONLY,CAP-FAAE9703FE61,User Operational Compat,SERVICE_ONLY,true,false,false,true,true,true,356,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true

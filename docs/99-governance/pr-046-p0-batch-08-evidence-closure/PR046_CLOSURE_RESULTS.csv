@@ -1,0 +1,7 @@
+batch_id,capability_id,capability_name,p0_signature,closure_state,selected_evidence_paths,service_gap_remaining,endpoint_gap_remaining,real_data_gap_remaining,human_confirmation_required,ui_complete_created
+B08_SERVICE_ENDPOINT,CAP-B13D2E033AA3,Use Market,SERVICE_ENDPOINT,CLOSED_MACHINE_EVIDENCE_FOUND,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,false,false,false,true,false
+B08_SERVICE_ENDPOINT,CAP-C231FDE8F33A,Is Decision Request,SERVICE_ENDPOINT,CLOSED_MACHINE_EVIDENCE_FOUND,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,false,false,false,true,false
+B08_SERVICE_ENDPOINT,CAP-D89712BC5C12,Ndsp Governance 44 V26,SERVICE_ENDPOINT,CLOSED_MACHINE_EVIDENCE_FOUND,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,false,false,false,true,false
+B08_SERVICE_ENDPOINT,CAP-E4F9CD5311CA,Pick Market Timestamp,SERVICE_ENDPOINT,CLOSED_MACHINE_EVIDENCE_FOUND,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,false,false,false,true,false
+B08_SERVICE_ENDPOINT,CAP-EAFDBC235B37,Format Market Timestamp,SERVICE_ENDPOINT,CLOSED_MACHINE_EVIDENCE_FOUND,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,false,false,false,true,false
+B08_SERVICE_ENDPOINT,CAP-F5C7F3807EC2,Canonical Decision Text,SERVICE_ENDPOINT,CLOSED_MACHINE_EVIDENCE_FOUND,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,false,false,false,true,false

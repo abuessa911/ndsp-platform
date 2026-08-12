@@ -1,0 +1,12 @@
+57ac3ddf84c5854bcf5ef2f577287e2d05e62e9ff30f3c9ff0cbf1a302c2375c  docs/99-governance/pr-062-cot-direction-time-backend-audit/PR-062-COT-DIRECTION-TIME-BACKEND-AUDIT.md
+9693ab5f6c870f4792012f4ec1071836c1ae09cbd4a6198b122f0b0df2cf8f87  docs/99-governance/pr-062-cot-direction-time-backend-audit/PR062_LOGIC_INVENTORY.csv
+84fd8ba92e183fadab23a0e5283671337c10dada485d9d4d1fd587a7207e429a  docs/99-governance/pr-062-cot-direction-time-backend-audit/PR062_LOGIC_INVENTORY.json
+b4c1520bdb1c16ffaccb74f7915ee0dbb1f67a748e126e4b0bd72aa86f3902e7  docs/99-governance/pr-062-cot-direction-time-backend-audit/PR062_CODE_IMPACT_MAP.csv
+e92c3251db15792428e7293767afa898b635a26b7bc8d8f8888ea0313476b4e9  docs/99-governance/pr-062-cot-direction-time-backend-audit/PR062_CODE_IMPACT_MAP.json
+94213ba8632197cd032a8c6e3671d8623726fb1b0ce4cc3edc7f03929539908a  docs/99-governance/pr-062-cot-direction-time-backend-audit/PR062_UNRESOLVED_ITEMS.csv
+9dcc4dd711b61bc6bfa0ba8e5aa34334b40ebc61687155992a20f1182943ab71  docs/99-governance/pr-062-cot-direction-time-backend-audit/PR062_SUMMARY.json
+cb4b498027194e5a55ad716aa938aaebafa227d77b731c3dcbe806d08aea4569  docs/99-governance/pr-062-cot-direction-time-backend-audit/README.md
+f88849da537f97858efc35aa6a6802e80387738af50c42e09f759e095c0e38d7  scripts/governance/build_pr062_cot_direction_time_backend_audit.py
+46652623e07ba772c9feb1b628b9b783c169c343f53dbc1aa22c47830ef1f887  scripts/governance/validate_pr062_cot_direction_time_backend_audit.py
+97bcc368b0fdc9a20a1dc1853e55ca1de8152a70119d203ceba61deee593260d  scripts/governance/tests/pr062-cot-direction-time-backend-audit.test.cjs
+3407d2c7c5b6ff68a6875321f72d9b65f7008e373dcfb0c3f6ead632fdf0970c  .github/workflows/pr062-cot-direction-time-backend-audit.yml

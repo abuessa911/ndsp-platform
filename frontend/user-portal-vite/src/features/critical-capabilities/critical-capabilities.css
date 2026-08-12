@@ -1,0 +1,26 @@
+.critical-capabilities-page {
+  display: grid;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.critical-capabilities-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+}
+
+.critical-capabilities-grid article {
+  border: 1px solid currentColor;
+  border-radius: 1rem;
+  display: grid;
+  gap: 1rem;
+  min-height: 14rem;
+  padding: 1.25rem;
+}
+
+.critical-capabilities-grid pre {
+  max-height: 20rem;
+  overflow: auto;
+  white-space: pre-wrap;
+}

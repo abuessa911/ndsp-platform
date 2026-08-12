@@ -1,0 +1,30 @@
+[
+  {
+    "path": "apps/ndsp-governance-bridge/policies/admin_snapshot/tdl_v2_policy_admin.py",
+    "status": "RECOVERED_FROM_LOCAL",
+    "reason": "required_by_pr023_contract",
+    "sha256": "bd044be248c4958803b6612b4e8819226b38ef874255e02f56f132e1820eb380",
+    "size_bytes": 5205
+  },
+  {
+    "path": "backend/app/api/v1/frontend_contract.py",
+    "status": "RECOVERED_FROM_LOCAL",
+    "reason": "required_by_pr023_contract",
+    "sha256": "d4d2bde00b9b1fbae357bfe6d7a05b2e10c79ef52f73e4180646a0581cbf71c9",
+    "size_bytes": 13786
+  },
+  {
+    "path": "backend/app/support_layers/quality/decision_quality_stack.py",
+    "status": "RECOVERED_FROM_LOCAL",
+    "reason": "required_by_pr023_contract",
+    "sha256": "bf173d2931da605f001d11284a180d820891f26369bfd1bb3c67ae24728564ff",
+    "size_bytes": 6579
+  },
+  {
+    "path": "backend/app/support_layers/scenario/scenario_engine.py",
+    "status": "RECOVERED_FROM_LOCAL",
+    "reason": "required_by_pr023_contract",
+    "sha256": "8ef29aa4f4b074a36d50665196b30feaa6fd7e89203cb6be5b57457da049c88c",
+    "size_bytes": 18046
+  }
+]

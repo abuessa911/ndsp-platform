@@ -1,0 +1,130 @@
+{
+  "schema_version": "1.0",
+  "document": "NDSP Governance Review Ownership and Escalation Register",
+  "generated_at": "2026-07-31T14:41:26.656978+00:00",
+  "source_commit": "04c4aaa7a772fd0d4e346dd7caea2d92c9c670ba",
+  "scope": "docs/99-governance",
+  "runtime_changes": "none",
+  "status": "ACTIVE",
+  "purpose": "Define accountable ownership roles, review responsibilities, escalation levels, response expectations, and closure evidence.",
+  "register_state": {
+    "governance_packages": 10,
+    "assigned_named_owners": 0,
+    "pending_owner_assignments": 10,
+    "open_escalations": 0,
+    "overdue_escalations": 0,
+    "closed_escalations": 0
+  },
+  "ownership_roles": [
+    {
+      "role": "governance_owner",
+      "accountability": [
+        "Own governance policy and final escalation decisions.",
+        "Approve policy exceptions and overdue remediation.",
+        "Ensure review coverage remains complete."
+      ]
+    },
+    {
+      "role": "artifact_owner",
+      "accountability": [
+        "Maintain the assigned governance artifact.",
+        "Provide review evidence.",
+        "Resolve findings within agreed deadlines."
+      ]
+    },
+    {
+      "role": "runtime_owner",
+      "accountability": [
+        "Validate runtime-related governance assertions.",
+        "Assess operational impact.",
+        "Approve runtime-scope exceptions."
+      ]
+    },
+    {
+      "role": "review_owner",
+      "accountability": [
+        "Schedule and conduct periodic reviews.",
+        "Record findings and evidence.",
+        "Escalate overdue or material issues."
+      ]
+    },
+    {
+      "role": "maintainer",
+      "accountability": [
+        "Validate repository scope and integrity.",
+        "Review governance-only pull requests.",
+        "Preserve traceability and checksums."
+      ]
+    }
+  ],
+  "escalation_levels": [
+    {
+      "level": 1,
+      "name": "OWNER_ACTION",
+      "trigger": "Routine finding or missing evidence.",
+      "target_role": "artifact_owner",
+      "response_target_business_days": 5
+    },
+    {
+      "level": 2,
+      "name": "GOVERNANCE_REVIEW",
+      "trigger": "Overdue review, repeated finding, or missing owner.",
+      "target_role": "governance_owner",
+      "response_target_business_days": 3
+    },
+    {
+      "level": 3,
+      "name": "RUNTIME_RISK_REVIEW",
+      "trigger": "Finding may affect production runtime or exposure.",
+      "target_role": "runtime_owner",
+      "response_target_business_days": 1
+    },
+    {
+      "level": 4,
+      "name": "CRITICAL_ESCALATION",
+      "trigger": "Uncontrolled material risk or expired critical evidence.",
+      "target_role": "governance_owner",
+      "response_target_business_days": 0
+    }
+  ],
+  "required_ownership_fields": [
+    "governance_package",
+    "primary_artifact",
+    "artifact_owner",
+    "review_owner",
+    "runtime_owner",
+    "governance_owner",
+    "backup_owner",
+    "effective_date",
+    "review_date",
+    "evidence"
+  ],
+  "required_escalation_fields": [
+    "escalation_id",
+    "level",
+    "trigger",
+    "affected_scope",
+    "reported_by",
+    "assigned_to",
+    "opened_at",
+    "response_due_at",
+    "status",
+    "actions",
+    "evidence",
+    "closed_at"
+  ],
+  "control_rules": [
+    "Every governance artifact must have an accountable artifact owner.",
+    "Every periodic review must have an assigned review owner.",
+    "Runtime-impacting findings require runtime-owner review.",
+    "Missing owners must be escalated to the governance owner.",
+    "Overdue actions must advance to the next escalation level.",
+    "Critical findings must not wait for the normal review cycle.",
+    "Escalation evidence and closure decisions must be retained.",
+    "Ownership exceptions must be recorded in PR-012.",
+    "Review schedules must remain aligned with PR-013.",
+    "Governance-only pull requests must not contain runtime changes."
+  ],
+  "ownership_assignments": [],
+  "escalations": []
+}

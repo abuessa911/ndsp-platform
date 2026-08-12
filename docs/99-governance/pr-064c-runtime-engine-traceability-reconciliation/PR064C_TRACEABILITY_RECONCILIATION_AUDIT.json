@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "document": "PR-064C Runtime Engine Traceability Reconciliation",
+  "generated_at": "2026-08-02T03:26:57.626557+00:00",
+  "source_pr_commit": "d798b793dc58eb658e025bb2f14042c3581137f4",
+  "traceability_path": "docs/99-governance/pr-018-full-capability-ui-governance/CAPABILITY_UI_TRACEABILITY.csv",
+  "selected_row_number": 427,
+  "selection_score": 44,
+  "capability_id": "CAP-704639CE50C9",
+  "capability_name": "Validate Decision",
+  "changed_columns": [
+    "source_or_algorithm",
+    "notes"
+  ],
+  "before": {
+    "source_or_algorithm": "backend/services/decision_governance_core/main.cjs::validateDecision",
+    "notes": "origin=LOCAL_ONLY;confidence=HIGH;business_keyword_score=6;quality_filtered=true;human_validation=PENDING;full_power_preservation=REQUIRED;pr026_runtime=PENDING;pr026_missing=SOURCE|SERVICE|TEST|UI;pr026_human_confirmation=REQUIRED;pr026_ui_complete=false;pr052_batch=B14_SERVICE_ONLY;pr052_machine_evidence=CLOSED;pr052_evidence_paths=docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json;pr052_human_confirmation=REQUIRED;pr052_ui_complete=false;pr059_batch=B14_SERVICE_ONLY;pr059_signature=SERVICE_ONLY;pr059_reconciled_dimensions=NONE;pr059_source=P0_BATCH_MACHINE_EVIDENCE;pr059_human_confirmation=REQUIRED;pr059_ui_complete=false"
+  },
+  "after": {
+    "source_or_algorithm": "backend/services/decision_governance_core/main.cjs::validateDecision|backend/services/decision_governance_core/main.cjs",
+    "notes": "origin=LOCAL_ONLY|confidence=HIGH|business_keyword_score=6|quality_filtered=true|human_validation=PENDING|full_power_preservation=REQUIRED|pr026_runtime=PENDING|pr026_missing=SOURCE|SERVICE|TEST|UI|pr026_human_confirmation=REQUIRED|pr026_ui_complete=false|pr052_batch=B14_SERVICE_ONLY|pr052_machine_evidence=CLOSED|pr052_evidence_paths=docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json|pr052_human_confirmation=REQUIRED|pr052_ui_complete=false|pr059_batch=B14_SERVICE_ONLY|pr059_signature=SERVICE_ONLY|pr059_reconciled_dimensions=NONE|pr059_source=P0_BATCH_MACHINE_EVIDENCE|pr059_human_confirmation=REQUIRED|pr059_ui_complete=false|PR-064B byte-identical runtime source recovery; PR-064C canonical Traceability reconciliation; behavior changes=0; direction logic changes=0"
+  },
+  "status_preserved": true,
+  "new_capability_created": false,
+  "runtime_engine_path": "backend/services/decision_governance_core/main.cjs",
+  "runtime_engine_service": "decision_governance_core",
+  "runtime_engine_endpoints": [
+    "/health",
+    "/api/governance/evaluate",
+    "/api/governance/submit"
+  ],
+  "behavior_changes": 0,
+  "direction_logic_changes": 0,
+  "runtime_changes": "none"
+}

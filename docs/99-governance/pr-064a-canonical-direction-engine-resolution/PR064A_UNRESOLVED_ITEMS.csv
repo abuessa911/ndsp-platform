@@ -1,0 +1,6 @@
+item_id,topic,previous_status,pr064a_resolution,resolution_status,human_approval_required
+UNR-001,TDL-M&L semantics,UNRESOLVED,TDL-M&L disabled in investment and disabled in speculation until separate semantics approval,EXPLICITLY_DISABLED_PENDING_APPROVAL,true
+UNR-002,TDL-S semantics,UNRESOLVED,TDL-S disabled in investment and disabled in speculation until separate semantics approval,EXPLICITLY_DISABLED_PENDING_APPROVAL,true
+UNR-003,Official and experimental result stores,DISCOVERY_REQUIRED,Logical stores proposed; physical stores remain unidentified and must be implemented after approval,PARTIALLY_RESOLVED,true
+UNR-004,Exact production integration points,DISCOVERY_REQUIRED,High-risk integration candidates mapped; exact runtime call graph still requires PR-064 implementation review,PARTIALLY_RESOLVED,true
+UNR-005,Zero-versus-nonzero explicitness classification,TEMPORARY_RULE,PR-063 contract remains authoritative; no new explicitness semantics introduced by PR-064A,PARTIALLY_RESOLVED,true

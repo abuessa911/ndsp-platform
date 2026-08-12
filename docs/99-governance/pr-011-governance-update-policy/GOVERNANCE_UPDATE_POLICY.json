@@ -1,0 +1,161 @@
+{
+  "schema_version": "1.0",
+  "document": "NDSP Governance Update Policy",
+  "generated_at": "2026-07-31T14:03:37.835561+00:00",
+  "source_commit": "640327b806d40f87783c42029862a0b79417da02",
+  "scope": "docs/99-governance",
+  "runtime_changes": "none",
+  "status": "ACTIVE",
+  "purpose": "Define the controlled process for proposing, validating, reviewing, merging, and recording governance documentation changes.",
+  "principles": [
+    "Governance changes must be isolated from runtime changes.",
+    "Each governance change must have explicit scope and ownership.",
+    "Evidence must be reproducible and machine-readable where practical.",
+    "Existing canonical artifacts must not be silently rewritten.",
+    "Checksums and validation results must accompany closure artifacts.",
+    "Temporary branches and worktrees must be removed after merge."
+  ],
+  "change_classes": [
+    {
+      "class": "correction",
+      "description": "Fixes inaccurate documentation without changing governance intent or ownership.",
+      "required_review": "one maintainer"
+    },
+    {
+      "class": "extension",
+      "description": "Adds new governed components, evidence, ownership, exposure, or dependency records.",
+      "required_review": "owner and maintainer"
+    },
+    {
+      "class": "policy_change",
+      "description": "Changes governance requirements, approval rules, or canonical decision criteria.",
+      "required_review": "governance owner and maintainer"
+    },
+    {
+      "class": "closure",
+      "description": "Records completion, integrity validation, or final state for a governance sequence.",
+      "required_review": "maintainer"
+    }
+  ],
+  "required_pull_request_controls": [
+    "One clearly defined governance objective.",
+    "Changes limited to docs/99-governance unless explicitly approved.",
+    "No deleted files unless the deletion is documented and approved.",
+    "JSON artifacts must pass syntax validation.",
+    "Checksum manifests must pass verification.",
+    "The branch must contain only intended commits.",
+    "The pull request must be mergeable and target main.",
+    "The merge commit must be verified on origin/main.",
+    "Temporary local and remote resources must be cleaned up."
+  ],
+  "update_workflow": [
+    {
+      "step": 1,
+      "name": "classify",
+      "requirement": "Declare the change class and intended outcome."
+    },
+    {
+      "step": 2,
+      "name": "isolate",
+      "requirement": "Create a clean branch and independent worktree."
+    },
+    {
+      "step": 3,
+      "name": "generate",
+      "requirement": "Create human-readable and machine-readable evidence."
+    },
+    {
+      "step": 4,
+      "name": "validate",
+      "requirement": "Validate syntax, checksums, scope, and file operations."
+    },
+    {
+      "step": 5,
+      "name": "review",
+      "requirement": "Open a pull request with explicit validation results."
+    },
+    {
+      "step": 6,
+      "name": "merge",
+      "requirement": "Merge only when scope and repository state are clean."
+    },
+    {
+      "step": 7,
+      "name": "verify",
+      "requirement": "Verify the merge commit and artifacts on origin/main."
+    },
+    {
+      "step": 8,
+      "name": "close",
+      "requirement": "Delete temporary branches, worktrees, and files."
+    }
+  ],
+  "required_existing_packages": [
+    {
+      "pr": "PR-004",
+      "directory": "pr-004-runtime-dependency-map",
+      "primary_artifact": "FINAL_RUNTIME_DEPENDENCY_MAP.json",
+      "status": "PRESENT",
+      "file_count": 8,
+      "primary_artifact_sha256": "579336a09ee02b81a26ee6070decff87f83c96e9e6735c09e23ab670f5d84464"
+    },
+    {
+      "pr": "PR-005",
+      "directory": "pr-005-runtime-ownership-map",
+      "primary_artifact": "FINAL_RUNTIME_OWNERSHIP_MAP.json",
+      "status": "PRESENT",
+      "file_count": 5,
+      "primary_artifact_sha256": "11009cf78d6ce22629098db8f172beed92647dc6eaf24cd120350c6a6fca44cb"
+    },
+    {
+      "pr": "PR-006",
+      "directory": "pr-006-network-exposure-map",
+      "primary_artifact": "FINAL_NETWORK_EXPOSURE_MAP.json",
+      "status": "PRESENT",
+      "file_count": 5,
+      "primary_artifact_sha256": "4d672f5fd5313bc9ca3ab5cda21f0a89934b81ab6ecbb3cdd6ea620cae90fdc9"
+    },
+    {
+      "pr": "PR-007",
+      "directory": "pr-007-noncanonical-ownership",
+      "primary_artifact": "FINAL_NONCANONICAL_OWNERSHIP_MAP.json",
+      "status": "PRESENT",
+      "file_count": 5,
+      "primary_artifact_sha256": "5239677f1cdf01ad470167a5b0865378ae4d36e70ccc2aabe194d4b478a35b15"
+    },
+    {
+      "pr": "PR-008",
+      "directory": "pr-008-governance-closure",
+      "primary_artifact": "PR-008-COMMIT-MANIFEST.json",
+      "status": "PRESENT",
+      "file_count": 4,
+      "primary_artifact_sha256": "6f9934ec7bd8f2f08418be0bb2aafdf4d0d9a13e4c982c1f36b31d5d88761966"
+    },
+    {
+      "pr": "PR-009",
+      "directory": "pr-009-governance-index",
+      "primary_artifact": "GOVERNANCE_INDEX.json",
+      "status": "PRESENT",
+      "file_count": 4,
+      "primary_artifact_sha256": "06ef7c192129729f1d0573179572ad20f5b6adfe2992e5707ee3d00a79b18da8"
+    },
+    {
+      "pr": "PR-010",
+      "directory": "pr-010-integrity-audit",
+      "primary_artifact": "GOVERNANCE_INTEGRITY_AUDIT.json",
+      "status": "PRESENT",
+      "file_count": 4,
+      "primary_artifact_sha256": "2768a711a821f59982985bdec7a97e3a8145c94b7536e60fdc0b387e1a09087a"
+    }
+  ],
+  "exceptions": {
+    "allowed": true,
+    "requirements": [
+      "Document the reason.",
+      "Name the approving owner.",
+      "Define the affected artifacts.",
+      "Define the expiry or review date.",
+      "Preserve the exception decision as a governance artifact."
+    ]
+  }
+}

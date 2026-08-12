@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "document": "PR-028 Quick Wins Evidence Closure",
+  "generated_at": "2026-07-31T22:49:11.349525+00:00",
+  "input_quick_win_count": 55,
+  "executable_test_count": 55,
+  "closed_machine_verified_count": 24,
+  "remaining_quick_win_count": 31,
+  "remaining_gap_counts": {
+    "ENDPOINT": 18,
+    "REAL_DATA": 2,
+    "UI": 11
+  },
+  "traceability_rows_updated": 55,
+  "human_approvals_granted": 0,
+  "ui_complete_records_created": 0,
+  "full_capability_coverage_claimed": false,
+  "human_confirmation_required": true,
+  "runtime_changes": "none",
+  "status": "QUICK_WINS_PARTIALLY_CLOSED_GAPS_RETAINED"
+}

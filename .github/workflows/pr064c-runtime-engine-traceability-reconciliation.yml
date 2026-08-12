@@ -1,0 +1,48 @@
+name: PR-064C Runtime Engine Traceability Reconciliation
+
+on:
+  pull_request:
+    paths:
+      - "backend/services/decision_governance_core/**"
+      - "docs/99-governance/pr-018-full-capability-ui-governance/CAPABILITY_UI_TRACEABILITY.csv"
+      - "docs/99-governance/pr-064c-runtime-engine-traceability-reconciliation/**"
+      - "scripts/governance/validate_pr064c_runtime_engine_traceability_reconciliation.py"
+      - "scripts/governance/tests/pr064c-runtime-engine-traceability-reconciliation.test.cjs"
+      - ".github/workflows/pr064c-runtime-engine-traceability-reconciliation.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "backend/services/decision_governance_core/**"
+      - "docs/99-governance/pr-018-full-capability-ui-governance/CAPABILITY_UI_TRACEABILITY.csv"
+      - "docs/99-governance/pr-064c-runtime-engine-traceability-reconciliation/**"
+      - "scripts/governance/validate_pr064c_runtime_engine_traceability_reconciliation.py"
+      - "scripts/governance/tests/pr064c-runtime-engine-traceability-reconciliation.test.cjs"
+      - ".github/workflows/pr064c-runtime-engine-traceability-reconciliation.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Validate PR-064C reconciliation
+        env:
+          PYTHONDONTWRITEBYTECODE: "1"
+        run: |
+          python3 scripts/governance/validate_pr064c_runtime_engine_traceability_reconciliation.py .
+          node --test scripts/governance/tests/pr064c-runtime-engine-traceability-reconciliation.test.cjs

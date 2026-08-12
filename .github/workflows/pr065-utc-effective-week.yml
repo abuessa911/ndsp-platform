@@ -1,0 +1,39 @@
+name: PR-065 UTC Effective Week
+
+on:
+  pull_request:
+    paths:
+      - "backend/services/decision_governance_core/time/**"
+      - "backend/services/decision_governance_core/tests/canonical-effective-week.test.cjs"
+      - "docs/99-governance/pr-018-full-capability-ui-governance/CAPABILITY_UI_TRACEABILITY.csv"
+      - "docs/99-governance/pr-065-utc-effective-week-correction/**"
+      - "scripts/governance/validate_pr065_utc_effective_week.py"
+      - "scripts/governance/tests/pr065-utc-effective-week.test.cjs"
+      - ".github/workflows/pr065-utc-effective-week.yml"
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Validate PR-065
+        env:
+          PYTHONDONTWRITEBYTECODE: "1"
+        run: |
+          python3 scripts/governance/validate_pr065_utc_effective_week.py .
+          node --test backend/services/decision_governance_core/tests/canonical-effective-week.test.cjs
+          node --test scripts/governance/tests/pr065-utc-effective-week.test.cjs
+          node --check backend/services/decision_governance_core/time/canonical-effective-week.cjs

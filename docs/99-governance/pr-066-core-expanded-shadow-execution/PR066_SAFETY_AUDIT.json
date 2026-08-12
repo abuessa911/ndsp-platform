@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0",
+  "runner_sha256": "f31a126aa1dc70b876ea55f997dbec7fd97571a295822ceb9145566813e7c89a",
+  "official_result_write": false,
+  "experimental_result_write": false,
+  "expanded_public_exposure": false,
+  "automatic_promotion": false,
+  "public_api_changes": 0,
+  "runtime_route_changes": 0,
+  "database_changes": 0,
+  "deployment_authorized": false
+}

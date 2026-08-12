@@ -1,0 +1,601 @@
+schema_version: "1.0"
+policy_id: "NDSP-UI-BACKEND-GOVERNANCE"
+title: "NDSP Frontend, Backend, and UI Architecture Governance Policy"
+title_ar: "سياسة حوكمة هندسة الواجهات والباك إند وتجربة المستخدم"
+status: "ACTIVE"
+enforcement: "MANDATORY"
+effective_from: "2026-08-01"
+owners:
+  - "Platform Architecture"
+  - "Governance Engineering"
+  - "Frontend Engineering"
+  - "Backend Engineering"
+
+purpose:
+  ar: >
+    تحويل التوجه التصميمي والهندسي المعتمد إلى سياسة قابلة للقراءة البشرية
+    والآلية، بحيث تستطيع الواجهات والباك إند والاختبارات وأدوات CI/CD فهم
+    القواعد والتحقق منها وتطبيقها دون الاعتماد على تفسير يدوي.
+  en: >
+    Convert the approved design and engineering direction into a machine-readable
+    and human-readable policy that frontend, backend, tests, and CI/CD tooling can
+    validate and apply consistently.
+
+scope:
+  applies_to:
+    - "public_frontend"
+    - "admin_frontend"
+    - "governance_backend"
+    - "raw_cot_data_services"
+    - "public_api"
+    - "internal_admin_api"
+    - "design_system"
+    - "documentation"
+    - "tests"
+    - "ci_cd"
+  repositories:
+    - "abuessa911/ndsp-platform"
+
+design_references:
+  rule: >
+    Reference products are inspiration sources only. Their visual identity,
+    proprietary assets, branding, and component implementations must not be copied.
+  references:
+    public_frontend:
+      inspired_by: "Stripe"
+      principles:
+        - "clear_hero"
+        - "light_motion"
+        - "measured_gradients"
+        - "simple_data_flow_explanation"
+        - "clear_cta"
+        - "short_feature_cards"
+        - "marketing_clarity"
+    admin_dashboard:
+      inspired_by: "Linear"
+      principles:
+        - "fixed_sidebar"
+        - "fast_tables"
+        - "keyboard_shortcuts"
+        - "fast_updates_without_full_reload"
+        - "simple_loading_states"
+        - "tables_before_oversized_charts"
+    settings_and_projects:
+      inspired_by: "Vercel"
+      principles:
+        - "clear_entity_cards"
+        - "status_and_version_visibility"
+        - "operational_health_visibility"
+        - "environment_visibility"
+        - "governance_change_visibility"
+    dialogs_and_sensitive_actions:
+      inspired_by: "Figma"
+      principles:
+        - "explicit_change_summary"
+        - "explicit_non_change_summary"
+        - "impact_visibility"
+        - "version_comparison"
+        - "approval_identity"
+        - "utc_execution_time"
+    documentation:
+      inspired_by: "Notion"
+      principles:
+        - "hierarchical_navigation"
+        - "internal_links"
+        - "clear_empty_states"
+        - "document_versioning"
+        - "modification_dates"
+        - "rtl_and_ltr_support"
+
+architecture:
+  frontend:
+    framework: "React"
+    build_tool: "Vite"
+    language: "TypeScript"
+    rule: >
+      All new governance-facing frontend code must use TypeScript whenever
+      technically feasible.
+  governance_backend:
+    runtime: "Node.js"
+    framework: "Express"
+    module_system: "CommonJS"
+    contract_format: "JSON Schema"
+    preferred_location: "backend/services/decision_governance_core/"
+  raw_cot_gateway:
+    runtime: "Python"
+    server: "Uvicorn"
+    service_location: "apps/ndsp-raw-cot-gateway"
+    responsibility:
+      - "provide_raw_cot_data"
+      - "validate_raw_cot_data"
+    prohibited_responsibility:
+      - "publish_final_direction"
+      - "promote_expanded_to_public"
+  separation_of_concerns:
+    required: true
+    layers:
+      - "presentation"
+      - "business_logic"
+      - "data_access"
+      - "contracts"
+      - "governance"
+
+core_expanded_separation:
+  mandatory: true
+  public_path:
+    flow:
+      - "CORE Engine"
+      - "Official Result Store"
+      - "Public API"
+      - "User Interface"
+  internal_path:
+    flow:
+      - "EXPANDED Shadow Engine"
+      - "Experimental Result Store"
+      - "Internal Admin API"
+      - "Admin Dashboard"
+  prohibited_flows:
+    - "EXPANDED Shadow Engine -> Public API"
+    - "Experimental Result Store -> Public API"
+    - "Admin Dashboard -> Official Result Store direct mutation"
+  promotion:
+    direct_promotion_allowed: false
+    required_artifact: "Governance Promotion Request"
+    required_controls:
+      - "human_approval"
+      - "version_increment"
+      - "acceptance_tests"
+      - "audit_record"
+      - "utc_timestamp"
+      - "rollback_plan"
+
+public_frontend:
+  visible_model: "CORE"
+  hidden_models:
+    - "EXPANDED"
+  prohibited_content:
+    - "shadow_test_status"
+    - "experimental_result"
+    - "expanded_comparison"
+    - "internal_governance_state"
+  required_sections:
+    - "Home"
+    - "Methodology"
+    - "Current Analysis"
+    - "Documentation"
+    - "Sign In"
+  current_analysis_fields:
+    - "Official Direction"
+    - "Analysis Mode"
+    - "Effective Week"
+    - "Report Date"
+    - "Direction Label"
+    - "Dominance Delta"
+    - "Last Updated UTC"
+  experience_rules:
+    - "marketing_not_monitoring"
+    - "clear_value_proposition"
+    - "no_heavy_effects"
+    - "no_experimental_exposure"
+
+admin_frontend:
+  base_route: "/admin/cot"
+  required_routes:
+    - "/admin/cot/overview"
+    - "/admin/cot/reports"
+    - "/admin/cot/daily-control"
+    - "/admin/cot/experiments"
+    - "/admin/cot/comparisons"
+    - "/admin/cot/governance"
+    - "/admin/cot/audit-logs"
+    - "/admin/cot/contracts"
+    - "/admin/cot/settings"
+  visible_statuses:
+    core: "OFFICIAL"
+    expanded: "SHADOW"
+    experiment_status: "RUNNING"
+    public_exposure: "DISABLED"
+  required_filters:
+    - "report"
+    - "effective_week"
+    - "analysis_mode"
+    - "category_perspective"
+    - "day_control_perspective"
+    - "agreement_or_difference"
+  interaction_rules:
+    - "keyboard_shortcuts_supported"
+    - "no_full_page_reload_for_normal_updates"
+    - "simple_loading_states"
+    - "prefer_tables_when_charts_add_no_value"
+
+settings:
+  sections:
+    - "General"
+    - "Perspectives"
+    - "Day Control"
+    - "UTC Calendar"
+    - "Shadow Testing"
+    - "Permissions"
+    - "Audit Log"
+    - "API Contracts"
+  governed_entities:
+    - "COT Governance Engine"
+    - "Raw COT Gateway"
+    - "CORE Perspective"
+    - "EXPANDED Experiment"
+    - "UTC Calendar Policy"
+    - "Report Activation Policy"
+  entity_card_fields:
+    - "status"
+    - "version"
+    - "last_run"
+    - "last_cot_report"
+    - "operational_health"
+    - "environment"
+    - "internal_logs_link"
+    - "last_governance_change"
+
+sensitive_actions:
+  required_dialog_fields:
+    - "what_will_change"
+    - "what_will_not_change"
+    - "user_impact"
+    - "current_version"
+    - "new_version"
+    - "change_reason"
+    - "approver_name"
+    - "execution_time_utc"
+  prohibited_labels:
+    - "Save"
+  approved_labels:
+    - "Save as Draft"
+    - "Start Shadow Test"
+    - "Approve Governance Version"
+    - "Promote to CORE"
+    - "Cancel Without Changes"
+
+documentation_center:
+  required_sections:
+    - "Governance Overview"
+    - "Terminology"
+    - "Dominance Delta"
+    - "Investment Mode"
+    - "Speculation Mode"
+    - "Day-Control Perspectives"
+    - "UTC Policy"
+    - "CORE vs EXPANDED"
+    - "API Contracts"
+    - "Test Cases"
+    - "Decision Records"
+    - "Changelog"
+    - "Incident Notes"
+  required_features:
+    - "hierarchical_sidebar"
+    - "internal_cross_links"
+    - "clear_empty_states"
+    - "last_modified_at"
+    - "governance_version"
+    - "rtl_support"
+    - "ltr_support"
+
+visual_identity:
+  principle: "institutional_analytical_low_noise"
+  colors:
+    background:
+      allowed:
+        - "neutral_dark"
+        - "clean_white"
+    primary_accent: "indigo_violet"
+    secondary_accent: "cyan"
+    success: "green"
+    bearish: "red"
+    warning: "amber"
+    shadow_experiment: "purple"
+    official_core: "blue"
+  accessibility:
+    color_only_status_forbidden: true
+    status_must_include:
+      - "text"
+      - "icon"
+  example_labels:
+    - "صاعد غير صريح — ذو أفق ضيق"
+    - "هابط صريح — ذو أفق ممتد"
+
+internationalization:
+  supported_languages:
+    - "ar"
+    - "en"
+  html:
+    ar: '<html lang="ar" dir="rtl">'
+    en: '<html lang="en" dir="ltr">'
+  rules:
+    arabic_text_direction: "rtl"
+    english_text_direction: "ltr"
+    numbers_and_equations: "ltr_when_needed"
+    code_and_json: "ltr"
+    mixed_language_paragraphs: "forbidden"
+    bilingual_reports: "separate_language_sections"
+  component_level_direction_required: true
+
+frontend_libraries:
+  base_ui:
+    approved:
+      - "shadcn/ui"
+      - "Radix UI"
+      - "Lucide React"
+  forms:
+    approved:
+      - "React Hook Form"
+      - "Zod"
+  server_state:
+    approved:
+      - "TanStack Query"
+    rule: "Direct fetch calls inside presentation components require documented exception."
+  routing:
+    approved:
+      - "React Router"
+      - "TanStack Router"
+    selection_rule: "Use the router already adopted by the application unless an ADR approves migration."
+  tables:
+    large:
+      approved:
+        - "AG Grid"
+      use_cases:
+        - "large_datasets"
+        - "sorting"
+        - "filtering"
+        - "grouping"
+        - "column_pinning"
+        - "export"
+      licensing_review_required_for:
+        - "Pivot"
+        - "Server-Side Row Model"
+        - "Master/Detail"
+        - "advanced_export"
+    small:
+      approved:
+        - "shadcn/ui table"
+  charts:
+    simple:
+      approved:
+        - "Recharts"
+      use_cases:
+        - "kpis"
+        - "simple_line"
+        - "simple_bar"
+        - "simple_area"
+        - "simple_pie"
+        - "public_dashboard"
+    advanced:
+      approved:
+        - "Apache ECharts"
+      use_cases:
+        - "heatmap"
+        - "sankey"
+        - "graph_network"
+        - "financial_chart"
+        - "large_time_series"
+        - "complex_admin_analytics"
+    rule: "Do not mix chart libraries on the same screen without documented justification."
+  workflows:
+    approved:
+      - "React Flow"
+  maps:
+    default:
+      approved:
+        - "Leaflet"
+    advanced:
+      approved:
+        - "Mapbox GL"
+        - "MapLibre GL"
+    rule: "Use Leaflet by default; use Mapbox GL or MapLibre GL only for advanced vector-map requirements."
+  rich_text:
+    approved:
+      - "TipTap"
+  code_json:
+    approved:
+      - "Monaco Editor"
+    loading: "lazy"
+  calendar:
+    approved:
+      - "FullCalendar"
+    premium_license_review_required_for:
+      - "Timeline"
+      - "Resource Scheduling"
+  drag_drop:
+    approved:
+      - "dnd-kit"
+    accessibility_required: true
+  three_d:
+    approved:
+      - "React Three Fiber"
+    default_inclusion: false
+    rule: "Only include for an approved real 3D use case."
+  dates:
+    approved:
+      - "date-fns"
+  localization:
+    approved:
+      - "i18next"
+      - "react-intl"
+  testing:
+    unit:
+      - "Vitest"
+    components:
+      - "Testing Library"
+    end_to_end:
+      - "Playwright"
+    api_mocking:
+      - "MSW"
+    component_documentation:
+      - "Storybook"
+  prohibited:
+    - "duplicate_library_for_same_purpose_without_adr"
+    - "mock_data_as_final_product_data"
+    - "unlicensed_enterprise_features"
+    - "heavy_library_in_initial_bundle_without_need"
+
+library_admission_policy:
+  required_checks:
+    - "react_compatibility"
+    - "typescript_compatibility"
+    - "official_documentation"
+    - "active_maintenance"
+    - "accessibility_support"
+    - "dark_mode_support_when_relevant"
+    - "design_system_compatibility"
+    - "lazy_loading_feasibility"
+    - "bundle_size_assessment"
+    - "license_review"
+    - "security_review"
+    - "architecture_decision_record"
+  approval_required: true
+
+api_and_contracts:
+  requirements:
+    - "Every visible UI element must have a defined data source."
+    - "Every mutating action must have an API contract."
+    - "Every API contract must define authentication and authorization."
+    - "Every API contract must define success and error states."
+    - "Every sensitive action must be auditable."
+    - "Public API must expose CORE only."
+    - "Internal Admin API may expose CORE and EXPANDED."
+  contract_formats:
+    - "JSON Schema"
+    - "OpenAPI where applicable"
+  ui_state_requirements:
+    - "loading"
+    - "empty"
+    - "error"
+    - "success"
+    - "permission_denied"
+    - "stale_data_when_applicable"
+
+traceability:
+  mandatory: true
+  mapping:
+    - "screen"
+    - "function"
+    - "capability"
+    - "service"
+    - "endpoint"
+    - "data_source"
+    - "component"
+    - "permission"
+    - "test"
+  ui_complete_rule:
+    all_required:
+      - "screen_defined"
+      - "visible_component_defined"
+      - "service_defined"
+      - "endpoint_or_contract_defined"
+      - "real_data_defined"
+      - "permission_defined"
+      - "loading_state_defined"
+      - "empty_state_defined"
+      - "error_state_defined"
+      - "success_state_defined"
+      - "executable_test_defined"
+      - "human_confirmation_when_required"
+  prohibited:
+    - "ui_complete_without_machine_evidence"
+    - "button_without_action"
+    - "card_without_data_source"
+    - "chart_without_data_source"
+    - "screen_without_capability"
+
+temporary_model_policy:
+  core:
+    investment_mode:
+      groups:
+        - "asset_managers"
+    speculation_long_term_control:
+      groups:
+        - "asset_managers"
+    speculation_short_term_control:
+      groups:
+        - "leveraged_funds"
+  expanded:
+    groups:
+      - "asset_managers"
+      - "others"
+      - "leveraged_funds"
+      - "dealers"
+    mode: "SHADOW_MODE"
+    public_visibility: false
+    admin_visibility: true
+
+testing_and_quality:
+  mandatory:
+    - "unit_tests"
+    - "component_tests"
+    - "contract_tests"
+    - "end_to_end_tests_for_critical_flows"
+    - "accessibility_checks"
+    - "rtl_checks"
+    - "ltr_checks"
+    - "loading_empty_error_success_checks"
+  critical_flows:
+    - "sign_in"
+    - "view_official_analysis"
+    - "create_shadow_experiment"
+    - "compare_core_and_expanded"
+    - "approve_governance_version"
+    - "promote_to_core"
+    - "audit_log_review"
+  ci_must_fail_on:
+    - "public_exposure_of_expanded"
+    - "missing_required_contract"
+    - "missing_sensitive_action_audit"
+    - "missing_rtl_support"
+    - "ui_complete_without_required_evidence"
+    - "unapproved_library"
+    - "license_violation"
+
+security:
+  requirements:
+    - "role_based_access_control"
+    - "least_privilege"
+    - "no_secret_in_frontend_bundle"
+    - "no_sensitive_payload_in_client_logs"
+    - "csrf_protection_where_applicable"
+    - "input_validation"
+    - "output_encoding"
+    - "audit_for_sensitive_actions"
+  public_admin_boundary_mandatory: true
+
+change_governance:
+  changes_requiring_approval:
+    - "core_business_logic"
+    - "expanded_promotion"
+    - "public_api_contract"
+    - "admin_api_contract"
+    - "new_frontend_library"
+    - "design_system_breaking_change"
+    - "permission_model_change"
+    - "routing_structure_change"
+  required_artifacts:
+    - "Architecture Decision Record"
+    - "risk_assessment"
+    - "test_plan"
+    - "rollback_plan"
+    - "approval_record"
+  timestamps: "UTC"
+
+machine_enforcement:
+  recommended_project_path: "docs/99-governance/ui-architecture/UI_BACKEND_GOVERNANCE_POLICY.yaml"
+  recommended_validator_path: "scripts/governance/validate_ui_backend_governance_policy.py"
+  recommended_ci_path: ".github/workflows/ui-backend-governance-policy.yml"
+  parsers:
+    - "PyYAML"
+    - "js-yaml"
+  required_exit_codes:
+    valid: 0
+    invalid: 1
+  required_output:
+    valid:
+      - "validation=PASS"
+      - "status=UI_BACKEND_GOVERNANCE_POLICY_VALID"
+    invalid:
+      - "validation=FAIL"
+      - "status=UI_BACKEND_GOVERNANCE_POLICY_INVALID"

@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "direction_rule": "delta = long - short",
+  "neutral_rule": "long == short only",
+  "case_count": 5,
+  "cases": [
+    {
+      "id": "DIR-001",
+      "source_path": "$[0]",
+      "long": 120.0,
+      "short": 80.0,
+      "expected_delta": 40.0,
+      "expected_direction": "BULLISH"
+    },
+    {
+      "id": "DIR-002",
+      "source_path": "$[1]",
+      "long": 75.0,
+      "short": 100.0,
+      "expected_delta": -25.0,
+      "expected_direction": "BEARISH"
+    },
+    {
+      "id": "DIR-003",
+      "source_path": "$[2]",
+      "long": 50.0,
+      "short": 50.0,
+      "expected_delta": 0.0,
+      "expected_direction": "NEUTRAL"
+    },
+    {
+      "id": "DIR-004",
+      "source_path": "$[3]",
+      "long": 1.0,
+      "short": 0.0,
+      "expected_delta": 1.0,
+      "expected_direction": "BULLISH"
+    },
+    {
+      "id": "DIR-005",
+      "source_path": "$[4]",
+      "long": 0.0,
+      "short": 1.0,
+      "expected_delta": -1.0,
+      "expected_direction": "BEARISH"
+    }
+  ]
+}

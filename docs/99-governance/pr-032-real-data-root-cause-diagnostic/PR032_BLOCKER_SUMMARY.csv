@@ -1,0 +1,6 @@
+blocker,capability_count,recommended_action
+EXPLICIT_DATA_SOURCE_MISSING,2,Set canonical non-mock data_source in Traceability and document the actual provider/database/feed.
+REAL_DATA_STATE_MISSING,2,Set data_state to REAL_LIVE or REAL_SNAPSHOT only after owner confirmation and supporting runtime evidence.
+ENDPOINT_NOT_RESPONSIVE,2,Repair or expose the canonical read-only endpoint and verify a local HTTP 2xx/3xx response.
+PAYLOAD_EMPTY,2,Investigate upstream ingestion/query filters and ensure the endpoint returns a non-empty production payload.
+PAYLOAD_NOT_JSON,2,Return a documented JSON contract or update the verifier to the canonical structured response format.

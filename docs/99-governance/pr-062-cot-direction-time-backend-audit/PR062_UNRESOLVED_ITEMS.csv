@@ -1,0 +1,6 @@
+item_id,topic,status,required_before,resolution
+UNR-001,TDL-M&L semantics,UNRESOLVED,PR-064 implementation,Document existing rule and obtain governance approval
+UNR-002,TDL-S semantics,UNRESOLVED,PR-064 implementation,Document existing rule and obtain governance approval
+UNR-003,Official and experimental result stores,DISCOVERY_REQUIRED,Shadow integration,"Identify stores, writers, readers, retention, and ownership"
+UNR-004,Exact production integration points,DISCOVERY_REQUIRED,Runtime integration,Confirm entry points and current result consumers
+UNR-005,Zero-versus-nonzero explicitness classification,TEMPORARY_RULE,Contract freeze,Approve or revise narrow-horizon non-explicit classification

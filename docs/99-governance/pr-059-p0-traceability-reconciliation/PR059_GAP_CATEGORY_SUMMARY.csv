@@ -1,0 +1,8 @@
+gap_type,capability_count,coverage_count,coverage_percent
+SOURCE,526,0,0.0
+SERVICE,0,526,100.0
+ENDPOINT,0,526,100.0
+REAL_DATA,5,521,99.05
+CALCULATION,0,526,100.0
+TEST,0,526,100.0
+UI,0,526,100.0
