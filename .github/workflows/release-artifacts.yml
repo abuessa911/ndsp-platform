@@ -1,0 +1,56 @@
+name: Build Release Artifacts
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+
+jobs:
+  build-artifacts:
+    name: Build deployable frontend artifacts
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            frontend/user-portal-vite/package-lock.json
+
+      - name: Build root project
+        run: |
+          npm ci --ignore-scripts --no-audit --no-fund
+          npm run build
+
+      - name: Build user portal
+        working-directory: frontend/user-portal-vite
+        run: |
+          npm ci --ignore-scripts --no-audit --no-fund
+          npm run build
+
+      - name: Upload root build
+        uses: actions/upload-artifact@v4
+        with:
+          name: root-build-${{ github.sha }}
+          path: dist
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Upload user portal build
+        uses: actions/upload-artifact@v4
+        with:
+          name: user-portal-build-${{ github.sha }}
+          path: frontend/user-portal-vite/dist
+          if-no-files-found: error
+          retention-days: 14
