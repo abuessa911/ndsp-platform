@@ -1,0 +1,21 @@
+capability_id,capability_name,original_missing_evidence,resolved_evidence,remaining_missing_evidence,evidence,closure_state,human_confirmation_required,ui_complete_created
+CAP-4FF90CCC6DFE,Tdl V2 Policy Admin,REAL_DATA,,REAL_DATA,,REMAINS_OPEN,true,false
+CAP-8A9DD9B6E7D5,Tdl V2 Policy Admin,REAL_DATA,,REAL_DATA,,REMAINS_OPEN,true,false
+CAP-15C56B60B4B0,Ndsp User Login Gateway,ENDPOINT,,ENDPOINT,,REMAINS_OPEN,true,false
+CAP-214521E6EBD1,Ndsp User Login Gateway,ENDPOINT,,ENDPOINT,,REMAINS_OPEN,true,false
+CAP-242D8324FAD9,Ndsp User Login Gateway,ENDPOINT,,ENDPOINT,,REMAINS_OPEN,true,false
+CAP-3A5ED3DB0C0D,Risk Label,ENDPOINT,,ENDPOINT,,REMAINS_OPEN,true,false
+CAP-3B89863B2015,Ndsp User Login Gateway,ENDPOINT,,ENDPOINT,,REMAINS_OPEN,true,false
+CAP-3D9086A829ED,Ndsp Admin Ui Proxy,ENDPOINT,,ENDPOINT,,REMAINS_OPEN,true,false
+CAP-4B75FD38F852,Ndsp Admin Ui Proxy,ENDPOINT,,ENDPOINT,,REMAINS_OPEN,true,false
+CAP-4FCAA631BA18,Ndsp Admin Actions Bypass Old Middleware,ENDPOINT,,ENDPOINT,,REMAINS_OPEN,true,false
+CAP-644C81537AC6,Ndsp User Login Gateway,ENDPOINT,,ENDPOINT,,REMAINS_OPEN,true,false
+CAP-6565FE804AF5,Ndsp User Login Gateway,ENDPOINT,,ENDPOINT,,REMAINS_OPEN,true,false
+CAP-8F78E58E5656,Ndsp User Login Gateway,ENDPOINT,,ENDPOINT,,REMAINS_OPEN,true,false
+CAP-98156F574B28,Risk Warnings,ENDPOINT,,ENDPOINT,,REMAINS_OPEN,true,false
+CAP-A61CF5BBAA01,Ndsp Admin Ui Proxy,ENDPOINT,,ENDPOINT,,REMAINS_OPEN,true,false
+CAP-C55DEBBD7CB7,Ndsp User Login Gateway,ENDPOINT,,ENDPOINT,,REMAINS_OPEN,true,false
+CAP-D054F1321201,Ndsp User Login Gateway,ENDPOINT,,ENDPOINT,,REMAINS_OPEN,true,false
+CAP-E6FFD507C6FA,Ndsp User Login Gateway,ENDPOINT,,ENDPOINT,,REMAINS_OPEN,true,false
+CAP-F139426B5341,Ndsp User Login Gateway,ENDPOINT,,ENDPOINT,,REMAINS_OPEN,true,false
+CAP-F56AB637F669,Ndsp User Login Gateway,ENDPOINT,,ENDPOINT,,REMAINS_OPEN,true,false

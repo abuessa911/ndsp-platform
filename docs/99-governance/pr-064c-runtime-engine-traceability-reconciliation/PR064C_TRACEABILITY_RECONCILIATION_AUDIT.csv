@@ -1,0 +1,2 @@
+traceability_path,selected_row_number,selection_score,capability_id,capability_name,changed_columns,runtime_engine_path,runtime_engine_service,runtime_engine_endpoints,status_preserved,new_capability_created,behavior_changes,direction_logic_changes,runtime_changes
+docs/99-governance/pr-018-full-capability-ui-governance/CAPABILITY_UI_TRACEABILITY.csv,427,44,CAP-704639CE50C9,Validate Decision,source_or_algorithm|notes,backend/services/decision_governance_core/main.cjs,decision_governance_core,/health|/api/governance/evaluate|/api/governance/submit,true,false,0,0,none

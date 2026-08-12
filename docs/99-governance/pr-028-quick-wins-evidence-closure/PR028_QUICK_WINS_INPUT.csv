@@ -1,0 +1,56 @@
+capability_id,capability_name,missing_evidence_count,missing_evidence,evidence_passed_count,completeness_percent,closability_score,matching_false_negative_risk,recommended_batch,recommended_action,source_verified,runtime_service_status,endpoint_status,real_data_verified,calculation_verified,test_verified,ui_verified
+CAP-13D1EE0A3B7A,Ndsp User Dashboard Gateway,1,TEST,6,85.71,92,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,RESPONSIVE,true,true,false,true
+CAP-170A28FFB0E7,Auth,1,TEST,6,85.71,92,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,RESPONSIVE,true,true,false,true
+CAP-20B6E1FEA3A2,Ndsp Api Compat Gateway,1,TEST,6,85.71,92,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,RESPONSIVE,true,true,false,true
+CAP-24BDA2A0DD8B,Ndsp Admin Ui Proxy,1,TEST,6,85.71,92,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,RESPONSIVE,true,true,false,true
+CAP-2D0CFB1BC505,Ndsp User Login Gateway,1,TEST,6,85.71,92,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,RESPONSIVE,true,true,false,true
+CAP-2ED357832A3E,Ndsp User Login Gateway,1,TEST,6,85.71,92,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,RESPONSIVE,true,true,false,true
+CAP-3CFCB5B47F6B,Ndsp Api Compat Gateway,1,TEST,6,85.71,92,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,RESPONSIVE,true,true,false,true
+CAP-3D0167450973,Ndsp Api Compat Gateway,1,TEST,6,85.71,92,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,RESPONSIVE,true,true,false,true
+CAP-438A6D14BFBB,Auth Optional,1,TEST,6,85.71,92,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,RESPONSIVE,true,true,false,true
+CAP-47C952094550,Ndsp Admin Actions Authoritative,1,TEST,6,85.71,92,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,RESPONSIVE,true,true,false,true
+CAP-48E71B4F1CF7,Ndsp Api Compat Gateway,1,TEST,6,85.71,92,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,RESPONSIVE,true,true,false,true
+CAP-513B295710F5,Ndsp Admin Ui Proxy,1,TEST,6,85.71,92,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,RESPONSIVE,true,true,false,true
+CAP-570806ECD8A4,Ndsp Api Compat Gateway,1,TEST,6,85.71,92,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,RESPONSIVE,true,true,false,true
+CAP-622CD214F034,Ndsp Admin Ui Proxy,1,TEST,6,85.71,92,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,RESPONSIVE,true,true,false,true
+CAP-7E97D2614E6D,Ndsp Admin Ui Proxy,1,TEST,6,85.71,92,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,RESPONSIVE,true,true,false,true
+CAP-81C879AE2209,Ndsp Api Compat Gateway,1,TEST,6,85.71,92,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,RESPONSIVE,true,true,false,true
+CAP-8374FD1D62EB,Ndsp Admin Ui Proxy,1,TEST,6,85.71,92,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,RESPONSIVE,true,true,false,true
+CAP-89287AB7B399,Ndsp Admin Actions Bypass Old Middleware,1,TEST,6,85.71,92,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,RESPONSIVE,true,true,false,true
+CAP-B39355BFBE71,Ndsp Admin Ui Proxy,1,TEST,6,85.71,92,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,RESPONSIVE,true,true,false,true
+CAP-C32C78AB47B0,Ndsp Admin Ui Proxy,1,TEST,6,85.71,92,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,RESPONSIVE,true,true,false,true
+CAP-D18B4EC4F34A,Ndsp Admin Ui Proxy,1,TEST,6,85.71,92,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,RESPONSIVE,true,true,false,true
+CAP-E01E3F460977,Ndsp User Login Gateway,1,TEST,6,85.71,92,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,RESPONSIVE,true,true,false,true
+CAP-F142BF636522,Ndsp Admin Ui Proxy,1,TEST,6,85.71,92,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,RESPONSIVE,true,true,false,true
+CAP-F4D88C2A7931,Ndsp Admin Ui Proxy,1,TEST,6,85.71,92,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,RESPONSIVE,true,true,false,true
+CAP-6F5DF526EE59,Admin Only,2,TEST|UI,5,71.43,84,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,RESPONSIVE,true,true,false,false
+CAP-753A055CFA5A,Ndsp Write Alert State,2,TEST|UI,5,71.43,84,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,RESPONSIVE,true,true,false,false
+CAP-7739F02602D8,Get User By Id,2,TEST|UI,5,71.43,84,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,RESPONSIVE,true,true,false,false
+CAP-784548F2FDAD,Authorize,2,TEST|UI,5,71.43,84,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,RESPONSIVE,true,true,false,false
+CAP-790CBD0E1BCE,Delete User Dependencies,2,TEST|UI,5,71.43,84,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,RESPONSIVE,true,true,false,false
+CAP-89CA79DDADE2,Ndsp Read Alert State,2,TEST|UI,5,71.43,84,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,RESPONSIVE,true,true,false,false
+CAP-9866D4AE9D59,Update User Status,2,TEST|UI,5,71.43,84,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,RESPONSIVE,true,true,false,false
+CAP-A231BBA8D29D,Auth Required,2,TEST|UI,5,71.43,84,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,RESPONSIVE,true,true,false,false
+CAP-ACFDAF4DAD5E,Auth,2,TEST|UI,5,71.43,84,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,RESPONSIVE,true,true,false,false
+CAP-DF54F83FC9EB,Authorize,2,TEST|UI,5,71.43,84,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,RESPONSIVE,true,true,false,false
+CAP-E22DBA05712A,Get User By Email,2,TEST|UI,5,71.43,84,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,RESPONSIVE,true,true,false,false
+CAP-4FF90CCC6DFE,Tdl V2 Policy Admin,2,REAL_DATA|TEST,5,71.43,76,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,RESPONSIVE,false,true,false,true
+CAP-8A9DD9B6E7D5,Tdl V2 Policy Admin,2,REAL_DATA|TEST,5,71.43,76,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,RESPONSIVE,false,true,false,true
+CAP-15C56B60B4B0,Ndsp User Login Gateway,2,ENDPOINT|TEST,5,71.43,74,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,UNSAFE_METHOD_NOT_EXECUTED,true,true,false,true
+CAP-214521E6EBD1,Ndsp User Login Gateway,2,ENDPOINT|TEST,5,71.43,74,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,UNSAFE_METHOD_NOT_EXECUTED,true,true,false,true
+CAP-242D8324FAD9,Ndsp User Login Gateway,2,ENDPOINT|TEST,5,71.43,74,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,UNSAFE_METHOD_NOT_EXECUTED,true,true,false,true
+CAP-3A5ED3DB0C0D,Risk Label,2,ENDPOINT|TEST,5,71.43,74,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,NO_CONTRACT,true,true,false,true
+CAP-3B89863B2015,Ndsp User Login Gateway,2,ENDPOINT|TEST,5,71.43,74,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,UNSAFE_METHOD_NOT_EXECUTED,true,true,false,true
+CAP-3D9086A829ED,Ndsp Admin Ui Proxy,2,ENDPOINT|TEST,5,71.43,74,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,UNSAFE_METHOD_NOT_EXECUTED,true,true,false,true
+CAP-4B75FD38F852,Ndsp Admin Ui Proxy,2,ENDPOINT|TEST,5,71.43,74,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,UNSAFE_METHOD_NOT_EXECUTED,true,true,false,true
+CAP-4FCAA631BA18,Ndsp Admin Actions Bypass Old Middleware,2,ENDPOINT|TEST,5,71.43,74,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,UNSAFE_METHOD_NOT_EXECUTED,true,true,false,true
+CAP-644C81537AC6,Ndsp User Login Gateway,2,ENDPOINT|TEST,5,71.43,74,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,UNSAFE_METHOD_NOT_EXECUTED,true,true,false,true
+CAP-6565FE804AF5,Ndsp User Login Gateway,2,ENDPOINT|TEST,5,71.43,74,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,UNSAFE_METHOD_NOT_EXECUTED,true,true,false,true
+CAP-8F78E58E5656,Ndsp User Login Gateway,2,ENDPOINT|TEST,5,71.43,74,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,UNSAFE_METHOD_NOT_EXECUTED,true,true,false,true
+CAP-98156F574B28,Risk Warnings,2,ENDPOINT|TEST,5,71.43,74,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,NO_CONTRACT,true,true,false,true
+CAP-A61CF5BBAA01,Ndsp Admin Ui Proxy,2,ENDPOINT|TEST,5,71.43,74,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,UNSAFE_METHOD_NOT_EXECUTED,true,true,false,true
+CAP-C55DEBBD7CB7,Ndsp User Login Gateway,2,ENDPOINT|TEST,5,71.43,74,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,UNSAFE_METHOD_NOT_EXECUTED,true,true,false,true
+CAP-D054F1321201,Ndsp User Login Gateway,2,ENDPOINT|TEST,5,71.43,74,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,UNSAFE_METHOD_NOT_EXECUTED,true,true,false,true
+CAP-E6FFD507C6FA,Ndsp User Login Gateway,2,ENDPOINT|TEST,5,71.43,74,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,UNSAFE_METHOD_NOT_EXECUTED,true,true,false,true
+CAP-F139426B5341,Ndsp User Login Gateway,2,ENDPOINT|TEST,5,71.43,74,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,UNSAFE_METHOD_NOT_EXECUTED,true,true,false,true
+CAP-F56AB637F669,Ndsp User Login Gateway,2,ENDPOINT|TEST,5,71.43,74,LOW,B01_QUICK_WINS,Resolve one or two missing evidence elements and rerun verification,true,ACTIVE,UNSAFE_METHOD_NOT_EXECUTED,true,true,false,true

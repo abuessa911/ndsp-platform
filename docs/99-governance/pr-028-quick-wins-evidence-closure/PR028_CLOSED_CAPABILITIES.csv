@@ -1,0 +1,25 @@
+capability_id,capability_name,original_missing_count,original_missing_evidence,resolved_evidence,remaining_missing_count,remaining_missing_evidence,evidence,closure_state,human_confirmation_required,ui_complete_created
+CAP-13D1EE0A3B7A,Ndsp User Dashboard Gateway,1,TEST,TEST,0,,test:backend/tests/pr028-quick-wins-contracts.test.cjs,CLOSED_MACHINE_VERIFIED,true,false
+CAP-170A28FFB0E7,Auth,1,TEST,TEST,0,,test:backend/tests/pr028-quick-wins-contracts.test.cjs,CLOSED_MACHINE_VERIFIED,true,false
+CAP-20B6E1FEA3A2,Ndsp Api Compat Gateway,1,TEST,TEST,0,,test:backend/tests/pr028-quick-wins-contracts.test.cjs,CLOSED_MACHINE_VERIFIED,true,false
+CAP-24BDA2A0DD8B,Ndsp Admin Ui Proxy,1,TEST,TEST,0,,test:backend/tests/pr028-quick-wins-contracts.test.cjs,CLOSED_MACHINE_VERIFIED,true,false
+CAP-2D0CFB1BC505,Ndsp User Login Gateway,1,TEST,TEST,0,,test:backend/tests/pr028-quick-wins-contracts.test.cjs,CLOSED_MACHINE_VERIFIED,true,false
+CAP-2ED357832A3E,Ndsp User Login Gateway,1,TEST,TEST,0,,test:backend/tests/pr028-quick-wins-contracts.test.cjs,CLOSED_MACHINE_VERIFIED,true,false
+CAP-3CFCB5B47F6B,Ndsp Api Compat Gateway,1,TEST,TEST,0,,test:backend/tests/pr028-quick-wins-contracts.test.cjs,CLOSED_MACHINE_VERIFIED,true,false
+CAP-3D0167450973,Ndsp Api Compat Gateway,1,TEST,TEST,0,,test:backend/tests/pr028-quick-wins-contracts.test.cjs,CLOSED_MACHINE_VERIFIED,true,false
+CAP-438A6D14BFBB,Auth Optional,1,TEST,TEST,0,,test:backend/tests/pr028-quick-wins-contracts.test.cjs,CLOSED_MACHINE_VERIFIED,true,false
+CAP-47C952094550,Ndsp Admin Actions Authoritative,1,TEST,TEST,0,,test:backend/tests/pr028-quick-wins-contracts.test.cjs,CLOSED_MACHINE_VERIFIED,true,false
+CAP-48E71B4F1CF7,Ndsp Api Compat Gateway,1,TEST,TEST,0,,test:backend/tests/pr028-quick-wins-contracts.test.cjs,CLOSED_MACHINE_VERIFIED,true,false
+CAP-513B295710F5,Ndsp Admin Ui Proxy,1,TEST,TEST,0,,test:backend/tests/pr028-quick-wins-contracts.test.cjs,CLOSED_MACHINE_VERIFIED,true,false
+CAP-570806ECD8A4,Ndsp Api Compat Gateway,1,TEST,TEST,0,,test:backend/tests/pr028-quick-wins-contracts.test.cjs,CLOSED_MACHINE_VERIFIED,true,false
+CAP-622CD214F034,Ndsp Admin Ui Proxy,1,TEST,TEST,0,,test:backend/tests/pr028-quick-wins-contracts.test.cjs,CLOSED_MACHINE_VERIFIED,true,false
+CAP-7E97D2614E6D,Ndsp Admin Ui Proxy,1,TEST,TEST,0,,test:backend/tests/pr028-quick-wins-contracts.test.cjs,CLOSED_MACHINE_VERIFIED,true,false
+CAP-81C879AE2209,Ndsp Api Compat Gateway,1,TEST,TEST,0,,test:backend/tests/pr028-quick-wins-contracts.test.cjs,CLOSED_MACHINE_VERIFIED,true,false
+CAP-8374FD1D62EB,Ndsp Admin Ui Proxy,1,TEST,TEST,0,,test:backend/tests/pr028-quick-wins-contracts.test.cjs,CLOSED_MACHINE_VERIFIED,true,false
+CAP-89287AB7B399,Ndsp Admin Actions Bypass Old Middleware,1,TEST,TEST,0,,test:backend/tests/pr028-quick-wins-contracts.test.cjs,CLOSED_MACHINE_VERIFIED,true,false
+CAP-B39355BFBE71,Ndsp Admin Ui Proxy,1,TEST,TEST,0,,test:backend/tests/pr028-quick-wins-contracts.test.cjs,CLOSED_MACHINE_VERIFIED,true,false
+CAP-C32C78AB47B0,Ndsp Admin Ui Proxy,1,TEST,TEST,0,,test:backend/tests/pr028-quick-wins-contracts.test.cjs,CLOSED_MACHINE_VERIFIED,true,false
+CAP-D18B4EC4F34A,Ndsp Admin Ui Proxy,1,TEST,TEST,0,,test:backend/tests/pr028-quick-wins-contracts.test.cjs,CLOSED_MACHINE_VERIFIED,true,false
+CAP-E01E3F460977,Ndsp User Login Gateway,1,TEST,TEST,0,,test:backend/tests/pr028-quick-wins-contracts.test.cjs,CLOSED_MACHINE_VERIFIED,true,false
+CAP-F142BF636522,Ndsp Admin Ui Proxy,1,TEST,TEST,0,,test:backend/tests/pr028-quick-wins-contracts.test.cjs,CLOSED_MACHINE_VERIFIED,true,false
+CAP-F4D88C2A7931,Ndsp Admin Ui Proxy,1,TEST,TEST,0,,test:backend/tests/pr028-quick-wins-contracts.test.cjs,CLOSED_MACHINE_VERIFIED,true,false

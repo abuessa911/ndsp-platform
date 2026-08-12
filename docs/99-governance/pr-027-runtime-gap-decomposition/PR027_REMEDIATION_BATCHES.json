@@ -1,0 +1,74 @@
+[
+  {
+    "batch_order": 1,
+    "batch_id": "B01_QUICK_WINS",
+    "capability_count": 55,
+    "minimum_missing_count": 1,
+    "maximum_missing_count": 2,
+    "average_closability_score": "83.93",
+    "recommended_action": "Resolve one or two missing evidence elements and rerun verification"
+  },
+  {
+    "batch_order": 2,
+    "batch_id": "B02_SERVICE_MAPPING",
+    "capability_count": 56,
+    "minimum_missing_count": 4,
+    "maximum_missing_count": 6,
+    "average_closability_score": "35.43",
+    "recommended_action": "Map capability to exact systemd unit/process and verify active state"
+  },
+  {
+    "batch_order": 3,
+    "batch_id": "B03_ENDPOINT_CONTRACTS",
+    "capability_count": 7,
+    "minimum_missing_count": 3,
+    "maximum_missing_count": 3,
+    "average_closability_score": "58.00",
+    "recommended_action": "Bind capability to canonical API contract and safe local probe"
+  },
+  {
+    "batch_order": 4,
+    "batch_id": "B04_DATA_CALCULATION",
+    "capability_count": 2,
+    "minimum_missing_count": 4,
+    "maximum_missing_count": 4,
+    "average_closability_score": "56.00",
+    "recommended_action": "Document real data source, freshness, and calculation evidence"
+  },
+  {
+    "batch_order": 5,
+    "batch_id": "B05_TEST_IMPLEMENTATION",
+    "capability_count": 0,
+    "minimum_missing_count": 0,
+    "maximum_missing_count": 0,
+    "average_closability_score": "0.00",
+    "recommended_action": "Add executable contract/integration test linked to capability"
+  },
+  {
+    "batch_order": 6,
+    "batch_id": "B06_UI_CONSUMERS",
+    "capability_count": 0,
+    "minimum_missing_count": 0,
+    "maximum_missing_count": 0,
+    "average_closability_score": "0.00",
+    "recommended_action": "Bind verified response to visible UI component and states"
+  },
+  {
+    "batch_order": 7,
+    "batch_id": "B07_DEEP_REMEDIATION",
+    "capability_count": 281,
+    "minimum_missing_count": 4,
+    "maximum_missing_count": 7,
+    "average_closability_score": "22.81",
+    "recommended_action": "Review source architecture and reconstruct complete evidence chain"
+  },
+  {
+    "batch_order": 8,
+    "batch_id": "B08_HUMAN_REVIEW",
+    "capability_count": 125,
+    "minimum_missing_count": 2,
+    "maximum_missing_count": 3,
+    "average_closability_score": "62.00",
+    "recommended_action": "Confirm whether machine matching is false-negative before code change"
+  }
+]

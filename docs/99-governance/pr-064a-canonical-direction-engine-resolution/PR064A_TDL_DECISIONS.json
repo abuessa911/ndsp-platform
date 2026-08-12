@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "decision_status": "PARTIALLY_RESOLVED_REQUIRES_HUMAN_APPROVAL",
+  "investment": {
+    "day_control": "DISABLED",
+    "tdl_ml": "DISABLED",
+    "tdl_s": "DISABLED",
+    "reason": "PR-063 approved investment invariants"
+  },
+  "speculation": {
+    "input_basis": "CHANGES_ONLY",
+    "tdl_ml": "DISABLED_UNTIL_SEPARATE_SEMANTICS_APPROVAL",
+    "tdl_s": "DISABLED_UNTIL_SEPARATE_SEMANTICS_APPROVAL",
+    "day_control": "DISABLED_UNTIL_SEPARATE_SEMANTICS_APPROVAL",
+    "invented_semantics_allowed": false
+  },
+  "public_core": {
+    "expanded_exposure": "DISABLED",
+    "shadow_metadata_exposure": "DISABLED"
+  }
+}

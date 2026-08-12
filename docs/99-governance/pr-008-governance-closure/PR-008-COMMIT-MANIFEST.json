@@ -1,0 +1,136 @@
+{
+  "generated_at": "2026-07-31T10:24:38.915720+00:00",
+  "status": "COMPLETE",
+  "scope": "PR-004 through PR-007 governance closure",
+  "runtime_changes": "none",
+  "source_branch": "governance/pr-007-noncanonical-ownership-review",
+  "closure_branch": "governance/pr-008-governance-closure",
+  "commits": {
+    "PR-004": [
+      {
+        "full_hash": "7b3eae0954ec106dedf7e5ce467395b93f0a304e",
+        "short_hash": "7b3eae0",
+        "subject": "docs(governance): add PR-004 runtime dependency map",
+        "author": "Nawaf Al-Otaibi",
+        "authored_at": "2026-07-31T11:25:39+02:00",
+        "ancestor_of_head": true
+      },
+      {
+        "full_hash": "7c0b1e6dc57aad8105d1520520fb1bf37df4b6fb",
+        "short_hash": "7c0b1e6",
+        "subject": "docs(governance): normalize PR-004 CSV line endings",
+        "author": "Nawaf Al-Otaibi",
+        "authored_at": "2026-07-31T11:52:52+02:00",
+        "ancestor_of_head": true
+      }
+    ],
+    "PR-005": [
+      {
+        "full_hash": "eed6ea1be6b2ee9ab243fef913a2fa4375782e45",
+        "short_hash": "eed6ea1",
+        "subject": "docs(governance): add PR-005 runtime ownership map",
+        "author": "Nawaf Al-Otaibi",
+        "authored_at": "2026-07-31T11:57:05+02:00",
+        "ancestor_of_head": true
+      }
+    ],
+    "PR-006": [
+      {
+        "full_hash": "ff3643961418d3a0ccebc1a58db26af7a12c6d7c",
+        "short_hash": "ff36439",
+        "subject": "docs(governance): add PR-006 network exposure map",
+        "author": "Nawaf Al-Otaibi",
+        "authored_at": "2026-07-31T12:11:52+02:00",
+        "ancestor_of_head": true
+      }
+    ],
+    "PR-007": [
+      {
+        "full_hash": "b95343a7ffca19b7410fdefbf3787b1e23ded528",
+        "short_hash": "b95343a",
+        "subject": "docs(governance): add PR-007 ownership review baseline",
+        "author": "Nawaf Al-Otaibi",
+        "authored_at": "2026-07-31T12:16:58+02:00",
+        "ancestor_of_head": true
+      },
+      {
+        "full_hash": "02ac76217b6720f947553af1064865aecd360a45",
+        "short_hash": "02ac762",
+        "subject": "docs(governance): finalize PR-007 ownership decisions",
+        "author": "Nawaf Al-Otaibi",
+        "authored_at": "2026-07-31T12:20:50+02:00",
+        "ancestor_of_head": true
+      }
+    ]
+  },
+  "required_files": {
+    "PR-006": [
+      {
+        "path": "docs/99-governance/pr-006-network-exposure-map/FINAL_NETWORK_EXPOSURE_MAP.csv",
+        "exists": true
+      },
+      {
+        "path": "docs/99-governance/pr-006-network-exposure-map/FINAL_NETWORK_EXPOSURE_MAP.json",
+        "exists": true
+      },
+      {
+        "path": "docs/99-governance/pr-006-network-exposure-map/PR-006-FINAL-NETWORK-EXPOSURE-MAP.md",
+        "exists": true
+      },
+      {
+        "path": "docs/99-governance/pr-006-network-exposure-map/PR-006-NETWORK-EXPOSURE-REVIEW-NOTES.md",
+        "exists": true
+      },
+      {
+        "path": "docs/99-governance/pr-006-network-exposure-map/PR006_FINAL_SHA256SUMS.txt",
+        "exists": true
+      }
+    ],
+    "PR-007": [
+      {
+        "path": "docs/99-governance/pr-007-noncanonical-ownership/FINAL_NONCANONICAL_OWNERSHIP_MAP.csv",
+        "exists": true
+      },
+      {
+        "path": "docs/99-governance/pr-007-noncanonical-ownership/FINAL_NONCANONICAL_OWNERSHIP_MAP.json",
+        "exists": true
+      },
+      {
+        "path": "docs/99-governance/pr-007-noncanonical-ownership/PR-007-NONCANONICAL-OWNERSHIP.md",
+        "exists": true
+      },
+      {
+        "path": "docs/99-governance/pr-007-noncanonical-ownership/PR-007-REVIEW-NOTES.md",
+        "exists": true
+      },
+      {
+        "path": "docs/99-governance/pr-007-noncanonical-ownership/PR007_SHA256SUMS.txt",
+        "exists": true
+      }
+    ]
+  },
+  "validation": {
+    "PR-006": {
+      "listener_count": 79,
+      "unresolved_listener_count": 0,
+      "runtime_changes": "none"
+    },
+    "PR-007": {
+      "status": "FINALIZED",
+      "record_count": 42,
+      "unresolved_record_count": 0,
+      "decision_counts": {
+        "DEPRECATED": 1,
+        "PROMOTE_TO_CANONICAL": 20,
+        "SHARED_INFRASTRUCTURE": 21
+      },
+      "review_status_counts": {
+        "RESOLVED": 42
+      },
+      "runtime_changes": "none"
+    },
+    "commit_validation": "PASS",
+    "file_validation": "PASS",
+    "runtime_changes": "none"
+  }
+}

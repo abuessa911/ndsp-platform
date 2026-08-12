@@ -1,0 +1,40 @@
+[
+  {
+    "capability_id": "CAP-4FF90CCC6DFE",
+    "capability_name": "Tdl V2 Policy Admin",
+    "canonical_endpoint": "GET /api/admin/timing_model-v2/policy",
+    "data_source": "TDL_V2_POLICY_STORE",
+    "data_state": "REAL_SNAPSHOT",
+    "runtime_url": "http://127.0.0.1:58017/api/admin/timing_model-v2/policy",
+    "http_status": 200,
+    "payload_sha256": "e79e6cc37c6060c12c3f9adce608af92ca6a3c1817129a952ff4d55cb3370436",
+    "payload_bytes": 254,
+    "root_key": "policy",
+    "root_item_count": 9,
+    "source_file": "apps/ndsp-governance-bridge/app/core/tdl_v2_policy.py::read_tdl_v2_policy",
+    "runtime_mode": "ISOLATED_REAL_CODE",
+    "payload_values_persisted": "false",
+    "closure_state": "CLOSED_MACHINE_VERIFIED",
+    "human_confirmation_required": "true",
+    "ui_complete_created": "false"
+  },
+  {
+    "capability_id": "CAP-8A9DD9B6E7D5",
+    "capability_name": "Tdl V2 Policy Admin",
+    "canonical_endpoint": "GET /api/admin/timing_model-v2/auth-debug",
+    "data_source": "PROCESS_ENVIRONMENT_PRESENCE_METADATA",
+    "data_state": "REAL_LIVE",
+    "runtime_url": "http://127.0.0.1:58017/api/admin/timing_model-v2/auth-debug",
+    "http_status": 200,
+    "payload_sha256": "3af47b742a2ff8cc70a1402047183d98123de1a9ea57b6622bb0c38f8dc1febe",
+    "payload_bytes": 166,
+    "root_key": "env_present",
+    "root_item_count": 3,
+    "source_file": "apps/ndsp-governance-bridge/policies/admin_snapshot/tdl_v2_policy_admin.py::auth_debug",
+    "runtime_mode": "ISOLATED_REAL_CODE",
+    "payload_values_persisted": "false",
+    "closure_state": "CLOSED_MACHINE_VERIFIED",
+    "human_confirmation_required": "true",
+    "ui_complete_created": "false"
+  }
+]

@@ -1,0 +1,237 @@
+schema_version: "2.0"
+policy_id: "NDSP-UIUX-GOVERNANCE-SUPERSESSION-V2"
+title: "NDSP UI/UX Governance Supersession V2"
+title_ar: "مرجع الحوكمة الحاكم لتجربة المستخدم والتصميم وحماية المصطلحات — الإصدار الثاني"
+status: "ACTIVE"
+enforcement: "MANDATORY"
+effective_from: "2026-08-08"
+owner_approval: "EXPLICIT_OWNER_INSTRUCTION"
+
+purpose:
+  ar: >
+    تثبيت القرارات الأحدث المعتمدة لهوية NDSP وتجربة المستخدم وحدود كشف
+    المصطلحات والباقات، مع إبقاء جميع المتطلبات التقنية والهندسية الفريدة
+    في UI_BACKEND_GOVERNANCE_POLICY.yaml سارية ما لم يحدث تعارض صريح مع
+    هذا الملف في نطاق التصميم أو العرض أو السرية أو Entitlement.
+  en: >
+    Freeze the latest owner-approved NDSP visual identity, customer exposure,
+    confidentiality and subscription-entitlement rules while preserving all
+    unique technical and engineering requirements in the baseline policy.
+
+precedence:
+  baseline_policy: "UI_BACKEND_GOVERNANCE_POLICY.yaml"
+  rule: >
+    This V2 policy has precedence only for visual identity, customer-facing
+    terminology exposure, subscription presentation, trial exposure, and
+    confidentiality boundaries. All non-conflicting baseline requirements remain mandatory.
+  merge_rule: "MERGE_NOT_REWRITE"
+  unique_content_preserved: true
+  true_duplicates_only_may_be_consolidated: true
+
+repository_safety:
+  repository_visibility_observed: "PUBLIC"
+  full_confidential_master_report_in_public_repo: "FORBIDDEN"
+  rule: >
+    The full confidential master report must not be committed to a public
+    repository. Only this sanitized governing policy and other explicitly
+    public-safe governance artifacts may be committed here.
+
+visual_identity:
+  category: "GOVERNED_INSTITUTIONAL_DECISION_INTELLIGENCE"
+  logo_complexity: "3/10"
+  default_foundation: "DEEP_CHARCOAL_NEAR_BLACK"
+  premium_authority_accent: "WARM_REFINED_METALLIC_GOLD"
+  analytical_secondary_accent: "CONTROLLED_SKY_BLUE"
+  high_contrast_neutral: "WHITE_OFF_WHITE"
+  indigo_violet_primary_brand_accent: false
+  purple_usage: "CONTROLLED_REVIEW_EXPERIMENTAL_SEMANTIC_ONLY"
+  gold_usage:
+    - "brand_authority"
+    - "premium_hierarchy"
+    - "selective_core_emphasis"
+  prohibited_visual_patterns:
+    - "continuous_glow"
+    - "heavy_gold_gradients"
+    - "particle_systems"
+    - "gaming_aesthetics"
+    - "crypto_exchange_aesthetics"
+    - "retail_trading_dashboard_identity"
+  motion: "SUBTLE_ONLY"
+  reduced_motion_required: true
+
+architecture_invariants:
+  one_canonical_cot_dataset: "PRESERVED"
+  decision_layers: "01_TO_16_LOGICAL"
+  capabilities: "01_TO_28_LOGICAL"
+  backend_ownership: "UNCHANGED"
+  database_ownership: "UNCHANGED"
+  service_boundaries: "UNCHANGED"
+  governance_authority: "UNCHANGED"
+  existing_contracts: "PRESERVED"
+  technical_freeze_items: "PRESERVED"
+
+customer_terminology_exposure:
+  mode: "NAME_ONLY"
+  maximum_approved_named_items: 5
+  approved_customer_visible_names:
+    - "TDL"
+    - "NMP"
+    - "Nawaf Golden Signal"
+    - "Enhanced Nawaf Golden Signal"
+    - "Devil's Advocate"
+  protected_internal_names_remaining: 11
+  protected_names_publicly_exposed: false
+  important_mapping_rule: >
+    Customer-visible names are a display abstraction and must not be treated as
+    proof of a 1:1 mapping to Decision Layers 01-16 or their internal numbering.
+
+confidentiality:
+  internal_existence_does_not_equal_public_authorization: true
+  paid_entitlement_does_not_equal_ip_disclosure: true
+  forbidden_customer_disclosure:
+    - "formulas"
+    - "algorithms"
+    - "weights"
+    - "internal_inputs"
+    - "internal_state"
+    - "raw_values"
+    - "layer_level_outputs"
+    - "internal_results"
+    - "producers"
+    - "internal_sources"
+    - "internal_contracts"
+    - "internal_dependencies"
+    - "internal_relationships"
+    - "database_structure"
+    - "service_structure"
+    - "hidden_layer_names"
+    - "hidden_capability_names"
+  forbidden_leak_surfaces:
+    - "api_payloads"
+    - "dom"
+    - "hidden_routes"
+    - "html_ids"
+    - "css_classes"
+    - "aria_labels"
+    - "alt_text"
+    - "metadata"
+    - "seo"
+    - "analytics_event_names"
+    - "client_logs"
+    - "error_messages"
+    - "frontend_bundles"
+  secret_data_sent_to_browser_then_hidden: "FORBIDDEN"
+  css_only_locking: "FORBIDDEN"
+  server_side_authorization_required: true
+  server_side_entitlement_required: true
+
+public_experience:
+  principle: "CORE_FIRST_CALM_EXECUTIVE_INTELLIGENCE"
+  anonymous_landing_must_not_become_internal_architecture_map: true
+  public_safe_story:
+    - "official_decision_context"
+    - "authorized_market_context"
+    - "authorized_evidence"
+    - "freshness"
+    - "governance_trust"
+    - "methodology_transparency"
+  internal_logic_exposure: false
+
+subscription_architecture:
+  customer_facing_plans:
+    - "Free"
+    - "Pro"
+    - "Elite"
+    - "Institutional"
+  billing_and_commercial_limits_source: "APPROVED_BILLING_SUBSCRIPTION_CONTRACT_OR_CONFIGURATION"
+  hard_code_unverified_prices_or_limits_in_ui: "FORBIDDEN"
+  admin_rbac_separate_from_customer_subscription_entitlement: true
+
+trial_and_entitlement:
+  trial_duration_days: 16
+  trial_visible_names:
+    - "TDL"
+    - "NMP"
+    - "Nawaf Golden Signal"
+    - "Enhanced Nawaf Golden Signal"
+    - "Devil's Advocate"
+  post_trial_visibility: "SERVER_SIDE_PLAN_ENTITLEMENT"
+  entitlement_matrix:
+    Free:
+      visible_names:
+        - "TDL"
+    Pro:
+      visible_names:
+        - "TDL"
+        - "NMP"
+    Elite:
+      visible_names:
+        - "TDL"
+        - "NMP"
+        - "Nawaf Golden Signal"
+        - "Enhanced Nawaf Golden Signal"
+        - "Devil's Advocate"
+    Institutional:
+      visible_names:
+        - "TDL"
+        - "NMP"
+        - "Nawaf Golden Signal"
+        - "Enhanced Nawaf Golden Signal"
+        - "Devil's Advocate"
+  rule: >
+    Entitlement changes customer-visible naming and authorized customer-facing
+    output depth only. It never authorizes disclosure of proprietary implementation.
+
+locked_state_design:
+  secret_name_rendered_then_blurred: "FORBIDDEN"
+  secret_name_rendered_then_masked: "FORBIDDEN"
+  approved_generic_labels:
+    - "Protected Intelligence"
+    - "Additional Analytical Depth"
+    - "Advanced Decision Intelligence"
+  rule: "The confidential value must not reach the frontend."
+
+responsive_and_accessibility:
+  rtl_ltr_required: true
+  accessibility_required: true
+  color_only_status_forbidden: true
+  admin_desktop_grid: 12
+  tablet_grid: 8
+  mobile_grid: 4
+  spacing_base_px: 4
+  public_whitespace: "GENEROUS"
+  admin_information_density: "CONTROLLED_HIGH"
+
+canonical_private_artifacts:
+  note: >
+    Full artifacts are retained outside the public repository because they are
+    classified as confidential governance material. Integrity hashes are frozen here.
+  markdown:
+    filename: "NDSP_FINAL_MASTER_UIUX_ARCHITECTURE_GOVERNANCE_AR_V2_CONFIDENTIALITY_SUBSCRIPTIONS.md"
+    sha256: "806be2bb2fbc72ae4192ec68d14d5b0e52162af4b5a9238ca9932b96c08c9d70"
+  pdf:
+    filename: "NDSP_FINAL_MASTER_UIUX_ARCHITECTURE_GOVERNANCE_AR_V2_CONFIDENTIALITY_SUBSCRIPTIONS.pdf"
+    sha256: "43ee65c41ee4451e7956c8242cc637ae80c2e3b28a72a27cf74593281365b3e5"
+  docx:
+    filename: "NDSP_FINAL_MASTER_UIUX_ARCHITECTURE_GOVERNANCE_AR_V2_CONFIDENTIALITY_SUBSCRIPTIONS.docx"
+    sha256: "f6f7cdf097c827faa58c9a71e1a06cb4104fbe9ee0417d1bad6aa9ad0dff1bd8"
+
+machine_enforcement:
+  validator_path: "scripts/governance/validate_uiux_governance_v2.py"
+  workflow_path: ".github/workflows/ui-backend-governance-policy.yml"
+  unit_test_path: "scripts/governance/tests/test_validate_uiux_governance_v2.py"
+  pull_request_changed_file_enforcement: true
+  push_changed_file_enforcement: true
+  full_repository_scan_available: true
+  ci_fail_on:
+    - "v2_policy_drift"
+    - "legacy_primary_brand_reintroduced"
+    - "more_than_five_customer_visible_names"
+    - "unapproved_customer_visible_name"
+    - "confidential_field_in_customer_or_public_api"
+    - "confidential_master_committed_to_public_repo"
+    - "decision_layer_number_exposure"
+
+final_rule:
+  ar: "تُظهر NDSP عمق الذكاء دون كشف خريطة أسراره."
+  en: "NDSP communicates the depth of its intelligence without exposing the secrets of its intelligence."

@@ -1,0 +1,59 @@
+name: PR-064B Runtime Engine Source Recovery
+
+on:
+  pull_request:
+    paths:
+      - "backend/services/decision_governance_core/**"
+      - "docs/99-governance/pr-064b-runtime-engine-source-recovery/**"
+      - "scripts/governance/validate_pr064b_runtime_engine_source_recovery.py"
+      - "scripts/governance/tests/pr064b-runtime-engine-source-recovery.test.cjs"
+      - ".github/workflows/pr064b-runtime-engine-source-recovery.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "backend/services/decision_governance_core/**"
+      - "docs/99-governance/pr-064b-runtime-engine-source-recovery/**"
+      - "scripts/governance/validate_pr064b_runtime_engine_source_recovery.py"
+      - "scripts/governance/tests/pr064b-runtime-engine-source-recovery.test.cjs"
+      - ".github/workflows/pr064b-runtime-engine-source-recovery.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Validate recovered runtime source
+        env:
+          PYTHONDONTWRITEBYTECODE: "1"
+        run: |
+          python3 scripts/governance/validate_pr064b_runtime_engine_source_recovery.py .
+          node --test scripts/governance/tests/pr064b-runtime-engine-source-recovery.test.cjs
+
+      - name: Validate Node syntax
+        run: |
+          node --check backend/services/decision_governance_core/main.cjs
+          node --check backend/services/decision_governance_core/framework-adapter.cjs
+
+      - name: Validate package metadata
+        run: |
+          node -e '
+            const p = require("./backend/services/decision_governance_core/package.json");
+            if (p.type !== "commonjs") process.exit(1);
+            if (p.main !== "main.cjs") process.exit(1);
+          '

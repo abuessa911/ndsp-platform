@@ -1,0 +1,8 @@
+path,current_role,risk,proposed_action,canonical_target,runtime_change_allowed_in_pr064a,implementation_stage,human_review_required
+apps/ndsp-governance-bridge/app/core/tdl_v2_policy.py,RUNTIME_LOGIC,HIGH,REPLACE_OR_WRAP,backend/services/decision_governance_core/,false,PR-064_OR_PR-065_AFTER_REVIEW,true
+backend/app/api/v1/frontend_contract.py,CONTRACT_ADAPTER,HIGH,ALIGN_CONTRACT,backend/services/decision_governance_core/,false,PR-064_OR_PR-065_AFTER_REVIEW,true
+backend/middleware/trialGuard.js,RUNTIME_LOGIC,HIGH,REPLACE_OR_WRAP,backend/services/decision_governance_core/,false,PR-064_OR_PR-065_AFTER_REVIEW,true
+backend/ndsp_api_compat_gateway.cjs,INTEGRATION_ADAPTER,HIGH,REPLACE_OR_WRAP,backend/services/decision_governance_core/,false,PR-064_OR_PR-065_AFTER_REVIEW,true
+backend/ndsp_tdl_trade_horizon_addons.cjs,RUNTIME_LOGIC,HIGH,REPLACE_OR_WRAP,backend/services/decision_governance_core/,false,PR-064_OR_PR-065_AFTER_REVIEW,true
+backend/ndsp_trial_register_gateway.cjs,INTEGRATION_ADAPTER,HIGH,REPLACE_OR_WRAP,backend/services/decision_governance_core/,false,PR-064_OR_PR-065_AFTER_REVIEW,true
+backend/ndsp_user_dashboard_gateway.cjs,INTEGRATION_ADAPTER,HIGH,REPLACE_OR_WRAP,backend/services/decision_governance_core/,false,PR-064_OR_PR-065_AFTER_REVIEW,true

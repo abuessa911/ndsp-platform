@@ -1,0 +1,12 @@
+batch_id,capability_id,capability_name,p0_signature,service_required,endpoint_required,real_data_required,service_evidence_found,endpoint_evidence_found,real_data_evidence_found,candidate_count,selected_evidence_paths,machine_closed,human_confirmation_required
+B19_ENDPOINT_ONLY,CAP-834DF8F1DE14,User From Auth Me,ENDPOINT_ONLY,false,true,false,true,true,true,410,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B19_ENDPOINT_ONLY,CAP-85BB71BCB158,V461 Market Path,ENDPOINT_ONLY,false,true,false,true,true,true,381,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B19_ENDPOINT_ONLY,CAP-978D970F265C,Ndsp Alert Audit,ENDPOINT_ONLY,false,true,false,true,true,true,400,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B19_ENDPOINT_ONLY,CAP-9F0C0925830C,Get User Counts,ENDPOINT_ONLY,false,true,false,true,true,true,385,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B19_ENDPOINT_ONLY,CAP-E2BE53CEC0F0,Insert User,ENDPOINT_ONLY,false,true,false,true,true,true,378,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B19_ENDPOINT_ONLY,CAP-E7E2EB1C570D,Activate User By Token,ENDPOINT_ONLY,false,true,false,true,true,true,372,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B19_ENDPOINT_ONLY,CAP-EEA57DDC5CC1,Current User,ENDPOINT_ONLY,false,true,false,true,true,true,382,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B19_ENDPOINT_ONLY,CAP-EF7009376528,User From Jwt,ENDPOINT_ONLY,false,true,false,true,true,true,406,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B19_ENDPOINT_ONLY,CAP-F1DC3D02D328,Find Users Table,ENDPOINT_ONLY,false,true,false,true,true,true,389,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B19_ENDPOINT_ONLY,CAP-FABD911344A4,Sync Admin Users Json Safe,ENDPOINT_ONLY,false,true,false,true,true,true,367,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true
+B19_ENDPOINT_ONLY,CAP-A1CD5A0B9B66,Market Type For,ENDPOINT_ONLY,false,true,false,true,true,true,414,docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json,true,true

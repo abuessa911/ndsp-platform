@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "document": "PR-065 UTC Effective Week Correction",
+  "generated_at": "2026-08-02T04:06:18.005248+00:00",
+  "source_commit": "c2558e2aa0bad3c45446a69dfd73c5978831e5eb",
+  "timezone": "UTC",
+  "week_start": "MONDAY_00_00_00_UTC",
+  "interval_semantics": "[effective_from,effective_until)",
+  "effective_from_inclusive": true,
+  "effective_until_exclusive": true,
+  "runtime_integration_changes": 0,
+  "direction_logic_changes": 0,
+  "traceability_rows_changed": 1,
+  "new_capability_created": false,
+  "deployment_authorized": false,
+  "production_services_restarted": 0,
+  "mutating_requests_executed": 0,
+  "runtime_changes": "none",
+  "validation": "PASS",
+  "status": "UTC_EFFECTIVE_WEEK_CORRECTED_REPOSITORY_ONLY"
+}

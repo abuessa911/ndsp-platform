@@ -1,0 +1,46 @@
+name: PR-064 Canonical Direction Engine
+
+on:
+  pull_request:
+    paths:
+      - "backend/services/decision_governance_core/**"
+      - "docs/99-governance/pr-018-full-capability-ui-governance/CAPABILITY_UI_TRACEABILITY.csv"
+      - "docs/99-governance/pr-064-canonical-direction-engine-correction/**"
+      - "scripts/governance/validate_pr064_canonical_direction_engine.py"
+      - "scripts/governance/tests/pr064-canonical-direction-engine.test.cjs"
+      - ".github/workflows/pr064-canonical-direction-engine.yml"
+  push:
+    branches: [main]
+    paths:
+      - "backend/services/decision_governance_core/**"
+      - "docs/99-governance/pr-018-full-capability-ui-governance/CAPABILITY_UI_TRACEABILITY.csv"
+      - "docs/99-governance/pr-064-canonical-direction-engine-correction/**"
+      - "scripts/governance/validate_pr064_canonical_direction_engine.py"
+      - "scripts/governance/tests/pr064-canonical-direction-engine.test.cjs"
+      - ".github/workflows/pr064-canonical-direction-engine.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Validate PR-064
+        env:
+          PYTHONDONTWRITEBYTECODE: "1"
+        run: |
+          python3 scripts/governance/validate_pr064_canonical_direction_engine.py .
+          node --test backend/services/decision_governance_core/tests/canonical-direction.test.cjs
+          node --test scripts/governance/tests/pr064-canonical-direction-engine.test.cjs
+          node --check backend/services/decision_governance_core/main.cjs
+          node --check backend/services/decision_governance_core/direction/canonical-direction.cjs

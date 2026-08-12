@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0",
+  "main_sha256": "ad8ab45cea9308d0abce48df497eaff8d0fb4791dfa512b9d4adea9fba3d775e",
+  "module_sha256": "1c69a2db6bc0fdd9fd88bb3e74200d2b83c91393d3bc1342ca0b363ea0b65b46",
+  "route": "POST /api/governance/direction/shadow",
+  "execution_mode": "SHADOW_ONLY",
+  "public_exposure": "DISABLED",
+  "official_result_written": false,
+  "official_result_store_changes": 0,
+  "experimental_result_store_changes": 0,
+  "time_logic_changes": 0
+}

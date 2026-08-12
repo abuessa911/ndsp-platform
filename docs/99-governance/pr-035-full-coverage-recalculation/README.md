@@ -1,0 +1,3 @@
+# PR-035 — Full Capability Coverage Recalculation
+
+Recalculates strict evidence coverage for all 526 capabilities after PR-033. The audit evaluates source, service, endpoint, real-data state, calculation, test evidence, and UI evidence. It does not modify Traceability or runtime, and it does not claim full coverage unless all 526 capabilities pass all dimensions.

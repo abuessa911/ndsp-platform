@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "document": "PR-025 Local State Reconciliation",
+  "generated_at": "2026-07-31T21:35:14.593206+00:00",
+  "observed_local_change_count": 3654,
+  "inventory_classifications": {
+    "BACKUP_OR_ARCHIVE": 22,
+    "HUMAN_REVIEW": 2608,
+    "NOISE_OR_GENERATED": 853,
+    "SENSITIVE_OR_BINARY": 13,
+    "SOURCE_CANDIDATE": 158
+  },
+  "required_capability_source_count": 4,
+  "already_on_main_count": 0,
+  "recovered_from_local_count": 4,
+  "blocked_source_count": 0,
+  "still_missing_source_count": 0,
+  "recovered_paths": [
+    "apps/ndsp-governance-bridge/policies/admin_snapshot/tdl_v2_policy_admin.py",
+    "backend/app/api/v1/frontend_contract.py",
+    "backend/app/support_layers/quality/decision_quality_stack.py",
+    "backend/app/support_layers/scenario/scenario_engine.py"
+  ],
+  "snapshot_path": "/home/nawaf511/pr025-local-state-snapshot/20260731T213510Z",
+  "primary_worktree_modified": false,
+  "local_changes_deleted": false,
+  "secrets_copied": false,
+  "runtime_changes": "none",
+  "human_review_required": true,
+  "status": "LOCAL_STATE_RECONCILED_CAPABILITY_SOURCES_RECOVERED"
+}

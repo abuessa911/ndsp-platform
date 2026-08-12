@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "document": "PR-064C Runtime Engine Traceability Reconciliation",
+  "generated_at": "2026-08-02T03:26:57.773486+00:00",
+  "origin_main_commit": "5d84640e0273547186c846459079a4534cae4ed2",
+  "source_pr_number": 69,
+  "source_pr_commit": "d798b793dc58eb658e025bb2f14042c3581137f4",
+  "traceability_path": "docs/99-governance/pr-018-full-capability-ui-governance/CAPABILITY_UI_TRACEABILITY.csv",
+  "traceability_rows_changed": 1,
+  "traceability_capability_id": "CAP-704639CE50C9",
+  "traceability_capability_name": "Validate Decision",
+  "new_capability_created": false,
+  "traceability_status_preserved": true,
+  "runtime_engine_path": "backend/services/decision_governance_core/main.cjs",
+  "runtime_engine_service": "decision_governance_core",
+  "runtime_engine_endpoints": [
+    "/health",
+    "/api/governance/evaluate",
+    "/api/governance/submit"
+  ],
+  "product_source_recovery_accounted": "PASS",
+  "behavior_changes": 0,
+  "direction_logic_changes": 0,
+  "systemd_changes": 0,
+  "nginx_changes": 0,
+  "database_changes": 0,
+  "production_services_restarted": 0,
+  "mutating_requests_executed": 0,
+  "runtime_changes": "none",
+  "validation": "PASS",
+  "status": "RUNTIME_ENGINE_TRACEABILITY_RECONCILED"
+}
