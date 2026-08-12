@@ -1,0 +1,84 @@
+name: Node CI
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "package.json"
+      - "package-lock.json"
+      - "frontend/user-portal-vite/**"
+      - ".github/workflows/ci.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "package.json"
+      - "package-lock.json"
+      - "frontend/user-portal-vite/**"
+      - ".github/workflows/ci.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: node-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build ${{ matrix.name }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: root
+            working-directory: .
+            lockfile: package-lock.json
+          - name: user-portal
+            working-directory: frontend/user-portal-vite
+            lockfile: frontend/user-portal-vite/package-lock.json
+
+    defaults:
+      run:
+        working-directory: ${{ matrix.working-directory }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: ${{ matrix.lockfile }}
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+
+      - name: Build
+        run: npm run build
+
+      - name: Audit production dependencies
+        continue-on-error: true
+        run: npm audit --omit=dev --audit-level=high
+
+  workflow-validation:
+    name: Workflow validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Confirm required pipeline files
+        run: |
+          test -f .github/workflows/ci.yml
+          test -f .github/workflows/release-artifacts.yml
+          test -f .github/dependabot.yml
