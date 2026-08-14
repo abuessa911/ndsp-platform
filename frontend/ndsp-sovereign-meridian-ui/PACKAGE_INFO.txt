@@ -1,0 +1,47 @@
+NDSP Sovereign Meridian UI — Auth-Integrated Delivery
+
+Version: 1.0.0-auth.1
+
+Verified inputs:
+- Uploaded wrapper ZIP SHA256: 570ede2ad465ebbc2e937b2b1107131d094e203e2de8e35101f3d3d6ec3bc10e
+- Nested project ZIP SHA256: a4d666896c40993fd42df6320cd9eb39034d99db6b29479cce9be3241634d1c7
+- Real-auth audit SHA256: 770d6a055ffb48e601a2b0c6313edece6f6a84f8e5b5e41e9dbd41926506d84c
+
+Public routes:
+- /
+- /methodology
+- /analysis
+- /documentation
+
+Authentication routes:
+- /login
+- /sign-in (compatibility redirect)
+- /forgot-password
+- /reset-password
+
+Protected administration routes:
+- /admin/cot/overview
+- /admin/cot/reports
+- /admin/cot/daily-control
+- /admin/cot/experiments
+- /admin/cot/comparisons
+- /admin/cot/governance
+- /admin/cot/audit-logs
+- /admin/cot/contracts
+- /admin/cot/settings
+
+Verification:
+- TypeScript typecheck: PASS
+- Vite production build: PASS
+- Sites preparation and tests: PASS (4/4)
+- Same-origin authentication contract gate: PASS
+- Fail-closed administrator route gate: PASS
+- Preview route HTTP checks: PASS
+
+Production limits:
+- Real user-portal pages are not present.
+- Analysis and administration page data remains mock presentation data.
+- Docker edge routing must be audited before deployment.
+- Existing portal files must not be deleted by this delivery.
+
+FINAL_STATUS=AUTH_INTEGRATED_UI_BUILD_VERIFIED_NOT_PRODUCTION_CUTOVER_READY
