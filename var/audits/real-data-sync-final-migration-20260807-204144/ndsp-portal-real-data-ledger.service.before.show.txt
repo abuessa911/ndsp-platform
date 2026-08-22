@@ -1,8 +1,0 @@
-Result=success
-ExecStart={ path=/home/nawaf511/ndsp-portal-real-data-sync/sync_real_ledger.py ; argv[]=/home/nawaf511/ndsp-portal-real-data-sync/sync_real_ledger.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }
-TriggeredBy=
-LoadState=loaded
-ActiveState=inactive
-SubState=dead
-FragmentPath=/etc/systemd/system/ndsp-portal-real-data-ledger.service
-DropInPaths=

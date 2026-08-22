@@ -1,5 +1,0 @@
-70845a2b99618ecbe9936d1b997678470ebeb3b8f591665eaecbf98affb3b598  /home/nawaf511/empire-core-new/backend/app/contracts/canonical/semantic_contract.py
-b6aa4ecd411374da9c0d34f0daa02cc60f83d0737b6a2c3bf067a5453ff5888a  /home/nawaf511/empire-core-new/backend/app/contracts/assets/source_routing_contract.py
-baa25e53caabae96fdbc4e07f60edb76c97d79184d1bf28cbd4e7f6b21e30fc1  /home/nawaf511/empire-core-new/backend/app/contracts/market_data/market_data_contract.py
-9ecaa18a1f3916e649725b0752f22efcd5c3ba6551074ff31a9254b53d6ad4a6  /home/nawaf511/empire-core-new/backend/app/contracts/cot/cot_tff_contract.py
-d93285bcff2b7301432c7e209072455e9629cc5c159dc67c4c3d3be3bf8e16d5  /home/nawaf511/empire-core-new/backend/tests/contracts/test_contracts_01_04.py

@@ -1,1 +1,0 @@
-أغسطس 05 09:30:50 vmi2934783 node[3019664]: [NDSP] Bot Execution Service listening on http://127.0.0.1:9080

@@ -1,4 +1,0 @@
-V37_URL_LITERAL_COUNT=3
-V37_URL_LITERAL=/api/completed-decisions
-V37_URL_LITERAL=/api/completed-decisions/history?limit=100
-V37_URL_LITERAL=/api/completed-decisions/history/integrity

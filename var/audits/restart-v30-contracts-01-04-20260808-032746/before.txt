@@ -1,6 +1,0 @@
-=== PRE-RESTART ===
-MainPID=1373808
-ExecStart={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_canonical_live_runtime_v30.py ; ignore_errors=no ; start_time=[Fri 2026-08-07 23:01:23 CEST] ; stop_time=[n/a] ; pid=1373808 ; code=(null) ; status=0/0 }
-ActiveState=active
-SubState=running
-OLD_PID=1373808

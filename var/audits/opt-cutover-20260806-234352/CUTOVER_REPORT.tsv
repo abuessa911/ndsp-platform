@@ -1,2 +1,0 @@
-service	source	destination	result	details
-ndsp-16-layers.service	/opt/ndsp16-api	/home/nawaf511/empire-core-new/runtime/opt-services/ndsp16-api-98114d2615	ROLLED_BACK	cutover-failed-stopped-batch

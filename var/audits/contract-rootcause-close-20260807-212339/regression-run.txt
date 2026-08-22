@@ -1,3 +1,0 @@
-FAIL: 843 regression failure(s), 0 warning(s).
-Report: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T192352Z.md
-JSON: /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T192352Z.json

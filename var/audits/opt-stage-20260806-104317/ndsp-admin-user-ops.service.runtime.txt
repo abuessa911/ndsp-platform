@@ -1,6 +1,0 @@
-MainPID=2778
-ExecStart={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 -m uvicorn app:app --host 127.0.0.1 --port 9068 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }
-Environment=
-WorkingDirectory=/opt/ndsp-admin-user-ops
-ActiveState=active
-SubState=running

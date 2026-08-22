@@ -1,6 +1,0 @@
-MainPID=1367
-ExecStart={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /opt/ndsp-v3-portal-gateway/app.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }
-Environment=
-WorkingDirectory=/opt/ndsp-v3-portal-gateway
-ActiveState=active
-SubState=running

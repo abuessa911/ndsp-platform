@@ -1,9 +1,0 @@
-# /etc/systemd/system/ndsp-live-economic-calendar.service
-[Unit]
-Description=NDSP Live Economic Calendar Sync
-After=network-online.target
-
-[Service]
-Type=oneshot
-User=nawaf511
-ExecStart=/usr/bin/python3 /home/nawaf511/ndsp-portal-real-data-sync/live_economic_calendar_sync.py

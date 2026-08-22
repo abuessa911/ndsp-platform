@@ -1,4 +1,0 @@
-○ ndsp-business-digest.service - NDSP Daily Business Digest V205
-     Loaded: loaded (/etc/systemd/system/ndsp-business-digest.service; static)
-     Active: inactive (dead)
-TriggeredBy: ● ndsp-business-digest.timer

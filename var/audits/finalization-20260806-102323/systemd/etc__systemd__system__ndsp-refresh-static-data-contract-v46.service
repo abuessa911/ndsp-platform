@@ -1,9 +1,0 @@
-[Unit]
-Description=NDSP V46 static data contract refresh
-After=network-online.target
-Wants=network-online.target
-
-[Service]
-Type=oneshot
-ExecStart=/usr/local/bin/ndsp-refresh-static-data-contract-v46
-User=root

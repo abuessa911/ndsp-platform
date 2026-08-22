@@ -1,6 +1,0 @@
-MainPID=1369
-ExecStart={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /opt/ndsp-v53-bridge/app.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }
-Environment=
-WorkingDirectory=
-ActiveState=active
-SubState=running

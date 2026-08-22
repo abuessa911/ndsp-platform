@@ -1,2 +1,0 @@
-/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_history_v36.py
-/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/hooks/useCompletedDecisionsV37.js

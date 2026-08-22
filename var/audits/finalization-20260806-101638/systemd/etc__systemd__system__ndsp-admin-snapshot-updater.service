@@ -1,6 +1,0 @@
-[Unit]
-Description=NDSP Admin Snapshot Updater
-
-[Service]
-Type=oneshot
-ExecStart=/usr/bin/python3 /usr/local/bin/ndsp_admin_snapshot_updater.py

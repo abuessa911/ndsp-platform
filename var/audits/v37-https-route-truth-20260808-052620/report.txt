@@ -1,42 +1,0 @@
-=== NDSP V37 HTTPS + ROUTE TRUTH ===
-DATE=2026-08-08T05:26:20+02:00
-MODE=READ_ONLY
-AUDIT=/home/nawaf511/empire-core-new/var/audits/v37-https-route-truth-20260808-052620
-
-=== 1. DIRECT BACKENDS ===
-V35_DIRECT=200
-V36_HISTORY_DIRECT=200
-V36_INTEGRITY_DIRECT=200
-
-=== 2. HTTP REDIRECT DESTINATIONS ===
-PATH=/api/completed-decisions
-HTTP/1.1 301 Moved Permanently Location: https://127.0.0.1/api/completed-decisions 
-PATH=/api/completed-decisions/history?limit=1
-HTTP/1.1 301 Moved Permanently Location: https://127.0.0.1/api/completed-decisions/history?limit=1 
-PATH=/api/completed-decisions/history/integrity
-HTTP/1.1 301 Moved Permanently Location: https://127.0.0.1/api/completed-decisions/history/integrity 
-
-=== 3. NGINX CONFIG TEST ===
-2026/08/08 05:26:20 [warn] 2553286#2553286: the "user" directive makes sense only if the master process runs with super-user privileges, ignored in /etc/nginx/nginx.conf:1
-nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
-2026/08/08 05:26:20 [emerg] 2553286#2553286: open() "/run/nginx.pid" failed (13: Permission denied)
-nginx: configuration file /etc/nginx/nginx.conf test failed
-
-=== 4. NGINX RELEVANT ROUTING ===
-NGINX_RELEVANT_LINES=0
-
-=== 5. DISCOVER SERVER NAMES ===
-SERVER_NAME_COUNT=0
-
-=== 6. HTTPS CONTRACT TESTS ===
-
-=== 7. ROUTING CLASSIFICATION ===
-PUBLIC_HTTPS_CONTRACT=FAIL
-NGINX_PATCH_REQUIRED=REQUIRES_EXACT_ROUTE_PATCH
-NEXT_ACTION=PATCH_V35_V36_PUBLIC_SPLIT_ROUTING
-
-FILES_MODIFIED=0
-SERVICES_RESTARTED=0
-RUNTIME_LOGIC_MODIFIED=0
-FINAL_RESULT=PASS_READ_ONLY_DIAGNOSTIC
-AUDIT=/home/nawaf511/empire-core-new/var/audits/v37-https-route-truth-20260808-052620

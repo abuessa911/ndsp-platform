@@ -1,6 +1,0 @@
-MainPID=1365
-ExecStart={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 -m uvicorn main:app --host 127.0.0.1 --port 9066 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }
-Environment=
-WorkingDirectory=/opt/ndsp-ui-bridge-api
-ActiveState=active
-SubState=running

@@ -1,5 +1,0 @@
-MainPID=862027
-ExecStart={ path=/usr/bin/node ; argv[]=/usr/bin/node /home/nawaf511/empire-core-new/runtime/opt-services/ndsp16-api-98114d2615/server.js ; ignore_errors=no ; start_time=[Thu 2026-08-06 10:48:11 CEST] ; stop_time=[n/a] ; pid=862027 ; code=(null) ; status=0/0 }
-WorkingDirectory=/home/nawaf511/empire-core-new/runtime/opt-services/ndsp16-api-98114d2615
-ActiveState=active
-SubState=running

@@ -1,6 +1,0 @@
-[Unit]
-Description=NDSP refresh static data contract from quality-live
-
-[Service]
-Type=oneshot
-ExecStart=/usr/local/bin/ndsp-refresh-static-data-contract

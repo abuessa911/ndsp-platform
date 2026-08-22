@@ -1,3 +1,0 @@
-CANDIDATE_FUNCTIONS=1
-FUNCTION=status LINES=239-245
-DECORATOR=app.get("/api/admin/raw-cot/status")

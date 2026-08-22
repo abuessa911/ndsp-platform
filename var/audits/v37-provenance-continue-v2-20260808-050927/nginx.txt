@@ -1,4 +1,0 @@
-2026/08/08 05:09:27 [warn] 2501445#2501445: the "user" directive makes sense only if the master process runs with super-user privileges, ignored in /etc/nginx/nginx.conf:1
-nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
-2026/08/08 05:09:27 [emerg] 2501445#2501445: open() "/run/nginx.pid" failed (13: Permission denied)
-nginx: configuration file /etc/nginx/nginx.conf test failed

@@ -1,8 +1,0 @@
-/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_history_v36.py
-/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v200_score_inputs.py
-/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v201_launch_completion.py
-/home/nawaf511/empire-core-new/backend/app/runtime/__pycache__/ndsp_completed_decisions_history_v36.cpython-312.pyc
-/home/nawaf511/empire-core-new/backend/app/runtime/__pycache__/ndsp_v200_score_inputs.cpython-312.pyc
-/home/nawaf511/empire-core-new/backend/app/runtime/__pycache__/ndsp_v201_launch_completion.cpython-312.pyc
-/home/nawaf511/empire-core-new/backend/tests/contracts/__pycache__/test_v201_weekly_direction_handoff.cpython-312-pytest-7.4.4.pyc
-/home/nawaf511/empire-core-new/backend/tests/contracts/test_v201_weekly_direction_handoff.py

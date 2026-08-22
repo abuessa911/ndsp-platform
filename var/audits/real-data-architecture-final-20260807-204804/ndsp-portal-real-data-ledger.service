@@ -1,6 +1,0 @@
-[Unit]
-Description=NDSP Portal Real Data Ledger Sync
-
-[Service]
-Type=oneshot
-ExecStart=/home/nawaf511/ndsp-portal-real-data-sync/sync_real_ledger.py

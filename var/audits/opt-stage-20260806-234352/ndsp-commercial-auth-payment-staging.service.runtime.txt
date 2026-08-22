@@ -1,7 +1,0 @@
-MainPID=3019723
-ExecStart={ path=/opt/ndsp-commercial-auth-payment-staging/releases/20260730_103616-source-staging-v1-13/run-staging.sh ; argv[]=/opt/ndsp-commercial-auth-payment-staging/releases/20260730_103616-source-staging-v1-13/run-staging.sh ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }
-Environment=
-EnvironmentFiles=/etc/ndsp/commercial-auth-payment-staging.env (ignore_errors=no)
-WorkingDirectory=/opt/ndsp-commercial-auth-payment-staging/releases/20260730_103616-source-staging-v1-13/source
-ActiveState=active
-SubState=running
