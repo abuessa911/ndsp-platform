@@ -202,3 +202,53 @@ __pycache__/
 !**/.env.*.sample
 !**/.env.*.template
 !**/.env.*.dist
+
+# === NDSP RUNTIME / GENERATED FILES ===
+
+# Runtime audit evidence
+/var/audits/
+
+# Local operational backups
+/var/backups/
+
+# Runtime ledger/state — must not live in source control
+/var/ledger/
+
+# Generic runtime state
+/var/run/
+/var/log/
+/var/tmp/
+
+# Python runtime/cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Node build/cache
+node_modules/
+.npm/
+.yarn/
+.pnpm-store/
+
+# Local databases / process state
+*.sqlite
+*.sqlite3
+*.db-journal
+*.pid
+*.sock
+
+# Local secrets
+.env
+.env.*
+!.env.example
+!.env.sample
+
+# Editor / OS noise
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# === END NDSP RUNTIME / GENERATED FILES ===

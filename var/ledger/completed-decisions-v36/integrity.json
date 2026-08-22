@@ -1,9 +1,0 @@
-{
-  "checked_at": "2026-08-22T16:32:44.427393Z",
-  "head_record_hash": "7e79a29a7d3ba39b9432fb82c4d9bbc71ed9f1b94bf78ff8677e8ad52e94b883",
-  "ledger_version": "ndsp-append-only-ledger-v36",
-  "ok": true,
-  "reason": null,
-  "record_count": 6,
-  "record_index": null
-}
