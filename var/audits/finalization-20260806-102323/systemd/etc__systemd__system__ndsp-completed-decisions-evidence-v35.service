@@ -1,0 +1,29 @@
+[Unit]
+Description=NDSP Completed Decisions Evidence Registry V35
+After=network-online.target ndsp-canonical-live-runtime-v33.service
+Wants=network-online.target
+Requires=ndsp-canonical-live-runtime-v33.service
+
+[Service]
+Type=simple
+User=nawaf511
+Group=nawaf511
+WorkingDirectory=/home/nawaf511/empire-core-new
+Environment=PYTHONUNBUFFERED=1
+Environment=NDSP_COMPLETED_EVIDENCE_HOST=127.0.0.1
+Environment=NDSP_COMPLETED_EVIDENCE_PORT=9087
+Environment=NDSP_V33_RUNTIME_DIR=/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33
+ExecStart=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_evidence_v35.py
+Restart=on-failure
+RestartSec=3
+TimeoutStartSec=45
+TimeoutStopSec=20
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=read-only
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+LockPersonality=true
+
+[Install]
+WantedBy=multi-user.target

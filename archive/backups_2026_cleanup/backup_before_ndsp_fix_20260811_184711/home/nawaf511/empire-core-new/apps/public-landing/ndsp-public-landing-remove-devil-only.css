@@ -1,0 +1,9 @@
+/* Public landing only: remove Devil Advocate layer from ndsp.app landing. */
+#ndsp-devil-advocate-visible-card,
+#ndsp-devil-advocate-integrated-card,
+[data-ndsp-layer="devil-advocate"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}

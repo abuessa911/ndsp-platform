@@ -1,0 +1,150 @@
+أغسطس 05 10:21:04 vmi2934783 node[3173997]:   errno: -98,
+أغسطس 05 10:21:04 vmi2934783 node[3173997]:   syscall: 'listen',
+أغسطس 05 10:21:04 vmi2934783 node[3173997]:   address: '127.0.0.1',
+أغسطس 05 10:21:04 vmi2934783 node[3173997]:   port: 9079
+أغسطس 05 10:21:04 vmi2934783 node[3173997]: }
+أغسطس 05 10:21:04 vmi2934783 node[3173997]: Node.js v22.23.1
+أغسطس 05 10:21:07 vmi2934783 node[3174054]: node:events:497
+أغسطس 05 10:21:07 vmi2934783 node[3174054]:       throw er; // Unhandled 'error' event
+أغسطس 05 10:21:07 vmi2934783 node[3174054]:       ^
+أغسطس 05 10:21:07 vmi2934783 node[3174054]: Error: listen EADDRINUSE: address already in use 127.0.0.1:9079
+أغسطس 05 10:21:07 vmi2934783 node[3174054]:     at Server.setupListenHandle [as _listen2] (node:net:1941:16)
+أغسطس 05 10:21:07 vmi2934783 node[3174054]:     at listenInCluster (node:net:1998:12)
+أغسطس 05 10:21:07 vmi2934783 node[3174054]:     at node:net:2207:7
+أغسطس 05 10:21:07 vmi2934783 node[3174054]:     at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
+أغسطس 05 10:21:07 vmi2934783 node[3174054]: Emitted 'error' event on Server instance at:
+أغسطس 05 10:21:07 vmi2934783 node[3174054]:     at emitErrorNT (node:net:1977:8)
+أغسطس 05 10:21:07 vmi2934783 node[3174054]:     at process.processTicksAndRejections (node:internal/process/task_queues:89:21) {
+أغسطس 05 10:21:07 vmi2934783 node[3174054]:   code: 'EADDRINUSE',
+أغسطس 05 10:21:07 vmi2934783 node[3174054]:   errno: -98,
+أغسطس 05 10:21:07 vmi2934783 node[3174054]:   syscall: 'listen',
+أغسطس 05 10:21:07 vmi2934783 node[3174054]:   address: '127.0.0.1',
+أغسطس 05 10:21:07 vmi2934783 node[3174054]:   port: 9079
+أغسطس 05 10:21:07 vmi2934783 node[3174054]: }
+أغسطس 05 10:21:07 vmi2934783 node[3174054]: Node.js v22.23.1
+أغسطس 05 10:21:11 vmi2934783 node[3175208]: node:events:497
+أغسطس 05 10:21:11 vmi2934783 node[3175208]:       throw er; // Unhandled 'error' event
+أغسطس 05 10:21:11 vmi2934783 node[3175208]:       ^
+أغسطس 05 10:21:11 vmi2934783 node[3175208]: Error: listen EADDRINUSE: address already in use 127.0.0.1:9079
+أغسطس 05 10:21:11 vmi2934783 node[3175208]:     at Server.setupListenHandle [as _listen2] (node:net:1941:16)
+أغسطس 05 10:21:11 vmi2934783 node[3175208]:     at listenInCluster (node:net:1998:12)
+أغسطس 05 10:21:11 vmi2934783 node[3175208]:     at node:net:2207:7
+أغسطس 05 10:21:11 vmi2934783 node[3175208]:     at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
+أغسطس 05 10:21:11 vmi2934783 node[3175208]: Emitted 'error' event on Server instance at:
+أغسطس 05 10:21:11 vmi2934783 node[3175208]:     at emitErrorNT (node:net:1977:8)
+أغسطس 05 10:21:11 vmi2934783 node[3175208]:     at process.processTicksAndRejections (node:internal/process/task_queues:89:21) {
+أغسطس 05 10:21:11 vmi2934783 node[3175208]:   code: 'EADDRINUSE',
+أغسطس 05 10:21:11 vmi2934783 node[3175208]:   errno: -98,
+أغسطس 05 10:21:11 vmi2934783 node[3175208]:   syscall: 'listen',
+أغسطس 05 10:21:11 vmi2934783 node[3175208]:   address: '127.0.0.1',
+أغسطس 05 10:21:11 vmi2934783 node[3175208]:   port: 9079
+أغسطس 05 10:21:11 vmi2934783 node[3175208]: }
+أغسطس 05 10:21:11 vmi2934783 node[3175208]: Node.js v22.23.1
+أغسطس 05 10:21:15 vmi2934783 node[3175312]: node:events:497
+أغسطس 05 10:21:15 vmi2934783 node[3175312]:       throw er; // Unhandled 'error' event
+أغسطس 05 10:21:15 vmi2934783 node[3175312]:       ^
+أغسطس 05 10:21:15 vmi2934783 node[3175312]: Error: listen EADDRINUSE: address already in use 127.0.0.1:9079
+أغسطس 05 10:21:15 vmi2934783 node[3175312]:     at Server.setupListenHandle [as _listen2] (node:net:1941:16)
+أغسطس 05 10:21:15 vmi2934783 node[3175312]:     at listenInCluster (node:net:1998:12)
+أغسطس 05 10:21:15 vmi2934783 node[3175312]:     at node:net:2207:7
+أغسطس 05 10:21:15 vmi2934783 node[3175312]:     at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
+أغسطس 05 10:21:15 vmi2934783 node[3175312]: Emitted 'error' event on Server instance at:
+أغسطس 05 10:21:15 vmi2934783 node[3175312]:     at emitErrorNT (node:net:1977:8)
+أغسطس 05 10:21:15 vmi2934783 node[3175312]:     at process.processTicksAndRejections (node:internal/process/task_queues:89:21) {
+أغسطس 05 10:21:15 vmi2934783 node[3175312]:   code: 'EADDRINUSE',
+أغسطس 05 10:21:15 vmi2934783 node[3175312]:   errno: -98,
+أغسطس 05 10:21:15 vmi2934783 node[3175312]:   syscall: 'listen',
+أغسطس 05 10:21:15 vmi2934783 node[3175312]:   address: '127.0.0.1',
+أغسطس 05 10:21:15 vmi2934783 node[3175312]:   port: 9079
+أغسطس 05 10:21:15 vmi2934783 node[3175312]: }
+أغسطس 05 10:21:15 vmi2934783 node[3175312]: Node.js v22.23.1
+أغسطس 05 10:21:18 vmi2934783 node[3175368]: node:events:497
+أغسطس 05 10:21:18 vmi2934783 node[3175368]:       throw er; // Unhandled 'error' event
+أغسطس 05 10:21:18 vmi2934783 node[3175368]:       ^
+أغسطس 05 10:21:18 vmi2934783 node[3175368]: Error: listen EADDRINUSE: address already in use 127.0.0.1:9079
+أغسطس 05 10:21:18 vmi2934783 node[3175368]:     at Server.setupListenHandle [as _listen2] (node:net:1941:16)
+أغسطس 05 10:21:18 vmi2934783 node[3175368]:     at listenInCluster (node:net:1998:12)
+أغسطس 05 10:21:18 vmi2934783 node[3175368]:     at node:net:2207:7
+أغسطس 05 10:21:18 vmi2934783 node[3175368]:     at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
+أغسطس 05 10:21:18 vmi2934783 node[3175368]: Emitted 'error' event on Server instance at:
+أغسطس 05 10:21:18 vmi2934783 node[3175368]:     at emitErrorNT (node:net:1977:8)
+أغسطس 05 10:21:18 vmi2934783 node[3175368]:     at process.processTicksAndRejections (node:internal/process/task_queues:89:21) {
+أغسطس 05 10:21:18 vmi2934783 node[3175368]:   code: 'EADDRINUSE',
+أغسطس 05 10:21:18 vmi2934783 node[3175368]:   errno: -98,
+أغسطس 05 10:21:18 vmi2934783 node[3175368]:   syscall: 'listen',
+أغسطس 05 10:21:18 vmi2934783 node[3175368]:   address: '127.0.0.1',
+أغسطس 05 10:21:18 vmi2934783 node[3175368]:   port: 9079
+أغسطس 05 10:21:18 vmi2934783 node[3175368]: }
+أغسطس 05 10:21:18 vmi2934783 node[3175368]: Node.js v22.23.1
+أغسطس 05 10:21:22 vmi2934783 node[3175449]: node:events:497
+أغسطس 05 10:21:22 vmi2934783 node[3175449]:       throw er; // Unhandled 'error' event
+أغسطس 05 10:21:22 vmi2934783 node[3175449]:       ^
+أغسطس 05 10:21:22 vmi2934783 node[3175449]: Error: listen EADDRINUSE: address already in use 127.0.0.1:9079
+أغسطس 05 10:21:22 vmi2934783 node[3175449]:     at Server.setupListenHandle [as _listen2] (node:net:1941:16)
+أغسطس 05 10:21:22 vmi2934783 node[3175449]:     at listenInCluster (node:net:1998:12)
+أغسطس 05 10:21:22 vmi2934783 node[3175449]:     at node:net:2207:7
+أغسطس 05 10:21:22 vmi2934783 node[3175449]:     at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
+أغسطس 05 10:21:22 vmi2934783 node[3175449]: Emitted 'error' event on Server instance at:
+أغسطس 05 10:21:22 vmi2934783 node[3175449]:     at emitErrorNT (node:net:1977:8)
+أغسطس 05 10:21:22 vmi2934783 node[3175449]:     at process.processTicksAndRejections (node:internal/process/task_queues:89:21) {
+أغسطس 05 10:21:22 vmi2934783 node[3175449]:   code: 'EADDRINUSE',
+أغسطس 05 10:21:22 vmi2934783 node[3175449]:   errno: -98,
+أغسطس 05 10:21:22 vmi2934783 node[3175449]:   syscall: 'listen',
+أغسطس 05 10:21:22 vmi2934783 node[3175449]:   address: '127.0.0.1',
+أغسطس 05 10:21:22 vmi2934783 node[3175449]:   port: 9079
+أغسطس 05 10:21:22 vmi2934783 node[3175449]: }
+أغسطس 05 10:21:22 vmi2934783 node[3175449]: Node.js v22.23.1
+أغسطس 05 10:21:26 vmi2934783 node[3175518]: node:events:497
+أغسطس 05 10:21:26 vmi2934783 node[3175518]:       throw er; // Unhandled 'error' event
+أغسطس 05 10:21:26 vmi2934783 node[3175518]:       ^
+أغسطس 05 10:21:26 vmi2934783 node[3175518]: Error: listen EADDRINUSE: address already in use 127.0.0.1:9079
+أغسطس 05 10:21:26 vmi2934783 node[3175518]:     at Server.setupListenHandle [as _listen2] (node:net:1941:16)
+أغسطس 05 10:21:26 vmi2934783 node[3175518]:     at listenInCluster (node:net:1998:12)
+أغسطس 05 10:21:26 vmi2934783 node[3175518]:     at node:net:2207:7
+أغسطس 05 10:21:26 vmi2934783 node[3175518]:     at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
+أغسطس 05 10:21:26 vmi2934783 node[3175518]: Emitted 'error' event on Server instance at:
+أغسطس 05 10:21:26 vmi2934783 node[3175518]:     at emitErrorNT (node:net:1977:8)
+أغسطس 05 10:21:26 vmi2934783 node[3175518]:     at process.processTicksAndRejections (node:internal/process/task_queues:89:21) {
+أغسطس 05 10:21:26 vmi2934783 node[3175518]:   code: 'EADDRINUSE',
+أغسطس 05 10:21:26 vmi2934783 node[3175518]:   errno: -98,
+أغسطس 05 10:21:26 vmi2934783 node[3175518]:   syscall: 'listen',
+أغسطس 05 10:21:26 vmi2934783 node[3175518]:   address: '127.0.0.1',
+أغسطس 05 10:21:26 vmi2934783 node[3175518]:   port: 9079
+أغسطس 05 10:21:26 vmi2934783 node[3175518]: }
+أغسطس 05 10:21:26 vmi2934783 node[3175518]: Node.js v22.23.1
+أغسطس 05 10:21:29 vmi2934783 node[3175582]: node:events:497
+أغسطس 05 10:21:29 vmi2934783 node[3175582]:       throw er; // Unhandled 'error' event
+أغسطس 05 10:21:29 vmi2934783 node[3175582]:       ^
+أغسطس 05 10:21:29 vmi2934783 node[3175582]: Error: listen EADDRINUSE: address already in use 127.0.0.1:9079
+أغسطس 05 10:21:29 vmi2934783 node[3175582]:     at Server.setupListenHandle [as _listen2] (node:net:1941:16)
+أغسطس 05 10:21:29 vmi2934783 node[3175582]:     at listenInCluster (node:net:1998:12)
+أغسطس 05 10:21:29 vmi2934783 node[3175582]:     at node:net:2207:7
+أغسطس 05 10:21:29 vmi2934783 node[3175582]:     at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
+أغسطس 05 10:21:29 vmi2934783 node[3175582]: Emitted 'error' event on Server instance at:
+أغسطس 05 10:21:29 vmi2934783 node[3175582]:     at emitErrorNT (node:net:1977:8)
+أغسطس 05 10:21:29 vmi2934783 node[3175582]:     at process.processTicksAndRejections (node:internal/process/task_queues:89:21) {
+أغسطس 05 10:21:29 vmi2934783 node[3175582]:   code: 'EADDRINUSE',
+أغسطس 05 10:21:29 vmi2934783 node[3175582]:   errno: -98,
+أغسطس 05 10:21:29 vmi2934783 node[3175582]:   syscall: 'listen',
+أغسطس 05 10:21:29 vmi2934783 node[3175582]:   address: '127.0.0.1',
+أغسطس 05 10:21:29 vmi2934783 node[3175582]:   port: 9079
+أغسطس 05 10:21:29 vmi2934783 node[3175582]: }
+أغسطس 05 10:21:29 vmi2934783 node[3175582]: Node.js v22.23.1
+أغسطس 05 10:21:33 vmi2934783 node[3177031]: node:events:497
+أغسطس 05 10:21:33 vmi2934783 node[3177031]:       throw er; // Unhandled 'error' event
+أغسطس 05 10:21:33 vmi2934783 node[3177031]:       ^
+أغسطس 05 10:21:33 vmi2934783 node[3177031]: Error: listen EADDRINUSE: address already in use 127.0.0.1:9079
+أغسطس 05 10:21:33 vmi2934783 node[3177031]:     at Server.setupListenHandle [as _listen2] (node:net:1941:16)
+أغسطس 05 10:21:33 vmi2934783 node[3177031]:     at listenInCluster (node:net:1998:12)
+أغسطس 05 10:21:33 vmi2934783 node[3177031]:     at node:net:2207:7
+أغسطس 05 10:21:33 vmi2934783 node[3177031]:     at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
+أغسطس 05 10:21:33 vmi2934783 node[3177031]: Emitted 'error' event on Server instance at:
+أغسطس 05 10:21:33 vmi2934783 node[3177031]:     at emitErrorNT (node:net:1977:8)
+أغسطس 05 10:21:33 vmi2934783 node[3177031]:     at process.processTicksAndRejections (node:internal/process/task_queues:89:21) {
+أغسطس 05 10:21:33 vmi2934783 node[3177031]:   code: 'EADDRINUSE',
+أغسطس 05 10:21:33 vmi2934783 node[3177031]:   errno: -98,
+أغسطس 05 10:21:33 vmi2934783 node[3177031]:   syscall: 'listen',
+أغسطس 05 10:21:33 vmi2934783 node[3177031]:   address: '127.0.0.1',
+أغسطس 05 10:21:33 vmi2934783 node[3177031]:   port: 9079
+أغسطس 05 10:21:33 vmi2934783 node[3177031]: }
+أغسطس 05 10:21:33 vmi2934783 node[3177031]: Node.js v22.23.1

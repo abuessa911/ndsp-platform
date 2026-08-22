@@ -1,0 +1,253 @@
+
+============================================================
+NDSP — AUTH BUILD TOOL PERMISSION DISCOVERY V10.4
+============================================================
+DATE=2026-07-27T20:00:37+02:00
+HOST=vmi2934783.contaboserver.net
+USER=nawaf511
+UID=1000
+GROUPS=nawaf511 root sudo users docker ndspdata
+AUTH_CURRENT=/opt/ndsp-auth-core-clean/current
+AUTH_SERVICE=ndsp-auth-core-clean.service
+MODE=READ_ONLY
+REPORT=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_AUTH_BUILD_TOOL_PERMISSION_DISCOVERY_V10_4_20260727_200037/REPORT.txt
+
+============================================================
+0) PRIVILEGES AND PRECONDITIONS
+============================================================
+ACTIVE_RELEASE=/opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1
+PRECONDITION_GATE=PASS
+
+============================================================
+1) ACTIVE SERVICE BINDING
+============================================================
+SERVICE_ACTIVE=active
+SERVICE_WORKING_DIRECTORY=/opt/ndsp-auth-core-clean/current
+SERVICE_EXEC_START={ path=/usr/bin/nsolid ; argv[]=/usr/bin/nsolid /opt/ndsp-auth-core-clean/current/server/dist/server.js ; ignore_errors=no ; start_time=[Mon 2026-07-27 19:47:18 CEST] ; stop_time=[n/a] ; pid=460835 ; code=(null) ; status=0/0 }
+
+============================================================
+2) PACKAGE BUILD SCRIPTS
+============================================================
+PACKAGE_NAME=ndsp-clean-auth-core
+PACKAGE_VERSION=2.4.0
+SCRIPT_build=npm run build:server && npm run build:ui
+SCRIPT_build:server=tsc -p server/tsconfig.json
+SCRIPT_build:ui=vite build --config ui/vite.config.ts
+
+============================================================
+3) NODE_MODULES BINDING
+============================================================
+NODE_MODULES_TYPE=SYMLINK
+NODE_MODULES_LINK=/opt/ndsp-auth-core-clean/releases/20260724_050053-final-ux-v31/node_modules
+NODE_MODULES_REALPATH=/opt/ndsp-auth-core-clean/releases/20260724_050053-final-ux-v31/node_modules
+
+--- NODE_MODULES PATH PERMISSIONS ---
+f: /opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1/node_modules
+drwxr-xr-x root root /
+drwxr-xr-x root root opt
+drwxr-xr-x root root ndsp-auth-core-clean
+drwxr-xr-x root root releases
+drwxr-xr-x root root 20260727_103119-legacy-email-delete-source-fix-v1-1
+lrwxrwxrwx root root node_modules -> /opt/ndsp-auth-core-clean/releases/20260724_050053-final-ux-v31/node_modules
+drwxr-xr-x root root   /
+drwxr-xr-x root root   opt
+drwxr-xr-x root root   ndsp-auth-core-clean
+drwxr-xr-x root root   releases
+drwxr-xr-x root root   20260724_050053-final-ux-v31
+drwxr-xr-x root root   node_modules
+TARGET SOURCE    FSTYPE OPTIONS
+/      /dev/sda1 ext4   rw,relatime,discard,errors=remount-ro,commit=30
+
+============================================================
+4) TYPESCRIPT EXECUTABLE DISCOVERY
+============================================================
+TSC_BIN=/opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1/node_modules/.bin/tsc
+TSC_REAL=/opt/ndsp-auth-core-clean/releases/20260724_050053-final-ux-v31/node_modules/typescript/bin/tsc
+TSC_BIN_EXISTS=YES
+TSC_BIN_EXECUTABLE_BY_CURRENT_USER=NO
+
+--- TSC LINK DETAILS ---
+lrwxrwxrwx 1 root root 21 يوليو  22 17:14 /opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1/node_modules/.bin/tsc -> ../typescript/bin/tsc
+PATH=/opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1/node_modules/.bin/tsc MODE=777 SYMBOLIC=lrwxrwxrwx UID=0 GID=0 OWNER=root GROUP=root SIZE=21
+f: /opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1/node_modules/.bin/tsc
+drwxr-xr-x root root /
+drwxr-xr-x root root opt
+drwxr-xr-x root root ndsp-auth-core-clean
+drwxr-xr-x root root releases
+drwxr-xr-x root root 20260727_103119-legacy-email-delete-source-fix-v1-1
+lrwxrwxrwx root root node_modules -> /opt/ndsp-auth-core-clean/releases/20260724_050053-final-ux-v31/node_modules
+drwxr-xr-x root root   /
+drwxr-xr-x root root   opt
+drwxr-xr-x root root   ndsp-auth-core-clean
+drwxr-xr-x root root   releases
+drwxr-xr-x root root   20260724_050053-final-ux-v31
+drwxr-xr-x root root   node_modules
+drwxr-xr-x root root .bin
+lrwxrwxrwx root root tsc -> ../typescript/bin/tsc
+drwxr-xr-x root root   ..
+drwxr-xr-x root root   typescript
+drwxr-xr-x root root   bin
+-rw-r--r-- root root   tsc
+
+--- TSC REAL FILE DETAILS ---
+/opt/ndsp-auth-core-clean/releases/20260724_050053-final-ux-v31/node_modules/typescript/bin/tsc: Node.js script executable, ASCII text
+PATH=/opt/ndsp-auth-core-clean/releases/20260724_050053-final-ux-v31/node_modules/typescript/bin/tsc MODE=644 SYMBOLIC=-rw-r--r-- UID=0 GID=0 OWNER=root GROUP=root SIZE=45
+f: /opt/ndsp-auth-core-clean/releases/20260724_050053-final-ux-v31/node_modules/typescript/bin/tsc
+drwxr-xr-x root root /
+drwxr-xr-x root root opt
+drwxr-xr-x root root ndsp-auth-core-clean
+drwxr-xr-x root root releases
+drwxr-xr-x root root 20260724_050053-final-ux-v31
+drwxr-xr-x root root node_modules
+drwxr-xr-x root root typescript
+drwxr-xr-x root root bin
+-rw-r--r-- root root tsc
+TSC_REAL_FIRST_LINE=#!/usr/bin/env node
+TSC_REAL_EXECUTABLE_BY_CURRENT_USER=NO
+
+============================================================
+5) TYPESCRIPT NON-MODIFYING EXECUTION TESTS
+============================================================
+TSC_DIRECT_EXIT=126
+TSC_DIRECT_STDOUT=
+TSC_DIRECT_STDERR=/home/nawaf511/ndsp_auth_build_tool_permission_discovery_v10_4.sh: line 209: /opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1/node_modules/.bin/tsc: Permission denied 
+TSC_VIA_NODE_EXIT=0
+TSC_VIA_NODE_STDOUT=Version 5.9.3 
+TSC_VIA_NODE_STDERR=
+
+============================================================
+6) OTHER BUILD TOOL PERMISSIONS
+============================================================
+
+TOOL=vite
+TOOL_BIN=/opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1/node_modules/.bin/vite
+TOOL_REAL=/opt/ndsp-auth-core-clean/releases/20260724_050053-final-ux-v31/node_modules/vite/bin/vite.js
+TOOL_EXISTS=YES
+TOOL_EXECUTABLE_BY_CURRENT_USER=NO
+lrwxrwxrwx 1 root root 19 يوليو  22 17:14 /opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1/node_modules/.bin/vite -> ../vite/bin/vite.js
+f: /opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1/node_modules/.bin/vite
+drwxr-xr-x root root /
+drwxr-xr-x root root opt
+drwxr-xr-x root root ndsp-auth-core-clean
+drwxr-xr-x root root releases
+drwxr-xr-x root root 20260727_103119-legacy-email-delete-source-fix-v1-1
+lrwxrwxrwx root root node_modules -> /opt/ndsp-auth-core-clean/releases/20260724_050053-final-ux-v31/node_modules
+drwxr-xr-x root root   /
+drwxr-xr-x root root   opt
+drwxr-xr-x root root   ndsp-auth-core-clean
+drwxr-xr-x root root   releases
+drwxr-xr-x root root   20260724_050053-final-ux-v31
+drwxr-xr-x root root   node_modules
+drwxr-xr-x root root .bin
+lrwxrwxrwx root root vite -> ../vite/bin/vite.js
+drwxr-xr-x root root   ..
+drwxr-xr-x root root   vite
+drwxr-xr-x root root   bin
+-rw-r--r-- root root   vite.js
+
+TOOL=esbuild
+TOOL_BIN=/opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1/node_modules/.bin/esbuild
+TOOL_REAL=/opt/ndsp-auth-core-clean/releases/20260724_050053-final-ux-v31/node_modules/esbuild/bin/esbuild
+TOOL_EXISTS=YES
+TOOL_EXECUTABLE_BY_CURRENT_USER=NO
+lrwxrwxrwx 1 root root 22 يوليو  22 17:14 /opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1/node_modules/.bin/esbuild -> ../esbuild/bin/esbuild
+f: /opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1/node_modules/.bin/esbuild
+drwxr-xr-x root root /
+drwxr-xr-x root root opt
+drwxr-xr-x root root ndsp-auth-core-clean
+drwxr-xr-x root root releases
+drwxr-xr-x root root 20260727_103119-legacy-email-delete-source-fix-v1-1
+lrwxrwxrwx root root node_modules -> /opt/ndsp-auth-core-clean/releases/20260724_050053-final-ux-v31/node_modules
+drwxr-xr-x root root   /
+drwxr-xr-x root root   opt
+drwxr-xr-x root root   ndsp-auth-core-clean
+drwxr-xr-x root root   releases
+drwxr-xr-x root root   20260724_050053-final-ux-v31
+drwxr-xr-x root root   node_modules
+drwxr-xr-x root root .bin
+lrwxrwxrwx root root esbuild -> ../esbuild/bin/esbuild
+drwxr-xr-x root root   ..
+drwxr-xr-x root root   esbuild
+drwxr-xr-x root root   bin
+-rw-r--r-- root root   esbuild
+
+TOOL=rollup
+TOOL_BIN=/opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1/node_modules/.bin/rollup
+TOOL_REAL=/opt/ndsp-auth-core-clean/releases/20260724_050053-final-ux-v31/node_modules/rollup/dist/bin/rollup
+TOOL_EXISTS=YES
+TOOL_EXECUTABLE_BY_CURRENT_USER=NO
+lrwxrwxrwx 1 root root 25 يوليو  22 17:14 /opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1/node_modules/.bin/rollup -> ../rollup/dist/bin/rollup
+f: /opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1/node_modules/.bin/rollup
+drwxr-xr-x root root /
+drwxr-xr-x root root opt
+drwxr-xr-x root root ndsp-auth-core-clean
+drwxr-xr-x root root releases
+drwxr-xr-x root root 20260727_103119-legacy-email-delete-source-fix-v1-1
+lrwxrwxrwx root root node_modules -> /opt/ndsp-auth-core-clean/releases/20260724_050053-final-ux-v31/node_modules
+drwxr-xr-x root root   /
+drwxr-xr-x root root   opt
+drwxr-xr-x root root   ndsp-auth-core-clean
+drwxr-xr-x root root   releases
+drwxr-xr-x root root   20260724_050053-final-ux-v31
+drwxr-xr-x root root   node_modules
+drwxr-xr-x root root .bin
+lrwxrwxrwx root root rollup -> ../rollup/dist/bin/rollup
+drwxr-xr-x root root   ..
+drwxr-xr-x root root   rollup
+drwxr-xr-x root root   dist
+drwxr-xr-x root root   bin
+-rw-r--r-- root root   rollup
+
+============================================================
+7) NODE_MODULES BIN PERMISSION SUMMARY
+============================================================
+BIN_DIRECTORY_EXISTS=YES
+BIN_ENTRY_COUNT=17
+BIN_NOT_EXECUTABLE_COUNT=17
+BIN_NOT_EXECUTABLE=/opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1/node_modules/.bin/baseline-browser-mapping
+BIN_NOT_EXECUTABLE=/opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1/node_modules/.bin/bcrypt
+BIN_NOT_EXECUTABLE=/opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1/node_modules/.bin/browserslist
+BIN_NOT_EXECUTABLE=/opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1/node_modules/.bin/esbuild
+BIN_NOT_EXECUTABLE=/opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1/node_modules/.bin/jsesc
+BIN_NOT_EXECUTABLE=/opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1/node_modules/.bin/json5
+BIN_NOT_EXECUTABLE=/opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1/node_modules/.bin/loose-envify
+BIN_NOT_EXECUTABLE=/opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1/node_modules/.bin/nanoid
+BIN_NOT_EXECUTABLE=/opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1/node_modules/.bin/parser
+BIN_NOT_EXECUTABLE=/opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1/node_modules/.bin/pino
+BIN_NOT_EXECUTABLE=/opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1/node_modules/.bin/rollup
+BIN_NOT_EXECUTABLE=/opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1/node_modules/.bin/safe-regex2
+BIN_NOT_EXECUTABLE=/opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1/node_modules/.bin/semver
+BIN_NOT_EXECUTABLE=/opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1/node_modules/.bin/tsc
+BIN_NOT_EXECUTABLE=/opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1/node_modules/.bin/tsserver
+BIN_NOT_EXECUTABLE=/opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1/node_modules/.bin/update-browserslist-db
+BIN_NOT_EXECUTABLE=/opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1/node_modules/.bin/vite
+
+============================================================
+8) DIRECTORY TRAVERSAL TEST
+============================================================
+PATH=/opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1 READABLE=YES TRAVERSABLE=YES
+MODE=755 SYMBOLIC=drwxr-xr-x UID=0 GID=0 OWNER=root GROUP=root
+PATH=/opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1/ui READABLE=YES TRAVERSABLE=YES
+MODE=755 SYMBOLIC=drwxr-xr-x UID=0 GID=0 OWNER=root GROUP=root
+PATH=/opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1/ui/src READABLE=YES TRAVERSABLE=YES
+MODE=755 SYMBOLIC=drwxr-xr-x UID=0 GID=0 OWNER=root GROUP=root
+PATH=/opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1/node_modules READABLE=YES TRAVERSABLE=YES
+MODE=777 SYMBOLIC=lrwxrwxrwx UID=0 GID=0 OWNER=root GROUP=root
+PATH=/opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1/node_modules/.bin READABLE=YES TRAVERSABLE=YES
+MODE=755 SYMBOLIC=drwxr-xr-x UID=0 GID=0 OWNER=root GROUP=root
+
+============================================================
+9) AUTOMATIC CLASSIFICATION
+============================================================
+ROOT_CAUSE_CLASS=TSC_LAUNCHER_NOT_EXECUTABLE_BUT_NODE_TARGET_WORKS
+
+============================================================
+10) FINAL RESULT
+============================================================
+PRODUCTION_MODIFIED=NO
+DATABASE_CHANGED=NO
+SOURCE_CHANGED=NO
+SERVICE_RESTARTED=NO
+NGINX_CHANGED=NO
+FINAL_STATUS=NDSP_AUTH_BUILD_TOOL_PERMISSION_DISCOVERY_V10_4_COMPLETE
+REPORT=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_AUTH_BUILD_TOOL_PERMISSION_DISCOVERY_V10_4_20260727_200037/REPORT.txt

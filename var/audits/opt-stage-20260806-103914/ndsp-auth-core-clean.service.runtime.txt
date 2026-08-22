@@ -1,0 +1,7 @@
+MainPID=2795
+ExecStart={ path=/usr/bin/nsolid ; argv[]=/usr/bin/nsolid /opt/ndsp-auth-core-clean/current/server/dist/server.js ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }
+Environment=
+EnvironmentFiles=/etc/ndsp/ndsp-auth-core-clean.env (ignore_errors=no)
+WorkingDirectory=/opt/ndsp-auth-core-clean/current
+ActiveState=active
+SubState=running

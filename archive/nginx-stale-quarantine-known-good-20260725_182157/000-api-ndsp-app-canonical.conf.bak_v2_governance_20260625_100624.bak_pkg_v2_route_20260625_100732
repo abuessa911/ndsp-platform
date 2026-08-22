@@ -1,0 +1,229 @@
+server {
+    listen 80;
+    listen [::]:80;
+    server_name api.ndsp.app;
+
+    location ^~ /.well-known/acme-challenge/ {
+        root /var/www/html;
+        default_type text/plain;
+        try_files $uri =404;
+    }
+
+
+    # NDSP_REGISTER_HTML_CONTENT_TYPE_FINAL
+    location = /register {
+        default_type text/html;
+        add_header Content-Type "text/html; charset=utf-8" always;
+        add_header Cache-Control "no-store, no-cache, must-revalidate, max-age=0" always;
+        add_header Pragma "no-cache" always;
+        add_header Expires "0" always;
+        try_files /register.html =404;
+    }
+
+    location / {
+        return 301 https://$host$request_uri;
+    }
+
+    # NDSP launch alias: governed live decision quality
+    location = /api/decision/quality-live {
+        proxy_pass http://127.0.0.1:9067/api/decision/quality-live$is_args$args;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        add_header Cache-Control "no-store, no-cache, must-revalidate, proxy-revalidate" always;
+    }
+
+
+    # BEGIN NDSP16_LAYER_REPLACE
+# END NDSP16_LAYER_REPLACE
+
+    # NDSP 16 Layers API - public route
+
+    # NDSP 16 Layers API - forced public route
+
+    # NDSP 16 Layers API - forced public route
+    location = /api/ndsp16/health {
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        add_header X-NDSP16-Route "exact-health" always;
+    }
+
+    location = /api/ndsp16/layers/status {
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        add_header X-NDSP16-Route "exact-layers-status" always;
+    }
+
+    location ^~ /api/ndsp16/ {
+        rewrite ^/api/ndsp16/(.*)$ /api/$1 break;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_connect_timeout 10s;
+        proxy_send_timeout 60s;
+        proxy_read_timeout 60s;
+        add_header X-NDSP16-Route "prefix" always;
+    }
+
+
+
+}
+
+server {
+    include /etc/nginx/snippets/ndsp-staged-commercial-security.conf;
+
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name api.ndsp.app;
+
+    ssl_certificate /etc/letsencrypt/live/api.ndsp.app/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/api.ndsp.app/privkey.pem;
+
+    client_max_body_size 20m;
+
+    location = /api/auth/login {
+        proxy_pass http://127.0.0.1:9020/api/auth/login;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto https;
+    }
+
+    location = /api/auth/me {
+        proxy_pass http://127.0.0.1:9020/api/auth/me;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto https;
+    }
+
+    location = /api/auth/logout {
+        proxy_pass http://127.0.0.1:9020/api/auth/logout;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto https;
+    }
+
+    location / {
+        proxy_pass http://127.0.0.1:9001;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto https;
+    }
+
+    # NDSP launch alias: governed live decision quality
+    location = /api/decision/quality-live {
+        proxy_pass http://127.0.0.1:9067/api/decision/quality-live$is_args$args;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        add_header Cache-Control "no-store, no-cache, must-revalidate, proxy-revalidate" always;
+    }
+
+    # NDSP 16 Layers API - forced public route
+
+    # NDSP 16 Layers API - forced public route
+    location = /api/ndsp16/health {
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        add_header X-NDSP16-Route "exact-health" always;
+    }
+
+    location = /api/ndsp16/layers/status {
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        add_header X-NDSP16-Route "exact-layers-status" always;
+    }
+
+    location ^~ /api/ndsp16/ {
+        rewrite ^/api/ndsp16/(.*)$ /api/$1 break;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_connect_timeout 10s;
+        proxy_send_timeout 60s;
+        proxy_read_timeout 60s;
+        add_header X-NDSP16-Route "prefix" always;
+    }
+
+
+
+
+    # NDSP_PRIORITY_UI_BRIDGE_ROUTES_START
+    location ^~ /api/ui-bridge/ {
+        proxy_pass http://127.0.0.1:9066;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    location ^~ /api/dashboard/ {
+        proxy_pass http://127.0.0.1:9066;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+    # NDSP_PRIORITY_UI_BRIDGE_ROUTES_END
+
+    # NDSP_UI_BRIDGE_ROUTES_START
+    location = /api/ui-bridge/health { proxy_pass http://127.0.0.1:9066; proxy_http_version 1.1; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; }
+    
+    
+    
+    location = /api/market-structure { proxy_pass http://127.0.0.1:9066; proxy_http_version 1.1; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; }
+    location = /api/technical-confirmation { proxy_pass http://127.0.0.1:9066; proxy_http_version 1.1; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; }
+    location = /api/macro-analysis { proxy_pass http://127.0.0.1:9066; proxy_http_version 1.1; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; }
+    location = /api/risk-layer { proxy_pass http://127.0.0.1:9066; proxy_http_version 1.1; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; }
+    location = /api/nawaf-signal { proxy_pass http://127.0.0.1:9066; proxy_http_version 1.1; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; }
+    location = /api/alerts { proxy_pass http://127.0.0.1:9066; proxy_http_version 1.1; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; }
+    location = /api/settings { proxy_pass http://127.0.0.1:9066; proxy_http_version 1.1; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; }
+    
+    # NDSP_UI_BRIDGE_ROUTES_END
+    
+
+
+    
+
+
+    # NDSP_ENTERPRISE_ROUTES_START
+    # NDSP_ENTERPRISE_ROUTES_END
+
+
+    # NDSP_DECISION_PACKAGE_V1_START
+    location = /api/decision/package-live {
+        proxy_pass http://127.0.0.1:9061/api/decision/package-live;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+    # NDSP_DECISION_PACKAGE_V1_END
+
+}

@@ -1,0 +1,17 @@
+{
+  "head_record_hash": "7e79a29a7d3ba39b9432fb82c4d9bbc71ed9f1b94bf78ff8677e8ad52e94b883",
+  "latest_by_key": {
+    "ETHUSDT|weekly|speculative": {
+      "captured_at": "2026-08-10T15:59:26.224225Z",
+      "event_id": "HD-BD942C92B719D499EF303047",
+      "history_fingerprint": "ce3fa40556a724870ab0f6cbfa92300e8b6a2a8d1bf9707c31f85e1a7c8d4214",
+      "record_hash": "7e79a29a7d3ba39b9432fb82c4d9bbc71ed9f1b94bf78ff8677e8ad52e94b883",
+      "record_index": 6
+    }
+  },
+  "ledger_version": "ndsp-append-only-ledger-v36",
+  "ok": true,
+  "record_count": 6,
+  "runtime_version": "ndsp-completed-decisions-history-v36.0.0",
+  "updated_at": "2026-08-22T16:32:44.427360Z"
+}

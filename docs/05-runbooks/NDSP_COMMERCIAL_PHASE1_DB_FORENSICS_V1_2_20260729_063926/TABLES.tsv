@@ -1,0 +1,8 @@
+table_name	exists	rows	size	owner	live_source_references
+ndsp_legal_acceptances	YES	0	40 kB	ndsp_auth	1
+ndsp_subscriptions	YES	0	32 kB	ndsp_auth	3
+ndsp_payment_events	NO	0	-	-	0
+ndsp_portfolios	NO	0	-	-	0
+ndsp_watchlist_items	NO	0	-	-	0
+ndsp_alert_rules	NO	0	-	-	0
+ndsp_alert_deliveries	NO	0	-	-	0

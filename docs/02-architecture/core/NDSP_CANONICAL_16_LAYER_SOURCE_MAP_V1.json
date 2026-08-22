@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0",
+  "source_root": "backend/layers/canonical_v1",
+  "registry": "docs/03-contracts/NDSP_16_LAYER_CORE_REGISTRY_V1.json",
+  "modules": {
+    "NDSP-CORE-L01": "direction/l01_tdl_medium_long.py",
+    "NDSP-CORE-L02": "direction/l02_tdl_short_speculative.py",
+    "NDSP-CORE-L03": "direction/l03_market_direction_context.py",
+    "NDSP-CORE-L04": "direction/l04_correction_gate.py",
+    "NDSP-CORE-L05": "quality/l05_divergence_engine.py",
+    "NDSP-CORE-L06": "direction/l06_temporal_day_logic.py",
+    "NDSP-CORE-L07": "structure/l07_scenario_levels.py",
+    "NDSP-CORE-L08": "structure/l08_nmp_confirmation.py",
+    "NDSP-CORE-L09": "quality/l09_momentum_engine.py",
+    "NDSP-CORE-L10": "quality/l10_liquidity_structure_confirmation.py",
+    "NDSP-CORE-L11": "risk/l11_usd_macro_filter.py",
+    "NDSP-CORE-L12": "risk/l12_risk_engine.py",
+    "NDSP-CORE-L13": "quality/l13_nawaf_golden_signal.py",
+    "NDSP-CORE-L14": "quality/l14_nawaf_enhanced_golden_signal.py",
+    "NDSP-CORE-L15": "risk/l15_devils_advocate.py",
+    "NDSP-CORE-L16": "final/l16_decision_readiness_state_machine.py"
+  },
+  "activation_status": "INSTALLED_NOT_YET_LIVE",
+  "legacy_orchestrator_modified": false
+}

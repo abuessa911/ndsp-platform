@@ -1,0 +1,6 @@
+https://ndsp.app => 000
+https://ndsp.app/ => 000
+https://my.ndsp.app => 000
+https://my.ndsp.app/login => 000
+https://my.ndsp.app/register => 000
+https://my.ndsp.app/subscription => 000

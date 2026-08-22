@@ -1,0 +1,296 @@
+# NDSP V1.8 / P8-D12 — Codex Task: Source-Level Arabic, Mobile Menu, Decision Room Audit
+# الغرض:
+# إصلاح التعريب وزر اللغة وقائمة الجوال من المصدر أو من runtime واحد فقط، بدون تغيير التصميم الحالي أو حذف محتوياته.
+
+أنت تعمل على:
+NDSP — Nawaf Decision Support Platform
+
+الجملة الحاكمة:
+NDSP لا تبني شاشة؛ NDSP تبني غرفة قرار.
+
+## 0) القواعد غير القابلة للتفاوض
+
+ممنوع:
+- لا تغيّر التصميم البصري العام.
+- لا تغيّر الألوان أو الثيم أو الهوية.
+- لا تحذف أي صفحة.
+- لا تغيّر أسماء الصفحات الرسمية.
+- لا تلمس API أو backend أو database أو Nginx أو PM2 أو systemd.
+- لا تضف Buy/Sell أو أي لغة تنفيذ.
+- لا تكشف أسماء محركات داخلية أو مزودين داخليين.
+- لا تخترع NMP.
+- لا تعرض بيانات وهمية كأنها live.
+- لا تكدس سكربتات جديدة فوق D11.
+- لا تنشئ runtime JS جديد إذا كان بالإمكان تعديل runtime D11 الحالي.
+- لا تعدل protected assets:
+  /var/www/ndsp-my/assets/ndsp-radar-safe-clean.js
+  /var/www/ndsp-my/assets/ndsp-global-menu.js
+  /var/www/ndsp-my/assets/ndsp-disclaimer-gate.js
+
+مسموح:
+- إصلاح ملف التعريب الحالي إن كان موجودًا:
+  /var/www/ndsp-my/approved-design/ndsp-full-ar-i18n-v18-d11.js
+- أو نقل التعريب إلى المصدر إن كان source المعتمد موجودًا، بشرط عدم تغيير التصميم.
+- إضافة زر لغة يعمل دائمًا.
+- إضافة زر قائمة للجوال فقط إذا كانت نسخة الجوال بلا قائمة.
+- إضافة طبقة تحقق/تقرير read-only لقياس العناصر المطلوبة.
+- إضافة backup + report + post-patch test.
+
+## 1) سبب المهمة
+
+المشكلة الحالية:
+1. زر تغيير اللغة يعمل مرة واحدة فقط، وبعدها لا يستجيب إلا بعد refresh.
+2. التعريب غير كامل لكل الصفحة.
+3. نسخة الجوال لا يظهر فيها زر واضح للقوائم.
+4. مطلوب التأكد من وجود عناصر غرفة القرار بدون حذف أو تغيير محتوى التصميم الحالي.
+
+## 2) المطلوب إصلاحه
+
+### A) زر اللغة
+- زر اللغة يجب أن يعمل بلا توقف:
+  عربي ⇄ EN ⇄ عربي ⇄ EN
+- لا يحتاج refresh.
+- لا يعلق بسبب MutationObserver.
+- لا يترجم نص الزر نفسه بشكل يكسر الضغط.
+- لا يكرر الزر.
+- لا يضيف أكثر من زر لغة.
+- يحفظ اللغة في localStorage.
+- العربية تكون default.
+- EN يرجع النص الأصلي قدر الإمكان.
+
+### B) التعريب الكامل
+- ترجم كل النصوص الظاهرة الممكنة:
+  text nodes
+  placeholder
+  title
+  aria-label
+  alt
+  buttons
+  nav labels
+  card labels
+  table headers
+  modal/drawer labels
+- لا تترجم الرموز المالية مثل:
+  BTC, ETH, XAUUSD, EURUSD, USD, DXY إذا كانت رموز أصول.
+- لا تترجم أسماء الطبقات العامة المسموحة إذا كان بقاؤها أفضل:
+  TDL
+  NMP
+- ترجم المصطلحات التالية:
+  Executive Overview = النظرة التنفيذية
+  Markets Monitor = مراقبة الأسواق
+  Phase Engine = محرك المرحلة
+  Intelligence Engine = محرك الذكاء
+  Decision Engine = محرك القرار
+  Governance & Risk = الحوكمة والمخاطر
+  Data Infrastructure = بنية البيانات
+  Strategy Lab = مختبر القراءة
+  System Architecture = معمارية النظام
+  Decision Confidence = ثقة القراءة
+  Decision Quality = جودة القراءة
+  Reference Levels = المستويات المرجعية
+  Activation Level = مستوى التفعيل
+  Arrival Level = مستوى الوصول
+  Review Level = مستوى المراجعة
+  Invalidation Level = مستوى الإلغاء
+  Nawaf Meet Point = نقطة التقاء نواف
+  Alternative Scenarios = السيناريوهات البديلة
+  Governing Scenario = السيناريو الحاكم
+  Beginner = بسيط
+  Professional = محترف
+  Investment Reading = قراءة استثمارية
+  Speculative Reading = قراءة مضاربية
+  Completed Decisions = القرارات المكتملة
+  Not Financial Advice = ليست نصيحة مالية
+  Decision support only = دعم قرار فقط
+
+### C) قائمة الجوال
+- أضف زر قائمة للجوال فقط.
+- يظهر على الشاشات الصغيرة فقط.
+- لا يغطي زر اللغة.
+- يفتح drawer أو panel يحتوي روابط الصفحات الرسمية.
+- يستخدم روابط الإنتاج الحالية:
+  /
+  /asset-selector.html
+  /market-assets.html
+  /decision-radar.html
+  /decision-support.html
+  /nmp.html
+  /decision-guide.html
+  /completed-decisions.html
+  /daily-brief.html
+  /settings.html
+  /login.html
+  /register.html
+- لا يغير القائمة الأصلية في الديسكتوب.
+- لا يزيل أي عنصر موجود.
+
+### D) السيناريوهات البديلة
+- لا تحذف السيناريوهات البديلة.
+- للبسيط: تظهر مطوية تحت عنوان:
+  "ما الذي قد يغير القراءة؟"
+- للمحترف: تظهر كاملة كجدول:
+  السيناريو / شرط التحول / أثره على الجاهزية
+- تجنب عبارة "مستويات بديلة".
+- استخدم:
+  "مستويات مرجعية"
+  "شرط مراجعة السيناريو"
+
+## 3) المطلوب التحقق من وجوده
+
+افحص التصميم الحالي والمصدر/الإنتاج وتأكد من هذه العناصر:
+
+1. رادار اكتمال وحدات القرار.
+2. المستويات المرجعية:
+   التفعيل / الوصول / المراجعة / الإلغاء.
+3. NMP / نقطة التقاء نواف.
+4. السيناريو الحاكم والسيناريوهات البديلة.
+5. شرح القرار للمستخدم البسيط.
+6. شرح القرار للمستخدم المحترف.
+7. أنماط القراءة:
+   استثماري / مضاربي / tactical / investor حسب المتاح.
+8. دليل قراءة القرار.
+9. صفحة الأسواق كلها.
+10. صفحة الأصول كلها.
+11. تسلسل الأقسام حتى القسم الأخير.
+12. القرارات المكتملة.
+13. صفحة الهبوط.
+14. صفحة التسجيل.
+15. صفحة الدخول.
+16. صفحة الإدارة.
+17. إخلاء المسؤولية.
+18. Beginner default + Advanced toggle.
+19. Risk Radar legend.
+20. USD/Macro panel قبل Devil’s Advocate.
+21. Data freshness / آخر تحديث / UTC.
+22. Completed Reading Seal / Under Monitoring Seal / Caution Seal.
+23. عدم ظهور Buy/Sell/LONG/SHORT/NO TRADE كأوامر.
+24. عدم ظهور أسماء مزودين داخلية:
+   CFTC, FRED, Glassnode, CryptoQuant, TradingEconomics,
+   Provider Manager, Failover Controller, Data Ingest,
+   On-Chain Adapter, NDIP, Empire Core.
+
+## 4) طريقة التنفيذ المطلوبة
+
+نفذ على مراحل:
+
+### المرحلة 1 — Read-only audit
+- لا تغيّر أي ملف.
+- حدد المصدر الحالي:
+  - هل التصميم المعتمد موجود في source؟
+  - هل الإنتاج يعتمد على /approved-design/؟
+  - هل D11 runtime موجود ومحقون؟
+- أخرج تقرير:
+  docs/05-runbooks/NDSP_V18_P8_D12_READONLY_AUDIT_<timestamp>.md
+
+### المرحلة 2 — Backup
+قبل أي تعديل:
+- انسخ الملف/الملفات التي ستعدلها فقط.
+- إن كان التعديل runtime فقط، backup لملف:
+  /var/www/ndsp-my/approved-design/ndsp-full-ar-i18n-v18-d11.js
+- إن كان source-level، backup لمسار source المستهدف.
+- أنشئ rollback script.
+
+### المرحلة 3 — Patch
+اختر أحد المسارين:
+
+#### المسار المفضل: Source-level
+إذا source المعتمد موجود:
+- أضف i18n layer/source map داخل source.
+- أضف LanguageProvider أو hook خفيف.
+- أضف MobileNav component.
+- لا تغيّر التصميم.
+- ابْنِ preview أولًا، لا تنشر مباشرة.
+
+#### المسار الآمن الحالي: Runtime single-file
+إذا source غير مؤكد:
+- عدّل الملف الحالي فقط:
+  /var/www/ndsp-my/approved-design/ndsp-full-ar-i18n-v18-d11.js
+- أصلح toggle.
+- وسّع dictionary.
+- أضف mobile menu داخل نفس الملف.
+- لا تضف JS جديد.
+- لا تضف script tag جديد.
+
+### المرحلة 4 — Tests
+اختبر:
+- HTTP 200:
+  /
+  /asset-selector.html
+  /market-assets.html
+  /decision-radar.html
+  /decision-support.html
+  /nmp.html
+  /decision-guide.html
+  /completed-decisions.html
+  /login.html
+  /register.html
+  /admin.html
+  /approved-design/ndsp-full-ar-i18n-v18-d11.js
+  https://api.ndsp.app/api/health
+  https://api.ndsp.app/api/decision/quality-live?symbol=ETHUSDT
+
+- Grep:
+  لا يوجد script tag مكرر.
+  لا يوجد JS runtime جديد.
+  لا يوجد Buy/Sell/LONG/SHORT/NO TRADE.
+  لا توجد أسماء مزودين داخلية.
+  protected assets checksums unchanged.
+
+- Playwright أو browser check إن توفر:
+  1. افتح الصفحة.
+  2. اضغط زر اللغة 5 مرات متتالية.
+  3. تأكد أنه لا يتوقف.
+  4. حوّل للجوال viewport 390x844.
+  5. تأكد زر القائمة يظهر.
+  6. افتح القائمة وأغلقها.
+  7. تأكد لا يوجد console error حرج.
+
+## 5) ملفات ممنوع لمسها
+
+لا تعدل:
+- /etc/nginx/*
+- backend/*
+- database/*
+- systemd/*
+- pm2 config
+- /var/www/ndsp-my/assets/ndsp-radar-safe-clean.js
+- /var/www/ndsp-my/assets/ndsp-global-menu.js
+- /var/www/ndsp-my/assets/ndsp-disclaimer-gate.js
+
+## 6) التقرير النهائي المطلوب
+
+في النهاية أنشئ تقرير:
+docs/05-runbooks/NDSP_V18_P8_D12_ARABIC_MOBILE_DECISION_ROOM_FIX_<timestamp>.md
+
+ويجب أن يحتوي:
+- الملفات المعدلة.
+- هل التعديل source-level أو runtime single-file.
+- نتيجة زر اللغة.
+- نتيجة زر قائمة الجوال.
+- نتيجة التعريب.
+- عدد النصوص الإنجليزية المتبقية إن وجدت.
+- نتيجة فحص العناصر الـ 24.
+- نتيجة forbidden terms.
+- نتيجة HTTP.
+- نتيجة API.
+- checksum للـ protected assets.
+- rollback path.
+- package path.
+- final status.
+
+## 7) final status المطلوب
+
+لا تعتبر المهمة ناجحة إلا إذا ظهر:
+
+FINAL_STATUS=V18_P8_D12_ARABIC_MOBILE_DECISION_ROOM_FIX_OK
+
+ولو بقيت نصوص إنجليزية قليلة:
+FINAL_STATUS=V18_P8_D12_WITH_REMAINING_TRANSLATION_ITEMS
+مع قائمة واضحة بما بقي فقط.
+
+## 8) ملاحظة مهمة
+
+لا تحول NDSP إلى شاشة مؤشرات عادية.
+كل إصلاح يجب أن يخدم غرفة القرار:
+
+قراءة → تفسير → تحقق → اعتراض → جاهزية → متابعة

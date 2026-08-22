@@ -1,0 +1,125 @@
+PATTERN=\bSettings\b
+ANCHOR_LINE=7469
+CONTEXT_START=7424
+CONTEXT_END=7543
+
+  007424:       window.location.assign("/logout/");
+  007425:     }
+  007426:   }
+  007427: 
+  007428:   const label =
+  007429:     busy
+  007430:       ? (lang === "ar" ? "جارٍ تسجيل الخروج…" : "Signing out…")
+  007431:       : (lang === "ar" ? "تسجيل الخروج" : "Sign out");
+  007432: 
+  007433:   return (
+  007434:     <button
+  007435:       type="button"
+  007436:       className="nav-link drawer-logout"
+  007437:       onClick={logout}
+  007438:       disabled={busy}
+  007439:       data-ndsp-source-logout-v2="integrated-nav-item"
+  007440:       aria-label={label}
+  007441:     >
+  007442:       <span className="drawer-logout-icon" aria-hidden="true">↪</span>
+  007443:       <span>{label}</span>
+  007444:     </button>
+  007445:   );
+  007446: }
+  007447: /* NDSP_SOURCE_LOGOUT_V1_END */
+  007448: 
+  007449: function AppRoutes() {
+  007450:   const { route, navigate } = useNavigation();
+  007451:   useEffect(() => { if (route === "/") navigate("/command-center", { replace: true }); }, [route, navigate]);
+  007452:   const routes = {
+  007453:     "/command-center": <CommandCenterPage/>,
+  007454:     "/markets": <MarketsPage/>,
+  007455:     "/prices-chart": <PricesChartPage/>,
+  007456:     "/opportunities": <OpportunitiesPage/>,
+  007457:     "/decision-room": <DecisionRoomPage/>,
+  007458:     "/portfolio": <PortfolioPage/>,
+  007459:     "/scenarios": <ScenariosPage/>,
+  007460:     "/layers": <LayersPage/>,
+  007461:     "/risk": <RiskPage/>,
+  007462:     "/completed": <CompletedPage/>,
+  007463:     "/data-health": <DataHealthPage/>,
+  007464:     "/alerts": <AlertsPage/>,
+  007465:     "/guide": <GuidePage/>,
+  007466:     "/support": <SupportPage/>,
+  007467:     "/account": <AccountPage/>,
+  007468:     "/plans": <PlansPage/>,
+>>007469:     "/settings": <SettingsPage/>,
+  007470:     "/context": <ContextPage/>,
+  007471:     "/trial-expired": <TrialExpiredPage/>
+  007472:   };
+  007473:   return routes[route] || <NotFoundPage/>;
+  007474: }
+  007475: 
+  007476: function AppShell() {
+  007477:   const { t } = useTranslate();
+  007478:   return <div className="app-shell"><Topbar/><ContextStrip/><main className="page-container"><AppRoutes/></main><footer className="footer"><span>© 2026 NDSP</span><span>{t("explanatoryOnly")}</span></footer><LegalModal/></div>;
+  007479: }
+  007480: 
+  007481: class AppErrorBoundary extends React.Component {
+  007482:   constructor(props) {
+  007483:     super(props);
+  007484:     this.state = {
+  007485:       error: null
+  007486:     };
+  007487:   }
+  007488: 
+  007489:   static getDerivedStateFromError(error) {
+  007490:     return {
+  007491:       error
+  007492:     };
+  007493:   }
+  007494: 
+  007495:   componentDidCatch(error, info) {
+  007496:     console.error(
+  007497:       "NDSP_ROUTE_RENDER_ERROR",
+  007498:       error,
+  007499:       info
+  007500:     );
+  007501:   }
+  007502: 
+  007503:   render() {
+  007504:     if (!this.state.error) {
+  007505:       return this.props.children;
+  007506:     }
+  007507: 
+  007508:     const ar =
+  007509:       document.documentElement.lang === "ar" ||
+  007510:       new URLSearchParams(
+  007511:         window.location.search
+  007512:       ).get("lang") === "ar";
+  007513: 
+  007514:     return (
+  007515:       <div
+  007516:         className="route-error-state"
+  007517:         dir={ar ? "rtl" : "ltr"}
+  007518:       >
+  007519:         <Icon name="warning" size={42}/>
+  007520: 
+  007521:         <h1>
+  007522:           {
+  007523:             ar
+  007524:               ? "تعذر عرض الصفحة"
+  007525:               : "Unable to render the page"
+  007526:           }
+  007527:         </h1>
+  007528: 
+  007529:         <p>
+  007530:           {
+  007531:             ar
+  007532:               ? "تم منع الشاشة السوداء. أعد تحميل الصفحة، وإذا استمرت المشكلة استخدم مركز الدعم وأرفق اسم الصفحة."
+  007533:               : "A blank screen was prevented. Reload the page; if the issue persists, use Support and include the page name."
+  007534:           }
+  007535:         </p>
+  007536: 
+  007537:         <button
+  007538:           className="button primary"
+  007539:           onClick={() =>
+  007540:             window.location.reload()
+  007541:           }
+  007542:         >
+  007543:           {

@@ -1,0 +1,146 @@
+206:    root /var/www/ndsp-my;
+234:        try_files $uri $uri/ /approved-design/index.html;
+239:        try_files $uri =404;
+244:        try_files $uri =404;
+250:        try_files $uri $uri/ /index.html;
+281:    location = /decision-room-v31/account {
+285:    location ^~ /decision-room-v31/account/ {
+286:        try_files $uri $uri/ /decision-room-v31/account/index.html;
+292:        try_files /decision-room-v31/index.html =404;
+298:        try_files $uri $uri/ /decision-room-v31/index.html;
+307:    location = /portal-v50/config/assets.json {
+308:        alias /var/www/ndsp-my/portal-v50/config/assets.json;
+313:    location = /portal-v50/config/layers.json {
+314:        alias /var/www/ndsp-my/portal-v50/config/layers.json;
+319:    location = /portal-v50/config/capabilities.json {
+320:        alias /var/www/ndsp-my/portal-v50/config/capabilities.json;
+330:        try_files /portal-v50/support-center-v60.html =404;
+431:        root /var/www/ndsp-my;
+433:        try_files $uri $uri/index.html =404;
+438:        alias /var/www/ndsp-my/assets/ndsp-telegram-v182.css;
+444:        alias /var/www/ndsp-my/assets/ndsp-telegram-v182.js;
+450:        alias /var/www/ndsp-my/assets/ndsp-telegram-entry-v182.js;
+619:    location = /_ndsp_clean_auth_completed_check {
+629:    location = /api/completed-decisions {
+644:    location = /api/completed-decisions/latest {
+666:    location = /portal {
+670:    location ^~ /portal/assets/ {
+671:        root /var/www/ndsp-my;
+672:        try_files $uri =404;
+678:    location = /portal/favicon.svg {
+679:        root /var/www/ndsp-my;
+680:        try_files $uri =404;
+685:    location ^~ /portal/ {
+686:        root /var/www/ndsp-my;
+688:        try_files $uri $uri/ /portal/index.html;
+698:    location = /portal-next {
+702:    location = /portal-next/ {
+703:        root /var/www/ndsp-my;
+704:        try_files /portal-next/index.html =404;
+711:    location ^~ /portal-next/assets/ {
+712:        root /var/www/ndsp-my;
+713:        try_files $uri =404;
+718:    location = /portal-next/favicon.svg {
+719:        root /var/www/ndsp-my;
+720:        try_files $uri =404;
+723:    location ^~ /portal-next/ {
+724:        root /var/www/ndsp-my;
+725:        try_files /portal-next/index.html =404;
+741:        root /var/www/ndsp-my;
+742:        try_files /forgot-password.html =404;
+750:        root /var/www/ndsp-my;
+751:        try_files /reset-password.html =404;
+799:location ^~ /start/ { alias /var/www/ndsp-business-ops/start/; index index.html; add_header Cache-Control "no-store" always; }
+801:location ^~ /support/ { alias /var/www/ndsp-business-ops/support/; index index.html; add_header Cache-Control "no-store" always; }
+803:location ^~ /subscribe/ { alias /var/www/ndsp-business-ops/subscribe/; index index.html; add_header Cache-Control "no-store" always; }
+805:location ^~ /launch/ { alias /var/www/ndsp-business-ops/launch/; index index.html; add_header Cache-Control "no-store" always; }
+806:location = /ndsp-ops-assets/common.css { alias /var/www/ndsp-business-ops/common.css; add_header Cache-Control "public, max-age=3600" always; }
+812:    alias /var/www/ndsp-business-ops/ops-admin/;
+933:    try_files $uri $uri/ /owner/index.html;
+940:    try_files $uri $uri/ /admin/index.html;
+950:        root /var/www/html;
+972:    root /var/www/ndsp-admin;
+996:        try_files $uri =404;
+1000:        try_files $uri $uri/ /index.html;
+1059:        root /var/www/html;
+1061:        try_files $uri =404;
+1072:        try_files /register.html =404;
+1166:    location = /api/completed-decisions {
+1182:    location = /api/completed-decisions/latest {
+1198:    location = /api/v15/completed-decisions {
+1202:        root /var/www/ndsp-my;
+1203:        try_files /data/completed-decisions-v15-api.json =404;
+1209:    location = /api/v16/completed-decisions {
+1213:        root /var/www/ndsp-my;
+1214:        try_files /data/completed-decisions-v16-live-adapter.json =404;
+1217:    location = /api/completed-decisions-live {
+1221:        root /var/www/ndsp-my;
+1222:        try_files /data/completed-decisions-v16-live-adapter.json =404;
+1225:    location = /api/completed-decisions-live/latest {
+1229:        root /var/www/ndsp-my;
+1230:        try_files /data/completed-decisions-v16-live-adapter.json =404;
+1388:    location = /api/completed {
+1396:    location = /api/completed/latest {
+1404:    location ~ ^/api/completed/([A-Za-z0-9._:-]+)$ {
+1412:    location ~ ^/api/completed/id/([A-Za-z0-9._:-]+)$ {
+1420:    location ~ ^/api/completed/id/([A-Za-z0-9._:-]+)/timeline$ {
+1444:    location = /api/completed/ingest {
+1448:    location ~ ^/api/completed/.+/publish$ {
+1492:    location = /api/completed-decisions {
+1508:    location = /api/completed-decisions/latest {
+1524:    location = /api/v15/completed-decisions {
+1528:        root /var/www/ndsp-my;
+1529:        try_files /data/completed-decisions-v15-api.json =404;
+1535:    location = /api/v16/completed-decisions {
+1539:        root /var/www/ndsp-my;
+1540:        try_files /data/completed-decisions-v16-live-adapter.json =404;
+1543:    location = /api/completed-decisions-live {
+1547:        root /var/www/ndsp-my;
+1548:        try_files /data/completed-decisions-v16-live-adapter.json =404;
+1551:    location = /api/completed-decisions-live/latest {
+1555:        root /var/www/ndsp-my;
+1556:        try_files /data/completed-decisions-v16-live-adapter.json =404;
+1620:        root /var/www/html;
+1630:        root /var/www/html;
+1634:        try_files /reset-password.html =404;
+1656:    location = /api/completed-decisions {
+1660:        root /var/www/ndsp-my;
+1661:        try_files /data/completed-decisions-v15-api.json =404;
+1664:    location = /api/completed-decisions/latest {
+1668:        root /var/www/ndsp-my;
+1669:        try_files /data/completed-decisions-v15-api.json =404;
+1672:    location = /api/v15/completed-decisions {
+1676:        root /var/www/ndsp-my;
+1677:        try_files /data/completed-decisions-v15-api.json =404;
+1683:    location = /api/v16/completed-decisions {
+1687:        root /var/www/ndsp-my;
+1688:        try_files /data/completed-decisions-v16-live-adapter.json =404;
+1691:    location = /api/completed-decisions-live {
+1695:        root /var/www/ndsp-my;
+1696:        try_files /data/completed-decisions-v16-live-adapter.json =404;
+1699:    location = /api/completed-decisions-live/latest {
+1703:        root /var/www/ndsp-my;
+1704:        try_files /data/completed-decisions-v16-live-adapter.json =404;
+1716:    root /var/www/ndsp;
+1723:    add_header X-NDSP-Scope "public-landing" always;
+1724:    add_header X-NDSP-Serving-Root "/var/www/ndsp" always;
+1785:        try_files /index.html =404;
+1789:        try_files $uri $uri/ /index.html;
+1796:        root /var/www/html;
+1800:        try_files /reset-password.html =404;
+1844:    location = /api/completed-decisions {
+1859:    location = /api/completed-decisions/latest {
+1874:    location = /api/v15/completed-decisions {
+1878:        root /var/www/ndsp-my;
+1879:        try_files /data/completed-decisions-v15-api.json =404;
+1885:    location = /api/v16/completed-decisions {
+1889:        root /var/www/ndsp-my;
+1890:        try_files /data/completed-decisions-v16-live-adapter.json =404;
+1893:    location = /api/completed-decisions-live {
+1897:        root /var/www/ndsp-my;
+1898:        try_files /data/completed-decisions-v16-live-adapter.json =404;
+1901:    location = /api/completed-decisions-live/latest {
+1905:        root /var/www/ndsp-my;
+1906:        try_files /data/completed-decisions-v16-live-adapter.json =404;
+1949:    location = /api/completed-decisions/history {
+1958:    location = /api/completed-decisions/history/integrity {

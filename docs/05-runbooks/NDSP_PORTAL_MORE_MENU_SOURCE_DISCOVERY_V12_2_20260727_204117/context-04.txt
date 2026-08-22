@@ -1,0 +1,125 @@
+PATTERN=\bMore\b
+ANCHOR_LINE=65
+CONTEXT_START=20
+CONTEXT_END=139
+
+  000020: const CONTEXT_KEYS = ["lang", "market", "symbol", "timeframe", "mode", "view", "session"];
+  000021: const CONTEXT_STORAGE = "ndsp.commercial.context.v1";
+  000022: const LEGAL_STORAGE = "ndsp.commercial.legal.v1";
+  000023: const DENSITY_STORAGE = "ndsp.commercial.density.v1";
+  000024: const WATCHLIST_STORAGE = "ndsp.commercial.watchlist.v1";
+  000025: const PORTFOLIO_STORAGE = "ndsp.commercial.portfolio.v1";
+  000026: const ALERTS_STORAGE = "ndsp.commercial.alerts.v1";
+  000027: 
+  000028: const MARKETS = ["CRYPTO", "FOREX", "METALS", "COMMODITIES", "INDICES", "BONDS", "ENERGY"];
+  000029: const TIMEFRAMES = ["15m", "1h", "4h", "daily", "weekly"];
+  000030: const PUBLIC_LAYERS = [
+  000031:   { id: "tdl", label: { ar: "TDL", en: "TDL" } },
+  000032:   { id: "nmp", label: { ar: "NMP", en: "NMP" } },
+  000033:   { id: "golden", label: { ar: "إشارة نواف الذهبية", en: "Nawaf Golden Signal" } },
+  000034:   { id: "enhancedGolden", label: { ar: "إشارة نواف الذهبية المعززة", en: "Enhanced Nawaf Golden Signal" } },
+  000035:   { id: "devilsAdvocate", label: { ar: "محامي الشيطان", en: "Devil's Advocate" } }
+  000036: ];
+  000037: 
+  000038: const ASSETS = ndspAssetsRegistry.map((asset) => ({
+  000039:   market: String(asset.market || "").toUpperCase(),
+  000040:   symbol: String(asset.symbol || "").toUpperCase(),
+  000041:   nameAr: String(asset.nameAr || ""),
+  000042:   nameEn: String(asset.nameEn || "")
+  000043: }));
+  000044: 
+  000045: const DEFAULT_CONTEXT = {
+  000046:   lang: "ar",
+  000047:   market: "CRYPTO",
+  000048:   symbol: "BTCUSDT",
+  000049:   timeframe: "weekly",
+  000050:   mode: "investment",
+  000051:   view: "beginner",
+  000052:   session: ""
+  000053: };
+  000054: 
+  000055: const I18N = {
+  000056:   ar: {
+  000057:     brand: "NDSP",
+  000058:     brandFull: "منصة نواف لدعم القرار",
+  000059:     commandCenter: "مركز القيادة",
+  000060:     markets: "الأسواق",
+  000061:     pricesChart: "الأسعار والشارت",
+  000062:     opportunities: "مستكشف الفرص",
+  000063:     decisionRoom: "غرفة القرار",
+  000064:     portfolio: "المحفظة",
+>>000065:     more: "المزيد",
+  000066:     scenarios: "السيناريوهات والمستويات",
+  000067:     publicLayers: "الطبقات العامة",
+  000068:     riskChallenge: "المخاطر والاعتراض",
+  000069:     completed: "القرارات المكتملة",
+  000070:     dataHealth: "صحة البيانات",
+  000071:     alerts: "مركز التنبيهات",
+  000072:     guide: "دليل المستخدم",
+  000073:     support: "مركز الدعم",
+  000074:     account: "الحساب والاشتراك",
+  000075:     plans: "الباقات والترقية",
+  000076:     settings: "الإعدادات",
+  000077:     changeContext: "تغيير الاختيار",
+  000078:     trialExpired: "انتهت الفترة التجريبية",
+  000079:     market: "السوق",
+  000080:     asset: "الأصل",
+  000081:     timeframe: "الإطار الزمني",
+  000082:     readingType: "نوع القراءة",
+  000083:     viewLevel: "مستوى العرض",
+  000084:     investment: "استثماري",
+  000085:     speculative: "مضاربي",
+  000086:     beginner: "مبتدئ",
+  000087:     professional: "محترف",
+  000088:     live: "بيانات حية",
+  000089:     unavailable: "غير متاحة",
+  000090:     delayed: "متأخرة",
+  000091:     stale: "قديمة",
+  000092:     loading: "جارٍ التحميل…",
+  000093:     retry: "إعادة المحاولة",
+  000094:     error: "تعذر تحميل البيانات",
+  000095:     empty: "لا توجد بيانات متاحة",
+  000096:     partial: "البيانات المتاحة جزئية",
+  000097:     lastUpdated: "آخر تحديث",
+  000098:     sourceStatus: "حالة المصدر",
+  000099:     marketSummary: "ملخص السوق",
+  000100:     currentDecision: "القرار الحالي",
+  000101:     readingStatus: "حالة القراءة",
+  000102:     readiness: "جاهزية القرار",
+  000103:     strength: "قوة القراءة",
+  000104:     dataQuality: "جودة البيانات",
+  000105:     momentum: "الزخم",
+  000106:     macro: "السياق الكلي",
+  000107:     trackedAssets: "الأصول المتابعة",
+  000108:     activeAlerts: "التنبيهات النشطة",
+  000109:     completedReads: "قراءات مكتملة",
+  000110:     monitoredReads: "تحت المتابعة",
+  000111:     strongestOpportunities: "أقوى الفرص",
+  000112:     keyRisks: "أبرز المخاطر",
+  000113:     dailyBrief: "الملخص اليومي",
+  000114:     quickLinks: "روابط سريعة",
+  000115:     underMonitoring: "تحت المتابعة",
+  000116:     blocked: "غير مكتمل",
+  000117:     allowed: "مسموح",
+  000118:     armed: "جاهز للتأكيد",
+  000119:     executed: "مكتمل",
+  000120:     bullish: "ضغط إيجابي",
+  000121:     bearish: "ضغط سلبي",
+  000122:     neutral: "محايد",
+  000123:     high: "مرتفعة",
+  000124:     medium: "متوسطة",
+  000125:     low: "منخفضة",
+  000126:     search: "بحث",
+  000127:     allMarkets: "كل الأسواق",
+  000128:     addWatchlist: "إضافة للمفضلة",
+  000129:     removeWatchlist: "إزالة من المفضلة",
+  000130:     openChart: "فتح الشارت",
+  000131:     openDecision: "فتح غرفة القرار",
+  000132:     addPortfolio: "إضافة للمحفظة",
+  000133:     price: "السعر",
+  000134:     change: "التغير",
+  000135:     status: "الحالة",
+  000136:     actions: "الإجراءات",
+  000137:     chartTitle: "الأسعار الحية والشارت الفني",
+  000138:     refresh: "تحديث",
+  000139:     fullscreen: "ملء الشاشة",

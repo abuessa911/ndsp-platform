@@ -1,0 +1,259 @@
+=== NDSP RAW COT 9076 SOURCE TRUTH V3 ===
+MODE=READ_ONLY
+
+=== SERVICE IDENTITY ===
+LISTENER_PID=1339
+SERVICE_PID=1339
+WORKING_DIRECTORY=/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway
+EXECSTART={ path=/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/.venv/bin/uvicorn ; argv[]=/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/.venv/bin/uvicorn app:app --host 127.0.0.1 --port 9076 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }
+SERVICE_OWNERSHIP=PROVEN
+
+=== GATEWAY DIRECTORY ===
+EXPECTED=/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway
+GATEWAY_DIRECTORY=FOUND
+
+=== UVICORN app:app RESOLUTION ===
+APP_MODULE_FILE=/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/app.py
+APP_MODULE_FILE=FOUND
+PYTHON_RESOLUTION_RC=0
+PYTHON_RESOLVED_APP=/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/app.py
+PYTHON_RESOLUTION_STDERR_PRESENT=NO
+APP_MODULE_PROOF=PASS
+
+=== ROUTE OWNER DECISION ===
+ROUTE_OWNER_COUNT=1
+ROUTE_OWNER=/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/app.py
+ROUTE_OWNER_PROOF=PASS
+
+=== ROUTE OWNER RELEVANT SOURCE ===
+1-from __future__ import annotations
+2-
+3-import csv
+4-import json
+5-import time
+6-import urllib.request
+7-from pathlib import Path
+8-from typing import Any
+9-
+10-from fastapi import FastAPI, Query
+11-from fastapi.middleware.cors import CORSMiddleware
+12-
+13:DATA_DIR = Path("/home/nawaf511/empire-core-new/backend/data/raw_cot")
+14-DATA_DIR.mkdir(parents=True, exist_ok=True)
+15-
+16-TFF_URL = "https://www.cftc.gov/dea/newcot/FinFutWk.txt"
+17-DISAGG_URL = "https://www.cftc.gov/dea/newcot/f_disagg.txt"
+18-
+19-TFF_CURRENT = DATA_DIR / "current_tff_futures_only_FinFutWk.txt"
+20-DISAGG_CURRENT = DATA_DIR / "current_disaggregated_futures_only_f_disagg.txt"
+21:MANIFEST = DATA_DIR / "raw_cot_manifest.json"
+22-
+23-app = FastAPI(title="NDSP Raw COT Gateway", version="0.2.0-current-cftc")
+24-
+25-app.add_middleware(
+26-    CORSMiddleware,
+27-    allow_origins=["https://admin.ndsp.app", "https://my.ndsp.app", "http://localhost"],
+28-    allow_credentials=True,
+29-    allow_methods=["*"],
+30-    allow_headers=["*"],
+31-)
+32-
+33-
+34-def download(url: str, path: Path) -> dict[str, Any]:
+35-    req = urllib.request.Request(url, headers={"User-Agent": "NDSP-Raw-COT-Gateway/0.2"})
+36-    with urllib.request.urlopen(req, timeout=20) as r:
+37-        raw = r.read()
+38-    path.write_bytes(raw)
+39-    return {"url": url, "path": str(path), "bytes": len(raw)}
+40-
+41-
+42-def import_current() -> dict[str, Any]:
+43-    stamp = time.strftime("%Y%m%d_%H%M%S")
+44-    tff_snapshot = DATA_DIR / f"tff_futures_only_FinFutWk_{stamp}.txt"
+45-    disagg_snapshot = DATA_DIR / f"disaggregated_futures_only_f_disagg_{stamp}.txt"
+46-
+--
+102-def bias_from_net(net: int) -> str:
+103-    if net > 0:
+104-        return "bullish"
+105-    if net < 0:
+106-        return "bearish"
+107-    return "neutral"
+108-
+109-
+110-def parse_tff_rows() -> list[list[str]]:
+111-    if not TFF_CURRENT.exists():
+112-        return []
+113-    text = TFF_CURRENT.read_text(encoding="utf-8", errors="ignore")
+114-    rows = []
+115-    for row in csv.reader(text.splitlines()):
+116-        if len(row) > 20:
+117-            rows.append([x.strip() for x in row])
+118-    return rows
+119-
+120-
+121-def find_tff_asset(asset: str) -> dict[str, Any]:
+122-    rows = parse_tff_rows()
+123-    aliases = asset_aliases(asset)
+124-
+125-    if not rows:
+126-        return {
+127:            "raw_cot_connected": False,
+128:            "raw_cot_status": "WAITING_FOR_IMPORT",
+129-            "source_family": "TFF",
+130-            "source_file": str(TFF_CURRENT),
+131-            "matched_rows": 0,
+132-            "message": "No current TFF file imported yet.",
+133-        }
+134-
+135-    match = None
+136-    for row in rows:
+137-        name = row[0].upper() if row else ""
+138-        if any(alias in name for alias in aliases):
+139-            match = row
+140-            break
+141-
+142-    if not match:
+143-        return {
+144:            "raw_cot_connected": False,
+145:            "raw_cot_status": "CONNECTED_NO_ASSET_MATCH",
+146-            "source_family": "TFF",
+147-            "source_file": str(TFF_CURRENT),
+148-            "total_rows": len(rows),
+149-            "matched_rows": 0,
+150-            "aliases": aliases,
+151-        }
+152-
+153-    # CFTC TFF futures-only record positions:
+154-    # 7 open interest
+155-    # 8 dealer long, 9 dealer short
+156-    # 11 asset manager long, 12 asset manager short
+157-    # 14 leveraged funds long, 15 leveraged funds short
+158-    open_interest = safe_int(match[7])
+159-    dealer_long = safe_int(match[8])
+160-    dealer_short = safe_int(match[9])
+161-    asset_mgr_long = safe_int(match[11])
+162-    asset_mgr_short = safe_int(match[12])
+163-    leveraged_long = safe_int(match[14])
+164-    leveraged_short = safe_int(match[15])
+165-
+166-    dealer_net = dealer_long - dealer_short
+167-    asset_mgr_net = asset_mgr_long - asset_mgr_short
+168-    leveraged_net = leveraged_long - leveraged_short
+169-
+170-    return {
+171:        "raw_cot_connected": True,
+172:        "raw_cot_status": "CONNECTED_MATCHED",
+173-        "source_family": "TFF",
+174-        "source_file": str(TFF_CURRENT),
+175-        "market_name": match[0],
+176-        "report_yyMMdd": match[1],
+177:        "report_date": match[2],
+178-        "exchange": match[4].strip() if len(match) > 4 else None,
+179-        "open_interest": open_interest,
+180-
+181-        "dealer_intermediary_long": dealer_long,
+182-        "dealer_intermediary_short": dealer_short,
+183-        "dealer_intermediary_net": dealer_net,
+184-        "dealer_intermediary_bias": bias_from_net(dealer_net),
+185-
+186:        "asset_managers_long": asset_mgr_long,
+187:        "asset_managers_short": asset_mgr_short,
+188-        "asset_managers_net": asset_mgr_net,
+189-        "asset_managers_bias": bias_from_net(asset_mgr_net),
+190-
+191:        "leveraged_funds_long": leveraged_long,
+192:        "leveraged_funds_short": leveraged_short,
+193-        "leveraged_funds_net": leveraged_net,
+194-        "leveraged_funds_bias": bias_from_net(leveraged_net),
+195-
+196-        "matched_rows": 1,
+197-        "total_rows": len(rows),
+198-        "raw_row_head": match[:18],
+199-    }
+200-
+201-
+202:@app.get("/api/admin/raw-cot/health")
+203-def health() -> dict[str, Any]:
+204-    files = list_files()
+205-    manifest = None
+206-    if MANIFEST.exists():
+207-        try:
+208-            manifest = json.loads(MANIFEST.read_text(encoding="utf-8", errors="ignore"))
+209-        except Exception:
+210-            manifest = None
+211-    return {
+212-        "ok": True,
+213:        "service": "ndsp-raw-cot-gateway",
+214-        "version": "0.2.0-current-cftc",
+215-        "data_dir": str(DATA_DIR),
+216-        "files_count": len(files),
+217:        "raw_cot_status": "WAITING_FOR_IMPORT" if not TFF_CURRENT.exists() else "CURRENT_FILES_PRESENT",
+218-        "tff_current_exists": TFF_CURRENT.exists(),
+219-        "disagg_current_exists": DISAGG_CURRENT.exists(),
+220-        "manifest": manifest,
+221-        "files": files,
+222-    }
+223-
+224-
+225:@app.get("/api/admin/raw-cot/import-current")
+226-def import_current_get() -> dict[str, Any]:
+227-    result = import_current()
+228-    eth = find_tff_asset("ETHUSDT")
+229-    btc = find_tff_asset("BTCUSDT")
+230-    return {"ok": True, "import": result, "ethusdt_status": eth, "btcusdt_status": btc}
+231-
+232-
+233:@app.post("/api/admin/raw-cot/import-current")
+234-def import_current_post() -> dict[str, Any]:
+235-    return import_current_get()
+236-
+237-
+238:@app.get("/api/admin/raw-cot/status")
+239-def status(asset: str = Query("ETHUSDT")) -> dict[str, Any]:
+240-    result = find_tff_asset(asset)
+241-    return {
+242-        "ok": True,
+243-        "asset": asset,
+244-        **result,
+245-    }
+
+=== SOURCE SYNTAX ===
+ROUTE_OWNER_PYTHON_SYNTAX=PASS
+
+=== LIVE 9076 CONTRACT ===
+HTTP=200
+asset='ETHUSDT'
+market_name='ETHER CASH SETTLED - CHICAGO MERCANTILE EXCHANGE'
+exchange='CME'
+report_date='2026-07-21'
+asset_managers_long=1634
+asset_managers_short=4054
+asset_managers_change_long=NOT_PRESENT
+asset_managers_change_short=NOT_PRESENT
+leveraged_funds_long=2223
+leveraged_funds_short=9276
+leveraged_funds_change_long=NOT_PRESENT
+leveraged_funds_change_short=NOT_PRESENT
+raw_cot_connected=True
+raw_cot_status='CONNECTED_MATCHED'
+source_family='TFF'
+
+=== GOVERNED HISTORY ADAPTER ===
+HISTORY_ADAPTER=/home/nawaf511/empire-core-new/backend/app/support_layers/cot/cot_history_adapter.py
+HISTORY_ADAPTER=FOUND
+HISTORY_ADAPTER_SYNTAX=PASS
+
+=== PATCH GATE ===
+OWNERSHIP_PROOF=1
+APP_MODULE_PROOF=1
+ROUTE_OWNER_PROOF=1
+SOURCE_SYNTAX_PROOF=1
+HISTORY_ADAPTER_PROOF=1
+RAW_COT_9076_PATCH_TARGET=PROVEN
+PATCH_ALLOWED_FOR_NEXT_STEP=YES
+
+FILES_MODIFIED=0
+SERVICES_RESTARTED=0
+RUNTIME_LOGIC_MODIFIED=0
+FINAL_RESULT=PASS

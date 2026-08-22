@@ -1,0 +1,338 @@
+
+============================================================
+NDSP — PUBLIC LOGIN SOURCE DISCOVERY V6
+============================================================
+DATE=2026-07-27T13:53:57+02:00
+HOST=vmi2934783.contaboserver.net
+DOMAIN=my.ndsp.app
+PROJECT=/home/nawaf511/empire-core-new
+WEB_ROOT=/var/www/ndsp-my
+EXPECTED_LOGIN=/var/www/ndsp-my/login/index.html
+AUTH_CURRENT=/opt/ndsp-auth-core-clean/current
+MODE=READ_ONLY
+REPORT=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_LOGIN_PUBLIC_SOURCE_DISCOVERY_V6_20260727_135357/REPORT.txt
+
+============================================================
+0) PRIVILEGES AND PRECONDITIONS
+============================================================
+SUDO_GATE=PASS
+PRECONDITION_GATE=PASS
+
+============================================================
+1) CURRENT EXPECTED LOGIN FILE
+============================================================
+EXPECTED_LOGIN_EXISTS=YES
+EXPECTED_LOGIN_REALPATH=/var/www/ndsp-my/login/index.html
+EXPECTED_LOGIN_SHA256=602ce6388e18e8452f0d2dd4a0588660412d1eb884ccffd04c8ca27485342cd6
+EXPECTED_LOGIN_BYTES=49090
+EXPECTED_LOGIN_FORGOT_ROUTE_COUNT=1
+EXPECTED_LOGIN_RESET_ROUTE_COUNT=0
+
+--- EXPECTED LOGIN RECOVERY LINKS ---
+href="/forgot-password.html"
+
+============================================================
+2) PUBLIC LOGIN WITHOUT FOLLOWING REDIRECTS
+============================================================
+PUBLIC_NOFOLLOW_HTTP=200
+--- NOFOLLOW RESPONSE HEADERS ---
+HTTP/2 200 
+server: nginx/1.24.0 (Ubuntu)
+date: Mon, 27 Jul 2026 11:53:57 GMT
+content-type: text/html; charset=utf-8
+content-length: 561
+cross-origin-opener-policy: same-origin
+cross-origin-resource-policy: same-origin
+origin-agent-cluster: ?1
+referrer-policy: no-referrer
+strict-transport-security: max-age=31536000; includeSubDomains
+x-content-type-options: nosniff
+x-dns-prefetch-control: off
+x-download-options: noopen
+x-frame-options: SAMEORIGIN
+x-permitted-cross-domain-policies: none
+x-xss-protection: 0
+cache-control: no-store, no-cache, must-revalidate
+pragma: no-cache
+x-ndsp-auth-core: clean-v2.2-users-delete
+cache-control: no-store, no-cache, must-revalidate
+pragma: no-cache
+
+
+============================================================
+3) PUBLIC LOGIN WITH REDIRECTS FOLLOWED
+============================================================
+HTTP=200
+EFFECTIVE_URL=https://my.ndsp.app/login/?source_discovery=20260727_135357
+REDIRECTS=0
+REMOTE_IP=161.97.144.189
+CONTENT_TYPE=text/html; charset=utf-8
+PUBLIC_LOGIN_SHA256=bd318f34957f24791649327afd64eae7a4b7d80b9a55714710973cb487008d73
+PUBLIC_LOGIN_BYTES=561
+PUBLIC_LOGIN_FORGOT_ROUTE_COUNT=0
+PUBLIC_LOGIN_RESET_ROUTE_COUNT=0
+
+--- PUBLIC LOGIN TITLE ---
+<title>تسجيل الدخول | NDSP</title>
+
+--- PUBLIC LOGIN RECOVERY LINKS ---
+
+============================================================
+4) PUBLIC /login/index.html COMPARISON
+============================================================
+PUBLIC_LOGIN_INDEX_HTTP=200
+PUBLIC_LOGIN_INDEX_SHA256=602ce6388e18e8452f0d2dd4a0588660412d1eb884ccffd04c8ca27485342cd6
+PUBLIC_LOGIN_AND_INDEX_BODY_EQUAL=NO
+
+============================================================
+5) DIRECT FILE VERSUS PUBLIC BODY
+============================================================
+EXPECTED_LOGIN_EQUALS_PUBLIC_BODY=NO
+EXPECTED_AND_PUBLIC_SHA_MATCH=NO
+
+============================================================
+6) JAVASCRIPT ASSETS USED BY PUBLIC LOGIN
+============================================================
+https://my.ndsp.app/login/assets/index-s5NFk2mn.js
+JS_ASSET_URL=https://my.ndsp.app/login/assets/index-s5NFk2mn.js
+JS_ASSET_HTTP=200
+JS_ASSET_SHA256=f2d2d8cf7c81157eeb641b95bf691a9f3439c7c93ead7347479e248801256b29
+JS_ASSET_BYTES=146480
+
+--- PUBLIC LOGIN JAVASCRIPT ROUTE EVIDENCE ---
+URL=https://my.ndsp.app/login/assets/index-s5NFk2mn.js
+FILE=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_LOGIN_PUBLIC_SOURCE_DISCOVERY_V6_20260727_135357/js/asset-1.js
+n:[j.jsxs("label",{className:"remember",children:[j.jsx("input",{type:"checkbox",checked:o,onChange:z=>i(z.target.checked)}),j.jsx("span",{children:"تذكرني"})]}),j.jsx("a",{href:"/reset-password/",children:"نسيت كلمة المرور؟"})]}),p&&j.jsx("div",{className:"notice error",role:"alert",children:p}),h&&j.jsx("div",{className:"notice success",role:"status",children:h}),j.jsxs("div",{className:"login-actions","data-ndsp-owner-actions-v2":"integrated-form-
+---
+
+============================================================
+7) EFFECTIVE NGINX CONFIGURATION
+============================================================
+4:    listen 80;
+5:    listen [::]:80;
+6:    server_name my.ndsp.app;
+7:    return 301 https://$host$request_uri;
+12:        return 302 /;
+17:        return 302 /;
+22:        return 302 /;
+27:        return 302 /;
+51:        return 302 https://www.ndsp.app/;
+57:    listen 443 ssl http2;
+58:    listen [::]:443 ssl http2;
+59:    server_name my.ndsp.app;
+62:    root /var/www/ndsp-my;
+63:    index index.html;
+73:        return 308 /register/;
+77:        return 308 /forgot-password/;
+81:        return 308 /reset-password/;
+87:        proxy_pass https://api.ndsp.app/api/;
+88:        proxy_ssl_server_name on;
+96:        try_files $uri $uri/ /approved-design/index.html;
+101:        try_files $uri =404;
+106:        try_files $uri =404;
+112:        try_files $uri $uri/ /index.html;
+118:        return 302 /;
+123:        return 302 /;
+128:        return 302 /;
+133:        return 302 /;
+144:        return 308 /decision-room-v31/account/;
+148:        try_files $uri $uri/ /decision-room-v31/account/index.html;
+154:        try_files /decision-room-v31/index.html =404;
+160:        try_files $uri $uri/ /decision-room-v31/index.html;
+163:    location @ndsp_v39_login {
+164:        return 302 /decision-room-v31/account/?mode=login;
+170:        alias /var/www/ndsp-my/portal-v50/config/assets.json;
+176:        alias /var/www/ndsp-my/portal-v50/config/layers.json;
+182:        alias /var/www/ndsp-my/portal-v50/config/capabilities.json;
+192:        try_files /portal-v50/support-center-v60.html =404;
+201:        proxy_pass http://127.0.0.1:9090/api/register;
+208:        proxy_pass_request_headers on;
+214:        proxy_pass http://127.0.0.1:9090/api/trial/status;
+221:        proxy_pass_request_headers on;
+228:        proxy_pass http://127.0.0.1:9090/api/trial/seats;
+238:        proxy_pass http://127.0.0.1:9090/api/launch/status;
+248:        proxy_pass http://127.0.0.1:9090/api/entitlements/me;
+255:        proxy_pass_request_headers on;
+267:        proxy_pass http://127.0.0.1:9090/api/auth/decision-room-access;
+272:        proxy_pass_request_body off;
+289:        return 302 /telegram-alerts/;
+293:        root /var/www/ndsp-my;
+294:        index index.html;
+295:        try_files $uri $uri/index.html =404;
+300:        alias /var/www/ndsp-my/assets/ndsp-telegram-v182.css;
+306:        alias /var/www/ndsp-my/assets/ndsp-telegram-v182.js;
+312:        alias /var/www/ndsp-my/assets/ndsp-telegram-entry-v182.js;
+318:        proxy_pass http://127.0.0.1:9091;
+325:        proxy_pass_request_headers on;
+335:        proxy_pass http://127.0.0.1:9095;
+348:        proxy_pass http://127.0.0.1:9095;
+361:        proxy_pass http://127.0.0.1:9095;
+374:        proxy_pass http://127.0.0.1:9095;
+387:        proxy_pass http://127.0.0.1:9095;
+400:        proxy_pass http://127.0.0.1:9095;
+413:        proxy_pass http://127.0.0.1:9095;
+426:        proxy_pass http://127.0.0.1:9095;
+439:        proxy_pass http://127.0.0.1:9095;
+452:        proxy_pass http://127.0.0.1:9095;
+465:        proxy_pass http://127.0.0.1:9095;
+481:    location = /_ndsp_clean_auth_completed_check {
+483:        proxy_pass http://127.0.0.1:19091/api/auth/session;
+484:        proxy_pass_request_body off;
+493:        proxy_pass http://127.0.0.1:9078/api/completed$is_args$args;
+508:        proxy_pass http://127.0.0.1:9078/api/completed/latest$is_args$args;
+529:        return 301 /portal/;
+533:        root /var/www/ndsp-my;
+534:        try_files $uri =404;
+541:        root /var/www/ndsp-my;
+542:        try_files $uri =404;
+548:        root /var/www/ndsp-my;
+550:        try_files $uri $uri/ /portal/index.html;
+561:        return 301 /portal-next/;
+565:        root /var/www/ndsp-my;
+566:        try_files /portal-next/index.html =404;
+574:        root /var/www/ndsp-my;
+575:        try_files $uri =404;
+581:        root /var/www/ndsp-my;
+582:        try_files $uri =404;
+586:        root /var/www/ndsp-my;
+587:        try_files /portal-next/index.html =404;
+
+============================================================
+8) ACTIVE NGINX SOURCE FILES CONTAINING LOGIN ROUTES
+============================================================
+ACTIVE_MY_NDSP_CONFIG=/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf
+15:    server_name my.ndsp.app;
+16:    return 301 https://$host$request_uri;
+21:        return 302 /;
+26:        return 302 /;
+31:        return 302 /;
+36:        return 302 /;
+58:        return 302 https://www.ndsp.app/;
+66:    server_name my.ndsp.app;
+69:    root /var/www/ndsp-my;
+70:    index index.html;
+80:        return 308 /register/;
+84:        return 308 /forgot-password/;
+88:        return 308 /reset-password/;
+94:        proxy_pass https://api.ndsp.app/api/;
+95:        proxy_ssl_server_name on;
+103:        try_files $uri $uri/ /approved-design/index.html;
+108:        try_files $uri =404;
+113:        try_files $uri =404;
+119:        try_files $uri $uri/ /index.html;
+125:        return 302 /;
+130:        return 302 /;
+135:        return 302 /;
+140:        return 302 /;
+151:        return 308 /decision-room-v31/account/;
+155:        try_files $uri $uri/ /decision-room-v31/account/index.html;
+161:        try_files /decision-room-v31/index.html =404;
+167:        try_files $uri $uri/ /decision-room-v31/index.html;
+170:    location @ndsp_v39_login {
+171:        return 302 /decision-room-v31/account/?mode=login;
+177:        alias /var/www/ndsp-my/portal-v50/config/assets.json;
+183:        alias /var/www/ndsp-my/portal-v50/config/layers.json;
+189:        alias /var/www/ndsp-my/portal-v50/config/capabilities.json;
+199:        try_files /portal-v50/support-center-v60.html =404;
+208:        proxy_pass http://127.0.0.1:9090/api/register;
+215:        proxy_pass_request_headers on;
+221:        proxy_pass http://127.0.0.1:9090/api/trial/status;
+228:        proxy_pass_request_headers on;
+235:        proxy_pass http://127.0.0.1:9090/api/trial/seats;
+245:        proxy_pass http://127.0.0.1:9090/api/launch/status;
+255:        proxy_pass http://127.0.0.1:9090/api/entitlements/me;
+262:        proxy_pass_request_headers on;
+274:        proxy_pass http://127.0.0.1:9090/api/auth/decision-room-access;
+279:        proxy_pass_request_body off;
+296:        return 302 /telegram-alerts/;
+300:        root /var/www/ndsp-my;
+301:        index index.html;
+302:        try_files $uri $uri/index.html =404;
+307:        alias /var/www/ndsp-my/assets/ndsp-telegram-v182.css;
+313:        alias /var/www/ndsp-my/assets/ndsp-telegram-v182.js;
+319:        alias /var/www/ndsp-my/assets/ndsp-telegram-entry-v182.js;
+325:        proxy_pass http://127.0.0.1:9091;
+332:        proxy_pass_request_headers on;
+342:        proxy_pass http://127.0.0.1:9095;
+355:        proxy_pass http://127.0.0.1:9095;
+368:        proxy_pass http://127.0.0.1:9095;
+381:        proxy_pass http://127.0.0.1:9095;
+394:        proxy_pass http://127.0.0.1:9095;
+407:        proxy_pass http://127.0.0.1:9095;
+420:        proxy_pass http://127.0.0.1:9095;
+433:        proxy_pass http://127.0.0.1:9095;
+446:        proxy_pass http://127.0.0.1:9095;
+459:        proxy_pass http://127.0.0.1:9095;
+472:        proxy_pass http://127.0.0.1:9095;
+488:    location = /_ndsp_clean_auth_completed_check {
+490:        proxy_pass http://127.0.0.1:19091/api/auth/session;
+491:        proxy_pass_request_body off;
+500:        proxy_pass http://127.0.0.1:9078/api/completed$is_args$args;
+515:        proxy_pass http://127.0.0.1:9078/api/completed/latest$is_args$args;
+536:        return 301 /portal/;
+540:        root /var/www/ndsp-my;
+541:        try_files $uri =404;
+548:        root /var/www/ndsp-my;
+549:        try_files $uri =404;
+555:        root /var/www/ndsp-my;
+557:        try_files $uri $uri/ /portal/index.html;
+568:        return 301 /portal-next/;
+572:        root /var/www/ndsp-my;
+573:        try_files /portal-next/index.html =404;
+581:        root /var/www/ndsp-my;
+582:        try_files $uri =404;
+588:        root /var/www/ndsp-my;
+589:        try_files $uri =404;
+593:        root /var/www/ndsp-my;
+594:        try_files /portal-next/index.html =404;
+
+============================================================
+9) SEARCH FOR EXACT PUBLIC HTML SOURCE
+============================================================
+--- EXACT PUBLIC LOGIN SOURCE MATCHES ---
+/opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1/ui-dist/index.html
+
+--- HIGH-RELEVANCE LOGIN SOURCE CANDIDATES ---
+8	/var/www/ndsp-my/login/index.html	forgot-label,forgot-route,login-title
+8	/home/nawaf511/empire-core-new/frontend/ndsp-auth-canonical-v94/login/index.html	forgot-label,forgot-route,login-title
+6	/var/www/ndsp-my/ndsp-forgot-password-v68.js	forgot-label,forgot-route
+6	/var/www/ndsp-my/ndsp-forgot-password-v67.js	forgot-label,forgot-route
+6	/var/www/ndsp-my/ndsp-forgot-password-v65.js	forgot-label,forgot-route
+6	/var/www/ndsp-my/forgot-password.html	forgot-label,forgot-route
+6	/var/www/ndsp-my/forgot-password-v67.html	forgot-label,forgot-route
+6	/home/nawaf511/empire-core-new/frontend/ndsp-user-portal-v50/public/ndsp-forgot-password-v65.js	forgot-label,forgot-route
+5	/opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1/ui/src/main.tsx	forgot-label,reset-route
+5	/opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1/ui-dist/assets/index-s5NFk2mn.js	forgot-label,reset-route
+5	/home/nawaf511/empire-core-new/backend/password_reset_gateway/server.js	forgot-route,reset-route
+5	/home/nawaf511/empire-core-new/backend/auth_api/ndsp_password_reset_module.js	forgot-label,reset-route
+5	/home/nawaf511/empire-core-new/backend/_backups/DEV002G_legacy_backend_modules_intake_20260628_003623/backend/password_reset_gateway/server.js	forgot-route,reset-route
+5	/home/nawaf511/empire-core-new/backend/_backups/DEV002D_backend_core_source_intake_20260628_002228/backend/auth_api/ndsp_password_reset_module.js	forgot-label,reset-route
+
+============================================================
+10) DETERMINE ROUTE AND SOURCE CLASS
+============================================================
+PUBLIC_EFFECTIVE_URL=https://my.ndsp.app/login/?source_discovery=20260727_135357
+PUBLIC_REDIRECT_COUNT=0
+PUBLIC_HTML_FORGOT_ROUTE_COUNT=0
+PUBLIC_JS_FORGOT_EVIDENCE_COUNT=1
+EXPECTED_HTML_FORGOT_ROUTE_COUNT=1
+EXACT_PUBLIC_SOURCE_MATCH_COUNT=1
+NGINX_LOGIN_PROXY_OR_ROUTE_EVIDENCE_COUNT=29
+ROOT_CAUSE_CLASS=PUBLIC_LOGIN_SOURCE_IDENTIFIED_BY_EXACT_HASH
+
+============================================================
+11) FINAL RESULT
+============================================================
+PRODUCTION_MODIFIED=NO
+DATABASE_CHANGED=NO
+NGINX_CHANGED=NO
+SOURCE_CHANGED=NO
+SERVICE_RESTARTED=NO
+NGINX_RELOADED=NO
+FINAL_STATUS=NDSP_LOGIN_PUBLIC_SOURCE_DISCOVERY_V6_COMPLETE
+REPORT=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_LOGIN_PUBLIC_SOURCE_DISCOVERY_V6_20260727_135357/REPORT.txt
+PUBLIC_BODY=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_LOGIN_PUBLIC_SOURCE_DISCOVERY_V6_20260727_135357/public-login-follow.html
+NGINX_EVIDENCE=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_LOGIN_PUBLIC_SOURCE_DISCOVERY_V6_20260727_135357/nginx-login-evidence.txt
+EXACT_SOURCE_MATCHES=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_LOGIN_PUBLIC_SOURCE_DISCOVERY_V6_20260727_135357/exact-public-login-source-matches.txt
+SOURCE_CANDIDATES=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_LOGIN_PUBLIC_SOURCE_DISCOVERY_V6_20260727_135357/login-source-candidate-evidence.txt
+JAVASCRIPT_EVIDENCE=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_LOGIN_PUBLIC_SOURCE_DISCOVERY_V6_20260727_135357/public-login-js-route-evidence.txt

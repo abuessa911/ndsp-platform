@@ -1,0 +1,18 @@
+[Unit]
+Description=NDSP Live Market Adapter
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=nawaf511
+WorkingDirectory=/home/nawaf511/empire-core-new/backend
+Environment=NODE_ENV=production
+Environment=NDSP_LIVE_ADAPTER_PORT=9033
+ExecStart=/usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp_live_market_adapter.cjs
+Restart=always
+RestartSec=3
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

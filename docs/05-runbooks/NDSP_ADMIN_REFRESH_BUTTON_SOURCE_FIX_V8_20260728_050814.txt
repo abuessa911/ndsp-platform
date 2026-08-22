@@ -1,0 +1,32 @@
+
+============================================================
+NDSP — ADMIN REFRESH ACCOUNTS BUTTON SOURCE FIX V8
+============================================================
+DATE=2026-07-28T05:08:14+02:00
+HOST=vmi2934783.contaboserver.net
+PROJECT=/home/nawaf511/empire-core-new
+SOURCE_ROOT=/home/nawaf511/empire-core-new/frontend/admin-console
+LIVE_ROOT=/var/www/ndsp-my
+PUBLIC_URL=https://my.ndsp.app/owner/
+MODE=SOURCE_FIRST
+REPORT=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_ADMIN_REFRESH_BUTTON_SOURCE_FIX_V8_20260728_050814.txt
+BACKUP=/home/nawaf511/empire-core-new/backups/admin-refresh-button-source-fix-v8/20260728_050814
+
+============================================================
+0) EXPLICIT CONFIRMATION AND PRECONDITIONS
+============================================================
+EXPLICIT_CONFIRMATION=YES
+SUDO_GATE=PASS
+PRECONDITION_GATE=PASS
+
+============================================================
+1) DISCOVER CANONICAL SOURCE FILE
+============================================================
+SOURCE_BUTTON_TEXT_HIT_COUNT=0
+ROLLBACK_REASON=NO_SOURCE_FILE_CONTAINS_REFRESH_BUTTON_TEXT
+DATABASE_CHANGED=NO
+BACKEND_CHANGED=NO
+NGINX_CHANGED=NO
+SERVICE_RESTARTED=NO
+FINAL_STATUS=NDSP_ADMIN_REFRESH_BUTTON_SOURCE_FIX_V8_FAILED_AND_ROLLED_BACK
+REPORT=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_ADMIN_REFRESH_BUTTON_SOURCE_FIX_V8_20260728_050814.txt

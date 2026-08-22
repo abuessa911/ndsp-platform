@@ -1,0 +1,17 @@
+● empire-web-ndip-frontend.service                     not-found inactive   dead          empire-web-ndip-frontend.service
+  ndsp-admin-user-ops.service                          loaded    active     running       NDSP Admin User Ops
+  ndsp-admin-users-official-readonly.service           loaded    active     exited        NDSP Admin Users Official Readonly Readiness Sentinel
+  ndsp-admin-users-official.service                    loaded    active     running       NDSP Admin Official Users API
+  ndsp-current-user-display.service                    loaded    active     running       NDSP Current User Display API
+  ndsp-portal-real-data-api.service                    loaded    active     running       NDSP Portal Real Data API
+  ndsp-user-alert-channels.service                     loaded    active     running       NDSP User Alert Channels API
+  ndsp-user-dashboard.service                          loaded    active     running       NDSP User Dashboard Data Gateway
+  ndsp-user-login.service                              loaded    active     running       NDSP User Login Gateway
+  ndsp-v3-portal-gateway.service                       loaded    active     running       NDSP V3 Portal Gateway
+  systemd-logind.service                               loaded    active     running       User Login Management
+  systemd-pcrphase.service                             loaded    inactive   dead          TPM2 PCR Barrier (User)
+  systemd-soft-reboot.service                          loaded    inactive   dead          Reboot System Userspace
+  systemd-sysusers.service                             loaded    inactive   dead          Create System Users
+  systemd-user-sessions.service                        loaded    active     exited        Permit User Sessions
+  user-runtime-dir@1000.service                        loaded    active     exited        User Runtime Directory /run/user/1000
+  user@1000.service                                    loaded    active     running       User Manager for UID 1000

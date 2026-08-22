@@ -1,0 +1,3 @@
+FILE=/var/www/ndsp-my/admin/index.html|MATCH_TYPES=AR_LITERAL,REFRESH_FN,OWNER_PAGE|BYTES=67957
+FILE=/var/www/ndsp-my/login/index.html|MATCH_TYPES=OWNER_PAGE|BYTES=49090
+FILE=/var/www/ndsp-my/owner/index.html|MATCH_TYPES=AR_LITERAL,REFRESH_FN,OWNER_PAGE|BYTES=67957

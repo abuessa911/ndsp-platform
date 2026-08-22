@@ -1,0 +1,18 @@
+NDSP Zero Public Name Final Summary
+Timestamp: 20260811_100926
+Project: /home/nawaf511/empire-core-new
+Backup: /home/nawaf511/ndsp-zero-public-name-final-backup-20260811_100926.tar.gz
+
+Changed files:
+./apps/admin-console/data/owner-layer-source-map.json
+./frontend/public-site/src/i18n/locales/th.ts
+
+Remaining public name hits:
+None
+
+Remaining forbidden claims:
+None
+
+Not changed automatically:
+- /home/nawaf511 OS paths.
+- Internal canonical identifiers: nawaf_golden_signal, nawaf_enhanced_golden_signal, NAWAF_GOLDEN_SIGNAL if used as contracts.

@@ -7,7 +7,7 @@ const pool = new Pool({
     process.env.POSTGRES_URL ||
     process.env.POSTGRES_URI ||
     process.env.PG_CONNECTION_STRING ||
-    'postgresql://postgres:postgres@127.0.0.1:5432/postgres'
+    (process.env.DATABASE_URL || process.env.NDSP_DATABASE_URL || process.env.DB_URL || process.env.POSTGRES_URL || process.env.POSTGRESQL_URL || (() => { throw new Error("DATABASE_CONNECTION_ENV_REQUIRED"); })())
 });
 
 async function main() {

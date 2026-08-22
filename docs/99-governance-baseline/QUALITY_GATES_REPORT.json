@@ -1,0 +1,8 @@
+{
+  "generated_at": "2026-07-12T18:11:36+02:00",
+  "status": "PASS",
+  "failures": 0,
+  "warnings": 0,
+  "findings_file": "docs/99-governance-baseline/synchronization-pack/findings.txt",
+  "resume_version": "1.1"
+}

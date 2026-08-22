@@ -1,0 +1,1253 @@
+[
+  {
+    "semantic_cluster_id": "CLUSTER-00830B85A41852B9",
+    "candidate_count": 2,
+    "capability_ids": "CAP-A294A80A744D|CAP-D054F1321201",
+    "capability_names": "Ndsp User Login Gateway",
+    "endpoint_contracts": "POST /API/AUTH/2FA/SETUP/CONFIRM-FINAL",
+    "sources": "backend/auth_api/ndsp_user_login_gateway.cjs|backend/ndsp_user_login_gateway.cjs",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-0328C106FF332C89",
+    "candidate_count": 1,
+    "capability_ids": "CAP-4B8CAC6792AE",
+    "capability_names": "Ndsp User Portal Final Experience V1 One Script",
+    "endpoint_contracts": "GET /API/USER/EXPERIENCE",
+    "sources": "NDSP_USER_PORTAL_FINAL_EXPERIENCE_V1_ONE_SCRIPT.sh",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-0412272E609423D6",
+    "candidate_count": 1,
+    "capability_ids": "CAP-B89CF4208B10",
+    "capability_names": "Grade From Score",
+    "endpoint_contracts": "",
+    "sources": "backend/app/support_layers/quality/decision_quality_stack.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-04AE942A6CCB8C5A",
+    "candidate_count": 2,
+    "capability_ids": "CAP-329C5FE62399|CAP-5649C9641068",
+    "capability_names": "Nowpayments Create Alias|User Operational Compat",
+    "endpoint_contracts": "POST /API/V6/PAYMENTS/NOWPAYMENTS/SUBSCRIPTION/CREATE",
+    "sources": "backend/app/api/compat/nowpayments_create_alias.py|backend/app/api/compat/user_operational_compat.py",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-0510FC78E483B3D6",
+    "candidate_count": 1,
+    "capability_ids": "CAP-353E6D9C0A43",
+    "capability_names": "Ndsp User Login Gateway",
+    "endpoint_contracts": "PUT /API/AUTH/PROFILE",
+    "sources": "backend/auth_api/ndsp_user_login_gateway.cjs",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-058EA84FFB96BD5C",
+    "candidate_count": 1,
+    "capability_ids": "CAP-B26FA1996A34",
+    "capability_names": "Ndsp User Login Gateway",
+    "endpoint_contracts": "GET /API/AUTH/PROFILE",
+    "sources": "backend/auth_api/ndsp_user_login_gateway.cjs",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-065FF7E991FE7A36",
+    "candidate_count": 2,
+    "capability_ids": "CAP-09B689D81772|CAP-F4D88C2A7931",
+    "capability_names": "Ndsp Admin Ui Proxy",
+    "endpoint_contracts": "GET /API/ADMIN-UI/HEALTH",
+    "sources": "backend/auth_api/ndsp_admin_ui_proxy.cjs|backend/ndsp_admin_ui_proxy.cjs",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-0746027563B4F7CB",
+    "candidate_count": 1,
+    "capability_ids": "CAP-636B50FAED04",
+    "capability_names": "Frontend Contract",
+    "endpoint_contracts": "GET /ME/DASHBOARD",
+    "sources": "backend/app/api/v1/frontend_contract.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-075A9C033639FAC0",
+    "candidate_count": 1,
+    "capability_ids": "CAP-935E1E26D22F",
+    "capability_names": "Dqsrisk State",
+    "endpoint_contracts": "",
+    "sources": "backend/app/support_layers/quality/decision_quality_stack.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-0AB1FDCBBD5FA5E8",
+    "candidate_count": 1,
+    "capability_ids": "CAP-C250957D114F",
+    "capability_names": "Frontend Contract",
+    "endpoint_contracts": "GET /ACCOUNT/TRIAL",
+    "sources": "backend/app/api/v1/frontend_contract.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-0AFD7CA382703AB5",
+    "candidate_count": 1,
+    "capability_ids": "CAP-A5C181808EF6",
+    "capability_names": "Frontend Contract",
+    "endpoint_contracts": "POST /AUTH/2FA/VERIFY",
+    "sources": "backend/app/api/v1/frontend_contract.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-0EDDB74E15FCFD6A",
+    "candidate_count": 2,
+    "capability_ids": "CAP-89287AB7B399|CAP-C216A7C8548C",
+    "capability_names": "Ndsp Admin Actions Bypass Old Middleware",
+    "endpoint_contracts": "GET /API/ADMIN-ACTIONS/USERS/ACTION/HEALTH",
+    "sources": "backend/auth_api/ndsp_admin_actions_bypass_old_middleware.cjs|backend/ndsp_admin_actions_bypass_old_middleware.cjs",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-0EE83BCF1B387E47",
+    "candidate_count": 1,
+    "capability_ids": "CAP-E07F7BC7E52F",
+    "capability_names": "Ndsp User Login Gateway",
+    "endpoint_contracts": "POST /API/AUTH/INTERNAL/EVIDENCE",
+    "sources": "backend/auth_api/ndsp_user_login_gateway.cjs",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-1143EF6BAB8687CD",
+    "candidate_count": 1,
+    "capability_ids": "CAP-D6102C7DC3C1",
+    "capability_names": "Frontend Contract",
+    "endpoint_contracts": "GET /PACKAGES",
+    "sources": "backend/app/api/v1/frontend_contract.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-12CE9BAE31EA4CB2",
+    "candidate_count": 1,
+    "capability_ids": "CAP-EDF3F96EC14B",
+    "capability_names": "User Operational Compat",
+    "endpoint_contracts": "POST /API/TRIAL/REGISTER",
+    "sources": "backend/app/api/compat/user_operational_compat.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-1331DA2B82D10D74",
+    "candidate_count": 4,
+    "capability_ids": "CAP-1FBA01D3C252|CAP-4515D5FBBBF3|CAP-D64F1CFB3F24|CAP-F5C8984FC6A0",
+    "capability_names": "About|Framework Adapter",
+    "endpoint_contracts": "GET /ABOUT",
+    "sources": "backend/framework/about/about.cjs|backend/services/bot_execution/framework-adapter.cjs|backend/services/completed_decision/framework-adapter.cjs|backend/services/decision_governance_core/framework-adapter.cjs",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-13E1BE84357A8BF3",
+    "candidate_count": 2,
+    "capability_ids": "CAP-81C879AE2209|CAP-B2C76796BD6C",
+    "capability_names": "Ndsp Api Compat Gateway",
+    "endpoint_contracts": "GET /API/PACKAGES",
+    "sources": "backend/auth_api/ndsp_api_compat_gateway.cjs|backend/ndsp_api_compat_gateway.cjs",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-146A953A5A090F47",
+    "candidate_count": 2,
+    "capability_ids": "CAP-77CF58DFBBF6|CAP-D18B4EC4F34A",
+    "capability_names": "Ndsp Admin Ui Proxy",
+    "endpoint_contracts": "GET /API/ADMIN-UI/PACKAGES",
+    "sources": "backend/auth_api/ndsp_admin_ui_proxy.cjs|backend/ndsp_admin_ui_proxy.cjs",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-14E241D47ACC5CBA",
+    "candidate_count": 1,
+    "capability_ids": "CAP-B2ADCE8E14C1",
+    "capability_names": "Ndsp User Portal Final Experience V1 One Script",
+    "endpoint_contracts": "POST /API/USER/LEGAL-ACCEPTANCE",
+    "sources": "NDSP_USER_PORTAL_FINAL_EXPERIENCE_V1_ONE_SCRIPT.sh",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-192665335C34E13D",
+    "candidate_count": 1,
+    "capability_ids": "CAP-BC09A0EB4549",
+    "capability_names": "User Operational Compat",
+    "endpoint_contracts": "POST /API/ALERTS/EMAIL/TEST",
+    "sources": "backend/app/api/compat/user_operational_compat.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-1A1DF77772C7862E",
+    "candidate_count": 1,
+    "capability_ids": "CAP-805630C7C819",
+    "capability_names": "Attach Report",
+    "endpoint_contracts": "",
+    "sources": "backend/app/support_layers/scenario/scenario_engine.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-1B355FCD82516B99",
+    "candidate_count": 1,
+    "capability_ids": "CAP-4804EA150D2F",
+    "capability_names": "Frontend Contract",
+    "endpoint_contracts": "GET /BRIEF/TODAY",
+    "sources": "backend/app/api/v1/frontend_contract.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-1BD5A59391679254",
+    "candidate_count": 1,
+    "capability_ids": "CAP-552A04A27A0F",
+    "capability_names": "Scenario Report",
+    "endpoint_contracts": "",
+    "sources": "backend/app/support_layers/scenario/scenario_engine.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-1C0006D0FCDB7718",
+    "candidate_count": 1,
+    "capability_ids": "CAP-C95B03AE5FFB",
+    "capability_names": "Frontend Contract",
+    "endpoint_contracts": "POST /ACCOUNT/ACTIVATE",
+    "sources": "backend/app/api/v1/frontend_contract.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-20B55F2AD6D04BE8",
+    "candidate_count": 3,
+    "capability_ids": "CAP-45BEE5E5B9D6|CAP-6FE68AAF4F33|CAP-C3C9F07E6EC7",
+    "capability_names": "Telegram Routing Admin|Telegram Routing Internal|Telegram Routing V2",
+    "endpoint_contracts": "GET /STATUS",
+    "sources": "backend/app/api/admin/telegram_routing_admin.py|backend/app/api/admin/telegram_routing_v2.py|backend/app/api/internal/telegram_routing_internal.py",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-21D862A38B8E3867",
+    "candidate_count": 2,
+    "capability_ids": "CAP-3B89863B2015|CAP-7EEC4AB2500E",
+    "capability_names": "Ndsp User Login Gateway",
+    "endpoint_contracts": "POST /API/AUTH/2FA/SETUP/START",
+    "sources": "backend/auth_api/ndsp_user_login_gateway.cjs|backend/ndsp_user_login_gateway.cjs",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-2305B098920942A5",
+    "candidate_count": 2,
+    "capability_ids": "CAP-20B6E1FEA3A2|CAP-A323993993E5",
+    "capability_names": "Ndsp Api Compat Gateway",
+    "endpoint_contracts": "GET /API/MARKETS",
+    "sources": "backend/auth_api/ndsp_api_compat_gateway.cjs|backend/ndsp_api_compat_gateway.cjs",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-23D620B64D4FFE61",
+    "candidate_count": 1,
+    "capability_ids": "CAP-3A5ED3DB0C0D",
+    "capability_names": "Risk Label",
+    "endpoint_contracts": "",
+    "sources": "backend/app/support_layers/scenario/scenario_engine.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-25099A6E3D05D0C3",
+    "candidate_count": 2,
+    "capability_ids": "CAP-7B056D6FB736|CAP-C55DEBBD7CB7",
+    "capability_names": "Ndsp User Login Gateway",
+    "endpoint_contracts": "POST /API/AUTH/2FA/DISABLE",
+    "sources": "backend/auth_api/ndsp_user_login_gateway.cjs|backend/ndsp_user_login_gateway.cjs",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-2B8E8720210CF8DD",
+    "candidate_count": 2,
+    "capability_ids": "CAP-846435C78CD1|CAP-F139426B5341",
+    "capability_names": "Ndsp User Login Gateway",
+    "endpoint_contracts": "POST /API/AUTH/2FA/SETUP",
+    "sources": "backend/auth_api/ndsp_user_login_gateway.cjs|backend/ndsp_user_login_gateway.cjs",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-2BF08E118E2502DD",
+    "candidate_count": 1,
+    "capability_ids": "CAP-F150D0BAA604",
+    "capability_names": "Frontend Contract",
+    "endpoint_contracts": "GET /ADMIN/LAYERS",
+    "sources": "backend/app/api/v1/frontend_contract.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-2C421ED62D7F895B",
+    "candidate_count": 1,
+    "capability_ids": "CAP-1A9F62165A6D",
+    "capability_names": "Ndsp User Login Gateway",
+    "endpoint_contracts": "POST /API/AUTH/INTERNAL/LEGAL-ACCEPTANCE",
+    "sources": "backend/auth_api/ndsp_user_login_gateway.cjs",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-2E7C1911FA0C6C3D",
+    "candidate_count": 2,
+    "capability_ids": "CAP-3E2090989150|CAP-7E97D2614E6D",
+    "capability_names": "Ndsp Admin Ui Proxy",
+    "endpoint_contracts": "GET /API/ADMIN-UI/MARKETS",
+    "sources": "backend/auth_api/ndsp_admin_ui_proxy.cjs|backend/ndsp_admin_ui_proxy.cjs",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-322DC710CFDB962B",
+    "candidate_count": 1,
+    "capability_ids": "CAP-E4980A40032A",
+    "capability_names": "Ndsp User Portal Final Experience V1 One Script",
+    "endpoint_contracts": "GET /API/USER/NOTIFICATIONS",
+    "sources": "NDSP_USER_PORTAL_FINAL_EXPERIENCE_V1_ONE_SCRIPT.sh",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-325036ACDFEA1ED3",
+    "candidate_count": 4,
+    "capability_ids": "CAP-56C562461855|CAP-A34761515678|CAP-D93913F10664|CAP-F4B0061B6EC3",
+    "capability_names": "Framework Adapter|Version",
+    "endpoint_contracts": "GET /VERSION",
+    "sources": "backend/framework/version/version.cjs|backend/services/bot_execution/framework-adapter.cjs|backend/services/completed_decision/framework-adapter.cjs|backend/services/decision_governance_core/framework-adapter.cjs",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-328257E93FCC054C",
+    "candidate_count": 1,
+    "capability_ids": "CAP-0CE111E47411",
+    "capability_names": "Frontend Contract",
+    "endpoint_contracts": "POST /ME/CHANNELS/TELEGRAM/LINK",
+    "sources": "backend/app/api/v1/frontend_contract.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-32A1E3F9E77CD9AB",
+    "candidate_count": 1,
+    "capability_ids": "CAP-425426D4A96B",
+    "capability_names": "User Operational Compat",
+    "endpoint_contracts": "GET /API/AUTH/ACTIVATE",
+    "sources": "backend/app/api/compat/user_operational_compat.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-3373CEFA77A50B27",
+    "candidate_count": 1,
+    "capability_ids": "CAP-70C19D24087E",
+    "capability_names": "Ndsp Nowpayments",
+    "endpoint_contracts": "GET /WEBHOOKS/NOWPAYMENTS",
+    "sources": "backend/ndsp_nowpayments.cjs",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-33A3608EC2C6ABB6",
+    "candidate_count": 2,
+    "capability_ids": "CAP-242D8324FAD9|CAP-8D64F6304F2E",
+    "capability_names": "Ndsp User Login Gateway",
+    "endpoint_contracts": "POST /API/AUTH/2FA/SETUP/SKIP",
+    "sources": "backend/auth_api/ndsp_user_login_gateway.cjs|backend/ndsp_user_login_gateway.cjs",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-37970355FCCFFAB3",
+    "candidate_count": 1,
+    "capability_ids": "CAP-11BF5E282765",
+    "capability_names": "Frontend Contract",
+    "endpoint_contracts": "GET /ME/WATCHLIST",
+    "sources": "backend/app/api/v1/frontend_contract.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-3936838EFF8BCAF5",
+    "candidate_count": 1,
+    "capability_ids": "CAP-1D926198372A",
+    "capability_names": "Ndsp User Login Gateway",
+    "endpoint_contracts": "POST /API/AUTH/RUNTIME/USAGE/CONSUME",
+    "sources": "backend/auth_api/ndsp_user_login_gateway.cjs",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-39C99CAF91B276BA",
+    "candidate_count": 10,
+    "capability_ids": "CAP-170A28FFB0E7|CAP-242A581E1E52|CAP-6F5DF526EE59|CAP-753A055CFA5A|CAP-89CA79DDADE2|CAP-9866D4AE9D59|CAP-B227DA36FA9B|CAP-B2BAF38F8204|CAP-ECBB8B6ED8D2|CAP-ED8397248098",
+    "capability_names": "Admin Only|Auth|Ndsp Read Alert State|Ndsp Write Alert State|Update User Status",
+    "endpoint_contracts": "GET /API/ADMIN-UI/ALERTS|GET /API/ADMIN-UI/BACKUPS|GET /API/ADMIN-UI/GOVERNANCE|GET /API/ADMIN-UI/HEALTH|GET /API/ADMIN-UI/MARKETS|GET /API/ADMIN-UI/PACKAGES|GET /API/ADMIN-UI/PAYMENTS|GET /API/ADMIN-UI/SUMMARY|GET /API/ADMIN-UI/TRIALS|GET /API/ADMIN-UI/USERS|POST /API/ADMIN-UI/ACTION|POST /API/ADMIN-UI/ALERTS/CHANNEL|POST /API/ADMIN-UI/ALERTS/TEST",
+    "sources": "backend/auth_api/ndsp_admin_ui_proxy.cjs|backend/ndsp_admin_ui_proxy.cjs",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-3B0A4645F1E78920",
+    "candidate_count": 1,
+    "capability_ids": "CAP-FA44BA71A8B0",
+    "capability_names": "Frontend Contract",
+    "endpoint_contracts": "GET /ASSETS/{ASSET_ID}/CHART",
+    "sources": "backend/app/api/v1/frontend_contract.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-3B2119F427ED870D",
+    "candidate_count": 1,
+    "capability_ids": "CAP-4C3B7B99A4A6",
+    "capability_names": "Nowpayments Create Alias",
+    "endpoint_contracts": "GET /API/NDSP/NOWPAYMENTS-CREATE-ALIAS/HEALTH",
+    "sources": "backend/app/api/compat/nowpayments_create_alias.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-3B2D0C744090CBFD",
+    "candidate_count": 1,
+    "capability_ids": "CAP-2CD69A7EA838",
+    "capability_names": "Frontend Contract",
+    "endpoint_contracts": "POST /AUTH/REGISTER",
+    "sources": "backend/app/api/v1/frontend_contract.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-3C2B33BFE5D13257",
+    "candidate_count": 1,
+    "capability_ids": "CAP-9ADF707918ED",
+    "capability_names": "Ndsp User Login Gateway",
+    "endpoint_contracts": "GET /API/AUTH/SURVEY/STATUS",
+    "sources": "backend/auth_api/ndsp_user_login_gateway.cjs",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-3DB2CA2224CCB065",
+    "candidate_count": 1,
+    "capability_ids": "CAP-B167184CBF84",
+    "capability_names": "Frontend Contract",
+    "endpoint_contracts": "POST /ME/WATCHLIST",
+    "sources": "backend/app/api/v1/frontend_contract.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-40EAC1E50F40B29A",
+    "candidate_count": 1,
+    "capability_ids": "CAP-1736E39D1CE4",
+    "capability_names": "Frontend Contract",
+    "endpoint_contracts": "POST /AUTH/MAGIC-LINK",
+    "sources": "backend/app/api/v1/frontend_contract.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-418471406315AE70",
+    "candidate_count": 1,
+    "capability_ids": "CAP-48F24BF885D7",
+    "capability_names": "User Operational Compat",
+    "endpoint_contracts": "POST /API/TELEGRAM/LINK/START",
+    "sources": "backend/app/api/compat/user_operational_compat.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-4346E697DC6E8699",
+    "candidate_count": 2,
+    "capability_ids": "CAP-0843B421B752|CAP-F56AB637F669",
+    "capability_names": "Ndsp User Login Gateway",
+    "endpoint_contracts": "POST /API/AUTH/2FA/CONFIRM",
+    "sources": "backend/auth_api/ndsp_user_login_gateway.cjs|backend/ndsp_user_login_gateway.cjs",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-439BB6D39BC81D2B",
+    "candidate_count": 1,
+    "capability_ids": "CAP-E9D779AE5200",
+    "capability_names": "Frontend Contract",
+    "endpoint_contracts": "GET /ADMIN/REGISTRATIONS",
+    "sources": "backend/app/api/v1/frontend_contract.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-43E988AB222E55F2",
+    "candidate_count": 1,
+    "capability_ids": "CAP-A57ECAABD0D2",
+    "capability_names": "Frontend Contract",
+    "endpoint_contracts": "GET /ASSETS",
+    "sources": "backend/app/api/v1/frontend_contract.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-456F5C0D6EEA8305",
+    "candidate_count": 1,
+    "capability_ids": "CAP-7A9637DD3A75",
+    "capability_names": "Frontend Contract",
+    "endpoint_contracts": "GET /MARKETS",
+    "sources": "backend/app/api/v1/frontend_contract.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-4667012B1A9E34A8",
+    "candidate_count": 1,
+    "capability_ids": "CAP-2B9AC68DB1D6",
+    "capability_names": "Assert No Decision Mutation",
+    "endpoint_contracts": "",
+    "sources": "backend/app/support_layers/scenario/scenario_engine.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-46E5B501847DD809",
+    "candidate_count": 2,
+    "capability_ids": "CAP-13D1EE0A3B7A|CAP-2D45C5C1A44B",
+    "capability_names": "Ndsp User Dashboard Gateway",
+    "endpoint_contracts": "GET /API/USER-DASHBOARD/SAAS-POLICY",
+    "sources": "backend/auth_api/ndsp_user_dashboard_gateway.cjs|backend/ndsp_user_dashboard_gateway.cjs",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-49DBC384FFE12134",
+    "candidate_count": 2,
+    "capability_ids": "CAP-4B75FD38F852|CAP-C58E98CA2D3A",
+    "capability_names": "Ndsp Admin Ui Proxy",
+    "endpoint_contracts": "POST /API/ADMIN-UI/ALERTS/TEST",
+    "sources": "backend/auth_api/ndsp_admin_ui_proxy.cjs|backend/ndsp_admin_ui_proxy.cjs",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-4AE80B870122ACCA",
+    "candidate_count": 1,
+    "capability_ids": "CAP-F6B5F7A0A680",
+    "capability_names": "Frontend Fields Api",
+    "endpoint_contracts": "GET /API/NDSP/FRONTEND-FIELDS/PROBE",
+    "sources": "backend/app/ndsp_governance/frontend_fields_api.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-52E920E2015C88E7",
+    "candidate_count": 1,
+    "capability_ids": "CAP-C26418100904",
+    "capability_names": "User Operational Compat",
+    "endpoint_contracts": "GET /API/NDSP/COMPAT/HEALTH",
+    "sources": "backend/app/api/compat/user_operational_compat.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-547C76FD6DEEB68F",
+    "candidate_count": 1,
+    "capability_ids": "CAP-A1CD5A0B9B66",
+    "capability_names": "Market Type For",
+    "endpoint_contracts": "",
+    "sources": "backend/ndsp-live-decision-quality/asset_registry_runtime.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-56135DB7D7AC83E9",
+    "candidate_count": 1,
+    "capability_ids": "CAP-5FEF33A2C87F",
+    "capability_names": "Ndsp User Login Gateway",
+    "endpoint_contracts": "POST /API/AUTH/EVENTS",
+    "sources": "backend/auth_api/ndsp_user_login_gateway.cjs",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-566579A5139ED492",
+    "candidate_count": 1,
+    "capability_ids": "CAP-6F83F74440AE",
+    "capability_names": "Frontend Contract",
+    "endpoint_contracts": "GET /ASSETS/{ASSET_ID}/DECISION",
+    "sources": "backend/app/api/v1/frontend_contract.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-56B06674577E8202",
+    "candidate_count": 1,
+    "capability_ids": "CAP-2CC212BF4F8E",
+    "capability_names": "Frontend Contract",
+    "endpoint_contracts": "DELETE /ME/WATCHLIST/{ASSET_ID}",
+    "sources": "backend/app/api/v1/frontend_contract.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-5792A265FF46E0D7",
+    "candidate_count": 2,
+    "capability_ids": "CAP-7F41666FC0D4|CAP-F142BF636522",
+    "capability_names": "Ndsp Admin Ui Proxy",
+    "endpoint_contracts": "GET /API/ADMIN-UI/TRIALS",
+    "sources": "backend/auth_api/ndsp_admin_ui_proxy.cjs|backend/ndsp_admin_ui_proxy.cjs",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-582655326350BC33",
+    "candidate_count": 2,
+    "capability_ids": "CAP-D6B934D294FE|CAP-E01E3F460977",
+    "capability_names": "Ndsp User Login Gateway",
+    "endpoint_contracts": "GET /API/AUTH/LOGIN/HEALTH",
+    "sources": "backend/auth_api/ndsp_user_login_gateway.cjs|backend/ndsp_user_login_gateway.cjs",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-5B9DAFE475C08AEA",
+    "candidate_count": 1,
+    "capability_ids": "CAP-C84121300635",
+    "capability_names": "Tdl V2 Policy Admin",
+    "endpoint_contracts": "POST /TIMING/ENABLE",
+    "sources": "apps/ndsp-governance-bridge/policies/admin_snapshot/tdl_v2_policy_admin.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-5C8A28CB4849CE41",
+    "candidate_count": 4,
+    "capability_ids": "CAP-70F625B28F63|CAP-A6810593B898|CAP-CF000A7305E2|CAP-E668719D9AD9",
+    "capability_names": "Alert Prefs Get|Alert Prefs Post|Subscription Status Compat|Trial Register Compat",
+    "endpoint_contracts": "GET /API/AUTH/ACTIVATE|GET /API/NDSP/COMPAT/HEALTH|GET /API/PAYMENTS/NOWPAYMENTS/SUBSCRIPTION/STATUS|GET /API/USER/ALERT-PREFERENCES|GET /API/V6/PAYMENTS/NOWPAYMENTS/SUBSCRIPTION/STATUS|POST /API/ALERTS/EMAIL/TEST|POST /API/AUTH/ACTIVATE|POST /API/AUTH/REGISTER-TRIAL|POST /API/PAYMENTS/NOWPAYMENTS/SUBSCRIPTION/CREATE|POST /API/TELEGRAM/LINK/START|POST /API/TELEGRAM/LINK/VERIFY|POST /API/TRIAL/REGISTER|POST /API/TRIAL/REQUEST|POST /API/USER/ALERT-PREFERENCES|POST /API/V1/TRIAL/REGISTER|POST /API/V6/PAYMENTS/NOWPAYMENTS/SUBSCRIPTION/CREATE",
+    "sources": "backend/app/api/compat/user_operational_compat.py",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-5DBA84E9131F0BAC",
+    "candidate_count": 1,
+    "capability_ids": "CAP-F19E055AF8D6",
+    "capability_names": "User Operational Compat",
+    "endpoint_contracts": "POST /API/AUTH/ACTIVATE",
+    "sources": "backend/app/api/compat/user_operational_compat.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-5E7C7AD2F1B4282A",
+    "candidate_count": 3,
+    "capability_ids": "CAP-A194414E26E2|CAP-B3BF7C85F687|CAP-CAD48928C8E4",
+    "capability_names": "Telegram Routing Admin|Telegram Routing Internal|Telegram Routing V2",
+    "endpoint_contracts": "POST /TEST",
+    "sources": "backend/app/api/admin/telegram_routing_admin.py|backend/app/api/admin/telegram_routing_v2.py|backend/app/api/internal/telegram_routing_internal.py",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-5E9DA9DE4B7D094A",
+    "candidate_count": 1,
+    "capability_ids": "CAP-9EAA6B9BF2BC",
+    "capability_names": "User Operational Compat",
+    "endpoint_contracts": "GET /API/PAYMENTS/NOWPAYMENTS/SUBSCRIPTION/STATUS",
+    "sources": "backend/app/api/compat/user_operational_compat.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-5F9C10E11F6C8818",
+    "candidate_count": 1,
+    "capability_ids": "CAP-FAAE9703FE61",
+    "capability_names": "User Operational Compat",
+    "endpoint_contracts": "GET /API/USER/ALERT-PREFERENCES",
+    "sources": "backend/app/api/compat/user_operational_compat.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-631F0C2197AF7D5E",
+    "candidate_count": 2,
+    "capability_ids": "CAP-8CF43007F5CD|CAP-C60CD9D10164",
+    "capability_names": "Telegram Routing Internal|Telegram Routing V2",
+    "endpoint_contracts": "GET /DEBUG-AUTH",
+    "sources": "backend/app/api/admin/telegram_routing_v2.py|backend/app/api/internal/telegram_routing_internal.py",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-64C310B6EDCD42B4",
+    "candidate_count": 1,
+    "capability_ids": "CAP-3965B46743DE",
+    "capability_names": "Frontend Contract",
+    "endpoint_contracts": "POST /ADMIN/REGISTRATIONS/{REGISTRATION_ID}/DECISION",
+    "sources": "backend/app/api/v1/frontend_contract.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-65E18FD59CD68EA6",
+    "candidate_count": 2,
+    "capability_ids": "CAP-255A55D1B989|CAP-B39355BFBE71",
+    "capability_names": "Ndsp Admin Ui Proxy",
+    "endpoint_contracts": "GET /API/ADMIN-UI/SUMMARY",
+    "sources": "backend/auth_api/ndsp_admin_ui_proxy.cjs|backend/ndsp_admin_ui_proxy.cjs",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-67635868736B0665",
+    "candidate_count": 1,
+    "capability_ids": "CAP-538A80545E29",
+    "capability_names": "Frontend Contract",
+    "endpoint_contracts": "POST /ME/CHANNELS/EMAIL/TEST",
+    "sources": "backend/app/api/v1/frontend_contract.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-67D1DD2C621BA7A2",
+    "candidate_count": 2,
+    "capability_ids": "CAP-644C81537AC6|CAP-A8D586B30335",
+    "capability_names": "Ndsp User Login Gateway",
+    "endpoint_contracts": "POST /API/AUTH/2FA/STATUS",
+    "sources": "backend/auth_api/ndsp_user_login_gateway.cjs|backend/ndsp_user_login_gateway.cjs",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-6A45450BC66CD8D3",
+    "candidate_count": 2,
+    "capability_ids": "CAP-513B295710F5|CAP-BE5C7B84201D",
+    "capability_names": "Ndsp Admin Ui Proxy",
+    "endpoint_contracts": "GET /API/ADMIN-UI/PAYMENTS",
+    "sources": "backend/auth_api/ndsp_admin_ui_proxy.cjs|backend/ndsp_admin_ui_proxy.cjs",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-6F9527A740879BA9",
+    "candidate_count": 2,
+    "capability_ids": "CAP-8374FD1D62EB|CAP-B25ABE2AD98F",
+    "capability_names": "Ndsp Admin Ui Proxy",
+    "endpoint_contracts": "GET /API/ADMIN-UI/ALERTS",
+    "sources": "backend/auth_api/ndsp_admin_ui_proxy.cjs|backend/ndsp_admin_ui_proxy.cjs",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-7221689E4834C98E",
+    "candidate_count": 3,
+    "capability_ids": "CAP-22453668AACA|CAP-65156AA526BC|CAP-FBE70B1294BC",
+    "capability_names": "Telegram Routing Admin|Telegram Routing Internal|Telegram Routing V2",
+    "endpoint_contracts": "POST /UPDATE",
+    "sources": "backend/app/api/admin/telegram_routing_admin.py|backend/app/api/admin/telegram_routing_v2.py|backend/app/api/internal/telegram_routing_internal.py",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-73EFBFAE1A55AC95",
+    "candidate_count": 1,
+    "capability_ids": "CAP-5B18901D1F22",
+    "capability_names": "Frontend Contract",
+    "endpoint_contracts": "GET /CONTRACT/STATUS",
+    "sources": "backend/app/api/v1/frontend_contract.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-754B89CD5C66FF20",
+    "candidate_count": 1,
+    "capability_ids": "CAP-116FF6D929A9",
+    "capability_names": "Ndsp User Login Gateway",
+    "endpoint_contracts": "GET /API/AUTH/DECISION-ROOM-ACCESS",
+    "sources": "backend/auth_api/ndsp_user_login_gateway.cjs",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-75F9D184F9AFE542",
+    "candidate_count": 1,
+    "capability_ids": "CAP-BD19C45FECD0",
+    "capability_names": "Frontend Contract",
+    "endpoint_contracts": "POST /PAYMENTS/CHECKOUT",
+    "sources": "backend/app/api/v1/frontend_contract.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-7760D3ACF83E0B50",
+    "candidate_count": 1,
+    "capability_ids": "CAP-D559FE326861",
+    "capability_names": "User Operational Compat",
+    "endpoint_contracts": "POST /API/USER/ALERT-PREFERENCES",
+    "sources": "backend/app/api/compat/user_operational_compat.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-7845464071C28F4D",
+    "candidate_count": 1,
+    "capability_ids": "CAP-F197D783C391",
+    "capability_names": "User Operational Compat",
+    "endpoint_contracts": "GET /API/V6/PAYMENTS/NOWPAYMENTS/SUBSCRIPTION/STATUS",
+    "sources": "backend/app/api/compat/user_operational_compat.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-78C95988F325EF45",
+    "candidate_count": 2,
+    "capability_ids": "CAP-54AB364B10F5|CAP-C32C78AB47B0",
+    "capability_names": "Ndsp Admin Ui Proxy",
+    "endpoint_contracts": "GET /API/ADMIN-UI/GOVERNANCE",
+    "sources": "backend/auth_api/ndsp_admin_ui_proxy.cjs|backend/ndsp_admin_ui_proxy.cjs",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-7C1FEACB5901A8AF",
+    "candidate_count": 2,
+    "capability_ids": "CAP-48E71B4F1CF7|CAP-F66DBAC61596",
+    "capability_names": "Ndsp Api Compat Gateway",
+    "endpoint_contracts": "GET /API/PAYMENTS/STATUS",
+    "sources": "backend/auth_api/ndsp_api_compat_gateway.cjs|backend/ndsp_api_compat_gateway.cjs",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-7D965DF29C66CBAD",
+    "candidate_count": 2,
+    "capability_ids": "CAP-50F4AF813A40|CAP-8F78E58E5656",
+    "capability_names": "Ndsp User Login Gateway",
+    "endpoint_contracts": "POST /API/AUTH/2FA/SETUP/CONFIRM",
+    "sources": "backend/auth_api/ndsp_user_login_gateway.cjs|backend/ndsp_user_login_gateway.cjs",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-7EB5191C8588F907",
+    "candidate_count": 3,
+    "capability_ids": "CAP-00ED621D6D60|CAP-4EB8C4DDA8E9|CAP-8189CA8761C9",
+    "capability_names": "Dynamic Quality Score|Market Type|Ndsp Attach Dual Scenario Data Quality Public V1",
+    "endpoint_contracts": "GET /API/DECISION/QUALITY-LIVE|GET /API/DECISION/QUALITY-LIVE/HEALTH",
+    "sources": "backend/ndsp-live-decision-quality/server.py",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-7F849E4490C35BB1",
+    "candidate_count": 1,
+    "capability_ids": "CAP-4FF90CCC6DFE",
+    "capability_names": "Tdl V2 Policy Admin",
+    "endpoint_contracts": "GET /POLICY",
+    "sources": "apps/ndsp-governance-bridge/policies/admin_snapshot/tdl_v2_policy_admin.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-8DB24B3A307DBA1B",
+    "candidate_count": 2,
+    "capability_ids": "CAP-0622719B013B|CAP-1653A8452D19",
+    "capability_names": "Compute From Active Engine|Ndsp Public Quality Unique",
+    "endpoint_contracts": "GET /API/NDSP/PUBLIC/DECISION-QUALITY",
+    "sources": "backend/app/api/ndsp_public_quality_unique.py",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-8E2FC46606546F23",
+    "candidate_count": 1,
+    "capability_ids": "CAP-071618E88E83",
+    "capability_names": "Frontend Contract",
+    "endpoint_contracts": "GET /ME/ENTITLEMENTS",
+    "sources": "backend/app/api/v1/frontend_contract.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-8F243050068688C8",
+    "candidate_count": 2,
+    "capability_ids": "CAP-3ACB19AAC8FC|CAP-4FCAA631BA18",
+    "capability_names": "Ndsp Admin Actions Bypass Old Middleware",
+    "endpoint_contracts": "POST /API/ADMIN-ACTIONS/USERS/ACTION",
+    "sources": "backend/auth_api/ndsp_admin_actions_bypass_old_middleware.cjs|backend/ndsp_admin_actions_bypass_old_middleware.cjs",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-8F684E41181B6FEE",
+    "candidate_count": 2,
+    "capability_ids": "CAP-47C952094550|CAP-D0B77E088DEE",
+    "capability_names": "Ndsp Admin Actions Authoritative",
+    "endpoint_contracts": "GET /API/ADMIN/USERS/ACTION/HEALTH",
+    "sources": "backend/auth_api/ndsp_admin_actions_authoritative.cjs|backend/ndsp_admin_actions_authoritative.cjs",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-91FDD188B6AF925D",
+    "candidate_count": 2,
+    "capability_ids": "CAP-376A2E7311B7|CAP-E6FFD507C6FA",
+    "capability_names": "Ndsp User Login Gateway",
+    "endpoint_contracts": "POST /API/AUTH/2FA/SETUP/CONFIRM-SPEAKEASY",
+    "sources": "backend/auth_api/ndsp_user_login_gateway.cjs|backend/ndsp_user_login_gateway.cjs",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-93E3BBEA8F0A76F6",
+    "candidate_count": 1,
+    "capability_ids": "CAP-93DD0F3859D4",
+    "capability_names": "Tdl V2 Policy Admin",
+    "endpoint_contracts": "POST /TIMING/DISABLE",
+    "sources": "apps/ndsp-governance-bridge/policies/admin_snapshot/tdl_v2_policy_admin.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-955B64BDFA938A5B",
+    "candidate_count": 1,
+    "capability_ids": "CAP-5F34508D1D07",
+    "capability_names": "User Operational Compat",
+    "endpoint_contracts": "POST /API/V1/TRIAL/REGISTER",
+    "sources": "backend/app/api/compat/user_operational_compat.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-95A680D94563A2A1",
+    "candidate_count": 3,
+    "capability_ids": "CAP-570806ECD8A4|CAP-8E040D696446|CAP-EEDDE460DD9C",
+    "capability_names": "Health|Ndsp Api Compat Gateway",
+    "endpoint_contracts": "GET /HEALTH",
+    "sources": "backend/auth_api/ndsp_api_compat_gateway.cjs|backend/framework/health/health.cjs|backend/ndsp_api_compat_gateway.cjs",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-97466F763D9BD9E5",
+    "candidate_count": 1,
+    "capability_ids": "CAP-8A9DD9B6E7D5",
+    "capability_names": "Tdl V2 Policy Admin",
+    "endpoint_contracts": "GET /AUTH-DEBUG",
+    "sources": "apps/ndsp-governance-bridge/policies/admin_snapshot/tdl_v2_policy_admin.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-9770B51137F30B8E",
+    "candidate_count": 1,
+    "capability_ids": "CAP-945D34B96341",
+    "capability_names": "User Operational Compat",
+    "endpoint_contracts": "POST /API/AUTH/REGISTER-TRIAL",
+    "sources": "backend/app/api/compat/user_operational_compat.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-979F2906008108BE",
+    "candidate_count": 2,
+    "capability_ids": "CAP-033B90B3A316|CAP-628E213D3D54",
+    "capability_names": "Nowpayments Create Alias|User Operational Compat",
+    "endpoint_contracts": "POST /API/PAYMENTS/NOWPAYMENTS/SUBSCRIPTION/CREATE",
+    "sources": "backend/app/api/compat/nowpayments_create_alias.py|backend/app/api/compat/user_operational_compat.py",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-9899BA6BB68DEBC5",
+    "candidate_count": 2,
+    "capability_ids": "CAP-3D9086A829ED|CAP-43B04D28A46B",
+    "capability_names": "Ndsp Admin Ui Proxy",
+    "endpoint_contracts": "POST /API/ADMIN-UI/ACTION",
+    "sources": "backend/auth_api/ndsp_admin_ui_proxy.cjs|backend/ndsp_admin_ui_proxy.cjs",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-9BB860E906E5F008",
+    "candidate_count": 2,
+    "capability_ids": "CAP-24BDA2A0DD8B|CAP-C8F6891BC250",
+    "capability_names": "Ndsp Admin Ui Proxy",
+    "endpoint_contracts": "GET /API/ADMIN-UI/USERS",
+    "sources": "backend/auth_api/ndsp_admin_ui_proxy.cjs|backend/ndsp_admin_ui_proxy.cjs",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-9D13ADEF1E509D68",
+    "candidate_count": 1,
+    "capability_ids": "CAP-7AF5F3CAE976",
+    "capability_names": "Ndsp Nowpayments",
+    "endpoint_contracts": "POST /WEBHOOKS/NOWPAYMENTS",
+    "sources": "backend/ndsp_nowpayments.cjs",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-9EC582F4151E97EC",
+    "candidate_count": 2,
+    "capability_ids": "CAP-3CFCB5B47F6B|CAP-B800EB18EDBC",
+    "capability_names": "Ndsp Api Compat Gateway",
+    "endpoint_contracts": "GET /API/ACCOUNT/TRIAL",
+    "sources": "backend/auth_api/ndsp_api_compat_gateway.cjs|backend/ndsp_api_compat_gateway.cjs",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-9F64828D6707F6B0",
+    "candidate_count": 2,
+    "capability_ids": "CAP-3D0167450973|CAP-A1DBE2356637",
+    "capability_names": "Ndsp Api Compat Gateway",
+    "endpoint_contracts": "GET /API/ALERTS/STATUS",
+    "sources": "backend/auth_api/ndsp_api_compat_gateway.cjs|backend/ndsp_api_compat_gateway.cjs",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-A10391D6225F56E7",
+    "candidate_count": 1,
+    "capability_ids": "CAP-D8194AB79967",
+    "capability_names": "Frontend Contract",
+    "endpoint_contracts": "POST /PAYMENTS/WEBHOOK",
+    "sources": "backend/app/api/v1/frontend_contract.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-A4184781CB31473F",
+    "candidate_count": 1,
+    "capability_ids": "CAP-C8C94E7A8122",
+    "capability_names": "Frontend Contract",
+    "endpoint_contracts": "POST /AUTH/LOGIN",
+    "sources": "backend/app/api/v1/frontend_contract.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-A8307409A045A817",
+    "candidate_count": 1,
+    "capability_ids": "CAP-98156F574B28",
+    "capability_names": "Risk Warnings",
+    "endpoint_contracts": "",
+    "sources": "backend/app/support_layers/scenario/scenario_engine.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-A84405A7F2E6BD0A",
+    "candidate_count": 1,
+    "capability_ids": "CAP-8BFCC7DDCBE0",
+    "capability_names": "Frontend Contract",
+    "endpoint_contracts": "POST /ADMIN/PAYMENTS/{PAYMENT_ID}/APPROVE",
+    "sources": "backend/app/api/v1/frontend_contract.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-AB4D236F021BB367",
+    "candidate_count": 1,
+    "capability_ids": "CAP-3F9549B2B851",
+    "capability_names": "User Operational Compat",
+    "endpoint_contracts": "POST /API/TRIAL/REQUEST",
+    "sources": "backend/app/api/compat/user_operational_compat.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-ABFFD4E1F0B0E15D",
+    "candidate_count": 1,
+    "capability_ids": "CAP-931E56E35D55",
+    "capability_names": "Frontend Contract",
+    "endpoint_contracts": "POST /ME/CHANNELS/TELEGRAM/VERIFY",
+    "sources": "backend/app/api/v1/frontend_contract.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-ADEC92F5352C095D",
+    "candidate_count": 1,
+    "capability_ids": "CAP-55015F233F5A",
+    "capability_names": "Frontend Contract",
+    "endpoint_contracts": "GET /AUTH/MAGIC-LINK/VERIFY",
+    "sources": "backend/app/api/v1/frontend_contract.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-AFBD9A0F516371DC",
+    "candidate_count": 1,
+    "capability_ids": "CAP-4ADB944E408B",
+    "capability_names": "Ndsp User Login Gateway",
+    "endpoint_contracts": "POST /API/AUTH/SURVEY/RESPONSE",
+    "sources": "backend/auth_api/ndsp_user_login_gateway.cjs",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-B3B8D85FAFE3D708",
+    "candidate_count": 1,
+    "capability_ids": "CAP-B81607E6BCDB",
+    "capability_names": "Frontend Contract",
+    "endpoint_contracts": "GET /ADMIN/HEALTH",
+    "sources": "backend/app/api/v1/frontend_contract.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-B660C1DCD7F3C77B",
+    "candidate_count": 1,
+    "capability_ids": "CAP-E4B4728311F0",
+    "capability_names": "Decision Quality Public",
+    "endpoint_contracts": "GET /API/DECISION/QUALITY",
+    "sources": "backend/app/api/decision_quality_public.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-B8252076D7DF7FF9",
+    "candidate_count": 1,
+    "capability_ids": "CAP-E50EE9CF3FD6",
+    "capability_names": "User Operational Compat",
+    "endpoint_contracts": "POST /API/TELEGRAM/LINK/VERIFY",
+    "sources": "backend/app/api/compat/user_operational_compat.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-B9068B4DD1E0C3BC",
+    "candidate_count": 1,
+    "capability_ids": "CAP-F402D935EFF7",
+    "capability_names": "Frontend Contract",
+    "endpoint_contracts": "GET /ADMIN/PAYMENTS",
+    "sources": "backend/app/api/v1/frontend_contract.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-BC5304F5A464794E",
+    "candidate_count": 1,
+    "capability_ids": "CAP-9BE0DE3ADC89",
+    "capability_names": "Generate Report",
+    "endpoint_contracts": "",
+    "sources": "backend/app/support_layers/scenario/scenario_engine.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-C303E36D3C1776CA",
+    "candidate_count": 1,
+    "capability_ids": "CAP-AA4ECF6DF3F8",
+    "capability_names": "Tdl V2 Policy Admin",
+    "endpoint_contracts": "POST /POLICY",
+    "sources": "apps/ndsp-governance-bridge/policies/admin_snapshot/tdl_v2_policy_admin.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-C427B922BB471395",
+    "candidate_count": 1,
+    "capability_ids": "CAP-EC53447FDEFA",
+    "capability_names": "Telegram Routing Internal",
+    "endpoint_contracts": "GET /DEBUG-DB",
+    "sources": "backend/app/api/internal/telegram_routing_internal.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-C9D5E973D5F5F3E9",
+    "candidate_count": 4,
+    "capability_ids": "CAP-438A6D14BFBB|CAP-7E1F66F717A1|CAP-A231BBA8D29D|CAP-DECAE45DE878",
+    "capability_names": "Auth Optional|Auth Required",
+    "endpoint_contracts": "GET /API/ACCOUNT/TRIAL|GET /API/ALERTS/STATUS|GET /API/MARKETS|GET /API/PACKAGES|GET /API/PAYMENTS/STATUS|GET /HEALTH",
+    "sources": "backend/auth_api/ndsp_api_compat_gateway.cjs|backend/ndsp_api_compat_gateway.cjs",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-CAAF3729109106A9",
+    "candidate_count": 1,
+    "capability_ids": "CAP-10D53C6D7918",
+    "capability_names": "Frontend Contract",
+    "endpoint_contracts": "GET /ADMIN/TRIALS",
+    "sources": "backend/app/api/v1/frontend_contract.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-CC1E47237D1C817F",
+    "candidate_count": 1,
+    "capability_ids": "CAP-D0B86CD5E331",
+    "capability_names": "Frontend Contract",
+    "endpoint_contracts": "POST /AUTH/RESET",
+    "sources": "backend/app/api/v1/frontend_contract.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-D7C6C05092448016",
+    "candidate_count": 1,
+    "capability_ids": "CAP-29DCBEF0D49C",
+    "capability_names": "Ndsp Nowpayments",
+    "endpoint_contracts": "POST /CHECKOUT/CREATE",
+    "sources": "backend/ndsp_nowpayments.cjs",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-DA5230BF722A7C44",
+    "candidate_count": 1,
+    "capability_ids": "CAP-9F3B6AAA223B",
+    "capability_names": "Frontend Contract",
+    "endpoint_contracts": "POST /ADMIN/PAYMENTS/{PAYMENT_ID}/REJECT",
+    "sources": "backend/app/api/v1/frontend_contract.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-DE2E5802B250D7BF",
+    "candidate_count": 2,
+    "capability_ids": "CAP-214521E6EBD1|CAP-496F09F3F4BB",
+    "capability_names": "Ndsp User Login Gateway",
+    "endpoint_contracts": "POST /API/AUTH/LOGIN",
+    "sources": "backend/auth_api/ndsp_user_login_gateway.cjs|backend/ndsp_user_login_gateway.cjs",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-E25552D956180A16",
+    "candidate_count": 1,
+    "capability_ids": "CAP-461745E841AB",
+    "capability_names": "Ndsp Trial Info",
+    "endpoint_contracts": "GET /TRIAL/INFO",
+    "sources": "backend/ndsp_trial_info.cjs",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-E488ABB058037AED",
+    "candidate_count": 1,
+    "capability_ids": "CAP-862CD297F1FD",
+    "capability_names": "Frontend Contract",
+    "endpoint_contracts": "POST /AUTH/FORGOT",
+    "sources": "backend/app/api/v1/frontend_contract.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-E6F3B9DC23FA980C",
+    "candidate_count": 2,
+    "capability_ids": "CAP-6565FE804AF5|CAP-A810F8810A25",
+    "capability_names": "Ndsp User Login Gateway",
+    "endpoint_contracts": "POST /API/AUTH/2FA/LOGIN/VERIFY",
+    "sources": "backend/auth_api/ndsp_user_login_gateway.cjs|backend/ndsp_user_login_gateway.cjs",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-E851A39B70C0258B",
+    "candidate_count": 3,
+    "capability_ids": "CAP-2ED357832A3E|CAP-3F820FC0AC86|CAP-E73BB362CCA6",
+    "capability_names": "Ndsp User Login Gateway|Ndsp User Portal Final Experience V1 One Script",
+    "endpoint_contracts": "GET /API/AUTH/SESSION",
+    "sources": "NDSP_USER_PORTAL_FINAL_EXPERIENCE_V1_ONE_SCRIPT.sh|backend/auth_api/ndsp_user_login_gateway.cjs|backend/ndsp_user_login_gateway.cjs",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-E95A56A8E3519D6A",
+    "candidate_count": 2,
+    "capability_ids": "CAP-2D0CFB1BC505|CAP-3B516BFCFA39",
+    "capability_names": "Ndsp User Login Gateway",
+    "endpoint_contracts": "GET /API/AUTH/2FA/STATUS",
+    "sources": "backend/auth_api/ndsp_user_login_gateway.cjs|backend/ndsp_user_login_gateway.cjs",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-EDC8A6285AD42668",
+    "candidate_count": 2,
+    "capability_ids": "CAP-15C56B60B4B0|CAP-1AF6F47DC3CE",
+    "capability_names": "Ndsp User Login Gateway",
+    "endpoint_contracts": "POST /API/AUTH/LOGOUT",
+    "sources": "backend/auth_api/ndsp_user_login_gateway.cjs|backend/ndsp_user_login_gateway.cjs",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-F3A2BBEC8AF03293",
+    "candidate_count": 1,
+    "capability_ids": "CAP-8BCDCDA9FCED",
+    "capability_names": "Frontend Contract",
+    "endpoint_contracts": "GET /ME/ALERT-PREFS",
+    "sources": "backend/app/api/v1/frontend_contract.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-F62343BD134E1900",
+    "candidate_count": 2,
+    "capability_ids": "CAP-A61CF5BBAA01|CAP-F1EB25BD9898",
+    "capability_names": "Ndsp Admin Ui Proxy",
+    "endpoint_contracts": "POST /API/ADMIN-UI/ALERTS/CHANNEL",
+    "sources": "backend/auth_api/ndsp_admin_ui_proxy.cjs|backend/ndsp_admin_ui_proxy.cjs",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-F6326AB20CA7039F",
+    "candidate_count": 2,
+    "capability_ids": "CAP-0D4E2C940F8F|CAP-622CD214F034",
+    "capability_names": "Ndsp Admin Ui Proxy",
+    "endpoint_contracts": "GET /API/ADMIN-UI/BACKUPS",
+    "sources": "backend/auth_api/ndsp_admin_ui_proxy.cjs|backend/ndsp_admin_ui_proxy.cjs",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-F9493910881613CF",
+    "candidate_count": 1,
+    "capability_ids": "CAP-F0AA44F7E81A",
+    "capability_names": "Frontend Contract",
+    "endpoint_contracts": "PUT /ME/ALERT-PREFS",
+    "sources": "backend/app/api/v1/frontend_contract.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-FBE574887ED479BC",
+    "candidate_count": 1,
+    "capability_ids": "CAP-C514A0947E28",
+    "capability_names": "Frontend Contract",
+    "endpoint_contracts": "GET /ME/SUBSCRIPTION",
+    "sources": "backend/app/api/v1/frontend_contract.py",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-FDBEF33E2C765F1C",
+    "candidate_count": 1,
+    "capability_ids": "CAP-AD97D3157EBD",
+    "capability_names": "Ndsp User Portal Final Experience V1 One Script",
+    "endpoint_contracts": "POST /API/USER/SURVEY",
+    "sources": "NDSP_USER_PORTAL_FINAL_EXPERIENCE_V1_ONE_SCRIPT.sh",
+    "deduplication_status": "UNIQUE"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-FDFBE9985B5F63E6",
+    "candidate_count": 22,
+    "capability_ids": "CAP-235EF538DEF9|CAP-367A94FB6D59|CAP-38A2585A38E0|CAP-3FBDCF7CE0E5|CAP-531AC9AE3E7D|CAP-538062400EBA|CAP-606E55E95DA2|CAP-63C8FEAE8B5B|CAP-6B7418516628|CAP-75CF22E0AFA6|CAP-798893D4D6E0|CAP-81A7994FF55D|CAP-8CF3F7EFFA7B|CAP-968B626DE9C3|CAP-A069C614B1B1|CAP-B742DDE3B851|CAP-BE68902B1F61|CAP-D2D57F714E79|CAP-DA1498962CCC|CAP-E739D717BE35|CAP-ED7AC36DD2F2|CAP-F8EDAA44375A",
+    "capability_names": "Account Trial|Admin Health|Admin Layers|Admin Payment Approve|Admin Payment Reject|Admin Payments|Admin Registration Decision|Admin Registrations|Admin Trials|Alert Prefs Payload|Asset Decision|Auth 2Fa Verify|Auth Forgot|Auth Login|Auth Magic Link|Auth Magic Link Verify|Auth Register|Auth Reset|Get Alert Prefs|Markets|Me Subscription|Put Alert Prefs",
+    "endpoint_contracts": "DELETE /ME/WATCHLIST/{ASSET_ID}|GET /ACCOUNT/TRIAL|GET /ADMIN/HEALTH|GET /ADMIN/LAYERS|GET /ADMIN/PAYMENTS|GET /ADMIN/REGISTRATIONS|GET /ADMIN/TRIALS|GET /ASSETS|GET /ASSETS/{ASSET_ID}/CHART|GET /ASSETS/{ASSET_ID}/DECISION|GET /AUTH/MAGIC-LINK/VERIFY|GET /BRIEF/TODAY|GET /CONTRACT/STATUS|GET /MARKETS|GET /ME/ALERT-PREFS|GET /ME/DASHBOARD|GET /ME/ENTITLEMENTS|GET /ME/SUBSCRIPTION|GET /ME/WATCHLIST|GET /PACKAGES|POST /ACCOUNT/ACTIVATE|POST /ADMIN/PAYMENTS/{PAYMENT_ID}/APPROVE|POST /ADMIN/PAYMENTS/{PAYMENT_ID}/REJECT|POST /ADMIN/REGISTRATIONS/{REGISTRATION_ID}/DECISION|POST /AUTH/2FA/VERIFY|POST /AUTH/FORGOT|POST /AUTH/LOGIN|POST /AUTH/MAGIC-LINK|POST /AUTH/REGISTER|POST /AUTH/RESET|POST /ME/CHANNELS/EMAIL/TEST|POST /ME/CHANNELS/TELEGRAM/LINK|POST /ME/CHANNELS/TELEGRAM/VERIFY|POST /ME/WATCHLIST|POST /PAYMENTS/CHECKOUT|POST /PAYMENTS/WEBHOOK|PUT /ME/ALERT-PREFS",
+    "sources": "backend/app/api/v1/frontend_contract.py",
+    "deduplication_status": "SEMANTIC_DUPLICATES_RETAINED"
+  },
+  {
+    "semantic_cluster_id": "CLUSTER-FFA7F6F8B9033F4B",
+    "candidate_count": 1,
+    "capability_ids": "CAP-DBE4CDD3AB94",
+    "capability_names": "Ndsp Nowpayments",
+    "endpoint_contracts": "GET /NOWPAYMENTS/HEALTH",
+    "sources": "backend/ndsp_nowpayments.cjs",
+    "deduplication_status": "UNIQUE"
+  }
+]

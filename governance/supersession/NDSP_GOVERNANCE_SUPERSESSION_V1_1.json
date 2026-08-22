@@ -1,0 +1,44 @@
+{
+  "document_id": "NDSP-GOVERNANCE-SUPERSESSION-001",
+  "version": "1.1.0",
+  "status": "CANONICAL_PRECEDENCE_WITH_COMPATIBILITY",
+  "rule": "Legacy governance remains physically present until every runtime and build consumer is proven and migrated.",
+  "canonical_entrypoint": "governance/CANONICAL_GOVERNANCE.md",
+  "canonical_directory": "governance/canonical-v1",
+  "legacy_paths": [
+    {
+      "path": "governance/NDSP_FINAL_GOVERNANCE_ALL_POLICIES_LOCKED.json",
+      "status": "SUPERSEDED_BY_PRECEDENCE_NOT_REMOVED"
+    },
+    {
+      "path": "docs/02-architecture/core/NDSP_16_LAYER_CORE_AND_FUTURE_INTEGRATION_BLUEPRINT_AR.md",
+      "status": "SUPERSEDED_BY_PRECEDENCE_NOT_REMOVED"
+    },
+    {
+      "path": "docs/02-architecture/core/NDSP_16_LAYER_CORE_AND_FUTURE_INTEGRATION_BLUEPRINT_EN.md",
+      "status": "SUPERSEDED_BY_PRECEDENCE_NOT_REMOVED"
+    },
+    {
+      "path": "docs/03-contracts/NDSP_16_LAYER_CORE_REGISTRY_V1.json",
+      "status": "SUPERSEDED_BY_PRECEDENCE_NOT_REMOVED"
+    },
+    {
+      "path": "NDSP_16_LAYER_CORE_INTEGRATION_PIN.md",
+      "status": "SUPERSEDED_BY_PRECEDENCE_NOT_REMOVED"
+    },
+    {
+      "path": "NDSP_FINAL_FRONTEND_GOVERNANCE_LOCK_V1.md",
+      "status": "SUPERSEDED_BY_PRECEDENCE_NOT_REMOVED"
+    },
+    {
+      "path": "NDSP_FINAL_FRONTEND_GOVERNANCE_LOCK_V1(1).md",
+      "status": "SUPERSEDED_BY_PRECEDENCE_NOT_REMOVED"
+    }
+  ],
+  "forbidden_actions": [
+    "DELETE_OR_MOVE_LEGACY_WITHOUT_DEPENDENCY_PROOF",
+    "REMOVE_RUNTIME_GOVERNANCE_CODE_BY_FILENAME",
+    "BREAK_TRACKED_PATHS",
+    "EDIT_LIVE_RUNTIME_AS_PART_OF_DOCUMENT_CONSOLIDATION"
+  ]
+}

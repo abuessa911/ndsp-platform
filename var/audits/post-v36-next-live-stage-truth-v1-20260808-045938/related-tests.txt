@@ -1,0 +1,1 @@
+/home/nawaf511/empire-core-new/backend/tests/contracts/test_v201_weekly_direction_handoff.py

@@ -1,0 +1,41 @@
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_canonical_live_runtime_v30.py:640:        "decision_layers": public_layers,
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v200_score_inputs.py:375:    layers = payload.get("decision_layers")
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v200_score_inputs.py:400:        "source_paths": [f"decision_layers[{layer_id}].score"],
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v200_score_inputs.py:424:def attach_v200_score_inputs(
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v200_score_inputs.py:506:        "tdl": tdl.get("alignment_score"),
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v200_score_inputs.py:537:        "tdl": tdl,
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_quality_live_nmp_wrapper.py:3:from backend.app.runtime.ndsp_v200_score_inputs import attach_v200_score_inputs as _ndsp_attach_v200_score_inputs_v200
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_quality_live_nmp_wrapper.py:7:    attach_v202_commercial_score as _ndsp_attach_v202_commercial_score,
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_quality_live_nmp_wrapper.py:586:from backend.app.runtime.ndsp_public_governance_projection_v1 import attach_governance_projection as _ndsp_attach_governance_projection_v26
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_quality_live_nmp_wrapper.py:589:    return _ndsp_attach_governance_projection_v26(_ndsp_enrich_with_nmp_before_governance_v26(*args, **kwargs))
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_quality_live_nmp_wrapper.py:642:            data = _ndsp_attach_v200_score_inputs_v200(
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_quality_live_nmp_wrapper.py:648:            data = _ndsp_attach_v202_commercial_score(
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v201_launch_completion.py:102:    layers = data.get("decision_layers")
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v201_launch_completion.py:402:def attach_v202_commercial_score(
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v201_launch_completion.py:437:    tdl_block = score_inputs.get("tdl") if isinstance(score_inputs.get("tdl"), Mapping) else {}
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v201_launch_completion.py:468:        "tdl": tdl,
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v201_launch_completion.py:478:        "tdl": 0.25,
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v201_launch_completion.py:492:    capabilities = data.get("platform_capabilities")
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v201_launch_completion.py:494:    layer_count = len(data.get("decision_layers")) if isinstance(data.get("decision_layers"), list) else 0
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_quality_live_golden_wrapper.py:75:def load_runtime_golden(symbol):
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_quality_live_golden_wrapper.py:126:    runtime = load_runtime_golden(symbol)
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_public_governance_projection_v1.py:17:    "schema_contract_registry": "سجل عقود المخطط", "data_quality_gate": "بوابة جودة البيانات",
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_public_governance_projection_v1.py:143:def attach_governance_projection(payload: Any) -> Any:
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_public_governance_projection_v1.py:189:        payload["decision_layers"] = layers
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_public_governance_projection_v1.py:190:        payload["platform_capabilities"] = capabilities
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_evidence_v35.py:47:    for item in response.get("decision_layers") or []:
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_evidence_v35.py:57:    for item in response.get("decision_layers") or []:
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_evidence_v35.py:153:        for item in response.get("decision_layers") or []
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_evidence_v35.py:219:            for item in response.get("decision_layers") or []
+/home/nawaf511/empire-core-new/backend/platform/runtime/capability_runtime_controller_v1.py:22:    "data_quality_gate": "backend.data_foundation.canonical_v1.data_quality_gate",
+/home/nawaf511/empire-core-new/backend/platform/runtime/capability_runtime_controller_v1.py:26:    "freshness_release_calendar_governor": "backend.data_foundation.canonical_v1.data_quality_gate",
+/home/nawaf511/empire-core-new/backend/platform/runtime/capability_runtime_controller_v1.py:121:def run_functional_probe(name: str, project: Path) -> tuple[bool, str]:
+/home/nawaf511/empire-core-new/backend/platform/runtime/capability_runtime_controller_v1.py:136:    if name == "data_quality_gate":
+/home/nawaf511/empire-core-new/backend/platform/runtime/capability_runtime_controller_v1.py:137:        result = module.evaluate_data_quality(
+/home/nawaf511/empire-core-new/backend/platform/runtime/capability_runtime_controller_v1.py:155:        result = module.evaluate_data_quality(asset_identity={"ok": True}, source_identity={"ok": True}, contract_status={"ok": True}, freshness_status="EXPECTED_NOT_YET_DUE", completeness=True, integrity=True)
+/home/nawaf511/empire-core-new/backend/platform/runtime/capability_runtime_controller_v1.py:253:def binding_for(name: str, context: dict[str, Any]) -> tuple[str, str, list[str], str]:
+/home/nawaf511/empire-core-new/backend/platform/runtime/capability_runtime_controller_v1.py:258:    if name == "access_visibility_governance" and context.get("bridge_status") == 200 and len(bridge.get("decision_layers") or []) == 16:
+/home/nawaf511/empire-core-new/backend/platform/runtime/capability_runtime_controller_v1.py:270:    if name == "data_quality_gate" and api.get("ok") is True and api.get("live_price_bound") is True:
+/home/nawaf511/empire-core-new/backend/platform/runtime/capability_runtime_controller_v1.py:308:                probe_ok, probe_detail = run_functional_probe(name, project)
+/home/nawaf511/empire-core-new/backend/platform/runtime/capability_runtime_controller_v1.py:318:            state, binding, blockers, strength = binding_for(name, context)
+/home/nawaf511/empire-core-new/backend/data_foundation/canonical_v1/data_quality_gate.py:4:def evaluate_data_quality(*, asset_identity, source_identity, contract_status,

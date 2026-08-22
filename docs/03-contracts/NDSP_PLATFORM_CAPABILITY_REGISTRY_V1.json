@@ -1,0 +1,347 @@
+{
+  "registry_id": "NDSP-PLATFORM-CAPABILITY-REGISTRY-V1",
+  "version": "1.0.0",
+  "governing_rule": "Platform capabilities must never use NDSP-CORE-L identifiers.",
+  "decision_layer_registry": "docs/03-contracts/NDSP_16_LAYER_CORE_REGISTRY_V1.json",
+  "capabilities": [
+    {
+      "capability_id": "NDSP-CAP-001",
+      "canonical_name": "asset_master_registry",
+      "domain": "data_foundation",
+      "criticality": "critical",
+      "decision_authority": false,
+      "fail_policy": "fail_closed",
+      "dependencies": [],
+      "implementation_status": "SCAFFOLDED_NOT_LIVE"
+    },
+    {
+      "capability_id": "NDSP-CAP-002",
+      "canonical_name": "source_registry",
+      "domain": "data_foundation",
+      "criticality": "critical",
+      "decision_authority": false,
+      "fail_policy": "fail_closed",
+      "dependencies": [],
+      "implementation_status": "SCAFFOLDED_NOT_LIVE"
+    },
+    {
+      "capability_id": "NDSP-CAP-003",
+      "canonical_name": "schema_contract_registry",
+      "domain": "contracts",
+      "criticality": "critical",
+      "decision_authority": false,
+      "fail_policy": "fail_closed",
+      "dependencies": [],
+      "implementation_status": "SCAFFOLDED_NOT_LIVE"
+    },
+    {
+      "capability_id": "NDSP-CAP-004",
+      "canonical_name": "data_quality_gate",
+      "domain": "data_foundation",
+      "criticality": "critical",
+      "decision_authority": false,
+      "fail_policy": "fail_closed",
+      "dependencies": [
+        "NDSP-CAP-001",
+        "NDSP-CAP-002",
+        "NDSP-CAP-003"
+      ],
+      "implementation_status": "SCAFFOLDED_NOT_LIVE"
+    },
+    {
+      "capability_id": "NDSP-CAP-005",
+      "canonical_name": "provider_reconciliation",
+      "domain": "data_foundation",
+      "criticality": "critical",
+      "decision_authority": false,
+      "fail_policy": "fail_closed",
+      "dependencies": [
+        "NDSP-CAP-002",
+        "NDSP-CAP-004"
+      ],
+      "implementation_status": "SCAFFOLDED_NOT_LIVE"
+    },
+    {
+      "capability_id": "NDSP-CAP-006",
+      "canonical_name": "raw_snapshot_storage",
+      "domain": "data_foundation",
+      "criticality": "critical",
+      "decision_authority": false,
+      "fail_policy": "fail_closed",
+      "dependencies": [
+        "NDSP-CAP-002"
+      ],
+      "implementation_status": "SCAFFOLDED_NOT_LIVE"
+    },
+    {
+      "capability_id": "NDSP-CAP-007",
+      "canonical_name": "canonical_accepted_snapshot_store",
+      "domain": "data_foundation",
+      "criticality": "critical",
+      "decision_authority": false,
+      "fail_policy": "fail_closed",
+      "dependencies": [
+        "NDSP-CAP-004",
+        "NDSP-CAP-005",
+        "NDSP-CAP-006"
+      ],
+      "implementation_status": "SCAFFOLDED_NOT_LIVE"
+    },
+    {
+      "capability_id": "NDSP-CAP-008",
+      "canonical_name": "freshness_release_calendar_governor",
+      "domain": "data_foundation",
+      "criticality": "critical",
+      "decision_authority": false,
+      "fail_policy": "fail_closed",
+      "dependencies": [
+        "NDSP-CAP-002"
+      ],
+      "implementation_status": "SCAFFOLDED_NOT_LIVE"
+    },
+    {
+      "capability_id": "NDSP-CAP-009",
+      "canonical_name": "data_lineage",
+      "domain": "evidence",
+      "criticality": "critical",
+      "decision_authority": false,
+      "fail_policy": "fail_closed",
+      "dependencies": [
+        "NDSP-CAP-006",
+        "NDSP-CAP-007"
+      ],
+      "implementation_status": "SCAFFOLDED_NOT_LIVE"
+    },
+    {
+      "capability_id": "NDSP-CAP-010",
+      "canonical_name": "decision_evidence_ledger",
+      "domain": "evidence",
+      "criticality": "critical",
+      "decision_authority": false,
+      "fail_policy": "fail_closed",
+      "dependencies": [
+        "NDSP-CAP-009"
+      ],
+      "implementation_status": "SCAFFOLDED_NOT_LIVE"
+    },
+    {
+      "capability_id": "NDSP-CAP-011",
+      "canonical_name": "engine_model_policy_version_registry",
+      "domain": "governance",
+      "criticality": "critical",
+      "decision_authority": false,
+      "fail_policy": "fail_closed",
+      "dependencies": [
+        "NDSP-CAP-003"
+      ],
+      "implementation_status": "SCAFFOLDED_NOT_LIVE"
+    },
+    {
+      "capability_id": "NDSP-CAP-012",
+      "canonical_name": "historical_replay_lab",
+      "domain": "simulation",
+      "criticality": "high",
+      "decision_authority": false,
+      "fail_policy": "simulation_only",
+      "dependencies": [
+        "NDSP-CAP-006",
+        "NDSP-CAP-009",
+        "NDSP-CAP-011"
+      ],
+      "implementation_status": "SCAFFOLDED_NOT_LIVE"
+    },
+    {
+      "capability_id": "NDSP-CAP-013",
+      "canonical_name": "opentelemetry_observability",
+      "domain": "observability",
+      "criticality": "high",
+      "decision_authority": false,
+      "fail_policy": "degrade_with_alert",
+      "dependencies": [],
+      "implementation_status": "SCAFFOLDED_NOT_LIVE"
+    },
+    {
+      "capability_id": "NDSP-CAP-014",
+      "canonical_name": "news_narrative_context_engine",
+      "domain": "intelligence",
+      "criticality": "high",
+      "decision_authority": false,
+      "fail_policy": "monitoring_only",
+      "dependencies": [
+        "NDSP-CAP-001",
+        "NDSP-CAP-002"
+      ],
+      "implementation_status": "SCAFFOLDED_NOT_LIVE"
+    },
+    {
+      "capability_id": "NDSP-CAP-015",
+      "canonical_name": "economic_events_market_calendar_engine",
+      "domain": "intelligence",
+      "criticality": "critical",
+      "decision_authority": false,
+      "fail_policy": "fail_closed_for_event_windows",
+      "dependencies": [
+        "NDSP-CAP-001",
+        "NDSP-CAP-002",
+        "NDSP-CAP-008"
+      ],
+      "implementation_status": "SCAFFOLDED_NOT_LIVE"
+    },
+    {
+      "capability_id": "NDSP-CAP-016",
+      "canonical_name": "cross_layer_conflict_engine",
+      "domain": "orchestration",
+      "criticality": "critical",
+      "decision_authority": false,
+      "fail_policy": "fail_closed",
+      "dependencies": [
+        "NDSP-CAP-003"
+      ],
+      "implementation_status": "SCAFFOLDED_NOT_LIVE"
+    },
+    {
+      "capability_id": "NDSP-CAP-017",
+      "canonical_name": "decision_explainability",
+      "domain": "explainability",
+      "criticality": "high",
+      "decision_authority": false,
+      "fail_policy": "degrade_with_alert",
+      "dependencies": [
+        "NDSP-CAP-003"
+      ],
+      "implementation_status": "SCAFFOLDED_NOT_LIVE"
+    },
+    {
+      "capability_id": "NDSP-CAP-018",
+      "canonical_name": "decision_evaluation",
+      "domain": "evaluation",
+      "criticality": "high",
+      "decision_authority": false,
+      "fail_policy": "post_decision_only",
+      "dependencies": [
+        "NDSP-CAP-009",
+        "NDSP-CAP-010"
+      ],
+      "implementation_status": "SCAFFOLDED_NOT_LIVE"
+    },
+    {
+      "capability_id": "NDSP-CAP-019",
+      "canonical_name": "cross_asset_influence_transmission",
+      "domain": "intelligence",
+      "criticality": "high",
+      "decision_authority": false,
+      "fail_policy": "context_only",
+      "dependencies": [
+        "NDSP-CAP-001",
+        "NDSP-CAP-007"
+      ],
+      "implementation_status": "SCAFFOLDED_NOT_LIVE"
+    },
+    {
+      "capability_id": "NDSP-CAP-020",
+      "canonical_name": "scenario_simulation",
+      "domain": "simulation",
+      "criticality": "high",
+      "decision_authority": false,
+      "fail_policy": "simulation_only",
+      "dependencies": [
+        "NDSP-CAP-007",
+        "NDSP-CAP-011"
+      ],
+      "implementation_status": "SCAFFOLDED_NOT_LIVE"
+    },
+    {
+      "capability_id": "NDSP-CAP-021",
+      "canonical_name": "personalized_experience",
+      "domain": "product",
+      "criticality": "medium",
+      "decision_authority": false,
+      "fail_policy": "presentation_only",
+      "dependencies": [],
+      "implementation_status": "SCAFFOLDED_NOT_LIVE"
+    },
+    {
+      "capability_id": "NDSP-CAP-022",
+      "canonical_name": "access_visibility_governance",
+      "domain": "access",
+      "criticality": "critical",
+      "decision_authority": false,
+      "fail_policy": "fail_closed",
+      "dependencies": [
+        "NDSP-CAP-003"
+      ],
+      "implementation_status": "SCAFFOLDED_NOT_LIVE"
+    },
+    {
+      "capability_id": "NDSP-CAP-023",
+      "canonical_name": "external_integration_gateway",
+      "domain": "integrations",
+      "criticality": "critical",
+      "decision_authority": false,
+      "fail_policy": "fail_closed",
+      "dependencies": [
+        "NDSP-CAP-003",
+        "NDSP-CAP-022"
+      ],
+      "implementation_status": "SCAFFOLDED_NOT_LIVE"
+    },
+    {
+      "capability_id": "NDSP-CAP-024",
+      "canonical_name": "commercial_entitlements_billing",
+      "domain": "commercial",
+      "criticality": "high",
+      "decision_authority": false,
+      "fail_policy": "fail_closed_for_paid_features",
+      "dependencies": [
+        "NDSP-CAP-022"
+      ],
+      "implementation_status": "SCAFFOLDED_NOT_LIVE"
+    },
+    {
+      "capability_id": "NDSP-CAP-025",
+      "canonical_name": "identity_authentication_authorization",
+      "domain": "access",
+      "criticality": "critical",
+      "decision_authority": false,
+      "fail_policy": "fail_closed",
+      "dependencies": [],
+      "implementation_status": "SCAFFOLDED_NOT_LIVE"
+    },
+    {
+      "capability_id": "NDSP-CAP-026",
+      "canonical_name": "security_secrets_key_management",
+      "domain": "security",
+      "criticality": "critical",
+      "decision_authority": false,
+      "fail_policy": "fail_closed",
+      "dependencies": [],
+      "implementation_status": "SCAFFOLDED_NOT_LIVE"
+    },
+    {
+      "capability_id": "NDSP-CAP-027",
+      "canonical_name": "backup_recovery_disaster_governance",
+      "domain": "operations",
+      "criticality": "critical",
+      "decision_authority": false,
+      "fail_policy": "fail_closed",
+      "dependencies": [
+        "NDSP-CAP-006",
+        "NDSP-CAP-010"
+      ],
+      "implementation_status": "SCAFFOLDED_NOT_LIVE"
+    },
+    {
+      "capability_id": "NDSP-CAP-028",
+      "canonical_name": "workflow_scheduler_event_bus",
+      "domain": "operations",
+      "criticality": "critical",
+      "decision_authority": false,
+      "fail_policy": "fail_closed",
+      "dependencies": [
+        "NDSP-CAP-003",
+        "NDSP-CAP-013"
+      ],
+      "implementation_status": "SCAFFOLDED_NOT_LIVE"
+    }
+  ]
+}

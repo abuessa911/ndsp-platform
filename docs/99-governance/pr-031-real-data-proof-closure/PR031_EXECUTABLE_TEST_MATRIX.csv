@@ -1,0 +1,3 @@
+capability_id,capability_name,closure_state,data_source,data_state,endpoint,connector_evidence,payload_sha256,payload_bytes,root_item_count,remaining_missing_evidence
+CAP-4FF90CCC6DFE,Tdl V2 Policy Admin,REMAINS_OPEN,UNKNOWN,UNKNOWN,,backend/tests/pr028-quick-wins-contracts.test.cjs,,0,0,REAL_DATA
+CAP-8A9DD9B6E7D5,Tdl V2 Policy Admin,REMAINS_OPEN,UNKNOWN,UNKNOWN,,backend/tests/pr028-quick-wins-contracts.test.cjs,,0,0,REAL_DATA

@@ -41,7 +41,7 @@ const app = express();
 
 /* NDSP_TRIAL_INFO_START */
 try {
-  const { installTrialInfo } = require('/home/nawaf511/empire-core-new/backend/auth_api/ndsp_trial_info.cjs');
+  const { installTrialInfo } = require('/home/nawaf511/ndsp-current/backend/auth_api/ndsp_trial_info.cjs');
   installTrialInfo(app);
 } catch (e) {
   console.error('⚠️ NDSP trial info skipped:', e.message);
@@ -51,7 +51,7 @@ try {
 
 /* NDSP_NOWPAYMENTS_START */
 try {
-  const { installNowPayments } = require('/home/nawaf511/empire-core-new/backend/auth_api/ndsp_nowpayments.cjs');
+  const { installNowPayments } = require('/home/nawaf511/ndsp-current/backend/auth_api/ndsp_nowpayments.cjs');
   installNowPayments(app);
 } catch (e) {
   console.error('❌ NDSP NOWPayments failed:', e);
@@ -66,7 +66,7 @@ try {
 
 /* NDSP_DEVICE_GUARD_START */
 try {
-  const { installDeviceRegistrationGuard } = require('/home/nawaf511/empire-core-new/backend/auth_api/ndsp_device_guard.cjs');
+  const { installDeviceRegistrationGuard } = require('/home/nawaf511/ndsp-current/backend/auth_api/ndsp_device_guard.cjs');
   installDeviceRegistrationGuard(app);
 } catch (e) {
   console.error('❌ NDSP device guard failed:', e);
@@ -77,7 +77,7 @@ try {
 
 /* NDSP_ADMIN_EXTENSION_START */
 try {
-  const { installNdspAdminExtension } = require('/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_extension.cjs');
+  const { installNdspAdminExtension } = require('/home/nawaf511/ndsp-current/backend/auth_api/ndsp_admin_extension.cjs');
   installNdspAdminExtension(app);
   console.log('✅ NDSP admin extension mounted early');
 } catch (e) {
@@ -996,7 +996,7 @@ function ndspReadAdminActionKey() {
 
 function ndspRunExporter() {
   try {
-    execFile('/usr/bin/python3', ['/usr/local/bin/ndsp_export_admin_users_json.py'], { timeout: 15000 }, () => {})
+    execFile('/usr/bin/python3', ['/home/nawaf511/ndsp-current/backend/services/ndsp-runtime-jobs/ndsp_export_admin_users_json.py'], { timeout: 15000 }, () => {})
   } catch (e) {}
 }
 
@@ -1192,7 +1192,7 @@ function ndspReadEnvFileSafe(path) {
 ndspReadEnvFileSafe('/etc/ndsp/ndsp-telegram.env');
 ndspReadEnvFileSafe('/etc/ndsp/ndsp-telegram-routing.env');
 ndspReadEnvFileSafe('/etc/ndsp/ndsp-db.env');
-ndspReadEnvFileSafe('/home/nawaf511/empire-core-new/backend/.env');
+ndspReadEnvFileSafe('/home/nawaf511/.config/ndsp/backend.env');
 
 function ndspAdminKeyFromReq(req) {
   const auth = req.headers.authorization || '';

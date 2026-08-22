@@ -1,0 +1,7 @@
+$ docker ps -a --no-trunc
+
+CONTAINER ID                                                       IMAGE                       COMMAND                                                      CREATED        STATUS                     PORTS                                         NAMES
+8a25b134d35779d4e501e42ed822674f2937cc54250d02fc43a41bc51a2e2a5c   ndsp-binance-bot-frontend   "docker-entrypoint.sh npm run start"                         6 weeks ago    Exited (255) 5 weeks ago   127.0.0.1:3010->3000/tcp                      ndsp_trading_frontend
+95e85833460b7a56f0c7431451d0770293bc5b26a642b2912ea887b9a913eade   ndsp-binance-bot-api        "uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"   6 weeks ago    Exited (255) 5 weeks ago   127.0.0.1:8000->8000/tcp                      ndsp_trading_api
+fe8a964c46fdbf5dc9105a8689ec46eaf81c51819c362de1c22caa1309f593b3   postgres:16                 "docker-entrypoint.sh postgres"                              2 months ago   Exited (255) 5 weeks ago   5432/tcp                                      ndsp_trading_postgres
+f1cd005aa4d48a8990a5e55950e350d693efb9265bed246c3fd7280754892b27   postgres:16                 "docker-entrypoint.sh postgres"                              3 months ago   Up 3 days (healthy)        0.0.0.0:5433->5432/tcp, [::]:5433->5432/tcp   ndip_postgres

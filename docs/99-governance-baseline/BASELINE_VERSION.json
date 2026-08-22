@@ -1,0 +1,10 @@
+{
+  "baseline_id": "NDSP-GOLDEN-BASELINE-1.0.0",
+  "generated_at": "2026-07-12T18:11:36+02:00",
+  "status": "CERTIFIED",
+  "quality_failures": 0,
+  "quality_warnings": 0,
+  "decision_layer_count": 16,
+  "platform_capability_count": 28,
+  "certification_engine": "enterprise-governance-v1.1-resume"
+}

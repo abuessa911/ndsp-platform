@@ -1,0 +1,2063 @@
+{
+  "registry_id": "NDSP-ASSET-MASTER-REGISTRY-V1",
+  "version": "1.2.0",
+  "generated_for_release": "NDSP-ASSET-MULTI-PROVIDER-BIND-V32",
+  "identity_rule": "All provider symbols must resolve to one internal_asset_id before entering decision layers.",
+  "public_contract_rule": "decision_symbol is the stable public symbol; provider symbols remain backend-only routing metadata. Public consumers receive provider identity, priority and runtime status only.",
+  "asset_count": 56,
+  "assets": [
+    {
+      "internal_asset_id": "NDSP:CRYPTO:BTC:USD",
+      "canonical_symbol": "BTCUSD",
+      "decision_symbol": "BTCUSDT",
+      "display_names": {
+        "ar": "بيتكوين",
+        "en": "Bitcoin / US Dollar"
+      },
+      "asset_class": "crypto",
+      "group": "crypto",
+      "base_asset": "BTC",
+      "quote_asset": "USD",
+      "aliases": [
+        "BTC-USD",
+        "BTC/USD",
+        "BTC/USDT",
+        "BTCUSD",
+        "BTCUSDT",
+        "XBT/USD",
+        "XBTUSD"
+      ],
+      "provider_symbols": {
+        "binance": "BTCUSDT",
+        "yahoo": "BTC-USD"
+      },
+      "provider_priority": [
+        "binance",
+        "yahoo"
+      ],
+      "provider_scopes": {
+        "binance": "intraday_and_daily",
+        "yahoo": "intraday_and_daily_fallback"
+      },
+      "cot_mapping": null,
+      "sessions": [
+        "24x7"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:CRYPTO:ETH:USD",
+      "canonical_symbol": "ETHUSD",
+      "decision_symbol": "ETHUSDT",
+      "display_names": {
+        "ar": "إيثريوم",
+        "en": "Ethereum / US Dollar"
+      },
+      "asset_class": "crypto",
+      "group": "crypto",
+      "base_asset": "ETH",
+      "quote_asset": "USD",
+      "aliases": [
+        "ETH-USD",
+        "ETH/USD",
+        "ETH/USDT",
+        "ETHUSD",
+        "ETHUSDT"
+      ],
+      "provider_symbols": {
+        "binance": "ETHUSDT",
+        "yahoo": "ETH-USD"
+      },
+      "provider_priority": [
+        "binance",
+        "yahoo"
+      ],
+      "provider_scopes": {
+        "binance": "intraday_and_daily",
+        "yahoo": "intraday_and_daily_fallback"
+      },
+      "cot_mapping": null,
+      "sessions": [
+        "24x7"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:CRYPTO:BNB:USD",
+      "canonical_symbol": "BNBUSD",
+      "decision_symbol": "BNBUSDT",
+      "display_names": {
+        "ar": "بي إن بي",
+        "en": "BNB / US Dollar"
+      },
+      "asset_class": "crypto",
+      "group": "crypto",
+      "base_asset": "BNB",
+      "quote_asset": "USD",
+      "aliases": [
+        "BNB-USD",
+        "BNB/USD",
+        "BNB/USDT",
+        "BNBUSD",
+        "BNBUSDT"
+      ],
+      "provider_symbols": {
+        "binance": "BNBUSDT",
+        "yahoo": "BNB-USD"
+      },
+      "provider_priority": [
+        "binance",
+        "yahoo"
+      ],
+      "provider_scopes": {
+        "binance": "intraday_and_daily",
+        "yahoo": "intraday_and_daily_fallback"
+      },
+      "cot_mapping": null,
+      "sessions": [
+        "24x7"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:CRYPTO:SOL:USD",
+      "canonical_symbol": "SOLUSD",
+      "decision_symbol": "SOLUSDT",
+      "display_names": {
+        "ar": "سولانا",
+        "en": "Solana / US Dollar"
+      },
+      "asset_class": "crypto",
+      "group": "crypto",
+      "base_asset": "SOL",
+      "quote_asset": "USD",
+      "aliases": [
+        "SOL-USD",
+        "SOL/USD",
+        "SOL/USDT",
+        "SOLUSD",
+        "SOLUSDT"
+      ],
+      "provider_symbols": {
+        "binance": "SOLUSDT",
+        "yahoo": "SOL-USD"
+      },
+      "provider_priority": [
+        "binance",
+        "yahoo"
+      ],
+      "provider_scopes": {
+        "binance": "intraday_and_daily",
+        "yahoo": "intraday_and_daily_fallback"
+      },
+      "cot_mapping": null,
+      "sessions": [
+        "24x7"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:CRYPTO:XRP:USD",
+      "canonical_symbol": "XRPUSD",
+      "decision_symbol": "XRPUSDT",
+      "display_names": {
+        "ar": "إكس آر بي",
+        "en": "XRP / US Dollar"
+      },
+      "asset_class": "crypto",
+      "group": "crypto",
+      "base_asset": "XRP",
+      "quote_asset": "USD",
+      "aliases": [
+        "XRP-USD",
+        "XRP/USD",
+        "XRP/USDT",
+        "XRPUSD",
+        "XRPUSDT"
+      ],
+      "provider_symbols": {
+        "binance": "XRPUSDT",
+        "yahoo": "XRP-USD"
+      },
+      "provider_priority": [
+        "binance",
+        "yahoo"
+      ],
+      "provider_scopes": {
+        "binance": "intraday_and_daily",
+        "yahoo": "intraday_and_daily_fallback"
+      },
+      "cot_mapping": null,
+      "sessions": [
+        "24x7"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:CRYPTO:ADA:USD",
+      "canonical_symbol": "ADAUSD",
+      "decision_symbol": "ADAUSDT",
+      "display_names": {
+        "ar": "كاردانو",
+        "en": "Cardano / US Dollar"
+      },
+      "asset_class": "crypto",
+      "group": "crypto",
+      "base_asset": "ADA",
+      "quote_asset": "USD",
+      "aliases": [
+        "ADA-USD",
+        "ADA/USD",
+        "ADA/USDT",
+        "ADAUSD",
+        "ADAUSDT"
+      ],
+      "provider_symbols": {
+        "binance": "ADAUSDT",
+        "yahoo": "ADA-USD"
+      },
+      "provider_priority": [
+        "binance",
+        "yahoo"
+      ],
+      "provider_scopes": {
+        "binance": "intraday_and_daily",
+        "yahoo": "intraday_and_daily_fallback"
+      },
+      "cot_mapping": null,
+      "sessions": [
+        "24x7"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:CRYPTO:AVAX:USD",
+      "canonical_symbol": "AVAXUSD",
+      "decision_symbol": "AVAXUSDT",
+      "display_names": {
+        "ar": "أفالانش",
+        "en": "Avalanche / US Dollar"
+      },
+      "asset_class": "crypto",
+      "group": "crypto",
+      "base_asset": "AVAX",
+      "quote_asset": "USD",
+      "aliases": [
+        "AVAX-USD",
+        "AVAX/USD",
+        "AVAX/USDT",
+        "AVAXUSD",
+        "AVAXUSDT"
+      ],
+      "provider_symbols": {
+        "binance": "AVAXUSDT",
+        "yahoo": "AVAX-USD"
+      },
+      "provider_priority": [
+        "binance",
+        "yahoo"
+      ],
+      "provider_scopes": {
+        "binance": "intraday_and_daily",
+        "yahoo": "intraday_and_daily_fallback"
+      },
+      "cot_mapping": null,
+      "sessions": [
+        "24x7"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:CRYPTO:LINK:USD",
+      "canonical_symbol": "LINKUSD",
+      "decision_symbol": "LINKUSDT",
+      "display_names": {
+        "ar": "تشين لينك",
+        "en": "Chainlink / US Dollar"
+      },
+      "asset_class": "crypto",
+      "group": "crypto",
+      "base_asset": "LINK",
+      "quote_asset": "USD",
+      "aliases": [
+        "LINK-USD",
+        "LINK/USD",
+        "LINK/USDT",
+        "LINKUSD",
+        "LINKUSDT"
+      ],
+      "provider_symbols": {
+        "binance": "LINKUSDT",
+        "yahoo": "LINK-USD"
+      },
+      "provider_priority": [
+        "binance",
+        "yahoo"
+      ],
+      "provider_scopes": {
+        "binance": "intraday_and_daily",
+        "yahoo": "intraday_and_daily_fallback"
+      },
+      "cot_mapping": null,
+      "sessions": [
+        "24x7"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:CRYPTO:DOGE:USD",
+      "canonical_symbol": "DOGEUSD",
+      "decision_symbol": "DOGEUSDT",
+      "display_names": {
+        "ar": "دوج كوين",
+        "en": "Dogecoin / US Dollar"
+      },
+      "asset_class": "crypto",
+      "group": "crypto",
+      "base_asset": "DOGE",
+      "quote_asset": "USD",
+      "aliases": [
+        "DOGE-USD",
+        "DOGE/USD",
+        "DOGE/USDT",
+        "DOGEUSD",
+        "DOGEUSDT"
+      ],
+      "provider_symbols": {
+        "binance": "DOGEUSDT",
+        "yahoo": "DOGE-USD"
+      },
+      "provider_priority": [
+        "binance",
+        "yahoo"
+      ],
+      "provider_scopes": {
+        "binance": "intraday_and_daily",
+        "yahoo": "intraday_and_daily_fallback"
+      },
+      "cot_mapping": null,
+      "sessions": [
+        "24x7"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:CRYPTO:TON:USD",
+      "canonical_symbol": "TONUSD",
+      "decision_symbol": "TONUSDT",
+      "display_names": {
+        "ar": "تون كوين",
+        "en": "Toncoin / US Dollar"
+      },
+      "asset_class": "crypto",
+      "group": "crypto",
+      "base_asset": "TON",
+      "quote_asset": "USD",
+      "aliases": [
+        "TON-USD",
+        "TON/USD",
+        "TON/USDT",
+        "TONUSD",
+        "TONUSDT"
+      ],
+      "provider_symbols": {
+        "binance": "TONUSDT",
+        "yahoo": "TON-USD"
+      },
+      "provider_priority": [
+        "binance",
+        "yahoo"
+      ],
+      "provider_scopes": {
+        "binance": "intraday_and_daily",
+        "yahoo": "intraday_and_daily_fallback"
+      },
+      "cot_mapping": null,
+      "sessions": [
+        "24x7"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:CRYPTO:AAVE:USD",
+      "canonical_symbol": "AAVEUSD",
+      "decision_symbol": "AAVEUSDT",
+      "display_names": {
+        "ar": "آيف",
+        "en": "Aave / US Dollar"
+      },
+      "asset_class": "crypto",
+      "group": "crypto",
+      "base_asset": "AAVE",
+      "quote_asset": "USD",
+      "aliases": [
+        "AAVE-USD",
+        "AAVE/USD",
+        "AAVE/USDT",
+        "AAVEUSD",
+        "AAVEUSDT"
+      ],
+      "provider_symbols": {
+        "binance": "AAVEUSDT",
+        "yahoo": "AAVE-USD"
+      },
+      "provider_priority": [
+        "binance",
+        "yahoo"
+      ],
+      "provider_scopes": {
+        "binance": "intraday_and_daily",
+        "yahoo": "intraday_and_daily_fallback"
+      },
+      "cot_mapping": null,
+      "sessions": [
+        "24x7"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:CRYPTO:APT:USD",
+      "canonical_symbol": "APTUSD",
+      "decision_symbol": "APTUSDT",
+      "display_names": {
+        "ar": "أبتوس",
+        "en": "Aptos / US Dollar"
+      },
+      "asset_class": "crypto",
+      "group": "crypto",
+      "base_asset": "APT",
+      "quote_asset": "USD",
+      "aliases": [
+        "APT-USD",
+        "APT/USD",
+        "APT/USDT",
+        "APTUSD",
+        "APTUSDT"
+      ],
+      "provider_symbols": {
+        "binance": "APTUSDT",
+        "yahoo": "APT-USD"
+      },
+      "provider_priority": [
+        "binance",
+        "yahoo"
+      ],
+      "provider_scopes": {
+        "binance": "intraday_and_daily",
+        "yahoo": "intraday_and_daily_fallback"
+      },
+      "cot_mapping": null,
+      "sessions": [
+        "24x7"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:CRYPTO:ARB:USD",
+      "canonical_symbol": "ARBUSD",
+      "decision_symbol": "ARBUSDT",
+      "display_names": {
+        "ar": "أربيتروم",
+        "en": "Arbitrum / US Dollar"
+      },
+      "asset_class": "crypto",
+      "group": "crypto",
+      "base_asset": "ARB",
+      "quote_asset": "USD",
+      "aliases": [
+        "ARB-USD",
+        "ARB/USD",
+        "ARB/USDT",
+        "ARBUSD",
+        "ARBUSDT"
+      ],
+      "provider_symbols": {
+        "binance": "ARBUSDT",
+        "yahoo": "ARB-USD"
+      },
+      "provider_priority": [
+        "binance",
+        "yahoo"
+      ],
+      "provider_scopes": {
+        "binance": "intraday_and_daily",
+        "yahoo": "intraday_and_daily_fallback"
+      },
+      "cot_mapping": null,
+      "sessions": [
+        "24x7"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:CRYPTO:ATOM:USD",
+      "canonical_symbol": "ATOMUSD",
+      "decision_symbol": "ATOMUSDT",
+      "display_names": {
+        "ar": "كوزموس",
+        "en": "Cosmos / US Dollar"
+      },
+      "asset_class": "crypto",
+      "group": "crypto",
+      "base_asset": "ATOM",
+      "quote_asset": "USD",
+      "aliases": [
+        "ATOM-USD",
+        "ATOM/USD",
+        "ATOM/USDT",
+        "ATOMUSD",
+        "ATOMUSDT"
+      ],
+      "provider_symbols": {
+        "binance": "ATOMUSDT",
+        "yahoo": "ATOM-USD"
+      },
+      "provider_priority": [
+        "binance",
+        "yahoo"
+      ],
+      "provider_scopes": {
+        "binance": "intraday_and_daily",
+        "yahoo": "intraday_and_daily_fallback"
+      },
+      "cot_mapping": null,
+      "sessions": [
+        "24x7"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:CRYPTO:BCH:USD",
+      "canonical_symbol": "BCHUSD",
+      "decision_symbol": "BCHUSDT",
+      "display_names": {
+        "ar": "بيتكوين كاش",
+        "en": "Bitcoin Cash / US Dollar"
+      },
+      "asset_class": "crypto",
+      "group": "crypto",
+      "base_asset": "BCH",
+      "quote_asset": "USD",
+      "aliases": [
+        "BCH-USD",
+        "BCH/USD",
+        "BCH/USDT",
+        "BCHUSD",
+        "BCHUSDT"
+      ],
+      "provider_symbols": {
+        "binance": "BCHUSDT",
+        "yahoo": "BCH-USD"
+      },
+      "provider_priority": [
+        "binance",
+        "yahoo"
+      ],
+      "provider_scopes": {
+        "binance": "intraday_and_daily",
+        "yahoo": "intraday_and_daily_fallback"
+      },
+      "cot_mapping": null,
+      "sessions": [
+        "24x7"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:CRYPTO:DOT:USD",
+      "canonical_symbol": "DOTUSD",
+      "decision_symbol": "DOTUSDT",
+      "display_names": {
+        "ar": "بولكادوت",
+        "en": "Polkadot / US Dollar"
+      },
+      "asset_class": "crypto",
+      "group": "crypto",
+      "base_asset": "DOT",
+      "quote_asset": "USD",
+      "aliases": [
+        "DOT-USD",
+        "DOT/USD",
+        "DOT/USDT",
+        "DOTUSD",
+        "DOTUSDT"
+      ],
+      "provider_symbols": {
+        "binance": "DOTUSDT",
+        "yahoo": "DOT-USD"
+      },
+      "provider_priority": [
+        "binance",
+        "yahoo"
+      ],
+      "provider_scopes": {
+        "binance": "intraday_and_daily",
+        "yahoo": "intraday_and_daily_fallback"
+      },
+      "cot_mapping": null,
+      "sessions": [
+        "24x7"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:CRYPTO:INJ:USD",
+      "canonical_symbol": "INJUSD",
+      "decision_symbol": "INJUSDT",
+      "display_names": {
+        "ar": "إنجكتيف",
+        "en": "Injective / US Dollar"
+      },
+      "asset_class": "crypto",
+      "group": "crypto",
+      "base_asset": "INJ",
+      "quote_asset": "USD",
+      "aliases": [
+        "INJ-USD",
+        "INJ/USD",
+        "INJ/USDT",
+        "INJUSD",
+        "INJUSDT"
+      ],
+      "provider_symbols": {
+        "binance": "INJUSDT",
+        "yahoo": "INJ-USD"
+      },
+      "provider_priority": [
+        "binance",
+        "yahoo"
+      ],
+      "provider_scopes": {
+        "binance": "intraday_and_daily",
+        "yahoo": "intraday_and_daily_fallback"
+      },
+      "cot_mapping": null,
+      "sessions": [
+        "24x7"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:CRYPTO:LTC:USD",
+      "canonical_symbol": "LTCUSD",
+      "decision_symbol": "LTCUSDT",
+      "display_names": {
+        "ar": "لايتكوين",
+        "en": "Litecoin / US Dollar"
+      },
+      "asset_class": "crypto",
+      "group": "crypto",
+      "base_asset": "LTC",
+      "quote_asset": "USD",
+      "aliases": [
+        "LTC-USD",
+        "LTC/USD",
+        "LTC/USDT",
+        "LTCUSD",
+        "LTCUSDT"
+      ],
+      "provider_symbols": {
+        "binance": "LTCUSDT",
+        "yahoo": "LTC-USD"
+      },
+      "provider_priority": [
+        "binance",
+        "yahoo"
+      ],
+      "provider_scopes": {
+        "binance": "intraday_and_daily",
+        "yahoo": "intraday_and_daily_fallback"
+      },
+      "cot_mapping": null,
+      "sessions": [
+        "24x7"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:CRYPTO:NEAR:USD",
+      "canonical_symbol": "NEARUSD",
+      "decision_symbol": "NEARUSDT",
+      "display_names": {
+        "ar": "نير بروتوكول",
+        "en": "NEAR Protocol / US Dollar"
+      },
+      "asset_class": "crypto",
+      "group": "crypto",
+      "base_asset": "NEAR",
+      "quote_asset": "USD",
+      "aliases": [
+        "NEAR-USD",
+        "NEAR/USD",
+        "NEAR/USDT",
+        "NEARUSD",
+        "NEARUSDT"
+      ],
+      "provider_symbols": {
+        "binance": "NEARUSDT",
+        "yahoo": "NEAR-USD"
+      },
+      "provider_priority": [
+        "binance",
+        "yahoo"
+      ],
+      "provider_scopes": {
+        "binance": "intraday_and_daily",
+        "yahoo": "intraday_and_daily_fallback"
+      },
+      "cot_mapping": null,
+      "sessions": [
+        "24x7"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:CRYPTO:OP:USD",
+      "canonical_symbol": "OPUSD",
+      "decision_symbol": "OPUSDT",
+      "display_names": {
+        "ar": "أوبتيمزم",
+        "en": "Optimism / US Dollar"
+      },
+      "asset_class": "crypto",
+      "group": "crypto",
+      "base_asset": "OP",
+      "quote_asset": "USD",
+      "aliases": [
+        "OP-USD",
+        "OP/USD",
+        "OP/USDT",
+        "OPUSD",
+        "OPUSDT"
+      ],
+      "provider_symbols": {
+        "binance": "OPUSDT",
+        "yahoo": "OP-USD"
+      },
+      "provider_priority": [
+        "binance",
+        "yahoo"
+      ],
+      "provider_scopes": {
+        "binance": "intraday_and_daily",
+        "yahoo": "intraday_and_daily_fallback"
+      },
+      "cot_mapping": null,
+      "sessions": [
+        "24x7"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:CRYPTO:SHIB:USD",
+      "canonical_symbol": "SHIBUSD",
+      "decision_symbol": "SHIBUSDT",
+      "display_names": {
+        "ar": "شيبا إينو",
+        "en": "Shiba Inu / US Dollar"
+      },
+      "asset_class": "crypto",
+      "group": "crypto",
+      "base_asset": "SHIB",
+      "quote_asset": "USD",
+      "aliases": [
+        "SHIB-USD",
+        "SHIB/USD",
+        "SHIB/USDT",
+        "SHIBUSD",
+        "SHIBUSDT"
+      ],
+      "provider_symbols": {
+        "binance": "SHIBUSDT",
+        "yahoo": "SHIB-USD"
+      },
+      "provider_priority": [
+        "binance",
+        "yahoo"
+      ],
+      "provider_scopes": {
+        "binance": "intraday_and_daily",
+        "yahoo": "intraday_and_daily_fallback"
+      },
+      "cot_mapping": null,
+      "sessions": [
+        "24x7"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:CRYPTO:TRX:USD",
+      "canonical_symbol": "TRXUSD",
+      "decision_symbol": "TRXUSDT",
+      "display_names": {
+        "ar": "ترون",
+        "en": "TRON / US Dollar"
+      },
+      "asset_class": "crypto",
+      "group": "crypto",
+      "base_asset": "TRX",
+      "quote_asset": "USD",
+      "aliases": [
+        "TRX-USD",
+        "TRX/USD",
+        "TRX/USDT",
+        "TRXUSD",
+        "TRXUSDT"
+      ],
+      "provider_symbols": {
+        "binance": "TRXUSDT",
+        "yahoo": "TRX-USD"
+      },
+      "provider_priority": [
+        "binance",
+        "yahoo"
+      ],
+      "provider_scopes": {
+        "binance": "intraday_and_daily",
+        "yahoo": "intraday_and_daily_fallback"
+      },
+      "cot_mapping": null,
+      "sessions": [
+        "24x7"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:CRYPTO:UNI:USD",
+      "canonical_symbol": "UNIUSD",
+      "decision_symbol": "UNIUSDT",
+      "display_names": {
+        "ar": "يونيسواب",
+        "en": "Uniswap / US Dollar"
+      },
+      "asset_class": "crypto",
+      "group": "crypto",
+      "base_asset": "UNI",
+      "quote_asset": "USD",
+      "aliases": [
+        "UNI-USD",
+        "UNI/USD",
+        "UNI/USDT",
+        "UNIUSD",
+        "UNIUSDT"
+      ],
+      "provider_symbols": {
+        "binance": "UNIUSDT",
+        "yahoo": "UNI-USD"
+      },
+      "provider_priority": [
+        "binance",
+        "yahoo"
+      ],
+      "provider_scopes": {
+        "binance": "intraday_and_daily",
+        "yahoo": "intraday_and_daily_fallback"
+      },
+      "cot_mapping": null,
+      "sessions": [
+        "24x7"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:FX:EUR:USD",
+      "canonical_symbol": "EURUSD",
+      "decision_symbol": "EURUSD",
+      "display_names": {
+        "ar": "اليورو / الدولار الأمريكي",
+        "en": "Euro / US Dollar"
+      },
+      "asset_class": "fx",
+      "group": "forex",
+      "base_asset": "EUR",
+      "quote_asset": "USD",
+      "aliases": [
+        "EURUSD",
+        "EUR/USD",
+        "EUR-USD"
+      ],
+      "provider_symbols": {
+        "yahoo": "EURUSD=X",
+        "stooq": "eurusd"
+      },
+      "provider_priority": [
+        "yahoo",
+        "stooq"
+      ],
+      "provider_scopes": {
+        "yahoo": "intraday_and_daily",
+        "stooq": "end_of_day_fallback"
+      },
+      "cot_mapping": {
+        "market_family": "eur_usd",
+        "cftc_contract_code": null
+      },
+      "sessions": [
+        "fx_week"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:FX:GBP:USD",
+      "canonical_symbol": "GBPUSD",
+      "decision_symbol": "GBPUSD",
+      "display_names": {
+        "ar": "الجنيه الإسترليني / الدولار الأمريكي",
+        "en": "British Pound / US Dollar"
+      },
+      "asset_class": "fx",
+      "group": "forex",
+      "base_asset": "GBP",
+      "quote_asset": "USD",
+      "aliases": [
+        "GBPUSD",
+        "GBP/USD",
+        "GBP-USD"
+      ],
+      "provider_symbols": {
+        "yahoo": "GBPUSD=X",
+        "stooq": "gbpusd"
+      },
+      "provider_priority": [
+        "yahoo",
+        "stooq"
+      ],
+      "provider_scopes": {
+        "yahoo": "intraday_and_daily",
+        "stooq": "end_of_day_fallback"
+      },
+      "cot_mapping": {
+        "market_family": "gbp_usd",
+        "cftc_contract_code": null
+      },
+      "sessions": [
+        "fx_week"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:FX:USD:JPY",
+      "canonical_symbol": "USDJPY",
+      "decision_symbol": "USDJPY",
+      "display_names": {
+        "ar": "الدولار الأمريكي / الين الياباني",
+        "en": "US Dollar / Japanese Yen"
+      },
+      "asset_class": "fx",
+      "group": "forex",
+      "base_asset": "USD",
+      "quote_asset": "JPY",
+      "aliases": [
+        "USDJPY",
+        "USD/JPY",
+        "USD-JPY"
+      ],
+      "provider_symbols": {
+        "yahoo": "JPY=X",
+        "stooq": "usdjpy"
+      },
+      "provider_priority": [
+        "yahoo",
+        "stooq"
+      ],
+      "provider_scopes": {
+        "yahoo": "intraday_and_daily",
+        "stooq": "end_of_day_fallback"
+      },
+      "cot_mapping": {
+        "market_family": "usd_jpy",
+        "cftc_contract_code": null
+      },
+      "sessions": [
+        "fx_week"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:FX:USD:CHF",
+      "canonical_symbol": "USDCHF",
+      "decision_symbol": "USDCHF",
+      "display_names": {
+        "ar": "الدولار الأمريكي / الفرنك السويسري",
+        "en": "US Dollar / Swiss Franc"
+      },
+      "asset_class": "fx",
+      "group": "forex",
+      "base_asset": "USD",
+      "quote_asset": "CHF",
+      "aliases": [
+        "USDCHF",
+        "USD/CHF",
+        "USD-CHF"
+      ],
+      "provider_symbols": {
+        "yahoo": "CHF=X",
+        "stooq": "usdchf"
+      },
+      "provider_priority": [
+        "yahoo",
+        "stooq"
+      ],
+      "provider_scopes": {
+        "yahoo": "intraday_and_daily",
+        "stooq": "end_of_day_fallback"
+      },
+      "cot_mapping": {
+        "market_family": "usd_chf",
+        "cftc_contract_code": null
+      },
+      "sessions": [
+        "fx_week"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:FX:AUD:USD",
+      "canonical_symbol": "AUDUSD",
+      "decision_symbol": "AUDUSD",
+      "display_names": {
+        "ar": "الدولار الأسترالي / الدولار الأمريكي",
+        "en": "Australian Dollar / US Dollar"
+      },
+      "asset_class": "fx",
+      "group": "forex",
+      "base_asset": "AUD",
+      "quote_asset": "USD",
+      "aliases": [
+        "AUDUSD",
+        "AUD/USD",
+        "AUD-USD"
+      ],
+      "provider_symbols": {
+        "yahoo": "AUDUSD=X",
+        "stooq": "audusd"
+      },
+      "provider_priority": [
+        "yahoo",
+        "stooq"
+      ],
+      "provider_scopes": {
+        "yahoo": "intraday_and_daily",
+        "stooq": "end_of_day_fallback"
+      },
+      "cot_mapping": {
+        "market_family": "aud_usd",
+        "cftc_contract_code": null
+      },
+      "sessions": [
+        "fx_week"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:FX:USD:CAD",
+      "canonical_symbol": "USDCAD",
+      "decision_symbol": "USDCAD",
+      "display_names": {
+        "ar": "الدولار الأمريكي / الدولار الكندي",
+        "en": "US Dollar / Canadian Dollar"
+      },
+      "asset_class": "fx",
+      "group": "forex",
+      "base_asset": "USD",
+      "quote_asset": "CAD",
+      "aliases": [
+        "USDCAD",
+        "USD/CAD",
+        "USD-CAD"
+      ],
+      "provider_symbols": {
+        "yahoo": "CAD=X",
+        "stooq": "usdcad"
+      },
+      "provider_priority": [
+        "yahoo",
+        "stooq"
+      ],
+      "provider_scopes": {
+        "yahoo": "intraday_and_daily",
+        "stooq": "end_of_day_fallback"
+      },
+      "cot_mapping": {
+        "market_family": "usd_cad",
+        "cftc_contract_code": null
+      },
+      "sessions": [
+        "fx_week"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:FX:NZD:USD",
+      "canonical_symbol": "NZDUSD",
+      "decision_symbol": "NZDUSD",
+      "display_names": {
+        "ar": "الدولار النيوزيلندي / الدولار الأمريكي",
+        "en": "New Zealand Dollar / US Dollar"
+      },
+      "asset_class": "fx",
+      "group": "forex",
+      "base_asset": "NZD",
+      "quote_asset": "USD",
+      "aliases": [
+        "NZDUSD",
+        "NZD/USD",
+        "NZD-USD"
+      ],
+      "provider_symbols": {
+        "yahoo": "NZDUSD=X",
+        "stooq": "nzdusd"
+      },
+      "provider_priority": [
+        "yahoo",
+        "stooq"
+      ],
+      "provider_scopes": {
+        "yahoo": "intraday_and_daily",
+        "stooq": "end_of_day_fallback"
+      },
+      "cot_mapping": {
+        "market_family": "nzd_usd",
+        "cftc_contract_code": null
+      },
+      "sessions": [
+        "fx_week"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:FX:EUR:JPY",
+      "canonical_symbol": "EURJPY",
+      "decision_symbol": "EURJPY",
+      "display_names": {
+        "ar": "اليورو / الين الياباني",
+        "en": "Euro / Japanese Yen"
+      },
+      "asset_class": "fx",
+      "group": "forex",
+      "base_asset": "EUR",
+      "quote_asset": "JPY",
+      "aliases": [
+        "EURJPY",
+        "EUR/JPY",
+        "EUR-JPY"
+      ],
+      "provider_symbols": {
+        "yahoo": "EURJPY=X",
+        "stooq": "eurjpy"
+      },
+      "provider_priority": [
+        "yahoo",
+        "stooq"
+      ],
+      "provider_scopes": {
+        "yahoo": "intraday_and_daily",
+        "stooq": "end_of_day_fallback"
+      },
+      "cot_mapping": {
+        "market_family": "eur_jpy",
+        "cftc_contract_code": null
+      },
+      "sessions": [
+        "fx_week"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:FX:GBP:JPY",
+      "canonical_symbol": "GBPJPY",
+      "decision_symbol": "GBPJPY",
+      "display_names": {
+        "ar": "الجنيه الإسترليني / الين الياباني",
+        "en": "British Pound / Japanese Yen"
+      },
+      "asset_class": "fx",
+      "group": "forex",
+      "base_asset": "GBP",
+      "quote_asset": "JPY",
+      "aliases": [
+        "GBPJPY",
+        "GBP/JPY",
+        "GBP-JPY"
+      ],
+      "provider_symbols": {
+        "yahoo": "GBPJPY=X",
+        "stooq": "gbpjpy"
+      },
+      "provider_priority": [
+        "yahoo",
+        "stooq"
+      ],
+      "provider_scopes": {
+        "yahoo": "intraday_and_daily",
+        "stooq": "end_of_day_fallback"
+      },
+      "cot_mapping": {
+        "market_family": "gbp_jpy",
+        "cftc_contract_code": null
+      },
+      "sessions": [
+        "fx_week"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:FX:EUR:GBP",
+      "canonical_symbol": "EURGBP",
+      "decision_symbol": "EURGBP",
+      "display_names": {
+        "ar": "اليورو / الجنيه الإسترليني",
+        "en": "Euro / British Pound"
+      },
+      "asset_class": "fx",
+      "group": "forex",
+      "base_asset": "EUR",
+      "quote_asset": "GBP",
+      "aliases": [
+        "EURGBP",
+        "EUR/GBP",
+        "EUR-GBP"
+      ],
+      "provider_symbols": {
+        "yahoo": "EURGBP=X",
+        "stooq": "eurgbp"
+      },
+      "provider_priority": [
+        "yahoo",
+        "stooq"
+      ],
+      "provider_scopes": {
+        "yahoo": "intraday_and_daily",
+        "stooq": "end_of_day_fallback"
+      },
+      "cot_mapping": {
+        "market_family": "eur_gbp",
+        "cftc_contract_code": null
+      },
+      "sessions": [
+        "fx_week"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:FX:AUD:JPY",
+      "canonical_symbol": "AUDJPY",
+      "decision_symbol": "AUDJPY",
+      "display_names": {
+        "ar": "الدولار الأسترالي / الين الياباني",
+        "en": "Australian Dollar / Japanese Yen"
+      },
+      "asset_class": "fx",
+      "group": "forex",
+      "base_asset": "AUD",
+      "quote_asset": "JPY",
+      "aliases": [
+        "AUDJPY",
+        "AUD/JPY",
+        "AUD-JPY"
+      ],
+      "provider_symbols": {
+        "yahoo": "AUDJPY=X",
+        "stooq": "audjpy"
+      },
+      "provider_priority": [
+        "yahoo",
+        "stooq"
+      ],
+      "provider_scopes": {
+        "yahoo": "intraday_and_daily",
+        "stooq": "end_of_day_fallback"
+      },
+      "cot_mapping": {
+        "market_family": "aud_jpy",
+        "cftc_contract_code": null
+      },
+      "sessions": [
+        "fx_week"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:FX:CAD:JPY",
+      "canonical_symbol": "CADJPY",
+      "decision_symbol": "CADJPY",
+      "display_names": {
+        "ar": "الدولار الكندي / الين الياباني",
+        "en": "Canadian Dollar / Japanese Yen"
+      },
+      "asset_class": "fx",
+      "group": "forex",
+      "base_asset": "CAD",
+      "quote_asset": "JPY",
+      "aliases": [
+        "CADJPY",
+        "CAD/JPY",
+        "CAD-JPY"
+      ],
+      "provider_symbols": {
+        "yahoo": "CADJPY=X",
+        "stooq": "cadjpy"
+      },
+      "provider_priority": [
+        "yahoo",
+        "stooq"
+      ],
+      "provider_scopes": {
+        "yahoo": "intraday_and_daily",
+        "stooq": "end_of_day_fallback"
+      },
+      "cot_mapping": {
+        "market_family": "cad_jpy",
+        "cftc_contract_code": null
+      },
+      "sessions": [
+        "fx_week"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:METAL:XAU:USD",
+      "canonical_symbol": "XAUUSD",
+      "decision_symbol": "XAUUSD",
+      "display_names": {
+        "ar": "الذهب / الدولار الأمريكي",
+        "en": "Gold / US Dollar"
+      },
+      "asset_class": "metal",
+      "group": "commodities",
+      "base_asset": "XAU",
+      "quote_asset": "USD",
+      "aliases": [
+        "GC=F",
+        "XAUUSD"
+      ],
+      "provider_symbols": {
+        "yahoo": "GC=F",
+        "stooq": "gc.f"
+      },
+      "provider_priority": [
+        "yahoo",
+        "stooq"
+      ],
+      "provider_scopes": {
+        "yahoo": "intraday_and_daily",
+        "stooq": "end_of_day_fallback"
+      },
+      "cot_mapping": {
+        "market_family": "xau",
+        "cftc_contract_code": null
+      },
+      "sessions": [
+        "global_futures"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:METAL:XAG:USD",
+      "canonical_symbol": "XAGUSD",
+      "decision_symbol": "XAGUSD",
+      "display_names": {
+        "ar": "الفضة / الدولار الأمريكي",
+        "en": "Silver / US Dollar"
+      },
+      "asset_class": "metal",
+      "group": "commodities",
+      "base_asset": "XAG",
+      "quote_asset": "USD",
+      "aliases": [
+        "SI=F",
+        "XAGUSD"
+      ],
+      "provider_symbols": {
+        "yahoo": "SI=F",
+        "stooq": "si.f"
+      },
+      "provider_priority": [
+        "yahoo",
+        "stooq"
+      ],
+      "provider_scopes": {
+        "yahoo": "intraday_and_daily",
+        "stooq": "end_of_day_fallback"
+      },
+      "cot_mapping": {
+        "market_family": "xag",
+        "cftc_contract_code": null
+      },
+      "sessions": [
+        "global_futures"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:ENERGY:WTI:USD",
+      "canonical_symbol": "USOIL",
+      "decision_symbol": "USOIL",
+      "display_names": {
+        "ar": "خام غرب تكساس",
+        "en": "WTI Crude Oil"
+      },
+      "asset_class": "energy",
+      "group": "commodities",
+      "base_asset": "WTI",
+      "quote_asset": "USD",
+      "aliases": [
+        "CL=F",
+        "USOIL"
+      ],
+      "provider_symbols": {
+        "yahoo": "CL=F",
+        "stooq": "cl.f"
+      },
+      "provider_priority": [
+        "yahoo",
+        "stooq"
+      ],
+      "provider_scopes": {
+        "yahoo": "intraday_and_daily",
+        "stooq": "end_of_day_fallback"
+      },
+      "cot_mapping": {
+        "market_family": "wti",
+        "cftc_contract_code": null
+      },
+      "sessions": [
+        "global_futures"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:ENERGY:BRENT:USD",
+      "canonical_symbol": "UKOIL",
+      "decision_symbol": "UKOIL",
+      "display_names": {
+        "ar": "خام برنت",
+        "en": "Brent Crude Oil"
+      },
+      "asset_class": "energy",
+      "group": "commodities",
+      "base_asset": "BRENT",
+      "quote_asset": "USD",
+      "aliases": [
+        "BZ=F",
+        "UKOIL"
+      ],
+      "provider_symbols": {
+        "yahoo": "BZ=F",
+        "stooq": "brn.f"
+      },
+      "provider_priority": [
+        "yahoo",
+        "stooq"
+      ],
+      "provider_scopes": {
+        "yahoo": "intraday_and_daily",
+        "stooq": "end_of_day_fallback"
+      },
+      "cot_mapping": {
+        "market_family": "brent",
+        "cftc_contract_code": null
+      },
+      "sessions": [
+        "global_futures"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:ENERGY:NG:USD",
+      "canonical_symbol": "NG",
+      "decision_symbol": "NG",
+      "display_names": {
+        "ar": "الغاز الطبيعي",
+        "en": "Natural Gas"
+      },
+      "asset_class": "energy",
+      "group": "commodities",
+      "base_asset": "NG",
+      "quote_asset": "USD",
+      "aliases": [
+        "NG",
+        "NG=F"
+      ],
+      "provider_symbols": {
+        "yahoo": "NG=F",
+        "stooq": "ng.f"
+      },
+      "provider_priority": [
+        "yahoo",
+        "stooq"
+      ],
+      "provider_scopes": {
+        "yahoo": "intraday_and_daily",
+        "stooq": "end_of_day_fallback"
+      },
+      "cot_mapping": {
+        "market_family": "ng",
+        "cftc_contract_code": null
+      },
+      "sessions": [
+        "global_futures"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:AGRICULTURE:CORN:USD",
+      "canonical_symbol": "ZC",
+      "decision_symbol": "ZC",
+      "display_names": {
+        "ar": "الذرة",
+        "en": "Corn"
+      },
+      "asset_class": "agriculture",
+      "group": "commodities",
+      "base_asset": "CORN",
+      "quote_asset": "USD",
+      "aliases": [
+        "ZC",
+        "ZC=F"
+      ],
+      "provider_symbols": {
+        "yahoo": "ZC=F",
+        "stooq": "zc.f"
+      },
+      "provider_priority": [
+        "yahoo",
+        "stooq"
+      ],
+      "provider_scopes": {
+        "yahoo": "intraday_and_daily",
+        "stooq": "end_of_day_fallback"
+      },
+      "cot_mapping": {
+        "market_family": "corn",
+        "cftc_contract_code": null
+      },
+      "sessions": [
+        "global_futures"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:AGRICULTURE:SOY:USD",
+      "canonical_symbol": "ZS",
+      "decision_symbol": "ZS",
+      "display_names": {
+        "ar": "فول الصويا",
+        "en": "Soybeans"
+      },
+      "asset_class": "agriculture",
+      "group": "commodities",
+      "base_asset": "SOY",
+      "quote_asset": "USD",
+      "aliases": [
+        "ZS",
+        "ZS=F"
+      ],
+      "provider_symbols": {
+        "yahoo": "ZS=F",
+        "stooq": "zs.f"
+      },
+      "provider_priority": [
+        "yahoo",
+        "stooq"
+      ],
+      "provider_scopes": {
+        "yahoo": "intraday_and_daily",
+        "stooq": "end_of_day_fallback"
+      },
+      "cot_mapping": {
+        "market_family": "soy",
+        "cftc_contract_code": null
+      },
+      "sessions": [
+        "global_futures"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:AGRICULTURE:WHEAT:USD",
+      "canonical_symbol": "ZW",
+      "decision_symbol": "ZW",
+      "display_names": {
+        "ar": "القمح",
+        "en": "Wheat"
+      },
+      "asset_class": "agriculture",
+      "group": "commodities",
+      "base_asset": "WHEAT",
+      "quote_asset": "USD",
+      "aliases": [
+        "ZW",
+        "ZW=F"
+      ],
+      "provider_symbols": {
+        "yahoo": "ZW=F",
+        "stooq": "zw.f"
+      },
+      "provider_priority": [
+        "yahoo",
+        "stooq"
+      ],
+      "provider_scopes": {
+        "yahoo": "intraday_and_daily",
+        "stooq": "end_of_day_fallback"
+      },
+      "cot_mapping": {
+        "market_family": "wheat",
+        "cftc_contract_code": null
+      },
+      "sessions": [
+        "global_futures"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:METAL:COPPER:USD",
+      "canonical_symbol": "HG",
+      "decision_symbol": "HG",
+      "display_names": {
+        "ar": "النحاس",
+        "en": "Copper"
+      },
+      "asset_class": "metal",
+      "group": "commodities",
+      "base_asset": "COPPER",
+      "quote_asset": "USD",
+      "aliases": [
+        "HG",
+        "HG=F"
+      ],
+      "provider_symbols": {
+        "yahoo": "HG=F",
+        "stooq": "hg.f"
+      },
+      "provider_priority": [
+        "yahoo",
+        "stooq"
+      ],
+      "provider_scopes": {
+        "yahoo": "intraday_and_daily",
+        "stooq": "end_of_day_fallback"
+      },
+      "cot_mapping": {
+        "market_family": "copper",
+        "cftc_contract_code": null
+      },
+      "sessions": [
+        "global_futures"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:METAL:PLATINUM:USD",
+      "canonical_symbol": "PL",
+      "decision_symbol": "PL",
+      "display_names": {
+        "ar": "البلاتين",
+        "en": "Platinum"
+      },
+      "asset_class": "metal",
+      "group": "commodities",
+      "base_asset": "PLATINUM",
+      "quote_asset": "USD",
+      "aliases": [
+        "PL",
+        "PL=F"
+      ],
+      "provider_symbols": {
+        "yahoo": "PL=F",
+        "stooq": "pl.f"
+      },
+      "provider_priority": [
+        "yahoo",
+        "stooq"
+      ],
+      "provider_scopes": {
+        "yahoo": "intraday_and_daily",
+        "stooq": "end_of_day_fallback"
+      },
+      "cot_mapping": {
+        "market_family": "platinum",
+        "cftc_contract_code": null
+      },
+      "sessions": [
+        "global_futures"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:INDEX:SPX",
+      "canonical_symbol": "SPX",
+      "decision_symbol": "SPX",
+      "display_names": {
+        "ar": "ستاندرد آند بورز 500",
+        "en": "S&P 500"
+      },
+      "asset_class": "index",
+      "group": "indices",
+      "base_asset": "SPX",
+      "quote_asset": null,
+      "aliases": [
+        "SPX",
+        "^GSPC"
+      ],
+      "provider_symbols": {
+        "yahoo": "^GSPC",
+        "stooq": "^spx"
+      },
+      "provider_priority": [
+        "yahoo",
+        "stooq"
+      ],
+      "provider_scopes": {
+        "yahoo": "intraday_and_daily",
+        "stooq": "end_of_day_fallback"
+      },
+      "cot_mapping": null,
+      "sessions": [
+        "exchange_session"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:INDEX:NDX",
+      "canonical_symbol": "NDX",
+      "decision_symbol": "NDX",
+      "display_names": {
+        "ar": "ناسداك 100",
+        "en": "Nasdaq 100"
+      },
+      "asset_class": "index",
+      "group": "indices",
+      "base_asset": "NDX",
+      "quote_asset": null,
+      "aliases": [
+        "NDX",
+        "^NDX"
+      ],
+      "provider_symbols": {
+        "yahoo": "^NDX",
+        "stooq": "^ndq"
+      },
+      "provider_priority": [
+        "yahoo",
+        "stooq"
+      ],
+      "provider_scopes": {
+        "yahoo": "intraday_and_daily",
+        "stooq": "end_of_day_fallback"
+      },
+      "cot_mapping": null,
+      "sessions": [
+        "exchange_session"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:INDEX:DXY",
+      "canonical_symbol": "DXY",
+      "decision_symbol": "DXY",
+      "display_names": {
+        "ar": "مؤشر الدولار الأمريكي",
+        "en": "US Dollar Index"
+      },
+      "asset_class": "index",
+      "group": "indices",
+      "base_asset": "DXY",
+      "quote_asset": null,
+      "aliases": [
+        "DX-Y.NYB",
+        "DXY"
+      ],
+      "provider_symbols": {
+        "yahoo": "DX-Y.NYB",
+        "stooq": "dx.f"
+      },
+      "provider_priority": [
+        "yahoo",
+        "stooq"
+      ],
+      "provider_scopes": {
+        "yahoo": "intraday_and_daily",
+        "stooq": "end_of_day_fallback"
+      },
+      "cot_mapping": null,
+      "sessions": [
+        "exchange_session"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:INDEX:DJI",
+      "canonical_symbol": "DJI",
+      "decision_symbol": "DJI",
+      "display_names": {
+        "ar": "داو جونز الصناعي",
+        "en": "Dow Jones Industrial Average"
+      },
+      "asset_class": "index",
+      "group": "indices",
+      "base_asset": "DJI",
+      "quote_asset": null,
+      "aliases": [
+        "DJI",
+        "^DJI"
+      ],
+      "provider_symbols": {
+        "yahoo": "^DJI",
+        "stooq": "^dji"
+      },
+      "provider_priority": [
+        "yahoo",
+        "stooq"
+      ],
+      "provider_scopes": {
+        "yahoo": "intraday_and_daily",
+        "stooq": "end_of_day_fallback"
+      },
+      "cot_mapping": null,
+      "sessions": [
+        "exchange_session"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:INDEX:VIX",
+      "canonical_symbol": "VIX",
+      "decision_symbol": "VIX",
+      "display_names": {
+        "ar": "مؤشر التقلب VIX",
+        "en": "CBOE Volatility Index"
+      },
+      "asset_class": "index",
+      "group": "indices",
+      "base_asset": "VIX",
+      "quote_asset": null,
+      "aliases": [
+        "VIX",
+        "^VIX"
+      ],
+      "provider_symbols": {
+        "yahoo": "^VIX",
+        "stooq": "^vix"
+      },
+      "provider_priority": [
+        "yahoo",
+        "stooq"
+      ],
+      "provider_scopes": {
+        "yahoo": "intraday_and_daily",
+        "stooq": "end_of_day_fallback"
+      },
+      "cot_mapping": null,
+      "sessions": [
+        "exchange_session"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:INDEX:CAC",
+      "canonical_symbol": "CAC",
+      "decision_symbol": "CAC",
+      "display_names": {
+        "ar": "كاك 40",
+        "en": "CAC 40"
+      },
+      "asset_class": "index",
+      "group": "indices",
+      "base_asset": "CAC",
+      "quote_asset": null,
+      "aliases": [
+        "CAC",
+        "^FCHI"
+      ],
+      "provider_symbols": {
+        "yahoo": "^FCHI",
+        "stooq": "^cac"
+      },
+      "provider_priority": [
+        "yahoo",
+        "stooq"
+      ],
+      "provider_scopes": {
+        "yahoo": "intraday_and_daily",
+        "stooq": "end_of_day_fallback"
+      },
+      "cot_mapping": null,
+      "sessions": [
+        "exchange_session"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:INDEX:DAX",
+      "canonical_symbol": "DAX",
+      "decision_symbol": "DAX",
+      "display_names": {
+        "ar": "داكس",
+        "en": "DAX"
+      },
+      "asset_class": "index",
+      "group": "indices",
+      "base_asset": "DAX",
+      "quote_asset": null,
+      "aliases": [
+        "DAX",
+        "^GDAXI"
+      ],
+      "provider_symbols": {
+        "yahoo": "^GDAXI",
+        "stooq": "^dax"
+      },
+      "provider_priority": [
+        "yahoo",
+        "stooq"
+      ],
+      "provider_scopes": {
+        "yahoo": "intraday_and_daily",
+        "stooq": "end_of_day_fallback"
+      },
+      "cot_mapping": null,
+      "sessions": [
+        "exchange_session"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:INDEX:FTSE",
+      "canonical_symbol": "FTSE",
+      "decision_symbol": "FTSE",
+      "display_names": {
+        "ar": "فوتسي 100",
+        "en": "FTSE 100"
+      },
+      "asset_class": "index",
+      "group": "indices",
+      "base_asset": "FTSE",
+      "quote_asset": null,
+      "aliases": [
+        "FTSE",
+        "^FTSE"
+      ],
+      "provider_symbols": {
+        "yahoo": "^FTSE",
+        "stooq": "^ftse"
+      },
+      "provider_priority": [
+        "yahoo",
+        "stooq"
+      ],
+      "provider_scopes": {
+        "yahoo": "intraday_and_daily",
+        "stooq": "end_of_day_fallback"
+      },
+      "cot_mapping": null,
+      "sessions": [
+        "exchange_session"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:INDEX:NIKKEI",
+      "canonical_symbol": "NIKKEI",
+      "decision_symbol": "NIKKEI",
+      "display_names": {
+        "ar": "نيكاي 225",
+        "en": "Nikkei 225"
+      },
+      "asset_class": "index",
+      "group": "indices",
+      "base_asset": "NIKKEI",
+      "quote_asset": null,
+      "aliases": [
+        "NIKKEI",
+        "^N225"
+      ],
+      "provider_symbols": {
+        "yahoo": "^N225",
+        "stooq": "^nkx"
+      },
+      "provider_priority": [
+        "yahoo",
+        "stooq"
+      ],
+      "provider_scopes": {
+        "yahoo": "intraday_and_daily",
+        "stooq": "end_of_day_fallback"
+      },
+      "cot_mapping": null,
+      "sessions": [
+        "exchange_session"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:INDEX:HSI",
+      "canonical_symbol": "HSI",
+      "decision_symbol": "HSI",
+      "display_names": {
+        "ar": "هانغ سنغ",
+        "en": "Hang Seng Index"
+      },
+      "asset_class": "index",
+      "group": "indices",
+      "base_asset": "HSI",
+      "quote_asset": null,
+      "aliases": [
+        "HSI",
+        "^HSI"
+      ],
+      "provider_symbols": {
+        "yahoo": "^HSI",
+        "stooq": "^hsi"
+      },
+      "provider_priority": [
+        "yahoo",
+        "stooq"
+      ],
+      "provider_scopes": {
+        "yahoo": "intraday_and_daily",
+        "stooq": "end_of_day_fallback"
+      },
+      "cot_mapping": null,
+      "sessions": [
+        "exchange_session"
+      ],
+      "status": "active"
+    },
+    {
+      "internal_asset_id": "NDSP:INDEX:RUT",
+      "canonical_symbol": "RUT",
+      "decision_symbol": "RUT",
+      "display_names": {
+        "ar": "راسل 2000",
+        "en": "Russell 2000"
+      },
+      "asset_class": "index",
+      "group": "indices",
+      "base_asset": "RUT",
+      "quote_asset": null,
+      "aliases": [
+        "RUT",
+        "^RUT"
+      ],
+      "provider_symbols": {
+        "yahoo": "^RUT",
+        "stooq": "^rut"
+      },
+      "provider_priority": [
+        "yahoo",
+        "stooq"
+      ],
+      "provider_scopes": {
+        "yahoo": "intraday_and_daily",
+        "stooq": "end_of_day_fallback"
+      },
+      "cot_mapping": null,
+      "sessions": [
+        "exchange_session"
+      ],
+      "status": "active"
+    }
+  ]
+}

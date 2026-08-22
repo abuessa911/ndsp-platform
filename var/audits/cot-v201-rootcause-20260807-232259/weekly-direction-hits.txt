@@ -1,0 +1,336 @@
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/quality/l13_nawaf_golden_signal.py:15:        asset_managers_overall=payload.get("asset_managers_overall"),
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/quality/l13_nawaf_golden_signal.py:16:        asset_managers_weekly=payload.get("asset_managers_weekly"),
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/quality/l13_nawaf_golden_signal.py:17:        leveraged_funds_weekly=payload.get("leveraged_funds_weekly"),
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/quality/l14_nawaf_enhanced_golden_signal.py:15:        asset_managers_overall=payload.get("asset_managers_overall"),
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/quality/l14_nawaf_enhanced_golden_signal.py:16:        asset_managers_weekly=payload.get("asset_managers_weekly"),
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/quality/l14_nawaf_enhanced_golden_signal.py:17:        leveraged_funds_weekly=payload.get("leveraged_funds_weekly"),
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/quality/golden_signals.py:5:    *, asset_managers_overall, asset_managers_weekly, leveraged_funds_weekly
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/quality/golden_signals.py:7:    am_overall = coerce_direction(asset_managers_overall)
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/quality/golden_signals.py:8:    am_weekly = coerce_direction(asset_managers_weekly)
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/quality/golden_signals.py:9:    lf_weekly = coerce_direction(leveraged_funds_weekly)
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/quality/golden_signals.py:19:        "asset_managers_overall": am_overall.value,
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/quality/golden_signals.py:20:        "asset_managers_weekly": am_weekly.value,
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/quality/golden_signals.py:21:        "leveraged_funds_weekly": lf_weekly.value,
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/quality/golden_signals.py:22:        "leveraged_funds_overall_used": False,
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/runtime_bridge.py:88:    "asset_managers_overall": (
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/runtime_bridge.py:89:        "asset_managers_overall",
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/runtime_bridge.py:90:        "asset_managers_overall_direction",
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/runtime_bridge.py:96:    "asset_managers_weekly": (
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/runtime_bridge.py:97:        "asset_managers_weekly",
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/runtime_bridge.py:98:        "asset_managers_weekly_direction",
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/runtime_bridge.py:101:        "asset_manager_weekly_direction",
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/runtime_bridge.py:103:    "leveraged_funds_weekly": (
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/runtime_bridge.py:104:        "leveraged_funds_weekly",
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/runtime_bridge.py:105:        "leveraged_funds_weekly_direction",
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/runtime_bridge.py:132:    am_overall = _extract_direction(data, DIRECTION_KEYS["asset_managers_overall"])
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/runtime_bridge.py:133:    am_weekly = _extract_direction(data, DIRECTION_KEYS["asset_managers_weekly"])
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/runtime_bridge.py:134:    lf_weekly = _extract_direction(data, DIRECTION_KEYS["leveraged_funds_weekly"])
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/runtime_bridge.py:139:            ("asset_managers_overall", am_overall),
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/runtime_bridge.py:140:            ("asset_managers_weekly", am_weekly),
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/runtime_bridge.py:141:            ("leveraged_funds_weekly", lf_weekly),
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/runtime_bridge.py:151:            "asset_managers_overall": am_overall or "unknown",
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/runtime_bridge.py:152:            "asset_managers_weekly": am_weekly or "unknown",
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/runtime_bridge.py:153:            "leveraged_funds_weekly": lf_weekly or "unknown",
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/runtime_bridge.py:154:            "leveraged_funds_overall_used": False,
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/runtime_bridge.py:160:            asset_managers_overall=am_overall,
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/runtime_bridge.py:161:            asset_managers_weekly=am_weekly,
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/runtime_bridge.py:162:            leveraged_funds_weekly=lf_weekly,
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/runtime_bridge.py:190:        "asset_managers_overall": result["asset_managers_overall"],
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/runtime_bridge.py:191:        "asset_managers_weekly": result["asset_managers_weekly"],
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/runtime_bridge.py:192:        "leveraged_funds_weekly": result["leveraged_funds_weekly"],
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/runtime_bridge.py:193:        "leveraged_funds_overall_used": False,
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/data/cot_validity_gate.py:69:            reason_code="CFTC_REPORT_DATE_DOES_NOT_MATCH_EXPECTED_CYCLE", **common,
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/direction/l04_correction_gate.py:15:        allowed = bool((payload.get("l01") or {}).get("asset_managers_weekly_alignment"))
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/direction/investment_policy.py:5:    *, asset_managers_overall, asset_managers_weekly, leveraged_funds_weekly
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/direction/investment_policy.py:7:    overall = coerce_direction(asset_managers_overall)
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/direction/investment_policy.py:8:    am_weekly = coerce_direction(asset_managers_weekly)
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/direction/investment_policy.py:9:    lf_weekly = coerce_direction(leveraged_funds_weekly)
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/direction/investment_policy.py:16:        "governing_source": "asset_managers_overall",
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/direction/investment_policy.py:18:        "asset_managers_weekly_alignment": weekly_aligned,
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/direction/investment_policy.py:20:        "leveraged_funds_weekly_alignment": stability_aligned,
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/direction/l01_tdl_medium_long.py:15:        asset_managers_overall=payload.get("asset_managers_overall"),
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/direction/l01_tdl_medium_long.py:16:        asset_managers_weekly=payload.get("asset_managers_weekly"),
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/direction/l01_tdl_medium_long.py:17:        leveraged_funds_weekly=payload.get("leveraged_funds_weekly"),
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/tests/test_orchestrator_smoke.py:18:            "asset_managers_overall": "bullish",
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/tests/test_orchestrator_smoke.py:19:            "asset_managers_weekly": "bullish",
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/tests/test_orchestrator_smoke.py:20:            "leveraged_funds_weekly": "bullish",
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/tests/test_logic.py:10:            asset_managers_overall="bullish",
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/tests/test_logic.py:11:            asset_managers_weekly="bearish",
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/tests/test_logic.py:12:            leveraged_funds_weekly="bearish",
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/tests/test_logic.py:20:            asset_managers_overall="bullish",
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/tests/test_logic.py:21:            asset_managers_weekly="bullish",
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/tests/test_logic.py:22:            leveraged_funds_weekly="bearish",
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/tests/test_logic.py:35:            asset_managers_overall="bearish",
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/tests/test_logic.py:36:            asset_managers_weekly="bullish",
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/tests/test_logic.py:37:            leveraged_funds_weekly="bullish",
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/tests/test_logic.py:42:            asset_managers_overall="bullish",
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/tests/test_logic.py:43:            asset_managers_weekly="bullish",
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/tests/test_logic.py:44:            leveraged_funds_weekly="bullish",
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/tests/test_logic.py:47:        self.assertFalse(enhanced["leveraged_funds_overall_used"])
+/home/nawaf511/empire-core-new/backend/_backups/DEV002E_docs_policy_intake_20260628_002836/governance/NDSP_FINAL_GOVERNANCE_ALL_POLICIES_LOCKED.json:151:        "Asset Managers"
+/home/nawaf511/empire-core-new/backend/_backups/DEV002E_docs_policy_intake_20260628_002836/governance/NDSP_FINAL_GOVERNANCE_ALL_POLICIES_LOCKED.json:163:        "Leveraged Funds"
+/home/nawaf511/empire-core-new/backend/_backups/DEV002E_docs_policy_intake_20260628_002836/governance/NDSP_FINAL_GOVERNANCE_ALL_POLICIES_LOCKED.json:194:        "Asset Managers"
+/home/nawaf511/empire-core-new/backend/_backups/DEV002E_docs_policy_intake_20260628_002836/governance/NDSP_FINAL_GOVERNANCE_ALL_POLICIES_LOCKED.json:200:        "Leveraged Funds"
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/backend/research/tdl_lab/tdl_lab_engine.py:14:    "monday": "ASSET_MANAGERS",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/backend/research/tdl_lab/tdl_lab_engine.py:15:    "tuesday": "LEVERAGED_FUNDS",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/backend/research/tdl_lab/tdl_lab_engine.py:16:    "wednesday": "LEVERAGED_FUNDS",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/backend/research/tdl_lab/tdl_lab_engine.py:17:    "thursday": "LEVERAGED_FUNDS",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/backend/research/tdl_lab/tdl_lab_engine.py:18:    "friday": "ASSET_MANAGERS",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/backend/research/tdl_lab/tdl_lab_engine.py:19:    "saturday": "LEVERAGED_FUNDS_CRYPTO_ONLY",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/backend/research/tdl_lab/tdl_lab_engine.py:20:    "sunday": "LEVERAGED_FUNDS_CRYPTO_ONLY",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/backend/research/tdl_lab/tdl_lab_engine.py:24:    "M1": "Asset Managers فقط",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/backend/research/tdl_lab/tdl_lab_engine.py:25:    "M2": "Asset Managers + Other Reportables",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/backend/research/tdl_lab/tdl_lab_engine.py:26:    "M3": "Asset Managers + Nonreportable",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/backend/research/tdl_lab/tdl_lab_engine.py:27:    "M4": "Asset Managers + Other Reportables + Nonreportable",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/backend/research/tdl_lab/tdl_lab_engine.py:31:    "S1": "Leveraged Funds فقط",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/backend/research/tdl_lab/tdl_lab_engine.py:32:    "S2": "Leveraged Funds + Dealer/Intermediary",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/backend/research/tdl_lab/tdl_lab_engine.py:33:    "S3": "Leveraged Funds - Dealer/Intermediary",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/backend/research/tdl_lab/tdl_lab_engine.py:34:    "S4": "Leveraged Funds مع Dealer كفلتر تأكيد",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/backend/research/tdl_lab/tdl_lab_engine.py:35:    "S5": "Leveraged Funds مع Dealer كفلتر رفض",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/backend/research/tdl_lab/tdl_lab_engine.py:40:    "T2": "Asset Managers طوال الأسبوع",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/backend/research/tdl_lab/tdl_lab_engine.py:41:    "T3": "Leveraged Funds طوال الأسبوع",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/backend/research/tdl_lab/results/latest.json:8:    "monday": "ASSET_MANAGERS",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/backend/research/tdl_lab/results/latest.json:9:    "tuesday": "LEVERAGED_FUNDS",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/backend/research/tdl_lab/results/latest.json:10:    "wednesday": "LEVERAGED_FUNDS",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/backend/research/tdl_lab/results/latest.json:11:    "thursday": "LEVERAGED_FUNDS",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/backend/research/tdl_lab/results/latest.json:12:    "friday": "ASSET_MANAGERS",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/backend/research/tdl_lab/results/latest.json:13:    "saturday": "LEVERAGED_FUNDS_CRYPTO_ONLY",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/backend/research/tdl_lab/results/latest.json:14:    "sunday": "LEVERAGED_FUNDS_CRYPTO_ONLY"
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/backend/research/tdl_lab/results/latest.json:18:      "M1": "Asset Managers فقط",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/backend/research/tdl_lab/results/latest.json:19:      "M2": "Asset Managers + Other Reportables",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/backend/research/tdl_lab/results/latest.json:20:      "M3": "Asset Managers + Nonreportable",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/backend/research/tdl_lab/results/latest.json:21:      "M4": "Asset Managers + Other Reportables + Nonreportable"
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/backend/research/tdl_lab/results/latest.json:24:      "S1": "Leveraged Funds فقط",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/backend/research/tdl_lab/results/latest.json:25:      "S2": "Leveraged Funds + Dealer/Intermediary",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/backend/research/tdl_lab/results/latest.json:26:      "S3": "Leveraged Funds - Dealer/Intermediary",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/backend/research/tdl_lab/results/latest.json:27:      "S4": "Leveraged Funds مع Dealer كفلتر تأكيد",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/backend/research/tdl_lab/results/latest.json:28:      "S5": "Leveraged Funds مع Dealer كفلتر رفض"
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/backend/research/tdl_lab/results/latest.json:32:      "T2": "Asset Managers طوال الأسبوع",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/backend/research/tdl_lab/results/latest.json:33:      "T3": "Leveraged Funds طوال الأسبوع",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/research/admin-console-published-pages/tdl-lab-latest.json:8:    "monday": "ASSET_MANAGERS",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/research/admin-console-published-pages/tdl-lab-latest.json:9:    "tuesday": "LEVERAGED_FUNDS",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/research/admin-console-published-pages/tdl-lab-latest.json:10:    "wednesday": "LEVERAGED_FUNDS",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/research/admin-console-published-pages/tdl-lab-latest.json:11:    "thursday": "LEVERAGED_FUNDS",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/research/admin-console-published-pages/tdl-lab-latest.json:12:    "friday": "ASSET_MANAGERS",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/research/admin-console-published-pages/tdl-lab-latest.json:13:    "saturday": "LEVERAGED_FUNDS_CRYPTO_ONLY",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/research/admin-console-published-pages/tdl-lab-latest.json:14:    "sunday": "LEVERAGED_FUNDS_CRYPTO_ONLY"
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/research/admin-console-published-pages/tdl-lab-latest.json:18:      "M1": "Asset Managers فقط",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/research/admin-console-published-pages/tdl-lab-latest.json:19:      "M2": "Asset Managers + Other Reportables",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/research/admin-console-published-pages/tdl-lab-latest.json:20:      "M3": "Asset Managers + Nonreportable",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/research/admin-console-published-pages/tdl-lab-latest.json:21:      "M4": "Asset Managers + Other Reportables + Nonreportable"
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/research/admin-console-published-pages/tdl-lab-latest.json:24:      "S1": "Leveraged Funds فقط",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/research/admin-console-published-pages/tdl-lab-latest.json:25:      "S2": "Leveraged Funds + Dealer/Intermediary",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/research/admin-console-published-pages/tdl-lab-latest.json:26:      "S3": "Leveraged Funds - Dealer/Intermediary",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/research/admin-console-published-pages/tdl-lab-latest.json:27:      "S4": "Leveraged Funds مع Dealer كفلتر تأكيد",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/research/admin-console-published-pages/tdl-lab-latest.json:28:      "S5": "Leveraged Funds مع Dealer كفلتر رفض"
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/research/admin-console-published-pages/tdl-lab-latest.json:32:      "T2": "Asset Managers طوال الأسبوع",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002J_research_data_reference_intake_20260628_004658/research/admin-console-published-pages/tdl-lab-latest.json:33:      "T3": "Leveraged Funds طوال الأسبوع",
+/home/nawaf511/empire-core-new/backend/_backups/DEV002E_hotfix_placeholder_scan_20260628_002936/governance/NDSP_FINAL_GOVERNANCE_ALL_POLICIES_LOCKED.json:151:        "Asset Managers"
+/home/nawaf511/empire-core-new/backend/_backups/DEV002E_hotfix_placeholder_scan_20260628_002936/governance/NDSP_FINAL_GOVERNANCE_ALL_POLICIES_LOCKED.json:163:        "Leveraged Funds"
+/home/nawaf511/empire-core-new/backend/_backups/DEV002E_hotfix_placeholder_scan_20260628_002936/governance/NDSP_FINAL_GOVERNANCE_ALL_POLICIES_LOCKED.json:194:        "Asset Managers"
+/home/nawaf511/empire-core-new/backend/_backups/DEV002E_hotfix_placeholder_scan_20260628_002936/governance/NDSP_FINAL_GOVERNANCE_ALL_POLICIES_LOCKED.json:200:        "Leveraged Funds"
+/home/nawaf511/empire-core-new/backend/shared/tdl_day_logic_v2.py:5:        "monday": {"controller": "ASSET_MANAGERS", "mode": "weekly_anchor"},
+/home/nawaf511/empire-core-new/backend/shared/tdl_day_logic_v2.py:6:        "tuesday": {"controller": "LEVERAGED_FUNDS", "mode": "tactical_structure"},
+/home/nawaf511/empire-core-new/backend/shared/tdl_day_logic_v2.py:7:        "wednesday": {"controller": "LEVERAGED_FUNDS", "mode": "tactical_structure"},
+/home/nawaf511/empire-core-new/backend/shared/tdl_day_logic_v2.py:8:        "thursday": {"controller": "LEVERAGED_FUNDS", "mode": "tactical_structure"},
+/home/nawaf511/empire-core-new/backend/shared/tdl_day_logic_v2.py:9:        "friday": {"controller": "ASSET_MANAGERS", "mode": "weekly_anchor"},
+/home/nawaf511/empire-core-new/backend/shared/tdl_day_logic_v2.py:10:        "saturday": {"controller": "LEVERAGED_FUNDS", "mode": "crypto_only", "applies_to": ["CRYPTO"]},
+/home/nawaf511/empire-core-new/backend/shared/tdl_day_logic_v2.py:11:        "sunday": {"controller": "LEVERAGED_FUNDS", "mode": "crypto_only", "applies_to": ["CRYPTO"]},
+/home/nawaf511/empire-core-new/backend/shared/tdl_day_logic_v2.js:7:    monday: { controller: 'ASSET_MANAGERS', mode: 'weekly_anchor' },
+/home/nawaf511/empire-core-new/backend/shared/tdl_day_logic_v2.js:8:    tuesday: { controller: 'LEVERAGED_FUNDS', mode: 'tactical_structure' },
+/home/nawaf511/empire-core-new/backend/shared/tdl_day_logic_v2.js:9:    wednesday: { controller: 'LEVERAGED_FUNDS', mode: 'tactical_structure' },
+/home/nawaf511/empire-core-new/backend/shared/tdl_day_logic_v2.js:10:    thursday: { controller: 'LEVERAGED_FUNDS', mode: 'tactical_structure' },
+/home/nawaf511/empire-core-new/backend/shared/tdl_day_logic_v2.js:11:    friday: { controller: 'ASSET_MANAGERS', mode: 'weekly_anchor' },
+/home/nawaf511/empire-core-new/backend/shared/tdl_day_logic_v2.js:12:    saturday: { controller: 'LEVERAGED_FUNDS', mode: 'crypto_only', applies_to: ['CRYPTO'] },
+/home/nawaf511/empire-core-new/backend/shared/tdl_day_logic_v2.js:13:    sunday: { controller: 'LEVERAGED_FUNDS', mode: 'crypto_only', applies_to: ['CRYPTO'] }
+/home/nawaf511/empire-core-new/backend/shared/tdl_day_logic_v2.json:8:      "controller": "ASSET_MANAGERS",
+/home/nawaf511/empire-core-new/backend/shared/tdl_day_logic_v2.json:13:      "controller": "LEVERAGED_FUNDS",
+/home/nawaf511/empire-core-new/backend/shared/tdl_day_logic_v2.json:18:      "controller": "LEVERAGED_FUNDS",
+/home/nawaf511/empire-core-new/backend/shared/tdl_day_logic_v2.json:23:      "controller": "LEVERAGED_FUNDS",
+/home/nawaf511/empire-core-new/backend/shared/tdl_day_logic_v2.json:28:      "controller": "ASSET_MANAGERS",
+/home/nawaf511/empire-core-new/backend/shared/tdl_day_logic_v2.json:33:      "controller": "LEVERAGED_FUNDS",
+/home/nawaf511/empire-core-new/backend/shared/tdl_day_logic_v2.json:39:      "controller": "LEVERAGED_FUNDS",
+/home/nawaf511/empire-core-new/backend/shared/tdl_day_logic_v2.json:47:    "crypto_weekend_controller": "LEVERAGED_FUNDS",
+/home/nawaf511/empire-core-new/backend/shared/tdl_day_logic_v2.json:48:    "asset_managers_days": ["monday", "friday"],
+/home/nawaf511/empire-core-new/backend/shared/tdl_day_logic_v2.json:49:    "leveraged_funds_days": ["tuesday", "wednesday", "thursday"],
+/home/nawaf511/empire-core-new/backend/research/tdl_lab/tdl_lab_engine.py:14:    "monday": "ASSET_MANAGERS",
+/home/nawaf511/empire-core-new/backend/research/tdl_lab/tdl_lab_engine.py:15:    "tuesday": "LEVERAGED_FUNDS",
+/home/nawaf511/empire-core-new/backend/research/tdl_lab/tdl_lab_engine.py:16:    "wednesday": "LEVERAGED_FUNDS",
+/home/nawaf511/empire-core-new/backend/research/tdl_lab/tdl_lab_engine.py:17:    "thursday": "LEVERAGED_FUNDS",
+/home/nawaf511/empire-core-new/backend/research/tdl_lab/tdl_lab_engine.py:18:    "friday": "ASSET_MANAGERS",
+/home/nawaf511/empire-core-new/backend/research/tdl_lab/tdl_lab_engine.py:19:    "saturday": "LEVERAGED_FUNDS_CRYPTO_ONLY",
+/home/nawaf511/empire-core-new/backend/research/tdl_lab/tdl_lab_engine.py:20:    "sunday": "LEVERAGED_FUNDS_CRYPTO_ONLY",
+/home/nawaf511/empire-core-new/backend/research/tdl_lab/tdl_lab_engine.py:24:    "M1": "Asset Managers فقط",
+/home/nawaf511/empire-core-new/backend/research/tdl_lab/tdl_lab_engine.py:25:    "M2": "Asset Managers + Other Reportables",
+/home/nawaf511/empire-core-new/backend/research/tdl_lab/tdl_lab_engine.py:26:    "M3": "Asset Managers + Nonreportable",
+/home/nawaf511/empire-core-new/backend/research/tdl_lab/tdl_lab_engine.py:27:    "M4": "Asset Managers + Other Reportables + Nonreportable",
+/home/nawaf511/empire-core-new/backend/research/tdl_lab/tdl_lab_engine.py:31:    "S1": "Leveraged Funds فقط",
+/home/nawaf511/empire-core-new/backend/research/tdl_lab/tdl_lab_engine.py:32:    "S2": "Leveraged Funds + Dealer/Intermediary",
+/home/nawaf511/empire-core-new/backend/research/tdl_lab/tdl_lab_engine.py:33:    "S3": "Leveraged Funds - Dealer/Intermediary",
+/home/nawaf511/empire-core-new/backend/research/tdl_lab/tdl_lab_engine.py:34:    "S4": "Leveraged Funds مع Dealer كفلتر تأكيد",
+/home/nawaf511/empire-core-new/backend/research/tdl_lab/tdl_lab_engine.py:35:    "S5": "Leveraged Funds مع Dealer كفلتر رفض",
+/home/nawaf511/empire-core-new/backend/research/tdl_lab/tdl_lab_engine.py:40:    "T2": "Asset Managers طوال الأسبوع",
+/home/nawaf511/empire-core-new/backend/research/tdl_lab/tdl_lab_engine.py:41:    "T3": "Leveraged Funds طوال الأسبوع",
+/home/nawaf511/empire-core-new/backend/research/tdl_lab/results/latest.json:8:    "monday": "ASSET_MANAGERS",
+/home/nawaf511/empire-core-new/backend/research/tdl_lab/results/latest.json:9:    "tuesday": "LEVERAGED_FUNDS",
+/home/nawaf511/empire-core-new/backend/research/tdl_lab/results/latest.json:10:    "wednesday": "LEVERAGED_FUNDS",
+/home/nawaf511/empire-core-new/backend/research/tdl_lab/results/latest.json:11:    "thursday": "LEVERAGED_FUNDS",
+/home/nawaf511/empire-core-new/backend/research/tdl_lab/results/latest.json:12:    "friday": "ASSET_MANAGERS",
+/home/nawaf511/empire-core-new/backend/research/tdl_lab/results/latest.json:13:    "saturday": "LEVERAGED_FUNDS_CRYPTO_ONLY",
+/home/nawaf511/empire-core-new/backend/research/tdl_lab/results/latest.json:14:    "sunday": "LEVERAGED_FUNDS_CRYPTO_ONLY"
+/home/nawaf511/empire-core-new/backend/research/tdl_lab/results/latest.json:18:      "M1": "Asset Managers فقط",
+/home/nawaf511/empire-core-new/backend/research/tdl_lab/results/latest.json:19:      "M2": "Asset Managers + Other Reportables",
+/home/nawaf511/empire-core-new/backend/research/tdl_lab/results/latest.json:20:      "M3": "Asset Managers + Nonreportable",
+/home/nawaf511/empire-core-new/backend/research/tdl_lab/results/latest.json:21:      "M4": "Asset Managers + Other Reportables + Nonreportable"
+/home/nawaf511/empire-core-new/backend/research/tdl_lab/results/latest.json:24:      "S1": "Leveraged Funds فقط",
+/home/nawaf511/empire-core-new/backend/research/tdl_lab/results/latest.json:25:      "S2": "Leveraged Funds + Dealer/Intermediary",
+/home/nawaf511/empire-core-new/backend/research/tdl_lab/results/latest.json:26:      "S3": "Leveraged Funds - Dealer/Intermediary",
+/home/nawaf511/empire-core-new/backend/research/tdl_lab/results/latest.json:27:      "S4": "Leveraged Funds مع Dealer كفلتر تأكيد",
+/home/nawaf511/empire-core-new/backend/research/tdl_lab/results/latest.json:28:      "S5": "Leveraged Funds مع Dealer كفلتر رفض"
+/home/nawaf511/empire-core-new/backend/research/tdl_lab/results/latest.json:32:      "T2": "Asset Managers طوال الأسبوع",
+/home/nawaf511/empire-core-new/backend/research/tdl_lab/results/latest.json:33:      "T3": "Leveraged Funds طوال الأسبوع",
+/home/nawaf511/empire-core-new/backend/ndsp_tdl_trade_horizon_addons.cjs:16:  - L&M primary: Asset Managers
+/home/nawaf511/empire-core-new/backend/ndsp_tdl_trade_horizon_addons.cjs:18:  - S primary: Leveraged Funds
+/home/nawaf511/empire-core-new/backend/ndsp_tdl_trade_horizon_addons.cjs:34:    primary_sources: ['Asset Managers'],
+/home/nawaf511/empire-core-new/backend/ndsp_tdl_trade_horizon_addons.cjs:40:    primary_sources: ['Leveraged Funds'],
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:263:    asset_manager_days = {"monday", "mon", "friday", "fri", "الاثنين", "الإثنين", "الجمعة"}
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:267:    if day in asset_manager_days:
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:268:        group = "ASSET_MANAGERS"
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:273:        group = "LEVERAGED_FUNDS"
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:278:        group = "LEVERAGED_FUNDS"
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:446:        "asset_managers": [
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:447:            "asset_managers", "asset_manager", "asset_manager_institutional",
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:450:        "leveraged_funds": [
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:451:            "leveraged_funds", "leveraged", "lev_funds", "speculative",
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:474:        if g == "asset_managers":
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:477:                    f"raw_cot_asset_managers_{k}",
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:478:                    f"context_asset_managers_{k}",
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:479:                    f"asset_managers_{k}",
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:484:        if g == "leveraged_funds":
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:487:                    f"raw_cot_leveraged_funds_{k}",
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:488:                    f"context_leveraged_funds_{k}",
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:489:                    f"leveraged_funds_{k}",
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:560:    long_term_group = "ASSET_MANAGERS"
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:561:    short_term_group = "LEVERAGED_FUNDS"
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:563:    am = _ndsp_extract_group_numbers(payload, "asset_managers")
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:564:    lf = _ndsp_extract_group_numbers(payload, "leveraged_funds")
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:568:        str(_get(payload, "asset_managers_bias", "long_term_bias", default="NEUTRAL")).upper(),
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:573:        str(_get(payload, "leveraged_funds_bias", "speculative_bias", default="NEUTRAL")).upper(),
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:598:        "asset_managers_long": am.get("long"),
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:599:        "asset_managers_short": am.get("short"),
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:600:        "asset_managers_change_long": am.get("change_long"),
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:601:        "asset_managers_change_short": am.get("change_short"),
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:603:        "leveraged_funds_long": lf.get("long"),
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:604:        "leveraged_funds_short": lf.get("short"),
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:605:        "leveraged_funds_change_long": lf.get("change_long"),
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:606:        "leveraged_funds_change_short": lf.get("change_short"),
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:608:        "asset_managers_overall_direction": am_overall,
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:609:        "asset_managers_overall_direction_ar": _ndsp_bias_ar(am_overall),
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:610:        "asset_managers_overall_comparison": am_overall_net,
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:612:        "asset_managers_weekly_direction": am_weekly,
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:613:        "asset_managers_weekly_direction_ar": _ndsp_weekly_bias_ar_with_scope(am_weekly, am_overall, movement_type),
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:614:        "asset_managers_weekly_comparison": am_weekly_delta,
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:615:        "asset_managers_weekly_scope": "NARROW_CORRECTIVE_HORIZON" if movement_type == "WEEKLY_CORRECTION" else "DIRECTIONAL_CONTINUATION_OR_NEUTRAL",
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:616:        "asset_managers_weekly_scope_ar": "غير صريح / ذو أفق ضيق" if movement_type == "WEEKLY_CORRECTION" else "اتجاه مباشر أو محايد",
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:618:        "leveraged_funds_overall_direction": lf_overall,
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:619:        "leveraged_funds_overall_direction_ar": _ndsp_bias_ar(lf_overall),
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:620:        "leveraged_funds_overall_comparison": lf_overall_net,
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:622:        "leveraged_funds_weekly_direction": lf_weekly,
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:623:        "leveraged_funds_weekly_direction_ar": _ndsp_bias_ar(lf_weekly),
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:624:        "leveraged_funds_weekly_comparison": lf_weekly_delta,
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:644:        "raw_cot_report_date": _get(payload, "raw_cot_report_date", "cot_report_date", default=None),
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:680:    overall_direction = str(_get(payload, "asset_managers_overall_direction", "long_term_bias", default="NEUTRAL")).upper()
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:681:    weekly_direction = str(_get(payload, "asset_managers_weekly_direction", "weekly_operational_bias", default="NEUTRAL")).upper()
+/home/nawaf511/empire-core-new/backend/ndsp_latest_16_layers_logic_functions.py:762:    overall_direction = str(_get(payload, "overall_trend_direction", "asset_managers_overall_direction", default="NEUTRAL")).upper()
+/home/nawaf511/empire-core-new/backend/app/support_layers/cot/test_cot_v6_1_storage.py:33:            report_date="2026-05-12",
+/home/nawaf511/empire-core-new/backend/app/support_layers/cot/test_cot_v6_1_storage.py:55:            report_date="2026-05-12",
+/home/nawaf511/empire-core-new/backend/app/support_layers/cot/manual_cot_provider.py:15:        report_date: str,
+/home/nawaf511/empire-core-new/backend/app/support_layers/cot/manual_cot_provider.py:24:            report_date=report_date,
+/home/nawaf511/empire-core-new/backend/app/support_layers/cot/manual_cot_provider.py:54:        report_date="2026-05-12",
+/home/nawaf511/empire-core-new/backend/app/support_layers/cot/manual_cot_provider.py:65:        report_date="2026-05-12",
+/home/nawaf511/empire-core-new/backend/app/support_layers/cot/manual_cot_provider.py:76:        report_date="2026-05-12",
+/home/nawaf511/empire-core-new/backend/app/support_layers/cot/manual_cot_provider.py:87:        report_date="2026-05-12",
+/home/nawaf511/empire-core-new/backend/app/support_layers/cot/cftc_auto_provider.py:47:            report_date="2026-05-12",
+/home/nawaf511/empire-core-new/backend/app/support_layers/cot/cot_engine.py:69:            report_date=snapshot.report_date,
+/home/nawaf511/empire-core-new/backend/app/support_layers/cot/cot_contracts.py:54:    report_date: str
+/home/nawaf511/empire-core-new/backend/app/support_layers/cot/cot_contracts.py:72:    report_date: str
+/home/nawaf511/empire-core-new/backend/app/support_layers/cot/cot_storage.py:60:        report_date: str,
+/home/nawaf511/empire-core-new/backend/app/support_layers/cot/cot_storage.py:83:            "report_date": report_date,
+/home/nawaf511/empire-core-new/backend/app/support_layers/cot/cot_storage.py:150:            report_date=record["report_date"],
+/home/nawaf511/empire-core-new/backend/app/support_layers/cot/cot_storage.py:169:        "report_date": snapshot.report_date,
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_canonical_live_runtime_v30.py:168:    "asset_managers_overall": {
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_canonical_live_runtime_v30.py:169:        "asset_managers_overall", "asset_managers_overall_direction",
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_canonical_live_runtime_v30.py:173:    "asset_managers_weekly": {
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_canonical_live_runtime_v30.py:174:        "asset_managers_weekly", "asset_managers_weekly_direction",
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_canonical_live_runtime_v30.py:175:        "am_weekly", "am_weekly_direction", "asset_manager_weekly_direction",
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_canonical_live_runtime_v30.py:177:    "leveraged_funds_weekly": {
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_canonical_live_runtime_v30.py:178:        "leveraged_funds_weekly", "leveraged_funds_weekly_direction",
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_canonical_live_runtime_v30.py:226:    report_date = None
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_canonical_live_runtime_v30.py:230:        if report_date is None and low in {
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_canonical_live_runtime_v30.py:231:            "report_as_of_date", "report_date", "as_of_date", "cot_report_date"
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_canonical_live_runtime_v30.py:233:            report_date = str(value or "").strip() or None
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_canonical_live_runtime_v30.py:249:    verified = bool(complete and report_date and timestamp and age_hours is not None and age_hours <= 168)
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_canonical_live_runtime_v30.py:255:        "report_as_of_date": report_date,
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_canonical_live_runtime_v30.py:486:        "asset_managers_overall": cot_directions.get("asset_managers_overall"),
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_canonical_live_runtime_v30.py:487:        "asset_managers_weekly": cot_directions.get("asset_managers_weekly"),
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_canonical_live_runtime_v30.py:488:        "leveraged_funds_weekly": cot_directions.get("leveraged_funds_weekly"),
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v201_launch_completion.py:112:    overall = directions.get("asset_managers_overall")
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v201_launch_completion.py:113:    am_weekly = directions.get("asset_managers_weekly")
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v201_launch_completion.py:114:    lf_weekly = directions.get("leveraged_funds_weekly")
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v201_launch_completion.py:117:        asset_managers_overall=overall,
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v201_launch_completion.py:118:        asset_managers_weekly=am_weekly,
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v201_launch_completion.py:119:        leveraged_funds_weekly=lf_weekly,
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v201_launch_completion.py:122:        asset_managers_overall=overall,
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v201_launch_completion.py:123:        asset_managers_weekly=am_weekly,
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v201_launch_completion.py:124:        leveraged_funds_weekly=lf_weekly,
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v201_launch_completion.py:135:                f"governing={overall}; asset_managers_weekly={am_weekly}; "
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v201_launch_completion.py:136:                f"leveraged_funds_weekly={lf_weekly}; correction={investment['correction_state']}"
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v201_launch_completion.py:147:            allowed = bool(investment["asset_managers_weekly_alignment"])
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v201_launch_completion.py:153:                "evidence": "investment weekly correction gate derived from current and weekly Asset Manager directions",
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v201_launch_completion.py:278:        "asset_managers_overall": _normalize_direction(
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v201_launch_completion.py:279:            raw.get("asset_managers_overall_direction") or raw.get("asset_managers_bias")
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v201_launch_completion.py:281:        "asset_managers_weekly": _normalize_direction(raw.get("asset_managers_weekly_direction")),
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v201_launch_completion.py:282:        "leveraged_funds_weekly": _normalize_direction(raw.get("leveraged_funds_weekly_direction")),
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v201_launch_completion.py:300:        "report_date": raw.get("report_date"),
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v201_launch_completion.py:323:    data["asset_managers_overall_direction"] = directions["asset_managers_overall"]
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v201_launch_completion.py:324:    data["asset_managers_weekly_direction"] = directions["asset_managers_weekly"]
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v201_launch_completion.py:325:    data["leveraged_funds_weekly_direction"] = directions["leveraged_funds_weekly"]
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v201_launch_completion.py:334:            "source_report_date": raw.get("report_date"),
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v201_launch_completion.py:430:        directions.get("asset_managers_overall")
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v201_launch_completion.py:432:        else directions.get("leveraged_funds_weekly")
+/home/nawaf511/empire-core-new/backend/intelligence/cot-direction/coalitions.js:4:  ASSET_MANAGERS_OTHER: Object.freeze([
+/home/nawaf511/empire-core-new/backend/intelligence/cot-direction/coalitions.js:5:    'ASSET_MANAGERS',
+/home/nawaf511/empire-core-new/backend/intelligence/cot-direction/coalitions.js:9:  LEVERAGED_FUNDS_OTHER: Object.freeze([
+/home/nawaf511/empire-core-new/backend/intelligence/cot-direction/coalitions.js:10:    'LEVERAGED_FUNDS',
+/home/nawaf511/empire-core-new/backend/intelligence/cot-direction/coalitions.js:60:  const assetManagersOther = analyzeNamedCoalition(
+/home/nawaf511/empire-core-new/backend/intelligence/cot-direction/coalitions.js:61:    'ASSET_MANAGERS_OTHER',
+/home/nawaf511/empire-core-new/backend/intelligence/cot-direction/coalitions.js:65:  const leveragedFundsOther = analyzeNamedCoalition(
+/home/nawaf511/empire-core-new/backend/intelligence/cot-direction/coalitions.js:66:    'LEVERAGED_FUNDS_OTHER',
+/home/nawaf511/empire-core-new/backend/intelligence/cot-direction/coalitions.js:71:    assetManagersOther,
+/home/nawaf511/empire-core-new/backend/intelligence/cot-direction/coalitions.js:72:    leveragedFundsOther,
+/home/nawaf511/empire-core-new/backend/intelligence/cot-direction/coalitions.js:76:        assetManagersOther.direction ===
+/home/nawaf511/empire-core-new/backend/intelligence/cot-direction/coalitions.js:77:        leveragedFundsOther.direction,
+/home/nawaf511/empire-core-new/backend/intelligence/cot-direction/coalitions.js:80:        assetManagersOther.clarity ===
+/home/nawaf511/empire-core-new/backend/intelligence/cot-direction/coalitions.js:81:        leveragedFundsOther.clarity,
+/home/nawaf511/empire-core-new/backend/intelligence/cot-direction/coalitions.js:84:        assetManagersOther.horizon ===
+/home/nawaf511/empire-core-new/backend/intelligence/cot-direction/coalitions.js:85:        leveragedFundsOther.horizon,
+/home/nawaf511/empire-core-new/backend/venv/lib64/python3.12/site-packages/yfinance/scrapers/holders.py:118:            df["reportDate"] = pd.to_datetime(df["reportDate"], unit="s")
+/home/nawaf511/empire-core-new/backend/venv/lib64/python3.12/site-packages/yfinance/scrapers/holders.py:119:            df.rename(columns={"reportDate": "Date Reported", "organization": "Holder", "position": "Shares", "value": "Value"}, inplace=True)  # "pctHeld": "% Out"
+/home/nawaf511/empire-core-new/backend/venv/lib64/python3.12/site-packages/yfinance/scrapers/holders.py:130:            df["reportDate"] = pd.to_datetime(df["reportDate"], unit="s")
+/home/nawaf511/empire-core-new/backend/venv/lib64/python3.12/site-packages/yfinance/scrapers/holders.py:131:            df.rename(columns={"reportDate": "Date Reported", "organization": "Holder", "position": "Shares", "value": "Value"}, inplace=True)
+/home/nawaf511/empire-core-new/backend/venv/lib64/python3.12/site-packages/yfinance/scrapers/holders.py:142:            df["reportDate"] = pd.to_datetime(df["reportDate"], unit="s")
+/home/nawaf511/empire-core-new/backend/venv/lib64/python3.12/site-packages/yfinance/scrapers/holders.py:143:            df.rename(columns={"reportDate": "Date Reported", "organization": "Holder", "positionDirect": "Shares", "valueDirect": "Value"}, inplace=True)
+/home/nawaf511/empire-core-new/backend/venv/lib64/python3.12/site-packages/pygments/lexers/teal.py:41:        'ConfigAssetMetadataHash', 'ConfigAssetManager', 'ConfigAssetReserve',
+/home/nawaf511/empire-core-new/backend/venv/lib64/python3.12/site-packages/pygments/lexers/teal.py:50:        'AssetName', 'AssetURL', 'AssetMetadataHash', 'AssetManager',
+/home/nawaf511/empire-core-new/backend/venv/lib/python3.12/site-packages/yfinance/scrapers/holders.py:118:            df["reportDate"] = pd.to_datetime(df["reportDate"], unit="s")
+/home/nawaf511/empire-core-new/backend/venv/lib/python3.12/site-packages/yfinance/scrapers/holders.py:119:            df.rename(columns={"reportDate": "Date Reported", "organization": "Holder", "position": "Shares", "value": "Value"}, inplace=True)  # "pctHeld": "% Out"
+/home/nawaf511/empire-core-new/backend/venv/lib/python3.12/site-packages/yfinance/scrapers/holders.py:130:            df["reportDate"] = pd.to_datetime(df["reportDate"], unit="s")
+/home/nawaf511/empire-core-new/backend/venv/lib/python3.12/site-packages/yfinance/scrapers/holders.py:131:            df.rename(columns={"reportDate": "Date Reported", "organization": "Holder", "position": "Shares", "value": "Value"}, inplace=True)
+/home/nawaf511/empire-core-new/backend/venv/lib/python3.12/site-packages/yfinance/scrapers/holders.py:142:            df["reportDate"] = pd.to_datetime(df["reportDate"], unit="s")
+/home/nawaf511/empire-core-new/backend/venv/lib/python3.12/site-packages/yfinance/scrapers/holders.py:143:            df.rename(columns={"reportDate": "Date Reported", "organization": "Holder", "positionDirect": "Shares", "valueDirect": "Value"}, inplace=True)
+/home/nawaf511/empire-core-new/backend/venv/lib/python3.12/site-packages/pygments/lexers/teal.py:41:        'ConfigAssetMetadataHash', 'ConfigAssetManager', 'ConfigAssetReserve',
+/home/nawaf511/empire-core-new/backend/venv/lib/python3.12/site-packages/pygments/lexers/teal.py:50:        'AssetName', 'AssetURL', 'AssetMetadataHash', 'AssetManager',
+/home/nawaf511/empire-core-new/backend/auth_api/ndsp_tdl_trade_horizon_addons.cjs:16:  - L&M primary: Asset Managers
+/home/nawaf511/empire-core-new/backend/auth_api/ndsp_tdl_trade_horizon_addons.cjs:18:  - S primary: Leveraged Funds
+/home/nawaf511/empire-core-new/backend/auth_api/ndsp_tdl_trade_horizon_addons.cjs:34:    primary_sources: ['Asset Managers'],
+/home/nawaf511/empire-core-new/backend/auth_api/ndsp_tdl_trade_horizon_addons.cjs:40:    primary_sources: ['Leveraged Funds'],

@@ -1,0 +1,17 @@
+{
+  "marketSymbol": "GOLD",
+  "reportDate": "2026-08-04",
+  "coalitionKey": "ASSET_MANAGERS_OTHER",
+  "participants": [
+    {
+      "participant": "ASSET_MANAGERS",
+      "longChange": 2,
+      "shortChange": -2
+    },
+    {
+      "participant": "OTHER_REPORTABLES",
+      "longChange": 1,
+      "shortChange": 1
+    }
+  ]
+}

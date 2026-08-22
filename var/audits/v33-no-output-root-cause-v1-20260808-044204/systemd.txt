@@ -1,0 +1,9 @@
+MainPID=2402283
+ExecMainPID=2402283
+ExecMainStatus=0
+ExecStart={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_canonical_live_runtime_v33.py ; ignore_errors=no ; start_time=[Sat 2026-08-08 04:38:11 CEST] ; stop_time=[n/a] ; pid=2402283 ; code=(null) ; status=0/0 }
+Environment=PYTHONUNBUFFERED=1 PYTHONPATH=/home/nawaf511/empire-core-new NDSP_PROJECT_ROOT=/home/nawaf511/empire-core-new NDSP_UPSTREAM_BASE=http://127.0.0.1:9082 NDSP_CANONICAL_HOST=127.0.0.1 NDSP_CANONICAL_PORT=9086 NDSP_CANONICAL_RUNTIME_DIR=/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33 NDSP_WEB_DATA_DIR=/var/www/ndsp-my/data NDSP_V33_CACHE_TTL_SECONDS=60
+WorkingDirectory=/home/nawaf511/empire-core-new
+ActiveState=active
+SubState=running
+FragmentPath=/etc/systemd/system/ndsp-canonical-live-runtime-v33.service

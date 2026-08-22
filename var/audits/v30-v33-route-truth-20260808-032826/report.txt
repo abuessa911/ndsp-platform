@@ -1,0 +1,335 @@
+=== NDSP V30/V33 ROUTE TRUTH ===
+MODE=READ_ONLY
+
+=== SERVICE STATUS ===
+
+SERVICE=ndsp-quality-live-nmp-wrapper.service
+MainPID=1373772
+ExecStart={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_quality_live_nmp_wrapper.py ; ignore_errors=no ; start_time=[Fri 2026-08-07 23:01:23 CEST] ; stop_time=[n/a] ; pid=1373772 ; code=(null) ; status=0/0 }
+ActiveState=active
+SubState=running
+
+SERVICE=ndsp-canonical-live-runtime-v30.service
+MainPID=2184909
+ExecStart={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_canonical_live_runtime_v30.py ; ignore_errors=no ; start_time=[Sat 2026-08-08 03:27:46 CEST] ; stop_time=[n/a] ; pid=2184909 ; code=(null) ; status=0/0 }
+ActiveState=active
+SubState=running
+
+SERVICE=ndsp-canonical-live-runtime-v33.service
+MainPID=1373828
+ExecStart={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_canonical_live_runtime_v33.py ; ignore_errors=no ; start_time=[Fri 2026-08-07 23:01:23 CEST] ; stop_time=[n/a] ; pid=1373828 ; code=(null) ; status=0/0 }
+ActiveState=active
+SubState=running
+
+=== LISTENERS ===
+State  Recv-Q Send-Q Local Address:Port Peer Address:PortProcess                              
+LISTEN 0      5          127.0.0.1:9082      0.0.0.0:*    users:(("python3",pid=1373772,fd=3))
+LISTEN 0      5          127.0.0.1:9086      0.0.0.0:*    users:(("python3",pid=1373828,fd=3))
+LISTEN 0      5          127.0.0.1:9085      0.0.0.0:*    users:(("python3",pid=2184909,fd=3))
+
+=== STATIC ROUTES V30 ===
+LINE=22 METHOD=get ARGS=['NDSP_CANONICAL_HOST', '127.0.0.1']
+LINE=20 METHOD=get ARGS=['NDSP_PROJECT_ROOT', '/home/nawaf511/empire-core-new']
+LINE=23 METHOD=get ARGS=['NDSP_CANONICAL_PORT', '9085']
+LINE=24 METHOD=get ARGS=['NDSP_CANONICAL_RUNTIME_DIR']
+LINE=28 METHOD=get ARGS=['NDSP_WEB_DATA_DIR', '/var/www/ndsp-my/data']
+LINE=72 METHOD=get ARGS=['unknown']
+LINE=270 METHOD=get ARGS=['scenario_levels']
+LINE=328 METHOD=get ARGS=['live_market_analysis']
+LINE=348 METHOD=get ARGS=['cross_timeframe_divergence']
+LINE=458 METHOD=get ARGS=['momentum_candle']
+LINE=21 METHOD=get ARGS=['NDSP_UPSTREAM_BASE', 'http://127.0.0.1:9082']
+LINE=272 METHOD=get ARGS=['scenario_levels']
+LINE=293 METHOD=get ARGS=['generated_at']
+LINE=298 METHOD=get ARGS=['items']
+LINE=303 METHOD=get ARGS=['source']
+LINE=304 METHOD=get ARGS=['provider']
+LINE=305 METHOD=get ARGS=['generated_at']
+LINE=314 METHOD=get ARGS=['items']
+LINE=327 METHOD=get ARGS=['instrument']
+LINE=330 METHOD=get ARGS=['scenario']
+LINE=331 METHOD=get ARGS=['nmp']
+LINE=345 METHOD=get ARGS=['selected_timeframe_rsi']
+LINE=346 METHOD=get ARGS=['atr_4h_pct']
+LINE=461 METHOD=get ARGS=['rsi']
+LINE=483 METHOD=get ARGS=['market']
+LINE=486 METHOD=get ARGS=['asset_managers_overall']
+LINE=487 METHOD=get ARGS=['asset_managers_weekly']
+LINE=488 METHOD=get ARGS=['leveraged_funds_overall']
+LINE=489 METHOD=get ARGS=['leveraged_funds_weekly']
+LINE=534 METHOD=get ARGS=['generated_at']
+LINE=536 METHOD=get ARGS=['public_contract_version']
+LINE=537 METHOD=get ARGS=['scenario_state']
+LINE=561 METHOD=get ARGS=['layer_id']
+LINE=576 METHOD=get ARGS=['single_truth_state']
+LINE=600 METHOD=get ARGS=['layers']
+LINE=642 METHOD=get ARGS=['scenario']
+LINE=643 METHOD=get ARGS=['nmp']
+LINE=644 METHOD=get ARGS=['golden_alignment']
+LINE=761 METHOD=get ARGS=['ok']
+LINE=265 METHOD=get ARGS=['price']
+LINE=298 METHOD=get ARGS=['items']
+LINE=327 METHOD=get ARGS=['instrument']
+LINE=330 METHOD=get ARGS=['scenario']
+LINE=331 METHOD=get ARGS=['nmp']
+LINE=335 METHOD=get ARGS=['selected_timeframe_direction']
+LINE=336 METHOD=get ARGS=['direction']
+LINE=342 METHOD=get ARGS=['ok', False]
+LINE=347 METHOD=get ARGS=['live_price']
+LINE=347 METHOD=get ARGS=['price']
+LINE=460 METHOD=get ARGS=['open']
+LINE=460 METHOD=get ARGS=['value']
+LINE=462 METHOD=get ARGS=['direction']
+LINE=504 METHOD=get ARGS=['public_contract_version']
+LINE=505 METHOD=get ARGS=['generated_at']
+LINE=506 METHOD=get ARGS=['source_mode']
+LINE=535 METHOD=get ARGS=['provider']
+LINE=535 METHOD=get ARGS=['data_provider']
+LINE=547 METHOD=get ARGS=['ok']
+LINE=566 METHOD=get ARGS=['ok']
+LINE=624 METHOD=get ARGS=['market']
+LINE=625 METHOD=get ARGS=['live_price']
+LINE=630 METHOD=get ARGS=['total_layers_executed', 0]
+LINE=647 METHOD=get ARGS=['public_contract_version']
+LINE=648 METHOD=get ARGS=['generated_at']
+LINE=649 METHOD=get ARGS=['source_mode']
+LINE=683 METHOD=get ARGS=['ok']
+LINE=691 METHOD=get ARGS=['layer_count']
+LINE=693 METHOD=get ARGS=['ok']
+LINE=444 METHOD=get ARGS=['ok', False]
+LINE=562 METHOD=get ARGS=['layers']
+LINE=567 METHOD=get ARGS=['total_layers_executed']
+LINE=604 METHOD=get ARGS=['layer_id']
+LINE=605 METHOD=get ARGS=['canonical_name']
+LINE=606 METHOD=get ARGS=['status']
+LINE=607 METHOD=get ARGS=['confidence']
+LINE=608 METHOD=get ARGS=['blocking']
+LINE=684 METHOD=get ARGS=['ok']
+LINE=690 METHOD=get ARGS=['ok']
+LINE=770 METHOD=get ARGS=['layer_count']
+LINE=272 METHOD=get ARGS=['scenario']
+LINE=609 METHOD=get ARGS=['reasons']
+LINE=610 METHOD=get ARGS=['output']
+LINE=762 METHOD=get ARGS=['errors']
+LINE=624 METHOD=get ARGS=['instrument']
+LINE=625 METHOD=get ARGS=['instrument']
+LINE=315 METHOD=get ARGS=['impact']
+LINE=729 METHOD=get ARGS=['symbol']
+LINE=730 METHOD=get ARGS=['timeframe']
+LINE=731 METHOD=get ARGS=['mode']
+
+=== STATIC ROUTES V33 ===
+LINE=28 METHOD=get ARGS=['NDSP_CANONICAL_HOST', '127.0.0.1']
+LINE=17 METHOD=get ARGS=['NDSP_PROJECT_ROOT', '/home/nawaf511/empire-core-new']
+LINE=29 METHOD=get ARGS=['NDSP_CANONICAL_PORT', '9086']
+LINE=30 METHOD=get ARGS=['NDSP_CANONICAL_RUNTIME_DIR']
+LINE=37 METHOD=get ARGS=['NDSP_V33_CACHE_TTL_SECONDS', '60']
+LINE=678 METHOD=get ARGS=['usd_macro_result']
+LINE=714 METHOD=get ARGS=['risk_result']
+LINE=721 METHOD=get ARGS=['input_matrix']
+LINE=674 METHOD=get ARGS=['scenario_levels']
+LINE=716 METHOD=get ARGS=['blocked']
+LINE=735 METHOD=get ARGS=['provider', 'OHLCV_VOLUME_ONLY']
+LINE=166 METHOD=get ARGS=['timestamp']
+LINE=168 METHOD=get ARGS=['open']
+LINE=169 METHOD=get ARGS=['high']
+LINE=170 METHOD=get ARGS=['low']
+LINE=171 METHOD=get ARGS=['close']
+LINE=172 METHOD=get ARGS=['volume']
+LINE=674 METHOD=get ARGS=['scenario_levels']
+LINE=701 METHOD=get ARGS=['critical_blockers']
+LINE=163 METHOD=get ARGS=['result']
+LINE=532 METHOD=get ARGS=['volumes']
+LINE=710 METHOD=get ARGS=[False]
+LINE=735 METHOD=get ARGS=['order_book', {}]
+LINE=167 METHOD=get ARGS=['quote']
+LINE=500 METHOD=get ARGS=['bids']
+LINE=501 METHOD=get ARGS=['asks']
+LINE=540 METHOD=get ARGS=['levels', 0]
+LINE=541 METHOD=get ARGS=['spread_bps']
+LINE=163 METHOD=get ARGS=['chart']
+LINE=167 METHOD=get ARGS=['indicators']
+
+=== HTTP ROOT / DOC DISCOVERY ===
+
+----- PORT=9085 -----
+PORT=9085 PATH=/ HTTP=404
+PORT=9085 PATH=/health HTTP=200
+PORT=9085 PATH=/healthz HTTP=404
+PORT=9085 PATH=/docs HTTP=404
+PORT=9085 PATH=/openapi.json HTTP=404
+PORT=9085 PATH=/api HTTP=404
+PORT=9085 PATH=/api/health HTTP=200
+PORT=9085 PATH=/api/v1 HTTP=404
+PORT=9085 PATH=/status HTTP=404
+
+----- PORT=9086 -----
+PORT=9086 PATH=/ HTTP=404
+PORT=9086 PATH=/health HTTP=200
+PORT=9086 PATH=/healthz HTTP=404
+PORT=9086 PATH=/docs HTTP=404
+PORT=9086 PATH=/openapi.json HTTP=404
+PORT=9086 PATH=/api HTTP=404
+PORT=9086 PATH=/api/health HTTP=200
+PORT=9086 PATH=/api/v1 HTTP=404
+PORT=9086 PATH=/status HTTP=404
+
+=== OPENAPI ROUTES IF AVAILABLE ===
+PORT=9085 OPENAPI=NOT_FOUND
+PORT=9086 OPENAPI=NOT_FOUND
+
+=== V30 PATCH PRESENCE ON DISK ===
+488:        "leveraged_funds_overall": cot_directions.get("leveraged_funds_overall"),
+
+=== V30 RECENT JOURNAL ===
+أغسطس 01 00:12:08 vmi2934783 python3[2978623]: 2026-07-31T22:12:08.378729Z client=127.0.0.1 "GET /api/payments/nowpayments/subscription/status HTTP/1.1" 404 -
+أغسطس 01 00:12:09 vmi2934783 python3[2978623]: 2026-07-31T22:12:09.878717Z client=127.0.0.1 "GET /api/ndsp/compat/health HTTP/1.1" 404 -
+أغسطس 01 00:12:11 vmi2934783 python3[2978623]: 2026-07-31T22:12:11.440010Z client=127.0.0.1 "GET /api/v6/payments/nowpayments/subscription/status HTTP/1.1" 404 -
+أغسطس 01 00:12:13 vmi2934783 python3[2978623]: 2026-07-31T22:12:13.190932Z client=127.0.0.1 "GET /api/user/alert-preferences HTTP/1.1" 404 -
+أغسطس 01 00:12:14 vmi2934783 python3[2978623]: 2026-07-31T22:12:14.468853Z client=127.0.0.1 "GET /version HTTP/1.1" 404 -
+أغسطس 01 00:12:15 vmi2934783 python3[2978623]: 2026-07-31T22:12:15.939937Z client=127.0.0.1 "GET /api/auth/login/health HTTP/1.1" 404 -
+أغسطس 01 00:12:17 vmi2934783 python3[2978623]: 2026-07-31T22:12:17.388778Z client=127.0.0.1 "GET /status HTTP/1.1" 404 -
+أغسطس 01 00:12:18 vmi2934783 python3[2978623]: 2026-07-31T22:12:18.631107Z client=127.0.0.1 "GET /debug-auth HTTP/1.1" 404 -
+أغسطس 01 00:12:19 vmi2934783 python3[2978623]: 2026-07-31T22:12:19.976801Z client=127.0.0.1 "GET /status HTTP/1.1" 404 -
+أغسطس 01 00:12:21 vmi2934783 python3[2978623]: 2026-07-31T22:12:21.340839Z client=127.0.0.1 "GET /status HTTP/1.1" 404 -
+أغسطس 01 00:12:23 vmi2934783 python3[2978623]: 2026-07-31T22:12:23.117086Z client=127.0.0.1 "GET /health HTTP/1.1" 200 -
+أغسطس 01 00:12:24 vmi2934783 python3[2978623]: 2026-07-31T22:12:24.848881Z client=127.0.0.1 "GET /health HTTP/1.1" 200 -
+أغسطس 01 00:12:26 vmi2934783 python3[2978623]: 2026-07-31T22:12:26.544490Z client=127.0.0.1 "GET /api/auth/login/health HTTP/1.1" 404 -
+أغسطس 01 00:12:27 vmi2934783 python3[2978623]: 2026-07-31T22:12:27.977352Z client=127.0.0.1 "GET /auth-debug HTTP/1.1" 404 -
+أغسطس 01 00:12:29 vmi2934783 python3[2978623]: 2026-07-31T22:12:29.472332Z client=127.0.0.1 "GET /api/admin-actions/users/action/health HTTP/1.1" 404 -
+أغسطس 01 00:12:31 vmi2934783 python3[2978623]: 2026-07-31T22:12:31.184747Z client=127.0.0.1 "GET /api/admin/users/action/health HTTP/1.1" 404 -
+أغسطس 01 00:12:32 vmi2934783 python3[2978623]: 2026-07-31T22:12:32.632153Z client=127.0.0.1 "GET /api/decision/quality HTTP/1.1" 404 -
+أغسطس 01 00:12:34 vmi2934783 python3[2978623]: 2026-07-31T22:12:34.021141Z client=127.0.0.1 "GET /api/ndsp/nowpayments-create-alias/health HTTP/1.1" 404 -
+أغسطس 01 00:12:35 vmi2934783 python3[2978623]: 2026-07-31T22:12:35.467503Z client=127.0.0.1 "GET /debug-auth HTTP/1.1" 404 -
+أغسطس 01 00:12:36 vmi2934783 python3[2978623]: 2026-07-31T22:12:36.797324Z client=127.0.0.1 "GET /status HTTP/1.1" 404 -
+أغسطس 01 00:12:38 vmi2934783 python3[2978623]: 2026-07-31T22:12:38.200257Z client=127.0.0.1 "GET /api/auth/login/health HTTP/1.1" 404 -
+أغسطس 01 00:12:39 vmi2934783 python3[2978623]: 2026-07-31T22:12:39.824407Z client=127.0.0.1 "GET /api/admin/users/action/health HTTP/1.1" 404 -
+أغسطس 01 00:12:46 vmi2934783 python3[2978623]: 2026-07-31T22:12:46.002325Z client=127.0.0.1 "GET /api/decision/quality-live HTTP/1.1" 404 -
+أغسطس 01 00:12:47 vmi2934783 python3[2978623]: 2026-07-31T22:12:47.866387Z client=127.0.0.1 "GET /api/ndsp/public/decision-quality HTTP/1.1" 404 -
+أغسطس 01 00:12:49 vmi2934783 python3[2978623]: 2026-07-31T22:12:49.243652Z client=127.0.0.1 "GET /api/decision/quality HTTP/1.1" 404 -
+أغسطس 01 00:12:50 vmi2934783 python3[2978623]: 2026-07-31T22:12:50.777550Z client=127.0.0.1 "GET /api/auth/login/health HTTP/1.1" 404 -
+أغسطس 01 00:12:52 vmi2934783 python3[2978623]: 2026-07-31T22:12:52.452449Z client=127.0.0.1 "GET /api/auth/login/health HTTP/1.1" 404 -
+أغسطس 01 00:12:55 vmi2934783 python3[2978623]: 2026-07-31T22:12:55.012845Z client=127.0.0.1 "GET /api/admin/layers/health HTTP/1.1" 404 -
+أغسطس 01 00:12:57 vmi2934783 python3[2978623]: 2026-07-31T22:12:57.050885Z client=127.0.0.1 "GET /health HTTP/1.1" 200 -
+أغسطس 01 00:12:58 vmi2934783 python3[2978623]: 2026-07-31T22:12:58.894596Z client=127.0.0.1 "GET /health HTTP/1.1" 200 -
+أغسطس 01 00:13:00 vmi2934783 python3[2978623]: 2026-07-31T22:13:00.728802Z client=127.0.0.1 "GET /health HTTP/1.1" 200 -
+أغسطس 01 00:13:03 vmi2934783 python3[2978623]: 2026-07-31T22:13:03.462472Z client=127.0.0.1 "GET /health HTTP/1.1" 200 -
+أغسطس 01 00:13:05 vmi2934783 python3[2978623]: 2026-07-31T22:13:05.274184Z client=127.0.0.1 "GET /health HTTP/1.1" 200 -
+أغسطس 01 00:13:06 vmi2934783 python3[2978623]: 2026-07-31T22:13:06.852727Z client=127.0.0.1 "GET /api/ndsp/public/decision-quality HTTP/1.1" 404 -
+أغسطس 01 00:13:08 vmi2934783 python3[2978623]: 2026-07-31T22:13:08.441356Z client=127.0.0.1 "GET /health HTTP/1.1" 200 -
+أغسطس 01 00:13:15 vmi2934783 python3[2978623]: 2026-07-31T22:13:15.095636Z client=127.0.0.1 "GET /api/decision/quality-live HTTP/1.1" 404 -
+أغسطس 01 00:13:21 vmi2934783 python3[2978623]: 2026-07-31T22:13:21.984884Z client=127.0.0.1 "GET /api/decision/quality-live HTTP/1.1" 404 -
+أغسطس 01 00:13:23 vmi2934783 python3[2978623]: 2026-07-31T22:13:23.728240Z client=127.0.0.1 "GET /api/admin/raw-cot/health HTTP/1.1" 404 -
+أغسطس 01 00:13:25 vmi2934783 python3[2978623]: 2026-07-31T22:13:25.134637Z client=127.0.0.1 "GET /api/auth/login/health HTTP/1.1" 404 -
+أغسطس 01 00:13:26 vmi2934783 python3[2978623]: 2026-07-31T22:13:26.483964Z client=127.0.0.1 "GET /status HTTP/1.1" 404 -
+أغسطس 01 00:13:27 vmi2934783 python3[2978623]: 2026-07-31T22:13:27.872235Z client=127.0.0.1 "GET /api/decision/quality HTTP/1.1" 404 -
+أغسطس 01 00:13:35 vmi2934783 python3[2978623]: 2026-07-31T22:13:35.065177Z client=127.0.0.1 "GET /api/decision/quality-live HTTP/1.1" 404 -
+أغسطس 01 00:13:41 vmi2934783 python3[2978623]: 2026-07-31T22:13:41.197828Z client=127.0.0.1 "GET /api/decision/quality-live HTTP/1.1" 404 -
+أغسطس 01 00:13:42 vmi2934783 python3[2978623]: 2026-07-31T22:13:42.616465Z client=127.0.0.1 "GET /debug-auth HTTP/1.1" 404 -
+أغسطس 01 00:13:44 vmi2934783 python3[2978623]: 2026-07-31T22:13:44.171903Z client=127.0.0.1 "GET /status HTTP/1.1" 404 -
+أغسطس 01 00:13:45 vmi2934783 python3[2978623]: 2026-07-31T22:13:45.648156Z client=127.0.0.1 "GET /status HTTP/1.1" 404 -
+أغسطس 01 00:13:47 vmi2934783 python3[2978623]: 2026-07-31T22:13:47.451614Z client=127.0.0.1 "GET /auth-debug HTTP/1.1" 404 -
+أغسطس 01 00:13:49 vmi2934783 python3[2978623]: 2026-07-31T22:13:49.015202Z client=127.0.0.1 "GET /health HTTP/1.1" 200 -
+أغسطس 01 00:13:50 vmi2934783 python3[2978623]: 2026-07-31T22:13:50.751880Z client=127.0.0.1 "GET /api/auth/login/health HTTP/1.1" 404 -
+أغسطس 01 00:13:52 vmi2934783 python3[2978623]: 2026-07-31T22:13:52.290250Z client=127.0.0.1 "GET /api/auth/login/health HTTP/1.1" 404 -
+أغسطس 01 00:13:53 vmi2934783 python3[2978623]: 2026-07-31T22:13:53.770483Z client=127.0.0.1 "GET /health HTTP/1.1" 200 -
+أغسطس 01 00:13:55 vmi2934783 python3[2978623]: 2026-07-31T22:13:55.500721Z client=127.0.0.1 "GET /nowpayments/health HTTP/1.1" 404 -
+أغسطس 01 00:13:57 vmi2934783 python3[2978623]: 2026-07-31T22:13:57.103356Z client=127.0.0.1 "GET /api/auth/login/health HTTP/1.1" 404 -
+أغسطس 01 00:13:58 vmi2934783 python3[2978623]: 2026-07-31T22:13:58.747906Z client=127.0.0.1 "GET /api/admin-actions/users/action/health HTTP/1.1" 404 -
+أغسطس 01 00:14:00 vmi2934783 python3[2978623]: 2026-07-31T22:14:00.399781Z client=127.0.0.1 "GET /api/admin/users/action/health HTTP/1.1" 404 -
+أغسطس 01 00:14:02 vmi2934783 python3[2978623]: 2026-07-31T22:14:02.564870Z client=127.0.0.1 "GET /api/admin/users/action/health HTTP/1.1" 404 -
+أغسطس 01 00:14:04 vmi2934783 python3[2978623]: 2026-07-31T22:14:04.565211Z client=127.0.0.1 "GET /nowpayments/health HTTP/1.1" 404 -
+أغسطس 01 00:14:05 vmi2934783 python3[2978623]: 2026-07-31T22:14:05.946528Z client=127.0.0.1 "GET /api/auth/login/health HTTP/1.1" 404 -
+أغسطس 01 00:14:07 vmi2934783 python3[2978623]: 2026-07-31T22:14:07.438994Z client=127.0.0.1 "GET /api/auth/login/health HTTP/1.1" 404 -
+أغسطس 01 00:14:09 vmi2934783 python3[2978623]: 2026-07-31T22:14:09.097434Z client=127.0.0.1 "GET /nowpayments/health HTTP/1.1" 404 -
+أغسطس 01 00:14:10 vmi2934783 python3[2978623]: 2026-07-31T22:14:10.777347Z client=127.0.0.1 "GET /trial/info HTTP/1.1" 404 -
+أغسطس 01 00:14:12 vmi2934783 python3[2978623]: 2026-07-31T22:14:12.640975Z client=127.0.0.1 "GET /api/auth/session HTTP/1.1" 404 -
+-- Boot 1d7a60877acc40148d88a352d85728d7 --
+أغسطس 02 23:57:04 vmi2934783 python3[1391]: {"ok": true, "service": "ndsp-canonical-live-runtime-v30", "host": "127.0.0.1", "port": 9085, "runtime_version": "ndsp-canonical-live-runtime-v30.0.0", "registry_layers": 16}
+أغسطس 05 09:30:49 vmi2934783 python3[3019691]: {"ok": true, "service": "ndsp-canonical-live-runtime-v30", "host": "127.0.0.1", "port": 9085, "runtime_version": "ndsp-canonical-live-runtime-v30.0.0", "registry_layers": 16}
+أغسطس 05 21:22:44 vmi2934783 python3[3019691]: 2026-08-05T19:22:44.901918Z client=127.0.0.1 "GET /health HTTP/1.1" 200 -
+أغسطس 07 06:49:24 vmi2934783 python3[357811]: {"ok": true, "service": "ndsp-canonical-live-runtime-v30", "host": "127.0.0.1", "port": 9085, "runtime_version": "ndsp-canonical-live-runtime-v30.0.0", "registry_layers": 16}
+-- Boot 645dbba7d26d4e9886840cf8f0143622 --
+أغسطس 07 16:46:02 vmi2934783 python3[1373]: {"ok": true, "service": "ndsp-canonical-live-runtime-v30", "host": "127.0.0.1", "port": 9085, "runtime_version": "ndsp-canonical-live-runtime-v30.0.0", "registry_layers": 16}
+أغسطس 07 23:01:23 vmi2934783 python3[1373808]: {"ok": true, "service": "ndsp-canonical-live-runtime-v30", "host": "127.0.0.1", "port": 9085, "runtime_version": "ndsp-canonical-live-runtime-v30.0.0", "registry_layers": 16}
+أغسطس 08 03:27:46 vmi2934783 python3[2184909]: {"ok": true, "service": "ndsp-canonical-live-runtime-v30", "host": "127.0.0.1", "port": 9085, "runtime_version": "ndsp-canonical-live-runtime-v30.0.0", "registry_layers": 16}
+أغسطس 08 03:27:53 vmi2934783 python3[2184909]: 2026-08-08T01:27:53.037009Z client=127.0.0.1 "GET /api/decision/quality-live?symbol=ETHUSDT&timeframe=weekly HTTP/1.1" 404 -
+أغسطس 08 03:28:27 vmi2934783 python3[2184909]: 2026-08-08T01:28:27.307979Z client=127.0.0.1 "GET / HTTP/1.1" 404 -
+أغسطس 08 03:28:27 vmi2934783 python3[2184909]: 2026-08-08T01:28:27.379822Z client=127.0.0.1 "GET /health HTTP/1.1" 200 -
+أغسطس 08 03:28:27 vmi2934783 python3[2184909]: 2026-08-08T01:28:27.401626Z client=127.0.0.1 "GET /healthz HTTP/1.1" 404 -
+أغسطس 08 03:28:27 vmi2934783 python3[2184909]: 2026-08-08T01:28:27.424278Z client=127.0.0.1 "GET /docs HTTP/1.1" 404 -
+أغسطس 08 03:28:27 vmi2934783 python3[2184909]: 2026-08-08T01:28:27.449145Z client=127.0.0.1 "GET /openapi.json HTTP/1.1" 404 -
+أغسطس 08 03:28:27 vmi2934783 python3[2184909]: 2026-08-08T01:28:27.469684Z client=127.0.0.1 "GET /api HTTP/1.1" 404 -
+أغسطس 08 03:28:27 vmi2934783 python3[2184909]: 2026-08-08T01:28:27.495389Z client=127.0.0.1 "GET /api/health HTTP/1.1" 200 -
+أغسطس 08 03:28:27 vmi2934783 python3[2184909]: 2026-08-08T01:28:27.518457Z client=127.0.0.1 "GET /api/v1 HTTP/1.1" 404 -
+أغسطس 08 03:28:27 vmi2934783 python3[2184909]: 2026-08-08T01:28:27.544823Z client=127.0.0.1 "GET /status HTTP/1.1" 404 -
+أغسطس 08 03:28:27 vmi2934783 python3[2184909]: 2026-08-08T01:28:27.864303Z client=127.0.0.1 "GET /openapi.json HTTP/1.1" 404 -
+
+=== V33 RECENT JOURNAL ===
+أغسطس 01 00:12:35 vmi2934783 python3[2978624]: 2026-07-31T22:12:35.486339Z client=127.0.0.1 "GET /debug-auth HTTP/1.1" 404 -
+أغسطس 01 00:12:36 vmi2934783 python3[2978624]: 2026-07-31T22:12:36.817005Z client=127.0.0.1 "GET /status HTTP/1.1" 404 -
+أغسطس 01 00:12:38 vmi2934783 python3[2978624]: 2026-07-31T22:12:38.217070Z client=127.0.0.1 "GET /api/auth/login/health HTTP/1.1" 404 -
+أغسطس 01 00:12:39 vmi2934783 python3[2978624]: 2026-07-31T22:12:39.845774Z client=127.0.0.1 "GET /api/admin/users/action/health HTTP/1.1" 404 -
+أغسطس 01 00:12:46 vmi2934783 python3[2978624]: 2026-07-31T22:12:46.043957Z client=127.0.0.1 "GET /api/decision/quality-live HTTP/1.1" 404 -
+أغسطس 01 00:12:47 vmi2934783 python3[2978624]: 2026-07-31T22:12:47.884022Z client=127.0.0.1 "GET /api/ndsp/public/decision-quality HTTP/1.1" 404 -
+أغسطس 01 00:12:49 vmi2934783 python3[2978624]: 2026-07-31T22:12:49.269306Z client=127.0.0.1 "GET /api/decision/quality HTTP/1.1" 404 -
+أغسطس 01 00:12:50 vmi2934783 python3[2978624]: 2026-07-31T22:12:50.795167Z client=127.0.0.1 "GET /api/auth/login/health HTTP/1.1" 404 -
+أغسطس 01 00:12:52 vmi2934783 python3[2978624]: 2026-07-31T22:12:52.479208Z client=127.0.0.1 "GET /api/auth/login/health HTTP/1.1" 404 -
+أغسطس 01 00:12:55 vmi2934783 python3[2978624]: 2026-07-31T22:12:55.035376Z client=127.0.0.1 "GET /api/admin/layers/health HTTP/1.1" 404 -
+أغسطس 01 00:12:57 vmi2934783 python3[2978624]: 2026-07-31T22:12:57.071056Z client=127.0.0.1 "GET /health HTTP/1.1" 200 -
+أغسطس 01 00:12:58 vmi2934783 python3[2978624]: 2026-07-31T22:12:58.944502Z client=127.0.0.1 "GET /health HTTP/1.1" 200 -
+أغسطس 01 00:13:00 vmi2934783 python3[2978624]: 2026-07-31T22:13:00.770516Z client=127.0.0.1 "GET /health HTTP/1.1" 200 -
+أغسطس 01 00:13:03 vmi2934783 python3[2978624]: 2026-07-31T22:13:03.485433Z client=127.0.0.1 "GET /health HTTP/1.1" 200 -
+أغسطس 01 00:13:05 vmi2934783 python3[2978624]: 2026-07-31T22:13:05.295080Z client=127.0.0.1 "GET /health HTTP/1.1" 200 -
+أغسطس 01 00:13:06 vmi2934783 python3[2978624]: 2026-07-31T22:13:06.870888Z client=127.0.0.1 "GET /api/ndsp/public/decision-quality HTTP/1.1" 404 -
+أغسطس 01 00:13:08 vmi2934783 python3[2978624]: 2026-07-31T22:13:08.465381Z client=127.0.0.1 "GET /health HTTP/1.1" 200 -
+أغسطس 01 00:13:15 vmi2934783 python3[2978624]: 2026-07-31T22:13:15.114221Z client=127.0.0.1 "GET /api/decision/quality-live HTTP/1.1" 404 -
+أغسطس 01 00:13:22 vmi2934783 python3[2978624]: 2026-07-31T22:13:22.002608Z client=127.0.0.1 "GET /api/decision/quality-live HTTP/1.1" 404 -
+أغسطس 01 00:13:23 vmi2934783 python3[2978624]: 2026-07-31T22:13:23.755403Z client=127.0.0.1 "GET /api/admin/raw-cot/health HTTP/1.1" 404 -
+أغسطس 01 00:13:25 vmi2934783 python3[2978624]: 2026-07-31T22:13:25.151434Z client=127.0.0.1 "GET /api/auth/login/health HTTP/1.1" 404 -
+أغسطس 01 00:13:26 vmi2934783 python3[2978624]: 2026-07-31T22:13:26.499711Z client=127.0.0.1 "GET /status HTTP/1.1" 404 -
+أغسطس 01 00:13:27 vmi2934783 python3[2978624]: 2026-07-31T22:13:27.892142Z client=127.0.0.1 "GET /api/decision/quality HTTP/1.1" 404 -
+أغسطس 01 00:13:35 vmi2934783 python3[2978624]: 2026-07-31T22:13:35.084331Z client=127.0.0.1 "GET /api/decision/quality-live HTTP/1.1" 404 -
+أغسطس 01 00:13:41 vmi2934783 python3[2978624]: 2026-07-31T22:13:41.213208Z client=127.0.0.1 "GET /api/decision/quality-live HTTP/1.1" 404 -
+أغسطس 01 00:13:42 vmi2934783 python3[2978624]: 2026-07-31T22:13:42.632831Z client=127.0.0.1 "GET /debug-auth HTTP/1.1" 404 -
+أغسطس 01 00:13:44 vmi2934783 python3[2978624]: 2026-07-31T22:13:44.194492Z client=127.0.0.1 "GET /status HTTP/1.1" 404 -
+أغسطس 01 00:13:45 vmi2934783 python3[2978624]: 2026-07-31T22:13:45.689014Z client=127.0.0.1 "GET /status HTTP/1.1" 404 -
+أغسطس 01 00:13:47 vmi2934783 python3[2978624]: 2026-07-31T22:13:47.467484Z client=127.0.0.1 "GET /auth-debug HTTP/1.1" 404 -
+أغسطس 01 00:13:49 vmi2934783 python3[2978624]: 2026-07-31T22:13:49.036585Z client=127.0.0.1 "GET /health HTTP/1.1" 200 -
+أغسطس 01 00:13:50 vmi2934783 python3[2978624]: 2026-07-31T22:13:50.771770Z client=127.0.0.1 "GET /api/auth/login/health HTTP/1.1" 404 -
+أغسطس 01 00:13:52 vmi2934783 python3[2978624]: 2026-07-31T22:13:52.308400Z client=127.0.0.1 "GET /api/auth/login/health HTTP/1.1" 404 -
+أغسطس 01 00:13:53 vmi2934783 python3[2978624]: 2026-07-31T22:13:53.800501Z client=127.0.0.1 "GET /health HTTP/1.1" 200 -
+أغسطس 01 00:13:55 vmi2934783 python3[2978624]: 2026-07-31T22:13:55.519446Z client=127.0.0.1 "GET /nowpayments/health HTTP/1.1" 404 -
+أغسطس 01 00:13:57 vmi2934783 python3[2978624]: 2026-07-31T22:13:57.126435Z client=127.0.0.1 "GET /api/auth/login/health HTTP/1.1" 404 -
+أغسطس 01 00:13:58 vmi2934783 python3[2978624]: 2026-07-31T22:13:58.771184Z client=127.0.0.1 "GET /api/admin-actions/users/action/health HTTP/1.1" 404 -
+أغسطس 01 00:14:00 vmi2934783 python3[2978624]: 2026-07-31T22:14:00.421220Z client=127.0.0.1 "GET /api/admin/users/action/health HTTP/1.1" 404 -
+أغسطس 01 00:14:02 vmi2934783 python3[2978624]: 2026-07-31T22:14:02.601748Z client=127.0.0.1 "GET /api/admin/users/action/health HTTP/1.1" 404 -
+أغسطس 01 00:14:04 vmi2934783 python3[2978624]: 2026-07-31T22:14:04.580334Z client=127.0.0.1 "GET /nowpayments/health HTTP/1.1" 404 -
+أغسطس 01 00:14:05 vmi2934783 python3[2978624]: 2026-07-31T22:14:05.963803Z client=127.0.0.1 "GET /api/auth/login/health HTTP/1.1" 404 -
+أغسطس 01 00:14:07 vmi2934783 python3[2978624]: 2026-07-31T22:14:07.520345Z client=127.0.0.1 "GET /api/auth/login/health HTTP/1.1" 404 -
+أغسطس 01 00:14:09 vmi2934783 python3[2978624]: 2026-07-31T22:14:09.119781Z client=127.0.0.1 "GET /nowpayments/health HTTP/1.1" 404 -
+أغسطس 01 00:14:10 vmi2934783 python3[2978624]: 2026-07-31T22:14:10.807438Z client=127.0.0.1 "GET /trial/info HTTP/1.1" 404 -
+أغسطس 01 00:14:12 vmi2934783 python3[2978624]: 2026-07-31T22:14:12.660587Z client=127.0.0.1 "GET /api/auth/session HTTP/1.1" 404 -
+-- Boot 1d7a60877acc40148d88a352d85728d7 --
+أغسطس 02 23:57:04 vmi2934783 python3[1393]: {"ok": true, "service": "ndsp-canonical-live-runtime-v30", "host": "127.0.0.1", "port": 9086, "runtime_version": "ndsp-canonical-live-runtime-v33.0.0", "registry_layers": 16}
+أغسطس 05 09:30:49 vmi2934783 python3[3019695]: {"ok": true, "service": "ndsp-canonical-live-runtime-v30", "host": "127.0.0.1", "port": 9086, "runtime_version": "ndsp-canonical-live-runtime-v33.0.0", "registry_layers": 16}
+أغسطس 05 21:22:44 vmi2934783 python3[3019695]: 2026-08-05T19:22:44.974389Z client=127.0.0.1 "GET /health HTTP/1.1" 200 -
+أغسطس 07 06:49:24 vmi2934783 python3[357812]: {"ok": true, "service": "ndsp-canonical-live-runtime-v30", "host": "127.0.0.1", "port": 9086, "runtime_version": "ndsp-canonical-live-runtime-v33.0.0", "registry_layers": 16}
+-- Boot 645dbba7d26d4e9886840cf8f0143622 --
+أغسطس 07 16:46:02 vmi2934783 python3[1375]: {"ok": true, "service": "ndsp-canonical-live-runtime-v30", "host": "127.0.0.1", "port": 9086, "runtime_version": "ndsp-canonical-live-runtime-v33.0.0", "registry_layers": 16}
+أغسطس 07 23:01:23 vmi2934783 python3[1373828]: {"ok": true, "service": "ndsp-canonical-live-runtime-v30", "host": "127.0.0.1", "port": 9086, "runtime_version": "ndsp-canonical-live-runtime-v33.0.0", "registry_layers": 16}
+أغسطس 08 03:28:27 vmi2934783 python3[1373828]: 2026-08-08T01:28:27.574470Z client=127.0.0.1 "GET / HTTP/1.1" 404 -
+أغسطس 08 03:28:27 vmi2934783 python3[1373828]: 2026-08-08T01:28:27.653677Z client=127.0.0.1 "GET /health HTTP/1.1" 200 -
+أغسطس 08 03:28:27 vmi2934783 python3[1373828]: 2026-08-08T01:28:27.677051Z client=127.0.0.1 "GET /healthz HTTP/1.1" 404 -
+أغسطس 08 03:28:27 vmi2934783 python3[1373828]: 2026-08-08T01:28:27.702215Z client=127.0.0.1 "GET /docs HTTP/1.1" 404 -
+أغسطس 08 03:28:27 vmi2934783 python3[1373828]: 2026-08-08T01:28:27.729611Z client=127.0.0.1 "GET /openapi.json HTTP/1.1" 404 -
+أغسطس 08 03:28:27 vmi2934783 python3[1373828]: 2026-08-08T01:28:27.758927Z client=127.0.0.1 "GET /api HTTP/1.1" 404 -
+أغسطس 08 03:28:27 vmi2934783 python3[1373828]: 2026-08-08T01:28:27.784124Z client=127.0.0.1 "GET /api/health HTTP/1.1" 200 -
+أغسطس 08 03:28:27 vmi2934783 python3[1373828]: 2026-08-08T01:28:27.812043Z client=127.0.0.1 "GET /api/v1 HTTP/1.1" 404 -
+أغسطس 08 03:28:27 vmi2934783 python3[1373828]: 2026-08-08T01:28:27.844819Z client=127.0.0.1 "GET /status HTTP/1.1" 404 -
+أغسطس 08 03:28:27 vmi2934783 python3[1373828]: 2026-08-08T01:28:27.888856Z client=127.0.0.1 "GET /openapi.json HTTP/1.1" 404 -
+
+FILES_MODIFIED=0
+SERVICES_RESTARTED=0
+RUNTIME_LOGIC_MODIFIED=0
+FINAL_RESULT=PASS

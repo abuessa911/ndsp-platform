@@ -1,0 +1,272 @@
+Generated: 2026-08-06T10:16:38+02:00
+
+## feature/cot-governance-v1
+ D .github/workflows/ndsp-project-validator.yml
+ D DSP_FINAL_TRIAL_POLICY.md
+ D DSP_NMP_V1_POLICY.md
+ D NDSP_UI_CHANGE_GOVERNANCE_FINAL.md
+ M README.md
+ D apps/NDSP_APPS_ONLY_GOVERNANCE.md
+ D apps/ndsp-governance-bridge/NDSP_LAYER_VISIBILITY_OWNER_INTERNAL_POLICY.json
+ D apps/ndsp-governance-bridge/NDSP_LAYER_VISIBILITY_OWNER_INTERNAL_POLICY.md
+ D apps/ndsp-governance-bridge/layers/NDSP_OWNER_INTERNAL_16_LAYER_REGISTRY.json
+ D apps/ndsp-governance-bridge/layers/NDSP_OWNER_INTERNAL_16_LAYER_REGISTRY.md
+ D apps/ndsp-governance-bridge/policies/admin_snapshot/audit_admin_v6.py
+ D apps/ndsp-governance-bridge/policies/audit_logger.py
+ D apps/ndsp-governance-bridge/policies/decision_active_governance.py
+ D apps/ndsp-governance-bridge/policies/elite_trial_capacity.py
+ D apps/ndsp-governance-bridge/policies/feature_gate.py
+ D apps/ndsp-governance-bridge/policies/governance_runtime.py
+ D apps/ndsp-governance-bridge/policies/ndsp_alert_audit.py
+ D apps/ndsp-governance-bridge/policies/ndsp_governance_mode.py
+ D apps/ndsp-governance-bridge/policies/tdl_v2_policy.py
+ D apps/ndsp-governance-bridge/server.mjs
+ M apps/ndsp-raw-cot-gateway/app.py
+ D backend/architecture/API_CONTRACTS.md
+ M backend/architecture/CHANGELOG.md
+ D backend/architecture/GOVERNANCE_RULES.md
+ M backend/architecture/registry/SERVICE_REGISTRY_V2.md
+ M backend/data/raw_cot/current_disaggregated_futures_only_f_disagg.txt
+ M backend/data/raw_cot/current_tff_futures_only_FinFutWk.txt
+ M backend/data/raw_cot/raw_cot_manifest.json
+ D backend/docs/API_CONTRACT.md
+ D docs/99-governance/pr-002-canonical-layer-map/CANONICAL_LAYER_SOURCE_MAP.csv
+ D docs/99-governance/pr-002-canonical-layer-map/CANONICAL_LAYER_SOURCE_MAP.json
+ D docs/99-governance/pr-002-canonical-layer-map/PR-002-CANONICAL-LAYER-SOURCE-MAP.md
+ D docs/99-governance/pr-002-canonical-layer-map/SHA256SUMS.txt
+ D docs/99-governance/pr-002-canonical-layer-map/owners.json
+ D docs/99-governance/pr-003-canonical-service-map/CANONICAL_SERVICE_MAP.csv
+ D docs/99-governance/pr-003-canonical-service-map/CANONICAL_SERVICE_MAP.json
+ D docs/99-governance/pr-003-canonical-service-map/CANONICAL_SERVICE_MAP_FINAL.csv
+ D docs/99-governance/pr-003-canonical-service-map/CANONICAL_SERVICE_MAP_FINAL.json
+ D docs/99-governance/pr-003-canonical-service-map/PR-003-CANONICAL-SERVICE-MAP-FINAL.md
+ D docs/99-governance/pr-003-canonical-service-map/PR-003-CANONICAL-SERVICE-MAP.md
+ D docs/99-governance/pr-003-canonical-service-map/PR003_FINAL_SHA256SUMS.txt
+ D docs/NDSP_GOVERNANCE_DOCUMENTATION.md
+ D frontend/NDSP_APPS_ONLY_GOVERNANCE.md
+ M frontend/user-portal-vite/package-lock.json
+ M frontend/user-portal-vite/package.json
+ D governance/CANONICAL_GOVERNANCE.md
+ D governance/GOVERNANCE_PACKAGE_INDEX.md
+ D governance/NDSP_FINAL_GOVERNANCE_ALL_POLICIES_LOCKED.md
+ D governance/NDSP_FINAL_GOVERNANCE_EXCLUSIONS_AND_ADOPTIONS.md
+ D governance/canonical-v1/NDSP_CANONICAL_GOVERNANCE_V1_AR.md
+ D ndsp_governance/NDSP_CURRENT_ADOPTIONS_MASTER.md
+ D ndsp_governance/NDSP_LAYER_NAME_MASKING_POLICY.json
+ D ndsp_governance/NDSP_LAYER_NAME_MASKING_POLICY.md
+ D ndsp_governance/NDSP_SAAS_PACKAGES_POLICY.json
+ D ndsp_governance/NDSP_SAAS_PACKAGES_POLICY.md
+ M package.json
+ D research/nmp-lab/NMP_RESEARCH_LAB_POLICY.md
+?? .github/copilot-instructions.md
+?? .github/dependabot.yml
+?? .github/workflows/ci.yml
+?? .github/workflows/full-capability-ui-governance.yml
+?? .github/workflows/pr024-critical-implementation.yml
+?? .github/workflows/pr026-runtime-verification-governance.yml
+?? .github/workflows/pr027-gap-decomposition-governance.yml
+?? .github/workflows/pr028-quick-wins-governance.yml
+?? .github/workflows/pr029-remaining-quick-wins-governance.yml
+?? .github/workflows/pr030-endpoint-real-data-governance.yml
+?? .github/workflows/pr031-real-data-proof-governance.yml
+?? .github/workflows/pr032-real-data-diagnostic-governance.yml
+?? .github/workflows/pr033-real-data-runtime-proof-governance.yml
+?? .github/workflows/pr034-tdl-v2-policy-restore-governance.yml
+?? .github/workflows/pr035-full-coverage-recalculation.yml
+?? .github/workflows/pr036-p0-remediation-batches.yml
+?? .github/workflows/pr037-p0-batch-01-evidence-closure.yml
+?? .github/workflows/pr038-p0-batch-02-evidence-closure.yml
+?? .github/workflows/pr040-p0-batch-03-evidence-closure.yml
+?? .github/workflows/pr042-p0-batch-04-evidence-closure.yml
+?? .github/workflows/pr043-p0-batch-05-evidence-closure.yml
+?? .github/workflows/pr044-p0-batch-06-evidence-closure.yml
+?? .github/workflows/pr045-p0-batch-07-evidence-closure.yml
+?? .github/workflows/pr046-p0-batch-08-evidence-closure.yml
+?? .github/workflows/pr047-p0-batch-09-evidence-closure.yml
+?? .github/workflows/pr048-p0-batch-10-evidence-closure.yml
+?? .github/workflows/pr049-p0-batch-11-evidence-closure.yml
+?? .github/workflows/pr050-p0-batch-12-evidence-closure.yml
+?? .github/workflows/pr051-p0-batch-13-evidence-closure.yml
+?? .github/workflows/pr052-p0-batch-14-evidence-closure.yml
+?? .github/workflows/pr053-p0-batch-15-evidence-closure.yml
+?? .github/workflows/pr054-p0-batch-16-evidence-closure.yml
+?? .github/workflows/pr055-p0-batch-17-evidence-closure.yml
+?? .github/workflows/pr056-p0-batch-18-evidence-closure.yml
+?? .github/workflows/pr057-p0-batch-19-evidence-closure.yml
+?? .github/workflows/pr058-full-coverage-recalculation.yml
+?? .github/workflows/pr059-p0-traceability-reconciliation.yml
+?? .github/workflows/pr060-source-mapping-real-data-diagnostic.yml
+?? .github/workflows/release-artifacts.yml
+?? .ndsp-evidence/
+?? .ndsp_protected_assets
+?? AGENTS.md
+?? NDSP_CODEX_V18_P8_D12_ARABIC_MOBILE_DECISION_ROOM_FIX_PROMPT.txt
+?? NDSP_USER_PORTAL_FINAL_EXPERIENCE_V1_ONE_SCRIPT.sh
+?? apps/ndsp-governance-bridge/app/
+?? archive/
+?? audit-cot-logic.sh
+?? backend/access/
+?? backend/auth_api/ndsp_admin_extension.cjs
+?? backend/auth_api/ndsp_asset_market_universe.cjs
+?? backend/auth_api/ndsp_device_guard.cjs
+?? backend/auth_api/ndsp_nowpayments.cjs
+?? backend/auth_api/ndsp_register_compat_gateway.cjs
+?? backend/auth_api/ndsp_trial_info.cjs
+?? backend/commercial/
+?? backend/contracts/
+?? backend/data/raw_cot/disaggregated_futures_only_f_disagg_20260703_222221.txt
+?? backend/data/raw_cot/disaggregated_futures_only_f_disagg_20260712_165852.txt
+?? backend/data/raw_cot/disaggregated_futures_only_f_disagg_20260720_141036.txt
+?? backend/data/raw_cot/disaggregated_futures_only_f_disagg_20260726_083458.txt
+?? backend/data/raw_cot/tff_futures_only_FinFutWk_20260703_222221.txt
+?? backend/data/raw_cot/tff_futures_only_FinFutWk_20260712_165852.txt
+?? backend/data/raw_cot/tff_futures_only_FinFutWk_20260720_141036.txt
+?? backend/data/raw_cot/tff_futures_only_FinFutWk_20260726_083458.txt
+?? backend/data_foundation/
+?? backend/evaluation/
+?? backend/evidence/
+?? backend/explainability/
+?? backend/governance/
+?? backend/integrations/
+?? backend/intelligence/
+?? backend/layers/canonical_v1/
+?? backend/ndsp-live-decision-quality/asset_registry_runtime.py
+?? backend/observability/
+?? backend/operations/
+?? backend/orchestration/
+?? backend/password_reset_gateway/run_password_reset_gateway.sh
+?? backend/personalization/
+?? backend/platform/
+?? backend/security/
+?? backend/services/ndsp-launch-control-v167/
+?? backend/services/ndsp-telegram-notifications-v182/
+?? backend/services/ndsp-trial-clock-v163/
+?? backend/services/ndsp-trial-clock-v164/
+?? backend/simulation/
+?? backend/tests/
+?? backups/
+?? build-cot-gov-handoff.sh
+?? detect-project-stack.sh
+?? docs/00-build-catalog/
+?? docs/00-governance/
+?? docs/01-build-control-pack/
+?? docs/02-architecture/core/NDSP_16_LAYER_CORE_INTEGRATION_SHA256SUMS_20260711_162006.txt
+?? docs/02-architecture/core/NDSP_CANONICAL_16_LAYER_SOURCE_MAP_V1.json
+?? docs/02-architecture/core/NDSP_PLATFORM_FOUNDATION_V3_AR.md
+?? docs/02-architecture/core/NDSP_PLATFORM_FOUNDATION_V3_EN.md
+?? docs/02-execution-ready-pack/
+?? docs/02-user-guide/
+?? docs/03-contracts/NDSP_ANALYSIS_CONTEXT_LOCK_CONTRACT_V1.json
+?? docs/03-contracts/NDSP_ASSET_MASTER_REGISTRY_V1.json
+?? docs/03-contracts/NDSP_PLATFORM_CAPABILITY_REGISTRY_V1.json
+?? docs/03-contracts/NDSP_SCHEMA_CONTRACT_REGISTRY_V1.json
+?? docs/03-contracts/NDSP_SOURCE_REGISTRY_V1.json
+?? docs/03-final-transition/
+?? docs/04-legal/
+?? docs/05-runbooks/
+?? docs/06-business/
+?? docs/06-decision-room-contracts/
+?? docs/07-backup-restore/
+?? docs/10-enterprise-governance/
+?? docs/11-architecture-decisions/
+?? docs/90-operations/
+?? docs/98-knowledge/
+?? docs/99-governance-baseline/
+?? docs/99-governance/pr-009-governance-index/
+?? docs/99-governance/pr-010-integrity-audit/
+?? docs/99-governance/pr-011-governance-update-policy/
+?? docs/99-governance/pr-012-exceptions-approvals-register/
+?? docs/99-governance/pr-013-periodic-reviews-expirations/
+?? docs/99-governance/pr-014-review-ownership-escalation/
+?? docs/99-governance/pr-015-final-series-closure/
+?? docs/99-governance/pr-016-final-audit-archive/
+?? docs/99-governance/pr-018-full-capability-ui-governance/
+?? docs/99-governance/pr-019-capability-discovery-audit/
+?? docs/99-governance/pr-020-p0-capability-product-mapping/
+?? docs/99-governance/pr-021-p0-traceability-remediation/
+?? docs/99-governance/pr-022-p0-critical-evidence-closure/
+?? docs/99-governance/pr-023-critical-contract-closure/
+?? docs/99-governance/pr-024-critical-tests-ui-bindings/
+?? docs/99-governance/pr-025-local-state-reconciliation/
+?? docs/99-governance/pr-026-runtime-capability-verification/
+?? docs/99-governance/pr-027-runtime-gap-decomposition/
+?? docs/99-governance/pr-028-quick-wins-evidence-closure/
+?? docs/99-governance/pr-029-remaining-quick-wins-closure/
+?? docs/99-governance/pr-030-endpoint-real-data-closure/
+?? docs/99-governance/pr-031-real-data-proof-closure/
+?? docs/99-governance/pr-032-real-data-root-cause-diagnostic/
+?? docs/99-governance/pr-033-real-data-runtime-proof/
+?? docs/99-governance/pr-034-restore-tdl-v2-policy/
+?? docs/99-governance/pr-035-full-coverage-recalculation/
+?? docs/99-governance/pr-036-p0-remediation-batches/
+?? docs/99-governance/pr-037-p0-batch-01-evidence-closure/
+?? docs/99-governance/pr-038-p0-batch-02-evidence-closure/
+?? docs/99-governance/pr-040-p0-batch-03-evidence-closure/
+?? docs/99-governance/pr-042-p0-batch-04-evidence-closure/
+?? docs/99-governance/pr-043-p0-batch-05-evidence-closure/
+?? docs/99-governance/pr-044-p0-batch-06-evidence-closure/
+?? docs/99-governance/pr-045-p0-batch-07-evidence-closure/
+?? docs/99-governance/pr-046-p0-batch-08-evidence-closure/
+?? docs/99-governance/pr-047-p0-batch-09-evidence-closure/
+?? docs/99-governance/pr-048-p0-batch-10-evidence-closure/
+?? docs/99-governance/pr-049-p0-batch-11-evidence-closure/
+?? docs/99-governance/pr-050-p0-batch-12-evidence-closure/
+?? docs/99-governance/pr-051-p0-batch-13-evidence-closure/
+?? docs/99-governance/pr-052-p0-batch-14-evidence-closure/
+?? docs/99-governance/pr-053-p0-batch-15-evidence-closure/
+?? docs/99-governance/pr-054-p0-batch-16-evidence-closure/
+?? docs/99-governance/pr-055-p0-batch-17-evidence-closure/
+?? docs/99-governance/pr-056-p0-batch-18-evidence-closure/
+?? docs/99-governance/pr-057-p0-batch-19-evidence-closure/
+?? docs/99-governance/pr-058-full-coverage-recalculation/
+?? docs/99-governance/pr-059-p0-traceability-reconciliation/
+?? docs/99-governance/pr-060-source-mapping-real-data-diagnostic/
+?? docs/README.md
+?? fix_duplicate_header.sh
+?? fix_nav_js_only.sh
+?? frontend/auth-recovery/
+?? frontend/live-runtime-overlay/
+?? frontend/ndsp-auth-canonical-v94/
+?? frontend/ndsp-user-portal-v50/
+?? frontend/owner-console/
+?? frontend/shared/
+?? frontend/user-portal-vite/public/
+?? frontend/user-portal-vite/src/components/
+?? frontend/user-portal-vite/src/hooks/useCanonicalDecision.js
+?? frontend/user-portal-vite/src/hooks/useCompletedDecisionsV37.js
+?? frontend/user-portal/assets/
+?? governance/contracts/
+?? governance/cot/
+?? governance/reference_inputs/
+?? install-server-tooling.sh
+?? integrations/
+?? ndsp_phase0_baseline.sh
+?? project-detection-report-20260801T155748Z.txt
+?? project-detection-report-20260801T162616Z.txt
+?? project-detection-report-20260801T162640Z.txt
+?? rebuild_ndsp_density_nav.sh
+?? rebuild_ndsp_ui.sh
+?? scripts/
+?? tools/
+?? var/
+
+5647254 docs(governance): add PR-008 governance closure package
+02ac762 docs(governance): finalize PR-007 ownership decisions
+b95343a docs(governance): add PR-007 ownership review baseline
+ff36439 docs(governance): add PR-006 network exposure map
+eed6ea1 docs(governance): add PR-005 runtime ownership map
+7c0b1e6 docs(governance): normalize PR-004 CSV line endings
+7b3eae0 docs(governance): add PR-004 runtime dependency map
+be6a503 governance: add PR-003 canonical service map
+973c91c docs(governance): establish canonical L01-L16 ownership map
+5d7f160 governance: establish canonical NDSP gaps and precedence
+4e7c9bf fix(DEV-020C): repair sovereign preview radar and navigation
+609e319 feat(DEV-019): add sovereign command interface preview
+cdd53bd fix(DEV-018C): block rejected canary public routes
+54599cc fix(DEV-018B): remove public bot mention and reset rejected canary
+5dcf40d feat(DEV-018): add wow radar ui canary
+01cbf0a feat(DEV-018): add wow radar ui canary
+9d261a5 test(DEV-017): finalize rc1 production smoke snapshot
+a3e30a6 test(DEV-017): finalize rc1 production smoke snapshot
+77b6636 test(DEV-017): production smoke test and snapshot
+c221ce1 release(DEV-016): freeze release candidate rc1

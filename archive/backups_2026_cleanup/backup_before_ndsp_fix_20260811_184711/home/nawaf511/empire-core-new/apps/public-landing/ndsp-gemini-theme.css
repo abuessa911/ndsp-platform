@@ -1,0 +1,26 @@
+:root{
+  --ndsp-bg:#050505;
+  --ndsp-card:#111214;
+  --ndsp-line:#2a2a2a;
+  --ndsp-gold:#c5a059;
+  --ndsp-text:#e8e8e8;
+  --ndsp-muted:#8b8b8b;
+}
+html,body{
+  background:var(--ndsp-bg);
+  color:var(--ndsp-text);
+  direction:rtl;
+}
+.ndsp-card,.card{
+  background:var(--ndsp-card);
+  border:1px solid var(--ndsp-line);
+  border-radius:16px;
+}
+.ndsp-gold,.btn-primary{
+  background:var(--ndsp-gold);
+  color:#050505;
+  font-weight:700;
+}
+.ndsp-placeholder,.status-placeholder{
+  color:var(--ndsp-muted);
+}

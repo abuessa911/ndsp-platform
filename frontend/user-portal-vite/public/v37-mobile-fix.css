@@ -1,0 +1,154 @@
+.v37DecisionCard {
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.v37DecisionCard * {
+  box-sizing: border-box;
+}
+
+.v37DecisionHeader,
+.v37DecisionIdentity,
+.v37Explanation,
+.v37Expanded,
+.v37EvidenceGrid {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.v37LevelGrid,
+.v37ReasonGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  width: 100%;
+  min-width: 0;
+  margin-top: 14px;
+}
+
+.v37LevelGrid > div,
+.v37ReasonGrid > div {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 5px;
+  min-width: 0;
+  max-width: 100%;
+  padding: 12px 14px;
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: 14px;
+  background: rgba(15, 23, 42, 0.30);
+  text-align: start;
+}
+
+.v37LevelGrid small,
+.v37ReasonGrid small {
+  display: block;
+  min-width: 0;
+  margin: 0;
+  line-height: 1.45;
+  opacity: 0.72;
+  overflow-wrap: anywhere;
+}
+
+.v37LevelGrid strong,
+.v37ReasonGrid strong {
+  display: block;
+  min-width: 0;
+  margin: 0;
+  line-height: 1.6;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  unicode-bidi: plaintext;
+}
+
+.v37ReasonGrid span {
+  display: block;
+  min-width: 0;
+  margin: 0;
+  line-height: 1.55;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  unicode-bidi: plaintext;
+}
+
+[dir="rtl"] .v37DecisionCard,
+[dir="rtl"] .v37ReasonGrid,
+[dir="rtl"] .v37LevelGrid {
+  direction: rtl;
+  text-align: right;
+}
+
+.v37DetailsButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 48px;
+  margin: 14px 0 0;
+  padding: 11px 16px;
+  line-height: 1.45;
+  white-space: normal;
+}
+
+.v37GovernanceNote {
+  min-width: 0;
+  margin-top: 16px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+.v37LayerTableWrap {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 640px) {
+  .v37DecisionCard {
+    padding-inline: 14px;
+  }
+
+  .v37ReasonGrid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .v37LevelGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px;
+  }
+
+  .v37LevelGrid > div,
+  .v37ReasonGrid > div {
+    padding: 11px 12px;
+  }
+
+  .v37ReasonGrid small {
+    font-size: 0.78rem;
+  }
+
+  .v37ReasonGrid strong {
+    font-size: 1rem;
+  }
+
+  .v37ReasonGrid span {
+    font-size: 0.88rem;
+  }
+
+  .v37DetailsButton {
+    min-height: 50px;
+    margin-top: 12px;
+  }
+}
+
+@media (max-width: 380px) {
+  .v37LevelGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

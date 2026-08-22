@@ -1,0 +1,26 @@
+{
+  "project": "DSP — منصة دعم القرار",
+  "lab": "NMP Formula Lab",
+  "status": "TEMP_RESEARCH_RESULT",
+  "production_approved": false,
+  "final_formula_adopted": false,
+  "formula_candidate": "RSI14 + Opposite Candle + High",
+  "display_title_ar": "مستوى NMP البحثي",
+  "display_title_en": "NMP Research Level",
+  "symbol": "RESEARCH_SAMPLE",
+  "timeframe": "LAB",
+  "nmp_research_level": null,
+  "level_type": "research_context_level",
+  "last_updated": null,
+  "user_notice_ar": "هذا المستوى ناتج من مختبر NMP Formula Lab، وهو قيد البحث ولم يعتمد كصيغة نهائية بعد. يعرض كمعلومة سياقية بحثية فقط وليس توصية مالية أو أمر تداول أو ضمانًا للنتائج.",
+  "user_notice_en": "This level comes from the NMP Formula Lab and remains under research. It is not a final adopted formula. It is shown as contextual research information only, not financial advice, a trading instruction, or a guarantee of results.",
+  "forbidden_use": [
+    "entry",
+    "take_profit",
+    "stop_loss",
+    "buy_now",
+    "sell_now",
+    "execute",
+    "guarantee"
+  ]
+}

@@ -1,0 +1,18 @@
+[Unit]
+Description=NDSP DGC-001 Decision Governance Core
+After=network.target
+
+[Service]
+Type=simple
+User=nawaf511
+WorkingDirectory=/home/nawaf511/empire-core-v5-1-1-clean/backend/services/decision_governance_core
+Environment=NODE_ENV=production
+Environment=NDSP_PORT=9079
+Environment=NDSP_HOST=127.0.0.1
+ExecStart=/usr/bin/node /home/nawaf511/empire-core-v5-1-1-clean/backend/services/decision_governance_core/main.cjs
+Restart=always
+RestartSec=3
+
+EnvironmentFile=-/home/nawaf511/empire-core-v5-1-1-clean/backend/runtime/systemd-env/core-services.env
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,1931 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-07-12T17:54:46+02:00",
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/layers_control.py"
+    },
+    {
+      "method": "GET",
+      "path": "/",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/layers_control.py"
+    },
+    {
+      "method": "GET",
+      "path": "/",
+      "source": "server.js"
+    },
+    {
+      "method": "POST",
+      "path": "/__retired_api_admin_users_action_legacy",
+      "source": "backend/server.js"
+    },
+    {
+      "method": "GET",
+      "path": "/about",
+      "source": "backend/framework/about/about.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/about",
+      "source": "backend/services/bot_execution/framework-adapter.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/about",
+      "source": "backend/services/completed_decision/framework-adapter.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/about",
+      "source": "backend/services/decision_governance_core/framework-adapter.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/account/activate",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "POST",
+      "path": "/account/activate",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "GET",
+      "path": "/account/trial",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "GET",
+      "path": "/account/trial",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "GET",
+      "path": "/admin",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/elite_trial.py"
+    },
+    {
+      "method": "GET",
+      "path": "/admin",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/elite_trial.py"
+    },
+    {
+      "method": "GET",
+      "path": "/admin/feedback",
+      "source": "backend/server.js"
+    },
+    {
+      "method": "POST",
+      "path": "/admin/feedback/:id/review",
+      "source": "backend/server.js"
+    },
+    {
+      "method": "GET",
+      "path": "/admin/health",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "GET",
+      "path": "/admin/health",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "GET",
+      "path": "/admin/layers",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "GET",
+      "path": "/admin/layers",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "GET",
+      "path": "/admin/notifications",
+      "source": "backend/server.js"
+    },
+    {
+      "method": "POST",
+      "path": "/admin/notifications/send",
+      "source": "backend/server.js"
+    },
+    {
+      "method": "GET",
+      "path": "/admin/payments",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "GET",
+      "path": "/admin/payments",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "POST",
+      "path": "/admin/payments/{payment_id}/approve",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "POST",
+      "path": "/admin/payments/{payment_id}/approve",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "POST",
+      "path": "/admin/payments/{payment_id}/reject",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "POST",
+      "path": "/admin/payments/{payment_id}/reject",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/plan-features/:id",
+      "source": "backend/server.js"
+    },
+    {
+      "method": "GET",
+      "path": "/admin/plans",
+      "source": "backend/server.js"
+    },
+    {
+      "method": "PUT",
+      "path": "/admin/plans/:id",
+      "source": "backend/server.js"
+    },
+    {
+      "method": "POST",
+      "path": "/admin/plans/:id/features",
+      "source": "backend/server.js"
+    },
+    {
+      "method": "PUT",
+      "path": "/admin/plans/:id/layers/:layerKey",
+      "source": "backend/server.js"
+    },
+    {
+      "method": "GET",
+      "path": "/admin/registrations",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "GET",
+      "path": "/admin/registrations",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "POST",
+      "path": "/admin/registrations/{registration_id}/decision",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "POST",
+      "path": "/admin/registrations/{registration_id}/decision",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "GET",
+      "path": "/admin/stats",
+      "source": "backend/server.js"
+    },
+    {
+      "method": "GET",
+      "path": "/admin/trials",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "GET",
+      "path": "/admin/trials",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "GET",
+      "path": "/admin/upgrade-requests",
+      "source": "backend/server.js"
+    },
+    {
+      "method": "POST",
+      "path": "/admin/upgrade-requests/:id/review",
+      "source": "backend/server.js"
+    },
+    {
+      "method": "GET",
+      "path": "/admin/users",
+      "source": "backend/server.js"
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/users/:id",
+      "source": "backend/server.js"
+    },
+    {
+      "method": "PUT",
+      "path": "/admin/users/:id",
+      "source": "backend/server.js"
+    },
+    {
+      "method": "POST",
+      "path": "/analyst",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/elite_trial.py"
+    },
+    {
+      "method": "POST",
+      "path": "/analyst",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/elite_trial.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/account/trial",
+      "source": "backend/auth_api/ndsp_api_compat_gateway.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/account/trial",
+      "source": "backend/ndsp_api_compat_gateway.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin-actions/users/action",
+      "source": "backend/auth_api/ndsp_admin_actions_bypass_old_middleware.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin-actions/users/action",
+      "source": "backend/ndsp_admin_actions_bypass_old_middleware.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin-actions/users/action/health",
+      "source": "backend/auth_api/ndsp_admin_actions_bypass_old_middleware.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin-actions/users/action/health",
+      "source": "backend/ndsp_admin_actions_bypass_old_middleware.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin-ui/action",
+      "source": "backend/auth_api/ndsp_admin_ui_proxy.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin-ui/action",
+      "source": "backend/ndsp_admin_ui_proxy.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin-ui/alerts",
+      "source": "backend/auth_api/ndsp_admin_ui_proxy.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin-ui/alerts",
+      "source": "backend/ndsp_admin_ui_proxy.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin-ui/alerts/channel",
+      "source": "backend/auth_api/ndsp_admin_ui_proxy.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin-ui/alerts/channel",
+      "source": "backend/ndsp_admin_ui_proxy.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin-ui/alerts/test",
+      "source": "backend/auth_api/ndsp_admin_ui_proxy.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin-ui/alerts/test",
+      "source": "backend/ndsp_admin_ui_proxy.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin-ui/backups",
+      "source": "backend/auth_api/ndsp_admin_ui_proxy.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin-ui/backups",
+      "source": "backend/ndsp_admin_ui_proxy.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin-ui/governance",
+      "source": "backend/auth_api/ndsp_admin_ui_proxy.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin-ui/governance",
+      "source": "backend/ndsp_admin_ui_proxy.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin-ui/health",
+      "source": "backend/auth_api/ndsp_admin_ui_proxy.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin-ui/health",
+      "source": "backend/ndsp_admin_ui_proxy.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin-ui/markets",
+      "source": "backend/auth_api/ndsp_admin_ui_proxy.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin-ui/markets",
+      "source": "backend/ndsp_admin_ui_proxy.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin-ui/packages",
+      "source": "backend/auth_api/ndsp_admin_ui_proxy.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin-ui/packages",
+      "source": "backend/ndsp_admin_ui_proxy.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin-ui/payments",
+      "source": "backend/auth_api/ndsp_admin_ui_proxy.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin-ui/payments",
+      "source": "backend/ndsp_admin_ui_proxy.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin-ui/summary",
+      "source": "backend/auth_api/ndsp_admin_ui_proxy.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin-ui/summary",
+      "source": "backend/ndsp_admin_ui_proxy.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin-ui/trials",
+      "source": "backend/auth_api/ndsp_admin_ui_proxy.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin-ui/trials",
+      "source": "backend/ndsp_admin_ui_proxy.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin-ui/users",
+      "source": "backend/auth_api/ndsp_admin_ui_proxy.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin-ui/users",
+      "source": "backend/ndsp_admin_ui_proxy.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/layers/context",
+      "source": "apps/ndsp-layers-api/app.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/layers/context",
+      "source": "apps/ndsp-layers-api/app.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/layers/health",
+      "source": "apps/ndsp-layers-api/app.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/layers/health",
+      "source": "apps/ndsp-layers-api/app.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/layers/run",
+      "source": "apps/ndsp-layers-api/app.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/layers/run",
+      "source": "apps/ndsp-layers-api/app.py"
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/layers/run",
+      "source": "apps/ndsp-layers-api/app.py"
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/layers/run",
+      "source": "apps/ndsp-layers-api/app.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/raw-cot/health",
+      "source": "apps/ndsp-raw-cot-gateway/app.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/raw-cot/health",
+      "source": "apps/ndsp-raw-cot-gateway/app.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/raw-cot/import-current",
+      "source": "apps/ndsp-raw-cot-gateway/app.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/raw-cot/import-current",
+      "source": "apps/ndsp-raw-cot-gateway/app.py"
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/raw-cot/import-current",
+      "source": "apps/ndsp-raw-cot-gateway/app.py"
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/raw-cot/import-current",
+      "source": "apps/ndsp-raw-cot-gateway/app.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/raw-cot/status",
+      "source": "apps/ndsp-raw-cot-gateway/app.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/raw-cot/status",
+      "source": "apps/ndsp-raw-cot-gateway/app.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/telegram-routing/status",
+      "source": "backend/server.js"
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/telegram-routing/test",
+      "source": "backend/server.js"
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/telegram-routing/update",
+      "source": "backend/server.js"
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/trial-activations/approve",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_activation_admin.py"
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/trial-activations/approve",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_activation_admin.py"
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/trial-activations/approve",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_activation_admin.py"
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/trial-activations/approve",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_activation_admin.py"
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/trial-activations/create-pending",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_activation_admin.py"
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/trial-activations/create-pending",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_activation_admin.py"
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/trial-activations/create-pending",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_activation_admin.py"
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/trial-activations/create-pending",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_activation_admin.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/trial-activations/list",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_activation_admin.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/trial-activations/list",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_activation_admin.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/trial-activations/list",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_activation_admin.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/trial-activations/list",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_activation_admin.py"
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/trial-activations/reject",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_activation_admin.py"
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/trial-activations/reject",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_activation_admin.py"
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/trial-activations/reject",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_activation_admin.py"
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/trial-activations/reject",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_activation_admin.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/trial-activations/status",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_activation_admin.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/trial-activations/status",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_activation_admin.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/trial-activations/status",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_activation_admin.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/trial-activations/status",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_activation_admin.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/users/action/health",
+      "source": "backend/auth_api/ndsp_admin_actions_authoritative.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/users/action/health",
+      "source": "backend/ndsp_admin_actions_authoritative.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/api/alerts/email/test",
+      "source": "backend/app/api/compat/user_operational_compat.py"
+    },
+    {
+      "method": "POST",
+      "path": "/api/alerts/email/test",
+      "source": "backend/app/api/compat/user_operational_compat.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/alerts/status",
+      "source": "backend/auth_api/ndsp_api_compat_gateway.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/alerts/status",
+      "source": "backend/ndsp_api_compat_gateway.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/2fa/confirm",
+      "source": "backend/auth_api/ndsp_user_login_gateway.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/2fa/confirm",
+      "source": "backend/ndsp_user_login_gateway.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/2fa/disable",
+      "source": "backend/auth_api/ndsp_user_login_gateway.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/2fa/disable",
+      "source": "backend/ndsp_user_login_gateway.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/2fa/login/verify",
+      "source": "backend/auth_api/ndsp_user_login_gateway.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/2fa/login/verify",
+      "source": "backend/ndsp_user_login_gateway.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/2fa/setup",
+      "source": "backend/auth_api/ndsp_user_login_gateway.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/2fa/setup",
+      "source": "backend/ndsp_user_login_gateway.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/2fa/setup/confirm",
+      "source": "backend/auth_api/ndsp_user_login_gateway.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/2fa/setup/confirm",
+      "source": "backend/ndsp_user_login_gateway.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/2fa/setup/confirm",
+      "source": "backend/server.js"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/2fa/setup/confirm-final",
+      "source": "backend/auth_api/ndsp_user_login_gateway.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/2fa/setup/confirm-final",
+      "source": "backend/ndsp_user_login_gateway.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/2fa/setup/confirm-speakeasy",
+      "source": "backend/auth_api/ndsp_user_login_gateway.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/2fa/setup/confirm-speakeasy",
+      "source": "backend/ndsp_user_login_gateway.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/2fa/setup/skip",
+      "source": "backend/auth_api/ndsp_user_login_gateway.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/2fa/setup/skip",
+      "source": "backend/ndsp_user_login_gateway.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/2fa/setup/start",
+      "source": "backend/auth_api/ndsp_user_login_gateway.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/2fa/setup/start",
+      "source": "backend/ndsp_user_login_gateway.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/2fa/setup/start",
+      "source": "backend/server.js"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/2fa/setup/start",
+      "source": "backend/server.js"
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/2fa/status",
+      "source": "backend/auth_api/ndsp_user_login_gateway.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/2fa/status",
+      "source": "backend/ndsp_user_login_gateway.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/2fa/status",
+      "source": "backend/auth_api/ndsp_user_login_gateway.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/2fa/status",
+      "source": "backend/ndsp_user_login_gateway.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/activate",
+      "source": "backend/app/api/compat/user_operational_compat.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/activate",
+      "source": "backend/app/api/compat/user_operational_compat.py"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/activate",
+      "source": "backend/app/api/compat/user_operational_compat.py"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/activate",
+      "source": "backend/app/api/compat/user_operational_compat.py"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/forgot-password",
+      "source": "backend/password_reset_gateway/server.js"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "source": "backend/auth_api/ndsp_user_login_gateway.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "source": "backend/ndsp_user_login_gateway.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/login/health",
+      "source": "backend/auth_api/ndsp_user_login_gateway.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/login/health",
+      "source": "backend/ndsp_user_login_gateway.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/logout",
+      "source": "backend/auth_api/ndsp_user_login_gateway.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/logout",
+      "source": "backend/ndsp_user_login_gateway.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/register-trial",
+      "source": "backend/app/api/compat/user_operational_compat.py"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/register-trial",
+      "source": "backend/app/api/compat/user_operational_compat.py"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/reset-password",
+      "source": "backend/password_reset_gateway/server.js"
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/session",
+      "source": "backend/auth_api/ndsp_user_login_gateway.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/session",
+      "source": "backend/ndsp_user_login_gateway.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/bot/:symbol",
+      "source": "backend/services/bot_execution/main.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/bot/latest",
+      "source": "backend/services/bot_execution/main.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/api/bot/simulate",
+      "source": "backend/services/bot_execution/main.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/completed",
+      "source": "backend/services/completed_decision/main.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/api/completed/:decision_id/publish",
+      "source": "backend/services/completed_decision/main.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/completed/:symbol",
+      "source": "backend/services/completed_decision/main.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/completed/id/:decision_id",
+      "source": "backend/services/completed_decision/main.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/completed/id/:decision_id/timeline",
+      "source": "backend/services/completed_decision/main.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/api/completed/ingest",
+      "source": "backend/services/completed_decision/main.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/completed/latest",
+      "source": "backend/services/completed_decision/main.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/decision/quality",
+      "source": "backend/app/api/decision_quality_public.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/decision/quality",
+      "source": "backend/app/api/decision_quality_public.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/decision/quality-live",
+      "source": "backend/ndsp-live-decision-quality/server.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/decision/quality-live",
+      "source": "backend/ndsp-live-decision-quality/server.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/decision/quality-live/health",
+      "source": "backend/ndsp-live-decision-quality/server.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/decision/quality-live/health",
+      "source": "backend/ndsp-live-decision-quality/server.py"
+    },
+    {
+      "method": "POST",
+      "path": "/api/governance/evaluate",
+      "source": "backend/services/decision_governance_core/main.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/api/governance/submit",
+      "source": "backend/services/decision_governance_core/main.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/markets",
+      "source": "backend/auth_api/ndsp_api_compat_gateway.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/markets",
+      "source": "backend/ndsp_api_compat_gateway.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/ndsp/compat/health",
+      "source": "backend/app/api/compat/user_operational_compat.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/ndsp/compat/health",
+      "source": "backend/app/api/compat/user_operational_compat.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/ndsp/frontend-fields/probe",
+      "source": "backend/app/ndsp_governance/frontend_fields_api.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/ndsp/frontend-fields/probe",
+      "source": "backend/app/ndsp_governance/frontend_fields_api.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/ndsp/nowpayments-create-alias/health",
+      "source": "backend/app/api/compat/nowpayments_create_alias.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/ndsp/nowpayments-create-alias/health",
+      "source": "backend/app/api/compat/nowpayments_create_alias.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/ndsp/public/decision-quality",
+      "source": "backend/app/api/ndsp_public_quality_unique.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/ndsp/public/decision-quality",
+      "source": "backend/app/api/ndsp_public_quality_unique.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/packages",
+      "source": "backend/auth_api/ndsp_api_compat_gateway.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/packages",
+      "source": "backend/ndsp_api_compat_gateway.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/api/payments/nowpayments/subscription/create",
+      "source": "backend/app/api/compat/nowpayments_create_alias.py"
+    },
+    {
+      "method": "POST",
+      "path": "/api/payments/nowpayments/subscription/create",
+      "source": "backend/app/api/compat/nowpayments_create_alias.py"
+    },
+    {
+      "method": "POST",
+      "path": "/api/payments/nowpayments/subscription/create",
+      "source": "backend/app/api/compat/user_operational_compat.py"
+    },
+    {
+      "method": "POST",
+      "path": "/api/payments/nowpayments/subscription/create",
+      "source": "backend/app/api/compat/user_operational_compat.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/payments/nowpayments/subscription/status",
+      "source": "backend/app/api/compat/user_operational_compat.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/payments/nowpayments/subscription/status",
+      "source": "backend/app/api/compat/user_operational_compat.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/payments/status",
+      "source": "backend/auth_api/ndsp_api_compat_gateway.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/payments/status",
+      "source": "backend/ndsp_api_compat_gateway.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/api/telegram/link/start",
+      "source": "backend/app/api/compat/user_operational_compat.py"
+    },
+    {
+      "method": "POST",
+      "path": "/api/telegram/link/start",
+      "source": "backend/app/api/compat/user_operational_compat.py"
+    },
+    {
+      "method": "POST",
+      "path": "/api/telegram/link/verify",
+      "source": "backend/app/api/compat/user_operational_compat.py"
+    },
+    {
+      "method": "POST",
+      "path": "/api/telegram/link/verify",
+      "source": "backend/app/api/compat/user_operational_compat.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/trial/activation-policy",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_activation_admin.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/trial/activation-policy",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_activation_admin.py"
+    },
+    {
+      "method": "POST",
+      "path": "/api/trial/alerts/notify",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_telegram_alerts.py"
+    },
+    {
+      "method": "POST",
+      "path": "/api/trial/alerts/notify",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_telegram_alerts.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/trial/alerts/status",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_telegram_alerts.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/trial/alerts/status",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_telegram_alerts.py"
+    },
+    {
+      "method": "POST",
+      "path": "/api/trial/alerts/test",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_telegram_alerts.py"
+    },
+    {
+      "method": "POST",
+      "path": "/api/trial/alerts/test",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_telegram_alerts.py"
+    },
+    {
+      "method": "POST",
+      "path": "/api/trial/register",
+      "source": "backend/app/api/compat/user_operational_compat.py"
+    },
+    {
+      "method": "POST",
+      "path": "/api/trial/register",
+      "source": "backend/app/api/compat/user_operational_compat.py"
+    },
+    {
+      "method": "POST",
+      "path": "/api/trial/request",
+      "source": "backend/app/api/compat/user_operational_compat.py"
+    },
+    {
+      "method": "POST",
+      "path": "/api/trial/request",
+      "source": "backend/app/api/compat/user_operational_compat.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/user-dashboard/saas-policy",
+      "source": "backend/auth_api/ndsp_user_dashboard_gateway.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/user-dashboard/saas-policy",
+      "source": "backend/ndsp_user_dashboard_gateway.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/api/user/alert-preferences",
+      "source": "backend/app/api/compat/user_operational_compat.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/user/alert-preferences",
+      "source": "backend/app/api/compat/user_operational_compat.py"
+    },
+    {
+      "method": "POST",
+      "path": "/api/user/alert-preferences",
+      "source": "backend/app/api/compat/user_operational_compat.py"
+    },
+    {
+      "method": "POST",
+      "path": "/api/user/alert-preferences",
+      "source": "backend/app/api/compat/user_operational_compat.py"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/trial/register",
+      "source": "backend/app/api/compat/user_operational_compat.py"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/trial/register",
+      "source": "backend/app/api/compat/user_operational_compat.py"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v6/payments/nowpayments/subscription/create",
+      "source": "backend/app/api/compat/nowpayments_create_alias.py"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v6/payments/nowpayments/subscription/create",
+      "source": "backend/app/api/compat/nowpayments_create_alias.py"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v6/payments/nowpayments/subscription/create",
+      "source": "backend/app/api/compat/user_operational_compat.py"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v6/payments/nowpayments/subscription/create",
+      "source": "backend/app/api/compat/user_operational_compat.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v6/payments/nowpayments/subscription/status",
+      "source": "backend/app/api/compat/user_operational_compat.py"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v6/payments/nowpayments/subscription/status",
+      "source": "backend/app/api/compat/user_operational_compat.py"
+    },
+    {
+      "method": "GET",
+      "path": "/assets",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "GET",
+      "path": "/assets",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/{asset_id}/chart",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/{asset_id}/chart",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/{asset_id}/decision",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/{asset_id}/decision",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "GET",
+      "path": "/auth-debug",
+      "source": "apps/ndsp-governance-bridge/policies/admin_snapshot/tdl_v2_policy_admin.py"
+    },
+    {
+      "method": "GET",
+      "path": "/auth-debug",
+      "source": "apps/ndsp-governance-bridge/policies/admin_snapshot/tdl_v2_policy_admin.py"
+    },
+    {
+      "method": "GET",
+      "path": "/auth-debug",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/tdl_v2_policy_admin.py"
+    },
+    {
+      "method": "GET",
+      "path": "/auth-debug",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/tdl_v2_policy_admin.py"
+    },
+    {
+      "method": "POST",
+      "path": "/auth/2fa/verify",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "POST",
+      "path": "/auth/2fa/verify",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "POST",
+      "path": "/auth/forgot",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "POST",
+      "path": "/auth/forgot",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "POST",
+      "path": "/auth/login",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "POST",
+      "path": "/auth/login",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "POST",
+      "path": "/auth/login",
+      "source": "backend/server.js"
+    },
+    {
+      "method": "POST",
+      "path": "/auth/magic-link",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "POST",
+      "path": "/auth/magic-link",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "GET",
+      "path": "/auth/magic-link/verify",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "GET",
+      "path": "/auth/magic-link/verify",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "POST",
+      "path": "/auth/register",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "POST",
+      "path": "/auth/register",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "POST",
+      "path": "/auth/register",
+      "source": "backend/server.js"
+    },
+    {
+      "method": "POST",
+      "path": "/auth/reset",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "POST",
+      "path": "/auth/reset",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "GET",
+      "path": "/brief/today",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "GET",
+      "path": "/brief/today",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "POST",
+      "path": "/checkout/create",
+      "source": "backend/ndsp_nowpayments.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/close-expired",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/elite_trial.py"
+    },
+    {
+      "method": "POST",
+      "path": "/close-expired",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/elite_trial.py"
+    },
+    {
+      "method": "GET",
+      "path": "/contract/status",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "GET",
+      "path": "/contract/status",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "GET",
+      "path": "/debug-auth",
+      "source": "backend/app/api/admin/telegram_routing_v2.py"
+    },
+    {
+      "method": "GET",
+      "path": "/debug-auth",
+      "source": "backend/app/api/admin/telegram_routing_v2.py"
+    },
+    {
+      "method": "GET",
+      "path": "/debug-auth",
+      "source": "backend/app/api/internal/telegram_routing_internal.py"
+    },
+    {
+      "method": "GET",
+      "path": "/debug-auth",
+      "source": "backend/app/api/internal/telegram_routing_internal.py"
+    },
+    {
+      "method": "GET",
+      "path": "/debug-db",
+      "source": "backend/app/api/internal/telegram_routing_internal.py"
+    },
+    {
+      "method": "GET",
+      "path": "/debug-db",
+      "source": "backend/app/api/internal/telegram_routing_internal.py"
+    },
+    {
+      "method": "POST",
+      "path": "/feedback",
+      "source": "backend/server.js"
+    },
+    {
+      "method": "GET",
+      "path": "/health",
+      "source": "backend/auth_api/ndsp_api_compat_gateway.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/health",
+      "source": "backend/framework/health/health.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/health",
+      "source": "backend/ndsp_api_compat_gateway.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/health",
+      "source": "backend/password_reset_gateway/server.js"
+    },
+    {
+      "method": "GET",
+      "path": "/health",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/elite_trial_requests.py"
+    },
+    {
+      "method": "GET",
+      "path": "/health",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/elite_trial_requests.py"
+    },
+    {
+      "method": "GET",
+      "path": "/health",
+      "source": "backend/server.js"
+    },
+    {
+      "method": "GET",
+      "path": "/health",
+      "source": "backend/services/bot_execution/main.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/health",
+      "source": "backend/services/completed_decision/main.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/health",
+      "source": "backend/services/decision_governance_core/main.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/health",
+      "source": "server.js"
+    },
+    {
+      "method": "GET",
+      "path": "/identity",
+      "source": "backend/services/ctl-001-workspace-identity/main.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/login",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/elite_trial_requests.py"
+    },
+    {
+      "method": "POST",
+      "path": "/login",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/elite_trial_requests.py"
+    },
+    {
+      "method": "GET",
+      "path": "/markets",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "GET",
+      "path": "/markets",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "POST",
+      "path": "/mcp",
+      "source": "server.js"
+    },
+    {
+      "method": "GET",
+      "path": "/me",
+      "source": "backend/server.js"
+    },
+    {
+      "method": "GET",
+      "path": "/me/alert-prefs",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "GET",
+      "path": "/me/alert-prefs",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "PUT",
+      "path": "/me/alert-prefs",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "PUT",
+      "path": "/me/alert-prefs",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "POST",
+      "path": "/me/channels/email/test",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "POST",
+      "path": "/me/channels/email/test",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "POST",
+      "path": "/me/channels/telegram/link",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "POST",
+      "path": "/me/channels/telegram/link",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "POST",
+      "path": "/me/channels/telegram/verify",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "POST",
+      "path": "/me/channels/telegram/verify",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "GET",
+      "path": "/me/dashboard",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "GET",
+      "path": "/me/dashboard",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "GET",
+      "path": "/me/entitlements",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "GET",
+      "path": "/me/entitlements",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "GET",
+      "path": "/me/subscription",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "GET",
+      "path": "/me/subscription",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "GET",
+      "path": "/me/watchlist",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "GET",
+      "path": "/me/watchlist",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "POST",
+      "path": "/me/watchlist",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "POST",
+      "path": "/me/watchlist",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "DELETE",
+      "path": "/me/watchlist/{asset_id}",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "DELETE",
+      "path": "/me/watchlist/{asset_id}",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "GET",
+      "path": "/notifications",
+      "source": "backend/server.js"
+    },
+    {
+      "method": "POST",
+      "path": "/notifications/:id/read",
+      "source": "backend/server.js"
+    },
+    {
+      "method": "GET",
+      "path": "/nowpayments/health",
+      "source": "backend/ndsp_nowpayments.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/ordinary",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/elite_trial.py"
+    },
+    {
+      "method": "POST",
+      "path": "/ordinary",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/elite_trial.py"
+    },
+    {
+      "method": "GET",
+      "path": "/packages",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "GET",
+      "path": "/packages",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "POST",
+      "path": "/payments/checkout",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "POST",
+      "path": "/payments/checkout",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "POST",
+      "path": "/payments/webhook",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "POST",
+      "path": "/payments/webhook",
+      "source": "backend/app/api/v1/frontend_contract.py"
+    },
+    {
+      "method": "GET",
+      "path": "/plans",
+      "source": "backend/server.js"
+    },
+    {
+      "method": "GET",
+      "path": "/policy",
+      "source": "apps/ndsp-governance-bridge/policies/admin_snapshot/tdl_v2_policy_admin.py"
+    },
+    {
+      "method": "GET",
+      "path": "/policy",
+      "source": "apps/ndsp-governance-bridge/policies/admin_snapshot/tdl_v2_policy_admin.py"
+    },
+    {
+      "method": "GET",
+      "path": "/policy",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/tdl_v2_policy_admin.py"
+    },
+    {
+      "method": "GET",
+      "path": "/policy",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/tdl_v2_policy_admin.py"
+    },
+    {
+      "method": "POST",
+      "path": "/policy",
+      "source": "apps/ndsp-governance-bridge/policies/admin_snapshot/tdl_v2_policy_admin.py"
+    },
+    {
+      "method": "POST",
+      "path": "/policy",
+      "source": "apps/ndsp-governance-bridge/policies/admin_snapshot/tdl_v2_policy_admin.py"
+    },
+    {
+      "method": "POST",
+      "path": "/policy",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/tdl_v2_policy_admin.py"
+    },
+    {
+      "method": "POST",
+      "path": "/policy",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/tdl_v2_policy_admin.py"
+    },
+    {
+      "method": "GET",
+      "path": "/requests",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/elite_trial_requests.py"
+    },
+    {
+      "method": "GET",
+      "path": "/requests",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/elite_trial_requests.py"
+    },
+    {
+      "method": "POST",
+      "path": "/requests",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/elite_trial_requests.py"
+    },
+    {
+      "method": "POST",
+      "path": "/requests",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/elite_trial_requests.py"
+    },
+    {
+      "method": "PATCH",
+      "path": "/requests/{request_id}",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/elite_trial_requests.py"
+    },
+    {
+      "method": "PATCH",
+      "path": "/requests/{request_id}",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/elite_trial_requests.py"
+    },
+    {
+      "method": "GET",
+      "path": "/runtime/policy",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/runtime_policy_api.py"
+    },
+    {
+      "method": "GET",
+      "path": "/runtime/policy",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/runtime_policy_api.py"
+    },
+    {
+      "method": "GET",
+      "path": "/status",
+      "source": "backend/app/api/admin/telegram_routing_admin.py"
+    },
+    {
+      "method": "GET",
+      "path": "/status",
+      "source": "backend/app/api/admin/telegram_routing_admin.py"
+    },
+    {
+      "method": "GET",
+      "path": "/status",
+      "source": "backend/app/api/admin/telegram_routing_v2.py"
+    },
+    {
+      "method": "GET",
+      "path": "/status",
+      "source": "backend/app/api/admin/telegram_routing_v2.py"
+    },
+    {
+      "method": "GET",
+      "path": "/status",
+      "source": "backend/app/api/internal/telegram_routing_internal.py"
+    },
+    {
+      "method": "GET",
+      "path": "/status",
+      "source": "backend/app/api/internal/telegram_routing_internal.py"
+    },
+    {
+      "method": "GET",
+      "path": "/status",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/elite_trial.py"
+    },
+    {
+      "method": "GET",
+      "path": "/status",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/elite_trial.py"
+    },
+    {
+      "method": "POST",
+      "path": "/test",
+      "source": "backend/app/api/admin/telegram_routing_admin.py"
+    },
+    {
+      "method": "POST",
+      "path": "/test",
+      "source": "backend/app/api/admin/telegram_routing_admin.py"
+    },
+    {
+      "method": "POST",
+      "path": "/test",
+      "source": "backend/app/api/admin/telegram_routing_v2.py"
+    },
+    {
+      "method": "POST",
+      "path": "/test",
+      "source": "backend/app/api/admin/telegram_routing_v2.py"
+    },
+    {
+      "method": "POST",
+      "path": "/test",
+      "source": "backend/app/api/internal/telegram_routing_internal.py"
+    },
+    {
+      "method": "POST",
+      "path": "/test",
+      "source": "backend/app/api/internal/telegram_routing_internal.py"
+    },
+    {
+      "method": "POST",
+      "path": "/timing/disable",
+      "source": "apps/ndsp-governance-bridge/policies/admin_snapshot/tdl_v2_policy_admin.py"
+    },
+    {
+      "method": "POST",
+      "path": "/timing/disable",
+      "source": "apps/ndsp-governance-bridge/policies/admin_snapshot/tdl_v2_policy_admin.py"
+    },
+    {
+      "method": "POST",
+      "path": "/timing/disable",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/tdl_v2_policy_admin.py"
+    },
+    {
+      "method": "POST",
+      "path": "/timing/disable",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/tdl_v2_policy_admin.py"
+    },
+    {
+      "method": "POST",
+      "path": "/timing/enable",
+      "source": "apps/ndsp-governance-bridge/policies/admin_snapshot/tdl_v2_policy_admin.py"
+    },
+    {
+      "method": "POST",
+      "path": "/timing/enable",
+      "source": "apps/ndsp-governance-bridge/policies/admin_snapshot/tdl_v2_policy_admin.py"
+    },
+    {
+      "method": "POST",
+      "path": "/timing/enable",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/tdl_v2_policy_admin.py"
+    },
+    {
+      "method": "POST",
+      "path": "/timing/enable",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/tdl_v2_policy_admin.py"
+    },
+    {
+      "method": "POST",
+      "path": "/toggle",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/layers_control.py"
+    },
+    {
+      "method": "POST",
+      "path": "/toggle",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/layers_control.py"
+    },
+    {
+      "method": "GET",
+      "path": "/trial/info",
+      "source": "backend/ndsp_trial_info.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/trial/info",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/ndsp_trial_info.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/trial/info",
+      "source": "backend/runtime/private_governance/source_snapshot/ndsp_trial_info.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/trial/status",
+      "source": "backend/server.js"
+    },
+    {
+      "method": "POST",
+      "path": "/update",
+      "source": "backend/app/api/admin/telegram_routing_admin.py"
+    },
+    {
+      "method": "POST",
+      "path": "/update",
+      "source": "backend/app/api/admin/telegram_routing_admin.py"
+    },
+    {
+      "method": "POST",
+      "path": "/update",
+      "source": "backend/app/api/admin/telegram_routing_v2.py"
+    },
+    {
+      "method": "POST",
+      "path": "/update",
+      "source": "backend/app/api/admin/telegram_routing_v2.py"
+    },
+    {
+      "method": "POST",
+      "path": "/update",
+      "source": "backend/app/api/internal/telegram_routing_internal.py"
+    },
+    {
+      "method": "POST",
+      "path": "/update",
+      "source": "backend/app/api/internal/telegram_routing_internal.py"
+    },
+    {
+      "method": "POST",
+      "path": "/upgrade-request",
+      "source": "backend/server.js"
+    },
+    {
+      "method": "GET",
+      "path": "/upgrade-requests/me",
+      "source": "backend/server.js"
+    },
+    {
+      "method": "POST",
+      "path": "/variant",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/layers_control.py"
+    },
+    {
+      "method": "POST",
+      "path": "/variant",
+      "source": "backend/runtime/private_governance/final_extra_snapshot/layers_control.py"
+    },
+    {
+      "method": "GET",
+      "path": "/version",
+      "source": "backend/framework/version/version.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/version",
+      "source": "backend/services/bot_execution/framework-adapter.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/version",
+      "source": "backend/services/completed_decision/framework-adapter.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/version",
+      "source": "backend/services/decision_governance_core/framework-adapter.cjs"
+    },
+    {
+      "method": "GET",
+      "path": "/webhooks/nowpayments",
+      "source": "backend/ndsp_nowpayments.cjs"
+    },
+    {
+      "method": "POST",
+      "path": "/webhooks/nowpayments",
+      "source": "backend/ndsp_nowpayments.cjs"
+    }
+  ]
+}

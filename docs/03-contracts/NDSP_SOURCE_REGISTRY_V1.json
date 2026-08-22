@@ -1,0 +1,42 @@
+{
+  "registry_id": "NDSP-SOURCE-REGISTRY-V1",
+  "version": "1.0.0",
+  "sources": [
+    {
+      "source_id": "CFTC_OFFICIAL_COT",
+      "provider": "CFTC",
+      "dataset_family": "commitments_of_traders",
+      "authority_rank": 1,
+      "official": true,
+      "decision_use_allowed": true,
+      "freshness_policy": "official_release_schedule_fail_closed",
+      "timezone": "America/New_York",
+      "fallback_allowed": false,
+      "status": "active"
+    },
+    {
+      "source_id": "TWELVEDATA_MARKET_DATA",
+      "provider": "Twelve Data",
+      "dataset_family": "market_price_and_technical",
+      "authority_rank": 10,
+      "official": false,
+      "decision_use_allowed": true,
+      "freshness_policy": "timeframe_specific",
+      "timezone": "UTC",
+      "fallback_allowed": true,
+      "status": "active"
+    },
+    {
+      "source_id": "SECONDARY_RECONCILIATION_ONLY",
+      "provider": "configured_secondary_provider",
+      "dataset_family": "market_reconciliation",
+      "authority_rank": 50,
+      "official": false,
+      "decision_use_allowed": false,
+      "freshness_policy": "comparison_only",
+      "timezone": "UTC",
+      "fallback_allowed": false,
+      "status": "planned"
+    }
+  ]
+}

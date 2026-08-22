@@ -1,0 +1,20 @@
+# /etc/systemd/system/ndsp-market-prices-updater.service
+[Unit]
+Description=NDSP Live Market Prices Updater
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /usr/local/bin/ndsp_live_market_prices_updater.py
+User=root
+Group=root
+
+# /etc/systemd/system/ndsp-market-prices-updater.service.d/30-ndsp-official-runtime-source.conf
+[Service]
+EnvironmentFile=/etc/ndsp/ndsp-db.env
+EnvironmentFile=/etc/ndsp/ndsp-mail.env
+Environment=NDSP_ADMIN_USERS_JSON=/home/nawaf511/empire-core-new/runtime/admin-users.json
+
+# /etc/systemd/system/ndsp-market-prices-updater.service.d/40-ndsp-p3-after-postgresql.conf
+[Unit]
+Wants=postgresql.service network-online.target
+After=postgresql.service network-online.target

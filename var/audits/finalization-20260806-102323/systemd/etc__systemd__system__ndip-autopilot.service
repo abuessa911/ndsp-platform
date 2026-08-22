@@ -1,0 +1,12 @@
+[Unit]
+Description=NDIP Autonomous Trader
+After=network.target
+
+[Service]
+User=nawaf511
+WorkingDirectory=/opt/empire-core/backend
+ExecStart=/opt/empire-core/backend/venv/bin/python3 /opt/empire-core/backend/engine/autonomous_trader.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,241 @@
+
+============================================================
+NDSP — PASSWORD RECOVERY ROUTE DISCOVERY V4
+============================================================
+DATE=2026-07-27T13:36:08+02:00
+HOST=vmi2934783.contaboserver.net
+PROJECT=/home/nawaf511/empire-core-new
+PACKAGE=/home/nawaf511/empire-core-new/backend/password_reset_gateway
+SERVER=/home/nawaf511/empire-core-new/backend/password_reset_gateway/server.js
+SERVICE=ndsp-password-reset.service
+MODE=READ_ONLY
+REPORT=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PASSWORD_RECOVERY_ROUTE_DISCOVERY_V4_20260727_133608/REPORT.txt
+
+============================================================
+0) PRIVILEGES AND PRECONDITIONS
+============================================================
+SUDO_GATE=PASS
+PRECONDITION_GATE=PASS
+
+============================================================
+1) REAL SYSTEMD BINDING
+============================================================
+MAIN_PID=3306
+WORKING_DIRECTORY=/home/nawaf511/empire-core-new/backend/password_reset_gateway
+EXEC_START={ path=/usr/bin/node ; argv[]=/usr/bin/node /home/nawaf511/empire-core-new/backend/password_reset_gateway/server.js ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }
+FRAGMENT_PATH=/etc/systemd/system/ndsp-password-reset.service
+SERVICE_SOURCE_BINDING_GATE=PASS
+
+============================================================
+2) ROUTES DECLARED IN REAL SOURCE
+============================================================
+/home/nawaf511/empire-core-new/backend/password_reset_gateway/server.js:31:app.use(express.json({ limit: '256kb' }));
+/home/nawaf511/empire-core-new/backend/password_reset_gateway/server.js:63:app.get('/health', async (req, res) => {
+/home/nawaf511/empire-core-new/backend/password_reset_gateway/server.js:72:app.post('/api/auth/forgot-password', async (req, res) => {
+/home/nawaf511/empire-core-new/backend/password_reset_gateway/server.js:99:    const link = `${frontend}/reset-password.html?token=${resetToken}&email=${encodeURIComponent(user.email)}`;
+/home/nawaf511/empire-core-new/backend/password_reset_gateway/server.js:110:    console.error('forgot-password error:', e);
+/home/nawaf511/empire-core-new/backend/password_reset_gateway/server.js:115:app.post('/api/auth/reset-password', async (req, res) => {
+/home/nawaf511/empire-core-new/backend/password_reset_gateway/server.js:157:    console.error('reset-password error:', e);
+SOURCE_FORGOT_CANONICAL_FILE_COUNT=1
+SOURCE_RESET_CANONICAL_FILE_COUNT=1
+
+============================================================
+3) ACTUAL LISTENING PORTS FOR SERVICE PID
+============================================================
+SERVICE_LISTENING_PORT=9027
+
+============================================================
+4) LOCAL ROUTE PROBES
+============================================================
+PROBE_LABEL=LOCAL_FORGOT_PORT_9027_/api/auth/forgot-password
+PROBE_URL=http://127.0.0.1:9027/api/auth/forgot-password
+PROBE_HTTP=200
+PROBE_CONTENT_TYPE=application/json; charset=utf-8
+PROBE_BODY_HEAD={"success":true,"message":"If this email exists, a reset link has been sent"}
+---
+PROBE_LABEL=LOCAL_FORGOT_PORT_9027_/api/forgot-password
+PROBE_URL=http://127.0.0.1:9027/api/forgot-password
+PROBE_HTTP=404
+PROBE_CONTENT_TYPE=text/html; charset=utf-8
+PROBE_BODY_HEAD=<!DOCTYPE html> <html lang="en"> <head> <meta charset="utf-8"> <title>Error</title> </head> <body> <pre>Cannot POST /api/forgot-password</pre> </body> </html> 
+---
+PROBE_LABEL=LOCAL_FORGOT_PORT_9027_/forgot-password
+PROBE_URL=http://127.0.0.1:9027/forgot-password
+PROBE_HTTP=404
+PROBE_CONTENT_TYPE=text/html; charset=utf-8
+PROBE_BODY_HEAD=<!DOCTYPE html> <html lang="en"> <head> <meta charset="utf-8"> <title>Error</title> </head> <body> <pre>Cannot POST /forgot-password</pre> </body> </html> 
+---
+PROBE_LABEL=LOCAL_FORGOT_PORT_9027_/auth/forgot-password
+PROBE_URL=http://127.0.0.1:9027/auth/forgot-password
+PROBE_HTTP=404
+PROBE_CONTENT_TYPE=text/html; charset=utf-8
+PROBE_BODY_HEAD=<!DOCTYPE html> <html lang="en"> <head> <meta charset="utf-8"> <title>Error</title> </head> <body> <pre>Cannot POST /auth/forgot-password</pre> </body> </html> 
+---
+PROBE_LABEL=LOCAL_RESET_PORT_9027_/api/auth/reset-password
+PROBE_URL=http://127.0.0.1:9027/api/auth/reset-password
+PROBE_HTTP=400
+PROBE_CONTENT_TYPE=application/json; charset=utf-8
+PROBE_BODY_HEAD={"success":false,"message":"Invalid reset token or email"}
+---
+PROBE_LABEL=LOCAL_RESET_PORT_9027_/api/reset-password
+PROBE_URL=http://127.0.0.1:9027/api/reset-password
+PROBE_HTTP=404
+PROBE_CONTENT_TYPE=text/html; charset=utf-8
+PROBE_BODY_HEAD=<!DOCTYPE html> <html lang="en"> <head> <meta charset="utf-8"> <title>Error</title> </head> <body> <pre>Cannot POST /api/reset-password</pre> </body> </html> 
+---
+PROBE_LABEL=LOCAL_RESET_PORT_9027_/reset-password
+PROBE_URL=http://127.0.0.1:9027/reset-password
+PROBE_HTTP=404
+PROBE_CONTENT_TYPE=text/html; charset=utf-8
+PROBE_BODY_HEAD=<!DOCTYPE html> <html lang="en"> <head> <meta charset="utf-8"> <title>Error</title> </head> <body> <pre>Cannot POST /reset-password</pre> </body> </html> 
+---
+PROBE_LABEL=LOCAL_RESET_PORT_9027_/auth/reset-password
+PROBE_URL=http://127.0.0.1:9027/auth/reset-password
+PROBE_HTTP=404
+PROBE_CONTENT_TYPE=text/html; charset=utf-8
+PROBE_BODY_HEAD=<!DOCTYPE html> <html lang="en"> <head> <meta charset="utf-8"> <title>Error</title> </head> <body> <pre>Cannot POST /auth/reset-password</pre> </body> </html> 
+---
+PROBE_LABEL=LOCAL_HEALTH_PORT_9027
+PROBE_URL=http://127.0.0.1:9027/health
+PROBE_HTTP=404
+PROBE_CONTENT_TYPE=text/html; charset=utf-8
+PROBE_BODY_HEAD=<!DOCTYPE html> <html lang="en"> <head> <meta charset="utf-8"> <title>Error</title> </head> <body> <pre>Cannot POST /health</pre> </body> </html> 
+---
+
+============================================================
+5) EFFECTIVE NGINX ROUTING
+============================================================
+152:    server_name my.ndsp.app;
+203:    server_name my.ndsp.app;
+220:    location = /forgot-password {
+224:    location = /reset-password {
+841:location ^~ /api/auth/ {
+907:    server_name admin.ndsp.app;
+927:    server_name admin.ndsp.app;
+998:    server_name api.ndsp.app;
+1110:    location = /api/auth/register {
+1201:    server_name api.ndsp.app;
+1210:    location = /api/auth/login {
+1211:        proxy_pass http://127.0.0.1:9020/api/auth/login;
+1219:    location = /api/auth/me {
+1220:        proxy_pass http://127.0.0.1:9020/api/auth/me;
+1228:    location = /api/auth/logout {
+1229:        proxy_pass http://127.0.0.1:9020/api/auth/logout;
+1436:    location = /api/auth/register {
+1577:    server_name ndsp.app www.ndsp.app;
+1589:    location = /reset-password.html {
+1594:        try_files /reset-password.html =404;
+1598:        proxy_pass https://api.ndsp.app/api/auth/reset-password;
+1674:    server_name ndsp.app www.ndsp.app;
+1695:    location = /api/auth/login {
+1696:        proxy_pass http://127.0.0.1:9020/api/auth/login;
+1755:    location = /reset-password.html {
+1760:        try_files /reset-password.html =404;
+1764:        proxy_pass https://api.ndsp.app/api/auth/reset-password;
+EFFECTIVE_NGINX_FORGOT_ROUTE_COUNT=1
+EFFECTIVE_NGINX_RESET_ROUTE_COUNT=5
+
+============================================================
+6) PUBLIC ROUTE PROBES
+============================================================
+PROBE_LABEL=PUBLIC_FORGOT_https://my.ndsp.app_/api/auth/forgot-password
+PROBE_URL=https://my.ndsp.app/api/auth/forgot-password
+PROBE_HTTP=404
+PROBE_CONTENT_TYPE=application/json; charset=utf-8
+PROBE_BODY_HEAD={"message":"Route POST:/api/auth/forgot-password not found","error":"Not Found","statusCode":404}
+---
+PROBE_LABEL=PUBLIC_FORGOT_https://my.ndsp.app_/api/forgot-password
+PROBE_URL=https://my.ndsp.app/api/forgot-password
+PROBE_HTTP=501
+PROBE_CONTENT_TYPE=text/html;charset=utf-8
+PROBE_BODY_HEAD=<!DOCTYPE HTML> <html lang="en"> <head> <meta charset="utf-8"> <title>Error response</title> </head> <body> <h1>Error response</h1> <p>Error code: 501</p> <p>Message: Unsupported method ('POST').</p> <p>Error code explanation: 501 - Server does not support thi
+---
+PROBE_LABEL=PUBLIC_RESET_https://my.ndsp.app_/api/auth/reset-password
+PROBE_URL=https://my.ndsp.app/api/auth/reset-password
+PROBE_HTTP=404
+PROBE_CONTENT_TYPE=application/json; charset=utf-8
+PROBE_BODY_HEAD={"message":"Route POST:/api/auth/reset-password not found","error":"Not Found","statusCode":404}
+---
+PROBE_LABEL=PUBLIC_RESET_https://my.ndsp.app_/api/reset-password
+PROBE_URL=https://my.ndsp.app/api/reset-password
+PROBE_HTTP=501
+PROBE_CONTENT_TYPE=text/html;charset=utf-8
+PROBE_BODY_HEAD=<!DOCTYPE HTML> <html lang="en"> <head> <meta charset="utf-8"> <title>Error response</title> </head> <body> <h1>Error response</h1> <p>Error code: 501</p> <p>Message: Unsupported method ('POST').</p> <p>Error code explanation: 501 - Server does not support thi
+---
+PROBE_LABEL=PUBLIC_FORGOT_https://api.ndsp.app_/api/auth/forgot-password
+PROBE_URL=https://api.ndsp.app/api/auth/forgot-password
+PROBE_HTTP=200
+PROBE_CONTENT_TYPE=application/json; charset=utf-8
+PROBE_BODY_HEAD={"success":true,"message":"If this email exists, a reset link has been sent"}
+---
+PROBE_LABEL=PUBLIC_FORGOT_https://api.ndsp.app_/api/forgot-password
+PROBE_URL=https://api.ndsp.app/api/forgot-password
+PROBE_HTTP=501
+PROBE_CONTENT_TYPE=text/html;charset=utf-8
+PROBE_BODY_HEAD=<!DOCTYPE HTML> <html lang="en"> <head> <meta charset="utf-8"> <title>Error response</title> </head> <body> <h1>Error response</h1> <p>Error code: 501</p> <p>Message: Unsupported method ('POST').</p> <p>Error code explanation: 501 - Server does not support thi
+---
+PROBE_LABEL=PUBLIC_RESET_https://api.ndsp.app_/api/auth/reset-password
+PROBE_URL=https://api.ndsp.app/api/auth/reset-password
+PROBE_HTTP=400
+PROBE_CONTENT_TYPE=application/json; charset=utf-8
+PROBE_BODY_HEAD={"success":false,"message":"Invalid reset token or email"}
+---
+PROBE_LABEL=PUBLIC_RESET_https://api.ndsp.app_/api/reset-password
+PROBE_URL=https://api.ndsp.app/api/reset-password
+PROBE_HTTP=501
+PROBE_CONTENT_TYPE=text/html;charset=utf-8
+PROBE_BODY_HEAD=<!DOCTYPE HTML> <html lang="en"> <head> <meta charset="utf-8"> <title>Error response</title> </head> <body> <h1>Error response</h1> <p>Error code: 501</p> <p>Message: Unsupported method ('POST').</p> <p>Error code explanation: 501 - Server does not support thi
+---
+PROBE_LABEL=PUBLIC_FORGOT_https://ndsp.app_/api/auth/forgot-password
+PROBE_URL=https://ndsp.app/api/auth/forgot-password
+PROBE_HTTP=405
+PROBE_CONTENT_TYPE=text/html
+PROBE_BODY_HEAD=<html> <head><title>405 Not Allowed</title></head> <body> <center><h1>405 Not Allowed</h1></center> <hr><center>nginx/1.24.0 (Ubuntu)</center> </body> </html> 
+---
+PROBE_LABEL=PUBLIC_FORGOT_https://ndsp.app_/api/forgot-password
+PROBE_URL=https://ndsp.app/api/forgot-password
+PROBE_HTTP=405
+PROBE_CONTENT_TYPE=text/html
+PROBE_BODY_HEAD=<html> <head><title>405 Not Allowed</title></head> <body> <center><h1>405 Not Allowed</h1></center> <hr><center>nginx/1.24.0 (Ubuntu)</center> </body> </html> 
+---
+PROBE_LABEL=PUBLIC_RESET_https://ndsp.app_/api/auth/reset-password
+PROBE_URL=https://ndsp.app/api/auth/reset-password
+PROBE_HTTP=405
+PROBE_CONTENT_TYPE=text/html
+PROBE_BODY_HEAD=<html> <head><title>405 Not Allowed</title></head> <body> <center><h1>405 Not Allowed</h1></center> <hr><center>nginx/1.24.0 (Ubuntu)</center> </body> </html> 
+---
+PROBE_LABEL=PUBLIC_RESET_https://ndsp.app_/api/reset-password
+PROBE_URL=https://ndsp.app/api/reset-password
+PROBE_HTTP=405
+PROBE_CONTENT_TYPE=text/html
+PROBE_BODY_HEAD=<html> <head><title>405 Not Allowed</title></head> <body> <center><h1>405 Not Allowed</h1></center> <hr><center>nginx/1.24.0 (Ubuntu)</center> </body> </html> 
+---
+
+============================================================
+7) RECENT PASSWORD RESET SERVICE LOGS
+============================================================
+-- No entries --
+
+============================================================
+8) AUTOMATIC CLASSIFICATION
+============================================================
+LOCAL_CANONICAL_FORGOT_ROUTE=YES
+LOCAL_ANY_FORGOT_ROUTE=YES
+LOCAL_CANONICAL_RESET_ROUTE=YES
+PUBLIC_MY_CANONICAL_FORGOT_ROUTE=NO
+PUBLIC_API_CANONICAL_FORGOT_ROUTE=NO
+ROOT_CAUSE_CLASS=PUBLIC_NGINX_FORGOT_PASSWORD_ROUTE_MISSING
+
+============================================================
+9) FINAL RESULT
+============================================================
+PRODUCTION_MODIFIED=NO
+DATABASE_CHANGED=NO
+NGINX_CHANGED=NO
+SOURCE_CHANGED=NO
+SERVICE_RESTARTED=NO
+FINAL_STATUS=NDSP_PASSWORD_RECOVERY_ROUTE_DISCOVERY_V4_COMPLETE
+REPORT=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PASSWORD_RECOVERY_ROUTE_DISCOVERY_V4_20260727_133608/REPORT.txt
+PROBE_RESULTS=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PASSWORD_RECOVERY_ROUTE_DISCOVERY_V4_20260727_133608/probe-results.tsv
+NGINX_EVIDENCE=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PASSWORD_RECOVERY_ROUTE_DISCOVERY_V4_20260727_133608/nginx-recovery-routes.txt
+SOURCE_ROUTE_EVIDENCE=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_PASSWORD_RECOVERY_ROUTE_DISCOVERY_V4_20260727_133608/source-routes.txt

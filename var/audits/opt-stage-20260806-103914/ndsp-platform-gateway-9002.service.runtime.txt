@@ -1,0 +1,6 @@
+MainPID=1400
+ExecStart={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /opt/ndsp-platform-gateway-9002/app.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }
+Environment=
+WorkingDirectory=/opt/ndsp-platform-gateway-9002
+ActiveState=active
+SubState=running

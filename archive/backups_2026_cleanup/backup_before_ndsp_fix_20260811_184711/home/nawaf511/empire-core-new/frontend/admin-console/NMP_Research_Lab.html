@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>DSP — NMP Research Lab</title>
+  <style>
+    :root{
+      --bg:#070707;
+      --card:#111;
+      --soft:#191919;
+      --gold:#d4af37;
+      --text:#f6f1df;
+      --muted:#aaa;
+      --danger:#ff6b6b;
+      --ok:#7ee787;
+      --border:rgba(212,175,55,.28);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:
+        radial-gradient(circle at top left,rgba(212,175,55,.16),transparent 32%),
+        linear-gradient(135deg,#050505,#111 45%,#050505);
+      color:var(--text);
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      min-height:100vh;
+    }
+    header{
+      padding:22px;
+      border-bottom:1px solid var(--border);
+      background:rgba(0,0,0,.5);
+      position:sticky;
+      top:0;
+      backdrop-filter:blur(10px);
+      z-index:10;
+    }
+    h1{margin:0;font-size:26px;color:var(--gold)}
+    .sub{margin-top:6px;color:var(--muted);font-size:14px}
+    main{padding:22px;max-width:1280px;margin:auto}
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:14px;
+      margin-bottom:18px;
+    }
+    .card{
+      background:rgba(17,17,17,.86);
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:16px;
+      box-shadow:0 18px 40px rgba(0,0,0,.22);
+    }
+    .k{color:var(--muted);font-size:12px}
+    .v{font-size:24px;font-parameter:800;margin-top:6px}
+    .ok{color:var(--ok)}
+    .danger{color:var(--danger)}
+    table{width:100%;border-collapse:collapse;margin-top:10px;font-size:13px}
+    th,td{border-bottom:1px solid rgba(255,255,255,.08);padding:10px;text-align:right;white-space:nowrap}
+    th{color:var(--gold);font-parameter:700;background:rgba(212,175,55,.08)}
+    tr:hover{background:rgba(255,255,255,.035)}
+    .toolbar{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:14px;
+      align-items:center;
+    }
+    button,a.btn{
+      border:1px solid var(--border);
+      background:rgba(212,175,55,.12);
+      color:var(--text);
+      border-radius:12px;
+      padding:10px 14px;
+      cursor:pointer;
+      text-decoration:none;
+      font-parameter:700;
+    }
+    button:hover,a.btn:hover{background:rgba(212,175,55,.2)}
+    .note{
+      color:var(--muted);
+      line-height:1.8;
+      font-size:14px;
+    }
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;direction:ltr;text-align:left}
+    @media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:560px){.grid{grid-template-columns:1fr}}
+  </style>
+<meta http-equiv="Cache-Control" content="no-store" />
+</head>
+<
+
+
+</
+<!-- DSP_ADMIN_ARABIC_FINAL_BEGIN -->
+<style>
+#dspAdminLangFinal{position:fixed;top:12px;right:12px;z-index:999999;display:flex;gap:6px;padding:6px;border-radius:999px;background:rgba(7,10,16,.94);border:1px solid rgba(217,182,90,.45)}
+#dspAdminLangFinal button{border:0;border-radius:999px;padding:8px 12px;font-parameter:900;background:transparent;color:#9AA6BC}
+#dspAdminLangFinal button.on{background:linear-gradient(135deg,#F2D27A,#D9B65A);color:#151006}
+</style>
+<script>
+(function(){
+const AR={
+"OPERATIONS CENTER":"مركز العمليات","MAIN":"الرئيسية","Overview":"نظرة عامة","Users":"المستخدمون","Trials":"التجارب",
+"Registration Review":"مراجعة التسجيل","BUSINESS":"الأعمال","Packages":"الباقات","Payments":"المدفوعات",
+"ENGINE & GOVERNANCE":"المحركات والحوكمة","Layer Governance":"حوكمة الطبقات","NMP Research Lab":"مختبر أبحاث NMP",
+"Alerts & Config":"التنبيهات والإعدادات","Email":"البريد","Telegram":"تيليجرام","Health":"الصحة التشغيلية","Reports":"التقارير",
+"Backups":"النسخ الاحتياطية","Status":"الحالة","Active":"نشط","Pending":"قيد الانتظار","Approved":"مقبول","Rejected":"مرفوض"
+};
+const EN={}; Object.keys(AR).forEach(k=>EN[AR[k]]=k);
+function walk(fn){let w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let n,a=[];while(n=w.nextNode())a.push(n);a.forEach(n=>{if(n.parentElement&& !n.parentElement.closest("#dspAdminLangFinal"))fn(n)});}
+function apply(lang){
+ localStorage.setItem("dsp_admin_lang",lang);
+ document.documentElement.lang=lang; document.documentElement.dir=lang==="ar"?"rtl":"ltr"; document.body.dir=document.documentElement.dir;
+ let map=lang==="ar"?AR:EN;
+ walk(n=>{let t=n.nodeValue;Object.keys(map).forEach(k=>t=t.split(k).join(map[k]));n.nodeValue=t;});
+ document.getElementById("adAR")?.classList.toggle("on",lang==="ar");
+ document.getElementById("adEN")?.classList.toggle("on",lang==="en");
+}
+function boot(){
+ if(!document.getElementById("dspAdminLangFinal")){
+  let b=document.createElement("div"); b.id="dspAdminLangFinal";
+  b.innerHTML='<button id="adAR">AR</button><button id="adEN">EN</button>';
+  document.body.appendChild(b);
+  document.getElementById("adAR").onclick=()=>apply("ar");
+  document.getElementById("adEN").onclick=()=>apply("en");
+ }
+ apply(localStorage.getItem("dsp_admin_lang")||"ar");
+}
+document.readyState==="loading"?document.addEventListener("DOMContentLoaded",boot):boot();
+})();
+</script>
+<!-- DSP_ADMIN_ARABIC_FINAL_END -->
+
+</
+
+
+</
+<!-- DSP_ADMIN_MOBILE_HARD_DRAWER_BEGIN -->
+<style>
+@media(max-width:900px){
+  #dspHardMenuBtn{
+    position:fixed!important;
+    top:12px!important;
+    left:12px!important;
+    z-index:2147483647!important;
+    width:46px!important;
+    height:46px!important;
+    border-radius:14px!important;
+    border:1px solid rgba(217,182,90,.55)!important;
+    background:#070A10!important;
+    color:#F2D27A!important;
+    font-size:24px!important;
+    font-parameter:900!important;
+  }
+  #dspHardBackdrop{
+    position:fixed!important;
+    inset:0!important;
+    z-index:2147483645!important;
+    display:none!important;
+    background:rgba(0,0,0,.72)!important;
+    backdrop-filter:blur(6px)!important;
+  }
+  body.dspHardOpen #dspHardBackdrop{display:block!important}
+  body.dspHardOpen .dspHardSidebar{
+    transform:translateX(0)!important;
+    opacity:1!important;
+    pointer-events:auto!important;
+  }
+  .dspHardSidebar{
+    position:fixed!important;
+    top:0!important;
+    left:0!important;
+    bottom:0!important;
+    width:min(86vw,360px)!important;
+    height:100vh!important;
+    max-height:100vh!important;
+    overflow-y:auto!important;
+    z-index:2147483646!important;
+    background:#0B0F17!important;
+    transform:translateX(-115%)!important;
+    opacity:1!important;
+    pointer-events:none!important;
+    transition:transform .22s ease!important;
+    box-shadow:32px 0 90px rgba(0,0,0,.65)!important;
+  }
+  body:not(.dspHardOpen) .dspHardSidebar *{
+    pointer-events:none!important;
+  }
+}
+</style>
+
+<script>
+(function(){
+  function mobile(){ return window.matchMedia("(max-width:900px)").matches; }
+
+  function isSidebar(el){
+    var t=(el.innerText||"").trim();
+    if(t.length<40) return false;
+    var hits=0;
+    ["Overview","Users","Trials","Registration Review","Packages","Payments","Layer Governance","NMP Research Lab","Health","Reports","Backups","نظرة عامة","المستخدمون","التجارب","الباقات","المدفوعات"].forEach(function(x){
+      if(t.indexOf(x)>=0) hits++;
+    });
+    return hits>=4;
+  }
+
+  function findSidebar(){
+    var all=[].slice.call(document.querySelectorAll("aside,nav,div,section"));
+    var c=all.filter(isSidebar);
+    c.sort(function(a,b){
+      var aw=a.getBoundingClientRect().width || 9999;
+      var bw=b.getBoundingClientRect().width || 9999;
+      return aw-bw;
+    });
+    return c[0] || null;
+  }
+
+  function boot(){
+    document.querySelectorAll("#dspAdminDrawerBtn,#dspAdminDrawerBackdrop,#dspAdminMobileBackdrop").forEach(function(x){x.remove();});
+    document.body.classList.remove("dspDrawerOpen","dsp-admin-menu-open");
+
+    var side=findSidebar();
+    if(!side) return;
+
+    side.classList.add("dspHardSidebar");
+
+    if(!document.getElementById("dspHardBackdrop")){
+      var back=document.createElement("div");
+      back.id="dspHardBackdrop";
+      document.body.appendChild(back);
+      back.onclick=function(){document.body.classList.remove("dspHardOpen");};
+    }
+
+    if(!document.getElementById("dspHardMenuBtn")){
+      var btn=document.createElement("button");
+      btn.id="dspHardMenuBtn";
+      btn.type="button";
+      btn.textContent="☰";
+      document.body.appendChild(btn);
+      btn.onclick=function(){document.body.classList.toggle("dspHardOpen");};
+    }
+
+    side.querySelectorAll("a,button").forEach(function(el){
+      if(!el.dataset.hardClose){
+        el.dataset.hardClose="1";
+        el.addEventListener("click",function(){
+          if(mobile()) setTimeout(function(){document.body.classList.remove("dspHardOpen");},120);
+        });
+      }
+    });
+
+    if(mobile()) document.body.classList.remove("dspHardOpen");
+  }
+
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",boot);
+  else boot();
+
+  setTimeout(boot,300);
+  setTimeout(boot,1000);
+  window.addEventListener("resize",boot);
+})();
+</script>
+<!-- DSP_ADMIN_MOBILE_HARD_DRAWER_END -->
+
+</body>
+  <header>
+    <h1>DSP — NMP Research Lab</h1>
+    <div class="sub">مختبر داخلي لاختبار أفضل صيغة لاستخراج منطقة NMP السعرية. غير مخصص للمستخدمين.</div>
+  </header>
+
+  <main>
+    <div class="toolbar">
+      <a class="btn" href="/">العودة للوحة الإدارة</a>
+      <button onclick="loadLab()">تحديث النتائج</button>
+      <button onclick="downloadJson()">تحميل JSON</button>
+    </div>
+
+    <section class="grid">
+      <div class="card"><div class="k">حالة المختبر</div><div id="status" class="v">—</div></div>
+      <div class="card"><div class="k">عدد ملفات النتائج</div><div id="filesCount" class="v">—</div></div>
+      <div class="card"><div class="k">أفضل صيغة NMP حالية</div><div id="bestModel" class="v">—</div></div>
+      <div class="card"><div class="k">أفضل Score</div><div id="bestScore" class="v">—</div></div>
+    </section>
+
+    <section class="card">
+      <h2 style="margin-top:0;color:var(--gold)">الفائز المؤقت</h2>
+      <div id="winner" class="note">لا توجد نتائج بعد. شغّل مختبر NMP ثم حدّث الصفحة.</div>
+    </section>
+
+    <section class="card" style="margin-top:16px">
+      <h2 style="margin-top:0;color:var(--gold)">جدول المنافسة</h2>
+      <div style="overflow:auto">
+        <table>
+          <thead>
+            <tr>
+              <th>الملف</th>
+              <th>صيغة NMP</th>
+              <th>السعر داخل الشمعة المقابلة</th>
+              <th>عدد الاختبارات</th>
+              <th>Touch</th>
+              <th>Bounce</th>
+              <th>False Break</th>
+              <th>Reaction</th>
+              <th>Score</th>
+            </tr>
+          </thead>
+          <tbody id="rows">
+            <tr><td colspan="9">جاري التحميل...</td></tr>
+          </t</</</</body>
+        </table>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:16px">
+      <h2 style="margin-top:0;color:var(--gold)">تعريف تشغيلي معتمد حاليًا</h2>
+      <p class="note">
+        NMP ليست قيمة مؤشر. NMP هي منطقة سعرية. المؤشر أو الزخم مجرد أداة لاكتشاف الشمعة المرجعية،
+        ثم يتم استخراج سعر منطقة NMP من الشمعة المقابلة.
+      </p>
+      <p class="note mono">
+        Current Production: RSI(7) + Opposite Candle + Open
+      </p>
+    </section>
+  </main>
+
+<script>
+let CURRENT_DATA = null;
+
+function num(x, d=2){
+  const n = Number(x);
+  if(!Number.isFinite(n)) return "—";
+  return n.toFixed(d);
+}
+
+async function loadLab(){
+  const status = document.getElementById("status");
+  const rows = document.getElementById("rows");
+  status.textContent = "Loading";
+  rows.innerHTML = '<tr><td colspan="9">جاري التحميل...</td></tr>';
+
+  try{
+    const res = await fetch('/nmp-lab-summary.txt?ts=' + Date.now(), {cache:'no-store'});
+    if(!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    CURRENT_DATA = data;
+
+    const items = Array.isArray(data.items) ? data.items : [];
+    document.getElementById("status").textContent = "Ready";
+    document.getElementById("status").className = "v ok";
+    document.getElementById("filesCount").textContent = data.files_count ?? items.length;
+
+    if(items.length === 0){
+      document.getElementById("bestModel").textContent = "—";
+      document.getElementById("bestScore").textContent = "—";
+      document.getElementById("winner").textContent = "لا توجد نتائج بعد.";
+      rows.innerHTML = '<tr><td colspan="9">لا توجد نتائج.</td></tr>';
+      return;
+    }
+
+    items.sort((a,b)=>(Number(b.score)||0)-(Number(a.score)||0));
+    const best = items[0];
+
+    document.getElementById("bestModel").textContent =
+      best.nmp_internal method || `${best.detector || '—'} + Opposite Candle + ${best.reference_price_type || '—'}`;
+    document.getElementById("bestScore").textContent = num(best.score, 4);
+
+    document.getElementById("winner").innerHTML =
+      `الفائز المؤقت: <b style="color:var(--gold)">${best.detector}</b>
+       مع السعر داخل الشمعة المقابلة <b style="color:var(--gold)">${best.reference_price_type}</b>
+       و Score = <b>${num(best.score,4)}</b>.
+       <br>هذا لا يعني اعتماده تلقائيًا؛ الاعتماد النهائي يتم بقرار الإدارة بعد مراجعة النتائج.`;
+
+    rows.innerHTML = items.slice(0,100).map(r => `
+      <tr>
+        <td class="mono">${r.source_file || r.file || '—'}</td>
+        <td>${r.nmp_internal method || ((r.detector || '—') + ' + Opposite Candle + ' + (r.reference_price_type || '—'))}</td>
+        <td>${r.reference_price_type || '—'}</td>
+        <td>${r.tests ?? '—'}</td>
+        <td>${num(r.touch_rate,3)}</td>
+        <td>${num(r.bounce_rate,3)}</td>
+        <td>${num(r.false_break_rate,3)}</td>
+        <td>${num(r.avg_reaction_pct,3)}</td>
+        <td><b>${num(r.score,4)}</b></td>
+      </tr>
+    `).join('');
+  }catch(e){
+    document.getElementById("status").textContent = "No Data";
+    document.getElementById("status").className = "v danger";
+    rows.innerHTML = `<tr><td colspan="9">لا توجد بيانات منشورة بعد: ${e.message}</td></tr>`;
+    document.getElementById("winner").textContent = "شغّل مختبر NMP ثم انشر النتائج إلى لوحة الإدارة.";
+  }
+}
+
+function downloadJson(){
+  if(!CURRENT_DATA) return;
+  const blob = new Blob([JSON.stringify(CURRENT_DATA,null,2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'nmp-lab-summary.json';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+loadLab();
+</script>
+</</</</</body>
+</html>

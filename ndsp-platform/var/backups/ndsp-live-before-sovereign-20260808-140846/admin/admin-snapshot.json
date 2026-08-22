@@ -1,0 +1,42 @@
+{
+  "ok": true,
+  "source": "ndsp_auth_admin_snapshot",
+  "updated_at": "2026-08-08T12:07:53.778791+00:00",
+  "users_total": 4,
+  "active_users": 3,
+  "trial_users": 4,
+  "pending_activations": 0,
+  "seats_total": 50,
+  "seats_reserved": 0,
+  "payments_total": 0,
+  "subscriptions_total": 0,
+  "feedback_total": 0,
+  "notifications_total": 0,
+  "cohorts": [
+    {
+      "key": "beginner",
+      "name_ar": "مستخدم مبتدئ",
+      "capacity": 25,
+      "reserved": 0
+    },
+    {
+      "key": "academic",
+      "name_ar": "متخصص / أكاديمي",
+      "capacity": 10,
+      "reserved": 0
+    },
+    {
+      "key": "premium",
+      "name_ar": "خاص مميز",
+      "capacity": 15,
+      "reserved": 0
+    }
+  ],
+  "tables": {
+    "users": true,
+    "feedback_surveys": true,
+    "notifications": true,
+    "nowpayments_payments": false,
+    "subscriptions": false
+  }
+}

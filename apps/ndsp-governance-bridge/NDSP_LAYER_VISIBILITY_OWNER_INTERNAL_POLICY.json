@@ -1,0 +1,12 @@
+{
+  "policy": "NDSP_LAYER_VISIBILITY_OWNER_INTERNAL_POLICY",
+  "status": "authoritative",
+  "replaces": "NDSP_LAYER_NAME_MASKING_POLICY",
+  "owner_internal_unmasked": true,
+  "public_ui_masked": true,
+  "backend_unmasked": true,
+  "layers_folder_unmasked": true,
+  "admin_owner_audit_unmasked": true,
+  "public_api_sanitized": true,
+  "final_rule": "Layer names, logic, code paths, and raw mapping are visible internally to the owner. Public UI remains masked unless explicitly approved."
+}

@@ -1,0 +1,152 @@
+أغسطس 01 00:10:46 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:50118 - "GET /health HTTP/1.1" 404 Not Found
+أغسطس 01 00:10:48 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:50120 - "GET /api/packages HTTP/1.1" 404 Not Found
+أغسطس 01 00:10:50 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:50134 - "GET /health HTTP/1.1" 404 Not Found
+أغسطس 01 00:10:51 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:50138 - "GET /api/alerts/status HTTP/1.1" 404 Not Found
+أغسطس 01 00:10:53 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:54578 - "GET /api/markets HTTP/1.1" 404 Not Found
+أغسطس 01 00:10:55 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:54586 - "GET /api/packages HTTP/1.1" 404 Not Found
+أغسطس 01 00:10:56 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:54590 - "GET /api/account/trial HTTP/1.1" 404 Not Found
+أغسطس 01 00:10:58 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:54592 - "GET /api/payments/status HTTP/1.1" 404 Not Found
+أغسطس 01 00:11:01 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:54606 - "GET /api/decision/quality-live HTTP/1.1" 404 Not Found
+أغسطس 01 00:11:07 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:55542 - "GET /webhooks/nowpayments HTTP/1.1" 404 Not Found
+أغسطس 01 00:11:08 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:55544 - "GET /nowpayments/health HTTP/1.1" 404 Not Found
+أغسطس 01 00:11:10 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:55558 - "GET /api/ndsp/public/decision-quality HTTP/1.1" 404 Not Found
+أغسطس 01 00:11:11 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:55568 - "GET /api/admin-ui/health HTTP/1.1" 404 Not Found
+أغسطس 01 00:11:13 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:59478 - "GET /api/admin-ui/health HTTP/1.1" 404 Not Found
+أغسطس 01 00:11:14 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:59480 - "GET /trial/info HTTP/1.1" 404 Not Found
+أغسطس 01 00:11:16 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:59486 - "GET /api/user-dashboard/saas-policy HTTP/1.1" 404 Not Found
+أغسطس 01 00:11:17 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:59502 - "GET /api/user-dashboard/saas-policy HTTP/1.1" 404 Not Found
+أغسطس 01 00:11:19 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:59514 - "GET /api/auth/decision-room-access HTTP/1.1" 404 Not Found
+أغسطس 01 00:11:21 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:59526 - "GET /api/auth/2fa/status HTTP/1.1" 404 Not Found
+أغسطس 01 00:11:22 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:59530 - "GET /api/auth/session HTTP/1.1" 404 Not Found
+أغسطس 01 00:11:24 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:51996 - "GET /api/auth/2fa/status HTTP/1.1" 404 Not Found
+أغسطس 01 00:11:26 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:52008 - "GET /api/auth/survey/status HTTP/1.1" 404 Not Found
+أغسطس 01 00:11:28 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:52012 - "GET /api/auth/profile HTTP/1.1" 404 Not Found
+أغسطس 01 00:11:30 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:52016 - "GET /api/auth/login/health HTTP/1.1" 404 Not Found
+أغسطس 01 00:11:32 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:52028 - "GET /api/auth/login/health HTTP/1.1" 404 Not Found
+أغسطس 01 00:11:34 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:53352 - "GET /api/auth/session HTTP/1.1" 404 Not Found
+أغسطس 01 00:11:36 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:53360 - "GET /api/auth/session HTTP/1.1" 404 Not Found
+أغسطس 01 00:11:37 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:53364 - "GET /api/user/experience HTTP/1.1" 404 Not Found
+أغسطس 01 00:11:39 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:53380 - "GET /api/user/notifications HTTP/1.1" 404 Not Found
+أغسطس 01 00:11:40 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:53394 - "GET /api/admin-ui/health HTTP/1.1" 404 Not Found
+أغسطس 01 00:11:41 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:53406 - "GET /api/admin-ui/health HTTP/1.1" 404 Not Found
+أغسطس 01 00:11:43 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:43518 - "GET /api/ndsp/nowpayments-create-alias/health HTTP/1.1" 404 Not Found
+أغسطس 01 00:11:44 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:43534 - "GET /contract/status HTTP/1.1" 404 Not Found
+أغسطس 01 00:11:46 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:43540 - "GET /api/ndsp/compat/health HTTP/1.1" 404 Not Found
+أغسطس 01 00:11:47 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:43548 - "GET /policy HTTP/1.1" 404 Not Found
+أغسطس 01 00:11:49 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:43562 - "GET /auth-debug HTTP/1.1" 404 Not Found
+أغسطس 01 00:11:51 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:43568 - "GET /status HTTP/1.1" 404 Not Found
+أغسطس 01 00:11:52 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:43578 - "GET /status HTTP/1.1" 404 Not Found
+أغسطس 01 00:11:54 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:55634 - "GET /debug-auth HTTP/1.1" 404 Not Found
+أغسطس 01 00:11:55 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:55636 - "GET /debug-db HTTP/1.1" 404 Not Found
+أغسطس 01 00:11:57 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:55638 - "GET /status HTTP/1.1" 404 Not Found
+أغسطس 01 00:11:58 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:55644 - "GET /debug-auth HTTP/1.1" 404 Not Found
+أغسطس 01 00:12:00 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:55654 - "GET /api/ndsp/compat/health HTTP/1.1" 404 Not Found
+أغسطس 01 00:12:03 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:54078 - "GET /api/admin-ui/health HTTP/1.1" 404 Not Found
+أغسطس 01 00:12:04 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:54088 - "GET /api/admin-ui/health HTTP/1.1" 404 Not Found
+أغسطس 01 00:12:06 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:54090 - "GET /api/auth/activate HTTP/1.1" 404 Not Found
+أغسطس 01 00:12:07 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:54094 - "GET /api/payments/nowpayments/subscription/status HTTP/1.1" 404 Not Found
+أغسطس 01 00:12:09 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:54110 - "GET /api/ndsp/compat/health HTTP/1.1" 404 Not Found
+أغسطس 01 00:12:11 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:54116 - "GET /api/v6/payments/nowpayments/subscription/status HTTP/1.1" 404 Not Found
+أغسطس 01 00:12:12 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:54118 - "GET /api/user/alert-preferences HTTP/1.1" 404 Not Found
+أغسطس 01 00:12:14 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:51802 - "GET /version HTTP/1.1" 404 Not Found
+أغسطس 01 00:12:15 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:51804 - "GET /api/auth/login/health HTTP/1.1" 404 Not Found
+أغسطس 01 00:12:17 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:51812 - "GET /status HTTP/1.1" 404 Not Found
+أغسطس 01 00:12:18 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:51818 - "GET /debug-auth HTTP/1.1" 404 Not Found
+أغسطس 01 00:12:19 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:51832 - "GET /status HTTP/1.1" 404 Not Found
+أغسطس 01 00:12:21 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:51836 - "GET /status HTTP/1.1" 404 Not Found
+أغسطس 01 00:12:22 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:51848 - "GET /health HTTP/1.1" 404 Not Found
+أغسطس 01 00:12:24 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:40786 - "GET /health HTTP/1.1" 404 Not Found
+أغسطس 01 00:12:26 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:40790 - "GET /api/auth/login/health HTTP/1.1" 404 Not Found
+أغسطس 01 00:12:27 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:40802 - "GET /auth-debug HTTP/1.1" 404 Not Found
+أغسطس 01 00:12:29 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:40816 - "GET /api/admin-actions/users/action/health HTTP/1.1" 404 Not Found
+أغسطس 01 00:12:30 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:40822 - "GET /api/admin/users/action/health HTTP/1.1" 404 Not Found
+أغسطس 01 00:12:32 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:40838 - "GET /api/decision/quality HTTP/1.1" 404 Not Found
+أغسطس 01 00:12:33 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:59460 - "GET /api/ndsp/nowpayments-create-alias/health HTTP/1.1" 404 Not Found
+أغسطس 01 00:12:35 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:59464 - "GET /debug-auth HTTP/1.1" 404 Not Found
+أغسطس 01 00:12:36 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:59476 - "GET /status HTTP/1.1" 404 Not Found
+أغسطس 01 00:12:37 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:59480 - "GET /api/auth/login/health HTTP/1.1" 404 Not Found
+أغسطس 01 00:12:39 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:59484 - "GET /api/admin/users/action/health HTTP/1.1" 404 Not Found
+أغسطس 01 00:12:42 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:59486 - "GET /api/decision/quality-live HTTP/1.1" 404 Not Found
+أغسطس 01 00:12:47 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:48148 - "GET /api/ndsp/public/decision-quality HTTP/1.1" 404 Not Found
+أغسطس 01 00:12:48 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:48158 - "GET /api/decision/quality HTTP/1.1" 404 Not Found
+أغسطس 01 00:12:50 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:48162 - "GET /api/auth/login/health HTTP/1.1" 404 Not Found
+أغسطس 01 00:12:51 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:48174 - "GET /api/auth/login/health HTTP/1.1" 404 Not Found
+أغسطس 01 00:12:54 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:34590 - "GET /api/admin/layers/health HTTP/1.1" 200 OK
+أغسطس 01 00:12:56 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:34592 - "GET /health HTTP/1.1" 404 Not Found
+أغسطس 01 00:12:58 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:34596 - "GET /health HTTP/1.1" 404 Not Found
+أغسطس 01 00:13:00 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:34598 - "GET /health HTTP/1.1" 404 Not Found
+أغسطس 01 00:13:02 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:34602 - "GET /health HTTP/1.1" 404 Not Found
+أغسطس 01 00:13:04 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:50798 - "GET /health HTTP/1.1" 404 Not Found
+أغسطس 01 00:13:06 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:50810 - "GET /api/ndsp/public/decision-quality HTTP/1.1" 404 Not Found
+أغسطس 01 00:13:08 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:50818 - "GET /health HTTP/1.1" 404 Not Found
+أغسطس 01 00:13:11 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:50834 - "GET /api/decision/quality-live HTTP/1.1" 404 Not Found
+أغسطس 01 00:13:17 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:59744 - "GET /api/decision/quality-live HTTP/1.1" 404 Not Found
+أغسطس 01 00:13:23 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:37712 - "GET /api/admin/raw-cot/health HTTP/1.1" 404 Not Found
+أغسطس 01 00:13:24 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:37726 - "GET /api/auth/login/health HTTP/1.1" 404 Not Found
+أغسطس 01 00:13:26 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:37742 - "GET /status HTTP/1.1" 404 Not Found
+أغسطس 01 00:13:27 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:37754 - "GET /api/decision/quality HTTP/1.1" 404 Not Found
+أغسطس 01 00:13:30 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:37756 - "GET /api/decision/quality-live HTTP/1.1" 404 Not Found
+أغسطس 01 00:13:37 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:51720 - "GET /api/decision/quality-live HTTP/1.1" 404 Not Found
+أغسطس 01 00:13:42 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:51732 - "GET /debug-auth HTTP/1.1" 404 Not Found
+أغسطس 01 00:13:43 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:53558 - "GET /status HTTP/1.1" 404 Not Found
+أغسطس 01 00:13:45 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:53570 - "GET /status HTTP/1.1" 404 Not Found
+أغسطس 01 00:13:47 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:53574 - "GET /auth-debug HTTP/1.1" 404 Not Found
+أغسطس 01 00:13:48 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:53588 - "GET /health HTTP/1.1" 404 Not Found
+أغسطس 01 00:13:50 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:53592 - "GET /api/auth/login/health HTTP/1.1" 404 Not Found
+أغسطس 01 00:13:51 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:53606 - "GET /api/auth/login/health HTTP/1.1" 404 Not Found
+أغسطس 01 00:13:53 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:34348 - "GET /health HTTP/1.1" 404 Not Found
+أغسطس 01 00:13:55 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:34352 - "GET /nowpayments/health HTTP/1.1" 404 Not Found
+أغسطس 01 00:13:56 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:34366 - "GET /api/auth/login/health HTTP/1.1" 404 Not Found
+أغسطس 01 00:13:58 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:34370 - "GET /api/admin-actions/users/action/health HTTP/1.1" 404 Not Found
+أغسطس 01 00:13:59 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:34376 - "GET /api/admin/users/action/health HTTP/1.1" 404 Not Found
+أغسطس 01 00:14:02 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:34384 - "GET /api/admin/users/action/health HTTP/1.1" 404 Not Found
+أغسطس 01 00:14:04 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:49396 - "GET /nowpayments/health HTTP/1.1" 404 Not Found
+أغسطس 01 00:14:05 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:49410 - "GET /api/auth/login/health HTTP/1.1" 404 Not Found
+أغسطس 01 00:14:06 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:49418 - "GET /api/auth/login/health HTTP/1.1" 404 Not Found
+أغسطس 01 00:14:08 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:49428 - "GET /nowpayments/health HTTP/1.1" 404 Not Found
+أغسطس 01 00:14:10 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:49442 - "GET /trial/info HTTP/1.1" 404 Not Found
+أغسطس 01 00:14:12 vmi2934783 uvicorn[2978601]: INFO:     127.0.0.1:49450 - "GET /api/auth/session HTTP/1.1" 404 Not Found
+أغسطس 02 23:56:02 vmi2934783 uvicorn[2978601]: INFO:     Shutting down
+أغسطس 02 23:56:02 vmi2934783 uvicorn[2978601]: INFO:     Waiting for application shutdown.
+أغسطس 02 23:56:02 vmi2934783 uvicorn[2978601]: INFO:     Application shutdown complete.
+أغسطس 02 23:56:02 vmi2934783 uvicorn[2978601]: INFO:     Finished server process [2978601]
+-- Boot 1d7a60877acc40148d88a352d85728d7 --
+أغسطس 02 23:57:11 vmi2934783 uvicorn[1358]: INFO:     Started server process [1358]
+أغسطس 02 23:57:11 vmi2934783 uvicorn[1358]: INFO:     Waiting for application startup.
+أغسطس 02 23:57:11 vmi2934783 uvicorn[1358]: INFO:     Application startup complete.
+أغسطس 02 23:57:11 vmi2934783 uvicorn[1358]: INFO:     Uvicorn running on http://127.0.0.1:9065 (Press CTRL+C to quit)
+أغسطس 05 09:22:41 vmi2934783 uvicorn[1358]: INFO:     Shutting down
+أغسطس 05 09:22:41 vmi2934783 uvicorn[1358]: INFO:     Waiting for application shutdown.
+أغسطس 05 09:22:41 vmi2934783 uvicorn[1358]: INFO:     Application shutdown complete.
+أغسطس 05 09:22:41 vmi2934783 uvicorn[1358]: INFO:     Finished server process [1358]
+أغسطس 05 09:30:55 vmi2934783 uvicorn[3019805]: INFO:     Started server process [3019805]
+أغسطس 05 09:30:55 vmi2934783 uvicorn[3019805]: INFO:     Waiting for application startup.
+أغسطس 05 09:30:55 vmi2934783 uvicorn[3019805]: INFO:     Application startup complete.
+أغسطس 05 09:30:55 vmi2934783 uvicorn[3019805]: INFO:     Uvicorn running on http://127.0.0.1:9065 (Press CTRL+C to quit)
+أغسطس 05 10:17:19 vmi2934783 uvicorn[3019805]: INFO:     127.0.0.1:34562 - "GET /health HTTP/1.1" 404 Not Found
+أغسطس 05 10:17:19 vmi2934783 uvicorn[3019805]: INFO:     127.0.0.1:34570 - "GET /api/health HTTP/1.1" 404 Not Found
+أغسطس 05 10:17:19 vmi2934783 uvicorn[3019805]: INFO:     127.0.0.1:34580 - "GET / HTTP/1.1" 404 Not Found
+أغسطس 05 21:22:43 vmi2934783 uvicorn[3019805]: INFO:     127.0.0.1:58210 - "GET /health HTTP/1.1" 404 Not Found
+أغسطس 06 14:51:55 vmi2934783 uvicorn[3019805]: INFO:     127.0.0.1:58384 - "GET /api/admin/layers/run?asset=GOLD HTTP/1.1" 200 OK
+أغسطس 06 14:51:56 vmi2934783 uvicorn[3019805]: INFO:     127.0.0.1:58394 - "GET /api/admin/layers/context?asset=GOLD HTTP/1.1" 200 OK
+أغسطس 06 14:53:06 vmi2934783 uvicorn[3019805]: INFO:     127.0.0.1:43064 - "GET /api/admin/layers/run?asset=GOLD HTTP/1.1" 200 OK
+أغسطس 06 14:53:08 vmi2934783 uvicorn[3019805]: INFO:     127.0.0.1:46208 - "GET /api/admin/layers/context?asset=GOLD HTTP/1.1" 200 OK
+أغسطس 06 15:20:28 vmi2934783 uvicorn[3019805]: INFO:     127.0.0.1:59036 - "GET /api/admin/layers/health HTTP/1.1" 200 OK
+أغسطس 06 15:20:28 vmi2934783 uvicorn[3019805]: INFO:     127.0.0.1:59048 - "GET /api/admin/layers/canonical/health HTTP/1.1" 404 Not Found
+أغسطس 06 15:21:05 vmi2934783 uvicorn[3019805]: INFO:     Shutting down
+أغسطس 06 15:21:05 vmi2934783 uvicorn[3019805]: INFO:     Waiting for application shutdown.
+أغسطس 06 15:21:05 vmi2934783 uvicorn[3019805]: INFO:     Application shutdown complete.
+أغسطس 06 15:21:05 vmi2934783 uvicorn[3019805]: INFO:     Finished server process [3019805]
+أغسطس 06 15:21:08 vmi2934783 uvicorn[1784925]: INFO:     Started server process [1784925]
+أغسطس 06 15:21:08 vmi2934783 uvicorn[1784925]: INFO:     Waiting for application startup.
+أغسطس 06 15:21:08 vmi2934783 uvicorn[1784925]: INFO:     Application startup complete.
+أغسطس 06 15:21:08 vmi2934783 uvicorn[1784925]: INFO:     Uvicorn running on http://127.0.0.1:9065 (Press CTRL+C to quit)
+أغسطس 06 15:21:09 vmi2934783 uvicorn[1784925]: INFO:     127.0.0.1:42364 - "GET /api/admin/layers/health HTTP/1.1" 200 OK
+أغسطس 06 15:21:09 vmi2934783 uvicorn[1784925]: INFO:     127.0.0.1:42372 - "GET /api/admin/layers/canonical/health HTTP/1.1" 200 OK
+أغسطس 06 15:21:11 vmi2934783 uvicorn[1784925]: INFO:     127.0.0.1:42374 - "GET /api/admin/layers/canonical/run?asset=GOLD HTTP/1.1" 200 OK
+أغسطس 06 15:21:13 vmi2934783 uvicorn[1784925]: INFO:     127.0.0.1:42384 - "GET /api/admin/layers/run?asset=GOLD HTTP/1.1" 200 OK
+-- Boot 645dbba7d26d4e9886840cf8f0143622 --
+أغسطس 07 16:46:06 vmi2934783 uvicorn[1333]: INFO:     Started server process [1333]
+أغسطس 07 16:46:06 vmi2934783 uvicorn[1333]: INFO:     Waiting for application startup.
+أغسطس 07 16:46:06 vmi2934783 uvicorn[1333]: INFO:     Application startup complete.
+أغسطس 07 16:46:06 vmi2934783 uvicorn[1333]: INFO:     Uvicorn running on http://127.0.0.1:9065 (Press CTRL+C to quit)

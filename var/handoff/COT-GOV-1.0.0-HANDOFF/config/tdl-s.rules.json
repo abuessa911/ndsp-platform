@@ -1,0 +1,10 @@
+{
+  "version": "UNMAPPED",
+  "status": "TO_BE_MAPPED_FROM_LEGACY_CODE",
+  "allowedAnalysisModes": [
+    "SPECULATION"
+  ],
+  "rules": [],
+  "notesAr": "يجب استخراج منطق TDL-S الفعلي من الكود القديم قبل تفعيله.",
+  "notesEn": "The actual TDL-S logic must be extracted from the legacy code before activation."
+}

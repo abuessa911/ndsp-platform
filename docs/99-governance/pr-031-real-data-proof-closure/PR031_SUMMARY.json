@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "document": "PR-031 Remaining Real-Data Proof Closure",
+  "generated_at": "2026-07-31T23:31:06.688735+00:00",
+  "input_capability_count": 2,
+  "connector_evidence_records": 40,
+  "response_profile_records": 2,
+  "executable_test_count": 2,
+  "closed_machine_verified_count": 0,
+  "still_open_count": 2,
+  "payload_values_persisted": false,
+  "unsafe_mutating_requests_executed": 0,
+  "services_restarted": 0,
+  "mock_data_created": 0,
+  "human_approvals_granted": 0,
+  "ui_complete_records_created": 0,
+  "full_capability_coverage_claimed": false,
+  "human_confirmation_required": true,
+  "runtime_changes": "none",
+  "status": "REAL_DATA_PROOF_PARTIALLY_CLOSED"
+}

@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "document": "PR-019 Discovery Quality Report",
+  "generated_at": "2026-07-31T20:09:56.219291+00:00",
+  "raw_candidate_count": 976,
+  "active_candidate_count": 526,
+  "excluded_candidate_count": 450,
+  "excluded_candidates_retained": true,
+  "node_modules_inventory_noise_detected": 0,
+  "active_priority": {
+    "P0": 233,
+    "P1": 195,
+    "P2": 98
+  },
+  "active_origins": {
+    "LOCAL_MODIFIED": 10,
+    "LOCAL_ONLY": 336,
+    "ON_MAIN": 74,
+    "RUNTIME_ONLY": 26,
+    "UNTRACKED": 80
+  },
+  "excluded_reasons": {
+    "GENERIC_SYMBOL_FALSE_POSITIVE": 71,
+    "HOST_INFRASTRUCTURE_NOT_PRODUCT_CAPABILITY": 39,
+    "LOCALIZATION_FALSE_POSITIVE": 29,
+    "LOW_SIGNAL_STATIC_CANDIDATE": 199,
+    "NON_ACTIVE_SOURCE": 112
+  },
+  "full_capability_coverage_claimed": false,
+  "human_validation_required": true,
+  "runtime_changes": "none",
+  "status": "QUALITY_FILTERED_DISCOVERY_PENDING_HUMAN_VALIDATION"
+}

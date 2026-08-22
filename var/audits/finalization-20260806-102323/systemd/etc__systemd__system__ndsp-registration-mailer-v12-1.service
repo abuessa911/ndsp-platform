@@ -1,0 +1,15 @@
+[Unit]
+Description=NDSP Registration Welcome and Owner Notification Mailer V12.1
+After=network-online.target postgresql.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=root
+Group=root
+ExecStart=/usr/bin/python3 /opt/ndsp-registration-mailer-v12-1/mailer.py
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/var/lib /run

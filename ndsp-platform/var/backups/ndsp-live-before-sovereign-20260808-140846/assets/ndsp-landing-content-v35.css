@@ -1,0 +1,4 @@
+/* V35 intentionally preserves the existing landing composition and visual system.
+   The V34 append-only section is hidden so the rewritten original page is the
+   single public narrative. */
+#ndspLandingV34 { display: none !important; }

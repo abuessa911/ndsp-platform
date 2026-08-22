@@ -1,0 +1,14 @@
+=== POST-RESTART ===
+SERVICE=ndsp-canonical-live-runtime-v30.service
+OLD_PID=1373808
+NEW_PID=2184909
+ACTIVE=active
+MainPID=2184909
+ExecStart={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_canonical_live_runtime_v30.py ; ignore_errors=no ; start_time=[Sat 2026-08-08 03:27:46 CEST] ; stop_time=[n/a] ; pid=2184909 ; code=(null) ; status=0/0 }
+ActiveState=active
+SubState=running
+
+=== LISTENERS ===
+State  Recv-Q Send-Q Local Address:Port Peer Address:PortProcess                              
+LISTEN 0      5          127.0.0.1:9082      0.0.0.0:*    users:(("python3",pid=1373772,fd=3))
+LISTEN 0      5          127.0.0.1:9085      0.0.0.0:*    users:(("python3",pid=2184909,fd=3))

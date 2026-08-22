@@ -1,0 +1,91 @@
+=== LISTENER ===
+LISTEN 0      5          127.0.0.1:9094       0.0.0.0:*    users:(("python3",pid=2497959,fd=6))                                                                                                                                                                                                                      
+
+=== PID BASIC DATA ===
+2497959       1 nawaf511 nawaf511 ر يوليو 29 06:52:50 2026 18:21:56 Ss /usr/bin/python3 /usr/local/lib/ndsp-business-ops/app.py
+
+=== EXECUTABLE ===
+/usr/bin/python3.12
+
+=== WORKING DIRECTORY ===
+/
+
+=== COMMAND LINE ===
+/usr/bin/python3 /usr/local/lib/ndsp-business-ops/app.py 
+
+=== CGROUP ===
+0::/system.slice/ndsp-business-ops.service
+
+=== ENVIRONMENT KEY NAMES ONLY ===
+HOME
+INVOCATION_ID
+JOURNAL_STREAM
+LANG
+LOGNAME
+MEMORY_PRESSURE_WATCH
+MEMORY_PRESSURE_WRITE
+NDSP_LANDING_BASE
+NDSP_LOCAL_DECISION_BASE
+NDSP_LOCAL_MAIL_USER
+NDSP_LOCAL_PACKAGES_URL
+NDSP_OPS_DB
+NDSP_OPS_HASH_SALT
+NDSP_OPS_HOST
+NDSP_OPS_LATEST_MONITOR
+NDSP_OPS_MONITOR_STATE
+NDSP_OPS_PORT
+NDSP_OPS_REPORT_DIR
+NDSP_PUBLIC_BASE
+PATH
+SHELL
+SYSTEMD_EXEC_PID
+USER
+
+=== PARENT CHAIN ===
+2497959       1 nawaf511 nawaf511 ر يوليو 29 06:52:50 2026 18:21:57 Ss /usr/bin/python3 /usr/local/lib/ndsp-business-ops/app.py
+
+=== SYSTEMD UNIT FROM CGROUP ===
+CGROUP_UNIT=ndsp-business-ops.service
+
+=== SYSTEMD SHOW ===
+MainPID=2497959
+ExecStart={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /usr/local/lib/ndsp-business-ops/app.py ; ignore_errors=no ; start_time=[Wed 2026-07-29 06:52:50 CEST] ; stop_time=[n/a] ; pid=2497959 ; code=(null) ; status=0/0 }
+EnvironmentFiles=/etc/ndsp/business-ops.env (ignore_errors=no)
+WorkingDirectory=
+User=nawaf511
+Group=nawaf511
+Id=ndsp-business-ops.service
+Description=NDSP Business Operations V205
+LoadState=loaded
+ActiveState=active
+SubState=running
+FragmentPath=/etc/systemd/system/ndsp-business-ops.service
+
+=== SYSTEMD UNIT CONTENT ===
+# /etc/systemd/system/ndsp-business-ops.service
+[Unit]
+Description=NDSP Business Operations V205
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=nawaf511
+Group=nawaf511
+EnvironmentFile=/etc/ndsp/business-ops.env
+ExecStart=/usr/bin/python3 /usr/local/lib/ndsp-business-ops/app.py
+Restart=always
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/ndsp-business-ops
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+UMask=0027
+
+[Install]
+WantedBy=multi-user.target
+
+=== FALLBACK UNIT MATCH BY MAINPID ===
+ndsp-business-ops.service

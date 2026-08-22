@@ -1,0 +1,13 @@
+./apps/admin-console/index.html
+./apps/admin-console/NDSP_Admin_Console.html
+./apps/admin-console/NDSP_Help_Center.html
+./apps/admin-console/NDSP_Terms_Privacy.html
+./apps/admin-console/data/owner-layer-source-map.json
+./backend/auth_api/ndsp_layer_name_masking_policy.cjs
+./backend/auth_api/ndsp_saas_packages_policy.cjs
+./backend/auth_api/ndsp_admin_ui_proxy.cjs
+./backend/ndsp_layer_name_masking_policy.cjs
+./backend/ndsp_saas_packages_policy.cjs
+./backend/ndsp_admin_ui_proxy.cjs
+./backend/auth_api/ndsp_layer_name_masking_policy.cjs
+./backend/ndsp_layer_name_masking_policy.cjs

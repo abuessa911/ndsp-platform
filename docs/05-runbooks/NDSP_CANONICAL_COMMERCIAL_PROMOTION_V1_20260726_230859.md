@@ -1,0 +1,150 @@
+============================================================
+NDSP — CANONICAL COMMERCIAL PROMOTION V1
+MODE=SOURCE_BUILD_ATOMIC_CANONICAL_SWAP_ROLLBACK
+DATE=2026-07-26T23:08:59+02:00
+SOURCE=/home/nawaf511/Downloads/NDSP_COMMERCIAL_FRONTEND_LIVE_V1
+TARGET=/var/www/ndsp-my/portal
+PREVIEW=/var/www/ndsp-my/portal-commercial-preview
+============================================================
+
+== 0) Explicit production confirmation ==
+EXPLICIT_CONFIRMATION=YES
+
+== 1) Preconditions and safety gates ==
+SOURCE_SOURCEMAP_POLICY=FALSE
+PRECONDITION_GATE=PASS
+
+== 2) Pre-promotion public and service gates ==
+PREVIEW_BEFORE_PROMOTION=PASS
+TRIAL_HTTP=200
+RAW_COT_HTTP=200
+QUALITY_SPEC_HTTP=200
+QUALITY_INV_HTTP=200
+SPECULATIVE={'mode': 'speculative', 'score': 75.91, 'direction': 'bearish', 'status': 'CALCULATED_GOVERNED'}
+INVESTMENT={'mode': 'investment', 'score': 64.34, 'direction': 'bullish', 'status': 'CALCULATED_GOVERNED'}
+PRE_PROMOTION_MODE_CONTRACT_GATE=PASS
+SURFACE_HTTP=200 URL=https://ndsp.app/
+SURFACE_HTTP=200 URL=https://my.ndsp.app/login
+SURFACE_HTTP=200 URL=https://my.ndsp.app/register
+SURFACE_HTTP=200 URL=https://ndsp.app/reset-password.html
+SURFACE_HTTP=200 URL=https://api.ndsp.app/api/health
+COMMERCIAL_SURFACES_PRECHECK=PASS
+
+== 3) Backup current canonical portal ==
+CURRENT_CANONICAL_INDEX_SHA256=5a2ee3cf06fdb16b7c18adcf7bd2b73e5eb0b9b447648b353c9166ba4def0547
+CANONICAL_BACKUP=/home/nawaf511/empire-core-new/backups/canonical-commercial-promotion-v1/20260726_230859/portal.previous
+BACKUP_GATE=PASS
+
+== 4) Isolated authoritative source build for /portal/ ==
+PRODUCTION_SOURCEMAP_FILE_COUNT=0
+CANONICAL_BUILD_JS=index-Bq_cOiI4.js
+CANONICAL_BUILD_CSS=index-DoraAm3r.css
+CANONICAL_SOURCE_BUILD_GATE=PASS
+
+== 5) Create physical canonical SPA route entrypoints ==
+PHYSICAL_SPA_ROUTE_COUNT=19
+PHYSICAL_SPA_ROUTE_GATE=PASS
+
+== 6) Stage canonical release with permissions ==
+STAGED_CANONICAL_RELEASE=/var/www/ndsp-my/portal.new.20260726_230859
+STAGING_GATE=PASS
+
+== 7) Atomic canonical portal swap ==
+ATOMIC_SWAP=PASS
+ATOMIC_PREVIOUS=/var/www/ndsp-my/portal.previous.20260726_230859
+CANONICAL_PORTAL_CHANGED=YES
+NGINX_CHANGED=NO
+NGINX_RELOADED=NO
+SERVICE_RESTARTED=NO
+
+== 8) Canonical public identity verification ==
+CANONICAL_ROOT_HTTP=200
+CANONICAL_ROOT_JS=/portal/assets/index-Bq_cOiI4.js
+CANONICAL_ROOT_CSS=/portal/assets/index-DoraAm3r.css
+CANONICAL_PUBLIC_IDENTITY_GATE=PASS
+
+== 9) All 38 canonical route variants ==
+CANONICAL_ROUTE_PASS=command-center/
+CANONICAL_ROUTE_PASS=command-center
+CANONICAL_ROUTE_PASS=markets/
+CANONICAL_ROUTE_PASS=markets
+CANONICAL_ROUTE_PASS=prices-chart/
+CANONICAL_ROUTE_PASS=prices-chart
+CANONICAL_ROUTE_PASS=opportunities/
+CANONICAL_ROUTE_PASS=opportunities
+CANONICAL_ROUTE_PASS=decision-room/
+CANONICAL_ROUTE_PASS=decision-room
+CANONICAL_ROUTE_PASS=portfolio/
+CANONICAL_ROUTE_PASS=portfolio
+CANONICAL_ROUTE_PASS=scenarios/
+CANONICAL_ROUTE_PASS=scenarios
+CANONICAL_ROUTE_PASS=layers/
+CANONICAL_ROUTE_PASS=layers
+CANONICAL_ROUTE_PASS=risk/
+CANONICAL_ROUTE_PASS=risk
+CANONICAL_ROUTE_PASS=completed/
+CANONICAL_ROUTE_PASS=completed
+CANONICAL_ROUTE_PASS=data-health/
+CANONICAL_ROUTE_PASS=data-health
+CANONICAL_ROUTE_PASS=alerts/
+CANONICAL_ROUTE_PASS=alerts
+CANONICAL_ROUTE_PASS=guide/
+CANONICAL_ROUTE_PASS=guide
+CANONICAL_ROUTE_PASS=support/
+CANONICAL_ROUTE_PASS=support
+CANONICAL_ROUTE_PASS=account/
+CANONICAL_ROUTE_PASS=account
+CANONICAL_ROUTE_PASS=plans/
+CANONICAL_ROUTE_PASS=plans
+CANONICAL_ROUTE_PASS=settings/
+CANONICAL_ROUTE_PASS=settings
+CANONICAL_ROUTE_PASS=context/
+CANONICAL_ROUTE_PASS=context
+CANONICAL_ROUTE_PASS=trial-expired/
+CANONICAL_ROUTE_PASS=trial-expired
+CANONICAL_ROUTE_VARIANTS_TESTED=38
+ALL_CANONICAL_ROUTES=PASS
+
+== 10) Canonical production source-map closure ==
+CANONICAL_MAP_HTTP=404
+CANONICAL_MAP_ACTUAL=FALSE
+CANONICAL_MAP_SOURCE_COUNT=0
+CANONICAL_MAP_HAS_SOURCES_CONTENT=FALSE
+CANONICAL_MAP_RESPONSE_IS_HTML=TRUE
+CANONICAL_SOURCEMAP_CLOSURE_GATE=PASS
+
+== 11) Post-promotion API, auth, and trial gates ==
+PUBLIC_QUALITY_SPEC_HTTP=200
+PUBLIC_QUALITY_INV_HTTP=200
+AUTH_SESSION_HTTP=401
+TRIAL_STATUS_HTTP=200
+PUBLIC_SPECULATIVE={'mode': 'speculative', 'score': 75.91, 'direction': 'bearish', 'status': 'CALCULATED_GOVERNED'}
+PUBLIC_INVESTMENT={'mode': 'investment', 'score': 64.34, 'direction': 'bullish', 'status': 'CALCULATED_GOVERNED'}
+PUBLIC_MODE_CONTRACT_GATE=PASS
+TRIAL_POLICY_16_DAYS=PASS
+POST_PROMOTION_API_AUTH_TRIAL_GATE=PASS
+
+== 12) Preview remains available and unchanged ==
+PREVIEW_AFTER_PROMOTION=PASS
+
+== 13) Finalize release and retain rollback ==
+NEW_CANONICAL_INDEX_SHA256=d5cf8a057bbdb9c4d9c95ec52e6e27cabc5ca2a0abfc0443cf169568862eaf6c
+FAST_ROLLBACK_DIRECTORY=/var/www/ndsp-my/portal.previous.20260726_230859
+DURABLE_BACKUP_DIRECTORY=/home/nawaf511/empire-core-new/backups/canonical-commercial-promotion-v1/20260726_230859/portal.previous
+
+COMMERCIAL_LAUNCH_READY=YES
+FINAL_STATUS=NDSP_CANONICAL_COMMERCIAL_PORTAL_PROMOTED_AND_VERIFIED
+CANONICAL_PORTAL_CHANGED=YES
+CANONICAL_URL=https://my.ndsp.app/portal/command-center/?lang=ar
+SOURCE_CHANGED=NO
+DIRECT_DIST_PATCH=NO
+BACKEND_CHANGED=NO
+NGINX_CHANGED=NO
+NGINX_RELOADED=NO
+SERVICE_RESTARTED=NO
+PRODUCTION_SOURCEMAP_FILE_COUNT=0
+ALL_CANONICAL_ROUTES=PASS
+PUBLIC_MODE_CONTRACT_GATE=PASS
+TRIAL_POLICY_16_DAYS=PASS
+BACKUP=/home/nawaf511/empire-core-new/backups/canonical-commercial-promotion-v1/20260726_230859
+REPORT=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_CANONICAL_COMMERCIAL_PROMOTION_V1_20260726_230859.md

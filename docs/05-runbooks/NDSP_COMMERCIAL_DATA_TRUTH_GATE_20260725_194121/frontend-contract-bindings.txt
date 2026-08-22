@@ -1,0 +1,16 @@
+live_price=YES aliases=live_price
+scenario_state=YES aliases=scenario_state
+directional_context=YES aliases=scenario_directional_context,directional_context
+activation_level=YES aliases=scenario_activation_level,activation_level
+arrival_level=YES aliases=scenario_arrival_level,arrival_level
+review_level=YES aliases=scenario_review_level,review_level
+invalidation_level=YES aliases=scenario_invalidation_level,invalidation_level
+confidence=YES aliases=confidence
+time_horizon=YES aliases=time_horizon,follow_up_horizon
+alignment_score=YES aliases=alignment_score
+confirmation_score=YES aliases=confirmation_score
+macd_histogram=YES aliases=macd_histogram
+obv_slope=YES aliases=obv_slope
+cci_value=YES aliases=cci_value
+usd_pressure_score=YES aliases=usd_pressure_score
+blockers=YES aliases=blockers

@@ -1,0 +1,9 @@
+MainPID=1399
+ExecStart={ path=/usr/bin/node ; argv[]=/usr/bin/node /opt/ndsp-news-ticker/server.js ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }
+Environment=NDSP_ADMIN_USERS_JSON=/home/nawaf511/empire-core-new/runtime/admin-users.json
+EnvironmentFiles=/etc/ndsp-news-ticker.env (ignore_errors=no)
+EnvironmentFiles=/etc/ndsp/ndsp-db.env (ignore_errors=no)
+EnvironmentFiles=/etc/ndsp/ndsp-mail.env (ignore_errors=no)
+WorkingDirectory=/opt/ndsp-news-ticker
+ActiveState=active
+SubState=running

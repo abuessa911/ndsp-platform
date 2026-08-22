@@ -1,0 +1,267 @@
+=== NDSP 9082 V201 EXACT PATCHPOINT TRUTH V3 ===
+DATE=2026-08-08T03:53:11+02:00
+MODE=READ_ONLY
+
+=== SOURCE IDENTITY ===
+SOURCE_FILE=/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v201_launch_completion.py
+SOURCE_FILE=FOUND
+PYTHON_SYNTAX=PASS
+
+=== LIVE CAPTURE ===
+HTTP_9076=200
+HTTP_9082=200
+LIVE_CAPTURE=PASS
+
+=== LIVE 9076 GOVERNED FIELDS ===
+market_name='ETHER CASH SETTLED - CHICAGO MERCANTILE EXCHANGE'
+market_code='146021'
+exchange='CME'
+report_date='2026-07-21'
+previous_report_date='2026-07-14'
+asset_managers_long=1634
+asset_managers_short=4054
+asset_managers_change_long=-303
+asset_managers_change_short=711
+asset_managers_bias='bearish'
+asset_managers_overall_direction=NOT_PRESENT
+asset_managers_weekly_direction=NOT_PRESENT
+leveraged_funds_long=2223
+leveraged_funds_short=9276
+leveraged_funds_change_long=-691
+leveraged_funds_change_short=-1599
+leveraged_funds_bias='bearish'
+leveraged_funds_overall_direction=NOT_PRESENT
+leveraged_funds_weekly_direction=NOT_PRESENT
+weekly_change_source='REAL_SAME_MARKET_CONSECUTIVE_CFTC_REPORTS'
+synthetic_values_used=False
+history_adapter_status='CONNECTED'
+raw_cot_connected=True
+raw_cot_status='CONNECTED_MATCHED'
+raw_cot_governing_inputs_complete=True
+
+=== LIVE 9082 GOVERNING INPUTS ===
+GOVERNING_INPUTS=FOUND
+report_date='2026-07-21'
+report_age_days=None
+max_age_days=10
+fresh=False
+status='INCOMPLETE'
+missing_inputs=['asset_managers_weekly', 'leveraged_funds_weekly']
+raw_cot_connected=True
+raw_cot_status='CONNECTED_MATCHED'
+directions.asset_managers_overall='bearish'
+directions.asset_managers_weekly=None
+directions.leveraged_funds_overall=None
+directions.leveraged_funds_weekly=None
+
+=== EXACT V201 SOURCE 250-390 ===
+   250	        "status": status,
+   251	        "label": label,
+   252	        "reason": summary,
+   253	        "evidence": evidence,
+   254	        "notice": "هذه قراءة تفسيرية محكومة وليست توصية مالية.",
+   255	    })
+   256	
+   257	
+   258	def attach_v201_governing_inputs(
+   259	    payload: Any,
+   260	    *,
+   261	    symbol: Any = None,
+   262	    timeframe: Any = None,
+   263	    analysis_mode: Any = None,
+   264	    max_cot_age_days: int = DEFAULT_MAX_COT_AGE_DAYS,
+   265	    raw_cot_override: Mapping[str, Any] | None = None,
+   266	) -> Any:
+   267	    if not isinstance(payload, dict):
+   268	        return payload
+   269	
+   270	    data = deepcopy(payload)
+   271	    instrument = data.get("instrument") if isinstance(data.get("instrument"), Mapping) else {}
+   272	    normalized_symbol = str(symbol or instrument.get("symbol") or data.get("symbol") or "").upper().strip()
+   273	    normalized_tf = str(timeframe or instrument.get("timeframe") or "weekly").strip()
+   274	    mode = _analysis_mode(analysis_mode, normalized_tf)
+   275	    raw = dict(raw_cot_override) if isinstance(raw_cot_override, Mapping) else _fetch_raw_cot(normalized_symbol)
+   276	
+   277	    directions = {
+   278	        "asset_managers_overall": _normalize_direction(
+   279	            raw.get("asset_managers_overall_direction") or raw.get("asset_managers_bias")
+   280	        ),
+   281	        "asset_managers_weekly": _normalize_direction(raw.get("asset_managers_weekly_direction")),
+   282	        "leveraged_funds_overall": _normalize_direction(
+   283	            raw.get("leveraged_funds_overall_direction")
+   284	            or raw.get("leveraged_funds_bias")
+   285	        ),
+   286	        "leveraged_funds_weekly": _normalize_direction(raw.get("leveraged_funds_weekly_direction")),
+   287	    }
+   288	    missing = [name for name, value in directions.items() if value not in {"bullish", "bearish", "neutral"}]
+   289	    age = _safe_float(raw.get("report_age_days"))
+   290	
+   291	    # Canonical freshness fallback:
+   292	    # report_age_days may be derived only from a real report_date.
+   293	    # Missing report_date remains missing; no synthetic freshness.
+   294	    if age is None:
+   295	        report_date_value = raw.get("report_date")
+   296	        if report_date_value:
+   297	            try:
+   298	                from datetime import date, datetime, timezone
+   299	
+   300	                text = str(report_date_value).strip()
+   301	                parsed = datetime.fromisoformat(
+   302	                    text.replace("Z", "+00:00")
+   303	                )
+   304	
+   305	                if parsed.tzinfo is None:
+   306	                    parsed = parsed.replace(tzinfo=timezone.utc)
+   307	
+   308	                age = float(
+   309	                    (datetime.now(timezone.utc).date() - parsed.date()).days
+   310	                )
+   311	            except Exception:
+   312	                try:
+   313	                    parsed_date = date.fromisoformat(
+   314	                        str(report_date_value).strip()[:10]
+   315	                    )
+   316	                    age = float(
+   317	                        (datetime.now(timezone.utc).date() - parsed_date).days
+   318	                    )
+   319	                except Exception:
+   320	                    age = None
+   321	
+   322	    fresh = age is not None and age <= float(max_cot_age_days)
+   323	    complete = (
+   324	        raw.get("raw_cot_connected") is True
+   325	        and raw.get("raw_cot_governing_inputs_complete") is True
+   326	        and not missing
+   327	        and fresh
+   328	    )
+   329	
+   330	    data["governing_inputs"] = {
+   331	        "contract_version": GOVERNING_INPUTS_VERSION,
+   332	        "status": "COMPLETE" if complete else "INCOMPLETE",
+   333	        "source": "CFTC_TFF_FUTURES_ONLY",
+   334	        "source_family": raw.get("source_family"),
+   335	        "source_market": raw.get("market_name"),
+   336	        "report_date": raw.get("report_date"),
+   337	        "report_age_days": age,
+   338	        "max_age_days": int(max_cot_age_days),
+   339	        "fresh": fresh,
+   340	        "symbol": normalized_symbol,
+   341	        "source_timeframe": "weekly",
+   342	        "analysis_timeframe": normalized_tf,
+   343	        "analysis_mode": mode,
+   344	        "directions": directions,
+   345	        "missing_inputs": missing,
+   346	        "raw_cot_connected": raw.get("raw_cot_connected") is True,
+   347	        "raw_cot_status": raw.get("raw_cot_status"),
+   348	        "not_recommendation": True,
+   349	    }
+   350	
+   351	    if not complete:
+   352	        data["governing_inputs_reason_code"] = (
+   353	            "COT_STALE" if age is not None and not fresh
+   354	            else "COT_GOVERNING_INPUTS_INCOMPLETE"
+   355	        )
+   356	        return data
+   357	
+   358	    data.update(directions)
+   359	    data["asset_managers_overall_direction"] = directions["asset_managers_overall"]
+   360	    data["asset_managers_weekly_direction"] = directions["asset_managers_weekly"]
+   361	    data["leveraged_funds_overall_direction"] = directions["leveraged_funds_overall"]
+   362	    data["leveraged_funds_weekly_direction"] = directions["leveraged_funds_weekly"]
+   363	    data["canonical_cot_directions"] = dict(directions)
+   364	
+   365	    data = apply_canonical_golden(data)
+   366	    golden = data.get("golden_alignment")
+   367	    if isinstance(golden, dict):
+   368	        golden.update({
+   369	            "governing_inputs_complete": True,
+   370	            "governing_inputs_contract_version": GOVERNING_INPUTS_VERSION,
+   371	            "source_report_date": raw.get("report_date"),
+   372	            "source_report_age_days": age,
+   373	            "source_fresh": fresh,
+   374	            "source_family": raw.get("source_family"),
+   375	            "decision_authority": False,
+   376	            "not_recommendation": True,
+   377	            "no_buy_sell": True,
+   378	        })
+   379	
+   380	    _update_public_layers(data, mode, directions)
+   381	    _refresh_public_golden(data)
+   382	    data["governing_inputs_reason_code"] = None
+   383	    data["governing_inputs_contract_version"] = GOVERNING_INPUTS_VERSION
+   384	    return data
+   385	
+   386	
+   387	def _scenario_levels_complete(data: Mapping[str, Any]) -> bool:
+   388	    levels = data.get("scenario_levels")
+   389	    if not isinstance(levels, Mapping):
+   390	        scenario = data.get("scenario")
+
+=== AST FUNCTION TRUTH ===
+FUNCTION=_normalize_direction LINES=42-51
+FUNCTION=_fetch_raw_cot LINES=82-98
+FUNCTION=attach_v201_governing_inputs LINES=258-384
+
+=== V201 RAW FIELD CONSUMPTION ===
+RAW_GET_FIELD=asset_managers_bias
+RAW_GET_FIELD=asset_managers_overall_direction
+RAW_GET_FIELD=asset_managers_weekly_direction
+RAW_GET_FIELD=leveraged_funds_bias
+RAW_GET_FIELD=leveraged_funds_overall_direction
+RAW_GET_FIELD=leveraged_funds_weekly_direction
+RAW_GET_FIELD=market_name
+RAW_GET_FIELD=raw_cot_connected
+RAW_GET_FIELD=raw_cot_governing_inputs_complete
+RAW_GET_FIELD=raw_cot_status
+RAW_GET_FIELD=report_age_days
+RAW_GET_FIELD=report_date
+RAW_GET_FIELD=source_family
+
+=== 9076 -> V201 FIELD GAP MATRIX ===
+FIELD=report_date 9076=PRESENT V201=CONSUMED VALUE='2026-07-21'
+FIELD=report_age_days 9076=MISSING V201=CONSUMED VALUE=None
+FIELD=raw_cot_connected 9076=PRESENT V201=CONSUMED VALUE=True
+FIELD=raw_cot_status 9076=PRESENT V201=CONSUMED VALUE='CONNECTED_MATCHED'
+FIELD=raw_cot_governing_inputs_complete 9076=PRESENT V201=CONSUMED VALUE=True
+FIELD=asset_managers_bias 9076=PRESENT V201=CONSUMED VALUE='bearish'
+FIELD=asset_managers_overall_direction 9076=MISSING V201=CONSUMED VALUE=None
+FIELD=asset_managers_weekly_direction 9076=MISSING V201=CONSUMED VALUE=None
+FIELD=asset_managers_change_long 9076=PRESENT V201=NOT_CONSUMED VALUE=-303
+FIELD=asset_managers_change_short 9076=PRESENT V201=NOT_CONSUMED VALUE=711
+FIELD=leveraged_funds_bias 9076=PRESENT V201=CONSUMED VALUE='bearish'
+FIELD=leveraged_funds_overall_direction 9076=MISSING V201=CONSUMED VALUE=None
+FIELD=leveraged_funds_weekly_direction 9076=MISSING V201=CONSUMED VALUE=None
+FIELD=leveraged_funds_change_long 9076=PRESENT V201=NOT_CONSUMED VALUE=-691
+FIELD=leveraged_funds_change_short 9076=PRESENT V201=NOT_CONSUMED VALUE=-1599
+
+=== WEEKLY DELTA SIGN TRUTH ===
+ASSET_MANAGERS_CHANGE_LONG=-303
+ASSET_MANAGERS_CHANGE_SHORT=711
+ASSET_MANAGERS_DELTA_NET=-1014
+ASSET_MANAGERS_SIGN_DIRECTION='bearish'
+LEVERAGED_FUNDS_CHANGE_LONG=-691
+LEVERAGED_FUNDS_CHANGE_SHORT=-1599
+LEVERAGED_FUNDS_DELTA_NET=908
+LEVERAGED_FUNDS_SIGN_DIRECTION='bullish'
+NOTE=SIGN_DIRECTION_IS_EVIDENCE_ONLY_NOT_PATCH_POLICY
+
+=== PATCHPOINT DECISION ===
+9076_REAL_WEEKLY_HISTORY=PASS
+9076_GOVERNING_COMPLETE=PASS
+V201_CONSUMES_WEEKLY_NUMERICS=NO
+ROOT_CAUSE=V201_ADAPTER_DOES_NOT_CONSUME_NEW_9076_HISTORY_FIELDS
+NEXT_PATCH_TARGET=backend/app/runtime/ndsp_v201_launch_completion.py
+SURGICAL_PATCH_ALLOWED=YES
+PATCH_APPLIED=NO
+FILES_MODIFIED=0
+SERVICES_RESTARTED=0
+RUNTIME_LOGIC_MODIFIED=0
+FINAL_RESULT=PASS
+
+=== V201 EXACT PATCHPOINT TRUTH COMPLETE ===
+AUDIT=/home/nawaf511/empire-core-new/var/audits/9082-v201-exact-patchpoint-truth-v3-20260808-035311
+REPORT=/home/nawaf511/empire-core-new/var/audits/9082-v201-exact-patchpoint-truth-v3-20260808-035311/report.txt
+RAW_9076=/home/nawaf511/empire-core-new/var/audits/9082-v201-exact-patchpoint-truth-v3-20260808-035311/raw-9076.json
+QUALITY_9082=/home/nawaf511/empire-core-new/var/audits/9082-v201-exact-patchpoint-truth-v3-20260808-035311/quality-9082.json
+SOURCE=/home/nawaf511/empire-core-new/var/audits/9082-v201-exact-patchpoint-truth-v3-20260808-035311/v201-source.txt
+CHECKSUMS=/home/nawaf511/empire-core-new/var/audits/9082-v201-exact-patchpoint-truth-v3-20260808-035311/SHA256SUMS

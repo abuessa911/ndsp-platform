@@ -1,0 +1,5 @@
+/etc/systemd/system
+/home/nawaf511
+/home/nawaf511/empire-core-new
+/home/nawaf511/empire-core-new/backend
+/opt

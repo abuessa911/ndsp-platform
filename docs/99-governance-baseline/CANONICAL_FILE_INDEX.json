@@ -1,0 +1,396 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-07-12T17:54:46+02:00",
+  "files": [
+    {
+      "path": "backend/access/canonical_v1/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "backend/access/canonical_v1/access.py",
+      "sha256": "3d1911642ab87238a4a5f23b7f09b8bb942dfef2eec1730199e754198b1541ae",
+      "size_bytes": 693
+    },
+    {
+      "path": "backend/commercial/canonical_v1/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "backend/commercial/canonical_v1/entitlements.py",
+      "sha256": "95313a7d41556c670e949bd66da8fea87acd3ab0a7412d10398e4f7f4f1257da",
+      "size_bytes": 467
+    },
+    {
+      "path": "backend/contracts/canonical_v1/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "backend/contracts/canonical_v1/contract_registry.py",
+      "sha256": "564ffbb2de557d333953e838ed02b804291571c127f527737154d1daf7514a37",
+      "size_bytes": 813
+    },
+    {
+      "path": "backend/data_foundation/canonical_v1/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "backend/data_foundation/canonical_v1/asset_master_registry.py",
+      "sha256": "671119aebd8c1a96f013f99582fb37b6af5e8b37325af7ada427fe9e6ee1396e",
+      "size_bytes": 2484
+    },
+    {
+      "path": "backend/data_foundation/canonical_v1/data_quality_gate.py",
+      "sha256": "422bcd06862582a1b2927998f8e2c55d36776c71780c80bfd862f884ebbbaf76",
+      "size_bytes": 857
+    },
+    {
+      "path": "backend/data_foundation/canonical_v1/provider_reconciliation.py",
+      "sha256": "3ebdf3ae0f7492e65a9b593ca485b5a2e6bae4c29597d6ee622ae97a9cd81320",
+      "size_bytes": 972
+    },
+    {
+      "path": "backend/data_foundation/canonical_v1/snapshots.py",
+      "sha256": "63eea9470bfd7dee85f42c09f3b8903b162d808234b5c4a12b09c57e5c657a3f",
+      "size_bytes": 1214
+    },
+    {
+      "path": "backend/data_foundation/canonical_v1/source_registry.py",
+      "sha256": "d6014343fdfa23559741aa4e73e977fa56956928311069905e12960dac5474ce",
+      "size_bytes": 627
+    },
+    {
+      "path": "backend/evaluation/canonical_v1/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "backend/evaluation/canonical_v1/evaluator.py",
+      "sha256": "c2e001fe7b9ecd9a1e22d69b983d8aaa5ee891183d5eb71a50c12a39c5d1cd89",
+      "size_bytes": 437
+    },
+    {
+      "path": "backend/evidence/canonical_v1/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "backend/evidence/canonical_v1/decision_ledger.py",
+      "sha256": "407a21d4e94742aeadbf59dea2d83cc621a13ca561fc5cbab8dc350e9fc2a6c9",
+      "size_bytes": 1107
+    },
+    {
+      "path": "backend/evidence/canonical_v1/lineage.py",
+      "sha256": "c50dcce10610fad7eb1382c9a0e6a52ceb4d5679f9a72874e1d21ad897a6b1ab",
+      "size_bytes": 479
+    },
+    {
+      "path": "backend/explainability/canonical_v1/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "backend/explainability/canonical_v1/explainer.py",
+      "sha256": "362cd68e22468df6dd6de7bc229462dd8bea4180a838e3f44e6b27ef7d7aa58a",
+      "size_bytes": 703
+    },
+    {
+      "path": "backend/governance/canonical_v1/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "backend/governance/canonical_v1/version_registry.py",
+      "sha256": "9214a76dff11f08ee8a9179ce0c53bc5ef59f47a6feb4ea6d921c677b889ec0c",
+      "size_bytes": 467
+    },
+    {
+      "path": "backend/integrations/canonical_v1/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "backend/integrations/canonical_v1/gateway.py",
+      "sha256": "94670e52cbacb9811ded457ee78e923b427503797534b22a6eeb95d9bd9efb9a",
+      "size_bytes": 367
+    },
+    {
+      "path": "backend/intelligence/canonical_v1/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "backend/intelligence/canonical_v1/context_engines.py",
+      "sha256": "82cba9b35fda5c191cc4fa8ae0c4c1532dcfe2350687e47248e8561accce3fd7",
+      "size_bytes": 787
+    },
+    {
+      "path": "backend/layers/canonical_v1/__init__.py",
+      "sha256": "a0c68597b2132ad24f88c51e72348f313dba3bd5bae171683c3fe58439e66075",
+      "size_bytes": 105
+    },
+    {
+      "path": "backend/layers/canonical_v1/core/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "backend/layers/canonical_v1/core/contracts.py",
+      "sha256": "346a5bb72bc34d560299d81e53c815217d86d52ef1fe347777bfdce193b237eb",
+      "size_bytes": 2588
+    },
+    {
+      "path": "backend/layers/canonical_v1/data/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "backend/layers/canonical_v1/data/cot_validity_gate.py",
+      "sha256": "1fcd9cf31cf908416e868addddc1aeccbd7786d21679ca07cc6a35207849bb9f",
+      "size_bytes": 4175
+    },
+    {
+      "path": "backend/layers/canonical_v1/direction/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "backend/layers/canonical_v1/direction/investment_policy.py",
+      "sha256": "589421e95ef2fca8eb1077ad5ab1acb31571cacfd874e5e2333458e174dd5d03",
+      "size_bytes": 1009
+    },
+    {
+      "path": "backend/layers/canonical_v1/direction/l01_tdl_medium_long.py",
+      "sha256": "661b71188a3f79aee03c484f1f086ed31aef6e0b71c993588ac06c2f00816c23",
+      "size_bytes": 904
+    },
+    {
+      "path": "backend/layers/canonical_v1/direction/l02_tdl_short_speculative.py",
+      "sha256": "065e0bfccd81664e971a4c51226a2f04d114c00633fdb22431e2adc1109cd2f9",
+      "size_bytes": 740
+    },
+    {
+      "path": "backend/layers/canonical_v1/direction/l03_market_direction_context.py",
+      "sha256": "3e57c698bb1ef82bf09d4f3412fa9ee864a0a0c39d368067f971217a3b7c7dd5",
+      "size_bytes": 897
+    },
+    {
+      "path": "backend/layers/canonical_v1/direction/l04_correction_gate.py",
+      "sha256": "d17afb6c3783c15eb28dc17b3802322021f293653c663dd64ab0993da6fcdd3c",
+      "size_bytes": 889
+    },
+    {
+      "path": "backend/layers/canonical_v1/direction/l06_temporal_day_logic.py",
+      "sha256": "3ccb4e6a4f67e16955ad64f91715263987ca789a8a15586e396a2d4dae4e4020",
+      "size_bytes": 1080
+    },
+    {
+      "path": "backend/layers/canonical_v1/direction/speculative_policy.py",
+      "sha256": "41642f19f63e8718133c102906ccef991302c9a4997c87b3c5c55ab52783ebaa",
+      "size_bytes": 703
+    },
+    {
+      "path": "backend/layers/canonical_v1/final/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "backend/layers/canonical_v1/final/l16_decision_readiness_state_machine.py",
+      "sha256": "ec93b41ab62ebd366d349309010996eb6e954f555ef1799357f1972f6a5d0833",
+      "size_bytes": 1204
+    },
+    {
+      "path": "backend/layers/canonical_v1/layer_orchestrator_v2.py",
+      "sha256": "666bd0fdfb366e1292e28a67bc21916d228b5a7cc57afe991557c93dd6f86b32",
+      "size_bytes": 3238
+    },
+    {
+      "path": "backend/layers/canonical_v1/quality/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "backend/layers/canonical_v1/quality/golden_signals.py",
+      "sha256": "e569f632cf55e7ed28d18d471cd0eb29ab326889af46ba6318a4a140ba03d5ea",
+      "size_bytes": 896
+    },
+    {
+      "path": "backend/layers/canonical_v1/quality/l05_divergence_engine.py",
+      "sha256": "4aa4fefdb6c18e2e9370abc1db24e86dbfbe41c438c71c013e672650c11f022b",
+      "size_bytes": 606
+    },
+    {
+      "path": "backend/layers/canonical_v1/quality/l09_momentum_engine.py",
+      "sha256": "39981cba67a7759f5c6d7e960bcfa468f9f4e8d25a9d8137e1aaaf3f29610c92",
+      "size_bytes": 612
+    },
+    {
+      "path": "backend/layers/canonical_v1/quality/l10_liquidity_structure_confirmation.py",
+      "sha256": "af1bda5d25c5fe785f3dd4ff77835715c3abd59a815ba1267bac38fdf1510ecf",
+      "size_bytes": 640
+    },
+    {
+      "path": "backend/layers/canonical_v1/quality/l13_nawaf_golden_signal.py",
+      "sha256": "4e75678447bb1dfc36a0c8132c43839193a799de41da1d8451bb8166cfc77dad",
+      "size_bytes": 937
+    },
+    {
+      "path": "backend/layers/canonical_v1/quality/l14_nawaf_enhanced_golden_signal.py",
+      "sha256": "d66b6f71a311cfc714886beeda0bcc8b808c90f435c9f3614fab422b1a263da8",
+      "size_bytes": 1000
+    },
+    {
+      "path": "backend/layers/canonical_v1/quality/nmp_engine.py",
+      "sha256": "c09ece2194a1c00860e92041ae2410f84e647bb5afa882475fa8400203d95684",
+      "size_bytes": 2420
+    },
+    {
+      "path": "backend/layers/canonical_v1/registry_lock.py",
+      "sha256": "e8bb2952090460e3195900f9872b85d14d61c4dc341e077e5abd255fe326faf7",
+      "size_bytes": 2537
+    },
+    {
+      "path": "backend/layers/canonical_v1/risk/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "backend/layers/canonical_v1/risk/l11_usd_macro_filter.py",
+      "sha256": "282d83c7009dc5b865aae9b06c7fd7124cc51c930048dd9f903b294e05e3c7e4",
+      "size_bytes": 610
+    },
+    {
+      "path": "backend/layers/canonical_v1/risk/l12_risk_engine.py",
+      "sha256": "0cafe7247f57cf543b4ab75167d34803511887773d8aba5593b7bbb547bb515f",
+      "size_bytes": 662
+    },
+    {
+      "path": "backend/layers/canonical_v1/risk/l15_devils_advocate.py",
+      "sha256": "782266b87e8db82b31e052a4470c1672bbf6b50bb3b01d64730d729098993878",
+      "size_bytes": 686
+    },
+    {
+      "path": "backend/layers/canonical_v1/runtime_bridge.py",
+      "sha256": "f9ac19acd4f7e79d5e4c60f69bb9c32c104fc838324bf831b24ca715737ac85e",
+      "size_bytes": 7335
+    },
+    {
+      "path": "backend/layers/canonical_v1/structure/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "backend/layers/canonical_v1/structure/l07_scenario_levels.py",
+      "sha256": "28668569a855802071ccb3962e51499ab4a95d881b541fab03515b0e60af366b",
+      "size_bytes": 1036
+    },
+    {
+      "path": "backend/layers/canonical_v1/structure/l08_nmp_confirmation.py",
+      "sha256": "f376ebe8e9cd814a519715e868f42695be446b02bc9a8e84390604f481b87dbd",
+      "size_bytes": 891
+    },
+    {
+      "path": "backend/layers/canonical_v1/tests/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "backend/layers/canonical_v1/tests/test_cot_gate.py",
+      "sha256": "055b5345a79a089ff1a2d4630ff80770d3624d3cea765822c0a64a2194790b3f",
+      "size_bytes": 1177
+    },
+    {
+      "path": "backend/layers/canonical_v1/tests/test_logic.py",
+      "sha256": "d462aee018e848dff9fbbc6de24a2a1778b839472db0651a60990a8162d91310",
+      "size_bytes": 2973
+    },
+    {
+      "path": "backend/layers/canonical_v1/tests/test_orchestrator_smoke.py",
+      "sha256": "9785e125e698c364074f22eb6e24d62ac467d7b20791f2e171a488c7acb08708",
+      "size_bytes": 2206
+    },
+    {
+      "path": "backend/layers/canonical_v1/tests/test_registry_lock.py",
+      "sha256": "c33f1d6b32bf70c02376fe44cfd443b9d03e78025dffc5d11183edf1b2466338",
+      "size_bytes": 1278
+    },
+    {
+      "path": "backend/observability/canonical_v1/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "backend/observability/canonical_v1/telemetry.py",
+      "sha256": "3e5862b9db0f4d2353d33b81ed516fd7425d4f2fcfa0fa242db8dd56118d08fc",
+      "size_bytes": 462
+    },
+    {
+      "path": "backend/operations/canonical_v1/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "backend/operations/canonical_v1/operations.py",
+      "sha256": "ce079979968d5e8099830c1f64b16fa108dca27f6760dd3d672107c7e960dff0",
+      "size_bytes": 755
+    },
+    {
+      "path": "backend/orchestration/canonical_v1/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "backend/orchestration/canonical_v1/conflict_engine.py",
+      "sha256": "eab77a8afeeee65d02e44f8fe0074389b123fe623ef1586461bd6113d76d3b1e",
+      "size_bytes": 669
+    },
+    {
+      "path": "backend/platform/canonical_v1/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "backend/platform/canonical_v1/boundary_lock.py",
+      "sha256": "d0fffedf8d0ac1d3df29fe98a6a9c29b8d8258da381a6a2c313b589f1dcabff2",
+      "size_bytes": 1623
+    },
+    {
+      "path": "backend/platform/canonical_v1/tests/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "backend/platform/canonical_v1/tests/test_platform_foundation.py",
+      "sha256": "c78304ea8ba3f452195da0ef860394334d78a2c43d3c5d1cb04d255d747e77ae",
+      "size_bytes": 4559
+    },
+    {
+      "path": "backend/security/canonical_v1/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "backend/security/canonical_v1/policy.py",
+      "sha256": "1c981b0bf50e862d15eca13f23b1437e62660af99bb6a6c64e01289aace6927a",
+      "size_bytes": 379
+    },
+    {
+      "path": "backend/simulation/canonical_v1/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "backend/simulation/canonical_v1/replay.py",
+      "sha256": "2d058871c2f6e119e90e84e8f2c393663987e0a355e8d64ea4a3754548962d50",
+      "size_bytes": 498
+    },
+    {
+      "path": "backend/simulation/canonical_v1/scenario.py",
+      "sha256": "e889d98e5fc3a17cbb8a647ec775fe8bab872c153d5c55930af29577ee9e369b",
+      "size_bytes": 369
+    }
+  ]
+}

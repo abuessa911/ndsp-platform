@@ -1,0 +1,96 @@
+=== SYSTEMD REFERENCES TO COMMERCIAL SOURCE FILES ===
+/etc/systemd/system/multi-user.target.wants/ndsp-user-login.service:17:ExecStart=/usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_user_login_gateway.cjs
+/etc/systemd/system/ndsp-user-login.service:17:ExecStart=/usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_user_login_gateway.cjs
+
+=== ACTIVE PROCESS REFERENCES ===
+nawaf511 2498163       1  0 يوليو29 ? 00:01:55 /usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_user_login_gateway.cjs
+
+=== NGINX PAYMENT / SUBSCRIPTION / LEGAL ROUTES ===
+/etc/nginx/snippets/ndsp-business-ops-v205.conf:6:location = /subscribe { return 301 /subscribe/; }
+/etc/nginx/snippets/ndsp-business-ops-v205.conf:7:location ^~ /subscribe/ { alias /var/www/ndsp-business-ops/subscribe/; index index.html; add_header Cache-Control "no-store" always; }
+
+=== PROJECT PACKAGE AND SERVICE REFERENCES ===
+/home/nawaf511/empire-core-new/backend/ndsp_api_compat_gateway.cjs:222:    if (await tableExists('ndsp_nowpayments_payments')) {
+/home/nawaf511/empire-core-new/backend/ndsp_api_compat_gateway.cjs:225:        FROM ndsp_nowpayments_payments
+/home/nawaf511/empire-core-new/backend/ndsp_api_compat_gateway.cjs:235:      provider:'nowpayments',
+/home/nawaf511/empire-core-new/backend/ndsp_admin_actions_bypass_old_middleware.cjs:207:    'nowpayments_payments',
+/home/nawaf511/empire-core-new/backend/.env.before_mt4_dir_fix_20260502_021056:23:NOWPAYMENTS_API_BASE="https://api.nowpayments.io/v1"
+/home/nawaf511/empire-core-new/backend/ndsp_nowpayments.cjs:80:  const sig = req.headers['x-nowpayments-sig'];
+/home/nawaf511/empire-core-new/backend/ndsp_nowpayments.cjs:117:    INSERT INTO public.ndsp_subscriptions
+/home/nawaf511/empire-core-new/backend/ndsp_nowpayments.cjs:120:      ($1,$2,$3,$4,'active','nowpayments',$5,$6,$7)
+/home/nawaf511/empire-core-new/backend/ndsp_nowpayments.cjs:163:  router.get('/nowpayments/health', (_req, res) => {
+/home/nawaf511/empire-core-new/backend/ndsp_nowpayments.cjs:166:      provider: 'nowpayments',
+/home/nawaf511/empire-core-new/backend/ndsp_nowpayments.cjs:229:        INSERT INTO public.ndsp_nowpayments_payments
+/home/nawaf511/empire-core-new/backend/ndsp_nowpayments.cjs:249:        ipn_callback_url: `${PUBLIC_URL}/api/webhooks/nowpayments`,
+/home/nawaf511/empire-core-new/backend/ndsp_nowpayments.cjs:254:      const npRes = await fetch('https://api.nowpayments.io/v1/invoice', {
+/home/nawaf511/empire-core-new/backend/ndsp_nowpayments.cjs:274:          UPDATE public.ndsp_nowpayments_payments
+/home/nawaf511/empire-core-new/backend/ndsp_nowpayments.cjs:288:        UPDATE public.ndsp_nowpayments_payments
+/home/nawaf511/empire-core-new/backend/ndsp_nowpayments.cjs:306:          ('nowpayments','invoice_created',$1,'invoice_created',$2)
+/home/nawaf511/empire-core-new/backend/ndsp_nowpayments.cjs:311:        provider: 'nowpayments',
+/home/nawaf511/empire-core-new/backend/ndsp_nowpayments.cjs:318:      console.error('NOWPayments checkout error:', err);
+/home/nawaf511/empire-core-new/backend/ndsp_nowpayments.cjs:328:  router.get('/webhooks/nowpayments', (_req, res) => {
+/home/nawaf511/empire-core-new/backend/ndsp_nowpayments.cjs:331:      provider: 'nowpayments',
+/home/nawaf511/empire-core-new/backend/ndsp_nowpayments.cjs:332:      endpoint: '/api/webhooks/nowpayments',
+/home/nawaf511/empire-core-new/backend/ndsp_nowpayments.cjs:334:      message: 'NOWPayments IPN endpoint is active. Browser GET is only a health check.'
+/home/nawaf511/empire-core-new/backend/ndsp_nowpayments.cjs:338:  router.post('/webhooks/nowpayments', async (req, res) => {
+/home/nawaf511/empire-core-new/backend/ndsp_nowpayments.cjs:354:          ('nowpayments','ipn',$1,$2,$3)
+/home/nawaf511/empire-core-new/backend/ndsp_nowpayments.cjs:362:        UPDATE public.ndsp_nowpayments_payments
+/home/nawaf511/empire-core-new/backend/ndsp_nowpayments.cjs:381:          FROM public.ndsp_subscriptions
+/home/nawaf511/empire-core-new/backend/ndsp_nowpayments.cjs:393:      console.error('NOWPayments IPN error:', err);
+/home/nawaf511/empire-core-new/backend/ndsp_nowpayments.cjs:403:  console.log('✅ NDSP NOWPayments mounted: /api/checkout/create and /api/webhooks/nowpayments');
+/home/nawaf511/empire-core-new/backend/.env.bak.20260527_025723:60:# NOWPayments
+/home/nawaf511/empire-core-new/backend/migrations/001_postgres_core.sql:31:    provider TEXT NOT NULL DEFAULT 'nowpayments',
+/home/nawaf511/empire-core-new/backend/ndsp_admin_actions_authoritative.cjs:187:    'nowpayments_payments',
+/home/nawaf511/empire-core-new/backend/ndsp_admin_actions_gateway.cjs:218:    'nowpayments_payments',
+/home/nawaf511/empire-core-new/backend/ndsp_nowpayments_migrate.cjs:15:    CREATE TABLE IF NOT EXISTS public.ndsp_nowpayments_payments (
+/home/nawaf511/empire-core-new/backend/ndsp_nowpayments_migrate.cjs:35:    CREATE INDEX IF NOT EXISTS ndsp_nowpayments_user_idx
+/home/nawaf511/empire-core-new/backend/ndsp_nowpayments_migrate.cjs:36:      ON public.ndsp_nowpayments_payments (user_id);
+/home/nawaf511/empire-core-new/backend/ndsp_nowpayments_migrate.cjs:38:    CREATE INDEX IF NOT EXISTS ndsp_nowpayments_status_idx
+/home/nawaf511/empire-core-new/backend/ndsp_nowpayments_migrate.cjs:39:      ON public.ndsp_nowpayments_payments (payment_status);
+/home/nawaf511/empire-core-new/backend/ndsp_nowpayments_migrate.cjs:41:    CREATE TABLE IF NOT EXISTS public.ndsp_subscriptions (
+/home/nawaf511/empire-core-new/backend/ndsp_nowpayments_migrate.cjs:48:      provider TEXT NOT NULL DEFAULT 'nowpayments',
+/home/nawaf511/empire-core-new/backend/ndsp_nowpayments_migrate.cjs:58:    CREATE INDEX IF NOT EXISTS ndsp_subscriptions_user_idx
+/home/nawaf511/empire-core-new/backend/ndsp_nowpayments_migrate.cjs:59:      ON public.ndsp_subscriptions (user_id);
+/home/nawaf511/empire-core-new/backend/ndsp_nowpayments_migrate.cjs:72:  console.log('✅ NOWPayments tables ready');
+/home/nawaf511/empire-core-new/backend/ndsp_admin_ui_proxy.cjs:373:    const paymentsA = await safeCount('ndsp_nowpayments_payments')
+/home/nawaf511/empire-core-new/backend/ndsp_admin_ui_proxy.cjs:423:    const out = await queryExistingTables(['ndsp_nowpayments_payments','payments','payment_requests'], 200)
+/home/nawaf511/empire-core-new/backend/ndsp_admin_ui_proxy.cjs:720:      const p1 = await updateByIdentity('ndsp_nowpayments_payments', 'approved', id, email, payment_id)
+/home/nawaf511/empire-core-new/backend/ndsp_admin_ui_proxy.cjs:727:      const p1 = await updateByIdentity('ndsp_nowpayments_payments', 'rejected', id, email, payment_id)
+/home/nawaf511/empire-core-new/backend/ndsp_checkout_plans_package/database/migrations/20260524_001_checkout_plans.sql:40:    provider TEXT NOT NULL DEFAULT 'manual_or_nowpayments',
+/home/nawaf511/empire-core-new/backend/app/api/compat/nowpayments_create_alias.py:13:router = APIRouter(tags=["ndsp-nowpayments-create-alias"])
+/home/nawaf511/empire-core-new/backend/app/api/compat/nowpayments_create_alias.py:70:@router.get("/api/ndsp/nowpayments-create-alias/health")
+/home/nawaf511/empire-core-new/backend/app/api/compat/nowpayments_create_alias.py:74:        "service": "ndsp-nowpayments-create-alias",
+/home/nawaf511/empire-core-new/backend/app/api/compat/nowpayments_create_alias.py:77:            "/api/v6/payments/nowpayments/subscription/create",
+/home/nawaf511/empire-core-new/backend/app/api/compat/nowpayments_create_alias.py:78:            "/api/payments/nowpayments/subscription/create",
+/home/nawaf511/empire-core-new/backend/app/api/compat/nowpayments_create_alias.py:82:@router.post("/api/v6/payments/nowpayments/subscription/create")
+/home/nawaf511/empire-core-new/backend/app/api/compat/nowpayments_create_alias.py:83:@router.post("/api/payments/nowpayments/subscription/create")
+/home/nawaf511/empire-core-new/backend/app/api/compat/nowpayments_create_alias.py:108:            INSERT INTO ndsp_nowpayments_payments
+/home/nawaf511/empire-core-new/backend/app/api/compat/nowpayments_create_alias.py:147:                json.dumps({"provider": "nowpayments", "mode": "manual_review_required"}, ensure_ascii=False),
+/home/nawaf511/empire-core-new/backend/app/api/compat/nowpayments_create_alias.py:153:        "provider": "nowpayments",
+/home/nawaf511/empire-core-new/backend/app/api/compat/user_operational_compat.py:127:            "/api/v6/payments/nowpayments/subscription/create",
+/home/nawaf511/empire-core-new/backend/app/api/compat/user_operational_compat.py:128:            "/api/payments/nowpayments/subscription/create",
+/home/nawaf511/empire-core-new/backend/app/api/compat/user_operational_compat.py:206:@router.get("/api/v6/payments/nowpayments/subscription/status")
+/home/nawaf511/empire-core-new/backend/app/api/compat/user_operational_compat.py:207:@router.get("/api/payments/nowpayments/subscription/status")
+/home/nawaf511/empire-core-new/backend/app/api/compat/user_operational_compat.py:218:                FROM ndsp_subscriptions
+/home/nawaf511/empire-core-new/backend/app/api/compat/user_operational_compat.py:240:@router.post("/api/v6/payments/nowpayments/subscription/create")
+/home/nawaf511/empire-core-new/backend/app/api/compat/user_operational_compat.py:241:@router.post("/api/payments/nowpayments/subscription/create")
+/home/nawaf511/empire-core-new/backend/app/api/compat/user_operational_compat.py:247:    audit("/api/v6/payments/nowpayments/subscription/create", email, payload)
+/home/nawaf511/empire-core-new/backend/app/api/compat/user_operational_compat.py:258:                CREATE TABLE IF NOT EXISTS ndsp_nowpayments_payments (
+/home/nawaf511/empire-core-new/backend/app/api/compat/user_operational_compat.py:273:                INSERT INTO ndsp_nowpayments_payments(user_email, plan_code, status, currency, network)
+/home/nawaf511/empire-core-new/backend/app/api/compat/user_operational_compat.py:281:            "provider": "nowpayments",
+/home/nawaf511/empire-core-new/backend/server.js:54:  const { installNowPayments } = require('/home/nawaf511/empire-core-new/backend/auth_api/ndsp_nowpayments.cjs');
+/home/nawaf511/empire-core-new/backend/server.js:57:  console.warn('⚠ NDSP NOWPayments skipped during V1:', e.message);
+/home/nawaf511/empire-core-new/backend/auth_api/ndsp_api_compat_gateway.cjs:222:    if (await tableExists('ndsp_nowpayments_payments')) {
+/home/nawaf511/empire-core-new/backend/auth_api/ndsp_api_compat_gateway.cjs:225:        FROM ndsp_nowpayments_payments
+/home/nawaf511/empire-core-new/backend/auth_api/ndsp_api_compat_gateway.cjs:235:      provider:'nowpayments',
+/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_actions_bypass_old_middleware.cjs:207:    'nowpayments_payments',
+/home/nawaf511/empire-core-new/backend/auth_api/ndsp_user_login_gateway.cjs:774:    `INSERT INTO public.ndsp_legal_acceptances
+/home/nawaf511/empire-core-new/backend/auth_api/ndsp_user_login_gateway.cjs:777:     ON CONFLICT (request_id) DO UPDATE SET upstream_status=COALESCE(EXCLUDED.upstream_status,public.ndsp_legal_acceptances.upstream_status)
+/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_actions_authoritative.cjs:187:    'nowpayments_payments',
+/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_actions_gateway.cjs:218:    'nowpayments_payments',
+/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_ui_proxy.cjs:373:    const paymentsA = await safeCount('ndsp_nowpayments_payments')
+/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_ui_proxy.cjs:423:    const out = await queryExistingTables(['ndsp_nowpayments_payments','payments','payment_requests'], 200)
+/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_ui_proxy.cjs:720:      const p1 = await updateByIdentity('ndsp_nowpayments_payments', 'approved', id, email, payment_id)
+/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_ui_proxy.cjs:727:      const p1 = await updateByIdentity('ndsp_nowpayments_payments', 'rejected', id, email, payment_id)
+/home/nawaf511/empire-core-new/backend/auth_api/.env:50:# NOWPayments
+/home/nawaf511/empire-core-new/backend/.env:50:# NOWPayments

@@ -1,0 +1,18 @@
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/hooks/useCompletedDecisionsV37.js:4:  current: "/api/completed-decisions",
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/hooks/useCompletedDecisionsV37.js:5:  history: "/api/completed-decisions/history?limit=100",
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/hooks/useCompletedDecisionsV37.js:6:  integrity: "/api/completed-decisions/history/integrity"
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/hooks/useCompletedDecisionsV37.js:30:export function useCompletedDecisionsV37() {
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/components/CompletedDecisionsPanelV37.jsx:2:import { useCompletedDecisionsV37 } from "../hooks/useCompletedDecisionsV37";
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/components/CompletedDecisionsPanelV37.jsx:28:    title: "القرارات المكتملة وسجل التغيّرات",
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/components/CompletedDecisionsPanelV37.jsx:83:    investmentBlockedText: "القراءة الاستثمارية ليست قرارًا مكتملًا حاليًا، لذلك لا تظهر داخل سجل القرارات المكتملة.",
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/components/CompletedDecisionsPanelV37.jsx:111:    title: "Completed Decisions & Change History",
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/components/CompletedDecisionsPanelV37.jsx:462:export function CompletedDecisionsPanelV37({
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/components/CompletedDecisionsPanelV37.jsx:470:  const registry = useCompletedDecisionsV37();
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/components/CompletedDecisionsPanelV37.jsx:507:      id="completed-decisions"
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/components/CompletedDecisionsPanelV37.jsx:509:      data-ndsp-v37="completed-decisions"
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/main.jsx.before_watchlist_20260629_145613:71:          <button>القرارات المكتملة</button>
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/main.jsx.before_watchlist_20260629_145613:164:              <div className="kicker">القرارات المكتملة</div>
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/main.jsx.before_visible_layers_v2_20260627_201907:57:          <button>القرارات المكتملة</button>
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/main.jsx.before_visible_layers_v2_20260627_201907:150:              <div className="kicker">القرارات المكتملة</div>
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/main.jsx:71:          <button>القرارات المكتملة</button>
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/main.jsx:164:              <div className="kicker">القرارات المكتملة</div>

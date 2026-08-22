@@ -1,0 +1,128 @@
+{
+  "contract_id": "INT-0404",
+  "contract_type": "INTEGRATION_CONTRACT",
+  "name": "tr",
+  "arabic_name": "يتطلب مراجعة بشرية",
+  "version": "0.1.0",
+  "status": "DISCOVERED",
+  "classification": "INFERRED_FROM_SOURCE",
+  "owner": "REQUIRES_HUMAN_REVIEW",
+  "approvers": [],
+  "effective_date": "NOT_APPROVED",
+  "review_date": "REQUIRES_HUMAN_REVIEW",
+  "purpose": "Evidence-backed discovered contract. Generated without approving runtime status.",
+  "scope": "DISCOVERY_ONLY",
+  "out_of_scope": [
+    "runtime activation",
+    "deployment",
+    "database writes",
+    "approval"
+  ],
+  "source_of_truth": "SOURCE_EVIDENCE_PENDING_REVIEW",
+  "evidence": [
+    {
+      "source_path": "frontend/public-site/src/i18n/locales/tr.ts",
+      "source_file": "tr.ts",
+      "source_symbol": "SEE_DISCOVERY",
+      "source_lines": "SEE_DISCOVERY",
+      "sha256": "SEE_DISCOVERY",
+      "discovered_at_utc": "2026-08-05T14:47:50Z",
+      "discovery_tool": "ndsp_enterprise_contract_system_build_v1.sh",
+      "classification": "INFERRED_FROM_SOURCE",
+      "runtime_evidence": "NOT_EXECUTED"
+    }
+  ],
+  "reference_documents": [],
+  "responsibilities": [
+    "document evidence",
+    "require human review before verification"
+  ],
+  "inputs": [],
+  "outputs": [],
+  "preconditions": [],
+  "postconditions": [],
+  "invariants": [],
+  "business_rules": [],
+  "governance_rules": [
+    "Generated contracts cannot approve or activate themselves."
+  ],
+  "security_rules": [
+    "No secrets may be stored in contracts."
+  ],
+  "privacy_rules": [],
+  "ui_exposure_rules": [],
+  "public_exposure": "UNKNOWN_REQUIRES_REVIEW",
+  "admin_exposure": "UNKNOWN_REQUIRES_REVIEW",
+  "core_or_expanded_classification": "UNKNOWN_REQUIRES_REVIEW",
+  "dependencies": [],
+  "consumers": [],
+  "providers": [],
+  "layer_mapping": [],
+  "capability_mapping": [],
+  "engine_mapping": [],
+  "service_mapping": [],
+  "api_mapping": [],
+  "data_mapping": [],
+  "event_mapping": [],
+  "message_mapping": [],
+  "integration_mapping": [
+    "tr"
+  ],
+  "ui_mapping": [],
+  "route_mapping": [],
+  "configuration": [],
+  "feature_flags": [],
+  "validation_rules": [],
+  "error_codes": [],
+  "failure_modes": [],
+  "retry_rules": [],
+  "timeout_rules": [],
+  "idempotency": "UNKNOWN",
+  "rate_limits": "UNKNOWN",
+  "telemetry": "UNKNOWN",
+  "logging": "UNKNOWN",
+  "audit": "REQUIRES_HUMAN_REVIEW",
+  "metrics": [],
+  "slo": "NOT_DEFINED",
+  "sla": "NOT_DEFINED",
+  "security_controls": [],
+  "compatibility": "UNKNOWN",
+  "deprecation": "UNKNOWN",
+  "migration": "UNKNOWN",
+  "rollback": "REQUIRES_HUMAN_REVIEW",
+  "testing_requirements": [
+    "schema validation",
+    "unique ids",
+    "evidence integrity",
+    "human review"
+  ],
+  "acceptance_criteria": [
+    "evidence exists",
+    "id is unique",
+    "no secret values"
+  ],
+  "open_questions": [
+    "runtime status",
+    "owner",
+    "approval path"
+  ],
+  "known_risks": [
+    "pattern-based discovery may include candidates requiring manual review"
+  ],
+  "exceptions": [],
+  "change_history": [
+    {
+      "utc": "2026-08-05T14:47:50Z",
+      "change": "generated as discovered from evidence"
+    }
+  ],
+  "digital_integrity": {
+    "contract_sha256": "COMPUTED_IN_MANIFEST"
+  },
+  "approval_record": {
+    "status": "NOT_APPROVED"
+  },
+  "evidence_confidence": "MEDIUM_SOURCE_PATTERN",
+  "implementation_status": "CODE_PRESENT_RUNTIME_UNVERIFIED",
+  "reference_alignment_status": "NOT_ASSESSED"
+}

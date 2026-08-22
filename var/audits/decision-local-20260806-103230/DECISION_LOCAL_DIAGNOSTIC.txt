@@ -1,0 +1,1296 @@
+=== PRODUCTION MONITOR UNIT ===
+# /etc/systemd/system/ndsp-production-monitor.service
+[Unit]
+Description=NDSP Production Monitor V205
+After=network-online.target ndsp-business-ops.service
+Wants=network-online.target
+
+[Service]
+TimeoutStartSec=45s
+TimeoutStopSec=10s
+KillMode=control-group
+Type=oneshot
+User=nawaf511
+Group=nawaf511
+EnvironmentFile=/etc/ndsp/business-ops.env
+ExecStart=/usr/bin/python3 /usr/local/lib/ndsp-business-ops/monitor.py
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/ndsp-business-ops /home/nawaf511/ndsp_launch_reports
+
+=== PRODUCTION MONITOR TIMER ===
+# /etc/systemd/system/ndsp-production-monitor.timer
+[Unit]
+Description=Run NDSP production monitor every five minutes
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=5min
+AccuracySec=30s
+RandomizedDelaySec=20s
+Persistent=true
+Unit=ndsp-production-monitor.service
+
+[Install]
+WantedBy=timers.target
+
+=== MONITOR SERVICE PROPERTIES ===
+ExecStart={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /usr/local/lib/ndsp-business-ops/monitor.py ; ignore_errors=no ; start_time=[Thu 2026-08-06 10:30:48 CEST] ; stop_time=[Thu 2026-08-06 10:30:52 CEST] ; pid=791381 ; code=exited ; status=1 }
+Environment=
+EnvironmentFiles=/etc/ndsp/business-ops.env (ignore_errors=no)
+WorkingDirectory=
+FragmentPath=/etc/systemd/system/ndsp-production-monitor.service
+
+=== DECISION SERVICE DEFINITIONS ===
+
+##### ndsp-completed-decision.service #####
+○ ndsp-completed-decision.service - NDSP Completed Decision Service
+     Loaded: loaded (/etc/systemd/system/ndsp-completed-decision.service; disabled; preset: enabled)
+     Active: inactive (dead) since Wed 2026-08-05 10:21:36 CEST; 24h ago
+   Duration: 1.090s
+   Main PID: 3177189 (code=exited, status=1/FAILURE)
+        CPU: 1.054s
+MainPID=0
+ExecStart={ path=/usr/bin/node ; argv[]=/usr/bin/node /home/nawaf511/empire-core-new/backend/services/completed_decision/main.cjs ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }
+Environment=NODE_ENV=production NDSP_COMPLETED_DECISION_PORT=9078
+WorkingDirectory=/home/nawaf511/empire-core-new/backend/services/completed_decision
+ActiveState=inactive
+SubState=dead
+
+##### ndsp-completed_decision.service #####
+● ndsp-completed_decision.service - NDSP CDS-001 Completed Decision Service
+     Loaded: loaded (/etc/systemd/system/ndsp-completed_decision.service; enabled; preset: enabled)
+     Active: active (running) since Wed 2026-08-05 09:30:50 CEST; 1 day 1h ago
+   Main PID: 3019730 (node)
+      Tasks: 12 (limit: 28792)
+     Memory: 22.5M (peak: 34.3M)
+        CPU: 3min 15.784s
+     CGroup: /system.slice/ndsp-completed_decision.service
+             └─3019730 /usr/bin/node /home/nawaf511/empire-core-new/backend/services/completed_decision/main.cjs
+
+أغسطس 05 09:30:53 vmi2934783 node[3019730]: [NDSP] Completed Decision Service listening on http://127.0.0.1:9078
+MainPID=3019730
+ExecStart={ path=/usr/bin/node ; argv[]=/usr/bin/node /home/nawaf511/empire-core-new/backend/services/completed_decision/main.cjs ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }
+Environment=NODE_ENV=production NDSP_PORT=9078 NDSP_HOST=127.0.0.1
+WorkingDirectory=/home/nawaf511/empire-core-new/backend/services/completed_decision
+ActiveState=active
+SubState=running
+
+##### ndsp-decision-package-v1.service #####
+● ndsp-decision-package-v1.service - NDSP Decision Package API v1
+     Loaded: loaded (/etc/systemd/system/ndsp-decision-package-v1.service; enabled; preset: enabled)
+     Active: active (running) since Sun 2026-08-02 23:57:02 CEST; 3 days ago
+   Main PID: 1354 (uvicorn)
+      Tasks: 2 (limit: 28792)
+     Memory: 34.1M (peak: 40.1M)
+        CPU: 22min 7.310s
+     CGroup: /system.slice/ndsp-decision-package-v1.service
+             └─1354 /opt/ndsp-decision-package-v1/venv/bin/python3 /opt/ndsp-decision-package-v1/venv/bin/uvicorn app:app --host 127.0.0.1 --port 9061
+
+Warning: some journal files were not opened due to insufficient permissions.
+MainPID=1354
+ExecStart={ path=/opt/ndsp-decision-package-v1/venv/bin/uvicorn ; argv[]=/opt/ndsp-decision-package-v1/venv/bin/uvicorn app:app --host 127.0.0.1 --port 9061 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }
+Environment=
+WorkingDirectory=/opt/ndsp-decision-package-v1
+ActiveState=active
+SubState=running
+
+##### ndsp-decision_governance_core.service #####
+● ndsp-decision_governance_core.service - NDSP DGC-001 Decision Governance Core
+     Loaded: loaded (/etc/systemd/system/ndsp-decision_governance_core.service; enabled; preset: enabled)
+     Active: active (running) since Wed 2026-08-05 09:30:51 CEST; 1 day 1h ago
+   Main PID: 3019784 (node)
+      Tasks: 8 (limit: 28792)
+     Memory: 26.8M (peak: 37.1M)
+        CPU: 3min 18.993s
+     CGroup: /system.slice/ndsp-decision_governance_core.service
+             └─3019784 /usr/bin/node /home/nawaf511/empire-core-new/backend/services/decision_governance_core/main.cjs
+
+أغسطس 05 09:30:53 vmi2934783 node[3019784]: [NDSP] Decision Governance Core listening on http://127.0.0.1:9079
+MainPID=3019784
+ExecStart={ path=/usr/bin/node ; argv[]=/usr/bin/node /home/nawaf511/empire-core-new/backend/services/decision_governance_core/main.cjs ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }
+Environment=NODE_ENV=production NDSP_PORT=9079 NDSP_HOST=127.0.0.1
+WorkingDirectory=/home/nawaf511/empire-core-new/backend/services/decision_governance_core
+ActiveState=active
+SubState=running
+
+##### ndsp-live-decision-quality.service #####
+● ndsp-live-decision-quality.service - NDSP Live Decision Quality Bridge
+     Loaded: loaded (/etc/systemd/system/ndsp-live-decision-quality.service; enabled; preset: enabled)
+     Active: active (running) since Wed 2026-08-05 09:30:51 CEST; 1 day 1h ago
+   Main PID: 3019811 (python3)
+      Tasks: 7 (limit: 28792)
+     Memory: 43.8M (peak: 47.0M)
+        CPU: 8min 35.514s
+     CGroup: /system.slice/ndsp-live-decision-quality.service
+             └─3019811 /usr/bin/python3 /home/nawaf511/empire-core-new/backend/ndsp-live-decision-quality/server.py
+MainPID=3019811
+ExecStart={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/ndsp-live-decision-quality/server.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }
+Environment=
+WorkingDirectory=/home/nawaf511/empire-core-new/backend/ndsp-live-decision-quality
+ActiveState=active
+SubState=running
+
+##### ndsp-platform-gateway.service #####
+● ndsp-platform-gateway.service - NDSP Platform Unified Backend Gateway 9001
+     Loaded: loaded (/etc/systemd/system/ndsp-platform-gateway.service; enabled; preset: enabled)
+    Drop-In: /etc/systemd/system/ndsp-platform-gateway.service.d
+             └─20-ndsp-mail-env.conf, 30-ndsp-official-runtime-source.conf, 46-runtime-database.conf
+     Active: active (running) since Wed 2026-08-05 09:30:52 CEST; 1 day 1h ago
+   Main PID: 3019837 (node)
+      Tasks: 8 (limit: 28792)
+     Memory: 17.8M (peak: 21.7M)
+        CPU: 3min 39.833s
+     CGroup: /system.slice/ndsp-platform-gateway.service
+             └─3019837 /usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_platform_gateway_9001.cjs
+
+أغسطس 05 09:30:52 vmi2934783 node[3019837]: NDSP platform gateway listening on http://127.0.0.1:9001
+MainPID=3019837
+ExecStart={ path=/usr/bin/node ; argv[]=/usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_platform_gateway_9001.cjs ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }
+Environment=NDSP_PLATFORM_GATEWAY_HOST=127.0.0.1 NDSP_PLATFORM_GATEWAY_PORT=9001 NDSP_ADMIN_USERS_JSON=/home/nawaf511/empire-core-new/runtime/admin-users.json
+WorkingDirectory=/home/nawaf511/empire-core-new/backend/auth_api
+ActiveState=active
+SubState=running
+
+=== SEARCH MONITOR CONFIGURATION ===
+/etc/systemd/system/ndip-health-monitor.service:11:ExecStart=/home/nawaf511/empire-core-new/backend/venv/bin/python -m app.workers.ndip_health_monitor
+/etc/systemd/system/ndip-api.service.disabled_old_ndip_20260502_004422:9:ExecStart=/home/nawaf511/ndip-backend/venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 9000
+/etc/systemd/system/ndsp-telegram-alert.timer:2:Description=Run NDSP Telegram automatic health alert every 2 minutes
+/etc/systemd/system/testapp.service:8:ExecStart=/srv/testapp/venv/bin/streamlit run /srv/testapp/app.py --server.port=8521 --server.address=127.0.0.1
+/etc/systemd/system/ndsp-market-data-bridge-v2.service:12:Environment=BRIDGE_HOST=127.0.0.1
+/etc/systemd/system/ndsp-completed-decisions-evidence-v35.service:13:Environment=NDSP_COMPLETED_EVIDENCE_HOST=127.0.0.1
+/etc/systemd/system/ndsp-completed-decisions-evidence-v35.service:16:ExecStart=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_evidence_v35.py
+/etc/systemd/system/ndsp-quality-live-golden-wrapper.service:8:Environment=NDSP_QUALITY_LIVE_UPSTREAM=http://127.0.0.1:9057
+/etc/systemd/system/ndsp-quality-live-golden-wrapper.service:9:Environment=NDSP_GOLDEN_WRAPPER_HOST=127.0.0.1
+/etc/systemd/system/ndsp-trial-fingerprint-guard.service:11:Environment=NDSP_TRIAL_REGISTER_HOST=127.0.0.1
+/etc/systemd/system/ndsp-decision_governance_core.service:11:Environment=NDSP_HOST=127.0.0.1
+/etc/systemd/system/ndip-dashboard.service:11:ExecStart=/root/empire-core/backend/venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 8010
+/etc/systemd/system/ndsp-ui-bridge-api.service:9:ExecStart=/usr/bin/python3 -m uvicorn main:app --host 127.0.0.1 --port 9066
+/etc/systemd/system/ndsp-enterprise-api.service:9:ExecStart=/opt/ndsp-enterprise-api/.venv/bin/python -m uvicorn main:app --host 127.0.0.1 --port 9088
+/etc/systemd/system/ndsp-canonical-live-runtime-v33.service:15:Environment=NDSP_UPSTREAM_BASE=http://127.0.0.1:9082
+/etc/systemd/system/ndsp-canonical-live-runtime-v33.service:16:Environment=NDSP_CANONICAL_HOST=127.0.0.1
+/etc/systemd/system/ndsp-completed-decisions-history-v36.service:3:After=network-online.target ndsp-completed-decisions-evidence-v35.service
+/etc/systemd/system/ndsp-completed-decisions-history-v36.service:5:Requires=ndsp-completed-decisions-evidence-v35.service
+/etc/systemd/system/ndsp-completed-decisions-history-v36.service:13:Environment=NDSP_HISTORY_HOST=127.0.0.1
+/etc/systemd/system/ndsp-completed-decisions-history-v36.service:15:Environment=NDSP_HISTORY_SOURCE_URL=http://127.0.0.1:9087/api/completed-decisions?limit=100
+/etc/systemd/system/ndsp-completed-decisions-history-v36.service:16:Environment=NDSP_HISTORY_DATA_DIR=/home/nawaf511/empire-core-new/var/ledger/completed-decisions-v36
+/etc/systemd/system/ndsp-completed-decisions-history-v36.service:17:ExecStart=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_history_v36.py serve
+/etc/systemd/system/ndsp-completed-decisions-history-v36.service:26:ReadWritePaths=/home/nawaf511/empire-core-new/var/ledger/completed-decisions-v36
+/etc/systemd/system/ndsp-telegram-alert.service:2:Description=NDSP Telegram automatic health alert
+/etc/systemd/system/ndsp-telegram-alert.service:8:ExecStart=/usr/local/bin/ndsp_auto_telegram_health_alert.sh
+/etc/systemd/system/marketpulse.service:12:          --bind 127.0.0.1:8000 \
+/etc/systemd/system/ndsp-raw-cot-gateway.service:9:ExecStart=/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/.venv/bin/uvicorn app:app --host 127.0.0.1 --port 9076
+/etc/systemd/system/ndsp-change-password-gateway.service:12:ExecStart=/opt/ndsp-change-password-gateway/venv/bin/uvicorn app:app --host 127.0.0.1 --port 9069
+/etc/systemd/system/empire-py-ndip-core-backend-api.service.bak_20260225_185436:11:ExecStart=/opt/empire-clean/venvs/empire-py-ndip-core-backend-api/bin/python -m uvicorn main:app --host 127.0.0.1 --port 9102
+/etc/systemd/system/ndsp-bot-execution.service:3:After=network.target ndsp-completed-decision.service
+/etc/systemd/system/ndsp-bot-execution.service:11:Environment=NDSP_COMPLETED_DECISION_URL=http://127.0.0.1:9078
+/etc/systemd/system/ndsp-completed-decisions-history-capture-v36.service:3:After=network-online.target ndsp-completed-decisions-evidence-v35.service
+/etc/systemd/system/ndsp-completed-decisions-history-capture-v36.service:5:Requires=ndsp-completed-decisions-evidence-v35.service
+/etc/systemd/system/ndsp-completed-decisions-history-capture-v36.service:13:Environment=NDSP_HISTORY_SOURCE_URL=http://127.0.0.1:9087/api/completed-decisions?limit=100
+/etc/systemd/system/ndsp-completed-decisions-history-capture-v36.service:14:Environment=NDSP_HISTORY_DATA_DIR=/home/nawaf511/empire-core-new/var/ledger/completed-decisions-v36
+/etc/systemd/system/ndsp-completed-decisions-history-capture-v36.service:15:ExecStart=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_history_v36.py capture
+/etc/systemd/system/ndsp-completed-decisions-history-capture-v36.service:20:ReadWritePaths=/home/nawaf511/empire-core-new/var/ledger/completed-decisions-v36
+/etc/systemd/system/ndsp-public-gateway.service:10:Environment=NDSP_UPSTREAM=http://127.0.0.1:9001
+/etc/systemd/system/ndsp-quality-live-nmp-wrapper.service:9:Environment=NDSP_NMP_WRAPPER_UPSTREAM=http://127.0.0.1:9067
+/etc/systemd/system/ndsp-quality-live-nmp-wrapper.service:10:Environment=NDSP_NMP_WRAPPER_HOST=127.0.0.1
+/etc/systemd/system/empire-ndip-api.service:8:ExecStart=/opt/empire-core/backend/venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 9001
+/etc/systemd/system/ndsp-admin-users-official.service:11:Environment=HOST=127.0.0.1
+/etc/systemd/system/ndsp-completed_decision.service:8:WorkingDirectory=/home/nawaf511/empire-core-new/backend/services/completed_decision
+/etc/systemd/system/ndsp-completed_decision.service:11:Environment=NDSP_HOST=127.0.0.1
+/etc/systemd/system/ndsp-completed_decision.service:12:ExecStart=/usr/bin/node /home/nawaf511/empire-core-new/backend/services/completed_decision/main.cjs
+/etc/systemd/system/binance-feed.service:10:Environment="BACKEND_API=http://127.0.0.1:9001"
+/etc/systemd/system/ndsp-commercial-auth-payment-staging.service:16:IPAddressAllow=localhost
+/etc/systemd/system/multi-user.target.wants/ndsp-market-data-bridge-v2.service:12:Environment=BRIDGE_HOST=127.0.0.1
+/etc/systemd/system/multi-user.target.wants/ndsp-completed-decisions-evidence-v35.service:13:Environment=NDSP_COMPLETED_EVIDENCE_HOST=127.0.0.1
+/etc/systemd/system/multi-user.target.wants/ndsp-completed-decisions-evidence-v35.service:16:ExecStart=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_evidence_v35.py
+/etc/systemd/system/multi-user.target.wants/ndsp-quality-live-golden-wrapper.service:8:Environment=NDSP_QUALITY_LIVE_UPSTREAM=http://127.0.0.1:9057
+/etc/systemd/system/multi-user.target.wants/ndsp-quality-live-golden-wrapper.service:9:Environment=NDSP_GOLDEN_WRAPPER_HOST=127.0.0.1
+/etc/systemd/system/multi-user.target.wants/ndsp-trial-fingerprint-guard.service:11:Environment=NDSP_TRIAL_REGISTER_HOST=127.0.0.1
+/etc/systemd/system/multi-user.target.wants/ndsp-decision_governance_core.service:11:Environment=NDSP_HOST=127.0.0.1
+/etc/systemd/system/multi-user.target.wants/ndsp-ui-bridge-api.service:9:ExecStart=/usr/bin/python3 -m uvicorn main:app --host 127.0.0.1 --port 9066
+/etc/systemd/system/multi-user.target.wants/ndsp-canonical-live-runtime-v33.service:15:Environment=NDSP_UPSTREAM_BASE=http://127.0.0.1:9082
+/etc/systemd/system/multi-user.target.wants/ndsp-canonical-live-runtime-v33.service:16:Environment=NDSP_CANONICAL_HOST=127.0.0.1
+/etc/systemd/system/multi-user.target.wants/ndsp-completed-decisions-history-v36.service:3:After=network-online.target ndsp-completed-decisions-evidence-v35.service
+/etc/systemd/system/multi-user.target.wants/ndsp-completed-decisions-history-v36.service:5:Requires=ndsp-completed-decisions-evidence-v35.service
+/etc/systemd/system/multi-user.target.wants/ndsp-completed-decisions-history-v36.service:13:Environment=NDSP_HISTORY_HOST=127.0.0.1
+/etc/systemd/system/multi-user.target.wants/ndsp-completed-decisions-history-v36.service:15:Environment=NDSP_HISTORY_SOURCE_URL=http://127.0.0.1:9087/api/completed-decisions?limit=100
+/etc/systemd/system/multi-user.target.wants/ndsp-completed-decisions-history-v36.service:16:Environment=NDSP_HISTORY_DATA_DIR=/home/nawaf511/empire-core-new/var/ledger/completed-decisions-v36
+/etc/systemd/system/multi-user.target.wants/ndsp-completed-decisions-history-v36.service:17:ExecStart=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_history_v36.py serve
+/etc/systemd/system/multi-user.target.wants/ndsp-completed-decisions-history-v36.service:26:ReadWritePaths=/home/nawaf511/empire-core-new/var/ledger/completed-decisions-v36
+/etc/systemd/system/multi-user.target.wants/ndsp-raw-cot-gateway.service:9:ExecStart=/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/.venv/bin/uvicorn app:app --host 127.0.0.1 --port 9076
+/etc/systemd/system/multi-user.target.wants/ndsp-change-password-gateway.service:12:ExecStart=/opt/ndsp-change-password-gateway/venv/bin/uvicorn app:app --host 127.0.0.1 --port 9069
+/etc/systemd/system/multi-user.target.wants/ndsp-quality-live-nmp-wrapper.service:9:Environment=NDSP_NMP_WRAPPER_UPSTREAM=http://127.0.0.1:9067
+/etc/systemd/system/multi-user.target.wants/ndsp-quality-live-nmp-wrapper.service:10:Environment=NDSP_NMP_WRAPPER_HOST=127.0.0.1
+/etc/systemd/system/multi-user.target.wants/ndsp-admin-users-official.service:11:Environment=HOST=127.0.0.1
+/etc/systemd/system/multi-user.target.wants/ndsp-completed_decision.service:8:WorkingDirectory=/home/nawaf511/empire-core-new/backend/services/completed_decision
+/etc/systemd/system/multi-user.target.wants/ndsp-completed_decision.service:11:Environment=NDSP_HOST=127.0.0.1
+/etc/systemd/system/multi-user.target.wants/ndsp-completed_decision.service:12:ExecStart=/usr/bin/node /home/nawaf511/empire-core-new/backend/services/completed_decision/main.cjs
+/etc/systemd/system/multi-user.target.wants/ndsp-platform-gateway.service:9:Environment=NDSP_PLATFORM_GATEWAY_HOST=127.0.0.1
+/etc/systemd/system/multi-user.target.wants/ndsp-trial-register-canonical-wrapper.service:10:Environment=NDSP_REGISTER_UPSTREAM=http://127.0.0.1:9019
+/etc/systemd/system/multi-user.target.wants/ndsp-admin-user-ops.service:7:ExecStart=/usr/bin/python3 -m uvicorn app:app --host 127.0.0.1 --port 9068
+/etc/systemd/system/multi-user.target.wants/ndsp-canonical-live-runtime-v30.service:15:Environment=NDSP_UPSTREAM_BASE=http://127.0.0.1:9082
+/etc/systemd/system/multi-user.target.wants/ndsp-canonical-live-runtime-v30.service:16:Environment=NDSP_CANONICAL_HOST=127.0.0.1
+/etc/systemd/system/multi-user.target.wants/ndsp-decision-package-v1.service:7:WorkingDirectory=/opt/ndsp-decision-package-v1
+/etc/systemd/system/multi-user.target.wants/ndsp-decision-package-v1.service:8:ExecStart=/opt/ndsp-decision-package-v1/venv/bin/uvicorn app:app --host 127.0.0.1 --port 9061
+/etc/systemd/system/multi-user.target.wants/ndsp-ctl-001-workspace-identity.service:11:Environment=NDSP_HOST=127.0.0.1
+/etc/systemd/system/multi-user.target.wants/ndsp-layers-api.service:9:ExecStart=/home/nawaf511/empire-core-new/apps/ndsp-layers-api/.venv/bin/uvicorn app:app --host 127.0.0.1 --port 9065
+/etc/systemd/system/multi-user.target.wants/ndsp-current-user-display.service:10:ExecStart=/opt/ndsp-current-user-display/.venv/bin/uvicorn app:app --host 127.0.0.1 --port 9074
+/etc/systemd/system/multi-user.target.wants/ubuntu-advantage.service:19:# Only run if not already attached
+/etc/systemd/system/multi-user.target.wants/ndsp-user-login.service:12:Environment=HOST=127.0.0.1
+/etc/systemd/system/multi-user.target.wants/ndsp-user-login.service:13:Environment=PGHOST=127.0.0.1
+/etc/systemd/system/ndsp-completed-decision.service:8:WorkingDirectory=/home/nawaf511/empire-core-new/backend/services/completed_decision
+/etc/systemd/system/ndsp-completed-decision.service:12:ExecStart=/usr/bin/node /home/nawaf511/empire-core-new/backend/services/completed_decision/main.cjs
+/etc/systemd/system/ndip-api-new.service:10:ExecStart=/home/nawaf511/empire-core-new/backend/venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 9000
+/etc/systemd/system/empire-webhook.service:8:ExecStart=/opt/empire/webhooks/universal/venv/bin/uvicorn app:app --host 127.0.0.1 --port 9100
+/etc/systemd/system/ndsp-platform-gateway.service:9:Environment=NDSP_PLATFORM_GATEWAY_HOST=127.0.0.1
+/etc/systemd/system/ndsp-trial-register-canonical-wrapper.service:10:Environment=NDSP_REGISTER_UPSTREAM=http://127.0.0.1:9019
+/etc/systemd/system/twelvedata-poller.service:12:Environment="BACKEND_API=http://127.0.0.1:9001"
+/etc/systemd/system/ndsp-admin-user-ops.service:7:ExecStart=/usr/bin/python3 -m uvicorn app:app --host 127.0.0.1 --port 9068
+/etc/systemd/system/ndsp-completed-decisions-history-v36.timer:8:Unit=ndsp-completed-decisions-history-capture-v36.service
+/etc/systemd/system/ndsp-api.service:13:ExecStart=/home/nawaf511/empire-core-new/backend/venv/bin/gunicorn app.main:app   -k uvicorn.workers.UvicornWorker   --bind 127.0.0.1:9001   --workers 4   --timeout 120
+/etc/systemd/system/ndsp-canonical-live-runtime-v30.service:15:Environment=NDSP_UPSTREAM_BASE=http://127.0.0.1:9082
+/etc/systemd/system/ndsp-canonical-live-runtime-v30.service:16:Environment=NDSP_CANONICAL_HOST=127.0.0.1
+/etc/systemd/system/ndsp-decision-package-v1.service:7:WorkingDirectory=/opt/ndsp-decision-package-v1
+/etc/systemd/system/ndsp-decision-package-v1.service:8:ExecStart=/opt/ndsp-decision-package-v1/venv/bin/uvicorn app:app --host 127.0.0.1 --port 9061
+/etc/systemd/system/ndsp-ctl-001-workspace-identity.service:11:Environment=NDSP_HOST=127.0.0.1
+/etc/systemd/system/ndsp-bot_execution.service:11:Environment=NDSP_HOST=127.0.0.1
+/etc/systemd/system/ndip-engine.service:8:ExecStart=/opt/empire-core/backend/venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 9001
+/etc/systemd/system/ndsp-app.service:8:ExecStart=/usr/bin/python3 -m http.server 8010 --bind 127.0.0.1
+/etc/systemd/system/ndsp-api.service.d/10-ndsp-db-env.conf:3:Environment="DATABASE_URL=postgresql://<REDACTED_CREDENTIALS>@127.0.0.1:5432/ndsp_auth"
+/etc/systemd/system/ndsp-api.service.d/10-ndsp-db-env.conf:4:Environment="POSTGRES_URL=postgresql://<REDACTED_CREDENTIALS>@127.0.0.1:5432/ndsp_auth"
+/etc/systemd/system/ndsp-api.service.d/10-ndsp-db-env.conf:5:Environment="PGHOST=127.0.0.1"
+/etc/systemd/system/ndsp-api.service.d/10-ndsp-db-env.conf:10:Environment="DB_HOST=127.0.0.1"
+/etc/systemd/system/ndsp-api.service.d/10-ndsp-db-env.conf:17:Environment="POSTGRES_HOST=127.0.0.1"
+/etc/systemd/system/ndsp-api.service.d/50-bind-9002.conf:3:ExecStart=/home/nawaf511/empire-core-new/backend/venv/bin/gunicorn app.main:app -k uvicorn.workers.UvicornWorker --bind 127.0.0.1:9002 --workers 4 --timeout 120
+/etc/systemd/system/ndsp-api.service.d/99-ndsp-correct-db.env.conf:3:Environment="DATABASE_URL=postgresql://<REDACTED_CREDENTIALS>@127.0.0.1:5432/ndsp_auth"
+/etc/systemd/system/ndsp-api.service.d/99-ndsp-correct-db.env.conf:4:Environment="POSTGRES_URL=postgresql://<REDACTED_CREDENTIALS>@127.0.0.1:5432/ndsp_auth"
+/etc/systemd/system/ndsp-api.service.d/99-ndsp-correct-db.env.conf:5:Environment="AUTH_DATABASE_URL=postgresql://<REDACTED_CREDENTIALS>@127.0.0.1:5432/ndsp_auth"
+/etc/systemd/system/ndsp-api.service.d/99-ndsp-correct-db.env.conf:6:Environment="PGHOST=127.0.0.1"
+/etc/systemd/system/ndsp-api.service.d/99-ndsp-correct-db.env.conf:11:Environment="DB_HOST=127.0.0.1"
+/etc/systemd/system/ndsp-api.service.d/99-ndsp-correct-db.env.conf:18:Environment="POSTGRES_HOST=127.0.0.1"
+/etc/systemd/system/ndsp-decision-governance-core.service:3:After=network.target ndsp-completed-decision.service
+/etc/systemd/system/ndsp-decision-governance-core.service:11:Environment=NDSP_COMPLETED_DECISION_URL=http://127.0.0.1:9078
+/etc/systemd/system/ndsp-layers-api.service:9:ExecStart=/home/nawaf511/empire-core-new/apps/ndsp-layers-api/.venv/bin/uvicorn app:app --host 127.0.0.1 --port 9065
+/etc/systemd/system/ndsp-current-user-display.service:10:ExecStart=/opt/ndsp-current-user-display/.venv/bin/uvicorn app:app --host 127.0.0.1 --port 9074
+/etc/systemd/system/graphical.target.wants/accounts-daemon.service:68:# if it is already around when gdm wants to use it and doesn't have to wait for
+/etc/systemd/system/timers.target.wants/ndsp-telegram-alert.timer:2:Description=Run NDSP Telegram automatic health alert every 2 minutes
+/etc/systemd/system/timers.target.wants/ndsp-completed-decisions-history-v36.timer:8:Unit=ndsp-completed-decisions-history-capture-v36.service
+/etc/systemd/system/ndsp-user-login.service:12:Environment=HOST=127.0.0.1
+/etc/systemd/system/ndsp-user-login.service:13:Environment=PGHOST=127.0.0.1
+/lib/systemd/system/tigervncserver@.service:16:# [user@hostA ~]$ ssh -v -C -L 590N:localhost:590M hostB
+/lib/systemd/system/tigervncserver@.service:19:# (in fact, it ssh-connects to hostB and then connects to localhost (on hostB).
+/lib/systemd/system/tigervncserver@.service:22:# You can then point a VNC client on hostA at vncdisplay N of localhost and with
+/lib/systemd/system/tigervncserver@.service:27:# Use "localhost" to prevent remote VNC clients connecting except when
+/lib/systemd/system/systemd-pcrphase.service:21:ExecStart=/usr/lib/systemd/systemd-pcrextend --graceful ready
+/lib/systemd/system/drkonqi-coredump-processor@.service:12:# This limit is already incredibly lenient.
+/lib/systemd/system/accounts-daemon.service:68:# if it is already around when gdm wants to use it and doesn't have to wait for
+/lib/systemd/system/sysinit.target.wants/systemd-pcrphase.service:21:ExecStart=/usr/lib/systemd/systemd-pcrextend --graceful ready
+/lib/systemd/system/ubuntu-advantage.service:19:# Only run if not already attached
+/etc/default/docker:17:#export http_proxy="http://127.0.0.1:3128/"
+/etc/ndsp/commercial-auth-payment-staging.env:4:DATABASE_URL=postgresql://ndsp_commercial_staging@localhost:5432/ndsp_auth_commercial_staging?host=%2Fvar%2Frun%2Fpostgresql
+/etc/ndsp/commercial-auth-payment-staging.env:5:NDSP_DATABASE_URL=postgresql://ndsp_commercial_staging@localhost:5432/ndsp_auth_commercial_staging?host=%2Fvar%2Frun%2Fpostgresql
+/etc/ndsp/commercial-auth-payment-staging.env:6:POSTGRES_URL=postgresql://ndsp_commercial_staging@localhost:5432/ndsp_auth_commercial_staging?host=%2Fvar%2Frun%2Fpostgresql
+/etc/ndsp/commercial-auth-payment-staging.env:7:DB_URL=postgresql://ndsp_commercial_staging@localhost:5432/ndsp_auth_commercial_staging?host=%2Fvar%2Frun%2Fpostgresql
+/etc/ndsp/commercial-auth-payment-staging.env:12:HOST=127.0.0.1
+/etc/ndsp/commercial-auth-payment-staging.env:13:BIND_HOST=127.0.0.1
+/etc/ndsp/commercial-auth-payment-staging.env:16:AUTH_HOST=127.0.0.1
+/etc/ndsp/commercial-auth-payment-staging.env:17:AUTH_DOMAIN=127.0.0.1
+/etc/ndsp/commercial-auth-payment-staging.env:21:PUBLIC_URL=http://127.0.0.1:19094
+/etc/ndsp/commercial-auth-payment-staging.env:22:NDSP_PUBLIC_URL=http://127.0.0.1:19094
+/etc/ndsp/commercial-auth-payment-staging.env:23:BASE_URL=http://127.0.0.1:19094
+/etc/ndsp/commercial-auth-payment-staging.env:24:FRONTEND_URL=http://127.0.0.1:19094
+/etc/ndsp/commercial-auth-payment-staging.env:29:COOKIE_DOMAIN=127.0.0.1
+/etc/ndsp/commercial-auth-payment-staging.env:30:NDSP_COOKIE_DOMAIN=127.0.0.1
+/etc/ndsp/commercial-auth-payment-staging.env:34:CORS_ORIGIN=http://127.0.0.1:19094
+/etc/ndsp/commercial-auth-payment-staging.env:35:NDSP_CORS_ORIGIN=http://127.0.0.1:19094
+/etc/ndsp/business-ops.env:1:NDSP_OPS_HOST=127.0.0.1
+/etc/ndsp/business-ops.env:5:NDSP_LOCAL_PACKAGES_URL=http://127.0.0.1:9022/api/packages
+/etc/ndsp/business-ops.env:10:NDSP_LOCAL_DECISION_BASE=http://127.0.0.1:9082
+/etc/ndsp/ndsp-db.env:5:DATABASE_URL=postgresql://<REDACTED_CREDENTIALS>@127.0.0.1:5432/ndsp_auth
+/etc/ndsp/ndsp-db.env:6:POSTGRES_URL=postgresql://<REDACTED_CREDENTIALS>@127.0.0.1:5432/ndsp_auth
+/etc/ndsp/ndsp-db.env:8:PGHOST=127.0.0.1
+/etc/ndsp/ndsp-db.env:14:DB_HOST=127.0.0.1
+/etc/ndsp/ndsp-auth-core-clean.env:1:DATABASE_URL="postgresql://<REDACTED_CREDENTIALS>@127.0.0.1:5432/ndsp_auth"
+/etc/ndsp/ndsp-auth-core-clean.env:3:AUTH_HOST=127.0.0.1
+/usr/local/bin/ndsp_auto_telegram_health_alert.sh:6:STATE_FILE="$STATE_DIR/telegram_health_state"
+/usr/local/bin/ndsp_auto_telegram_health_alert.sh:7:LOCK_FILE="/tmp/ndsp_telegram_health_alert.lock"
+/usr/local/bin/ndsp_auto_telegram_health_alert.sh:40:API_CODE="$(check_code "http://127.0.0.1:9001/api/runtime/health")"
+/usr/local/bin/ndsp_auto_telegram_health_alert.sh:67:    send_msg "NDSP health restored ✅
+/usr/local/bin/ndsp_auto_telegram_health_alert.sh:76:    send_msg "NDSP health alert ❌
+/usr/local/bin/ndip-health:2:exec /home/nawaf511/ndip_dev_tools/ndip_health_summary.sh "$@"
+/usr/local/bin/ndsp-refresh-static-data-contract-v46.core_before_public_scrub_20260701_190411:178:  "concepts_fixed":True,"backend_fields_ready":True,
+/usr/local/bin/ndip-healthcheck.sh:3:URL="http://127.0.0.1:9001/status"
+/usr/local/bin/ndip-healthcheck.sh:9:    echo "$(date) - NDIP DOWN, restarting..." >> /var/log/ndip-health.log
+/usr/local/bin/ndsp-refresh-live-data:105:        f"http://127.0.0.1:9057/api/decision/quality-live?symbol={symbol}",
+/usr/local/bin/empire_add_app.sh:30:  echo "ℹ️ User $USER already exists"
+/usr/local/bin/empire_add_app.sh:63:ExecStart=/usr/bin/python3 -m streamlit run app.py --server.port $PORT --server.address 127.0.0.1
+/usr/local/bin/empire_add_app.sh:82:        proxy_pass http://127.0.0.1:$PORT;
+/home/nawaf511/empire-core-new/ndsp_phase0_baseline.sh:232:      '(healthz|readyz|/health|/ready|/live|liveness|readiness)' . \
+/home/nawaf511/empire-core-new/ndsp_phase0_baseline.sh:308:4. Identify public URLs and expected health endpoints.
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:26:/home/nawaf511/empire-core-new/backend/services/completed_decision/package.json
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:67:[/home/nawaf511/empire-core-new/backend/services/completed_decision/package.json]
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:115:/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:202:        proxy_pass http://127.0.0.1:9090/api/register;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:116:/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:215:        proxy_pass http://127.0.0.1:9090/api/trial/status;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:117:/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:229:        proxy_pass http://127.0.0.1:9090/api/trial/seats;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:118:/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:239:        proxy_pass http://127.0.0.1:9090/api/launch/status;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:119:/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:249:        proxy_pass http://127.0.0.1:9090/api/entitlements/me;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:120:/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:268:        proxy_pass http://127.0.0.1:9090/api/auth/decision-room-access;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:125:/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:319:        proxy_pass http://127.0.0.1:9091;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:127:/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:336:        proxy_pass http://127.0.0.1:9095;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:128:/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:349:        proxy_pass http://127.0.0.1:9095;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:129:/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:362:        proxy_pass http://127.0.0.1:9095;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:130:/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:375:        proxy_pass http://127.0.0.1:9095;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:131:/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:388:        proxy_pass http://127.0.0.1:9095;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:132:/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:401:        proxy_pass http://127.0.0.1:9095;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:133:/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:414:        proxy_pass http://127.0.0.1:9095;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:134:/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:427:        proxy_pass http://127.0.0.1:9095;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:135:/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:440:        proxy_pass http://127.0.0.1:9095;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:136:/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:453:        proxy_pass http://127.0.0.1:9095;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:137:/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:466:        proxy_pass http://127.0.0.1:9095;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:139:/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:484:        proxy_pass http://127.0.0.1:19091/api/auth/session;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:140:/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:494:        proxy_pass http://127.0.0.1:9078/api/completed$is_args$args;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:141:/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:509:        proxy_pass http://127.0.0.1:9078/api/completed/latest$is_args$args;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:151:/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:618:        proxy_pass http://127.0.0.1:9027/api/auth/forgot-password;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:152:/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:630:        proxy_pass http://127.0.0.1:9027/api/auth/reset-password;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:159:/etc/nginx/conf.d/000-admin-ndsp-app-canonical-only.conf:35:        proxy_pass http://127.0.0.1:9068/health;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:160:/etc/nginx/conf.d/000-admin-ndsp-app-canonical-only.conf:44:        proxy_pass http://127.0.0.1:9068/;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:164:/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:110:        proxy_pass http://127.0.0.1:9028/api/register;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:165:/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:123:        proxy_pass http://127.0.0.1:9028/api/auth/register;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:166:/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:138:        proxy_pass http://127.0.0.1:9001/api/completed-decisions$is_args$args;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:167:/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:154:        proxy_pass http://127.0.0.1:9001/api/completed-decisions/latest$is_args$args;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:170:/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:18:        proxy_pass http://127.0.0.1:9061/api/decision/package-v2;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:174:/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:222:        proxy_pass http://127.0.0.1:9020/api/auth/login;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:175:/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:231:        proxy_pass http://127.0.0.1:9020/api/auth/me;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:176:/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:240:        proxy_pass http://127.0.0.1:9020/api/auth/logout;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:177:/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:249:        proxy_pass http://127.0.0.1:9001;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:178:/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:259:        proxy_pass http://127.0.0.1:9082/api/decision/quality-live$is_args$args;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:179:/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:307:        proxy_pass http://127.0.0.1:9066;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:181:/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:314:        proxy_pass http://127.0.0.1:9066;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:182:/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:347:        proxy_pass http://127.0.0.1:9061/api/decision/package-live;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:183:/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:361:        proxy_pass http://127.0.0.1:9078/api/completed;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:184:/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:369:        proxy_pass http://127.0.0.1:9078/api/completed/latest;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:185:/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:377:        proxy_pass http://127.0.0.1:9078$request_uri;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:186:/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:385:        proxy_pass http://127.0.0.1:9078$request_uri;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:187:/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:393:        proxy_pass http://127.0.0.1:9078$request_uri;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:188:/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:401:        proxy_pass http://127.0.0.1:9079/health;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:189:/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:409:        proxy_pass http://127.0.0.1:9079/api/governance/evaluate;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:190:/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:436:        proxy_pass http://127.0.0.1:9028/api/register;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:191:/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:449:        proxy_pass http://127.0.0.1:9028/api/auth/register;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:192:/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:464:        proxy_pass http://127.0.0.1:9001/api/completed-decisions$is_args$args;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:193:/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:480:        proxy_pass http://127.0.0.1:9001/api/completed-decisions/latest$is_args$args;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:198:/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:52:        proxy_pass http://127.0.0.1:9082/api/decision/quality-live$is_args$args;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:199:/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:533:        proxy_pass http://127.0.0.1:9090/api/trial/status;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:200:/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:547:        proxy_pass http://127.0.0.1:9090/api/trial/seats;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:201:/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:557:        proxy_pass http://127.0.0.1:9090/api/launch/status;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:205:/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:133:        proxy_pass http://127.0.0.1:9020/api/auth/login;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:206:/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:142:        proxy_pass http://127.0.0.1:9019/api/trial/register/health;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:207:/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:154:        proxy_pass http://127.0.0.1:9019/api/trial/register/;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:208:/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:166:        proxy_pass http://127.0.0.1:9019/api/trial/invites/validate;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:212:/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:219:        proxy_pass http://127.0.0.1:9083/api/decision/nmp-timeframes-live$is_args$args;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:213:/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:226:        proxy_pass http://127.0.0.1:9083/api/decision/quality-contract-v52$is_args$args;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:214:/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:233:        proxy_pass http://127.0.0.1:9083/health;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:222:/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:295:        proxy_pass http://127.0.0.1:9090/api/trial/status;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:223:/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:309:        proxy_pass http://127.0.0.1:9090/api/trial/seats;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:224:/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:319:        proxy_pass http://127.0.0.1:9090/api/launch/status;
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:300:/etc/systemd/system/empire-ndip-api.service:8:ExecStart=/opt/empire-core/backend/venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 9001
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:301:/etc/systemd/system/empire-webhook.service:8:ExecStart=/opt/empire/webhooks/universal/venv/bin/uvicorn app:app --host 127.0.0.1 --port 9100
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:304:/etc/systemd/system/ndip-api-new.service:10:ExecStart=/home/nawaf511/empire-core-new/backend/venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 9000
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:317:/etc/systemd/system/ndip-dashboard.service:11:ExecStart=/root/empire-core/backend/venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 8010
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:320:/etc/systemd/system/ndip-engine.service:8:ExecStart=/opt/empire-core/backend/venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 9001
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:323:/etc/systemd/system/ndip-health-monitor.service:10:EnvironmentFile=/home/nawaf511/empire-core-new/backend/.env
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:324:/etc/systemd/system/ndip-health-monitor.service:11:ExecStart=/home/nawaf511/empire-core-new/backend/venv/bin/python -m app.workers.ndip_health_monitor
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:325:/etc/systemd/system/ndip-health-monitor.service:9:WorkingDirectory=/home/nawaf511/empire-core-new/backend
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:356:/etc/systemd/system/ndsp-admin-user-ops.service:7:ExecStart=/usr/bin/python3 -m uvicorn app:app --host 127.0.0.1 --port 9068
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:368:/etc/systemd/system/ndsp-api.service:13:ExecStart=/home/nawaf511/empire-core-new/backend/venv/bin/gunicorn app.main:app   -k uvicorn.workers.UvicornWorker   --bind 127.0.0.1:9001   --workers 4   --timeout 120
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:379:/etc/systemd/system/ndsp-api.service.d/50-bind-9002.conf:3:ExecStart=/home/nawaf511/empire-core-new/backend/venv/bin/gunicorn app.main:app -k uvicorn.workers.UvicornWorker --bind 127.0.0.1:9002 --workers 4 --timeout 120
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:385:/etc/systemd/system/ndsp-app.service:8:ExecStart=/usr/bin/python3 -m http.server 8010 --bind 127.0.0.1
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:411:/etc/systemd/system/ndsp-change-password-gateway.service:12:ExecStart=/opt/ndsp-change-password-gateway/venv/bin/uvicorn app:app --host 127.0.0.1 --port 9069
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:418:/etc/systemd/system/ndsp-completed-decision.service:11:EnvironmentFile=-/home/nawaf511/empire-core-new/backend/.env
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:419:/etc/systemd/system/ndsp-completed-decision.service:12:ExecStart=/usr/bin/node /home/nawaf511/empire-core-new/backend/services/completed_decision/main.cjs
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:420:/etc/systemd/system/ndsp-completed_decision.service:12:ExecStart=/usr/bin/node /home/nawaf511/empire-core-new/backend/services/completed_decision/main.cjs
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:421:/etc/systemd/system/ndsp-completed_decision.service:16:EnvironmentFile=-/home/nawaf511/empire-core-new/backend/runtime/systemd-env/core-services.env
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:422:/etc/systemd/system/ndsp-completed-decision.service:8:WorkingDirectory=/home/nawaf511/empire-core-new/backend/services/completed_decision
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:423:/etc/systemd/system/ndsp-completed_decision.service:8:WorkingDirectory=/home/nawaf511/empire-core-new/backend/services/completed_decision
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:424:/etc/systemd/system/ndsp-completed-decisions-evidence-v35.service:16:ExecStart=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_evidence_v35.py
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:425:/etc/systemd/system/ndsp-completed-decisions-history-capture-v36.service:15:ExecStart=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_history_v36.py capture
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:426:/etc/systemd/system/ndsp-completed-decisions-history-v36.service:17:ExecStart=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_history_v36.py serve
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:431:/etc/systemd/system/ndsp-current-user-display.service:10:ExecStart=/opt/ndsp-current-user-display/.venv/bin/uvicorn app:app --host 127.0.0.1 --port 9074
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:438:/etc/systemd/system/ndsp-decision-package-v1.service:8:ExecStart=/opt/ndsp-decision-package-v1/venv/bin/uvicorn app:app --host 127.0.0.1 --port 9061
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:440:/etc/systemd/system/ndsp-enterprise-api.service:9:ExecStart=/opt/ndsp-enterprise-api/.venv/bin/python -m uvicorn main:app --host 127.0.0.1 --port 9088
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:444:/etc/systemd/system/ndsp-layers-api.service:9:ExecStart=/home/nawaf511/empire-core-new/apps/ndsp-layers-api/.venv/bin/uvicorn app:app --host 127.0.0.1 --port 9065
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:474:/etc/systemd/system/ndsp-raw-cot-gateway.service:9:ExecStart=/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/.venv/bin/uvicorn app:app --host 127.0.0.1 --port 9076
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:582:  CWD=/home/nawaf511/empire-core-new/backend/services/completed_decision
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:583:  CMD=/usr/bin/node /home/nawaf511/empire-core-new/backend/services/completed_decision/main.cjs 
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:595:  CMD=/opt/ndsp-change-password-gateway/venv/bin/python3 /opt/ndsp-change-password-gateway/venv/bin/uvicorn app:app --host 127.0.0.1 --port 9069 
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:604:  CMD=/home/nawaf511/empire-core-new/apps/ndsp-layers-api/.venv/bin/python3 /home/nawaf511/empire-core-new/apps/ndsp-layers-api/.venv/bin/uvicorn app:app --host 127.0.0.1 --port 9065 
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:607:  CMD=/opt/ndsp-current-user-display/.venv/bin/python3 /opt/ndsp-current-user-display/.venv/bin/uvicorn app:app --host 127.0.0.1 --port 9074 
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:612:  CWD=/opt/ndsp-decision-package-v1
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:613:  CMD=/opt/ndsp-decision-package-v1/venv/bin/python3 /opt/ndsp-decision-package-v1/venv/bin/uvicorn app:app --host 127.0.0.1 --port 9061 
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:634:  CMD=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_evidence_v35.py 
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:637:  CMD=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_history_v36.py serve 
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:640:  CMD=/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/.venv/bin/python3 /home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/.venv/bin/uvicorn app:app --host 127.0.0.1 --port 9076 
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:649:  CMD=/usr/bin/python3 -m uvicorn app:app --host 127.0.0.1 --port 9068 
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:652:  CMD=/usr/bin/python3 -m uvicorn main:app --host 127.0.0.1 --port 9066 
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:679:LISTEN 0      65535      127.0.0.1:631        0.0.0.0:*    users:(("cupsd",pid=2102587,fd=7))                                                                                                                                                                                                                        
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:682:LISTEN 0      511        127.0.0.1:19091      0.0.0.0:*    users:(("nsolid",pid=2497988,fd=33))                                                                                                                                                                                                                      
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:683:LISTEN 0      200        127.0.0.1:5432       0.0.0.0:*    users:(("postgres",pid=2978763,fd=7))                                                                                                                                                                                                                     
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:690:LISTEN 0      511        127.0.0.1:8097       0.0.0.0:*    users:(("node",pid=2498028,fd=32))                                                                                                                                                                                                                        
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:691:LISTEN 0      511        127.0.0.1:6379       0.0.0.0:*    users:(("redis-server",pid=2978668,fd=6))                                                                                                                                                                                                                 
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:692:LISTEN 0      5          127.0.0.1:9089       0.0.0.0:*    users:(("python3",pid=2978938,fd=5))                                                                                                                                                                                                                      
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:693:LISTEN 0      5          127.0.0.1:9088       0.0.0.0:*    users:(("python3",pid=2978627,fd=3))                                                                                                                                                                                                                      
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:694:LISTEN 0      5          127.0.0.1:9091       0.0.0.0:*    users:(("python3",pid=2978945,fd=7))                                                                                                                                                                                                                      
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:695:LISTEN 0      5          127.0.0.1:9090       0.0.0.0:*    users:(("python3",pid=2978939,fd=7))                                                                                                                                                                                                                      
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:696:LISTEN 0      5          127.0.0.1:9093       0.0.0.0:*    users:(("python3",pid=2978609,fd=3))                                                                                                                                                                                                                      
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:697:LISTEN 0      5          127.0.0.1:9092       0.0.0.0:*    users:(("python3",pid=2978596,fd=3))                                                                                                                                                                                                                      
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:698:LISTEN 0      5          127.0.0.1:9095       0.0.0.0:*    users:(("python3",pid=2978584,fd=3))                                                                                                                                                                                                                      
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:699:LISTEN 0      5          127.0.0.1:9094       0.0.0.0:*    users:(("python3",pid=2978555,fd=6))                                                                                                                                                                                                                      
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:700:LISTEN 0      2048       127.0.0.1:9057       0.0.0.0:*    users:(("python3",pid=2978652,fd=13))                                                                                                                                                                                                                     
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:701:LISTEN 0      2048       127.0.0.1:9061       0.0.0.0:*    users:(("uvicorn",pid=2978615,fd=6))                                                                                                                                                                                                                      
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:702:LISTEN 0      511        127.0.0.1:9062       0.0.0.0:*    users:(("node",pid=2498159,fd=32))                                                                                                                                                                                                                        
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:703:LISTEN 0      2048       127.0.0.1:9065       0.0.0.0:*    users:(("uvicorn",pid=2978601,fd=13))                                                                                                                                                                                                                     
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:704:LISTEN 0      511        127.0.0.1:9064       0.0.0.0:*    users:(("node",pid=2498136,fd=32))                                                                                                                                                                                                                        
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:705:LISTEN 0      5          127.0.0.1:9067       0.0.0.0:*    users:(("python3",pid=2978620,fd=3))                                                                                                                                                                                                                      
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:706:LISTEN 0      2048       127.0.0.1:9066       0.0.0.0:*    users:(("python3",pid=2978766,fd=13))                                                                                                                                                                                                                     
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:707:LISTEN 0      2048       127.0.0.1:9069       0.0.0.0:*    users:(("uvicorn",pid=2978588,fd=13))                                                                                                                                                                                                                     
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:708:LISTEN 0      2048       127.0.0.1:9068       0.0.0.0:*    users:(("python3",pid=2978752,fd=13))                                                                                                                                                                                                                     
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:709:LISTEN 0      511        127.0.0.1:9070       0.0.0.0:*    users:(("node",pid=2498154,fd=32))                                                                                                                                                                                                                        
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:710:LISTEN 0      2048       127.0.0.1:9074       0.0.0.0:*    users:(("uvicorn",pid=2978608,fd=6))                                                                                                                                                                                                                      
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:711:LISTEN 0      511        127.0.0.1:9077       0.0.0.0:*    users:(("node",pid=2497887,fd=32))                                                                                                                                                                                                                        
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:712:LISTEN 0      2048       127.0.0.1:9076       0.0.0.0:*    users:(("uvicorn",pid=2978629,fd=13))                                                                                                                                                                                                                     
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:713:LISTEN 0      511        127.0.0.1:9079       0.0.0.0:*    users:(("node",pid=2498024,fd=32))                                                                                                                                                                                                                        
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:714:LISTEN 0      511        127.0.0.1:9078       0.0.0.0:*    users:(("node",pid=2499820,fd=33))                                                                                                                                                                                                                        
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:715:LISTEN 0      511        127.0.0.1:9081       0.0.0.0:*    users:(("node",pid=2498098,fd=32))                                                                                                                                                                                                                        
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:716:LISTEN 0      511        127.0.0.1:9080       0.0.0.0:*    users:(("node",pid=2497949,fd=32))                                                                                                                                                                                                                        
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:717:LISTEN 0      5          127.0.0.1:9083       0.0.0.0:*    users:(("python3",pid=2978616,fd=3))                                                                                                                                                                                                                      
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:718:LISTEN 0      5          127.0.0.1:9082       0.0.0.0:*    users:(("python3",pid=2978622,fd=3))                                                                                                                                                                                                                      
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:719:LISTEN 0      5          127.0.0.1:9085       0.0.0.0:*    users:(("python3",pid=2978623,fd=3))                                                                                                                                                                                                                      
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:720:LISTEN 0      5          127.0.0.1:9084       0.0.0.0:*    users:(("python3",pid=2978617,fd=3))                                                                                                                                                                                                                      
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:721:LISTEN 0      5          127.0.0.1:9087       0.0.0.0:*    users:(("python3",pid=2978625,fd=3))                                                                                                                                                                                                                      
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:722:LISTEN 0      5          127.0.0.1:9086       0.0.0.0:*    users:(("python3",pid=2978624,fd=3))                                                                                                                                                                                                                      
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:723:LISTEN 0      511        127.0.0.1:9024       0.0.0.0:*    users:(("node",pid=2497888,fd=32))                                                                                                                                                                                                                        
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:724:LISTEN 0      511        127.0.0.1:9027       0.0.0.0:*    users:(("node",pid=2498041,fd=32))                                                                                                                                                                                                                        
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:725:LISTEN 0      511        127.0.0.1:9029       0.0.0.0:*    users:(("node",pid=2498093,fd=32))                                                                                                                                                                                                                        
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:726:LISTEN 0      511        127.0.0.1:9028       0.0.0.0:*    users:(("node",pid=2498120,fd=32))                                                                                                                                                                                                                        
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:727:LISTEN 0      511        127.0.0.1:9031       0.0.0.0:*    users:(("node",pid=2497937,fd=32))                                                                                                                                                                                                                        
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:728:LISTEN 0      511        127.0.0.1:9030       0.0.0.0:*    users:(("node",pid=2497889,fd=32))                                                                                                                                                                                                                        
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:729:LISTEN 0      511        127.0.0.1:9033       0.0.0.0:*    users:(("node",pid=2498040,fd=32))                                                                                                                                                                                                                        
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:730:LISTEN 0      511        127.0.0.1:9034       0.0.0.0:*    users:(("node",pid=2498121,fd=32))                                                                                                                                                                                                                        
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:731:LISTEN 0      511        127.0.0.1:9041       0.0.0.0:*    users:(("node",pid=2498156,fd=32))                                                                                                                                                                                                                        
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:732:LISTEN 0      511        127.0.0.1:9044       0.0.0.0:*    users:(("node",pid=2498025,fd=32))                                                                                                                                                                                                                        
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:733:LISTEN 0      5          127.0.0.1:9047       0.0.0.0:*    users:(("python3",pid=2978595,fd=3))                                                                                                                                                                                                                      
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:734:LISTEN 0      511        127.0.0.1:9001       0.0.0.0:*    users:(("node",pid=2498048,fd=32))                                                                                                                                                                                                                        
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:735:LISTEN 0      5          127.0.0.1:9002       0.0.0.0:*    users:(("python3",pid=2978585,fd=3))                                                                                                                                                                                                                      
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:736:LISTEN 0      511        127.0.0.1:9017       0.0.0.0:*    users:(("node",pid=2497900,fd=32))                                                                                                                                                                                                                        
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:737:LISTEN 0      511        127.0.0.1:9019       0.0.0.0:*    users:(("node",pid=2498152,fd=32))                                                                                                                                                                                                                        
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:738:LISTEN 0      511        127.0.0.1:9021       0.0.0.0:*    users:(("node",pid=2498162,fd=32))                                                                                                                                                                                                                        
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:739:LISTEN 0      511        127.0.0.1:9020       0.0.0.0:*    users:(("node",pid=2498163,fd=32))                                                                                                                                                                                                                        
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:740:LISTEN 0      511        127.0.0.1:9023       0.0.0.0:*    users:(("node",pid=2497902,fd=32))                                                                                                                                                                                                                        
+/home/nawaf511/empire-core-new/project-detection-report-20260801T162640Z.txt:741:LISTEN 0      511        127.0.0.1:9022       0.0.0.0:*    users:(("node",pid=2497947,fd=32))                                                                                                                                                                                                                        
+/home/nawaf511/empire-core-new/var/runtime/NDSP_PUBLIC_BETA_LAUNCH_STATUS_V38.json:28:  "completed_decisions": {
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/911bc202e3cf82e781995d47.json:524:      "publishable_completed_decision": false,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/911bc202e3cf82e781995d47.json:1079:      "capability_operational_ready": 28,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/911bc202e3cf82e781995d47.json:1083:      "capability_ready_verified": 19,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/911bc202e3cf82e781995d47.json:1161:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/911bc202e3cf82e781995d47.json:1185:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/911bc202e3cf82e781995d47.json:1209:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/911bc202e3cf82e781995d47.json:1237:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/911bc202e3cf82e781995d47.json:1238:        "runtime_binding": "live response passed public health and live-price binding gates",
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/911bc202e3cf82e781995d47.json:1264:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/911bc202e3cf82e781995d47.json:1290:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/911bc202e3cf82e781995d47.json:1318:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/911bc202e3cf82e781995d47.json:1344:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/911bc202e3cf82e781995d47.json:1371:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/911bc202e3cf82e781995d47.json:1397:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/911bc202e3cf82e781995d47.json:1423:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/911bc202e3cf82e781995d47.json:1451:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/911bc202e3cf82e781995d47.json:1475:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/911bc202e3cf82e781995d47.json:1502:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/911bc202e3cf82e781995d47.json:1530:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/911bc202e3cf82e781995d47.json:1556:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/911bc202e3cf82e781995d47.json:1582:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/911bc202e3cf82e781995d47.json:1609:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/911bc202e3cf82e781995d47.json:1636:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/911bc202e3cf82e781995d47.json:1663:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/911bc202e3cf82e781995d47.json:1687:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/911bc202e3cf82e781995d47.json:1713:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/911bc202e3cf82e781995d47.json:1738:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/911bc202e3cf82e781995d47.json:1764:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/911bc202e3cf82e781995d47.json:1788:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/911bc202e3cf82e781995d47.json:1812:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/911bc202e3cf82e781995d47.json:1839:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/911bc202e3cf82e781995d47.json:1866:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ec3ea17e6ec6bb9cc777cd4d.json:524:      "publishable_completed_decision": false,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ec3ea17e6ec6bb9cc777cd4d.json:1079:      "capability_operational_ready": 28,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ec3ea17e6ec6bb9cc777cd4d.json:1083:      "capability_ready_verified": 19,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ec3ea17e6ec6bb9cc777cd4d.json:1161:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ec3ea17e6ec6bb9cc777cd4d.json:1185:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ec3ea17e6ec6bb9cc777cd4d.json:1209:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ec3ea17e6ec6bb9cc777cd4d.json:1237:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ec3ea17e6ec6bb9cc777cd4d.json:1238:        "runtime_binding": "live response passed public health and live-price binding gates",
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ec3ea17e6ec6bb9cc777cd4d.json:1264:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ec3ea17e6ec6bb9cc777cd4d.json:1290:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ec3ea17e6ec6bb9cc777cd4d.json:1318:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ec3ea17e6ec6bb9cc777cd4d.json:1344:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ec3ea17e6ec6bb9cc777cd4d.json:1371:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ec3ea17e6ec6bb9cc777cd4d.json:1397:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ec3ea17e6ec6bb9cc777cd4d.json:1423:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ec3ea17e6ec6bb9cc777cd4d.json:1451:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ec3ea17e6ec6bb9cc777cd4d.json:1475:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ec3ea17e6ec6bb9cc777cd4d.json:1502:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ec3ea17e6ec6bb9cc777cd4d.json:1530:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ec3ea17e6ec6bb9cc777cd4d.json:1556:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ec3ea17e6ec6bb9cc777cd4d.json:1582:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ec3ea17e6ec6bb9cc777cd4d.json:1609:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ec3ea17e6ec6bb9cc777cd4d.json:1636:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ec3ea17e6ec6bb9cc777cd4d.json:1663:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ec3ea17e6ec6bb9cc777cd4d.json:1687:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ec3ea17e6ec6bb9cc777cd4d.json:1713:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ec3ea17e6ec6bb9cc777cd4d.json:1738:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ec3ea17e6ec6bb9cc777cd4d.json:1764:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ec3ea17e6ec6bb9cc777cd4d.json:1788:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ec3ea17e6ec6bb9cc777cd4d.json:1812:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ec3ea17e6ec6bb9cc777cd4d.json:1839:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ec3ea17e6ec6bb9cc777cd4d.json:1866:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/fa7394b04bde1b745f7fb356.json:589:      "publishable_completed_decision": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/fa7394b04bde1b745f7fb356.json:1156:      "capability_operational_ready": 28,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/fa7394b04bde1b745f7fb356.json:1160:      "capability_ready_verified": 19,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/fa7394b04bde1b745f7fb356.json:1253:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/fa7394b04bde1b745f7fb356.json:1277:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/fa7394b04bde1b745f7fb356.json:1301:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/fa7394b04bde1b745f7fb356.json:1329:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/fa7394b04bde1b745f7fb356.json:1330:        "runtime_binding": "live response passed public health and live-price binding gates",
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/fa7394b04bde1b745f7fb356.json:1356:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/fa7394b04bde1b745f7fb356.json:1382:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/fa7394b04bde1b745f7fb356.json:1410:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/fa7394b04bde1b745f7fb356.json:1436:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/fa7394b04bde1b745f7fb356.json:1463:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/fa7394b04bde1b745f7fb356.json:1489:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/fa7394b04bde1b745f7fb356.json:1515:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/fa7394b04bde1b745f7fb356.json:1543:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/fa7394b04bde1b745f7fb356.json:1567:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/fa7394b04bde1b745f7fb356.json:1594:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/fa7394b04bde1b745f7fb356.json:1622:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/fa7394b04bde1b745f7fb356.json:1648:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/fa7394b04bde1b745f7fb356.json:1674:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/fa7394b04bde1b745f7fb356.json:1701:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/fa7394b04bde1b745f7fb356.json:1728:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/fa7394b04bde1b745f7fb356.json:1755:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/fa7394b04bde1b745f7fb356.json:1779:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/fa7394b04bde1b745f7fb356.json:1805:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/fa7394b04bde1b745f7fb356.json:1830:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/fa7394b04bde1b745f7fb356.json:1856:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/fa7394b04bde1b745f7fb356.json:1880:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/fa7394b04bde1b745f7fb356.json:1904:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/fa7394b04bde1b745f7fb356.json:1931:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/fa7394b04bde1b745f7fb356.json:1958:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ad1717f36fdc843801451c5a.json:521:      "publishable_completed_decision": false,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ad1717f36fdc843801451c5a.json:1075:      "capability_operational_ready": 28,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ad1717f36fdc843801451c5a.json:1079:      "capability_ready_verified": 19,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ad1717f36fdc843801451c5a.json:1157:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ad1717f36fdc843801451c5a.json:1181:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ad1717f36fdc843801451c5a.json:1205:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ad1717f36fdc843801451c5a.json:1233:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ad1717f36fdc843801451c5a.json:1234:        "runtime_binding": "live response passed public health and live-price binding gates",
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ad1717f36fdc843801451c5a.json:1260:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ad1717f36fdc843801451c5a.json:1286:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ad1717f36fdc843801451c5a.json:1314:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ad1717f36fdc843801451c5a.json:1340:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ad1717f36fdc843801451c5a.json:1367:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ad1717f36fdc843801451c5a.json:1393:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ad1717f36fdc843801451c5a.json:1419:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ad1717f36fdc843801451c5a.json:1447:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ad1717f36fdc843801451c5a.json:1471:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ad1717f36fdc843801451c5a.json:1498:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ad1717f36fdc843801451c5a.json:1526:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ad1717f36fdc843801451c5a.json:1552:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ad1717f36fdc843801451c5a.json:1578:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ad1717f36fdc843801451c5a.json:1605:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ad1717f36fdc843801451c5a.json:1632:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ad1717f36fdc843801451c5a.json:1659:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ad1717f36fdc843801451c5a.json:1683:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ad1717f36fdc843801451c5a.json:1709:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ad1717f36fdc843801451c5a.json:1734:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ad1717f36fdc843801451c5a.json:1760:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ad1717f36fdc843801451c5a.json:1784:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ad1717f36fdc843801451c5a.json:1808:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ad1717f36fdc843801451c5a.json:1835:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ad1717f36fdc843801451c5a.json:1862:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5a36413089f9c9c43b8aad9f.json:521:      "publishable_completed_decision": false,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5a36413089f9c9c43b8aad9f.json:1075:      "capability_operational_ready": 28,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5a36413089f9c9c43b8aad9f.json:1079:      "capability_ready_verified": 19,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5a36413089f9c9c43b8aad9f.json:1157:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5a36413089f9c9c43b8aad9f.json:1181:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5a36413089f9c9c43b8aad9f.json:1205:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5a36413089f9c9c43b8aad9f.json:1233:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5a36413089f9c9c43b8aad9f.json:1234:        "runtime_binding": "live response passed public health and live-price binding gates",
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5a36413089f9c9c43b8aad9f.json:1260:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5a36413089f9c9c43b8aad9f.json:1286:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5a36413089f9c9c43b8aad9f.json:1314:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5a36413089f9c9c43b8aad9f.json:1340:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5a36413089f9c9c43b8aad9f.json:1367:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5a36413089f9c9c43b8aad9f.json:1393:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5a36413089f9c9c43b8aad9f.json:1419:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5a36413089f9c9c43b8aad9f.json:1447:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5a36413089f9c9c43b8aad9f.json:1471:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5a36413089f9c9c43b8aad9f.json:1498:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5a36413089f9c9c43b8aad9f.json:1526:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5a36413089f9c9c43b8aad9f.json:1552:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5a36413089f9c9c43b8aad9f.json:1578:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5a36413089f9c9c43b8aad9f.json:1605:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5a36413089f9c9c43b8aad9f.json:1632:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5a36413089f9c9c43b8aad9f.json:1659:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5a36413089f9c9c43b8aad9f.json:1683:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5a36413089f9c9c43b8aad9f.json:1709:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5a36413089f9c9c43b8aad9f.json:1734:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5a36413089f9c9c43b8aad9f.json:1760:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5a36413089f9c9c43b8aad9f.json:1784:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5a36413089f9c9c43b8aad9f.json:1808:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5a36413089f9c9c43b8aad9f.json:1835:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5a36413089f9c9c43b8aad9f.json:1862:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4f0c0b6fa25b0c140adbd37d.json:524:      "publishable_completed_decision": false,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4f0c0b6fa25b0c140adbd37d.json:1079:      "capability_operational_ready": 28,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4f0c0b6fa25b0c140adbd37d.json:1083:      "capability_ready_verified": 19,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4f0c0b6fa25b0c140adbd37d.json:1161:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4f0c0b6fa25b0c140adbd37d.json:1185:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4f0c0b6fa25b0c140adbd37d.json:1209:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4f0c0b6fa25b0c140adbd37d.json:1237:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4f0c0b6fa25b0c140adbd37d.json:1238:        "runtime_binding": "live response passed public health and live-price binding gates",
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4f0c0b6fa25b0c140adbd37d.json:1264:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4f0c0b6fa25b0c140adbd37d.json:1290:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4f0c0b6fa25b0c140adbd37d.json:1318:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4f0c0b6fa25b0c140adbd37d.json:1344:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4f0c0b6fa25b0c140adbd37d.json:1371:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4f0c0b6fa25b0c140adbd37d.json:1397:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4f0c0b6fa25b0c140adbd37d.json:1423:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4f0c0b6fa25b0c140adbd37d.json:1451:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4f0c0b6fa25b0c140adbd37d.json:1475:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4f0c0b6fa25b0c140adbd37d.json:1502:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4f0c0b6fa25b0c140adbd37d.json:1530:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4f0c0b6fa25b0c140adbd37d.json:1556:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4f0c0b6fa25b0c140adbd37d.json:1582:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4f0c0b6fa25b0c140adbd37d.json:1609:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4f0c0b6fa25b0c140adbd37d.json:1636:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4f0c0b6fa25b0c140adbd37d.json:1663:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4f0c0b6fa25b0c140adbd37d.json:1687:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4f0c0b6fa25b0c140adbd37d.json:1713:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4f0c0b6fa25b0c140adbd37d.json:1738:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4f0c0b6fa25b0c140adbd37d.json:1764:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4f0c0b6fa25b0c140adbd37d.json:1788:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4f0c0b6fa25b0c140adbd37d.json:1812:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4f0c0b6fa25b0c140adbd37d.json:1839:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4f0c0b6fa25b0c140adbd37d.json:1866:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/e7bbbcd4cdf497ad3819258e.json:524:      "publishable_completed_decision": false,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/e7bbbcd4cdf497ad3819258e.json:1079:      "capability_operational_ready": 28,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/e7bbbcd4cdf497ad3819258e.json:1083:      "capability_ready_verified": 19,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/e7bbbcd4cdf497ad3819258e.json:1161:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/e7bbbcd4cdf497ad3819258e.json:1185:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/e7bbbcd4cdf497ad3819258e.json:1209:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/e7bbbcd4cdf497ad3819258e.json:1237:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/e7bbbcd4cdf497ad3819258e.json:1238:        "runtime_binding": "live response passed public health and live-price binding gates",
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/e7bbbcd4cdf497ad3819258e.json:1264:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/e7bbbcd4cdf497ad3819258e.json:1290:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/e7bbbcd4cdf497ad3819258e.json:1318:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/e7bbbcd4cdf497ad3819258e.json:1344:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/e7bbbcd4cdf497ad3819258e.json:1371:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/e7bbbcd4cdf497ad3819258e.json:1397:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/e7bbbcd4cdf497ad3819258e.json:1423:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/e7bbbcd4cdf497ad3819258e.json:1451:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/e7bbbcd4cdf497ad3819258e.json:1475:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/e7bbbcd4cdf497ad3819258e.json:1502:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/e7bbbcd4cdf497ad3819258e.json:1530:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/e7bbbcd4cdf497ad3819258e.json:1556:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/e7bbbcd4cdf497ad3819258e.json:1582:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/e7bbbcd4cdf497ad3819258e.json:1609:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/e7bbbcd4cdf497ad3819258e.json:1636:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/e7bbbcd4cdf497ad3819258e.json:1663:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/e7bbbcd4cdf497ad3819258e.json:1687:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/e7bbbcd4cdf497ad3819258e.json:1713:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/e7bbbcd4cdf497ad3819258e.json:1738:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/e7bbbcd4cdf497ad3819258e.json:1764:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/e7bbbcd4cdf497ad3819258e.json:1788:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/e7bbbcd4cdf497ad3819258e.json:1812:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/e7bbbcd4cdf497ad3819258e.json:1839:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/e7bbbcd4cdf497ad3819258e.json:1866:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ee28312b880a7b045cc834fe.json:521:      "publishable_completed_decision": false,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ee28312b880a7b045cc834fe.json:1075:      "capability_operational_ready": 28,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ee28312b880a7b045cc834fe.json:1079:      "capability_ready_verified": 19,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ee28312b880a7b045cc834fe.json:1157:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ee28312b880a7b045cc834fe.json:1181:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ee28312b880a7b045cc834fe.json:1205:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ee28312b880a7b045cc834fe.json:1233:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ee28312b880a7b045cc834fe.json:1234:        "runtime_binding": "live response passed public health and live-price binding gates",
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ee28312b880a7b045cc834fe.json:1260:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ee28312b880a7b045cc834fe.json:1286:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ee28312b880a7b045cc834fe.json:1314:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ee28312b880a7b045cc834fe.json:1340:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ee28312b880a7b045cc834fe.json:1367:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ee28312b880a7b045cc834fe.json:1393:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ee28312b880a7b045cc834fe.json:1419:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ee28312b880a7b045cc834fe.json:1447:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ee28312b880a7b045cc834fe.json:1471:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ee28312b880a7b045cc834fe.json:1498:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ee28312b880a7b045cc834fe.json:1526:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ee28312b880a7b045cc834fe.json:1552:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ee28312b880a7b045cc834fe.json:1578:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ee28312b880a7b045cc834fe.json:1605:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ee28312b880a7b045cc834fe.json:1632:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ee28312b880a7b045cc834fe.json:1659:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ee28312b880a7b045cc834fe.json:1683:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ee28312b880a7b045cc834fe.json:1709:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ee28312b880a7b045cc834fe.json:1734:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ee28312b880a7b045cc834fe.json:1760:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ee28312b880a7b045cc834fe.json:1784:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ee28312b880a7b045cc834fe.json:1808:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ee28312b880a7b045cc834fe.json:1835:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ee28312b880a7b045cc834fe.json:1862:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/87eb5c0629119da5731b5803.json:521:      "publishable_completed_decision": false,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/87eb5c0629119da5731b5803.json:1075:      "capability_operational_ready": 28,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/87eb5c0629119da5731b5803.json:1079:      "capability_ready_verified": 19,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/87eb5c0629119da5731b5803.json:1157:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/87eb5c0629119da5731b5803.json:1181:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/87eb5c0629119da5731b5803.json:1205:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/87eb5c0629119da5731b5803.json:1233:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/87eb5c0629119da5731b5803.json:1234:        "runtime_binding": "live response passed public health and live-price binding gates",
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/87eb5c0629119da5731b5803.json:1260:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/87eb5c0629119da5731b5803.json:1286:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/87eb5c0629119da5731b5803.json:1314:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/87eb5c0629119da5731b5803.json:1340:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/87eb5c0629119da5731b5803.json:1367:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/87eb5c0629119da5731b5803.json:1393:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/87eb5c0629119da5731b5803.json:1419:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/87eb5c0629119da5731b5803.json:1447:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/87eb5c0629119da5731b5803.json:1471:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/87eb5c0629119da5731b5803.json:1498:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/87eb5c0629119da5731b5803.json:1526:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/87eb5c0629119da5731b5803.json:1552:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/87eb5c0629119da5731b5803.json:1578:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/87eb5c0629119da5731b5803.json:1605:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/87eb5c0629119da5731b5803.json:1632:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/87eb5c0629119da5731b5803.json:1659:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/87eb5c0629119da5731b5803.json:1683:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/87eb5c0629119da5731b5803.json:1709:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/87eb5c0629119da5731b5803.json:1734:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/87eb5c0629119da5731b5803.json:1760:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/87eb5c0629119da5731b5803.json:1784:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/87eb5c0629119da5731b5803.json:1808:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/87eb5c0629119da5731b5803.json:1835:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/87eb5c0629119da5731b5803.json:1862:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/d3d6aba121cad1ec92e9791f.json:521:      "publishable_completed_decision": false,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/d3d6aba121cad1ec92e9791f.json:1075:      "capability_operational_ready": 28,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/d3d6aba121cad1ec92e9791f.json:1079:      "capability_ready_verified": 19,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/d3d6aba121cad1ec92e9791f.json:1157:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/d3d6aba121cad1ec92e9791f.json:1181:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/d3d6aba121cad1ec92e9791f.json:1205:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/d3d6aba121cad1ec92e9791f.json:1233:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/d3d6aba121cad1ec92e9791f.json:1234:        "runtime_binding": "live response passed public health and live-price binding gates",
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/d3d6aba121cad1ec92e9791f.json:1260:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/d3d6aba121cad1ec92e9791f.json:1286:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/d3d6aba121cad1ec92e9791f.json:1314:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/d3d6aba121cad1ec92e9791f.json:1340:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/d3d6aba121cad1ec92e9791f.json:1367:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/d3d6aba121cad1ec92e9791f.json:1393:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/d3d6aba121cad1ec92e9791f.json:1419:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/d3d6aba121cad1ec92e9791f.json:1447:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/d3d6aba121cad1ec92e9791f.json:1471:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/d3d6aba121cad1ec92e9791f.json:1498:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/d3d6aba121cad1ec92e9791f.json:1526:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/d3d6aba121cad1ec92e9791f.json:1552:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/d3d6aba121cad1ec92e9791f.json:1578:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/d3d6aba121cad1ec92e9791f.json:1605:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/d3d6aba121cad1ec92e9791f.json:1632:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/d3d6aba121cad1ec92e9791f.json:1659:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/d3d6aba121cad1ec92e9791f.json:1683:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/d3d6aba121cad1ec92e9791f.json:1709:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/d3d6aba121cad1ec92e9791f.json:1734:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/d3d6aba121cad1ec92e9791f.json:1760:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/d3d6aba121cad1ec92e9791f.json:1784:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/d3d6aba121cad1ec92e9791f.json:1808:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/d3d6aba121cad1ec92e9791f.json:1835:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/d3d6aba121cad1ec92e9791f.json:1862:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/9ba2fcffe149adfa6dcd76f7.json:524:      "publishable_completed_decision": false,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/9ba2fcffe149adfa6dcd76f7.json:1079:      "capability_operational_ready": 28,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/9ba2fcffe149adfa6dcd76f7.json:1083:      "capability_ready_verified": 19,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/9ba2fcffe149adfa6dcd76f7.json:1161:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/9ba2fcffe149adfa6dcd76f7.json:1185:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/9ba2fcffe149adfa6dcd76f7.json:1209:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/9ba2fcffe149adfa6dcd76f7.json:1237:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/9ba2fcffe149adfa6dcd76f7.json:1238:        "runtime_binding": "live response passed public health and live-price binding gates",
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/9ba2fcffe149adfa6dcd76f7.json:1264:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/9ba2fcffe149adfa6dcd76f7.json:1290:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/9ba2fcffe149adfa6dcd76f7.json:1318:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/9ba2fcffe149adfa6dcd76f7.json:1344:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/9ba2fcffe149adfa6dcd76f7.json:1371:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/9ba2fcffe149adfa6dcd76f7.json:1397:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/9ba2fcffe149adfa6dcd76f7.json:1423:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/9ba2fcffe149adfa6dcd76f7.json:1451:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/9ba2fcffe149adfa6dcd76f7.json:1475:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/9ba2fcffe149adfa6dcd76f7.json:1502:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/9ba2fcffe149adfa6dcd76f7.json:1530:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/9ba2fcffe149adfa6dcd76f7.json:1556:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/9ba2fcffe149adfa6dcd76f7.json:1582:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/9ba2fcffe149adfa6dcd76f7.json:1609:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/9ba2fcffe149adfa6dcd76f7.json:1636:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/9ba2fcffe149adfa6dcd76f7.json:1663:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/9ba2fcffe149adfa6dcd76f7.json:1687:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/9ba2fcffe149adfa6dcd76f7.json:1713:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/9ba2fcffe149adfa6dcd76f7.json:1738:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/9ba2fcffe149adfa6dcd76f7.json:1764:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/9ba2fcffe149adfa6dcd76f7.json:1788:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/9ba2fcffe149adfa6dcd76f7.json:1812:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/9ba2fcffe149adfa6dcd76f7.json:1839:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/9ba2fcffe149adfa6dcd76f7.json:1866:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/27fcb76ce95b8b7d93bb5194.json:521:      "publishable_completed_decision": false,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/27fcb76ce95b8b7d93bb5194.json:1075:      "capability_operational_ready": 28,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/27fcb76ce95b8b7d93bb5194.json:1079:      "capability_ready_verified": 19,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/27fcb76ce95b8b7d93bb5194.json:1157:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/27fcb76ce95b8b7d93bb5194.json:1181:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/27fcb76ce95b8b7d93bb5194.json:1205:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/27fcb76ce95b8b7d93bb5194.json:1233:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/27fcb76ce95b8b7d93bb5194.json:1234:        "runtime_binding": "live response passed public health and live-price binding gates",
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/27fcb76ce95b8b7d93bb5194.json:1260:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/27fcb76ce95b8b7d93bb5194.json:1286:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/27fcb76ce95b8b7d93bb5194.json:1314:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/27fcb76ce95b8b7d93bb5194.json:1340:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/27fcb76ce95b8b7d93bb5194.json:1367:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/27fcb76ce95b8b7d93bb5194.json:1393:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/27fcb76ce95b8b7d93bb5194.json:1419:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/27fcb76ce95b8b7d93bb5194.json:1447:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/27fcb76ce95b8b7d93bb5194.json:1471:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/27fcb76ce95b8b7d93bb5194.json:1498:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/27fcb76ce95b8b7d93bb5194.json:1526:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/27fcb76ce95b8b7d93bb5194.json:1552:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/27fcb76ce95b8b7d93bb5194.json:1578:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/27fcb76ce95b8b7d93bb5194.json:1605:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/27fcb76ce95b8b7d93bb5194.json:1632:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/27fcb76ce95b8b7d93bb5194.json:1659:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/27fcb76ce95b8b7d93bb5194.json:1683:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/27fcb76ce95b8b7d93bb5194.json:1709:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/27fcb76ce95b8b7d93bb5194.json:1734:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/27fcb76ce95b8b7d93bb5194.json:1760:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/27fcb76ce95b8b7d93bb5194.json:1784:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/27fcb76ce95b8b7d93bb5194.json:1808:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/27fcb76ce95b8b7d93bb5194.json:1835:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/27fcb76ce95b8b7d93bb5194.json:1862:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/6263a719cfafb3a9b3f84ca9.json:521:      "publishable_completed_decision": false,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/6263a719cfafb3a9b3f84ca9.json:1075:      "capability_operational_ready": 28,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/6263a719cfafb3a9b3f84ca9.json:1079:      "capability_ready_verified": 19,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/6263a719cfafb3a9b3f84ca9.json:1157:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/6263a719cfafb3a9b3f84ca9.json:1181:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/6263a719cfafb3a9b3f84ca9.json:1205:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/6263a719cfafb3a9b3f84ca9.json:1233:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/6263a719cfafb3a9b3f84ca9.json:1234:        "runtime_binding": "live response passed public health and live-price binding gates",
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/6263a719cfafb3a9b3f84ca9.json:1260:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/6263a719cfafb3a9b3f84ca9.json:1286:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/6263a719cfafb3a9b3f84ca9.json:1314:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/6263a719cfafb3a9b3f84ca9.json:1340:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/6263a719cfafb3a9b3f84ca9.json:1367:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/6263a719cfafb3a9b3f84ca9.json:1393:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/6263a719cfafb3a9b3f84ca9.json:1419:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/6263a719cfafb3a9b3f84ca9.json:1447:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/6263a719cfafb3a9b3f84ca9.json:1471:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/6263a719cfafb3a9b3f84ca9.json:1498:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/6263a719cfafb3a9b3f84ca9.json:1526:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/6263a719cfafb3a9b3f84ca9.json:1552:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/6263a719cfafb3a9b3f84ca9.json:1578:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/6263a719cfafb3a9b3f84ca9.json:1605:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/6263a719cfafb3a9b3f84ca9.json:1632:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/6263a719cfafb3a9b3f84ca9.json:1659:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/6263a719cfafb3a9b3f84ca9.json:1683:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/6263a719cfafb3a9b3f84ca9.json:1709:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/6263a719cfafb3a9b3f84ca9.json:1734:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/6263a719cfafb3a9b3f84ca9.json:1760:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/6263a719cfafb3a9b3f84ca9.json:1784:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/6263a719cfafb3a9b3f84ca9.json:1808:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/6263a719cfafb3a9b3f84ca9.json:1835:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/6263a719cfafb3a9b3f84ca9.json:1862:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5560487d91224aee05cf455f.json:524:      "publishable_completed_decision": false,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5560487d91224aee05cf455f.json:1079:      "capability_operational_ready": 28,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5560487d91224aee05cf455f.json:1083:      "capability_ready_verified": 19,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5560487d91224aee05cf455f.json:1161:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5560487d91224aee05cf455f.json:1185:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5560487d91224aee05cf455f.json:1209:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5560487d91224aee05cf455f.json:1237:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5560487d91224aee05cf455f.json:1238:        "runtime_binding": "live response passed public health and live-price binding gates",
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5560487d91224aee05cf455f.json:1264:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5560487d91224aee05cf455f.json:1290:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5560487d91224aee05cf455f.json:1318:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5560487d91224aee05cf455f.json:1344:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5560487d91224aee05cf455f.json:1371:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5560487d91224aee05cf455f.json:1397:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5560487d91224aee05cf455f.json:1423:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5560487d91224aee05cf455f.json:1451:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5560487d91224aee05cf455f.json:1475:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5560487d91224aee05cf455f.json:1502:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5560487d91224aee05cf455f.json:1530:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5560487d91224aee05cf455f.json:1556:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5560487d91224aee05cf455f.json:1582:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5560487d91224aee05cf455f.json:1609:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5560487d91224aee05cf455f.json:1636:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5560487d91224aee05cf455f.json:1663:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5560487d91224aee05cf455f.json:1687:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5560487d91224aee05cf455f.json:1713:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5560487d91224aee05cf455f.json:1738:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5560487d91224aee05cf455f.json:1764:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5560487d91224aee05cf455f.json:1788:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5560487d91224aee05cf455f.json:1812:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5560487d91224aee05cf455f.json:1839:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/5560487d91224aee05cf455f.json:1866:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/adfbe3859e15cb2751ede05e.json:521:      "publishable_completed_decision": false,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/adfbe3859e15cb2751ede05e.json:1075:      "capability_operational_ready": 28,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/adfbe3859e15cb2751ede05e.json:1079:      "capability_ready_verified": 19,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/adfbe3859e15cb2751ede05e.json:1157:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/adfbe3859e15cb2751ede05e.json:1181:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/adfbe3859e15cb2751ede05e.json:1205:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/adfbe3859e15cb2751ede05e.json:1233:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/adfbe3859e15cb2751ede05e.json:1234:        "runtime_binding": "live response passed public health and live-price binding gates",
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/adfbe3859e15cb2751ede05e.json:1260:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/adfbe3859e15cb2751ede05e.json:1286:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/adfbe3859e15cb2751ede05e.json:1314:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/adfbe3859e15cb2751ede05e.json:1340:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/adfbe3859e15cb2751ede05e.json:1367:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/adfbe3859e15cb2751ede05e.json:1393:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/adfbe3859e15cb2751ede05e.json:1419:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/adfbe3859e15cb2751ede05e.json:1447:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/adfbe3859e15cb2751ede05e.json:1471:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/adfbe3859e15cb2751ede05e.json:1498:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/adfbe3859e15cb2751ede05e.json:1526:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/adfbe3859e15cb2751ede05e.json:1552:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/adfbe3859e15cb2751ede05e.json:1578:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/adfbe3859e15cb2751ede05e.json:1605:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/adfbe3859e15cb2751ede05e.json:1632:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/adfbe3859e15cb2751ede05e.json:1659:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/adfbe3859e15cb2751ede05e.json:1683:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/adfbe3859e15cb2751ede05e.json:1709:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/adfbe3859e15cb2751ede05e.json:1734:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/adfbe3859e15cb2751ede05e.json:1760:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/adfbe3859e15cb2751ede05e.json:1784:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/adfbe3859e15cb2751ede05e.json:1808:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/adfbe3859e15cb2751ede05e.json:1835:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/adfbe3859e15cb2751ede05e.json:1862:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4260911755d0336d5fc1900c.json:521:      "publishable_completed_decision": false,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4260911755d0336d5fc1900c.json:1075:      "capability_operational_ready": 28,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4260911755d0336d5fc1900c.json:1079:      "capability_ready_verified": 19,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4260911755d0336d5fc1900c.json:1157:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4260911755d0336d5fc1900c.json:1181:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4260911755d0336d5fc1900c.json:1205:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4260911755d0336d5fc1900c.json:1233:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4260911755d0336d5fc1900c.json:1234:        "runtime_binding": "live response passed public health and live-price binding gates",
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4260911755d0336d5fc1900c.json:1260:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4260911755d0336d5fc1900c.json:1286:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4260911755d0336d5fc1900c.json:1314:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4260911755d0336d5fc1900c.json:1340:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4260911755d0336d5fc1900c.json:1367:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4260911755d0336d5fc1900c.json:1393:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4260911755d0336d5fc1900c.json:1419:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4260911755d0336d5fc1900c.json:1447:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4260911755d0336d5fc1900c.json:1471:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4260911755d0336d5fc1900c.json:1498:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4260911755d0336d5fc1900c.json:1526:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4260911755d0336d5fc1900c.json:1552:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4260911755d0336d5fc1900c.json:1578:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4260911755d0336d5fc1900c.json:1605:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4260911755d0336d5fc1900c.json:1632:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4260911755d0336d5fc1900c.json:1659:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4260911755d0336d5fc1900c.json:1683:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4260911755d0336d5fc1900c.json:1709:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4260911755d0336d5fc1900c.json:1734:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4260911755d0336d5fc1900c.json:1760:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4260911755d0336d5fc1900c.json:1784:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4260911755d0336d5fc1900c.json:1808:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4260911755d0336d5fc1900c.json:1835:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/4260911755d0336d5fc1900c.json:1862:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ea4d7d985e78be6079685ecd.json:521:      "publishable_completed_decision": false,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ea4d7d985e78be6079685ecd.json:1075:      "capability_operational_ready": 28,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ea4d7d985e78be6079685ecd.json:1079:      "capability_ready_verified": 19,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ea4d7d985e78be6079685ecd.json:1157:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ea4d7d985e78be6079685ecd.json:1181:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ea4d7d985e78be6079685ecd.json:1205:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ea4d7d985e78be6079685ecd.json:1233:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ea4d7d985e78be6079685ecd.json:1234:        "runtime_binding": "live response passed public health and live-price binding gates",
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ea4d7d985e78be6079685ecd.json:1260:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ea4d7d985e78be6079685ecd.json:1286:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ea4d7d985e78be6079685ecd.json:1314:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ea4d7d985e78be6079685ecd.json:1340:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ea4d7d985e78be6079685ecd.json:1367:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ea4d7d985e78be6079685ecd.json:1393:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ea4d7d985e78be6079685ecd.json:1419:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ea4d7d985e78be6079685ecd.json:1447:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ea4d7d985e78be6079685ecd.json:1471:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ea4d7d985e78be6079685ecd.json:1498:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ea4d7d985e78be6079685ecd.json:1526:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ea4d7d985e78be6079685ecd.json:1552:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ea4d7d985e78be6079685ecd.json:1578:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ea4d7d985e78be6079685ecd.json:1605:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ea4d7d985e78be6079685ecd.json:1632:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ea4d7d985e78be6079685ecd.json:1659:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ea4d7d985e78be6079685ecd.json:1683:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ea4d7d985e78be6079685ecd.json:1709:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ea4d7d985e78be6079685ecd.json:1734:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ea4d7d985e78be6079685ecd.json:1760:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ea4d7d985e78be6079685ecd.json:1784:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ea4d7d985e78be6079685ecd.json:1808:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ea4d7d985e78be6079685ecd.json:1835:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/ea4d7d985e78be6079685ecd.json:1862:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/a37748af5ebb0ef10a80f9fb.json:524:      "publishable_completed_decision": false,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/a37748af5ebb0ef10a80f9fb.json:1079:      "capability_operational_ready": 28,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/a37748af5ebb0ef10a80f9fb.json:1083:      "capability_ready_verified": 19,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/a37748af5ebb0ef10a80f9fb.json:1161:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/a37748af5ebb0ef10a80f9fb.json:1185:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/a37748af5ebb0ef10a80f9fb.json:1209:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/a37748af5ebb0ef10a80f9fb.json:1237:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/a37748af5ebb0ef10a80f9fb.json:1238:        "runtime_binding": "live response passed public health and live-price binding gates",
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/a37748af5ebb0ef10a80f9fb.json:1264:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/a37748af5ebb0ef10a80f9fb.json:1290:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/a37748af5ebb0ef10a80f9fb.json:1318:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/a37748af5ebb0ef10a80f9fb.json:1344:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/a37748af5ebb0ef10a80f9fb.json:1371:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/a37748af5ebb0ef10a80f9fb.json:1397:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/a37748af5ebb0ef10a80f9fb.json:1423:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/a37748af5ebb0ef10a80f9fb.json:1451:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/a37748af5ebb0ef10a80f9fb.json:1475:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/a37748af5ebb0ef10a80f9fb.json:1502:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/a37748af5ebb0ef10a80f9fb.json:1530:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/a37748af5ebb0ef10a80f9fb.json:1556:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/a37748af5ebb0ef10a80f9fb.json:1582:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/a37748af5ebb0ef10a80f9fb.json:1609:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/a37748af5ebb0ef10a80f9fb.json:1636:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/a37748af5ebb0ef10a80f9fb.json:1663:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/a37748af5ebb0ef10a80f9fb.json:1687:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/a37748af5ebb0ef10a80f9fb.json:1713:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/a37748af5ebb0ef10a80f9fb.json:1738:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/a37748af5ebb0ef10a80f9fb.json:1764:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/a37748af5ebb0ef10a80f9fb.json:1788:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/a37748af5ebb0ef10a80f9fb.json:1812:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/a37748af5ebb0ef10a80f9fb.json:1839:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/a37748af5ebb0ef10a80f9fb.json:1866:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/166fdc212545e1b2fff20eb2.json:524:      "publishable_completed_decision": false,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/166fdc212545e1b2fff20eb2.json:1079:      "capability_operational_ready": 28,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/166fdc212545e1b2fff20eb2.json:1083:      "capability_ready_verified": 19,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/166fdc212545e1b2fff20eb2.json:1161:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/166fdc212545e1b2fff20eb2.json:1185:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/166fdc212545e1b2fff20eb2.json:1209:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/166fdc212545e1b2fff20eb2.json:1237:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/166fdc212545e1b2fff20eb2.json:1238:        "runtime_binding": "live response passed public health and live-price binding gates",
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/166fdc212545e1b2fff20eb2.json:1264:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/166fdc212545e1b2fff20eb2.json:1290:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/166fdc212545e1b2fff20eb2.json:1318:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/166fdc212545e1b2fff20eb2.json:1344:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/166fdc212545e1b2fff20eb2.json:1371:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/166fdc212545e1b2fff20eb2.json:1397:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/166fdc212545e1b2fff20eb2.json:1423:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/166fdc212545e1b2fff20eb2.json:1451:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/166fdc212545e1b2fff20eb2.json:1475:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/166fdc212545e1b2fff20eb2.json:1502:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/166fdc212545e1b2fff20eb2.json:1530:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/166fdc212545e1b2fff20eb2.json:1556:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/166fdc212545e1b2fff20eb2.json:1582:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/166fdc212545e1b2fff20eb2.json:1609:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/166fdc212545e1b2fff20eb2.json:1636:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/166fdc212545e1b2fff20eb2.json:1663:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/166fdc212545e1b2fff20eb2.json:1687:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/166fdc212545e1b2fff20eb2.json:1713:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/166fdc212545e1b2fff20eb2.json:1738:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/166fdc212545e1b2fff20eb2.json:1764:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/166fdc212545e1b2fff20eb2.json:1788:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/166fdc212545e1b2fff20eb2.json:1812:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/166fdc212545e1b2fff20eb2.json:1839:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/166fdc212545e1b2fff20eb2.json:1866:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/aaea890802544faef51204bb.json:524:      "publishable_completed_decision": false,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/aaea890802544faef51204bb.json:1079:      "capability_operational_ready": 28,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/aaea890802544faef51204bb.json:1083:      "capability_ready_verified": 19,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/aaea890802544faef51204bb.json:1161:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/aaea890802544faef51204bb.json:1185:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/aaea890802544faef51204bb.json:1209:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/aaea890802544faef51204bb.json:1237:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/aaea890802544faef51204bb.json:1238:        "runtime_binding": "live response passed public health and live-price binding gates",
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/aaea890802544faef51204bb.json:1264:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/aaea890802544faef51204bb.json:1290:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/aaea890802544faef51204bb.json:1318:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/aaea890802544faef51204bb.json:1344:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/aaea890802544faef51204bb.json:1371:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/aaea890802544faef51204bb.json:1397:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/aaea890802544faef51204bb.json:1423:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/aaea890802544faef51204bb.json:1451:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/aaea890802544faef51204bb.json:1475:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/aaea890802544faef51204bb.json:1502:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/aaea890802544faef51204bb.json:1530:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/aaea890802544faef51204bb.json:1556:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/aaea890802544faef51204bb.json:1582:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/aaea890802544faef51204bb.json:1609:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/aaea890802544faef51204bb.json:1636:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/aaea890802544faef51204bb.json:1663:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/aaea890802544faef51204bb.json:1687:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/aaea890802544faef51204bb.json:1713:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/aaea890802544faef51204bb.json:1738:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/aaea890802544faef51204bb.json:1764:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/aaea890802544faef51204bb.json:1788:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/aaea890802544faef51204bb.json:1812:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/aaea890802544faef51204bb.json:1839:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/aaea890802544faef51204bb.json:1866:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/49297af070ab66ca91891fc7.json:524:      "publishable_completed_decision": false,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/49297af070ab66ca91891fc7.json:1079:      "capability_operational_ready": 28,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/49297af070ab66ca91891fc7.json:1083:      "capability_ready_verified": 19,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/49297af070ab66ca91891fc7.json:1161:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/49297af070ab66ca91891fc7.json:1185:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/49297af070ab66ca91891fc7.json:1209:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/49297af070ab66ca91891fc7.json:1237:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/49297af070ab66ca91891fc7.json:1238:        "runtime_binding": "live response passed public health and live-price binding gates",
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/49297af070ab66ca91891fc7.json:1264:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/49297af070ab66ca91891fc7.json:1290:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/49297af070ab66ca91891fc7.json:1318:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/49297af070ab66ca91891fc7.json:1344:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/49297af070ab66ca91891fc7.json:1371:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/49297af070ab66ca91891fc7.json:1397:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/49297af070ab66ca91891fc7.json:1423:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/49297af070ab66ca91891fc7.json:1451:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/49297af070ab66ca91891fc7.json:1475:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/49297af070ab66ca91891fc7.json:1502:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/49297af070ab66ca91891fc7.json:1530:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/49297af070ab66ca91891fc7.json:1556:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/49297af070ab66ca91891fc7.json:1582:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/49297af070ab66ca91891fc7.json:1609:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/49297af070ab66ca91891fc7.json:1636:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/49297af070ab66ca91891fc7.json:1663:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/49297af070ab66ca91891fc7.json:1687:        "operational_ready": true,
+/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/raw/49297af070ab66ca91891fc7.json:1713:        "operational_ready": true,
+
+=== LISTENING DECISION PROCESSES ===
+
+ndsp-completed_decision.service PID=3019730
+LISTEN 0      511        127.0.0.1:9078       0.0.0.0:*    users:(("node",pid=3019730,fd=33))                                                                                                                                                                                             
+
+ndsp-decision-package-v1.service PID=1354
+LISTEN 0      2048       127.0.0.1:9061       0.0.0.0:*    users:(("uvicorn",pid=1354,fd=6))                                                                                                                                                                                              
+
+ndsp-decision_governance_core.service PID=3019784
+LISTEN 0      511        127.0.0.1:9079       0.0.0.0:*    users:(("node",pid=3019784,fd=32))                                                                                                                                                                                             
+
+ndsp-live-decision-quality.service PID=3019811
+LISTEN 0      2048       127.0.0.1:9057       0.0.0.0:*    users:(("python3",pid=3019811,fd=13))                                                                                                                                                                                          
+
+ndsp-platform-gateway.service PID=3019837
+LISTEN 0      511        127.0.0.1:9001       0.0.0.0:*    users:(("node",pid=3019837,fd=32))                                                                                                                                                                                             
+
+=== LOCAL HTTP PROBES ===
+200 127.0.0.1:9001/health {"ok":true,"service":"ndsp-platform-gateway","platform_backend_port":9001,"bot_backend_port":9002,"public_api_namespace":"/api","legacy_services_behind_gateway":[9017,9019,9020,9021]}
+404 127.0.0.1:9001/healthz {"ok":false,"error":"NOT_FOUND","service":"ndsp-platform-gateway","path":"/healthz"}
+404 127.0.0.1:9001/ready {"ok":false,"error":"NOT_FOUND","service":"ndsp-platform-gateway","path":"/ready"}
+200 127.0.0.1:9001/api/health {"ok":true,"service":"ndsp-platform-gateway","platform_backend_port":9001,"bot_backend_port":9002,"public_api_namespace":"/api","legacy_services_behind_gateway":[9017,9019,9020,9021]}
+404 127.0.0.1:9001/api/v1/health {"ok": false, "error": "NOT_FOUND", "path": "/api/v1/health", "service": "ndsp-platform-gateway-9002"}
+404 127.0.0.1:9001/    {"ok":false,"error":"NOT_FOUND","service":"ndsp-platform-gateway","path":"/"}
+404 127.0.0.1:9044/health {"ok":false,"error":"NOT_FOUND","public_safe":true}
+404 127.0.0.1:9044/healthz {"ok":false,"error":"NOT_FOUND","public_safe":true}
+404 127.0.0.1:9044/ready {"ok":false,"error":"NOT_FOUND","public_safe":true}
+404 127.0.0.1:9044/api/health {"ok":false,"error":"NOT_FOUND","public_safe":true}
+404 127.0.0.1:9044/api/v1/health {"ok":false,"error":"NOT_FOUND","public_safe":true}
+404 127.0.0.1:9044/    {"ok":false,"error":"NOT_FOUND","public_safe":true}
+200 127.0.0.1:9061/health {"ok":true,"service":"ndsp-decision-package-v1","port":9061}
+404 127.0.0.1:9061/healthz {"detail":"Not Found"}
+404 127.0.0.1:9061/ready {"detail":"Not Found"}
+404 127.0.0.1:9061/api/health {"detail":"Not Found"}
+404 127.0.0.1:9061/api/v1/health {"detail":"Not Found"}
+404 127.0.0.1:9061/    {"detail":"Not Found"}
+404 127.0.0.1:9076/health {"detail":"Not Found"}
+404 127.0.0.1:9076/healthz {"detail":"Not Found"}
+404 127.0.0.1:9076/ready {"detail":"Not Found"}
+404 127.0.0.1:9076/api/health {"detail":"Not Found"}
+404 127.0.0.1:9076/api/v1/health {"detail":"Not Found"}
+404 127.0.0.1:9076/    {"detail":"Not Found"}
+200 127.0.0.1:9082/health {"ok":true,"service":"ndsp-quality-live-nmp-wrapper","port":9082,"upstream":"http://127.0.0.1:9067","updated_at":"2026-08-06T08:32:33+00:00"}
+404 127.0.0.1:9082/healthz {"ok":false,"error":"NOT_FOUND","path":"/healthz"}
+404 127.0.0.1:9082/ready {"ok":false,"error":"NOT_FOUND","path":"/ready"}
+404 127.0.0.1:9082/api/health {"ok":false,"error":"NOT_FOUND","path":"/api/health"}
+404 127.0.0.1:9082/api/v1/health {"ok":false,"error":"NOT_FOUND","path":"/api/v1/health"}
+404 127.0.0.1:9082/    {"ok":false,"error":"NOT_FOUND","path":"/"}
+200 127.0.0.1:9088/health {"ok":true,"service":"ndsp-completed-decisions-history-v36","runtime_version":"ndsp-completed-decisions-history-v36.0.0","contract_version":"ndsp-completed-decisions-history-contract-v36","ledger_version":"ndsp-append-only-ledger-v36","stor
+404 127.0.0.1:9088/healthz {"ok":false,"error":"NOT_FOUND"}
+404 127.0.0.1:9088/ready {"ok":false,"error":"NOT_FOUND"}
+200 127.0.0.1:9088/api/health {"ok":true,"service":"ndsp-completed-decisions-history-v36","runtime_version":"ndsp-completed-decisions-history-v36.0.0","contract_version":"ndsp-completed-decisions-history-contract-v36","ledger_version":"ndsp-append-only-ledger-v36","stor
+404 127.0.0.1:9088/api/v1/health {"ok":false,"error":"NOT_FOUND"}
+404 127.0.0.1:9088/    {"ok":false,"error":"NOT_FOUND"}
+
+=== LATEST CONTRACT REGRESSION REPORT ===
+/home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_latest.md
+# NDSP_CONTRACT_REGRESSION_V1_1
+
+- Generated: `2026-08-06T08:29:24+00:00`
+- Failures: **70**
+- Warnings: **0**
+- baseline: `/home/nawaf511/.local/state/ndsp-contract-v1-1/baseline.json`
+- cases: `3`
+- contract: `NDSP_DUAL_SCENARIO_DATA_QUALITY_BACKEND_V1_1`
+
+
+## FAIL
+- **REQUIRED_PATH_REMOVED** — manual_02_127.0.0.1_9082_api/decision/quality-live: required schema path removed: /_ndsp_canonical_consumer.
+- **REQUIRED_PATH_REMOVED** — manual_02_127.0.0.1_9082_api/decision/quality-live: required schema path removed: /_ndsp_canonical_consumer/canonical_source.
+- **REQUIRED_PATH_REMOVED** — manual_02_127.0.0.1_9082_api/decision/quality-live: required schema path removed: /_ndsp_canonical_consumer/enabled.
+- **REQUIRED_PATH_REMOVED** — manual_02_127.0.0.1_9082_api/decision/quality-live: required schema path removed: /_ndsp_canonical_consumer/golden_engine.
+- **REQUIRED_PATH_REMOVED** — manual_02_127.0.0.1_9082_api/decision/quality-live: required schema path removed: /_ndsp_canonical_consumer/golden_reason_code.
+- **REQUIRED_PATH_REMOVED** — manual_02_127.0.0.1_9082_api/decision/quality-live: required schema path removed: /_ndsp_canonical_consumer/layer_orchestrator.
+- **REQUIRED_PATH_REMOVED** — manual_02_127.0.0.1_9082_api/decision/quality-live: required schema path removed: /_ndsp_canonical_consumer/nmp_engine.
+- **TYPE_CHANGED** — manual_02_127.0.0.1_9082_api/decision/quality-live: /allowed_public_outputs/commercial_score expected ['number'], got ['null'].
+- **TYPE_CHANGED** — manual_02_127.0.0.1_9082_api/decision/quality-live: /allowed_public_outputs/commercial_score_band expected ['string'], got ['null'].
+- **REQUIRED_PATH_REMOVED** — manual_02_127.0.0.1_9082_api/decision/quality-live: required schema path removed: /asset_managers_overall.
+- **REQUIRED_PATH_REMOVED** — manual_02_127.0.0.1_9082_api/decision/quality-live: required schema path removed: /asset_managers_overall_direction.
+- **REQUIRED_PATH_REMOVED** — manual_02_127.0.0.1_9082_api/decision/quality-live: required schema path removed: /asset_managers_weekly.
+- **REQUIRED_PATH_REMOVED** — manual_02_127.0.0.1_9082_api/decision/quality-live: required schema path removed: /asset_managers_weekly_direction.
+- **REQUIRED_PATH_REMOVED** — manual_02_127.0.0.1_9082_api/decision/quality-live: required schema path removed: /canonical_cot_directions.
+- **REQUIRED_PATH_REMOVED** — manual_02_127.0.0.1_9082_api/decision/quality-live: required schema path removed: /canonical_cot_directions/asset_managers_overall.
+- **REQUIRED_PATH_REMOVED** — manual_02_127.0.0.1_9082_api/decision/quality-live: required schema path removed: /canonical_cot_directions/asset_managers_weekly.
+- **REQUIRED_PATH_REMOVED** — manual_02_127.0.0.1_9082_api/decision/quality-live: required schema path removed: /canonical_cot_directions/leveraged_funds_weekly.
+- **TYPE_CHANGED** — manual_02_127.0.0.1_9082_api/decision/quality-live: /commercial_score/band expected ['string'], got ['null'].
+- **TYPE_CHANGED** — manual_02_127.0.0.1_9082_api/decision/quality-live: /commercial_score/score expected ['number'], got ['null'].
+- **REQUIRED_PATH_REMOVED** — manual_02_127.0.0.1_9082_api/decision/quality-live: required schema path removed: /golden_alignment/governing_inputs_complete.
+- **REQUIRED_PATH_REMOVED** — manual_02_127.0.0.1_9082_api/decision/quality-live: required schema path removed: /golden_alignment/governing_inputs_contract_version.
+- **TYPE_CHANGED** — manual_02_127.0.0.1_9082_api/decision/quality-live: /golden_alignment/reason_code expected ['null'], got ['string'].
+- **REQUIRED_PATH_REMOVED** — manual_02_127.0.0.1_9082_api/decision/quality-live: required schema path removed: /golden_alignment/source_family.
+- **REQUIRED_PATH_REMOVED** — manual_02_127.0.0.1_9082_api/decision/quality-live: required schema path removed: /golden_alignment/source_fresh.
+- **REQUIRED_PATH_REMOVED** — manual_02_127.0.0.1_9082_api/decision/quality-live: required schema path removed: /golden_alignment/source_report_age_days.
+- **REQUIRED_PATH_REMOVED** — manual_02_127.0.0.1_9082_api/decision/quality-live: required schema path removed: /golden_alignment/source_report_date.
+- **REQUIRED_PATH_REMOVED** — manual_02_127.0.0.1_9082_api/decision/quality-live: required schema path removed: /governing_inputs_contract_version.
+- **TYPE_CHANGED** — manual_02_127.0.0.1_9082_api/decision/quality-live: /governing_inputs_reason_code expected ['null'], got ['string'].
+- **REQUIRED_PATH_REMOVED** — manual_02_127.0.0.1_9082_api/decision/quality-live: required schema path removed: /leveraged_funds_weekly.
+- **REQUIRED_PATH_REMOVED** — manual_02_127.0.0.1_9082_api/decision/quality-live: required schema path removed: /leveraged_funds_weekly_direction.
+- **STABLE_VALUE_CHANGED** — manual_02_127.0.0.1_9082_api/decision/quality-live: stable value at /golden_spotlight/status changed from 'inactive' to 'inputs_incomplete'.
+- **STABLE_VALUE_CHANGED** — manual_02_127.0.0.1_9082_api/decision/quality-live: stable value at /public_explainability/golden_alignment/status changed from 'inactive' to 'inputs_incomplete'.
+- **STABLE_VALUE_CHANGED** — manual_02_127.0.0.1_9082_api/decision/quality-live: stable value at /governing_inputs/status changed from 'COMPLETE' to 'INCOMPLETE'.
+- **STABLE_VALUE_CHANGED** — manual_02_127.0.0.1_9082_api/decision/quality-live: stable value at /commercial_score/status changed from 'CALCULATED_GOVERNED' to 'WITHHELD_GOVERNANCE_GATE'.
+- **STABLE_VALUE_CHANGED** — manual_02_127.0.0.1_9082_api/decision/quality-live: stable value at /launch_readiness/status changed from 'READY_FOR_COMMERCIAL_LAUNCH' to 'BLOCKED_BY_GOVERNANCE_GATE'.
+- **REQUIRED_PATH_REMOVED** — manual_03_api.ndsp.app_https_api/decision/quality-live: required schema path removed: /_ndsp_canonical_consumer.
+- **REQUIRED_PATH_REMOVED** — manual_03_api.ndsp.app_https_api/decision/quality-live: required schema path removed: /_ndsp_canonical_consumer/canonical_source.
+- **REQUIRED_PATH_REMOVED** — manual_03_api.ndsp.app_https_api/decision/quality-live: required schema path removed: /_ndsp_canonical_consumer/enabled.
+- **REQUIRED_PATH_REMOVED** — manual_03_api.ndsp.app_https_api/decision/quality-live: required schema path removed: /_ndsp_canonical_consumer/golden_engine.
+- **REQUIRED_PATH_REMOVED** — manual_03_api.ndsp.app_https_api/decision/quality-live: required schema path removed: /_ndsp_canonical_consumer/golden_reason_code.
+- **REQUIRED_PATH_REMOVED** — manual_03_api.ndsp.app_https_api/decision/quality-live: required schema path removed: /_ndsp_canonical_consumer/layer_orchestrator.
+- **REQUIRED_PATH_REMOVED** — manual_03_api.ndsp.app_https_api/decision/quality-live: required schema path removed: /_ndsp_canonical_consumer/nmp_engine.
+- **TYPE_CHANGED** — manual_03_api.ndsp.app_https_api/decision/quality-live: /allowed_public_outputs/commercial_score expected ['number'], got ['null'].
+- **TYPE_CHANGED** — manual_03_api.ndsp.app_https_api/decision/quality-live: /allowed_public_outputs/commercial_score_band expected ['string'], got ['null'].
+- **REQUIRED_PATH_REMOVED** — manual_03_api.ndsp.app_https_api/decision/quality-live: required schema path removed: /asset_managers_overall.
+- **REQUIRED_PATH_REMOVED** — manual_03_api.ndsp.app_https_api/decision/quality-live: required schema path removed: /asset_managers_overall_direction.
+- **REQUIRED_PATH_REMOVED** — manual_03_api.ndsp.app_https_api/decision/quality-live: required schema path removed: /asset_managers_weekly.
+- **REQUIRED_PATH_REMOVED** — manual_03_api.ndsp.app_https_api/decision/quality-live: required schema path removed: /asset_managers_weekly_direction.
+- **REQUIRED_PATH_REMOVED** — manual_03_api.ndsp.app_https_api/decision/quality-live: required schema path removed: /canonical_cot_directions.
+- **REQUIRED_PATH_REMOVED** — manual_03_api.ndsp.app_https_api/decision/quality-live: required schema path removed: /canonical_cot_directions/asset_managers_overall.
+- **REQUIRED_PATH_REMOVED** — manual_03_api.ndsp.app_https_api/decision/quality-live: required schema path removed: /canonical_cot_directions/asset_managers_weekly.
+- **REQUIRED_PATH_REMOVED** — manual_03_api.ndsp.app_https_api/decision/quality-live: required schema path removed: /canonical_cot_directions/leveraged_funds_weekly.
+- **TYPE_CHANGED** — manual_03_api.ndsp.app_https_api/decision/quality-live: /commercial_score/band expected ['string'], got ['null'].
+- **TYPE_CHANGED** — manual_03_api.ndsp.app_https_api/decision/quality-live: /commercial_score/score expected ['number'], got ['null'].
+- **REQUIRED_PATH_REMOVED** — manual_03_api.ndsp.app_https_api/decision/quality-live: required schema path removed: /golden_alignment/governing_inputs_complete.
+- **REQUIRED_PATH_REMOVED** — manual_03_api.ndsp.app_https_api/decision/quality-live: required schema path removed: /golden_alignment/governing_inputs_contract_version.
+- **TYPE_CHANGED** — manual_03_api.ndsp.app_https_api/decision/quality-live: /golden_alignment/reason_code expected ['null'], got ['string'].
+- **REQUIRED_PATH_REMOVED** — manual_03_api.ndsp.app_https_api/decision/quality-live: required schema path removed: /golden_alignment/source_family.
+- **REQUIRED_PATH_REMOVED** — manual_03_api.ndsp.app_https_api/decision/quality-live: required schema path removed: /golden_alignment/source_fresh.
+- **REQUIRED_PATH_REMOVED** — manual_03_api.ndsp.app_https_api/decision/quality-live: required schema path removed: /golden_alignment/source_report_age_days.
+- **REQUIRED_PATH_REMOVED** — manual_03_api.ndsp.app_https_api/decision/quality-live: required schema path removed: /golden_alignment/source_report_date.
+- **REQUIRED_PATH_REMOVED** — manual_03_api.ndsp.app_https_api/decision/quality-live: required schema path removed: /governing_inputs_contract_version.
+- **TYPE_CHANGED** — manual_03_api.ndsp.app_https_api/decision/quality-live: /governing_inputs_reason_code expected ['null'], got ['string'].
+- **REQUIRED_PATH_REMOVED** — manual_03_api.ndsp.app_https_api/decision/quality-live: required schema path removed: /leveraged_funds_weekly.
+- **REQUIRED_PATH_REMOVED** — manual_03_api.ndsp.app_https_api/decision/quality-live: required schema path removed: /leveraged_funds_weekly_direction.
+- **STABLE_VALUE_CHANGED** — manual_03_api.ndsp.app_https_api/decision/quality-live: stable value at /golden_spotlight/status changed from 'inactive' to 'inputs_incomplete'.
+- **STABLE_VALUE_CHANGED** — manual_03_api.ndsp.app_https_api/decision/quality-live: stable value at /public_explainability/golden_alignment/status changed from 'inactive' to 'inputs_incomplete'.
+- **STABLE_VALUE_CHANGED** — manual_03_api.ndsp.app_https_api/decision/quality-live: stable value at /governing_inputs/status changed from 'COMPLETE' to 'INCOMPLETE'.
+- **STABLE_VALUE_CHANGED** — manual_03_api.ndsp.app_https_api/decision/quality-live: stable value at /commercial_score/status changed from 'CALCULATED_GOVERNED' to 'WITHHELD_GOVERNANCE_GATE'.
+- **STABLE_VALUE_CHANGED** — manual_03_api.ndsp.app_https_api/decision/quality-live: stable value at /launch_readiness/status changed from 'READY_FOR_COMMERCIAL_LAUNCH' to 'BLOCKED_BY_GOVERNANCE_GATE'.

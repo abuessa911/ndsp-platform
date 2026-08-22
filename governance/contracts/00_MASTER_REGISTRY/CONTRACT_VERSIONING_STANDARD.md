@@ -1,0 +1,3 @@
+# Versioning Standard
+
+Semantic versioning.

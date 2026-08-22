@@ -1,0 +1,16 @@
+=== SYSTEMD ===
+
+=== ACTIVE PROCESSES ===
+nawaf511 1378612 1377262  0 23:21 pts/2    00:00:00 bash /home/nawaf511/ndsp_commercial_phase1_db_forensics_v1_2.sh
+nawaf511 1382042 1378612  0 23:22 pts/2    00:00:00 bash /home/nawaf511/ndsp_commercial_phase1_db_forensics_v1_2.sh
+nawaf511 1382043 1378612  0 23:22 pts/2    00:00:00 tee /home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_COMMERCIAL_PHASE1_DB_FORENSICS_V1_2_20260729_232122/RUNTIME_HITS.txt
+
+=== LISTENERS ===
+LISTEN 0      5          127.0.0.1:9094       0.0.0.0:*    users:(("python3",pid=2497959,fd=6))                                                                                                                                                                                                                      
+
+=== NGINX REFERENCES ===
+/etc/nginx/snippets/ndsp-business-ops-v205.conf:22:    proxy_pass http://127.0.0.1:9094/health;
+/etc/nginx/snippets/ndsp-business-ops-v205.conf:32:    proxy_pass http://127.0.0.1:9094;
+/etc/nginx/snippets/ndsp-business-ops-v205.conf:45:    proxy_pass http://127.0.0.1:9094;
+
+=== RECENT JOURNAL REFERENCES ===

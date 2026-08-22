@@ -1,0 +1,1879 @@
+#!/usr/bin/env python3
+
+import datetime as dt
+import hashlib
+import hmac
+import http.client
+import http.server
+import json
+import os
+import secrets
+import sqlite3
+import ssl
+import threading
+import time
+import urllib.parse
+
+PORT=int(os.environ["PORT"])
+DB_PATH=os.environ["DB_PATH"]
+ADMIN_SECRET=os.environ["ADMIN_SECRET"]
+OWNER_EMAIL=os.environ.get("OWNER_EMAIL","").strip().lower()
+INTERNAL_EMAILS={
+    value.strip().lower()
+    for value in os.environ.get("INTERNAL_EMAILS","").split(",")
+    if value.strip()
+}
+MAX_TRIAL_SEATS=int(os.environ.get("MAX_TRIAL_SEATS","50"))
+CONSENT_VERSION=os.environ.get(
+    "CONSENT_VERSION",
+    "NDSP-LEGAL-2026-07-19-V1",
+)
+SESSION_URL=os.environ.get(
+    "SESSION_URL",
+    "https://api.ndsp.app/api/auth/session",
+)
+REGISTER_URL=os.environ.get(
+    "REGISTER_URL",
+    "http://127.0.0.1:9028/api/register",
+)
+TRIAL_STATUS_URL=os.environ.get(
+    "TRIAL_STATUS_URL",
+    "http://127.0.0.1:9001/api/trial/status",
+)
+DECISION_ACCESS_URL=os.environ.get(
+    "DECISION_ACCESS_URL",
+    "http://127.0.0.1:9020/api/auth/decision-room-access",
+)
+TRIAL_DAYS=16
+MARKER="v167"
+LOCK=threading.RLock()
+
+CAPACITY_MESSAGE_AR=(
+    "اكتمل العدد المخصص للمرحلة التجريبية الحالية. "
+    "نشكر اهتمامك بمنصة NDSP، وسيتم فتح مقاعد إضافية في مرحلة لاحقة."
+)
+CAPACITY_MESSAGE_EN=(
+    "The current limited-trial capacity is full. "
+    "Additional NDSP seats may open in a later phase."
+)
+
+def now():
+    return dt.datetime.now(dt.timezone.utc)
+
+def iso(value):
+    return value.astimezone(dt.timezone.utc).isoformat().replace("+00:00","Z")
+
+def parse_date(value):
+    if value in (None,""):
+        return None
+
+    try:
+        parsed=dt.datetime.fromisoformat(str(value).replace("Z","+00:00"))
+
+        if parsed.tzinfo is None:
+            parsed=parsed.replace(tzinfo=dt.timezone.utc)
+
+        return parsed.astimezone(dt.timezone.utc)
+    except Exception:
+        return None
+
+def connect():
+    connection=sqlite3.connect(
+        DB_PATH,
+        timeout=30,
+        isolation_level=None,
+    )
+    connection.row_factory=sqlite3.Row
+    connection.execute("PRAGMA journal_mode=WAL")
+    connection.execute("PRAGMA foreign_keys=ON")
+    connection.execute("PRAGMA busy_timeout=30000")
+    return connection
+
+def columns(connection,table):
+    return {
+        row["name"]
+        for row in connection.execute(
+            f"PRAGMA table_info({table})"
+        ).fetchall()
+    }
+
+def add_column(connection,table,name,definition):
+    if name not in columns(connection,table):
+        connection.execute(
+            f"ALTER TABLE {table} ADD COLUMN {name} {definition}"
+        )
+
+def init_db():
+    os.makedirs(os.path.dirname(DB_PATH),exist_ok=True)
+
+    with connect() as connection:
+        connection.execute(
+            """
+            CREATE TABLE IF NOT EXISTS trial_clock (
+                user_key TEXT PRIMARY KEY,
+                user_id TEXT,
+                email TEXT,
+                trial_started_at TEXT NOT NULL,
+                trial_ends_at TEXT NOT NULL,
+                duration_days INTEGER NOT NULL DEFAULT 16,
+                source TEXT NOT NULL,
+                source_reference TEXT,
+                created_at TEXT NOT NULL,
+                updated_at TEXT NOT NULL
+            )
+            """
+        )
+
+        add_column(
+            connection,
+            "trial_clock",
+            "is_internal",
+            "INTEGER NOT NULL DEFAULT 0",
+        )
+        add_column(
+            connection,
+            "trial_clock",
+            "entitlement_status",
+            "TEXT NOT NULL DEFAULT 'trial'",
+        )
+        add_column(
+            connection,
+            "trial_clock",
+            "plan",
+            "TEXT NOT NULL DEFAULT 'trial'",
+        )
+        add_column(
+            connection,
+            "trial_clock",
+            "suspended",
+            "INTEGER NOT NULL DEFAULT 0",
+        )
+        add_column(
+            connection,
+            "trial_clock",
+            "notes",
+            "TEXT NOT NULL DEFAULT ''",
+        )
+
+        connection.execute(
+            """
+            CREATE UNIQUE INDEX IF NOT EXISTS
+            trial_clock_email_idx
+            ON trial_clock(lower(email))
+            WHERE email IS NOT NULL AND email<>''
+            """
+        )
+
+        connection.execute(
+            """
+            CREATE TABLE IF NOT EXISTS seat_reservations (
+                token TEXT PRIMARY KEY,
+                email TEXT NOT NULL,
+                created_at TEXT NOT NULL,
+                expires_at TEXT NOT NULL
+            )
+            """
+        )
+
+        connection.execute(
+            """
+            CREATE UNIQUE INDEX IF NOT EXISTS
+            seat_reservations_email_idx
+            ON seat_reservations(lower(email))
+            """
+        )
+
+        connection.execute(
+            """
+            CREATE TABLE IF NOT EXISTS legal_consents (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id TEXT,
+                email TEXT NOT NULL,
+                consent_version TEXT NOT NULL,
+                terms_accepted INTEGER NOT NULL,
+                privacy_accepted INTEGER NOT NULL,
+                disclaimer_accepted INTEGER NOT NULL,
+                accepted_at TEXT NOT NULL,
+                source_ip TEXT,
+                user_agent TEXT
+            )
+            """
+        )
+
+        connection.execute(
+            """
+            CREATE UNIQUE INDEX IF NOT EXISTS
+            legal_consents_email_version_idx
+            ON legal_consents(lower(email),consent_version)
+            """
+        )
+
+        connection.execute(
+            """
+            CREATE TABLE IF NOT EXISTS audit_log (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                actor_email TEXT,
+                action TEXT NOT NULL,
+                target_email TEXT,
+                details_json TEXT,
+                created_at TEXT NOT NULL
+            )
+            """
+        )
+
+        connection.execute(
+            """
+            CREATE TABLE IF NOT EXISTS settings (
+                key TEXT PRIMARY KEY,
+                value TEXT NOT NULL,
+                updated_at TEXT NOT NULL
+            )
+            """
+        )
+
+        connection.execute(
+            """
+            INSERT INTO settings(key,value,updated_at)
+            VALUES('max_trial_seats',?,?)
+            ON CONFLICT(key) DO UPDATE SET
+                value=excluded.value,
+                updated_at=excluded.updated_at
+            """,
+            (str(MAX_TRIAL_SEATS),iso(now())),
+        )
+
+        for email in INTERNAL_EMAILS:
+            connection.execute(
+                """
+                UPDATE trial_clock
+                SET is_internal=1,
+                    notes=CASE
+                        WHEN notes='' THEN 'internal_test_account'
+                        ELSE notes
+                    END,
+                    updated_at=?
+                WHERE lower(email)=lower(?)
+                """,
+                (iso(now()),email),
+            )
+
+def flatten(value,output=None):
+    if output is None:
+        output=[]
+
+    if isinstance(value,dict):
+        for key,item in value.items():
+            output.append((str(key).lower(),item))
+            flatten(item,output)
+    elif isinstance(value,list):
+        for item in value:
+            flatten(item,output)
+
+    return output
+
+def first_value(data,terms):
+    rows=flatten(data)
+
+    for term in terms:
+        for key,value in rows:
+            if (
+                term in key
+                and not isinstance(value,(dict,list))
+                and value not in (None,"")
+            ):
+                return str(value)
+
+    return ""
+
+def identity_from(data,headers=None):
+    headers=headers or {}
+    user_id=first_value(
+        data,
+        ["user_id","account_id","subject","sub","id"],
+    )
+    email=first_value(
+        data,
+        ["email_address","user_email","email"],
+    ).strip().lower()
+
+    if not user_id:
+        user_id=str(headers.get("x-ndsp-user-id","")).strip()
+
+    if not email:
+        email=str(headers.get("x-ndsp-user-email","")).strip().lower()
+
+    return user_id,email
+
+def role_from(data):
+    role=first_value(
+        data,
+        ["user_role","account_role","role","type"],
+    ).strip().lower()
+    return role
+
+def plan_from(data):
+    return first_value(
+        data,
+        [
+            "subscription_plan",
+            "package",
+            "plan",
+            "subscription",
+        ],
+    ).strip().lower()
+
+def is_admin_session(data):
+    _,email=identity_from(data)
+    role=role_from(data)
+
+    return (
+        email==OWNER_EMAIL
+        or role in {
+            "owner",
+            "admin",
+            "administrator",
+            "superadmin",
+            "super_admin",
+        }
+    )
+
+def user_key(user_id,email):
+    if user_id:
+        return "id:"+str(user_id)
+
+    if email:
+        return "email:"+email.lower()
+
+    return ""
+
+def cleanup_reservations(connection):
+    connection.execute(
+        "DELETE FROM seat_reservations WHERE expires_at<=?",
+        (iso(now()),),
+    )
+
+def record_for(user_id,email,connection=None):
+    own=connection is None
+    connection=connection or connect()
+    row=None
+    key=user_key(user_id,email)
+
+    try:
+        if key:
+            row=connection.execute(
+                "SELECT * FROM trial_clock WHERE user_key=?",
+                (key,),
+            ).fetchone()
+
+        if row is None and email:
+            row=connection.execute(
+                """
+                SELECT * FROM trial_clock
+                WHERE lower(email)=lower(?)
+                """,
+                (email,),
+            ).fetchone()
+
+        if row is None and user_id:
+            row=connection.execute(
+                "SELECT * FROM trial_clock WHERE user_id=?",
+                (str(user_id),),
+            ).fetchone()
+    finally:
+        if own:
+            connection.close()
+
+    return dict(row) if row else None
+
+def active_trial(row,at=None):
+    at=at or now()
+
+    if not row:
+        return False
+
+    if int(row.get("is_internal") or 0)==1:
+        return True
+
+    if int(row.get("suspended") or 0)==1:
+        return False
+
+    status=str(row.get("entitlement_status") or "trial").lower()
+
+    if status=="paid":
+        return True
+
+    if status in {"cancelled","expired","suspended"}:
+        return False
+
+    end=parse_date(row.get("trial_ends_at"))
+    return bool(end and end>at)
+
+def status_for(row,at=None):
+    at=at or now()
+
+    if not row:
+        return "UNTRACKED"
+
+    if int(row.get("suspended") or 0)==1:
+        return "SUSPENDED"
+
+    status=str(row.get("entitlement_status") or "trial").lower()
+
+    if status=="paid":
+        return "PAID_ACTIVE"
+
+    if status=="cancelled":
+        return "CANCELLED"
+
+    end=parse_date(row.get("trial_ends_at"))
+
+    if not end or end<=at:
+        return "EXPIRED"
+
+    return "ACTIVE"
+
+def seat_snapshot(connection=None):
+    own=connection is None
+    connection=connection or connect()
+
+    try:
+        cleanup_reservations(connection)
+        current=iso(now())
+
+        active=connection.execute(
+            """
+            SELECT COUNT(*) AS c
+            FROM trial_clock
+            WHERE is_internal=0
+              AND suspended=0
+              AND lower(entitlement_status)='trial'
+              AND trial_ends_at>?
+            """,
+            (current,),
+        ).fetchone()["c"]
+
+        reserved=connection.execute(
+            """
+            SELECT COUNT(*) AS c
+            FROM seat_reservations
+            WHERE expires_at>?
+            """,
+            (current,),
+        ).fetchone()["c"]
+
+        paid=connection.execute(
+            """
+            SELECT COUNT(*) AS c
+            FROM trial_clock
+            WHERE is_internal=0
+              AND suspended=0
+              AND lower(entitlement_status)='paid'
+            """
+        ).fetchone()["c"]
+
+        expired=connection.execute(
+            """
+            SELECT COUNT(*) AS c
+            FROM trial_clock
+            WHERE is_internal=0
+              AND (
+                lower(entitlement_status) IN (
+                    'expired',
+                    'cancelled',
+                    'suspended'
+                )
+                OR suspended=1
+                OR (
+                    lower(entitlement_status)='trial'
+                    AND trial_ends_at<=?
+                )
+              )
+            """,
+            (current,),
+        ).fetchone()["c"]
+    finally:
+        if own:
+            connection.close()
+
+    remaining=max(0,MAX_TRIAL_SEATS-active-reserved)
+
+    return {
+        "max_trial_seats":MAX_TRIAL_SEATS,
+        "active_trial_seats":int(active),
+        "reserved_trial_seats":int(reserved),
+        "paid_users":int(paid),
+        "inactive_or_expired":int(expired),
+        "remaining_trial_seats":int(remaining),
+        "registration_allowed":remaining>0,
+        "capacity_reached":remaining<=0,
+        "message_ar":(
+            "التسجيل متاح ضمن المرحلة التجريبية المحدودة."
+            if remaining>0
+            else CAPACITY_MESSAGE_AR
+        ),
+        "message_en":(
+            "Registration is available for the limited trial."
+            if remaining>0
+            else CAPACITY_MESSAGE_EN
+        ),
+    }
+
+def reserve_seat(email):
+    email=email.strip().lower()
+
+    if email in INTERNAL_EMAILS:
+        return {
+            "allowed":True,
+            "token":"INTERNAL",
+            "reason":"INTERNAL",
+        }
+
+    token=secrets.token_urlsafe(24)
+    created=now()
+    expires=created+dt.timedelta(minutes=5)
+
+    with LOCK:
+        connection=connect()
+
+        try:
+            connection.execute("BEGIN IMMEDIATE")
+            cleanup_reservations(connection)
+
+            existing=connection.execute(
+                """
+                SELECT user_key
+                FROM trial_clock
+                WHERE lower(email)=lower(?)
+                """,
+                (email,),
+            ).fetchone()
+
+            if existing:
+                connection.execute("COMMIT")
+                return {
+                    "allowed":True,
+                    "token":"EXISTING",
+                    "reason":"EXISTING",
+                }
+
+            snapshot=seat_snapshot(connection)
+
+            if not snapshot["registration_allowed"]:
+                connection.execute("ROLLBACK")
+                return {
+                    "allowed":False,
+                    "token":"",
+                    "reason":"CAPACITY_REACHED",
+                    "snapshot":snapshot,
+                }
+
+            connection.execute(
+                """
+                INSERT INTO seat_reservations(
+                    token,
+                    email,
+                    created_at,
+                    expires_at
+                )
+                VALUES(?,?,?,?)
+                """,
+                (
+                    token,
+                    email,
+                    iso(created),
+                    iso(expires),
+                ),
+            )
+            connection.execute("COMMIT")
+
+            return {
+                "allowed":True,
+                "token":token,
+                "reason":"RESERVED",
+            }
+        except Exception:
+            try:
+                connection.execute("ROLLBACK")
+            except Exception:
+                pass
+            raise
+        finally:
+            connection.close()
+
+def release_reservation(token):
+    if token in {"","INTERNAL","EXISTING"}:
+        return
+
+    with connect() as connection:
+        connection.execute(
+            "DELETE FROM seat_reservations WHERE token=?",
+            (token,),
+        )
+
+def finalize_registration(
+    token,
+    user_id,
+    email,
+    request_data,
+    source_ip,
+    user_agent,
+):
+    email=email.strip().lower()
+    started=now()
+    ended=started+dt.timedelta(days=TRIAL_DAYS)
+    key=user_key(user_id,email)
+    internal=1 if email in INTERNAL_EMAILS else 0
+
+    accepted=all([
+        bool(
+            request_data.get("terms_accepted")
+            or request_data.get("consent")
+        ),
+        bool(
+            request_data.get("privacy_accepted")
+            or request_data.get("consent")
+            or request_data.get("terms_accepted")
+        ),
+        bool(
+            request_data.get("disclaimer_accepted")
+            or request_data.get("consent")
+            or request_data.get("terms_accepted")
+        ),
+    ])
+
+    with LOCK:
+        connection=connect()
+
+        try:
+            connection.execute("BEGIN IMMEDIATE")
+
+            connection.execute(
+                """
+                INSERT INTO trial_clock(
+                    user_key,
+                    user_id,
+                    email,
+                    trial_started_at,
+                    trial_ends_at,
+                    duration_days,
+                    source,
+                    source_reference,
+                    created_at,
+                    updated_at,
+                    is_internal,
+                    entitlement_status,
+                    plan,
+                    suspended,
+                    notes
+                )
+                VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+                ON CONFLICT(user_key) DO UPDATE SET
+                    user_id=excluded.user_id,
+                    email=excluded.email,
+                    updated_at=excluded.updated_at,
+                    is_internal=excluded.is_internal
+                """,
+                (
+                    key,
+                    str(user_id or ""),
+                    email,
+                    iso(started),
+                    iso(ended),
+                    TRIAL_DAYS,
+                    "registration_success_201",
+                    "my.ndsp.app/api/register",
+                    iso(started),
+                    iso(started),
+                    internal,
+                    "trial",
+                    "trial",
+                    0,
+                    "internal_test_account" if internal else "",
+                ),
+            )
+
+            if accepted:
+                connection.execute(
+                    """
+                    INSERT INTO legal_consents(
+                        user_id,
+                        email,
+                        consent_version,
+                        terms_accepted,
+                        privacy_accepted,
+                        disclaimer_accepted,
+                        accepted_at,
+                        source_ip,
+                        user_agent
+                    )
+                    VALUES(?,?,?,?,?,?,?,?,?)
+                    ON CONFLICT(lower(email),consent_version)
+                    DO UPDATE SET
+                        user_id=excluded.user_id,
+                        terms_accepted=excluded.terms_accepted,
+                        privacy_accepted=excluded.privacy_accepted,
+                        disclaimer_accepted=excluded.disclaimer_accepted,
+                        accepted_at=excluded.accepted_at,
+                        source_ip=excluded.source_ip,
+                        user_agent=excluded.user_agent
+                    """,
+                    (
+                        str(user_id or ""),
+                        email,
+                        CONSENT_VERSION,
+                        1,
+                        1,
+                        1,
+                        iso(started),
+                        source_ip,
+                        user_agent[:500],
+                    ),
+                )
+
+            if token not in {"","INTERNAL","EXISTING"}:
+                connection.execute(
+                    "DELETE FROM seat_reservations WHERE token=?",
+                    (token,),
+                )
+
+            connection.execute("COMMIT")
+        except Exception:
+            try:
+                connection.execute("ROLLBACK")
+            except Exception:
+                pass
+            raise
+        finally:
+            connection.close()
+
+def trial_payload(row):
+    start=parse_date(row["trial_started_at"])
+    end=parse_date(row["trial_ends_at"])
+    remaining_seconds=(end-now()).total_seconds()
+    remaining=max(0,int((remaining_seconds+86399)//86400))
+    current_status=status_for(row)
+    allowed=active_trial(row)
+
+    return {
+        "trial_started_at":iso(start),
+        "trial_ends_at":iso(end),
+        "trial_days":TRIAL_DAYS,
+        "trial_days_remaining":remaining,
+        "trial_active":(
+            current_status=="ACTIVE"
+            or int(row.get("is_internal") or 0)==1
+        ),
+        "trial_status":current_status,
+        "trial_clock_source":row["source"],
+        "trial_clock_authoritative":True,
+        "trial_clock_server_recorded":True,
+        "entitlement_status":current_status,
+        "entitlement_allowed":allowed,
+        "entitlement_plan":row.get("plan") or "trial",
+        "entitlement_reason":current_status,
+        "seat_counted":int(row.get("is_internal") or 0)==0,
+        "internal_account":int(row.get("is_internal") or 0)==1,
+    }
+
+def filtered_request_headers(headers):
+    output={}
+
+    for key,value in headers.items():
+        if key.lower() in {
+            "host",
+            "content-length",
+            "connection",
+            "accept-encoding",
+        }:
+            continue
+        output[key]=value
+
+    return output
+
+def request_upstream(url,method,headers,body=b""):
+    target=urllib.parse.urlsplit(url)
+    path=target.path or "/"
+
+    if target.query:
+        path+="?"+target.query
+
+    if target.scheme=="https":
+        connection=http.client.HTTPSConnection(
+            target.hostname,
+            target.port or 443,
+            timeout=30,
+            context=ssl.create_default_context(),
+        )
+    else:
+        connection=http.client.HTTPConnection(
+            target.hostname,
+            target.port or 80,
+            timeout=30,
+        )
+
+    request_headers=filtered_request_headers(headers)
+
+    if body:
+        request_headers["Content-Length"]=str(len(body))
+
+    connection.request(
+        method,
+        path,
+        body=body if body else None,
+        headers=request_headers,
+    )
+
+    response=connection.getresponse()
+    raw=response.read()
+    response_headers=response.getheaders()
+    status=response.status
+    connection.close()
+
+    try:
+        data=json.loads(raw.decode("utf-8"))
+    except Exception:
+        data=None
+
+    return status,response_headers,raw,data
+
+def session_data(headers):
+    status,response_headers,raw,data=request_upstream(
+        SESSION_URL,
+        "GET",
+        headers,
+    )
+    return status,response_headers,raw,data
+
+def merge_session(data,row):
+    output=dict(data) if isinstance(data,dict) else {}
+    snapshot=seat_snapshot()
+    output["launch_control"]=snapshot
+
+    if row:
+        payload=trial_payload(row)
+        output.update(payload)
+        nested=output.get("trial")
+
+        if not isinstance(nested,dict):
+            nested={}
+
+        nested.update(payload)
+        nested["duration_days"]=TRIAL_DAYS
+        output["trial"]=nested
+
+    return output
+
+def entitlement_decision(data,row):
+    user_id,email=identity_from(data)
+    role=role_from(data)
+    plan=plan_from(data)
+
+    if is_admin_session(data):
+        return {
+            "allowed":True,
+            "status":"OWNER_ADMIN",
+            "reason":"OWNER_ADMIN",
+            "role":role or "owner",
+            "plan":plan or "owner",
+            "user_id":user_id,
+            "email":email,
+        }
+
+    if row:
+        status=status_for(row)
+        allowed=active_trial(row)
+        return {
+            "allowed":allowed,
+            "status":status,
+            "reason":status,
+            "role":role or "user",
+            "plan":row.get("plan") or plan or "trial",
+            "user_id":user_id,
+            "email":email,
+        }
+
+    return {
+        "allowed":True,
+        "status":"UPSTREAM_ACCOUNT",
+        "reason":"UPSTREAM_AUTHORIZATION",
+        "role":role or "user",
+        "plan":plan or "existing",
+        "user_id":user_id,
+        "email":email,
+    }
+
+def audit(actor,action,target,details):
+    with connect() as connection:
+        connection.execute(
+            """
+            INSERT INTO audit_log(
+                actor_email,
+                action,
+                target_email,
+                details_json,
+                created_at
+            )
+            VALUES(?,?,?,?,?)
+            """,
+            (
+                actor,
+                action,
+                target,
+                json.dumps(details,ensure_ascii=False),
+                iso(now()),
+            ),
+        )
+
+def admin_token(email):
+    slot=int(time.time()//1800)
+    message=f"{email}|{slot}".encode()
+    digest=hmac.new(
+        ADMIN_SECRET.encode(),
+        message,
+        hashlib.sha256,
+    ).hexdigest()
+    return f"{slot}.{digest}"
+
+def validate_admin_token(email,token):
+    try:
+        slot_text,digest=token.split(".",1)
+        slot=int(slot_text)
+    except Exception:
+        return False
+
+    current=int(time.time()//1800)
+
+    if abs(current-slot)>1:
+        return False
+
+    expected=hmac.new(
+        ADMIN_SECRET.encode(),
+        f"{email}|{slot}".encode(),
+        hashlib.sha256,
+    ).hexdigest()
+
+    return hmac.compare_digest(expected,digest)
+
+def admin_snapshot():
+    snapshot=seat_snapshot()
+
+    with connect() as connection:
+        users=[
+            dict(row)
+            for row in connection.execute(
+                """
+                SELECT
+                    email,
+                    user_id,
+                    trial_started_at,
+                    trial_ends_at,
+                    duration_days,
+                    is_internal,
+                    entitlement_status,
+                    plan,
+                    suspended,
+                    notes,
+                    updated_at
+                FROM trial_clock
+                ORDER BY created_at DESC
+                LIMIT 500
+                """
+            ).fetchall()
+        ]
+
+        consent_count=connection.execute(
+            "SELECT COUNT(*) AS c FROM legal_consents"
+        ).fetchone()["c"]
+
+        audit_rows=[
+            dict(row)
+            for row in connection.execute(
+                """
+                SELECT
+                    actor_email,
+                    action,
+                    target_email,
+                    details_json,
+                    created_at
+                FROM audit_log
+                ORDER BY id DESC
+                LIMIT 100
+                """
+            ).fetchall()
+        ]
+
+    for user in users:
+        user["computed_status"]=status_for(user)
+        user["entitlement_allowed"]=active_trial(user)
+        user["days_remaining"]=max(
+            0,
+            int(
+                (
+                    parse_date(user["trial_ends_at"])-now()
+                ).total_seconds()
+                / 86400
+            ),
+        ) if parse_date(user["trial_ends_at"]) else 0
+
+    return {
+        "ok":True,
+        "service":"ndsp-launch-control-v167",
+        "seat_control":snapshot,
+        "consent_version":CONSENT_VERSION,
+        "consent_record_count":int(consent_count),
+        "users":users,
+        "audit_log":audit_rows,
+    }
+
+def apply_admin_action(actor,target,action,note):
+    action=action.strip().lower()
+    target=target.strip().lower()
+    allowed_actions={
+        "suspend",
+        "reactivate",
+        "expire",
+        "cancel",
+        "mark_paid",
+        "restore_trial",
+        "extend_16_days",
+    }
+
+    if action not in allowed_actions:
+        raise ValueError("UNSUPPORTED_ACTION")
+
+    with LOCK:
+        connection=connect()
+
+        try:
+            connection.execute("BEGIN IMMEDIATE")
+            row=connection.execute(
+                """
+                SELECT * FROM trial_clock
+                WHERE lower(email)=lower(?)
+                """,
+                (target,),
+            ).fetchone()
+
+            if not row:
+                raise ValueError("USER_NOT_FOUND")
+
+            values={
+                "suspended":int(row["suspended"] or 0),
+                "entitlement_status":str(
+                    row["entitlement_status"] or "trial"
+                ),
+                "plan":str(row["plan"] or "trial"),
+                "trial_started_at":row["trial_started_at"],
+                "trial_ends_at":row["trial_ends_at"],
+            }
+
+            if action=="suspend":
+                values["suspended"]=1
+                values["entitlement_status"]="suspended"
+            elif action=="reactivate":
+                values["suspended"]=0
+
+                if parse_date(values["trial_ends_at"])>now():
+                    values["entitlement_status"]="trial"
+                else:
+                    values["entitlement_status"]="expired"
+            elif action=="expire":
+                values["suspended"]=0
+                values["entitlement_status"]="expired"
+                values["trial_ends_at"]=iso(
+                    now()-dt.timedelta(seconds=1)
+                )
+            elif action=="cancel":
+                values["suspended"]=0
+                values["entitlement_status"]="cancelled"
+            elif action=="mark_paid":
+                values["suspended"]=0
+                values["entitlement_status"]="paid"
+                values["plan"]="professional"
+            elif action=="restore_trial":
+                values["suspended"]=0
+                values["entitlement_status"]="trial"
+            elif action=="extend_16_days":
+                started=now()
+                values["suspended"]=0
+                values["entitlement_status"]="trial"
+                values["plan"]="trial"
+                values["trial_started_at"]=iso(started)
+                values["trial_ends_at"]=iso(
+                    started+dt.timedelta(days=TRIAL_DAYS)
+                )
+
+            connection.execute(
+                """
+                UPDATE trial_clock
+                SET suspended=?,
+                    entitlement_status=?,
+                    plan=?,
+                    trial_started_at=?,
+                    trial_ends_at=?,
+                    notes=?,
+                    updated_at=?
+                WHERE lower(email)=lower(?)
+                """,
+                (
+                    values["suspended"],
+                    values["entitlement_status"],
+                    values["plan"],
+                    values["trial_started_at"],
+                    values["trial_ends_at"],
+                    note[:500],
+                    iso(now()),
+                    target,
+                ),
+            )
+
+            connection.execute(
+                """
+                INSERT INTO audit_log(
+                    actor_email,
+                    action,
+                    target_email,
+                    details_json,
+                    created_at
+                )
+                VALUES(?,?,?,?,?)
+                """,
+                (
+                    actor,
+                    action,
+                    target,
+                    json.dumps(
+                        {
+                            "note":note,
+                            "result":values,
+                        },
+                        ensure_ascii=False,
+                    ),
+                    iso(now()),
+                ),
+            )
+            connection.execute("COMMIT")
+        except Exception:
+            try:
+                connection.execute("ROLLBACK")
+            except Exception:
+                pass
+            raise
+        finally:
+            connection.close()
+
+def admin_page():
+    return '<!doctype html>\n<html lang="ar" dir="rtl">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">\n<title>NDSP — لوحة التحكم بالإطلاق</title>\n<style>\n:root{\n  color-scheme:dark;\n  --gold:#e1bd5b;\n  --gold-soft:#ad8a35;\n  --bg:#050505;\n  --card:#101010;\n  --card-2:#15130e;\n  --line:#38301f;\n  --muted:#aaa7a0;\n  --ok:#78dca5;\n  --bad:#ff8a8a;\n}\n*{box-sizing:border-box}\nhtml,body{margin:0;min-height:100%;background:var(--bg);color:#f5f5f5}\nbody{\n  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,Arial,sans-serif;\n  background:\n    radial-gradient(circle at 82% 0,rgba(155,118,31,.13),transparent 30%),\n    linear-gradient(180deg,#070706,#030303 55%);\n}\nbutton,input,select{font:inherit}\n.wrap{width:min(1240px,100%);margin:auto;padding:28px}\n.hero{margin-bottom:24px}\nh1{\n  margin:0 0 8px;\n  color:var(--gold);\n  font-size:clamp(28px,5vw,46px);\n  line-height:1.25;\n}\n.sub{\n  margin:0;\n  color:var(--muted);\n  font-size:clamp(16px,2.4vw,22px);\n  line-height:1.8;\n}\n.metrics{\n  display:grid;\n  grid-template-columns:repeat(4,minmax(0,1fr));\n  gap:14px;\n  margin:24px 0 18px;\n}\n.metric-card{\n  min-height:150px;\n  display:flex;\n  flex-direction:column;\n  justify-content:center;\n  background:rgba(16,16,16,.94);\n  border:1px solid var(--line);\n  border-radius:20px;\n  padding:22px;\n  box-shadow:0 18px 50px rgba(0,0,0,.22);\n}\n.metric{\n  color:var(--gold);\n  font-weight:900;\n  font-size:clamp(34px,5vw,56px);\n  line-height:1;\n  direction:rtl;\n}\n.metric-label{color:var(--muted);margin-top:14px;font-size:16px}\n.toolbar{\n  display:grid;\n  grid-template-columns:minmax(220px,1fr) auto auto;\n  gap:12px;\n  align-items:center;\n  margin:18px 0 10px;\n}\ninput,select{\n  width:100%;\n  min-height:48px;\n  border:1px solid var(--line);\n  border-radius:13px;\n  background:#111;\n  color:#fff;\n  padding:11px 14px;\n  outline:none;\n}\ninput:focus,select:focus{border-color:var(--gold-soft)}\nbutton{\n  min-height:48px;\n  border:0;\n  border-radius:13px;\n  padding:11px 18px;\n  cursor:pointer;\n  background:linear-gradient(180deg,var(--gold),#a9822d);\n  color:#090909;\n  font-weight:900;\n}\nbutton.secondary{\n  border:1px solid var(--line);\n  background:#171717;\n  color:#fff;\n}\n.admin-link{\n  color:var(--gold);\n  font-weight:800;\n  text-decoration:underline;\n  text-underline-offset:5px;\n  white-space:nowrap;\n}\n.message{\n  min-height:28px;\n  margin:12px 0 18px;\n  color:var(--gold);\n  font-size:16px;\n}\n.user-grid{\n  display:grid;\n  grid-template-columns:repeat(2,minmax(0,1fr));\n  gap:16px;\n}\n.user-card{\n  min-width:0;\n  background:rgba(15,15,15,.96);\n  border:1px solid var(--line);\n  border-radius:20px;\n  padding:20px;\n  box-shadow:0 18px 45px rgba(0,0,0,.2);\n}\n.user-top{\n  display:flex;\n  align-items:flex-start;\n  justify-content:space-between;\n  gap:14px;\n  margin-bottom:18px;\n}\n.user-email{\n  min-width:0;\n  direction:ltr;\n  text-align:left;\n  color:#fff;\n  font-weight:800;\n  font-size:16px;\n  overflow-wrap:anywhere;\n  word-break:break-word;\n}\n.badges{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}\n.badge{\n  display:inline-flex;\n  align-items:center;\n  min-height:30px;\n  padding:5px 10px;\n  border-radius:999px;\n  border:1px solid #4c3d19;\n  background:#2b2414;\n  color:#f1cd6b;\n  font-size:12px;\n  font-weight:900;\n  white-space:nowrap;\n}\n.badge.internal{background:#18252c;border-color:#284452;color:#83cce9}\n.details{\n  display:grid;\n  grid-template-columns:repeat(2,minmax(0,1fr));\n  gap:10px;\n}\n.detail{\n  min-width:0;\n  background:#0a0a0a;\n  border:1px solid #262117;\n  border-radius:13px;\n  padding:12px;\n}\n.detail-label{color:#8e8b84;font-size:12px;margin-bottom:6px}\n.detail-value{\n  color:#eee;\n  font-size:13px;\n  overflow-wrap:anywhere;\n  word-break:break-word;\n}\n.actions{\n  display:grid;\n  grid-template-columns:minmax(0,1fr) auto;\n  gap:10px;\n  margin-top:16px;\n}\n.empty{\n  grid-column:1/-1;\n  padding:34px 20px;\n  text-align:center;\n  color:var(--muted);\n  background:#0e0e0e;\n  border:1px dashed var(--line);\n  border-radius:18px;\n}\n.footer-note{\n  margin-top:20px;\n  color:#777;\n  font-size:12px;\n  line-height:1.7;\n}\n@media(max-width:900px){\n  .metrics{grid-template-columns:repeat(2,minmax(0,1fr))}\n  .user-grid{grid-template-columns:1fr}\n}\n@media(max-width:600px){\n  .wrap{padding:18px 14px 34px}\n  .hero{margin-bottom:14px}\n  .metrics{gap:10px;margin-top:18px}\n  .metric-card{min-height:128px;padding:16px;border-radius:17px}\n  .metric{font-size:38px}\n  .metric-label{font-size:14px;line-height:1.5}\n  .toolbar{grid-template-columns:1fr auto}\n  .toolbar input{grid-column:1/-1}\n  .admin-link{font-size:14px}\n  .user-card{padding:16px;border-radius:17px}\n  .user-top{display:block}\n  .badges{justify-content:flex-start;margin-top:12px}\n  .details{grid-template-columns:1fr}\n  .actions{grid-template-columns:1fr}\n  .actions button{width:100%}\n}\n</style>\n</head>\n<body>\n<main class="wrap">\n  <header class="hero">\n    <h1>NDSP — لوحة التحكم بالإطلاق</h1>\n    <p class="sub">إدارة المقاعد التجريبية، حالة المستخدمين، الصلاحيات، والموافقات القانونية.</p>\n  </header>\n\n  <section class="metrics" aria-label="ملخص الإطلاق">\n    <article class="metric-card">\n      <div id="used" class="metric">—</div>\n      <div class="metric-label">المقاعد التجريبية المستخدمة</div>\n    </article>\n    <article class="metric-card">\n      <div id="remaining" class="metric">—</div>\n      <div class="metric-label">المقاعد المتبقية</div>\n    </article>\n    <article class="metric-card">\n      <div id="paid" class="metric">—</div>\n      <div class="metric-label">المستخدمون المدفوعون</div>\n    </article>\n    <article class="metric-card">\n      <div id="consents" class="metric">—</div>\n      <div class="metric-label">الموافقات القانونية المحفوظة</div>\n    </article>\n  </section>\n\n  <section class="toolbar" aria-label="أدوات الإدارة">\n    <input id="search" type="search" autocomplete="off" placeholder="بحث بالبريد">\n    <button id="refreshButton" class="secondary" type="button">تحديث</button>\n    <a class="admin-link" href="/admin/">العودة للإدارة</a>\n  </section>\n\n  <div id="msg" class="message" role="status" aria-live="polite"></div>\n  <section id="usersGrid" class="user-grid" aria-label="حسابات المستخدمين"></section>\n\n  <p class="footer-note">\n    الحسابات الداخلية وحسابات الاختبار تظهر للمراجعة، لكنها لا تُحتسب ضمن المقاعد التجريبية الخمسين.\n  </p>\n</main>\n<script src="/admin/launch-control/?asset=js&v=169" defer></script>\n</body>\n</html>\n'
+
+def admin_script():
+    return '(function(){\n"use strict";\n\nlet token="";\nlet users=[];\n\nconst elements={\n  used:document.getElementById("used"),\n  remaining:document.getElementById("remaining"),\n  paid:document.getElementById("paid"),\n  consents:document.getElementById("consents"),\n  search:document.getElementById("search"),\n  refresh:document.getElementById("refreshButton"),\n  grid:document.getElementById("usersGrid"),\n  message:document.getElementById("msg")\n};\n\nfunction escapeHtml(value){\n  return String(value??"").replace(/[&<>"\']/g,function(character){\n    return {\n      "&":"&amp;",\n      "<":"&lt;",\n      ">":"&gt;",\n      \'"\':"&quot;",\n      "\'":"&#39;"\n    }[character];\n  });\n}\n\nfunction setMessage(text,isError){\n  if(!elements.message)return;\n  elements.message.textContent=String(text||"");\n  elements.message.style.color=isError?"#ff8a8a":"#e1bd5b";\n}\n\nfunction statusArabic(status){\n  const map={\n    ACTIVE:"نشط",\n    PAID_ACTIVE:"مدفوع نشط",\n    EXPIRED:"منتهي",\n    CANCELLED:"ملغي",\n    SUSPENDED:"موقوف",\n    UNTRACKED:"غير متتبع"\n  };\n  return map[String(status||"").toUpperCase()]||String(status||"—");\n}\n\nfunction actionOptions(){\n  return [\n    ["suspend","إيقاف الحساب"],\n    ["reactivate","إعادة التفعيل"],\n    ["extend_16_days","تمديد التجربة 16 يومًا"],\n    ["mark_paid","تحويل إلى مدفوع"],\n    ["expire","إنهاء التجربة الآن"],\n    ["cancel","إلغاء الحساب"],\n    ["restore_trial","إعادة الحساب كتجريبي"]\n  ].map(function(item){\n    return \'<option value="\'+item[0]+\'">\'+item[1]+\'</option>\';\n  }).join("");\n}\n\nfunction render(){\n  if(!elements.grid)return;\n\n  const query=elements.search\n    ? elements.search.value.trim().toLowerCase()\n    : "";\n\n  const filtered=users.filter(function(user){\n    return !query ||\n      String(user.email||"").toLowerCase().includes(query);\n  });\n\n  if(filtered.length===0){\n    elements.grid.innerHTML=\n      \'<div class="empty">لا توجد حسابات مطابقة للبحث.</div>\';\n    return;\n  }\n\n  elements.grid.innerHTML=filtered.map(function(user){\n    const encoded=encodeURIComponent(user.email||"");\n    const internal=Boolean(user.is_internal);\n    const remaining=Number(user.days_remaining||0);\n\n    return `\n      <article class="user-card">\n        <div class="user-top">\n          <div class="user-email">${escapeHtml(user.email||"—")}</div>\n          <div class="badges">\n            <span class="badge">${escapeHtml(statusArabic(user.computed_status))}</span>\n            ${internal?\'<span class="badge internal">اختبار داخلي</span>\':""}\n          </div>\n        </div>\n\n        <div class="details">\n          <div class="detail">\n            <div class="detail-label">الخطة</div>\n            <div class="detail-value">${escapeHtml(user.plan||"—")}</div>\n          </div>\n          <div class="detail">\n            <div class="detail-label">الأيام المتبقية</div>\n            <div class="detail-value">${escapeHtml(remaining)}</div>\n          </div>\n          <div class="detail">\n            <div class="detail-label">بداية التجربة</div>\n            <div class="detail-value" dir="ltr">${escapeHtml(user.trial_started_at||"—")}</div>\n          </div>\n          <div class="detail">\n            <div class="detail-label">نهاية التجربة</div>\n            <div class="detail-value" dir="ltr">${escapeHtml(user.trial_ends_at||"—")}</div>\n          </div>\n          <div class="detail">\n            <div class="detail-label">يُحتسب ضمن المقاعد</div>\n            <div class="detail-value">${internal?"لا":"نعم"}</div>\n          </div>\n          <div class="detail">\n            <div class="detail-label">معرّف المستخدم</div>\n            <div class="detail-value">${escapeHtml(user.user_id||"—")}</div>\n          </div>\n        </div>\n\n        <div class="actions">\n          <select id="action-${encoded}" aria-label="الإجراء الإداري">\n            ${actionOptions()}\n          </select>\n          <button type="button" data-email="${encoded}">تنفيذ الإجراء</button>\n        </div>\n      </article>`;\n  }).join("");\n\n  elements.grid.querySelectorAll("button[data-email]").forEach(function(button){\n    button.addEventListener("click",function(){\n      runAction(button.getAttribute("data-email")||"");\n    });\n  });\n}\n\nasync function loadData(){\n  ["used","remaining","paid","consents"].forEach(function(key){\n    if(elements[key])elements[key].textContent="...";\n  });\n\n  setMessage("جارٍ تحميل بيانات لوحة الإدارة...",false);\n\n  try{\n    const response=await fetch(\n      "/api/admin/launch-control",\n      {\n        credentials:"include",\n        cache:"no-store",\n        headers:{"Accept":"application/json"}\n      }\n    );\n\n    if(response.status===401||response.status===403){\n      location.href="/login/?next="+\n        encodeURIComponent("/admin/launch-control/");\n      return;\n    }\n\n    if(!response.ok){\n      throw new Error("HTTP "+response.status);\n    }\n\n    const data=await response.json();\n    token=data.admin_token||"";\n    users=Array.isArray(data.users)?data.users:[];\n    const seats=data.seat_control||{};\n    const used=Number(seats.active_trial_seats||0);\n    const maximum=Number(seats.max_trial_seats||50);\n\n    if(elements.used){\n      elements.used.textContent=used+" من "+maximum;\n    }\n    if(elements.remaining){\n      elements.remaining.textContent=String(\n        seats.remaining_trial_seats??0\n      );\n    }\n    if(elements.paid){\n      elements.paid.textContent=String(\n        seats.paid_users??0\n      );\n    }\n    if(elements.consents){\n      elements.consents.textContent=String(\n        data.consent_record_count??0\n      );\n    }\n\n    setMessage(\n      users.length===0\n        ? "لوحة الإدارة تعمل. لا توجد حسابات حتى الآن."\n        : "تم تحديث بيانات لوحة الإدارة.",\n      false\n    );\n\n    render();\n  }catch(error){\n    console.error("NDSP_ADMIN_V169_LOAD_ERROR",error);\n    setMessage(\n      "تعذر تحميل بيانات لوحة الإدارة. حدّث الصفحة، وإن استمرت المشكلة راجع خدمة V167.",\n      true\n    );\n  }\n}\n\nasync function runAction(encoded){\n  const email=decodeURIComponent(encoded);\n  const select=document.getElementById("action-"+encoded);\n\n  if(!select)return;\n\n  const action=select.value;\n\n  if(!confirm("تنفيذ الإجراء المحدد على الحساب؟"))return;\n\n  setMessage("جارٍ تنفيذ الإجراء...",false);\n\n  try{\n    const response=await fetch(\n      "/api/admin/launch-control/action",\n      {\n        method:"POST",\n        credentials:"include",\n        cache:"no-store",\n        headers:{\n          "Content-Type":"application/json",\n          "Accept":"application/json",\n          "X-NDSP-Admin-Token":token\n        },\n        body:JSON.stringify({\n          email:email,\n          action:action,\n          note:"Admin launch-control action from responsive V169"\n        })\n      }\n    );\n\n    const data=await response.json().catch(function(){\n      return {};\n    });\n\n    if(!response.ok){\n      throw new Error(\n        data.error||\n        data.message_ar||\n        ("HTTP "+response.status)\n      );\n    }\n\n    setMessage(\n      data.message_ar||"تم تنفيذ الإجراء.",\n      false\n    );\n    await loadData();\n  }catch(error){\n    setMessage(\n      "فشل تنفيذ الإجراء: "+String(error.message||error),\n      true\n    );\n  }\n}\n\nif(elements.search){\n  elements.search.addEventListener("input",render);\n}\nif(elements.refresh){\n  elements.refresh.addEventListener("click",loadData);\n}\n\nwindow.ndspAdminRefresh=loadData;\nloadData();\n})();\n'
+
+def owner_dashboard_page():
+    return '<!doctype html>\n<html lang="ar" dir="rtl">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">\n<meta name="theme-color" content="#070707">\n<title>NDSP — مركز الإدارة العليا</title>\n<style>\n:root{\n  color-scheme:dark;\n  --bg:#050505;\n  --surface:#0d0d0d;\n  --surface-2:#12110d;\n  --line:#342d1d;\n  --line-strong:#5c4a20;\n  --gold:#e3bd59;\n  --gold-light:#f1d27c;\n  --gold-dark:#9c7627;\n  --text:#f5f1e7;\n  --muted:#a7a39a;\n  --ok:#5ee2a0;\n  --warn:#f3c96d;\n  --bad:#ff8989;\n}\n*{box-sizing:border-box}\nhtml,body{margin:0;min-height:100%;background:var(--bg);color:var(--text)}\nbody{\n  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,Arial,sans-serif;\n  background:\n    radial-gradient(circle at 88% -8%,rgba(203,156,45,.18),transparent 30%),\n    radial-gradient(circle at 8% 20%,rgba(143,104,23,.08),transparent 28%),\n    linear-gradient(180deg,#080806 0,#040404 48%,#020202 100%);\n}\na{color:inherit;text-decoration:none}\nbutton{font:inherit}\n.shell{width:min(1320px,100%);margin:auto;padding:24px}\n.topbar{\n  display:flex;\n  align-items:center;\n  justify-content:space-between;\n  gap:18px;\n  padding:14px 16px;\n  border:1px solid rgba(227,189,89,.18);\n  border-radius:18px;\n  background:rgba(9,9,8,.82);\n  backdrop-filter:blur(16px);\n  box-shadow:0 18px 60px rgba(0,0,0,.24);\n}\n.brand{display:flex;align-items:center;gap:12px;min-width:0}\n.mark{\n  width:46px;height:46px;display:grid;place-items:center;\n  border-radius:14px;\n  background:linear-gradient(145deg,#efd273,#a47b27);\n  color:#080705;font-weight:1000;font-size:18px;\n  box-shadow:0 0 34px rgba(227,189,89,.18);\n}\n.brand-copy{min-width:0}\n.brand-title{font-size:17px;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}\n.brand-sub{margin-top:3px;color:var(--muted);font-size:11px;direction:ltr;text-align:right}\n.top-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}\n.status-pill{\n  display:inline-flex;align-items:center;gap:8px;\n  min-height:38px;padding:8px 12px;border-radius:999px;\n  border:1px solid rgba(94,226,160,.24);\n  background:rgba(94,226,160,.08);color:var(--ok);\n  font-size:12px;font-weight:800;white-space:nowrap;\n}\n.dot{width:8px;height:8px;border-radius:50%;background:currentColor;box-shadow:0 0 12px currentColor}\n.top-link{\n  min-height:40px;display:inline-flex;align-items:center;justify-content:center;\n  padding:9px 14px;border-radius:12px;border:1px solid var(--line);\n  background:#111;color:#fff;font-size:13px;font-weight:800;\n}\n.hero{\n  position:relative;overflow:hidden;margin-top:18px;\n  padding:clamp(24px,5vw,58px);\n  border:1px solid rgba(227,189,89,.2);\n  border-radius:28px;\n  background:\n    linear-gradient(135deg,rgba(227,189,89,.11),transparent 38%),\n    linear-gradient(180deg,rgba(18,17,13,.98),rgba(8,8,8,.98));\n  box-shadow:0 28px 90px rgba(0,0,0,.34);\n}\n.hero:after{\n  content:"";position:absolute;inset:auto -10% -70% auto;\n  width:420px;height:420px;border-radius:50%;\n  border:1px solid rgba(227,189,89,.12);\n  box-shadow:0 0 0 54px rgba(227,189,89,.025),0 0 0 108px rgba(227,189,89,.018);\n}\n.eyebrow{\n  display:inline-flex;align-items:center;gap:9px;\n  color:var(--gold-light);font-size:12px;font-weight:900;\n  letter-spacing:.08em;text-transform:uppercase;\n}\n.eyebrow:before{content:"";width:36px;height:1px;background:var(--gold)}\nh1{\n  position:relative;z-index:1;\n  margin:16px 0 12px;\n  max-width:820px;\n  font-size:clamp(34px,7vw,72px);\n  line-height:1.08;\n  letter-spacing:-.035em;\n}\n.hero-copy{\n  position:relative;z-index:1;\n  max-width:760px;color:#bcb7ad;\n  font-size:clamp(16px,2vw,20px);line-height:1.9;\n}\n.hero-actions{\n  position:relative;z-index:1;\n  display:flex;gap:12px;flex-wrap:wrap;margin-top:28px;\n}\n.primary,.secondary{\n  min-height:48px;display:inline-flex;align-items:center;justify-content:center;\n  padding:12px 18px;border-radius:14px;font-weight:900;font-size:14px;\n}\n.primary{\n  background:linear-gradient(180deg,var(--gold-light),var(--gold-dark));\n  color:#090805;box-shadow:0 14px 38px rgba(227,189,89,.16);\n}\n.secondary{border:1px solid var(--line);background:#101010;color:#fff}\n.session-card{\n  position:absolute;left:clamp(20px,4vw,52px);top:clamp(20px,4vw,50px);\n  width:min(330px,38%);z-index:2;\n  padding:18px;border:1px solid rgba(227,189,89,.18);\n  border-radius:20px;background:rgba(6,6,6,.74);backdrop-filter:blur(14px);\n}\n.session-label{color:var(--muted);font-size:11px}\n.session-email{\n  margin-top:8px;direction:ltr;text-align:left;\n  font-size:13px;font-weight:800;overflow-wrap:anywhere;\n}\n.session-role{margin-top:12px;color:var(--gold);font-size:12px;font-weight:900}\n.metrics{\n  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));\n  gap:14px;margin-top:18px;\n}\n.metric-card{\n  min-height:142px;padding:20px;\n  border:1px solid var(--line);border-radius:20px;\n  background:linear-gradient(180deg,rgba(17,17,16,.98),rgba(9,9,9,.98));\n}\n.metric-value{\n  color:var(--gold-light);font-size:clamp(30px,4vw,48px);\n  font-weight:1000;line-height:1;direction:rtl;\n}\n.metric-label{margin-top:14px;color:var(--muted);font-size:14px}\n.metric-note{margin-top:7px;color:#77736c;font-size:11px}\n.section-head{\n  display:flex;align-items:flex-end;justify-content:space-between;\n  gap:14px;margin:34px 0 14px;\n}\n.section-title{margin:0;font-size:clamp(23px,4vw,34px)}\n.section-copy{margin:5px 0 0;color:var(--muted);font-size:14px}\n.grid{\n  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;\n}\n.module{\n  position:relative;min-height:220px;padding:22px;\n  border:1px solid var(--line);border-radius:22px;\n  background:\n    radial-gradient(circle at 90% 5%,rgba(227,189,89,.09),transparent 32%),\n    linear-gradient(180deg,#11100d,#090909);\n  transition:transform .18s ease,border-color .18s ease;\n}\n.module:hover{transform:translateY(-2px);border-color:var(--line-strong)}\n.module-index{color:var(--gold);font-size:12px;font-weight:900;direction:ltr}\n.module h3{margin:18px 0 8px;font-size:21px}\n.module p{margin:0;color:var(--muted);font-size:14px;line-height:1.75}\n.module-link{\n  position:absolute;right:22px;bottom:20px;\n  color:var(--gold-light);font-size:13px;font-weight:900;\n}\n.ops{\n  display:grid;grid-template-columns:1.2fr .8fr;gap:14px;margin-top:14px;\n}\n.panel{\n  padding:22px;border:1px solid var(--line);border-radius:22px;\n  background:rgba(12,12,11,.94);\n}\n.panel h3{margin:0 0 16px;font-size:18px}\n.checks{display:grid;gap:10px}\n.check{\n  display:flex;align-items:center;justify-content:space-between;gap:14px;\n  padding:13px 14px;border:1px solid #292419;border-radius:14px;background:#090909;\n}\n.check-name{font-size:13px;color:#ddd8cf}\n.check-state{font-size:12px;font-weight:900;color:var(--ok)}\n.check-state.warn{color:var(--warn)}\n.release{\n  display:flex;align-items:center;justify-content:space-between;gap:14px;\n  padding:14px 0;border-bottom:1px solid #262117;\n}\n.release:last-child{border-bottom:0}\n.release-name{font-weight:900}\n.release-note{margin-top:4px;color:var(--muted);font-size:12px}\n.release-tag{color:var(--gold);font-size:12px;font-weight:900;white-space:nowrap}\n.message{\n  min-height:26px;margin-top:16px;color:var(--gold);\n  font-size:13px;line-height:1.7;\n}\n.footer{\n  display:flex;align-items:center;justify-content:space-between;gap:16px;\n  margin:28px 0 8px;padding-top:18px;border-top:1px solid #211d15;\n  color:#706c64;font-size:11px;\n}\n@media(max-width:1000px){\n  .session-card{position:relative;left:auto;top:auto;width:100%;margin-top:24px}\n  .metrics{grid-template-columns:repeat(2,minmax(0,1fr))}\n  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}\n  .ops{grid-template-columns:1fr}\n}\n@media(max-width:640px){\n  .shell{padding:12px}\n  .topbar{align-items:flex-start;border-radius:16px}\n  .brand-sub{display:none}\n  .status-pill{display:none}\n  .hero{padding:24px 18px;border-radius:22px}\n  h1{font-size:38px}\n  .hero-copy{font-size:15px}\n  .hero-actions{display:grid;grid-template-columns:1fr}\n  .primary,.secondary{width:100%}\n  .metrics{gap:10px}\n  .metric-card{min-height:126px;padding:16px;border-radius:17px}\n  .metric-value{font-size:34px}\n  .grid{grid-template-columns:1fr}\n  .module{min-height:190px}\n  .section-head{display:block}\n  .footer{display:block;line-height:1.8}\n}\n</style>\n</head>\n<body>\n<div class="shell" data-release="NDSP_OWNER_DASHBOARD_V173">\n  <nav class="topbar">\n    <div class="brand">\n      <div class="mark">N</div>\n      <div class="brand-copy">\n        <div class="brand-title">NDSP — Nawaf Decision Support Platform</div>\n        <div class="brand-sub">OWNER GOVERNANCE CONSOLE · RELEASE V173</div>\n      </div>\n    </div>\n    <div class="top-actions">\n      <span class="status-pill"><span class="dot"></span><span id="topStatus">متصل</span></span>\n      <a class="top-link" href="/portal-v50/">فتح المنصة</a>\n    </div>\n  </nav>\n\n  <section class="hero">\n    <div class="eyebrow">مركز الإدارة العليا</div>\n    <h1>إدارة المنصة من واجهة واحدة واضحة ومحكومة.</h1>\n    <p class="hero-copy">\n      تحكم بالمستخدمين والمقاعد التجريبية والصلاحيات، وراجع حالة التشغيل\n      ومسارات المنصة دون الرجوع إلى الواجهة القديمة أو النصوص الثابتة.\n    </p>\n    <div class="hero-actions">\n      <a class="primary" href="/admin/launch-control/">إدارة المستخدمين والمقاعد</a>\n      <a class="secondary" href="/portal-v50/">معاينة بوابة المستخدم</a>\n    </div>\n    <aside class="session-card">\n      <div class="session-label">جلسة المالك الحالية</div>\n      <div id="ownerEmail" class="session-email">جارٍ التحقق...</div>\n      <div id="ownerRole" class="session-role">OWNER</div>\n    </aside>\n  </section>\n\n  <section class="metrics" aria-label="مؤشرات الإطلاق">\n    <article class="metric-card">\n      <div id="usedSeats" class="metric-value">—</div>\n      <div class="metric-label">المقاعد المستخدمة</div>\n      <div class="metric-note">من أصل 50 مقعدًا تجريبيًا</div>\n    </article>\n    <article class="metric-card">\n      <div id="remainingSeats" class="metric-value">—</div>\n      <div class="metric-label">المقاعد المتبقية</div>\n      <div class="metric-note">تتوقف التسجيلات تلقائيًا عند الصفر</div>\n    </article>\n    <article class="metric-card">\n      <div id="paidUsers" class="metric-value">—</div>\n      <div class="metric-label">المستخدمون المدفوعون</div>\n      <div class="metric-note">خارج الإطلاق التجريبي الحالي</div>\n    </article>\n    <article class="metric-card">\n      <div id="consents" class="metric-value">—</div>\n      <div class="metric-label">الموافقات المحفوظة</div>\n      <div class="metric-note">نسخة قانونية وهوية وتوقيت</div>\n    </article>\n  </section>\n\n  <div class="section-head">\n    <div>\n      <h2 class="section-title">مراكز التحكم</h2>\n      <p class="section-copy">وصول مباشر إلى أهم وظائف الإدارة والتشغيل.</p>\n    </div>\n  </div>\n\n  <section class="grid">\n    <a class="module" href="/admin/launch-control/">\n      <div class="module-index">01 · USERS</div>\n      <h3>المستخدمون والصلاحيات</h3>\n      <p>إدارة التجارب، التمديد، الإيقاف، الإلغاء، والتحويل إلى حساب مدفوع.</p>\n      <span class="module-link">فتح لوحة الإطلاق ←</span>\n    </a>\n    <a class="module" href="/portal-v50/">\n      <div class="module-index">02 · PORTAL</div>\n      <h3>بوابة المستخدم</h3>\n      <p>معاينة التجربة الفعلية للمستخدم وجميع صفحات دعم القرار والأسواق.</p>\n      <span class="module-link">فتح البوابة ←</span>\n    </a>\n    <a class="module" href="/register/">\n      <div class="module-index">03 · ONBOARDING</div>\n      <h3>التسجيل والتجربة</h3>\n      <p>فحص رحلة التسجيل الحالية ورسالة اكتمال المقاعد والتجربة ذات 16 يومًا.</p>\n      <span class="module-link">فتح التسجيل ←</span>\n    </a>\n    <a class="module" href="/api/launch/status">\n      <div class="module-index">04 · CAPACITY</div>\n      <h3>حالة المقاعد المباشرة</h3>\n      <p>عرض العقد العام الحالي لعدد المقاعد، التسجيل المتاح، وحالة السعة.</p>\n      <span class="module-link">عرض الحالة ←</span>\n    </a>\n    <a class="module" href="/api/health">\n      <div class="module-index">05 · HEALTH</div>\n      <h3>صحة الخدمات</h3>\n      <p>فحص نقطة الصحة العامة والتأكد من استجابة البنية التشغيلية.</p>\n      <span class="module-link">فحص الصحة ←</span>\n    </a>\n    <a class="module" href="/forgot-password.html">\n      <div class="module-index">06 · RECOVERY</div>\n      <h3>استعادة الحساب</h3>\n      <p>فتح مسار إعادة تعيين كلمة المرور المعتمد للحسابات المسجلة.</p>\n      <span class="module-link">فتح الاستعادة ←</span>\n    </a>\n  </section>\n\n  <section class="ops">\n    <article class="panel">\n      <h3>الحالة التشغيلية</h3>\n      <div class="checks">\n        <div class="check"><span class="check-name">جلسة المالك</span><span id="sessionState" class="check-state">جارٍ الفحص</span></div>\n        <div class="check"><span class="check-name">خدمة التحكم بالإطلاق</span><span id="serviceState" class="check-state">جارٍ الفحص</span></div>\n        <div class="check"><span class="check-name">التسجيل التجريبي</span><span id="registrationState" class="check-state warn">جارٍ الفحص</span></div>\n        <div class="check"><span class="check-name">حد المقاعد</span><span id="capacityState" class="check-state">50</span></div>\n      </div>\n      <div id="ownerMessage" class="message" role="status" aria-live="polite"></div>\n    </article>\n\n    <article class="panel">\n      <h3>الإصدارات الحية</h3>\n      <div class="release">\n        <div><div class="release-name">جوهر القرار العام</div><div class="release-note">النسخة التقنية المعتمدة</div></div>\n        <span class="release-tag">V143</span>\n      </div>\n      <div class="release">\n        <div><div class="release-name">التحكم بالإطلاق</div><div class="release-note">المقاعد والصلاحيات والتجربة</div></div>\n        <span class="release-tag">V167</span>\n      </div>\n      <div class="release">\n        <div><div class="release-name">لوحة المستخدمين</div><div class="release-note">بطاقات متجاوبة للجوال</div></div>\n        <span class="release-tag">V169</span>\n      </div>\n      <div class="release">\n        <div><div class="release-name">مركز المالك</div><div class="release-note">الهوية الحديثة الحالية</div></div>\n        <span class="release-tag">V173</span>\n      </div>\n    </article>\n  </section>\n\n  <footer class="footer">\n    <span>NDSP — واجهة إدارية محكومة وليست منصة تنفيذ أو أوامر تداول.</span>\n    <span id="lastUpdated">آخر تحديث: —</span>\n  </footer>\n</div>\n<script src="/admin/?asset=owner-js&v=173" defer></script>\n</body>\n</html>\n'
+
+def owner_dashboard_script():
+    return '(function(){\n"use strict";\n\nconst byId=function(id){return document.getElementById(id);};\n\nfunction findValue(value,keys,depth){\n  if(depth>7||value===null||value===undefined)return "";\n\n  if(Array.isArray(value)){\n    for(const item of value){\n      const found=findValue(item,keys,depth+1);\n      if(found)return found;\n    }\n    return "";\n  }\n\n  if(typeof value!=="object")return "";\n\n  for(const key of keys){\n    if(Object.prototype.hasOwnProperty.call(value,key)){\n      const current=value[key];\n      if(current!==null&&current!==undefined&&String(current).trim()){\n        return String(current).trim();\n      }\n    }\n  }\n\n  for(const current of Object.values(value)){\n    const found=findValue(current,keys,depth+1);\n    if(found)return found;\n  }\n\n  return "";\n}\n\nfunction setText(id,value){\n  const element=byId(id);\n  if(element)element.textContent=String(value);\n}\n\nfunction setState(id,text,kind){\n  const element=byId(id);\n  if(!element)return;\n  element.textContent=text;\n  element.classList.toggle("warn",kind==="warn");\n  element.style.color=kind==="bad"?"#ff8989":"";\n}\n\nasync function getJson(url){\n  const response=await fetch(url,{\n    credentials:"include",\n    cache:"no-store",\n    headers:{"Accept":"application/json"}\n  });\n\n  if(response.status===401||response.status===403){\n    location.href="/login/?next="+encodeURIComponent("/admin/");\n    throw new Error("AUTH_REQUIRED");\n  }\n\n  if(!response.ok){\n    throw new Error(url+" HTTP "+response.status);\n  }\n\n  return response.json();\n}\n\nasync function load(){\n  setText("ownerMessage","جارٍ تحميل بيانات الإدارة العليا...");\n\n  try{\n    const results=await Promise.all([\n      getJson("/api/auth/session"),\n      getJson("/api/admin/launch-control"),\n      getJson("/api/launch/status")\n    ]);\n\n    const session=results[0]||{};\n    const admin=results[1]||{};\n    const launch=results[2]||{};\n    const seats=admin.seat_control||launch||{};\n\n    const email=findValue(session,["email","user_email"],0)||\n      admin.actor_email||\n      "حساب المالك";\n\n    const role=findValue(session,["role","user_role","account_role"],0)||\n      "owner";\n\n    const used=Number(seats.active_trial_seats||0);\n    const maximum=Number(seats.max_trial_seats||50);\n    const remaining=Number(seats.remaining_trial_seats??Math.max(0,maximum-used));\n    const paid=Number(seats.paid_users||0);\n    const consentCount=Number(admin.consent_record_count||0);\n    const registrationAllowed=Boolean(seats.registration_allowed);\n\n    setText("ownerEmail",email);\n    setText("ownerRole",String(role).toUpperCase());\n    setText("usedSeats",used+" من "+maximum);\n    setText("remainingSeats",remaining);\n    setText("paidUsers",paid);\n    setText("consents",consentCount);\n    setText("topStatus","متصل وآمن");\n    setState("sessionState","نشطة","ok");\n    setState("serviceState","متصلة","ok");\n    setState(\n      "registrationState",\n      registrationAllowed?"متاح":"مغلق",\n      registrationAllowed?"ok":"warn"\n    );\n    setText("capacityState",maximum+" مقعدًا");\n    setText(\n      "ownerMessage",\n      "تم تحميل الجلسة وحالة الإطلاق وبيانات المقاعد بنجاح."\n    );\n    setText(\n      "lastUpdated",\n      "آخر تحديث: "+new Date().toLocaleString("ar-SA")\n    );\n  }catch(error){\n    if(String(error&&error.message)==="AUTH_REQUIRED")return;\n\n    console.error("NDSP_OWNER_V173_LOAD_ERROR",error);\n    setText("topStatus","تعذر التحقق");\n    setState("sessionState","تعذر الفحص","bad");\n    setState("serviceState","تعذر الفحص","bad");\n    setState("registrationState","غير معروف","warn");\n    setText(\n      "ownerMessage",\n      "تعذر تحميل بعض بيانات لوحة المالك. أعد تحديث الصفحة، وإن استمرت المشكلة راجع خدمة التحكم بالإطلاق."\n    );\n  }\n}\n\nload();\n})();\n'
+
+class Handler(http.server.BaseHTTPRequestHandler):
+    protocol_version="HTTP/1.1"
+
+    def log_message(self,fmt,*args):
+        print(
+            "%s - - [%s] %s"
+            % (
+                self.client_address[0],
+                self.log_date_time_string(),
+                fmt%args,
+            ),
+            flush=True,
+        )
+
+    def body(self):
+        length=int(self.headers.get("Content-Length","0") or "0")
+        return self.rfile.read(length) if length>0 else b""
+
+    def common(self):
+        self.send_header("X-NDSP-Launch-Control",MARKER)
+        self.send_header("Cache-Control","no-store")
+
+    def send_json(self,status,data,headers=None):
+        raw=json.dumps(
+            data,
+            ensure_ascii=False,
+            separators=(",",":"),
+        ).encode()
+
+        self.send_response(status)
+        self.send_header(
+            "Content-Type",
+            "application/json; charset=utf-8",
+        )
+
+        for key,value in headers or []:
+            if key.lower() not in {
+                "content-length",
+                "content-type",
+                "connection",
+                "transfer-encoding",
+                "content-encoding",
+                "x-ndsp-launch-control",
+            }:
+                self.send_header(key,value)
+
+        self.common()
+        self.send_header("Content-Length",str(len(raw)))
+        self.end_headers()
+        self.wfile.write(raw)
+
+    def send_raw(self,status,raw,headers=None):
+        self.send_response(status)
+
+        for key,value in headers or []:
+            if key.lower() not in {
+                "content-length",
+                "connection",
+                "transfer-encoding",
+                "content-encoding",
+                "x-ndsp-launch-control",
+            }:
+                self.send_header(key,value)
+
+        self.common()
+        self.send_header("Content-Length",str(len(raw)))
+        self.end_headers()
+        self.wfile.write(raw)
+
+    def send_javascript(self,status,text):
+        raw=text.encode("utf-8")
+        self.send_response(status)
+        self.send_header(
+            "Content-Type",
+            "application/javascript; charset=utf-8",
+        )
+        self.common()
+        self.send_header("Content-Length",str(len(raw)))
+        self.end_headers()
+        self.wfile.write(raw)
+
+    def send_html(self,status,text):
+        raw=text.encode()
+        self.send_response(status)
+        self.send_header(
+            "Content-Type",
+            "text/html; charset=utf-8",
+        )
+        self.common()
+        self.send_header("Content-Length",str(len(raw)))
+        self.end_headers()
+        self.wfile.write(raw)
+
+    def client_ip(self):
+        forwarded=self.headers.get("X-Forwarded-For","").split(",")[0].strip()
+        return forwarded or self.client_address[0]
+
+    def require_admin(self):
+        headers=dict(self.headers.items())
+        status,_,_,data=session_data(headers)
+
+        if status!=200 or not isinstance(data,dict):
+            return None
+
+        if not is_admin_session(data):
+            return None
+
+        return data
+
+    def do_GET(self):
+        path=urllib.parse.urlsplit(self.path).path
+        headers=dict(self.headers.items())
+
+        if path=="/health":
+            self.send_json(
+                200,
+                {
+                    "ok":True,
+                    "service":"ndsp-launch-control-v167",
+                    "port":PORT,
+                    "max_trial_seats":MAX_TRIAL_SEATS,
+                    "database":DB_PATH,
+                },
+            )
+            return
+
+        if path=="/internal/capacity-message-test":
+            if self.client_address[0] not in {"127.0.0.1","::1"}:
+                self.send_json(404,{"ok":False})
+                return
+
+            self.send_json(
+                409,
+                {
+                    "ok":False,
+                    "code":"TRIAL_CAPACITY_REACHED",
+                    "message":CAPACITY_MESSAGE_AR,
+                    "message_ar":CAPACITY_MESSAGE_AR,
+                    "message_en":CAPACITY_MESSAGE_EN,
+                    "max_trial_seats":MAX_TRIAL_SEATS,
+                },
+            )
+            return
+
+        if path in {
+            "/api/launch/status",
+            "/api/trial/seats",
+        }:
+            self.send_json(
+                200,
+                {
+                    "ok":True,
+                    "service":"ndsp-launch-control-v167",
+                    **seat_snapshot(),
+                },
+            )
+            return
+
+        if path=="/api/auth/session":
+            status,response_headers,raw,data=session_data(headers)
+
+            if status!=200 or not isinstance(data,dict):
+                self.send_raw(status,raw,response_headers)
+                return
+
+            user_id,email=identity_from(data,headers)
+            row=record_for(user_id,email)
+            self.send_json(
+                200,
+                merge_session(data,row),
+                response_headers,
+            )
+            return
+
+        if path=="/api/trial/status":
+            session_status,_,_,session=session_data(headers)
+            upstream_status,response_headers,raw,data=request_upstream(
+                TRIAL_STATUS_URL,
+                "GET",
+                headers,
+            )
+
+            if upstream_status!=200 or not isinstance(data,dict):
+                self.send_raw(
+                    upstream_status,
+                    raw,
+                    response_headers,
+                )
+                return
+
+            user_id,email=identity_from(
+                session if isinstance(session,dict) else {},
+                headers,
+            )
+            row=record_for(user_id,email)
+            output=dict(data)
+            output["seat_control"]=seat_snapshot()
+
+            if row:
+                payload=trial_payload(row)
+                output.update(payload)
+                trial=output.get("trial")
+
+                if not isinstance(trial,dict):
+                    trial={}
+
+                trial.update(payload)
+                trial["duration_days"]=TRIAL_DAYS
+                output["trial"]=trial
+
+            self.send_json(200,output,response_headers)
+            return
+
+        if path=="/api/entitlements/me":
+            status,_,_,data=session_data(headers)
+
+            if status!=200 or not isinstance(data,dict):
+                self.send_json(
+                    401,
+                    {"ok":False,"error":"AUTH_REQUIRED"},
+                )
+                return
+
+            user_id,email=identity_from(data,headers)
+            row=record_for(user_id,email)
+            decision=entitlement_decision(data,row)
+            self.send_json(
+                200,
+                {
+                    "ok":True,
+                    "entitlement":decision,
+                    "seat_control":seat_snapshot(),
+                    "trial":trial_payload(row) if row else None,
+                },
+            )
+            return
+
+        if path=="/api/auth/decision-room-access":
+            upstream_status,response_headers,raw,data=request_upstream(
+                DECISION_ACCESS_URL,
+                "GET",
+                headers,
+            )
+
+            if upstream_status<200 or upstream_status>=300:
+                self.send_raw(
+                    upstream_status,
+                    raw,
+                    response_headers,
+                )
+                return
+
+            status,_,_,session=session_data(headers)
+
+            if status!=200 or not isinstance(session,dict):
+                self.send_json(
+                    401,
+                    {
+                        "ok":False,
+                        "error":"AUTH_REQUIRED",
+                    },
+                )
+                return
+
+            user_id,email=identity_from(session,headers)
+            row=record_for(user_id,email)
+            decision=entitlement_decision(session,row)
+
+            if not decision["allowed"]:
+                self.send_json(
+                    403,
+                    {
+                        "ok":False,
+                        "code":"ENTITLEMENT_DENIED",
+                        "status":decision["status"],
+                        "message_ar":"انتهت أو توقفت صلاحية الوصول لهذا الحساب.",
+                        "message_en":"This account no longer has active access.",
+                        "entitlement":decision,
+                    },
+                )
+                return
+
+            self.send_raw(upstream_status,raw,response_headers)
+            return
+
+        if path in {
+            "/admin",
+            "/admin/",
+            "/owner",
+            "/owner/",
+        }:
+            admin=self.require_admin()
+
+            if not admin:
+                self.send_response(302)
+                self.send_header(
+                    "Location",
+                    "/login/?next=%2Fadmin%2F",
+                )
+                self.common()
+                self.send_header("Content-Length","0")
+                self.end_headers()
+                return
+
+            query=urllib.parse.parse_qs(
+                urllib.parse.urlsplit(self.path).query
+            )
+
+            if query.get("asset")==["owner-js"]:
+                self.send_javascript(
+                    200,
+                    owner_dashboard_script(),
+                )
+                return
+
+            self.send_html(
+                200,
+                owner_dashboard_page(),
+            )
+            return
+
+        if path in {
+            "/admin/launch-control",
+            "/admin/launch-control/",
+        }:
+            admin=self.require_admin()
+
+            if not admin:
+                self.send_response(302)
+                self.send_header(
+                    "Location",
+                    "/login/?next=%2Fadmin%2Flaunch-control%2F",
+                )
+                self.common()
+                self.send_header("Content-Length","0")
+                self.end_headers()
+                return
+
+            query=urllib.parse.parse_qs(
+                urllib.parse.urlsplit(self.path).query
+            )
+
+            if query.get("asset")==["js"]:
+                self.send_javascript(200,admin_script())
+                return
+
+            self.send_html(200,admin_page())
+            return
+
+        if path=="/api/admin/launch-control":
+            admin=self.require_admin()
+
+            if not admin:
+                self.send_json(
+                    403,
+                    {"ok":False,"error":"ADMIN_REQUIRED"},
+                )
+                return
+
+            _,actor=identity_from(admin)
+            output=admin_snapshot()
+            output["admin_token"]=admin_token(actor)
+            output["actor_email"]=actor
+            self.send_json(200,output)
+            return
+
+        if path=="/api/register":
+            self.send_json(
+                405,
+                {
+                    "ok":False,
+                    "error":"METHOD_NOT_ALLOWED",
+                    "required_method":"POST",
+                },
+                [("Allow","POST")],
+            )
+            return
+
+        self.send_json(404,{"ok":False,"error":"NOT_FOUND"})
+
+    def do_POST(self):
+        path=urllib.parse.urlsplit(self.path).path
+        headers=dict(self.headers.items())
+        raw_body=self.body()
+
+        if path=="/api/register":
+            try:
+                request_data=json.loads(raw_body.decode())
+            except Exception:
+                self.send_json(
+                    400,
+                    {
+                        "ok":False,
+                        "error":"INVALID_JSON",
+                    },
+                )
+                return
+
+            email=str(
+                request_data.get("email")
+                or request_data.get("user_email")
+                or ""
+            ).strip().lower()
+
+            if not email:
+                self.send_json(
+                    422,
+                    {
+                        "ok":False,
+                        "error":"EMAIL_REQUIRED",
+                    },
+                )
+                return
+
+            reservation=reserve_seat(email)
+
+            if not reservation["allowed"]:
+                snapshot=reservation["snapshot"]
+                self.send_json(
+                    409,
+                    {
+                        "ok":False,
+                        "code":"TRIAL_CAPACITY_REACHED",
+                        "message":CAPACITY_MESSAGE_AR,
+                        "message_ar":CAPACITY_MESSAGE_AR,
+                        "message_en":CAPACITY_MESSAGE_EN,
+                        **snapshot,
+                    },
+                )
+                return
+
+            token=reservation["token"]
+
+            try:
+                status,response_headers,raw,data=request_upstream(
+                    REGISTER_URL,
+                    "POST",
+                    headers,
+                    raw_body,
+                )
+
+                if status in {200,201}:
+                    response_data=data if isinstance(data,dict) else {}
+                    user_id,response_email=identity_from(
+                        response_data,
+                        headers,
+                    )
+                    final_email=response_email or email
+                    finalize_registration(
+                        token,
+                        user_id,
+                        final_email,
+                        request_data,
+                        self.client_ip(),
+                        self.headers.get("User-Agent",""),
+                    )
+                else:
+                    release_reservation(token)
+
+                self.send_raw(status,raw,response_headers)
+            except Exception as error:
+                release_reservation(token)
+                self.send_json(
+                    502,
+                    {
+                        "ok":False,
+                        "error":"REGISTER_UPSTREAM_FAILURE",
+                        "detail":str(error)[:240],
+                    },
+                )
+            return
+
+        if path=="/api/admin/launch-control/action":
+            admin=self.require_admin()
+
+            if not admin:
+                self.send_json(
+                    403,
+                    {"ok":False,"error":"ADMIN_REQUIRED"},
+                )
+                return
+
+            _,actor=identity_from(admin)
+            origin=self.headers.get("Origin","")
+            token=self.headers.get("X-NDSP-Admin-Token","")
+
+            if origin and "my.ndsp.app" not in origin:
+                self.send_json(
+                    403,
+                    {"ok":False,"error":"INVALID_ORIGIN"},
+                )
+                return
+
+            if not validate_admin_token(actor,token):
+                self.send_json(
+                    403,
+                    {"ok":False,"error":"INVALID_ADMIN_TOKEN"},
+                )
+                return
+
+            try:
+                payload=json.loads(raw_body.decode())
+                target=str(payload.get("email") or "")
+                action=str(payload.get("action") or "")
+                note=str(payload.get("note") or "")
+                apply_admin_action(
+                    actor,
+                    target,
+                    action,
+                    note,
+                )
+            except ValueError as error:
+                self.send_json(
+                    422,
+                    {
+                        "ok":False,
+                        "error":str(error),
+                    },
+                )
+                return
+            except Exception as error:
+                self.send_json(
+                    500,
+                    {
+                        "ok":False,
+                        "error":"ADMIN_ACTION_FAILED",
+                        "detail":str(error)[:240],
+                    },
+                )
+                return
+
+            self.send_json(
+                200,
+                {
+                    "ok":True,
+                    "message_ar":"تم تنفيذ الإجراء وتسجيله في سجل الإدارة.",
+                },
+            )
+            return
+
+        self.send_json(404,{"ok":False,"error":"NOT_FOUND"})
+
+def self_test():
+    global DB_PATH,MAX_TRIAL_SEATS,INTERNAL_EMAILS
+    original_db=DB_PATH
+    original_max=MAX_TRIAL_SEATS
+    original_internal=set(INTERNAL_EMAILS)
+    test_db=original_db+".selftest"
+
+    try:
+        if os.path.exists(test_db):
+            os.unlink(test_db)
+
+        DB_PATH=test_db
+        MAX_TRIAL_SEATS=1
+        INTERNAL_EMAILS={"internal@example.com"}
+        init_db()
+
+        first=reserve_seat("one@example.com")
+        second=reserve_seat("two@example.com")
+
+        assert first["allowed"] is True
+        assert second["allowed"] is False
+        assert second["reason"]=="CAPACITY_REACHED"
+
+        release_reservation(first["token"])
+        request={
+            "email":"one@example.com",
+            "terms_accepted":True,
+            "privacy_accepted":True,
+            "disclaimer_accepted":True,
+        }
+        finalize_registration(
+            "",
+            "u1",
+            "one@example.com",
+            request,
+            "127.0.0.1",
+            "self-test",
+        )
+
+        row=record_for("u1","one@example.com")
+        assert status_for(row)=="ACTIVE"
+        assert active_trial(row) is True
+
+        with connect() as connection:
+            connection.execute(
+                """
+                UPDATE trial_clock
+                SET trial_ends_at=?,
+                    entitlement_status='trial'
+                WHERE user_key='id:u1'
+                """,
+                (iso(now()-dt.timedelta(seconds=1)),),
+            )
+
+        row=record_for("u1","one@example.com")
+        assert status_for(row)=="EXPIRED"
+        assert active_trial(row) is False
+
+        with connect() as connection:
+            connection.execute(
+                """
+                UPDATE trial_clock
+                SET entitlement_status='paid',
+                    suspended=0
+                WHERE user_key='id:u1'
+                """
+            )
+
+        row=record_for("u1","one@example.com")
+        assert status_for(row)=="PAID_ACTIVE"
+        assert active_trial(row) is True
+
+        with connect() as connection:
+            connection.execute(
+                """
+                UPDATE trial_clock
+                SET entitlement_status='cancelled'
+                WHERE user_key='id:u1'
+                """
+            )
+
+        row=record_for("u1","one@example.com")
+        assert status_for(row)=="CANCELLED"
+        assert active_trial(row) is False
+
+        cancelled_decision=entitlement_decision(
+            {"user":{"id":"u1","email":"one@example.com","role":"user"}},
+            row,
+        )
+        assert cancelled_decision["allowed"] is False
+
+        with connect() as connection:
+            connection.execute(
+                """
+                UPDATE trial_clock
+                SET entitlement_status='paid',
+                    suspended=0
+                WHERE user_key='id:u1'
+                """
+            )
+
+        row=record_for("u1","one@example.com")
+        paid_decision=entitlement_decision(
+            {"user":{"id":"u1","email":"one@example.com","role":"professional"}},
+            row,
+        )
+        assert paid_decision["allowed"] is True
+
+        owner_decision=entitlement_decision(
+            {"user":{"id":"owner","email":OWNER_EMAIL,"role":"owner"}},
+            None,
+        )
+        assert owner_decision["allowed"] is True
+
+        with connect() as connection:
+            consent=connection.execute(
+                """
+                SELECT COUNT(*) AS c
+                FROM legal_consents
+                WHERE lower(email)='one@example.com'
+                  AND terms_accepted=1
+                  AND privacy_accepted=1
+                  AND disclaimer_accepted=1
+                """
+            ).fetchone()["c"]
+
+        assert consent==1
+
+        print("ATOMIC_SEAT_CAP_SELF_TEST=PASS")
+        print("TRIAL_EXPIRY_TRANSITION_SELF_TEST=PASS")
+        print("ENTITLEMENT_MATRIX_SELF_TEST=PASS")
+        print("LEGAL_CONSENT_PERSISTENCE_SELF_TEST=PASS")
+    finally:
+        DB_PATH=original_db
+        MAX_TRIAL_SEATS=original_max
+        INTERNAL_EMAILS=original_internal
+
+        for suffix in ("","-wal","-shm"):
+            try:
+                os.unlink(test_db+suffix)
+            except FileNotFoundError:
+                pass
+
+def main():
+    init_db()
+    server=http.server.ThreadingHTTPServer(
+        ("127.0.0.1",PORT),
+        Handler,
+    )
+    print(
+        "NDSP_LAUNCH_CONTROL_V167_LISTENING "
+        f"PORT={PORT} DB={DB_PATH} MAX={MAX_TRIAL_SEATS}",
+        flush=True,
+    )
+    server.serve_forever()
+
+if __name__=="__main__":
+    if "--self-test" in os.sys.argv:
+        self_test()
+    else:
+        main()

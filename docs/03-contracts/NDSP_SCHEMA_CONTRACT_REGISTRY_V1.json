@@ -1,0 +1,54 @@
+{
+  "registry_id": "NDSP-SCHEMA-CONTRACT-REGISTRY-V1",
+  "version": "1.0.0",
+  "contracts": [
+    {
+      "contract_id": "NDSP-CONTRACT-ASSET-IDENTITY",
+      "version": "1.0.0",
+      "boundary": "ingestion",
+      "fail_policy": "fail_closed"
+    },
+    {
+      "contract_id": "NDSP-CONTRACT-SOURCE-IDENTITY",
+      "version": "1.0.0",
+      "boundary": "ingestion",
+      "fail_policy": "fail_closed"
+    },
+    {
+      "contract_id": "NDSP-CONTRACT-RAW-SNAPSHOT",
+      "version": "1.0.0",
+      "boundary": "raw_storage",
+      "fail_policy": "fail_closed"
+    },
+    {
+      "contract_id": "NDSP-CONTRACT-CANONICAL-SNAPSHOT",
+      "version": "1.0.0",
+      "boundary": "decision_input",
+      "fail_policy": "fail_closed"
+    },
+    {
+      "contract_id": "NDSP-CONTRACT-LAYER-RESULT",
+      "version": "1.0.0",
+      "boundary": "layer",
+      "fail_policy": "fail_closed"
+    },
+    {
+      "contract_id": "NDSP-CONTRACT-DECISION",
+      "version": "1.0.0",
+      "boundary": "decision_output",
+      "fail_policy": "fail_closed"
+    },
+    {
+      "contract_id": "NDSP-CONTRACT-EVIDENCE-LEDGER",
+      "version": "1.0.0",
+      "boundary": "evidence",
+      "fail_policy": "fail_closed"
+    },
+    {
+      "contract_id": "NDSP-CONTRACT-EXTERNAL-API",
+      "version": "1.0.0",
+      "boundary": "external",
+      "fail_policy": "fail_closed"
+    }
+  ]
+}

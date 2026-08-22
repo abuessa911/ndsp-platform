@@ -1,0 +1,3 @@
+=== FILE INVENTORY ===
+/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/app.py
+/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/requirements.txt

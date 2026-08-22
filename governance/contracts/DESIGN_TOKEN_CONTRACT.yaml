@@ -1,0 +1,11 @@
+status: DESIGN_REFERENCE_ONLY
+classification: DESIGN_REFERENCE_ONLY
+tokens:
+  primary_accent: Indigo or Violet
+  secondary_accent: Cyan
+  success: Green
+  bearish: Red
+  warning: Amber
+  shadow_experiment: Purple
+  official_core: Blue
+rule: Color is never the only state signal; use text, icon, label, and tooltip when needed.

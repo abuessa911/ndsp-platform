@@ -1,0 +1,29 @@
+{
+  "project": "DSP — منصة دعم القرار",
+  "status": "AUTHORITATIVE_RESEARCH_ROOT_LOCKED",
+  "official_research_root": "/home/nawaf511/empire-core-new/research",
+  "labs": {
+    "nmp_formula_lab": {
+      "path": "/home/nawaf511/empire-core-new/research/nmp-lab",
+      "status": "RESEARCH_LAB_APPROVED",
+      "final_formula_adopted": false,
+      "temporary_finding": "RSI14 + Opposite Candle + High",
+      "temporary_finding_approved_for_production": false
+    },
+    "tdl_research_lab": {
+      "path": "/home/nawaf511/empire-core-new/research/tdl-lab",
+      "status": "RESEARCH_LAB_APPROVED"
+    },
+    "shared": {
+      "path": "/home/nawaf511/empire-core-new/research/shared"
+    }
+  },
+  "rules": {
+    "apps_frontend_only": true,
+    "backend_runtime_api_only": true,
+    "governance_policy_only": true,
+    "research_labs_source_of_truth": true,
+    "no_scattered_lab_paths": true
+  },
+  "final_status": "DSP_RESEARCH_LABS_REFERENCE_LOCKED"
+}

@@ -1,0 +1,92 @@
+     1	import { useCallback, useEffect, useState } from "react";
+     2	
+     3	const ENDPOINTS = {
+     4	  current: "/api/completed-decisions",
+     5	  history: "/api/completed-decisions/history?limit=100",
+     6	  integrity: "/api/completed-decisions/history/integrity"
+     7	};
+     8	
+     9	async function fetchJson(url) {
+    10	  const controller = new AbortController();
+    11	  const timeout = setTimeout(() => controller.abort(), 20000);
+    12	
+    13	  try {
+    14	    const response = await fetch(url, {
+    15	      signal: controller.signal,
+    16	      cache: "no-store",
+    17	      headers: { Accept: "application/json" }
+    18	    });
+    19	
+    20	    if (!response.ok) {
+    21	      throw new Error(`${url}:HTTP_${response.status}`);
+    22	    }
+    23	
+    24	    return await response.json();
+    25	  } finally {
+    26	    clearTimeout(timeout);
+    27	  }
+    28	}
+    29	
+    30	export function useCompletedDecisionsV37() {
+    31	  const [current, setCurrent] = useState(null);
+    32	  const [history, setHistory] = useState(null);
+    33	  const [integrity, setIntegrity] = useState(null);
+    34	  const [loading, setLoading] = useState(true);
+    35	  const [error, setError] = useState(null);
+    36	  const [lastLoadedAt, setLastLoadedAt] = useState(null);
+    37	
+    38	  const refresh = useCallback(async () => {
+    39	    setLoading(true);
+    40	    setError(null);
+    41	
+    42	    const settled = await Promise.allSettled([
+    43	      fetchJson(ENDPOINTS.current),
+    44	      fetchJson(ENDPOINTS.history),
+    45	      fetchJson(ENDPOINTS.integrity)
+    46	    ]);
+    47	
+    48	    const failures = [];
+    49	
+    50	    if (settled[0].status === "fulfilled") {
+    51	      setCurrent(settled[0].value);
+    52	    } else {
+    53	      failures.push(settled[0].reason?.message || "CURRENT_FETCH_FAILED");
+    54	    }
+    55	
+    56	    if (settled[1].status === "fulfilled") {
+    57	      setHistory(settled[1].value);
+    58	    } else {
+    59	      failures.push(settled[1].reason?.message || "HISTORY_FETCH_FAILED");
+    60	    }
+    61	
+    62	    if (settled[2].status === "fulfilled") {
+    63	      setIntegrity(settled[2].value);
+    64	    } else {
+    65	      failures.push(settled[2].reason?.message || "INTEGRITY_FETCH_FAILED");
+    66	    }
+    67	
+    68	    if (failures.length) {
+    69	      setError(failures.join(" | "));
+    70	    }
+    71	
+    72	    setLastLoadedAt(new Date());
+    73	    setLoading(false);
+    74	  }, []);
+    75	
+    76	  useEffect(() => {
+    77	    refresh();
+    78	    const id = setInterval(refresh, 60000);
+    79	    return () => clearInterval(id);
+    80	  }, [refresh]);
+    81	
+    82	  return {
+    83	    current,
+    84	    history,
+    85	    integrity,
+    86	    loading,
+    87	    error,
+    88	    lastLoadedAt,
+    89	    refresh
+    90	  };
+    91	}
+    92	

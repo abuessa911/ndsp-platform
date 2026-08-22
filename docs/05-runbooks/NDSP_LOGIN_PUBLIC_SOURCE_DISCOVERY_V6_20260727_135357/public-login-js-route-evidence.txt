@@ -1,0 +1,4 @@
+URL=https://my.ndsp.app/login/assets/index-s5NFk2mn.js
+FILE=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_LOGIN_PUBLIC_SOURCE_DISCOVERY_V6_20260727_135357/js/asset-1.js
+n:[j.jsxs("label",{className:"remember",children:[j.jsx("input",{type:"checkbox",checked:o,onChange:z=>i(z.target.checked)}),j.jsx("span",{children:"تذكرني"})]}),j.jsx("a",{href:"/reset-password/",children:"نسيت كلمة المرور؟"})]}),p&&j.jsx("div",{className:"notice error",role:"alert",children:p}),h&&j.jsx("div",{className:"notice success",role:"status",children:h}),j.jsxs("div",{className:"login-actions","data-ndsp-owner-actions-v2":"integrated-form-
+---

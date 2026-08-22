@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "governance-policy.schema.json",
+  "title": "COT governance policy",
+  "type": "object",
+  "required": [
+    "governanceVersion",
+    "canonicalProjectRoot",
+    "canonicalTimezone",
+    "production",
+    "shadow",
+    "investment",
+    "speculation"
+  ],
+  "properties": {
+    "governanceVersion": {
+      "const": "COT-GOV-1.0.0"
+    },
+    "canonicalProjectRoot": {
+      "const": "/home/nawaf511/empire-core-new"
+    },
+    "canonicalTimezone": {
+      "const": "UTC"
+    },
+    "production": {
+      "type": "object"
+    },
+    "shadow": {
+      "type": "object",
+      "required": [
+        "enabled",
+        "publicExposure",
+        "canAffectOfficialResult",
+        "canWriteOfficialStore",
+        "automaticPromotion"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "publicExposure": {
+          "const": false
+        },
+        "canAffectOfficialResult": {
+          "const": false
+        },
+        "canWriteOfficialStore": {
+          "const": false
+        },
+        "automaticPromotion": {
+          "const": false
+        }
+      }
+    },
+    "investment": {
+      "type": "object",
+      "required": [
+        "officialDirection",
+        "weeklySupport",
+        "timing"
+      ],
+      "properties": {
+        "timing": {
+          "type": "object",
+          "required": [
+            "enabled",
+            "dayControl",
+            "tdlML",
+            "tdlS",
+            "speculationTiming"
+          ],
+          "properties": {
+            "enabled": {
+              "const": false
+            },
+            "dayControl": {
+              "const": false
+            },
+            "tdlML": {
+              "const": false
+            },
+            "tdlS": {
+              "const": false
+            },
+            "speculationTiming": {
+              "const": false
+            }
+          }
+        }
+      }
+    },
+    "speculation": {
+      "type": "object"
+    }
+  }
+}

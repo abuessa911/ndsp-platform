@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0.0",
+  "generated_from_preflight": "NDSP_BACKUP_READINESS_PREFLIGHT_vmi2934783_20260711_153142",
+  "preflight_archive_sha256": "4076f964a0fb2f2459b8e23e28e62be3e37aab2e107bff22cbcc0dee407268b1",
+  "host": "vmi2934783",
+  "project": "/home/nawaf511/empire-core-new",
+  "facts": {
+    "project_apparent_size": "2.4G",
+    "free_space_at_preflight": "154G",
+    "sudo_mode": "PASSWORDLESS",
+    "pm2_processes": ["ndsp-portal"],
+    "local_postgresql": {
+      "version": "16",
+      "cluster": "main",
+      "port": 5432,
+      "known_databases": ["postgres", "ndsp_auth"]
+    },
+    "docker_postgresql": {
+      "container": "ndip_postgres",
+      "image": "postgres:16",
+      "host_port": 5433,
+      "volume": "ndip-backend_ndip_postgres_data"
+    },
+    "redis": {
+      "host": "127.0.0.1",
+      "port": 6379,
+      "version": "7.0.15"
+    },
+    "nginx_preflight": "configuration test successful",
+    "git_branch": "feature/ndsp-os",
+    "git_head": "4e7c9bf2d96484488a6f19608fadec0d3d016558",
+    "git_worktree": "DIRTY_WITH_UNTRACKED_FILES"
+  },
+  "filesystem_groups": {
+    "project": [
+      "/home/nawaf511/empire-core-new"
+    ],
+    "home_runtime": [
+      "/home/nawaf511/ndsp-portal-real-data-sync",
+      "/home/nawaf511/ndsp_ops",
+      "/home/nawaf511/.pm2"
+    ],
+    "live_apps": [
+      "/opt/ndsp-current-user-display",
+      "/opt/ndsp-change-password-gateway",
+      "/opt/ndsp-v3-portal-gateway",
+      "/opt/ndsp-v52-contract",
+      "/opt/ndsp-v53-bridge",
+      "/opt/execution-engine",
+      "/var/www"
+    ],
+    "system_config": [
+      "/etc/nginx",
+      "/etc/systemd/system",
+      "/etc/ndsp",
+      "/etc/empire",
+      "/etc/postgresql",
+      "/etc/redis",
+      "/etc/cron.d",
+      "/etc/letsencrypt",
+      "/var/spool/cron/crontabs"
+    ]
+  },
+  "database_strategy": {
+    "local_postgresql": "logical custom-format dumps plus globals",
+    "docker_postgresql": "logical custom-format dumps plus globals for running PostgreSQL containers",
+    "docker_volumes": "raw archive for matching volumes except active PostgreSQL data volumes",
+    "sqlite": "Python online backup API for valid databases in governed roots",
+    "redis": "redis-cli RDB transfer with filesystem fallback"
+  },
+  "encryption": "GPG symmetric AES-256 using a passphrase file that is never included in the backup",
+  "production_restore": "manual gated runbook only; automated package performs a non-destructive restore drill"
+}

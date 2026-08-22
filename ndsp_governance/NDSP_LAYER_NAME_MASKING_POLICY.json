@@ -1,0 +1,9 @@
+{
+  "policy": "NDSP_LAYER_NAME_MASKING_POLICY",
+  "status": "superseded",
+  "replaced_by": "NDSP_LAYER_VISIBILITY_OWNER_INTERNAL_POLICY",
+  "backend_masking_cancelled": true,
+  "layers_folder_masking_cancelled": true,
+  "owner_admin_audit_unmasked": true,
+  "public_ui_masking_only": true
+}

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -euo pipefail
+# NDSP_PUBLIC_SCRUB_WRAPPER_V473
+CORE_BIN="/home/nawaf511/empire-core-v5-1-1-clean/backend/services/ndsp-runtime-jobs/ndsp-refresh-static-data-contract-v46.core_before_public_scrub_20260701_190411"
+SCRUB_BIN="/home/nawaf511/empire-core-v5-1-1-clean/backend/services/ndsp-runtime-jobs/ndsp-public-secret-scrub-and-safe-tdl-labels-v473"
+"$CORE_BIN" "$@"
+"$SCRUB_BIN"

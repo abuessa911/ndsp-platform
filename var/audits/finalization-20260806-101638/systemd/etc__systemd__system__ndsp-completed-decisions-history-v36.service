@@ -1,0 +1,31 @@
+[Unit]
+Description=NDSP Completed Decisions Append-Only History API V36
+After=network-online.target ndsp-completed-decisions-evidence-v35.service
+Wants=network-online.target
+Requires=ndsp-completed-decisions-evidence-v35.service
+
+[Service]
+Type=simple
+User=nawaf511
+Group=nawaf511
+WorkingDirectory=/home/nawaf511/empire-core-new
+Environment=PYTHONUNBUFFERED=1
+Environment=NDSP_HISTORY_HOST=127.0.0.1
+Environment=NDSP_HISTORY_PORT=9088
+Environment=NDSP_HISTORY_SOURCE_URL=http://127.0.0.1:9087/api/completed-decisions?limit=100
+Environment=NDSP_HISTORY_DATA_DIR=/home/nawaf511/empire-core-new/var/ledger/completed-decisions-v36
+ExecStart=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_history_v36.py serve
+Restart=on-failure
+RestartSec=3
+TimeoutStartSec=45
+TimeoutStopSec=20
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=read-only
+ReadWritePaths=/home/nawaf511/empire-core-new/var/ledger/completed-decisions-v36
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+LockPersonality=true
+
+[Install]
+WantedBy=multi-user.target

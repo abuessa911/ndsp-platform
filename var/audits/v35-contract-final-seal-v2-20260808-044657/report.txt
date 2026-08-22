@@ -1,0 +1,115 @@
+=== NDSP V35 CONTRACT FINAL SEAL V2 ===
+DATE=2026-08-08T04:46:57+02:00
+MODE=READ_ONLY
+FILES_MODIFIED=0
+SERVICES_RESTARTED=0
+RUNTIME_LOGIC_MODIFIED=0
+AUDIT=/home/nawaf511/empire-core-new/var/audits/v35-contract-final-seal-v2-20260808-044657
+
+=== 1. SERVICE ===
+V35_STATE=active
+V35_PID=2402285
+V35_SERVICE=PASS
+LISTEN 0      5          127.0.0.1:9087       0.0.0.0:*    users:(("python3",pid=2402285,fd=3)) 
+
+=== 2. V33 INPUT DIRECTORY ===
+V33_RUNTIME_DIR=/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33
+V33_RUNTIME_DIR=FOUND
+V33_LATEST_FILE_COUNT=6
+2026-08-08T04:44:18.8035964300 18945 /home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/latest_ETHUSDT_weekly_investment.json
+2026-07-16T01:30:52.1186105960 16685 /home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/latest_XAUUSD_weekly_investment.json
+2026-07-16T01:30:52.0866107510 16559 /home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/latest_XAUUSD_weekly_speculative.json
+2026-07-14T07:58:36.1732411340 17067 /home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/latest_EURUSD_weekly_investment.json
+2026-07-14T07:58:36.0872414440 16868 /home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/latest_EURUSD_weekly_speculative.json
+2026-07-14T07:40:21.2462513630 17934 /home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/latest_ETHUSDT_weekly_speculative.json
+
+=== 3. ETH V33 GOVERNANCE INPUT ===
+ETH_V33_FILE=/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/latest_ETHUSDT_weekly_investment.json
+RUNTIME_VERSION= 'ndsp-canonical-live-runtime-v33.0.0'
+COT_STATUS= 'STALE_BY_POLICY'
+COT_REASON_CODE= 'COT_REPORT_STALE_BY_POLICY'
+COT_DECISION_USE_ALLOWED= False
+COT_MONITORING_USE_ALLOWED= True
+COT_REPORT_DATE= '2026-07-21'
+COT_REPORT_AGE_DAYS= 18.0
+COT_MAX_AGE_DAYS= 10
+COT_FRESH= False
+asset_managers_overall='bearish'
+asset_managers_weekly='bearish'
+leveraged_funds_overall='bearish'
+leveraged_funds_weekly='bullish'
+EXEC_DECISION_USE_ALLOWED= False
+PUBLISHABLE_COMPLETED_DECISION= False
+GOVERNED_SINGLE_TRUTH_STATE= 'DATA_BLOCKED'
+BLOCKERS= ['CANONICAL_COT_NOT_VERIFIED']
+FOUR_COT_DIRECTIONS_PRESENT=PASS
+STALE_COT_DECISION_AUTHORITY_BLOCK=PASS
+
+=== 4. V35 HTTP CONTRACT ===
+HTTP_V35_HEALTH=200
+HTTP_V35_LIST=200
+HTTP_V35_LATEST=200
+
+=== 5. V35 RESPONSES ===
+--- HEALTH ---
+ok=True
+service='ndsp-completed-decisions-evidence-v35'
+contract_version='ndsp-completed-decisions-current-v35'
+v33_runtime_dir='/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33'
+v33_runtime_dir_exists=True
+TOP_LEVEL_KEYS= ['contract_version', 'current_blocked_or_rejected_count', 'current_publishable_count', 'database_backed_history', 'generated_at', 'ok', 'port', 'read_only', 'runtime_version', 'service', 'v33_runtime_dir', 'v33_runtime_dir_exists']
+--- LIST ---
+ok=True
+contract_version='ndsp-completed-decisions-current-v35'
+source='v33_evidence_backed_current_registry'
+decision_authority_boundary='ONLY_V33_PUBLISHABLE_CANONICAL_DECISIONS'
+count=1
+TOP_LEVEL_KEYS= ['contract_version', 'count', 'current_only', 'database_backed_history', 'decision_authority_boundary', 'decisions', 'generated_at', 'ok', 'source']
+--- LATEST ---
+ok=True
+source='v33_evidence_backed_current_registry'
+TOP_LEVEL_KEYS= ['decision', 'generated_at', 'ok', 'source']
+
+=== 6. V35 REGISTRY TRUTH ===
+V33_FILES_PARSED=6
+V35_ELIGIBLE_PUBLISHABLE=1
+V33_FILES_WITH_BLOCKERS=5
+V33_STALE_COT_FILES=1
+PUBLISHABLE_EXAMPLE=/home/nawaf511/empire-core-new/var/runtime/canonical-live-v33/latest_ETHUSDT_weekly_speculative.json
+V35_REGISTRY_EVALUATION=PASS
+
+=== 7. ETH MUST NOT BE FALSELY PUBLISHED ===
+ETH_V35_ELIGIBLE= False
+STALE_ETH_NOT_FALSELY_PUBLISHABLE=PASS
+
+=== 8. JOURNAL REGRESSION CHECK ===
+V35_RUNTIME_ERRORS=NONE_FOUND
+
+=== 9. FINAL CONTRACT CLASSIFICATION ===
+V33_TO_V35_INPUT_CONTRACT=PASS
+FOUR_DIRECTION_EVIDENCE=PASS
+STALE_POLICY_BOUNDARY=PASS
+V35_PATCH_REQUIRED=NO
+NEXT_ACTION=NONE
+FINAL_RESULT=PASS
+
+=== 10. CHECKSUMS ===
+CHECKSUMS=PASS
+
+============================================================
+RAW_9076_HISTORY_ADAPTER=PASS
+QUALITY_9082_GOVERNING_INPUTS=PASS
+CANONICAL_9085_HANDOFF=PASS
+V33_9086_COT_HANDOFF=PASS
+V35_AUTHORITY_BOUNDARY_VERIFIED=YES
+FILES_MODIFIED=0
+SERVICES_RESTARTED=0
+RUNTIME_LOGIC_MODIFIED=0
+AUDIT=/home/nawaf511/empire-core-new/var/audits/v35-contract-final-seal-v2-20260808-044657
+REPORT=/home/nawaf511/empire-core-new/var/audits/v35-contract-final-seal-v2-20260808-044657/report.txt
+HEALTH=/home/nawaf511/empire-core-new/var/audits/v35-contract-final-seal-v2-20260808-044657/health.json
+COMPLETED_DECISIONS=/home/nawaf511/empire-core-new/var/audits/v35-contract-final-seal-v2-20260808-044657/completed-decisions.json
+LATEST=/home/nawaf511/empire-core-new/var/audits/v35-contract-final-seal-v2-20260808-044657/latest.json
+JOURNAL=/home/nawaf511/empire-core-new/var/audits/v35-contract-final-seal-v2-20260808-044657/journal.txt
+CHECKSUMS=/home/nawaf511/empire-core-new/var/audits/v35-contract-final-seal-v2-20260808-044657/SHA256SUMS
+=== V35 CONTRACT FINAL SEAL COMPLETE ===

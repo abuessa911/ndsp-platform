@@ -1,0 +1,58 @@
+
+--- /home/nawaf511/empire-core-new ---
+# file: /home/nawaf511/empire-core-new
+# owner: nawaf511
+# group: nawaf511
+user::rwx
+user:www-data:--x
+user:postgres:--x
+user:nobody:--x
+group::---
+mask::--x
+other::---
+
+
+--- /home/nawaf511/empire-core-new/backend ---
+# file: /home/nawaf511/empire-core-new/backend
+# owner: nawaf511
+# group: nawaf511
+user::rwx
+group::r-x
+other::r-x
+
+
+--- /home/nawaf511/empire-core-new/backend/platform ---
+# file: /home/nawaf511/empire-core-new/backend/platform
+# owner: nawaf511
+# group: nawaf511
+user::rwx
+group::---
+other::---
+
+
+--- /home/nawaf511/empire-core-new/backend/platform/canonical_v1 ---
+# file: /home/nawaf511/empire-core-new/backend/platform/canonical_v1
+# owner: nawaf511
+# group: nawaf511
+user::rwx
+group::---
+other::---
+
+
+--- /home/nawaf511/empire-core-new/backend/contracts ---
+# file: /home/nawaf511/empire-core-new/backend/contracts
+# owner: nawaf511
+# group: nawaf511
+user::rwx
+group::---
+other::---
+
+
+--- /home/nawaf511/empire-core-new/backend/contracts/canonical_v1 ---
+# file: /home/nawaf511/empire-core-new/backend/contracts/canonical_v1
+# owner: nawaf511
+# group: nawaf511
+user::rwx
+group::---
+other::---
+

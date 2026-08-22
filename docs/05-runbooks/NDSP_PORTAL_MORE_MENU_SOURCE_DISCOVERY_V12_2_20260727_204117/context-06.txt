@@ -1,0 +1,125 @@
+PATTERN=\bMore\b
+ANCHOR_LINE=2225
+CONTEXT_START=2180
+CONTEXT_END=2299
+
+  002180: const CHART_HISTORY_LIMITS = [100, 250, 500, 1000, 2000];
+  002181: 
+  002182: const CHART_INDICATORS = [
+  002183:   { id: "rsi", label: "RSI" },
+  002184:   { id: "macd", label: "MACD Histogram" },
+  002185:   { id: "obv", label: "OBV" },
+  002186:   { id: "cci", label: "CCI" }
+  002187: ];
+  002188: 
+  002189: const CHART_COPY = {
+  002190:   ar: {
+  002191:     older: "أقدم",
+  002192:     newer: "أحدث",
+  002193:     latest: "الآن",
+  002194:     zoomIn: "تكبير",
+  002195:     zoomOut: "تصغير",
+  002196:     resetView: "إعادة العرض",
+  002197:     history: "المدى التاريخي",
+  002198:     loadedCandles: "شمعة محمّلة",
+  002199:     sourceLimit: "يعرض كل ما أعاده مصدر الشموع دون اختلاق بيانات مفقودة.",
+  002200:     dragHint: "اسحب الشارت أفقيًا، واستخدم عجلة الماوس أو أزرار التكبير.",
+  002201:     technicalTools: "أدوات التحليل الفني",
+  002202:     noIndicatorData: "لا توجد بيانات كافية لهذا المؤشر على الإطار المختار.",
+  002203:     loadMore: "تحميل تاريخ أكثر",
+  002204:     allAvailableLoaded: "تم تحميل كل التاريخ المتاح من المصدر لهذه الطلبية.",
+  002205:     hoverHint: "حرّك المؤشر فوق الشموع لعرض الوقت وOHLC.",
+  002206:     open: "الافتتاح",
+  002207:     high: "الأعلى",
+  002208:     low: "الأدنى",
+  002209:     close: "الإغلاق",
+  002210:     time: "الوقت"
+  002211:   },
+  002212:   en: {
+  002213:     older: "Older",
+  002214:     newer: "Newer",
+  002215:     latest: "Latest",
+  002216:     zoomIn: "Zoom in",
+  002217:     zoomOut: "Zoom out",
+  002218:     resetView: "Reset view",
+  002219:     history: "History range",
+  002220:     loadedCandles: "candles loaded",
+  002221:     sourceLimit: "Shows everything returned by the candle source without inventing missing data.",
+  002222:     dragHint: "Drag horizontally and use the mouse wheel or zoom buttons.",
+  002223:     technicalTools: "Technical analysis tools",
+  002224:     noIndicatorData: "Not enough data for this indicator on the selected timeframe.",
+>>002225:     loadMore: "Load more history",
+  002226:     allAvailableLoaded: "All history returned by the source for this request is loaded.",
+  002227:     hoverHint: "Move over candles to inspect time and OHLC.",
+  002228:     open: "Open",
+  002229:     high: "High",
+  002230:     low: "Low",
+  002231:     close: "Close",
+  002232:     time: "Time"
+  002233:   }
+  002234: };
+  002235: 
+  002236: function chartNumber(value) {
+  002237:   const parsed = Number(value);
+  002238:   return Number.isFinite(parsed) ? parsed : null;
+  002239: }
+  002240: 
+  002241: function chartTimeValue(value) {
+  002242:   if (value === null || value === undefined || value === "") {
+  002243:     return 0;
+  002244:   }
+  002245: 
+  002246:   if (typeof value === "number") {
+  002247:     return value < 10_000_000_000 ? value * 1000 : value;
+  002248:   }
+  002249: 
+  002250:   const numericValue = Number(value);
+  002251: 
+  002252:   if (Number.isFinite(numericValue)) {
+  002253:     return numericValue < 10_000_000_000
+  002254:       ? numericValue * 1000
+  002255:       : numericValue;
+  002256:   }
+  002257: 
+  002258:   const parsed = Date.parse(String(value));
+  002259:   return Number.isFinite(parsed) ? parsed : 0;
+  002260: }
+  002261: 
+  002262: function chartTimeLabel(value, lang, includeTime = true) {
+  002263:   const milliseconds = chartTimeValue(value);
+  002264: 
+  002265:   if (!milliseconds) {
+  002266:     return "—";
+  002267:   }
+  002268: 
+  002269:   const date = new Date(milliseconds);
+  002270: 
+  002271:   if (Number.isNaN(date.getTime())) {
+  002272:     return String(value || "—");
+  002273:   }
+  002274: 
+  002275:   return new Intl.DateTimeFormat(
+  002276:     lang === "ar" ? "ar-SA" : "en-US",
+  002277:     includeTime
+  002278:       ? {
+  002279:           year: "numeric",
+  002280:           month: "short",
+  002281:           day: "2-digit",
+  002282:           hour: "2-digit",
+  002283:           minute: "2-digit"
+  002284:         }
+  002285:       : {
+  002286:           year: "numeric",
+  002287:           month: "short",
+  002288:           day: "2-digit"
+  002289:         }
+  002290:   ).format(date);
+  002291: }
+  002292: 
+  002293: function normalizeChartCandles(payload) {
+  002294:   const candidates = [
+  002295:     payload,
+  002296:     payload?.candles,
+  002297:     payload?.data,
+  002298:     payload?.rows,
+  002299:     payload?.result,

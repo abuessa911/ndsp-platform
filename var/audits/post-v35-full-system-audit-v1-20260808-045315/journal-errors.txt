@@ -1,0 +1,464 @@
+=== ● ===
+=== ndsp-16-layers.service ===
+=== ndsp-access-guard-9024.service ===
+=== ndsp-access-guard-final.service ===
+=== ndsp-access-guard.service ===
+=== ndsp-admin-actions.service ===
+=== ndsp-admin-console.service ===
+=== ndsp-admin-snapshot-updater.service ===
+=== ndsp-admin-ui-proxy.service ===
+=== ndsp-admin-user-ops.service ===
+=== ndsp-admin-users-official-readonly.service ===
+=== ndsp-admin-users-official.service ===
+=== ndsp-airtable-runtime-sync.service ===
+=== ndsp-api-compat.service ===
+=== ndsp-api.service ===
+أغسطس 05 09:44:09 vmi2934783 gunicorn[3079669]: [2026-08-05 09:44:09 +0200] [3079669] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:44:10 vmi2934783 gunicorn[3079669]: [2026-08-05 09:44:10 +0200] [3079669] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:44:11 vmi2934783 gunicorn[3079669]: [2026-08-05 09:44:11 +0200] [3079669] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:44:17 vmi2934783 gunicorn[3080921]: [2026-08-05 09:44:17 +0200] [3080921] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:44:18 vmi2934783 gunicorn[3080921]: [2026-08-05 09:44:18 +0200] [3080921] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:44:19 vmi2934783 gunicorn[3080921]: [2026-08-05 09:44:19 +0200] [3080921] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:44:20 vmi2934783 gunicorn[3080921]: [2026-08-05 09:44:20 +0200] [3080921] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:44:21 vmi2934783 gunicorn[3080921]: [2026-08-05 09:44:21 +0200] [3080921] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:44:28 vmi2934783 gunicorn[3081165]: [2026-08-05 09:44:28 +0200] [3081165] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:44:29 vmi2934783 gunicorn[3081165]: [2026-08-05 09:44:29 +0200] [3081165] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:44:30 vmi2934783 gunicorn[3081165]: [2026-08-05 09:44:30 +0200] [3081165] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:44:31 vmi2934783 gunicorn[3081165]: [2026-08-05 09:44:31 +0200] [3081165] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:44:32 vmi2934783 gunicorn[3081165]: [2026-08-05 09:44:32 +0200] [3081165] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:44:38 vmi2934783 gunicorn[3082403]: [2026-08-05 09:44:38 +0200] [3082403] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:44:39 vmi2934783 gunicorn[3082403]: [2026-08-05 09:44:39 +0200] [3082403] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:44:40 vmi2934783 gunicorn[3082403]: [2026-08-05 09:44:40 +0200] [3082403] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:44:41 vmi2934783 gunicorn[3082403]: [2026-08-05 09:44:41 +0200] [3082403] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:44:42 vmi2934783 gunicorn[3082403]: [2026-08-05 09:44:42 +0200] [3082403] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:44:49 vmi2934783 gunicorn[3082673]: [2026-08-05 09:44:49 +0200] [3082673] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:44:50 vmi2934783 gunicorn[3082673]: [2026-08-05 09:44:50 +0200] [3082673] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:44:51 vmi2934783 gunicorn[3082673]: [2026-08-05 09:44:51 +0200] [3082673] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:44:52 vmi2934783 gunicorn[3082673]: [2026-08-05 09:44:52 +0200] [3082673] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:44:53 vmi2934783 gunicorn[3082673]: [2026-08-05 09:44:53 +0200] [3082673] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:44:59 vmi2934783 gunicorn[3083921]: [2026-08-05 09:44:59 +0200] [3083921] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:45:00 vmi2934783 gunicorn[3083921]: [2026-08-05 09:45:00 +0200] [3083921] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:45:01 vmi2934783 gunicorn[3083921]: [2026-08-05 09:45:01 +0200] [3083921] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:45:02 vmi2934783 gunicorn[3083921]: [2026-08-05 09:45:02 +0200] [3083921] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:45:03 vmi2934783 gunicorn[3083921]: [2026-08-05 09:45:03 +0200] [3083921] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:45:10 vmi2934783 gunicorn[3084345]: [2026-08-05 09:45:10 +0200] [3084345] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:45:11 vmi2934783 gunicorn[3084345]: [2026-08-05 09:45:11 +0200] [3084345] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:45:12 vmi2934783 gunicorn[3084345]: [2026-08-05 09:45:12 +0200] [3084345] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:45:13 vmi2934783 gunicorn[3084345]: [2026-08-05 09:45:13 +0200] [3084345] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:45:14 vmi2934783 gunicorn[3084345]: [2026-08-05 09:45:14 +0200] [3084345] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:45:20 vmi2934783 gunicorn[3085606]: [2026-08-05 09:45:20 +0200] [3085606] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:45:21 vmi2934783 gunicorn[3085606]: [2026-08-05 09:45:21 +0200] [3085606] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:45:22 vmi2934783 gunicorn[3085606]: [2026-08-05 09:45:22 +0200] [3085606] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:45:23 vmi2934783 gunicorn[3085606]: [2026-08-05 09:45:23 +0200] [3085606] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:45:24 vmi2934783 gunicorn[3085606]: [2026-08-05 09:45:24 +0200] [3085606] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:45:31 vmi2934783 gunicorn[3085851]: [2026-08-05 09:45:31 +0200] [3085851] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:45:32 vmi2934783 gunicorn[3085851]: [2026-08-05 09:45:32 +0200] [3085851] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:45:33 vmi2934783 gunicorn[3085851]: [2026-08-05 09:45:33 +0200] [3085851] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:45:34 vmi2934783 gunicorn[3085851]: [2026-08-05 09:45:34 +0200] [3085851] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:45:35 vmi2934783 gunicorn[3085851]: [2026-08-05 09:45:35 +0200] [3085851] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:45:41 vmi2934783 gunicorn[3087091]: [2026-08-05 09:45:41 +0200] [3087091] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:45:42 vmi2934783 gunicorn[3087091]: [2026-08-05 09:45:42 +0200] [3087091] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:45:43 vmi2934783 gunicorn[3087091]: [2026-08-05 09:45:43 +0200] [3087091] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:45:44 vmi2934783 gunicorn[3087091]: [2026-08-05 09:45:44 +0200] [3087091] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:45:45 vmi2934783 gunicorn[3087091]: [2026-08-05 09:45:45 +0200] [3087091] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:45:51 vmi2934783 gunicorn[3087369]: [2026-08-05 09:45:51 +0200] [3087369] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:45:52 vmi2934783 gunicorn[3087369]: [2026-08-05 09:45:52 +0200] [3087369] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:45:53 vmi2934783 gunicorn[3087369]: [2026-08-05 09:45:53 +0200] [3087369] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:45:54 vmi2934783 gunicorn[3087369]: [2026-08-05 09:45:54 +0200] [3087369] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:45:55 vmi2934783 gunicorn[3087369]: [2026-08-05 09:45:55 +0200] [3087369] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:46:02 vmi2934783 gunicorn[3088396]: [2026-08-05 09:46:02 +0200] [3088396] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:46:03 vmi2934783 gunicorn[3088396]: [2026-08-05 09:46:03 +0200] [3088396] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:46:04 vmi2934783 gunicorn[3088396]: [2026-08-05 09:46:04 +0200] [3088396] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:46:05 vmi2934783 gunicorn[3088396]: [2026-08-05 09:46:05 +0200] [3088396] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:46:06 vmi2934783 gunicorn[3088396]: [2026-08-05 09:46:06 +0200] [3088396] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:46:12 vmi2934783 gunicorn[3089039]: [2026-08-05 09:46:12 +0200] [3089039] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:46:13 vmi2934783 gunicorn[3089039]: [2026-08-05 09:46:13 +0200] [3089039] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:46:15 vmi2934783 gunicorn[3089039]: [2026-08-05 09:46:14 +0200] [3089039] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:46:16 vmi2934783 gunicorn[3089039]: [2026-08-05 09:46:16 +0200] [3089039] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+أغسطس 05 09:46:17 vmi2934783 gunicorn[3089039]: [2026-08-05 09:46:17 +0200] [3089039] [ERROR] connection to ('127.0.0.1', 9002) failed: [Errno 98] Address already in use
+=== ndsp-app.service ===
+أغسطس 05 10:07:45 vmi2934783 (python3)[3134360]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:07:50 vmi2934783 (python3)[3134492]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:07:55 vmi2934783 (python3)[3134586]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:08:01 vmi2934783 (python3)[3134712]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:08:06 vmi2934783 (python3)[3134813]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:08:11 vmi2934783 (python3)[3135039]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:08:16 vmi2934783 (python3)[3135142]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:08:21 vmi2934783 (python3)[3135258]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:08:27 vmi2934783 (python3)[3135366]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:08:32 vmi2934783 (python3)[3135465]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:08:37 vmi2934783 (python3)[3135559]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:08:43 vmi2934783 (python3)[3135684]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:08:48 vmi2934783 (python3)[3135774]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:08:53 vmi2934783 (python3)[3135889]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:08:58 vmi2934783 (python3)[3135989]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:09:04 vmi2934783 (python3)[3136147]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:09:09 vmi2934783 (python3)[3136315]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:09:19 vmi2934783 (python3)[3136566]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:09:24 vmi2934783 (python3)[3136675]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:09:29 vmi2934783 (python3)[3136786]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:09:34 vmi2934783 (python3)[3136881]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:09:39 vmi2934783 (python3)[3136977]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:09:44 vmi2934783 (python3)[3137093]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:09:49 vmi2934783 (python3)[3137183]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:09:55 vmi2934783 (python3)[3137313]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:10:00 vmi2934783 (python3)[3137422]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:10:05 vmi2934783 (python3)[3137576]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:10:10 vmi2934783 (python3)[3137744]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:10:15 vmi2934783 (python3)[3137886]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:10:20 vmi2934783 (python3)[3137970]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:10:26 vmi2934783 (python3)[3138089]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:10:31 vmi2934783 (python3)[3138181]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:10:36 vmi2934783 (python3)[3138298]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:10:41 vmi2934783 (python3)[3138385]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:10:46 vmi2934783 (python3)[3138508]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:10:52 vmi2934783 (python3)[3138586]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:10:57 vmi2934783 (python3)[3138712]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:11:02 vmi2934783 (python3)[3138811]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:11:07 vmi2934783 (python3)[3138944]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:11:12 vmi2934783 (python3)[3139127]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:11:17 vmi2934783 (python3)[3139236]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:11:22 vmi2934783 (python3)[3139331]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:11:27 vmi2934783 (python3)[3139459]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:11:33 vmi2934783 (python3)[3139556]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:11:38 vmi2934783 (python3)[3139668]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:11:43 vmi2934783 (python3)[3139757]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:11:48 vmi2934783 (python3)[3139879]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:11:58 vmi2934783 (python3)[3140122]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:12:08 vmi2934783 (python3)[3140389]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:12:13 vmi2934783 (python3)[3140551]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:12:19 vmi2934783 (python3)[3140665]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:12:24 vmi2934783 (python3)[3140748]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:12:29 vmi2934783 (python3)[3140883]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:12:34 vmi2934783 (python3)[3140956]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:12:40 vmi2934783 (python3)[3141114]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:12:45 vmi2934783 (python3)[3141343]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:12:50 vmi2934783 (python3)[3141609]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:12:55 vmi2934783 (python3)[3142214]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:13:00 vmi2934783 (python3)[3142669]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:13:05 vmi2934783 (python3)[3143402]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:13:10 vmi2934783 (python3)[3144391]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:13:15 vmi2934783 (python3)[3145401]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:13:20 vmi2934783 (python3)[3146426]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:13:26 vmi2934783 (python3)[3146857]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:13:36 vmi2934783 (python3)[3147044]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:13:41 vmi2934783 (python3)[3147155]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:13:46 vmi2934783 (python3)[3147248]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:13:51 vmi2934783 (python3)[3147403]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:13:56 vmi2934783 (python3)[3147483]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:14:01 vmi2934783 (python3)[3147613]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:14:07 vmi2934783 (python3)[3147699]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:14:12 vmi2934783 (python3)[3147938]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:14:17 vmi2934783 (python3)[3148023]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:14:22 vmi2934783 (python3)[3148150]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:14:27 vmi2934783 (python3)[3148266]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:14:33 vmi2934783 (python3)[3148360]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:14:38 vmi2934783 (python3)[3148475]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:14:48 vmi2934783 (python3)[3149058]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:14:53 vmi2934783 (python3)[3149148]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:14:59 vmi2934783 (python3)[3149265]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:15:04 vmi2934783 (python3)[3149393]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:15:09 vmi2934783 (python3)[3149587]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:15:14 vmi2934783 (python3)[3149719]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:15:19 vmi2934783 (python3)[3149824]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:15:24 vmi2934783 (python3)[3149919]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:15:30 vmi2934783 (python3)[3150032]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:15:35 vmi2934783 (python3)[3150137]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:15:40 vmi2934783 (python3)[3150228]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:15:51 vmi2934783 (python3)[3150444]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:15:56 vmi2934783 (python3)[3150957]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:16:06 vmi2934783 (python3)[3151177]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:16:11 vmi2934783 (python3)[3151414]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:16:16 vmi2934783 (python3)[3151508]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:16:21 vmi2934783 (python3)[3151689]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:16:27 vmi2934783 (python3)[3151904]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:16:32 vmi2934783 (python3)[3152101]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:16:37 vmi2934783 (python3)[3152538]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:16:42 vmi2934783 (python3)[3152899]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:16:47 vmi2934783 (python3)[3153193]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:16:52 vmi2934783 (python3)[3153532]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:16:57 vmi2934783 (python3)[3153899]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:17:02 vmi2934783 (python3)[3154195]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:17:13 vmi2934783 (python3)[3154643]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:17:18 vmi2934783 (python3)[3155906]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:17:23 vmi2934783 (python3)[3156137]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:17:28 vmi2934783 (python3)[3156266]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:17:33 vmi2934783 (python3)[3156357]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:17:38 vmi2934783 (python3)[3157440]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:17:44 vmi2934783 (python3)[3157549]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:17:49 vmi2934783 (python3)[3157659]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:17:54 vmi2934783 (python3)[3157777]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:18:00 vmi2934783 (python3)[3158885]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:18:05 vmi2934783 (python3)[3158996]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:18:10 vmi2934783 (python3)[3159192]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:18:15 vmi2934783 (python3)[3159326]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:18:20 vmi2934783 (python3)[3159810]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:18:25 vmi2934783 (python3)[3160507]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:18:31 vmi2934783 (python3)[3160633]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:18:36 vmi2934783 (python3)[3160736]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:18:41 vmi2934783 (python3)[3161560]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:18:46 vmi2934783 (python3)[3161912]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:18:51 vmi2934783 (python3)[3162007]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:18:57 vmi2934783 (python3)[3162133]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:19:02 vmi2934783 (python3)[3162627]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:19:07 vmi2934783 (python3)[3163328]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:19:12 vmi2934783 (python3)[3163562]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:19:18 vmi2934783 (python3)[3163663]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:19:23 vmi2934783 (python3)[3163759]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:19:28 vmi2934783 (python3)[3164865]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:19:34 vmi2934783 (python3)[3164950]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:19:39 vmi2934783 (python3)[3165065]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:19:44 vmi2934783 (python3)[3165158]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:19:49 vmi2934783 (python3)[3166253]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:19:54 vmi2934783 (python3)[3166392]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:20:00 vmi2934783 (python3)[3166495]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:20:05 vmi2934783 (python3)[3166627]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:20:10 vmi2934783 (python3)[3167875]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:20:21 vmi2934783 (python3)[3168423]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:20:26 vmi2934783 (python3)[3168720]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:20:31 vmi2934783 (python3)[3170188]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:20:36 vmi2934783 (python3)[3171529]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:20:42 vmi2934783 (python3)[3172010]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:20:47 vmi2934783 (python3)[3172362]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:20:52 vmi2934783 (python3)[3173642]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:21:03 vmi2934783 (python3)[3173987]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:21:08 vmi2934783 (python3)[3174077]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:21:13 vmi2934783 (python3)[3175278]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:21:18 vmi2934783 (python3)[3175391]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:21:29 vmi2934783 (python3)[3175581]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+أغسطس 05 10:21:34 vmi2934783 (python3)[3177188]: ndsp-app.service: Changing to the requested working directory failed: No such file or directory
+=== ndsp-auth-api.service ===
+أغسطس 05 10:03:01 vmi2934783 node[3127713]: ❌ NDSP admin extension failed: Error: Cannot find module '/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_extension.cjs'
+أغسطس 05 10:03:05 vmi2934783 node[3127831]: ❌ NDSP admin extension failed: Error: Cannot find module '/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_extension.cjs'
+أغسطس 05 10:03:09 vmi2934783 node[3127996]: ❌ NDSP admin extension failed: Error: Cannot find module '/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_extension.cjs'
+=== ndsp-auth-core-clean.service ===
+=== ndsp-backend.service ===
+أغسطس 05 09:46:03 vmi2934783 node[3088699]: ❌ NDSP device guard failed: Error: Cannot find module '/home/nawaf511/empire-core-new/backend/auth_api/ndsp_device_guard.cjs'
+أغسطس 05 09:46:09 vmi2934783 node[3088946]: ❌ NDSP device guard failed: Error: Cannot find module '/home/nawaf511/empire-core-new/backend/auth_api/ndsp_device_guard.cjs'
+أغسطس 05 09:46:14 vmi2934783 node[3089068]: ❌ NDSP device guard failed: Error: Cannot find module '/home/nawaf511/empire-core-new/backend/auth_api/ndsp_device_guard.cjs'
+=== ndsp-bot-execution.service ===
+=== ndsp-bot_execution.service ===
+=== ndsp-business-digest.service ===
+=== ndsp-business-ops.service ===
+=== ndsp-canonical-live-runtime-v30.service ===
+=== ndsp-canonical-live-runtime-v33.service ===
+=== ndsp-capability-runtime-controller.service ===
+أغسطس 06 15:04:54 vmi2934783 python3[1730401]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 06 15:20:18 vmi2934783 python3[1781473]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 06 15:35:23 vmi2934783 python3[1845179]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 06 15:50:41 vmi2934783 python3[1896118]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 06 16:06:02 vmi2934783 python3[1950652]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 06 16:21:33 vmi2934783 python3[2002875]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 06 16:36:45 vmi2934783 python3[2053422]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 06 16:51:50 vmi2934783 python3[2102817]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 06 17:07:00 vmi2934783 python3[2153263]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 06 17:22:24 vmi2934783 python3[2203865]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 06 17:37:48 vmi2934783 python3[2254416]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 06 17:53:09 vmi2934783 python3[2305143]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 06 18:08:28 vmi2934783 python3[2356632]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 06 18:23:54 vmi2934783 python3[2407230]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 06 18:39:14 vmi2934783 python3[2457745]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 06 18:54:38 vmi2934783 python3[2511079]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 06 19:09:47 vmi2934783 python3[2561444]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 06 19:24:49 vmi2934783 python3[2611709]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 06 19:39:58 vmi2934783 python3[2663040]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 06 19:55:01 vmi2934783 python3[2712495]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 06 20:10:20 vmi2934783 python3[2761864]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 0, "not_installed": 0, "operational_ready": 28, "partially_live": 4, "probe_failed": 0, "ready_verified": 24, "timer_active": true}
+أغسطس 06 20:25:39 vmi2934783 python3[2815755]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 06 20:40:34 vmi2934783 python3[2864294]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 06 20:55:34 vmi2934783 python3[2913327]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 06 21:10:43 vmi2934783 python3[2965121]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 06 21:26:10 vmi2934783 python3[3015503]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 06 21:41:38 vmi2934783 python3[3066362]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 0, "not_installed": 0, "operational_ready": 28, "partially_live": 4, "probe_failed": 0, "ready_verified": 24, "timer_active": true}
+أغسطس 06 21:56:35 vmi2934783 python3[3116811]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 06 22:11:58 vmi2934783 python3[3166007]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 06 22:27:31 vmi2934783 python3[3215897]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 06 22:42:38 vmi2934783 python3[3265788]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 06 22:58:01 vmi2934783 python3[3316137]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 06 23:13:23 vmi2934783 python3[3374467]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 06 23:28:51 vmi2934783 python3[3438964]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 06 23:44:02 vmi2934783 python3[3449938]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 06 23:59:29 vmi2934783 python3[3465563]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 00:14:54 vmi2934783 python3[3476247]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 00:30:17 vmi2934783 python3[3519090]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 00:45:14 vmi2934783 python3[3568210]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 01:00:14 vmi2934783 python3[3617167]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 01:15:20 vmi2934783 python3[3667171]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 01:30:37 vmi2934783 python3[3719019]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 01:46:02 vmi2934783 python3[3769142]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 02:01:05 vmi2934783 python3[3819015]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 02:16:10 vmi2934783 python3[3868947]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 02:31:19 vmi2934783 python3[3918670]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 02:46:42 vmi2934783 python3[3973577]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 03:01:50 vmi2934783 python3[3995661]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 03:16:50 vmi2934783 python3[4003273]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 03:32:01 vmi2934783 python3[4022540]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 03:47:26 vmi2934783 python3[4030543]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 04:02:32 vmi2934783 python3[4039178]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 04:17:45 vmi2934783 python3[4047858]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 04:33:08 vmi2934783 python3[4098923]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 04:48:25 vmi2934783 python3[4150027]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 05:03:27 vmi2934783 python3[5961]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 05:18:58 vmi2934783 python3[56155]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 05:34:14 vmi2934783 python3[107010]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 05:49:39 vmi2934783 python3[158184]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 06:05:07 vmi2934783 python3[209131]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 06:20:28 vmi2934783 python3[259148]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 06:35:50 vmi2934783 python3[310045]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 06:51:10 vmi2934783 python3[363449]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 07:06:26 vmi2934783 python3[414405]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 07:21:27 vmi2934783 python3[463404]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 07:36:29 vmi2934783 python3[512157]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 07:51:47 vmi2934783 python3[561238]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 08:07:08 vmi2934783 python3[611229]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 7, "probe_failed": 0, "ready_verified": 20, "timer_active": true}
+أغسطس 07 08:22:07 vmi2934783 python3[660209]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 08:37:10 vmi2934783 python3[709981]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 08:52:27 vmi2934783 python3[759966]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 09:07:37 vmi2934783 python3[809699]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 09:22:49 vmi2934783 python3[858603]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 09:38:11 vmi2934783 python3[909525]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 09:53:34 vmi2934783 python3[959725]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 10:09:03 vmi2934783 python3[1012098]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 10:24:28 vmi2934783 python3[1061794]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 10:39:27 vmi2934783 python3[1070686]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 10:54:45 vmi2934783 python3[1078838]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 11:10:03 vmi2934783 python3[1087488]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 7, "probe_failed": 0, "ready_verified": 20, "timer_active": true}
+أغسطس 07 11:25:17 vmi2934783 python3[1111862]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 11:40:27 vmi2934783 python3[1120356]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 11:55:29 vmi2934783 python3[1128681]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 12:10:39 vmi2934783 python3[1136532]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 12:25:39 vmi2934783 python3[1167456]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 12:40:53 vmi2934783 python3[1217685]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 12:55:57 vmi2934783 python3[1271730]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 13:11:24 vmi2934783 python3[1322077]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 13:26:44 vmi2934783 python3[1373729]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 13:41:52 vmi2934783 python3[1425691]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 13:57:12 vmi2934783 python3[1434190]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 14:12:18 vmi2934783 python3[1454970]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 14:27:22 vmi2934783 python3[1504829]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 14:42:33 vmi2934783 python3[1555062]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 14:57:39 vmi2934783 python3[1605680]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 15:13:07 vmi2934783 python3[1656558]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 15:28:25 vmi2934783 python3[1707396]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 15:43:26 vmi2934783 python3[1756285]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 15:58:30 vmi2934783 python3[1806139]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 16:13:54 vmi2934783 python3[1857271]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 16:28:56 vmi2934783 python3[1907393]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 16:44:19 vmi2934783 python3[1957488]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 16:48:00 vmi2934783 python3[13115]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 17:03:38 vmi2934783 python3[62664]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 17:18:54 vmi2934783 python3[109685]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 17:34:15 vmi2934783 python3[156953]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 17:49:43 vmi2934783 python3[203858]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 18:05:16 vmi2934783 python3[250296]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 18:20:42 vmi2934783 python3[295945]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 18:35:43 vmi2934783 python3[342627]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 18:50:53 vmi2934783 python3[390527]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 19:06:15 vmi2934783 python3[536256]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 19:21:41 vmi2934783 python3[599707]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 19:37:08 vmi2934783 python3[710046]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 19:52:27 vmi2934783 python3[762831]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 20:07:31 vmi2934783 python3[818283]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 20:22:44 vmi2934783 python3[878693]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 20:38:17 vmi2934783 python3[927869]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 20:53:39 vmi2934783 python3[977318]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 21:08:52 vmi2934783 python3[1024275]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 21:24:18 vmi2934783 python3[1071208]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 21:39:21 vmi2934783 python3[1118687]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 21:54:27 vmi2934783 python3[1167347]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 22:09:53 vmi2934783 python3[1214552]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 22:25:19 vmi2934783 python3[1262305]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 22:40:36 vmi2934783 python3[1308882]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 22:55:44 vmi2934783 python3[1356341]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 23:11:18 vmi2934783 python3[1404059]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 23:26:52 vmi2934783 python3[1451945]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 23:42:14 vmi2934783 python3[1498576]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 07 23:57:43 vmi2934783 python3[1545498]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 08 00:12:52 vmi2934783 python3[1591952]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 08 00:28:08 vmi2934783 python3[1638026]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 08 00:43:38 vmi2934783 python3[1685613]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 08 00:59:07 vmi2934783 python3[1733009]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 08 01:14:10 vmi2934783 python3[1778380]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 08 01:29:19 vmi2934783 python3[1824605]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 08 01:44:52 vmi2934783 python3[1871049]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 08 02:00:12 vmi2934783 python3[1918263]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 08 02:15:18 vmi2934783 python3[1963987]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 08 02:30:55 vmi2934783 python3[2012220]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 08 02:46:23 vmi2934783 python3[2058715]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 08 03:01:53 vmi2934783 python3[2105992]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 08 03:17:23 vmi2934783 python3[2152511]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 08 03:32:48 vmi2934783 python3[2200262]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 08 03:48:07 vmi2934783 python3[2246641]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 08 04:03:38 vmi2934783 python3[2295768]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 08 04:18:54 vmi2934783 python3[2342051]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 08 04:34:21 vmi2934783 python3[2390319]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+أغسطس 08 04:49:24 vmi2934783 python3[2436414]: {"capability_total": 28, "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16", "functional_probe_passed": 28, "installed": 28, "live_verified": 1, "not_installed": 0, "operational_ready": 28, "partially_live": 8, "probe_failed": 0, "ready_verified": 19, "timer_active": true}
+=== ndsp-change-password-gateway.service ===
+=== ndsp-checkout-api.service ===
+=== ndsp-command-center-real-data.service ===
+=== ndsp-commercial-auth-payment-staging.service ===
+=== ndsp-completed-decision.service ===
+=== ndsp-completed_decision.service ===
+يوليو 29 06:53:01 vmi2934783 node[2498003]: [NDSP] Completed Decision Service failed to initialize: error: the database system is starting up
+يوليو 29 06:53:01 vmi2934783 node[2498003]:   severity: 'FATAL',
+أغسطس 07 16:46:07 vmi2934783 node[1328]: [NDSP] Completed Decision Service failed to initialize: error: the database system is starting up
+أغسطس 07 16:46:07 vmi2934783 node[1328]:   severity: 'FATAL',
+=== ndsp-completed-decisions-evidence-v35.service ===
+=== ndsp-completed-decisions-history-capture-v36.service ===
+=== ndsp-completed-decisions-history-v36.service ===
+=== ndsp-contract-regression-v1-1.service ===
+=== ndsp-ctl-001-workspace-identity.service ===
+=== ndsp-current-user-display.service ===
+=== ndsp-decision-governance-core.service ===
+=== ndsp-decision_governance_core.service ===
+=== ndsp-decision-package-v1.service ===
+=== ndsp-enterprise-api.service ===
+=== ndsp-governance-bridge.service ===
+=== ndsp-layers-api.service ===
+=== ndsp-layers.service ===
+=== ndsp-live-decision-quality.service ===
+=== ndsp-live-market-adapter.service ===
+=== ndsp-market-data-bridge-v2.service ===
+=== ndsp-market-prices-updater.service ===
+=== ndsp-mt4-freshness-guard.service ===
+=== ndsp-news-ticker.service ===
+=== ndsp-password-reset.service ===
+=== ndsp-platform-gateway-9002.service ===
+=== ndsp-platform-gateway.service ===
+=== ndsp-portal-real-data-api.service ===
+=== ndsp-portal-real-data-ledger.service ===
+=== ndsp-production-monitor.service ===
+=== ndsp-public-gateway.service ===
+=== ndsp-public-summary-v548.service ===
+=== ndsp-quality-live-golden-wrapper.service ===
+=== ndsp-quality-live-nmp-wrapper.service ===
+=== ndsp-raw-cot-gateway.service ===
+=== ndsp-real-feeds-sync.service ===
+=== ndsp-refresh-live-data.service ===
+=== ndsp-refresh-static-data-contract.service ===
+=== ndsp-refresh-static-data-contract-v45.service ===
+=== ndsp-refresh-static-data-contract-v46.service ===
+=== ndsp-refresh-static-data-contract-with-nmp.service ===
+=== ndsp-register-compat-gateway.service ===
+=== ndsp-registration-consent-v42.service ===
+=== ndsp-registration-mailer-v12-1.service ===
+=== ndsp-scenario-levels-adapter.service ===
+=== ndsp-telegram-alert.service ===
+=== ndsp-telegram-link-listener.service ===
+أغسطس 08 03:13:31 vmi2934783 node[4624]: POLL_FAILED TELEGRAM_TIMEOUT
+أغسطس 08 03:14:11 vmi2934783 node[4624]: POLL_FAILED TELEGRAM_TIMEOUT
+أغسطس 08 03:15:00 vmi2934783 node[4624]: POLL_FAILED read ETIMEDOUT
+أغسطس 08 04:24:03 vmi2934783 node[4624]: POLL_FAILED read ETIMEDOUT
+=== ndsp-tradingview-calendar.service ===
+=== ndsp-trial-fingerprint-guard.service ===
+=== ndsp-trial-register-canonical-wrapper.service ===
+=== ndsp-trial-register.service ===
+=== ndsp-trial-seats-api.service ===
+=== ndsp-ui-bridge-api.service ===
+=== ndsp-user-alert-channels.service ===
+=== ndsp-user-dashboard.service ===
+=== ndsp-user-login.service ===
+=== ndsp-user-portal.service ===
+=== ndsp-v3-portal-gateway.service ===
+=== ndsp-v52-contract.service ===
+=== ndsp-v53-bridge.service ===

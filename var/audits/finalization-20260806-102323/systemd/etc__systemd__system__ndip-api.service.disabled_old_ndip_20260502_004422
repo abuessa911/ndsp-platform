@@ -1,0 +1,15 @@
+[Unit]
+Description=NDIP FastAPI Backend
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/nawaf511/ndip-backend
+EnvironmentFile=/home/nawaf511/ndip-backend/.env
+ExecStart=/home/nawaf511/ndip-backend/venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 9000
+Restart=always
+RestartSec=5
+User=nawaf511
+
+[Install]
+WantedBy=multi-user.target

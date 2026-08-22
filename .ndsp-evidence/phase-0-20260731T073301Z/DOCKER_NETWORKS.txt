@@ -1,0 +1,9 @@
+$ docker network ls
+
+NETWORK ID     NAME                       DRIVER    SCOPE
+68b45d81ba0b   bridge                     bridge    local
+49746480b465   docker_default             bridge    local
+e2c7ba4e3ada   host                       host      local
+ca81dc54a5b9   ndip-backend_default       bridge    local
+f632fd2ca4b1   ndsp-binance-bot_default   bridge    local
+7e1c31f17511   none                       null      local

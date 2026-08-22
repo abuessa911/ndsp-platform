@@ -1,0 +1,27 @@
+152:    server_name my.ndsp.app;
+203:    server_name my.ndsp.app;
+220:    location = /forgot-password {
+224:    location = /reset-password {
+841:location ^~ /api/auth/ {
+907:    server_name admin.ndsp.app;
+927:    server_name admin.ndsp.app;
+998:    server_name api.ndsp.app;
+1110:    location = /api/auth/register {
+1201:    server_name api.ndsp.app;
+1210:    location = /api/auth/login {
+1211:        proxy_pass http://127.0.0.1:9020/api/auth/login;
+1219:    location = /api/auth/me {
+1220:        proxy_pass http://127.0.0.1:9020/api/auth/me;
+1228:    location = /api/auth/logout {
+1229:        proxy_pass http://127.0.0.1:9020/api/auth/logout;
+1436:    location = /api/auth/register {
+1577:    server_name ndsp.app www.ndsp.app;
+1589:    location = /reset-password.html {
+1594:        try_files /reset-password.html =404;
+1598:        proxy_pass https://api.ndsp.app/api/auth/reset-password;
+1674:    server_name ndsp.app www.ndsp.app;
+1695:    location = /api/auth/login {
+1696:        proxy_pass http://127.0.0.1:9020/api/auth/login;
+1755:    location = /reset-password.html {
+1760:        try_files /reset-password.html =404;
+1764:        proxy_pass https://api.ndsp.app/api/auth/reset-password;

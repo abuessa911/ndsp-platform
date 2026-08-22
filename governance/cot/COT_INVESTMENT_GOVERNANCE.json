@@ -1,0 +1,65 @@
+{
+  "document": {
+    "id": "COT-INVESTMENT-GOVERNANCE",
+    "analysisMode": "INVESTMENT",
+    "governanceVersion": "COT-GOV-1.0.0",
+    "timezone": "UTC",
+    "dominanceDelta": "longValue - shortValue",
+    "direction": {
+      "BULLISH": "longValue > shortValue",
+      "BEARISH": "shortValue > longValue",
+      "NEUTRAL": "longValue == shortValue"
+    },
+    "classification": {
+      "oppositeSigns": {
+        "explicitness": "EXPLICIT",
+        "horizon": "EXTENDED"
+      },
+      "sameSigns": {
+        "explicitness": "NON_EXPLICIT",
+        "horizon": "NARROW"
+      },
+      "exactEquality": {
+        "explicitness": "NOT_APPLICABLE",
+        "horizon": "NONE"
+      }
+    }
+  },
+  "officialDirection": {
+    "dataset": "POSITIONS",
+    "categories": [
+      "ASSET_MANAGER"
+    ],
+    "resultType": "OFFICIAL",
+    "perspective": "CORE"
+  },
+  "weeklySupport": {
+    "dataset": "CHANGES",
+    "categories": [
+      "ASSET_MANAGER"
+    ],
+    "purpose": "SUPPORT_ONLY",
+    "confirmedAr": "الدعم الأسبوعي متحقق",
+    "notConfirmedAr": "الدعم الأسبوعي غير متحقق",
+    "confirmedEn": "Weekly support is confirmed",
+    "notConfirmedEn": "Weekly support is not confirmed",
+    "canOverrideDirection": false
+  },
+  "timing": {
+    "enabled": false,
+    "dayControl": false,
+    "tdlML": false,
+    "tdlS": false,
+    "errorCode": "TIMING_DISABLED_FOR_INVESTMENT"
+  },
+  "expanded": {
+    "resultType": "SHADOW",
+    "categories": [
+      "ASSET_MANAGER",
+      "OTHER_REPORTABLES"
+    ],
+    "canAffectCore": false,
+    "publicExposure": false,
+    "automaticPromotion": false
+  }
+}

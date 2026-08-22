@@ -1,0 +1,41 @@
+[
+  {
+    "batch_id": "B17_SERVICE_ONLY",
+    "capability_id": "CAP-F197D783C391",
+    "capability_name": "User Operational Compat",
+    "p0_signature": "SERVICE_ONLY",
+    "closure_state": "CLOSED_MACHINE_EVIDENCE_FOUND",
+    "selected_evidence_paths": "docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json",
+    "service_gap_remaining": "false",
+    "endpoint_gap_remaining": "false",
+    "real_data_gap_remaining": "false",
+    "human_confirmation_required": "true",
+    "ui_complete_created": "false"
+  },
+  {
+    "batch_id": "B17_SERVICE_ONLY",
+    "capability_id": "CAP-F19E055AF8D6",
+    "capability_name": "User Operational Compat",
+    "p0_signature": "SERVICE_ONLY",
+    "closure_state": "CLOSED_MACHINE_EVIDENCE_FOUND",
+    "selected_evidence_paths": "docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json",
+    "service_gap_remaining": "false",
+    "endpoint_gap_remaining": "false",
+    "real_data_gap_remaining": "false",
+    "human_confirmation_required": "true",
+    "ui_complete_created": "false"
+  },
+  {
+    "batch_id": "B17_SERVICE_ONLY",
+    "capability_id": "CAP-FAAE9703FE61",
+    "capability_name": "User Operational Compat",
+    "p0_signature": "SERVICE_ONLY",
+    "closure_state": "CLOSED_MACHINE_EVIDENCE_FOUND",
+    "selected_evidence_paths": "docs/99-governance/pr-019-capability-discovery-audit/PR019_ACTIVE_CAPABILITY_CATALOG.json",
+    "service_gap_remaining": "false",
+    "endpoint_gap_remaining": "false",
+    "real_data_gap_remaining": "false",
+    "human_confirmation_required": "true",
+    "ui_complete_created": "false"
+  }
+]

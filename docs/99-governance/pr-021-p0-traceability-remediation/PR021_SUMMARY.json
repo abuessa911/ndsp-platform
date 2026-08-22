@@ -1,0 +1,58 @@
+{
+  "schema_version": "1.0",
+  "document": "PR-021 P0 Traceability Remediation",
+  "generated_at": "2026-07-31T20:30:44.267073+00:00",
+  "input_gap_count": 285,
+  "gap_types": {
+    "API_CONTRACT_UNVERIFIED": 9,
+    "DATA_STATE_UNVERIFIED": 54,
+    "OWNER_UNASSIGNED": 139,
+    "RUNTIME_SERVICE_UNVERIFIED": 83
+  },
+  "priorities": {
+    "P0_CRITICAL": 35,
+    "P1_HIGH": 70,
+    "P2_MEDIUM": 101,
+    "P3_OWNER": 79
+  },
+  "screens": {
+    "ADMIN_USERS": 17,
+    "ALERTS_AND_CHANNELS": 38,
+    "AUTHENTICATION": 40,
+    "CAPABILITY_REVIEW": 27,
+    "DECISION_ROOM": 10,
+    "LANDING": 9,
+    "MARKET_INTELLIGENCE": 3,
+    "PLATFORM_OPERATIONS": 44,
+    "QUALITY_AND_RISK": 30,
+    "REPORTS_AND_ANALYTICS": 13,
+    "TRIAL_AND_BILLING": 54
+  },
+  "origins": {
+    "LOCAL_ONLY": 225,
+    "ON_MAIN": 50,
+    "UNTRACKED": 10
+  },
+  "remediation_statuses": {
+    "AMBIGUOUS_EVIDENCE": 71,
+    "EVIDENCE_FOUND_PENDING_HUMAN_CONFIRMATION": 8,
+    "OWNER_CANDIDATE_FOUND_NOT_AUTHORITATIVE": 31,
+    "UNRESOLVED": 175
+  },
+  "evidence_types": {
+    "SYSTEMD_EXECUTION_USER": 31,
+    "SYSTEMD_RUNTIME_MATCH": 79
+  },
+  "evidence_found_pending_human_confirmation": 8,
+  "remaining_gap_count": 277,
+  "traceability_rows_updated": 8,
+  "traceability_fields_updated": {
+    "coverage_state": 8,
+    "runtime_service": 8
+  },
+  "ui_complete_records_created": 0,
+  "full_capability_coverage_claimed": false,
+  "human_confirmation_required": true,
+  "runtime_changes": "none",
+  "status": "P0_MACHINE_REMEDIATION_COMPLETE_HUMAN_CONFIRMATION_REQUIRED"
+}

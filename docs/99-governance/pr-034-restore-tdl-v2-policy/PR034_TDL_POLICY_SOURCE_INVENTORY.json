@@ -1,0 +1,20 @@
+[
+  {
+    "source_kind": "primary_local_worktree",
+    "locator": "/home/nawaf511/empire-core-new/backend/runtime/private_governance/final_extra_snapshot/tdl_v2_policy.py",
+    "materialized_path": "/home/nawaf511/empire-core-new/backend/runtime/private_governance/final_extra_snapshot/tdl_v2_policy.py",
+    "sha256": "916fd5074c00ea149e418166b0700ca188d68f5f404bd18b839a63a2324aa3a7",
+    "bytes": 8479,
+    "modified_epoch": 1778954578.0,
+    "modified_iso": "2026-05-16T18:02:58+00:00",
+    "read_function_kind": "sync",
+    "write_function_kind": "sync",
+    "import_count": 5,
+    "imports": "__future__|datetime|json|pathlib|typing",
+    "secret_scan": "PASS",
+    "ast_valid": true,
+    "score": 21689,
+    "selected": true,
+    "selection_reason": "highest deterministic score among AST-valid, secret-safe, SHA-256-deduplicated candidates"
+  }
+]

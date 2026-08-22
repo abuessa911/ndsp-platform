@@ -1,0 +1,71 @@
+document:
+  id: COT-SPECULATION-GOVERNANCE
+  analysisMode: SPECULATION
+  governanceVersion: COT-GOV-1.0.0
+  timezone: UTC
+  dominanceDelta: longValue - shortValue
+  direction:
+    BULLISH: longValue > shortValue
+    BEARISH: shortValue > longValue
+    NEUTRAL: longValue == shortValue
+  classification:
+    oppositeSigns:
+      explicitness: EXPLICIT
+      horizon: EXTENDED
+    sameSigns:
+      explicitness: NON_EXPLICIT
+      horizon: NARROW
+    exactEquality:
+      explicitness: NOT_APPLICABLE
+      horizon: NONE
+sourcePolicy:
+  dataset: CHANGES
+  positionsAllowed: false
+reportActivation:
+  reportDay: TUESDAY
+  effectiveFrom: NEXT_MONDAY_00_00_UTC
+  interval: effectiveFrom <= timestamp < effectiveUntil
+dayControl:
+  enabled: true
+  selectedPerspective: D1
+  D1:
+    MONDAY: LONG_TERM
+    TUESDAY: SHORT_TERM
+    WEDNESDAY: SHORT_TERM
+    THURSDAY: SHORT_TERM
+    FRIDAY: LONG_TERM
+    SATURDAY: SHORT_TERM
+    SUNDAY: SHORT_TERM
+  D2:
+    MONDAY: SHORT_TERM
+    TUESDAY: SHORT_TERM
+    WEDNESDAY: SHORT_TERM
+    THURSDAY: LONG_TERM
+    FRIDAY: LONG_TERM
+    SATURDAY: SHORT_TERM
+    SUNDAY: SHORT_TERM
+core:
+  resultType: OFFICIAL
+  LONG_TERM:
+  - ASSET_MANAGER
+  SHORT_TERM:
+  - LEVERAGED_FUNDS
+  publicExposure: true
+expanded:
+  resultType: SHADOW
+  LONG_TERM:
+  - ASSET_MANAGER
+  - OTHER_REPORTABLES
+  SHORT_TERM:
+  - LEVERAGED_FUNDS
+  - DEALER_INTERMEDIARY
+  canAffectCore: false
+  publicExposure: false
+  automaticPromotion: false
+timing:
+  enabled: false
+  configurable: true
+  allowedMode: SPECULATION
+  tdlML: false
+  tdlS: false
+  canOverrideDirection: false

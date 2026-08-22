@@ -1,0 +1,30 @@
+
+============================================================
+NDSP — OWNER USERS AUTHORITATIVE SNAPSHOT SYNC V6
+============================================================
+DATE=2026-07-27T23:37:53+02:00
+HOST=vmi2934783.contaboserver.net
+PROJECT=/home/nawaf511/empire-core-new
+DB_NAME=ndsp_auth
+TARGET_EMAIL=she20232030@gmail.com
+REPORT=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_OWNER_USERS_SNAPSHOT_SYNC_V6_20260727_233753/REPORT.txt
+BACKUP=/home/nawaf511/empire-core-new/backups/owner-users-snapshot-sync-v6/20260727_233753
+
+============================================================
+0) EXPLICIT CONFIRMATION AND PRECONDITIONS
+============================================================
+EXPLICIT_CONFIRMATION=YES
+SUDO_GATE=PASS
+PRECONDITION_GATE=PASS
+
+============================================================
+1) SOURCE CONTRACT GATE
+============================================================
+SOURCE_FILE=/home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_actions_gateway.cjs
+SOURCE_SHA256=84b80498bd731e97ddb87868f95da64e394f3b4fa22b02450fdf13fa55995f5a
+UNEXPECTED_EXIT_CODE=127
+FINAL_STATUS=NDSP_OWNER_USERS_SNAPSHOT_SYNC_V6_FAILED
+REPORT=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_OWNER_USERS_SNAPSHOT_SYNC_V6_20260727_233753/REPORT.txt
+UNEXPECTED_EXIT_CODE=127
+FINAL_STATUS=NDSP_OWNER_USERS_SNAPSHOT_SYNC_V6_FAILED
+REPORT=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_OWNER_USERS_SNAPSHOT_SYNC_V6_20260727_233753/REPORT.txt

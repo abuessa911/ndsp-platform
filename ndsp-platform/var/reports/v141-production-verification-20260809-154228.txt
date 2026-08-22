@@ -1,0 +1,248 @@
+============================================================
+ NDSP V1.4.1 — PRODUCTION DEPLOYMENT GATE
+ CANONICAL SOURCE -> BUILD -> PRODUCTION
+ NGINX CONFIG WILL NOT BE MODIFIED
+============================================================
+
+=== 01. PRE-DEPLOY SOURCE GATE ===
+
+> public@0.0.1 typecheck
+> tsc --noEmit
+
+
+> public@0.0.1 lint
+> eslint .
+
+PASS: TypeScript
+PASS: ESLint
+
+Build index:
+e5d1231e0055d1db02c99410afdef348e5e009c3e1f2ad3b837cf2f19082c8f1  dist/index.html
+
+CSS runtime graph:
+@import "./styles/ndsp-tokens.css";
+@import "./styles/ndsp-motion.css";
+@import "./styles/ndsp-sovereign.css";
+@import "./styles/ndsp-pages.css";
+PASS: canonical source gate
+
+=== 02. BACKUP CURRENT PRODUCTION ===
+Production backup:
+/home/nawaf511/empire-core-new/ndsp-platform/var/backups/production-before-v141-20260809-154228
+
+=== 03. CREATE ROLLBACK SCRIPT ===
+Rollback:
+/home/nawaf511/empire-core-new/ndsp-platform/var/backups/production-before-v141-20260809-154228/rollback-v141.sh
+
+=== 04. DEPLOY CANONICAL BUILD ===
+sending incremental file list
+deleting shield-check-BQkpa--0.js
+deleting public-api-CQ5DT0E1.js
+deleting overview-page-CJ1jEd-T.js
+deleting methodology-page-CB0nabDV.js
+deleting market-context-page-Czv2OHWd.js
+deleting lock-keyhole-PNamy3Cn.js
+deleting index-CNVqUsq3.css
+deleting index-BhX9fFju.js
+deleting home-page-CkI5f18t.js
+deleting file-check-corner-0ZAwc9YI.js
+deleting evidence-page-CY7tfpFP.js
+deleting core-page-BBBjcfFE.js
+deleting clock-3-CXD6PtbF.js
+deleting account-page-CKOTeNBE.js
+./
+account-page-lZBrYE4R.js
+clock-3-Dp-BFqvI.js
+core-page-CuKeBlvJ.js
+esm-L5hlJ8Vx.js
+evidence-page-D8Nfm6nX.js
+file-check-corner-DqizmfRP.js
+home-page-D-hwlY8M.js
+ibm-plex-mono-cyrillic-400-normal-BSMlKf0J.woff2
+ibm-plex-mono-cyrillic-400-normal-CEL4l2ZJ.woff
+ibm-plex-mono-cyrillic-ext-400-normal-DMdlQ8Kv.woff
+ibm-plex-mono-cyrillic-ext-400-normal-xuaO2J-f.woff2
+ibm-plex-mono-latin-400-normal-CvHOgSBP.woff
+ibm-plex-mono-latin-400-normal-DMJ8VG8y.woff2
+ibm-plex-mono-latin-ext-400-normal-BmRBH3aV.woff2
+ibm-plex-mono-latin-ext-400-normal-D3D2R8hC.woff
+ibm-plex-mono-vietnamese-400-normal-BulugwFq.woff2
+ibm-plex-mono-vietnamese-400-normal-DDuiU_S-.woff
+ibm-plex-sans-cyrillic-300-normal-LoaTnByX.woff
+ibm-plex-sans-cyrillic-300-normal-RhT0Ayi3.woff2
+ibm-plex-sans-cyrillic-400-normal-BTotfTJu.woff
+ibm-plex-sans-cyrillic-400-normal-DZqxrq2p.woff2
+ibm-plex-sans-cyrillic-500-normal-ByOcLdNv.woff
+ibm-plex-sans-cyrillic-500-normal-CocWQlwt.woff2
+ibm-plex-sans-cyrillic-600-normal-71GNu3SW.woff2
+ibm-plex-sans-cyrillic-600-normal-BGq0mW3O.woff
+ibm-plex-sans-cyrillic-ext-300-normal-Bbd5v1xK.woff
+ibm-plex-sans-cyrillic-ext-300-normal-DqmgDkIN.woff2
+ibm-plex-sans-cyrillic-ext-400-normal-Dsrv2Tcn.woff
+ibm-plex-sans-cyrillic-ext-400-normal-g30qAdWV.woff2
+ibm-plex-sans-cyrillic-ext-500-normal-Cs5J6C77.woff2
+ibm-plex-sans-cyrillic-ext-500-normal-DB5PtV2g.woff
+ibm-plex-sans-cyrillic-ext-600-normal-Bz0x94Yp.woff
+ibm-plex-sans-cyrillic-ext-600-normal-DUMzJB7m.woff2
+ibm-plex-sans-greek-300-normal-J-CBqZoJ.woff2
+ibm-plex-sans-greek-300-normal-STc8XiDr.woff
+ibm-plex-sans-greek-400-normal-D9ESIMu3.woff
+ibm-plex-sans-greek-400-normal-_efipK4i.woff2
+ibm-plex-sans-greek-500-normal-CuWXN6rf.woff
+ibm-plex-sans-greek-500-normal-JMMifIXV.woff2
+ibm-plex-sans-greek-600-normal-D-CqTdkO.woff
+ibm-plex-sans-greek-600-normal-DzTrcv_p.woff2
+ibm-plex-sans-latin-300-normal-C9Of02-5.woff
+ibm-plex-sans-latin-300-normal-b4i7YzLG.woff2
+ibm-plex-sans-latin-400-normal-CDDApCn2.woff2
+ibm-plex-sans-latin-400-normal-CYLoc0-x.woff
+ibm-plex-sans-latin-500-normal-6ng42L7E.woff2
+ibm-plex-sans-latin-500-normal-BgVn5rGT.woff
+ibm-plex-sans-latin-600-normal-Cu4Hd6ag.woff
+ibm-plex-sans-latin-600-normal-CuJfVYMP.woff2
+ibm-plex-sans-latin-ext-300-normal-B8Zgwjh3.woff
+ibm-plex-sans-latin-ext-300-normal-BLFuR0P1.woff2
+ibm-plex-sans-latin-ext-400-normal-C5H60-Va.woff2
+ibm-plex-sans-latin-ext-400-normal-RBey6euL.woff
+ibm-plex-sans-latin-ext-500-normal-D0aIdm-b.woff
+ibm-plex-sans-latin-ext-500-normal-DakdToA3.woff2
+ibm-plex-sans-latin-ext-600-normal-DIrixKbi.woff
+ibm-plex-sans-latin-ext-600-normal-DOrvGEcy.woff2
+ibm-plex-sans-vietnamese-300-normal-CkYRZD2a.woff
+ibm-plex-sans-vietnamese-300-normal-SDfX6ktj.woff2
+ibm-plex-sans-vietnamese-400-normal-DG4YqDda.woff2
+ibm-plex-sans-vietnamese-400-normal-fK1oJ5dG.woff
+ibm-plex-sans-vietnamese-500-normal-BEb3_waV.woff
+ibm-plex-sans-vietnamese-500-normal-e4dixQRQ.woff2
+ibm-plex-sans-vietnamese-600-normal-DgdngZtN.woff
+ibm-plex-sans-vietnamese-600-normal-DpPYBSTl.woff2
+index-DI89IHSb.css
+index-Dk_M-rsE.js
+jsx-runtime-B-hcVAMW.js
+libre-baskerville-latin-400-normal-BTm3cn9P.woff
+libre-baskerville-latin-400-normal-C42RasBZ.woff2
+libre-baskerville-latin-ext-400-normal-BWURas-n.woff
+libre-baskerville-latin-ext-400-normal-DehDhP4C.woff2
+lock-keyhole-BW6_09js.js
+market-context-page-Co86RyyJ.js
+methodology-page-Cm9uP_ua.js
+methodology-page-DLioOiRN.css
+overview-page-DXPxetVA.js
+page-shell-BEHz6DMO.js
+public-api-Dc7UH6jd.js
+shield-check-B9iqdvQ4.js
+sovereign-control-BpBdZtoZ.jpg
+
+sent 3,811,314 bytes  received 1,949 bytes  2,542,175.33 bytes/sec
+total size is 3,803,251  speedup is 1.00
+PASS: production files deployed
+
+=== 05. LOCAL VS SERVER SHA256 ===
+LOCAL : e5d1231e0055d1db02c99410afdef348e5e009c3e1f2ad3b837cf2f19082c8f1
+SERVER: e5d1231e0055d1db02c99410afdef348e5e009c3e1f2ad3b837cf2f19082c8f1
+PASS: server index matches canonical build
+
+=== 06. LOCAL ASSET GRAPH ===
+/assets/index-DI89IHSb.css
+/assets/index-Dk_M-rsE.js
+/assets/jsx-runtime-B-hcVAMW.js
+PASS: local asset graph extracted
+
+=== 07. LIVE HTML FETCH ===
+--- LIVE ASSETS ---
+/assets/index-DI89IHSb.css
+/assets/index-Dk_M-rsE.js
+/assets/jsx-runtime-B-hcVAMW.js
+PASS: live HTML references canonical assets
+
+=== 08. VERIFY EVERY LIVE ENTRY ASSET ===
+/assets/index-DI89IHSb.css                                             200
+/assets/index-Dk_M-rsE.js                                              200
+/assets/jsx-runtime-B-hcVAMW.js                                        200
+PASS: production entry assets reachable
+
+=== 09. PUBLIC ROUTE VERIFICATION ===
+/                        200
+/overview                200
+/core                    200
+/market-context          200
+/evidence                200
+/methodology             200
+/account                 200
+PASS: all public routes HTTP 200
+
+=== 10. HOME BUNDLE CONTENT ===
+dist/assets/index-Dk_M-rsE.js
+dist/assets/home-page-D-hwlY8M.js
+PASS: Home content exists in deployed build
+
+=== 11. HTTP HEADERS ===
+HTTP/2 200 
+server: nginx/1.24.0 (Ubuntu)
+date: Sun, 09 Aug 2026 13:42:37 GMT
+content-type: text/html
+content-length: 808
+last-modified: Sun, 09 Aug 2026 13:42:36 GMT
+etag: "6a7883cc-328"
+strict-transport-security: max-age=300
+content-security-policy-report-only: default-src 'self' https: data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' https: data: blob:; font-src 'self' https: data:; connect-src 'self' https: wss:; frame-src 'self' https:; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self' https:;
+x-content-type-options: nosniff
+referrer-policy: strict-origin-when-cross-origin
+x-ndsp-scope: public-landing
+x-ndsp-serving-root: /var/www/ndsp
+accept-ranges: bytes
+
+
+=== 12. DEPLOYED FILES ===
+-rw-rw-r-- 1 www-data www-data 808 أغسطس   9 15:42 /var/www/ndsp/index.html
+2026-08-09 15:34:16.8956802920      21272  libre-baskerville-latin-ext-400-normal-DehDhP4C.woff2
+2026-08-09 15:34:16.8956802920      15413  methodology-page-DLioOiRN.css
+2026-08-09 15:34:16.8956802920     101716  sovereign-control-BpBdZtoZ.jpg
+2026-08-09 15:34:16.8936802990      36742  index-DI89IHSb.css
+2026-08-09 15:34:16.8936802990      29228  libre-baskerville-latin-ext-400-normal-BWURas-n.woff
+2026-08-09 15:34:16.8936802990      24300  libre-baskerville-latin-400-normal-BTm3cn9P.woff
+2026-08-09 15:34:16.8936802990      20108  libre-baskerville-latin-400-normal-C42RasBZ.woff2
+2026-08-09 15:34:16.8926803030       8460  ibm-plex-sans-vietnamese-600-normal-DpPYBSTl.woff2
+2026-08-09 15:34:16.8926803030       8416  ibm-plex-sans-vietnamese-500-normal-e4dixQRQ.woff2
+2026-08-09 15:34:16.8926803030       8232  ibm-plex-sans-vietnamese-300-normal-SDfX6ktj.woff2
+2026-08-09 15:34:16.8926803030       8204  ibm-plex-sans-vietnamese-400-normal-DG4YqDda.woff2
+2026-08-09 15:34:16.8926803030       6588  ibm-plex-sans-vietnamese-500-normal-BEb3_waV.woff
+2026-08-09 15:34:16.8926803030       6584  ibm-plex-sans-vietnamese-600-normal-DgdngZtN.woff
+2026-08-09 15:34:16.8926803030       6440  ibm-plex-sans-vietnamese-300-normal-CkYRZD2a.woff
+2026-08-09 15:34:16.8926803030       6392  ibm-plex-sans-vietnamese-400-normal-fK1oJ5dG.woff
+2026-08-09 15:34:16.8926803030      16448  ibm-plex-sans-latin-ext-600-normal-DOrvGEcy.woff2
+2026-08-09 15:34:16.8926803030      14772  ibm-plex-sans-latin-ext-600-normal-DIrixKbi.woff
+2026-08-09 15:34:16.8916803070      24288  ibm-plex-sans-latin-300-normal-b4i7YzLG.woff2
+2026-08-09 15:34:16.8916803070      24252  ibm-plex-sans-latin-600-normal-CuJfVYMP.woff2
+2026-08-09 15:34:16.8916803070      24184  ibm-plex-sans-latin-500-normal-6ng42L7E.woff2
+
+=== 13. FINAL PRODUCTION HASH ===
+e5d1231e0055d1db02c99410afdef348e5e009c3e1f2ad3b837cf2f19082c8f1  dist/index.html
+e5d1231e0055d1db02c99410afdef348e5e009c3e1f2ad3b837cf2f19082c8f1  /var/www/ndsp/index.html
+
+============================================================
+ NDSP V1.4.1 — PRODUCTION MACHINE GATE PASSED
+============================================================
+ PASS  canonical source
+ PASS  TypeScript
+ PASS  ESLint
+ PASS  production deployment
+ PASS  local/server SHA256
+ PASS  live asset graph
+ PASS  live entry assets
+ PASS  all public routes HTTP 200
+
+ NGINX CONFIG: UNTOUCHED
+
+ V1.4.1 MACHINE STATUS = PASS
+ V1.4.1 VISUAL STATUS  = PENDING FINAL REVIEW
+
+ Production:
+ https://ndsp.app/
+
+ Verification report:
+ /home/nawaf511/empire-core-new/ndsp-platform/var/reports/v141-production-verification-20260809-154228.txt
+
+ Rollback:
+ /home/nawaf511/empire-core-new/ndsp-platform/var/backups/production-before-v141-20260809-154228/rollback-v141.sh
+============================================================

@@ -1,0 +1,125 @@
+PATTERN=\bSettings\b
+ANCHOR_LINE=7295
+CONTEXT_START=7250
+CONTEXT_END=7369
+
+  007250:             <span>
+  007251:               {t("readingType")}
+  007252:               <b>{t(state.mode)}</b>
+  007253:             </span>
+  007254:           </div>
+  007255: 
+  007256:           <div className="callout">
+  007257:             <Icon name="info"/>
+  007258:             <p>
+  007259:               {
+  007260:                 lang === "ar"
+  007261:                   ? "لا تظهر رسالة نجاح إلا بعد قبول الطلب من خدمة الدعم الخلفية."
+  007262:                   : "A success message appears only after the backend support service accepts the request."
+  007263:               }
+  007264:             </p>
+  007265:           </div>
+  007266:         </Card>
+  007267:       </div>
+  007268:     </>
+  007269:   );
+  007270: }
+  007271: 
+  007272: function AccountPage() {
+  007273:   const { t } = useTranslate();
+  007274:   const access = useAccessState();
+  007275:   return <><PageHeader title={t("account")}/><div className="account-grid"><Card title={t("account")}><p>{access.authenticated === false ? t("authRequired") : access.authenticated === true ? t("live") : t("noUserData")}</p></Card><Card title={t("plans")}><pre className="json-view">{access.entitlement ? JSON.stringify(access.entitlement, null, 2) : t("planUnavailable")}</pre></Card><Card title="Trial registration"><Badge tone={access.registration?.registration_allowed ? "success" : "muted"}>{access.registration?.registration_allowed ? t("registrationAvailable") : t("registrationUnavailable")}</Badge></Card></div></>;
+  007276: }
+  007277: 
+  007278: function PlansPage() {
+  007279:   const { t } = useTranslate();
+  007280:   return <><PageHeader title={t("plans")}/><div className="plans-grid"><Card title={t("plans")}><p>{t("planUnavailable")}</p></Card><Card title="Billing"><div className="callout warning"><Icon name="warning"/><p>{t("billingUnavailable")}</p></div></Card></div></>;
+  007281: }
+  007282: 
+  007283: function SettingsPage() {
+  007284:   const {
+  007285:     density,
+  007286:     setDensity
+  007287:   } = useDecision();
+  007288: 
+  007289:   const { t, lang } = useTranslate();
+  007290: 
+  007291:   return (
+  007292:     <>
+  007293:       <PageHeader title={t("settings")}/>
+  007294: 
+>>007295:       <div className="settings-grid">
+  007296:         <Card title={t("sourceStatus")}>
+  007297:           <div className="radio-stack">
+  007298:             <label>
+  007299:               <input
+  007300:                 type="radio"
+  007301:                 checked
+  007302:                 readOnly
+  007303:               />
+  007304: 
+  007305:               <span>
+  007306:                 <b>{t("live")}</b>
+  007307:                 <small>
+  007308:                   {t("commercialNotice")}
+  007309:                 </small>
+  007310:               </span>
+  007311:             </label>
+  007312:           </div>
+  007313:         </Card>
+  007314: 
+  007315:         <Card title={t("appearance")}>
+  007316:           <p className="setting-explanation">
+  007317:             {
+  007318:               lang === "ar"
+  007319:                 ? "المظهر هنا يحدد كثافة عرض الصفحة والمسافات بين العناصر، ولا يغير ألوان المنصة أو بياناتها."
+  007320:                 : "Appearance here controls page density and spacing; it does not change platform colors or data."
+  007321:             }
+  007322:           </p>
+  007323: 
+  007324:           <div className="radio-stack">
+  007325:             <label>
+  007326:               <input
+  007327:                 type="radio"
+  007328:                 name="density"
+  007329:                 checked={
+  007330:                   density ===
+  007331:                   "comfortable"
+  007332:                 }
+  007333:                 onChange={() =>
+  007334:                   setDensity(
+  007335:                     "comfortable"
+  007336:                   )
+  007337:                 }
+  007338:               />
+  007339: 
+  007340:               <span>
+  007341:                 <b>{t("comfortable")}</b>
+  007342:                 <small>
+  007343:                   {
+  007344:                     lang === "ar"
+  007345:                       ? "مسافات أكبر وقراءة أهدأ، مع ظهور محتوى أقل في الشاشة."
+  007346:                       : "More spacing and calmer reading, with less content visible at once."
+  007347:                   }
+  007348:                 </small>
+  007349:               </span>
+  007350:             </label>
+  007351: 
+  007352:             <label>
+  007353:               <input
+  007354:                 type="radio"
+  007355:                 name="density"
+  007356:                 checked={
+  007357:                   density === "compact"
+  007358:                 }
+  007359:                 onChange={() =>
+  007360:                   setDensity("compact")
+  007361:                 }
+  007362:               />
+  007363: 
+  007364:               <span>
+  007365:                 <b>{t("compact")}</b>
+  007366:                 <small>
+  007367:                   {
+  007368:                     lang === "ar"
+  007369:                       ? "مسافات أقل لعرض محتوى أكثر دون تغيير حجم البيانات أو معناها."

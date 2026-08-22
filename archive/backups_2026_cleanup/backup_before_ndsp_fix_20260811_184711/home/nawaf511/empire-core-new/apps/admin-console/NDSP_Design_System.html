@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="google" content="notranslate" />
+<title>DSP — نظام التصميم (Design System)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Sora:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#070A10;--ink:#0B0F17;--panel:rgba(18,24,36,.62);--panel-2:rgba(22,29,43,.55);
+  --line:rgba(201,162,39,.18);--line-soft:rgba(255,255,255,.06);
+  --gold:#D9B65A;--gold-bright:#F2D27A;--gold-deep:#9A7A22;
+  --teal:#3FD3C6;--teal-deep:#1C8C84;--rose:#E0607A;--rose-deep:#9C2F46;--blue:#88A6FF;
+  --txt:#EAEEF6;--txt-2:#9AA6BC;--txt-3:#5E6A82;
+  --up:#56D6A0;--down:#E2657E;--warn:#E8B964;--neutral:#C9CEDA;
+  --r:18px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--void);color:var(--txt);overflow-x:hidden;
+  font-family:"IBM Plex Sans Arabic","Sora",system-ui,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.8}
+body[dir="ltr"]{font-family:"Sora","IBM Plex Sans Arabic",sans-serif}
+.mono{font-family:"IBM Plex Mono",monospace;font-feature-settings:"tnum" 1}
+h1,h2,h3,.kufi{font-family:"Reem Kufi",serif}
+body[dir="ltr"] h1,body[dir="ltr"] h2,body[dir="ltr"] h3{font-family:"Sora",sans-serif;letter-spacing:-.01em}
+
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.bg .glow{position:absolute;border-radius:50%;filter:blur(140px);opacity:.45}
+.bg .g1{width:50vw;height:50vw;top:-24vw;inset-inline-end:-14vw;background:radial-gradient(circle,rgba(217,182,90,.15),transparent 64%)}
+.bg .g2{width:42vw;height:42vw;bottom:-20vw;inset-inline-start:-12vw;background:radial-gradient(circle,rgba(63,211,198,.09),transparent 64%)}
+.bg .grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:46px 46px;mask-image:radial-gradient(ellipse 120% 70% at 50% 0%,#000 30%,transparent 78%)}
+.seal-wm{position:fixed;z-index:0;inset-inline-start:-6vw;bottom:-8vw;width:42vw;max-width:600px;opacity:.035;pointer-events:none}
+
+nav{position:sticky;top:0;z-index:40;backdrop-filter:blur(16px);background:linear-gradient(180deg,rgba(7,10,16,.92),rgba(7,10,16,.55));border-bottom:1px solid var(--line)}
+nav .in{max-width:1000px;margin:0 auto;padding:13px 24px;display:flex;align-items:center;gap:14px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand svg{width:40px;height:40px;filter:drop-shadow(0 4px 12px rgba(217,182,90,.45))}
+.brand b{font-family:"Reem Kufi";font-size:19px;background:linear-gradient(180deg,var(--gold-bright),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;display:block;line-height:1}
+.brand span{font-size:9px;color:var(--txt-3);letter-spacing:2px;font-family:"IBM Plex Mono"}
+.spacer{flex:1}
+.lang{cursor:pointer;user-select:none;padding:8px 13px;border-radius:10px;border:1px solid var(--line);color:var(--txt-2);font-size:12.5px}
+.lang:hover{color:var(--gold-bright);border-color:var(--gold)}
+
+.wrap{position:relative;z-index:2;max-width:1000px;margin:0 auto;padding:30px 24px 70px}
+.intro{text-align:center;margin-bottom:8px}
+.intro h1{font-size:clamp(26px,4vw,36px);margin:0 0 8px}
+.intro p{color:var(--txt-2);font-size:13.5px;max-width:560px;margin:0 auto;line-height:1.7}
+
+.sec{font-family:"Reem Kufi";font-size:16px;color:var(--gold);margin:34px 0 14px;display:flex;align-items:center;gap:10px}
+body[dir="ltr"] .sec{font-family:"Sora"}
+.sec::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:14px}
+.sw .chip{border-radius:13px;height:62px;border:1px solid var(--line-soft)}
+.sw .nm{font-size:12px;color:var(--txt);margin-top:8px}
+.sw .hex{font-family:"IBM Plex Mono";font-size:11px;color:var(--txt-3);display:flex;align-items:center;gap:6px}
+.sw .var{font-family:"IBM Plex Mono";font-size:10px;color:var(--teal)}
+
+.cards-row{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-start}
+.preview-card{flex:1;min-width:200px;background:var(--panel);border:1px solid var(--line-soft);border-radius:16px;padding:18px;backdrop-filter:blur(12px)}
+.preview-card.gold-line{border-color:var(--line)}
+.lbl{font-size:11.5px;color:var(--txt-2)}
+.kpi-val{font-family:"IBM Plex Mono";font-size:30px;font-parameter:500;color:var(--gold-bright);margin-top:8px}
+.badge{font-size:10.5px;font-parameter:600;padding:4px 10px;border-radius:999px}
+.b-up{background:rgba(86,214,160,.14);color:var(--up)}
+.b-gold{background:rgba(217,182,90,.16);color:var(--gold-bright)}
+.b-rose{background:rgba(226,101,126,.14);color:var(--down)}
+.btn{flex:1;text-align:center;font-size:12.5px;padding:11px;border-radius:12px;cursor:pointer}
+.btn-gold{background:linear-gradient(135deg,var(--gold-bright),var(--gold-deep));color:#1a1303;font-parameter:600}
+.btn-ghost{background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--txt-2)}
+
+.font-preview{display:flex;gap:14px;flex-wrap:wrap}
+.font-preview .preview-card .big{font-size:24px;color:var(--txt)}
+
+/* code reference block */
+.code{background:#05070C;border:1px solid var(--line-soft);border-radius:16px;padding:18px 20px;overflow:auto;position:relative}
+.code pre{margin:0;font-family:"IBM Plex Mono";font-size:12px;line-height:1.85;color:#C7D0E0;white-space:pre}
+.code .c-com{color:#5E6A82}
+.code .c-var{color:#3FD3C6}
+.code .c-val{color:#F2D27A}
+.copy{position:absolute;inset-inline-end:12px;top:12px;font-family:"IBM Plex Sans Arabic";font-size:11px;padding:6px 11px;border-radius:9px;border:1px solid var(--line);background:rgba(217,182,90,.1);color:var(--gold-bright);cursor:pointer}
+.copy:hover{background:rgba(217,182,90,.2)}
+body[dir="ltr"] .copy{font-family:"Sora"}
+
+.note{background:linear-gradient(135deg,rgba(217,182,90,.08),rgba(0,0,0,.2));border:1px solid var(--line);border-radius:15px;padding:16px 18px;font-size:12.5px;color:var(--txt-2);line-height:1.8;margin-top:14px}
+.note b{color:var(--gold-bright)}
+.note code{font-family:"IBM Plex Mono";font-size:11.5px;color:var(--teal);background:rgba(63,211,198,.08);padding:1px 6px;border-radius:5px}
+.gov{text-align:center;margin-top:30px;font-family:"Reem Kufi";color:var(--gold);font-size:13px;opacity:.8}
+body[dir="ltr"] .gov{font-family:"Sora"}
+</style>
+<meta http-equiv="Cache-Control" content="no-store" />
+<link rel="stylesheet" href="ndsp-hud-theme.css">
+</head>
+<body dir="ltr">
+
+<div class="bg"><div class="glow g1"></div><div class="glow g2"></div><div class="grid"></div></div>
+<svg class="seal-wm" viewBox="0 0 240 240" aria-hidden="true"><use href="#hunterSeal"/></svg>
+
+<svg width="0" height="0" style="position:absolute"><defs><g id="hunterSeal">
+  <circle cx="120" cy="120" r="116" fill="none" stroke="#D9B65A" stroke-width="2"/>
+  <circle cx="120" cy="120" r="106" fill="none" stroke="#D9B65A" stroke-width="1" stroke-dasharray="2 6"/>
+  <path d="M120 56 C150 60 168 80 170 108 C171 122 165 134 154 142 L172 150 L150 152 C146 168 132 180 118 182 C128 172 130 162 128 156 C112 162 96 158 86 146 C100 148 110 144 114 138 C96 134 84 120 84 102 C84 76 100 60 120 56 Z" fill="#D9B65A"/>
+  <circle cx="138" cy="98" r="6.5" fill="#070A10"/><circle cx="140" cy="96" r="2" fill="#F2D27A"/>
+  <path d="M170 108 C184 110 190 118 184 126 C180 120 174 118 168 120 Z" fill="#9A7A22"/>
+  <path d="M120 30 l3 7 7 1 -5 5 1 7 -6 -3 -6 3 1 -7 -5 -5 7 -1 z" fill="#F2D27A"/>
+  <path id="arcTop" d="M40 120 A80 80 0 0 1 200 120" fill="none"/>
+  <path id="arcBot" d="M44 124 A76 76 0 0 0 196 124" fill="none"/>
+  <text font-family="IBM Plex Mono,monospace" font-size="15" letter-spacing="6" fill="#D9B65A"><textPath href="#arcTop" startOffset="50%" text-anchor="middle">HUNTER</textPath></text>
+  <text font-family="IBM Plex Mono,monospace" font-size="13" letter-spacing="5" fill="#D9B65A"><textPath href="#arcBot" startOffset="50%" text-anchor="middle">KSA · 1</textPath></text>
+</g></defs></svg>
+
+<nav><div class="in">
+  <div class="brand"><svg viewBox="0 0 240 240"><use href="#hunterSeal"/></svg>
+    <div><b>DSP</b><span data-i="ds">DESIGN SYSTEM</span></div></div>
+  <div class="spacer"></div>
+  <span class="lang" id="langBtn">EN</span>
+</div></nav>
+
+<div class="wrap">
+  <div class="intro">
+    <h1 data-i="title">نظام التصميم — الهوية البصرية</h1>
+    <p data-i="sub">المرجع البصري الموحّد المطبَّق على كل الواجهات الـ١٣. انسخ الرمز قناة محميات أدناه لتطبيق نفس الثيم في الكود الخلفي والواجهات.</p>
+  </div>
+
+  <!-- COLORS: gold -->
+  <div class="sec" data-i="secGold">◆ الذهب السعودي — اللون الأساسي</div>
+  <div class="grid">
+    <div class="sw"><div class="chip" style="background:#F2D27A"></div><div class="nm" data-i="goldBright">ذهب لامع</div><div class="hex">#F2D27A</div><div class="var">--gold-bright</div></div>
+    <div class="sw"><div class="chip" style="background:#D9B65A"></div><div class="nm" data-i="goldMain">ذهب أساسي</div><div class="hex">#D9B65A</div><div class="var">--gold</div></div>
+    <div class="sw"><div class="chip" style="background:#9A7A22"></div><div class="nm" data-i="goldDeep">ذهب غامق</div><div class="hex">#9A7A22</div><div class="var">--gold-deep</div></div>
+    <div class="sw"><div class="chip" style="background:linear-gradient(135deg,#F2D27A,#9A7A22)"></div><div class="nm" data-i="goldGrad">تدرّج ذهبي</div><div class="hex" data-i="forButtons">للأزرار</div></div>
+  </div>
+
+  <!-- COLORS: bg + text -->
+  <div class="sec" data-i="secBg">◇ الخلفيات والنصوص</div>
+  <div class="grid">
+    <div class="sw"><div class="chip" style="background:#070A10"></div><div class="nm" data-i="void">الخلفية</div><div class="hex">#070A10</div><div class="var">--void</div></div>
+    <div class="sw"><div class="chip" style="background:#121826"></div><div class="nm" data-i="panel">لوحة زجاجية</div><div class="hex">rgba(18,24,36,.62)</div><div class="var">--panel</div></div>
+    <div class="sw"><div class="chip" style="background:#EAEEF6"></div><div class="nm" data-i="txt">نص أساسي</div><div class="hex">#EAEEF6</div><div class="var">--txt</div></div>
+    <div class="sw"><div class="chip" style="background:#9AA6BC"></div><div class="nm" data-i="txt2">نص ثانوي</div><div class="hex">#9AA6BC</div><div class="var">--txt-2</div></div>
+    <div class="sw"><div class="chip" style="background:#5E6A82"></div><div class="nm" data-i="txt3">نص خافت</div><div class="hex">#5E6A82</div><div class="var">--txt-3</div></div>
+  </div>
+
+  <!-- COLORS: accents + states -->
+  <div class="sec" data-i="secStates">⬡ اللمسات والحالات</div>
+  <div class="grid">
+    <div class="sw"><div class="chip" style="background:#3FD3C6"></div><div class="nm">Teal</div><div class="hex">#3FD3C6</div><div class="var">--teal</div></div>
+    <div class="sw"><div class="chip" style="background:#88A6FF"></div><div class="nm" data-i="blue">أزرق</div><div class="hex">#88A6FF</div><div class="var">--blue</div></div>
+    <div class="sw"><div class="chip" style="background:#56D6A0"></div><div class="nm" data-i="up">صاعد / نجاح</div><div class="hex">#56D6A0</div><div class="var">--up</div></div>
+    <div class="sw"><div class="chip" style="background:#E2657E"></div><div class="nm" data-i="down">هابط / خطر</div><div class="hex">#E2657E</div><div class="var">--down</div></div>
+    <div class="sw"><div class="chip" style="background:#E8B964"></div><div class="nm" data-i="warn">تحذير</div><div class="hex">#E8B964</div><div class="var">--warn</div></div>
+  </div>
+
+  <!-- TYPOGRAPHY -->
+  <div class="sec" data-i="secFonts">✎ الخطوط (Typography)</div>
+  <div class="font-preview">
+    <div class="preview-card"><div class="kufi big">مركز القرار</div><div class="lbl">Reem Kufi · <span data-i="fHead">عناوين عربية</span></div></div>
+    <div class="preview-card"><div class="big" style="font-family:'IBM Plex Sans Arabic'">نص المحتوى الأساسي</div><div class="lbl">IBM Plex Sans Arabic · <span data-i="fBody">النص</span></div></div>
+    <div class="preview-card"><div class="mono big" style="color:var(--gold-bright)">٧٤٪ · ٢٤١٢.٥</div><div class="lbl">IBM Plex Mono · <span data-i="fNum">الأرقام</span></div></div>
+    <div class="preview-card"><div class="big" style="font-family:'Sora'">Command Center</div><div class="lbl">Sora · <span data-i="fLat">اللاتيني</span></div></div>
+  </div>
+
+  <!-- COMPONENTS -->
+  <div class="sec" data-i="secComp">▣ معاينة المكوّنات (Components)</div>
+  <div class="cards-row">
+    <div class="preview-card">
+      <div class="lbl">◎ <span data-i="activeUsers">مستخدمون نشطون</span></div>
+      <div class="kpi-val">٣٤٨</div>
+      <div style="font-size:11.5px;color:var(--up);margin-top:6px">▲ ١٢٪ <span data-i="thisWeek">هذا الأسبوع</span></div>
+    </div>
+    <div class="preview-card gold-line">
+      <div class="kufi" style="font-size:15px;margin-bottom:11px" data-i="glassCard">بطاقة زجاجية</div>
+      <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px">
+        <span class="badge b-up" data-i="bActive">نشط</span>
+        <span class="badge b-gold" data-i="bGoverned">محكوم</span>
+        <span class="badge b-rose" data-i="bCaution">تحفّظ</span>
+      </div>
+      <div style="display:flex;gap:9px">
+        <span class="btn btn-gold" data-i="btnGold">زر ذهبي</span>
+        <span class="btn btn-ghost" data-i="btnGhost">زر ثانوي</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CSS TOKENS -->
+  <div class="sec" data-i="secProtected credentials">⌨ رمز قناة محميات CSS — جاهزة للنسخ</div>
+  <div class="code">
+    <button class="copy" id="copyBtn" data-i="copy">نسخ</button>
+<pre id="protected credentialCode"><span class="c-com">/* DSP design variables — paste into :root */</span>
+<span class="c-com">/* fonts: Reem Kufi · IBM Plex Sans Arabic · IBM Plex Mono · Sora */</span>
+:root{
+  <span class="c-var">--void</span>:<span class="c-val">#070A10</span>; <span class="c-var">--ink</span>:<span class="c-val">#0B0F17</span>;
+  <span class="c-var">--panel</span>:<span class="c-val">rgba(18,24,36,.62)</span>;
+  <span class="c-var">--panel-2</span>:<span class="c-val">rgba(22,29,43,.55)</span>;
+  <span class="c-var">--line</span>:<span class="c-val">rgba(201,162,39,.18)</span>;
+  <span class="c-var">--line-soft</span>:<span class="c-val">rgba(255,255,255,.06)</span>;
+  <span class="c-var">--gold</span>:<span class="c-val">#D9B65A</span>; <span class="c-var">--gold-bright</span>:<span class="c-val">#F2D27A</span>; <span class="c-var">--gold-deep</span>:<span class="c-val">#9A7A22</span>;
+  <span class="c-var">--teal</span>:<span class="c-val">#3FD3C6</span>; <span class="c-var">--blue</span>:<span class="c-val">#88A6FF</span>; <span class="c-var">--rose</span>:<span class="c-val">#E0607A</span>;
+  <span class="c-var">--txt</span>:<span class="c-val">#EAEEF6</span>; <span class="c-var">--txt-2</span>:<span class="c-val">#9AA6BC</span>; <span class="c-var">--txt-3</span>:<span class="c-val">#5E6A82</span>;
+  <span class="c-var">--up</span>:<span class="c-val">#56D6A0</span>; <span class="c-var">--down</span>:<span class="c-val">#E2657E</span>; <span class="c-var">--warn</span>:<span class="c-val">#E8B964</span>;
+  <span class="c-var">--radius</span>:<span class="c-val">18px</span>;
+}</pre>
+  </div>
+
+  <div class="note">
+    <b data-i="noteH">ملاحظات للمطوّر:</b><br>
+    <span data-i="note1">• الزر الذهبي = <code>linear-gradient(135deg, --gold-bright, --gold-deep)</code> ونصّه داكن <code>#1a1303</code>.</span><br>
+    <span data-i="note2">• البطاقات زجاجية: <code>background:--panel</code> + <code>backdrop-filter:blur(12px)</code> + حد <code>--line-soft</code>، الزوايا <code>--radius</code>.</span><br>
+    <span data-i="note3">• الاتجاه: استخدم خصائص منطقية (<code>inset-inline</code>، <code>padding-inline</code>) ليعمل القلب بين RTL/LTR تلقائيًا.</span><br>
+    <span data-i="note4">• الشعار: <code>&lt;g id="hunterSeal"&gt;</code> يُعرّف مرة ويُستدعى بـ <code>&lt;use href="#hunterSeal"/&gt;</code> في كل صفحة.</span><br>
+    <span data-i="note5">• الأرقام بخط Mono مع <code>font-feature-settings:"tnum"</code> لمحاذاة ثابتة.</span>
+  </div>
+
+  <div class="gov" data-i="govRule">اعرض قيمة القرار · أخفِ الوصفة الداخلية</div>
+</div>
+
+<script>
+let LANG="en";
+const __ndspStub=new Proxy(function(){},{get:(t,p)=>{if(p==='style'||p==='dataset'||p==='classList')return new Proxy({},{get:()=>()=>{}});if(p==='value'||p==='textContent'||p==='innerHTML'||p==='placeholder')return '';return __ndspStub;},set:()=>true,apply:()=>__ndspStub});const __q=(s)=>{try{return document.querySelector(s)||__ndspStub;}catch(e){return __ndspStub;}};const $=s=>__q(s),$$=s=>document.querySelectorAll(s);
+const I18N={
+ ar:{dir:"rtl",lang:"ar",ds:"DESIGN SYSTEM",
+  title:"نظام التصميم — الهوية البصرية",
+  sub:"المرجع البصري الموحّد المطبَّق على كل الواجهات الـ١٣. انسخ الرمز قناة محميات أدناه لتطبيق نفس الثيم في الكود الخلفي والواجهات.",
+  secGold:"◆ الذهب السعودي — اللون الأساسي",goldBright:"ذهب لامع",goldMain:"ذهب أساسي",goldDeep:"ذهب غامق",goldGrad:"تدرّج ذهبي",forButtons:"للأزرار",
+  secBg:"◇ الخلفيات والنصوص",void:"الخلفية",panel:"لوحة زجاجية",txt:"نص أساسي",txt2:"نص ثانوي",txt3:"نص خافت",
+  secStates:"⬡ اللمسات والحالات",blue:"أزرق",up:"صاعد / نجاح",down:"هابط / خطر",warn:"تحذير",
+  secFonts:"✎ الخطوط (Typography)",fHead:"عناوين عربية",fBody:"النص",fNum:"الأرقام",fLat:"اللاتيني",
+  secComp:"▣ معاينة المكوّنات (Components)",activeUsers:"مستخدمون نشطون",thisWeek:"هذا الأسبوع",
+  glassCard:"بطاقة زجاجية",bActive:"نشط",bGoverned:"محكوم",bCaution:"تحفّظ",btnGold:"زر ذهبي",btnGhost:"زر ثانوي",
+  secProtected credentials:"⌨ رمز قناة محميات CSS — جاهزة للنسخ",copy:"نسخ",
+  noteH:"ملاحظات للمطوّر:",
+  note1:"• الزر الذهبي = <code>linear-gradient(135deg, --gold-bright, --gold-deep)</code> ونصّه داكن <code>#1a1303</code>.",
+  note2:"• البطاقات زجاجية: <code>background:--panel</code> + <code>backdrop-filter:blur(12px)</code> + حد <code>--line-soft</code>، الزوايا <code>--radius</code>.",
+  note3:"• الاتجاه: استخدم خصائص منطقية (<code>inset-inline</code>، <code>padding-inline</code>) ليعمل القلب بين RTL/LTR تلقائيًا.",
+  note4:"• الشعار: <code>&lt;g id=\"hunterSeal\"&gt;</code> يُعرّف مرة ويُستدعى بـ <code>&lt;use href=\"#hunterSeal\"/&gt;</code> في كل صفحة.",
+  note5:"• الأرقام بخط Mono مع <code>font-feature-settings:\"tnum\"</code> لمحاذاة ثابتة.",
+  govRule:"اعرض قيمة القرار · أخفِ الوصفة الداخلية"
+ },
+ en:{dir:"ltr",lang:"en",ds:"DESIGN SYSTEM",
+  title:"Design System — Visual Identity",
+  sub:"The unified visual reference applied across all 13 interfaces. Copy the variables below to apply the same theme in the backend and frontends.",
+  secGold:"◆ Saudi gold — primary color",goldBright:"Gold bright",goldMain:"Gold base",goldDeep:"Gold deep",goldGrad:"Gold gradient",forButtons:"for buttons",
+  secBg:"◇ Backgrounds & text",void:"Background",panel:"Glass panel",txt:"Primary text",txt2:"Secondary text",txt3:"Muted text",
+  secStates:"⬡ Accents & states",blue:"Blue",up:"Up / success",down:"Down / risk",warn:"Warning",
+  secFonts:"✎ Typography",fHead:"Arabic headings",fBody:"Body",fNum:"Numbers",fLat:"Latin",
+  secComp:"▣ Component preview",activeUsers:"Active users",thisWeek:"this week",
+  glassCard:"Glass card",bActive:"Active",bGoverned:"Governed",bCaution:"Caution",btnGold:"Gold button",btnGhost:"Ghost button",
+  secProtected credentials:"⌨ CSS variables — copy-ready",copy:"Copy",
+  noteH:"Developer notes:",
+  note1:"• Gold button = <code>linear-gradient(135deg, --gold-bright, --gold-deep)</code> with dark text <code>#1a1303</code>.",
+  note2:"• Cards are glass: <code>background:--panel</code> + <code>backdrop-filter:blur(12px)</code> + <code>--line-soft</code> border, radius <code>--radius</code>.",
+  note3:"• Direction: use logical properties (<code>inset-inline</code>, <code>padding-inline</code>) so RTL/LTR flips automatically.",
+  note4:"• Emblem: <code>&lt;g id=\"hunterSeal\"&gt;</code> is defined once and referenced via <code>&lt;use href=\"#hunterSeal\"/&gt;</code> on every page.",
+  note5:"• Numbers use Mono with <code>font-feature-settings:\"tnum\"</code> for steady alignment.",
+  govRule:"Expose decision value · Hide the recipe"
+ }
+};
+function applyLang(){
+  const d=I18N[LANG];
+  document.documentElement.lang=d.lang;document.documentElement.dir=d.dir;document.body.dir=d.dir;
+  $$('[data-i]').forEach(el=>{const k=el.getAttribute('data-i');if(d[k]!=null)el.innerHTML=d[k];});
+  $("#langBtn").textContent=LANG==="ar"?"EN":"ع";
+}
+$("#langBtn").onclick=()=>{LANG=LANG==="ar"?"en":"ar";applyLang();};
+
+$("#copyBtn").onclick=()=>{
+  const txt=$("#protected credentialCode").innerText;
+  navigator.clipboard?.writeText(txt).then(()=>{
+    const b=$("#copyBtn");const o=b.textContent;b.textContent=LANG==="ar"?"تم النسخ ✓":"Copied ✓";
+    setTimeout(()=>b.textContent=o,1600);
+  });
+};
+applyLang();
+</script>
+</
+
+
+</
+
+
+</
+<!-- DSP_ADMIN_ARABIC_FINAL_BEGIN -->
+<style>
+#dspAdminLangFinal{position:fixed;top:12px;right:12px;z-index:999999;display:flex;gap:6px;padding:6px;border-radius:999px;background:rgba(7,10,16,.94);border:1px solid rgba(217,182,90,.45)}
+#dspAdminLangFinal button{border:0;border-radius:999px;padding:8px 12px;font-parameter:900;background:transparent;color:#9AA6BC}
+#dspAdminLangFinal button.on{background:linear-gradient(135deg,#F2D27A,#D9B65A);color:#151006}
+</style>
+<script>
+(function(){
+const AR={
+"OPERATIONS CENTER":"مركز العمليات","MAIN":"الرئيسية","Overview":"نظرة عامة","Users":"المستخدمون","Trials":"التجارب",
+"Registration Review":"مراجعة التسجيل","BUSINESS":"الأعمال","Packages":"الباقات","Payments":"المدفوعات",
+"ENGINE & GOVERNANCE":"المحركات والحوكمة","Layer Governance":"حوكمة الطبقات","NMP Research Lab":"مختبر أبحاث NMP",
+"Alerts & Config":"التنبيهات والإعدادات","Email":"البريد","Telegram":"تيليجرام","Health":"الصحة التشغيلية","Reports":"التقارير",
+"Backups":"النسخ الاحتياطية","Status":"الحالة","Active":"نشط","Pending":"قيد الانتظار","Approved":"مقبول","Rejected":"مرفوض"
+};
+const EN={}; Object.keys(AR).forEach(k=>EN[AR[k]]=k);
+function walk(fn){let w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let n,a=[];while(n=w.nextNode())a.push(n);a.forEach(n=>{if(n.parentElement&& !n.parentElement.closest("#dspAdminLangFinal"))fn(n)});}
+function apply(lang){
+ localStorage.setItem("dsp_admin_lang",lang);
+ document.documentElement.lang=lang; document.documentElement.dir=lang==="ar"?"rtl":"ltr"; document.body.dir=document.documentElement.dir;
+ let map=lang==="ar"?AR:EN;
+ walk(n=>{let t=n.nodeValue;Object.keys(map).forEach(k=>t=t.split(k).join(map[k]));n.nodeValue=t;});
+ document.getElementById("adAR")?.classList.toggle("on",lang==="ar");
+ document.getElementById("adEN")?.classList.toggle("on",lang==="en");
+}
+function boot(){
+ if(!document.getElementById("dspAdminLangFinal")){
+  let b=document.createElement("div"); b.id="dspAdminLangFinal";
+  b.innerHTML='<button id="adAR">AR</button><button id="adEN">EN</button>';
+  document.body.appendChild(b);
+  document.getElementById("adAR").onclick=()=>apply("ar");
+  document.getElementById("adEN").onclick=()=>apply("en");
+ }
+ apply(localStorage.getItem("dsp_admin_lang")||"ar");
+}
+document.readyState==="loading"?document.addEventListener("DOMContentLoaded",boot):boot();
+})();
+</script>
+<!-- DSP_ADMIN_ARABIC_FINAL_END -->
+
+</
+
+
+</
+<!-- DSP_ADMIN_MOBILE_HARD_DRAWER_BEGIN -->
+<style>
+@media(max-width:900px){
+  #dspHardMenuBtn{
+    position:fixed!important;
+    top:12px!important;
+    left:12px!important;
+    z-index:2147483647!important;
+    width:46px!important;
+    height:46px!important;
+    border-radius:14px!important;
+    border:1px solid rgba(217,182,90,.55)!important;
+    background:#070A10!important;
+    color:#F2D27A!important;
+    font-size:24px!important;
+    font-parameter:900!important;
+  }
+  #dspHardBackdrop{
+    position:fixed!important;
+    inset:0!important;
+    z-index:2147483645!important;
+    display:none!important;
+    background:rgba(0,0,0,.72)!important;
+    backdrop-filter:blur(6px)!important;
+  }
+  body.dspHardOpen #dspHardBackdrop{display:block!important}
+  body.dspHardOpen .dspHardSidebar{
+    transform:translateX(0)!important;
+    opacity:1!important;
+    pointer-events:auto!important;
+  }
+  .dspHardSidebar{
+    position:fixed!important;
+    top:0!important;
+    left:0!important;
+    bottom:0!important;
+    width:min(86vw,360px)!important;
+    height:100vh!important;
+    max-height:100vh!important;
+    overflow-y:auto!important;
+    z-index:2147483646!important;
+    background:#0B0F17!important;
+    transform:translateX(-115%)!important;
+    opacity:1!important;
+    pointer-events:none!important;
+    transition:transform .22s ease!important;
+    box-shadow:32px 0 90px rgba(0,0,0,.65)!important;
+  }
+  body:not(.dspHardOpen) .dspHardSidebar *{
+    pointer-events:none!important;
+  }
+}
+</style>
+
+<script>
+(function(){
+  function mobile(){ return window.matchMedia("(max-width:900px)").matches; }
+
+  function isSidebar(el){
+    var t=(el.innerText||"").trim();
+    if(t.length<40) return false;
+    var hits=0;
+    ["Overview","Users","Trials","Registration Review","Packages","Payments","Layer Governance","NMP Research Lab","Health","Reports","Backups","نظرة عامة","المستخدمون","التجارب","الباقات","المدفوعات"].forEach(function(x){
+      if(t.indexOf(x)>=0) hits++;
+    });
+    return hits>=4;
+  }
+
+  function findSidebar(){
+    var all=[].slice.call(document.querySelectorAll("aside,nav,div,section"));
+    var c=all.filter(isSidebar);
+    c.sort(function(a,b){
+      var aw=a.getBoundingClientRect().width || 9999;
+      var bw=b.getBoundingClientRect().width || 9999;
+      return aw-bw;
+    });
+    return c[0] || null;
+  }
+
+  function boot(){
+    document.querySelectorAll("#dspAdminDrawerBtn,#dspAdminDrawerBackdrop,#dspAdminMobileBackdrop").forEach(function(x){x.remove();});
+    document.body.classList.remove("dspDrawerOpen","dsp-admin-menu-open");
+
+    var side=findSidebar();
+    if(!side) return;
+
+    side.classList.add("dspHardSidebar");
+
+    if(!document.getElementById("dspHardBackdrop")){
+      var back=document.createElement("div");
+      back.id="dspHardBackdrop";
+      document.body.appendChild(back);
+      back.onclick=function(){document.body.classList.remove("dspHardOpen");};
+    }
+
+    if(!document.getElementById("dspHardMenuBtn")){
+      var btn=document.createElement("button");
+      btn.id="dspHardMenuBtn";
+      btn.type="button";
+      btn.textContent="☰";
+      document.body.appendChild(btn);
+      btn.onclick=function(){document.body.classList.toggle("dspHardOpen");};
+    }
+
+    side.querySelectorAll("a,button").forEach(function(el){
+      if(!el.dataset.hardClose){
+        el.dataset.hardClose="1";
+        el.addEventListener("click",function(){
+          if(mobile()) setTimeout(function(){document.body.classList.remove("dspHardOpen");},120);
+        });
+      }
+    });
+
+    if(mobile()) document.body.classList.remove("dspHardOpen");
+  }
+
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",boot);
+  else boot();
+
+  setTimeout(boot,300);
+  setTimeout(boot,1000);
+  window.addEventListener("resize",boot);
+})();
+</script>
+<!-- DSP_ADMIN_MOBILE_HARD_DRAWER_END -->
+
+<script src="ndsp-hud-theme.js" defer></script>
+
+<!-- NDSP_AR_EN_ONLY_CLEAN_FINAL_START -->
+<script>
+(function(){
+  "use strict";
+
+  function n(v){ return String(v || "").trim().toLowerCase(); }
+
+  function allowed(v){
+    v = n(v);
+    return v === "ar" || v === "en" || v.indexOf("ar-") === 0 || v.indexOf("en-") === 0 ||
+           v === "arabic" || v === "english" || v === "العربية";
+  }
+
+  function isLangSelect(sel){
+    var meta = n((sel.id || "") + " " + (sel.name || "") + " " + (sel.className || "") + " " + (sel.getAttribute("aria-label") || ""));
+    var text = n(sel.textContent || "");
+    return /lang|language|locale|لغة|لسان/.test(meta) || /العربية|english|arabic/.test(text);
+  }
+
+  function cleanSelect(sel){
+    if (!sel || !sel.options || !isLangSelect(sel)) return;
+
+    Array.prototype.slice.call(sel.options).forEach(function(o){
+      var v = n(o.value || "");
+      var t = n(o.textContent || "");
+      if (!allowed(v) && !allowed(t)) o.remove();
+    });
+
+    var opts = Array.prototype.slice.call(sel.options);
+    var hasAr = opts.some(function(o){ return n(o.value) === "ar" || n(o.textContent).indexOf("العربية") >= 0; });
+    var hasEn = opts.some(function(o){ return n(o.value) === "en" || n(o.textContent).indexOf("english") >= 0; });
+
+    if (!hasAr) {
+      var ar = document.createElement("option");
+      ar.value = "ar";
+      ar.textContent = "العربية";
+      sel.appendChild(ar);
+    }
+
+    if (!hasEn) {
+      var en = document.createElement("option");
+      en.value = "en";
+      en.textContent = "English";
+      sel.appendChild(en);
+    }
+  }
+
+  function enforce(){
+    window.NDSP_ALLOWED_LANGUAGES = ["ar","en"];
+    document.documentElement.setAttribute("data-allowed-languages", "ar,en");
+    Array.prototype.slice.call(document.querySelectorAll("select")).forEach(cleanSelect);
+
+    Array.prototype.slice.call(document.querySelectorAll("[data-lang], [data-language], [data-locale]")).forEach(function(el){
+      var v = n(el.getAttribute("data-lang") || el.getAttribute("data-language") || el.getAttribute("data-locale") || "");
+      if (v && !allowed(v)) el.remove();
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", enforce);
+  setTimeout(enforce, 300);
+  setTimeout(enforce, 1200);
+})();
+</script>
+<!-- NDSP_AR_EN_ONLY_CLEAN_FINAL_END -->
+
+</body>
+</html>

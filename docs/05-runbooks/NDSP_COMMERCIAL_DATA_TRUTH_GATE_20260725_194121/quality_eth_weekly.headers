@@ -1,0 +1,16 @@
+HTTP/2 200 
+server: nginx/1.24.0 (Ubuntu)
+date: Sat, 25 Jul 2026 17:41:24 GMT
+content-type: application/json; charset=utf-8
+content-length: 46239
+cache-control: no-store, no-cache, max-age=0, must-revalidate
+cache-control: no-store, no-cache, must-revalidate, proxy-revalidate
+strict-transport-security: max-age=31536000
+x-content-type-options: nosniff
+referrer-policy: strict-origin-when-cross-origin
+x-frame-options: SAMEORIGIN
+content-security-policy: default-src 'self' https: data: blob: 'unsafe-inline' 'unsafe-eval'; connect-src 'self' https: wss:; frame-ancestors 'self'; base-uri 'self'; object-src 'none';
+permissions-policy: geolocation=(), microphone=(), camera=()
+x-ndsp-portal: approved-design-only-d10-d4
+x-content-type-options: nosniff
+

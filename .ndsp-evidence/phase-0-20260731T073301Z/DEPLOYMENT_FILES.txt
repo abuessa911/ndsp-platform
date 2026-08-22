@@ -1,0 +1,27 @@
+$ cd /home/nawaf511/empire-core-new && find . -type f       \( -name 'Dockerfile*' -o -name 'docker-compose*.yml' -o -name 'docker-compose*.yaml'       -o -name 'compose*.yml' -o -name 'compose*.yaml' -o -name '*.service'       -o -name 'ecosystem*.js' -o -name 'ecosystem*.cjs' -o -name 'ecosystem*.json'       -o -name 'nginx*.conf' -o -name 'Procfile' -o -name '*.timer'       -o -path '*/.github/workflows/*' -o -path '*/.gitlab-ci.yml' \)       -not -path './.git/*' -not -path './node_modules/*'       -not -path './.ndsp-evidence/*' -print 2>/dev/null | sort
+
+./backend/auth_api/node_modules/bcrypt/Dockerfile
+./backend/auth_api/node_modules/bcrypt/Dockerfile-alpine
+./backend/auth_api/node_modules/bcrypt/.github/workflows/build-pack-publish.yml
+./backend/auth_api/node_modules/bcrypt/.github/workflows/ci.yaml
+./backend/_backups/DEV002D_backend_core_source_intake_20260628_002228/backend/auth_api/node_modules/bcrypt/Dockerfile
+./backend/_backups/DEV002D_backend_core_source_intake_20260628_002228/backend/auth_api/node_modules/bcrypt/Dockerfile-alpine
+./backend/_backups/DEV002D_backend_core_source_intake_20260628_002228/backend/auth_api/node_modules/bcrypt/.github/workflows/build-pack-publish.yml
+./backend/_backups/DEV002D_backend_core_source_intake_20260628_002228/backend/auth_api/node_modules/bcrypt/.github/workflows/ci.yaml
+./backend/_backups/DEV002G_legacy_backend_modules_intake_20260628_003623/backend/password_reset_gateway/node_modules/bcrypt/.github/workflows/ci.yaml
+./backend/_backups/DEV002G_legacy_backend_modules_intake_20260628_003623/backend/password_reset_gateway/node_modules/@mapbox/node-pre-gyp/.github/workflows/codeql.yml
+./backend/password_reset_gateway/node_modules/bcrypt/Dockerfile
+./backend/password_reset_gateway/node_modules/bcrypt/Dockerfile-alpine
+./backend/password_reset_gateway/node_modules/bcrypt/.github/workflows/build-pack-publish.yml
+./backend/password_reset_gateway/node_modules/bcrypt/.github/workflows/ci.yaml
+./backend/services/bot_execution/systemd/ndsp-bot_execution.service
+./backend/services/completed_decision/systemd/ndsp-completed_decision.service
+./backend/services/ctl-001-workspace-identity/systemd/ndsp-ctl-001-workspace-identity.service
+./backend/services/decision_governance_core/systemd/ndsp-decision_governance_core.service
+./backups/auth-recovery-true-source-fix-v7/20260727_195013/nginx/nginx-1.before.conf
+./backups/auth-recovery-true-source-fix-v7/20260727_195558/nginx/nginx-1.before.conf
+./backups/auth-recovery-true-source-fix-v7/20260727_200610/nginx/nginx-1.before.conf
+./Dockerfile
+./docs/05-runbooks/NDSP_COMMERCIAL_STAGING_SOURCE_DEPLOY_V1_13_20260730_103616/work/ndsp-commercial-auth-payment-staging.service
+./.github/workflows/ndsp-project-validator.yml
+./.repair_backups/20260625_172737/Dockerfile.bak

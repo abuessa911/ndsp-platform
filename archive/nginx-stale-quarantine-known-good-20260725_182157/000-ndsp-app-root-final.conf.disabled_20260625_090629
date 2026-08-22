@@ -1,0 +1,28 @@
+
+# NDSP_DISABLED_DUPLICATE_PUBLIC_NDSP_BLOCK_START 20260618_063133
+# Removed duplicate server block from /etc/nginx/conf.d/000-ndsp-app-root-final.conf line 1 names=ndsp.app
+# Preview:
+# server {
+#     listen 80;
+#     listen [::]:80;
+#     server_name ndsp.app;
+# 
+#     location ^~ /.well-known/acme-challenge/ {
+#         root /var/www/html;
+#         default_type text/plain;
+# NDSP_DISABLED_DUPLICATE_PUBLIC_NDSP_BLOCK_END 20260618_063133
+
+
+
+# NDSP_DISABLED_DUPLICATE_PUBLIC_NDSP_BLOCK_START 20260618_063133
+# Removed duplicate server block from /etc/nginx/conf.d/000-ndsp-app-root-final.conf line 17 names=ndsp.app
+# Preview:
+# server {
+#     listen 443 ssl http2;
+#     listen [::]:443 ssl http2;
+#     server_name ndsp.app;
+# 
+#     ssl_certificate /etc/letsencrypt/live/ndsp.app/fullchain.pem;
+#     ssl_certificate_key /etc/letsencrypt/live/ndsp.app/privkey.pem;
+# NDSP_DISABLED_DUPLICATE_PUBLIC_NDSP_BLOCK_END 20260618_063133
+

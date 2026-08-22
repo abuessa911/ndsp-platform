@@ -1,0 +1,35 @@
+
+============================================================
+NDSP — FLUSH OWNER API 9023 MEMORY CACHE V7
+============================================================
+DATE=2026-07-28T00:14:17+02:00
+HOST=vmi2934783.contaboserver.net
+PROJECT=/home/nawaf511/empire-core-new
+TARGET_EMAIL=she20232030@gmail.com
+DB_NAME=ndsp_auth
+REPORT=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_OWNER_API_9023_CACHE_FLUSH_V7_20260728_001417.txt
+BACKUP=/home/nawaf511/empire-core-new/backups/owner-api-9023-cache-flush-v7/20260728_001417
+
+============================================================
+0) CONFIRMATION AND PRECONDITIONS
+============================================================
+EXPLICIT_CONFIRMATION=YES
+SUDO_GATE=PASS
+PRECONDITION_GATE=PASS
+
+============================================================
+1) AUTHORITATIVE DATABASE ABSENCE GATE
+============================================================
+AUTHORITATIVE_DB_TARGET_COUNT_BEFORE=0
+AUTHORITATIVE_DATABASE_ABSENCE_GATE=PASS
+
+============================================================
+2) OFFICIAL API 9031 GATE
+============================================================
+OFFICIAL_API_HTTP_BEFORE=401
+OFFICIAL_API_BYTES_BEFORE=35
+FAIL=OFFICIAL_API_9031_NOT_HEALTHY:401
+DATABASE_CHANGED=NO
+SOURCE_CHANGED=NO
+NGINX_CHANGED=NO
+FINAL_STATUS=NDSP_OWNER_API_9023_CACHE_FLUSH_V7_FAILED

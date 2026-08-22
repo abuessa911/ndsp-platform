@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <title>TDL Research Lab — DSP</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body{margin:0;background:#080b10;color:#f5f1df;font-family:Arial,Tahoma,sans-serif}
+    .wrap{max-width:1180px;margin:auto;padding:28px}
+    .card{background:rgba(255,255,255,.05);border:1px solid rgba(212,175,55,.35);border-radius:18px;padding:20px;margin:16px 0}
+    h1,h2{color:#d4af37}.muted{color:#b8b8b8}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+    .pill{padding:12px;border-radius:14px;background:rgba(0,188,212,.08);border:1px solid rgba(0,188,212,.25)}
+    button{background:#d4af37;color:#050505;border:0;border-radius:12px;padding:12px 18px;font-parameter:700;cursor:pointer}
+    pre{white-space:pre-wrap;background:#05070a;border-radius:14px;padding:16px;overflow:auto;border:1px solid rgba(255,255,255,.12);direction:ltr;text-align:left}
+  </style>
+
+<style>
+/* DSP_TDL_DASHBOARD_VIEW_V1 */
+#tdlRuntimeDashboard{margin-top:18px;border:1px solid rgba(217,182,90,.35);border-radius:22px;background:rgba(12,17,26,.92);padding:22px;color:#e5e7eb;font-family:system-ui,Tahoma,Arial,sans-serif;direction:rtl}
+#tdlRuntimeDashboard .head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}
+#tdlRuntimeDashboard .title{font-size:24px;font-parameter:800;color:#f2d27a}
+#tdlRuntimeDashboard .badge{padding:9px 14px;border-radius:999px;background:rgba(16,185,129,.14);color:#6ee7b7;border:1px solid rgba(16,185,129,.35);font-parameter:800}
+#tdlRuntimeDashboard .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+#tdlRuntimeDashboard .card{border:1px solid rgba(148,163,184,.16);border-radius:18px;padding:16px;background:rgba(7,10,16,.72)}
+#tdlRuntimeDashboard .k{color:#94a3b8;font-size:13px;margin-bottom:8px}
+#tdlRuntimeDashboard .v{font-size:18px;font-parameter:800}
+#tdlRuntimeDashboard .safe{color:#6ee7b7}
+#tdlRuntimeDashboard .warn{color:#f2d27a}
+#tdlRuntimeDashboard .deny{color:#fb7185}
+#tdlRuntimeDashboard .note{margin-top:14px;color:#cbd5e1;line-height:1.8;border-top:1px solid rgba(148,163,184,.14);padding-top:14px}
+#tdlRawJsonBox{display:none!important}
+@media(max-width:900px){#tdlRuntimeDashboard .grid{grid-template-columns:1fr}}
+</style>
+
+<meta http-equiv="Cache-Control" content="no-store" />
+</head>
+<
+
+
+</
+<!-- DSP_ADMIN_ARABIC_FINAL_BEGIN -->
+<style>
+#dspAdminLangFinal{position:fixed;top:12px;right:12px;z-index:999999;display:flex;gap:6px;padding:6px;border-radius:999px;background:rgba(7,10,16,.94);border:1px solid rgba(217,182,90,.45)}
+#dspAdminLangFinal button{border:0;border-radius:999px;padding:8px 12px;font-parameter:900;background:transparent;color:#9AA6BC}
+#dspAdminLangFinal button.on{background:linear-gradient(135deg,#F2D27A,#D9B65A);color:#151006}
+</style>
+<script>
+(function(){
+const AR={
+"OPERATIONS CENTER":"مركز العمليات","MAIN":"الرئيسية","Overview":"نظرة عامة","Users":"المستخدمون","Trials":"التجارب",
+"Registration Review":"مراجعة التسجيل","BUSINESS":"الأعمال","Packages":"الباقات","Payments":"المدفوعات",
+"ENGINE & GOVERNANCE":"المحركات والحوكمة","Layer Governance":"حوكمة الطبقات","NMP Research Lab":"مختبر أبحاث NMP",
+"Alerts & Config":"التنبيهات والإعدادات","Email":"البريد","Telegram":"تيليجرام","Health":"الصحة التشغيلية","Reports":"التقارير",
+"Backups":"النسخ الاحتياطية","Status":"الحالة","Active":"نشط","Pending":"قيد الانتظار","Approved":"مقبول","Rejected":"مرفوض"
+};
+const EN={}; Object.keys(AR).forEach(k=>EN[AR[k]]=k);
+function walk(fn){let w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let n,a=[];while(n=w.nextNode())a.push(n);a.forEach(n=>{if(n.parentElement&& !n.parentElement.closest("#dspAdminLangFinal"))fn(n)});}
+function apply(lang){
+ localStorage.setItem("dsp_admin_lang",lang);
+ document.documentElement.lang=lang; document.documentElement.dir=lang==="ar"?"rtl":"ltr"; document.body.dir=document.documentElement.dir;
+ let map=lang==="ar"?AR:EN;
+ walk(n=>{let t=n.nodeValue;Object.keys(map).forEach(k=>t=t.split(k).join(map[k]));n.nodeValue=t;});
+ document.getElementById("adAR")?.classList.toggle("on",lang==="ar");
+ document.getElementById("adEN")?.classList.toggle("on",lang==="en");
+}
+function boot(){
+ if(!document.getElementById("dspAdminLangFinal")){
+  let b=document.createElement("div"); b.id="dspAdminLangFinal";
+  b.innerHTML='<button id="adAR">AR</button><button id="adEN">EN</button>';
+  document.body.appendChild(b);
+  document.getElementById("adAR").onclick=()=>apply("ar");
+  document.getElementById("adEN").onclick=()=>apply("en");
+ }
+ apply(localStorage.getItem("dsp_admin_lang")||"ar");
+}
+document.readyState==="loading"?document.addEventListener("DOMContentLoaded",boot):boot();
+})();
+</script>
+<!-- DSP_ADMIN_ARABIC_FINAL_END -->
+
+</
+
+
+</
+<!-- DSP_ADMIN_MOBILE_HARD_DRAWER_BEGIN -->
+<style>
+@media(max-width:900px){
+  #dspHardMenuBtn{
+    position:fixed!important;
+    top:12px!important;
+    left:12px!important;
+    z-index:2147483647!important;
+    width:46px!important;
+    height:46px!important;
+    border-radius:14px!important;
+    border:1px solid rgba(217,182,90,.55)!important;
+    background:#070A10!important;
+    color:#F2D27A!important;
+    font-size:24px!important;
+    font-parameter:900!important;
+  }
+  #dspHardBackdrop{
+    position:fixed!important;
+    inset:0!important;
+    z-index:2147483645!important;
+    display:none!important;
+    background:rgba(0,0,0,.72)!important;
+    backdrop-filter:blur(6px)!important;
+  }
+  body.dspHardOpen #dspHardBackdrop{display:block!important}
+  body.dspHardOpen .dspHardSidebar{
+    transform:translateX(0)!important;
+    opacity:1!important;
+    pointer-events:auto!important;
+  }
+  .dspHardSidebar{
+    position:fixed!important;
+    top:0!important;
+    left:0!important;
+    bottom:0!important;
+    width:min(86vw,360px)!important;
+    height:100vh!important;
+    max-height:100vh!important;
+    overflow-y:auto!important;
+    z-index:2147483646!important;
+    background:#0B0F17!important;
+    transform:translateX(-115%)!important;
+    opacity:1!important;
+    pointer-events:none!important;
+    transition:transform .22s ease!important;
+    box-shadow:32px 0 90px rgba(0,0,0,.65)!important;
+  }
+  body:not(.dspHardOpen) .dspHardSidebar *{
+    pointer-events:none!important;
+  }
+}
+</style>
+
+<script>
+(function(){
+  function mobile(){ return window.matchMedia("(max-width:900px)").matches; }
+
+  function isSidebar(el){
+    var t=(el.innerText||"").trim();
+    if(t.length<40) return false;
+    var hits=0;
+    ["Overview","Users","Trials","Registration Review","Packages","Payments","Layer Governance","NMP Research Lab","Health","Reports","Backups","نظرة عامة","المستخدمون","التجارب","الباقات","المدفوعات"].forEach(function(x){
+      if(t.indexOf(x)>=0) hits++;
+    });
+    return hits>=4;
+  }
+
+  function findSidebar(){
+    var all=[].slice.call(document.querySelectorAll("aside,nav,div,section"));
+    var c=all.filter(isSidebar);
+    c.sort(function(a,b){
+      var aw=a.getBoundingClientRect().width || 9999;
+      var bw=b.getBoundingClientRect().width || 9999;
+      return aw-bw;
+    });
+    return c[0] || null;
+  }
+
+  function boot(){
+    document.querySelectorAll("#dspAdminDrawerBtn,#dspAdminDrawerBackdrop,#dspAdminMobileBackdrop").forEach(function(x){x.remove();});
+    document.body.classList.remove("dspDrawerOpen","dsp-admin-menu-open");
+
+    var side=findSidebar();
+    if(!side) return;
+
+    side.classList.add("dspHardSidebar");
+
+    if(!document.getElementById("dspHardBackdrop")){
+      var back=document.createElement("div");
+      back.id="dspHardBackdrop";
+      document.body.appendChild(back);
+      back.onclick=function(){document.body.classList.remove("dspHardOpen");};
+    }
+
+    if(!document.getElementById("dspHardMenuBtn")){
+      var btn=document.createElement("button");
+      btn.id="dspHardMenuBtn";
+      btn.type="button";
+      btn.textContent="☰";
+      document.body.appendChild(btn);
+      btn.onclick=function(){document.body.classList.toggle("dspHardOpen");};
+    }
+
+    side.querySelectorAll("a,button").forEach(function(el){
+      if(!el.dataset.hardClose){
+        el.dataset.hardClose="1";
+        el.addEventListener("click",function(){
+          if(mobile()) setTimeout(function(){document.body.classList.remove("dspHardOpen");},120);
+        });
+      }
+    });
+
+    if(mobile()) document.body.classList.remove("dspHardOpen");
+  }
+
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",boot);
+  else boot();
+
+  setTimeout(boot,300);
+  setTimeout(boot,1000);
+  window.addEventListener("resize",boot);
+})();
+</script>
+<!-- DSP_ADMIN_MOBILE_HARD_DRAWER_END -->
+
+<!-- NDSP_AR_EN_ONLY_CLEAN_FINAL_START -->
+<script>
+(function(){
+  "use strict";
+
+  function n(v){ return String(v || "").trim().toLowerCase(); }
+
+  function allowed(v){
+    v = n(v);
+    return v === "ar" || v === "en" || v.indexOf("ar-") === 0 || v.indexOf("en-") === 0 ||
+           v === "arabic" || v === "english" || v === "العربية";
+  }
+
+  function isLangSelect(sel){
+    var meta = n((sel.id || "") + " " + (sel.name || "") + " " + (sel.className || "") + " " + (sel.getAttribute("aria-label") || ""));
+    var text = n(sel.textContent || "");
+    return /lang|language|locale|لغة|لسان/.test(meta) || /العربية|english|arabic/.test(text);
+  }
+
+  function cleanSelect(sel){
+    if (!sel || !sel.options || !isLangSelect(sel)) return;
+
+    Array.prototype.slice.call(sel.options).forEach(function(o){
+      var v = n(o.value || "");
+      var t = n(o.textContent || "");
+      if (!allowed(v) && !allowed(t)) o.remove();
+    });
+
+    var opts = Array.prototype.slice.call(sel.options);
+    var hasAr = opts.some(function(o){ return n(o.value) === "ar" || n(o.textContent).indexOf("العربية") >= 0; });
+    var hasEn = opts.some(function(o){ return n(o.value) === "en" || n(o.textContent).indexOf("english") >= 0; });
+
+    if (!hasAr) {
+      var ar = document.createElement("option");
+      ar.value = "ar";
+      ar.textContent = "العربية";
+      sel.appendChild(ar);
+    }
+
+    if (!hasEn) {
+      var en = document.createElement("option");
+      en.value = "en";
+      en.textContent = "English";
+      sel.appendChild(en);
+    }
+  }
+
+  function enforce(){
+    window.NDSP_ALLOWED_LANGUAGES = ["ar","en"];
+    document.documentElement.setAttribute("data-allowed-languages", "ar,en");
+    Array.prototype.slice.call(document.querySelectorAll("select")).forEach(cleanSelect);
+
+    Array.prototype.slice.call(document.querySelectorAll("[data-lang], [data-language], [data-locale]")).forEach(function(el){
+      var v = n(el.getAttribute("data-lang") || el.getAttribute("data-language") || el.getAttribute("data-locale") || "");
+      if (v && !allowed(v)) el.remove();
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", enforce);
+  setTimeout(enforce, 300);
+  setTimeout(enforce, 1200);
+})();
+</script>
+<!-- NDSP_AR_EN_ONLY_CLEAN_FINAL_END -->
+
+</body>
+  <div class="wrap">
+    <h1>TDL Research Lab</h1>
+    <p class="muted">مختبر اختبار فرضيات TDL التاريخية — معزول عن الإنتاج.</p>
+
+    <div class="card">
+      <h2>منطق الأيام الحالي — V2</h2>
+      <div class="grid">
+        <div class="pill">الاثنين: مدراء الأصول</div>
+        <div class="pill">الثلاثاء: صناديق الرافعة</div>
+        <div class="pill">الأربعاء: صناديق الرافعة</div>
+        <div class="pill">الخميس: صناديق الرافعة</div>
+        <div class="pill">الجمعة: مدراء الأصول</div>
+        <div class="pill">السبت/الأحد: كريبتو فقط — صناديق الرافعة</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>مختبرات الاختبار</h2>
+      <div class="grid">
+        <div class="pill">Direction Authority Lab</div>
+        <div class="pill">Temporal Authority Lab</div>
+        <div class="pill">Conflict Lab</div>
+        <div class="pill">Dealer Influence Lab</div>
+        <div class="pill">Weekly Structure Lab</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>حالة المحرك</h2>
+      <button onclick="loadLab()">تحديث الحالة</button>
+      <pre id="tdlRawJsonBox" id="out">اضغط تحديث الحالة...</pre>
+    </div>
+  </div>
+
+<script>
+async function loadLab(){
+  const out = document.getElementById('out');
+  out.textContent = 'جار التحميل...';
+  try {
+    const r = await fetch('/research/tdl-lab-latest.json?v=' + Date.now());
+    const j = await r.json();
+    out.textContent = JSON.stringify(j, null, 2);
+  } catch(e) {
+    out.textContent = 'تعذر تحميل حالة المختبر: ' + e.message;
+  }
+}
+loadLab();
+</script>
+
+
+
+
+
+
+
+<script>
+/* DSP_TDL_DASHBOARD_RENDER_V2 */
+(async function(){
+  const raw = document.querySelector("#tdlRawJsonBox") || document.querySelector("pre, code");
+  function set(id,v){ const el=document.getElementById(id); if(el) el.textContent=v; }
+  try{
+    const r = await fetch("./tdl-lab-latest.json", {cache:"no-store"});
+    const d = await r.json();
+    const g = d.governance || {};
+    const o = d.safe_output || {};
+    set("tdlStatusBadge", d.status==="RESEARCH_RUNTIME_CONNECTED" ? "متصل" : "غير متصل");
+    set("tdlEngineState", o.engine_state || "connected");
+    set("tdlLastUpdated", d.last_updated || "—");
+    set("tdlDataSource", o.data_source || d.runtime_source || "runtime");
+    set("tdlDecisionScope", o.decision_scope || "research_only");
+    set("tdlProductionApproved", d.production_approved ? "معتمد" : "غير معتمد");
+    set("tdlLatestAvailable", d.latest_result_available ? "متوفرة" : "غير متوفرة");
+    set("tdlRawLogic", g.raw_logic_exposed ? "مكشوف" : "غير مسموح");
+    set("tdlParameters", g.internal parameters_exposed ? "مكشوفة" : "غير مسموح");
+    set("tdlFinalInternal method", g.final_internal method_adopted ? "معتمدة" : "غير معتمدة");
+    set("tdlNote", o.public_note_ar || "تم ربط المختبر بمصدر تشغيل آمن دون كشف المنطق الداخلي.");
+    if(raw) raw.textContent="";
+  }catch(e){
+    set("tdlStatusBadge","تعذر التحقق");
+    set("tdlEngineState","غير متصل");
+    set("tdlNote","تعذر جلب حالة المختبر حالياً.");
+    if(raw) raw.textContent="";
+  }
+})();
+</script>
+
+</</</</
+
+<!-- NDSP_AR_EN_ONLY_CLEAN_FINAL_START -->
+<script>
+(function(){
+  "use strict";
+
+  function n(v){ return String(v || "").trim().toLowerCase(); }
+
+  function allowed(v){
+    v = n(v);
+    return v === "ar" || v === "en" || v.indexOf("ar-") === 0 || v.indexOf("en-") === 0 ||
+           v === "arabic" || v === "english" || v === "العربية";
+  }
+
+  function isLangSelect(sel){
+    var meta = n((sel.id || "") + " " + (sel.name || "") + " " + (sel.className || "") + " " + (sel.getAttribute("aria-label") || ""));
+    var text = n(sel.textContent || "");
+    return /lang|language|locale|لغة|لسان/.test(meta) || /العربية|english|arabic/.test(text);
+  }
+
+  function cleanSelect(sel){
+    if (!sel || !sel.options || !isLangSelect(sel)) return;
+
+    Array.prototype.slice.call(sel.options).forEach(function(o){
+      var v = n(o.value || "");
+      var t = n(o.textContent || "");
+      if (!allowed(v) && !allowed(t)) o.remove();
+    });
+
+    var opts = Array.prototype.slice.call(sel.options);
+    var hasAr = opts.some(function(o){ return n(o.value) === "ar" || n(o.textContent).indexOf("العربية") >= 0; });
+    var hasEn = opts.some(function(o){ return n(o.value) === "en" || n(o.textContent).indexOf("english") >= 0; });
+
+    if (!hasAr) {
+      var ar = document.createElement("option");
+      ar.value = "ar";
+      ar.textContent = "العربية";
+      sel.appendChild(ar);
+    }
+
+    if (!hasEn) {
+      var en = document.createElement("option");
+      en.value = "en";
+      en.textContent = "English";
+      sel.appendChild(en);
+    }
+  }
+
+  function enforce(){
+    window.NDSP_ALLOWED_LANGUAGES = ["ar","en"];
+    document.documentElement.setAttribute("data-allowed-languages", "ar,en");
+    Array.prototype.slice.call(document.querySelectorAll("select")).forEach(cleanSelect);
+
+    Array.prototype.slice.call(document.querySelectorAll("[data-lang], [data-language], [data-locale]")).forEach(function(el){
+      var v = n(el.getAttribute("data-lang") || el.getAttribute("data-language") || el.getAttribute("data-locale") || "");
+      if (v && !allowed(v)) el.remove();
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", enforce);
+  setTimeout(enforce, 300);
+  setTimeout(enforce, 1200);
+})();
+</script>
+<!-- NDSP_AR_EN_ONLY_CLEAN_FINAL_END -->
+
+</body>
+</html>

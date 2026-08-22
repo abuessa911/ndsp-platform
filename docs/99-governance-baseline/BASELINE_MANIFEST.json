@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-07-12T18:11:36+02:00",
+  "status": "CERTIFIED",
+  "files": [
+    {
+      "path": "docs/99-governance-baseline/API_REGISTRY.json",
+      "sha256": "c12f6573979035bacdad90c3ba5a58f4846f72492c5afe005da52ef1b583957b",
+      "size_bytes": 54055
+    },
+    {
+      "path": "docs/99-governance-baseline/BASELINE_VERSION.json",
+      "sha256": "7fde0e6ae383952b690b889430eee74d5c158fecc637cb2621bb7896b576b2f1",
+      "size_bytes": 300
+    },
+    {
+      "path": "docs/99-governance-baseline/CANONICAL_FILE_INDEX.json",
+      "sha256": "d616a87f2c47a5d60c8ec28602620224bd414d49cdac9b5fff63b2ac5865942e",
+      "size_bytes": 14851
+    },
+    {
+      "path": "docs/99-governance-baseline/DOCUMENTATION_REGISTRY.json",
+      "sha256": "de621ddf31bc6cd076c4e9c7856616e40e650e4d061ae0a7ffb476f8d0826a2f",
+      "size_bytes": 67260
+    },
+    {
+      "path": "docs/99-governance-baseline/MASTER_GOVERNANCE_REGISTRY.json",
+      "sha256": "74e1dbf51d7039200ea41db717b37cecf549eb03dfabf1a7298527effff1c5f0",
+      "size_bytes": 1848
+    },
+    {
+      "path": "docs/99-governance-baseline/PROJECT_INDEX.json",
+      "sha256": "4cb6c6f6a56b1b6bbfb77a2e82a53e538d004d5a38f19d0efcfadf143a6e35c7",
+      "size_bytes": 2294
+    },
+    {
+      "path": "docs/99-governance-baseline/PROJECT_STRUCTURE.json",
+      "sha256": "ae614c88e2fe54184da60adf1f407faf78f40b5ab62c81aa60cdeb8caa7fa241",
+      "size_bytes": 1631
+    },
+    {
+      "path": "docs/99-governance-baseline/QUALITY_GATES_REPORT.json",
+      "sha256": "8c3d0de2b8abf049b7410b58a5c1063966441452de955e426d0ecb6ccb4e8cab",
+      "size_bytes": 215
+    },
+    {
+      "path": "docs/99-governance-baseline/SERVICE_REGISTRY.json",
+      "sha256": "a8f47286f5f17d0e1e538367c6b53a4320db7f1f2baee4a8867e2bb2a1d7f285",
+      "size_bytes": 1466
+    },
+    {
+      "path": "docs/99-governance-baseline/synchronization-pack/findings.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    }
+  ]
+}

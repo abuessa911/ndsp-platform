@@ -1,0 +1,6 @@
+MainPID=2803
+ExecStart={ path=/opt/ndsp-current-user-display/.venv/bin/uvicorn ; argv[]=/opt/ndsp-current-user-display/.venv/bin/uvicorn app:app --host 127.0.0.1 --port 9074 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }
+Environment=NDSP_AUTH_DB_DSN=dbname=ndsp_auth user=postgres
+WorkingDirectory=/opt/ndsp-current-user-display
+ActiveState=active
+SubState=running

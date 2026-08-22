@@ -1,0 +1,20 @@
+{
+  "governanceVersion": "COT-GOV-1.0.0",
+  "status": {
+    "logicalRulesApproved": true,
+    "referenceImplementationCreated": true,
+    "productionBackendAudited": false,
+    "legacyTdlMapped": false,
+    "databaseIntegrationCompleted": false,
+    "publicApiIntegrationCompleted": false,
+    "adminApiIntegrationCompleted": false,
+    "coreShadowRunStarted": false,
+    "expandedShadowRunStarted": false,
+    "historicalTestCompleted": false,
+    "forwardTestCompleted": false,
+    "systemdMigrationCompleted": false,
+    "nginxMigrationCompleted": false,
+    "legacyPathsRetired": false,
+    "productionDeploymentCompleted": false
+  }
+}

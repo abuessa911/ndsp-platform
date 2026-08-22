@@ -1,0 +1,188 @@
+{
+  "TDL": [
+    {
+      "file": "backend/app/runtime/ndsp_quality_live_golden_wrapper.py",
+      "matched_terms": [
+        "tdl"
+      ],
+      "functions": [
+        "load_runtime_golden"
+      ],
+      "classes": [],
+      "imports": []
+    },
+    {
+      "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+      "matched_terms": [
+        "tdl"
+      ],
+      "functions": [
+        "attach_v202_commercial_score"
+      ],
+      "classes": [],
+      "imports": []
+    },
+    {
+      "file": "backend/app/runtime/ndsp_v200_score_inputs.py",
+      "matched_terms": [
+        "tdl"
+      ],
+      "functions": [
+        "attach_v200_score_inputs"
+      ],
+      "classes": [],
+      "imports": []
+    },
+    {
+      "file": "backend/app/runtime/ndsp_canonical_live_runtime_v30.py",
+      "matched_terms": [
+        "tdl"
+      ],
+      "functions": [
+        "build_payload",
+        "discover_cot"
+      ],
+      "classes": [],
+      "imports": []
+    },
+    {
+      "file": "backend/platform/runtime/capability_runtime_controller_v1.py",
+      "matched_terms": [
+        "tdl"
+      ],
+      "functions": [
+        "run_functional_probe"
+      ],
+      "classes": [],
+      "imports": []
+    }
+  ],
+  "DECISION_LAYERS": [
+    {
+      "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+      "matched_terms": [
+        "decision_layers",
+        "ndsp-core-l"
+      ],
+      "functions": [
+        "_layer",
+        "_update_public_layers",
+        "attach_v202_commercial_score"
+      ],
+      "classes": [],
+      "imports": []
+    },
+    {
+      "file": "backend/app/runtime/ndsp_v200_score_inputs.py",
+      "matched_terms": [
+        "decision_layers",
+        "ndsp-core-l"
+      ],
+      "functions": [
+        "_layer",
+        "_layer_numeric_input",
+        "attach_v200_score_inputs"
+      ],
+      "classes": [],
+      "imports": []
+    },
+    {
+      "file": "backend/app/runtime/ndsp_canonical_live_runtime_v30.py",
+      "matched_terms": [
+        "decision_layers",
+        "ndsp-core-l"
+      ],
+      "functions": [
+        "execute"
+      ],
+      "classes": [],
+      "imports": []
+    },
+    {
+      "file": "backend/app/runtime/ndsp_public_governance_projection_v1.py",
+      "matched_terms": [
+        "decision_layers",
+        "ndsp-core-l"
+      ],
+      "functions": [
+        "_layer_state",
+        "attach_governance_projection"
+      ],
+      "classes": [],
+      "imports": []
+    },
+    {
+      "file": "backend/platform/runtime/capability_runtime_controller_v1.py",
+      "matched_terms": [
+        "decision_layers",
+        "ndsp-core-l"
+      ],
+      "functions": [
+        "binding_for",
+        "run_functional_probe"
+      ],
+      "classes": [],
+      "imports": []
+    }
+  ],
+  "CAPABILITIES": [
+    {
+      "file": "backend/app/runtime/ndsp_v201_launch_completion.py",
+      "matched_terms": [
+        "platform_capabilities"
+      ],
+      "functions": [
+        "attach_v202_commercial_score"
+      ],
+      "classes": [],
+      "imports": []
+    },
+    {
+      "file": "backend/app/runtime/ndsp_public_governance_projection_v1.py",
+      "matched_terms": [
+        "platform_capabilities"
+      ],
+      "functions": [
+        "attach_governance_projection"
+      ],
+      "classes": [],
+      "imports": []
+    }
+  ],
+  "DATA_QUALITY": [
+    {
+      "file": "backend/app/runtime/ndsp_public_governance_projection_v1.py",
+      "matched_terms": [
+        "data_quality",
+        "quality_gate"
+      ],
+      "functions": [],
+      "classes": [],
+      "imports": []
+    },
+    {
+      "file": "backend/platform/runtime/capability_runtime_controller_v1.py",
+      "matched_terms": [
+        "data_quality",
+        "quality_gate"
+      ],
+      "functions": [
+        "binding_for",
+        "run_functional_probe"
+      ],
+      "classes": [],
+      "imports": []
+    },
+    {
+      "file": "backend/data_foundation/canonical_v1/data_quality_gate.py",
+      "matched_terms": [
+        "data_quality"
+      ],
+      "functions": [
+        "evaluate_data_quality"
+      ],
+      "classes": [],
+      "imports": []
+    }
+  ]
+}

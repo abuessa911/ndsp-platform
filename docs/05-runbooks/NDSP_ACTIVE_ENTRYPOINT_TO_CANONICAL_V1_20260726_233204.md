@@ -1,0 +1,31 @@
+============================================================
+NDSP — ACTIVE ENTRYPOINT TO CANONICAL V1
+MODE=TARGETED_ROUTING_LAYER_MIGRATION_WITH_ROLLBACK
+DATE=2026-07-26T23:32:04+02:00
+WEBROOT=/var/www/ndsp-my
+CANONICAL_TARGET=/portal/command-center/
+============================================================
+
+== 0) Explicit confirmation ==
+EXPLICIT_CONFIRMATION=YES
+
+== 1) Preconditions and canonical health ==
+CANONICAL_HTTP=200
+CANONICAL_HEALTH_GATE=PASS
+
+== 2) Discover active login-page references ==
+
+FAILURE_LINE=143
+FAILURE_EXIT_CODE=1
+FINAL_STATUS=FAILED_AND_ROLLED_BACK
+LOGIN_HOST_FILE=
+LOGIN_HOST_FILE=FAILURE_LINE=143
+LOGIN_HOST_FILE=FAILURE_EXIT_CODE=1
+LOGIN_HOST_FILE=FINAL_STATUS=FAILED_AND_ROLLED_BACK
+LOGIN_HOST_FILE_COUNT=4
+
+== 3) Backup exact routing layer ==
+
+FAILURE_LINE=178
+FAILURE_EXIT_CODE=1
+FINAL_STATUS=FAILED_AND_ROLLED_BACK

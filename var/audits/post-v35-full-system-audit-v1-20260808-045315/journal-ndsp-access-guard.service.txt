@@ -1,0 +1,2 @@
+أغسطس 05 09:22:47 vmi2934783 node[2991134]: ndsp-access-guard listening on 9023
+أغسطس 05 09:30:42 vmi2934783 node[3019523]: ndsp-access-guard listening on 9023

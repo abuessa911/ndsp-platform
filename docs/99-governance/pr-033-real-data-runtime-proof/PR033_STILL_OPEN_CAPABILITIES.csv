@@ -1,0 +1,1 @@
+capability_id,capability_name,canonical_endpoint,data_source,data_state,runtime_url,http_status,payload_sha256,payload_bytes,root_key,root_item_count,source_file,runtime_mode,payload_values_persisted,closure_state,human_confirmation_required,ui_complete_created

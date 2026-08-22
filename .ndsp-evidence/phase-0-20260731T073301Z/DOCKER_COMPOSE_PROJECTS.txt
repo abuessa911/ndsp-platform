@@ -1,0 +1,4 @@
+$ docker compose ls
+
+NAME                STATUS              CONFIG FILES
+ndip-backend        running(1)          /home/nawaf511/ndip-backend/docker-compose.postgres.yml

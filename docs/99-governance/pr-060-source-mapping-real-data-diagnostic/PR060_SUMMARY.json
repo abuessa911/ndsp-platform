@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "document": "PR-060 Full Capability Coverage Recalculation",
+  "generated_at": "2026-08-01T13:40:21.872838+00:00",
+  "total_capabilities": 526,
+  "fully_evidenced_capabilities": 59,
+  "partially_evidenced_capabilities": 467,
+  "discovery_required_capabilities": 0,
+  "remaining_capability_count": 467,
+  "gap_counts": {
+    "SOURCE": 0,
+    "SERVICE": 312,
+    "ENDPOINT": 245,
+    "REAL_DATA": 5,
+    "CALCULATION": 186,
+    "TEST": 0,
+    "UI": 337
+  },
+  "priority_counts": {
+    "P0_CRITICAL": 391,
+    "P1_HIGH": 5,
+    "P3_UI": 130
+  },
+  "source_column_used": "source_or_algorithm",
+  "source_mapping_validation": "PASS",
+  "pr059_p0_reconciliation_verified": true,
+  "real_data_diagnostic_count": 5,
+  "full_capability_coverage_claimed": false,
+  "human_confirmation_required": true,
+  "traceability_rows_modified": 0,
+  "runtime_changes": "none",
+  "status": "SOURCE_MAPPING_CORRECTED_REAL_DATA_GAPS_DIAGNOSED"
+}

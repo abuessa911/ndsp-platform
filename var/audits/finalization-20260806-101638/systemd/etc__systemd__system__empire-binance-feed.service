@@ -1,0 +1,13 @@
+[Unit]
+Description=Binance Live Feed
+After=network.target
+
+[Service]
+User=root
+WorkingDirectory=/opt/empire-core/backend
+ExecStart=/opt/empire-core/backend/venv/bin/python app/binance_feed.py
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

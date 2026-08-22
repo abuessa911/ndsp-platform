@@ -1,0 +1,20 @@
+[Unit]
+Description=NDSP Airtable Runtime Sync
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=nawaf511
+WorkingDirectory=/home/nawaf511/empire-core-new/integrations/airtable-runtime-sync
+EnvironmentFile=/home/nawaf511/empire-core-new/integrations/airtable-runtime-sync/.env
+ExecStart=/usr/bin/python3 /home/nawaf511/empire-core-new/integrations/airtable-runtime-sync/ndsp_airtable_sync.py
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/home/nawaf511/empire-core-new/integrations/airtable-runtime-sync
+UMask=0077
+
+[Install]
+WantedBy=multi-user.target

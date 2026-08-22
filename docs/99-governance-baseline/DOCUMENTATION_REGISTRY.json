@@ -1,0 +1,1606 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-07-12T17:54:46+02:00",
+  "documents": [
+    {
+      "path": "docs/00-build-catalog/NDSP_16_LAYER_CORE_INTEGRATION_PIN.md",
+      "sha256": "da624bbe9136f66ec6836563bd2e1e77e9a15262266da5870e75c04d8b1c67c2",
+      "size_bytes": 804
+    },
+    {
+      "path": "docs/00-build-catalog/NDSP_GOVERNANCE_MASTER_INDEX_V1.md",
+      "sha256": "5c99646ca0b8d7019029ecabea8d027b510b06aa23d043ec6417983484ce2cc4",
+      "size_bytes": 1341
+    },
+    {
+      "path": "docs/00-build-catalog/NDSP_PROJECT_WORK_GOVERNANCE_PIN_AR.md",
+      "sha256": "bbd2455c7457b8951925071fc0b0197720f441325abb297a36a7983287ca134e",
+      "size_bytes": 1223
+    },
+    {
+      "path": "docs/00-build-catalog/NDSP_SYSTEM_BUILD_AND_READINESS_CATALOG_AR_v1.md",
+      "sha256": "e724ee28de8e1d61cd6db81fb5cf6d560c0b1a52fc628091682982e5ea21f7f0",
+      "size_bytes": 34448
+    },
+    {
+      "path": "docs/00-build-catalog/NDSP_SYSTEM_BUILD_AND_READINESS_CATALOG_EN_v1.md",
+      "sha256": "03252ea2f7475e99a92b4170c6b46ad8f994ec71f4720cf93b389c676af21e29",
+      "size_bytes": 25760
+    },
+    {
+      "path": "docs/01-build-control-pack/NDSP_16_LAYER_COMPLETENESS_AND_NUMBERING_LOCK_AR_V1.md",
+      "sha256": "071dae460793c380042c2f95b8407bd66f8f64b537891f492e43a0e9e14a4077",
+      "size_bytes": 1760
+    },
+    {
+      "path": "docs/01-build-control-pack/NDSP_16_LAYER_COMPLETENESS_AND_NUMBERING_LOCK_EN_V1.md",
+      "sha256": "c20d31d2268ac31486622417115a074fd8ee0e8dcfd0572033f267f9f67f412e",
+      "size_bytes": 675
+    },
+    {
+      "path": "docs/01-build-control-pack/NDSP_AI_BUILDER_PROMPT.md",
+      "sha256": "4c56328585673d33f9cba86736f7ac2a354bc958942d7ed93d9be5df10be5b23",
+      "size_bytes": 684
+    },
+    {
+      "path": "docs/01-build-control-pack/NDSP_API_CONTRACT.md",
+      "sha256": "20ef70b1b18b27f79be86a9eadbe22281a4b642a21d85c8d07fea52238b6def1",
+      "size_bytes": 657
+    },
+    {
+      "path": "docs/01-build-control-pack/NDSP_BUILD_TOOLS_AND_CONTROL_PACK_AR_v1.md",
+      "sha256": "d4bb4a72c031eaa98020bf16c0faaf0e2462e4924ecf68e8bea6dee38f37ab2d",
+      "size_bytes": 19012
+    },
+    {
+      "path": "docs/01-build-control-pack/NDSP_BUILD_TOOLS_AND_CONTROL_PACK_EN_v1.md",
+      "sha256": "346fe0c45b79ca2675caccf4bd24475390632a6f8eb799d82b9537e7b5eca80a",
+      "size_bytes": 14048
+    },
+    {
+      "path": "docs/01-build-control-pack/NDSP_CORE_LAYERS_VS_PLATFORM_CAPABILITIES_GOVERNANCE_AR_V1.md",
+      "sha256": "eac98b78d2e463c73ed751bf8c86b89a680a5fe611c8b71d7b90f9b7a5babd8d",
+      "size_bytes": 1483
+    },
+    {
+      "path": "docs/01-build-control-pack/NDSP_CORE_LAYERS_VS_PLATFORM_CAPABILITIES_GOVERNANCE_EN_V1.md",
+      "sha256": "f89ea4e59110f33fa8e3d2d553d43849443462e5e62b683670de226845ca8ee4",
+      "size_bytes": 881
+    },
+    {
+      "path": "docs/01-build-control-pack/NDSP_DATABASE_SCHEMA.md",
+      "sha256": "8211941393c077450038dec4e885280caee7a848c148276fcd494aa4b02dff6e",
+      "size_bytes": 482
+    },
+    {
+      "path": "docs/01-build-control-pack/NDSP_DECISION_ENGINES_SPEC.md",
+      "sha256": "7658840db49dd22e5ed4b9638982aa794632e06cbba3d5aeee54b816b6e90ef5",
+      "size_bytes": 567
+    },
+    {
+      "path": "docs/01-build-control-pack/NDSP_DEPLOYMENT_RUNBOOK.md",
+      "sha256": "734ea1d5ff40154c8cc2a756abf984acbc6c1a506e7a2194aad6eaa655bcf21a",
+      "size_bytes": 551
+    },
+    {
+      "path": "docs/01-build-control-pack/NDSP_MASTER_GOVERNANCE_RULES.md",
+      "sha256": "9e91d180238b7884ebe6fa8af6dd10346bbd48a09cec78a0c0f5e9e004804f26",
+      "size_bytes": 965
+    },
+    {
+      "path": "docs/01-build-control-pack/NDSP_PAGE_REGISTRY.md",
+      "sha256": "8db105c51f223612775e30b17810fff94d22a0718f9cbcd0e22c579a6bc5ea98",
+      "size_bytes": 1058
+    },
+    {
+      "path": "docs/01-build-control-pack/NDSP_PROTECTED_FILES_AND_RULES.md",
+      "sha256": "2b37048223766a3766f475fe556cca3c18a8f19d59acc6cc34e8e49f8e271afb",
+      "size_bytes": 530
+    },
+    {
+      "path": "docs/01-build-control-pack/NDSP_ROLLBACK_PLAN.md",
+      "sha256": "406bc30d5247f854f5421f8566250d5e8d61bbdabf334522417125c20061b45b",
+      "size_bytes": 480
+    },
+    {
+      "path": "docs/01-build-control-pack/NDSP_SECURITY_POLICY.md",
+      "sha256": "27c963509ec1e4119a5e919e65d732db3419e896ff50d8a470fcd88d59356fc3",
+      "size_bytes": 480
+    },
+    {
+      "path": "docs/01-build-control-pack/NDSP_TEST_PLAN.md",
+      "sha256": "2aa8655ba3c189e905d8db499591c3f9b4441bb455bc86eb8f800c96720f65aa",
+      "size_bytes": 451
+    },
+    {
+      "path": "docs/01-build-control-pack/governance/NDSP_STABILITY_FIRST_GOVERNANCE_SHA256SUMS_20260711_144852.txt",
+      "sha256": "46d1283f009344d62574d5f00ec81160848b58ded737f0ced822594a1e326f95",
+      "size_bytes": 534
+    },
+    {
+      "path": "docs/01-build-control-pack/governance/NDSP_STABILITY_FIRST_TRANSFORMATION_GOVERNANCE_AR.md",
+      "sha256": "ad2e0259bd72dd8d5bdbcabaf6fc7820e49a9ac4e49eaf93412caed4627f47ed",
+      "size_bytes": 21343
+    },
+    {
+      "path": "docs/01-build-control-pack/governance/NDSP_STABILITY_FIRST_TRANSFORMATION_GOVERNANCE_EN.md",
+      "sha256": "3ae38a819685aef840cb4c4e73c85a2a8250d9db23abf4f021fb732f218efe70",
+      "size_bytes": 13691
+    },
+    {
+      "path": "docs/02-architecture/core/NDSP_16_LAYER_CORE_AND_FUTURE_INTEGRATION_BLUEPRINT_AR.md",
+      "sha256": "91697db6a1aea136c9931d689044c22c2bc3a6ac1618315211a7643234b9aa4d",
+      "size_bytes": 14760
+    },
+    {
+      "path": "docs/02-architecture/core/NDSP_16_LAYER_CORE_AND_FUTURE_INTEGRATION_BLUEPRINT_EN.md",
+      "sha256": "2d9d41725ef9218a78096f092e74474d90d54d60c0c219bd22c0d48200fb289e",
+      "size_bytes": 11694
+    },
+    {
+      "path": "docs/02-architecture/core/NDSP_16_LAYER_CORE_INTEGRATION_SHA256SUMS_20260711_162006.txt",
+      "sha256": "ab5be591de7a0377e17c2974c9855f1e77dca577707000366897acc338ddf64e",
+      "size_bytes": 670
+    },
+    {
+      "path": "docs/02-architecture/core/NDSP_CANONICAL_16_LAYER_SOURCE_MAP_V1.json",
+      "sha256": "825479b1b78de6f887245d36e49cc48e402a093efab18585e1c0e5f992d14724",
+      "size_bytes": 1205
+    },
+    {
+      "path": "docs/02-architecture/core/NDSP_PLATFORM_FOUNDATION_V3_AR.md",
+      "sha256": "46112624726ecda26d5bb1d96498ebbab9ce93e697261285f8f1bac652061a74",
+      "size_bytes": 1175
+    },
+    {
+      "path": "docs/02-architecture/core/NDSP_PLATFORM_FOUNDATION_V3_EN.md",
+      "sha256": "ddb7ff11e99792d14b196e8c8860bf48737596255a8cac6b57a076f29043b779",
+      "size_bytes": 584
+    },
+    {
+      "path": "docs/02-execution-ready-pack/NDSP_PRACTICAL_IMPLEMENTATION_STEPS_AR_v1.md",
+      "sha256": "83fcc641f48d7319b7a36169804b8161ed05629ed415d235d5140cfcef3a9cdf",
+      "size_bytes": 16136
+    },
+    {
+      "path": "docs/02-execution-ready-pack/NDSP_PRACTICAL_IMPLEMENTATION_STEPS_EN_v1.md",
+      "sha256": "dd558b68c5f25911d9dfe3014fcbe7cb739f5dc46edd8e293924561318e9dc34",
+      "size_bytes": 13031
+    },
+    {
+      "path": "docs/03-contracts/NDSP_16_LAYER_CORE_REGISTRY_V1.json",
+      "sha256": "1e82873218176c33ab67176a9ff11494ddf87a72e75ca510abf0d59bcb3d1931",
+      "size_bytes": 10437
+    },
+    {
+      "path": "docs/03-contracts/NDSP_ASSET_MASTER_REGISTRY_V1.json",
+      "sha256": "fbe79e89af86197c90f4463a2f5ff7d0edb993db69f810c236521ff4ee95e944",
+      "size_bytes": 2908
+    },
+    {
+      "path": "docs/03-contracts/NDSP_PLATFORM_CAPABILITY_REGISTRY_V1.json",
+      "sha256": "74699294e8cb0ec17d34359379606dc223b72c96091df6fb4298d0f505cc3895",
+      "size_bytes": 10334
+    },
+    {
+      "path": "docs/03-contracts/NDSP_SCHEMA_CONTRACT_REGISTRY_V1.json",
+      "sha256": "3352ff12fbab94b1f3a683ee4b9cbe31b0ec9b80efc4a7de6f2bf1ce9d27c48a",
+      "size_bytes": 1364
+    },
+    {
+      "path": "docs/03-contracts/NDSP_SOURCE_REGISTRY_V1.json",
+      "sha256": "cc0d37db0362e98f246e89b20eb8b3b0b9d808283a72e3dc7678a4fdde2e3dde",
+      "size_bytes": 1215
+    },
+    {
+      "path": "docs/03-final-transition/NDSP_FINAL_PRE_IMPLEMENTATION_TRANSITION_PLAN_AR_v1.md",
+      "sha256": "16ae5a3bef782e950e35e2e3c235e8a9f3134ab89350124fd4be8427378d7409",
+      "size_bytes": 11976
+    },
+    {
+      "path": "docs/03-final-transition/NDSP_FINAL_PRE_IMPLEMENTATION_TRANSITION_PLAN_EN_v1.md",
+      "sha256": "d26d2ef3e87561e75f5221aed7f570f3b964fbdd4357604b6792e44376ad80e3",
+      "size_bytes": 8990
+    },
+    {
+      "path": "docs/03-final-transition/NDSP_PRACTICAL_IMPLEMENTATION_STEPS_AR_v1.md",
+      "sha256": "83fcc641f48d7319b7a36169804b8161ed05629ed415d235d5140cfcef3a9cdf",
+      "size_bytes": 16136
+    },
+    {
+      "path": "docs/03-final-transition/NDSP_PRACTICAL_IMPLEMENTATION_STEPS_EN_v1.md",
+      "sha256": "dd558b68c5f25911d9dfe3014fcbe7cb739f5dc46edd8e293924561318e9dc34",
+      "size_bytes": 13031
+    },
+    {
+      "path": "docs/04-legal/NDSP_LEGAL_DISCLAIMER_MASTER_AR.md",
+      "sha256": "a21c560fcb35785b9ba63acd4bfbad8e522d7528ce12f80320a66c54d7ff3c58",
+      "size_bytes": 1044
+    },
+    {
+      "path": "docs/04-legal/NDSP_LEGAL_DISCLAIMER_MASTER_EN.md",
+      "sha256": "bfab2c347332c43279eb656b1018587820f309e5797ac445d9a6ad59f6023545",
+      "size_bytes": 521
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_16_LAYER_CORE_INTEGRATION_INSTALL_20260711_162006.md",
+      "sha256": "4e28544ce6dc58059bc66d3dd1a3fb656c78d2502950de45ec1f1d5b85fdfd2c",
+      "size_bytes": 1568
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_APPROVED_DESIGN_REQUIREMENTS_AUDIT_READONLY_20260709_164824.md",
+      "sha256": "4c4804b8f2b230f5f6a260686a6cd72711ba99645147f1206cfc2c25d64b16df",
+      "size_bytes": 8278
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_ASSET_VIEW_CONTENT_ONLY_PATCH_PLAN_20260707_213943.md",
+      "sha256": "cadf5dfd6b4359255db2ff120cffbcff817e0a6480af4fcd5ecd84a9e8f213c5",
+      "size_bytes": 4766
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_ASSET_VIEW_PREFLIGHT_20260707_100921.md",
+      "sha256": "c8f6424b9ba9c86dd63e6fcbad878cb1a9fdfacbfb934a68d02e74157457550a",
+      "size_bytes": 3722
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_AUDIT_REPORT_20260707_080621.md",
+      "sha256": "2507697f501d5807dedf5a139c2769f09339b0089b4dc9b95df8f53d04c25eef",
+      "size_bytes": 1188
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_AUDIT_REPORT_20260707_090724.md",
+      "sha256": "413b7d81403cc5273f966664ba1c0caffcb1007df7fd6c6ef8bdd483858963cb",
+      "size_bytes": 7688
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_AUTH_ROUTE_ALIAS_DISCOVERY_PLAN_20260707_223736.md",
+      "sha256": "e18cba1eb25bcde165f489c226408f8913c03cc690fcba8ba6434d3c9e2598bd",
+      "size_bytes": 2192
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_AUTH_SOURCE_RESOLUTION_READONLY_20260707_224027.md",
+      "sha256": "a2267098da77644198c1faf761fde78cb39422adfbafb41f2711eefd6f76f655",
+      "size_bytes": 105892
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_BACKUP_REPORT_20260707_091443.md",
+      "sha256": "634cd480abc61e2d39d800d06d015627d6fda4230afeb49d14648548ad96061e",
+      "size_bytes": 612
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_BACKUP_RESTORE_PACK_V1_INSTALL_20260711_173814.md",
+      "sha256": "151d77039bead8bd9d975ad8c34ff1b654ee8e430af7c37ff4c2686935f28011",
+      "size_bytes": 607
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_BACKUP_RESTORE_PACK_V1_INSTALL_20260711_175009.md",
+      "sha256": "9d41db34cf4cfd926d0569bd948b7f8dec12583748d0610178846faa5ac7f447",
+      "size_bytes": 607
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_BROWSER_SMOKE_TEST_20260707_153720.md",
+      "sha256": "6af693ed8d254a47393c0a075da5de5013c7b66846f7ff36a573aebab1ba6c92",
+      "size_bytes": 3477
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_BUILD_STARTER_INSTALL_REPORT_20260707_090633.md",
+      "sha256": "58dc883787f42086dbafbaa1367571038c9375fe42311be97c91ed12e21e7808",
+      "size_bytes": 1484
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_CANONICAL_LIVE_CONSUMER_V5_2_20260712_152819.md",
+      "sha256": "a8f4a3aebc2e50f11789b946f468f3c6256335f024f9bef596043443990c3f49",
+      "size_bytes": 1600
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_CANONICAL_SOURCE_LOCK_CURRENT_AR.md",
+      "sha256": "c47b403b3aff2b9585ae2adbdc69155d2a021a6034409a529e1c1a718159fffa",
+      "size_bytes": 52179
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_CANONICAL_SOURCE_LOCK_CURRENT_EN.md",
+      "sha256": "f5ee751ef399ac10d1d311845441e36ca33937d00897a0fb9f7fd2c6962885ad",
+      "size_bytes": 51934
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_CANONICAL_SOURCE_MAP_CURRENT.json",
+      "sha256": "48a93cd7e0525d840c4386bc7ca6b496e153f49abb8d73c6e3fe2e51dabba70e",
+      "size_bytes": 224040
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_CODEX_EXTERNAL_AUDIT_20260707_111805.md",
+      "sha256": "3ce192d23d7e77ce1e01e7cc77880d4dbbcadfa669255dbce98edabb20e8fdc8",
+      "size_bytes": 1178
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_COMMAND_CENTER_CONTENT_ONLY_PATCH_PLAN_20260707_220358.md",
+      "sha256": "f25c8bb42e195aaa19b6a82c78a27e494fb9c90650d4f4bc47a88e531433eb8f",
+      "size_bytes": 4580
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_COMMAND_CENTER_RADAR_PREFLIGHT_20260707_095205.md",
+      "sha256": "631beda1a75474f57449f7dd84f5444244ff90300b2593a078613e3a4132573b",
+      "size_bytes": 30415
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_CURRENT_REALITY_LOCK_AR.md",
+      "sha256": "640b4655c664d4153d0a69217e3484d22d671fd3471cd83e19d8886ccc09cc80",
+      "size_bytes": 137822
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_CURRENT_REALITY_LOCK_TEMPLATE_AR.md",
+      "sha256": "b1e6d314cb5d053fab4eeb8c6bf2d7d2b0de50263b3bf1af3202408d8a156ef3",
+      "size_bytes": 928
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_DAILY_BRIEF_CONTENT_ONLY_PATCH_PLAN_20260707_215051.md",
+      "sha256": "504e0c22d8866dd205351d93065bdb8b9dab0a2bfe0692bd6f4e01e17c34a035",
+      "size_bytes": 4559
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_DAILY_BRIEF_PREFLIGHT_20260707_101610.md",
+      "sha256": "ec1c14f367e936da804c163118d6e7a8b1b84a10b8e7c843af52a0c604be9e5c",
+      "size_bytes": 6922
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_DECISION_SUPPORT_CONTENT_ONLY_PATCH_PLAN_20260707_212057.md",
+      "sha256": "147a03dbcbf8cb67111156e8c05108b4e43d998d9c3a39bfcc25bd1d8a1c8900",
+      "size_bytes": 4820
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_DECISION_SUPPORT_PREFLIGHT_20260707_100303.md",
+      "sha256": "a964d0827f9dda5b7448f1ac27ab32d82f8c15d124e1185eaadd0193ccddac86",
+      "size_bytes": 5372
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_DISCLAIMER_GATE_PREFLIGHT_20260707_094108.md",
+      "sha256": "bb44ab881e7e1e9a1720d3e8dbf2f79aef3d5b0bb9c90b9deb6bfa0fb43a8d48",
+      "size_bytes": 36649
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_EXTERNAL_TOOL_GUARDRAILS_20260707_110424.md",
+      "sha256": "029e1fd2e30dd66aed135fa3d64f495e42abe80fab273da1710d0971515be77a",
+      "size_bytes": 3261
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_EXTERNAL_TOOL_PROMPT_SHORT_20260707_110632.md",
+      "sha256": "00ac22f4567bbf154228b94bde192526889d2028126cbdd26c2f06d989cc07c3",
+      "size_bytes": 1903
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_FINAL_LOCAL_GATE_BEFORE_DEPLOY_20260709_191510.md",
+      "sha256": "b67dffd723e732baf247b1b58f4e7ab95964e8253e6f6e69a3ed27b7be19e899",
+      "size_bytes": 2853
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_FINAL_RELEASE_SWEEP_20260707_103944.md",
+      "sha256": "f267c23f54a54c6e122162d22dd4d489a41c6575e7ab8d77c4328ea2ceace6db",
+      "size_bytes": 7043
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_FINAL_V1_RELEASE_READINESS_AUDIT_20260707_225738.md",
+      "sha256": "9d884299cac3b5a9b8fc1f17a27db66aa5ed737379feb40740514bbba0b3b085",
+      "size_bytes": 5675
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_FIX_ASSET_SELECTOR_DESIGN_ONLY_20260709_150120.md",
+      "sha256": "7e68472674c637a8c4e15135cdedd33de3395b37cd6c7e2051a00e554b2a13a3",
+      "size_bytes": 2511
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_FIX_REFERENCE_LEVELS_PAYLOAD_V2_20260709_190927.md",
+      "sha256": "f276ef9f63e8b45b63990b086c922257da4805d9172b14dfd06b326adea34608",
+      "size_bytes": 815
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_FIX_VITE_REVIEW_P1_P2_20260709_185923.md",
+      "sha256": "1db5203357a0ee97efe79b2fd7fc91c73c71da73fa61c23a8c1c3adaa7c31207",
+      "size_bytes": 783
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_FORBIDDEN_CONTEXT_SCAN_20260707_154022.md",
+      "sha256": "0a3f8fe1957378b68f74666bffababf4988b8505f314c1ca0f6594cfd59573b9",
+      "size_bytes": 5691
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_FORBIDDEN_WORDING_TRACE_20260707_093534.md",
+      "sha256": "988d5a31a1d21fc4a8b7f2541eecff4c11319b40012e7fcbb99b094494797804",
+      "size_bytes": 17606
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_GOVERNANCE_AND_CANONICAL_LOCK_INSTALL_20260711_183952.md",
+      "sha256": "566ed81591a6dd2e1aa954b38338536f63eaa839b6d1a784cd17997416afcb76",
+      "size_bytes": 619
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_GOVERNANCE_AND_CANONICAL_LOCK_INSTALL_20260711_184209.md",
+      "sha256": "c04ed610737762f5b4839308baca323de21979cb2bbaca8c81f7da65f13dd435",
+      "size_bytes": 619
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_GOVERNANCE_DOCS_NORMALIZATION_P0_20260707_232113.md",
+      "sha256": "7a4b156f8f3dc6599786db3bed98044e0910843261d06fd96f43059abeac3053",
+      "size_bytes": 2236
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_IMPLEMENTATION_TASKS_AR.md",
+      "sha256": "db9ae52273dfb316346d93c0ae00e18499c1530400fbdc375b2fe8adcf92cfee",
+      "size_bytes": 3087
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_IMPLEMENTATION_TASKS_EN.md",
+      "sha256": "479ec0960e5a3dadcca6c9fef8827e5ef4cb7972cdcec2f9e3eafa376086cbd6",
+      "size_bytes": 348
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_MENU_PAGE_MATCH_PREFLIGHT_20260707_094603.md",
+      "sha256": "a09eafb8634eb44d828504934232ae47f6aa0152c4da5798027bcc818658ade8",
+      "size_bytes": 46579
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_MENU_STRUCTURE_DIAGNOSTIC_20260707_194204.md",
+      "sha256": "619cb8f4cb0df3676c0f149ff3702ec35c1efdf71bb75ec80e44c607c32ad82d",
+      "size_bytes": 9366
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_MOBILE_POLISH_AUDIT_20260707_154749.md",
+      "sha256": "4dc643a742a30a8937a5d30a6b887f60e8f0da11b7696ba09eea7771bffe58e9",
+      "size_bytes": 13517
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P1_AUTH_FUNCTIONAL_DISCOVERY_READONLY_20260707_232843.md",
+      "sha256": "cc05784b855fbef8c4c9d16076f52c1c2bf73846dca0b37540a7f975c5a01e1e",
+      "size_bytes": 620572
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P1_CONTROLLED_AUTH_FUNCTIONAL_TEST_20260707_233231.md",
+      "sha256": "58a5815c677dd9a8a37dabf1c19355f303d87ab2c3c3ff73c83351e41fa94e55",
+      "size_bytes": 3352
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P1_DISCLAIMER_GATE_FUNCTIONAL_TEST_20260707_234050.md",
+      "sha256": "e22fc65ef8b5826cde4cb3f0614872c14e2a071b4f730565ad88a08f86a8e534",
+      "size_bytes": 1230
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P1_DISCLAIMER_GATE_FUNCTIONAL_TEST_20260707_234913.md",
+      "sha256": "0c4f1c6417c6b313ab36e31f29985648db9cd5ca1c528f660fd6c83e25f77353",
+      "size_bytes": 1230
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P1_DISCLAIMER_GATE_FUNCTIONAL_TEST_20260707_235717.md",
+      "sha256": "28e9023a81191980637ee63115a693c4da040f39c9cd3ad7fbf3d505f6db0a71",
+      "size_bytes": 1230
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P1_DISCLAIMER_GATE_FUNCTIONAL_TEST_FIXED_20260707_235929.md",
+      "sha256": "18abe42a889acbc8955c2570a5b66bd0b3757cda21057c28662f2cf953f30cab",
+      "size_bytes": 3337
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P2_ALERTS_RESOLVER_READONLY_20260708_005722.md",
+      "sha256": "fab53a6292d116e89a96e3352c3d6610061b206ccdefaa057f3edd3dbcb1fe5c",
+      "size_bytes": 15013
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P2_CERTBOT_SCOPE_DECISION_READONLY_20260708_055414.md",
+      "sha256": "09f2a1ff66132f59a56ae496f7dce4b6c2edff1fa20c52e264785c66b9e401f3",
+      "size_bytes": 30275
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P2_CERTBOT_SCOPE_DECISION_READONLY_20260708_055804.md",
+      "sha256": "8e2996659dbac8fed141444a3e6ecf220b458e2c1858d62f59d913faca64b28d",
+      "size_bytes": 31553
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P2_CERTBOT_SCOPE_DECISION_READONLY_20260708_060327.md",
+      "sha256": "9e35bbd4f7e044f18c279bc8295c9721b594cf618169f7a5f9d5d9c252c83fa7",
+      "size_bytes": 31553
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P2_FAILED_SERVICES_CLASSIFICATION_READONLY_20260708_062340.md",
+      "sha256": "1fdcc57e9ec3b6ae123c2d8d406961d8dae6884a551237a1738d52ca61f33049",
+      "size_bytes": 38522
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P2_FINAL_HEALTH_AUDIT_20260708_064314.md",
+      "sha256": "2c8b8d179ae78f6095e144c4c14f651d5575e4a13f441e92392d7f366f5beb11",
+      "size_bytes": 10472
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P2_FIX_A_REAL_FEEDS_PERMISSIONS_20260708_052909.md",
+      "sha256": "f1977b3ff2938fe26051e8a1e5bdf8b36d7cb5717661f6f63e33079a05a8e8c5",
+      "size_bytes": 5903
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P2_FIX_B2_LOGROTATE_MOVE_DISABLED_OUT_20260708_054419.md",
+      "sha256": "d416612bab10702e069f84b88dc1fc7da5a9f4a434c3f6903cfbf2e211255cb6",
+      "size_bytes": 14069
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P2_FIX_B_LOGROTATE_DUPLICATE_20260708_053339.md",
+      "sha256": "339424f3d28d1402cb4a5cdc7aa57b52169406742a1ff64d5704c436e7340a72",
+      "size_bytes": 23109
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P2_FIX_C_DISABLE_OLD_NAWAFO_RENEWALS_20260708_060441.md",
+      "sha256": "a272c4be0b592297a6b11477b9480062428da39568cef5456483bbd5956ed856",
+      "size_bytes": 10556
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P2_FIX_D2_PM2_STARTUP_SAFETY_NO_PIPE_20260708_061132.md",
+      "sha256": "174e3c0848d4bdb6f6f9f9fb727119c53df206a1b5643517d78e6291936e9e54",
+      "size_bytes": 25275
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P2_FIX_D3_PM2_ONESHOT_BOOTSTRAP_20260708_061517.md",
+      "sha256": "eb97a0210e92f103ace0b96cae29bdbc7a06b0699a6896895bda8db0852fa4a5",
+      "size_bytes": 3418
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P2_FIX_D3_PM2_ONESHOT_BOOTSTRAP_20260708_061553.md",
+      "sha256": "68d514984eefc2c46896a306cdc5d5ced2a5a3faa027167078ce7e2dd891d07f",
+      "size_bytes": 28274
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P2_FIX_D_PM2_STARTUP_SAFETY_20260708_060836.md",
+      "sha256": "28e9f3ce2d24b8013d4f562d035d9c9e215a3f0ca7d4e3628b81114405b75061",
+      "size_bytes": 3475
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P2_FIX_E_DISABLE_LEGACY_FAILED_SERVICES_20260708_063422.md",
+      "sha256": "392e21a373ec157e5afa02a2954e80a94a1a006621e92c162278b0f32b618df1",
+      "size_bytes": 9203
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P2_FIX_F_DISABLE_TWO_HOLD_REVIEW_LEGACY_20260708_220447.md",
+      "sha256": "d8c6fb8ccb48bc593472686adba4e05fa2fea8f3d359d86af9f6c35926b547a5",
+      "size_bytes": 7996
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P2_FIX_G_TESTAPP_DISABLE_NDIP_RESET_FAILED_20260708_222645.md",
+      "sha256": "f93edba8112689660d13c2f763160e357ad333c0a59591cde5e187300a21fc02",
+      "size_bytes": 6974
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P2_HOLD_REVIEW_DECISION_MATRIX_READONLY_20260708_215212.md",
+      "sha256": "9cc56b3a3b9be01f46ed123d39a47e2d33cddb4236c6099f42e6f00076c115cd",
+      "size_bytes": 4583
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P2_HOLD_REVIEW_SERVICES_DEEP_AUDIT_READONLY_20260708_065226.md",
+      "sha256": "8ad138e375bc148b89fb009e68ae5090c7fc15087a8b538422171940be7709e2",
+      "size_bytes": 96848
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P2_HOLD_REVIEW_SERVICES_DEEP_AUDIT_READONLY_20260708_065452.md",
+      "sha256": "2c7327ea8a41570573b17b96958e26a6294e4a656e3ccaaf0a89e6f5e7e43f91",
+      "size_bytes": 96613
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P2_MONITORING_STARTUP_SAFETY_AUDIT_READONLY_20260708_005254.md",
+      "sha256": "c8f3aab3703a5a9a0cb501604b3fbf5959124274b644bc0f475bcfa37ad449a5",
+      "size_bytes": 16996
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P2_POST_G_FINAL_CLEAN_AUDIT_20260708_223115.md",
+      "sha256": "585dfa9071c20c95a4ee22ec72e72f76c40cc86526cd69becd883b22dc07ba84",
+      "size_bytes": 10419
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P2_POST_G_FINAL_CLEAN_AUDIT_20260708_223425.md",
+      "sha256": "3dc21f2da9c885024d902f026f90e76f8a3969a0efeeed02992278a257b80e92",
+      "size_bytes": 10421
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P2_REMAINING_TWO_D3_STRICT_SEPARATION_AUDIT_READONLY_20260708_222216.md",
+      "sha256": "11d40b72016ca8bfca069d1c2cdc7c0a2d8fbf10974606432442ed7ca243fde0",
+      "size_bytes": 22965
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P2_REMAINING_TWO_TARGETED_EVIDENCE_AUDIT_D2_READONLY_20260708_221551.md",
+      "sha256": "e6449de8c477e27dc23b08d03c5c8cdaaa11f5630abecb7a6be55d66acb62d07",
+      "size_bytes": 79421
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P2_REMAINING_TWO_TARGETED_EVIDENCE_AUDIT_READONLY_20260708_221136.md",
+      "sha256": "a939dcbb6d39552c2c2197a3e4c6df255875770f9cb2ba9a541084ef8193e05a",
+      "size_bytes": 3076
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P2_ROOT_DIAGNOSTICS_READONLY_20260708_010319.md",
+      "sha256": "2dda9a9c7971c48da4bbef7c64a0ff5a281da6770acda5a2557ad2d61a2d1edd",
+      "size_bytes": 36848
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P3_ALERT_RESOLVER_H_POST_REBOOT_FAILED_UNITS_READONLY_20260708_225727.md",
+      "sha256": "ae01d6a04b24d620862beb7545b2fd058d834f3e1902e5e6962a16e6dec2264c",
+      "size_bytes": 55192
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P3_BOOT_READINESS_AUDIT_READONLY_20260708_224326.md",
+      "sha256": "a5c2c03b3f20ab59d76c241971f6b856f572ed8a92046e6ec0e85e5cdc8c65d0",
+      "size_bytes": 11353
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P3_CONTROLLED_REBOOT_DRILL_PREFLIGHT_20260708_224943.md",
+      "sha256": "9af52ad1a95f4604a3094369e1a2bb9e117810dfa654016c9539b3b0d611c161",
+      "size_bytes": 4137
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P3_CONTROLLED_REBOOT_DRILL_PREFLIGHT_20260708_225101.md",
+      "sha256": "5328babb0d0c85b6c3f3c678e984d93cecbb7bc4ba2d43bfcf9e55d5c6ef5f00",
+      "size_bytes": 4316
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P3_CONTROLLED_REBOOT_MARKER_20260708_224943.env",
+      "sha256": "2514e39b4e755a12df8cb3a825541501ab9c430b3b218729fd569a59943a8a74",
+      "size_bytes": 224
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P3_CONTROLLED_REBOOT_MARKER_20260708_225101.env",
+      "sha256": "91ed5c1388c2271a507faafb187d21ec73b7a3f4d4bcc46824c3a406866c1b61",
+      "size_bytes": 224
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P3_FINAL_CLEAN_AUDIT_20260708_233209.md",
+      "sha256": "d42f67c09ea4860aaa16710af8382992d26dfb797dfff4b886f1cd9007f5a3dc",
+      "size_bytes": 10248
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P3_FIX_I_CONTAIN_NDIP_LOOP_AND_STABILIZE_MARKET_UPDATER_20260708_230607.md",
+      "sha256": "bb2c0f82cb1c565d38abdad8c9926eda3551af828e7cdb627ec21eb6cd55e754",
+      "size_bytes": 9240
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P3_FIX_I_CONTAIN_NDIP_LOOP_AND_STABILIZE_MARKET_UPDATER_20260708_231351.md",
+      "sha256": "8c0cedb179680c5d84486cf6de2dd6853f359f28d75bada4399e67f187e391b5",
+      "size_bytes": 9037
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P3_POST_REBOOT_AFTER_FIX_I_VERIFICATION_20260708_232520.md",
+      "sha256": "5859eafd5f351a93ea12c1e6592c8e45067603e6b743caa0854cc1882df90a44",
+      "size_bytes": 5129
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P3_POST_REBOOT_VERIFICATION_20260708_225121.md",
+      "sha256": "46eb7b74e2bd4a34986b19bda81755a57561b2d7cbac81e612fb4443ab5fa86d",
+      "size_bytes": 11750
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P3_REBOOT_AFTER_FIX_I_MARKER_20260708_232114.env",
+      "sha256": "d1376931b196bb0990e4282be3376dada288a17ee8b389949c26a059d528e9c7",
+      "size_bytes": 243
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_P3_REBOOT_AFTER_FIX_I_PREFLIGHT_20260708_232114.md",
+      "sha256": "84c2fefd97bb37d621af5b7dee05089bb1c7ea91835e6f22c97598cd33eba348",
+      "size_bytes": 3761
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_PAGE_PRIORITY_MATRIX_20260707_210713.md",
+      "sha256": "98bf7fce720510145f36d3b3da73857116b1b7ced4899950d5579504ac448750",
+      "size_bytes": 2863
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_PATCH_ASSET_VIEW_CONTENT_V1_20260707_204602.md",
+      "sha256": "094cd96ae4addaab04250539792792775651ef79dc9df659c8a545c741d920e0",
+      "size_bytes": 4067
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_PATCH_ASSET_VIEW_LIVE_BIND_V1_20260707_101304.md",
+      "sha256": "130882cc1252dd59984982c6350ba6b0c6883e3d642b50f3cb032d96729cc7d9",
+      "size_bytes": 496
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_PATCH_AUTH_ROUTE_ALIAS_V1_20260707_225005.md",
+      "sha256": "342e2106429d3a58a37ee140fc2ca20363895179d4d67968eae8ecbbac7e5431",
+      "size_bytes": 7167
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_PATCH_COMMAND_CENTER_CONTENT_V1_20260707_214346.md",
+      "sha256": "f8caec12f6144fef75d872933825d7fc0672366f0134a9b3cb13521f94bad977",
+      "size_bytes": 4491
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_PATCH_COMMAND_CENTER_RADAR_BIND_V24_20260707_100000.md",
+      "sha256": "a584530422b3a24fc3ad0c98064145a77a6fb572e9ec3eb092ba7cd8f86e621e",
+      "size_bytes": 452
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_PATCH_DAILY_BRIEF_CONTENT_V1_20260707_205606.md",
+      "sha256": "c3bb3a19a2c875b99e454917c1f4d2ca2a7a26ab9cbaf35ea41ba9d2295fa5f6",
+      "size_bytes": 4058
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_PATCH_DAILY_BRIEF_LIVE_BIND_V1_20260707_102950.md",
+      "sha256": "ad442545319ef87a732a87aeefc3533953bb34e6242d2a2612a3f5a1f40f9e9d",
+      "size_bytes": 896
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_PATCH_DECISION_SUPPORT_BIND_V1_20260707_100626.md",
+      "sha256": "3026902ec702db987a0854beab5d1ad98a3f2ad2b1e4c78d6b2cb189b7be35c7",
+      "size_bytes": 425
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_PATCH_DECISION_SUPPORT_CONTENT_V1A_HOTFIX_20260707_203428.md",
+      "sha256": "a2f8956915eb2548b3b563c0af326406e3c0ba42a180f4fa00ec67851b0920a2",
+      "size_bytes": 4227
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_PATCH_DECISION_SUPPORT_CONTENT_V1_20260707_202619.md",
+      "sha256": "a039505cdd061bed349cf2475f4d62972d43b73da99faa870a5d80b89e21fd31",
+      "size_bytes": 4335
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_PATCH_DISCLAIMER_GATE_V1_20260707_094240.md",
+      "sha256": "f860384eeb50bf0ac786b0c1d21fb202c131a9bdb4db4d7dfad2210284681fe7",
+      "size_bytes": 5709
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_PATCH_MENU_CANONICAL_PAGE_MATCH_V1_20260707_094821.md",
+      "sha256": "3f5aed432519cd4c35f43b98d62ea9fd1aaa255da587b127b492816d3d73e4ed",
+      "size_bytes": 3190
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_PATCH_MOBILE_MENU_CSS_ONLY_V1_20260707_172212.md",
+      "sha256": "80f50b672330c3d910fac19bfbf0bc7b9cea9dab458a0b8562db3e955ef96f04",
+      "size_bytes": 4230
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_PATCH_MOBILE_MENU_CSS_ONLY_V2_20260707_174604.md",
+      "sha256": "a075bf7d7ca10849891adb8ec27d424f2962a2304a0c4d934b555b62254dbe88",
+      "size_bytes": 4234
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_PATCH_MOBILE_MENU_CSS_ONLY_V2_20260707_180918.md",
+      "sha256": "bc9b1c46a6eba9daf14a9e251cc936f9b76e72c65883584b980e04087f665b4f",
+      "size_bytes": 4471
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_PATCH_MOBILE_MENU_LINK_LAYOUT_V4_20260707_194553.md",
+      "sha256": "6cc30eeebb75041d24183a40f69a63be0f841efc52df17042e34bf9770656e7a",
+      "size_bytes": 4665
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_PATCH_MOBILE_MENU_TEXT_READABILITY_V3_20260707_181813.md",
+      "sha256": "c5e076a16fce19492f91c39874de69bbd11b3cebd7413c829cd0c781687dca1c",
+      "size_bytes": 4662
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_PATCH_NOWPAYMENTS_OPTIONAL_V1_20260707_092249.md",
+      "sha256": "8d6f21e5a74056af10b013ad9910ba06d51d2ac1e8a32080a158d56868f9b02d",
+      "size_bytes": 20377
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_PATCH_PM2_BACKEND_DEPENDENCIES_20260707_092005.md",
+      "sha256": "cdff0e886427b6ae41295ff825b8f57fd5553ceb4bab0d61f81e6b96140ba840",
+      "size_bytes": 16396
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_PATCH_QUARANTINE_UNUSED_PM2_BACKEND_20260707_092629.md",
+      "sha256": "3270755cb992c8057086dc12c3abf8cc510acd29d1a8e5ff8fdb375537cdd7e9",
+      "size_bytes": 27802
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_PATCH_SETTINGS_ALERTS_BIND_V1_20260707_103642.md",
+      "sha256": "58f176bab6c7db6a7b432d9cdb16ef011a80bd45473851fd2e1492b878f2db52",
+      "size_bytes": 902
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_PATCH_SETTINGS_ALERTS_CONTENT_V1_20260707_215551.md",
+      "sha256": "7e75d0de05ea86134941eacac24704e8d716a4625dbb29211bdfd3f93abbeb84",
+      "size_bytes": 4096
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_PLATFORM_FOUNDATION_V4_CORRECTED_20260712_143756.md",
+      "sha256": "7291112a81b61d988db15d51bfc77eb556d796dfa666ebc681580bc5411a593c",
+      "size_bytes": 845
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_POST_P0_GOVERNANCE_VERIFICATION_20260707_232444.md",
+      "sha256": "1873f633190c15fdc6406b21dd9f2cab94e503fe78aa3de07adf33ec8df3573d",
+      "size_bytes": 2740
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_POST_PATCH_TEST_20260707_093408.md",
+      "sha256": "cea4b44cbdf1ce584d317aa66f1f48072b9bef63a377f77741800ee25950b7d8",
+      "size_bytes": 3137
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_POST_PATCH_TEST_20260707_093711.md",
+      "sha256": "477ea0a1c6c3ba7c2d6d6ffe06dbcfd511d3dc77374be6725aca94343ec25d5d",
+      "size_bytes": 3118
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_POST_PATCH_TEST_20260707_094334.md",
+      "sha256": "12cec81f706c6a7cc602b0c9dead1a008e6d658e0e04cfdcaa00e9ddc5caf996",
+      "size_bytes": 3118
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_POST_PATCH_TEST_20260707_094957.md",
+      "sha256": "3756d968fadc0b390aef601b930749fd3841c90d58d07387febb7bed8c656ed3",
+      "size_bytes": 3119
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_POST_PATCH_TEST_20260707_100110.md",
+      "sha256": "5158078890928555734ec45dcf89a2af87b7fc2f47957abb5a100529c125cf55",
+      "size_bytes": 3119
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_POST_PATCH_TEST_20260707_100627.md",
+      "sha256": "533102106735dd87b24875d41b3eaa570d3f6facb68895e87a3320e496077e75",
+      "size_bytes": 3116
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_POST_PATCH_TEST_20260707_101404.md",
+      "sha256": "77cdea48ff3958a954ed17273e5bba4b4dbdb9929b69b9a18fd441109bfaa76c",
+      "size_bytes": 3117
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_POST_PATCH_TEST_20260707_102018.md",
+      "sha256": "bf71d2cd302f7e30667502cbfcacd21491f56c01f00603c423c8a2c9b82751ed",
+      "size_bytes": 3122
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_POST_PATCH_TEST_20260707_102417.md",
+      "sha256": "e655b40d5d67d094dd5b4acd7a13c92eb3c418a91d80f60f0b8b654daf1ed7eb",
+      "size_bytes": 3123
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_POST_PATCH_TEST_20260707_102951.md",
+      "sha256": "bd58d08c49673199d72da272086c74f3c9ed4fcbc7e8743a700d80bdd8210b49",
+      "size_bytes": 3123
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_POST_PATCH_TEST_20260707_103643.md",
+      "sha256": "6b6292034b19facf78a641c07c57eed56e7ece4bc67d6dc58626298c0a56de4e",
+      "size_bytes": 3118
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_POST_PATCH_TEST_20260707_103951.md",
+      "sha256": "2e9944ee01bba3c6b7e9a4c2b6dc895a4eed6a8bb19610cf0a0044516376ef19",
+      "size_bytes": 3119
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_POST_PATCH_TEST_20260707_172212.md",
+      "sha256": "5cf941bfe9946ab6d09d7f7180532afced6962fb738aec916fe35d982bd49660",
+      "size_bytes": 3123
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_POST_PATCH_TEST_20260707_174605.md",
+      "sha256": "df41b7254bbc987757f02dfde755a925a2cac9672e6a42e9b3644f9d55cf5a08",
+      "size_bytes": 3117
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_POST_PATCH_TEST_20260707_180920.md",
+      "sha256": "467309abd2e0c0739c5b70c027449928ebbd9558a3f2e35a4a88934c75f0716c",
+      "size_bytes": 3122
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_POST_PATCH_TEST_20260707_181815.md",
+      "sha256": "6843413c599c36fc9ee2c1e2292f3f677c5a8e3b175311953b929d4642ec5dc8",
+      "size_bytes": 3122
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_POST_PATCH_TEST_20260707_194554.md",
+      "sha256": "5115d14d35e04fa1601813376320f590e36c21619867383f13150f6504673812",
+      "size_bytes": 3122
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_POST_PATCH_TEST_20260707_202619.md",
+      "sha256": "bf8d387caa74137e66641897dc01b75d4dbc4a822b34e36aa1d24479ff2bbbf0",
+      "size_bytes": 3189
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_POST_PATCH_TEST_20260707_203428.md",
+      "sha256": "ded00c6cbe78755d8915c66e798111c7d2b25c83e6fc17d8bced04b0421fb420",
+      "size_bytes": 3118
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_POST_PATCH_TEST_20260707_204602.md",
+      "sha256": "c46dc4a9fae5f39e5e9aa2440e2f5518a6cb26936ff20ca830f2d8733b283738",
+      "size_bytes": 3119
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_POST_PATCH_TEST_20260707_205607.md",
+      "sha256": "b63465202757c14ac79bf1f9a5fd3dba9d7e410d13d43eb21e9072c5ce956aab",
+      "size_bytes": 3119
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_POST_PATCH_TEST_20260707_214346.md",
+      "sha256": "a28c99bbc20a8580ab13cf520330ae6082a920faca1f59dda32c1e79465f896d",
+      "size_bytes": 3123
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_POST_PATCH_TEST_20260707_215551.md",
+      "sha256": "fb031b704d7a1d99c68fa7b39dfba40aac02a41fa93d51d47aa81b435603f1e2",
+      "size_bytes": 3117
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_POST_PATCH_TEST_20260707_225006.md",
+      "sha256": "fc578a8e1039bdefcd6ba005cd01099f75931a2819ac792bb9d4d917f2952efe",
+      "size_bytes": 3123
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_POST_PATCH_TEST_ASSET_VIEW_CONTENT_V1_20260707_204602.md",
+      "sha256": "c46dc4a9fae5f39e5e9aa2440e2f5518a6cb26936ff20ca830f2d8733b283738",
+      "size_bytes": 3119
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_POST_PATCH_TEST_AUTH_ROUTE_ALIAS_V1_20260707_225005.md",
+      "sha256": "fc578a8e1039bdefcd6ba005cd01099f75931a2819ac792bb9d4d917f2952efe",
+      "size_bytes": 3123
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_POST_PATCH_TEST_COMMAND_CENTER_CONTENT_V1_20260707_214346.md",
+      "sha256": "a28c99bbc20a8580ab13cf520330ae6082a920faca1f59dda32c1e79465f896d",
+      "size_bytes": 3123
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_POST_PATCH_TEST_DAILY_BRIEF_CONTENT_V1_20260707_205606.md",
+      "sha256": "b63465202757c14ac79bf1f9a5fd3dba9d7e410d13d43eb21e9072c5ce956aab",
+      "size_bytes": 3119
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_POST_PATCH_TEST_DECISION_SUPPORT_CONTENT_V1A_HOTFIX_20260707_203428.md",
+      "sha256": "ded00c6cbe78755d8915c66e798111c7d2b25c83e6fc17d8bced04b0421fb420",
+      "size_bytes": 3118
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_POST_PATCH_TEST_DECISION_SUPPORT_CONTENT_V1_20260707_202619.md",
+      "sha256": "bf8d387caa74137e66641897dc01b75d4dbc4a822b34e36aa1d24479ff2bbbf0",
+      "size_bytes": 3189
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_POST_PATCH_TEST_MOBILE_MENU_CSS_ONLY_V1_20260707_172212.md",
+      "sha256": "5cf941bfe9946ab6d09d7f7180532afced6962fb738aec916fe35d982bd49660",
+      "size_bytes": 3123
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_POST_PATCH_TEST_MOBILE_MENU_CSS_ONLY_V2_20260707_174604.md",
+      "sha256": "df41b7254bbc987757f02dfde755a925a2cac9672e6a42e9b3644f9d55cf5a08",
+      "size_bytes": 3117
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_POST_PATCH_TEST_MOBILE_MENU_CSS_ONLY_V2_20260707_180918.md",
+      "sha256": "467309abd2e0c0739c5b70c027449928ebbd9558a3f2e35a4a88934c75f0716c",
+      "size_bytes": 3122
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_POST_PATCH_TEST_MOBILE_MENU_LINK_LAYOUT_V4_20260707_194553.md",
+      "sha256": "5115d14d35e04fa1601813376320f590e36c21619867383f13150f6504673812",
+      "size_bytes": 3122
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_POST_PATCH_TEST_MOBILE_MENU_TEXT_READABILITY_V3_20260707_181813.md",
+      "sha256": "6843413c599c36fc9ee2c1e2292f3f677c5a8e3b175311953b929d4642ec5dc8",
+      "size_bytes": 3122
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_POST_PATCH_TEST_REPORT_20260707_092917.md",
+      "sha256": "fa6edda54dd0f0d6013fc9ee3502bec64c81b8a2787a48bdad634713f9627282",
+      "size_bytes": 731
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_POST_PATCH_TEST_SETTINGS_ALERTS_CONTENT_V1_20260707_215551.md",
+      "sha256": "fb031b704d7a1d99c68fa7b39dfba40aac02a41fa93d51d47aa81b435603f1e2",
+      "size_bytes": 3117
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_PRIORITY1_CONTENT_PLAN_20260707_211231.md",
+      "sha256": "5a129f98a9f4d5705dbf4a8ca3cea573fc26f089810623d2f5d35c3d01b892bf",
+      "size_bytes": 4688
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_PRODUCTION_SNAPSHOT_20260707_105055.md",
+      "sha256": "aee253db713f90add85ce92d4d5544c45d52fadc20b07a909cd0c1c0535d76f8",
+      "size_bytes": 3079
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_RELEASE_HANDOFF_20260707_104741.md",
+      "sha256": "965521636a5651d9899230035184d3f3f02c0de6cb9251d3e1b25d228b4063c2",
+      "size_bytes": 2875
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_REMAINING_PROCEDURES_AUDIT_20260707_231118.md",
+      "sha256": "47bcb37f1606c9108daad4be73a1284bffb199226331b308d458895add775686",
+      "size_bytes": 6373
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_ROUTES_INVENTORY_AUDIT_20260707_210030.md",
+      "sha256": "2dfea4c0a9e4a2be40d2c8a498ae7feff2fedf50cf534cc8174dc8d0af8d6712",
+      "size_bytes": 4061
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_RUNTIME_GOVERNANCE_LOCK_AR.md",
+      "sha256": "e9c1dac8916c2ce047df1a7a4c3a9cfdc248a1364428ab992c17ad30e289e823",
+      "size_bytes": 3569
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_RUNTIME_PORT_OWNER_DIAGNOSTICS_20260707_091840.md",
+      "sha256": "8512ee465a20020b8db43c462ba88efb36c1c3e3fe7c95349de655855f076522",
+      "size_bytes": 55272
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_RUNTIME_TRUTH_GATE_20260707_092516.md",
+      "sha256": "8a5053b5eb92fe05e95aacd9d6ae461c9c758f9e7854c8529e942983d55caf62",
+      "size_bytes": 26710
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_SAFE_DEPLOY_USER_PORTAL_VITE_V18_P8_D12_20260709_191700.md",
+      "sha256": "50bcc49939e72e6f7aa61d452ad9bbe0b49d741d84b7e2e24748d265a52c664f",
+      "size_bytes": 23827
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_SERVICE_DIAGNOSTICS_20260707_091658.md",
+      "sha256": "8b0e2a6a694c3cf9c7e52549a0afdac4c381be80ceed786c0022259783a46910",
+      "size_bytes": 18417
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_SETTINGS_ALERTS_CONTENT_ONLY_PATCH_PLAN_20260707_224918.md",
+      "sha256": "d66163812d682f88500462e598c07cf134158bb6a046bbabba862689d14bc9de",
+      "size_bytes": 4507
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_SETTINGS_ALERTS_PREFLIGHT_20260707_103215.md",
+      "sha256": "22138eca195887fcf4e52653f4264f6cf4bb569cd6f6b6f3acdd1562b5a18b00",
+      "size_bytes": 5862
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_STABILITY_FIRST_GOVERNANCE_INSTALL_20260711_144852.md",
+      "sha256": "9fd53c5efbaa937f076b4bc54751350fd6c3c2d310e0a5a1e0cb94ec4b933b69",
+      "size_bytes": 1546
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V12_FINAL_ACCEPTANCE_AUDIT_20260708_004202.md",
+      "sha256": "8fe0825956088b8548fc9d0c705e5455b8e1386f53b5f1ab6e79ba5a297185b9",
+      "size_bytes": 3251
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V12_FRONTEND_DISPLAY_VERIFICATION_READONLY_20260708_003607.md",
+      "sha256": "0d563eff9755e2793a4a69df9913691c93567b4ed3a236fcc63e2be3ff429c05",
+      "size_bytes": 9234
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V12_PATCH_SCENARIO_LEVELS_CONTRACT_20260708_002156.md",
+      "sha256": "dab7fd45762c04e5541cdc498dc09160d7839509914a88385ae767d545e64232",
+      "size_bytes": 665
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V12_PATCH_SCENARIO_LEVELS_CONTRACT_REMOTE_ONLY_20260708_003202.md",
+      "sha256": "a1fa5923bb33fb9cc1281954de300aa80f846a23a045a670b45f4e017f974784",
+      "size_bytes": 6553
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V12_PATCH_SCENARIO_LEVELS_CONTRACT_SUDO_FIX_20260708_002415.md",
+      "sha256": "468ecd96fb485f6247088b75d7f33879012b8c5e7fb98f3280aeef277dd93534",
+      "size_bytes": 415
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V12_RELEASE_PACKAGE_REPORT_20260708_004432.md",
+      "sha256": "f26b101de8358e2ad27d1a8f70038a04bd4ad997c8930c706b3a0448181666ea",
+      "size_bytes": 3668
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V12_SCENARIO_LEVELS_DISCOVERY_READONLY_20260708_000331.md",
+      "sha256": "eb0a0b363f634ed6266f08a48ef89b503c6b448baaeae3b43be33bf7d7af02c7",
+      "size_bytes": 349087
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V12_SCENARIO_LEVELS_SOURCE_RESOLVER_READONLY_20260708_001039.md",
+      "sha256": "a31cedf5cb39030d7469c20910cfd68002f773f11f21c87e42a0871e3d601454",
+      "size_bytes": 87495
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V12_SCENARIO_LEVELS_STRICT_VALIDATOR_20260708_000702.md",
+      "sha256": "f66a5b244c60a5df1701e92e5d30ad5762c63a16fb859ddb497c43a4e0c104eb",
+      "size_bytes": 4523
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V13_A_RELEASE_EVIDENCE_PAGE_20260709_000110.md",
+      "sha256": "ec0706aedce35d79c0565e48cf1cbb65341f6ae52f1d43b44017d496e2e4a130",
+      "size_bytes": 4535
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V13_B1_COMMAND_CENTER_OWNERSHIP_STABILIZER_20260709_002357.md",
+      "sha256": "d7346a8d8902b4cbdda6781b1755b044bb0d7789bb6fb20ac264be8948f64a93",
+      "size_bytes": 4198
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V13_B1_D2_SAFE_OWNERSHIP_STABILIZER_NO_UPDATER_RUN_20260709_003057.md",
+      "sha256": "3d0111f2577b58ebe04c113a4c9e90ec0fe289b43cb359c6839284a6110952a0",
+      "size_bytes": 7936
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V13_B2_DATA_FRESHNESS_STABILIZATION_AUDIT_READONLY_20260709_003752.md",
+      "sha256": "dc96bf986c7565a2cfa3966730a806dc1df10e93e0e67f73c93ec1a32723f2b6",
+      "size_bytes": 6930
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V13_B_DATA_FRESHNESS_TRUST_PANEL_20260709_001015.md",
+      "sha256": "23c5bd1c9ece5f663d8e8aaa30ba3cfd24dd7ce8ff4ad35b7391b3ae8489204b",
+      "size_bytes": 5257
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V13_C_DECISION_ROOM_UX_COPY_GUIDE_20260709_004632.md",
+      "sha256": "0472774b2e4eb61028754161d945eac635d18c6d9b9b4a2754839f76d46f8465",
+      "size_bytes": 4917
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V13_C_DECISION_ROOM_UX_COPY_GUIDE_20260709_013021.md",
+      "sha256": "3f9793716f9722ce80a671c13ab62e2f6c219c270c9125d08a92f2ce102a9b4b",
+      "size_bytes": 5109
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V13_D_COMPLETED_DECISIONS_VIEWER_HARDENING_20260709_005409.md",
+      "sha256": "3ca703e1e9cf221a61b0d2f34e9ff29aa380d39af15ebed2a1ceb853840cbc16",
+      "size_bytes": 5283
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V13_D_COMPLETED_DECISIONS_VIEWER_HARDENING_20260709_013406.md",
+      "sha256": "01d67d6db3e4b8306578b9d0032d70c46428c92252584f3e2dee6087e9bdacc0",
+      "size_bytes": 5532
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V13_E_D2_FINALIZE_AFTER_SAFE_GREP_EXIT_20260709_033000.md",
+      "sha256": "762030a357f00ceb17e59a70704d3e1e642e9ee6c774c7a5994920aa4765a405",
+      "size_bytes": 4589
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V13_E_D2_FINALIZE_AFTER_SAFE_GREP_EXIT_20260709_033345.md",
+      "sha256": "37653c6ad1947c5447a509144d00a71e319e874e801b93667a08e3e69131ec4b",
+      "size_bytes": 4575
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V13_E_VISUAL_POLISH_HUB_AND_LINK_INTEGRITY_20260709_022529.md",
+      "sha256": "9977cebed434ca9f11addc5a11c8224c5ac2b184d75c970f03c460ef88b5d92f",
+      "size_bytes": 6728
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V13_FINAL_AUDIT_AND_PACKAGE_20260709_034130.md",
+      "sha256": "5e9d7ff20a5d145a693e82658d3038b01cd900159d510ea12af27db3d4cb2ccf",
+      "size_bytes": 5791
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V13_FINAL_AUDIT_AND_PACKAGE_20260709_040334.md",
+      "sha256": "0c9d651f0dcff47c9677ea4a77fd5e84c8f054f60314d8f286d15a5ec11e1f96",
+      "size_bytes": 6285
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V13_FINAL_D2_OWNER_WATCHER_AND_REPACKAGE_20260709_035022.md",
+      "sha256": "3974098fe6bb575e9ce2a8f2a03b07b944d826423925ed9778a0267a5a40d288",
+      "size_bytes": 10950
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V13_FINAL_D3_TIMER_OWNER_FIXER_AND_REPACKAGE_20260709_074419.md",
+      "sha256": "ff713afa88aa6ce8394e0b88dbdbbaff1fdb84f3cfe90e16de619d60e421ad49",
+      "size_bytes": 11682
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V13_FINAL_D4_OWNERSHIP_STABILIZATION_AND_REPACKAGE_20260709_075518.md",
+      "sha256": "8e7b6c0e6ce55022f210af7a10991efd455b8e20bd46b166b936ca98152e1bf3",
+      "size_bytes": 8783
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V13_FINAL_D5_CANONICAL_ROOT_WRITER_POLICY_AND_REPACKAGE_20260709_080303.md",
+      "sha256": "89f06ca6e57e3589c71b50ddaaade3174a1303ed3af01c0ef7c341d63d213504",
+      "size_bytes": 9860
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V13_IMPLEMENTATION_PLAN_20260708_235303.md",
+      "sha256": "23c19db97372066374ad5896bef994a645db3adca51dbf9bc3d27845a8d60dc5",
+      "size_bytes": 3196
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V13_PLANNING_BASELINE_AUDIT_READONLY_20260708_234638.md",
+      "sha256": "93c7798fe6a458cb79460ed01d4ddd27d83c91daad398e6846188abcba864c35",
+      "size_bytes": 49899
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V13_SCOPE_DRAFT_20260708_234638.md",
+      "sha256": "73b2301916e2ddbc9a8c0c191fb731ea18574226f751bf98fe1758818d11891f",
+      "size_bytes": 2826
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V13_SCOPE_FREEZE_AND_PLAN_DOCS_ONLY_20260708_235303.md",
+      "sha256": "85da22f436a65e6c9d6841c0f52fa05c34454a5a023470f44073337595083f86",
+      "size_bytes": 855
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V13_SCOPE_FREEZE_AR_20260708_235303.md",
+      "sha256": "1b075693107307a54d1cbd3504328dfdd3b3fea54fbd014d9feac29851d8cb19",
+      "size_bytes": 5505
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V13_SCOPE_FREEZE_EN_20260708_235303.md",
+      "sha256": "9c77a0503ddfe644a9e8afcaacd6a7b27c167aeb3ec45a35b4f81487ded13107",
+      "size_bytes": 4413
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V14_A_COMPLETED_DECISIONS_SOURCE_DISCOVERY_READONLY_20260709_084218.md",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V14_A_D2_COMPLETED_DECISIONS_SOURCE_DISCOVERY_READONLY_FAST_20260709_084807.md",
+      "sha256": "b37c3783d5403ef412701e5b22dd3fe5e2aa07b762c33078315afe2f68f9d58b",
+      "size_bytes": 945776
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V14_BCDE_D2_RECONCILE_A_D2_LOCK_AND_FINAL_PACKAGE_20260709_090710.md",
+      "sha256": "4047cfb985b1c917bbf888ff3df259db60d085a63e764578bdcfcbfb2da7c0de",
+      "size_bytes": 9848
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V14_BCDE_ONE_SHOT_STATIC_COMPLETION_FINAL_PACKAGE_20260709_085742.md",
+      "sha256": "37efa887ec8eb7779fa2d117873a58dbc271c38c8d200cb2209be3d74fdb0813",
+      "size_bytes": 761
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V14_COMPLETED_DECISIONS_DISCOVERY_BASELINE_20260709_082445.md",
+      "sha256": "a4867a68d91c62306138c2c0757942217a643eb3fdbbf63d8e9441fceb62553c",
+      "size_bytes": 2060173
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V14_D0_D2_GOVERNANCE_FALSE_POSITIVE_FINALIZER_20260709_083510.md",
+      "sha256": "93a8af45189de3e714998b1d6737752bf7a81fa3a11dca022429c315903c2f75",
+      "size_bytes": 6546
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V14_D0_D2_GOVERNANCE_SCAN_DECISION_20260709_083510.md",
+      "sha256": "d474c2ef1628a48914b6492f0d08933ff60aca0e929a95d5aed1134a311bb39a",
+      "size_bytes": 838
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V14_D0_RECONCILE_D5_LOCK_AND_KICKOFF_RETRY_20260709_082445.md",
+      "sha256": "75413f6e20d201128a5dc49d433f9bc6707e9c3f7f0692c223916d61b012b465",
+      "size_bytes": 112610
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V14_FAST_KICKOFF_SCOPE_AUDIT_PLAN_20260709_081522.md",
+      "sha256": "44334eb911501e8921af8f241dd9501df5a4bac8d9f777b67f545320c4128006",
+      "size_bytes": 616
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V14_IMPLEMENTATION_PLAN_20260709_082445.md",
+      "sha256": "d94bcd2fead454a1dd10bd2e55eed73a52c45b0a68e82eee34468301c1ee295c",
+      "size_bytes": 839
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V14_PATCH_QUEUE_20260709_082445.md",
+      "sha256": "d1432060e0716835aa0b6476c9c1ec892b41530e3bae2db29301517d48527c49",
+      "size_bytes": 281
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V14_ROLLBACK_POLICY_20260709_082445.md",
+      "sha256": "244a2cf9dc3a606edc72ff86a185aae94594790abae1d08cae02b84e62010204",
+      "size_bytes": 172
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V14_SCOPE_FREEZE_AR_20260709_082445.md",
+      "sha256": "225f24e674b721a725144745d809172fa4e86b90c494080621a158ef464beb29",
+      "size_bytes": 718
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V14_SCOPE_FREEZE_EN_20260709_082445.md",
+      "sha256": "02ecc0457f4efe9930a54961a12c4d81650abca345c714cda1a64363121e3b5e",
+      "size_bytes": 630
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V15_P5_D2_FIX_API_BRIDGE_NGINX_TARGET_FINAL_PACKAGE_20260709_094155.md",
+      "sha256": "1c5b1d9ab0d78e67b9c55dddf9787a70922d2529b0cc0a85562b91ae5aa06deb",
+      "size_bytes": 8759
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V15_P5_ONE_SHOT_READONLY_API_BRIDGE_FINAL_PACKAGE_20260709_092500.md",
+      "sha256": "432909bbedbd46d7bcef92c1f6b2700f745741bfaa62eb6c2672119654bb6a21",
+      "size_bytes": 8539
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V16_F_ARCHITECTURE_MAP_STATIC_PAGE_20260709_115257.md",
+      "sha256": "c30ab0f6c177049e2b8a4d162de8c7527800a4922bf7375c85697600d63b577c",
+      "size_bytes": 7875
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V16_P6_ONE_SHOT_LIVE_READONLY_ADAPTER_FINAL_PACKAGE_20260709_101523.md",
+      "sha256": "5ab0febdc619ecf0925447ff8411eaab7c96305ba08eeaa96b3a823a60e22428",
+      "size_bytes": 35721
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V17_P7_RELEASE_REGISTRY_LAUNCH_READINESS_FINAL_20260709_121842.md",
+      "sha256": "8af4521dbb7f7f24ce87808b4d4d6b6e557b22f68495793af0a8fa6e5f5e8df8",
+      "size_bytes": 9458
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V18_P8_D10_D2_KEEP_APPROVED_DESIGN_ONLY_PRIVACY_SANITIZED_20260709_170810.md",
+      "sha256": "c2127b82b7cff776b2708a31a8b80d3af87deee504de1316f6d958274ea2da73",
+      "size_bytes": 5667
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V18_P8_D10_D3_KEEP_APPROVED_DESIGN_ONLY_PRIVACY_SANITIZED_20260709_171952.md",
+      "sha256": "65b6d245eb231dd2acacd3903f86e0796a43e0b4fe4dff06398727cce32aeff3",
+      "size_bytes": 14827
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V18_P8_D10_D4_FINALIZE_APPROVED_DESIGN_FIX_MY_NGINX_DUPLICATE_20260709_173339.md",
+      "sha256": "884650ba0e6861e5d00638f6b3e51573b2f23cccf4dad575458772f61d15d1bc",
+      "size_bytes": 5688
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V18_P8_D10_D5_FINALIZE_APPROVED_DESIGN_FIX_AUTH_ALIASES_20260709_174026.md",
+      "sha256": "7aa95e132d8383d6038f20e35f473c442e182e73f952320e6a4cfea400c542aa",
+      "size_bytes": 2231
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V18_P8_D11_FULL_ARABIC_I18N_LAYER_NO_DESIGN_CHANGE_20260709_175345.md",
+      "sha256": "5ded7de972016ea73ae7f8c3c3a1d09affee0cf6ea0bee22439aafb5ecde8fef",
+      "size_bytes": 5930
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V18_P8_D12_ARABIC_MOBILE_DECISION_ROOM_FIX_20260709_181731.md",
+      "sha256": "753bad9e644fa94125847b4447262f674c8276409895553c7447cd7525d37dcc",
+      "size_bytes": 8399
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V18_P8_D12_READONLY_AUDIT_20260709_181731.md",
+      "sha256": "a78a9e0c49ad86c6dc3c4f0166e6904f746d21aa0e4eaefb094b08178755cf6b",
+      "size_bytes": 3741
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V18_P8_D2_GOLDEN_VISUAL_SKIN_PREVIEW_FIXED_20260709_130749.md",
+      "sha256": "cc4f274e844bc71ebc8e607553053c0dd5efbee1d223d86a46f9d06c85398a44",
+      "size_bytes": 12398
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V18_P8_D3_GOLDEN_VISUAL_SKIN_PREVIEW_FIXED_20260709_132128.md",
+      "sha256": "692ec7ed00e00afbbf36c4765e169ba3eb9e2516e7bc93f2fc4ffa82e40f960c",
+      "size_bytes": 10318
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V18_P8_D4_FIX_SPA_404_ARABIC_TOGGLE_20260709_133849.md",
+      "sha256": "5de1b6b820274e41f555b52e8265d036ffec29afc79aad77f41df2b253e8f04c",
+      "size_bytes": 6633
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V18_P8_D5_ADOPT_GOLDEN_DESIGN_TO_PRODUCTION_LINKS_20260709_140821.md",
+      "sha256": "10dccf193f5dc57aca8359f22fb4045e07479d3ec3c2d8bdc454fe84a381ef9f",
+      "size_bytes": 13019
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V18_P8_D6_PUBLIC_TERMS_SANITIZER_20260709_142051.md",
+      "sha256": "e226eb11632262722eb93e181905bec0e39c41fefdc14607f84a37c70727436a",
+      "size_bytes": 239360
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V18_P8_D7_REBUILD_FROM_CLEAN_SOURCE_FIX_BLANK_PAGE_20260709_143636.md",
+      "sha256": "be0130402da8fc1f75b51fa1dc443d4833140dc3ff6fc6a3b7abf9c0b135f81a",
+      "size_bytes": 4692
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V18_P8_D8_REMOVE_LEGACY_DESIGNS_FORCE_GOLDEN_PRODUCTION_20260709_145129.md",
+      "sha256": "4c0d80657d8cac8e1963d6396414231b117888498d4e7ea4e8eb8e995e77e6b9",
+      "size_bytes": 6701
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V18_P8_D9_D2_FINALIZE_STABLE_SHELL_FIX_MY_NGINX_DUPLICATE_20260709_152048.md",
+      "sha256": "501ff57ec728004813464676c0b42be73b103abe9f796a7de715520a017a7293",
+      "size_bytes": 2387
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V18_P8_D9_D3_FIX_FINALIZER_PYTHON_ARGS_AND_MY_NGINX_DUPLICATE_20260709_153746.md",
+      "sha256": "4d26d30495dac14e5b35c9b7bdaff34befd5409f64d3f80d5c2e328a153a20c7",
+      "size_bytes": 6576
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V18_P8_D9_RADICAL_STABLE_GOLDEN_SHELL_CLEAN_MY_NGINX_20260709_151344.md",
+      "sha256": "9505fd84ca58bd29b2ca62db721a7acc6018f8737957ab7c2b4879065546df70",
+      "size_bytes": 8075
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V18_P8_GOLDEN_VISUAL_SKIN_PREVIEW_20260709_125103.md",
+      "sha256": "0de413d6eb022ecf1567d9bd0a3e7150146d22e39d3219e374ea67064e3ad3e2",
+      "size_bytes": 3455
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V18_P8_GOLDEN_VISUAL_SKIN_PREVIEW_20260709_125926.md",
+      "sha256": "31c1209a5d3b12258a358d70e56e03e4c5612f8bd66373bcfeaa5de0521e2b27",
+      "size_bytes": 3453
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V1_FREEZE_AR.md",
+      "sha256": "a2d93c45862862b2a05e48a6196845265ce1e493cc1accbccde6aec8808b70b3",
+      "size_bytes": 2251
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V1_FREEZE_EN.md",
+      "sha256": "16fc29b65831f28d4d3f2cf9af4e4bf2900e242621601e6a04ecefebab33fc4d",
+      "size_bytes": 535
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V1_FUNCTIONAL_AUDIT_READONLY_20260707_220125.md",
+      "sha256": "ab6e049596ca79644efe096bf26a705230ad597d49c948ad5d1e533c562447cd",
+      "size_bytes": 5796
+    },
+    {
+      "path": "docs/05-runbooks/NDSP_V1_RELEASE_PACKAGE_REPORT_20260707_230119.md",
+      "sha256": "84da85cd94309a76aba19ec88ebb251bf0acfacf79120115e2d7d55d46756e4d",
+      "size_bytes": 1047
+    },
+    {
+      "path": "docs/05-runbooks/ndsp_post_patch_test_AR.before_fix_20260707_093038.sh",
+      "sha256": "d627ce81110727e3267a16bbe40271ae70c397425fa4bfa3049869633b4ef603",
+      "size_bytes": 2736
+    },
+    {
+      "path": "docs/05-runbooks/ndsp_post_patch_test_AR.before_wording_fix_20260707_093635.sh",
+      "sha256": "767f91ee64f611a74c9eeeb8cf38b6607d216bf920efddbbb9ec0836aca6efd9",
+      "size_bytes": 4369
+    },
+    {
+      "path": "docs/05-runbooks/ndsp_post_patch_test_AR.broken_20260707_093212.sh",
+      "sha256": "225f98a1187adb59c4ee0376a5fd0e6044d056844ad2ef25bcc3f43aaa2b362d",
+      "size_bytes": 5394
+    },
+    {
+      "path": "docs/06-decision-room-contracts/NDSP_DECISION_ROOM_24_AXES_LOCK_CHECKLIST_AR.md",
+      "sha256": "6938c1ea04230cdcf058da5c1f52616b63924b8ceac0bdf2d7184c8cd84363f8",
+      "size_bytes": 1094
+    },
+    {
+      "path": "docs/06-decision-room-contracts/NDSP_DECISION_ROOM_EXPERIENCE_CONTRACT_V1.json",
+      "sha256": "c46f012552c697269eb94746320dde60bbe4b148d8dee2a87e39b5a8c92b3c1f",
+      "size_bytes": 38594
+    },
+    {
+      "path": "docs/06-decision-room-contracts/NDSP_DECISION_ROOM_MASTER_CONTRACTS_AR_v1.md",
+      "sha256": "bdd2cb4e88a94a4a6b2a79389a98e02f6ede820f26f1608dbd6cbd8e7e6c533d",
+      "size_bytes": 29415
+    },
+    {
+      "path": "docs/06-decision-room-contracts/NDSP_DECISION_ROOM_MASTER_CONTRACTS_EN_v1.md",
+      "sha256": "644a9c13fcefec55a7efbc4cc38c8fd7ad07f8985310b99baffa9a066880be0a",
+      "size_bytes": 24107
+    },
+    {
+      "path": "docs/07-backup-restore/NDSP_BACKUP_RESTORE_PACK_V1_SHA256SUMS_20260711_173814.txt",
+      "sha256": "de2d98a353a88e3d9356e4e03cac83dc799ffb936be71f72bb16b716db4cd7e0",
+      "size_bytes": 1160
+    },
+    {
+      "path": "docs/07-backup-restore/NDSP_BACKUP_RESTORE_PACK_V1_SHA256SUMS_20260711_175009.txt",
+      "sha256": "de2d98a353a88e3d9356e4e03cac83dc799ffb936be71f72bb16b716db4cd7e0",
+      "size_bytes": 1160
+    },
+    {
+      "path": "docs/07-backup-restore/NDSP_BACKUP_RESTORE_RUNBOOK_AR.md",
+      "sha256": "37cfddd3dcca3102606615513da9bbc7931d612acacc2cb4d1ac0ffb6262d2d6",
+      "size_bytes": 5291
+    },
+    {
+      "path": "docs/07-backup-restore/NDSP_BACKUP_RESTORE_RUNBOOK_EN.md",
+      "sha256": "01ea07d4a4d01ba92fcad27cca87162da9f2937f63c39dfb66cd2011b1842f1d",
+      "size_bytes": 2620
+    },
+    {
+      "path": "docs/07-backup-restore/NDSP_BACKUP_SCOPE_V1.json",
+      "sha256": "f9034cd56811256d635a9fc9a492646a9f04896f7b1dd81ba89d7d2184954176",
+      "size_bytes": 2470
+    },
+    {
+      "path": "docs/10-enterprise-governance/NDSP_CANONICAL_POLICY.md",
+      "sha256": "79be7257f28cd94cc7e95667643334d142deb1793e4b68426985af6c4ee234fa",
+      "size_bytes": 270
+    },
+    {
+      "path": "docs/10-enterprise-governance/NDSP_CHANGE_CONTROL_POLICY.md",
+      "sha256": "aafddfb8d0a4ed99d7365b308add059ca5e355da3d1fa23fc8bfa39dc8399d5a",
+      "size_bytes": 272
+    },
+    {
+      "path": "docs/10-enterprise-governance/NDSP_DATA_GOVERNANCE_POLICY.md",
+      "sha256": "1056bc9e28ab579ba7c81166367ead7b56aaf337dfaaae0a64d0b2344b8c7e4f",
+      "size_bytes": 351
+    },
+    {
+      "path": "docs/10-enterprise-governance/NDSP_DECISION_GOVERNANCE_POLICY.md",
+      "sha256": "6a6248149cd271b337b63c31d6724ac53370fc1ac8bf6f8db80926840aee9ce8",
+      "size_bytes": 637
+    },
+    {
+      "path": "docs/10-enterprise-governance/NDSP_ENTERPRISE_CONSTITUTION_AR.md",
+      "sha256": "6163b2f87d35e4e4aee7f9fdf455201ddaa5f9ee63476f16028b90e3640501a3",
+      "size_bytes": 1000
+    },
+    {
+      "path": "docs/10-enterprise-governance/NDSP_ENTERPRISE_CONSTITUTION_EN.md",
+      "sha256": "19557d0ccd9a59652b7f825c7f296d0f4e9bebc31f8851ac2998e6418de0ee7f",
+      "size_bytes": 708
+    },
+    {
+      "path": "docs/10-enterprise-governance/NDSP_ENTERPRISE_PRINCIPLES.md",
+      "sha256": "bc616a6bf4643fb0e81f2f2700c978417a515b982df7b74b500beecb031cb5ae",
+      "size_bytes": 397
+    },
+    {
+      "path": "docs/10-enterprise-governance/NDSP_QUALITY_GATE_POLICY.md",
+      "sha256": "e206a1161a163e8876a4740ba80dd3e59ce06fdcadea8c786317967d66371c6a",
+      "size_bytes": 293
+    },
+    {
+      "path": "docs/10-enterprise-governance/NDSP_SINGLE_TRUTH_POLICY.md",
+      "sha256": "a72fd16fc37a2d2cc5c927d4234257b4f43e7a62842d08be3be26b25569d502f",
+      "size_bytes": 237
+    },
+    {
+      "path": "docs/10-enterprise-governance/README.md",
+      "sha256": "bd076f8a1e6c12ec6f8093eb63f9547a038b1f92a51ad31cb5c771b2d59e5ab5",
+      "size_bytes": 220
+    },
+    {
+      "path": "docs/11-architecture-decisions/ADR-001-CANONICAL-16-LAYERS.md",
+      "sha256": "79ca8373006df618ba040975156adc59ed34120be879eb3044bed76ef70fce2e",
+      "size_bytes": 263
+    },
+    {
+      "path": "docs/11-architecture-decisions/ADR-002-COT-AS-BACKBONE.md",
+      "sha256": "ed5dcd4034f4464a21ba0a1052a86722ebcbb52e28bc72244cc050f6f05096c2",
+      "size_bytes": 232
+    },
+    {
+      "path": "docs/11-architecture-decisions/ADR-003-NMP-DEFINITION.md",
+      "sha256": "09131aaf35a5720f32eef8321874ea081a672c7e46396968bb891c7d2efd0e7d",
+      "size_bytes": 235
+    },
+    {
+      "path": "docs/11-architecture-decisions/ADR-004-GOLDEN-SIGNALS.md",
+      "sha256": "ddd41d95be1502458c5693ff9789a0c6fa4bc533172a588ef24869e7a47b006e",
+      "size_bytes": 194
+    },
+    {
+      "path": "docs/11-architecture-decisions/ADR-005-CANONICAL-RUNTIME-ADAPTERS.md",
+      "sha256": "d4efd580cbaed48d64a3ef26e73f184eaabdc6d4d2c52461d1fcc5c0bca870ad",
+      "size_bytes": 230
+    },
+    {
+      "path": "docs/11-architecture-decisions/ADR-006-FAIL-CLOSED-DATA.md",
+      "sha256": "7ae273b3aea4b10aa01b41e3c81da186e9a3594599c383241e17d630e7a6f158",
+      "size_bytes": 216
+    },
+    {
+      "path": "docs/98-knowledge/HISTORICAL_DECISIONS.md",
+      "sha256": "3058519598bbb315fb26840c75c9a2532ade28830c35ec523e78473f21942ec5",
+      "size_bytes": 330
+    },
+    {
+      "path": "docs/98-knowledge/LESSONS_LEARNED.md",
+      "sha256": "52ebfc6815c52b7c3aededa16349479efb8696d45208142562c3921d913a02ea",
+      "size_bytes": 365
+    },
+    {
+      "path": "docs/98-knowledge/README.md",
+      "sha256": "3eab70950c0b2c75fe599213e1da00ee23668d57e67a53230fa5702e38deae15",
+      "size_bytes": 112
+    },
+    {
+      "path": "docs/98-knowledge/REJECTED_IDEAS.md",
+      "sha256": "cf48472a824738e88635a7046c713852fa2c1ec627797a88b28d028240f99866",
+      "size_bytes": 333
+    },
+    {
+      "path": "docs/NDSP_GOVERNANCE_DOCUMENTATION.md",
+      "sha256": "65cc703603cda47ae7e30c28141fc46fe37a8ea0cf536ad3ba56e8b1cb167f7f",
+      "size_bytes": 22834
+    },
+    {
+      "path": "docs/README.md",
+      "sha256": "31ad00e54e405ebef280108c7953d9d444659bf700b0b9eea2ea50df723c1c9d",
+      "size_bytes": 448
+    },
+    {
+      "path": "docs/README_NDSP_GOVERNANCE_ENTRYPOINT.md",
+      "sha256": "227a24bfe5bbb60bfc4977ec74abf11c621d7b6eee91562fc5d504cbc0039b79",
+      "size_bytes": 762
+    }
+  ]
+}

@@ -1,0 +1,2 @@
+$ cd /home/nawaf511/empire-core-new &&       grep -RhoEI --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=.ndsp-evidence       --exclude='*.min.js' --exclude='*.map'       'https?://[A-Za-z0-9._~:/?#\[\]@!$&()*+,;=%-]+' . 2>/dev/null       | sed -E 's/["'"'<>),;]+$//' | sort -u | head -n 1000 || true
+

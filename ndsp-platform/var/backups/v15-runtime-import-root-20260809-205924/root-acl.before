@@ -1,0 +1,11 @@
+# file: /home/nawaf511/empire-core-new
+# owner: nawaf511
+# group: nawaf511
+user::rwx
+user:www-data:--x
+user:postgres:--x
+user:nobody:--x
+group::---
+mask::--x
+other::---
+

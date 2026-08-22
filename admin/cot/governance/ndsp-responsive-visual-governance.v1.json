@@ -1,0 +1,115 @@
+{
+  "id": "NDSP_RESPONSIVE_VISUAL_GOVERNANCE_V1",
+  "status": "ACTIVE",
+  "scope": [
+    "ndsp.app",
+    "my.ndsp.app",
+    "responsive typography",
+    "graphics",
+    "visual effects",
+    "CORE authority bar"
+  ],
+  "principles": {
+    "content_text_absolute_positioning": false,
+    "fluid_typography_required": true,
+    "container_queries_preferred": true,
+    "text_size_adjust_percent": 100,
+    "minimum_inline_size": 0,
+    "overflow_wrap": "anywhere",
+    "container": "min(100% - 24px, 1220px)",
+    "arabic_line_height": 1.55
+  },
+  "typography": {
+    "unit_policy": "rem + clamp()",
+    "h1": {
+      "min_px": 36,
+      "max_px": 72
+    },
+    "h2": {
+      "min_px": 28,
+      "max_px": 48
+    },
+    "h3": {
+      "min_px": 20,
+      "max_px": 32
+    },
+    "body_large": {
+      "min_px": 16,
+      "max_px": 18
+    },
+    "body_medium_px": 16,
+    "label_px": 14,
+    "micro_px": 12
+  },
+  "graphics": {
+    "logo": {
+      "desktop_px": [220, 280],
+      "tablet_px": [160, 200],
+      "mobile_px": [120, 150]
+    },
+    "hero_art": {
+      "max_width_px": 680,
+      "preferred_width": "46vw"
+    },
+    "icons_px": [16, 20, 24, 32],
+    "stroke_px": [1.75, 2],
+    "images": {
+      "aspect_ratio": true,
+      "object_fit": "contain"
+    }
+  },
+  "viewport_matrix": {
+    "desktop": {
+      "min_px": 1440
+    },
+    "laptop": {
+      "min_px": 1024,
+      "max_px": 1439
+    },
+    "tablet": {
+      "min_px": 768,
+      "max_px": 1023
+    },
+    "mobile": {
+      "max_px": 767
+    }
+  },
+  "environment_support": {
+    "operating_systems": [
+      "Windows",
+      "Linux",
+      "macOS",
+      "iOS",
+      "Android"
+    ],
+    "zoom_percent": [80, 200],
+    "dpr": [1, 1.25, 1.5, 2, 3]
+  },
+  "core_authority_bar": {
+    "desktop": "4-columns",
+    "tablet": "2x2",
+    "mobile": "stacked",
+    "implementation": "CSS container queries",
+    "labels": [
+      "CORE",
+      "الاتجاه الرسمي",
+      "معتمد حوكمياً",
+      "أدلة قابلة للتحقق"
+    ]
+  },
+  "effects": {
+    "motion": "subtle",
+    "reduced_motion_required": true,
+    "high_dpr_glow_reduction": true,
+    "content_glow": "restricted",
+    "decorative_glow": "allowed-with-limits"
+  },
+  "prohibited": [
+    "fixed desktop-only typography for variable content",
+    "absolute positioning for variable content text",
+    "viewport-only CORE layout",
+    "unbounded text containers",
+    "effects that reduce readability",
+    "browser-specific hardcoded text offsets"
+  ]
+}

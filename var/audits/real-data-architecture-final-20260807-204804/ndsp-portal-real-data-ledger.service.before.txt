@@ -1,0 +1,13 @@
+# /etc/systemd/system/ndsp-portal-real-data-ledger.service
+[Unit]
+Description=NDSP Portal Real Data Ledger Sync
+
+[Service]
+Type=oneshot
+ExecStart=/home/nawaf511/ndsp-portal-real-data-sync/sync_real_ledger.py
+
+# /etc/systemd/system/ndsp-portal-real-data-ledger.service.d/override.conf
+[Service]
+ExecStart=
+ExecStart=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/services/ndsp-runtime-jobs/real-data-sync/sync_real_ledger.py
+ProtectHome=read-only

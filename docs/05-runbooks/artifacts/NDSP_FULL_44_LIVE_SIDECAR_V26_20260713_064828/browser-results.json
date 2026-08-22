@@ -1,0 +1,226 @@
+{
+  "results": [
+    {
+      "viewport": "desktop",
+      "page": "home",
+      "status": 200,
+      "language": {
+        "first": true,
+        "second": true,
+        "error": null,
+        "initial": {
+          "values": {
+            "ndsp_lang_final": null,
+            "ndsp_final_lang": null,
+            "ndsp_lang": null
+          },
+          "lang": "ar",
+          "dir": "rtl",
+          "v20": true
+        },
+        "firstState": {
+          "values": {
+            "ndsp_lang_final": "en",
+            "ndsp_final_lang": "en",
+            "ndsp_lang": "en"
+          },
+          "lang": "en",
+          "dir": "ltr",
+          "v20": true
+        },
+        "secondState": {
+          "values": {
+            "ndsp_lang_final": null,
+            "ndsp_final_lang": null,
+            "ndsp_lang": null
+          },
+          "lang": "ar",
+          "dir": "rtl",
+          "v20": true
+        },
+        "firstSelector": "scored-visible-control",
+        "secondSelector": "scored-visible-control"
+      },
+      "menu": null,
+      "pageErrors": [],
+      "screenshot": "desktop_home.png"
+    },
+    {
+      "viewport": "desktop",
+      "page": "decisions_ar",
+      "status": 200,
+      "count": 16,
+      "expected": 16,
+      "expectedLanguage": "ar",
+      "rootLanguage": "ar",
+      "apiError": 0,
+      "notFound": false,
+      "overflow": false,
+      "navigationError": null,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "desktop_decisions_ar.png"
+    },
+    {
+      "viewport": "desktop",
+      "page": "governance_ar",
+      "status": 200,
+      "count": 28,
+      "expected": 28,
+      "expectedLanguage": "ar",
+      "rootLanguage": "ar",
+      "apiError": 0,
+      "notFound": false,
+      "overflow": false,
+      "navigationError": null,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "desktop_governance_ar.png"
+    },
+    {
+      "viewport": "desktop",
+      "page": "decisions_en",
+      "status": 200,
+      "count": 16,
+      "expected": 16,
+      "expectedLanguage": "en",
+      "rootLanguage": "en",
+      "apiError": 0,
+      "notFound": false,
+      "overflow": false,
+      "navigationError": null,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "desktop_decisions_en.png"
+    },
+    {
+      "viewport": "desktop",
+      "page": "governance_en",
+      "status": 200,
+      "count": 28,
+      "expected": 28,
+      "expectedLanguage": "en",
+      "rootLanguage": "en",
+      "apiError": 0,
+      "notFound": false,
+      "overflow": false,
+      "navigationError": null,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "desktop_governance_en.png"
+    },
+    {
+      "viewport": "mobile",
+      "page": "home",
+      "status": 200,
+      "language": {
+        "first": true,
+        "second": true,
+        "error": null,
+        "initial": {
+          "values": {
+            "ndsp_lang_final": null,
+            "ndsp_final_lang": null,
+            "ndsp_lang": null
+          },
+          "lang": "ar",
+          "dir": "rtl",
+          "v20": true
+        },
+        "firstState": {
+          "values": {
+            "ndsp_lang_final": "en",
+            "ndsp_final_lang": "en",
+            "ndsp_lang": "en"
+          },
+          "lang": "en",
+          "dir": "ltr",
+          "v20": true
+        },
+        "secondState": {
+          "values": {
+            "ndsp_lang_final": null,
+            "ndsp_final_lang": null,
+            "ndsp_lang": null
+          },
+          "lang": "ar",
+          "dir": "rtl",
+          "v20": true
+        },
+        "firstSelector": "scored-visible-control",
+        "secondSelector": "scored-visible-control"
+      },
+      "menu": {
+        "found": true,
+        "clicked": true,
+        "changed": true
+      },
+      "pageErrors": [],
+      "screenshot": "mobile_home.png"
+    },
+    {
+      "viewport": "mobile",
+      "page": "decisions_ar",
+      "status": 200,
+      "count": 16,
+      "expected": 16,
+      "expectedLanguage": "ar",
+      "rootLanguage": "ar",
+      "apiError": 0,
+      "notFound": false,
+      "overflow": false,
+      "navigationError": null,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "mobile_decisions_ar.png"
+    },
+    {
+      "viewport": "mobile",
+      "page": "governance_ar",
+      "status": 200,
+      "count": 28,
+      "expected": 28,
+      "expectedLanguage": "ar",
+      "rootLanguage": "ar",
+      "apiError": 0,
+      "notFound": false,
+      "overflow": false,
+      "navigationError": null,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "mobile_governance_ar.png"
+    },
+    {
+      "viewport": "mobile",
+      "page": "decisions_en",
+      "status": 200,
+      "count": 16,
+      "expected": 16,
+      "expectedLanguage": "en",
+      "rootLanguage": "en",
+      "apiError": 0,
+      "notFound": false,
+      "overflow": false,
+      "navigationError": null,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "mobile_decisions_en.png"
+    },
+    {
+      "viewport": "mobile",
+      "page": "governance_en",
+      "status": 200,
+      "count": 28,
+      "expected": 28,
+      "expectedLanguage": "en",
+      "rootLanguage": "en",
+      "apiError": 0,
+      "notFound": false,
+      "overflow": false,
+      "navigationError": null,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "mobile_governance_en.png"
+    }
+  ]
+}

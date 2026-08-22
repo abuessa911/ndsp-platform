@@ -1,0 +1,13 @@
+
+> ndsp-user-portal-vite@1.0.0 build
+> vite build
+
+vite v6.4.3 building for production...
+transforming...
+✓ 29 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.44 kB │ gzip:  0.33 kB
+dist/assets/index-B87m92fc.css    4.78 kB │ gzip:  1.69 kB
+dist/assets/index-CfJbdoKo.js   174.41 kB │ gzip: 55.11 kB
+✓ built in 2.08s

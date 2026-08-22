@@ -1,0 +1,383 @@
+=== NDSP V36 LIVE CONTRACT FINAL TRUTH V1 ===
+DATE=2026-08-08T04:58:14+02:00
+MODE=READ_ONLY
+FILES_MODIFIED=0
+SERVICES_RESTARTED=0
+RUNTIME_LOGIC_MODIFIED=0
+AUDIT=/home/nawaf511/empire-core-new/var/audits/v36-live-contract-final-truth-v1-20260808-045814
+
+=== 1. V36 SERVICE / SOURCE ===
+V36_STATE=active
+V36_PID=2402288
+V36_SERVICE=PASS
+V36_SOURCE=FOUND
+V36_SYNTAX=PASS
+
+=== 2. V36 CONTRACT CONSTANTS ===
+VERSION='ndsp-completed-decisions-history-v36.0.0'
+CONTRACT_VERSION='ndsp-completed-decisions-history-contract-v36'
+LEDGER_VERSION='ndsp-append-only-ledger-v36'
+HOST='<dynamic>'
+PORT='<dynamic>'
+SOURCE_URL='<dynamic>'
+DATA_DIR='<dynamic>'
+
+=== 3. V36 LISTENER ===
+PORT_9088=LISTENING
+LISTEN 0      5          127.0.0.1:9088       0.0.0.0:*    users:(("python3",pid=2402288,fd=3)) 
+
+=== 4. V35 GOVERNING SOURCE ===
+V35_CURL_RC=0
+HTTP_V35=200
+V35_JSON=PASS
+V35_OK= True
+V35_CONTRACT_VERSION= 'ndsp-completed-decisions-current-v35'
+V35_SOURCE= 'v33_evidence_backed_current_registry'
+V35_COUNT= 1
+V35_DECISION_COUNT= 1
+V35_DECISION_0_SOURCE_RUNTIME='ndsp-canonical-live-runtime-v33.0.0'
+V35_DECISION_0_CONTRACT_VERSION='ndsp-canonical-live-contract-v33'
+V35_DECISION_0_SYMBOL='ETHUSDT'
+V35_DECISION_0_TIMEFRAME='weekly'
+V35_DECISION_0_MODE=None
+
+=== 5. V36 HEALTH ===
+V36_HEALTH_CURL_RC=0
+HTTP_V36_HEALTH=200
+V36_HEALTH_JSON=PASS
+ok=True
+service='ndsp-completed-decisions-history-v36'
+runtime_version='ndsp-completed-decisions-history-v36.0.0'
+contract_version='ndsp-completed-decisions-history-contract-v36'
+ledger_version='ndsp-append-only-ledger-v36'
+read_only=None
+source_url=None
+TOP_LEVEL_KEYS= ['contract_version', 'generated_at', 'head_record_hash', 'integrity_reason', 'ledger_version', 'manual_writes_enabled', 'ok', 'record_count', 'record_deletes_enabled', 'record_edits_enabled', 'runtime_version', 'service', 'storage']
+
+=== 6. V36 HISTORY API ===
+V36_HISTORY_CURL_RC=0
+HTTP_V36_HISTORY=200
+V36_HISTORY_JSON=PASS
+ok= True
+source= 'append_only_hash_chained_history_v36'
+count= 5
+TOP_LEVEL_KEYS= ['chain_verified', 'count', 'filters', 'generated_at', 'ledger_version', 'next_before_index', 'ok', 'records', 'source', 'total_record_count']
+RECORD_ARRAY_KEY= records
+V36_HISTORY_RECORDS= 5
+RECORD_0_KEYS=['captured_at', 'decision', 'event_id', 'event_type', 'history_fingerprint', 'history_key', 'ledger_version', 'previous_record_hash', 'record_hash', 'record_index', 'source_decision_id', 'source_evidence_sha256', 'source_generated_at', 'source_semantic_fingerprint']
+RECORD_0_record_hash='e8017a2b2ddb6c68a5a04057efcbc077335e2d6ae3f2545eda9e6d7f44cd1035'
+RECORD_1_KEYS=['captured_at', 'decision', 'event_id', 'event_type', 'history_fingerprint', 'history_key', 'ledger_version', 'previous_record_hash', 'record_hash', 'record_index', 'source_decision_id', 'source_evidence_sha256', 'source_generated_at', 'source_semantic_fingerprint']
+RECORD_1_record_hash='fadc8db25816eabe59043312dacd0814f2cbac7e238568a49652d4817d16d26e'
+RECORD_2_KEYS=['captured_at', 'decision', 'event_id', 'event_type', 'history_fingerprint', 'history_key', 'ledger_version', 'previous_record_hash', 'record_hash', 'record_index', 'source_decision_id', 'source_evidence_sha256', 'source_generated_at', 'source_semantic_fingerprint']
+RECORD_2_record_hash='e0b355dbd4d3caa87780f690db68f09535f3d711bce4fe88135d58335246714c'
+RECORD_3_KEYS=['captured_at', 'decision', 'event_id', 'event_type', 'history_fingerprint', 'history_key', 'ledger_version', 'previous_record_hash', 'record_hash', 'record_index', 'source_decision_id', 'source_evidence_sha256', 'source_generated_at', 'source_semantic_fingerprint']
+RECORD_3_record_hash='45e0d3c0b3ea584aca90a82799c1b849dff6ae71cc7986cff3e85c5d78fd25f4'
+RECORD_4_KEYS=['captured_at', 'decision', 'event_id', 'event_type', 'history_fingerprint', 'history_key', 'ledger_version', 'previous_record_hash', 'record_hash', 'record_index', 'source_decision_id', 'source_evidence_sha256', 'source_generated_at', 'source_semantic_fingerprint']
+RECORD_4_record_hash='b016239c13ebf6f35f7d34fa73dd87c74cbcbb7a1f98811d6ae50abfed8973ea'
+
+=== 7. V36 LEDGER STORAGE ===
+LEDGER_DIR=FOUND
+LEDGER_FILE_COUNT=4
+2026-08-08T04:58:14.5487300710 0 /home/nawaf511/empire-core-new/var/ledger/completed-decisions-v36/.ledger.lock
+2026-08-08T04:51:13.6571498780 268 /home/nawaf511/empire-core-new/var/ledger/completed-decisions-v36/integrity.json
+2026-08-08T04:51:13.6501499020 670 /home/nawaf511/empire-core-new/var/ledger/completed-decisions-v36/state.json
+2026-07-14T07:49:57.2231057680 20144 /home/nawaf511/empire-core-new/var/ledger/completed-decisions-v36/ledger.jsonl
+
+=== 8. V36 BUILT-IN LEDGER VERIFY ===
+V36_VERIFY_RC=0
+{"checked_at": "2026-08-08T02:58:14.782317Z", "head_record_hash": "e8017a2b2ddb6c68a5a04057efcbc077335e2d6ae3f2545eda9e6d7f44cd1035", "ledger_version": "ndsp-append-only-ledger-v36", "ok": true, "reason": null, "record_count": 5}
+V36_LEDGER_VERIFY=PASS
+
+=== 9. V36 ELIGIBILITY CONTRACT ===
+
+--- FUNCTION=decision_is_eligible LINES=244-254 ---
+244:def decision_is_eligible(decision: Mapping[str, Any]) -> bool:
+245:    return bool(
+246:        decision.get("decision_status") == "complete"
+247:        and decision.get("publishable") is True
+248:        and decision.get("actual_layers_executed") == 16
+249:        and decision.get("no_execution_authority") is True
+250:        and decision.get("source_runtime") == "ndsp-canonical-live-runtime-v33.0.0"
+251:        and decision.get("analysis_mode") in ALLOWED_MODES
+252:        and decision.get("timeframe") in ALLOWED_TIMEFRAMES
+253:        and SYMBOL_RE.fullmatch(str(decision.get("symbol") or ""))
+254:    )
+
+--- FUNCTION=verify_records LINES=281-350 ---
+281:def verify_records(records: Iterable[Mapping[str, Any]]) -> dict[str, Any]:
+282:    previous_hash = GENESIS_HASH
+283:    latest_by_key: dict[str, dict[str, Any]] = {}
+284:    count = 0
+285:
+286:    for expected_index, item in enumerate(records, 1):
+287:        count += 1
+288:        record = dict(item)
+289:
+290:        if record.get("ledger_version") != LEDGER_VERSION:
+291:            return {
+292:                "ok": False,
+293:                "reason": "LEDGER_VERSION_MISMATCH",
+294:                "record_index": expected_index,
+295:            }
+296:        if record.get("record_index") != expected_index:
+297:            return {
+298:                "ok": False,
+299:                "reason": "RECORD_INDEX_GAP",
+300:                "expected": expected_index,
+301:                "actual": record.get("record_index"),
+302:            }
+303:        if record.get("previous_record_hash") != previous_hash:
+304:            return {
+305:                "ok": False,
+306:                "reason": "PREVIOUS_HASH_MISMATCH",
+307:                "record_index": expected_index,
+308:            }
+309:
+310:        supplied_hash = record.pop("record_hash", None)
+311:        calculated_hash = record_hash(record)
+312:        if supplied_hash != calculated_hash:
+313:            return {
+314:                "ok": False,
+315:                "reason": "RECORD_HASH_MISMATCH",
+316:                "record_index": expected_index,
+317:            }
+318:
+319:        decision = item.get("decision")
+320:        if not isinstance(decision, Mapping):
+321:            return {
+322:                "ok": False,
+323:                "reason": "DECISION_MISSING",
+324:                "record_index": expected_index,
+325:            }
+326:
+327:        projection = meaningful_projection(decision)
+328:        expected_fingerprint = sha256_json(projection)
+329:        if item.get("history_fingerprint") != expected_fingerprint:
+330:            return {
+331:                "ok": False,
+332:                "reason": "HISTORY_FINGERPRINT_MISMATCH",
+333:                "record_index": expected_index,
+334:            }
+335:
+336:        previous_hash = str(supplied_hash)
+337:        latest_by_key[str(item.get("history_key") or "")] = {
+338:            "record_index": expected_index,
+339:            "record_hash": supplied_hash,
+340:            "history_fingerprint": expected_fingerprint,
+341:            "event_id": item.get("event_id"),
+342:            "captured_at": item.get("captured_at"),
+343:        }
+344:
+345:    return {
+346:        "ok": True,
+347:        "record_count": count,
+348:        "head_record_hash": previous_hash,
+349:        "latest_by_key": latest_by_key,
+350:    }
+
+--- FUNCTION=verify_ledger_locked LINES=353-356 ---
+353:def verify_ledger_locked() -> tuple[list[dict[str, Any]], dict[str, Any]]:
+354:    records = load_records_unlocked()
+355:    result = verify_records(records)
+356:    return records, result
+
+--- FUNCTION=fetch_source_decisions LINES=359-379 ---
+359:def fetch_source_decisions() -> list[dict[str, Any]]:
+360:    request = Request(
+361:        SOURCE_URL,
+362:        headers={
+363:            "Accept": "application/json",
+364:            "User-Agent": f"NDSP/{VERSION}",
+365:        },
+366:    )
+367:    with urlopen(request, timeout=45) as response:
+368:        if response.status != 200:
+369:            raise RuntimeError(f"SOURCE_HTTP_{response.status}")
+370:        payload = json.loads(response.read().decode("utf-8"))
+371:
+372:    if not isinstance(payload, Mapping) or payload.get("ok") is not True:
+373:        raise RuntimeError("SOURCE_PAYLOAD_NOT_OK")
+374:    if payload.get("database_backed_history") is not False:
+375:        raise RuntimeError("SOURCE_BOUNDARY_UNEXPECTED")
+376:    decisions = payload.get("decisions") or []
+377:    if not isinstance(decisions, list):
+378:        raise RuntimeError("SOURCE_DECISIONS_NOT_LIST")
+379:    return [item for item in decisions if isinstance(item, dict)]
+
+--- FUNCTION=capture LINES=421-522 ---
+421:def capture() -> dict[str, Any]:
+422:    decisions = fetch_source_decisions()
+423:    eligible = [sanitize_decision(item) for item in decisions if decision_is_eligible(item)]
+424:    eligible.sort(
+425:        key=lambda item: (
+426:            str(item.get("symbol") or ""),
+427:            str(item.get("timeframe") or ""),
+428:            str(item.get("analysis_mode") or ""),
+429:        )
+430:    )
+431:
+432:    with LedgerLock(exclusive=True):
+433:        records, verification = verify_ledger_locked()
+434:        if verification.get("ok") is not True:
+435:            rebuild_derived_files(records, verification)
+436:            raise RuntimeError(
+437:                f"LEDGER_INTEGRITY_FAILED:{verification.get('reason')}"
+438:            )
+439:
+440:        latest_by_key = dict(verification.get("latest_by_key") or {})
+441:        previous_hash = str(verification.get("head_record_hash") or GENESIS_HASH)
+442:        next_index = int(verification.get("record_count") or 0) + 1
+443:        appended: list[dict[str, Any]] = []
+444:        unchanged: list[str] = []
+445:
+446:        for decision in eligible:
+447:            key = history_key(decision)
+448:            projection = meaningful_projection(decision)
+449:            fingerprint = sha256_json(projection)
+450:            previous = latest_by_key.get(key) or {}
+451:
+452:            if previous.get("history_fingerprint") == fingerprint:
+453:                unchanged.append(key)
+454:                continue
+455:
+456:            event_seed = f"{next_index}|{key}|{fingerprint}|{previous_hash}"
+457:            event_id = "HD-" + hashlib.sha256(
+458:                event_seed.encode("utf-8")
+459:            ).hexdigest()[:24].upper()
+460:
+461:            record_without_hash = {
+462:                "ledger_version": LEDGER_VERSION,
+463:                "record_index": next_index,
+464:                "event_id": event_id,
+465:                "event_type": "PUBLISHABLE_DECISION_SNAPSHOT",
+466:                "captured_at": utc_now(),
+467:                "source_generated_at": decision.get("generated_at"),
+468:                "source_decision_id": decision.get("decision_id"),
+469:                "source_semantic_fingerprint": decision.get(
+470:                    "semantic_fingerprint"
+471:                ),
+472:                "source_evidence_sha256": decision.get("evidence_sha256"),
+473:                "history_key": key,
+474:                "history_fingerprint": fingerprint,
+475:                "previous_record_hash": previous_hash,
+476:                "decision": decision,
+477:            }
+478:            hashed_record = dict(record_without_hash)
+479:            hashed_record["record_hash"] = record_hash(record_without_hash)
+480:
+481:            append_record_unlocked(hashed_record)
+482:            records.append(hashed_record)
+483:            previous_hash = hashed_record["record_hash"]
+484:            latest_by_key[key] = {
+485:                "record_index": next_index,
+486:                "record_hash": previous_hash,
+487:                "history_fingerprint": fingerprint,
+488:                "event_id": event_id,
+489:                "captured_at": hashed_record["captured_at"],
+490:            }
+491:            appended.append(
+492:                {
+493:                    "record_index": next_index,
+494:                    "event_id": event_id,
+495:                    "history_key": key,
+496:                    "history_fingerprint": fingerprint,
+497:                }
+498:            )
+499:            next_index += 1
+500:
+501:        final_verification = verify_records(records)
+502:        if final_verification.get("ok") is not True:
+503:            rebuild_derived_files(records, final_verification)
+504:            raise RuntimeError(
+505:                f"POST_APPEND_INTEGRITY_FAILED:"
+506:                f"{final_verification.get('reason')}"
+507:            )
+508:        rebuild_derived_files(records, final_verification)
+509:
+510:    return {
+511:        "ok": True,
+512:        "source_url": SOURCE_URL,
+513:        "source_decision_count": len(decisions),
+514:        "eligible_decision_count": len(eligible),
+515:        "appended_count": len(appended),
+516:        "unchanged_count": len(unchanged),
+517:        "appended": appended,
+518:        "unchanged_keys": unchanged,
+519:        "record_count": final_verification.get("record_count"),
+520:        "head_record_hash": final_verification.get("head_record_hash"),
+521:        "captured_at": utc_now(),
+522:    }
+
+ELIGIBILITY_FUNCTIONS_FOUND=5
+
+=== 10. RECENT V36 JOURNAL ===
+V36_RECENT_ERROR_REFERENCES=0
+V36_RECENT_JOURNAL=PASS
+
+=== 11. FAILED NDSP SERVICES NOW ===
+● ndsp-contract-regression-v1-1.service loaded failed failed NDSP Backend Contract V1.1 Regression
+● ndsp-production-monitor.service       loaded failed failed NDSP Production Monitor V205
+FAILED_NDSP_SERVICES=FOUND
+
+=== 12. CONTRACT ASSERTIONS ===
+V35_SOURCE_CONTRACT=PASS
+V36_HEALTH_CONTRACT=PASS
+V36_HISTORY_CONTRACT=PASS
+V35_TO_V36_SOURCE_RUNTIME_BOUNDARY=PASS
+
+=== 13. FINAL CLASSIFICATION ===
+V36_LIVE_INPUT_CONTRACT=PASS
+V36_LIVE_OUTPUT_CONTRACT=PASS
+V36_APPEND_ONLY_LEDGER=PASS
+V36_RUNTIME_HEALTH=PASS
+V36_CONTRACT_CLOSED=YES
+PATCH_REQUIRED=NO
+NEXT_ACTION=TRACE_NEXT_LIVE_STAGE_AFTER_V36
+FINAL_RESULT=PASS
+
+=== 14. CHECKSUMS ===
+CHECKSUMS=PASS
+
+============================================================
+=== FINAL SUMMARY ===
+V36_STATE=active
+V36_SERVICE=PASS
+V36_SYNTAX=PASS
+PORT_9088=LISTENING
+HTTP_V35=200
+V35_JSON=PASS
+HTTP_V36_HEALTH=200
+V36_HEALTH_JSON=PASS
+HTTP_V36_HISTORY=200
+V36_HISTORY_JSON=PASS
+V36_HISTORY_RECORDS= 5
+LEDGER_DIR=FOUND
+LEDGER_FILE_COUNT=4
+V36_VERIFY_RC=0
+V36_LEDGER_VERIFY=PASS
+V36_RECENT_ERROR_REFERENCES=0
+V36_RECENT_JOURNAL=PASS
+FAILED_NDSP_SERVICES=FOUND
+V35_SOURCE_CONTRACT=PASS
+V36_HEALTH_CONTRACT=PASS
+V36_HISTORY_CONTRACT=PASS
+V35_TO_V36_SOURCE_RUNTIME_BOUNDARY=PASS
+V36_LIVE_INPUT_CONTRACT=PASS
+V36_LIVE_OUTPUT_CONTRACT=PASS
+V36_APPEND_ONLY_LEDGER=PASS
+V36_RUNTIME_HEALTH=PASS
+V36_CONTRACT_CLOSED=YES
+PATCH_REQUIRED=NO
+NEXT_ACTION=TRACE_NEXT_LIVE_STAGE_AFTER_V36
+FINAL_RESULT=PASS
+FILES_MODIFIED=0
+SERVICES_RESTARTED=0
+RUNTIME_LOGIC_MODIFIED=0
+AUDIT=/home/nawaf511/empire-core-new/var/audits/v36-live-contract-final-truth-v1-20260808-045814
+REPORT=/home/nawaf511/empire-core-new/var/audits/v36-live-contract-final-truth-v1-20260808-045814/report.txt
+HEALTH=/home/nawaf511/empire-core-new/var/audits/v36-live-contract-final-truth-v1-20260808-045814/health.json
+HISTORY=/home/nawaf511/empire-core-new/var/audits/v36-live-contract-final-truth-v1-20260808-045814/history.json
+V35_SOURCE=/home/nawaf511/empire-core-new/var/audits/v36-live-contract-final-truth-v1-20260808-045814/v35-completed.json
+JOURNAL=/home/nawaf511/empire-core-new/var/audits/v36-live-contract-final-truth-v1-20260808-045814/journal.txt
+CHECKSUMS=/home/nawaf511/empire-core-new/var/audits/v36-live-contract-final-truth-v1-20260808-045814/SHA256SUMS
+=== V36 LIVE CONTRACT FINAL TRUTH COMPLETE ===

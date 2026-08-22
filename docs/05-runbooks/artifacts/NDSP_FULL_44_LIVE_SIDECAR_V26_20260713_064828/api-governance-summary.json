@@ -1,0 +1,193 @@
+{
+  "governance_projection_version": "ndsp-public-governance-projection-v1",
+  "governance_summary": {
+    "layer_total": 16,
+    "layer_bound": 12,
+    "layer_not_exposed": 4,
+    "capability_total": 28,
+    "capability_installed": 27,
+    "capability_live": 0,
+    "all_items_exposed": true,
+    "decision_authority_boundary": "ONLY_NDSP_CORE_L01_TO_L16"
+  },
+  "layer_states": [
+    {
+      "id": "NDSP-CORE-L01",
+      "state": "INPUTS_INCOMPLETE"
+    },
+    {
+      "id": "NDSP-CORE-L02",
+      "state": "ACTIVE"
+    },
+    {
+      "id": "NDSP-CORE-L03",
+      "state": "ACTIVE"
+    },
+    {
+      "id": "NDSP-CORE-L04",
+      "state": "MONITORING_ONLY"
+    },
+    {
+      "id": "NDSP-CORE-L05",
+      "state": "PASSED"
+    },
+    {
+      "id": "NDSP-CORE-L06",
+      "state": "ACTIVE"
+    },
+    {
+      "id": "NDSP-CORE-L07",
+      "state": "AVAILABLE"
+    },
+    {
+      "id": "NDSP-CORE-L08",
+      "state": "AVAILABLE"
+    },
+    {
+      "id": "NDSP-CORE-L09",
+      "state": "NOT_EXPOSED"
+    },
+    {
+      "id": "NDSP-CORE-L10",
+      "state": "NOT_EXPOSED"
+    },
+    {
+      "id": "NDSP-CORE-L11",
+      "state": "NOT_EXPOSED"
+    },
+    {
+      "id": "NDSP-CORE-L12",
+      "state": "ACTIVE"
+    },
+    {
+      "id": "NDSP-CORE-L13",
+      "state": "INPUTS_INCOMPLETE"
+    },
+    {
+      "id": "NDSP-CORE-L14",
+      "state": "INPUTS_INCOMPLETE"
+    },
+    {
+      "id": "NDSP-CORE-L15",
+      "state": "NOT_EXPOSED"
+    },
+    {
+      "id": "NDSP-CORE-L16",
+      "state": "UNDER_MONITORING"
+    }
+  ],
+  "capability_states": [
+    {
+      "id": "NDSP-CAP-001",
+      "runtime_state": "INSTALLED_NOT_LIVE"
+    },
+    {
+      "id": "NDSP-CAP-002",
+      "runtime_state": "INSTALLED_NOT_LIVE"
+    },
+    {
+      "id": "NDSP-CAP-003",
+      "runtime_state": "INSTALLED_NOT_LIVE"
+    },
+    {
+      "id": "NDSP-CAP-004",
+      "runtime_state": "INSTALLED_NOT_LIVE"
+    },
+    {
+      "id": "NDSP-CAP-005",
+      "runtime_state": "INSTALLED_NOT_LIVE"
+    },
+    {
+      "id": "NDSP-CAP-006",
+      "runtime_state": "INSTALLED_NOT_LIVE"
+    },
+    {
+      "id": "NDSP-CAP-007",
+      "runtime_state": "INSTALLED_NOT_LIVE"
+    },
+    {
+      "id": "NDSP-CAP-008",
+      "runtime_state": "INSTALLED_NOT_LIVE"
+    },
+    {
+      "id": "NDSP-CAP-009",
+      "runtime_state": "INSTALLED_NOT_LIVE"
+    },
+    {
+      "id": "NDSP-CAP-010",
+      "runtime_state": "INSTALLED_NOT_LIVE"
+    },
+    {
+      "id": "NDSP-CAP-011",
+      "runtime_state": "INSTALLED_NOT_LIVE"
+    },
+    {
+      "id": "NDSP-CAP-012",
+      "runtime_state": "INSTALLED_NOT_LIVE"
+    },
+    {
+      "id": "NDSP-CAP-013",
+      "runtime_state": "INSTALLED_NOT_LIVE"
+    },
+    {
+      "id": "NDSP-CAP-014",
+      "runtime_state": "INSTALLED_NOT_LIVE"
+    },
+    {
+      "id": "NDSP-CAP-015",
+      "runtime_state": "INSTALLED_NOT_LIVE"
+    },
+    {
+      "id": "NDSP-CAP-016",
+      "runtime_state": "INSTALLED_NOT_LIVE"
+    },
+    {
+      "id": "NDSP-CAP-017",
+      "runtime_state": "INSTALLED_NOT_LIVE"
+    },
+    {
+      "id": "NDSP-CAP-018",
+      "runtime_state": "INSTALLED_NOT_LIVE"
+    },
+    {
+      "id": "NDSP-CAP-019",
+      "runtime_state": "INSTALLED_NOT_LIVE"
+    },
+    {
+      "id": "NDSP-CAP-020",
+      "runtime_state": "INSTALLED_NOT_LIVE"
+    },
+    {
+      "id": "NDSP-CAP-021",
+      "runtime_state": "NOT_INSTALLED"
+    },
+    {
+      "id": "NDSP-CAP-022",
+      "runtime_state": "INSTALLED_NOT_LIVE"
+    },
+    {
+      "id": "NDSP-CAP-023",
+      "runtime_state": "INSTALLED_NOT_LIVE"
+    },
+    {
+      "id": "NDSP-CAP-024",
+      "runtime_state": "INSTALLED_NOT_LIVE"
+    },
+    {
+      "id": "NDSP-CAP-025",
+      "runtime_state": "INSTALLED_NOT_LIVE"
+    },
+    {
+      "id": "NDSP-CAP-026",
+      "runtime_state": "INSTALLED_NOT_LIVE"
+    },
+    {
+      "id": "NDSP-CAP-027",
+      "runtime_state": "INSTALLED_NOT_LIVE"
+    },
+    {
+      "id": "NDSP-CAP-028",
+      "runtime_state": "INSTALLED_NOT_LIVE"
+    }
+  ]
+}

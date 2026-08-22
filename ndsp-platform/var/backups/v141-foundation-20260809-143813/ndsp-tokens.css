@@ -1,0 +1,155 @@
+:root {
+  --background: oklch(8.5% 0.005 80);
+  --foreground: oklch(95% 0.006 90);
+
+  --card: oklch(12% 0.006 80);
+  --card-foreground: oklch(95% 0.006 90);
+
+  --popover: oklch(12% 0.006 80);
+  --popover-foreground: oklch(95% 0.006 90);
+
+  --primary: oklch(71% 0.12 80);
+  --primary-foreground: oklch(11% 0.005 80);
+
+  --secondary: oklch(15% 0.006 80);
+  --secondary-foreground: oklch(95% 0.006 90);
+
+  --muted: oklch(15% 0.006 80);
+  --muted-foreground: oklch(60% 0.008 85);
+
+  --accent: oklch(74% 0.08 235);
+  --accent-foreground: oklch(95% 0.006 90);
+
+  --border: oklch(72% 0.12 80 / 0.22);
+  --input: oklch(72% 0.12 80 / 0.18);
+  --ring: oklch(74% 0.08 235);
+
+  --brand-gold: oklch(71% 0.12 80);
+  --brand-sky: oklch(74% 0.08 235);
+  --brand-ink: oklch(8.5% 0.005 80);
+  --brand-panel: oklch(12% 0.006 80);
+
+  --ndsp-canvas: var(--background);
+  --ndsp-canvas-deep: var(--brand-ink);
+  --ndsp-charcoal: var(--brand-ink);
+
+  --ndsp-surface: var(--brand-panel);
+  --ndsp-surface-soft: var(--card);
+  --ndsp-surface-raised: var(--muted);
+
+  --ndsp-gold: var(--brand-gold);
+  --ndsp-gold-bright: var(--brand-gold);
+
+  --ndsp-gold-soft:
+    color-mix(
+      in oklch,
+      var(--brand-gold) 82%,
+      var(--foreground)
+    );
+
+  --ndsp-gold-pale:
+    color-mix(
+      in oklch,
+      var(--brand-gold) 68%,
+      var(--foreground)
+    );
+
+  --ndsp-gold-deep:
+    color-mix(
+      in oklch,
+      var(--brand-gold) 72%,
+      var(--brand-ink)
+    );
+
+  --ndsp-sky: var(--brand-sky);
+  --ndsp-sky-soft: var(--brand-sky);
+
+  --ndsp-sky-muted:
+    color-mix(
+      in oklch,
+      var(--brand-sky) 62%,
+      var(--brand-ink)
+    );
+
+  --ndsp-white: var(--foreground);
+  --ndsp-off-white: var(--foreground);
+
+  --ndsp-muted: var(--muted-foreground);
+
+  --ndsp-muted-2:
+    color-mix(
+      in oklch,
+      var(--muted-foreground) 66%,
+      var(--brand-ink)
+    );
+
+  --ndsp-border: var(--border);
+
+  --ndsp-border-strong:
+    color-mix(
+      in oklch,
+      var(--border) 70%,
+      var(--foreground)
+    );
+
+  --ndsp-gold-border:
+    color-mix(
+      in oklch,
+      var(--brand-gold) 58%,
+      transparent
+    );
+
+  --ndsp-blue-border:
+    color-mix(
+      in oklch,
+      var(--brand-sky) 40%,
+      transparent
+    );
+
+  --ndsp-font-ar:
+    "IBM Plex Sans",
+    "Noto Sans Arabic",
+    "Segoe UI",
+    Arial,
+    sans-serif;
+
+  --ndsp-font-en:
+    "IBM Plex Sans",
+    Inter,
+    "Segoe UI",
+    Arial,
+    sans-serif;
+
+  --ndsp-font-mono:
+    "IBM Plex Mono",
+    "SFMono-Regular",
+    Consolas,
+    monospace;
+
+  --ndsp-font-editorial:
+    "Libre Baskerville",
+    Georgia,
+    serif;
+
+  --ndsp-display-reference:
+    clamp(3.2rem, 8vw, 7.6rem);
+
+  --ndsp-track-display: -0.02em;
+  --ndsp-track-tech: 0.28em;
+  --ndsp-track-wide: 0.18em;
+
+  --ndsp-space-1: 4px;
+  --ndsp-space-2: 8px;
+  --ndsp-space-3: 12px;
+  --ndsp-space-4: 16px;
+  --ndsp-space-6: 24px;
+  --ndsp-space-8: 32px;
+  --ndsp-space-12: 48px;
+  --ndsp-space-16: 64px;
+
+  --ndsp-radius-sm: 4px;
+  --ndsp-radius-md: 6px;
+  --ndsp-radius-lg: 8px;
+
+  --ndsp-container: 1480px;
+}

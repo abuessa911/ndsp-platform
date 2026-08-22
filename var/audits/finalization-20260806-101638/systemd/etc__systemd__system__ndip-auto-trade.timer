@@ -1,0 +1,11 @@
+[Unit]
+Description=Run NDIP Autonomous Trade Cycle Every 5 Minutes
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=5min
+AccuracySec=30s
+Unit=ndip-auto-trade.service
+
+[Install]
+WantedBy=timers.target

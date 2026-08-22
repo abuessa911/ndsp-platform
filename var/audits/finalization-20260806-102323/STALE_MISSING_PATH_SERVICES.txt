@@ -1,0 +1,51 @@
+binance-feed.service | /opt/empire-core/feeds | active=inactive
+inactive
+decisionos-backend.service | /opt/decisionos/backend | active=inactive
+inactive
+empire-binance-feed.service | /opt/empire-core/backend | active=inactive
+inactive
+empire-ndip-api.service | /opt/empire-core/backend | active=inactive
+inactive
+empire-webhook.service | /opt/empire/webhooks/universal | active=inactive
+inactive
+fanno-comments.service | /opt/fanno_comments | active=inactive
+inactive
+ndip-auto-signal.service | /opt/empire-core/backend | active=inactive
+inactive
+ndip-auto-trade.service | /opt/empire-core/backend | active=inactive
+inactive
+ndip-autonomous-loop.service | /opt/empire-core/backend | active=inactive
+inactive
+ndip-autopilot.service | /opt/empire-core/backend | active=inactive
+inactive
+ndip-backend.service | /opt/empire-core/backend | active=inactive
+inactive
+ndip-engine.service | /opt/empire-core/backend | active=inactive
+inactive
+ndip-frontend.service | /opt/empire-core/frontend | active=inactive
+inactive
+ndip-run-server.service | /opt/empire-core/backend | active=inactive
+inactive
+ndip-security-cleanup.service | /opt/ndip/backend/app | active=inactive
+inactive
+ndip-signal-engine.service | /opt/empire-core/backend | active=inactive
+inactive
+ndip-signal.service | /opt/empire-core/backend | active=inactive
+inactive
+ndip-trading-loop.service | /opt/empire-core/backend | active=inactive
+inactive
+ndip.service | /opt/empire-core/backend | active=inactive
+inactive
+ndsp-commercial-auth-payment-staging.service | /opt/ndsp-commercial-auth-payment-staging/releases/20260730_103616-source-staging-v1-13/source | active=active
+ndsp-enterprise-api.service | /opt/ndsp-enterprise-api | active=inactive
+inactive
+recommendation-engine.service | /opt/recommendation_engine | active=inactive
+inactive
+royal-api.service | /opt/empire/api | active=inactive
+inactive
+signal-engine.service | /opt/empire-core/backend | active=inactive
+inactive
+trade-monitor.service | /opt/empire-core/backend | active=inactive
+inactive
+twelvedata-poller.service | /opt/empire-core/feeds | active=inactive
+inactive

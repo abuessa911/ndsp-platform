@@ -1,0 +1,23 @@
+{
+  "project": "DSP — منصة دعم القرار",
+  "lab": "TDL Research Lab",
+  "status": "RESEARCH_RUNTIME_CONNECTED",
+  "production_approved": false,
+  "latest_result_available": true,
+  "last_updated": "20260608_175508",
+  "runtime_source": "users-only-launch-runtime",
+  "safe_output": {
+    "engine_state": "connected",
+    "data_source": "runtime",
+    "result_type": "sanitized_research_status",
+    "decision_scope": "research_only",
+    "public_note_ar": "تم ربط المختبر بمصدر تشغيل آمن. لا توجد صيغة نهائية معتمدة ولا يتم كشف المعادلات أو الأوزان.",
+    "public_note_en": "The lab is connected to a safe runtime source. No final formula is adopted and no formulas or weights are exposed."
+  },
+  "governance": {
+    "final_formula_adopted": false,
+    "raw_logic_exposed": false,
+    "weights_exposed": false,
+    "production_signal": false
+  }
+}

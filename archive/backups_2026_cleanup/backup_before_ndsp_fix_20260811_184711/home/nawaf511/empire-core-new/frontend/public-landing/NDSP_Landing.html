@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NDSP — منصة دعم القرار</title>
+  <meta name="description" content="NDSP منصة دعم قرار مؤسسية تجمع البيانات والسياق والأدلة داخل إطار محكوم لتقديم اتجاه رسمي واضح وقابل للتفسير والتحقق.">
+  <meta property="og:title" content="NDSP — منصة دعم القرار">
+  <meta property="og:description" content="الأدلة تتقاطع. القرار يتجه.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="NDSP">
+  <meta name="theme-color" content="#080A0D">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+  <style>
+    :root {
+      --carbon:#080A0D; --graphite:#151A20; --gold:#CDAA56; --blue:#35AFE3;
+      --mist:#D9DDE2; --alabaster:#F4F3EF; --green:#2DAA77; --amber:#D19038;
+      --red:#CF565D; --purple:#796286; --slate:#77818C; --max:1280px;
+    }
+    html{background:var(--carbon);scroll-behavior:smooth;overflow-x:hidden}
+    body{margin:0;background:radial-gradient(circle at 18% 8%,rgba(53,175,227,.11),transparent 32rem),radial-gradient(circle at 74% 18%,rgba(205,170,86,.12),transparent 34rem),var(--carbon);color:var(--alabaster);font-family:"IBM Plex Sans Arabic","Inter",system-ui,sans-serif;overflow-x:clip}
+    body.menu-open{overflow:hidden}
+    a{color:inherit;text-decoration:none}
+    .container,.container-fluid{max-width:var(--max)}
+    nav.container-fluid{position:sticky;top:0;z-index:50;padding:calc(14px + env(safe-area-inset-top,0px)) 24px 14px;background:rgba(8,10,13,.58);backdrop-filter:blur(18px);border-bottom:1px solid rgba(205,170,86,.16)}
+    nav ul{align-items:center}
+    .brand{display:grid;gap:2px;line-height:1.1}
+    .brand b{font-family:"IBM Plex Mono",monospace;color:var(--gold);letter-spacing:.12em}
+    .brand small{color:var(--mist)}
+    nav a[role=button],.outline-gold{border:1px solid rgba(205,170,86,.58);background:transparent;color:var(--gold);border-radius:10px}
+    .mobile-toggle{display:none}
+    main.container{padding:76px 24px 48px}
+    .grid.hero{grid-template-columns:1fr 1fr;align-items:center;gap:64px;min-height:calc(100dvh - 120px)}
+    h1{font-size:clamp(44px,7vw,92px);line-height:.98;letter-spacing:-.04em;margin:0 0 22px}
+    .gold{color:var(--gold)}
+    .lead{font-size:clamp(18px,2vw,24px);line-height:1.8;color:var(--mist);max-width:720px}
+    .actions{display:flex;gap:14px;flex-wrap:wrap;margin:28px 0 12px}
+    .primary{background:linear-gradient(180deg,#e4be68,var(--gold));color:var(--carbon);border:1px solid rgba(244,243,239,.18);border-radius:12px;padding:14px 22px;font-weight:700;box-shadow:0 18px 42px rgba(205,170,86,.18)}
+    .secondary{background:rgba(21,26,32,.72);color:var(--mist);border:1px solid rgba(217,221,226,.18);border-radius:12px;padding:14px 22px}
+    .micro{color:var(--slate);font-size:14px}
+    .visual{position:relative;padding:22px;border:1px solid rgba(217,221,226,.10);border-radius:24px;background:linear-gradient(180deg,rgba(21,26,32,.68),rgba(8,10,13,.86))}
+    .visual svg{display:block;width:100%;height:auto}
+    .authority{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin:24px auto 96px;border:1px solid rgba(205,170,86,.32);border-radius:16px;overflow:hidden;background:rgba(205,170,86,.16)}
+    .authority div{background:rgba(8,10,13,.9);padding:22px;text-align:center;color:var(--mist)}
+    .authority strong{display:block;color:var(--gold);font-family:"IBM Plex Mono",monospace}
+    section{padding:88px 0;border-top:1px solid rgba(217,221,226,.08)}
+    h2{font-size:clamp(30px,4vw,56px);line-height:1.12;margin-bottom:14px;color:var(--alabaster)}
+    h3{color:var(--gold)}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:34px}
+    .card{background:linear-gradient(180deg,rgba(21,26,32,.78),rgba(8,10,13,.92));border:1px solid rgba(217,221,226,.12);border-radius:16px;padding:26px;min-height:180px}
+    .card:hover{transform:translateY(-3px);transition:.2s ease;border-color:rgba(205,170,86,.32)}
+    .layers{display:grid;gap:12px;max-width:780px;margin:34px auto}
+    .layer{padding:18px 22px;border:1px solid rgba(217,221,226,.12);background:rgba(21,26,32,.7);border-radius:12px}
+    .layer:nth-child(1){margin-inline:0}
+    .layer:nth-child(2){margin-inline:28px}
+    .layer:nth-child(3){margin-inline:56px}
+    .layer:nth-child(4){margin-inline:84px}
+    .layer:nth-child(5){margin-inline:112px}
+    .core-box{text-align:center;border:1px solid rgba(205,170,86,.52);border-radius:18px;padding:30px;background:radial-gradient(circle,rgba(205,170,86,.14),rgba(8,10,13,.9) 68%);box-shadow:0 0 42px rgba(205,170,86,.11)}
+    .plans{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:34px}
+    .plan{border:1px solid rgba(217,221,226,.12);border-radius:16px;padding:24px;background:rgba(21,26,32,.68)}
+    .plan.featured{border-color:rgba(205,170,86,.52);box-shadow:0 0 40px rgba(205,170,86,.09)}
+    .badge{display:inline-block;border:1px solid rgba(205,170,86,.45);color:var(--gold);border-radius:999px;padding:4px 10px;font-size:12px}
+    .faq details{border:1px solid rgba(217,221,226,.12);border-radius:12px;padding:16px 18px;background:rgba(21,26,32,.56);margin-bottom:12px}
+    .subscribe-section{background:linear-gradient(180deg,rgba(205,170,86,.08),rgba(8,10,13,0));border-top:1px solid rgba(205,170,86,.16)}
+    footer.container{padding:44px 24px 64px;color:var(--slate);border-top:1px solid rgba(217,221,226,.08)}
+    .mobile-panel{display:none}
+    @media(max-width:900px){
+      nav.container-fluid>ul:nth-child(2){display:none}
+      .mobile-toggle{display:inline-flex}
+      main.container{padding-top:44px}
+      .grid.hero{grid-template-columns:1fr;gap:36px}
+      .visual{order:2}
+      .authority,.cards,.plans{grid-template-columns:1fr}
+      .layer{margin-inline:0!important}
+      .mobile-panel{position:fixed;inset:0 0 0 auto;width:min(92vw,430px);height:100dvh;z-index:100;background:rgba(8,10,13,.98);border-right:1px solid rgba(205,170,86,.28);padding:calc(18px + env(safe-area-inset-top,0px)) 18px calc(22px + env(safe-area-inset-bottom,0px));overflow-y:auto;display:none}
+      .mobile-panel.open{display:block}
+      .mobile-panel a,.mobile-panel button{display:flex;width:100%;min-height:44px;align-items:center;margin:8px 0}
+    }
+    @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+  </style>
+</head>
+<body>
+  <nav class="container-fluid">
+    <ul>
+      <li><strong class="brand"><b>NDSP</b><small>منصة دعم القرار</small></strong></li>
+    </ul>
+    <ul>
+      <li><a href="#methodology">المنهجية</a></li>
+      <li><a href="#current">التحليل الحالي</a></li>
+      <li><a href="#governance">الحوكمة</a></li>
+      <li><a href="#plans">الباقات</a></li>
+      <li><a href="#docs">التوثيق</a></li>
+      <li><a href="https://my.ndsp.app/login" role="button">تسجيل الدخول</a></li>
+      <li><button class="mobile-toggle outline-gold" id="openMenu" type="button">القائمة</button></li>
+    </ul>
+  </nav>
+
+  <aside class="mobile-panel" id="mobilePanel" aria-label="قائمة الجوال" aria-modal="true">
+    <button id="closeMenu" class="outline-gold" type="button">إغلاق ×</button>
+    <a href="#methodology">المنهجية</a>
+    <a href="#current">التحليل الحالي</a>
+    <a href="#governance">الحوكمة</a>
+    <a href="#plans">الباقات</a>
+    <a href="#docs">التوثيق</a>
+    <a href="https://my.ndsp.app/login">تسجيل الدخول</a>
+    <a class="primary" href="https://my.ndsp.app/register?trial=elite&days=16">ابدأ تجربة Elite لمدة 16 يومًا</a>
+  </aside>
+
+  <main class="container">
+    <div class="grid hero">
+      <section>
+        <hgroup>
+          <h1>الأدلة تتقاطع.<br><span class="gold">القرار يتجه.</span></h1>
+          <h3>NDSP — منصة دعم القرار</h3>
+        </hgroup>
+        <p class="lead">تجمع NDSP البيانات المؤسسية والتقارير والسياق التشغيلي والمعلومات الخارجية والمعايير داخل إطار محكوم، لتقديم اتجاه رسمي واضح وقابل للتفسير والتحقق.</p>
+        <div class="actions">
+          <a class="primary" href="https://my.ndsp.app/register?trial=elite&days=16">ابدأ تجربة Elite لمدة 16 يومًا</a>
+          <a class="secondary" href="#methodology">استكشف المنهجية</a>
+        </div>
+        <p class="micro">تجربة كاملة لمدة 16 يومًا — دون بطاقة دفع — ودون خصم تلقائي.</p>
+      </section>
+
+      <section class="visual" aria-label="مخطط تقاطع الأدلة إلى CORE">
+        <svg viewBox="0 0 760 620" role="img" aria-label="خمسة مصادر بيانات تتقاطع داخل نقطة ذهبية قبل دخولها إلى CORE">
+          <defs>
+            <linearGradient id="line" x1="0" x2="1">
+              <stop offset="0" stop-color="#35AFE3"/>
+              <stop offset=".72" stop-color="#35AFE3"/>
+              <stop offset="1" stop-color="#CDAA56"/>
+            </linearGradient>
+            <filter id="glow"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+          <rect width="760" height="620" fill="#080A0D" rx="28"/>
+          <g fill="#D9DDE2" font-family="IBM Plex Sans Arabic" font-size="20">
+            <text x="575" y="95">بيانات مؤسسية</text>
+            <text x="555" y="190">تقارير وتحليلات</text>
+            <text x="570" y="310">سياق تشغيلي</text>
+            <text x="555" y="430">معلومات خارجية</text>
+            <text x="555" y="525">معايير وسياسات</text>
+          </g>
+          <g stroke="url(#line)" stroke-width="3" fill="none" opacity=".92">
+            <path d="M540 88 C420 110 360 190 330 270"/>
+            <path d="M530 185 C420 210 370 240 330 286"/>
+            <path d="M540 305 C430 305 380 305 330 305"/>
+            <path d="M530 425 C420 396 370 358 330 326"/>
+            <path d="M540 522 C420 490 360 420 330 340"/>
+          </g>
+          <circle cx="318" cy="306" r="18" fill="#CDAA56" filter="url(#glow)"/>
+          <path d="M300 306 C250 306 225 306 190 306" stroke="#CDAA56" stroke-width="4" fill="none"/>
+          <g class="core" filter="url(#glow)">
+            <circle cx="130" cy="306" r="74" fill="#151A20" stroke="#CDAA56" stroke-width="2"/>
+            <text x="130" y="286" fill="#CDAA56" text-anchor="middle" font-family="IBM Plex Mono" font-size="34" font-weight="700">CORE</text>
+            <text x="130" y="322" fill="#D9DDE2" text-anchor="middle" font-family="IBM Plex Sans Arabic" font-size="15">الاتجاه الرسمي</text>
+            <text x="130" y="346" fill="#D9DDE2" text-anchor="middle" font-family="IBM Plex Sans Arabic" font-size="15">أدلة قابلة للتحقق</text>
+          </g>
+          <text x="130" y="430" fill="#CDAA56" text-anchor="middle" font-family="IBM Plex Sans Arabic" font-size="24">اتجاه رسمي واحد</text>
+          <text x="130" y="462" fill="#D9DDE2" text-anchor="middle" font-family="IBM Plex Sans Arabic" font-size="18">واضح وقابل للتفسير.</text>
+        </svg>
+      </section>
+    </div>
+
+    <div class="authority">
+      <div><strong>CORE</strong> مركز النتيجة</div>
+      <div><strong>رسمي</strong> اتجاه واحد</div>
+      <div><strong>محكوم</strong> إطار مراجعة</div>
+      <div><strong>قابل للتحقق</strong> أدلة وسياق</div>
+    </div>
+
+    <section id="methodology">
+      <hgroup>
+        <h2>من السياق إلى اتجاه رسمي</h2>
+        <h3>Align → Resolve → Single Pulse</h3>
+      </hgroup>
+      <p class="lead">تجمع المنصة مصادر متعددة، وتربطها ضمن إطار محكوم، ثم تقدم نتيجة رسمية واضحة يمكن تفسيرها وتتبع أدلتها.</p>
+      <div class="cards">
+        <article class="card"><h3>السياق</h3><p>استيعاب الصورة الكاملة من داخل المؤسسة وخارجها.</p></article>
+        <article class="card"><h3>الأدلة</h3><p>جمع الأدلة الموثوقة وتحليلها ضمن إطار واضح وقابل للمراجعة.</p></article>
+        <article class="card"><h3>الاتجاه الرسمي</h3><p>تقديم نتيجة رسمية واحدة، واضحة، قابلة للتفسير والتحقق.</p></article>
+      </div>
+    </section>
+
+    <section>
+      <hgroup>
+        <h2>من مصادر متعددة إلى نتيجة واحدة</h2>
+        <h3>CORE بوصفه نقطة الحوكمة والتوحيد</h3>
+      </hgroup>
+      <div class="core-box">
+        <h2>CORE</h2>
+        <p>الاتجاه الرسمي · محكوم حوكميًا · أدلة قابلة للتحقق</p>
+      </div>
+      <div class="cards">
+        <article class="card">بيانات مؤسسية</article>
+        <article class="card">تقارير وتحليلات</article>
+        <article class="card">سياق تشغيلي</article>
+        <article class="card">معلومات خارجية</article>
+        <article class="card">معايير وسياسات</article>
+      </div>
+    </section>
+
+    <section>
+      <hgroup>
+        <h2>القرار لا يبدأ من مؤشر واحد.</h2>
+        <h3>بل من أدلة تتراكم ضمن سياق واضح.</h3>
+      </hgroup>
+      <div class="layers">
+        <div class="layer">بيانات مؤسسية</div>
+        <div class="layer">تقارير وتحليلات</div>
+        <div class="layer">سياق تشغيلي</div>
+        <div class="layer">معلومات خارجية</div>
+        <div class="layer">معايير وسياسات</div>
+        <div class="core-box">CORE — اتجاه رسمي قابل للتفسير والمراجعة</div>
+      </div>
+    </section>
+
+    <section>
+      <hgroup>
+        <h2>ما الذي تقدمه المنصة؟</h2>
+        <h3>ذكاء قرار مؤسسي محكوم</h3>
+      </hgroup>
+      <div class="cards">
+        <article class="card">اتجاه رسمي واضح.</article>
+        <article class="card">أدلة قابلة للتتبع.</article>
+        <article class="card">تفسير منظم للنتيجة.</article>
+        <article class="card">إدارة السيناريوهات والمخاطر.</article>
+        <article class="card">فصل واضح بين النتيجة الرسمية والتجارب الداخلية.</article>
+      </div>
+    </section>
+
+    <section id="current">
+      <hgroup>
+        <h2>التحليل الحالي</h2>
+        <h3>نتيجة CORE الرسمية فقط</h3>
+      </hgroup>
+      <article class="card" id="officialResult">
+        <p>النتيجة الرسمية غير متاحة حاليًا.</p>
+        <small>سيتم عرض آخر تحديث حقيقي عند توفره من واجهة البيانات الرسمية.</small>
+      </article>
+    </section>
+
+    <section>
+      <hgroup>
+        <h2>غرفة قرار مصممة لفهم النتيجة، لا لمطاردة المؤشرات.</h2>
+        <h3>معاينة منظمة حسب الاستحقاقات</h3>
+      </hgroup>
+      <div class="cards">
+        <article class="card">ملخص القرار</article>
+        <article class="card">حالة القراءة</article>
+        <article class="card">مستويات السيناريو</article>
+        <article class="card">التفسير</article>
+        <article class="card">المخاطر</article>
+        <article class="card">الأدلة التحليلية</article>
+      </div>
+      <div class="actions"><a class="primary" href="https://my.ndsp.app/register?next=/decision-room&trial=elite&days=16">استكشف غرفة القرار</a></div>
+    </section>
+
+    <section id="governance">
+      <hgroup>
+        <h2>كل نتيجة لها سياق ودليل ومسار مراجعة.</h2>
+        <h3>حوكمة وقابلية تفسير دون كشف عناصر داخلية</h3>
+      </hgroup>
+      <div class="cards">
+        <article class="card">مصدر النتيجة</article>
+        <article class="card">وقت التحديث</article>
+        <article class="card">حالة البيانات</article>
+        <article class="card">حالة الاعتماد</article>
+        <article class="card">الأدلة المتاحة</article>
+        <article class="card">سجل المراجعة المصرح به</article>
+      </div>
+    </section>
+
+    <section id="plans">
+      <hgroup>
+        <h2>الباقات والاشتراكات</h2>
+        <h3>تُحمّل الأسعار والاستحقاقات من المصدر الرسمي عند توفره</h3>
+      </hgroup>
+      <div id="plansStatus" class="card">جاري تحميل بيانات الباقات...</div>
+      <div class="plans" id="plansGrid"></div>
+      <div class="actions"><a class="secondary" href="https://my.ndsp.app/subscription">قارن جميع الباقات</a></div>
+    </section>
+
+    <section>
+      <hgroup>
+        <h2>جرّب تجربة Elite الكاملة لمدة 16 يومًا.</h2>
+        <h3>دون بطاقة دفع ودون خصم تلقائي</h3>
+      </hgroup>
+      <div class="cards">
+        <article class="card">دون بطاقة دفع.</article>
+        <article class="card">دون خصم تلقائي.</article>
+        <article class="card">تجربة واحدة لكل حساب موثق.</article>
+        <article class="card">الانتقال إلى المجانية عند انتهاء التجربة دون اشتراك.</article>
+      </div>
+      <div class="actions"><a class="primary" href="https://my.ndsp.app/register?trial=elite&days=16">ابدأ تجربتك الآن</a></div>
+    </section>
+
+    <section class="faq">
+      <hgroup>
+        <h2>الأسئلة الشائعة</h2>
+        <h3>تعريف واضح للمنصة والتنبيهات والاشتراك</h3>
+      </hgroup>
+      <details><summary>ما هي NDSP؟</summary><p>NDSP منصة دعم قرار تجمع الأدلة والسياق ضمن إطار محكوم لتقديم اتجاه رسمي قابل للتفسير والتحقق.</p></details>
+      <details><summary>هل NDSP منصة تداول؟</summary><p>لا. NDSP لا تنفذ صفقات ولا تعمل كوسيط مالي ولا تقدم أوامر تنفيذ.</p></details>
+      <details><summary>ما المقصود بالاتجاه الرسمي؟</summary><p>هو نتيجة CORE المصرح بها ضمن إطار الحوكمة، وليست تجربة داخلية أو قراءة غير معتمدة.</p></details>
+      <details><summary>ما المقصود بالتنبيه؟</summary><p>تنبيهات NDSP هي تحديثات لدعم القرار وليست أوامر تداول أو توصيات تنفيذ.</p></details>
+      <details><summary>ماذا يحدث بعد انتهاء تجربة 16 يومًا؟</summary><p>ينتقل الحساب إلى المجانية عند عدم الاشتراك، مع قفل المزايا المدفوعة وفق سياسة الاحتفاظ.</p></details>
+      <details><summary>هل أحتاج إلى بطاقة دفع؟</summary><p>لا تحتاج إلى بطاقة دفع لبدء تجربة Elite لمدة 16 يومًا.</p></details>
+      <details><summary>هل يتم الخصم تلقائيًا؟</summary><p>لا يوجد خصم تلقائي بعد التجربة دون اختيار اشتراك مدفوع.</p></details>
+      <details><summary>ما الفرق بين Pro وElite؟</summary><p>Pro مناسب لغرفة قرار قياسية، بينما Elite يضيف العمق والمقارنات والتقارير والأدلة الموسعة.</p></details>
+      <details><summary>هل يمكن ترقية الباقة أو تخفيضها؟</summary><p>يمكن الترقية أو التخفيض وفق سياسة الاشتراك والدفع المعتمدة من الخادم.</p></details>
+      <details><summary>كيف أحصل على باقة SaaS للمؤسسات؟</summary><p>باقة SaaS تتم عبر التواصل مع المبيعات ولا تنتقل إلى الدفع المباشر.</p></details>
+    </section>
+  </main>
+
+  <section aria-label="Subscribe example" class="subscribe-section">
+    <div class="container">
+      <article>
+        <hgroup>
+          <h2>ابدأ من المسار المناسب</h2>
+          <h3>تجربة Elite أو تواصل المؤسسات</h3>
+        </hgroup>
+        <form class="grid">
+          <input type="text" id="firstname" name="firstname" placeholder="الاسم الأول" aria-label="الاسم الأول" required>
+          <input type="email" id="email" name="email" placeholder="البريد الإلكتروني" aria-label="البريد الإلكتروني" required>
+          <button type="submit" onclick="event.preventDefault(); location.href='https://my.ndsp.app/register?trial=elite&days=16'">ابدأ التجربة</button>
+        </form>
+      </article>
+    </div>
+  </section>
+
+  <footer class="container">
+    <small>
+      <strong>NDSP</strong> — منصة دعم القرار<br>
+      <a href="#methodology">المنهجية</a> •
+      <a href="#governance">الحوكمة</a> •
+      <a href="#docs">التوثيق</a> •
+      <a href="#plans">الباقات</a> •
+      <a href="https://my.ndsp.app/login">تسجيل الدخول</a> •
+      <a href="/privacy">سياسة الخصوصية</a> •
+      <a href="/terms">الشروط</a> •
+      <a href="/disclaimer">إخلاء المسؤولية</a> •
+      <a href="/support">الدعم</a>
+    </small>
+  </footer>
+
+  <script>
+    const panel = document.getElementById('mobilePanel');
+    const openMenu = document.getElementById('openMenu');
+    const closeMenu = document.getElementById('closeMenu');
+    let lastFocus = null;
+
+    function openNav(){
+      lastFocus = document.activeElement;
+      panel.classList.add('open');
+      document.body.classList.add('menu-open');
+      closeMenu.focus();
+    }
+    function closeNav(){
+      panel.classList.remove('open');
+      document.body.classList.remove('menu-open');
+      if(lastFocus) lastFocus.focus();
+    }
+    openMenu?.addEventListener('click', openNav);
+    closeMenu?.addEventListener('click', closeNav);
+    panel?.addEventListener('click', e => { if(e.target === panel) closeNav(); });
+    document.addEventListener('keydown', e => { if(e.key === 'Escape') closeNav(); });
+
+    async function loadPlans(){
+      const status = document.getElementById('plansStatus');
+      const grid = document.getElementById('plansGrid');
+      const endpoints = [
+        'https://my.ndsp.app/api/subscription/plans',
+        'https://my.ndsp.app/api/plans',
+        '/api/subscription/plans',
+        '/api/plans'
+      ];
+
+      for (const endpoint of endpoints) {
+        try {
+          const res = await fetch(endpoint, { credentials: 'include' });
+          if (!res.ok) continue;
+          const data = await res.json();
+          const plans = Array.isArray(data) ? data : (data.plans || data.data || []);
+          if (!plans.length) continue;
+
+          status.style.display = 'none';
+          grid.innerHTML = plans
+            .filter(p => ['FREE','PRO','ELITE','SAAS'].includes(String(p.id || p.code || '').toUpperCase()))
+            .sort((a,b)=>(a.displayOrder || a.order || 0) - (b.displayOrder || b.order || 0))
+            .map(p => {
+              const code = String(p.id || p.code || '').toUpperCase();
+              const name = p.nameAr || p.arName || p.name || code;
+              const desc = p.descriptionAr || p.description || '';
+              const badge = code === 'PRO' ? 'الأكثر اختيارًا' : code === 'ELITE' ? 'الأكثر اكتمالًا' : '';
+              const price = code === 'SAAS'
+                ? 'تواصل معنا'
+                : (p.monthlyPriceText || p.priceMonthlyText || p.priceText || '');
+              const button = p.buttonTextAr || (code === 'FREE' ? 'ابدأ مجانًا' : code === 'SAAS' ? 'تواصل مع المبيعات' : 'اشترك في ' + code);
+              const href = code === 'SAAS'
+                ? 'https://my.ndsp.app/contact-sales'
+                : 'https://my.ndsp.app/subscription?plan=' + encodeURIComponent(code);
+              return `<article class="plan ${code === 'ELITE' ? 'featured' : ''}">
+                ${badge ? `<span class="badge">${badge}</span>` : ''}
+                <h3>${name}</h3>
+                <p>${desc}</p>
+                <strong>${price || 'السعر غير متاح حاليًا'}</strong>
+                <p><a class="primary" href="${href}">${button}</a></p>
+              </article>`;
+            }).join('');
+          return;
+        } catch(e) {}
+      }
+
+      status.innerHTML = 'تعذر تحميل بيانات الباقات من المصدر الرسمي حاليًا. <button onclick="location.reload()">إعادة المحاولة</button>';
+    }
+    loadPlans();
+  </script>
+</body>
+</html>

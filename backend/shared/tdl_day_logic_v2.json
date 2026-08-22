@@ -1,0 +1,52 @@
+{
+  "version": "TDL_WEEKLY_DAY_LOGIC_V2",
+  "status": "ACTIVE_BASELINE",
+  "scope": "weekly_direction_timing",
+  "description_ar": "منطق أيام TDL المعدل: الاثنين والجمعة لمدراء الأصول، الثلاثاء والأربعاء والخميس لصناديق الرافعة، والسبت والأحد للكريبتو فقط وتتبع صناديق الرافعة.",
+  "days": {
+    "monday": {
+      "controller": "ASSET_MANAGERS",
+      "label_ar": "مدراء الأصول",
+      "mode": "weekly_anchor"
+    },
+    "tuesday": {
+      "controller": "LEVERAGED_FUNDS",
+      "label_ar": "صناديق الرافعة المالية",
+      "mode": "tactical_structure"
+    },
+    "wednesday": {
+      "controller": "LEVERAGED_FUNDS",
+      "label_ar": "صناديق الرافعة المالية",
+      "mode": "tactical_structure"
+    },
+    "thursday": {
+      "controller": "LEVERAGED_FUNDS",
+      "label_ar": "صناديق الرافعة المالية",
+      "mode": "tactical_structure"
+    },
+    "friday": {
+      "controller": "ASSET_MANAGERS",
+      "label_ar": "مدراء الأصول",
+      "mode": "weekly_anchor"
+    },
+    "saturday": {
+      "controller": "LEVERAGED_FUNDS",
+      "label_ar": "صناديق الرافعة المالية",
+      "mode": "crypto_only",
+      "applies_to": ["CRYPTO"]
+    },
+    "sunday": {
+      "controller": "LEVERAGED_FUNDS",
+      "label_ar": "صناديق الرافعة المالية",
+      "mode": "crypto_only",
+      "applies_to": ["CRYPTO"]
+    }
+  },
+  "rules": {
+    "non_crypto_weekend": "IGNORE_OR_MARK_CLOSED",
+    "crypto_weekend_controller": "LEVERAGED_FUNDS",
+    "asset_managers_days": ["monday", "friday"],
+    "leveraged_funds_days": ["tuesday", "wednesday", "thursday"],
+    "crypto_extra_leveraged_days": ["saturday", "sunday"]
+  }
+}

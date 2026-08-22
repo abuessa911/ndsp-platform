@@ -1,0 +1,193 @@
+/* NDSP mobile pages navigation
+ Scope: all NDSP HTML pages
+ Purpose: Pages button sits beside language switcher, not over content
+*/
+
+#ndsp-mobile-pages-button,
+#ndsp-mobile-pages-drawer,
+#ndsp-mobile-pages-backdrop,
+.ndsp-mobile-pages-inline-slot{
+ box-sizing:border-box;
+}
+
+#ndsp-mobile-pages-button,
+#ndsp-mobile-pages-drawer,
+#ndsp-mobile-pages-backdrop{
+ display:none;
+}
+
+@media (max-width: 900px){
+
+ #ndsp-mobile-pages-button{
+ position:static !important;
+ inset:auto !important;
+ right:auto !important;
+ left:auto !important;
+ top:auto !important;
+ bottom:auto !important;
+ transform:none !important;
+
+ z-index:auto !important;
+ display:inline-flex !important;
+ align-items:center;
+ justify-content:center;
+ gap:7px;
+ min-height:42px;
+ height:42px;
+ padding:8px 13px;
+ border-radius:999px;
+ border:1px solid rgba(244,215,125,.42);
+ background:linear-gradient(135deg,rgba(244,215,125,.96),rgba(212,175,55,.92));
+ color:#090806;
+ font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;
+ font-size:13px;
+ font-weight:950;
+ letter-spacing:.01em;
+ line-height:1;
+ box-shadow:0 10px 24px rgba(0,0,0,.30), 0 0 0 1px rgba(0,0,0,.22) inset;
+ cursor:pointer;
+ -webkit-tap-highlight-color:transparent;
+ flex:0 0 auto;
+ white-space:nowrap;
+ }
+
+ #ndsp-mobile-pages-button.ndsp-mobile-pages-icon{
+ font-size:17px;
+ line-height:1;
+ }
+
+.ndsp-mobile-pages-inline-slot{
+ display:inline-flex !important;
+ align-items:center;
+ justify-content:flex-start;
+ gap:8px;
+ flex:0 0 auto;
+ width:auto !important;
+ max-width:none !important;
+ margin:0 !important;
+ padding:0 !important;
+ }
+
+.ndsp-mobile-pages-inline-slot #ndsp-mobile-pages-button{
+ margin:0 !important;
+ }
+
+ #ndsp-mobile-pages-backdrop{
+ position:fixed;
+ inset:0;
+ z-index:2147482998;
+ display:block;
+ opacity:0;
+ pointer-events:none;
+ background:rgba(0,0,0,.58);
+ backdrop-filter:blur(3px);
+ transition:opacity.18s ease;
+ }
+
+ #ndsp-mobile-pages-drawer{
+ position:fixed;
+ top:0;
+ right:0;
+ bottom:0;
+ z-index:2147482999;
+ display:flex;
+ flex-direction:column;
+ width:min(84vw,340px);
+ max-width:340px;
+ padding:18px 14px;
+ background:
+ radial-gradient(circle at 20% 0%,rgba(212,175,55,.13),transparent 38%),
+ linear-gradient(180deg,rgba(10,10,8,.98),rgba(3,3,3,.99));
+ border-left:1px solid rgba(212,175,55,.30);
+ box-shadow:-24px 0 60px rgba(0,0,0,.58);
+ transform:translateX(105%);
+ transition:transform.22s ease;
+ overflow:auto;
+ color:#f7f1df;
+ font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;
+ }
+
+ html.ndsp-mobile-pages-open #ndsp-mobile-pages-drawer{
+ transform:translateX(0);
+ }
+
+ html.ndsp-mobile-pages-open #ndsp-mobile-pages-backdrop{
+ opacity:1;
+ pointer-events:auto;
+ }
+
+.ndsp-mobile-pages-head{
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:12px;
+ padding:4px 2px 16px;
+ border-bottom:1px solid rgba(212,175,55,.20);
+ margin-bottom:14px;
+ }
+
+.ndsp-mobile-pages-title{
+ display:flex;
+ flex-direction:column;
+ gap:4px;
+ }
+
+.ndsp-mobile-pages-title strong{
+ font-size:16px;
+ font-weight:950;
+ letter-spacing:.08em;
+ color:#f4d77d;
+ }
+
+.ndsp-mobile-pages-title span{
+ font-size:12px;
+ color:#a8b0bf;
+ }
+
+.ndsp-mobile-pages-close{
+ width:38px;
+ height:38px;
+ border-radius:12px;
+ border:1px solid rgba(212,175,55,.24);
+ background:rgba(255,255,255,.04);
+ color:#f4d77d;
+ font-size:22px;
+ font-weight:900;
+ cursor:pointer;
+ }
+
+.ndsp-mobile-pages-list{
+ display:flex;
+ flex-direction:column;
+ gap:8px;
+ }
+
+.ndsp-mobile-pages-link{
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:12px;
+ min-height:50px;
+ padding:12px 13px;
+ border-radius:14px;
+ border:1px solid rgba(212,175,55,.15);
+ background:linear-gradient(90deg,rgba(255,255,255,.045),rgba(255,255,255,.015));
+ color:#d8cfb7;
+ text-decoration:none;
+ font-size:15px;
+ font-weight:800;
+ }
+
+.ndsp-mobile-pages-link.is-active{
+ color:#f4d77d;
+ border-color:rgba(244,215,125,.44);
+ background:linear-gradient(90deg,rgba(212,175,55,.18),rgba(212,175,55,.06));
+ box-shadow:inset 4px 0 0 rgba(212,175,55,.72);
+ }
+
+.ndsp-mobile-pages-index{
+ color:#8f98aa;
+ font-size:12px;
+ font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+ }
+}

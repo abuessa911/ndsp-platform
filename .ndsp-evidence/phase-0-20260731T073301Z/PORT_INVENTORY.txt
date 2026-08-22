@@ -1,0 +1,82 @@
+$ ss -lntup 2>/dev/null || ss -lntp 2>/dev/null || true
+
+Netid State  Recv-Q Send-Q Local Address:Port  Peer Address:PortProcess                               
+udp   UNCONN 0      0         127.0.0.54:53         0.0.0.0:*                                         
+udp   UNCONN 0      0      127.0.0.53%lo:53         0.0.0.0:*                                         
+udp   UNCONN 0      0            0.0.0.0:5353       0.0.0.0:*                                         
+udp   UNCONN 0      0            0.0.0.0:57534      0.0.0.0:*                                         
+udp   UNCONN 0      0               [::]:34533         [::]:*                                         
+udp   UNCONN 0      0               [::]:5353          [::]:*                                         
+tcp   LISTEN 0      65535      127.0.0.1:631        0.0.0.0:*                                         
+tcp   LISTEN 0      65535     127.0.0.54:53         0.0.0.0:*                                         
+tcp   LISTEN 0      65535        0.0.0.0:5433       0.0.0.0:*                                         
+tcp   LISTEN 0      511        127.0.0.1:19091      0.0.0.0:*                                         
+tcp   LISTEN 0      200        127.0.0.1:5432       0.0.0.0:*                                         
+tcp   LISTEN 0      65535  127.0.0.53%lo:53         0.0.0.0:*                                         
+tcp   LISTEN 0      511          0.0.0.0:3000       0.0.0.0:*    users:(("node",pid=2978998,fd=34))   
+tcp   LISTEN 0      511          0.0.0.0:443        0.0.0.0:*                                         
+tcp   LISTEN 0      65535        0.0.0.0:22         0.0.0.0:*                                         
+tcp   LISTEN 0      100          0.0.0.0:25         0.0.0.0:*                                         
+tcp   LISTEN 0      511          0.0.0.0:80         0.0.0.0:*                                         
+tcp   LISTEN 0      511        127.0.0.1:8097       0.0.0.0:*    users:(("node",pid=2498028,fd=32))   
+tcp   LISTEN 0      511        127.0.0.1:6379       0.0.0.0:*                                         
+tcp   LISTEN 0      5          127.0.0.1:9089       0.0.0.0:*    users:(("python3",pid=2978938,fd=5)) 
+tcp   LISTEN 0      5          127.0.0.1:9088       0.0.0.0:*    users:(("python3",pid=2978627,fd=3)) 
+tcp   LISTEN 0      5          127.0.0.1:9091       0.0.0.0:*    users:(("python3",pid=2978945,fd=7)) 
+tcp   LISTEN 0      5          127.0.0.1:9090       0.0.0.0:*    users:(("python3",pid=2978939,fd=7)) 
+tcp   LISTEN 0      5          127.0.0.1:9093       0.0.0.0:*                                         
+tcp   LISTEN 0      5          127.0.0.1:9092       0.0.0.0:*    users:(("python3",pid=2978596,fd=3)) 
+tcp   LISTEN 0      5          127.0.0.1:9095       0.0.0.0:*                                         
+tcp   LISTEN 0      5          127.0.0.1:9094       0.0.0.0:*    users:(("python3",pid=2978555,fd=6)) 
+tcp   LISTEN 0      2048       127.0.0.1:9057       0.0.0.0:*    users:(("python3",pid=2978652,fd=13))
+tcp   LISTEN 0      2048       127.0.0.1:9061       0.0.0.0:*                                         
+tcp   LISTEN 0      511        127.0.0.1:9062       0.0.0.0:*    users:(("node",pid=2498159,fd=32))   
+tcp   LISTEN 0      2048       127.0.0.1:9065       0.0.0.0:*    users:(("uvicorn",pid=2978601,fd=13))
+tcp   LISTEN 0      511        127.0.0.1:9064       0.0.0.0:*    users:(("node",pid=2498136,fd=32))   
+tcp   LISTEN 0      5          127.0.0.1:9067       0.0.0.0:*                                         
+tcp   LISTEN 0      2048       127.0.0.1:9066       0.0.0.0:*                                         
+tcp   LISTEN 0      2048       127.0.0.1:9069       0.0.0.0:*                                         
+tcp   LISTEN 0      2048       127.0.0.1:9068       0.0.0.0:*                                         
+tcp   LISTEN 0      511        127.0.0.1:9070       0.0.0.0:*    users:(("node",pid=2498154,fd=32))   
+tcp   LISTEN 0      2048       127.0.0.1:9074       0.0.0.0:*                                         
+tcp   LISTEN 0      511        127.0.0.1:9077       0.0.0.0:*    users:(("node",pid=2497887,fd=32))   
+tcp   LISTEN 0      2048       127.0.0.1:9076       0.0.0.0:*    users:(("uvicorn",pid=2978629,fd=13))
+tcp   LISTEN 0      511        127.0.0.1:9079       0.0.0.0:*    users:(("node",pid=2498024,fd=32))   
+tcp   LISTEN 0      511        127.0.0.1:9078       0.0.0.0:*    users:(("node",pid=2499820,fd=33))   
+tcp   LISTEN 0      511        127.0.0.1:9081       0.0.0.0:*    users:(("node",pid=2498098,fd=32))   
+tcp   LISTEN 0      511        127.0.0.1:9080       0.0.0.0:*    users:(("node",pid=2497949,fd=32))   
+tcp   LISTEN 0      5          127.0.0.1:9083       0.0.0.0:*                                         
+tcp   LISTEN 0      5          127.0.0.1:9082       0.0.0.0:*                                         
+tcp   LISTEN 0      5          127.0.0.1:9085       0.0.0.0:*    users:(("python3",pid=2978623,fd=3)) 
+tcp   LISTEN 0      5          127.0.0.1:9084       0.0.0.0:*                                         
+tcp   LISTEN 0      5          127.0.0.1:9087       0.0.0.0:*    users:(("python3",pid=2978625,fd=3)) 
+tcp   LISTEN 0      5          127.0.0.1:9086       0.0.0.0:*    users:(("python3",pid=2978624,fd=3)) 
+tcp   LISTEN 0      511        127.0.0.1:9024       0.0.0.0:*    users:(("node",pid=2497888,fd=32))   
+tcp   LISTEN 0      511        127.0.0.1:9027       0.0.0.0:*    users:(("node",pid=2498041,fd=32))   
+tcp   LISTEN 0      511        127.0.0.1:9029       0.0.0.0:*                                         
+tcp   LISTEN 0      511        127.0.0.1:9028       0.0.0.0:*                                         
+tcp   LISTEN 0      511        127.0.0.1:9031       0.0.0.0:*                                         
+tcp   LISTEN 0      511        127.0.0.1:9030       0.0.0.0:*    users:(("node",pid=2497889,fd=32))   
+tcp   LISTEN 0      511        127.0.0.1:9033       0.0.0.0:*    users:(("node",pid=2498040,fd=32))   
+tcp   LISTEN 0      511        127.0.0.1:9034       0.0.0.0:*    users:(("node",pid=2498121,fd=32))   
+tcp   LISTEN 0      511        127.0.0.1:9041       0.0.0.0:*    users:(("node",pid=2498156,fd=32))   
+tcp   LISTEN 0      511        127.0.0.1:9044       0.0.0.0:*    users:(("node",pid=2498025,fd=32))   
+tcp   LISTEN 0      5          127.0.0.1:9047       0.0.0.0:*                                         
+tcp   LISTEN 0      511        127.0.0.1:9001       0.0.0.0:*    users:(("node",pid=2498048,fd=32))   
+tcp   LISTEN 0      5          127.0.0.1:9002       0.0.0.0:*                                         
+tcp   LISTEN 0      511        127.0.0.1:9017       0.0.0.0:*                                         
+tcp   LISTEN 0      511        127.0.0.1:9019       0.0.0.0:*                                         
+tcp   LISTEN 0      511        127.0.0.1:9021       0.0.0.0:*                                         
+tcp   LISTEN 0      511        127.0.0.1:9020       0.0.0.0:*    users:(("node",pid=2498163,fd=32))   
+tcp   LISTEN 0      511        127.0.0.1:9023       0.0.0.0:*                                         
+tcp   LISTEN 0      511        127.0.0.1:9022       0.0.0.0:*                                         
+tcp   LISTEN 0      65535          [::1]:631           [::]:*                                         
+tcp   LISTEN 0      2              [::1]:3350          [::]:*                                         
+tcp   LISTEN 0      65535           [::]:5433          [::]:*                                         
+tcp   LISTEN 0      200            [::1]:5432          [::]:*                                         
+tcp   LISTEN 0      2                  *:3389             *:*                                         
+tcp   LISTEN 0      511             [::]:443           [::]:*                                         
+tcp   LISTEN 0      65535           [::]:22            [::]:*                                         
+tcp   LISTEN 0      100             [::]:25            [::]:*                                         
+tcp   LISTEN 0      511             [::]:80            [::]:*                                         
+tcp   LISTEN 0      511            [::1]:6379          [::]:*                                         

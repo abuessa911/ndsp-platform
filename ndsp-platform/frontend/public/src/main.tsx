@@ -1,0 +1,46 @@
+import "@fontsource/ibm-plex-sans/300.css"
+import "@fontsource/ibm-plex-sans/400.css"
+import "@fontsource/ibm-plex-sans/500.css"
+import "@fontsource/ibm-plex-sans/600.css"
+
+import "@fontsource/ibm-plex-mono/400.css"
+
+import "@fontsource/libre-baskerville/400.css"
+
+import { StrictMode } from "react"
+import { createRoot } from "react-dom/client"
+import {
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query"
+
+import App from "./App"
+import { LanguageProvider } from "./lib/language-context"
+
+import "./index.css"
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 1,
+      refetchOnWindowFocus: false,
+      staleTime: 30_000,
+    },
+  },
+})
+
+const rootElement = document.getElementById("root")
+
+if (!rootElement) {
+  throw new Error("NDSP root element was not found.")
+}
+
+createRoot(rootElement).render(
+  <StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <LanguageProvider>
+        <App />
+      </LanguageProvider>
+    </QueryClientProvider>
+  </StrictMode>,
+)

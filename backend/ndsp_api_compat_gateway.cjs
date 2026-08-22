@@ -21,8 +21,8 @@ function loadEnvFile(file) {
 
 loadEnvFile('/etc/ndsp/ndsp-db.env')
 loadEnvFile('/etc/ndsp/ndsp-session.env')
-loadEnvFile('/home/nawaf511/empire-core-new/backend/.env')
-loadEnvFile('/home/nawaf511/empire-core-new/backend/auth_api/.env')
+loadEnvFile('/home/nawaf511/.config/ndsp/backend.env')
+loadEnvFile('/home/nawaf511/.config/ndsp/auth_api.env')
 
 
 const PORT = Number(process.env.NDSP_API_COMPAT_PORT || 9022)

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#070705" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>NDSP — بوابة دعم القرار</title>
+  <meta name="description" content="بوابة NDSP متعددة الصفحات مع قفل سياق السوق والأصل والفريم ونوع القراءة." />
+  <link rel="stylesheet" href="/portal-v50/assets/ndsp-portal-v50.css?v=public-four-v140&ts=20260724_005337" />
+  <link rel="stylesheet" href="css/ndsp-density.css">
+</head>
+<body>
+<header class="ndsp-header" id="ndsp-primary-header">
+    <a href="portal.html" class="ndsp-brand" id="ndsp-primary-brand">NDSP</a>
+    <nav class="ndsp-main-nav" id="ndsp-primary-nav">
+      <ul class="ndsp-nav-links">
+        <li class="ndsp-nav-item"><a href="portal.html">مركز القيادة</a></li>
+        <li class="ndsp-nav-item"><a href="market-assets.html">الأسواق</a></li>
+        <li class="ndsp-nav-item"><a href="live-market-analysis.html">الأسعار والشارت</a></li>
+        <li class="ndsp-nav-item"><a href="analysis-center.html">مستكشف الفرص</a></li>
+        <li class="ndsp-nav-item"><a href="decision-support.html">غرفة القرار</a></li>
+        <li class="ndsp-nav-item"><a href="#" id="ndsp-more-btn">المزيد</a></li>
+      </ul>
+    </nav>
+    <div class="ndsp-header-actions" style="display:flex; align-items:center; gap:8px;">
+      <button class="ndsp-lang-btn" id="ndsp-primary-lang-btn" style="background:none; border:1px solid #444; color:#fff; padding:4px 8px; border-radius:4px; font-size:12px; cursor:pointer;">EN</button>
+      <a href="market-assets.html" class="ndsp-header-btn" id="ndsp-primary-change-btn">تغيير الاختيار</a>
+    </div>
+  </header>
+
+  <div class="ndsp-drawer-backdrop" id="ndsp-more-backdrop"></div>
+  <aside class="ndsp-drawer" id="ndsp-more-drawer" aria-hidden="true">
+    <div class="ndsp-drawer-header">
+      <span style="color:var(--ndsp-gold); font-weight:700;">القائمة الكاملة</span>
+      <button id="ndsp-drawer-close" style="background:none; border:none; color:#fff; font-size:18px; cursor:pointer;">✕</button>
+    </div>
+    <div class="ndsp-drawer-body">
+      <ul class="ndsp-drawer-menu">
+        <li><a href="scenario-levels.html">السيناريوهات والمستويات</a></li>
+        <li><a href="decision-layers.html">الطبقات المعلنة</a></li>
+        <li><a href="risk-governance.html">المخاطر والاعتراض</a></li>
+        <li><a href="completed-decisions.html">القرارات المكتملة</a></li>
+        <li><a href="guide.html">دليل الاستخدام</a></li>
+        <li><a href="support-center.html">مركز المستخدم والمساعدة</a></li>
+        <li><a href="#">الإعدادات والتنبيهات</a></li>
+        <li><a href="#">تسجيل الخروج</a></li>
+      </ul>
+    </div>
+  </aside>
+  
+
+  <div class="ndsp-drawer-backdrop" id="ndsp-more-backdrop"></div>
+  <aside class="ndsp-drawer" id="ndsp-more-drawer" aria-hidden="true">
+    <div class="ndsp-drawer-header">
+      <span style="color:var(--ndsp-gold); font-weight:700;">القائمة الكاملة</span>
+      <button id="ndsp-drawer-close" style="background:none; border:none; color:#fff; font-size:18px; cursor:pointer;">✕</button>
+    </div>
+    
+  </aside>
+  <div id="app" aria-live="polite"></div>
+  <noscript>يجب تفعيل JavaScript لتشغيل بوابة NDSP.</noscript>
+  <script type="module" src="/portal-v50/assets/ndsp-portal-v50.js?v=public-four-v140&ts=20260724_005337"></script>
+  <script src="js/ndsp-nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "policy": "governance/canonical-v1/NDSP_DISCOVER_REUSE_GOVERNANCE_V1_AR.md",
+  "generated_at": "2026-08-06T10:41:07.044917+00:00",
+  "linked_agents": 1302,
+  "updated_local_agents": 0,
+  "conflicts": [],
+  "missing_precedence_targets": [
+    "governance/canonical-v1/NDSP_CANONICAL_GOVERNANCE_V1_AR.md",
+    "governance/archive/superseded/**"
+  ],
+  "validation_errors": [],
+  "backup": "var/backups/discover-reuse-governance-20260806-124106"
+}

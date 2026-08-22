@@ -1,0 +1,1 @@
+أغسطس 08 04:38:11 vmi2934783 python3[2402288]: [NDSP] Completed Decisions History V36 listening on http://127.0.0.1:9088

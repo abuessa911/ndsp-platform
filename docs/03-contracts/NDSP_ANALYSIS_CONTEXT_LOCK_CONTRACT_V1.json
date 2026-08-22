@@ -1,0 +1,25 @@
+{
+  "contract_id": "NDSP-ANALYSIS-CONTEXT-LOCK-001",
+  "version": "1.0.0",
+  "purpose": "Prevent cross-asset, cross-market, cross-timeframe, or cross-reading data contamination in the user portal.",
+  "required_context": [
+    "market",
+    "symbol",
+    "timeframe",
+    "analysis_mode",
+    "view_mode"
+  ],
+  "context_identity": "market|symbol|timeframe|analysis_mode",
+  "rules": [
+    "No decision endpoint is called before the required context is complete.",
+    "Every decision request carries symbol, timeframe, and analysis_mode.",
+    "Returned symbol and timeframe are validated when present.",
+    "A mismatched response is blocked and never rendered as the selected asset decision.",
+    "Changing market, symbol, timeframe, or analysis_mode creates a new decision session.",
+    "Display mode may change presentation but may not change scientific values.",
+    "Missing values are shown as unavailable and are never fabricated."
+  ],
+  "context_mismatch_policy": "FAIL_CLOSED",
+  "display_mode_authority": false,
+  "decision_authority": "NDSP canonical 16-layer core only"
+}

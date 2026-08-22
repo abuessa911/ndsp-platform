@@ -1,0 +1,58 @@
+============================================================
+NDSP — SOURCE AUTHENTICATION CONTROLS UNIFICATION V1.1
+DATE=2026-07-27T08:48:40+02:00
+MODE=SOURCE_ONLY_BUILD_ATOMIC_DEPLOY_ROLLBACK
+PORTAL_SOURCE=/home/nawaf511/Downloads/NDSP_COMMERCIAL_FRONTEND_LIVE_V1
+PORTAL_LIVE=/var/www/ndsp-my/portal
+AUTH_CURRENT=/opt/ndsp-auth-core-clean/current
+AUTH_SERVICE=ndsp-auth-core-clean
+============================================================
+
+== 0) Explicit confirmation and privileges ==
+EXPLICIT_CONFIRMATION=YES
+SUDO_GATE=PASS
+
+== 1) Preconditions ==
+PRECONDITION_GATE=PASS
+AUTH_OLD_TARGET=/opt/ndsp-auth-core-clean/releases/20260724_050053-final-ux-v31
+
+== 2) Secure backup ==
+BACKUP_GATE=PASS
+BACKUP=/home/nawaf511/empire-core-new/backups/source-auth-controls-v1-1/20260727_084840
+
+== 3) Shared database verification — no database changes ==
+AUTH_DATABASE_FINGERPRINT=cab8350b3d0c0daeb734bc34f68db23339f5e0dedfec54111b5657e7025fbc88
+CORE_DATABASE_FINGERPRINT=cab8350b3d0c0daeb734bc34f68db23339f5e0dedfec54111b5657e7025fbc88
+USERS_ID_COLUMN_TYPE=uuid
+AUTH_SESSIONS_USER_ID_COLUMN_TYPE=uuid
+SESSION_USER_JOIN_POLICY=TEXT_NORMALIZED_READ_ONLY
+DATABASE_NAME=ndsp_auth
+SHARED_USERS_TABLE=public.users
+SHARED_SESSIONS_TABLE=public.ndsp_auth_sessions
+OWNER_ADMIN_ACCOUNT_COUNT=1
+TOTAL_USER_ACCOUNT_COUNT=4
+SESSION_USER_ORPHANS=0
+OWNER_USER_DATABASE_UNIFICATION_GATE=PASS
+DATABASE_SCHEMA_CHANGED=NO
+DATABASE_DATA_CHANGED=NO
+
+== 4) Modify canonical portal React/CSS source ==
+PORTAL_SOURCE_PATCH_GATE=PASS
+
+== 5) Refresh portal source manifest ==
+PORTAL_SOURCE_MANIFEST_GATE=PASS
+
+== 6) Build canonical portal from source ==
+PORTAL_SOURCE_BUILD_GATE=PASS
+PORTAL_PHYSICAL_ROUTE_COUNT=19
+PORTAL_SOURCE_MAPS=DISABLED
+
+== 7) Prepare clean authentication source release ==
+ERROR_EXIT=1
+ERROR_LINE=617
+
+ROLLBACK_BEGIN=YES
+PORTAL_SOURCE_ROLLBACK=PASS
+ROLLBACK_COMPLETE=YES
+FINAL_STATUS=FAILED_AND_ROLLED_BACK
+REPORT=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_SOURCE_AUTH_CONTROLS_V1_1_20260727_084840.md

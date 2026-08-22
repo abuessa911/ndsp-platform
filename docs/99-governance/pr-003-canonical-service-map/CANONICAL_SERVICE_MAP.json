@@ -1,0 +1,272 @@
+{
+  "schema_version": "1.1.0",
+  "generated_at": "2026-07-31T08:48:57.840091+00:00",
+  "status": "BLOCKED_PENDING_RUNTIME_VERIFICATION",
+  "service_count": 13,
+  "services": [
+    {
+      "service_id": "bot-execution",
+      "status": "PORT_VERIFICATION_REQUIRED",
+      "canonical_entrypoint": "backend/services/bot_execution/main.cjs",
+      "service_name": "bot-execution",
+      "service_type": "node-http-service",
+      "verified_listener_ports": [],
+      "listener_environment_variables": [],
+      "referenced_ports": [
+        9078
+      ],
+      "systemd_unit": "backend/services/bot_execution/systemd/ndsp-bot_execution.service",
+      "evidence_files": [
+        "backend/services/bot_execution/main.cjs",
+        "backend/services/bot_execution/systemd/ndsp-bot_execution.service"
+      ],
+      "owner": "TBD",
+      "runtime_owner": "TBD",
+      "exposure": "TBD",
+      "notes": "Additional referenced ports are not treated as listener ports. Additional port-like environment variables require manual review: NDSP_BOT_EXECUTION_PORT. No direct listener expression was confirmed."
+    },
+    {
+      "service_id": "completed-decision",
+      "status": "PORT_VERIFICATION_REQUIRED",
+      "canonical_entrypoint": "backend/services/completed_decision/main.cjs",
+      "service_name": "completed-decision",
+      "service_type": "node-http-service",
+      "verified_listener_ports": [],
+      "listener_environment_variables": [],
+      "referenced_ports": [],
+      "systemd_unit": "backend/services/completed_decision/systemd/ndsp-completed_decision.service",
+      "evidence_files": [
+        "backend/services/completed_decision/main.cjs",
+        "backend/services/completed_decision/systemd/ndsp-completed_decision.service"
+      ],
+      "owner": "TBD",
+      "runtime_owner": "TBD",
+      "exposure": "TBD",
+      "notes": "Additional port-like environment variables require manual review: NDSP_COMPLETED_DECISION_PORT. No direct listener expression was confirmed."
+    },
+    {
+      "service_id": "decision-governance-core",
+      "status": "PORT_VERIFICATION_REQUIRED",
+      "canonical_entrypoint": "backend/services/decision_governance_core/main.cjs",
+      "service_name": "decision-governance-core",
+      "service_type": "node-http-service",
+      "verified_listener_ports": [],
+      "listener_environment_variables": [],
+      "referenced_ports": [
+        9078
+      ],
+      "systemd_unit": "backend/services/decision_governance_core/systemd/ndsp-decision_governance_core.service",
+      "evidence_files": [
+        "backend/services/decision_governance_core/main.cjs",
+        "backend/services/decision_governance_core/systemd/ndsp-decision_governance_core.service"
+      ],
+      "owner": "TBD",
+      "runtime_owner": "TBD",
+      "exposure": "TBD",
+      "notes": "Additional referenced ports are not treated as listener ports. Additional port-like environment variables require manual review: NDSP_GOVERNANCE_PORT. No direct listener expression was confirmed."
+    },
+    {
+      "service_id": "ndsp-launch-control-v167",
+      "status": "PORT_VERIFICATION_REQUIRED",
+      "canonical_entrypoint": "backend/services/ndsp-launch-control-v167/server.py",
+      "service_name": "ndsp-launch-control-v167",
+      "service_type": "application-service",
+      "verified_listener_ports": [],
+      "listener_environment_variables": [],
+      "referenced_ports": [
+        9001,
+        9020,
+        9028
+      ],
+      "systemd_unit": null,
+      "evidence_files": [
+        "backend/services/ndsp-launch-control-v167/server.py"
+      ],
+      "owner": "TBD",
+      "runtime_owner": "TBD",
+      "exposure": "TBD",
+      "notes": "Additional referenced ports are not treated as listener ports. No direct listener expression was confirmed."
+    },
+    {
+      "service_id": "ndsp-layers-api",
+      "status": "PORT_VERIFICATION_REQUIRED",
+      "canonical_entrypoint": "apps/ndsp-layers-api/app.py",
+      "service_name": "ndsp-layers-api",
+      "service_type": "python-http-service",
+      "verified_listener_ports": [],
+      "listener_environment_variables": [],
+      "referenced_ports": [
+        9057,
+        9076
+      ],
+      "systemd_unit": null,
+      "evidence_files": [
+        "apps/ndsp-layers-api/app.py"
+      ],
+      "owner": "TBD",
+      "runtime_owner": "TBD",
+      "exposure": "TBD",
+      "notes": "Additional referenced ports are not treated as listener ports. No direct listener expression was confirmed."
+    },
+    {
+      "service_id": "ndsp-live-decision-quality",
+      "status": "REVIEW_REQUIRED",
+      "canonical_entrypoint": "backend/ndsp-live-decision-quality/server.py",
+      "service_name": "ndsp-live-decision-quality",
+      "service_type": "python-http-service",
+      "verified_listener_ports": [
+        9057
+      ],
+      "listener_environment_variables": [],
+      "referenced_ports": [],
+      "systemd_unit": null,
+      "evidence_files": [
+        "backend/ndsp-live-decision-quality/server.py"
+      ],
+      "owner": "TBD",
+      "runtime_owner": "TBD",
+      "exposure": "TBD",
+      "notes": "Literal listener configuration detected."
+    },
+    {
+      "service_id": "ndsp-platform-backend",
+      "status": "PORT_VERIFICATION_REQUIRED",
+      "canonical_entrypoint": "backend/server.js",
+      "service_name": "ndsp-platform-backend",
+      "service_type": "node-http-service",
+      "verified_listener_ports": [],
+      "listener_environment_variables": [],
+      "referenced_ports": [],
+      "systemd_unit": null,
+      "evidence_files": [
+        "backend/server.js"
+      ],
+      "owner": "TBD",
+      "runtime_owner": "TBD",
+      "exposure": "TBD",
+      "notes": "Additional port-like environment variables require manual review: AUTH_PORT, NDSP_AUTH_PORT. No direct listener expression was confirmed."
+    },
+    {
+      "service_id": "ndsp-trial-clock-v163",
+      "status": "PORT_VERIFICATION_REQUIRED",
+      "canonical_entrypoint": "backend/services/ndsp-trial-clock-v163/server.py",
+      "service_name": "ndsp-trial-clock-v163",
+      "service_type": "application-service",
+      "verified_listener_ports": [],
+      "listener_environment_variables": [],
+      "referenced_ports": [
+        9001,
+        9028
+      ],
+      "systemd_unit": null,
+      "evidence_files": [
+        "backend/services/ndsp-trial-clock-v163/server.py"
+      ],
+      "owner": "TBD",
+      "runtime_owner": "TBD",
+      "exposure": "TBD",
+      "notes": "Additional referenced ports are not treated as listener ports. No direct listener expression was confirmed."
+    },
+    {
+      "service_id": "ndsp-trial-clock-v164",
+      "status": "PORT_VERIFICATION_REQUIRED",
+      "canonical_entrypoint": "backend/services/ndsp-trial-clock-v164/server.py",
+      "service_name": "ndsp-trial-clock-v164",
+      "service_type": "application-service",
+      "verified_listener_ports": [],
+      "listener_environment_variables": [],
+      "referenced_ports": [
+        9001,
+        9028
+      ],
+      "systemd_unit": null,
+      "evidence_files": [
+        "backend/services/ndsp-trial-clock-v164/server.py"
+      ],
+      "owner": "TBD",
+      "runtime_owner": "TBD",
+      "exposure": "TBD",
+      "notes": "Additional referenced ports are not treated as listener ports. No direct listener expression was confirmed."
+    },
+    {
+      "service_id": "ndsp-trial-register-canonical-wrapper",
+      "status": "PORT_VERIFICATION_REQUIRED",
+      "canonical_entrypoint": "backend/ndsp-trial-register-canonical-wrapper/server.js",
+      "service_name": "ndsp-trial-register-canonical-wrapper",
+      "service_type": "node-http-service",
+      "verified_listener_ports": [],
+      "listener_environment_variables": [],
+      "referenced_ports": [
+        9019
+      ],
+      "systemd_unit": null,
+      "evidence_files": [
+        "backend/ndsp-trial-register-canonical-wrapper/server.js"
+      ],
+      "owner": "TBD",
+      "runtime_owner": "TBD",
+      "exposure": "TBD",
+      "notes": "Additional referenced ports are not treated as listener ports. No direct listener expression was confirmed."
+    },
+    {
+      "service_id": "ndsp-trial-seats-api",
+      "status": "PORT_VERIFICATION_REQUIRED",
+      "canonical_entrypoint": "backend/ndsp-trial-seats-api/server.js",
+      "service_name": "ndsp-trial-seats-api",
+      "service_type": "node-http-service",
+      "verified_listener_ports": [],
+      "listener_environment_variables": [],
+      "referenced_ports": [
+        9064
+      ],
+      "systemd_unit": null,
+      "evidence_files": [
+        "backend/ndsp-trial-seats-api/server.js"
+      ],
+      "owner": "TBD",
+      "runtime_owner": "TBD",
+      "exposure": "TBD",
+      "notes": "Additional referenced ports are not treated as listener ports. No direct listener expression was confirmed."
+    },
+    {
+      "service_id": "ndsp-user-alert-channels",
+      "status": "PORT_VERIFICATION_REQUIRED",
+      "canonical_entrypoint": "backend/ndsp-user-alert-channels/server.js",
+      "service_name": "ndsp-user-alert-channels",
+      "service_type": "node-http-service",
+      "verified_listener_ports": [],
+      "listener_environment_variables": [],
+      "referenced_ports": [
+        9062
+      ],
+      "systemd_unit": null,
+      "evidence_files": [
+        "backend/ndsp-user-alert-channels/server.js"
+      ],
+      "owner": "TBD",
+      "runtime_owner": "TBD",
+      "exposure": "TBD",
+      "notes": "Additional referenced ports are not treated as listener ports. Additional port-like environment variables require manual review: SMTP_PORT. No direct listener expression was confirmed."
+    },
+    {
+      "service_id": "password-reset-gateway",
+      "status": "PORT_VERIFICATION_REQUIRED",
+      "canonical_entrypoint": "backend/password_reset_gateway/server.js",
+      "service_name": "password-reset-gateway",
+      "service_type": "gateway",
+      "verified_listener_ports": [],
+      "listener_environment_variables": [],
+      "referenced_ports": [
+        9027
+      ],
+      "systemd_unit": null,
+      "evidence_files": [
+        "backend/password_reset_gateway/server.js"
+      ],
+      "owner": "TBD",
+      "runtime_owner": "TBD",
+      "exposure": "TBD",
+      "notes": "Additional referenced ports are not treated as listener ports. No direct listener expression was confirmed."
+    }
+  ]
+}

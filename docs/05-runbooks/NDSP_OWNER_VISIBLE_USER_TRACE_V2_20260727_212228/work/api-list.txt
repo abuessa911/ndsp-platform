@@ -1,0 +1,8 @@
+/api/admin/customers
+/api/admin/users
+/api/auth/users
+/api/owner/customers
+/api/owner/subscriptions
+/api/owner/users
+/api/trial/status
+/api/users

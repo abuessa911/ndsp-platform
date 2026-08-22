@@ -1,0 +1,48 @@
+
+============================================================
+NDSP — DELETE USER FROM ACTIVE AUTH DATABASE V10
+============================================================
+DATE=2026-07-28T05:39:21+02:00
+HOST=vmi2934783.contaboserver.net
+PROJECT=/home/nawaf511/empire-core-new
+AUTH_CURRENT=/opt/ndsp-auth-core-clean/current
+AUTH_SERVICE=ndsp-auth-core-clean.service
+AUTH_PORT=9020
+TARGET_EMAIL=she20232030@gmail.com
+REPORT=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_ACTIVE_AUTH_DELETE_V10_20260728_053921.txt
+BACKUP=/home/nawaf511/empire-core-new/backups/active-auth-delete-v10/20260728_053921
+
+============================================================
+0) CONFIRMATION AND PRECONDITIONS
+============================================================
+EXPLICIT_CONFIRMATION=YES
+SUDO_GATE=PASS
+PRECONDITION_GATE=PASS
+
+============================================================
+1) ACTIVE AUTH SERVICE BINDING
+============================================================
+AUTH_MAIN_PID=520538
+ACTIVE_AUTH_RELEASE=/opt/ndsp-auth-core-clean/releases/20260727_200610-auth-recovery-true-source-fix-v7
+AUTH_PROCESS_EXE=/usr/bin/nsolid
+AUTH_PROCESS_CWD=/opt/ndsp-auth-core-clean/releases/20260727_200610-auth-recovery-true-source-fix-v7
+AUTH_PROCESS_CMDLINE=/usr/bin/nsolid /opt/ndsp-auth-core-clean/current/server/dist/server.js 
+ACTIVE_AUTH_SERVICE_BINDING_GATE=PASS
+
+============================================================
+2) LOAD ACTIVE DATABASE CONNECTION WITHOUT PRINTING SECRET
+============================================================
+ACTIVE_DATABASE_URL_LOADED=YES
+ACTIVE_DATABASE_URL_PRINTED=NO
+
+============================================================
+3) WRITE GUARDED ACTIVE-DATABASE DELETE ENGINE
+============================================================
+NODE_DELETE_ENGINE_SYNTAX_GATE=PASS
+
+============================================================
+4) DELETE FROM THE EXACT ACTIVE AUTH DATABASE
+============================================================
+UNEXPECTED_EXIT_CODE=1
+FINAL_STATUS=NDSP_ACTIVE_AUTH_DELETE_V10_FAILED
+REPORT=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_ACTIVE_AUTH_DELETE_V10_20260728_053921.txt

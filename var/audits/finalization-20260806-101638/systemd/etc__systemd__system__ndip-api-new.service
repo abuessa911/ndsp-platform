@@ -1,0 +1,17 @@
+[Unit]
+Description=NDIP API - New Backend
+After=network.target
+
+[Service]
+Type=simple
+User=nawaf511
+WorkingDirectory=/home/nawaf511/empire-core-new/backend
+EnvironmentFile=/home/nawaf511/empire-core-new/backend/.env
+ExecStart=/home/nawaf511/empire-core-new/backend/venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 9000
+Restart=always
+RestartSec=5
+TimeoutStopSec=20
+KillSignal=SIGINT
+
+[Install]
+WantedBy=multi-user.target

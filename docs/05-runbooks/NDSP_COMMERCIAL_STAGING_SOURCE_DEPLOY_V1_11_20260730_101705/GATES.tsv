@@ -1,0 +1,7 @@
+gate	status	evidence
+SAFETY_CONTRACT	PASS	Explicit confirmation, protected names, tools, identities and canonical paths validated.
+SOURCE_LOCK	PASS	Active production entrypoint and audited source path match the expected package identity and hashes.
+PRODUCTION_DB_READ_ONLY	PASS	Only public and ndsp_guard schema metadata were read; ndsp_guard contains functions but no data-bearing relations; archive schemas and all production rows were excluded.
+STAGING_POLICY	PASS	No staging DB, role, OS user/group, unit, env, release root, state root or current link exists; automatic reset is disabled.
+STAGING_DATABASE	PASS	Schema-only DB created; extensions restored via stdin; public and ndsp_guard were restored in dependency order; the pre-existing public schema conflict was filtered only from the restore stream; exact combined-schema round-trip passed.
+FINAL	FAIL	DEPENDENCY_BIN_LINK_NOT_PRESERVED:/opt/ndsp-commercial-auth-payment-staging/releases/20260730_101705-source-staging-v1-11/source/node_modules/.bin/tsc

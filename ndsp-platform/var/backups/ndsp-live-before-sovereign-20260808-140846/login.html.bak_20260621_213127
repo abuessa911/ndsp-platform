@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+ <meta charset="utf-8">
+ <meta http-equiv="refresh" content="0; url=/login/">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <title>منصة نواف لدعم القرار</title>
+ <script>location.replace("/login/");</script>
+<meta name="description" content="NDSP — منصة نواف لدعم القرار والتحليل السياقي وتوفير مخرجات معرفية ومؤشرات مساعدة للفهم والمتابعة.">
+<meta name="keywords" content="دعم القرار, التحليل السياقي, NDSP, Decision Support Platform">
+<meta property="og:title" content="NDSP — منصة نواف لدعم القرار">
+<meta property="og:site_name" content="NDSP">
+<meta property="og:description" content="NDSP — منصة نواف لدعم القرار والتحليل السياقي وتوفير مخرجات معرفية ومؤشرات مساعدة للفهم والمتابعة.">
+<meta name="twitter:title" content="NDSP — منصة نواف لدعم القرار">
+<meta name="twitter:description" content="NDSP — منصة نواف لدعم القرار والتحليل السياقي وتوفير مخرجات معرفية ومؤشرات مساعدة للفهم والمتابعة.">
+
+<script type="application/ld+json" id="NDSP_PUBLIC_BRAND_SCHEMA_V1">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "منصة دعم القرار",
+  "alternateName": "NDSP",
+  "description": "منصة دعم القرار والتحليل السياقي وتوفير مخرجات معرفية ومؤشرات مساعدة للفهم والمتابعة.",
+  "url": "https://ndsp.app"
+}
+</script>
+
+<script src="/ndsp-global-markets-ui-guard.js?v=final-global-ui" defer></script>
+</head>
+<body style="background:#09090b;color:#f5c753;font-family:system-ui;padding:40px">
+ يتم تحويلك إلى <a style="color:#f5c753" href="/login/">/login/</a>
+
+<script>
+(function(){
+  var form = document.querySelector("form");
+  if(!form) return;
+
+  form.addEventListener("submit", async function(e){
+    e.preventDefault();
+
+    var emailEl = form.querySelector('input[type="email"], input[name="email"]');
+    var passEl  = form.querySelector('input[type="password"], input[name="password"]');
+
+    var email = emailEl ? emailEl.value.trim() : "";
+    var password = passEl ? passEl.value : "";
+
+    if(!email || !password){
+      alert("أدخل البريد الإلكتروني وكلمة المرور");
+      return;
+    }
+
+    try{
+      var res = await fetch("https://api.ndsp.app/api/auth/login", {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify({email: email, password: password})
+      });
+
+      var data = await res.json().catch(function(){ return {}; });
+
+      if(data && data.ok && data.token){
+        localStorage.setItem("ndsp_token", data.token);
+        localStorage.setItem("ndsp_user", JSON.stringify(data.user || {}));
+        window.location.href = "https://my.ndsp.app/";
+        return;
+      }
+
+      alert("فشل تسجيل الدخول: " + (data.error || data.message || "بيانات الدخول غير صحيحة"));
+    }catch(err){
+      alert("تعذر الاتصال ببوابة المصادقة");
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

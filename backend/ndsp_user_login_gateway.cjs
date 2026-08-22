@@ -25,8 +25,8 @@ function loadEnvFile(file) {
 
 loadEnvFile('/etc/ndsp/ndsp-db.env')
 loadEnvFile('/etc/ndsp/ndsp-auth.env')
-loadEnvFile('/home/nawaf511/empire-core-new/backend/.env')
-loadEnvFile('/home/nawaf511/empire-core-new/backend/auth_api/.env')
+loadEnvFile('/home/nawaf511/.config/ndsp/backend.env')
+loadEnvFile('/home/nawaf511/.config/ndsp/auth_api.env')
 
 const PORT = Number(process.env.NDSP_USER_LOGIN_PORT || process.env.PORT || 9020)
 const DATABASE_URL =

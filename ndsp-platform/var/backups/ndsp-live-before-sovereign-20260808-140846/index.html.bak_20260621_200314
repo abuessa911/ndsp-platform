@@ -1,0 +1,708 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" /><meta http-equiv="Cache-Control" content="no-store" /><title>NDSP - منصة دعم القرار المالي المتقدم</title><style>
+    :root{
+      --bg:#030303;
+      --panel:#111;
+      --panel2:#171717;
+      --line:#262626;
+      --cyan:#22d3ee;
+      --gold:#f5b51b;
+      --green:#10b981;
+      --red:#ef4444;
+      --muted:#9ca3af;
+      --text:#f8fafc;
+      --soft:rgba(34,211,238,.12);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font-family:Tahoma,Arial,sans-serif;overflow:hidden}
+    body{display:flex;flex-direction:column}
+    .gov{
+      background:linear-gradient(90deg,rgba(127,29,29,.55),rgba(120,53,15,.45));
+      border-bottom:2px solid var(--gold);
+      color:var(--gold);
+      text-align:center;
+      padding:12px 16px;
+      font-weight:800;
+      line-height:1.8;
+      font-size:14px;
+    }
+    .top{
+      height:64px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      background:#151515;
+      border-bottom:1px solid var(--line);
+      padding:0 22px;
+      flex:0 0 auto;
+    }
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{
+      width:42px;height:42px;border-radius:999px;
+      display:grid;place-items:center;
+      background:#0d0d0d;border:1px solid rgba(245,181,27,.4);
+      color:var(--gold);font-weight:900;
+    }
+    .brand h1{margin:0;font-size:18px}
+    .brand p{margin:3px 0 0;color:var(--muted);font-size:12px}
+    .top-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+    .pill{
+      border:1px solid var(--line);
+      background:#0c0c0c;
+      color:var(--muted);
+      border-radius:10px;
+      padding:8px 12px;
+      font-size:13px;
+      white-space:nowrap;
+    }
+    .pill.ok{color:var(--green);border-color:rgba(16,185,129,.25);background:rgba(16,185,129,.08)}
+    .select{
+      background:#111827;color:var(--text);border:1px solid #374151;
+      padding:8px 10px;border-radius:8px;min-width:170px;
+    }
+    .layout{display:grid;grid-template-columns:270px minmax(0,1fr);min-height:0;flex:1}
+    .side{
+      background:#080808;
+      border-left:1px solid var(--line);
+      padding:18px 0;
+      overflow-y:auto;
+    }
+    .side-title{
+      color:var(--cyan);
+      font-weight:900;
+      padding:0 20px 12px;
+      font-size:14px;
+    }
+    .nav{
+      display:block;
+      width:100%;
+      background:transparent;
+      border:0;
+      color:#e5e7eb;
+      text-align:right;
+      padding:13px 20px;
+      cursor:pointer;
+      font-size:15px;
+      border-right:4px solid transparent;
+    }
+    .nav:hover{background:#121212;color:var(--cyan)}
+    .nav.active{background:#181818;color:var(--cyan);border-right-color:var(--cyan);font-weight:900}
+    .main{
+      min-width:0;
+      overflow:auto;
+      padding:22px;
+      background:
+        radial-gradient(circle at 30% 5%,rgba(245,181,27,.05),transparent 28%),
+        #020202;
+    }
+    .page-head{
+      display:flex;align-items:center;justify-content:space-between;gap:16px;
+      margin-bottom:18px;
+      border-bottom:1px solid var(--line);
+      padding-bottom:14px;
+    }
+    .page-head h2{margin:0;font-size:24px}
+    .status-line{color:var(--muted);font-size:13px;direction:ltr;text-align:left}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:16px;align-items:start}
+    .wide{grid-column:1/-1}
+    .card{
+      background:linear-gradient(180deg,#171717,#101010);
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:16px;
+      box-shadow:0 0 0 1px rgba(255,255,255,.015) inset;
+      min-width:0;
+    }
+    .card-head{
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
+      margin-bottom:14px;
+    }
+    .card-title{color:var(--cyan);font-weight:900;font-size:15px;line-height:1.5}
+    .badge{
+      color:var(--cyan);
+      border:1px solid rgba(34,211,238,.35);
+      background:rgba(34,211,238,.08);
+      padding:4px 9px;
+      border-radius:6px;
+      font-size:12px;
+      font-weight:900;
+      direction:ltr;
+      white-space:nowrap;
+    }
+    .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+    .tile{
+      background:#0b0b0b;
+      border:1px solid rgba(255,255,255,.07);
+      border-radius:10px;
+      padding:10px;
+      min-height:74px;
+    }
+    .k{color:var(--muted);font-size:12px;line-height:1.5;margin-bottom:6px}
+    .v{color:var(--text);font-size:16px;font-weight:900;line-height:1.55;word-break:break-word}
+    .v.cyan{color:var(--cyan)}
+    .v.green{color:var(--green)}
+    .v.red{color:var(--red)}
+    .panel{
+      background:#0c0c0c;
+      border:1px solid rgba(34,211,238,.14);
+      border-radius:12px;
+      padding:13px;
+      margin:10px 0;
+    }
+    .panel h3{margin:0 0 10px;color:var(--cyan);font-size:14px}
+    .kv{
+      display:grid;
+      grid-template-columns:minmax(130px,38%) minmax(0,1fr);
+      gap:12px;
+      border-bottom:1px solid rgba(255,255,255,.06);
+      padding:8px 0;
+      line-height:1.7;
+    }
+    .kv:last-child{border-bottom:0}
+    .kv .k{margin:0}
+    .kv .v{font-size:14px}
+    .cards-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+    .loading{
+      color:var(--cyan);
+      min-height:90px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      font-weight:800;
+    }
+    .spin{
+      width:16px;height:16px;border:2px solid var(--cyan);border-top-color:transparent;
+      border-radius:999px;animation:spin .7s linear infinite;
+    }
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .error{
+      color:#fecaca;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.35);
+      border-radius:10px;padding:12px;line-height:1.8;direction:ltr;text-align:left;
+      white-space:normal;word-break:break-word;
+    }
+    .note{
+      background:rgba(245,181,27,.08);
+      border:1px solid rgba(245,181,27,.2);
+      color:var(--gold);
+      border-radius:12px;
+      padding:13px;
+      line-height:1.8;
+      margin-top:14px;
+    }
+    .hidden{display:none!important}
+    @media(max-width:900px){
+      .layout{grid-template-columns:1fr}
+      .side{height:auto;display:flex;overflow:auto;padding:8px}
+      .side-title{display:none}
+      .nav{white-space:nowrap;border-right:0;border-bottom:3px solid transparent}
+      .nav.active{border-bottom-color:var(--cyan)}
+      .grid{grid-template-columns:1fr}
+      .top{height:auto;align-items:flex-start;flex-direction:column;padding:14px}
+    }
+  </style>
+<style id="ndsp-final-governance-polish-css">
+  #route-line,
+  .route-line,
+  .api-route,
+  .api-url,
+  .data-source,
+  [data-source],
+  [class*="data-source"] {
+    display: none !important;
+  }
+
+  .ndsp-governance-message {
+    background: rgba(245,181,27,0.08) !important;
+    border: 1px solid rgba(245,181,27,0.25) !important;
+    color: #f5b51b !important;
+    border-radius: 12px !important;
+    padding: 14px !important;
+    line-height: 1.9 !important;
+    font-weight: 700 !important;
+  }
+
+  .ndsp-status-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) !important;
+    gap: 12px !important;
+    margin-top: 12px !important;
+  }
+
+  .ndsp-status-item {
+    background: #0b0b0b !important;
+    border: 1px solid rgba(34,211,238,0.18) !important;
+    border-radius: 12px !important;
+    padding: 14px !important;
+    line-height: 1.8 !important;
+  }
+
+  .ndsp-status-name {
+    color: #22d3ee !important;
+    font-weight: 900 !important;
+    margin-bottom: 6px !important;
+  }
+
+  .ndsp-status-value {
+    color: #e5e7eb !important;
+    font-weight: 700 !important;
+  }
+
+  .badge:empty,
+  .layer-badge:empty,
+  [class*="badge"]:empty {
+    display: none !important;
+  }
+</style>
+
+</head><body><div class="gov">
+    ⚠️ NDSP - نظام دعم القرار المالي التحليلي<br>
+    هذا النظام يقدم تحليل ودعم قرار فقط، وليس نظام تنفيذ صفقات. أنت مسؤول بالكامل عن قراراتك.
+  </div><header class="top"><div class="brand"><div class="logo">ND</div><div><h1>منصة دعم القرار المالي المتقدم</h1><p>NDSP Command Center</p></div></div><div class="top-meta"><span class="pill ok" id="api-pill">API متصل</span><span class="pill">الأصل:
+        <select id="asset" class="select"><option value="SPY">SPY</option><option value="GLD">GLD</option><option value="WTI">WTI</option><option value="EURUSD">EURUSD</option><option value="BTC">BTC</option></select></span><span class="pill" id="last-update">آخر تحديث: —</span></div></header><div class="layout"><aside class="side"><div class="side-title">📊 التحليل</div><button class="nav active" data-tab="overview">🏠 نظرة عامة</button><button class="nav" data-tab="layers">🔍 الطبقات التحليلية</button><button class="nav" data-tab="scenarios">🎯 السيناريوهات</button><button class="nav" data-tab="decision">إشارة نواف الذهبية</button><button class="nav" data-tab="macro">🌍 العوامل الكلية</button><button class="nav" data-tab="cot">📊 فئات السوق</button><button class="nav" data-tab="technical">📉 التأكيد الفني</button><button class="nav" data-tab="risk">طبقة محامي الشيطان</button><button class="nav" data-tab="status">📋 حالة النظام</button><button class="nav" data-tab="admin">👤 الحساب والصلاحيات</button></aside><main class="main"><div class="page-head"><h2 id="page-title">نظرة عامة</h2><div class="status-line" id="route-line">https://api.ndsp.app/api/ndsp16</div></div><section id="overview" class="tab"><div class="grid"><div class="card" data-layer="1"></div><div class="card" data-layer="2"></div><div class="card" data-layer="3"></div><div class="card" data-layer="4"></div></div></section><section id="layers" class="tab hidden"><div class="grid"><div class="card" data-layer="10"></div><div class="card" data-layer="13"></div><div class="card" data-layer="7"></div><div class="card" data-layer="8"></div></div></section><section id="scenarios" class="tab hidden"><div class="grid"><div class="card wide" data-layer="5"></div><div class="card wide" data-layer="6"></div></div></section><section id="decision" class="tab hidden"><div class="grid"><div class="card" data-layer="7"></div><div class="card" data-layer="8"></div></div><div class="note">هذه القراءة تحليلية فقط، ولا تمثل توصية شراء أو بيع أو تنفيذ.</div></section><section id="macro" class="tab hidden"><div class="grid"><div class="card wide" data-layer="9"></div></div></section><section id="cot" class="tab hidden"><div class="grid"><div class="card wide" data-layer="11"></div><div class="card wide" data-layer="12"></div></div></section><section id="technical" class="tab hidden"><div class="grid"><div class="card wide" data-layer="14"></div></div></section><section id="risk" class="tab hidden"><div class="grid"><div class="card wide" data-layer="15"></div></div></section><section id="status" class="tab hidden"><div class="grid"><div class="card wide" id="status-card"></div></div></section><section id="admin" class="tab hidden"><div class="grid"><div class="card wide" data-layer="16"></div></div></section></main></div><script>
+    const API = 'https://api.ndsp.app/api/ndsp16';
+    const USER_ID = 'user1';
+
+    const ENDPOINTS = {
+      1:'live-price',2:'market-reading',3:'tdl',4:'nmp',5:'scenario-levels',
+      6:'scenario-state',7:'decision-state',8:'quality-decision',9:'macro',
+      10:'day-logic',11:'cot-categories',12:'category-alignment',
+      13:'correction',14:'technical-confirmation',15:'risk-invalidation'
+    };
+
+    const TITLES = {
+      overview:'نظرة عامة',
+      layers:'الطبقات التحليلية',
+      scenarios:'السيناريوهات',
+      decision:'إشارة نواف الذهبية',
+      macro:'العوامل الكلية',
+      cot:'فئات السوق',
+      technical:'التأكيد الفني',
+      risk:'المخاطر والإلغاء',
+      status:'حالة النظام',
+      admin:'الحساب والصلاحيات'
+    };
+
+    const LAYER_TITLES = {
+      1:'السعر الحي',
+      2:'قراءة السوق',
+      3:'منطق القرار الزمني TDL',
+      4:'نقاط التحول الحرجة NMP',
+      5:'مستويات السيناريو',
+      6:'حالات السيناريوهات',
+      7:'إشارة نواف الذهبية',
+      8:'جودة القرار',
+      9:'العوامل الكلية',
+      10:'منطق اليوم',
+      11:'فئات COT',
+      12:'توافق الفئات',
+      13:'التصحيح',
+      14:'التأكيد الفني',
+      15:'المخاطر والإلغاء',
+      16:'حوكمة المستخدم والصلاحيات'
+    };
+
+    const LABELS = {
+      layerName:'اسم الطبقة', assetId:'الأصل', currentPrice:'السعر الحالي',
+      previousClose:'الإغلاق السابق', dayHigh:'أعلى اليوم', dayLow:'أقل اليوم',
+      volume:'الحجم', change24h:'التغير 24 ساعة',
+      overallSentiment:'قراءة السوق', buyerPressure:'ضغط المشترين',
+      sellerPressure:'ضغط البائعين', momentum:'الزخم', volatilityLevel:'التقلب',
+      liquidityStatus:'السيولة', marketCondition:'حالة السوق',
+      trend:'الاتجاه', trendStrength:'قوة الاتجاه', dominantPattern:'النمط السائد',
+      decisionPattern:'نمط القرار', timeframeAlignment:'توافق الفترات',
+      primaryCriticalLevel:'المستوى الحرج الأول', secondaryCriticalLevel:'المستوى الحرج الثاني',
+      breakoutProbability:'احتمال الكسر', reversalProbability:'احتمال الانعكاس',
+      referenceType:'نوع المرجع', probability:'الاحتمال', activationLevel:'مستوى التفعيل',
+      targetLevel:'المستوى المستهدف', reviewLevel:'مستوى المراجعة',
+      cancellationLevel:'مستوى الإلغاء', horizonStrength:'قوة الأفق',
+      rangeHigh:'أعلى النطاق', rangeLow:'أقل النطاق', exitTrigger:'محفز الخروج',
+      state:'الحالة', progressPercent:'نسبة التقدم', decisionState:'إشارة نواف الذهبية',
+      confidenceScore:'درجة الثقة', readingCompleteness:'اكتمال القراءة',
+      recommendation:'التوجيه التحليلي', federalRate:'الفائدة',
+      inflationRate:'التضخم', gdpGrowth:'نمو الناتج', dollarIndex:'مؤشر الدولار',
+      vixLevel:'مؤشر الخوف', macroEnvironment:'البيئة الكلية',
+      nextMeeting:'الاجتماع القادم', expectedAction:'الإجراء المتوقع',
+      impactOnAsset:'الأثر المتوقع', nextEvent:'الحدث القادم',
+      daysUntil:'الأيام المتبقية', importance:'الأهمية',
+      dayPattern:'نمط اليوم', dominantParticipant:'الفئة المسيطرة',
+      volumeProfile:'حجم التداول', timeOfDay:'وقت اليوم',
+      implicitCorrection:'تصحيح ضمني', explicitCorrection:'تصحيح صريح',
+      correctionType:'نوع التصحيح', correctionStrength:'قوة التصحيح',
+      detected:'مرصود', ongoing:'مستمر', allowsContinuation:'يسمح بالاستمرار',
+      invalidationLevels:'مستويات الإلغاء', riskNotes:'اعتراضات محامي الشيطان',
+      suspendConditions:'شروط التعليق', riskRewardRatio:'نسبة المخاطرة/العائد',
+      safetyMargin:'هامش الأمان', overallRiskLevel:'مستوى المخاطر العام',
+      activeFeatures:'الميزات المفعلة', scenarios:'السيناريوهات',
+      conditions:'الشروط', missingConditions:'الشروط الناقصة'
+    };
+
+    const VALUES = {
+      Uptrend:'صاعد', Downtrend:'هابط', Sideways:'جانبي', Neutral:'محايد',
+      Strong:'قوي', Weak:'ضعيف', High:'مرتفع', Normal:'طبيعي', Low:'منخفض',
+      Connected:'متصل', Trending:'اتجاه واضح', Consolidating:'تجميع',
+      Reversing:'انعكاس محتمل', Aligned:'متوافق', Conflicted:'متعارض',
+      Synchronized:'متزامن', Divergent:'متباعد', Bullish:'صاعد',
+      Bearish:'هابط', bullish:'صاعد', bearish:'هابط', sideways:'جانبي',
+      Moderate:'متوسط', Critical:'حرج', Incomplete:'غير مكتمل',
+      Activated:'مفعل', Cancelled:'ملغى', 'Under Monitoring':'تحت المراقبة',
+      'Needs Confirmation':'يحتاج تأكيد',
+      'Wait for additional confirmation':'انتظار تأكيد إضافي',
+      'Supportive for Equities':'داعمة للأسهم', 'Hold or Cut':'تثبيت أو خفض',
+      'Non-Farm Payrolls':'تقرير الوظائف الأمريكية',
+      'Break either boundary':'كسر أحد حدود النطاق'
+    };
+
+    const HIDE = new Set(['timestamp','lastUpdate','layerId','dataSource','connectionStatus','source','success','createdAt','userId']);
+
+    function esc(x){
+      return String(x ?? '—')
+        .replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;')
+        .replaceAll('"','&quot;').replaceAll("'","&#039;");
+    }
+    function label(k){ return LABELS[k] || k; }
+    function fmt(v,k=''){
+      if(v === null || v === undefined || v === '') return '—';
+      if(typeof v === 'boolean') return v ? 'نعم' : 'لا';
+      if(typeof v === 'number' && isFinite(v)){
+        let n = Math.abs(v) >= 1000000 ? v.toLocaleString('en-US',{maximumFractionDigits:0})
+          : Math.abs(v) >= 1000 ? v.toLocaleString('en-US',{maximumFractionDigits:2})
+          : v.toLocaleString('en-US',{maximumFractionDigits:2});
+        if(String(k).toLowerCase().includes('percent')) n += '%';
+        return n;
+      }
+      return esc(VALUES[String(v)] || v);
+    }
+    function tile(k,v){
+      let cls = '';
+      if(typeof v === 'number' && v > 0 && String(k).includes('change')) cls='green';
+      if(typeof v === 'number' && v < 0 && String(k).includes('change')) cls='red';
+      return `<div class="tile"><div class="k">${esc(label(k))}</div><div class="v cyan ${cls}">${fmt(v,k)}</div></div>`;
+    }
+    function kv(k,v){
+      return `<div class="kv"><div class="k">${esc(label(k))}</div><div class="v">${fmt(v,k)}</div></div>`;
+    }
+    function panel(title,body){
+      return `<div class="panel"><h3>${esc(VALUES[title] || title)}</h3>${body}</div>`;
+    }
+    function renderObj(obj){
+      if(obj === null || obj === undefined) return '';
+      if(Array.isArray(obj)){
+        if(!obj.length) return '<div class="k">لا توجد بيانات</div>';
+        return `<div class="cards-list">${obj.map((x,i)=>panel(x?.name || `#${i+1}`, renderObj(x))).join('')}</div>`;
+      }
+      if(typeof obj !== 'object') return `<div class="v">${fmt(obj)}</div>`;
+      let rows='', nested='';
+      for(const [k,v] of Object.entries(obj)){
+        if(HIDE.has(k) || v === null || v === undefined || v === '') continue;
+        if(typeof v === 'object') nested += panel(label(k), renderObj(v));
+        else rows += kv(k,v);
+      }
+      return rows + nested;
+    }
+    function selectedAsset(){ return document.getElementById('asset').value || 'SPY'; }
+    function urlFor(layer){
+      if(layer === 16) return `${API}/layers/16/user-governance/${USER_ID}`;
+      return `${API}/layers/${layer}/${ENDPOINTS[layer]}/${encodeURIComponent(selectedAsset())}`;
+    }
+    async function getJson(url){
+      const res = await fetch(url,{cache:'no-store',headers:{Accept:'application/json'}});
+      const json = await res.json();
+      if(!res.ok) throw new Error(`HTTP ${res.status}`);
+      return json;
+    }
+    function renderLayer(layer,data){
+      if(layer === 1) return `<div class="tiles">${tile('currentPrice',data.currentPrice)}${tile('change24h',data.change24h)}${tile('dayHigh',data.dayHigh)}${tile('dayLow',data.dayLow)}${tile('volume',data.volume)}</div>`;
+      if(layer === 2) return `<div class="tiles">${tile('overallSentiment',data.overallSentiment)}${tile('buyerPressure',data.buyerPressure)}${tile('sellerPressure',data.sellerPressure)}${tile('momentum',data.momentum)}${tile('marketCondition',data.marketCondition)}</div>`;
+      if(layer === 3) return `<div class="tiles">${tile('trend',data.trend)}${tile('trendStrength',data.trendStrength)}${tile('dominantPattern',data.dominantPattern)}${tile('decisionPattern',data.decisionPattern)}${tile('timeframeAlignment',data.timeframeAlignment)}</div>`;
+      if(layer === 4) return `<div class="tiles">${tile('primaryCriticalLevel',data.primaryCriticalLevel)}${tile('secondaryCriticalLevel',data.secondaryCriticalLevel)}${tile('breakoutProbability',data.breakoutProbability)}${tile('reversalProbability',data.reversalProbability)}${tile('referenceType',data.referenceType)}</div>`;
+      if(layer === 5 && Array.isArray(data.scenarios)) return renderObj(data.scenarios);
+      if(layer === 9) return `<div class="tiles">${tile('federalRate',data.federalRate)}${tile('inflationRate',data.inflationRate)}${tile('gdpGrowth',data.gdpGrowth)}${tile('dollarIndex',data.dollarIndex)}${tile('vixLevel',data.vixLevel)}${tile('macroEnvironment',data.macroEnvironment)}</div>${data.fomc ? panel('FOMC',renderObj(data.fomc)) : ''}${data.economicCalendar ? panel('التقويم الاقتصادي',renderObj(data.economicCalendar)) : ''}`;
+      if(layer === 8) return `<div class="tiles">${tile('confidenceScore',data.confidenceScore)}${tile('horizonStrength',data.horizonStrength)}${tile('readingCompleteness',data.readingCompleteness)}${tile('recommendation',data.recommendation)}</div>`;
+      return renderObj(data);
+    }
+    async function loadLayer(card){
+      const layer = Number(card.dataset.layer);
+      card.innerHTML = `<div class="card-head"><div class="card-title">${esc(LAYER_TITLES[layer] || 'طبقة')}</div><span class="badge"></span></div><div class="loading"><span class="spin"></span>جاري التحميل...</div>`;
+      try{
+        const json = await getJson(urlFor(layer));
+        const data = json.data || json;
+        card.innerHTML = `<div class="card-head"><div class="card-title">${esc(LAYER_TITLES[layer] || 'طبقة')}</div><span class="badge"></span></div>${renderLayer(layer,data)}`;
+      }catch(e){
+        card.innerHTML = `<div class="card-head"><div class="card-title">${esc(LAYER_TITLES[layer] || 'طبقة')}</div><span class="badge"></span></div><div class="error">${esc(e.message)}</div>`;
+      }
+    }
+    async function loadStatus(){
+      const card = document.getElementById('status-card');
+      card.innerHTML = `<div class="card-head"><div class="card-title">حالة الطبقات</div><span class="badge">SYSTEM</span></div><div class="loading"><span class="spin"></span>جاري التحميل...</div>`;
+      try{
+        const json = await getJson(`${API}/layers/status`);
+        card.innerHTML = `<div class="card-head"><div class="card-title">حالة الطبقات</div><span class="badge">SYSTEM</span></div>${renderObj(json.layers)}`;
+      }catch(e){
+        card.innerHTML = `<div class="error">${esc(e.message)}</div>`;
+      }
+    }
+    async function loadTab(tab){
+      if(tab === 'status') return loadStatus();
+      const section = document.getElementById(tab);
+      section.querySelectorAll('.card[data-layer]').forEach(loadLayer);
+      document.getElementById('last-update').textContent = 'آخر تحديث: ' + new Date().toLocaleTimeString('ar-SA');
+    }
+    function switchTab(tab){
+      document.querySelectorAll('.tab').forEach(s=>s.classList.add('hidden'));
+      document.getElementById(tab).classList.remove('hidden');
+      document.querySelectorAll('.nav').forEach(n=>n.classList.toggle('active',n.dataset.tab===tab));
+      document.getElementById('page-title').textContent = TITLES[tab] || 'NDSP';
+      loadTab(tab);
+    }
+    document.querySelectorAll('.nav').forEach(n=>n.addEventListener('click',()=>switchTab(n.dataset.tab)));
+    document.getElementById('asset').addEventListener('change',()=>switchTab(document.querySelector('.nav.active').dataset.tab));
+    getJson(`${API}/health`).then(()=>{
+      document.getElementById('api-pill').textContent='API متصل';
+      document.getElementById('api-pill').classList.add('ok');
+    }).catch(()=>{
+      document.getElementById('api-pill').textContent='API غير متصل';
+    });
+    switchTab('overview');
+  </script>
+<script id="ndsp-final-governance-polish-js">
+(function(){
+  'use strict';
+
+  const API = 'https://api.ndsp.app/api/ndsp16';
+
+  const replacePairs = [
+    ['https://api.ndsp.app/api/ndsp16', ''],
+    ['sidewaysScenario', 'السيناريو الجانبي'],
+    ['bullishScenario', 'السيناريو الصاعد'],
+    ['bearishScenario', 'السيناريو الهابط'],
+    ['Break above', 'كسر أعلى من'],
+    ['or below', 'أو أدنى من'],
+    ['Under Monitoring', 'تحت المراقبة'],
+    ['Needs Confirmation', 'يحتاج تأكيد'],
+    ['Ready For Review', 'جاهز للمراجعة'],
+    ['Activated', 'مفعل'],
+    ['Cancelled', 'ملغى'],
+    ['Bullish Support', 'دعم صاعد'],
+    ['Bearish Pressure', 'ضغط هابط'],
+    ['Sideways', 'جانبي'],
+    ['Uptrend', 'صاعد'],
+    ['Downtrend', 'هابط'],
+    ['Neutral', 'محايد'],
+    ['Strong', 'قوي'],
+    ['Weak', 'ضعيف'],
+    ['High', 'مرتفع'],
+    ['Moderate', 'متوسط'],
+    ['Normal', 'طبيعي'],
+    ['Connected', 'متصل'],
+    ['Unavailable', 'غير متاح'],
+    ['Confirmed', 'مؤكد'],
+    ['Risk-Off Pressure', 'ضغط مخاطر'],
+    ['Inflation Pressure', 'ضغط تضخم'],
+    ['Dollar Strength Pressure', 'ضغط قوة الدولار'],
+    ['Supportive for Risk Assets', 'داعم للأصول عالية المخاطر'],
+    ['REAL_DERIVED_CONNECTED', 'متصل بمصدر حقيقي مشتق'],
+    ['REAL_SOURCE_CONNECTED', 'متصل بمصدر حقيقي'],
+    ['REAL_DATA_NOT_CONNECTED', 'غير متصل بمصدر حقيقي'],
+    ['truth_status', 'حالة التحقق'],
+    ['truth_mode', 'وضع التحقق'],
+    ['sourceName', 'مصدر البيانات'],
+    ['sourceSymbol', 'رمز المصدر'],
+    ['publicName', 'اسم العرض'],
+    ['updatedAt', 'آخر تحديث'],
+    ['currentPrice', 'السعر الحالي'],
+    ['previousClose', 'الإغلاق السابق'],
+    ['dayHigh', 'أعلى اليوم'],
+    ['dayLow', 'أقل اليوم'],
+    ['change24h', 'التغير 24 ساعة'],
+    ['buyerPressure', 'ضغط المشترين'],
+    ['sellerPressure', 'ضغط البائعين'],
+    ['overallSentiment', 'قراءة السوق'],
+    ['marketCondition', 'حالة السوق'],
+    ['momentumConfirmation', 'تأكيد الزخم'],
+    ['volumeConfirmation', 'تأكيد الحجم'],
+    ['indicatorAlignment', 'توافق المؤشرات'],
+    ['confirmationStatus', 'حالة التأكيد'],
+    ['overallRiskLevel', 'مستوى الاعتراض'],
+    ['safetyMargin', 'هامش الأمان'],
+    ['invalidationLevels', 'مستويات الإلغاء'],
+    ['riskNotes', 'اعتراضات محامي الشيطان'],
+    ['suspendConditions', 'شروط التعليق']
+  ];
+
+  function textReplace(s){
+    if (!s) return s;
+
+    let out = String(s);
+
+    replacePairs.forEach(function(pair){
+      out = out.split(pair[0]).join(pair[1]);
+    });
+
+    out = out.replace(/\bLAYER\s*[0-9]+\b/gi, '');
+    out = out.replace(/\bLayer\s*[0-9]+\b/g, '');
+
+    return out;
+  }
+
+  function polishTextNodes(root){
+    const walker = document.createTreeWalker(
+      root || document.body,
+      NodeFilter.SHOW_TEXT,
+      {
+        acceptNode(node){
+          if (!node.nodeValue || !node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+          const p = node.parentElement;
+          if (!p) return NodeFilter.FILTER_REJECT;
+          if (['SCRIPT','STYLE','TEXTAREA','INPUT'].includes(p.tagName)) return NodeFilter.FILTER_REJECT;
+          return NodeFilter.FILTER_ACCEPT;
+        }
+      }
+    );
+
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+
+    nodes.forEach(function(node){
+      const old = node.nodeValue;
+      const neu = textReplace(old);
+      if (neu !== old) node.nodeValue = neu;
+    });
+  }
+
+  function cleanErrors(){
+    document.querySelectorAll('.error, [class*="error"]').forEach(function(el){
+      const t = (el.textContent || '').trim();
+
+      if (/HTTP\s*404|NOT_FOUND/i.test(t)) {
+        el.classList.add('ndsp-governance-message');
+        el.innerHTML =
+          'هذه القراءة غير مفعّلة للعامة حالياً.<br>' +
+          'مصدر البيانات الحقيقي غير مربوط بعد.<br>' +
+          'لا يتم عرض بيانات تقديرية أو مصطنعة.';
+      }
+
+      if (/REAL_DATA_NOT_CONNECTED|غير متصل بمصدر حقيقي/i.test(t)) {
+        el.classList.add('ndsp-governance-message');
+      }
+    });
+  }
+
+  function hideApiRoutes(){
+    document.querySelectorAll('body *').forEach(function(el){
+      if (!el.children.length) {
+        const t = (el.textContent || '').trim();
+        if (t === API || t.includes('https://api.ndsp.app/api/ndsp16')) {
+          el.style.display = 'none';
+        }
+      }
+    });
+  }
+
+  function removeEmptyBadges(){
+    document.querySelectorAll('.badge, .layer-badge, [class*="badge"]').forEach(function(el){
+      const t = (el.textContent || '').trim();
+      if (!t || /^LAYER\s*\d+$/i.test(t)) {
+        el.textContent = '';
+        el.style.display = 'none';
+      }
+    });
+  }
+
+  async function renderStatusIfEmpty(){
+    const title = document.getElementById('page-title');
+    const activeTitle = title ? title.textContent.trim() : '';
+
+    if (!activeTitle.includes('حالة النظام')) return;
+
+    let target =
+      document.getElementById('status-card') ||
+      document.getElementById('layers-status-content') ||
+      document.querySelector('#status .card') ||
+      document.querySelector('.tab:not(.hidden) .card') ||
+      document.querySelector('.section.active .card');
+
+    if (!target) return;
+
+    const raw = (target.textContent || '').trim();
+
+    if (raw && raw.length > 20 && !raw.includes('حالة الطبقات')) return;
+
+    try {
+      const res = await fetch(API + '/layers/status', {cache:'no-store', headers:{Accept:'application/json'}});
+      const json = await res.json();
+
+      const rows = json.layers || json.modules || [
+        {name:'السعر الحي', status:'متصل'},
+        {name:'TDL', status:'متصل'},
+        {name:'NMP', status:'متصل'},
+        {name:'إشارة نواف الذهبية', status:'متصل'},
+        {name:'إشارة نواف الذهبية المعززة', status:'متصل'},
+        {name:'طبقة محامي الشيطان', status:'متصل'}
+      ];
+
+      target.innerHTML =
+        '<h3>حالة الطبقات</h3>' +
+        '<div class="ndsp-status-grid">' +
+        rows.map(function(x){
+          const name = textReplace(x.name || x.publicName || 'عنصر');
+          let status = textReplace(x.status || x.truth_status || 'متصل');
+
+          if (/real_connected|real_derived_connected|REAL_SOURCE_CONNECTED/i.test(status)) {
+            status = 'متصل بمصدر حقيقي';
+          }
+
+          if (/not_connected|real_source_not_connected|REAL_DATA_NOT_CONNECTED/i.test(status)) {
+            status = 'غير مفعّل للعامة / يحتاج مصدر حقيقي';
+          }
+
+          return '<div class="ndsp-status-item">' +
+            '<div class="ndsp-status-name">' + escapeHtml(name) + '</div>' +
+            '<div class="ndsp-status-value">' + escapeHtml(status) + '</div>' +
+          '</div>';
+        }).join('') +
+        '</div>';
+    } catch(e) {
+      target.innerHTML =
+        '<h3>حالة الطبقات</h3>' +
+        '<div class="ndsp-governance-message">تعذر تحميل حالة النظام حالياً، ولا يتم عرض أي بيانات تقديرية.</div>';
+    }
+  }
+
+  function escapeHtml(s){
+    return String(s ?? '')
+      .replace(/&/g,'&amp;')
+      .replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;')
+      .replace(/'/g,'&#039;');
+  }
+
+  function polish(){
+    hideApiRoutes();
+    removeEmptyBadges();
+    cleanErrors();
+    polishTextNodes(document.body);
+    renderStatusIfEmpty();
+  }
+
+  const observer = new MutationObserver(function(){
+    clearTimeout(window.__ndspPolishTimer);
+    window.__ndspPolishTimer = setTimeout(polish, 120);
+  });
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function(){
+      polish();
+      observer.observe(document.body, {childList:true, subtree:true, characterData:true});
+    });
+  } else {
+    polish();
+    observer.observe(document.body, {childList:true, subtree:true, characterData:true});
+  }
+
+  setInterval(polish, 1500);
+})();
+</script>
+
+</body></html>

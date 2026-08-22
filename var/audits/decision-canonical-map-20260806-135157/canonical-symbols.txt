@@ -1,0 +1,99 @@
+backend/layers/canonical_v1/layer_orchestrator_v2.py:24:    "NDSP-CORE-L16": "backend.layers.canonical_v1.final.l16_decision_readiness_state_machine",
+backend/layers/canonical_v1/layer_orchestrator_v2.py:29:def run_all_layers(payload: dict[str, Any] | None, registry_path: str | Path):
+backend/layers/canonical_v1/layer_orchestrator_v2.py:37:    if cot and not cot.get("decision_use_allowed", False):
+backend/services/decision_governance_core/main.cjs:18:  description: 'Official NDSP decision governance validation service.'
+backend/services/decision_governance_core/main.cjs:24:function cleanSymbol(v){
+backend/services/decision_governance_core/main.cjs:28:function num(v){
+backend/services/decision_governance_core/main.cjs:33:function validateDecision(input){
+backend/services/decision_governance_core/main.cjs:38:  const quality = num(input.decision_quality ?? input.quality);
+backend/services/decision_governance_core/main.cjs:53:function decideState(validation, input){
+backend/services/decision_governance_core/main.cjs:56:  const requested = String(input.decision_state || '').trim();
+backend/services/decision_governance_core/main.cjs:66:function toCompletedPayload(input, validation, state){
+backend/services/decision_governance_core/main.cjs:70:    decision_state: state,
+backend/services/decision_governance_core/main.cjs:71:    decision_quality: validation.quality,
+backend/services/decision_governance_core/main.cjs:82:    source: input.source || 'decision_governance_core',
+backend/services/decision_governance_core/main.cjs:100:      service:'ndsp-decision-governance-core',
+backend/services/decision_governance_core/main.cjs:102:      completed_decision_service:j
+backend/services/decision_governance_core/main.cjs:107:      service:'ndsp-decision-governance-core',
+backend/services/decision_governance_core/main.cjs:121:    source:'decision_governance_core',
+backend/services/decision_governance_core/main.cjs:123:    decision_state: state,
+backend/services/decision_governance_core/main.cjs:138:        source:'decision_governance_core',
+backend/services/decision_governance_core/main.cjs:141:        decision_state:state
+backend/services/decision_governance_core/main.cjs:148:        source:'decision_governance_core',
+backend/services/decision_governance_core/main.cjs:149:        decision_state:state,
+backend/services/decision_governance_core/main.cjs:167:      source:'decision_governance_core',
+backend/services/decision_governance_core/main.cjs:169:      decision_state:state,
+backend/services/decision_governance_core/main.cjs:170:      completed_decision_response:j
+backend/services/decision_governance_core/main.cjs:175:      source:'decision_governance_core',
+backend/services/decision_governance_core/framework-adapter.cjs:9:function buildFrameworkInfo() {
+backend/services/decision_governance_core/framework-adapter.cjs:19:function attachFrameworkStandard(app, options = {}) {
+backend/services/decision_governance_core/framework-adapter.cjs:27:  const description = options.description || 'Official NDSP decision governance validation service.';
+backend/services/decision_governance_core/framework-adapter.cjs:46:      role: 'governance_validation_before_completed_decision',
+backend/services/decision_governance_core/framework-adapter.cjs:47:      decision_policy: 'decision_support_only',
+backend/services/decision_governance_core/framework-adapter.cjs:70:module.exports = {
+backend/app/ndsp_governance/decision_output_policy.py:13:GOVERNANCE_NOTE_EN = "Scenario levels are contextual decision-support references only. They are not financial advice, trade instructions, execution orders, or guaranteed outcomes."
+backend/app/ndsp_governance/decision_output_policy.py:105:def now_iso() -> str:
+backend/app/ndsp_governance/decision_output_policy.py:108:def load_governance() -> Dict[str, Any]:
+backend/app/ndsp_governance/decision_output_policy.py:114:def normalize_plan(package: Any) -> str:
+backend/app/ndsp_governance/decision_output_policy.py:124:def visible_layer_names(package: Any) -> List[str]:
+backend/app/ndsp_governance/decision_output_policy.py:134:def sanitize_public_text(value: Any) -> str:
+backend/app/ndsp_governance/decision_output_policy.py:140:def contains_forbidden_public_terms(value: Any) -> bool:
+backend/app/ndsp_governance/decision_output_policy.py:144:def as_number_or_none(value: Any) -> Optional[float]:
+backend/app/ndsp_governance/decision_output_policy.py:155:def first_present(data: Dict[str, Any], keys: List[str], default: Any = None) -> Any:
+backend/app/ndsp_governance/decision_output_policy.py:161:def should_drop_key(key: str) -> bool:
+backend/app/ndsp_governance/decision_output_policy.py:188:def sanitize_recursive(value: Any, depth: int = 0) -> Any:
+backend/app/ndsp_governance/decision_output_policy.py:212:def normalize_direction(value: Any) -> str:
+backend/app/ndsp_governance/decision_output_policy.py:245:def detect_directional_context(data: Dict[str, Any]) -> Tuple[str, str, str]:
+backend/app/ndsp_governance/decision_output_policy.py:270:def same_directional_family(a: Any, b: Any) -> Optional[bool]:
+backend/app/ndsp_governance/decision_output_policy.py:281:def determine_tdl_authority(date_value: Any = None) -> Dict[str, Any]:
+backend/app/ndsp_governance/decision_output_policy.py:307:def derive_tdl_follow_style(data: Dict[str, Any]) -> Dict[str, Any]:
+backend/app/ndsp_governance/decision_output_policy.py:367:def derive_tdl_direction_exposure(data: Dict[str, Any]) -> Dict[str, Any]:
+backend/app/ndsp_governance/decision_output_policy.py:435:def build_tdl_v2_context(data: Dict[str, Any], package: str = "free") -> Dict[str, Any]:
+backend/app/ndsp_governance/decision_output_policy.py:470:def extract_package_from_payload(data: Dict[str, Any], fallback: str = "free") -> str:
+backend/app/ndsp_governance/decision_output_policy.py:473:def build_scenario(data: Dict[str, Any]) -> Dict[str, Any]:
+backend/app/ndsp_governance/decision_output_policy.py:507:def build_layer_outputs(data: Dict[str, Any], package: str) -> List[Dict[str, Any]]:
+backend/app/ndsp_governance/decision_output_policy.py:582:def govern_decision_output(payload: Any, package: str = "free") -> Dict[str, Any]:
+backend/app/ndsp_governance/decision_output_policy.py:599:        "source_mode": "python_decision_governed_tdl_v2",
+backend/app/ndsp_governance/decision_output_policy.py:624:            "decision_quality": sanitize_public_text(first_present(original, ["decision_quality", "quality"], "تحتاج متابعة")),
+backend/app/ndsp_governance/decision_output_policy.py:668:def govern_any_response(data: Any, package: str = "free") -> Any:
+backend/app/ndsp_governance/decision_output_policy.py:672:            wrapped["data"] = govern_decision_output(wrapped["data"], package=package)
+backend/app/ndsp_governance/decision_output_policy.py:675:        return govern_decision_output(data, package=package)
+backend/app/ndsp_governance/decision_output_policy.py:679:            govern_decision_output(item, package=package)
+backend/app/ndsp_governance/decision_output_policy.py:681:            else govern_decision_output({"summary": item}, package=package)
+backend/app/ndsp_governance/decision_output_policy.py:685:    return govern_decision_output({"summary": data}, package=package)
+backend/app/ndsp_governance/decision_output_policy.py:688:    re.compile(r"/decision", re.I),
+backend/app/ndsp_governance/decision_output_policy.py:689:    re.compile(r"/decisions", re.I),
+backend/app/ndsp_governance/decision_output_policy.py:697:def path_needs_governance(path: str) -> bool:
+backend/app/ndsp_governance/decision_output_policy.py:700:def install_ndsp_decision_governance(app: Any) -> None:
+backend/app/ndsp_governance/decision_output_policy.py:764:    installed = getattr(app.state, "ndsp_decision_governance_installed", False)
+backend/app/ndsp_governance/decision_output_policy.py:767:        app.state.ndsp_decision_governance_installed = True
+backend/app/ndsp_governance/decision_output_policy.py:815:def _ndsp_restore_mandatory_governance(governed):
+backend/app/ndsp_governance/decision_output_policy.py:842:def _ndsp_iter_string_values_only(value, *, depth=0, parent_key=""):
+backend/app/ndsp_governance/decision_output_policy.py:862:def contains_forbidden_public_terms(value):
+backend/app/ndsp_governance/decision_output_policy.py:882:def should_drop_key(key: str) -> bool:
+backend/app/ndsp_governance/decision_output_policy.py:913:        "decision_quality",
+backend/app/ndsp_governance/decision_output_policy.py:924:_original_govern_decision_output_before_keyerror_fix = govern_decision_output
+backend/app/ndsp_governance/decision_output_policy.py:926:def govern_decision_output(payload, package="free"):
+backend/app/ndsp_governance/decision_output_policy.py:927:    governed = _original_govern_decision_output_before_keyerror_fix(payload, package=package)
+backend/app/ndsp_governance/decision_output_policy.py:941:def govern_any_response(data, package="free"):
+backend/app/ndsp_governance/decision_output_policy.py:945:            wrapped["data"] = govern_decision_output(wrapped["data"], package=package)
+backend/app/ndsp_governance/decision_output_policy.py:948:        return govern_decision_output(data, package=package)
+backend/app/ndsp_governance/decision_output_policy.py:952:            govern_decision_output(item, package=package)
+backend/app/ndsp_governance/decision_output_policy.py:954:            else govern_decision_output({"summary": item}, package=package)
+backend/app/ndsp_governance/decision_output_policy.py:958:    return govern_decision_output({"summary": data}, package=package)
+backend/app/ndsp_governance/decision_output_policy.py:985:def _ndsp_restore_governance_keys(obj):
+backend/app/ndsp_governance/decision_output_policy.py:995:def _ndsp_iter_public_strings(value, depth=0):
+backend/app/ndsp_governance/decision_output_policy.py:1008:def contains_forbidden_public_terms(value):
+backend/app/ndsp_governance/decision_output_policy.py:1028:def should_drop_key(key: str) -> bool:
+backend/app/ndsp_governance/decision_output_policy.py:1064:        "decision_quality",
+backend/app/ndsp_governance/decision_output_policy.py:1077:_NDSP_ORIGINAL_GOVERN_DECISION_OUTPUT_V2 = govern_decision_output
+backend/app/ndsp_governance/decision_output_policy.py:1079:def govern_decision_output(payload, package="free"):
+backend/app/ndsp_governance/decision_output_policy.py:1094:def govern_any_response(data, package="free"):
+backend/app/ndsp_governance/decision_output_policy.py:1098:            wrapped["data"] = govern_decision_output(wrapped["data"], package=package)
+backend/app/ndsp_governance/decision_output_policy.py:1101:        return govern_decision_output(data, package=package)
+backend/app/ndsp_governance/decision_output_policy.py:1105:            govern_decision_output(item, package=package)
+backend/app/ndsp_governance/decision_output_policy.py:1107:            else govern_decision_output({"summary": item}, package=package)
+backend/app/ndsp_governance/decision_output_policy.py:1111:    return govern_decision_output({"summary": data}, package=package)
+backend/evidence/canonical_v1/decision_ledger.py:5:def append_record(*, payload, previous_hash=None):
+backend/evidence/canonical_v1/decision_ledger.py:19:def verify_record(record):
+backend/app/support_layers/cot/cot_engine.py:12:class CotIntelligenceEngine:

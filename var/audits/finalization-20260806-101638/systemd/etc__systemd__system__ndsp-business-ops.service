@@ -1,0 +1,23 @@
+[Unit]
+Description=NDSP Business Operations V205
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=nawaf511
+Group=nawaf511
+EnvironmentFile=/etc/ndsp/business-ops.env
+ExecStart=/usr/bin/python3 /usr/local/lib/ndsp-business-ops/app.py
+Restart=always
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/ndsp-business-ops
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+UMask=0027
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,10 @@
+/home/nawaf511/empire-core-new/backend/tests/contracts/test_v201_weekly_direction_handoff.py:1:from backend.app.runtime.ndsp_v201_launch_completion import (
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v200_score_inputs.py:18:CONTRACT_VERSION = "NDSP_SCORE_INPUTS_V200"
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v200_score_inputs.py:19:USER_AGENT = "NDSP-V200-Score-Inputs/1.0"
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v200_score_inputs.py:424:def attach_v200_score_inputs(
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_quality_live_nmp_wrapper.py:3:from backend.app.runtime.ndsp_v200_score_inputs import attach_v200_score_inputs as _ndsp_attach_v200_score_inputs_v200
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_quality_live_nmp_wrapper.py:4:# NDSP_V200_SCORE_INPUT_CONTRACT_PATCH
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_quality_live_nmp_wrapper.py:5:from backend.app.runtime.ndsp_v201_launch_completion import (
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_quality_live_nmp_wrapper.py:9:# NDSP_V201_V203_COMMERCIAL_LAUNCH_PATCH
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_quality_live_nmp_wrapper.py:642:            data = _ndsp_attach_v200_score_inputs_v200(
+/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_v201_launch_completion.py:17:GOVERNING_INPUTS_VERSION = "NDSP_GOVERNING_INPUTS_V201"

@@ -1,0 +1,65 @@
+=== DIRECT REFERENCES TO PORT 9094 ===
+/etc/nginx/snippets/ndsp-business-ops-v205.conf:22:    proxy_pass http://127.0.0.1:9094/health;
+/etc/nginx/snippets/ndsp-business-ops-v205.conf:32:    proxy_pass http://127.0.0.1:9094;
+/etc/nginx/snippets/ndsp-business-ops-v205.conf:45:    proxy_pass http://127.0.0.1:9094;
+
+=== NGINX EFFECTIVE CONFIG AROUND PORT 9094 ===
+
+=== BUSINESS OPS SNIPPET ===
+# NDSP_BUSINESS_OPERATIONS_V205_BEGIN
+location = /start { return 301 /start/; }
+location ^~ /start/ { alias /var/www/ndsp-business-ops/start/; index index.html; add_header Cache-Control "no-store" always; }
+location = /support { return 301 /support/; }
+location ^~ /support/ { alias /var/www/ndsp-business-ops/support/; index index.html; add_header Cache-Control "no-store" always; }
+location = /subscribe { return 301 /subscribe/; }
+location ^~ /subscribe/ { alias /var/www/ndsp-business-ops/subscribe/; index index.html; add_header Cache-Control "no-store" always; }
+location = /launch { return 301 /launch/; }
+location ^~ /launch/ { alias /var/www/ndsp-business-ops/launch/; index index.html; add_header Cache-Control "no-store" always; }
+location = /ndsp-ops-assets/common.css { alias /var/www/ndsp-business-ops/common.css; add_header Cache-Control "public, max-age=3600" always; }
+
+location = /ops-admin { return 301 /ops-admin/; }
+location ^~ /ops-admin/ {
+    auth_basic "NDSP Operations";
+    auth_basic_user_file /etc/nginx/ndsp-business-ops.htpasswd;
+    alias /var/www/ndsp-business-ops/ops-admin/;
+    index index.html;
+    add_header Cache-Control "no-store" always;
+}
+
+location = /api/ops/health {
+    proxy_pass http://127.0.0.1:9094/health;
+    proxy_http_version 1.1;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header X-NDSP-Admin-Gate "";
+}
+
+location ^~ /api/ops/public/ {
+    proxy_pass http://127.0.0.1:9094;
+    proxy_http_version 1.1;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header X-NDSP-Admin-Gate "";
+    client_max_body_size 128k;
+}
+
+location ^~ /api/ops/admin/ {
+    auth_basic "NDSP Operations";
+    auth_basic_user_file /etc/nginx/ndsp-business-ops.htpasswd;
+    proxy_pass http://127.0.0.1:9094;
+    proxy_http_version 1.1;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header X-NDSP-Admin-Gate "1";
+    client_max_body_size 128k;
+}
+# NDSP_BUSINESS_OPERATIONS_V205_END
+
+=== SNIPPET INCLUDE LOCATIONS ===
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:332:    include /etc/nginx/snippets/ndsp-business-ops-v205.conf;

@@ -1,0 +1,8 @@
+gap_category,capability_count,percentage_of_capabilities,priority_weight
+SOURCE,362,68.82,20
+SERVICE,326,61.98,18
+ENDPOINT,327,62.17,18
+REAL_DATA,216,41.06,16
+CALCULATION,164,31.18,12
+TEST,526,100.00,8
+UI,337,64.07,8

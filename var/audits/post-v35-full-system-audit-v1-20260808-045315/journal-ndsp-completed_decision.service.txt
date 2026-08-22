@@ -1,0 +1,61 @@
+يوليو 26 12:50:54 vmi2934783 node[1883652]: [NDSP] Completed Decision Service listening on http://127.0.0.1:9078
+-- Boot 8533528739ff4501818bba1d77ac8edf --
+يوليو 26 12:52:09 vmi2934783 node[1391]: [NDSP] Completed Decision Service listening on http://127.0.0.1:9078
+يوليو 26 13:03:42 vmi2934783 node[40950]: [NDSP] Completed Decision Service listening on http://127.0.0.1:9078
+-- Boot 168f7de0363e42cdb477fddec5756ef4 --
+يوليو 26 13:04:18 vmi2934783 node[1348]: [NDSP] Completed Decision Service listening on http://127.0.0.1:9078
+-- Boot d4a1b926329d4c869a2dfafb02ae170e --
+يوليو 26 18:03:55 vmi2934783 node[1380]: [NDSP] Completed Decision Service listening on http://127.0.0.1:9078
+-- Boot 75fb0989b75446339fadce54dbb8147b --
+يوليو 26 18:10:08 vmi2934783 node[1383]: [NDSP] Completed Decision Service listening on http://127.0.0.1:9078
+يوليو 27 19:47:26 vmi2934783 node[460800]: [NDSP] Completed Decision Service listening on http://127.0.0.1:9078
+يوليو 29 06:53:01 vmi2934783 node[2498003]: [NDSP] Completed Decision Service failed to initialize: error: the database system is starting up
+يوليو 29 06:53:01 vmi2934783 node[2498003]:     at /home/nawaf511/empire-core-new/backend/services/completed_decision/node_modules/pg-pool/index.js:45:11
+يوليو 29 06:53:01 vmi2934783 node[2498003]:     at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+يوليو 29 06:53:01 vmi2934783 node[2498003]:     at async initDb (/home/nawaf511/empire-core-new/backend/services/completed_decision/main.cjs:63:3) {
+يوليو 29 06:53:01 vmi2934783 node[2498003]:   length: 104,
+يوليو 29 06:53:01 vmi2934783 node[2498003]:   severity: 'FATAL',
+يوليو 29 06:53:01 vmi2934783 node[2498003]:   code: '57P03',
+يوليو 29 06:53:01 vmi2934783 node[2498003]:   detail: undefined,
+يوليو 29 06:53:01 vmi2934783 node[2498003]:   hint: undefined,
+يوليو 29 06:53:01 vmi2934783 node[2498003]:   position: undefined,
+يوليو 29 06:53:01 vmi2934783 node[2498003]:   internalPosition: undefined,
+يوليو 29 06:53:01 vmi2934783 node[2498003]:   internalQuery: undefined,
+يوليو 29 06:53:01 vmi2934783 node[2498003]:   where: undefined,
+يوليو 29 06:53:01 vmi2934783 node[2498003]:   schema: undefined,
+يوليو 29 06:53:01 vmi2934783 node[2498003]:   table: undefined,
+يوليو 29 06:53:01 vmi2934783 node[2498003]:   column: undefined,
+يوليو 29 06:53:01 vmi2934783 node[2498003]:   dataType: undefined,
+يوليو 29 06:53:01 vmi2934783 node[2498003]:   constraint: undefined,
+يوليو 29 06:53:01 vmi2934783 node[2498003]:   file: 'postmaster.c',
+يوليو 29 06:53:01 vmi2934783 node[2498003]:   line: '2358',
+يوليو 29 06:53:01 vmi2934783 node[2498003]:   routine: 'ProcessStartupPacket'
+يوليو 29 06:53:01 vmi2934783 node[2498003]: }
+يوليو 29 06:53:06 vmi2934783 node[2499820]: [NDSP] Completed Decision Service listening on http://127.0.0.1:9078
+-- Boot 1d7a60877acc40148d88a352d85728d7 --
+أغسطس 02 23:57:11 vmi2934783 node[1349]: [NDSP] Completed Decision Service listening on http://127.0.0.1:9078
+أغسطس 05 09:30:53 vmi2934783 node[3019730]: [NDSP] Completed Decision Service listening on http://127.0.0.1:9078
+-- Boot 645dbba7d26d4e9886840cf8f0143622 --
+أغسطس 07 16:46:07 vmi2934783 node[1328]: [NDSP] Completed Decision Service failed to initialize: error: the database system is starting up
+أغسطس 07 16:46:07 vmi2934783 node[1328]:     at /home/nawaf511/empire-core-new/backend/services/completed_decision/node_modules/pg-pool/index.js:45:11
+أغسطس 07 16:46:07 vmi2934783 node[1328]:     at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+أغسطس 07 16:46:07 vmi2934783 node[1328]:     at async initDb (/home/nawaf511/empire-core-new/backend/services/completed_decision/main.cjs:63:3) {
+أغسطس 07 16:46:07 vmi2934783 node[1328]:   length: 104,
+أغسطس 07 16:46:07 vmi2934783 node[1328]:   severity: 'FATAL',
+أغسطس 07 16:46:07 vmi2934783 node[1328]:   code: '57P03',
+أغسطس 07 16:46:07 vmi2934783 node[1328]:   detail: undefined,
+أغسطس 07 16:46:07 vmi2934783 node[1328]:   hint: undefined,
+أغسطس 07 16:46:07 vmi2934783 node[1328]:   position: undefined,
+أغسطس 07 16:46:07 vmi2934783 node[1328]:   internalPosition: undefined,
+أغسطس 07 16:46:07 vmi2934783 node[1328]:   internalQuery: undefined,
+أغسطس 07 16:46:07 vmi2934783 node[1328]:   where: undefined,
+أغسطس 07 16:46:07 vmi2934783 node[1328]:   schema: undefined,
+أغسطس 07 16:46:07 vmi2934783 node[1328]:   table: undefined,
+أغسطس 07 16:46:07 vmi2934783 node[1328]:   column: undefined,
+أغسطس 07 16:46:07 vmi2934783 node[1328]:   dataType: undefined,
+أغسطس 07 16:46:07 vmi2934783 node[1328]:   constraint: undefined,
+أغسطس 07 16:46:07 vmi2934783 node[1328]:   file: 'postmaster.c',
+أغسطس 07 16:46:07 vmi2934783 node[1328]:   line: '2358',
+أغسطس 07 16:46:07 vmi2934783 node[1328]:   routine: 'ProcessStartupPacket'
+أغسطس 07 16:46:07 vmi2934783 node[1328]: }
+أغسطس 07 16:46:11 vmi2934783 node[4768]: [NDSP] Completed Decision Service listening on http://127.0.0.1:9078

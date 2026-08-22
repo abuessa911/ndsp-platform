@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "document": "PR-029 Remaining Quick Wins Closure",
+  "generated_at": "2026-07-31T23:17:31.863933+00:00",
+  "input_remaining_quick_win_count": 31,
+  "endpoint_gap_input_count": 18,
+  "ui_gap_input_count": 11,
+  "real_data_gap_input_count": 2,
+  "ui_bindings_created": 11,
+  "http_probe_records": 0,
+  "executable_test_count": 31,
+  "closed_machine_verified_count": 11,
+  "still_open_count": 20,
+  "remaining_gap_counts": {
+    "ENDPOINT": 18,
+    "REAL_DATA": 2
+  },
+  "traceability_rows_updated": 31,
+  "human_approvals_granted": 0,
+  "ui_complete_records_created": 0,
+  "full_capability_coverage_claimed": false,
+  "human_confirmation_required": true,
+  "runtime_changes": "none",
+  "status": "REMAINING_QUICK_WINS_PARTIALLY_CLOSED"
+}

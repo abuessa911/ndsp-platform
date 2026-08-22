@@ -1,0 +1,10 @@
+[Unit]
+Description=Run NDSP Admin Snapshot Updater every minute
+
+[Timer]
+OnBootSec=20
+OnUnitActiveSec=60
+Unit=ndsp-admin-snapshot-updater.service
+
+[Install]
+WantedBy=timers.target

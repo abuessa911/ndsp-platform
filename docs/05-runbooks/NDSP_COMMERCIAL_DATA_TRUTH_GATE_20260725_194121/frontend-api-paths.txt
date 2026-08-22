@@ -1,0 +1,3 @@
+/api/completed-decisions
+/api/decision/quality-live?symbol=${encodeURIComponent
+/api/health

@@ -1,0 +1,95 @@
+# NDSP V1.3-D Completed Decisions Viewer Hardening
+DATE=2026-07-09T00:54:09+02:00
+MODE=CONTROLLED_STATIC_READONLY_COMPLETED_DECISIONS_VIEWER_PATCH
+PATCH=V13-D
+MODIFICATION=Create completed-decisions-review.html and data/completed-decisions-viewer-config.json only
+NO_NGINX_CHANGE=1
+NO_API_CHANGE=1
+NO_PM2_RESTART=1
+NO_FRONTEND_BUILD=1
+NO_REBOOT=1
+NO_SERVICE_CONTROL_FROM_UI=1
+NO_SHELL_FROM_BROWSER=1
+NO_PROTECTED_ASSET_CHANGE=1
+NO_DB_SCHEMA_CHANGE=1
+NO_COMPLETED_DECISIONS_API_CHANGE=1
+BACKUP_DIR=/home/nawaf511/ndsp_backups/NDSP_V13_D_COMPLETED_DECISIONS_VIEWER_HARDENING_20260709_005409
+
+## 1) V13-C prerequisite
+V13_C_LOCK=OK
+
+## 2) Preflight runtime health
+FAILED_UNITS_COUNT_BEFORE=0
+  UNIT LOAD ACTIVE SUB DESCRIPTION
+
+0 loaded units listed.
+NGINX_ACTIVE_BEFORE=active
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+PM2_ACTIVE_BEFORE=active
+PM2_ENABLED_BEFORE=enabled
+┌────┬────────────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐
+│ id │ name           │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
+├────┼────────────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤
+│ [1m[36m0[39m[22m  │ ndsp-portal    │ default     │ 0.39.7  │ [7m[1mfork[22m[27m    │ 3406     │ 92m    │ 0    │ [32m[1monline[22m[39m    │ 0%       │ 75.2mb   │ [1mnawaf511[22m │ [90mdisabled[39m │
+└────┴────────────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘
+[1m[36mhost metrics[39m[22m | [1mcpu[22m: [32m9.7%[39m | [1mram usage[22m: [32m7.3%[39m | [1mlo[22m: ⇓ [32m0.003mb/s[39m ⇑ [32m0.003mb/s[39m | [1meth0[22m: ⇓ [32m0.002mb/s[39m ⇑ [32m0.001mb/s[39m | [1mdisk[22m: ⇓ 0mb/s ⇑ [32m0.211mb/s[39m [90m/[39m [1m[33m82.09%[39m[22m |
+API_HEALTH_HTTP_BEFORE=200
+QUALITY_LIVE_HTTP_BEFORE=200
+MY_NDSP_HTTP_BEFORE=200
+ADMIN_NDSP_HTTP_BEFORE=200
+RELEASE_EVIDENCE_HTTP_BEFORE=200
+DATA_FRESHNESS_HTTP_BEFORE=200
+DECISION_ROOM_GUIDE_HTTP_BEFORE=200
+
+## 3) Backup target files
+BACKUP_PAGE=NO_EXISTING_PAGE
+BACKUP_JSON=NO_EXISTING_JSON
+
+## 4) Probe completed decisions endpoint as hint only
+COMPLETED_DECISIONS_API_HTTP_HINT=404
+COMPLETED_DECISIONS_API_LIMIT_HTTP_HINT=404
+COMPLETED_API_HINT_IS_NON_BLOCKING=1
+
+## 5) Generate completed decisions viewer config JSON
+JSON_CREATED=/var/www/ndsp-my/data/completed-decisions-viewer-config.json
+
+## 6) Generate completed decisions review HTML
+PAGE_CREATED=/var/www/ndsp-my/completed-decisions-review.html
+
+## 7) Ownership and permissions
+FILE=/var/www/ndsp-my/completed-decisions-review.html OWNER=nawaf511 GROUP=nawaf511 MODE=-rw-r--r-- SIZE=9460
+FILE=/var/www/ndsp-my/data/completed-decisions-viewer-config.json OWNER=nawaf511 GROUP=nawaf511 MODE=-rw-r--r-- SIZE=2119
+
+## 8) Post patch tests
+PAGE_HTTP=200
+JSON_HTTP=200
+RELEASE_EVIDENCE_HTTP_AFTER=200
+DATA_FRESHNESS_HTTP_AFTER=200
+DECISION_ROOM_GUIDE_HTTP_AFTER=200
+API_HEALTH_HTTP_AFTER=200
+QUALITY_LIVE_HTTP_AFTER=200
+MY_NDSP_HTTP_AFTER=200
+ADMIN_NDSP_HTTP_AFTER=200
+FAILED_UNITS_COUNT_AFTER=0
+NGINX_ACTIVE_AFTER=active
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+PM2_ACTIVE_AFTER=active
+MARKET_UPDATER_SERVICE_FAILED_AFTER=inactive
+MARKET_UPDATER_TIMER_ACTIVE_AFTER=active
+
+## 9) Protected asset checksum check
+ca07216a5346403af56ca23cdaef4f4425ac6fdf2a95340b6844451dc85c93ff  /var/www/ndsp-my/assets/ndsp-radar-safe-clean.js
+e60cc1f0d100c833c43ba763422ff7de5a46a495fea34243da652f9e4e149633  /var/www/ndsp-my/assets/ndsp-global-menu.js
+0c78267763a4b413fea671519ababf76e6bfe5f77b2e439cd42aa23f60b96d5a  /var/www/ndsp-my/assets/ndsp-disclaimer-gate.js
+
+## 10) Governance wording scan for new files
+GOVERNANCE_HITS_NEW_FILES=0
+
+## 11) Final Evaluation
+V13_D_COMPLETED_DECISIONS_VIEWER_HARDENING_STATUS=OK
+FINAL_STATUS=V13_D_COMPLETED_DECISIONS_VIEWER_HARDENING_OK
+REALITY_LOCK_STATUS=UPDATED
+REPORT=docs/05-runbooks/NDSP_V13_D_COMPLETED_DECISIONS_VIEWER_HARDENING_20260709_005409.md
+BACKUP_DIR=/home/nawaf511/ndsp_backups/NDSP_V13_D_COMPLETED_DECISIONS_VIEWER_HARDENING_20260709_005409

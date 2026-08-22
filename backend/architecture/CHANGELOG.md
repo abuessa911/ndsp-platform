@@ -76,3 +76,182 @@ Added:
 - framework tests
 - ADR-0003
 - ENG-001 service registry entry
+
+## 20260627_232733
+
+TSK-2.1B created CTL-001 Workspace Identity.
+
+Added:
+- services/ctl-001-workspace-identity
+- /identity endpoint
+- systemd service ndsp-ctl-001-workspace-identity.service
+- CTL-001 API contract
+- CTL-001 service registry entry
+
+## 20260627_235837
+
+DEV-001 created NDSP Developer Toolkit.
+
+Added:
+- backend/sdk/devtoolkit
+- backend/tools/ndsp
+- backend/templates/service
+- ndsp create service
+- ndsp validate
+- ndsp doctor
+- ndsp registry
+
+## 20260628_000901
+
+DEV-002 introduced repository hygiene.
+
+Added:
+- .gitignore policy
+- ADR-0005 repository hygiene
+- DEV-002 repository hygiene contract
+
+Rule:
+- Do not use git add .
+- Add only intentional paths.
+
+## 20260628_175219 — DEV-013Z Fix Guard And Close
+
+Fixed:
+- Repo Guard false positives for .env.example files
+- Repo Guard false positive for backend/app/runtime source files
+
+Closed:
+- DEV-013 Enterprise Hardening
+
+## 20260628_181658 — DEV-014 Gateway Readiness
+
+Added:
+- Public gateway contract
+- Public gateway readiness registry
+- Gateway readiness tool
+- Gateway route documentation
+- Disabled Nginx example
+
+No live Nginx route was installed.
+
+## 20260628_193248 — DEV-015 Public Gateway Controlled Activation
+
+Closed:
+- Public read-only gateway activation
+- Unified TLS verification
+- BOT-001 and CTL-001 remain internal only
+
+## 20260629_032831 — DEV-015 Public Gateway Controlled Activation
+
+Closed:
+- Public read-only gateway activation
+- Unified TLS verification
+- BOT-001 and CTL-001 remain internal only
+
+## 20260629_035520 — DEV-016 Release Candidate Freeze
+
+Closed:
+- RC1 freeze
+- Final Git/service/gateway/TLS/API checks
+- Release candidate registry
+- Release candidate freeze policy
+
+## 20260629_082844 — DEV-016 Release Candidate Freeze
+
+Closed:
+- RC1 freeze
+- Final Git/service/gateway/TLS/API checks
+- Release candidate registry
+- Release candidate freeze policy
+
+## 20260629_083105 — DEV-016 Release Candidate Freeze
+
+Closed:
+- RC1 freeze
+- Final Git/service/gateway/TLS/API checks
+- Release candidate registry
+- Release candidate freeze policy
+
+## 20260629_083955 — DEV-017 RC1 Production Smoke Test + Snapshot
+
+Closed:
+- RC1 production smoke test
+- Public read-only API verification
+- Public write block verification
+- TLS SAN verification
+- Service health snapshot
+- Production snapshot registry
+
+## 20260629_084803 — DEV-017 Auto Final Production Smoke + Snapshot
+
+Closed:
+- Final RC1 production smoke test
+- Public read-only API verification
+- Public write block verification
+- TLS SAN verification
+- Service health verification
+- Production snapshot final registry
+- RC1 public surface contract
+
+## 20260629_085022 — DEV-017 Auto Final Production Smoke + Snapshot
+
+Closed:
+- Final RC1 production smoke test
+- Public read-only API verification
+- Public write block verification
+- TLS SAN verification
+- Service health verification
+- Production snapshot final registry
+- RC1 public surface contract
+
+## 20260629_091747 — DEV-018 WOW Radar UI Canary
+
+Added:
+- Platform sovereign radar command page
+- Bot execution radar preview page
+- Premium experience launchpad
+- RC1 WOW radar UI spec
+
+## 20260629_091945 — DEV-018 WOW Radar UI Canary
+
+Added:
+- Platform sovereign radar command page
+- Bot execution radar preview page
+- Premium experience launchpad
+- RC1 WOW radar UI spec
+
+## 20260629_093055 — DEV-018B Public Privacy Reset
+
+Changed:
+- Removed rejected WOW radar canary from public surface.
+- Removed bot preview and launchpad from public platform.
+- Added NDSP public platform bot privacy boundary.
+- Confirmed public NDSP must not mention private Telegram bot.
+
+## 20260629_093253 — DEV-018C Rejected Canary Routes Blocked
+
+Changed:
+- Forced rejected canary public routes to return non-public status.
+- Preserved core NDSP user pages.
+- Confirmed no forbidden wording on public HTML.
+
+## 20260629_095927 — DEV-019 Sovereign Command Interface Preview
+
+Added:
+- Premium NDSP Sovereign Command preview page.
+- Colored decision radar semantics.
+- Public no-execution language policy.
+- Sovereign command interface design spec.
+
+Scope:
+- Preview only.
+- No bot mention.
+- No backend or gateway change.
+
+## 20260629_101120 — DEV-020C Sovereign Preview Repair
+
+Changed:
+- Restored live core NDSP pages.
+- Repaired Sovereign Command Preview navigation.
+- Added visible colored decision radar with user explanation.
+- Removed fake menu links from preview.

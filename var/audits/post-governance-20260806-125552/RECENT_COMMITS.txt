@@ -1,0 +1,5 @@
+d9d5c06 governance: enforce discover and reuse before creation
+9860067 governance: enforce discover and reuse before creation
+d93227e feat: add governed COT direction engine and UI readiness
+5647254 docs(governance): add PR-008 governance closure package
+02ac762 docs(governance): finalize PR-007 ownership decisions

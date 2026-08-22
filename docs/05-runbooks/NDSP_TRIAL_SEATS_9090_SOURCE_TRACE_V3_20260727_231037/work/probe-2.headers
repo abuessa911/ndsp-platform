@@ -1,0 +1,16 @@
+HTTP/1.1 200 OK
+Server: BaseHTTP/0.6 Python/3.12.3
+Date: Mon, 27 Jul 2026 21:10:42 GMT
+Content-Type: application/json; charset=utf-8
+server: NDSP9002/1.0 Python/3.12.3
+date: Mon, 27 Jul 2026 21:10:42 GMT
+cache-control: no-store
+access-control-allow-origin: *
+access-control-allow-methods: GET,OPTIONS
+access-control-allow-headers: Content-Type,Authorization
+x-ndsp-gateway: platform-9001
+Keep-Alive: timeout=5
+X-NDSP-Launch-Control: v167
+Cache-Control: no-store
+Content-Length: 628
+

@@ -1,0 +1,731 @@
+cat > scripts/audit/generate-architecture-report.sh <<'EOF'
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+PROJECT_ROOT="${PROJECT_ROOT:-$HOME/empire-core-new}"
+TIMESTAMP="$(date +%Y%m%d-%H%M%S)"
+REPORT_DIR="${PROJECT_ROOT}/var/audits/architecture-${TIMESTAMP}"
+REPORT_FILE="${REPORT_DIR}/NDSP_ARCHITECTURE_REPORT_${TIMESTAMP}.txt"
+SUMMARY_FILE="${REPORT_DIR}/SUMMARY_${TIMESTAMP}.txt"
+ERROR_FILE="${REPORT_DIR}/ERRORS_${TIMESTAMP}.log"
+
+MAX_FILE_LINES="${MAX_FILE_LINES:-220}"
+MAX_RESULTS="${MAX_RESULTS:-2500}"
+
+mkdir -p "${REPORT_DIR}"
+touch "${REPORT_FILE}" "${SUMMARY_FILE}" "${ERROR_FILE}"
+
+exec 3>>"${ERROR_FILE}"
+
+log() {
+  printf '[%s] %s\n' "$(date '+%F %T')" "$*" >&2
+}
+
+section() {
+  {
+    printf '\n'
+    printf '================================================================================\n'
+    printf '%s\n' "$1"
+    printf '================================================================================\n'
+  } >>"${REPORT_FILE}"
+}
+
+safe_run() {
+  local title="$1"
+  shift
+
+  section "${title}"
+
+  {
+    "$@"
+  } >>"${REPORT_FILE}" 2>>"${ERROR_FILE}" || {
+    printf '\n[WARNING] فشل الأمر أو لم يُرجع نتائج.\n' >>"${REPORT_FILE}"
+    return 0
+  }
+}
+
+safe_shell() {
+  local title="$1"
+  local command="$2"
+
+  section "${title}"
+
+  bash -lc "${command}" >>"${REPORT_FILE}" 2>>"${ERROR_FILE}" || {
+    printf '\n[WARNING] فشل الأمر أو لم يُرجع نتائج.\n' >>"${REPORT_FILE}"
+    return 0
+  }
+}
+
+if [[ ! -d "${PROJECT_ROOT}" ]]; then
+  echo "المشروع غير موجود: ${PROJECT_ROOT}" >&2
+  exit 1
+fi
+
+cd "${PROJECT_ROOT}"
+
+log "بدء إنشاء تقرير المعمارية"
+
+{
+  echo "NDSP / EMPIRE CORE ARCHITECTURE AUDIT"
+  echo
+  echo "Generated at: $(date --iso-8601=seconds)"
+  echo "Hostname: $(hostname -f 2>/dev/null || hostname)"
+  echo "User: $(whoami)"
+  echo "Project root: ${PROJECT_ROOT}"
+  echo "Report directory: ${REPORT_DIR}"
+  echo
+  echo "هذا التقرير للقراءة فقط ولا يعدل ملفات المشروع."
+} >"${REPORT_FILE}"
+
+safe_shell "1. معلومات النظام والخادم" '
+  echo "Date:"
+  date --iso-8601=seconds
+
+  echo
+  echo "Hostname:"
+  hostnamectl 2>/dev/null || hostname
+
+  echo
+  echo "Kernel:"
+  uname -a
+
+  echo
+  echo "Operating system:"
+  cat /etc/os-release 2>/dev/null || true
+
+  echo
+  echo "CPU:"
+  nproc
+  lscpu 2>/dev/null | sed -n "1,35p" || true
+
+  echo
+  echo "Memory:"
+  free -h
+
+  echo
+  echo "Disk:"
+  df -hT
+
+  echo
+  echo "Node:"
+  node --version 2>/dev/null || echo "Node not found"
+
+  echo
+  echo "npm:"
+  npm --version 2>/dev/null || echo "npm not found"
+
+  echo
+  echo "Python:"
+  python3 --version 2>/dev/null || true
+'
+
+safe_shell "2. حالة Git" '
+  git rev-parse --show-toplevel 2>/dev/null || true
+  git status --short --branch 2>/dev/null || true
+
+  echo
+  echo "Latest commits:"
+  git log --oneline --decorate -n 30 2>/dev/null || true
+
+  echo
+  echo "Remotes:"
+  git remote -v 2>/dev/null || true
+'
+
+safe_shell "3. محتويات المستوى الأعلى" "
+  find . -maxdepth 2 \
+    -not -path './node_modules*' \
+    -not -path './.git*' \
+    -not -path './venv*' \
+    -not -path './backend/venv*' \
+    -printf '%y %M %u:%g %TY-%Tm-%Td %TH:%TM %p\n' \
+    | sort \
+    | head -n ${MAX_RESULTS}
+"
+
+safe_shell "4. أحجام المجلدات الرئيسية" '
+  du -h --max-depth=1 . 2>/dev/null | sort -h
+'
+
+safe_shell "5. ملفات تعريف المشاريع والحزم" "
+  find . -maxdepth 6 -type f \
+    \( \
+      -name 'package.json' \
+      -o -name 'package-lock.json' \
+      -o -name 'pnpm-lock.yaml' \
+      -o -name 'yarn.lock' \
+      -o -name 'pnpm-workspace.yaml' \
+      -o -name 'turbo.json' \
+      -o -name 'nx.json' \
+      -o -name 'tsconfig.json' \
+      -o -name 'jsconfig.json' \
+      -o -name 'pyproject.toml' \
+      -o -name 'requirements.txt' \
+      -o -name 'Pipfile' \
+      -o -name 'poetry.lock' \
+      -o -name 'Dockerfile' \
+      -o -name 'docker-compose.yml' \
+      -o -name 'docker-compose.yaml' \
+    \) \
+    -not -path '*/node_modules/*' \
+    -not -path '*/venv/*' \
+    -not -path '*/.git/*' \
+    | sort \
+    | head -n ${MAX_RESULTS}
+"
+
+safe_shell "6. محتويات package.json الرئيسية" "
+  for file in \
+    ./package.json \
+    ./backend/package.json \
+    ./apps/*/package.json \
+    ./backend/services/*/package.json
+  do
+    if [[ -f \"\$file\" ]]; then
+      echo
+      echo \"===== \$file =====\"
+      sed -n '1,${MAX_FILE_LINES}p' \"\$file\"
+    fi
+  done
+"
+
+AUDIT_DIRS=(
+  "backend/core"
+  "backend/intelligence"
+  "backend/layers"
+  "backend/framework"
+  "backend/services"
+  "backend/runtime"
+  "backend/governance"
+  "backend/research"
+  "backend/orchestration"
+  "backend/explainability"
+  "backend/evaluation"
+  "backend/contracts"
+  "backend/data_foundation"
+  "backend/integrations"
+  "backend/simulation"
+  "backend/observability"
+  "governance/cot"
+  "governance/contracts"
+  "cot"
+  "apps/ndsp-governance-bridge"
+  "apps/ndsp-layers-api"
+  "apps/ndsp-raw-cot-gateway"
+  "packages/analytics"
+  "packages/shared"
+)
+
+for dir in "${AUDIT_DIRS[@]}"; do
+  if [[ -d "${dir}" ]]; then
+    safe_shell "7. بنية المجلد: ${dir}" "
+      echo 'Directories:'
+      find '${dir}' -maxdepth 4 -type d \
+        -not -path '*/node_modules/*' \
+        -not -path '*/venv/*' \
+        | sort \
+        | head -n ${MAX_RESULTS}
+
+      echo
+      echo 'Files:'
+      find '${dir}' -maxdepth 5 -type f \
+        \( \
+          -name '*.js' \
+          -o -name '*.mjs' \
+          -o -name '*.cjs' \
+          -o -name '*.ts' \
+          -o -name '*.tsx' \
+          -o -name '*.py' \
+          -o -name '*.json' \
+          -o -name '*.yaml' \
+          -o -name '*.yml' \
+          -o -name '*.md' \
+          -o -name '*.sql' \
+        \) \
+        -not -path '*/node_modules/*' \
+        -not -path '*/venv/*' \
+        | sort \
+        | head -n ${MAX_RESULTS}
+    "
+  fi
+done
+
+safe_shell "8. البحث عن المحركات والطبقات والإشارات" "
+  find backend apps packages cot governance -type f \
+    \( \
+      -name '*.js' \
+      -o -name '*.mjs' \
+      -o -name '*.cjs' \
+      -o -name '*.ts' \
+      -o -name '*.tsx' \
+      -o -name '*.py' \
+      -o -name '*.json' \
+      -o -name '*.md' \
+    \) \
+    -not -path '*/node_modules/*' \
+    -not -path '*/venv/*' \
+    -not -path '*/archive/*' \
+    -not -path '*/backups/*' \
+    | grep -Ei \
+      'engine|decision|analysis|signal|cot|governance|classifier|layer|intelligence|market|forecast|execution|strategy|explain|quality|scenario|regime|position|commitment' \
+    | sort \
+    | head -n ${MAX_RESULTS}
+"
+
+safe_shell "9. البحث داخل الكود عن الكلمات المعمارية المهمة" "
+  grep -RInE \
+    'class .*Engine|function .*Engine|analy[sz]e|classif|decision|signal|COT|Commitment|Asset.Manager|Leveraged|Other.Reportable|longChange|shortChange|horizon|governance|explainability|confidence|quality.score|market.regime' \
+    backend apps packages cot governance \
+    --include='*.js' \
+    --include='*.mjs' \
+    --include='*.cjs' \
+    --include='*.ts' \
+    --include='*.tsx' \
+    --include='*.py' \
+    --include='*.json' \
+    --include='*.md' \
+    --exclude-dir=node_modules \
+    --exclude-dir=venv \
+    --exclude-dir=archive \
+    --exclude-dir=backups \
+    2>/dev/null \
+    | head -n ${MAX_RESULTS}
+"
+
+safe_shell "10. العقود والمخططات والواجهات" "
+  find backend apps packages governance docs -type f \
+    \( \
+      -iname '*contract*' \
+      -o -iname '*schema*' \
+      -o -iname '*interface*' \
+      -o -iname '*types*' \
+      -o -iname '*spec*' \
+      -o -iname '*adr*' \
+    \) \
+    -not -path '*/node_modules/*' \
+    -not -path '*/venv/*' \
+    -not -path '*/archive/*' \
+    -not -path '*/backups/*' \
+    | sort \
+    | head -n ${MAX_RESULTS}
+"
+
+safe_shell "11. ملفات COT الموجودة" "
+  find . -type f \
+    -not -path '*/node_modules/*' \
+    -not -path '*/venv/*' \
+    -not -path '*/.git/*' \
+    -not -path '*/archive/*' \
+    -not -path '*/backups/*' \
+    | grep -Ei \
+      '/cot/|cot[-_.]|commitment.of.traders|asset.manager|leveraged.fund|other.reportable' \
+    | sort \
+    | head -n ${MAX_RESULTS}
+"
+
+safe_shell "12. مقتطفات من أهم ملفات COT" "
+  files=\$(find . -type f \
+    \( \
+      -name '*.js' \
+      -o -name '*.mjs' \
+      -o -name '*.cjs' \
+      -o -name '*.ts' \
+      -o -name '*.py' \
+      -o -name '*.json' \
+      -o -name '*.md' \
+    \) \
+    -not -path '*/node_modules/*' \
+    -not -path '*/venv/*' \
+    -not -path '*/archive/*' \
+    -not -path '*/backups/*' \
+    | grep -Ei \
+      '/cot/|cot[-_.]|commitment.of.traders|asset.manager|leveraged.fund|other.reportable' \
+    | head -n 80)
+
+  while IFS= read -r file; do
+    [[ -n \"\$file\" ]] || continue
+    echo
+    echo \"===== \$file =====\"
+    sed -n '1,${MAX_FILE_LINES}p' \"\$file\"
+  done <<< \"\$files\"
+"
+
+safe_shell "13. أحدث الملفات المهمة" "
+  find backend apps packages cot governance docs scripts \
+    -type f \
+    -not -path '*/node_modules/*' \
+    -not -path '*/venv/*' \
+    -not -path '*/archive/*' \
+    -not -path '*/backups/*' \
+    -printf '%TY-%Tm-%Td %TH:%TM:%TS %s %p\n' \
+    | sort -r \
+    | head -n 400
+"
+
+safe_shell "14. الملفات التنفيذية ونقاط الدخول" "
+  find . -maxdepth 7 -type f \
+    \( \
+      -name 'server.js' \
+      -o -name 'index.js' \
+      -o -name 'app.js' \
+      -o -name 'main.js' \
+      -o -name 'main.py' \
+      -o -name 'app.py' \
+      -o -name '*.service' \
+      -o -name '*.timer' \
+      -o -name '*.socket' \
+    \) \
+    -not -path '*/node_modules/*' \
+    -not -path '*/venv/*' \
+    -not -path '*/archive/*' \
+    -not -path '*/backups/*' \
+    | sort \
+    | head -n ${MAX_RESULTS}
+"
+
+safe_shell "15. خدمات systemd المرتبطة بالمشروع" '
+  sudo grep -RIlE \
+    "empire-core-new|ndsp|nawaf511" \
+    /etc/systemd/system \
+    /lib/systemd/system \
+    2>/dev/null \
+    | sort || true
+
+  echo
+  echo "Active NDSP-related services:"
+  systemctl list-units --type=service --all --no-pager \
+    | grep -Ei "ndsp|empire|cot|market|decision|governance|layer" \
+    || true
+'
+
+safe_shell "16. تفاصيل خدمات systemd المرتبطة" '
+  units=$(systemctl list-unit-files --type=service --no-legend 2>/dev/null \
+    | awk "{print \$1}" \
+    | grep -Ei "ndsp|empire|cot|market|decision|governance|layer" \
+    | head -n 100 || true)
+
+  while IFS= read -r unit; do
+    [[ -n "$unit" ]] || continue
+    echo
+    echo "===== $unit ====="
+    systemctl status "$unit" --no-pager 2>/dev/null | sed -n "1,80p" || true
+    echo
+    systemctl cat "$unit" 2>/dev/null | sed -n "1,180p" || true
+  done <<< "$units"
+'
+
+safe_shell "17. العمليات النشطة" '
+  ps auxww \
+    | grep -Ei "node|python|uvicorn|gunicorn|pm2|ndsp|empire|cot" \
+    | grep -v grep \
+    | sort || true
+'
+
+safe_shell "18. المنافذ المستمعة" '
+  sudo ss -lntup 2>/dev/null || ss -lntup 2>/dev/null || true
+'
+
+safe_shell "19. حالة PM2" '
+  pm2 list 2>/dev/null || echo "PM2 غير مثبت أو لا توجد عمليات."
+'
+
+safe_shell "20. حاويات Docker" '
+  docker ps -a \
+    --format "table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}" \
+    2>/dev/null || echo "Docker غير مثبت أو لا توجد صلاحية."
+
+  echo
+  docker compose ls 2>/dev/null || true
+'
+
+safe_shell "21. إعدادات Nginx المرتبطة بالمشروع" '
+  sudo grep -RInE \
+    "empire-core-new|ndsp|proxy_pass|upstream" \
+    /etc/nginx/sites-enabled \
+    /etc/nginx/sites-available \
+    /etc/nginx/conf.d \
+    2>/dev/null \
+    | head -n 1500 || true
+'
+
+safe_shell "22. مراجع قواعد البيانات دون كشف كلمات المرور" '
+  grep -RInE \
+    "postgres|postgresql|DATABASE_URL|PGHOST|PGPORT|PGDATABASE|redis|mongo|sqlite" \
+    backend apps packages config deployment infrastructure \
+    --include="*.js" \
+    --include="*.mjs" \
+    --include="*.cjs" \
+    --include="*.ts" \
+    --include="*.py" \
+    --include="*.json" \
+    --include="*.yaml" \
+    --include="*.yml" \
+    --include="*.env.example" \
+    --exclude-dir=node_modules \
+    --exclude-dir=venv \
+    2>/dev/null \
+    | sed -E \
+      "s#(postgres(ql)?://)[^/@:]+:[^/@]+@#\1<hidden>:<hidden>@#g; \
+       s#(PASSWORD|SECRET|TOKEN|API_KEY)([=:])[^\ \"'\''[:space:]]+#\1\2<hidden>#g" \
+    | head -n 1500 || true
+'
+
+safe_shell "23. ملفات البيئة مع إخفاء القيم" '
+  find . -maxdepth 7 -type f \
+    \( \
+      -name ".env" \
+      -o -name ".env.*" \
+      -o -name "*.env" \
+    \) \
+    -not -path "*/node_modules/*" \
+    -not -path "*/venv/*" \
+    -not -path "*/archive/*" \
+    -not -path "*/backups/*" \
+    | sort \
+    | while IFS= read -r file; do
+        echo
+        echo "===== $file ====="
+        sed -E \
+          "s/^([A-Za-z_][A-Za-z0-9_]*)=.*/\1=<hidden>/" \
+          "$file" 2>/dev/null \
+          | head -n 250
+      done
+'
+
+safe_shell "24. الاختبارات الموجودة" "
+  find tests backend apps packages -type f \
+    \( \
+      -iname '*test*' \
+      -o -iname '*spec*' \
+    \) \
+    -not -path '*/node_modules/*' \
+    -not -path '*/venv/*' \
+    -not -path '*/archive/*' \
+    -not -path '*/backups/*' \
+    | sort \
+    | head -n ${MAX_RESULTS}
+"
+
+safe_shell "25. سكربتات النشر والنسخ والاستعادة" "
+  find scripts deployment infrastructure bin -type f \
+    \( \
+      -name '*.sh' \
+      -o -name '*.js' \
+      -o -name '*.mjs' \
+      -o -name '*.py' \
+      -o -name '*.service' \
+      -o -name '*.yaml' \
+      -o -name '*.yml' \
+    \) \
+    -not -path '*/node_modules/*' \
+    -not -path '*/venv/*' \
+    | sort \
+    | head -n ${MAX_RESULTS}
+"
+
+safe_shell "26. ملفات الحوكمة والقرارات المعمارية" "
+  find governance docs backend/governance backend/architecture \
+    -type f \
+    \( \
+      -name '*.md' \
+      -o -name '*.json' \
+      -o -name '*.yaml' \
+      -o -name '*.yml' \
+    \) \
+    -not -path '*/archive/*' \
+    | sort \
+    | head -n ${MAX_RESULTS}
+"
+
+safe_shell "27. الروابط الرمزية" '
+  find . -type l \
+    -not -path "*/node_modules/*" \
+    -not -path "*/venv/*" \
+    -printf "%p -> %l\n" \
+    | sort \
+    | head -n 1500
+'
+
+safe_shell "28. الملفات الكبيرة" '
+  find . -type f \
+    -not -path "*/node_modules/*" \
+    -not -path "*/venv/*" \
+    -not -path "*/.git/*" \
+    -printf "%s %p\n" \
+    | sort -nr \
+    | head -n 200 \
+    | numfmt --field=1 --to=iec 2>/dev/null || true
+'
+
+safe_shell "29. أسماء المجلدات المتكررة أو المشتبه بتكرارها" '
+  find . -maxdepth 5 -type d \
+    -not -path "*/node_modules*" \
+    -not -path "*/venv*" \
+    -not -path "*/.git*" \
+    -printf "%f\n" \
+    | sort \
+    | uniq -c \
+    | sort -nr \
+    | head -n 250
+'
+
+safe_shell "30. مراجع /opt داخل المشروع والخدمات" '
+  echo "Project references:"
+  grep -RIn "/opt/" . \
+    --exclude-dir=node_modules \
+    --exclude-dir=venv \
+    --exclude-dir=.git \
+    --exclude-dir=archive \
+    --exclude-dir=backups \
+    2>/dev/null \
+    | head -n 1500 || true
+
+  echo
+  echo "Systemd references:"
+  sudo grep -RIn "/opt/" \
+    /etc/systemd/system \
+    /lib/systemd/system \
+    2>/dev/null \
+    | head -n 1000 || true
+'
+
+safe_shell "31. محتويات /opt المهمة فقط" '
+  sudo find /opt -maxdepth 3 \
+    -not -path "/opt/brave.com/brave/locales/*" \
+    -not -path "/opt/metasploit-framework/vendor/*" \
+    -printf "%M %u:%g %TY-%Tm-%Td %TH:%TM %s %p\n" \
+    2>/dev/null \
+    | sort \
+    | head -n 3000
+'
+
+safe_shell "32. أحجام مجلدات /opt" '
+  sudo du -h --max-depth=2 /opt 2>/dev/null | sort -h
+'
+
+safe_shell "33. الخدمات والعمليات التي تستخدم /opt" '
+  echo "Systemd:"
+  sudo grep -RIn "/opt/" \
+    /etc/systemd/system \
+    /lib/systemd/system \
+    2>/dev/null || true
+
+  echo
+  echo "Processes:"
+  ps auxww | grep "/opt/" | grep -v grep || true
+
+  echo
+  echo "Cron:"
+  sudo grep -RIn "/opt/" \
+    /etc/cron.d \
+    /etc/crontab \
+    /var/spool/cron \
+    2>/dev/null || true
+'
+
+safe_shell "34. ملخص تلقائي لأهم القدرات" "
+  printf 'COT-related files: '
+  find . -type f \
+    -not -path '*/node_modules/*' \
+    -not -path '*/venv/*' \
+    -not -path '*/archive/*' \
+    -not -path '*/backups/*' \
+    | grep -Eic \
+      '/cot/|cot[-_.]|commitment.of.traders|asset.manager|leveraged.fund|other.reportable' \
+    || true
+
+  printf 'Engine-related files: '
+  find backend apps packages -type f \
+    -not -path '*/node_modules/*' \
+    -not -path '*/venv/*' \
+    | grep -Eic \
+      'engine|decision|signal|classifier|intelligence|forecast|strategy' \
+    || true
+
+  printf 'Governance files: '
+  find governance docs backend/governance -type f 2>/dev/null \
+    | wc -l
+
+  printf 'Service definitions: '
+  find . -type f -name '*.service' \
+    -not -path '*/node_modules/*' \
+    -not -path '*/venv/*' \
+    | wc -l
+
+  printf 'JavaScript files: '
+  find backend apps packages -type f \
+    \( -name '*.js' -o -name '*.mjs' -o -name '*.cjs' \) \
+    -not -path '*/node_modules/*' \
+    | wc -l
+
+  printf 'TypeScript files: '
+  find backend apps packages -type f \
+    \( -name '*.ts' -o -name '*.tsx' \) \
+    -not -path '*/node_modules/*' \
+    | wc -l
+
+  printf 'Python files: '
+  find backend apps packages -type f \
+    -name '*.py' \
+    -not -path '*/venv/*' \
+    | wc -l
+"
+
+{
+  echo "NDSP ARCHITECTURE AUDIT SUMMARY"
+  echo
+  echo "Generated: $(date --iso-8601=seconds)"
+  echo "Project: ${PROJECT_ROOT}"
+  echo
+  echo "Main report:"
+  echo "${REPORT_FILE}"
+  echo
+  echo "Errors:"
+  echo "${ERROR_FILE}"
+  echo
+  echo "Report size:"
+  du -h "${REPORT_FILE}"
+  echo
+  echo "SHA256:"
+  sha256sum "${REPORT_FILE}"
+} >"${SUMMARY_FILE}"
+
+ARCHIVE_FILE="${PROJECT_ROOT}/var/audits/NDSP_ARCHITECTURE_AUDIT_${TIMESTAMP}.tar.gz"
+
+tar \
+  -czf "${ARCHIVE_FILE}" \
+  -C "${PROJECT_ROOT}/var/audits" \
+  "architecture-${TIMESTAMP}"
+
+log "اكتمل التقرير"
+
+cat <<OUT
+
+تم إنشاء التقرير على السيرفر.
+
+المجلد:
+${REPORT_DIR}
+
+التقرير الرئيسي:
+${REPORT_FILE}
+
+الملخص:
+${SUMMARY_FILE}
+
+سجل الأخطاء:
+${ERROR_FILE}
+
+الملف المضغوط:
+${ARCHIVE_FILE}
+
+لعرض أول التقرير:
+sed -n '1,240p' '${REPORT_FILE}'
+
+لعرض الملخص:
+cat '${SUMMARY_FILE}'
+
+لعرض أخطاء الفحص:
+cat '${ERROR_FILE}'
+
+OUT
+EOF

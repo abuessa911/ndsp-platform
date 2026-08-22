@@ -1,0 +1,1 @@
+* * * * * root /usr/local/bin/ndsp_refresh_admin_ops_summary.sh >/tmp/ndsp_admin_ops_summary_cron.log 2>&1

@@ -1,0 +1,626 @@
+============================================================
+=== NDSP CONTRACT REGRESSION DEEP AUDIT ====================
+============================================================
+DATE=2026-08-07T21:14:45+02:00
+OUTPUT=/home/nawaf511/empire-core-new/var/audits/contract-regression-deep-audit-20260807-211445.txt
+
+1) REGRESSION RUNNER
+SIZE=62614 MTIME=2026-07-30 06:15:30.544362736 +0200 OWNER=nawaf511:nawaf511 MODE=700 PATH=/home/nawaf511/ndsp_contract_regression_v1_1_1.py
+68366b9cee5bb07f8b9b1a867922c90966e454a92c608d187fac572a08c94965  /home/nawaf511/ndsp_contract_regression_v1_1_1.py
+RUNNER_SYNTAX=PASS
+
+2) SYSTEMD DEFINITION
+# /etc/systemd/system/ndsp-contract-regression-v1-1.service
+[Unit]
+Description=NDSP Backend Contract V1.1 Regression
+After=network-online.target ndsp-live-decision-quality.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=nawaf511
+Group=1000
+EnvironmentFile=-/home/nawaf511/.config/ndsp-contract-regression.env
+ExecStart="/usr/bin/python3.12" "/home/nawaf511/ndsp_contract_regression_v1_1_1.py" verify --baseline "/home/nawaf511/.local/state/ndsp-contract-v1-1/baseline.json" --output-dir "/home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1" --max-latency-ms 3000.0
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1
+LockPersonality=yes
+RestrictSUIDSGID=yes
+UMask=0077
+# /etc/systemd/system/ndsp-contract-regression-v1-1.timer
+[Unit]
+Description=Run NDSP Backend Contract V1.1 Regression Automatically
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=15min
+RandomizedDelaySec=2min
+Persistent=true
+Unit=ndsp-contract-regression-v1-1.service
+
+[Install]
+WantedBy=timers.target
+
+3) BASELINE
+SIZE=204150 MTIME=2026-07-30 06:56:59.809372005 +0200 OWNER=nawaf511:nawaf511 MODE=600 PATH=/home/nawaf511/.local/state/ndsp-contract-v1-1/baseline.json
+13340ac2b9eb9319fb3f9042269a100e2f9a1c6a7ec7d4e963d3e19bfa36ad0b  /home/nawaf511/.local/state/ndsp-contract-v1-1/baseline.json
+BASELINE_JSON=PASS
+BASELINE_TYPE=dict
+BASELINE_TOP_KEYS=format,tool_version,created_at,source_report,source_report_sha256,contract,explicit_scenario_paths,explicit_quality_paths,cases,extraction_warnings,required_environment_variables
+BASELINE_SECTION explicit_scenario_paths TYPE=list COUNT=0
+BASELINE_SECTION explicit_quality_paths TYPE=list COUNT=0
+BASELINE_SECTION cases TYPE=list COUNT=3
+BASELINE_SECTION extraction_warnings TYPE=list COUNT=0
+BASELINE_SECTION required_environment_variables TYPE=list COUNT=0
+
+4) LATEST REPORT FILES
+LATEST_JSON=/home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T190551Z.json
+LATEST_MD=/home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T190551Z.md
+SIZE=201980 MTIME=2026-08-07 21:05:51.817564183 +0200 PATH=/home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T190551Z.json
+4c73aeca175a7d7ccc388769cf92e116126565f7766294b1868fd49e33f0a5a3  /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T190551Z.json
+SIZE=128514 MTIME=2026-08-07 21:05:51.825564152 +0200 PATH=/home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T190551Z.md
+5e99b7dbbb0e7991fe921702e794075a07d6ef6e647dd10c2bbaad34e65dc728  /home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1/NDSP_CONTRACT_REGRESSION_V1_1_20260807T190551Z.md
+
+5) JSON REPORT STRUCTURE + FAILURE CLASSIFICATION
+REPORT_JSON_PARSE=PASS
+ROOT_TYPE=dict
+TOP_KEYS=generated_at,summary,metadata,findings
+CANDIDATE_FAILURE_RECORDS=845
+CATEGORY schema=812
+CATEGORY status=40
+CATEGORY missing=2
+CATEGORY latency=1
+
+---- FIRST 80 FAILURE-LIKE RECORDS ----
+root.summary
+FAIL=843 WARN=1 INFO=0
+---
+root.findings[0]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /allowed_public_outputs/data_quality_score. evidence=
+---
+root.findings[1]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /allowed_public_outputs/data_quality_status. evidence=
+---
+root.findings[2]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /allowed_public_outputs/execution_command. evidence=
+---
+root.findings[3]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /allowed_public_outputs/preferred_scenario. evidence=
+---
+root.findings[4]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /allowed_public_outputs/scenario_conflict_detected. evidence=
+---
+root.findings[5]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /analytical_outputs_contract_version. evidence=
+---
+root.findings[6]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /data_quality. evidence=
+---
+root.findings[7]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /data_quality/analytical_use_allowed. evidence=
+---
+root.findings[8]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /data_quality/checks. evidence=
+---
+root.findings[9]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /data_quality/checks/generated_at_present. evidence=
+---
+root.findings[10]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /data_quality/checks/instrument_complete. evidence=
+---
+root.findings[11]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /data_quality/checks/live_price_bound. evidence=
+---
+root.findings[12]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /data_quality/checks/provider_available. evidence=
+---
+root.findings[13]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /data_quality/checks/scenario_levels_complete. evidence=
+---
+root.findings[14]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /data_quality/checks/timeframe_analysis_complete. evidence=
+---
+root.findings[15]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /data_quality/contract_version. evidence=
+---
+root.findings[16]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /data_quality/execution_allowed. evidence=
+---
+root.findings[17]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /data_quality/failures. evidence=
+---
+root.findings[18]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /data_quality/monitoring_use_allowed. evidence=
+---
+root.findings[19]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /data_quality/provider. evidence=
+---
+root.findings[20]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /data_quality/providers. evidence=
+---
+root.findings[21]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /data_quality/providers/*. evidence=
+---
+root.findings[22]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /data_quality/providers/*/active. evidence=
+---
+root.findings[23]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /data_quality/providers/*/priority. evidence=
+---
+root.findings[24]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /data_quality/providers/*/provider. evidence=
+---
+root.findings[25]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /data_quality/providers/*/scope. evidence=
+---
+root.findings[26]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /data_quality/public_notice_ar. evidence=
+---
+root.findings[27]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /data_quality/public_notice_en. evidence=
+---
+root.findings[28]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /data_quality/quality_label. evidence=
+---
+root.findings[29]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /data_quality/score. evidence=
+---
+root.findings[30]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /data_quality/source_mode. evidence=
+---
+root.findings[31]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /data_quality/status. evidence=
+---
+root.findings[32]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /data_quality_contract_version. evidence=
+---
+root.findings[33]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /dual_scenario_contract_version. evidence=
+---
+root.findings[34]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /instrument/provider_sources. evidence=
+---
+root.findings[35]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /instrument/provider_sources/*. evidence=
+---
+root.findings[36]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /instrument/provider_sources/*/active. evidence=
+---
+root.findings[37]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /instrument/provider_sources/*/priority. evidence=
+---
+root.findings[38]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /instrument/provider_sources/*/provider. evidence=
+---
+root.findings[39]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /instrument/provider_sources/*/scope. evidence=
+---
+root.findings[40]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /negative_scenario. evidence=
+---
+root.findings[41]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /negative_scenario/activation. evidence=
+---
+root.findings[42]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /negative_scenario/activation/label_ar. evidence=
+---
+root.findings[43]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /negative_scenario/activation/label_en. evidence=
+---
+root.findings[44]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /negative_scenario/activation/price. evidence=
+---
+root.findings[45]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /negative_scenario/activation/raw_value. evidence=
+---
+root.findings[46]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /negative_scenario/activation/source. evidence=
+---
+root.findings[47]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /negative_scenario/arrival. evidence=
+---
+root.findings[48]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /negative_scenario/arrival/label_ar. evidence=
+---
+root.findings[49]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /negative_scenario/arrival/label_en. evidence=
+---
+root.findings[50]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /negative_scenario/arrival/price. evidence=
+---
+root.findings[51]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /negative_scenario/arrival/raw_value. evidence=
+---
+root.findings[52]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /negative_scenario/arrival/source. evidence=
+---
+root.findings[53]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /negative_scenario/confidence_band. evidence=
+---
+root.findings[54]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /negative_scenario/confirmation. evidence=
+---
+root.findings[55]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /negative_scenario/confirmation/level. evidence=
+---
+root.findings[56]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /negative_scenario/confirmation/level/label_ar. evidence=
+---
+root.findings[57]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /negative_scenario/confirmation/level/label_en. evidence=
+---
+root.findings[58]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /negative_scenario/confirmation/level/price. evidence=
+---
+root.findings[59]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /negative_scenario/confirmation/level/raw_value. evidence=
+---
+root.findings[60]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /negative_scenario/confirmation/level/source. evidence=
+---
+root.findings[61]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /negative_scenario/confirmation/rule_ar. evidence=
+---
+root.findings[62]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /negative_scenario/confirmation/rule_en. evidence=
+---
+root.findings[63]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /negative_scenario/confirmation/status. evidence=
+---
+root.findings[64]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /negative_scenario/direction. evidence=
+---
+root.findings[65]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /negative_scenario/directional_context. evidence=
+---
+root.findings[66]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /negative_scenario/execution_command. evidence=
+---
+root.findings[67]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /negative_scenario/explanatory_only. evidence=
+---
+root.findings[68]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /negative_scenario/invalidation. evidence=
+---
+root.findings[69]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /negative_scenario/invalidation/label_ar. evidence=
+---
+root.findings[70]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /negative_scenario/invalidation/label_en. evidence=
+---
+root.findings[71]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /negative_scenario/invalidation/price. evidence=
+---
+root.findings[72]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /negative_scenario/invalidation/raw_value. evidence=
+---
+root.findings[73]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /negative_scenario/invalidation/source. evidence=
+---
+root.findings[74]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /negative_scenario/last_updated. evidence=
+---
+root.findings[75]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /negative_scenario/review. evidence=
+---
+root.findings[76]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /negative_scenario/review/label_ar. evidence=
+---
+root.findings[77]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /negative_scenario/review/label_en. evidence=
+---
+root.findings[78]
+severity=FAIL code=REQUIRED_PATH_REMOVED message=manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /negative_scenario/review/price. evidence=
+---
+
+6) MARKDOWN FAILURE SUMMARY
+1:# NDSP_CONTRACT_REGRESSION_V1_1
+4:- Failures: **843**
+5:- Warnings: **1**
+11:## FAIL
+13:- **REQUIRED_PATH_REMOVED** — manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /allowed_public_outputs/data_quality_status.
+29:- **REQUIRED_PATH_REMOVED** — manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /data_quality/failures.
+43:- **REQUIRED_PATH_REMOVED** — manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /data_quality/status.
+75:- **REQUIRED_PATH_REMOVED** — manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /negative_scenario/confirmation/status.
+95:- **REQUIRED_PATH_REMOVED** — manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /negative_scenario/status.
+120:- **REQUIRED_PATH_REMOVED** — manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /positive_scenario/confirmation/status.
+140:- **REQUIRED_PATH_REMOVED** — manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /positive_scenario/status.
+188:- **REQUIRED_PATH_REMOVED** — manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /scenarios/negative/confirmation/status.
+208:- **REQUIRED_PATH_REMOVED** — manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /scenarios/negative/status.
+233:- **REQUIRED_PATH_REMOVED** — manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /scenarios/positive/confirmation/status.
+253:- **REQUIRED_PATH_REMOVED** — manual_01_127.0.0.1_9057_api/decision/quality-live: required schema path removed: /scenarios/positive/status.
+267:- **REQUIRED_PATH_REMOVED** — manual_02_127.0.0.1_9082_api/decision/quality-live: required schema path removed: /allowed_public_outputs/data_quality_status.
+293:- **REQUIRED_PATH_REMOVED** — manual_02_127.0.0.1_9082_api/decision/quality-live: required schema path removed: /data_quality/failures.
+307:- **REQUIRED_PATH_REMOVED** — manual_02_127.0.0.1_9082_api/decision/quality-live: required schema path removed: /data_quality/status.
+324:- **REQUIRED_PATH_REMOVED** — manual_02_127.0.0.1_9082_api/decision/quality-live: required schema path removed: /golden_alignment/missing_inputs.
+368:- **REQUIRED_PATH_REMOVED** — manual_02_127.0.0.1_9082_api/decision/quality-live: required schema path removed: /negative_scenario/confirmation/status.
+388:- **REQUIRED_PATH_REMOVED** — manual_02_127.0.0.1_9082_api/decision/quality-live: required schema path removed: /negative_scenario/status.
+413:- **REQUIRED_PATH_REMOVED** — manual_02_127.0.0.1_9082_api/decision/quality-live: required schema path removed: /positive_scenario/confirmation/status.
+433:- **REQUIRED_PATH_REMOVED** — manual_02_127.0.0.1_9082_api/decision/quality-live: required schema path removed: /positive_scenario/status.
+481:- **REQUIRED_PATH_REMOVED** — manual_02_127.0.0.1_9082_api/decision/quality-live: required schema path removed: /scenarios/negative/confirmation/status.
+501:- **REQUIRED_PATH_REMOVED** — manual_02_127.0.0.1_9082_api/decision/quality-live: required schema path removed: /scenarios/negative/status.
+526:- **REQUIRED_PATH_REMOVED** — manual_02_127.0.0.1_9082_api/decision/quality-live: required schema path removed: /scenarios/positive/confirmation/status.
+546:- **REQUIRED_PATH_REMOVED** — manual_02_127.0.0.1_9082_api/decision/quality-live: required schema path removed: /scenarios/positive/status.
+550:- **STABLE_VALUE_CHANGED** — manual_02_127.0.0.1_9082_api/decision/quality-live: stable value at /golden_spotlight/status changed from 'inactive' to 'partial'.
+551:- **STABLE_VALUE_CHANGED** — manual_02_127.0.0.1_9082_api/decision/quality-live: stable value at /public_explainability/golden_alignment/status changed from 'inactive' to 'partial'.
+552:- **STABLE_VALUE_CHANGED** — manual_02_127.0.0.1_9082_api/decision/quality-live: stable value at /governing_inputs/status changed from 'COMPLETE' to 'INCOMPLETE'.
+553:- **STABLE_VALUE_CHANGED** — manual_02_127.0.0.1_9082_api/decision/quality-live: stable value at /commercial_score/status changed from 'CALCULATED_GOVERNED' to 'WITHHELD_GOVERNANCE_GATE'.
+554:- **STABLE_VALUE_CHANGED** — manual_02_127.0.0.1_9082_api/decision/quality-live: stable value at /launch_readiness/status changed from 'READY_FOR_COMMERCIAL_LAUNCH' to 'BLOCKED_BY_GOVERNANCE_GATE'.
+566:- **REQUIRED_PATH_REMOVED** — manual_03_api.ndsp.app_https_api/decision/quality-live: required schema path removed: /allowed_public_outputs/data_quality_status.
+592:- **REQUIRED_PATH_REMOVED** — manual_03_api.ndsp.app_https_api/decision/quality-live: required schema path removed: /data_quality/failures.
+606:- **REQUIRED_PATH_REMOVED** — manual_03_api.ndsp.app_https_api/decision/quality-live: required schema path removed: /data_quality/status.
+623:- **REQUIRED_PATH_REMOVED** — manual_03_api.ndsp.app_https_api/decision/quality-live: required schema path removed: /golden_alignment/missing_inputs.
+667:- **REQUIRED_PATH_REMOVED** — manual_03_api.ndsp.app_https_api/decision/quality-live: required schema path removed: /negative_scenario/confirmation/status.
+687:- **REQUIRED_PATH_REMOVED** — manual_03_api.ndsp.app_https_api/decision/quality-live: required schema path removed: /negative_scenario/status.
+712:- **REQUIRED_PATH_REMOVED** — manual_03_api.ndsp.app_https_api/decision/quality-live: required schema path removed: /positive_scenario/confirmation/status.
+732:- **REQUIRED_PATH_REMOVED** — manual_03_api.ndsp.app_https_api/decision/quality-live: required schema path removed: /positive_scenario/status.
+780:- **REQUIRED_PATH_REMOVED** — manual_03_api.ndsp.app_https_api/decision/quality-live: required schema path removed: /scenarios/negative/confirmation/status.
+800:- **REQUIRED_PATH_REMOVED** — manual_03_api.ndsp.app_https_api/decision/quality-live: required schema path removed: /scenarios/negative/status.
+825:- **REQUIRED_PATH_REMOVED** — manual_03_api.ndsp.app_https_api/decision/quality-live: required schema path removed: /scenarios/positive/confirmation/status.
+845:- **REQUIRED_PATH_REMOVED** — manual_03_api.ndsp.app_https_api/decision/quality-live: required schema path removed: /scenarios/positive/status.
+849:- **STABLE_VALUE_CHANGED** — manual_03_api.ndsp.app_https_api/decision/quality-live: stable value at /golden_spotlight/status changed from 'inactive' to 'partial'.
+850:- **STABLE_VALUE_CHANGED** — manual_03_api.ndsp.app_https_api/decision/quality-live: stable value at /public_explainability/golden_alignment/status changed from 'inactive' to 'partial'.
+851:- **STABLE_VALUE_CHANGED** — manual_03_api.ndsp.app_https_api/decision/quality-live: stable value at /governing_inputs/status changed from 'COMPLETE' to 'INCOMPLETE'.
+852:- **STABLE_VALUE_CHANGED** — manual_03_api.ndsp.app_https_api/decision/quality-live: stable value at /commercial_score/status changed from 'CALCULATED_GOVERNED' to 'WITHHELD_GOVERNANCE_GATE'.
+853:- **STABLE_VALUE_CHANGED** — manual_03_api.ndsp.app_https_api/decision/quality-live: stable value at /launch_readiness/status changed from 'READY_FOR_COMMERCIAL_LAUNCH' to 'BLOCKED_BY_GOVERNANCE_GATE'.
+857:- **LATENCY_THRESHOLD_EXCEEDED** — manual_02_127.0.0.1_9082_api/decision/quality-live: 3153.8 ms exceeds 3000.0 ms.
+
+7) RUNNER TARGETS / URLS / CONTRACT LOGIC
+3:NDSP Backend Contract V1.1 audit and regression harness.
+7:  record         Extract curl cases from the report and create a contract baseline.
+8:  verify         Replay the baseline and fail on contract regressions.
+10:  self-test      Run internal parser/schema checks without network access.
+34:import urllib.error
+35:import urllib.parse
+36:import urllib.request
+50:DEFAULT_BASELINE = Path.home() / ".local/state/ndsp-contract-v1-1/baseline.json"
+51:DEFAULT_RESULT_DIR = Path.home() / "ndsp_reports/ndsp-contract-regression-v1-1"
+62:    r"request_id|trace_id|correlation_id|span_id|latency|latency_ms|"
+67:    r"(contract|schema|api)?_?version$|^(type|kind|mode|source|status)$",
+71:    r"(scenario|scenarios|baseline|alternative|candidate|proposed|"
+117:    verify_tls: bool
+161:            "verify_tls": self.verify_tls,
+182:            verify_tls=bool(data.get("verify_tls", True)),
+188:    status: int
+318:    parsed = urllib.parse.urlsplit(url)
+320:    query = urllib.parse.parse_qsl(parsed.query, keep_blank_values=True)
+329:    sanitized = urllib.parse.urlunsplit(
+334:            urllib.parse.urlencode(sanitized_query, doseq=True, safe="${}"),
+360:    verify_tls = True
+463:            verify_tls = False
+468:                verify_tls = False
+497:    parsed = urllib.parse.urlsplit(url)
+513:        verify_tls=verify_tls,
+550:            parsed = urllib.parse.urlsplit(url)
+563:                    verify_tls=True,
+586:    request = urllib.request.Request(
+593:    if urllib.parse.urlsplit(url).scheme == "https":
+595:        if not case.verify_tls:
+597:            context.verify_mode = ssl.CERT_NONE
+601:        with urllib.request.urlopen(
+606:            status = int(response.status)
+612:    except urllib.error.HTTPError as exc:
+613:        status = int(exc.code)
+617:    except (urllib.error.URLError, TimeoutError, socket.timeout, OSError) as exc:
+624:        status=status,
+659:def build_schema(
+662:    schema: dict[str, set[str]] | None = None,
+665:    schema = schema if schema is not None else {}
+669:        schema.setdefault(current_path, set()).add(scalar_type(value))
+676:            build_schema(child, child_path, schema, stable_values)
+687:            build_schema(child, child_path, schema, stable_values)
+689:    return schema, stable_values
+770:        {"baseline", "alternative"},
+771:        {"baseline", "candidate"},
+772:        {"baseline", "proposed"},
+773:        {"baseline", "counterfactual"},
+808:        "status": result.status,
+821:    schema, stable_values = build_schema(json_value)
+831:            "schema": {path: sorted(types) for path, types in sorted(schema.items())},
+844:def schema_for_current(value: Any) -> dict[str, set[str]]:
+845:    schema, _ = build_schema(value)
+846:    return schema
+851:    baseline: Mapping[str, Any],
+853:    max_latency_ms: float | None,
+858:    expected_status = int(baseline["status"])
+859:    if current.status != expected_status:
+863:                "HTTP_STATUS_CHANGED",
+864:                f"{case.name}: HTTP status changed from {expected_status} to {current.status}.",
+868:    expected_content_type = str(baseline.get("content_type", ""))
+879:    if max_latency_ms is not None and current.elapsed_ms > max_latency_ms:
+883:                "LATENCY_THRESHOLD_EXCEEDED",
+885:                f"{max_latency_ms:.1f} ms.",
+889:    if not bool(baseline.get("json")):
+891:        if current_hash != baseline.get("text_sha256"):
+913:    current_schema = schema_for_current(current_json)
+914:    for path, expected_types_raw in dict(baseline.get("schema", {})).items():
+916:        actual_types = current_schema.get(path)
+922:                    f"{case.name}: required schema path removed: {path}.",
+935:    for pointer, expected_value in dict(baseline.get("stable_values", {})).items():
+949:    expected_semantic = dict(baseline.get("semantic", {}))
+959:                "DUAL_SCENARIO_CONTRACT_LOST",
+967:                "DATA_QUALITY_CONTRACT_LOST",
+1044:    if not re.search(r"\bHTTP/\d(?:\.\d)?\s+[1-5]\d\d\b|\bstatus(?:_code)?\b", report_text, re.IGNORECASE):
+1048:                "HTTP_STATUS_NOT_CAPTURED",
+1049:                "Report does not clearly capture HTTP status codes.",
+1057:                "NO_NEGATIVE_CONTRACT_TEST",
+1058:                "No clear negative-path contract test is documented.",
+1107:        "ExecMainStatus",
+1147:    if values.get("ExecMainStatus") not in {"", "0"}:
+1151:                "SERVICE_MAIN_STATUS_NONZERO",
+1152:                f"ExecMainStatus={values.get('ExecMainStatus')}.",
+1239:        ok, detail = tcp_check("127.0.0.1", port)
+1245:                    f"127.0.0.1:{port} is unreachable: {detail}.",
+1348:def record_baseline(args: argparse.Namespace) -> int:
+1369:        parsed = urllib.parse.urlsplit(url)
+1382:                verify_tls=not args.insecure,
+1401:            if not case.verify_tls:
+1406:                        f"{case.name}: baseline preserves curl --insecure.",
+1427:            if result.status < 200 or result.status >= 400:
+1431:                        "BASELINE_NON_SUCCESS_STATUS",
+1432:                        f"{case.name}: recorded HTTP {result.status}.",
+1443:        raise NdspError("No baseline snapshots were created.")
+1472:        "format": "ndsp-contract-baseline-v1",
+1477:        "contract": "NDSP_DUAL_SCENARIO_DATA_QUALITY_BACKEND_V1_1",
+1487:        print(render_findings_markdown("NDSP baseline record", findings, {"report": report}))
+1489:            "Baseline was not written because contract evidence is incomplete. "
+1496:    baseline_path = Path(args.baseline).expanduser().resolve()
+1498:        baseline_path,
+1502:    print(f"Baseline: {baseline_path}")
+1515:def verify_baseline(args: argparse.Namespace) -> int:
+1516:    baseline_path = Path(args.baseline).expanduser().resolve()
+1518:        baseline = json.loads(baseline_path.read_text(encoding="utf-8"))
+1520:        raise NdspError(f"Cannot load baseline {baseline_path}: {exc}") from exc
+1522:    if baseline.get("format") != "ndsp-contract-baseline-v1":
+1523:        raise NdspError(f"Unsupported baseline format in {baseline_path}.")
+1527:    for item in baseline.get("cases", []):
+1540:                args.max_latency_ms,
+1541:                baseline.get("explicit_scenario_paths", []),
+1542:                baseline.get("explicit_quality_paths", []),
+1548:            Finding("FAIL", "BASELINE_HAS_NO_CASES", "Baseline contains no cases.")
+1552:        "baseline": str(baseline_path),
+1554:        "contract": baseline.get("contract", ""),
+1559:        "NDSP_CONTRACT_REGRESSION_V1_1",
+1571:        print(f"PASS: no contract regressions; {summary['WARN']} warning(s).")
+1611:    baseline_path = Path(args.baseline).expanduser().resolve()
+1614:    if not baseline_path.is_file():
+1615:        raise NdspError(f"Baseline not found: {baseline_path}")
+1631:    env_file = Path(account.pw_dir) / ".config/ndsp-contract-regression.env"
+1642:    service_name = "ndsp-contract-regression-v1-1.service"
+1643:    timer_name = "ndsp-contract-regression-v1-1.timer"
+1652:            "verify",
+1653:            "--baseline",
+1654:            systemd_quote(str(baseline_path)),
+1657:            "--max-latency-ms",
+1658:            str(args.max_latency_ms),
+1664:        Description=NDSP Backend Contract V1.1 Regression
+1687:        Description=Run NDSP Backend Contract V1.1 Regression Automatically
+1718:    curl -sS -X POST http://127.0.0.1:9057/v1/quality \
+1722:    curl -sS http://127.0.0.1:9082/health
+1732:        "contract_version": "1.1",
+1733:        "scenarios": [{"name": "baseline"}, {"name": "alternative"}],
+1737:    schema, stable = build_schema(sample_json)
+1738:    assert "/scenarios" in schema
+1739:    assert "/scenarios/*/name" in schema
+1740:    assert "/timestamp" not in schema
+1741:    assert stable["/contract_version"] == "1.1"
+1762:        "URL=http://127.0.0.1:9057/api/test?timeframe=weekly}"
+1775:        description="Audit and regression-test NDSP Backend Contract V1.1.",
+1789:        help="Record a known-good baseline from curl cases in the report.",
+1792:    record_parser.add_argument("--baseline", default=str(DEFAULT_BASELINE))
+1806:        help="Write baseline despite missing semantic evidence.",
+1808:    record_parser.set_defaults(function=record_baseline)
+1810:    verify_parser = subparsers.add_parser(
+1811:        "verify",
+1812:        help="Replay baseline and detect contract regressions.",
+1814:    verify_parser.add_argument("--baseline", default=str(DEFAULT_BASELINE))
+1815:    verify_parser.add_argument("--output-dir", default=str(DEFAULT_RESULT_DIR))
+1816:    verify_parser.add_argument("--max-latency-ms", type=float, default=3000.0)
+1817:    verify_parser.set_defaults(function=verify_baseline)
+1824:    install_parser.add_argument("--baseline", default=str(DEFAULT_BASELINE))
+1828:    install_parser.add_argument("--max-latency-ms", type=float, default=3000.0)
+
+8) CANONICAL CONTRACT FILES
+/home/nawaf511/empire-core-new/backend/app/api/v1/frontend_contract.py
+/home/nawaf511/empire-core-new/backend/app/support_layers/cot/cot_contracts.py
+/home/nawaf511/empire-core-new/backend/architecture/API_CONTRACTS.md
+/home/nawaf511/empire-core-new/backend/architecture/contracts/BOT-001-CONTRACT.md
+/home/nawaf511/empire-core-new/backend/architecture/contracts/CDS-001-CONTRACT.md
+/home/nawaf511/empire-core-new/backend/architecture/contracts/COMPLETED_DECISION_CONTRACT.md
+/home/nawaf511/empire-core-new/backend/architecture/contracts/CTL-001-WORKSPACE-IDENTITY-CONTRACT.md
+/home/nawaf511/empire-core-new/backend/architecture/contracts/DEV-001-DEVELOPER-TOOLKIT-CONTRACT.md
+/home/nawaf511/empire-core-new/backend/architecture/contracts/DEV-002-REPOSITORY-HYGIENE-CONTRACT.md
+/home/nawaf511/empire-core-new/backend/architecture/contracts/DGC-001-CONTRACT.md
+/home/nawaf511/empire-core-new/backend/architecture/contracts/ENG-001-FRAMEWORK-CONTRACT.md
+/home/nawaf511/empire-core-new/backend/architecture/contracts/PUBLIC_GATEWAY_ACTIVATION_CONTRACT.md
+/home/nawaf511/empire-core-new/backend/architecture/contracts/PUBLIC_GATEWAY_CONTRACT.md
+/home/nawaf511/empire-core-new/backend/contracts/canonical_v1/contract_registry.py
+/home/nawaf511/empire-core-new/backend/docs/API_CONTRACT.md
+/home/nawaf511/empire-core-new/backend/intelligence/cot-direction/contract.js
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/core/contracts.py
+/home/nawaf511/empire-core-new/backend/layers/canonical_v1/tests/test_contracts.py
+/home/nawaf511/empire-core-new/backend/services/bot_execution/contracts/BOT-001-CONTRACT.md
+/home/nawaf511/empire-core-new/backend/services/bot_execution/contracts/BOT-001-ENG-001-ADAPTER-CONTRACT.md
+/home/nawaf511/empire-core-new/backend/services/completed_decision/contracts/CDS-001-CONTRACT.md
+/home/nawaf511/empire-core-new/backend/services/completed_decision/contracts/CDS-001-ENG-001-ADAPTER-CONTRACT.md
+/home/nawaf511/empire-core-new/backend/services/ctl-001-workspace-identity/contracts/CTL-001-WORKSPACE-IDENTITY-CONTRACT.md
+/home/nawaf511/empire-core-new/backend/services/decision_governance_core/contracts/DGC-001-CONTRACT.md
+/home/nawaf511/empire-core-new/backend/services/decision_governance_core/contracts/DGC-001-ENG-001-ADAPTER-CONTRACT.md
+/home/nawaf511/empire-core-new/backend/tests/pr024-critical-contracts.test.cjs
+/home/nawaf511/empire-core-new/backend/tests/pr028-quick-wins-contracts.test.cjs
+
+9) GOVERNANCE DUPLICATE UNIT COMPARISON
+
+===== ndsp-decision-governance-core.service =====
+# /etc/systemd/system/ndsp-decision-governance-core.service
+[Unit]
+Description=NDSP Decision Governance Core
+After=network.target ndsp-completed-decision.service
+
+[Service]
+Type=simple
+User=nawaf511
+WorkingDirectory=/home/nawaf511/empire-core-new/backend/services/decision_governance_core
+Environment=NODE_ENV=production
+Environment=NDSP_GOVERNANCE_PORT=9079
+Environment=NDSP_COMPLETED_DECISION_URL=http://127.0.0.1:9078
+EnvironmentFile=-/home/nawaf511/empire-core-new/backend/.env
+ExecStart=/usr/bin/node /home/nawaf511/empire-core-new/backend/services/decision_governance_core/main.cjs
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
+ExecStart={ path=/usr/bin/node ; argv[]=/usr/bin/node /home/nawaf511/empire-core-new/backend/services/decision_governance_core/main.cjs ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }
+LoadState=loaded
+ActiveState=inactive
+SubState=dead
+UnitFileState=disabled
+
+===== ndsp-decision_governance_core.service =====
+# /etc/systemd/system/ndsp-decision_governance_core.service
+[Unit]
+Description=NDSP DGC-001 Decision Governance Core
+After=network.target
+
+[Service]
+Type=simple
+User=nawaf511
+WorkingDirectory=/home/nawaf511/empire-core-new/backend/services/decision_governance_core
+Environment=NODE_ENV=production
+Environment=NDSP_PORT=9079
+Environment=NDSP_HOST=127.0.0.1
+ExecStart=/usr/bin/node /home/nawaf511/empire-core-new/backend/services/decision_governance_core/main.cjs
+Restart=always
+RestartSec=3
+
+EnvironmentFile=-/home/nawaf511/empire-core-new/backend/runtime/systemd-env/core-services.env
+[Install]
+WantedBy=multi-user.target
+ExecStart={ path=/usr/bin/node ; argv[]=/usr/bin/node /home/nawaf511/empire-core-new/backend/services/decision_governance_core/main.cjs ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }
+LoadState=loaded
+ActiveState=active
+SubState=running
+UnitFileState=enabled
+
+10) CURRENT CORE HEALTH
+ndsp-decision_governance_core.service                active
+ndsp-governance-bridge.service                       active
+ndsp-decision-package-v1.service                     active
+ndsp-16-layers.service                               active
+ndsp-canonical-live-runtime-v30.service              active
+ndsp-canonical-live-runtime-v33.service              active
+ndsp-completed-decisions-evidence-v35.service        active
+ndsp-completed-decisions-history-v36.service         active
+
+11) FINAL
+READ_ONLY=YES
+NO_BASELINE_UPDATE=YES
+NO_SERVICE_RESTART=YES
+NO_FILES_MODIFIED=YES
+AUDIT_FILE=/home/nawaf511/empire-core-new/var/audits/contract-regression-deep-audit-20260807-211445.txt
+FINAL_RESULT=PASS
+============================================================

@@ -1,0 +1,16 @@
+NDSP FINAL GOVERNANCE AUDIT
+
+Repository: abuessa911/ndsp-platform
+origin/main: a473be351f6bc6bd74584d5e5e1c08cc00482c1d
+Expected packages: 12
+Validated packages: 12
+All JSON files: 12
+Primary JSON validations: 12
+Checksum manifests validated: 4
+Validated pull requests: 3
+Temporary worktrees: 0
+Temporary local branches: 0
+Temporary remote branches: 0
+Runtime changes: none
+Validation: PASS
+Status: GOVERNANCE_FINAL_AUDIT_PASSED

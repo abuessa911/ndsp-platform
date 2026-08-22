@@ -1,0 +1,47 @@
+=== EXACT MAIN SOURCE ===
+MAIN_SOURCE=/usr/local/lib/ndsp-business-ops/app.py
+  File: /usr/local/lib/ndsp-business-ops/app.py
+  Size: 19581     	Blocks: 40         IO Block: 4096   regular file
+Device: 8,1	Inode: 292252      Links: 1
+Access: (0755/-rwxr-xr-x)  Uid: (    0/    root)   Gid: (    0/    root)
+Access: 2026-07-29 06:53:37.702242427 +0200
+Modify: 2026-07-20 18:02:34.616370514 +0200
+Change: 2026-07-20 18:02:34.617370510 +0200
+ Birth: 2026-07-20 18:02:34.616370514 +0200
+cce1361d7ea7134873603cb4692dc2669b9ff36ee19a71f2205e045cb04ab052  /usr/local/lib/ndsp-business-ops/app.py
+
+=== SOURCE CANDIDATES ===
+/usr/local/lib/ndsp-business-ops/app.py
+/usr/local/lib/ndsp-business-ops/daily_digest.py
+/usr/local/lib/ndsp-business-ops/monitor.py
+
+=== ROUTE AND HTTP PATH DEFINITIONS ===
+
+--- FILE: /usr/local/lib/ndsp-business-ops/app.py ---
+142:        conn.execute("DELETE FROM rate_events WHERE created_epoch < ?", (now - 86400,))
+216:        self.send_header("Allow", "GET,POST,OPTIONS")
+221:        parsed = urlparse(self.path)
+222:        path = parsed.path
+225:        if path == "/api/ops/public/config":
+238:        if path == "/api/ops/public/plans":
+240:        if path == "/api/ops/public/status":
+243:        if path.startswith("/api/ops/admin/"):
+246:            if path == "/api/ops/admin/summary":
+248:            if path == "/api/ops/admin/export":
+253:        path = urlparse(self.path).path
+260:        if path.startswith("/api/ops/admin/"):
+263:            if path == "/api/ops/admin/status":
+266:        if path == "/api/ops/public/lead":
+268:        if path == "/api/ops/public/support":
+270:        if path == "/api/ops/public/subscription-request":
+272:        if path == "/api/ops/public/onboarding-event":
+
+--- FILE: /usr/local/lib/ndsp-business-ops/daily_digest.py ---
+17: path=os.path.join(outbox,f'{stamp}_{safe}.eml')
+49: path=os.path.join(REPORT_DIR,'NDSP_DAILY_BUSINESS_DIGEST_'+now.strftime('%Y%m%d')+'.md')
+
+--- FILE: /usr/local/lib/ndsp-business-ops/monitor.py ---
+47: path=os.path.join(outbox,f'{stamp}_{safe}.eml')
+89:  c.execute('DELETE FROM monitor_checks WHERE id NOT IN (SELECT id FROM monitor_checks ORDER BY id DESC LIMIT 10000)')
+
+=== RUNTIME SOURCE REFERENCES TO COMMERCIAL TABLES ===

@@ -1,0 +1,150 @@
+أغسطس 05 09:45:57 vmi2934783 node[3087531]:     at Object..js (node:internal/modules/cjs/loader:1930:10) {
+أغسطس 05 09:45:57 vmi2934783 node[3087531]:   code: 'MODULE_NOT_FOUND',
+أغسطس 05 09:45:57 vmi2934783 node[3087531]:   requireStack: [ '/home/nawaf511/empire-core-new/backend/server.js' ]
+أغسطس 05 09:45:57 vmi2934783 node[3087531]: }
+أغسطس 05 09:45:57 vmi2934783 node[3087531]: /home/nawaf511/empire-core-new/backend/server.js:72
+أغسطس 05 09:45:57 vmi2934783 node[3087531]:   throw e;
+أغسطس 05 09:45:57 vmi2934783 node[3087531]:   ^
+أغسطس 05 09:45:57 vmi2934783 node[3087531]: Error: Cannot find module '/home/nawaf511/empire-core-new/backend/auth_api/ndsp_device_guard.cjs'
+أغسطس 05 09:45:57 vmi2934783 node[3087531]: Require stack:
+أغسطس 05 09:45:57 vmi2934783 node[3087531]: - /home/nawaf511/empire-core-new/backend/server.js
+أغسطس 05 09:45:57 vmi2934783 node[3087531]:     at Function._resolveFilename (node:internal/modules/cjs/loader:1447:15)
+أغسطس 05 09:45:57 vmi2934783 node[3087531]:     at defaultResolveImpl (node:internal/modules/cjs/loader:1057:19)
+أغسطس 05 09:45:57 vmi2934783 node[3087531]:     at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1062:22)
+أغسطس 05 09:45:57 vmi2934783 node[3087531]:     at Function._load (node:internal/modules/cjs/loader:1233:25)
+أغسطس 05 09:45:57 vmi2934783 node[3087531]:     at wrapModuleLoad (node:internal/modules/cjs/loader:256:19)
+أغسطس 05 09:45:57 vmi2934783 node[3087531]:     at Module.require (node:internal/modules/cjs/loader:1544:12)
+أغسطس 05 09:45:57 vmi2934783 node[3087531]:     at require (node:internal/modules/helpers:147:16)
+أغسطس 05 09:45:57 vmi2934783 node[3087531]:     at Object.<anonymous> (/home/nawaf511/empire-core-new/backend/server.js:68:46)
+أغسطس 05 09:45:57 vmi2934783 node[3087531]:     at Module._compile (node:internal/modules/cjs/loader:1798:14)
+أغسطس 05 09:45:57 vmi2934783 node[3087531]:     at Object..js (node:internal/modules/cjs/loader:1930:10) {
+أغسطس 05 09:45:57 vmi2934783 node[3087531]:   code: 'MODULE_NOT_FOUND',
+أغسطس 05 09:45:57 vmi2934783 node[3087531]:   requireStack: [ '/home/nawaf511/empire-core-new/backend/server.js' ]
+أغسطس 05 09:45:57 vmi2934783 node[3087531]: }
+أغسطس 05 09:45:57 vmi2934783 node[3087531]: Node.js v22.23.1
+أغسطس 05 09:46:03 vmi2934783 node[3088699]: ⚠️ NDSP trial info skipped: Cannot find module '/home/nawaf511/empire-core-new/backend/auth_api/ndsp_trial_info.cjs'
+أغسطس 05 09:46:03 vmi2934783 node[3088699]: Require stack:
+أغسطس 05 09:46:03 vmi2934783 node[3088699]: - /home/nawaf511/empire-core-new/backend/server.js
+أغسطس 05 09:46:03 vmi2934783 node[3088699]: ⚠ NDSP NOWPayments skipped during V1: Cannot find module '/home/nawaf511/empire-core-new/backend/auth_api/ndsp_nowpayments.cjs'
+أغسطس 05 09:46:03 vmi2934783 node[3088699]: Require stack:
+أغسطس 05 09:46:03 vmi2934783 node[3088699]: - /home/nawaf511/empire-core-new/backend/server.js
+أغسطس 05 09:46:03 vmi2934783 node[3088699]: ❌ NDSP device guard failed: Error: Cannot find module '/home/nawaf511/empire-core-new/backend/auth_api/ndsp_device_guard.cjs'
+أغسطس 05 09:46:03 vmi2934783 node[3088699]: Require stack:
+أغسطس 05 09:46:03 vmi2934783 node[3088699]: - /home/nawaf511/empire-core-new/backend/server.js
+أغسطس 05 09:46:03 vmi2934783 node[3088699]:     at Function._resolveFilename (node:internal/modules/cjs/loader:1447:15)
+أغسطس 05 09:46:03 vmi2934783 node[3088699]:     at defaultResolveImpl (node:internal/modules/cjs/loader:1057:19)
+أغسطس 05 09:46:03 vmi2934783 node[3088699]:     at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1062:22)
+أغسطس 05 09:46:03 vmi2934783 node[3088699]:     at Function._load (node:internal/modules/cjs/loader:1233:25)
+أغسطس 05 09:46:03 vmi2934783 node[3088699]:     at wrapModuleLoad (node:internal/modules/cjs/loader:256:19)
+أغسطس 05 09:46:03 vmi2934783 node[3088699]:     at Module.require (node:internal/modules/cjs/loader:1544:12)
+أغسطس 05 09:46:03 vmi2934783 node[3088699]:     at require (node:internal/modules/helpers:147:16)
+أغسطس 05 09:46:03 vmi2934783 node[3088699]:     at Object.<anonymous> (/home/nawaf511/empire-core-new/backend/server.js:68:46)
+أغسطس 05 09:46:03 vmi2934783 node[3088699]:     at Module._compile (node:internal/modules/cjs/loader:1798:14)
+أغسطس 05 09:46:03 vmi2934783 node[3088699]:     at Object..js (node:internal/modules/cjs/loader:1930:10) {
+أغسطس 05 09:46:03 vmi2934783 node[3088699]:   code: 'MODULE_NOT_FOUND',
+أغسطس 05 09:46:03 vmi2934783 node[3088699]:   requireStack: [ '/home/nawaf511/empire-core-new/backend/server.js' ]
+أغسطس 05 09:46:03 vmi2934783 node[3088699]: }
+أغسطس 05 09:46:03 vmi2934783 node[3088699]: /home/nawaf511/empire-core-new/backend/server.js:72
+أغسطس 05 09:46:03 vmi2934783 node[3088699]:   throw e;
+أغسطس 05 09:46:03 vmi2934783 node[3088699]:   ^
+أغسطس 05 09:46:03 vmi2934783 node[3088699]: Error: Cannot find module '/home/nawaf511/empire-core-new/backend/auth_api/ndsp_device_guard.cjs'
+أغسطس 05 09:46:03 vmi2934783 node[3088699]: Require stack:
+أغسطس 05 09:46:03 vmi2934783 node[3088699]: - /home/nawaf511/empire-core-new/backend/server.js
+أغسطس 05 09:46:03 vmi2934783 node[3088699]:     at Function._resolveFilename (node:internal/modules/cjs/loader:1447:15)
+أغسطس 05 09:46:03 vmi2934783 node[3088699]:     at defaultResolveImpl (node:internal/modules/cjs/loader:1057:19)
+أغسطس 05 09:46:03 vmi2934783 node[3088699]:     at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1062:22)
+أغسطس 05 09:46:03 vmi2934783 node[3088699]:     at Function._load (node:internal/modules/cjs/loader:1233:25)
+أغسطس 05 09:46:03 vmi2934783 node[3088699]:     at wrapModuleLoad (node:internal/modules/cjs/loader:256:19)
+أغسطس 05 09:46:03 vmi2934783 node[3088699]:     at Module.require (node:internal/modules/cjs/loader:1544:12)
+أغسطس 05 09:46:03 vmi2934783 node[3088699]:     at require (node:internal/modules/helpers:147:16)
+أغسطس 05 09:46:03 vmi2934783 node[3088699]:     at Object.<anonymous> (/home/nawaf511/empire-core-new/backend/server.js:68:46)
+أغسطس 05 09:46:03 vmi2934783 node[3088699]:     at Module._compile (node:internal/modules/cjs/loader:1798:14)
+أغسطس 05 09:46:03 vmi2934783 node[3088699]:     at Object..js (node:internal/modules/cjs/loader:1930:10) {
+أغسطس 05 09:46:03 vmi2934783 node[3088699]:   code: 'MODULE_NOT_FOUND',
+أغسطس 05 09:46:03 vmi2934783 node[3088699]:   requireStack: [ '/home/nawaf511/empire-core-new/backend/server.js' ]
+أغسطس 05 09:46:03 vmi2934783 node[3088699]: }
+أغسطس 05 09:46:03 vmi2934783 node[3088699]: Node.js v22.23.1
+أغسطس 05 09:46:09 vmi2934783 node[3088946]: ⚠️ NDSP trial info skipped: Cannot find module '/home/nawaf511/empire-core-new/backend/auth_api/ndsp_trial_info.cjs'
+أغسطس 05 09:46:09 vmi2934783 node[3088946]: Require stack:
+أغسطس 05 09:46:09 vmi2934783 node[3088946]: - /home/nawaf511/empire-core-new/backend/server.js
+أغسطس 05 09:46:09 vmi2934783 node[3088946]: ⚠ NDSP NOWPayments skipped during V1: Cannot find module '/home/nawaf511/empire-core-new/backend/auth_api/ndsp_nowpayments.cjs'
+أغسطس 05 09:46:09 vmi2934783 node[3088946]: Require stack:
+أغسطس 05 09:46:09 vmi2934783 node[3088946]: - /home/nawaf511/empire-core-new/backend/server.js
+أغسطس 05 09:46:09 vmi2934783 node[3088946]: ❌ NDSP device guard failed: Error: Cannot find module '/home/nawaf511/empire-core-new/backend/auth_api/ndsp_device_guard.cjs'
+أغسطس 05 09:46:09 vmi2934783 node[3088946]: Require stack:
+أغسطس 05 09:46:09 vmi2934783 node[3088946]: - /home/nawaf511/empire-core-new/backend/server.js
+أغسطس 05 09:46:09 vmi2934783 node[3088946]:     at Function._resolveFilename (node:internal/modules/cjs/loader:1447:15)
+أغسطس 05 09:46:09 vmi2934783 node[3088946]:     at defaultResolveImpl (node:internal/modules/cjs/loader:1057:19)
+أغسطس 05 09:46:09 vmi2934783 node[3088946]:     at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1062:22)
+أغسطس 05 09:46:09 vmi2934783 node[3088946]:     at Function._load (node:internal/modules/cjs/loader:1233:25)
+أغسطس 05 09:46:09 vmi2934783 node[3088946]:     at wrapModuleLoad (node:internal/modules/cjs/loader:256:19)
+أغسطس 05 09:46:09 vmi2934783 node[3088946]:     at Module.require (node:internal/modules/cjs/loader:1544:12)
+أغسطس 05 09:46:09 vmi2934783 node[3088946]:     at require (node:internal/modules/helpers:147:16)
+أغسطس 05 09:46:09 vmi2934783 node[3088946]:     at Object.<anonymous> (/home/nawaf511/empire-core-new/backend/server.js:68:46)
+أغسطس 05 09:46:09 vmi2934783 node[3088946]:     at Module._compile (node:internal/modules/cjs/loader:1798:14)
+أغسطس 05 09:46:09 vmi2934783 node[3088946]:     at Object..js (node:internal/modules/cjs/loader:1930:10) {
+أغسطس 05 09:46:09 vmi2934783 node[3088946]:   code: 'MODULE_NOT_FOUND',
+أغسطس 05 09:46:09 vmi2934783 node[3088946]:   requireStack: [ '/home/nawaf511/empire-core-new/backend/server.js' ]
+أغسطس 05 09:46:09 vmi2934783 node[3088946]: }
+أغسطس 05 09:46:09 vmi2934783 node[3088946]: /home/nawaf511/empire-core-new/backend/server.js:72
+أغسطس 05 09:46:09 vmi2934783 node[3088946]:   throw e;
+أغسطس 05 09:46:09 vmi2934783 node[3088946]:   ^
+أغسطس 05 09:46:09 vmi2934783 node[3088946]: Error: Cannot find module '/home/nawaf511/empire-core-new/backend/auth_api/ndsp_device_guard.cjs'
+أغسطس 05 09:46:09 vmi2934783 node[3088946]: Require stack:
+أغسطس 05 09:46:09 vmi2934783 node[3088946]: - /home/nawaf511/empire-core-new/backend/server.js
+أغسطس 05 09:46:09 vmi2934783 node[3088946]:     at Function._resolveFilename (node:internal/modules/cjs/loader:1447:15)
+أغسطس 05 09:46:09 vmi2934783 node[3088946]:     at defaultResolveImpl (node:internal/modules/cjs/loader:1057:19)
+أغسطس 05 09:46:09 vmi2934783 node[3088946]:     at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1062:22)
+أغسطس 05 09:46:09 vmi2934783 node[3088946]:     at Function._load (node:internal/modules/cjs/loader:1233:25)
+أغسطس 05 09:46:09 vmi2934783 node[3088946]:     at wrapModuleLoad (node:internal/modules/cjs/loader:256:19)
+أغسطس 05 09:46:09 vmi2934783 node[3088946]:     at Module.require (node:internal/modules/cjs/loader:1544:12)
+أغسطس 05 09:46:09 vmi2934783 node[3088946]:     at require (node:internal/modules/helpers:147:16)
+أغسطس 05 09:46:09 vmi2934783 node[3088946]:     at Object.<anonymous> (/home/nawaf511/empire-core-new/backend/server.js:68:46)
+أغسطس 05 09:46:09 vmi2934783 node[3088946]:     at Module._compile (node:internal/modules/cjs/loader:1798:14)
+أغسطس 05 09:46:09 vmi2934783 node[3088946]:     at Object..js (node:internal/modules/cjs/loader:1930:10) {
+أغسطس 05 09:46:09 vmi2934783 node[3088946]:   code: 'MODULE_NOT_FOUND',
+أغسطس 05 09:46:09 vmi2934783 node[3088946]:   requireStack: [ '/home/nawaf511/empire-core-new/backend/server.js' ]
+أغسطس 05 09:46:09 vmi2934783 node[3088946]: }
+أغسطس 05 09:46:09 vmi2934783 node[3088946]: Node.js v22.23.1
+أغسطس 05 09:46:14 vmi2934783 node[3089068]: ⚠️ NDSP trial info skipped: Cannot find module '/home/nawaf511/empire-core-new/backend/auth_api/ndsp_trial_info.cjs'
+أغسطس 05 09:46:14 vmi2934783 node[3089068]: Require stack:
+أغسطس 05 09:46:14 vmi2934783 node[3089068]: - /home/nawaf511/empire-core-new/backend/server.js
+أغسطس 05 09:46:14 vmi2934783 node[3089068]: ⚠ NDSP NOWPayments skipped during V1: Cannot find module '/home/nawaf511/empire-core-new/backend/auth_api/ndsp_nowpayments.cjs'
+أغسطس 05 09:46:14 vmi2934783 node[3089068]: Require stack:
+أغسطس 05 09:46:14 vmi2934783 node[3089068]: - /home/nawaf511/empire-core-new/backend/server.js
+أغسطس 05 09:46:14 vmi2934783 node[3089068]: ❌ NDSP device guard failed: Error: Cannot find module '/home/nawaf511/empire-core-new/backend/auth_api/ndsp_device_guard.cjs'
+أغسطس 05 09:46:14 vmi2934783 node[3089068]: Require stack:
+أغسطس 05 09:46:14 vmi2934783 node[3089068]: - /home/nawaf511/empire-core-new/backend/server.js
+أغسطس 05 09:46:14 vmi2934783 node[3089068]:     at Function._resolveFilename (node:internal/modules/cjs/loader:1447:15)
+أغسطس 05 09:46:14 vmi2934783 node[3089068]:     at defaultResolveImpl (node:internal/modules/cjs/loader:1057:19)
+أغسطس 05 09:46:14 vmi2934783 node[3089068]:     at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1062:22)
+أغسطس 05 09:46:14 vmi2934783 node[3089068]:     at Function._load (node:internal/modules/cjs/loader:1233:25)
+أغسطس 05 09:46:14 vmi2934783 node[3089068]:     at wrapModuleLoad (node:internal/modules/cjs/loader:256:19)
+أغسطس 05 09:46:14 vmi2934783 node[3089068]:     at Module.require (node:internal/modules/cjs/loader:1544:12)
+أغسطس 05 09:46:14 vmi2934783 node[3089068]:     at require (node:internal/modules/helpers:147:16)
+أغسطس 05 09:46:14 vmi2934783 node[3089068]:     at Object.<anonymous> (/home/nawaf511/empire-core-new/backend/server.js:68:46)
+أغسطس 05 09:46:14 vmi2934783 node[3089068]:     at Module._compile (node:internal/modules/cjs/loader:1798:14)
+أغسطس 05 09:46:14 vmi2934783 node[3089068]:     at Object..js (node:internal/modules/cjs/loader:1930:10) {
+أغسطس 05 09:46:14 vmi2934783 node[3089068]:   code: 'MODULE_NOT_FOUND',
+أغسطس 05 09:46:14 vmi2934783 node[3089068]:   requireStack: [ '/home/nawaf511/empire-core-new/backend/server.js' ]
+أغسطس 05 09:46:14 vmi2934783 node[3089068]: }
+أغسطس 05 09:46:14 vmi2934783 node[3089068]: /home/nawaf511/empire-core-new/backend/server.js:72
+أغسطس 05 09:46:14 vmi2934783 node[3089068]:   throw e;
+أغسطس 05 09:46:14 vmi2934783 node[3089068]:   ^
+أغسطس 05 09:46:14 vmi2934783 node[3089068]: Error: Cannot find module '/home/nawaf511/empire-core-new/backend/auth_api/ndsp_device_guard.cjs'
+أغسطس 05 09:46:14 vmi2934783 node[3089068]: Require stack:
+أغسطس 05 09:46:14 vmi2934783 node[3089068]: - /home/nawaf511/empire-core-new/backend/server.js
+أغسطس 05 09:46:14 vmi2934783 node[3089068]:     at Function._resolveFilename (node:internal/modules/cjs/loader:1447:15)
+أغسطس 05 09:46:14 vmi2934783 node[3089068]:     at defaultResolveImpl (node:internal/modules/cjs/loader:1057:19)
+أغسطس 05 09:46:14 vmi2934783 node[3089068]:     at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1062:22)
+أغسطس 05 09:46:14 vmi2934783 node[3089068]:     at Function._load (node:internal/modules/cjs/loader:1233:25)
+أغسطس 05 09:46:14 vmi2934783 node[3089068]:     at wrapModuleLoad (node:internal/modules/cjs/loader:256:19)
+أغسطس 05 09:46:14 vmi2934783 node[3089068]:     at Module.require (node:internal/modules/cjs/loader:1544:12)
+أغسطس 05 09:46:14 vmi2934783 node[3089068]:     at require (node:internal/modules/helpers:147:16)
+أغسطس 05 09:46:14 vmi2934783 node[3089068]:     at Object.<anonymous> (/home/nawaf511/empire-core-new/backend/server.js:68:46)
+أغسطس 05 09:46:14 vmi2934783 node[3089068]:     at Module._compile (node:internal/modules/cjs/loader:1798:14)
+أغسطس 05 09:46:14 vmi2934783 node[3089068]:     at Object..js (node:internal/modules/cjs/loader:1930:10) {
+أغسطس 05 09:46:14 vmi2934783 node[3089068]:   code: 'MODULE_NOT_FOUND',
+أغسطس 05 09:46:14 vmi2934783 node[3089068]:   requireStack: [ '/home/nawaf511/empire-core-new/backend/server.js' ]
+أغسطس 05 09:46:14 vmi2934783 node[3089068]: }
+أغسطس 05 09:46:14 vmi2934783 node[3089068]: Node.js v22.23.1

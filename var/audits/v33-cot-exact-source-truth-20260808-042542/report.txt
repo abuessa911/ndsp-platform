@@ -1,0 +1,266 @@
+=== NDSP V33 COT EXACT SOURCE TRUTH ===
+DATE=2026-08-08T04:25:42+02:00
+MODE=STRICT_READ_ONLY
+SOURCE=/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_canonical_live_runtime_v33.py
+
+SOURCE_FOUND=YES
+PYTHON_SYNTAX=PASS
+
+=== SERVICE ===
+MainPID=2267278
+ExecMainStatus=0
+ActiveState=active
+SubState=running
+
+=== COT REFERENCES ===
+701:    blockers = list(evidence.get("critical_blockers") or [])
+719:    evidence["critical_blockers"] = blockers
+778:            "cot": "UNCHANGED_TRUTHFUL_GATE",
+
+=== AST DICTIONARIES / FUNCTIONS CONTAINING COT ===
+CANDIDATE_COUNT=3
+CANDIDATE_1=FUNCTION:737-800:enhanced_health
+CANDIDATE_2=DICT:740-800:"cot"
+CANDIDATE_3=DICT:748-800:"cot"
+
+=== RAW SOURCE WINDOWS AROUND KNOWN V33 AREA ===
+        or cleaned in {"EURUSD", "GBPUSD", "AUDUSD", "XAUUSD", "XAGUSD", "SPX", "NDX", "DJI"}
+    )
+    if not inverse_asset or usd_direction == "neutral":
+        return "neutral"
+    if usd_direction == "bullish":
+        return "negative_pressure"
+    if usd_direction == "bearish":
+        return "positive_support"
+    return "unknown"
+
+
+ORIGINAL_BUILD_PAYLOAD = v30.build_payload
+ORIGINAL_HEALTH = v30.health
+
+
+def enhanced_build_payload(
+    upstream: Mapping[str, Any],
+    symbol: str,
+    timeframe: str,
+    mode: str,
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    payload, evidence = ORIGINAL_BUILD_PAYLOAD(upstream, symbol, timeframe, mode)
+
+    ohlcv = fetch_ohlcv(symbol, timeframe, 240)
+    closes = [float(value) for value in ohlcv["closes"]]
+    highs = [float(value) for value in ohlcv["highs"]]
+    lows = [float(value) for value in ohlcv["lows"]]
+    volumes = [float(value) for value in ohlcv["volumes"]]
+    close_times = [int(value) for value in ohlcv["close_times"]]
+
+    if len(closes) < 80:
+        raise ValueError(f"INSUFFICIENT_TECHNICAL_BARS:{symbol}:{timeframe}:{len(closes)}")
+
+    last_close_ms = close_times[-1]
+    age_seconds = max(0.0, time.time() - (last_close_ms / 1000.0))
+    max_age = MAX_AGE_SECONDS[timeframe]
+    if age_seconds > max_age:
+        raise ValueError(
+            f"STALE_TECHNICAL_DATA:{symbol}:{timeframe}:{round(age_seconds / 3600, 2)}h"
+        )
+
+    rsi_values = rsi_series(closes, 14)
+    macd_values = macd_histogram(closes)
+    obv_values = obv_series(closes, volumes)
+    cci_values = cci_series(highs, lows, closes, 20)
+
+    full_indicators = {
+        "RSI": rsi_values,
+        "MACD_HISTOGRAM": macd_values,
+        "OBV": [float(value) for value in obv_values],
+        "CCI": cci_values,
+    }
+    divergence = detect_divergence(highs, lows, full_indicators)
+    momentum = momentum_result(rsi_values, macd_values, obv_values, cci_values)
+    levels = payload.get("scenario_levels") if isinstance(payload.get("scenario_levels"), Mapping) else {}
+    liquidity = liquidity_result(symbol, ohlcv, levels)
+    dxy = dxy_result()
+
+    old_macro = payload.get("usd_macro_result")
+    old_macro = old_macro if isinstance(old_macro, Mapping) else {}
+    usd_macro = dict(old_macro)
+    usd_macro.update({
+        "status": "AVAILABLE" if dxy["verified"] else "PARTIAL_AVAILABLE",
+        "confidence": 88 if dxy["verified"] else 55,
+        "input_quality": "FULL" if dxy["verified"] else "PARTIAL",
+        "usd_direction_verified": bool(dxy["verified"]),
+        "usd_direction": dxy["direction"],
+        "dxy": dxy,
+        "asset_effect": asset_usd_effect(symbol, dxy["direction"]),
+        "reason": (
+            "LIVE_DXY_CALENDAR_AND_NEWS_BOUND"
+            if dxy["verified"]
+            else "DXY_VERIFICATION_GATE_NOT_MET"
+        ),
+    })
+
+    payload["divergence_result"] = divergence
+    payload["momentum_result"] = momentum
+    payload["liquidity_structure_result"] = liquidity
+    payload["usd_macro_result"] = usd_macro
+
+    blockers = list(evidence.get("critical_blockers") or [])
+    removable = {
+        "DIVERGENCE_ENGINE_INPUT_SET_NOT_BOUND": divergence["status"] == "AVAILABLE",
+        "MOMENTUM_INDICATOR_SET_PARTIAL": momentum["status"] == "AVAILABLE",
+        "LIQUIDITY_FEED_NOT_VERIFIED": bool(liquidity["liquidity_verified"]),
+        "USD_DIRECTION_FEED_NOT_VERIFIED": bool(usd_macro["usd_direction_verified"]),
+    }
+    blockers = [
+        blocker for blocker in blockers
+        if not removable.get(blocker, False)
+    ]
+    blockers = list(dict.fromkeys(blockers))
+
+    risk = payload.get("risk_result")
+    risk = risk if isinstance(risk, Mapping) else {}
+    risk_blocked = bool(risk.get("blocked"))
+    payload["devils_advocate_blocked"] = risk_blocked
+    payload["devils_advocate_reasons"] = blockers
+    evidence["critical_blockers"] = blockers
+
+    input_matrix = evidence.get("input_matrix")
+    if not isinstance(input_matrix, dict):
+        input_matrix = {}
+        evidence["input_matrix"] = input_matrix
+    input_matrix["L05"] = {
+        "state": "LIVE",
+        "source": "REAL_OHLCV_RSI_MACD_OBV_CCI",
+    }
+    input_matrix["L09"] = {
+        "state": "LIVE",
+        "source": "REAL_OHLCV_RSI_MACD_OBV_CCI",
+    }
+    input_matrix["L10"] = {
+        "state": "LIVE" if liquidity["liquidity_verified"] else "PARTIAL",
+        "source": liquidity.get("order_book", {}).get("provider", "OHLCV_VOLUME_ONLY"),
+    }
+    input_matrix["L11"] = {
+        "state": "LIVE" if dxy["verified"] else "PARTIAL",
+        "source": "LIVE_DXY_PLUS_CALENDAR_PLUS_NEWS",
+    }
+
+    evidence["technical_evidence_v33"] = {
+        "symbol": clean_symbol(symbol),
+        "timeframe": timeframe,
+        "provider": ohlcv["provider"],
+        "provider_symbol": ohlcv["provider_symbol"],
+        "interval": ohlcv["interval"],
+        "bar_count": len(closes),
+        "last_close_time": datetime.fromtimestamp(
+            last_close_ms / 1000.0, timezone.utc
+        ).isoformat().replace("+00:00", "Z"),
+        "age_hours": round(age_seconds / 3600.0, 2),
+        "fresh": True,
+        "indicator_set": ["RSI", "MACD_HISTOGRAM", "OBV", "CCI"],
+        "liquidity_verified": bool(liquidity["liquidity_verified"]),
+        "usd_direction_verified": bool(dxy["verified"]),
+        "dxy_direction": dxy["direction"],
+    }
+    return payload, evidence
+
+
+def enhanced_health():
+    status, payload = ORIGINAL_HEALTH()
+    payload = dict(payload)
+    payload.update({
+        "service": "ndsp-canonical-live-runtime-v33",
+        "runtime_version": VERSION,
+        "contract_version": CONTRACT_VERSION,
+        "host": HOST,
+        "port": PORT,
+        "runtime_dir": str(RUNTIME_DIR),
+        "publicly_exposed": False,
+        "evidence_binding": {
+            "divergence": "REAL_OHLCV_RSI_MACD_OBV_CCI",
+            "momentum": "REAL_OHLCV_RSI_MACD_OBV_CCI",
+            "crypto_liquidity": "BINANCE_PUBLIC_ORDER_BOOK",
+            "usd_direction": "DXY_PUBLIC_CHART",
+            "cot": "UNCHANGED_TRUTHFUL_GATE",
+        },
+    })
+    return status, payload
+
+
+v30.VERSION = VERSION
+v30.CONTRACT_VERSION = CONTRACT_VERSION
+v30.HOST = HOST
+v30.PORT = PORT
+v30.RUNTIME_DIR = RUNTIME_DIR
+v30.build_payload = enhanced_build_payload
+v30.health = enhanced_health
+v30.Handler.server_version = "NDSPCanonicalLive/33"
+
+
+def main() -> None:
+    v30.main()
+
+
+if __name__ == "__main__":
+    main()
+
+
+=== FUNCTION INDEX ===
+FUNCTION=utc_now LINES=82-83
+FUNCTION=clean_symbol LINES=86-87
+FUNCTION=safe_number LINES=90-95
+FUNCTION=cached LINES=98-107
+FUNCTION=fetch_json LINES=110-119
+FUNCTION=fetch_binance_ohlcv LINES=122-144
+FUNCTION=fetch_yahoo_ohlcv LINES=147-209
+FUNCTION=fetch_ohlcv LINES=212-216
+FUNCTION=ema_series LINES=219-230
+FUNCTION=rsi_series LINES=233-260
+FUNCTION=macd_histogram LINES=263-282
+FUNCTION=obv_series LINES=285-296
+FUNCTION=cci_series LINES=299-312
+FUNCTION=last_number LINES=315-319
+FUNCTION=pivot_indices LINES=322-333
+FUNCTION=detect_divergence LINES=336-413
+FUNCTION=momentum_result LINES=416-492
+FUNCTION=fetch_binance_depth LINES=495-528
+FUNCTION=liquidity_result LINES=531-574
+FUNCTION=dxy_result LINES=577-613
+FUNCTION=asset_usd_effect LINES=616-628
+FUNCTION=enhanced_build_payload LINES=635-759
+FUNCTION=enhanced_health LINES=762-781
+FUNCTION=main LINES=794-795
+
+=== CURRENT V33 ETH COT ===
+{
+  "age_hours": null,
+  "decision_use_allowed": false,
+  "directions": {
+    "asset_managers_overall": null,
+    "asset_managers_weekly": null,
+    "leveraged_funds_weekly": null
+  },
+  "files_used": [],
+  "generated_at": null,
+  "monitoring_use_allowed": false,
+  "reason_code": "CANONICAL_COT_NOT_VERIFIED",
+  "report_as_of_date": null,
+  "status": "INPUTS_INCOMPLETE"
+}
+
+=== SAFETY ASSERTIONS ===
+FILES_MODIFIED=0
+SERVICES_RESTARTED=0
+RUNTIME_LOGIC_MODIFIED=0
+PATCH_APPLIED=NO
+ROLLBACK_REQUIRED=NO
+FINAL_RESULT=PASS_READ_ONLY
+
+AUDIT=/home/nawaf511/empire-core-new/var/audits/v33-cot-exact-source-truth-20260808-042542
+REPORT=/home/nawaf511/empire-core-new/var/audits/v33-cot-exact-source-truth-20260808-042542/report.txt
+COT_SOURCE_CONTEXT=/home/nawaf511/empire-core-new/var/audits/v33-cot-exact-source-truth-20260808-042542/cot-source-context.txt
+SOURCE_WINDOW=/home/nawaf511/empire-core-new/var/audits/v33-cot-exact-source-truth-20260808-042542/source-lines-620-850.txt
+CHECKSUMS=/home/nawaf511/empire-core-new/var/audits/v33-cot-exact-source-truth-20260808-042542/SHA256SUMS
+
+=== EXACT SOURCE TRUTH COMPLETE ===

@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cot-analysis-result.schema.json",
+  "title": "COT governed analysis result",
+  "type": "object",
+  "required": [
+    "governanceVersion",
+    "analysisMode",
+    "perspective",
+    "resultType",
+    "directionResult"
+  ],
+  "properties": {
+    "governanceVersion": {
+      "const": "COT-GOV-1.0.0"
+    },
+    "analysisMode": {
+      "enum": [
+        "INVESTMENT",
+        "SPECULATION"
+      ]
+    },
+    "perspective": {
+      "enum": [
+        "CORE",
+        "EXPANDED"
+      ]
+    },
+    "resultType": {
+      "enum": [
+        "OFFICIAL",
+        "SHADOW"
+      ]
+    },
+    "controller": {
+      "enum": [
+        "LONG_TERM",
+        "SHORT_TERM",
+        "NOT_APPLICABLE"
+      ]
+    },
+    "directionResult": {
+      "$ref": "#/$defs/direction"
+    },
+    "weeklySupport": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "CONFIRMED",
+            "NOT_CONFIRMED",
+            "NOT_APPLICABLE"
+          ]
+        },
+        "directionResult": {
+          "$ref": "#/$defs/direction"
+        }
+      }
+    },
+    "timing": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "direction": {
+      "type": "object",
+      "required": [
+        "longValue",
+        "shortValue",
+        "dominanceDelta",
+        "direction",
+        "explicitness",
+        "horizon",
+        "labelAr",
+        "labelEn"
+      ],
+      "properties": {
+        "longValue": {
+          "type": "number"
+        },
+        "shortValue": {
+          "type": "number"
+        },
+        "dominanceDelta": {
+          "type": "number"
+        },
+        "direction": {
+          "enum": [
+            "BULLISH",
+            "BEARISH",
+            "NEUTRAL"
+          ]
+        },
+        "explicitness": {
+          "enum": [
+            "EXPLICIT",
+            "NON_EXPLICIT",
+            "NOT_APPLICABLE"
+          ]
+        },
+        "horizon": {
+          "enum": [
+            "EXTENDED",
+            "NARROW",
+            "NONE"
+          ]
+        },
+        "labelAr": {
+          "type": "string"
+        },
+        "labelEn": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

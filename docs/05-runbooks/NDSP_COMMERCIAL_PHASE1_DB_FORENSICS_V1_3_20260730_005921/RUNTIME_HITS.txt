@@ -1,0 +1,20 @@
+=== SYSTEMD UNIT FILES ===
+
+=== SYSTEMD UNIT DEFINITIONS ===
+
+=== ACTIVE PROCESSES ===
+nawaf511 1686200 1682213  0 00:59 pts/2    00:00:00 bash /home/nawaf511/ndsp_commercial_phase1_db_forensics_v1_3.sh
+nawaf511 1686466 1686200  0 00:59 pts/2    00:00:00 bash /home/nawaf511/ndsp_commercial_phase1_db_forensics_v1_3.sh
+nawaf511 1686467 1686200  0 00:59 pts/2    00:00:00 tee /home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_COMMERCIAL_PHASE1_DB_FORENSICS_V1_3_20260730_005921/RUNTIME_HITS.txt
+nawaf511 1686468 1686200  0 00:59 pts/2    00:00:00 tee -a /home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_COMMERCIAL_PHASE1_DB_FORENSICS_V1_3_20260730_005921/REPORT.md
+
+=== LISTENERS ===
+LISTEN 0      5          127.0.0.1:9094       0.0.0.0:*    users:(("python3",pid=2497959,fd=6))                                                                                                                                                                                                                      
+
+=== NGINX REFERENCES ===
+/etc/nginx/snippets/ndsp-business-ops-v205.conf:22:    proxy_pass http://127.0.0.1:9094/health;
+/etc/nginx/snippets/ndsp-business-ops-v205.conf:32:    proxy_pass http://127.0.0.1:9094;
+/etc/nginx/snippets/ndsp-business-ops-v205.conf:45:    proxy_pass http://127.0.0.1:9094;
+
+=== CURRENT-BOOT JOURNAL REFERENCES (MAX 200 / 15 SECONDS) ===
+JOURNAL_SCAN_TIMEOUT=YES

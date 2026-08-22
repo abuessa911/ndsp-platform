@@ -3,7 +3,7 @@ set -euo pipefail
 
 DOMAIN="https://ndsp.app"
 FRONTEND_DIR="/var/www/ndsp-vite"
-BACKEND_DIR="/home/nawaf511/empire-core-new/backend/auth_api"
+BACKEND_DIR="/home/nawaf511/empire-core-v5-1-1-clean/backend/auth_api"
 DEPLOY_DIR="/var/www/html"
 SERVICE_NAME="ndsp-auth-api"
 BACKUP_ROOT="/root/ndsp_device_guard_backup_$(date +%Y%m%d_%H%M%S)"
@@ -36,7 +36,7 @@ const pool = new Pool({
     process.env.POSTGRES_URL ||
     process.env.POSTGRES_URI ||
     process.env.PG_CONNECTION_STRING ||
-    'postgresql://postgres:postgres@127.0.0.1:5432/postgres'
+    (process.env.DATABASE_URL || process.env.NDSP_DATABASE_URL || process.env.DB_URL || process.env.POSTGRES_URL || process.env.POSTGRESQL_URL || (() => { throw new Error("DATABASE_CONNECTION_ENV_REQUIRED"); })())
 });
 
 async function main() {
@@ -104,7 +104,7 @@ const pool = new Pool({
     process.env.POSTGRES_URL ||
     process.env.POSTGRES_URI ||
     process.env.PG_CONNECTION_STRING ||
-    'postgresql://postgres:postgres@127.0.0.1:5432/postgres'
+    (process.env.DATABASE_URL || process.env.NDSP_DATABASE_URL || process.env.DB_URL || process.env.POSTGRES_URL || process.env.POSTGRESQL_URL || (() => { throw new Error("DATABASE_CONNECTION_ENV_REQUIRED"); })())
 });
 
 const REGISTRATION_PATHS = new Set([

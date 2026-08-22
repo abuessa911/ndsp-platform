@@ -1,0 +1,3 @@
+PM2_NAME=ndsp-portal
+PM2_STATUS=online
+PM2_EXEC=/home/nawaf511/.nvm/versions/node/v24.15.0/bin/npm

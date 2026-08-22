@@ -1,0 +1,260 @@
+openapi: 3.1.0
+info:
+  title: NDSP API
+  version: 1.0.0
+  description: >
+    NDSP — Nawaf Decision Support Platform. Governed decision-support API.
+    Backend is the decision authority; the public sanitizer is the only gate for
+    user-facing output. No direct trade execution, no financial advice, no
+    guaranteed results, no secret/formula/weight/hidden-layer exposure.
+servers:
+  - url: https://api.ndsp.app/api/v1
+tags:
+  - name: system
+  - name: auth
+  - name: account
+  - name: catalog
+  - name: payments
+  - name: alerts
+  - name: admin
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          required: [code, message_ar, message_en]
+          properties:
+            code: { type: string }
+            message_ar: { type: string }
+            message_en: { type: string }
+    TokenOut:
+      type: object
+      properties:
+        access_token: { type: string }
+        refresh_token: { type: string }
+        token_type: { type: string, default: bearer }
+    RegisterIn:
+      type: object
+      required: [email, password]
+      properties:
+        email: { type: string, format: email }
+        name: { type: string, nullable: true }
+        seat_type: { type: string, enum: [ordinary, specialist, private], default: ordinary }
+        locale: { type: string, enum: [ar, en], default: ar }
+        password: { type: string, minLength: 8 }
+    RegisterOut:
+      type: object
+      properties:
+        decision: { type: string, enum: [ALLOW, PENDING_REVIEW, BLOCK_DUPLICATE, RATE_LIMITED, HIGH_RISK_DUPLICATE] }
+        ref: { type: string }
+    TrialOut:
+      type: object
+      properties:
+        trial_day: { type: integer }
+        total: { type: integer }
+        started_at: { type: string, format: date-time, nullable: true }
+        ends_at: { type: string, format: date-time, nullable: true }
+        expired: { type: boolean }
+    Scenario:
+      type: object
+      description: Allowed scenario fields only.
+      properties:
+        scenario_state: { type: string }
+        scenario_directional_context: { type: string }
+        scenario_activation_level: { type: number }
+        scenario_arrival_level: { type: number }
+        scenario_invalidation_level: { type: number }
+        scenario_review_zone: { type: string }
+        scenario_time_horizon: { type: string }
+        scenario_confidence_band: { type: string }
+        scenario_risk_note: { type: string }
+        scenario_follow_up_note: { type: string }
+        scenario_status_label: { type: string }
+        scenario_last_updated: { type: string, format: date-time }
+        governance_note: { type: string }
+    Decision:
+      type: object
+      description: Sanitized public decision object.
+      properties:
+        asset_id: { type: string }
+        symbol: { type: string }
+        bias: { type: string, enum: [up, down, flat] }
+        horizon: { type: string, enum: [short, extended] }
+        horizon_strength: { type: integer }
+        decision_quality: { type: integer }
+        market_state: { type: string }
+        liquidity: { type: string }
+        risk: { type: string }
+        volatility: { type: string }
+        sentiment: { type: string }
+        named_layers:
+          type: array
+          items: { type: string, enum: [TDL, NMP, "Devil's Advocate", "Nawaf Golden Alignment"] }
+        golden_alignment: { type: object }
+        devil_advocate: { type: array, items: { type: object } }
+        scenario: { $ref: '#/components/schemas/Scenario' }
+        summary_ar: { type: string }
+        summary_en: { type: string }
+
+security:
+  - bearerAuth: []
+
+paths:
+  /health:
+    get:
+      tags: [system]
+      security: []
+      summary: Service health
+      responses: { '200': { description: ok } }
+  /governance:
+    get:
+      tags: [system]
+      security: []
+      summary: Governance flags
+      responses: { '200': { description: ok } }
+
+  /auth/register:
+    post:
+      tags: [auth]
+      security: []
+      requestBody:
+        required: true
+        content: { application/json: { schema: { $ref: '#/components/schemas/RegisterIn' } } }
+      responses:
+        '200': { description: decision, content: { application/json: { schema: { $ref: '#/components/schemas/RegisterOut' } } } }
+        '429': { description: rate limited, content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } } }
+  /auth/login:
+    post:
+      tags: [auth]
+      security: []
+      requestBody:
+        required: true
+        content: { application/json: { schema: { type: object, required: [email, password], properties: { email: { type: string }, password: { type: string } } } } }
+      responses:
+        '200': { description: tokens, content: { application/json: { schema: { $ref: '#/components/schemas/TokenOut' } } } }
+        '401': { description: invalid, content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } } }
+        '403': { description: pending review, content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } } }
+  /auth/2fa/verify:
+    post:
+      tags: [auth]
+      security: []
+      requestBody:
+        required: true
+        content: { application/json: { schema: { type: object, properties: { email: { type: string }, code: { type: string } } } } }
+      responses: { '200': { description: tokens, content: { application/json: { schema: { $ref: '#/components/schemas/TokenOut' } } } } }
+  /auth/refresh:
+    post:
+      tags: [auth]
+      security: []
+      requestBody:
+        required: true
+        content: { application/json: { schema: { type: object, properties: { refresh_token: { type: string } } } } }
+      responses: { '200': { description: tokens, content: { application/json: { schema: { $ref: '#/components/schemas/TokenOut' } } } } }
+  /auth/me:
+    get:
+      tags: [auth]
+      responses: { '200': { description: profile } }
+
+  /account/activate:
+    post:
+      tags: [account]
+      summary: Start the per-user 16-day trial clock (idempotent)
+      responses: { '200': { description: trial, content: { application/json: { schema: { $ref: '#/components/schemas/TrialOut' } } } } }
+  /account/trial:
+    get:
+      tags: [account]
+      responses:
+        '200': { description: trial, content: { application/json: { schema: { $ref: '#/components/schemas/TrialOut' } } } }
+        '404': { description: no trial, content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } } }
+
+  /packages:
+    get: { tags: [catalog], security: [], responses: { '200': { description: packages } } }
+  /markets:
+    get: { tags: [catalog], security: [], responses: { '200': { description: markets } } }
+  /assets:
+    get:
+      tags: [catalog]
+      parameters: [ { name: market, in: query, required: false, schema: { type: string } } ]
+      responses: { '200': { description: assets } }
+  /assets/{asset_id}/decision:
+    get:
+      tags: [catalog]
+      parameters: [ { name: asset_id, in: path, required: true, schema: { type: string } } ]
+      responses:
+        '200': { description: sanitized decision, content: { application/json: { schema: { type: object, properties: { data: { $ref: '#/components/schemas/Decision' } } } } } }
+        '404': { description: not found, content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } } }
+  /assets/{asset_id}/chart:
+    get:
+      tags: [catalog]
+      parameters:
+        - { name: asset_id, in: path, required: true, schema: { type: string } }
+        - { name: timeframe, in: query, required: false, schema: { type: string, default: 1h } }
+      responses: { '200': { description: chart with reference zones } }
+
+  /payments/checkout:
+    post:
+      tags: [payments]
+      requestBody:
+        required: true
+        content: { application/json: { schema: { type: object, required: [package_code], properties: { package_code: { type: string, enum: [pro, elite, institutional] }, cycle: { type: string, enum: [monthly, annual], default: monthly }, method: { type: string, enum: [crypto, bank], default: crypto } } } } }
+      responses: { '200': { description: pending subscription (no auto-activation) } }
+  /payments/webhook:
+    post:
+      tags: [payments]
+      security: []
+      responses:
+        '200': { description: received }
+        '400': { description: bad signature, content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } } }
+  /me/subscription:
+    get: { tags: [payments], responses: { '200': { description: subscription } } }
+
+  /me/alert-prefs:
+    get: { tags: [alerts], responses: { '200': { description: prefs } } }
+    put:
+      tags: [alerts]
+      requestBody:
+        required: true
+        content: { application/json: { schema: { type: object, properties: { events: { type: object }, dq_threshold: { type: integer }, brief_time: { type: string }, digest: { type: string }, quiet_from: { type: string }, quiet_to: { type: string } } } } }
+      responses: { '200': { description: saved } }
+  /me/channels/telegram/link:
+    post: { tags: [alerts], responses: { '200': { description: one-time link code (token never returned) } } }
+
+  /admin/registrations:
+    get:
+      tags: [admin]
+      parameters: [ { name: status, in: query, required: false, schema: { type: string, default: pending_review } } ]
+      responses: { '200': { description: queue (safe signals only) } }
+  /admin/registrations/{user_id}/decision:
+    post:
+      tags: [admin]
+      parameters: [ { name: user_id, in: path, required: true, schema: { type: string } } ]
+      requestBody:
+        required: true
+        content: { application/json: { schema: { type: object, properties: { decision: { type: string, enum: [allow, block] } } } } }
+      responses: { '200': { description: updated } }
+  /admin/payments:
+    get: { tags: [admin], responses: { '200': { description: payments } } }
+  /admin/payments/{payment_id}/approve:
+    post:
+      tags: [admin]
+      parameters: [ { name: payment_id, in: path, required: true, schema: { type: string } } ]
+      responses: { '200': { description: confirmed } }
+  /admin/payments/{payment_id}/reject:
+    post:
+      tags: [admin]
+      parameters: [ { name: payment_id, in: path, required: true, schema: { type: string } } ]
+      responses: { '200': { description: rejected } }
+  /admin/trials:
+    get: { tags: [admin], responses: { '200': { description: per-user trial clocks } } }
+  /admin/layers:
+    get: { tags: [admin], responses: { '200': { description: visible layer names + hidden_count only } } }
+  /admin/health:
+    get: { tags: [admin], responses: { '200': { description: ok } } }

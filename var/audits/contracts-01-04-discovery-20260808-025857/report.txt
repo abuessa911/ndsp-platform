@@ -1,0 +1,71 @@
+=== NDSP CONTRACTS 01-04 DISCOVERY ===
+MODE=READ_ONLY
+PROJECT=/home/nawaf511/empire-core-new
+
+=== SCOPE ===
+01=CANONICAL_SEMANTIC
+02=ASSET_SOURCE_ROUTING
+03=MARKET_DATA
+04=COT_TFF
+
+=== COUNTS ===
+PYTHON_FILES_SCANNED=204
+RELEVANT_FILES=148
+RELEVANT_SOURCE_HITS=3766
+PARSE_ERRORS=0
+
+=== CRITICAL FIELD SOURCE PRESENCE ===
+ASSET_MANAGERS_OVERALL=FOUND occurrences=17
+ASSET_MANAGERS_WEEKLY=FOUND occurrences=16
+LEVERAGED_FUNDS_OVERALL=NOT_FOUND occurrences=0
+LEVERAGED_FUNDS_WEEKLY=FOUND occurrences=17
+REPORT_DATE=FOUND occurrences=6
+REPORT_AGE_DAYS=FOUND occurrences=3
+MAX_AGE_DAYS=FOUND occurrences=1
+FRESH=FOUND occurrences=12
+CURRENT_LONG=NOT_FOUND occurrences=0
+CURRENT_SHORT=NOT_FOUND occurrences=0
+CHANGE_LONG=FOUND occurrences=8
+CHANGE_SHORT=FOUND occurrences=8
+ASSET_CLASS=FOUND occurrences=16
+PROVIDER=FOUND occurrences=52
+DATASET=NOT_FOUND occurrences=0
+REPORT_FAMILY=FOUND occurrences=2
+SOURCE_MARKET=FOUND occurrences=1
+SOURCE_TIMEFRAME=FOUND occurrences=1
+ANALYSIS_TIMEFRAME=FOUND occurrences=1
+TIMEFRAME=FOUND occurrences=78
+HORIZON=FOUND occurrences=2
+
+=== COT LOGIC FUNCTIONS ===
+_ndsp_direction_from_long_short=FOUND backend/ndsp_latest_16_layers_logic_functions.py:335-367
+_ndsp_extract_group_numbers=FOUND backend/ndsp_latest_16_layers_logic_functions.py:441-508
+_ndsp_movement_type=FOUND backend/ndsp_latest_16_layers_logic_functions.py:406-416
+_ndsp_weekly_direction_from_changes=FOUND backend/ndsp_latest_16_layers_logic_functions.py:370-403
+
+=== COT ALIAS GROUPS ===
+asset_managers=['asset_managers', 'asset_manager', 'asset_manager_institutional', 'am', 'long_term', 'ml']
+leveraged_funds=['leveraged_funds', 'leveraged', 'lev_funds', 'speculative', 'short_term', 's']
+dealer_intermediary=['dealer_intermediary', 'dealer', 'dealers']
+
+=== DISCOVERED ROUTING VALUES ===
+ASSET_CLASSES=['commodity', 'unknown']
+PROVIDERS=['Investing.com', 'TradingEconomics', 'TradingView', 'alpha_vantage_fx_live_cached', 'binance', 'binance_klines', 'binance_live', 'binance_public_klines', 'binance_public_order_book', 'email', 'external_chart', 'finnhub_live_proxy', 'nowpayments', 'portal', 'push', 'telegram', 'unavailable', 'yahoo_chart', 'yahoo_public_chart']
+DATASETS=[]
+REPORT_FAMILIES=[]
+TIMEFRAMES=['1W', 'UNSPECIFIED', 'weekly']
+
+=== GOVERNANCE VERIFICATION TARGETS ===
+SPECULATION_MAPPING_EXPECTED=SPECULATORS->LEVERAGED_FUNDS_WEEKLY;INVESTORS->ASSET_MANAGERS_WEEKLY
+INVESTMENT_FINAL_DIRECTION_EXPECTED=ASSET_MANAGERS_WEEKLY
+INVESTMENT_NMP_GOVERNING_DIRECTION_EXPECTED=ASSET_MANAGERS_WEEKLY
+NMP_EXPECTED_SEMANTIC=PRICE_LEVEL_OPEN_TO_CLOSE_NOT_SUBTRACTION
+
+=== IMPORTANT ===
+FOUND means source reference exists; it does NOT mean contract CLOSED.
+Runtime correctness, semantic correctness, freshness, lineage and authority still require verification.
+
+FILES_MODIFIED=0
+SERVICES_RESTARTED=0
+RUNTIME_LOGIC_MODIFIED=0
+FINAL_RESULT=PASS

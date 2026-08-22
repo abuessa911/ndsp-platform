@@ -1,0 +1,69 @@
+:root {
+  --ndsp-canvas: #080d10;
+  --ndsp-canvas-deep: #05090c;
+  --ndsp-charcoal: #0b0d10;
+  --ndsp-surface: #10161b;
+  --ndsp-surface-raised: #151c22;
+  --ndsp-surface-soft: #0d1318;
+
+  --ndsp-gold: #d4af37;
+  --ndsp-gold-deep: #a97d2d;
+  --ndsp-gold-soft: #c6a45a;
+  --ndsp-gold-bright: #e6c66f;
+  --ndsp-gold-pale: #f0d78c;
+
+  --ndsp-sky: #29b6f6;
+  --ndsp-sky-soft: #5ac8fa;
+  --ndsp-sky-muted: #327d9f;
+
+  --ndsp-white: #f5f6f7;
+  --ndsp-off-white: #edece8;
+
+  --ndsp-muted: #8b9298;
+  --ndsp-muted-2: #646b70;
+
+  --ndsp-success: #2fb67c;
+  --ndsp-warning: #d89c3a;
+  --ndsp-critical: #d95c5c;
+  --ndsp-review: #8b6bd9;
+
+  --ndsp-border: rgba(245, 246, 247, 0.1);
+  --ndsp-border-strong: rgba(245, 246, 247, 0.18);
+  --ndsp-gold-border: rgba(212, 175, 55, 0.55);
+  --ndsp-blue-border: rgba(41, 182, 246, 0.32);
+
+  --ndsp-space-1: 4px;
+  --ndsp-space-2: 8px;
+  --ndsp-space-3: 12px;
+  --ndsp-space-4: 16px;
+  --ndsp-space-6: 24px;
+  --ndsp-space-8: 32px;
+  --ndsp-space-12: 48px;
+  --ndsp-space-16: 64px;
+
+  --ndsp-radius-sm: 4px;
+  --ndsp-radius-md: 8px;
+  --ndsp-radius-lg: 12px;
+
+  --ndsp-container: 1450px;
+
+  --ndsp-font-ar:
+    "IBM Plex Sans Arabic",
+    "Noto Sans Arabic",
+    "Segoe UI",
+    Arial,
+    sans-serif;
+
+  --ndsp-font-en:
+    "IBM Plex Sans",
+    "Inter",
+    "Segoe UI",
+    Arial,
+    sans-serif;
+
+  --ndsp-font-mono:
+    "IBM Plex Mono",
+    "SFMono-Regular",
+    Consolas,
+    monospace;
+}

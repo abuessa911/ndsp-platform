@@ -1,0 +1,7 @@
+[Unit]
+Description=NDIP Security Cleanup Job
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/ndip/backend/app
+ExecStart=/opt/ndip/backend/app/../../venv/bin/python -m backend.app.tools.cleanup_security

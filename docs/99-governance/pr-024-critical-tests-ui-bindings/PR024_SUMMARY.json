@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "document": "PR-024 Critical Tests and UI Bindings",
+  "generated_at": "2026-07-31T21:19:37.271062+00:00",
+  "executable_contract_tests": 11,
+  "ui_bindings": 14,
+  "endpoint_available_bindings": 14,
+  "endpoint_required_bindings": 0,
+  "traceability_rows_updated": 14,
+  "ui_states": [
+    "loading",
+    "empty",
+    "stale",
+    "error",
+    "ready"
+  ],
+  "human_approvals_granted": 0,
+  "ui_complete_records_created": 0,
+  "full_capability_coverage_claimed": false,
+  "human_confirmation_required": true,
+  "runtime_changes": "none",
+  "status": "CRITICAL_IMPLEMENTATION_COMPLETE_CONTRACTS_PENDING"
+}

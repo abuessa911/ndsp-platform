@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0A0B10">
+<meta name="robots" content="index,follow">
+<meta name="description" content="NDSP — منصة نواف لدعم القرار. غرفة قرار منضبطة للقراءات والسياق والمستويات المرجعية.">
+<title>NDSP — منصة نواف لدعم القرار</title>
+<link rel="stylesheet" href="/assets/ndsp-public.css">
+<link rel="stylesheet" href="/assets/ndsp-mobile-pages-nav-clean.css?v=20260710_153230">
+ <script src="/assets/ndsp-mobile-pages-nav-clean.js?v=20260710_153230" defer></script>
+  <script src="/assets/ndsp-single-arabic-guard-v10.js?v=20260710_164851" defer></script>
+  <link rel="stylesheet" href="/assets/ndsp-pages-routes-safe-v13.css?v=20260710_165834">
+  <script src="/assets/ndsp-pages-routes-safe-v13.js?v=20260710_165834" defer></script>
+<!-- NDSP_LANDING_V34 -->
+<link rel="stylesheet" href="/assets/ndsp-decision-room-landing-v34.css?v=34.1">
+<script defer src="/assets/ndsp-decision-room-landing-v34.js?v=34.1"></script>
+  <link rel="stylesheet" href="/assets/ndsp-landing-content-v35.css">
+
+
+
+<!-- NDSP_PUBLIC_ACCESS_V37_START -->
+<link rel="stylesheet" href="/assets/ndsp-public-access-v37.css?v=20260715_v37">
+<!-- NDSP_PUBLIC_ACCESS_V37_END -->
+  <link rel="stylesheet" href="/assets/ndsp-legal-v42.css?v=20260715">
+<link rel="stylesheet" href="/assets/ndsp-plans-v43.css?v=20260715">
+</head>
+<body>
+<div class="landing">
+ <header class="landing-nav">
+ <div class="nav-inner">
+ <a class="logo" href="/"><b>نـواف</b><span>| NDSP</span></a>
+ <nav class="nav-links">
+ <a href="#how">كيف تعمل</a>
+ <a href="#method">المنهجية</a>
+ <a href="#radar">الرادار</a>
+ <a href="#plans">الباقات</a>
+ <a href="https://my.ndsp.app/login">دخول المستخدم</a>
+ </nav>
+ <a class="btn" href="https://my.ndsp.app/register">ابدأ تجربة 16 يوم</a>
+ </div>
+ </header>
+
+ <main>
+ <section class="hero">
+ <div class="hero-copy">
+ <div class="over">منصة نواف لدعم القرار — NDSP</div>
+ <h1>غرفة قرار <span class="gold">سيادية</span><br>للقراءات عالية الانضباط.</h1>
+ <p>
+ NDSP ليست منصة مضاربة ولا تعد بنتيجة. هي بيئة منضبطة توضّح السياق، حالة الرادار،
+ جودة القراءة، والمستويات المرجعية بلغة محكومة قابلة للمراجعة.
+ </p>
+ <div class="cta-row">
+ <a class="btn" href="https://my.ndsp.app/register">ابدأ تجربة 16 يوم</a>
+ <a class="btn ghost" href="https://my.ndsp.app/platform">استعراض المنصة</a>
+ </div>
+ <div class="kpis">
+ <div class="kpi"><strong>16</strong><span>طبقة تحليلية</span></div>
+ <div class="kpi"><strong>6</strong><span>طبقات معلنة</span></div>
+ <div class="kpi"><strong>10</strong><span>طبقات محمية</span></div>
+ </div>
+ </div>
+
+ <div class="hero-panel" id="radar">
+ <div class="over">Decision Radar</div>
+ <h2>رادار وظيفي بخمس حالات</h2>
+ <svg class="radar-mini" viewBox="0 0 260 260">
+ <g stroke="rgba(255,255,255,.06)" stroke-width=".7">
+ <line x1="130" y1="8" x2="130" y2="252"/>
+ <line x1="8" y1="130" x2="252" y2="130"/>
+ </g>
+ <circle cx="130" cy="130" r="108" fill="none" stroke="#2E7D32" stroke-opacity=".32" stroke-dasharray="3 4"/>
+ <circle cx="130" cy="130" r="88" fill="#D4AF37" fill-opacity=".05" stroke="#D4AF37" stroke-opacity=".92" stroke-width="2"/>
+ <circle cx="130" cy="130" r="68" fill="none" stroke="#F57F17" stroke-opacity=".26" stroke-dasharray="3 4"/>
+ <circle cx="130" cy="130" r="48" fill="none" stroke="#B71C1C" stroke-opacity=".22" stroke-dasharray="3 4"/>
+ <circle cx="130" cy="130" r="27" fill="none" stroke="#1565C0" stroke-opacity=".22" stroke-dasharray="3 4"/>
+ <circle cx="130" cy="130" r="5" fill="#D4AF37"/>
+ </svg>
+ <p class="muted">
+ أخضر للبيئة الداعمة، ذهبي للتوافق، أصفر للمراقبة، أحمر للحجب الحوكمي، أزرق للفحص السياقي.
+ </p>
+ <div class="cta-row">
+ <span class="badge"><i class="dot"></i>بيانات متصلة</span>
+ <span class="badge">حوكمة لغوية</span>
+ <span class="badge">طبقات محمية</span>
+ </div>
+ </div>
+ </section>
+
+ <section class="section" id="how">
+ <div class="over">كيف تعمل المنصة</div>
+ <h2>من البيانات المتفرقة إلى قراءة واحدة قابلة للمراجعة.</h2>
+ <p class="lead">
+ المنصة تجمع السياق الزمني، المستويات المرجعية، حالة الرادار، وحالة الطبقات المعلنة
+ في واجهة واحدة. الهدف هو تقليل الضوضاء وتحسين جودة القرار الشخصي.
+ </p>
+ <div class="grid">
+ <div class="card"><h3>قراءة السياق</h3><p>تلخيص اتجاه الأصل، حالة السوق، والأفق الزمني بدون ازدحام أو مبالغة.</p></div>
+ <div class="card"><h3>مستويات مرجعية</h3><p>مراقبة، وصول، مراجعة، وإلغاء؛ كلها تعرض كنقاط حوكمة لا كأوامر.</p></div>
+ <div class="card"><h3>رادار القرار</h3><p>حالة لونية وظيفية تساعدك على فهم درجة اكتمال القراءة ومواطن الحذر.</p></div>
+ </div>
+ </section>
+
+ <section class="section" id="method">
+ <div class="over">المنهجية</div>
+ <h2>ست طبقات معلنة، وعشر طبقات محمية.</h2>
+ <p class="lead">
+ تظهر الطبقات المعلنة بقدر كافٍ للفهم والمراجعة. أما الطبقات المحمية فتظهر كحالة حوكمة فقط،
+ حفاظًا على المنطق الداخلي للمنصة.
+ </p>
+ <div class="grid">
+ <div class="card"><h3>TDL</h3><p>منطق البعد الزمني لقراءة السياق وفق أفق واضح.</p></div>
+ <div class="card"><h3>NMP</h3><p>نقطة التقاء نواف كمنطقة مرجعية داخل القراءة.</p></div>
+ <div class="card"><h3>DA</h3><p>محامي الشيطان كحارس حوكمي عند وجود تعارض داخلي.</p></div>
+ </div>
+ </section>
+
+ <section class="section" id="plans">
+ <div class="over">الباقات</div>
+ <h2>ابدأ بتجربة 16 يوم قبل اعتماد الاشتراك.</h2>
+ <p class="lead">تصميم الباقات قابل للتعديل حسب قرارك النهائي للتسعير، لكن الهيكلة جاهزة للربط.</p>
+ <div class="packages">
+ <div class="package"><h3>Starter</h3><div class="price">تجريبي</div><p class="muted">استعراض المنصة ومركز القرار الأساسي.</p></div>
+ <div class="package featured"><h3>Elite Trial</h3><div class="price">16 يوم</div><p class="muted">تجربة موسعة للبوابة، الإيجاز، والرادار.</p></div>
+ <div class="package"><h3>Controlled</h3><div class="price">مخصص</div><p class="muted">مستوى متقدم للمراجعة والحوكمة والتقارير.</p></div>
+ </div>
+ </section>
+ </main>
+
+ <footer class="footer">
+ <div class="footer-inner">
+ <span>© NDSP — منصة نواف لدعم القرار</span>
+ <span>ليست توصية مالية ولا ضمانًا لأي نتيجة.</span>
+ </div>
+ </footer>
+</div>
+  <script src="/assets/ndsp-landing-content-v35.js"></script>
+  <script src="/assets/ndsp-legal-v42.js?v=20260715" defer></script>
+<script src="/assets/ndsp-plans-v43-legacy.js?v=20260715" defer></script>
+<script src="/assets/ndsp-plans-v43.js?v=20260715" defer></script>
+</body>
+</html>

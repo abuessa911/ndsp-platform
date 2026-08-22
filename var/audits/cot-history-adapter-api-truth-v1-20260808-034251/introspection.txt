@@ -1,0 +1,13 @@
+MODULE_FILE=/home/nawaf511/empire-core-new/backend/app/support_layers/cot/cot_history_adapter.py
+PUBLIC_NAMES=['CotHistoryError', 'CotMarketIdentity', 'CotPositionSnapshot', 'CotWeeklyChange', 'Optional', 'Path', 'annotations', 'build_governed_history_payload', 'csv', 'dataclass', 'date', 'datetime', 'derive_weekly_change', 'discover_same_market_history']
+OBJECT=CotHistoryError TYPE=type SIGNATURE=UNAVAILABLE
+OBJECT=CotMarketIdentity TYPE=type SIGNATURE=(market_name: 'str', market_code: 'str', exchange: 'str') -> None
+OBJECT=CotPositionSnapshot TYPE=type SIGNATURE=(identity: 'CotMarketIdentity', report_date: 'date', asset_managers_long: 'int', asset_managers_short: 'int', leveraged_funds_long: 'int', leveraged_funds_short: 'int', source_file: 'str') -> None
+OBJECT=CotWeeklyChange TYPE=type SIGNATURE=(current_report_date: 'date', previous_report_date: 'date', asset_managers_change_long: 'int', asset_managers_change_short: 'int', leveraged_funds_change_long: 'int', leveraged_funds_change_short: 'int', source: 'str' = 'REAL_SAME_MARKET_CONSECUTIVE_CFTC_REPORTS', synthetic_values_used: 'bool' = False) -> None
+OBJECT=Path TYPE=type SIGNATURE=(*args, **kwargs)
+OBJECT=build_governed_history_payload TYPE=function SIGNATURE=(raw_dir: 'Path', target: 'CotMarketIdentity') -> 'dict'
+OBJECT=dataclass TYPE=function SIGNATURE=(cls=None, /, *, init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=False, weakref_slot=False)
+OBJECT=date TYPE=type SIGNATURE=UNAVAILABLE
+OBJECT=datetime TYPE=type SIGNATURE=UNAVAILABLE
+OBJECT=derive_weekly_change TYPE=function SIGNATURE=(history: 'list[CotPositionSnapshot]') -> 'CotWeeklyChange'
+OBJECT=discover_same_market_history TYPE=function SIGNATURE=(raw_dir: 'Path', target: 'CotMarketIdentity') -> 'list[CotPositionSnapshot]'

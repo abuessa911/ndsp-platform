@@ -1,0 +1,3 @@
+$ nginx -v 2>&1 || true
+
+nginx version: nginx/1.24.0 (Ubuntu)

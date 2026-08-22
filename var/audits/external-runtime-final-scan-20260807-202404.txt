@@ -1,0 +1,291 @@
+============================================================
+=== EXTERNAL RUNTIME FINAL MIGRATION SCAN ==================
+============================================================
+DATE=2026-08-07T20:24:05+02:00
+PROJECT=/home/nawaf511/empire-core-new
+
+=== 1. LIVE EXTERNAL SYSTEMD SERVICES ======================
+
+----- ndsp-real-feeds-sync.service -----
+Result=success
+ExecStart={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/ndsp-portal-real-data-sync/sync_real_feeds.py ; ignore_errors=no ; start_time=[Fri 2026-08-07 20:24:08 CEST] ; stop_time=[Fri 2026-08-07 20:24:09 CEST] ; pid=883457 ; code=exited ; status=0 }
+WorkingDirectory=
+TriggeredBy=ndsp-real-feeds-sync.timer
+ActiveState=inactive
+SubState=dead
+
+----- ndsp-tradingview-calendar.service -----
+Result=success
+ExecStart={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/ndsp-portal-real-data-sync/tradingview_live_calendar.py ; ignore_errors=no ; start_time=[Fri 2026-08-07 20:24:08 CEST] ; stop_time=[n/a] ; pid=883462 ; code=(null) ; status=0/0 }
+WorkingDirectory=
+TriggeredBy=ndsp-tradingview-calendar.timer
+ActiveState=activating
+SubState=start
+
+----- pm2-nawaf511.service -----
+Result=success
+ExecStart={ path=/usr/local/bin/pm2 ; argv[]=/usr/local/bin/pm2 resurrect ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }
+WorkingDirectory=/home/nawaf511
+TriggeredBy=
+ActiveState=active
+SubState=exited
+
+=== 2. EXTERNAL TIMERS =====================================
+Fri 2026-08-07 20:24:42 CEST      24s Fri 2026-08-07 20:23:42 CEST      35s ago ndsp-admin-snapshot-updater.timer           ndsp-admin-snapshot-updater.service
+Fri 2026-08-07 20:24:42 CEST      24s Fri 2026-08-07 20:23:42 CEST      35s ago ndsp-market-prices-updater.timer            ndsp-market-prices-updater.service
+Fri 2026-08-07 20:24:42 CEST      24s Fri 2026-08-07 20:23:42 CEST      35s ago ndsp-refresh-static-data-contract-v46.timer ndsp-refresh-static-data-contract-v46.service
+Fri 2026-08-07 20:24:42 CEST      24s Fri 2026-08-07 20:23:42 CEST      35s ago ndsp-registration-mailer-v12-1.timer        ndsp-registration-mailer-v12-1.service
+Fri 2026-08-07 20:26:11 CEST 1min 53s Fri 2026-08-07 20:24:11 CEST       6s ago ndsp-telegram-alert.timer                   ndsp-telegram-alert.service
+Fri 2026-08-07 20:27:44 CEST 3min 26s Fri 2026-08-07 20:22:37 CEST 1min 40s ago ndsp-production-monitor.timer               ndsp-production-monitor.service
+Fri 2026-08-07 20:29:08 CEST 4min 50s Fri 2026-08-07 20:24:08 CEST       9s ago ndsp-real-feeds-sync.timer                  ndsp-real-feeds-sync.service
+Fri 2026-08-07 20:29:08 CEST 4min 50s Fri 2026-08-07 20:24:08 CEST       9s ago ndsp-tradingview-calendar.timer             ndsp-tradingview-calendar.service
+Fri 2026-08-07 20:33:11 CEST     8min Fri 2026-08-07 20:18:11 CEST     6min ago ndsp-airtable-runtime-sync.timer            ndsp-airtable-runtime-sync.service
+Fri 2026-08-07 20:34:17 CEST     9min Fri 2026-08-07 20:19:17 CEST     5min ago ndsp-completed-decisions-history-v36.timer  ndsp-completed-decisions-history-capture-v36.service
+Fri 2026-08-07 20:34:20 CEST    10min Fri 2026-08-07 20:18:22 CEST     5min ago ndsp-contract-regression-v1-1.timer         ndsp-contract-regression-v1-1.service
+Fri 2026-08-07 20:38:00 CEST    13min Fri 2026-08-07 20:22:37 CEST 1min 40s ago ndsp-capability-runtime-controller.timer    ndsp-capability-runtime-controller.service
+Sat 2026-08-08 07:00:00 CEST      10h Fri 2026-08-07 07:00:01 CEST            - ndsp-business-digest.timer                  ndsp-business-digest.service
+
+=== 3. USER CRON — EXECUTABLE TARGETS ======================
+0 4 * * 0 sudo /opt/empire-core/ndip_full_snapshot.sh >> /opt/empire-core/logs/backup.log 2>&1
+0 3 * * * sudo /opt/empire-core/ndip_snapshot.sh >> /opt/empire-core/logs/backup.log 2>&1
+*/5 * * * * /opt/empire-core/backend/update_winrate.sh
+0 * * * * /opt/empire-core/backend/run_optimizer.sh >> /opt/empire-core/backend/optimizer.log 2>&1
+30 * * * * /opt/empire-core/backend/run_layer_optimizer.sh >> /opt/empire-core/backend/layer_optimizer.log 2>&1
+0 3 * * * /usr/local/bin/ndip_backup.sh
+*/5 * * * * /home/nawaf511/ndsp_ops/ndsp_monitor.sh >> /home/nawaf511/ndsp_ops/logs/cron_monitor.log 2>&1
+15 3 * * * /home/nawaf511/ndsp_ops/ndsp_daily_backup.sh >> /home/nawaf511/ndsp_ops/logs/cron_backup.log 2>&1
+
+=== 4. ROOT CRON — EXECUTABLE TARGETS ======================
+0 3 * * * /usr/local/bin/ndip-backup.sh
+55 23 * * * /usr/local/bin/webtrust_daily_hash.sh
+*/5 * * * * flock -n /tmp/ndip_health.lock /usr/local/bin/ndip-healthcheck.sh
+*/6 * * * * flock -n /tmp/empire_health.lock /usr/local/bin/empire-health-check.sh
+*/7 * * * * flock -n /tmp/guard.lock /etc/empire/security/empire_guard_orchestrator.sh
+*/8 * * * * flock -n /tmp/integrity.lock /etc/empire/security/empire_integrity_guard.sh check
+*/10 * * * * flock -n /tmp/snapshot.lock /bin/bash /opt/empire/scripts/monitor_snapshot.sh
+*/12 * * * * flock -n /tmp/resources.lock /bin/bash /opt/empire/scripts/monitor_resources.sh
+0 * * * * flock -n /tmp/winrate.lock /opt/empire-core/backend/update_winrate.sh
+* * * * * flock -n /tmp/tp_sl.lock /opt/execution-engine/tp_sl_engine.sh >> /opt/execution-engine/logs/tp_sl.log 2>&1
+@reboot sleep 172800 && /opt/empire/scripts/unlock_execution_48h.sh
+
+=== 5. EXTERNAL SYSTEM CRON ================================
+
+=== 6. IMPORTANT EXTERNAL FILES ============================
+
+FILE=/home/nawaf511/ndsp-portal-real-data-sync/sync_real_feeds.py
+STATUS=PRESENT SIZE=4239 MODE=-rwxrwxr-x OWNER=nawaf511:nawaf511 MTIME=2026-06-24 10:35:30.366010244 +0200
+df70255d0c5b26e47c61225fe1ffde0e0c7e7cb08fefb19e887b8dba051c68bc  /home/nawaf511/ndsp-portal-real-data-sync/sync_real_feeds.py
+DEPENDENCIES:
+1:#!/usr/bin/env python3
+
+FILE=/home/nawaf511/ndsp-portal-real-data-sync/tradingview_live_calendar.py
+STATUS=PRESENT SIZE=3446 MODE=-rwxrwxr-x OWNER=nawaf511:nawaf511 MTIME=2026-06-24 10:45:46.187527285 +0200
+d435b629865801f23c9b60f142c56981cca7247c6d8e8993a6be821a9104fbff  /home/nawaf511/ndsp-portal-real-data-sync/tradingview_live_calendar.py
+DEPENDENCIES:
+1:#!/usr/bin/env python3
+
+FILE=/home/nawaf511/ndsp-portal-real-data-sync/investing_live_calendar.py
+STATUS=PRESENT SIZE=4398 MODE=-rwxrwxr-x OWNER=nawaf511:nawaf511 MTIME=2026-06-24 10:42:14.099362181 +0200
+2063f8f7c45ab00c4ca299557699f3e9e811e903d8befa8f031698840484a4f5  /home/nawaf511/ndsp-portal-real-data-sync/investing_live_calendar.py
+DEPENDENCIES:
+1:#!/usr/bin/env python3
+
+FILE=/home/nawaf511/ndsp-portal-real-data-sync/live_economic_calendar_sync.py
+STATUS=PRESENT SIZE=4038 MODE=-rwxrwxr-x OWNER=nawaf511:nawaf511 MTIME=2026-06-24 10:39:44.174962987 +0200
+556dd843fd05cdc5ea6c18562bf3601388abda52ea89bfb8aa3aa1271441ddbe  /home/nawaf511/ndsp-portal-real-data-sync/live_economic_calendar_sync.py
+DEPENDENCIES:
+1:#!/usr/bin/env python3
+
+FILE=/home/nawaf511/ndsp-portal-real-data-sync/sync_real_ledger.py
+STATUS=PRESENT SIZE=3462 MODE=-rwxrwxr-x OWNER=nawaf511:nawaf511 MTIME=2026-06-24 09:37:03.605026147 +0200
+da16a83b135ff696e4b7b94a71f1884900b9a9d1a1e923305f19fb69354088bb  /home/nawaf511/ndsp-portal-real-data-sync/sync_real_ledger.py
+DEPENDENCIES:
+1:#!/usr/bin/env python3
+
+FILE=/home/nawaf511/ndsp_ops/ndsp_monitor.sh
+STATUS=ABSENT
+
+FILE=/home/nawaf511/ndsp_ops/ndsp_daily_backup.sh
+STATUS=ABSENT
+
+FILE=/opt/empire-core/ndip_full_snapshot.sh
+STATUS=ABSENT
+
+FILE=/opt/empire-core/ndip_snapshot.sh
+STATUS=ABSENT
+
+FILE=/opt/empire-core/backend/update_winrate.sh
+STATUS=ABSENT
+
+FILE=/opt/empire-core/backend/run_optimizer.sh
+STATUS=ABSENT
+
+FILE=/opt/empire-core/backend/run_layer_optimizer.sh
+STATUS=ABSENT
+
+FILE=/usr/local/bin/ndip_backup.sh
+STATUS=PRESENT SIZE=273 MODE=-rwxr-xr-x OWNER=root:root MTIME=2026-04-24 18:47:52.012393881 +0200
+a5470d0484862e3604c7230c26b6416bf763e6639326c6f79722aee5289b6198  /usr/local/bin/ndip_backup.sh
+DEPENDENCIES:
+4:SRC="/home/nawaf511/ndip-backend/data/ndip_saas.sqlite3"
+5:DST="/opt/ndip-backups"
+
+FILE=/usr/local/bin/ndip-backup.sh
+STATUS=PRESENT SIZE=240 MODE=-rwxr-xr-x OWNER=root:root MTIME=2026-02-28 06:50:25.427680984 +0100
+cd31b106fe8e9e9fa54215e7c4dc7bf68ca6942c980367b49552e1b17a0b0cee  /usr/local/bin/ndip-backup.sh
+DEPENDENCIES:
+1:#!/bin/bash
+4:BACKUP_DIR="/opt/backups"
+
+FILE=/usr/local/bin/ndip-healthcheck.sh
+STATUS=PRESENT SIZE=269 MODE=-rwxr-xr-x OWNER=root:root MTIME=2026-02-28 06:48:33.457442141 +0100
+ccfb616c5862e235f437d5c3a5b3663450cd18b9300bb1a2d0215bc000cd04d2  /usr/local/bin/ndip-healthcheck.sh
+DEPENDENCIES:
+1:#!/bin/bash
+6:HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" $URL)
+10:    systemctl restart $SERVICE
+
+FILE=/usr/local/bin/empire-health-check.sh
+STATUS=PRESENT SIZE=128 MODE=-rwxr-xr-x OWNER=root:root MTIME=2026-02-23 13:01:20.984879454 +0100
+a11a7aa9b491ad61f8ba4604a69b5f6d261bfcf253a2b43ce57cdc460e3aedec  /usr/local/bin/empire-health-check.sh
+DEPENDENCIES:
+1:#!/bin/bash
+3:if ! curl -s https://nawafo.shop | grep -q "<html"; then
+4:    systemctl restart empire-web-ndip-frontend.service
+
+FILE=/usr/local/bin/webtrust_daily_hash.sh
+STATUS=PRESENT SIZE=196 MODE=-rwxr-xr-x OWNER=root:root MTIME=2026-02-02 02:02:40.950426287 +0100
+db26d475e89551b0180fd3e733218b1983d807d5a56ad6342c4ed2ac66d7c86c  /usr/local/bin/webtrust_daily_hash.sh
+DEPENDENCIES:
+1:#!/bin/bash
+3:tar -czf /tmp/audit_$DATE.tar.gz /opt/webtrust/audit
+4:sha256sum /tmp/audit_$DATE.tar.gz > /opt/webtrust/hashes/audit_$DATE.sha256
+
+FILE=/opt/empire/scripts/monitor_snapshot.sh
+STATUS=ABSENT
+
+FILE=/opt/empire/scripts/monitor_resources.sh
+STATUS=ABSENT
+
+FILE=/opt/empire/scripts/unlock_execution_48h.sh
+STATUS=ABSENT
+
+FILE=/opt/execution-engine/tp_sl_engine.sh
+STATUS=ABSENT
+
+=== 7. EXTERNAL DIRECTORY SIZES ============================
+36K	/home/nawaf511/ndsp-portal-real-data-sync
+39M	/home/nawaf511/ndsp_ops
+ABSENT /home/nawaf511/ndip-backend
+ABSENT /opt/empire-core
+ABSENT /opt/empire
+ABSENT /opt/ndip
+ABSENT /opt/execution-engine
+36K	/usr/local/lib/ndsp-business-ops
+
+=== 8. LIVE PROCESSES ======================================
+   1455 root     ج أغسطس  7 16:46:01 2026 /bin/sh -c sleep 172800 && /opt/empire/scripts/unlock_execution_48h.sh
+
+=== 9. PROJECT COPIES OF IMPORTANT BASENAMES ==============
+
+----- sync_real_feeds.py -----
+
+----- tradingview_live_calendar.py -----
+
+----- investing_live_calendar.py -----
+
+----- live_economic_calendar_sync.py -----
+
+----- sync_real_ledger.py -----
+
+----- ndsp_monitor.sh -----
+
+----- ndsp_daily_backup.sh -----
+
+----- ndip_full_snapshot.sh -----
+
+----- ndip_snapshot.sh -----
+
+----- update_winrate.sh -----
+
+----- run_optimizer.sh -----
+
+----- run_layer_optimizer.sh -----
+
+----- ndip_backup.sh -----
+
+----- ndip-backup.sh -----
+
+----- ndip-healthcheck.sh -----
+
+----- empire-health-check.sh -----
+
+----- webtrust_daily_hash.sh -----
+
+----- monitor_snapshot.sh -----
+
+----- monitor_resources.sh -----
+
+----- unlock_execution_48h.sh -----
+
+----- tp_sl_engine.sh -----
+
+=== 10. FAILED UNITS =======================================
+● ndsp-contract-regression-v1-1.service loaded failed failed NDSP Backend Contract V1.1 Regression
+● ndsp-production-monitor.service       loaded failed failed NDSP Production Monitor V205
+
+=== 11. CURRENT IMPORTANT TIMER RESULTS ====================
+
+----- ndsp-real-feeds-sync.service -----
+Result=success
+ExecMainStatus=0
+ExecStart={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/ndsp-portal-real-data-sync/sync_real_feeds.py ; ignore_errors=no ; start_time=[Fri 2026-08-07 20:24:08 CEST] ; stop_time=[Fri 2026-08-07 20:24:09 CEST] ; pid=883457 ; code=exited ; status=0 }
+TriggeredBy=ndsp-real-feeds-sync.timer
+ActiveState=inactive
+SubState=dead
+
+----- ndsp-tradingview-calendar.service -----
+Result=success
+ExecMainStatus=0
+ExecStart={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/ndsp-portal-real-data-sync/tradingview_live_calendar.py ; ignore_errors=no ; start_time=[Fri 2026-08-07 20:24:08 CEST] ; stop_time=[Fri 2026-08-07 20:24:10 CEST] ; pid=883462 ; code=exited ; status=0 }
+TriggeredBy=ndsp-tradingview-calendar.timer
+ActiveState=inactive
+SubState=dead
+
+----- ndsp-production-monitor.service -----
+Result=exit-code
+ExecMainStatus=1
+ExecStart={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/services/ndsp-business-ops/monitor.py ; ignore_errors=no ; start_time=[Fri 2026-08-07 20:22:37 CEST] ; stop_time=[Fri 2026-08-07 20:22:40 CEST] ; pid=878690 ; code=exited ; status=1 }
+TriggeredBy=ndsp-production-monitor.timer
+ActiveState=failed
+SubState=failed
+
+----- ndsp-refresh-static-data-contract-v46.service -----
+Result=success
+ExecMainStatus=0
+ExecStart={ path=/home/nawaf511/empire-core-new/backend/services/ndsp-runtime-jobs/ndsp-refresh-static-data-contract-v46 ; argv[]=/home/nawaf511/empire-core-new/backend/services/ndsp-runtime-jobs/ndsp-refresh-static-data-contract-v46 ; ignore_errors=no ; start_time=[Fri 2026-08-07 20:23:42 CEST] ; stop_time=[Fri 2026-08-07 20:23:58 CEST] ; pid=881862 ; code=exited ; status=0 }
+TriggeredBy=ndsp-refresh-static-data-contract-v46.timer
+ActiveState=inactive
+SubState=dead
+
+----- ndsp-market-prices-updater.service -----
+Result=success
+ExecMainStatus=0
+ExecStart={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/services/ndsp-runtime-jobs/ndsp_live_market_prices_updater.py ; ignore_errors=no ; start_time=[Fri 2026-08-07 20:23:42 CEST] ; stop_time=[Fri 2026-08-07 20:23:55 CEST] ; pid=881858 ; code=exited ; status=0 }
+TriggeredBy=ndsp-market-prices-updater.timer
+ActiveState=inactive
+SubState=dead
+
+----- ndsp-admin-snapshot-updater.service -----
+Result=success
+ExecMainStatus=0
+ExecStart={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/services/ndsp-runtime-jobs/ndsp_admin_snapshot_updater.py ; ignore_errors=no ; start_time=[Fri 2026-08-07 20:24:42 CEST] ; stop_time=[n/a] ; pid=886470 ; code=(null) ; status=0/0 }
+TriggeredBy=ndsp-admin-snapshot-updater.timer
+ActiveState=activating
+SubState=start
+
+============================================================
+SCAN_RESULT=PASS
+AUDIT_FILE=/home/nawaf511/empire-core-new/var/audits/external-runtime-final-scan-20260807-202404.txt
+NO_CHANGES_MADE=TRUE
+============================================================

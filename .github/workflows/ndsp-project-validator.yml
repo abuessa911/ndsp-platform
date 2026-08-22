@@ -1,0 +1,45 @@
+name: NDSP Project Validator
+
+on:
+  push:
+    branches:
+      - main
+      - feature/ndsp-os
+  pull_request:
+    branches:
+      - main
+      - feature/ndsp-os
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install frontend dependencies
+        working-directory: frontend/user-portal-vite
+        run: npm ci || npm install
+
+      - name: Run NDSP Project Validator
+        run: |
+          chmod +x backend/tools/ndsp_project_validator.sh
+          ./backend/tools/ndsp_project_validator.sh backend/architecture/reports/DEV-004-CI-RUN.md
+
+      - name: Upload validator report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ndsp-project-validator-report
+          path: backend/architecture/reports/DEV-004-CI-RUN.md

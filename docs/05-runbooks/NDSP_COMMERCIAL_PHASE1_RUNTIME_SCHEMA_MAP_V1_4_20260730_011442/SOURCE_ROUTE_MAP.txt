@@ -1,0 +1,194 @@
+=== SOURCE CANDIDATES ===
+/etc/python3.12/sitecustomize.py
+/home/nawaf511/direction_engine.py
+/home/nawaf511/ndsp_alpic_remote_deployment_diagnostic_v28_4_1.py
+/home/nawaf511/ndsp_alpic_remote_deployment_diagnostic_v28_4_2.py
+/home/nawaf511/ndsp_alpic_remote_deployment_diagnostic_v28_4_3.py
+/home/nawaf511/ndsp_canonical_live_runtime_v33.py
+/home/nawaf511/ndsp_contract.py
+/home/nawaf511/ndsp_cot_fetcher.py
+/home/nawaf511/ndsp_explain.py
+/home/nawaf511/ndsp_governance.py
+/home/nawaf511/ndsp_i18n_phase2_patch_homepage.py
+/home/nawaf511/ndsp_latest_16_layers_logic_functions.py
+/home/nawaf511/ndsp_orchestrator.py
+/home/nawaf511/ndsp_resolver.py
+/home/nawaf511/NDSP_TRANSLATIONS_AR_EN.js
+/home/nawaf511/quality_stack.py
+/home/nawaf511/test_ws_live_connection.py
+/__init__.py
+/opt/empire-core.broken.1776325777/admin_api.py
+/opt/ndsp16-api/server.js
+/opt/ndsp-admin-user-ops/app.py
+/opt/ndsp-admin-user-ops/server.py
+/opt/ndsp-archive-app/admin-plans.js
+/opt/ndsp-archive-app/checkout.js
+/opt/ndsp-archive-app/discounts.js
+/opt/ndsp-archive-app/server.js
+/opt/ndsp-archive-app/webhooks-moyasar.js
+/opt/ndsp-change-password-gateway/app.py
+/opt/ndsp-current-user-display/app.py
+/opt/ndsp-decision-package-v1/app.py
+/opt/ndsp-market-data-bridge-v2/bridge.py
+/opt/ndsp-news-ticker/server.js
+/opt/ndsp-platform-gateway-9002/app.py
+/opt/ndsp-public-summary-v548/app.py
+/opt/ndsp-registration-mailer-v12-1/mailer.py
+/opt/ndsp-ui-bridge-api/main.py
+/opt/ndsp-v3-portal-gateway/app.py
+/opt/ndsp-v471-react-gold-portal_20260701_173443/postcss.config.js
+/opt/ndsp-v471-react-gold-portal_20260701_173443/tailwind.config.js
+/opt/ndsp-v52-contract/app.py
+/opt/ndsp-v53-bridge/app.py
+/srv/testapp2/app.py
+/srv/trade_control_center/app.py
+/srv/trade_control_center/auto_heal.py
+/srv/trade_engine/engine.py
+/usr/bin/grantlee_strings_extractor.py
+/usr/bin/kdelnk2desktop.py
+/usr/bin/kde-systemsettings-tree.py
+/usr/bin/mesa-overlay-control.py
+/usr/bin/pykig.py
+/usr/bin/zonetab2pot.py
+/usr/local/lib/ndsp-business-ops/app.py
+
+=== ROUTE DEFINITIONS ===
+
+--- FILE: /etc/python3.12/sitecustomize.py ---
+
+--- FILE: /home/nawaf511/direction_engine.py ---
+
+--- FILE: /home/nawaf511/ndsp_alpic_remote_deployment_diagnostic_v28_4_1.py ---
+
+--- FILE: /home/nawaf511/ndsp_alpic_remote_deployment_diagnostic_v28_4_2.py ---
+
+--- FILE: /home/nawaf511/ndsp_alpic_remote_deployment_diagnostic_v28_4_3.py ---
+
+--- FILE: /home/nawaf511/ndsp_canonical_live_runtime_v33.py ---
+
+--- FILE: /home/nawaf511/ndsp_contract.py ---
+
+--- FILE: /home/nawaf511/ndsp_cot_fetcher.py ---
+
+--- FILE: /home/nawaf511/ndsp_explain.py ---
+
+--- FILE: /home/nawaf511/ndsp_governance.py ---
+
+--- FILE: /home/nawaf511/ndsp_i18n_phase2_patch_homepage.py ---
+
+--- FILE: /home/nawaf511/ndsp_latest_16_layers_logic_functions.py ---
+
+--- FILE: /home/nawaf511/ndsp_orchestrator.py ---
+
+--- FILE: /home/nawaf511/ndsp_resolver.py ---
+
+--- FILE: /home/nawaf511/NDSP_TRANSLATIONS_AR_EN.js ---
+
+--- FILE: /home/nawaf511/quality_stack.py ---
+
+--- FILE: /home/nawaf511/test_ws_live_connection.py ---
+
+--- FILE: /__init__.py ---
+
+--- FILE: /opt/empire-core.broken.1776325777/admin_api.py ---
+17:@app.get("/admin/status")
+22:@app.get("/admin/market")
+31:@app.get("/admin/metrics")
+41:@app.get("/admin/ndip")
+50:@app.post("/admin/control")
+
+--- FILE: /opt/ndsp16-api/server.js ---
+700:  for(const p of paths) app.get(p, handler);
+703:app.get('/api/health', (req,res)=>res.json({
+886:app.get('/api/layers/status', (req,res)=>res.json({
+904:app.get('/api/assets', (req,res)=>res.json({
+919:app.get('/api/analysis/complete/:assetId/:userId', async (req,res)=>{
+
+--- FILE: /opt/ndsp-admin-user-ops/app.py ---
+23:@app.get("/health")
+27:@app.post("/{user_id}")
+
+--- FILE: /opt/ndsp-admin-user-ops/server.py ---
+
+--- FILE: /opt/ndsp-archive-app/admin-plans.js ---
+
+--- FILE: /opt/ndsp-archive-app/checkout.js ---
+
+--- FILE: /opt/ndsp-archive-app/discounts.js ---
+
+--- FILE: /opt/ndsp-archive-app/server.js ---
+
+--- FILE: /opt/ndsp-archive-app/webhooks-moyasar.js ---
+
+--- FILE: /opt/ndsp-change-password-gateway/app.py ---
+159:@app.get("/api/account/change-password/health")
+170:@app.post("/api/account/change-password")
+
+--- FILE: /opt/ndsp-current-user-display/app.py ---
+332:@app.get("/api/account/me-display/health")
+342:@app.get("/api/account/me-display")
+
+--- FILE: /opt/ndsp-decision-package-v1/app.py ---
+49:@app.get("/health")
+53:@app.get("/api/decision/package-live")
+280:@app.get("/api/decision/package-v2")
+
+--- FILE: /opt/ndsp-market-data-bridge-v2/bridge.py ---
+
+--- FILE: /opt/ndsp-news-ticker/server.js ---
+
+--- FILE: /opt/ndsp-platform-gateway-9002/app.py ---
+
+--- FILE: /opt/ndsp-public-summary-v548/app.py ---
+
+--- FILE: /opt/ndsp-registration-mailer-v12-1/mailer.py ---
+
+--- FILE: /opt/ndsp-ui-bridge-api/main.py ---
+38:@app.get("/api/ui-bridge/health")
+60:@app.get("/api/dashboard/overview")
+92:@app.get("/api/market/assets")
+129:@app.get("/api/layers")
+177:@app.get("/api/market-structure")
+201:@app.get("/api/technical-confirmation")
+224:@app.get("/api/macro-analysis")
+243:@app.get("/api/risk-layer")
+264:@app.get("/api/nawaf-signal")
+283:@app.get("/api/alerts")
+314:@app.get("/api/settings")
+326:@app.get("/api/account/profile")
+
+--- FILE: /opt/ndsp-v3-portal-gateway/app.py ---
+
+--- FILE: /opt/ndsp-v471-react-gold-portal_20260701_173443/postcss.config.js ---
+
+--- FILE: /opt/ndsp-v471-react-gold-portal_20260701_173443/tailwind.config.js ---
+
+--- FILE: /opt/ndsp-v52-contract/app.py ---
+
+--- FILE: /opt/ndsp-v53-bridge/app.py ---
+826:@app.get("/api/decision/public-summary")
+830:@app.get("/api/decision/public-contract-v548")
+892:@app.get("/api/decision/public-summary")
+896:@app.get("/api/decision/public-contract-v548")
+
+--- FILE: /srv/testapp2/app.py ---
+
+--- FILE: /srv/trade_control_center/app.py ---
+
+--- FILE: /srv/trade_control_center/auto_heal.py ---
+
+--- FILE: /srv/trade_engine/engine.py ---
+
+--- FILE: /usr/bin/grantlee_strings_extractor.py ---
+
+--- FILE: /usr/bin/kdelnk2desktop.py ---
+
+--- FILE: /usr/bin/kde-systemsettings-tree.py ---
+
+--- FILE: /usr/bin/mesa-overlay-control.py ---
+
+--- FILE: /usr/bin/pykig.py ---
+
+--- FILE: /usr/bin/zonetab2pot.py ---
+
+--- FILE: /usr/local/lib/ndsp-business-ops/app.py ---

@@ -1,0 +1,201 @@
+============================================================
+ NDSP V1.4.1 — RESPONSIVE FINAL PRODUCTION DEPLOY
+ SOURCE BUILD -> PRODUCTION
+ SSH SAFE / NGINX UNTOUCHED
+============================================================
+
+=== 01. VERIFY CURRENT BUILD ===
+BUILD SHA256: 75955c6fb6f87c9360fba372ffae5cc0ae71bebceaa3ffe215ac7370191de68c
+PASS: dist exists
+
+=== 02. VERIFY RESPONSIVE BUILD CONTENT ===
+PASS: mobile Evidence composition
+PASS: mobile Methodology composition
+PASS: CORE corrected direction content
+
+=== 03. FINAL SOURCE SAFETY GATE ===
+PASS: design !important = 0
+PASS: patch/legacy runtime = 0
+
+=== 04. BACKUP CURRENT PRODUCTION ===
+PASS: production backup
+/home/nawaf511/empire-core-new/ndsp-platform/var/backups/v141-responsive-final-production-before-20260809-171213
+
+=== 05. CREATE ROLLBACK ===
+PASS: rollback created
+/home/nawaf511/empire-core-new/ndsp-platform/var/backups/v141-responsive-final-production-before-20260809-171213/rollback.sh
+
+=== 06. DEPLOY RESPONSIVE BUILD ===
+sending incremental file list
+deleting shield-check-B9iqdvQ4.js
+deleting public-api-Dc7UH6jd.js
+deleting overview-page-DXPxetVA.js
+deleting methodology-page-Cm9uP_ua.js
+deleting market-context-page-Co86RyyJ.js
+deleting lock-keyhole-BW6_09js.js
+deleting index-Dk_M-rsE.js
+deleting index-DI89IHSb.css
+deleting home-page-D-hwlY8M.js
+deleting file-check-corner-DqizmfRP.js
+deleting evidence-page-D8Nfm6nX.js
+deleting core-page-CuKeBlvJ.js
+deleting clock-3-Dp-BFqvI.js
+deleting account-page-lZBrYE4R.js
+./
+account-page-E9EymKDt.js
+clock-3-Br7fdL2w.js
+core-page-BovBgeui.js
+esm-L5hlJ8Vx.js
+evidence-page-z_3aNgmM.js
+file-check-corner-CkmamL2F.js
+home-page-VXF1C_du.js
+ibm-plex-mono-cyrillic-400-normal-BSMlKf0J.woff2
+ibm-plex-mono-cyrillic-400-normal-CEL4l2ZJ.woff
+ibm-plex-mono-cyrillic-ext-400-normal-DMdlQ8Kv.woff
+ibm-plex-mono-cyrillic-ext-400-normal-xuaO2J-f.woff2
+ibm-plex-mono-latin-400-normal-CvHOgSBP.woff
+ibm-plex-mono-latin-400-normal-DMJ8VG8y.woff2
+ibm-plex-mono-latin-ext-400-normal-BmRBH3aV.woff2
+ibm-plex-mono-latin-ext-400-normal-D3D2R8hC.woff
+ibm-plex-mono-vietnamese-400-normal-BulugwFq.woff2
+ibm-plex-mono-vietnamese-400-normal-DDuiU_S-.woff
+ibm-plex-sans-cyrillic-300-normal-LoaTnByX.woff
+ibm-plex-sans-cyrillic-300-normal-RhT0Ayi3.woff2
+ibm-plex-sans-cyrillic-400-normal-BTotfTJu.woff
+ibm-plex-sans-cyrillic-400-normal-DZqxrq2p.woff2
+ibm-plex-sans-cyrillic-500-normal-ByOcLdNv.woff
+ibm-plex-sans-cyrillic-500-normal-CocWQlwt.woff2
+ibm-plex-sans-cyrillic-600-normal-71GNu3SW.woff2
+ibm-plex-sans-cyrillic-600-normal-BGq0mW3O.woff
+ibm-plex-sans-cyrillic-ext-300-normal-Bbd5v1xK.woff
+ibm-plex-sans-cyrillic-ext-300-normal-DqmgDkIN.woff2
+ibm-plex-sans-cyrillic-ext-400-normal-Dsrv2Tcn.woff
+ibm-plex-sans-cyrillic-ext-400-normal-g30qAdWV.woff2
+ibm-plex-sans-cyrillic-ext-500-normal-Cs5J6C77.woff2
+ibm-plex-sans-cyrillic-ext-500-normal-DB5PtV2g.woff
+ibm-plex-sans-cyrillic-ext-600-normal-Bz0x94Yp.woff
+ibm-plex-sans-cyrillic-ext-600-normal-DUMzJB7m.woff2
+ibm-plex-sans-greek-300-normal-J-CBqZoJ.woff2
+ibm-plex-sans-greek-300-normal-STc8XiDr.woff
+ibm-plex-sans-greek-400-normal-D9ESIMu3.woff
+ibm-plex-sans-greek-400-normal-_efipK4i.woff2
+ibm-plex-sans-greek-500-normal-CuWXN6rf.woff
+ibm-plex-sans-greek-500-normal-JMMifIXV.woff2
+ibm-plex-sans-greek-600-normal-D-CqTdkO.woff
+ibm-plex-sans-greek-600-normal-DzTrcv_p.woff2
+ibm-plex-sans-latin-300-normal-C9Of02-5.woff
+ibm-plex-sans-latin-300-normal-b4i7YzLG.woff2
+ibm-plex-sans-latin-400-normal-CDDApCn2.woff2
+ibm-plex-sans-latin-400-normal-CYLoc0-x.woff
+ibm-plex-sans-latin-500-normal-6ng42L7E.woff2
+ibm-plex-sans-latin-500-normal-BgVn5rGT.woff
+ibm-plex-sans-latin-600-normal-Cu4Hd6ag.woff
+ibm-plex-sans-latin-600-normal-CuJfVYMP.woff2
+ibm-plex-sans-latin-ext-300-normal-B8Zgwjh3.woff
+ibm-plex-sans-latin-ext-300-normal-BLFuR0P1.woff2
+ibm-plex-sans-latin-ext-400-normal-C5H60-Va.woff2
+ibm-plex-sans-latin-ext-400-normal-RBey6euL.woff
+ibm-plex-sans-latin-ext-500-normal-D0aIdm-b.woff
+ibm-plex-sans-latin-ext-500-normal-DakdToA3.woff2
+ibm-plex-sans-latin-ext-600-normal-DIrixKbi.woff
+ibm-plex-sans-latin-ext-600-normal-DOrvGEcy.woff2
+ibm-plex-sans-vietnamese-300-normal-CkYRZD2a.woff
+ibm-plex-sans-vietnamese-300-normal-SDfX6ktj.woff2
+ibm-plex-sans-vietnamese-400-normal-DG4YqDda.woff2
+ibm-plex-sans-vietnamese-400-normal-fK1oJ5dG.woff
+ibm-plex-sans-vietnamese-500-normal-BEb3_waV.woff
+ibm-plex-sans-vietnamese-500-normal-e4dixQRQ.woff2
+ibm-plex-sans-vietnamese-600-normal-DgdngZtN.woff
+ibm-plex-sans-vietnamese-600-normal-DpPYBSTl.woff2
+index-CSk-Fg5N.js
+index-KCh4LOXZ.css
+jsx-runtime-B-hcVAMW.js
+libre-baskerville-latin-400-normal-BTm3cn9P.woff
+libre-baskerville-latin-400-normal-C42RasBZ.woff2
+libre-baskerville-latin-ext-400-normal-BWURas-n.woff
+libre-baskerville-latin-ext-400-normal-DehDhP4C.woff2
+lock-keyhole-8mrFYHw5.js
+market-context-page-CRidXXmk.js
+methodology-page-CQjUCVt5.js
+methodology-page-DLioOiRN.css
+overview-page-huvBLy4V.js
+page-shell-BEHz6DMO.js
+public-api-BMSC0ZUE.js
+shield-check-CMKiQ9bj.js
+sovereign-control-BpBdZtoZ.jpg
+
+sent 3,823,473 bytes  received 1,949 bytes  7,650,844.00 bytes/sec
+total size is 3,815,372  speedup is 1.00
+PASS: responsive build deployed
+
+=== 07. LOCAL / SERVER SHA256 ===
+LOCAL : 75955c6fb6f87c9360fba372ffae5cc0ae71bebceaa3ffe215ac7370191de68c
+SERVER: 75955c6fb6f87c9360fba372ffae5cc0ae71bebceaa3ffe215ac7370191de68c
+PASS: server matches responsive build
+
+=== 08. LOCAL ENTRY ASSETS ===
+/assets/index-CSk-Fg5N.js
+/assets/index-KCh4LOXZ.css
+/assets/jsx-runtime-B-hcVAMW.js
+PASS: local asset graph
+
+=== 09. LIVE HTML ===
+--- LIVE ASSETS ---
+/assets/index-CSk-Fg5N.js
+/assets/index-KCh4LOXZ.css
+/assets/jsx-runtime-B-hcVAMW.js
+PASS: live HTML uses responsive assets
+
+=== 10. ENTRY ASSET HTTP STATUS ===
+/assets/index-CSk-Fg5N.js                                                200
+/assets/index-KCh4LOXZ.css                                               200
+/assets/jsx-runtime-B-hcVAMW.js                                          200
+PASS: entry assets HTTP 200
+
+=== 11. PUBLIC ROUTES ===
+/                        200
+/overview                200
+/core                    200
+/market-context          200
+/evidence                200
+/methodology             200
+/account                 200
+PASS: routes 7/7
+
+=== 12. FINAL DEPLOYED HASH ===
+75955c6fb6f87c9360fba372ffae5cc0ae71bebceaa3ffe215ac7370191de68c  dist/index.html
+75955c6fb6f87c9360fba372ffae5cc0ae71bebceaa3ffe215ac7370191de68c  /var/www/ndsp/index.html
+
+=== 13. DEPLOYED ENTRY FILES ===
+/assets/index-CSk-Fg5N.js
+/assets/index-KCh4LOXZ.css
+/assets/jsx-runtime-B-hcVAMW.js
+
+============================================================
+ NDSP V1.4.1 — RESPONSIVE PRODUCTION MACHINE PASS
+============================================================
+
+ PASS  responsive source build
+ PASS  mobile Evidence
+ PASS  mobile Methodology
+ PASS  CORE RTL/LTR correction
+ PASS  design !important = 0
+ PASS  patch styles = 0
+ PASS  production backup
+ PASS  deployment
+ PASS  SHA256
+ PASS  live asset graph
+ PASS  entry assets
+ PASS  routes 7/7
+
+ NGINX = UNTOUCHED
+
+ MACHINE ACCEPTANCE = PASS
+ VISUAL ACCEPTANCE  = PENDING
+
+ REPORT:
+ /home/nawaf511/empire-core-new/ndsp-platform/var/reports/v141-responsive-final-deploy-20260809-171213.txt
+
+ ROLLBACK:
+ /home/nawaf511/empire-core-new/ndsp-platform/var/backups/v141-responsive-final-production-before-20260809-171213/rollback.sh
+============================================================

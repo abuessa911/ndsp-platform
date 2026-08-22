@@ -1,0 +1,59 @@
+=== NDSP V36 PUBLIC HISTORY ROUTE FINAL ===
+DATE=2026-08-08T05:28:06+02:00
+TARGET=/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf
+AUDIT=/home/nawaf511/empire-core-new/var/audits/v36-public-history-route-final-20260808-052805
+
+=== 1. PRECONDITIONS ===
+TARGET_CONFIG=FOUND
+V36_STATE=active
+V36_HISTORY_DIRECT=200
+V36_INTEGRITY_DIRECT=200
+V36_DIRECT_CONTRACT=PASS
+
+=== 2. CURRENT PUBLIC CONTRACT BEFORE ===
+CURRENT_BEFORE=404
+
+=== 3. CHECK EXISTING HISTORY ROUTES ===
+HISTORY_ROUTE_ALREADY_PRESENT=NO
+PATCH_REQUIRED=YES
+
+=== 4. BACKUP ===
+f2535fb9fbeb8402268973725b71381935e4870e06882568c25bcc9af10c98b2  /etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf
+f2535fb9fbeb8402268973725b71381935e4870e06882568c25bcc9af10c98b2  /home/nawaf511/empire-core-new/var/audits/v36-public-history-route-final-20260808-052805/backup/config.conf
+BACKUP=PASS
+
+=== 5. INSERT V36 ROUTES ===
+INSERTION=PASS
+ROUTE_INSERTION=PASS
+
+=== 6. NGINX CONFIG TEST ===
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+NGINX_CONFIG_TEST=PASS
+
+=== 7. RELOAD NGINX ===
+NGINX_RELOAD=PASS
+
+=== 8. PUBLIC HTTPS VERIFICATION ===
+CURRENT_AFTER=404
+HISTORY_AFTER=200
+INTEGRITY_AFTER=200
+V36_PUBLIC_HISTORY_CONTRACT=PASS
+
+=== 9. CURRENT ROUTE REGRESSION ===
+CURRENT_ROUTE_UNCHANGED=PASS
+
+=== 10. FINAL NGINX TEST ===
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+FINAL_NGINX_TEST=PASS
+
+=== FINAL ===
+V35_CURRENT_ROUTE_MODIFIED=NO
+V36_HISTORY_PUBLIC=PASS
+V36_INTEGRITY_PUBLIC=PASS
+CURRENT_REGRESSION=PASS
+NEXT_ACTION=V37_MOUNT_BUILD_FINAL
+SAFE_TO_CONTINUE=YES
+FINAL_RESULT=PASS
+AUDIT=/home/nawaf511/empire-core-new/var/audits/v36-public-history-route-final-20260808-052805

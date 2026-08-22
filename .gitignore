@@ -1,0 +1,204 @@
+# ============================================================
+# NDSP Repository Hygiene — DEV-002
+# Keep source code trackable. Block secrets, caches, builds,
+# logs, virtual environments, runtime dumps, backups, and deps.
+# ============================================================
+
+# ---------- Secrets / environment ----------
+.env
+.env.*
+**/.env
+**/.env.*
+
+# Allow safe examples
+!.env.example
+!.env.*.example
+!**/.env.example
+!**/.env.*.example
+
+# ---------- Node / package managers ----------
+node_modules/
+**/node_modules/
+.npm/
+.pnpm-store/
+.yarn/
+.yarn-cache/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ---------- Python ----------
+venv/
+.venv/
+**/venv/
+**/.venv/
+__pycache__/
+**/__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ---------- Builds / generated artifacts ----------
+dist/
+build/
+out/
+.next/
+.nuxt/
+.cache/
+.parcel-cache/
+.turbo/
+coverage/
+**/dist/
+**/build/
+**/out/
+**/.next/
+**/coverage/
+
+# ---------- Logs / runtime ----------
+*.log
+logs/
+**/logs/
+server.log
+portal.log
+*.pid
+*.sock
+tmp/
+temp/
+.tmp/
+**/tmp/
+**/temp/
+
+# ---------- Backups / repair / archive ----------
+_backups/
+**/_backups/
+.repair_backups/
+**/.repair_backups/
+.backup_*/
+**/.backup_*/
+*_backup_*/
+**/*_backup_*/
+*.bak
+*.bak.*
+*.before_*
+*.old
+*.orig
+
+# ---------- OS / editor ----------
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# ---------- Local accidental command files ----------
+npm run build
+
+# ---------- Binary archives generated locally ----------
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.7z
+*.rar
+
+# ---------- Local archives discovered by DEV-002B ----------
+_archive*/
+**/_archive*/
+_archive_*/
+**/_archive_*/
+
+# ---------- DEV-002H generated frontend artifacts ----------
+_next/
+**/_next/
+**/_next/static/
+**/.next/
+**/out/
+
+# ---------- DEV-002J runtime and local artifacts ----------
+*.env
+runtime/
+backend/runtime/
+ndsp_checkout_plans_package/
+run_local_ndsp.py
+
+
+# BEGIN NDSP ENTERPRISE HYGIENE
+
+# Runtime / generated state - repo root only
+/runtime/
+/backend/runtime/
+/backend/_backups/
+*_backups/
+*_backup/
+*_backup_*/
+quarantine/
+tmp/
+temp/
+
+# Secrets / environment files
+.env
+.env.*
+!.env.example
+!*.env.example
+!*.env.*.example
+*.pem
+*.key
+*.crt
+*.p12
+
+# Node / frontend build artifacts
+node_modules/
+**/node_modules/
+.npm/
+.next/
+.vite/
+dist/
+build/
+coverage/
+
+# Python artifacts
+venv/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+
+# Logs / temporary files
+*.log
+*.tmp
+*.bak
+*.backup
+*.old
+*.swp
+*.swo
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+
+# Local archives and delivery bundles
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+
+# END NDSP ENTERPRISE HYGIENE
+
+
+# NDSP governed environment exclusions
+**/.env
+**/.env.*
+
+!**/.env.example
+!**/.env.sample
+!**/.env.template
+!**/.env.dist
+!**/.env.*.example
+!**/.env.*.sample
+!**/.env.*.template
+!**/.env.*.dist

@@ -1,0 +1,345 @@
+{
+  "document_id": "NDSP-ASSET-REGISTRY-NORMALIZED-V51",
+  "normalized_by": "NDSP_FIX_CONTEXT_LOCK_GATE_V51",
+  "source_file": "/home/nawaf511/empire-core-v5-1-1-clean/frontend/ndsp-user-portal-v50/config/assets.json",
+  "market_count": 8,
+  "asset_count": 56,
+  "markets": [
+    {
+      "id": "CRYPTO",
+      "name_ar": "العملات الرقمية",
+      "name_en": "Crypto",
+      "assets": [
+        {
+          "symbol": "ADAUSDT",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "AVAXUSDT",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "BCHUSDT",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "BNBUSDT",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "BTCUSDT",
+          "name_ar": "بيتكوين",
+          "name_en": "Bitcoin"
+        },
+        {
+          "symbol": "DOGEUSDT",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "DOTUSDT",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "ETHUSDT",
+          "name_ar": "إيثريوم",
+          "name_en": "Ethereum"
+        },
+        {
+          "symbol": "LINKUSDT",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "LTCUSDT",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "SOLUSDT",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "XRPUSDT",
+          "name_ar": "",
+          "name_en": ""
+        }
+      ]
+    },
+    {
+      "id": "FOREX",
+      "name_ar": "الفوركس",
+      "name_en": "Forex",
+      "assets": [
+        {
+          "symbol": "AUDJPY",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "AUDUSD",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "CADJPY",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "EURGBP",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "EURJPY",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "EURUSD",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "GBPJPY",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "GBPUSD",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "NZDUSD",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "USDCAD",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "USDCHF",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "USDJPY",
+          "name_ar": "",
+          "name_en": ""
+        }
+      ]
+    },
+    {
+      "id": "METALS",
+      "name_ar": "المعادن",
+      "name_en": "Metals",
+      "assets": [
+        {
+          "symbol": "XAGUSD",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "XAUUSD",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "XPDUSD",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "XPTUSD",
+          "name_ar": "",
+          "name_en": ""
+        }
+      ]
+    },
+    {
+      "id": "ENERGY",
+      "name_ar": "الطاقة",
+      "name_en": "Energy",
+      "assets": [
+        {
+          "symbol": "GASOIL",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "HEATOIL",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "NGAS",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "UKOIL",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "USOIL",
+          "name_ar": "",
+          "name_en": ""
+        }
+      ]
+    },
+    {
+      "id": "INDICES",
+      "name_ar": "المؤشرات",
+      "name_en": "Indices",
+      "assets": [
+        {
+          "symbol": "CAC40",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "DAX",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "DJI",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "FTSE",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "HSI",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "NDX",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "NIKKEI",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "RUT",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "SPX",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "STOXX50",
+          "name_ar": "",
+          "name_en": ""
+        }
+      ]
+    },
+    {
+      "id": "COMMODITIES",
+      "name_ar": "السلع",
+      "name_en": "Commodities",
+      "assets": [
+        {
+          "symbol": "COFFEE",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "COPPER",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "CORN",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "COTTON",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "SOYBEAN",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "SUGAR",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "WHEAT",
+          "name_ar": "",
+          "name_en": ""
+        }
+      ]
+    },
+    {
+      "id": "BONDS",
+      "name_ar": "السندات",
+      "name_en": "Bonds",
+      "assets": [
+        {
+          "symbol": "US02Y",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "US10Y",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "US30Y",
+          "name_ar": "",
+          "name_en": ""
+        }
+      ]
+    },
+    {
+      "id": "STOCKS",
+      "name_ar": "الأسهم",
+      "name_en": "Stocks",
+      "assets": [
+        {
+          "symbol": "AAPL",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "MSFT",
+          "name_ar": "",
+          "name_en": ""
+        },
+        {
+          "symbol": "NVDA",
+          "name_ar": "",
+          "name_en": ""
+        }
+      ]
+    }
+  ]
+}

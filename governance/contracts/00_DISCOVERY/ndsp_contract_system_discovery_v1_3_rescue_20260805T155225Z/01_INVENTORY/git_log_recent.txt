@@ -1,0 +1,85 @@
+COMMAND: git -C /home/nawaf511/empire-core-new log --oneline --decorate -n 80
+UTC: 2026-08-05T15:54:19Z
+
+5647254 (HEAD -> feature/cot-governance-v1, tag: cot-governance-before-v1-20260801T202209Z, governance/pr-008-governance-closure) docs(governance): add PR-008 governance closure package
+02ac762 (governance/pr-007-noncanonical-ownership-review) docs(governance): finalize PR-007 ownership decisions
+b95343a docs(governance): add PR-007 ownership review baseline
+ff36439 (governance/pr-006-network-exposure-map) docs(governance): add PR-006 network exposure map
+eed6ea1 (governance/pr-005-runtime-ownership-map) docs(governance): add PR-005 runtime ownership map
+7c0b1e6 docs(governance): normalize PR-004 CSV line endings
+7b3eae0 (governance/pr-004-runtime-dependency-map) docs(governance): add PR-004 runtime dependency map
+be6a503 (governance/pr-002-canonical-layer-map) governance: add PR-003 canonical service map
+973c91c docs(governance): establish canonical L01-L16 ownership map
+5d7f160 (origin/feature/ndsp-os, feature/ndsp-os) governance: establish canonical NDSP gaps and precedence
+4e7c9bf (tag: v0.4.1-ndsp-sovereign-preview-repair) fix(DEV-020C): repair sovereign preview radar and navigation
+609e319 (tag: v0.4.0-ndsp-sovereign-command-preview) feat(DEV-019): add sovereign command interface preview
+cdd53bd (tag: v0.3.9-ndsp-block-rejected-canary-routes) fix(DEV-018C): block rejected canary public routes
+54599cc (tag: v0.3.8-ndsp-public-privacy-reset) fix(DEV-018B): remove public bot mention and reset rejected canary
+5dcf40d (tag: v0.3.7-ndsp-wow-radar-ui-canary) feat(DEV-018): add wow radar ui canary
+01cbf0a feat(DEV-018): add wow radar ui canary
+9d261a5 (tag: v0.3.6-ndsp-rc1-smoke) test(DEV-017): finalize rc1 production smoke snapshot
+a3e30a6 test(DEV-017): finalize rc1 production smoke snapshot
+77b6636 test(DEV-017): production smoke test and snapshot
+c221ce1 (tag: v0.3.5-ndsp-rc1-20260629_083105, tag: v0.3.5-ndsp-rc1) release(DEV-016): freeze release candidate rc1
+3f75323 (tag: v0.3.5-ndsp-rc1-20260629_082844) release(DEV-016): freeze release candidate rc1
+e0b67d5 release(DEV-016): freeze release candidate rc1
+07c968c (tag: v0.3.4-ndsp-public-gateway-activation) ops(DEV-015): close controlled public gateway activation
+30f31ed ops(DEV-015): close controlled public gateway activation
+1d02a53 (tag: v0.3.3-ndsp-gateway-readiness) docs(DEV-014): prepare public gateway readiness
+85bb51d (tag: v0.3.2-ndsp-enterprise-hardening) ops(DEV-013): harden repo and systemd guardrails
+b823a3c (tag: v0.3.1-ndsp-core-services-systemd-local) ops(DEV-012): fix systemd runtime env and close local rollout
+3085a36 ops(DEV-012): recover and close systemd local rollout
+4155074 test(DEV-012E): check local health and process ownership
+cc1e313 ops(DEV-012D): install systemd units without restart
+1accb4d docs(DEV-012C): prepare systemd local activation readiness
+4f0cff4 docs(DEV-012B): plan controlled production rollout
+a3a80ff test(DEV-012A): check production rollout readiness
+5c2055b (tag: v0.3-ndsp-core-services) docs(DEV-011): close NDSP core services migration
+3e3a19a docs(DEV-010F): close bot execution migration
+e1e07d6 test(DEV-010E): run bot execution safe runtime smoke
+f17f044 test(DEV-010D): verify bot execution runtime dependencies
+f222251 test(DEV-010C): smoke test bot execution adapter
+92ca71a feat(DEV-010B): migrate bot execution service to ENG-001 adapter
+193b591 docs(DEV-010A): snapshot bot execution service
+b02cab8 docs(DEV-009F): close decision governance migration
+9d68940 test(DEV-009E): run decision governance safe runtime smoke
+6eea09f test(DEV-009D): verify decision governance runtime dependencies
+5565807 test(DEV-009C): smoke test decision governance adapter
+96942d9 feat(DEV-009B): migrate decision governance core to ENG-001 adapter
+c96b526 docs(DEV-009F): close decision governance migration
+2303524 test(DEV-009E): run decision governance safe runtime smoke
+290423b test(DEV-009D): verify decision governance runtime dependencies
+3d8702f test(DEV-009C): smoke test decision governance adapter
+9597e8c feat(DEV-009B): migrate decision governance core to ENG-001 adapter
+f1e1aad feat(DEV-009B): migrate decision governance core to ENG-001 adapter
+fc9c0a9 feat(DEV-009B): migrate decision governance core to ENG-001 adapter
+50388b1 docs(DEV-009A): snapshot decision governance core
+68d3f61 docs(DEV-009A): snapshot decision governance core
+853dfd4 docs(DEV-008F): close completed decision migration
+a5c0a92 test(DEV-008E): run completed decision safe runtime smoke
+1b549b6 test(DEV-008D): verify completed decision runtime dependencies
+536c929 test(DEV-008C): smoke test completed decision adapter
+bf51062 feat(DEV-008B): migrate completed decision service to ENG-001 adapter
+afa20e4 docs(DEV-008A): snapshot completed decision service
+065fd4c docs(DEV-008A): snapshot completed decision service
+8bc825a docs(DEV-008A): snapshot completed decision service
+8c5af98 docs(DEV-008A): snapshot completed decision service
+60eb26b docs(DEV-008A): snapshot completed decision service
+f10dd02 docs(DEV-008A): snapshot completed decision service
+1ad931c docs(DEV-007): add service migration plan
+fdabdca (tag: v0.2-ndsp-os-foundation) chore(DEV-005): make validator zero-warning clean
+fd18f7a ci(DEV-004): add project validation gate
+fcd34cb feat(DEV-003): add project validator
+6715231 chore(DEV-002K): close repository hygiene phase
+124cbf2 chore(DEV-002J): intake research data and reference files
+790d719 chore(DEV-002H): intake apps shared tests source
+b755111 chore(DEV-002G): intake legacy backend modules
+c17bc4f chore(DEV-002F): intake deployment tools
+abfaf3a docs(DEV-002E): intake policy docs and env examples
+70f28cd chore(DEV-002D): add secret sanity report
+5fe6216 feat(DEV-002D): intake backend core source
+029ee40 feat(DEV-002C): intake frontend user portal source
+b11f47d chore(DEV-002B): add source classification report
+bb8f1ce chore(DEV-002): add repository hygiene policy
+
+EXIT_CODE: 0

@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NDSP Enterprise Contract",
+  "type": "object",
+  "required": [
+    "contract_id",
+    "contract_type",
+    "name",
+    "version",
+    "status",
+    "classification",
+    "evidence",
+    "implementation_status",
+    "reference_alignment_status"
+  ],
+  "properties": {
+    "contract_id": {
+      "type": "string"
+    },
+    "contract_type": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "DRAFT",
+        "DISCOVERED",
+        "VERIFIED",
+        "REVIEWED",
+        "APPROVED",
+        "ACTIVE",
+        "DEPRECATED",
+        "RETIRED",
+        "ARCHIVED",
+        "CONFLICTED",
+        "UNVERIFIED",
+        "DOCUMENTATION_ONLY",
+        "DESIGN_REFERENCE_ONLY",
+        "PROPOSED"
+      ]
+    },
+    "classification": {
+      "enum": [
+        "VERIFIED_FROM_SOURCE",
+        "VERIFIED_FROM_RUNTIME_READ_ONLY",
+        "INFERRED_FROM_SOURCE",
+        "DOCUMENTATION_ONLY",
+        "DESIGN_REFERENCE_ONLY",
+        "HISTORICAL_REFERENCE",
+        "PROPOSED_NOT_IMPLEMENTED",
+        "PARTIALLY_IMPLEMENTED",
+        "CONFLICTING_IMPLEMENTATION",
+        "NOT_FOUND",
+        "REQUIRES_HUMAN_REVIEW"
+      ]
+    },
+    "evidence": {
+      "type": "array"
+    }
+  },
+  "additionalProperties": true
+}

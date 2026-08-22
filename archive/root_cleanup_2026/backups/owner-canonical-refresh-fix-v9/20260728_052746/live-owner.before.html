@@ -1,0 +1,1253 @@
+<!doctype html>
+<html lang="ar" dir="rtl" dir="rtl" lang="ar">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#071014">
+  <meta name="color-scheme" content="dark">
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>لوحة المالك | NDSP</title>
+  <style>
+    :root{
+      --bg:#05090c;
+      --bg2:#071014;
+      --panel:#0a1217;
+      --panel2:#0d171d;
+      --panel3:#111d24;
+      --line:rgba(147,171,184,.16);
+      --line-strong:rgba(147,171,184,.28);
+      --text:#eef5f7;
+      --muted:#8fa3ad;
+      --cyan:#31d5e7;
+      --cyan-soft:rgba(49,213,231,.12);
+      --gold:#f3bf4f;
+      --gold-soft:rgba(243,191,79,.12);
+      --green:#3bd292;
+      --green-soft:rgba(59,210,146,.12);
+      --red:#ff6b78;
+      --red-soft:rgba(255,107,120,.12);
+      --orange:#ffad55;
+      --shadow:0 22px 60px rgba(0,0,0,.36);
+      --radius:18px;
+      --sidebar:286px;
+      --safe-bottom:env(safe-area-inset-bottom,0px);
+    }
+    *{box-sizing:border-box}
+    html{background:var(--bg);scroll-behavior:smooth}
+    body{
+      margin:0;
+      min-height:100vh;
+      background:
+        radial-gradient(circle at 12% -10%,rgba(49,213,231,.10),transparent 36%),
+        radial-gradient(circle at 88% 0%,rgba(243,191,79,.07),transparent 34%),
+        linear-gradient(180deg,#05090c 0%,#070d11 52%,#05090c 100%);
+      color:var(--text);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,Arial,sans-serif;
+      -webkit-font-smoothing:antialiased;
+      padding-bottom:var(--safe-bottom);
+    }
+    button,input,select{font:inherit}
+    button,a{touch-action:manipulation}
+    a{color:inherit;text-decoration:none}
+    .app{display:grid;grid-template-columns:var(--sidebar) minmax(0,1fr);min-height:100vh}
+    .sidebar{
+      position:sticky;top:0;height:100vh;
+      border-left:1px solid var(--line);
+      background:rgba(5,10,13,.94);
+      backdrop-filter:blur(22px);
+      display:flex;flex-direction:column;
+      z-index:50;
+    }
+    .brand{
+      min-height:82px;padding:18px 20px;border-bottom:1px solid var(--line);
+      display:flex;align-items:center;gap:13px
+    }
+    .brand-mark{
+      width:44px;height:44px;border-radius:14px;display:grid;place-items:center;
+      background:linear-gradient(135deg,var(--cyan),#3a84ff);
+      color:#031014;font-weight:1000;box-shadow:0 0 34px rgba(49,213,231,.22)
+    }
+    .brand-name{font-size:20px;font-weight:900;letter-spacing:.04em}
+    .brand-sub{margin-top:3px;color:var(--muted);font-size:10px;line-height:1.5}
+    .nav{padding:16px 12px;overflow:auto;flex:1}
+    .nav-title{padding:8px 12px;color:#69808a;font-size:10px;font-weight:800}
+    .nav a{
+      display:flex;align-items:center;gap:12px;padding:12px;margin:3px 0;
+      border-radius:12px;color:#b8c6cc;font-size:13px;font-weight:700;
+      border:1px solid transparent;transition:.18s ease
+    }
+    .nav a:hover{background:var(--panel2);color:var(--text);border-color:var(--line)}
+    .nav a.active{background:var(--cyan-soft);color:var(--cyan);border-color:rgba(49,213,231,.24)}
+    .nav-icon{
+      width:32px;height:32px;border-radius:10px;background:rgba(255,255,255,.035);
+      display:grid;place-items:center;font-size:15px;flex:0 0 auto
+    }
+    .side-status{padding:14px;border-top:1px solid var(--line)}
+    .mini-status{
+      border:1px solid var(--line);border-radius:14px;padding:13px;background:var(--panel)
+    }
+    .row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .dot{width:8px;height:8px;border-radius:999px;background:var(--green);box-shadow:0 0 14px var(--green)}
+    .main{min-width:0}
+    .topbar{
+      height:74px;position:sticky;top:0;z-index:40;
+      display:flex;align-items:center;gap:14px;padding:0 24px;
+      border-bottom:1px solid var(--line);background:rgba(5,10,13,.82);
+      backdrop-filter:blur(22px)
+    }
+    .menu-btn{
+      display:none;width:42px;height:42px;border:1px solid var(--line);
+      background:var(--panel);color:var(--text);border-radius:12px;cursor:pointer
+    }
+    .top-title{font-size:14px;font-weight:900}
+    .top-sub{margin-top:3px;color:var(--muted);font-size:10px}
+    .top-spacer{flex:1}
+    .status-pill,.role-pill{
+      display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 13px;
+      border-radius:999px;border:1px solid var(--line);background:var(--panel);
+      font-size:11px;font-weight:800;white-space:nowrap
+    }
+    .status-pill{color:var(--green);border-color:rgba(59,210,146,.22);background:var(--green-soft)}
+    .role-pill{color:var(--gold)}
+    .logout{
+      height:40px;padding:0 14px;border-radius:12px;border:1px solid rgba(243,191,79,.30);
+      color:var(--gold);background:var(--gold-soft);font-weight:900;cursor:pointer
+    }
+    .content{max-width:1680px;margin:auto;padding:24px}
+    .hero{
+      border:1px solid var(--line);border-radius:24px;padding:26px;
+      background:
+        radial-gradient(circle at 88% 10%,rgba(49,213,231,.15),transparent 36%),
+        radial-gradient(circle at 15% 100%,rgba(243,191,79,.09),transparent 35%),
+        linear-gradient(135deg,rgba(16,29,36,.96),rgba(7,14,18,.98));
+      box-shadow:var(--shadow);overflow:hidden;position:relative
+    }
+    .hero::after{
+      content:"";position:absolute;inset:0;pointer-events:none;opacity:.18;
+      background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+      background-size:34px 34px
+    }
+    .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(310px,.75fr);gap:24px;align-items:center}
+    .eyebrow{color:var(--cyan);font-size:11px;font-weight:900;letter-spacing:.12em}
+    h1{font-size:clamp(30px,4vw,56px);line-height:1.16;margin:12px 0 10px;font-weight:1000}
+    .hero p{max-width:780px;margin:0;color:#a8bbc3;font-size:14px;line-height:2}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+    .btn{
+      min-height:44px;padding:0 16px;border-radius:12px;border:1px solid var(--line);
+      background:var(--panel2);color:var(--text);display:inline-flex;align-items:center;
+      justify-content:center;gap:8px;font-weight:900;font-size:12px
+    }
+    .btn.primary{background:linear-gradient(135deg,var(--cyan),#3a84ff);color:#031014;border:0}
+    .hero-console{
+      border:1px solid var(--line);border-radius:18px;padding:18px;
+      background:rgba(3,9,12,.68);backdrop-filter:blur(10px)
+    }
+    .console-title{font-size:12px;font-weight:900}
+    .console-meta{font-size:10px;color:var(--muted);margin-top:4px}
+    .readiness-ring{
+      width:148px;aspect-ratio:1;border-radius:50%;margin:18px auto 10px;
+      display:grid;place-items:center;position:relative;
+      background:conic-gradient(var(--cyan) var(--readiness,0%),rgba(255,255,255,.06) 0)
+    }
+    .readiness-ring::before{content:"";position:absolute;inset:11px;border-radius:50%;background:#071014;border:1px solid var(--line)}
+    .ring-value{position:relative;text-align:center;font-size:31px;font-weight:1000}
+    .ring-value small{display:block;color:var(--muted);font-size:9px;margin-top:4px}
+    .grid{display:grid;gap:16px}
+    .metrics{grid-template-columns:repeat(4,minmax(0,1fr));margin-top:16px}
+    .metric,.panel{
+      border:1px solid var(--line);background:linear-gradient(180deg,var(--panel2),var(--panel));
+      border-radius:var(--radius);box-shadow:0 12px 34px rgba(0,0,0,.18)
+    }
+    .metric{padding:18px}
+    .metric-label{font-size:11px;color:var(--muted);font-weight:700}
+    .metric-value{font-size:25px;font-weight:1000;margin-top:10px;word-break:break-word}
+    .metric-note{font-size:10px;color:#71868f;margin-top:7px}
+    .section-grid{grid-template-columns:minmax(0,1.25fr) minmax(330px,.75fr);margin-top:16px}
+    .panel{overflow:hidden}
+    .panel-head{
+      min-height:57px;padding:0 18px;border-bottom:1px solid var(--line);
+      display:flex;align-items:center;justify-content:space-between;gap:12px
+    }
+    .panel-title{font-size:12px;font-weight:1000}
+    .panel-sub{font-size:9px;color:var(--muted);margin-top:3px}
+    .panel-body{padding:18px}
+    .controls{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+    select{
+      height:38px;border:1px solid var(--line);border-radius:10px;background:#081116;
+      color:var(--text);padding:0 12px;outline:none
+    }
+    .decision-top{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:start}
+    .decision-state{font-size:25px;font-weight:1000}
+    .decision-context{color:#a6b8c0;font-size:13px;line-height:1.8;margin-top:8px}
+    .price{font-size:30px;font-weight:1000;color:var(--cyan);text-align:left;direction:ltr}
+    .price-label{font-size:9px;color:var(--muted);text-align:left}
+    .levels{grid-template-columns:repeat(4,minmax(0,1fr));margin-top:16px}
+    .level{padding:13px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.025)}
+    .level span{display:block;font-size:9px;color:var(--muted)}
+    .level strong{display:block;margin-top:7px;font-size:15px;direction:ltr;text-align:right}
+    .level-map{height:260px;margin-top:18px;border:1px solid var(--line);border-radius:14px;background:#061015;overflow:hidden}
+    .level-map svg{width:100%;height:100%;display:block}
+    .checks{display:grid;gap:10px}
+    .check{
+      display:grid;grid-template-columns:auto 1fr auto;gap:11px;align-items:center;
+      border:1px solid var(--line);border-radius:12px;padding:12px;background:rgba(255,255,255,.022)
+    }
+    .check-icon{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;background:var(--cyan-soft);color:var(--cyan)}
+    .check-name{font-size:11px;font-weight:900}
+    .check-note{font-size:9px;color:var(--muted);margin-top:4px}
+    .check-state{font-size:10px;font-weight:900;color:var(--muted)}
+    .check.ok .check-icon{background:var(--green-soft);color:var(--green)}
+    .check.ok .check-state{color:var(--green)}
+    .check.bad .check-icon{background:var(--red-soft);color:var(--red)}
+    .check.bad .check-state{color:var(--red)}
+    .check.warn .check-icon{background:var(--gold-soft);color:var(--gold)}
+    .check.warn .check-state{color:var(--gold)}
+    .quick-links{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .quick{
+      min-height:118px;border:1px solid var(--line);border-radius:15px;padding:16px;
+      background:linear-gradient(150deg,rgba(17,29,36,.9),rgba(7,14,18,.96));
+      display:flex;flex-direction:column;justify-content:space-between;transition:.18s ease
+    }
+    .quick:hover{transform:translateY(-2px);border-color:rgba(49,213,231,.32)}
+    .quick-icon{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:var(--cyan-soft);color:var(--cyan);font-weight:1000}
+    .quick strong{font-size:12px}
+    .quick small{color:var(--muted);font-size:9px;line-height:1.6}
+    .governance{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .layer-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .layer{
+      border:1px solid var(--line);border-radius:12px;padding:11px;
+      background:rgba(255,255,255,.02);display:flex;align-items:center;gap:10px
+    }
+    .layer-id{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:var(--cyan-soft);color:var(--cyan);font-size:10px;font-weight:1000;direction:ltr}
+    .layer-name{font-size:10px;font-weight:800;line-height:1.5}
+    .warning{
+      margin-top:16px;border:1px solid rgba(243,191,79,.26);background:var(--gold-soft);
+      border-radius:14px;padding:13px 15px;color:#f7d992;font-size:11px;line-height:1.8
+    }
+    .footer{padding:26px 0 10px;color:#61757e;font-size:9px;text-align:center}
+    .skeleton{position:relative;overflow:hidden;color:transparent!important;background:rgba(255,255,255,.05)!important}
+    .skeleton::after{content:"";position:absolute;inset:0;transform:translateX(100%);background:linear-gradient(90deg,transparent,rgba(255,255,255,.07),transparent);animation:shine 1.3s infinite}
+    @keyframes shine{to{transform:translateX(-100%)}}
+    .overlay{display:none}
+    .toast{
+      position:fixed;left:20px;bottom:calc(20px + var(--safe-bottom));z-index:100;
+      max-width:min(420px,calc(100vw - 40px));padding:13px 15px;border-radius:13px;
+      border:1px solid var(--line);background:#0b151a;box-shadow:var(--shadow);
+      font-size:11px;line-height:1.7;opacity:0;transform:translateY(14px);pointer-events:none;transition:.22s
+    }
+    .toast.show{opacity:1;transform:none}
+    .mobile-only{display:none}
+    @media(max-width:1180px){
+      .metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .section-grid{grid-template-columns:1fr}
+      .quick-links{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .layer-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+    }
+    @media(max-width:820px){
+      :root{--sidebar:280px}
+      .app{display:block}
+      .sidebar{position:fixed;right:0;top:0;transform:translateX(110%);transition:.22s ease;box-shadow:var(--shadow)}
+      body.menu-open .sidebar{transform:none}
+      .overlay{display:block;position:fixed;inset:0;background:rgba(0,0,0,.64);backdrop-filter:blur(3px);z-index:45;opacity:0;pointer-events:none;transition:.22s}
+      body.menu-open .overlay{opacity:1;pointer-events:auto}
+      .menu-btn{display:grid;place-items:center}
+      .topbar{padding:0 14px;height:68px}
+      .role-pill{display:none}
+      .content{padding:14px}
+      .hero{padding:20px}
+      .hero-grid{grid-template-columns:1fr}
+      .hero-console{display:grid;grid-template-columns:1fr auto;align-items:center}
+      .readiness-ring{width:112px;margin:0}
+      .metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .levels{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .quick-links{grid-template-columns:1fr 1fr}
+      .layer-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .governance{grid-template-columns:1fr}
+      .mobile-only{display:block}
+    }
+    @media(max-width:520px){
+      .top-sub,.status-pill{display:none}
+      .logout{padding:0 11px;font-size:11px}
+      .hero{border-radius:18px}
+      h1{font-size:31px}
+      .metrics{grid-template-columns:1fr 1fr}
+      .metric{padding:14px}
+      .metric-value{font-size:20px}
+      .quick-links{grid-template-columns:1fr}
+      .layer-grid{grid-template-columns:1fr 1fr}
+      .decision-top{grid-template-columns:1fr}
+      .price,.price-label{text-align:right}
+    }
+  
+    .users-summary{grid-template-columns:repeat(5,minmax(0,1fr));margin-bottom:16px}
+    .user-stat{border:1px solid var(--line);border-radius:14px;padding:14px;background:rgba(255,255,255,.025)}
+    .user-stat span{display:block;color:var(--muted);font-size:9px;font-weight:800}
+    .user-stat strong{display:block;margin-top:7px;font-size:22px;direction:ltr;text-align:right}
+    .user-toolbar{display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+    .user-search{height:38px;min-width:230px;flex:1;border:1px solid var(--line);border-radius:10px;background:#081116;color:var(--text);padding:0 12px;outline:none}
+    .user-table-wrap{overflow:auto;border:1px solid var(--line);border-radius:14px}
+    .user-table{width:100%;border-collapse:collapse;min-width:900px;background:rgba(3,9,12,.35)}
+    .user-table th,.user-table td{padding:12px 13px;text-align:right;border-bottom:1px solid var(--line);font-size:10px;vertical-align:middle}
+    .user-table th{color:var(--muted);font-size:9px;background:rgba(255,255,255,.025);position:sticky;top:0}
+    .user-table tr:last-child td{border-bottom:0}
+    .user-email{font-weight:900;direction:ltr;text-align:right}
+    .user-name{color:var(--muted);font-size:9px;margin-top:4px}
+    .badge{display:inline-flex;align-items:center;justify-content:center;min-height:25px;padding:0 9px;border-radius:999px;border:1px solid var(--line);font-size:9px;font-weight:900;white-space:nowrap}
+    .badge.ok{color:var(--green);background:var(--green-soft);border-color:rgba(59,210,146,.24)}
+    .badge.warn{color:var(--gold);background:var(--gold-soft);border-color:rgba(243,191,79,.24)}
+    .badge.bad{color:var(--red);background:var(--red-soft);border-color:rgba(255,107,120,.24)}
+    .badge.info{color:var(--cyan);background:var(--cyan-soft);border-color:rgba(49,213,231,.24)}
+    .user-actions{display:flex;gap:6px;flex-wrap:wrap}
+    .user-action{height:31px;padding:0 10px;border-radius:9px;border:1px solid var(--line);background:var(--panel3);color:var(--text);font-size:9px;font-weight:900;cursor:pointer}
+    .user-action.activate{color:var(--green);border-color:rgba(59,210,146,.28);background:var(--green-soft)}
+    .user-action.verify{color:var(--cyan);border-color:rgba(49,213,231,.28);background:var(--cyan-soft)}
+    .user-action.suspend{color:var(--gold);border-color:rgba(243,191,79,.28);background:var(--gold-soft)}
+    .user-action.deactivate{color:var(--red);border-color:rgba(255,107,120,.28);background:var(--red-soft)}
+    .user-action:disabled{opacity:.45;cursor:not-allowed}
+    .users-empty{padding:32px;text-align:center;color:var(--muted);font-size:11px}
+    .users-pagination{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px}
+    .page-buttons{display:flex;align-items:center;gap:7px}
+    .page-btn{height:34px;min-width:38px;padding:0 10px;border:1px solid var(--line);border-radius:9px;background:var(--panel2);color:var(--text);cursor:pointer;font-weight:900}
+    .page-btn:disabled{opacity:.4;cursor:not-allowed}
+    .users-mobile{display:none;gap:10px}
+    .user-card{border:1px solid var(--line);border-radius:14px;padding:14px;background:rgba(255,255,255,.02)}
+    .user-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+    .user-card-meta{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:12px 0}
+    .user-card-meta div{border:1px solid var(--line);border-radius:9px;padding:9px;background:rgba(255,255,255,.02)}
+    .user-card-meta span{display:block;color:var(--muted);font-size:8px}
+    .user-card-meta strong{display:block;margin-top:5px;font-size:10px}
+    @media(max-width:1180px){.users-summary{grid-template-columns:repeat(3,minmax(0,1fr))}}
+    @media(max-width:820px){.users-summary{grid-template-columns:repeat(2,minmax(0,1fr))}.user-table-wrap{display:none}.users-mobile{display:grid}.user-search{min-width:100%}.users-pagination{align-items:flex-start;flex-direction:column}}
+  
+    /* NDSP_OWNER_USERS_ROYAL_BLACK_GOLD_V22_BEGIN */
+    :root{
+      --bg:#030303!important;
+      --bg2:#070604!important;
+      --panel:#0a0907!important;
+      --panel2:#100e0a!important;
+      --panel3:#17130b!important;
+      --line:rgba(218,177,77,.22)!important;
+      --line-strong:rgba(229,190,92,.40)!important;
+      --text:#f7f2e8!important;
+      --muted:#aaa18e!important;
+      --cyan:#d9ad49!important;
+      --cyan-soft:rgba(217,173,73,.13)!important;
+      --gold:#e2b955!important;
+      --gold-soft:rgba(226,185,85,.13)!important;
+      --shadow:0 24px 70px rgba(0,0,0,.58)!important;
+    }
+    html,body{width:100%;max-width:100%;overflow-x:hidden}
+    body{
+      background:
+        radial-gradient(circle at 92% -8%,rgba(226,185,85,.13),transparent 34%),
+        radial-gradient(circle at 7% 8%,rgba(151,107,30,.08),transparent 28%),
+        linear-gradient(180deg,#020202 0%,#080704 50%,#020202 100%)!important;
+    }
+    .sidebar,.topbar{background:rgba(3,3,3,.94)!important}
+    .brand-mark,.btn.primary{
+      background:linear-gradient(135deg,#f0cc72,#a97219)!important;
+      color:#160f03!important;
+      box-shadow:0 0 34px rgba(226,185,85,.20)!important;
+    }
+    .nav a.active{
+      color:var(--gold)!important;
+      background:var(--gold-soft)!important;
+      border-color:rgba(226,185,85,.28)!important;
+    }
+    .metric,.panel,.user-card,.user-stat,.user-card-meta div{
+      background:linear-gradient(180deg,rgba(18,15,9,.98),rgba(7,7,6,.98))!important;
+    }
+    #usersSection{
+      border-color:rgba(226,185,85,.34)!important;
+      box-shadow:0 22px 65px rgba(0,0,0,.48),0 0 0 1px rgba(226,185,85,.04)!important;
+    }
+    #usersSection .panel-head{
+      background:linear-gradient(90deg,rgba(226,185,85,.08),transparent 68%)!important;
+    }
+    #usersSection .panel-title{color:#f2d17d!important}
+    .user-action.activated{
+      color:#f2d17d;
+      border-color:rgba(226,185,85,.32);
+      background:rgba(226,185,85,.12);
+    }
+    .user-action.delete{
+      color:#ff7b86;
+      border-color:rgba(255,78,94,.42);
+      background:rgba(255,55,72,.12);
+    }
+    .user-action.delete:hover{background:rgba(255,55,72,.20)}
+    .user-email{
+      max-width:100%;
+      overflow-wrap:anywhere;
+      word-break:break-word;
+      text-decoration-thickness:1px;
+      text-underline-offset:4px;
+    }
+    .app,.main,.content,.panel,.panel-body,#usersSection{
+      min-width:0;
+      max-width:100%;
+    }
+    @media(max-width:820px){
+      .topbar{
+        display:grid!important;
+        grid-template-columns:44px minmax(0,1fr) auto!important;
+        gap:9px!important;
+        width:100%!important;
+        min-width:0!important;
+        padding:0 10px!important;
+      }
+      .top-spacer{display:none!important}
+      .topbar>div{min-width:0}
+      .top-title{
+        overflow:hidden;
+        text-overflow:ellipsis;
+        white-space:nowrap;
+      }
+      .logout{
+        max-width:104px;
+        min-width:0;
+        padding:0 10px!important;
+        overflow:hidden;
+        text-overflow:ellipsis;
+        white-space:nowrap;
+      }
+      #usersSection{overflow:hidden}
+      .users-mobile,.user-card{width:100%;min-width:0}
+      .user-card-head{display:block}
+      .user-card-head>.badge{margin-top:9px}
+      .user-email{
+        font-size:clamp(15px,5vw,21px)!important;
+        line-height:1.35;
+      }
+      .user-card-meta{grid-template-columns:1fr!important}
+      .user-actions{
+        display:grid!important;
+        grid-template-columns:repeat(2,minmax(0,1fr))!important;
+        width:100%;
+      }
+      .user-action{
+        width:100%;
+        min-width:0;
+        padding:0 7px;
+      }
+    }
+    @media(max-width:430px){
+      .content{padding:10px!important}
+      .panel-body{padding:12px!important}
+      .users-summary{grid-template-columns:1fr 1fr!important}
+      .user-actions{grid-template-columns:1fr!important}
+      .logout{font-size:10px!important;max-width:88px}
+    }
+    /* NDSP_OWNER_USERS_ROYAL_BLACK_GOLD_V22_END */
+
+  </style>
+</head>
+<body>
+  <div class="overlay" id="overlay" aria-hidden="true"></div>
+  <div class="app">
+    <aside class="sidebar" id="sidebar" aria-label="التنقل الرئيسي">
+      <div class="brand">
+        <div class="brand-mark">N</div>
+        <div>
+          <div class="brand-name">NDSP</div>
+          <div class="brand-sub">منصة نواف لدعم القرار<br>لوحة المالك المؤسسية</div>
+        </div>
+      </div>
+      <nav class="nav">
+        <div class="nav-title">الإدارة</div>
+        <a href="/owner/" class="active"><span class="nav-icon">⌂</span><span>النظرة التنفيذية</span></a>
+        <a href="#usersSection"><span class="nav-icon">◉</span><span>حسابات المستخدمين</span></a>
+        <a href="/portal/command-center/"><span class="nav-icon">◈</span><span>بوابة المستخدم</span></a>
+        <a href="/market-suite/"><span class="nav-icon">⌁</span><span>الأسواق والأصول</span></a>
+        <a href="/decision-room/"><span class="nav-icon">◎</span><span>غرفة القرار</span></a>
+        <div class="nav-title">المنصة</div>
+        <a href="/data/"><span class="nav-icon">▤</span><span>البيانات</span></a>
+        <a href="/data-infra/"><span class="nav-icon">⛁</span><span>بنية البيانات</span></a>
+        <a href="/dashboard/"><span class="nav-icon">◫</span><span>لوحة التشغيل</span></a>
+        <a href="/decision-room-v31/account/"><span class="nav-icon">⚙</span><span>الحساب والإعدادات</span></a>
+      </nav>
+      <div class="side-status">
+        <div class="mini-status">
+          <div class="row">
+            <strong style="font-size:11px">الحالة المؤسسية</strong>
+            <span class="dot" id="sideDot"></span>
+          </div>
+          <div class="row" style="margin-top:12px;color:var(--muted);font-size:9px">
+            <span>طبقات القرار</span><strong style="color:var(--text)">16 / 16</strong>
+          </div>
+          <div class="row" style="margin-top:8px;color:var(--muted);font-size:9px">
+            <span>قدرات المنصة</span><strong style="color:var(--text)">28 / 28</strong>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="menu-btn" id="menuBtn" aria-label="فتح القائمة">☰</button>
+        <div>
+          <div class="top-title">مركز قيادة المالك</div>
+          <div class="top-sub">المخرجات تفسيرية ومحكومة وليست أوامر تداول أو تنفيذ</div>
+        </div>
+        <div class="top-spacer"></div>
+        <div class="status-pill"><span class="dot"></span><span id="liveText">جارٍ التحقق</span></div>
+        <div class="role-pill" id="rolePill">صلاحية المالك</div>
+        <a class="logout" href="/logout/">تسجيل الخروج</a>
+      </header>
+
+      <div class="content">
+        <section class="hero">
+          <div class="hero-grid">
+            <div>
+              <div class="eyebrow">الحالة التنفيذية الموحدة</div>
+              <h1>لوحة مالك حديثة تربط التشغيل والقرار والحوكمة.</h1>
+              <p>
+                نظرة واحدة على جاهزية المنصة، حالة المصادقة، القراءة السوقية الحية،
+                المستويات المرجعية وروابط الإدارة الأساسية دون عرض أسماء داخلية حساسة للمستخدم العام.
+              </p>
+              <div class="hero-actions">
+                <a class="btn primary" href="/decision-room/">فتح غرفة القرار</a>
+                <a class="btn" href="/market-suite/">عرض الأسواق والأصول</a>
+                <button class="btn" id="refreshBtn" type="button">تحديث البيانات</button>
+              </div>
+            </div>
+            <div class="hero-console">
+              <div>
+                <div class="console-title">جاهزية التشغيل الحالية</div>
+                <div class="console-meta" id="lastUpdated">لم يتم التحديث بعد</div>
+                <div class="warning" id="launchWarning" style="margin-top:14px">
+                  جارٍ فحص المسارات والخدمات الحية.
+                </div>
+              </div>
+              <div class="readiness-ring" id="readinessRing" style="--readiness:0%">
+                <div class="ring-value"><span id="readinessValue">0%</span><small>جاهزية حية</small></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="grid metrics" aria-label="المؤشرات الرئيسية">
+          <article class="metric">
+            <div class="metric-label">حالة النظام</div>
+            <div class="metric-value skeleton" id="systemState">جارٍ الفحص</div>
+            <div class="metric-note">بوابة الصحة العامة</div>
+          </article>
+          <article class="metric">
+            <div class="metric-label">جلسة الإدارة</div>
+            <div class="metric-value skeleton" id="sessionState">جارٍ الفحص</div>
+            <div class="metric-note" id="sessionNote">حماية خادمية للجلسة</div>
+          </article>
+          <article class="metric">
+            <div class="metric-label">الطبقات الحاكمة</div>
+            <div class="metric-value">16 / 16</div>
+            <div class="metric-note">سجل حوكمة مرجعي مقفل</div>
+          </article>
+          <article class="metric">
+            <div class="metric-label">قدرات المنصة</div>
+            <div class="metric-value">28 / 28</div>
+            <div class="metric-note">منفصلة عن قيمة القرار</div>
+          </article>
+        </section>
+
+        <section class="grid section-grid">
+          <article class="panel">
+            <div class="panel-head">
+              <div>
+                <div class="panel-title">القراءة الحية والمستويات المرجعية</div>
+                <div class="panel-sub">بيانات مباشرة من واجهة القرار الحالية</div>
+              </div>
+              <div class="controls">
+                <select id="symbolSelect" aria-label="اختيار الأصل">
+                  <option value="ETHUSDT">إيثريوم / دولار</option>
+                  <option value="BTCUSDT">بيتكوين / دولار</option>
+                  <option value="XAUUSD">الذهب / دولار</option>
+                </select>
+                <select id="timeframeSelect" aria-label="اختيار الإطار الزمني">
+                  <option value="weekly">أسبوعي</option>
+                  <option value="daily">يومي</option>
+                </select>
+              </div>
+            </div>
+            <div class="panel-body">
+              <div class="decision-top">
+                <div>
+                  <div class="decision-state skeleton" id="decisionState">جارٍ تحميل القراءة</div>
+                  <div class="decision-context" id="decisionContext">يتم الآن طلب بيانات الأصل المحدد.</div>
+                </div>
+                <div>
+                  <div class="price-label">السعر الحي</div>
+                  <div class="price skeleton" id="livePrice">—</div>
+                </div>
+              </div>
+              <div class="grid levels">
+                <div class="level"><span>مستوى التفعيل</span><strong id="activationLevel">—</strong></div>
+                <div class="level"><span>مستوى الوصول</span><strong id="arrivalLevel">—</strong></div>
+                <div class="level"><span>مستوى المراجعة</span><strong id="reviewLevel">—</strong></div>
+                <div class="level"><span>مستوى الإلغاء</span><strong id="invalidationLevel">—</strong></div>
+              </div>
+              <div class="level-map" id="levelMap" aria-label="خريطة مستويات القرار"></div>
+              <div class="warning" id="decisionFoot">
+                هذه القراءة تفسيرية ومحكومة. لا تمثل أمر دخول أو خروج أو تنفيذ.
+              </div>
+            </div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-head">
+              <div>
+                <div class="panel-title">بوابة الجاهزية التجارية</div>
+                <div class="panel-sub">اختبارات حية من المتصفح نفسه</div>
+              </div>
+              <button class="btn" id="checkBtn" type="button" style="min-height:36px">إعادة الفحص</button>
+            </div>
+            <div class="panel-body">
+              <div class="checks" id="checks">
+                <div class="check" data-check="health"><div class="check-icon">●</div><div><div class="check-name">صحة المنصة</div><div class="check-note">واجهة الصحة العامة</div></div><div class="check-state">انتظار</div></div>
+                <div class="check" data-check="auth"><div class="check-icon">●</div><div><div class="check-name">المصادقة والجلسة</div><div class="check-note">التحقق من الجلسة الحالية</div></div><div class="check-state">انتظار</div></div>
+                <div class="check" data-check="decision"><div class="check-icon">●</div><div><div class="check-name">محرك القراءة</div><div class="check-note">استجابة قراءة الأصل</div></div><div class="check-state">انتظار</div></div>
+                <div class="check" data-check="portal"><div class="check-icon">●</div><div><div class="check-name">بوابة المستخدم</div><div class="check-note">المسار التجاري الرئيسي</div></div><div class="check-state">انتظار</div></div>
+                <div class="check" data-check="market"><div class="check-icon">●</div><div><div class="check-name">الأسواق والأصول</div><div class="check-note">صفحة الأسعار والتحليل</div></div><div class="check-state">انتظار</div></div>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <section class="panel" style="margin-top:16px">
+          <div class="panel-head">
+            <div>
+              <div class="panel-title">الوصول السريع</div>
+              <div class="panel-sub">المسارات الأساسية لإدارة المنصة</div>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div class="grid quick-links">
+              <a class="quick" href="/portal/command-center/"><span class="quick-icon">01</span><div><strong>بوابة المستخدم</strong><small>تجربة العرض الأساسية للمشترك.</small></div></a>
+              <a class="quick" href="/market-suite/"><span class="quick-icon">02</span><div><strong>الأسواق والأصول</strong><small>الأسعار والقراءات والأصول المتاحة.</small></div></a>
+              <a class="quick" href="/decision-room/"><span class="quick-icon">03</span><div><strong>غرفة القرار</strong><small>الملخص والمستويات والتفسير والمخاطر.</small></div></a>
+              <a class="quick" href="/data/"><span class="quick-icon">04</span><div><strong>مركز البيانات</strong><small>متابعة حالة البيانات ومصادرها.</small></div></a>
+              <a class="quick" href="/data-infra/"><span class="quick-icon">05</span><div><strong>بنية البيانات</strong><small>الاعتمادية والتكامل وحالة البنية.</small></div></a>
+              <a class="quick" href="/decision-room-v31/account/"><span class="quick-icon">06</span><div><strong>الحساب والإعدادات</strong><small>إدارة الحساب والتنبيهات والتفضيلات.</small></div></a>
+            </div>
+          </div>
+        </section>
+
+
+        <section class="panel" id="usersSection" style="margin-top:16px">
+          <div class="panel-head" style="min-height:auto;padding-top:14px;padding-bottom:14px;align-items:flex-start;flex-wrap:wrap">
+            <div>
+              <div class="panel-title">حسابات المستخدمين والتفعيل</div>
+              <div class="panel-sub">عرض المسجلين وتفعيل الحساب وتعليق الوصول والتحقق من البريد</div>
+            </div>
+            <div class="user-toolbar">
+              <input class="user-search" id="usersSearch" type="search" placeholder="بحث بالاسم أو البريد" autocomplete="off">
+              <select id="usersStatusFilter" aria-label="تصفية المستخدمين">
+                <option value="all">كل الحسابات</option>
+                <option value="pending">بانتظار التفعيل</option>
+                <option value="active">الحسابات النشطة</option>
+                <option value="unverified">البريد غير مؤكد</option>
+                <option value="inactive">الحسابات المعطلة</option>
+                <option value="suspended">الحسابات المعلقة</option>
+                <option value="admins">الإدارة والمالك</option>
+              </select>
+              <button class="btn" id="usersRefreshBtn" type="button" style="min-height:38px">تحديث الحسابات</button>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div class="grid users-summary">
+              <div class="user-stat"><span>إجمالي المستخدمين</span><strong id="usersTotal">—</strong></div>
+              <div class="user-stat"><span>حسابات نشطة</span><strong id="usersActive">—</strong></div>
+              <div class="user-stat"><span>بانتظار التفعيل</span><strong id="usersPending">—</strong></div>
+              <div class="user-stat"><span>بريد غير مؤكد</span><strong id="usersUnverified">—</strong></div>
+              <div class="user-stat"><span>حسابات إدارية</span><strong id="usersAdmins">—</strong></div>
+            </div>
+            <div class="user-table-wrap">
+              <table class="user-table">
+                <thead><tr><th>المستخدم</th><th>الحالة</th><th>البريد</th><th>الدور</th><th>الخطة</th><th>التسجيل</th><th>الإجراءات</th></tr></thead>
+                <tbody id="usersTableBody"><tr><td colspan="7" class="users-empty">جارٍ تحميل الحسابات المسجلة</td></tr></tbody>
+              </table>
+            </div>
+            <div class="users-mobile" id="usersMobileCards"></div>
+            <div class="users-pagination">
+              <div id="usersPaginationText" style="color:var(--muted);font-size:9px">—</div>
+              <div class="page-buttons">
+                <button class="page-btn" id="usersPrevBtn" type="button">السابق</button>
+                <span id="usersPageText" style="font-size:10px;font-weight:900">1 / 1</span>
+                <button class="page-btn" id="usersNextBtn" type="button">التالي</button>
+              </div>
+            </div>
+            <div class="warning" style="margin-top:16px">
+              زر «تفعيل» يضبط الحساب على ACTIVE ويؤكد البريد ويبدأ تجربة 16 يومًا عندما تكون أعمدة التجربة موجودة. التعليق أو التعطيل يبطل الجلسات الحالية. «الحذف النهائي» متاح للمستخدم العادي فقط ويتطلب كتابة بريده؛ حسابات ADMIN وOWNER محمية، كما يُرفض الحذف إذا كانت للحساب سجلات مرتبطة.
+            </div>
+          </div>
+        </section>
+
+        <section class="grid governance" style="margin-top:16px">
+          <article class="panel">
+            <div class="panel-head">
+              <div><div class="panel-title">مسار القرار الحاكم</div><div class="panel-sub">التسلسل المرجعي للطبقات الست عشرة</div></div>
+            </div>
+            <div class="panel-body">
+              <div class="grid layer-grid" id="layerGrid"></div>
+            </div>
+          </article>
+          <article class="panel">
+            <div class="panel-head">
+              <div><div class="panel-title">هوية الجلسة الحالية</div><div class="panel-sub">لا تعرض إلا داخل صفحة المالك المحمية</div></div>
+            </div>
+            <div class="panel-body">
+              <div class="checks">
+                <div class="check ok"><div class="check-icon">✓</div><div><div class="check-name">البريد الإداري</div><div class="check-note" id="userEmail">جارٍ التحميل</div></div><div class="check-state">محمي</div></div>
+                <div class="check ok"><div class="check-icon">✓</div><div><div class="check-name">الدور الحالي</div><div class="check-note" id="userRole">جارٍ التحميل</div></div><div class="check-state">مفعل</div></div>
+                <div class="check ok"><div class="check-icon">✓</div><div><div class="check-name">الخطة</div><div class="check-note" id="userPlan">جارٍ التحميل</div></div><div class="check-state">نشطة</div></div>
+              </div>
+              <div class="warning">
+                صفحة المالك محمية على مستوى الخادم. تسجيل الخروج يبطل الجلسة الحالية ولا يعتمد على تخزين المتصفح لإثبات الصلاحية.
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <footer class="footer">
+          NDSP — منصة نواف لدعم القرار · واجهة مؤسسية تفسيرية وليست منصة تنفيذ أو توصيات تداول
+        </footer>
+      </div>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+  (() => {
+    "use strict";
+
+    const $ = (selector, root = document) => root.querySelector(selector);
+    const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
+    const state = { session: false, health: false, decision: false, portal: false, market: false };
+    const usersState = { page: 1, limit: 25, pages: 1, total: 0, loading: false, debounce: null };
+
+    const layers = [
+      "صلاحية البيانات", "TDL طويل ومتوسط", "TDL قصير", "اتجاه السوق",
+      "بوابة التصحيح", "الانحراف", "توقيت اليوم", "مستويات السيناريو",
+      "نقطة التقاء نواف", "الزخم", "السيولة والبنية", "الدولار والماكرو",
+      "المخاطر", "إشارة نواف الذهبية", "الذهبية المعززة", "محامي الشيطان والجاهزية"
+    ];
+
+    const toast = (message) => {
+      const el = $("#toast");
+      el.textContent = message;
+      el.classList.add("show");
+      clearTimeout(toast.timer);
+      toast.timer = setTimeout(() => el.classList.remove("show"), 3200);
+    };
+
+    const escapeHtml = (value) => String(value ?? "")
+      .replaceAll("&", "&amp;").replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;").replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+
+    const fetchWithTimeout = async (url, options = {}, timeout = 12000) => {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), timeout);
+      try {
+        return await fetch(url, {
+          credentials: "same-origin",
+          cache: "no-store",
+          ...options,
+          signal: controller.signal,
+          headers: { "Cache-Control": "no-cache", ...(options.headers || {}) }
+        });
+      } finally {
+        clearTimeout(timer);
+      }
+    };
+
+    const fetchJson = async (url, options, timeout) => {
+      const response = await fetchWithTimeout(url, options, timeout);
+      const text = await response.text();
+      let data = null;
+      try { data = text ? JSON.parse(text) : {}; } catch { data = { raw: text }; }
+      if (!response.ok) {
+        const error = new Error(`HTTP ${response.status}`);
+        error.status = response.status;
+        error.data = data;
+        throw error;
+      }
+      return { response, data };
+    };
+
+    const read = (obj, paths, fallback = null) => {
+      for (const path of paths) {
+        let current = obj;
+        let valid = true;
+        for (const key of path.split(".")) {
+          if (current && Object.prototype.hasOwnProperty.call(current, key)) current = current[key];
+          else { valid = false; break; }
+        }
+        if (valid && current !== null && current !== undefined && current !== "") return current;
+      }
+      return fallback;
+    };
+
+    const numberValue = (value) => {
+      if (typeof value === "number" && Number.isFinite(value)) return value;
+      if (typeof value !== "string") return null;
+      const cleaned = value.replace(/[,\s]/g, "").replace(/[^\d.+-]/g, "");
+      const parsed = Number(cleaned);
+      return Number.isFinite(parsed) ? parsed : null;
+    };
+
+    const formatNumber = (value, digits = 2) => {
+      const num = numberValue(value);
+      if (num === null) return value || "—";
+      return new Intl.NumberFormat("en-US", { maximumFractionDigits: digits }).format(num);
+    };
+
+    const removeSkeleton = (...ids) => ids.forEach(id => $("#" + id)?.classList.remove("skeleton"));
+
+    const setCheck = (name, mode, label, note) => {
+      const item = document.querySelector(`[data-check="${name}"]`);
+      if (!item) return;
+      item.classList.remove("ok", "bad", "warn");
+      if (mode) item.classList.add(mode);
+      const stateEl = $(".check-state", item);
+      const noteEl = $(".check-note", item);
+      stateEl.textContent = label;
+      if (note) noteEl.textContent = note;
+      state[name] = mode === "ok";
+      updateReadiness();
+    };
+
+    const updateReadiness = () => {
+      const values = Object.values(state);
+      const passed = values.filter(Boolean).length;
+      const percent = Math.round((passed / values.length) * 100);
+      $("#readinessRing").style.setProperty("--readiness", percent + "%");
+      $("#readinessValue").textContent = percent + "%";
+      const ready = percent === 100;
+      $("#launchWarning").textContent = ready
+        ? "المسارات الأساسية والمصادقة والقراءة الحية تستجيب من الجلسة الحالية."
+        : `اكتملت ${passed} من ${values.length} بوابات حية. راجع العناصر غير المكتملة.`;
+      $("#launchWarning").style.borderColor = ready ? "rgba(59,210,146,.26)" : "rgba(243,191,79,.26)";
+      $("#launchWarning").style.background = ready ? "rgba(59,210,146,.10)" : "rgba(243,191,79,.12)";
+      $("#lastUpdated").textContent = "آخر تحديث: " + new Intl.DateTimeFormat("ar-SA", {
+        dateStyle: "medium", timeStyle: "medium"
+      }).format(new Date());
+      $("#liveText").textContent = ready ? "النظام متصل" : "متابعة الفحص";
+      $("#sideDot").style.background = ready ? "var(--green)" : "var(--gold)";
+    };
+
+    const renderLayers = () => {
+      $("#layerGrid").innerHTML = layers.map((name, index) => `
+        <div class="layer">
+          <div class="layer-id">L${String(index + 1).padStart(2, "0")}</div>
+          <div class="layer-name">${escapeHtml(name)}</div>
+        </div>
+      `).join("");
+    };
+
+    const loadSession = async () => {
+      try {
+        const { data } = await fetchJson("/api/auth/session");
+        const authenticated = data.authenticated === true || data.ok === true;
+        const user = data.user || {};
+        if (!authenticated) throw new Error("جلسة غير مصادق عليها");
+        const role = String(user.role || user.accountType || "إدارة").toUpperCase();
+        $("#systemState").textContent = "متصل";
+        $("#sessionState").textContent = "محمية";
+        $("#sessionNote").textContent = user.email || "جلسة خادمية فعالة";
+        $("#userEmail").textContent = user.email || "غير متاح";
+        $("#userRole").textContent = role === "ADMIN" ? "مدير النظام" : role === "OWNER" ? "مالك النظام" : role;
+        $("#userPlan").textContent = user.plan || user.package || "الخطة الإدارية";
+        $("#rolePill").textContent = role === "ADMIN" ? "صلاحية المدير" : "صلاحية المالك";
+        removeSkeleton("systemState", "sessionState");
+        state.session = true;
+        setCheck("auth", "ok", "سليم", "الجلسة الإدارية محمية وفعالة");
+      } catch (error) {
+        $("#sessionState").textContent = "غير متاحة";
+        $("#sessionNote").textContent = "أعد تسجيل الدخول";
+        removeSkeleton("sessionState");
+        setCheck("auth", "bad", "فشل", "تعذر التحقق من الجلسة");
+      }
+    };
+
+    const loadHealth = async () => {
+      try {
+        const { data } = await fetchJson("/api/health");
+        const ok = data.ok !== false;
+        if (!ok) throw new Error("Health not ok");
+        $("#systemState").textContent = "سليم";
+        removeSkeleton("systemState");
+        state.health = true;
+        setCheck("health", "ok", "سليم", "واجهة الصحة العامة تستجيب");
+      } catch {
+        $("#systemState").textContent = "يحتاج مراجعة";
+        removeSkeleton("systemState");
+        setCheck("health", "bad", "فشل", "واجهة الصحة لا تستجيب");
+      }
+    };
+
+    const renderLevelMap = (levels, live) => {
+      const entries = [
+        ["الإلغاء", levels.invalidation, "#ff6b78"],
+        ["المراجعة", levels.review, "#f3bf4f"],
+        ["السعر", live, "#31d5e7"],
+        ["التفعيل", levels.activation, "#3bd292"],
+        ["الوصول", levels.arrival, "#7a98ff"]
+      ].filter(([,value]) => numberValue(value) !== null);
+
+      if (!entries.length) {
+        $("#levelMap").innerHTML = '<div style="display:grid;place-items:center;height:100%;color:var(--muted);font-size:11px">لا تتوفر مستويات رقمية للرسم</div>';
+        return;
+      }
+
+      const nums = entries.map(([,value]) => numberValue(value));
+      let min = Math.min(...nums);
+      let max = Math.max(...nums);
+      if (max === min) { max += 1; min -= 1; }
+      const pad = (max - min) * .12;
+      min -= pad; max += pad;
+
+      const width = 900, height = 260, top = 24, bottom = 28;
+      const y = value => top + (max - numberValue(value)) / (max - min) * (height - top - bottom);
+      const lines = entries.map(([label,value,color], index) => {
+        const yy = y(value);
+        const dash = label === "السعر" ? "" : 'stroke-dasharray="7 7"';
+        const thick = label === "السعر" ? 3 : 1.5;
+        return `
+          <g>
+            <line x1="28" y1="${yy}" x2="872" y2="${yy}" stroke="${color}" stroke-width="${thick}" ${dash} opacity="${label === "السعر" ? 1 : .72}"/>
+            <rect x="34" y="${yy - 12}" width="118" height="24" rx="8" fill="#071014" stroke="${color}" opacity=".96"/>
+            <text x="93" y="${yy + 4}" text-anchor="middle" fill="${color}" font-size="11" font-weight="800">${escapeHtml(label)}</text>
+            <text x="858" y="${yy - 7}" text-anchor="end" fill="#d9e4e8" font-size="11" font-weight="800">${escapeHtml(formatNumber(value))}</text>
+          </g>`;
+      }).join("");
+
+      $("#levelMap").innerHTML = `
+        <svg viewBox="0 0 ${width} ${height}" preserveAspectRatio="none" role="img" aria-label="خريطة المستويات المرجعية">
+          <defs>
+            <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#071319"/>
+              <stop offset="1" stop-color="#050b0e"/>
+            </linearGradient>
+          </defs>
+          <rect width="${width}" height="${height}" fill="url(#bg)"/>
+          <g opacity=".18" stroke="#8fa3ad" stroke-width="1">
+            ${[1,2,3,4,5].map(i => `<line x1="${i*150}" y1="0" x2="${i*150}" y2="${height}"/>`).join("")}
+            ${[1,2,3,4].map(i => `<line x1="0" y1="${i*52}" x2="${width}" y2="${i*52}"/>`).join("")}
+          </g>
+          ${lines}
+        </svg>`;
+    };
+
+    const loadDecision = async () => {
+      const symbol = $("#symbolSelect").value;
+      const timeframe = $("#timeframeSelect").value;
+      $("#decisionState").classList.add("skeleton");
+      $("#livePrice").classList.add("skeleton");
+      try {
+        const url = `/api/decision/quality-live?symbol=${encodeURIComponent(symbol)}&timeframe=${encodeURIComponent(timeframe)}`;
+        const { data } = await fetchJson(url, {}, 16000);
+        const stateValue = read(data, ["scenario.scenario_state", "scenario_state", "decision_status"], "تحت المتابعة");
+        const context = read(data, ["scenario.scenario_directional_context", "scenario_directional_context", "directional_context"], "قراءة محكومة قيد المتابعة");
+        const live = read(data, ["instrument.live_price", "live_price", "price"], null);
+        const levels = {
+          activation: read(data, ["scenario.scenario_activation_level", "levels.activation", "activation_level"], null),
+          arrival: read(data, ["scenario.scenario_arrival_level", "levels.arrival", "arrival_level"], null),
+          review: read(data, ["scenario.scenario_review_level", "levels.review", "review_level"], null),
+          invalidation: read(data, ["scenario.scenario_invalidation_level", "levels.cancel", "levels.invalidation", "invalidation_level"], null)
+        };
+        const confidence = read(data, ["scenario.confidence_band", "confidence_band", "decision_quality"], "غير محدد");
+        const horizon = read(data, ["scenario.time_horizon", "time_horizon", "follow_up_horizon"], "متابعة دورية");
+
+        $("#decisionState").textContent = String(stateValue).replaceAll("_", " ");
+        $("#decisionContext").textContent = context;
+        $("#livePrice").textContent = formatNumber(live);
+        $("#activationLevel").textContent = formatNumber(levels.activation);
+        $("#arrivalLevel").textContent = formatNumber(levels.arrival);
+        $("#reviewLevel").textContent = formatNumber(levels.review);
+        $("#invalidationLevel").textContent = formatNumber(levels.invalidation);
+        $("#decisionFoot").textContent = `الثقة: ${confidence} · الأفق: ${horizon} · المخرجات تفسيرية وليست أوامر تنفيذ.`;
+        renderLevelMap(levels, live);
+        removeSkeleton("decisionState", "livePrice");
+        state.decision = true;
+        setCheck("decision", "ok", "سليم", "القراءة الحية والمستويات متاحة");
+      } catch (error) {
+        $("#decisionState").textContent = "القراءة غير متاحة";
+        $("#decisionContext").textContent = "تعذر طلب قراءة الأصل الآن دون التأثير على بقية المنصة.";
+        $("#livePrice").textContent = "—";
+        removeSkeleton("decisionState", "livePrice");
+        $("#levelMap").innerHTML = '<div style="display:grid;place-items:center;height:100%;color:var(--muted);font-size:11px">تعذر تحميل المستويات الحية</div>';
+        setCheck("decision", "bad", "فشل", "واجهة القراءة الحية لا تستجيب");
+      }
+    };
+
+    const checkRoute = async (path, checkName, okStatuses = [200]) => {
+      try {
+        const response = await fetchWithTimeout(path, { method: "GET", redirect: "follow" }, 14000);
+        if (!okStatuses.includes(response.status)) throw new Error("Unexpected status");
+        setCheck(checkName, "ok", "سليم", `المسار يستجيب برمز ${response.status}`);
+      } catch {
+        setCheck(checkName, "bad", "فشل", "تعذر الوصول إلى المسار");
+      }
+    };
+
+    const runChecks = async () => {
+      await Promise.allSettled([
+        loadHealth(),
+        loadSession(),
+        loadDecision(),
+        checkRoute("/portal/command-center/", "portal", [200]),
+        checkRoute("/market-suite/", "market", [200]),
+        loadUsers(1)
+      ]);
+      updateReadiness();
+    };
+
+
+    const formatDate = (value) => {
+      if (!value) return "—";
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return String(value);
+      return new Intl.DateTimeFormat("ar-SA", { dateStyle: "medium", timeStyle: "short" }).format(date);
+    };
+
+    const userStatusInfo = (user) => {
+      const status = String(user.status || "PENDING").toUpperCase();
+      if (status === "ACTIVE" && user.emailVerified === true) return { label: "نشط", mode: "ok" };
+      if (["SUSPENDED", "BLOCKED", "LOCKED"].includes(status)) return { label: "معلق", mode: "warn" };
+      if (["INACTIVE", "DISABLED"].includes(status)) return { label: "معطل", mode: "bad" };
+      return { label: "بانتظار التفعيل", mode: "warn" };
+    };
+
+    const userActions = (user) => {
+      const role = String(user.role || "USER").toUpperCase();
+      const type = String(user.accountType || "user").toLowerCase();
+      const protectedAdmin = ["ADMIN", "OWNER"].includes(role) || ["admin", "owner"].includes(type);
+      const active = String(user.status || "").toUpperCase() === "ACTIVE" && user.emailVerified === true;
+      const id = escapeHtml(user.id);
+      const email = escapeHtml(user.email || "");
+      const actions = [];
+
+      if (active) {
+        actions.push('<button class="user-action activated" type="button" disabled>مفعّل</button>');
+      } else {
+        actions.push(`<button class="user-action activate" data-user-id="${id}" data-user-action="activate" type="button">تفعيل</button>`);
+      }
+
+      if (!user.emailVerified) {
+        actions.push(`<button class="user-action verify" data-user-id="${id}" data-user-action="verify" type="button">تأكيد البريد</button>`);
+      }
+
+      if (active && !protectedAdmin) {
+        actions.push(`<button class="user-action suspend" data-user-id="${id}" data-user-action="suspend" type="button">تعليق</button>`);
+        actions.push(`<button class="user-action deactivate" data-user-id="${id}" data-user-action="deactivate" type="button">تعطيل</button>`);
+      }
+
+      if (!protectedAdmin) {
+        actions.push(`<button class="user-action delete" data-user-id="${id}" data-user-email="${email}" data-user-action="delete" type="button">حذف نهائي</button>`);
+      } else {
+        actions.push('<span class="badge info">حساب محمي</span>');
+      }
+
+      return actions.join("");
+    };
+
+    const renderUsers = (payload) => {
+      const items = Array.isArray(payload.items) ? payload.items : [];
+      const summary = payload.summary || {};
+      const pagination = payload.pagination || {};
+      usersState.page = Number(pagination.page || 1);
+      usersState.pages = Math.max(1, Number(pagination.pages || 1));
+      usersState.total = Number(pagination.total || 0);
+
+      $("#usersTotal").textContent = Number(summary.total || 0).toLocaleString("en-US");
+      $("#usersActive").textContent = Number(summary.active || 0).toLocaleString("en-US");
+      $("#usersPending").textContent = Number(summary.pending || 0).toLocaleString("en-US");
+      $("#usersUnverified").textContent = Number(summary.unverified || 0).toLocaleString("en-US");
+      $("#usersAdmins").textContent = Number(summary.admins || 0).toLocaleString("en-US");
+      $("#usersPageText").textContent = `${usersState.page} / ${usersState.pages}`;
+      $("#usersPaginationText").textContent = `عرض ${items.length} من أصل ${usersState.total} حساب`;
+      $("#usersPrevBtn").disabled = usersState.page <= 1;
+      $("#usersNextBtn").disabled = usersState.page >= usersState.pages;
+
+      if (!items.length) {
+        $("#usersTableBody").innerHTML = '<tr><td colspan="7" class="users-empty">لا توجد حسابات مطابقة للتصفية الحالية</td></tr>';
+        $("#usersMobileCards").innerHTML = '<div class="users-empty">لا توجد حسابات مطابقة</div>';
+        return;
+      }
+
+      $("#usersTableBody").innerHTML = items.map((user) => {
+        const info = userStatusInfo(user);
+        const verified = user.emailVerified ? '<span class="badge ok">مؤكد</span>' : '<span class="badge warn">غير مؤكد</span>';
+        return `<tr>
+          <td><div class="user-email">${escapeHtml(user.email)}</div><div class="user-name">${escapeHtml(user.name || "بدون اسم")}</div></td>
+          <td><span class="badge ${info.mode}">${info.label}</span></td>
+          <td>${verified}</td>
+          <td><span class="badge info">${escapeHtml(user.role || user.accountType || "USER")}</span></td>
+          <td>${escapeHtml(user.plan || "—")}</td>
+          <td>${escapeHtml(formatDate(user.createdAt))}</td>
+          <td><div class="user-actions">${userActions(user)}</div></td>
+        </tr>`;
+      }).join("");
+
+      $("#usersMobileCards").innerHTML = items.map((user) => {
+        const info = userStatusInfo(user);
+        return `<article class="user-card">
+          <div class="user-card-head"><div><div class="user-email">${escapeHtml(user.email)}</div><div class="user-name">${escapeHtml(user.name || "بدون اسم")}</div></div><span class="badge ${info.mode}">${info.label}</span></div>
+          <div class="user-card-meta"><div><span>البريد</span><strong>${user.emailVerified ? "مؤكد" : "غير مؤكد"}</strong></div><div><span>الدور</span><strong>${escapeHtml(user.role || "USER")}</strong></div><div><span>الخطة</span><strong>${escapeHtml(user.plan || "—")}</strong></div><div><span>التسجيل</span><strong>${escapeHtml(formatDate(user.createdAt))}</strong></div></div>
+          <div class="user-actions">${userActions(user)}</div>
+        </article>`;
+      }).join("");
+    };
+
+    const loadUsers = async (page = usersState.page) => {
+      if (usersState.loading) return;
+      usersState.loading = true;
+      $("#usersRefreshBtn").disabled = true;
+      try {
+        const query = new URLSearchParams({
+          q: $("#usersSearch").value.trim(),
+          status: $("#usersStatusFilter").value,
+          page: String(page),
+          limit: String(usersState.limit)
+        });
+        const { data } = await fetchJson(`/api/auth/admin/users?${query.toString()}`, {}, 16000);
+        renderUsers(data);
+      } catch (error) {
+        const message = error?.status === 403 ? "الحساب الحالي لا يملك صلاحية إدارة المستخدمين" : error?.status === 401 ? "انتهت الجلسة الإدارية" : "تعذر تحميل حسابات المستخدمين";
+        $("#usersTableBody").innerHTML = `<tr><td colspan="7" class="users-empty">${escapeHtml(message)}</td></tr>`;
+        $("#usersMobileCards").innerHTML = `<div class="users-empty">${escapeHtml(message)}</div>`;
+        toast(message);
+      } finally {
+        usersState.loading = false;
+        $("#usersRefreshBtn").disabled = false;
+      }
+    };
+
+    const mutateUser = async (id, action, button) => {
+      const labels = { activate: "تفعيل الحساب", verify: "تأكيد البريد", suspend: "تعليق الحساب", deactivate: "تعطيل الحساب" };
+      const label = labels[action] || "تعديل الحساب";
+      if (!window.confirm(`تأكيد ${label}؟`)) return;
+      const previous = button.textContent;
+      button.disabled = true;
+      button.textContent = "جارٍ التنفيذ";
+      try {
+        await fetchJson(`/api/auth/admin/users/${encodeURIComponent(id)}`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ action })
+        }, 16000);
+        toast(`تم ${label} بنجاح`);
+        await loadUsers(usersState.page);
+      } catch (error) {
+        const code = error?.data?.error;
+        const message =
+          code === "ADMIN_ACCOUNT_PROTECTED"
+            ? "الحسابات الإدارية محمية من التعطيل"
+            : code === "CANNOT_DISABLE_CURRENT_ADMIN"
+              ? "لا يمكن تعطيل الجلسة الإدارية الحالية"
+              : "فشل تنفيذ الإجراء على الحساب";
+        toast(message);
+      } finally {
+        button.disabled = false;
+        button.textContent = previous;
+      }
+    };
+
+    const deleteUserPermanently = async (id, email, button) => {
+      const typed = window.prompt(
+        `هذا حذف نهائي من قاعدة البيانات ولا يمكن التراجع عنه.\n\nاكتب البريد التالي للتأكيد:\n${email}`
+      );
+      if (typed === null) return;
+      if (typed.trim().toLowerCase() !== String(email).trim().toLowerCase()) {
+        toast("البريد المكتوب لا يطابق بريد الحساب");
+        return;
+      }
+      if (!window.confirm("التأكيد الأخير: حذف الحساب نهائيًا من قاعدة البيانات؟")) return;
+
+      const previous = button.textContent;
+      button.disabled = true;
+      button.textContent = "جارٍ الحذف";
+      try {
+        await fetchJson(`/api/auth/admin/users/${encodeURIComponent(id)}`, {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            confirmEmail: email,
+            confirmation: "DELETE"
+          })
+        }, 20000);
+        toast("تم حذف الحساب نهائيًا");
+        await loadUsers(Math.max(1, usersState.page));
+      } catch (error) {
+        const code = error?.data?.error;
+        const messages = {
+          ADMIN_ACCOUNT_DELETE_PROTECTED: "لا يمكن حذف حساب إداري أو حساب المالك",
+          CANNOT_DELETE_CURRENT_ADMIN: "لا يمكن حذف حساب الإدارة الحالي",
+          DELETE_EMAIL_CONFIRMATION_MISMATCH: "تأكيد البريد غير مطابق",
+          USER_HAS_LINKED_RECORDS: "تعذر الحذف النهائي لأن الحساب مرتبط بسجلات أخرى؛ عطّله بدلًا من حذفه",
+          USER_NOT_FOUND: "الحساب غير موجود أو حُذف سابقًا"
+        };
+        toast(messages[code] || "فشل حذف الحساب نهائيًا");
+      } finally {
+        button.disabled = false;
+        button.textContent = previous;
+      }
+    };
+
+    const clearOldBrowserCaches = async () => {
+      try {
+        if ("serviceWorker" in navigator) {
+          const registrations = await navigator.serviceWorker.getRegistrations();
+          await Promise.all(registrations.map(registration => registration.unregister()));
+        }
+        if ("caches" in window) {
+          const keys = await caches.keys();
+          await Promise.all(keys.map(key => caches.delete(key)));
+        }
+      } catch {}
+    };
+
+    const openMenu = () => document.body.classList.add("menu-open");
+    const closeMenu = () => document.body.classList.remove("menu-open");
+
+    $("#menuBtn").addEventListener("click", openMenu);
+    $("#overlay").addEventListener("click", closeMenu);
+    $$(".nav a").forEach(link => link.addEventListener("click", closeMenu));
+    $("#refreshBtn").addEventListener("click", () => { toast("تم بدء تحديث البيانات"); runChecks(); });
+    $("#checkBtn").addEventListener("click", () => { toast("جارٍ إعادة فحص الجاهزية"); runChecks(); });
+    $("#symbolSelect").addEventListener("change", loadDecision);
+    $("#timeframeSelect").addEventListener("change", loadDecision);
+
+    $("#usersRefreshBtn").addEventListener("click", () => loadUsers(1));
+    $("#usersStatusFilter").addEventListener("change", () => loadUsers(1));
+    $("#usersSearch").addEventListener("input", () => {
+      clearTimeout(usersState.debounce);
+      usersState.debounce = setTimeout(() => loadUsers(1), 350);
+    });
+    $("#usersPrevBtn").addEventListener("click", () => loadUsers(Math.max(1, usersState.page - 1)));
+    $("#usersNextBtn").addEventListener("click", () => loadUsers(Math.min(usersState.pages, usersState.page + 1)));
+    document.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-user-action][data-user-id]");
+      if (!button) return;
+      const action = button.dataset.userAction;
+      if (action === "delete") {
+        deleteUserPermanently(
+          button.dataset.userId,
+          button.dataset.userEmail || "",
+          button
+        );
+        return;
+      }
+      mutateUser(button.dataset.userId, action, button);
+    });
+
+    renderLayers();
+    clearOldBrowserCaches();
+    runChecks();
+  })();
+  </script>
+</body>
+</html>

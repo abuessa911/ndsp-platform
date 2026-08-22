@@ -1,0 +1,227 @@
+/* NDSP Landing V37 — public access is limited to sign-in and registration. */
+:root {
+  --ndsp-v37-gold: #e2bd4d;
+  --ndsp-v37-gold-deep: #c79825;
+  --ndsp-v37-ink: #090a0d;
+  --ndsp-v37-line: rgba(226, 189, 77, .34);
+}
+
+/* A decision room is authenticated content, never a public landing-page destination. */
+.landing-nav .nav-links a:nth-child(1),
+.landing-nav .nav-links a:nth-child(2),
+.landing-nav .nav-links a:nth-child(3),
+.landing-nav .nav-links a:nth-child(4),
+.cta-row a:nth-child(2),
+#ndsp-mobile-pages-inline-slot,
+#ndsp-mobile-pages-button,
+#ndsp-mobile-pages-drawer,
+#ndsp-mobile-pages-backdrop,
+#ndspTopControlsV13 .ndsp-pages-btn,
+#ndspTopControlsV13 .ndsp-pages-panel {
+  display: none !important;
+}
+
+.landing-nav {
+  min-height: 78px !important;
+  border-bottom: 1px solid rgba(226, 189, 77, .2) !important;
+  background: rgba(8, 9, 12, .96) !important;
+}
+
+.landing-nav .nav-inner {
+  min-height: 78px !important;
+  width: min(1220px, calc(100% - 48px)) !important;
+  display: grid !important;
+  grid-template-columns: auto 1fr auto auto !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+
+.landing-nav .nav-links {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 !important;
+}
+
+.landing-nav .nav-links a:nth-child(5) {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 40px !important;
+  padding: 0 16px !important;
+  border: 1px solid var(--ndsp-v37-line) !important;
+  border-radius: 11px !important;
+  color: #f6f1e5 !important;
+  background: rgba(255, 255, 255, .02) !important;
+  font-size: 0 !important;
+  font-weight: 750 !important;
+  line-height: 1 !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+  transition: background-color .18s ease, border-color .18s ease, transform .18s ease !important;
+}
+
+.landing-nav .nav-links a:nth-child(5):hover {
+  border-color: var(--ndsp-v37-gold) !important;
+  background: rgba(226, 189, 77, .1) !important;
+  transform: translateY(-1px) !important;
+}
+
+html[dir="rtl"] .landing-nav .nav-links a:nth-child(5)::after {
+  content: "تسجيل الدخول";
+  font-size: 15px;
+}
+
+html[dir="ltr"] .landing-nav .nav-links a:nth-child(5)::after {
+  content: "Sign in";
+  font-size: 15px;
+}
+
+.landing-nav .nav-inner > a.btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 40px !important;
+  min-width: 0 !important;
+  padding: 0 17px !important;
+  border: 1px solid #f1d36b !important;
+  border-radius: 11px !important;
+  color: #151108 !important;
+  background: linear-gradient(135deg, #f1d570, #d7aa31) !important;
+  box-shadow: none !important;
+  font-size: 0 !important;
+  font-weight: 800 !important;
+  line-height: 1 !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+  transition: filter .18s ease, transform .18s ease !important;
+}
+
+.landing-nav .nav-inner > a.btn:hover {
+  filter: brightness(1.06) !important;
+  transform: translateY(-1px) !important;
+}
+
+html[dir="rtl"] .landing-nav .nav-inner > a.btn::after {
+  content: "تسجيل مستخدم جديد";
+  font-size: 15px;
+}
+
+html[dir="ltr"] .landing-nav .nav-inner > a.btn::after {
+  content: "Create account";
+  font-size: 15px;
+}
+
+/* Keep language choice, but not as a competing navigation menu. */
+#ndspTopControlsV13 {
+  position: static !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+#ndspTopControlsV13 .ndsp-lang-wrap {
+  display: inline-flex !important;
+  align-items: center !important;
+  height: 36px !important;
+  padding: 3px !important;
+  gap: 2px !important;
+  border: 1px solid rgba(226, 189, 77, .3) !important;
+  border-radius: 10px !important;
+  background: rgba(255, 255, 255, .02) !important;
+}
+
+#ndspTopControlsV13 .ndsp-lang-btn {
+  min-width: 34px !important;
+  height: 28px !important;
+  padding: 0 7px !important;
+  border: 0 !important;
+  border-radius: 7px !important;
+  color: #aaa399 !important;
+  background: transparent !important;
+  font-size: 13px !important;
+  font-weight: 800 !important;
+  line-height: 1 !important;
+}
+
+#ndspTopControlsV13 .ndsp-lang-btn.is-active {
+  color: #171207 !important;
+  background: var(--ndsp-v37-gold) !important;
+}
+
+/* The only public call-to-action starts registration; the room is reached after authentication. */
+.cta-row {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 12px !important;
+}
+
+.cta-row a:first-child {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 48px !important;
+  padding: 0 21px !important;
+  border-radius: 12px !important;
+  font-size: 0 !important;
+  font-weight: 800 !important;
+  line-height: 1 !important;
+  box-shadow: none !important;
+}
+
+html[dir="rtl"] .cta-row a:first-child::after {
+  content: "تسجيل مستخدم جديد";
+  font-size: 16px;
+}
+
+html[dir="ltr"] .cta-row a:first-child::after {
+  content: "Create account";
+  font-size: 16px;
+}
+
+@media (max-width: 860px) {
+  .landing-nav {
+    min-height: 118px !important;
+  }
+
+  .landing-nav .nav-inner {
+    width: calc(100% - 28px) !important;
+    min-height: 118px !important;
+    grid-template-columns: minmax(0, 1fr) auto auto !important;
+    grid-template-rows: 58px 48px !important;
+    gap: 0 9px !important;
+  }
+
+  .landing-nav .nav-links {
+    grid-column: 1 / -1 !important;
+    grid-row: 2 !important;
+  }
+
+  .landing-nav .nav-links a:nth-child(5) {
+    width: min(100%, 260px) !important;
+  }
+}
+
+@media (max-width: 520px) {
+  #ndspTopControlsV13 {
+    display: none !important;
+  }
+
+  .landing-nav .nav-inner {
+    grid-template-columns: minmax(0, 1fr) auto !important;
+  }
+
+  .landing-nav .nav-inner > a.btn {
+    padding: 0 11px !important;
+  }
+
+  html[dir="rtl"] .landing-nav .nav-inner > a.btn::after,
+  html[dir="ltr"] .landing-nav .nav-inner > a.btn::after {
+    font-size: 13px;
+  }
+}

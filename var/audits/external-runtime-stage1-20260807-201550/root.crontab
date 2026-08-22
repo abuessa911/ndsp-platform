@@ -1,0 +1,56 @@
+# Edit this file to introduce tasks to be run by cron.
+# 
+# Each task to run has to be defined through a single line
+# indicating with different fields when the task will be run
+# and what command to run for the task
+# 
+# To define the time you can provide concrete values for
+# minute (m), hour (h), day of month (dom), month (mon),
+# and day of week (dow) or use '*' in these fields (for 'any').
+# 
+# Notice that tasks will be started based on the cron's system
+# daemon's notion of time and timezones.
+# 
+# Output of the crontab jobs (including errors) is sent through
+# email to the user the crontab file belongs to (unless redirected).
+# 
+# For example, you can run a backup of all your user accounts
+# at 5 a.m every week with:
+# ==============================
+# BACKUP & SECURITY
+# ==============================
+0 3 * * * /usr/local/bin/ndip-backup.sh
+55 23 * * * /usr/local/bin/webtrust_daily_hash.sh
+
+# ==============================
+# HEALTH CHECK (محمي)
+# ==============================
+*/5 * * * * flock -n /tmp/ndip_health.lock /usr/local/bin/ndip-healthcheck.sh
+*/6 * * * * flock -n /tmp/empire_health.lock /usr/local/bin/empire-health-check.sh
+
+# ==============================
+# SECURITY ENGINE (محمي)
+# ==============================
+*/7 * * * * flock -n /tmp/guard.lock /etc/empire/security/empire_guard_orchestrator.sh
+*/8 * * * * flock -n /tmp/integrity.lock /etc/empire/security/empire_integrity_guard.sh check
+
+# ==============================
+# MONITORING (موزع + محمي)
+# ==============================
+*/10 * * * * flock -n /tmp/snapshot.lock /bin/bash /opt/empire/scripts/monitor_snapshot.sh
+*/12 * * * * flock -n /tmp/resources.lock /bin/bash /opt/empire/scripts/monitor_resources.sh
+
+# ==============================
+# ANALYTICS
+# ==============================
+0 * * * * flock -n /tmp/winrate.lock /opt/empire-core/backend/update_winrate.sh
+
+# ==============================
+# TRADING SYSTEM 🔥 (الأهم)
+# ==============================
+* * * * * flock -n /tmp/tp_sl.lock /opt/execution-engine/tp_sl_engine.sh >> /opt/execution-engine/logs/tp_sl.log 2>&1
+
+# ==============================
+# STARTUP
+# ==============================
+@reboot sleep 172800 && /opt/empire/scripts/unlock_execution_48h.sh

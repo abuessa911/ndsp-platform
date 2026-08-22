@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+ <meta name="theme-color" content="#050505">
+ <title>NDSP — تسجيل الدخول</title>
+ <style>
+:root{
+ --bg:#040404;
+ --bg2:#080807;
+ --panel:#0d0d0f;
+ --line:rgba(212,175,55,.24);
+ --gold:#d4af37;
+ --gold-hi:#f4d77d;
+ --text:#f7f1df;
+ --muted:#b9ad91;
+ --green:#34d399;
+ --shadow:0 30px 90px rgba(0,0,0,.55);
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:radial-gradient(circle at 18% 8%,rgba(212,175,55,.10),transparent 33%),radial-gradient(circle at 82% 12%,rgba(52,211,153,.05),transparent 34%),linear-gradient(180deg,var(--bg),var(--bg2) 48%,#020202);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif}
+body{min-height:100vh;overflow-x:hidden}
+.shell{min-height:100vh;display:grid;grid-template-columns:minmax(0,1fr) 340px;direction:ltr;align-items:start}
+.side{grid-column:2;padding:26px 22px;display:flex;flex-direction:column;gap:28px;border-left:1px solid var(--line);background:linear-gradient(180deg,rgba(9,9,9,.96),rgba(4,4,4,.98));direction:rtl;grid-row:1;align-self:start;min-height:100vh}
+.main{grid-column:1;min-width:0;display:grid;direction:rtl;grid-row:1;align-self:start;align-content:start;min-height:100vh;grid-template-rows:auto auto}
+.brand{display:flex;align-items:center;gap:14px;direction:ltr;text-align:left}
+.mark{width:52px;height:52px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(135deg,var(--gold-hi),var(--gold));color:#080705;font-size:26px;font-weight:900;box-shadow:0 0 22px rgba(212,175,55,.22)}
+.brand h1{margin:0;font-size:20px;letter-spacing:.02em}
+.brand p{margin:4px 0 0;color:var(--muted);letter-spacing:.28em;font-size:12px;line-height:1.5}
+nav{display:grid;gap:10px;margin-top:10px}
+nav a{text-decoration:none;color:var(--muted);border:1px solid transparent;border-radius:10px;padding:13px 14px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.018);min-height:52px}
+nav a:hover,nav a.active{color:var(--gold-hi);border-color:rgba(212,175,55,.38);background:linear-gradient(90deg,rgba(212,175,55,.14),rgba(212,175,55,.04));box-shadow:inset 3px 0 0 rgba(212,175,55,.72)}
+.side-status{margin-top:auto;border:1px solid rgba(212,175,55,.24);background:linear-gradient(180deg,rgba(18,16,11,.72),rgba(7,7,7,.94));border-radius:12px;padding:18px;color:#f3e8c8;box-shadow:0 12px 30px rgba(0,0,0,.22),inset 0 1px 0 rgba(244,215,125,.045)}
+.side-status b{display:flex;align-items:center;gap:10px;font-size:14px;letter-spacing:.08em;color:#f7edcf}
+.dot{width:11px;height:11px;border-radius:999px;background:#34d399;box-shadow:0 0 12px rgba(52,211,153,.24);display:inline-block}
+.topbar{border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 44px;background:rgba(5,5,5,.72);direction:ltr;gap:18px}
+.session{display:flex;gap:18px;align-items:center;color:var(--text);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.12em;white-space:nowrap}
+.session span:first-child{color:var(--muted);font-weight:800}
+.live{border:1px solid rgba(52,211,153,.32);color:var(--green);padding:10px 16px;border-radius:8px;font-weight:800;letter-spacing:.08em;white-space:nowrap}
+.content{min-width:0;display:grid;grid-template-columns:minmax(360px,520px) minmax(0,1fr);align-items:start;padding:24px clamp(18px,3vw,42px) 36px;gap:28px}
+.panel{grid-column:1;border:1px solid var(--line);background:linear-gradient(180deg,rgba(18,16,11,.92),rgba(7,7,7,.96));box-shadow:var(--shadow),inset 0 1px 0 rgba(244,215,125,.045);border-radius:18px;overflow:hidden;max-width:520px;width:100%;align-self:start}
+.hero{grid-column:2;min-width:0;max-width:720px;justify-self:start;align-self:start}
+.kicker{color:var(--gold-hi);letter-spacing:.22em;font-weight:900;font-size:13px;display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.kicker:before{content:"";width:42px;height:1px;background:var(--gold-hi);display:inline-block}
+h2{margin:0;font-size:clamp(34px,4vw,58px);line-height:1.15;letter-spacing:-.025em;color:var(--text);max-width:720px}
+.lead{margin:22px 0 0;color:var(--muted);font-size:18px;line-height:1.85;max-width:680px}
+.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;max-width:680px;margin-top:20px}
+.metric{border:1px solid var(--line);background:linear-gradient(180deg,rgba(18,16,11,.92),rgba(7,7,7,.96));border-radius:14px;padding:16px}
+.metric b{font-size:25px;display:block}
+.metric span{color:var(--muted);font-size:13px}
+.panel-head{padding:22px 24px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:14px}
+.panel-head b{color:var(--gold-hi);letter-spacing:.10em;font-size:14px}
+.badge{border:1px solid rgba(212,175,55,.38);color:var(--gold-hi);border-radius:8px;padding:8px 10px;font-size:12px;font-weight:800;white-space:nowrap}
+form{padding:24px;display:grid;gap:13px}
+label{color:var(--muted);font-size:13px;font-weight:800;letter-spacing:.04em}
+input{width:100%;border:1px solid rgba(212,175,55,.26);background:rgba(0,0,0,.42);color:var(--text);border-radius:10px;padding:14px 15px;outline:none;font-size:15px}
+input[type=email],input[type=password],input[type=tel],input[name=otp]{direction:ltr;text-align:left}
+input::placeholder{color:rgba(185,173,145,.62)}
+input:focus{border-color:var(--gold-hi);box-shadow:0 0 0 3px rgba(212,175,55,.10)}
+.submit{margin-top:8px;border:1px solid rgba(244,215,125,.52);background:linear-gradient(135deg,var(--gold-hi),var(--gold));color:#090806;font-weight:900;border-radius:10px;padding:15px;cursor:pointer;font-size:15px}
+.ghost{display:block;text-align:center;text-decoration:none;border:1px solid rgba(212,175,55,.28);color:var(--gold-hi);padding:13px;border-radius:10px;margin:0 24px 24px}
+.note{border-top:1px solid var(--line);color:var(--muted);font-size:13px;padding:18px 24px;line-height:1.7}
+.mini-row{display:flex;align-items:center;justify-content:space-between;gap:14px;font-size:13px;color:var(--muted)}
+.mini-row a{color:var(--gold-hi);text-decoration:none}
+
+@media(max-width:1180px){
+.shell{grid-template-columns:minmax(0,1fr) 280px;align-items:start}
+
+.side{grid-column:2;border-left:1px solid var(--line);border-bottom:0;padding:22px 16px;grid-row:1;align-self:start;min-height:100vh}
+
+.main{grid-column:1;grid-row:1;align-self:start;align-content:start;min-height:100vh;grid-template-rows:auto auto}
+
+.content{grid-template-columns:1fr;align-items:start;padding:24px clamp(18px,3vw,42px) 36px;gap:28px}
+
+.hero,
+.panel{grid-column:1;justify-self:stretch;max-width:none;align-self:start}
+
+.hero{order:1;align-self:start}
+
+.panel{order:2;align-self:start}
+
+.metrics{grid-template-columns:1fr;margin-top:20px}
+
+.topbar{
+ padding:18px;
+ align-items:flex-start;
+ flex-direction:column;
+ }
+
+.session{
+ flex-wrap:wrap;
+ white-space:normal;
+ }
+}
+
+@media(max-width:760px){
+.shell{grid-template-columns:minmax(0,1fr) 86px;align-items:start}
+
+.side{grid-column:2;padding:14px 8px;gap:18px;overflow:hidden;grid-row:1;align-self:start;min-height:100vh}
+
+.main{grid-column:1;grid-row:1;align-self:start;align-content:start;min-height:100vh;grid-template-rows:auto auto}
+
+.brand{
+ justify-content:center;
+ }
+
+.mark{
+ width:46px;
+ height:46px;
+ font-size:22px;
+ }
+
+.brand h1,
+.brand p{
+ display:none;
+ }
+
+ nav{
+ gap:8px;
+ }
+
+ nav a{
+ min-height:48px;
+ padding:10px 8px;
+ justify-content:center;
+ text-align:center;
+ }
+
+ nav a span:first-child{
+ display:none;
+ }
+
+ nav a span:last-child{
+ display:block;
+ font-weight:900;
+ color:inherit;
+ }
+
+.side-status{
+ padding:12px 8px;
+ text-align:center;
+ }
+
+.side-status b{
+ justify-content:center;
+ font-size:0;
+ gap:0;
+ }
+
+.side-status b::after{
+ content:"ON";
+ font-size:11px;
+ letter-spacing:.08em;
+ margin-inline-start:6px;
+ }
+
+.side-status p{
+ display:none;
+ }
+
+.content{align-items:start;padding:24px clamp(18px,3vw,42px) 36px;gap:28px}
+
+ h2{
+ font-size:32px;
+ }
+
+.lead{
+ font-size:16px;
+ line-height:1.75;
+ }
+
+.panel-head{
+ padding:18px;
+ }
+
+ form{
+ padding:18px;
+ }
+
+.ghost{
+ margin:0 18px 18px;
+ }
+
+.note{
+ padding:16px 18px;
+ }
+}
+
+</style>
+<link rel="stylesheet" href="/assets/ndsp-mobile-pages-nav-clean.css?v=20260710_153230">
+ <script src="/assets/ndsp-mobile-pages-nav-clean.js?v=20260710_153230" defer></script>
+  <script src="/assets/ndsp-single-arabic-guard-v10.js?v=20260710_164851" defer></script>
+  <link rel="stylesheet" href="/assets/ndsp-pages-routes-safe-v13.css?v=20260710_165834">
+  <script src="/assets/ndsp-pages-routes-safe-v13.js?v=20260710_165834" defer></script>
+</head>
+<body>
+ <div class="shell">
+ <aside class="side">
+ <div class="brand">
+ <div class="mark">⌘</div>
+ <div>
+ <h1>EMPIRE CORE</h1>
+ <p>NDIP · DECISION SYSTEM</p>
+ </div>
+ </div>
+
+ <nav>
+ <a href="https://my.ndsp.app/"><span>الصفحة الرئيسية</span><span>01</span></a>
+ <a href="/login" class="active"><span>تسجيل الدخول</span><span>02</span></a>
+<a href="/register" class=""><span>تسجيل مستخدم جديد</span><span>03</span></a>
+<a href="/admin" class=""><span>مدير النظام</span><span>04</span></a>
+<a href="/owner" class=""><span>مالك النظام</span><span>05</span></a>
+
+ </nav>
+
+ <div class="side-status">
+ <b><i class="dot"></i> SYSTEM ONLINE</b>
+ <p style="margin:12px 0 0;color:#cdbf98;line-height:1.7">النظام متاح الآن.</p>
+ </div>
+ </aside>
+
+ <main class="main">
+ <div class="topbar">
+ <div class="session">
+ <span>SESSION</span>
+ <strong>23 APR 2025 · 09:42:18 UTC</strong>
+ <span style="color:#34d399">MARKETS LIVE</span>
+ </div>
+ <div class="live">SECURE ACCESS</div>
+ </div>
+
+ <div class="content">
+ <section class="panel">
+ <div class="panel-head">
+ <b>تسجيل الدخول</b>
+ <span class="badge">SECURE SESSION</span>
+ </div>
+
+ <form method="get" action="#" onsubmit="event.preventDefault();window.location.href='https://my.ndsp.app/';return false;">
+ 
+ <label>البريد الإلكتروني</label>
+ <input type="email" name="email" placeholder="you@example.com" autocomplete="email">
+
+ <label>كلمة المرور</label>
+ <input type="password" name="password" placeholder="••••••••" autocomplete="current-password">
+
+ <div class="mini-row">
+ <a href="/forgot-password">نسيت كلمة المرور؟</a>
+ <span>جلسة آمنة</span>
+ </div>
+ 
+ <button class="submit" type="submit">دخول المستخدم</button>
+ </form>
+
+ <a class="ghost" href="/">العودة للرئيسية</a>
+
+ <div class="note">NDSP منصة دعم قرار، وليست منصة تنفيذ أو أوامر تداول.</div>
+ </section>
+
+ <section class="hero">
+ <div class="kicker">NDSP ACCESS</div>
+ <h2>الدخول إلى منصة NDSP</h2>
+ <p class="lead">سجّل دخولك للوصول إلى لوحة NDSP ومتابعة القراءات والتنبيهات وحالة الأسواق.</p>
+
+ <div class="metrics">
+ <div class="metric"><b>16</b><span>يوم تجربة</span></div>
+ <div class="metric"><b>16</b><span>طبقة حوكمة</span></div>
+ <div class="metric"><b>24H</b><span>مراقبة حالة</span></div>
+ </div>
+ </section>
+ </div>
+ </main>
+ </div>
+</body>
+</html>

@@ -1,0 +1,19 @@
+[Unit]
+Description=Empire Core - TwelveData Poller
+After=network.target
+
+[Service]
+User=root
+WorkingDirectory=/opt/empire-core/feeds
+EnvironmentFile=/opt/empire-core/backend/.env
+# ensure TWELVEDATA_KEY exists in the .env file
+Environment="TD_SYMBOLS=EUR/USD,XAU/USD,WTI"
+Environment="POLL_INTERVAL=15"
+Environment="BACKEND_API=http://127.0.0.1:9001"
+ExecStart=/opt/empire-core/backend/venv/bin/python /opt/empire-core/feeds/twelvedata_poller.py
+Restart=on-failure
+RestartSec=5
+LimitNOFILE=4096
+
+[Install]
+WantedBy=multi-user.target

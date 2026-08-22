@@ -1,0 +1,3 @@
+/api/completed-decisions
+/api/completed-decisions/latest
+/api/completed-decisions/

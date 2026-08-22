@@ -1,0 +1,14 @@
+● ndsp-registration-consent-v42.service - NDSP registration legal-consent gateway V42
+     Loaded: loaded (/etc/systemd/system/ndsp-registration-consent-v42.service; enabled; preset: enabled)
+    Drop-In: /etc/systemd/system/ndsp-registration-consent-v42.service.d
+             └─46-runtime-database.conf, 90-project-source.conf
+     Active: active (running) since Fri 2026-08-07 19:17:52 CEST; 34s ago
+   Main PID: 585567 (node)
+      Tasks: 8 (limit: 28792)
+     Memory: 10.0M (peak: 12.1M)
+        CPU: 435ms
+     CGroup: /system.slice/ndsp-registration-consent-v42.service
+             └─585567 /usr/bin/node /home/nawaf511/empire-core-new/runtime/opt-services/legal-v42-729774de5b/ndsp-registration-consent-gateway.cjs
+
+أغسطس 07 19:17:52 vmi2934783 systemd[1]: Started ndsp-registration-consent-v42.service - NDSP registration legal-consent gateway V42.
+أغسطس 07 19:17:52 vmi2934783 node[585567]: NDSP registration consent gateway listening on http://127.0.0.1:9029

@@ -1,0 +1,33 @@
+# NDSP bot temporary disabled endpoint.
+# Old static bot root has been archived.
+# Rebuild later with a fresh bot implementation.
+
+server {
+    listen 80;
+    listen [::]:80;
+    server_name bot.ndsp.app;
+
+    location ^~ /.well-known/acme-challenge/ {
+        root /var/www/html;
+        default_type text/plain;
+        try_files $uri =404;
+    }
+
+    location / {
+        return 410 "NDSP bot is temporarily disabled and will be rebuilt.\n";
+    }
+}
+
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name bot.ndsp.app;
+
+    ssl_certificate /etc/letsencrypt/live/bot.ndsp.app/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/bot.ndsp.app/privkey.pem;
+
+    location / {
+        add_header Cache-Control "no-store, no-cache, must-revalidate" always;
+        return 410 "NDSP bot is temporarily disabled and will be rebuilt.\n";
+    }
+}

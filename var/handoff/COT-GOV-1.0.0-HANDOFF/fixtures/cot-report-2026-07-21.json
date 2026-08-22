@@ -1,0 +1,40 @@
+{
+  "reportDate": "2026-07-21",
+  "marketCode": "CME_BITCOIN_REFERENCE_FIXTURE",
+  "positions": {
+    "ASSET_MANAGER": {
+      "long": 4684,
+      "short": 1957
+    },
+    "LEVERAGED_FUNDS": {
+      "long": 4073,
+      "short": 12041
+    },
+    "OTHER_REPORTABLES": {
+      "long": 811,
+      "short": 154
+    },
+    "DEALER_INTERMEDIARY": {
+      "long": 6904,
+      "short": 2270
+    }
+  },
+  "changes": {
+    "ASSET_MANAGER": {
+      "long": -95,
+      "short": -7
+    },
+    "LEVERAGED_FUNDS": {
+      "long": 45,
+      "short": 513
+    },
+    "OTHER_REPORTABLES": {
+      "long": 427,
+      "short": 1
+    },
+    "DEALER_INTERMEDIARY": {
+      "long": 150,
+      "short": 155
+    }
+  }
+}

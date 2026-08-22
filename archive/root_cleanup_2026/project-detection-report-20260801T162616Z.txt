@@ -1,0 +1,753 @@
+
+============================================================
+1. معلومات المسار
+============================================================
+وقت الفحص UTC:       2026-08-01T16:26:16Z
+المسار المنطقي:       /home/nawaf511/empire-core-new
+المسار الحقيقي:       /home/nawaf511/empire-core-new
+جذر المشروع المرجح:   /home/nawaf511/empire-core-new
+عمق البحث:            4
+حالة /var/www: جذر المشروع الحالي ليس تحت /var/www.
+أنت حالياً داخل جذر المشروع المرجح.
+
+============================================================
+2. ملفات تعريف المشروع
+============================================================
+/home/nawaf511/empire-core-new/apps/ndsp-layers-api/requirements.txt
+/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/requirements.txt
+/home/nawaf511/empire-core-new/backend/framework/package.json
+/home/nawaf511/empire-core-new/backend/ndsp-access-guard-9024/package.json
+/home/nawaf511/empire-core-new/backend/ndsp-access-guard-final/package.json
+/home/nawaf511/empire-core-new/backend/ndsp-access-guard/package.json
+/home/nawaf511/empire-core-new/backend/ndsp-trial-register-canonical-wrapper/package.json
+/home/nawaf511/empire-core-new/backend/package.json
+/home/nawaf511/empire-core-new/backend/password_reset_gateway/package.json
+/home/nawaf511/empire-core-new/backend/services/bot_execution/package.json
+/home/nawaf511/empire-core-new/backend/services/completed_decision/package.json
+/home/nawaf511/empire-core-new/backend/services/ctl-001-workspace-identity/package.json
+/home/nawaf511/empire-core-new/backend/services/decision_governance_core/package.json
+/home/nawaf511/empire-core-new/Dockerfile
+/home/nawaf511/empire-core-new/frontend/public-site/package.json
+/home/nawaf511/empire-core-new/frontend/public-site/tsconfig.json
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/package.json
+/home/nawaf511/empire-core-new/package.json
+
+============================================================
+3. اكتشاف اللغات والأطر
+============================================================
+
+[/home/nawaf511/empire-core-new/backend/framework/package.json]
+  النوع الأساسي: Node.js
+  الباك إند: Express
+
+[/home/nawaf511/empire-core-new/backend/ndsp-access-guard-9024/package.json]
+  النوع الأساسي: Node.js
+
+[/home/nawaf511/empire-core-new/backend/ndsp-access-guard-final/package.json]
+  النوع الأساسي: Node.js
+
+[/home/nawaf511/empire-core-new/backend/ndsp-access-guard/package.json]
+  النوع الأساسي: Node.js
+
+[/home/nawaf511/empire-core-new/backend/ndsp-trial-register-canonical-wrapper/package.json]
+  النوع الأساسي: Node.js
+
+[/home/nawaf511/empire-core-new/backend/package.json]
+  النوع الأساسي: Node.js
+  الباك إند: Express
+
+[/home/nawaf511/empire-core-new/backend/password_reset_gateway/package.json]
+  النوع الأساسي: Node.js
+  الباك إند: Express
+
+[/home/nawaf511/empire-core-new/backend/services/bot_execution/package.json]
+  النوع الأساسي: Node.js
+  الباك إند: Express
+
+[/home/nawaf511/empire-core-new/backend/services/completed_decision/package.json]
+  النوع الأساسي: Node.js
+  الباك إند: Express
+
+[/home/nawaf511/empire-core-new/backend/services/ctl-001-workspace-identity/package.json]
+  النوع الأساسي: Node.js
+
+[/home/nawaf511/empire-core-new/backend/services/decision_governance_core/package.json]
+  النوع الأساسي: Node.js
+  الباك إند: Express
+
+[/home/nawaf511/empire-core-new/frontend/public-site/package.json]
+  النوع الأساسي: Node.js + TypeScript
+  الواجهة: React
+  أداة البناء: Vite
+
+[/home/nawaf511/empire-core-new/frontend/user-portal-vite/package.json]
+  النوع الأساسي: Node.js
+  الواجهة: React
+  أداة البناء: Vite
+
+[/home/nawaf511/empire-core-new/package.json]
+  النوع الأساسي: Node.js
+  الباك إند: Express
+
+[/home/nawaf511/empire-core-new/apps/ndsp-layers-api]
+  النوع الأساسي: Python
+
+[/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway]
+  النوع الأساسي: Python
+
+============================================================
+4. مجلدات frontend وbackend المحتملة
+============================================================
+/home/nawaf511/empire-core-new/api
+/home/nawaf511/empire-core-new/apps/admin-console/api
+/home/nawaf511/empire-core-new/backend
+/home/nawaf511/empire-core-new/backend/app/api
+/home/nawaf511/empire-core-new/backups/frontend
+/home/nawaf511/empire-core-new/frontend
+/home/nawaf511/empire-core-new/frontend/admin-console/api
+
+============================================================
+5. فحص إعدادات خادم الويب
+============================================================
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:171:        alias /var/www/ndsp-my/portal-v50/config/assets.json;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:177:        alias /var/www/ndsp-my/portal-v50/config/layers.json;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:183:        alias /var/www/ndsp-my/portal-v50/config/capabilities.json;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:202:        proxy_pass http://127.0.0.1:9090/api/register;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:215:        proxy_pass http://127.0.0.1:9090/api/trial/status;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:229:        proxy_pass http://127.0.0.1:9090/api/trial/seats;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:239:        proxy_pass http://127.0.0.1:9090/api/launch/status;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:249:        proxy_pass http://127.0.0.1:9090/api/entitlements/me;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:268:        proxy_pass http://127.0.0.1:9090/api/auth/decision-room-access;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:294:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:301:        alias /var/www/ndsp-my/assets/ndsp-telegram-v182.css;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:307:        alias /var/www/ndsp-my/assets/ndsp-telegram-v182.js;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:313:        alias /var/www/ndsp-my/assets/ndsp-telegram-entry-v182.js;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:319:        proxy_pass http://127.0.0.1:9091;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:332:    include /etc/nginx/snippets/ndsp-business-ops-v205.conf;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:336:        proxy_pass http://127.0.0.1:9095;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:349:        proxy_pass http://127.0.0.1:9095;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:362:        proxy_pass http://127.0.0.1:9095;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:375:        proxy_pass http://127.0.0.1:9095;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:388:        proxy_pass http://127.0.0.1:9095;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:401:        proxy_pass http://127.0.0.1:9095;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:414:        proxy_pass http://127.0.0.1:9095;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:427:        proxy_pass http://127.0.0.1:9095;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:440:        proxy_pass http://127.0.0.1:9095;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:453:        proxy_pass http://127.0.0.1:9095;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:466:        proxy_pass http://127.0.0.1:9095;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:479:    include /etc/nginx/snippets/ndsp-auth-core-clean.conf;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:484:        proxy_pass http://127.0.0.1:19091/api/auth/session;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:494:        proxy_pass http://127.0.0.1:9078/api/completed$is_args$args;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:509:        proxy_pass http://127.0.0.1:9078/api/completed/latest$is_args$args;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:534:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:542:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:549:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:566:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:575:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:582:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:587:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:604:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:613:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:618:        proxy_pass http://127.0.0.1:9027/api/auth/forgot-password;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:630:        proxy_pass http://127.0.0.1:9027/api/auth/reset-password;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:67:    include /etc/nginx/snippets/ndsp-governance-44-v26.conf;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:69:    root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:88:        proxy_pass https://api.ndsp.app/api/;
+/etc/nginx/conf.d/000-admin-ndsp-app-canonical-only.conf:15:    include /etc/nginx/snippets/ndsp-layers-api-admin-location.conf;
+/etc/nginx/conf.d/000-admin-ndsp-app-canonical-only.conf:17:    include /etc/nginx/snippets/ndsp-raw-cot-admin-location.conf;
+/etc/nginx/conf.d/000-admin-ndsp-app-canonical-only.conf:29:    root /var/www/ndsp-admin;
+/etc/nginx/conf.d/000-admin-ndsp-app-canonical-only.conf:35:        proxy_pass http://127.0.0.1:9068/health;
+/etc/nginx/conf.d/000-admin-ndsp-app-canonical-only.conf:44:        proxy_pass http://127.0.0.1:9068/;
+/etc/nginx/conf.d/000-admin-ndsp-app-canonical-only.conf:60:    include /etc/nginx/snippets/ndsp-layers-api-admin-location.conf;
+/etc/nginx/conf.d/000-admin-ndsp-app-canonical-only.conf:62:    include /etc/nginx/snippets/ndsp-raw-cot-admin-location.conf;
+/etc/nginx/conf.d/000-admin-ndsp-app-canonical-only.conf:7:        root /var/www/html;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:110:        proxy_pass http://127.0.0.1:9028/api/register;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:123:        proxy_pass http://127.0.0.1:9028/api/auth/register;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:138:        proxy_pass http://127.0.0.1:9001/api/completed-decisions$is_args$args;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:154:        proxy_pass http://127.0.0.1:9001/api/completed-decisions/latest$is_args$args;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:173:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:184:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:18:        proxy_pass http://127.0.0.1:9061/api/decision/package-v2;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:192:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:200:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:208:    include /etc/nginx/snippets/ndsp-staged-commercial-security.conf;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:222:        proxy_pass http://127.0.0.1:9020/api/auth/login;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:231:        proxy_pass http://127.0.0.1:9020/api/auth/me;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:240:        proxy_pass http://127.0.0.1:9020/api/auth/logout;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:249:        proxy_pass http://127.0.0.1:9001;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:259:        proxy_pass http://127.0.0.1:9082/api/decision/quality-live$is_args$args;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:307:        proxy_pass http://127.0.0.1:9066;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:30:        root /var/www/html;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:314:        proxy_pass http://127.0.0.1:9066;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:347:        proxy_pass http://127.0.0.1:9061/api/decision/package-live;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:361:        proxy_pass http://127.0.0.1:9078/api/completed;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:369:        proxy_pass http://127.0.0.1:9078/api/completed/latest;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:377:        proxy_pass http://127.0.0.1:9078$request_uri;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:385:        proxy_pass http://127.0.0.1:9078$request_uri;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:393:        proxy_pass http://127.0.0.1:9078$request_uri;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:401:        proxy_pass http://127.0.0.1:9079/health;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:409:        proxy_pass http://127.0.0.1:9079/api/governance/evaluate;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:436:        proxy_pass http://127.0.0.1:9028/api/register;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:449:        proxy_pass http://127.0.0.1:9028/api/auth/register;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:464:        proxy_pass http://127.0.0.1:9001/api/completed-decisions$is_args$args;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:480:        proxy_pass http://127.0.0.1:9001/api/completed-decisions/latest$is_args$args;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:499:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:510:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:518:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:526:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:52:        proxy_pass http://127.0.0.1:9082/api/decision/quality-live$is_args$args;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:533:        proxy_pass http://127.0.0.1:9090/api/trial/status;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:547:        proxy_pass http://127.0.0.1:9090/api/trial/seats;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:557:        proxy_pass http://127.0.0.1:9090/api/launch/status;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:100:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:108:    include /etc/nginx/snippets/ndsp-staged-commercial-security.conf;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:113:    root /var/www/ndsp;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:133:        proxy_pass http://127.0.0.1:9020/api/auth/login;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:142:        proxy_pass http://127.0.0.1:9019/api/trial/register/health;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:154:        proxy_pass http://127.0.0.1:9019/api/trial/register/;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:166:        proxy_pass http://127.0.0.1:9019/api/trial/invites/validate;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:17:        root /var/www/html;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:193:        root /var/www/html;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:201:        proxy_pass https://api.ndsp.app/api/auth/reset-password;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:219:        proxy_pass http://127.0.0.1:9083/api/decision/nmp-timeframes-live$is_args$args;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:226:        proxy_pass http://127.0.0.1:9083/api/decision/quality-contract-v52$is_args$args;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:233:        proxy_pass http://127.0.0.1:9083/health;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:245:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:253:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:261:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:272:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:27:        root /var/www/html;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:280:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:288:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:295:        proxy_pass http://127.0.0.1:9090/api/trial/status;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:309:        proxy_pass http://127.0.0.1:9090/api/trial/seats;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:319:        proxy_pass http://127.0.0.1:9090/api/launch/status;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:35:        proxy_pass https://api.ndsp.app/api/auth/reset-password;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:57:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:65:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:73:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:84:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:92:        root /var/www/ndsp-my;
+/etc/nginx/nginx.conf:14:    include /etc/nginx/mime.types;
+/etc/nginx/nginx.conf:21:    include /etc/nginx/conf.d/*.conf;
+/etc/nginx/nginx.conf:22:    include /etc/nginx/sites-enabled/*;
+/etc/nginx/nginx.conf:4:include /etc/nginx/modules-enabled/*.conf;
+
+============================================================
+6. مطابقة إعدادات الخادم مع المشروع
+============================================================
+لم أجد إعداد خادم ويب يشير نصياً إلى جذر المشروع الحالي.
+
+تنبيه: توجد إعدادات ما زالت تشير إلى /var/www:
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:171:        alias /var/www/ndsp-my/portal-v50/config/assets.json;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:177:        alias /var/www/ndsp-my/portal-v50/config/layers.json;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:183:        alias /var/www/ndsp-my/portal-v50/config/capabilities.json;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:294:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:301:        alias /var/www/ndsp-my/assets/ndsp-telegram-v182.css;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:307:        alias /var/www/ndsp-my/assets/ndsp-telegram-v182.js;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:313:        alias /var/www/ndsp-my/assets/ndsp-telegram-entry-v182.js;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:534:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:542:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:549:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:566:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:575:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:582:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:587:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:604:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:613:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-000-my-ndsp-app-clean-golden.conf:69:    root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-admin-ndsp-app-canonical-only.conf:29:    root /var/www/ndsp-admin;
+/etc/nginx/conf.d/000-admin-ndsp-app-canonical-only.conf:7:        root /var/www/html;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:173:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:184:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:192:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:200:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:30:        root /var/www/html;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:499:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:510:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:518:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-api-ndsp-app-canonical.conf:526:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:100:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:113:    root /var/www/ndsp;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:17:        root /var/www/html;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:193:        root /var/www/html;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:245:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:253:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:261:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:272:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:27:        root /var/www/html;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:280:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:288:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:57:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:65:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:73:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:84:        root /var/www/ndsp-my;
+/etc/nginx/conf.d/000-ndsp-app-public-canonical-only.conf:92:        root /var/www/ndsp-my;
+
+============================================================
+7. فحص systemd
+============================================================
+/etc/systemd/system/binance-feed.service:11:ExecStart=/opt/empire-core/backend/venv/bin/python /opt/empire-core/feeds/binance_ws.py
+/etc/systemd/system/dashboard.service:9:ExecStart=/usr/bin/yarn start
+/etc/systemd/system/decisionos-backend.service:8:WorkingDirectory=/opt/decisionos/backend
+/etc/systemd/system/decisionos-backend.service:9:ExecStart=/opt/decisionos/backend/venv/bin/uvicorn main:app --host 0.0.0.0 --port 9103
+/etc/systemd/system/dsp-elite-trial-expiry.service:10:ExecStart=/home/nawaf511/empire-core-new/backend/venv/bin/python -m app.workers.elite_trial_expiry_worker
+/etc/systemd/system/dsp-elite-trial-expiry.service:8:WorkingDirectory=/home/nawaf511/empire-core-new/backend
+/etc/systemd/system/dsp-elite-trial-expiry.service:9:EnvironmentFile=/home/nawaf511/empire-core-new/backend/.env
+/etc/systemd/system/empire-binance-feed.service:7:WorkingDirectory=/opt/empire-core/backend
+/etc/systemd/system/empire-binance-feed.service:8:ExecStart=/opt/empire-core/backend/venv/bin/python app/binance_feed.py
+/etc/systemd/system/empire-ndip-api.service:7:WorkingDirectory=/opt/empire-core/backend
+/etc/systemd/system/empire-ndip-api.service:8:ExecStart=/opt/empire-core/backend/venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 9001
+/etc/systemd/system/empire-webhook.service:8:ExecStart=/opt/empire/webhooks/universal/venv/bin/uvicorn app:app --host 127.0.0.1 --port 9100
+/etc/systemd/system/fanno-comments.service:8:ExecStart=/opt/fanno_comments/venv/bin/python app.py
+/etc/systemd/system/marketpulse.service:10:ExecStart=/home/nawaf511/marketpulse/venv/bin/gunicorn \
+/etc/systemd/system/ndip-api-new.service:10:ExecStart=/home/nawaf511/empire-core-new/backend/venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 9000
+/etc/systemd/system/ndip-api-new.service:8:WorkingDirectory=/home/nawaf511/empire-core-new/backend
+/etc/systemd/system/ndip-api-new.service:9:EnvironmentFile=/home/nawaf511/empire-core-new/backend/.env
+/etc/systemd/system/ndip-autonomous-loop.service:7:WorkingDirectory=/opt/empire-core/backend
+/etc/systemd/system/ndip-autonomous-loop.service:8:ExecStart=/opt/empire-core/backend/venv/bin/python3 /opt/empire-core/backend/engine/autonomous_loop.py
+/etc/systemd/system/ndip-autopilot.service:7:WorkingDirectory=/opt/empire-core/backend
+/etc/systemd/system/ndip-autopilot.service:8:ExecStart=/opt/empire-core/backend/venv/bin/python3 /opt/empire-core/backend/engine/autonomous_trader.py
+/etc/systemd/system/ndip-auto-signal.service:7:WorkingDirectory=/opt/empire-core/backend
+/etc/systemd/system/ndip-auto-signal.service:8:ExecStart=/opt/empire-core/backend/venv/bin/python3 /opt/empire-core/backend/engine/auto_signal_engine.py
+/etc/systemd/system/ndip-auto-trade.service:10:WorkingDirectory=/opt/empire-core/backend
+/etc/systemd/system/ndip-auto-trade.service:12:ExecStart=/usr/bin/python3 /opt/empire-core/backend/bin/autonomous_cycle_runner.py
+/etc/systemd/system/ndip-backend.service:7:WorkingDirectory=/opt/empire-core/backend
+/etc/systemd/system/ndip-backend.service:9:ExecStart=/opt/empire-core/backend/venv/bin/gunicorn app.main:app \
+/etc/systemd/system/ndip-dashboard.service:11:ExecStart=/root/empire-core/backend/venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 8010
+/etc/systemd/system/ndip-dashboard.service:8:WorkingDirectory=/root/empire-core/backend
+/etc/systemd/system/ndip-engine.service:7:WorkingDirectory=/opt/empire-core/backend
+/etc/systemd/system/ndip-engine.service:8:ExecStart=/opt/empire-core/backend/venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 9001
+/etc/systemd/system/ndip-frontend.service:7:WorkingDirectory=/opt/empire-core/frontend
+/etc/systemd/system/ndip-frontend.service:8:ExecStart=/usr/bin/npm start
+/etc/systemd/system/ndip-health-monitor.service:10:EnvironmentFile=/home/nawaf511/empire-core-new/backend/.env
+/etc/systemd/system/ndip-health-monitor.service:11:ExecStart=/home/nawaf511/empire-core-new/backend/venv/bin/python -m app.workers.ndip_health_monitor
+/etc/systemd/system/ndip-health-monitor.service:9:WorkingDirectory=/home/nawaf511/empire-core-new/backend
+/etc/systemd/system/ndip-run-server.service:10:ExecStart=/opt/empire-core/backend/bin/managed_start_server.sh
+/etc/systemd/system/ndip-run-server.service:9:WorkingDirectory=/opt/empire-core/backend
+/etc/systemd/system/ndip-security-cleanup.service:6:WorkingDirectory=/opt/ndip/backend/app
+/etc/systemd/system/ndip-security-cleanup.service:7:ExecStart=/opt/ndip/backend/app/../../venv/bin/python -m backend.app.tools.cleanup_security
+/etc/systemd/system/ndip.service:7:WorkingDirectory=/opt/empire-core/backend
+/etc/systemd/system/ndip.service:8:ExecStart=/opt/empire-core/backend/venv/bin/gunicorn app.main:app -k uvicorn.workers.UvicornWorker -w 1 -b 0.0.0.0:9001
+/etc/systemd/system/ndip-signal-engine.service:7:WorkingDirectory=/opt/empire-core/backend
+/etc/systemd/system/ndip-signal-engine.service:8:ExecStart=/opt/empire-core/backend/venv/bin/python3 /opt/empire-core/backend/engine/signal_engine.py
+/etc/systemd/system/ndip-signal.service:7:WorkingDirectory=/opt/empire-core/backend
+/etc/systemd/system/ndip-signal.service:8:ExecStart=/opt/empire-core/backend/venv/bin/python3 /opt/empire-core/backend/engine/signal_dispatcher.py
+/etc/systemd/system/ndip-telegram-decision-worker.service:10:EnvironmentFile=/home/nawaf511/empire-core-new/backend/.env
+/etc/systemd/system/ndip-telegram-decision-worker.service:11:ExecStart=/home/nawaf511/empire-core-new/backend/venv/bin/python -m app.workers.telegram_decision_worker
+/etc/systemd/system/ndip-telegram-decision-worker.service:9:WorkingDirectory=/home/nawaf511/empire-core-new/backend
+/etc/systemd/system/ndip-trading-loop.service:7:WorkingDirectory=/opt/empire-core/backend
+/etc/systemd/system/ndip-trading-loop.service:8:ExecStart=/opt/empire-core/backend/venv/bin/python3 /opt/empire-core/backend/engine/trading_loop.py
+/etc/systemd/system/ndsp-16-layers.service:11:ExecStart=/usr/bin/node /opt/ndsp16-api/server.js
+/etc/systemd/system/ndsp-16-layers.service:8:WorkingDirectory=/opt/ndsp16-api
+/etc/systemd/system/ndsp-access-guard-9024.service:10:ExecStart=/usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp-access-guard-9024/server.js
+/etc/systemd/system/ndsp-access-guard-9024.service:8:WorkingDirectory=/home/nawaf511/empire-core-new/backend/ndsp-access-guard-9024
+/etc/systemd/system/ndsp-access-guard-final.service:10:ExecStart=/usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp-access-guard-final/server.js
+/etc/systemd/system/ndsp-access-guard-final.service:8:WorkingDirectory=/home/nawaf511/empire-core-new/backend/ndsp-access-guard-final
+/etc/systemd/system/ndsp-access-guard.service:10:ExecStart=/usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp-access-guard/server.js
+/etc/systemd/system/ndsp-access-guard.service:8:WorkingDirectory=/home/nawaf511/empire-core-new/backend/ndsp-access-guard
+/etc/systemd/system/ndsp-admin-actions.service:12:ExecStart=/usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_actions_gateway.cjs
+/etc/systemd/system/ndsp-admin-actions.service:7:WorkingDirectory=/home/nawaf511/empire-core-new/backend/auth_api
+/etc/systemd/system/ndsp-admin-console.service:11:ExecStart=/usr/bin/npm run start
+/etc/systemd/system/ndsp-admin-snapshot-updater.service:6:ExecStart=/usr/bin/python3 /usr/local/bin/ndsp_admin_snapshot_updater.py
+/etc/systemd/system/ndsp-admin-ui-proxy.service:10:EnvironmentFile=-/home/nawaf511/empire-core-new/backend/auth_api/.env
+/etc/systemd/system/ndsp-admin-ui-proxy.service:12:ExecStart=/usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_ui_proxy.cjs
+/etc/systemd/system/ndsp-admin-ui-proxy.service:7:WorkingDirectory=/home/nawaf511/empire-core-new/backend/auth_api
+/etc/systemd/system/ndsp-admin-user-ops.service:7:ExecStart=/usr/bin/python3 -m uvicorn app:app --host 127.0.0.1 --port 9068
+/etc/systemd/system/ndsp-admin-users-official.service:14:ExecStart=/usr/bin/node /home/nawaf511/empire-core-new/backend/admin_users_official_api/server.js
+/etc/systemd/system/ndsp-admin-users-official.service:8:WorkingDirectory=/home/nawaf511/empire-core-new/backend/admin_users_official_api
+/etc/systemd/system/ndsp-airtable-runtime-sync.service:11:ExecStart=/usr/bin/python3 /home/nawaf511/empire-core-new/integrations/airtable-runtime-sync/ndsp_airtable_sync.py
+/etc/systemd/system/ndsp-api-compat.service:10:EnvironmentFile=-/home/nawaf511/empire-core-new/backend/auth_api/.env
+/etc/systemd/system/ndsp-api-compat.service:12:ExecStart=/usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_api_compat_gateway.cjs
+/etc/systemd/system/ndsp-api-compat.service:7:WorkingDirectory=/home/nawaf511/empire-core-new/backend/auth_api
+/etc/systemd/system/ndsp-api-compat.service:8:EnvironmentFile=-/etc/ndsp/ndsp-db.env
+/etc/systemd/system/ndsp-api-compat.service:9:EnvironmentFile=-/etc/ndsp/ndsp-session.env
+/etc/systemd/system/ndsp-api-compat.service.d/30-ndsp-official-runtime-source.conf:2:EnvironmentFile=/etc/ndsp/ndsp-db.env
+/etc/systemd/system/ndsp-api-compat.service.d/30-ndsp-official-runtime-source.conf:3:EnvironmentFile=/etc/ndsp/ndsp-mail.env
+/etc/systemd/system/ndsp-api.service:11:EnvironmentFile=-/home/nawaf511/empire-core-new/backend/.env
+/etc/systemd/system/ndsp-api.service:13:ExecStart=/home/nawaf511/empire-core-new/backend/venv/bin/gunicorn app.main:app   -k uvicorn.workers.UvicornWorker   --bind 127.0.0.1:9001   --workers 4   --timeout 120
+/etc/systemd/system/ndsp-api.service:8:WorkingDirectory=/home/nawaf511/empire-core-new/backend
+/etc/systemd/system/ndsp-api.service.d/10-canonical-env.conf:2:EnvironmentFile=/etc/ndsp/ndsp-db.env
+/etc/systemd/system/ndsp-api.service.d/10-canonical-env.conf:3:EnvironmentFile=-/etc/ndsp/ndsp-telegram.env
+/etc/systemd/system/ndsp-api.service.d/10-ndsp-db-env.conf:2:EnvironmentFile=/etc/ndsp/ndsp-db.env
+/etc/systemd/system/ndsp-api.service.d/20-admin-envfile.conf:2:EnvironmentFile=/etc/ndsp/ndsp-api-admin.env
+/etc/systemd/system/ndsp-api.service.d/20-ndsp-admin-env.conf:2:EnvironmentFile=-/etc/ndsp/ndsp-admin.env
+/etc/systemd/system/ndsp-api.service.d/20-ndsp-mail-env.conf:2:EnvironmentFile=/etc/ndsp/ndsp-mail.env
+/etc/systemd/system/ndsp-api.service.d/30-ndsp-official-runtime-source.conf:2:EnvironmentFile=/etc/ndsp/ndsp-db.env
+/etc/systemd/system/ndsp-api.service.d/30-ndsp-official-runtime-source.conf:3:EnvironmentFile=/etc/ndsp/ndsp-mail.env
+/etc/systemd/system/ndsp-api.service.d/50-bind-9002.conf:2:ExecStart=
+/etc/systemd/system/ndsp-api.service.d/50-bind-9002.conf:3:ExecStart=/home/nawaf511/empire-core-new/backend/venv/bin/gunicorn app.main:app -k uvicorn.workers.UvicornWorker --bind 127.0.0.1:9002 --workers 4 --timeout 120
+/etc/systemd/system/ndsp-api.service.d/98-telegram-env.conf:2:EnvironmentFile=/etc/ndsp/ndsp-telegram.env
+/etc/systemd/system/ndsp-api.service.d/99-ndsp-canonical-env.conf:2:EnvironmentFile=/etc/ndsp/ndsp-db.env
+/etc/systemd/system/ndsp-api.service.d/99-ndsp-canonical-env.conf:3:EnvironmentFile=/etc/ndsp/ndsp-telegram.env
+/etc/systemd/system/ndsp-api.service.d/99-ndsp-correct-db.env.conf:2:EnvironmentFile=/etc/ndsp/ndsp-db.env
+/etc/systemd/system/ndsp-app.service:7:WorkingDirectory=/home/nawaf511/empire-core-new/backend/frontend_public
+/etc/systemd/system/ndsp-app.service:8:ExecStart=/usr/bin/python3 -m http.server 8010 --bind 127.0.0.1
+/etc/systemd/system/ndsp-auth-api.service:10:WorkingDirectory=/home/nawaf511/empire-core-new/backend/auth_api
+/etc/systemd/system/ndsp-auth-api.service:15:EnvironmentFile=-/etc/ndsp/ndsp-db.env
+/etc/systemd/system/ndsp-auth-api.service:16:EnvironmentFile=-/etc/ndsp/ndsp-telegram.env
+/etc/systemd/system/ndsp-auth-api.service:17:EnvironmentFile=-/home/nawaf511/empire-core-new/backend/.env
+/etc/systemd/system/ndsp-auth-api.service:18:EnvironmentFile=-/home/nawaf511/empire-core-new/backend/auth_api/.env
+/etc/systemd/system/ndsp-auth-api.service:19:ExecStart=/usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/server.js
+/etc/systemd/system/ndsp-auth-api.service.d/20-ndsp-mail-env.conf:2:EnvironmentFile=/etc/ndsp/ndsp-mail.env
+/etc/systemd/system/ndsp-auth-api.service.d/30-ndsp-official-runtime-source.conf:2:EnvironmentFile=/etc/ndsp/ndsp-db.env
+/etc/systemd/system/ndsp-auth-api.service.d/30-ndsp-official-runtime-source.conf:3:EnvironmentFile=/etc/ndsp/ndsp-mail.env
+/etc/systemd/system/ndsp-auth-core-clean.service:12:ExecStart=/usr/bin/nsolid /opt/ndsp-auth-core-clean/current/server/dist/server.js
+/etc/systemd/system/ndsp-backend.service:10:ExecStart=/usr/bin/node /home/nawaf511/empire-core-new/backend/server.js
+/etc/systemd/system/ndsp-backend.service:8:WorkingDirectory=/home/nawaf511/empire-core-new/backend
+/etc/systemd/system/ndsp-backend.service.d/30-ndsp-official-runtime-source.conf:2:EnvironmentFile=/etc/ndsp/ndsp-db.env
+/etc/systemd/system/ndsp-backend.service.d/30-ndsp-official-runtime-source.conf:3:EnvironmentFile=/etc/ndsp/ndsp-mail.env
+/etc/systemd/system/ndsp-bot-execution.service:12:EnvironmentFile=-/home/nawaf511/empire-core-new/backend/.env
+/etc/systemd/system/ndsp-bot_execution.service:12:ExecStart=/usr/bin/node /home/nawaf511/empire-core-new/backend/services/bot_execution/main.cjs
+/etc/systemd/system/ndsp-bot-execution.service:13:ExecStart=/usr/bin/node /home/nawaf511/empire-core-new/backend/services/bot_execution/main.cjs
+/etc/systemd/system/ndsp-bot_execution.service:16:EnvironmentFile=-/home/nawaf511/empire-core-new/backend/runtime/systemd-env/core-services.env
+/etc/systemd/system/ndsp-bot-execution.service:8:WorkingDirectory=/home/nawaf511/empire-core-new/backend/services/bot_execution
+/etc/systemd/system/ndsp-bot_execution.service:8:WorkingDirectory=/home/nawaf511/empire-core-new/backend/services/bot_execution
+/etc/systemd/system/ndsp-business-digest.service:13:ExecStart=/usr/bin/python3 /usr/local/lib/ndsp-business-ops/daily_digest.py
+/etc/systemd/system/ndsp-business-ops.service:11:ExecStart=/usr/bin/python3 /usr/local/lib/ndsp-business-ops/app.py
+/etc/systemd/system/ndsp-canonical-live-runtime-v30.service:20:ExecStart=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_canonical_live_runtime_v30.py
+/etc/systemd/system/ndsp-canonical-live-runtime-v33.service:21:ExecStart=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_canonical_live_runtime_v33.py
+/etc/systemd/system/ndsp-capability-runtime-controller.service:12:ExecStart=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/platform/runtime/capability_runtime_controller_v1.py --project /home/nawaf511/empire-core-new --output /home/nawaf511/empire-core-new/var/runtime/NDSP_CAPABILITY_RUNTIME_EVIDENCE_V1.json
+/etc/systemd/system/ndsp-change-password-gateway.service:12:ExecStart=/opt/ndsp-change-password-gateway/venv/bin/uvicorn app:app --host 127.0.0.1 --port 9069
+/etc/systemd/system/ndsp-checkout-api.service:10:EnvironmentFile=/home/nawaf511/empire-core-new/ndsp_checkout_plans_package/backend-express/.env
+/etc/systemd/system/ndsp-checkout-api.service:13:ExecStart=/usr/bin/node /home/nawaf511/empire-core-new/ndsp_checkout_plans_package/backend-express/src/server.js
+/etc/systemd/system/ndsp-checkout-api.service:9:WorkingDirectory=/home/nawaf511/empire-core-new/ndsp_checkout_plans_package/backend-express
+/etc/systemd/system/ndsp-checkout-api.service.d/30-ndsp-official-runtime-source.conf:2:EnvironmentFile=/etc/ndsp/ndsp-db.env
+/etc/systemd/system/ndsp-checkout-api.service.d/30-ndsp-official-runtime-source.conf:3:EnvironmentFile=/etc/ndsp/ndsp-mail.env
+/etc/systemd/system/ndsp-command-center-real-data.service:10:ExecStart=/usr/bin/python3 /home/nawaf511/ndsp_scripts/ndsp_generate_existing_command_real_data.py
+/etc/systemd/system/ndsp-completed-decision.service:11:EnvironmentFile=-/home/nawaf511/empire-core-new/backend/.env
+/etc/systemd/system/ndsp-completed-decision.service:12:ExecStart=/usr/bin/node /home/nawaf511/empire-core-new/backend/services/completed_decision/main.cjs
+/etc/systemd/system/ndsp-completed_decision.service:12:ExecStart=/usr/bin/node /home/nawaf511/empire-core-new/backend/services/completed_decision/main.cjs
+/etc/systemd/system/ndsp-completed_decision.service:16:EnvironmentFile=-/home/nawaf511/empire-core-new/backend/runtime/systemd-env/core-services.env
+/etc/systemd/system/ndsp-completed-decision.service:8:WorkingDirectory=/home/nawaf511/empire-core-new/backend/services/completed_decision
+/etc/systemd/system/ndsp-completed_decision.service:8:WorkingDirectory=/home/nawaf511/empire-core-new/backend/services/completed_decision
+/etc/systemd/system/ndsp-completed-decisions-evidence-v35.service:16:ExecStart=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_evidence_v35.py
+/etc/systemd/system/ndsp-completed-decisions-history-capture-v36.service:15:ExecStart=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_history_v36.py capture
+/etc/systemd/system/ndsp-completed-decisions-history-v36.service:17:ExecStart=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_history_v36.py serve
+/etc/systemd/system/ndsp-contract-regression-v1-1.service:11:ExecStart="/usr/bin/python3.12" "/home/nawaf511/ndsp_contract_regression_v1_1_1.py" verify --baseline "/home/nawaf511/.local/state/ndsp-contract-v1-1/baseline.json" --output-dir "/home/nawaf511/ndsp_reports/ndsp-contract-regression-v1-1" --max-latency-ms 3000.0
+/etc/systemd/system/ndsp-ctl-001-workspace-identity.service:12:EnvironmentFile=-/home/nawaf511/empire-core-new/backend/.env
+/etc/systemd/system/ndsp-ctl-001-workspace-identity.service:13:ExecStart=/usr/bin/node /home/nawaf511/empire-core-new/backend/services/ctl-001-workspace-identity/main.cjs
+/etc/systemd/system/ndsp-ctl-001-workspace-identity.service:8:WorkingDirectory=/home/nawaf511/empire-core-new/backend/services/ctl-001-workspace-identity
+/etc/systemd/system/ndsp-current-user-display.service:10:ExecStart=/opt/ndsp-current-user-display/.venv/bin/uvicorn app:app --host 127.0.0.1 --port 9074
+/etc/systemd/system/ndsp-decision-governance-core.service:12:EnvironmentFile=-/home/nawaf511/empire-core-new/backend/.env
+/etc/systemd/system/ndsp-decision_governance_core.service:12:ExecStart=/usr/bin/node /home/nawaf511/empire-core-new/backend/services/decision_governance_core/main.cjs
+/etc/systemd/system/ndsp-decision-governance-core.service:13:ExecStart=/usr/bin/node /home/nawaf511/empire-core-new/backend/services/decision_governance_core/main.cjs
+/etc/systemd/system/ndsp-decision_governance_core.service:16:EnvironmentFile=-/home/nawaf511/empire-core-new/backend/runtime/systemd-env/core-services.env
+/etc/systemd/system/ndsp-decision-governance-core.service:8:WorkingDirectory=/home/nawaf511/empire-core-new/backend/services/decision_governance_core
+/etc/systemd/system/ndsp-decision_governance_core.service:8:WorkingDirectory=/home/nawaf511/empire-core-new/backend/services/decision_governance_core
+/etc/systemd/system/ndsp-decision-package-v1.service:8:ExecStart=/opt/ndsp-decision-package-v1/venv/bin/uvicorn app:app --host 127.0.0.1 --port 9061
+/etc/systemd/system/ndsp-enterprise-api.service:8:WorkingDirectory=/opt/ndsp-enterprise-api
+/etc/systemd/system/ndsp-enterprise-api.service:9:ExecStart=/opt/ndsp-enterprise-api/.venv/bin/python -m uvicorn main:app --host 127.0.0.1 --port 9088
+/etc/systemd/system/ndsp-governance-bridge.service:10:ExecStart=/usr/bin/node /home/nawaf511/empire-core-new/apps/ndsp-governance-bridge/server.mjs
+/etc/systemd/system/ndsp-investing-calendar.service:7:ExecStart=/usr/bin/python3 /home/nawaf511/ndsp-portal-real-data-sync/investing_live_calendar.py
+/etc/systemd/system/ndsp-layers-api.service:8:WorkingDirectory=/home/nawaf511/empire-core-new/apps/ndsp-layers-api
+/etc/systemd/system/ndsp-layers-api.service:9:ExecStart=/home/nawaf511/empire-core-new/apps/ndsp-layers-api/.venv/bin/uvicorn app:app --host 127.0.0.1 --port 9065
+/etc/systemd/system/ndsp-layers.service:7:WorkingDirectory=/home/nawaf511/empire-core-new/backend/app/api/routers
+/etc/systemd/system/ndsp-layers.service:9:ExecStart=/usr/bin/python3 -m uvicorn layers_control:router --port 8000
+/etc/systemd/system/ndsp-live-decision-quality.service:8:WorkingDirectory=/home/nawaf511/empire-core-new/backend/ndsp-live-decision-quality
+/etc/systemd/system/ndsp-live-decision-quality.service:9:ExecStart=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/ndsp-live-decision-quality/server.py
+/etc/systemd/system/ndsp-live-economic-calendar.service:8:ExecStart=/usr/bin/python3 /home/nawaf511/ndsp-portal-real-data-sync/live_economic_calendar_sync.py
+/etc/systemd/system/ndsp-live-market-adapter.service:12:ExecStart=/usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp_live_market_adapter.cjs
+/etc/systemd/system/ndsp-live-market-adapter.service:9:WorkingDirectory=/home/nawaf511/empire-core-new/backend
+/etc/systemd/system/ndsp-market-data-bridge-v2.service:22:ExecStart=/usr/bin/python3 /opt/ndsp-market-data-bridge-v2/bridge.py
+/etc/systemd/system/ndsp-market-prices-updater.service:6:ExecStart=/usr/bin/python3 /usr/local/bin/ndsp_live_market_prices_updater.py
+/etc/systemd/system/ndsp-mt4-freshness-guard.service:10:EnvironmentFile=-/home/nawaf511/empire-core-new/backend/.env
+/etc/systemd/system/ndsp-mt4-freshness-guard.service:11:ExecStart=/home/nawaf511/empire-core-new/backend/venv/bin/python /home/nawaf511/empire-core-new/backend/app/runtime/mt4_freshness_guard.py
+/etc/systemd/system/ndsp-mt4-freshness-guard.service:8:WorkingDirectory=/home/nawaf511/empire-core-new/backend
+/etc/systemd/system/ndsp-news-ticker.service:11:ExecStart=/usr/bin/node /opt/ndsp-news-ticker/server.js
+/etc/systemd/system/ndsp-password-reset.service:11:ExecStart=/usr/bin/node /home/nawaf511/empire-core-new/backend/password_reset_gateway/server.js
+/etc/systemd/system/ndsp-password-reset.service:7:WorkingDirectory=/home/nawaf511/empire-core-new/backend/password_reset_gateway
+/etc/systemd/system/ndsp-password-reset.service:9:EnvironmentFile=-/home/nawaf511/empire-core-new/backend/auth_api/.env
+/etc/systemd/system/ndsp-platform-gateway-9002.service:11:ExecStart=/usr/bin/python3 /opt/ndsp-platform-gateway-9002/app.py
+/etc/systemd/system/ndsp-platform-gateway.service:11:ExecStart=/usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_platform_gateway_9001.cjs
+/etc/systemd/system/ndsp-platform-gateway.service:8:WorkingDirectory=/home/nawaf511/empire-core-new/backend/auth_api
+/etc/systemd/system/ndsp-portal-real-data-api.service:10:ExecStart=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/ndsp-portal-real-data-api/server.py
+/etc/systemd/system/ndsp-portal-real-data-api.service:9:WorkingDirectory=/home/nawaf511/empire-core-new/backend/ndsp-portal-real-data-api
+/etc/systemd/system/ndsp-production-monitor.service:14:ExecStart=/usr/bin/python3 /usr/local/lib/ndsp-business-ops/monitor.py
+/etc/systemd/system/ndsp-public-gateway.service:11:ExecStart=/usr/bin/node /var/www/ndsp-public-gateway/server.mjs
+/etc/systemd/system/ndsp-public-gateway.service:8:WorkingDirectory=/var/www/ndsp-public-gateway
+/etc/systemd/system/ndsp-public-summary-v548.service:8:ExecStart=/usr/bin/python3 /opt/ndsp-public-summary-v548/app.py
+/etc/systemd/system/ndsp-quality-live-golden-wrapper.service:11:ExecStart=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_quality_live_golden_wrapper.py
+/etc/systemd/system/ndsp-quality-live-golden-wrapper.service.d/10-ndsp-canonical-pythonpath.conf:3:WorkingDirectory=/home/nawaf511/empire-core-new
+/etc/systemd/system/ndsp-quality-live-nmp-wrapper.service:12:ExecStart=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_quality_live_nmp_wrapper.py
+/etc/systemd/system/ndsp-quality-live-nmp-wrapper.service.d/10-ndsp-canonical-pythonpath.conf:3:WorkingDirectory=/home/nawaf511/empire-core-new
+/etc/systemd/system/ndsp-raw-cot-gateway.service:9:ExecStart=/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/.venv/bin/uvicorn app:app --host 127.0.0.1 --port 9076
+/etc/systemd/system/ndsp-real-feeds-sync.service:7:ExecStart=/usr/bin/python3 /home/nawaf511/ndsp-portal-real-data-sync/sync_real_feeds.py
+/etc/systemd/system/ndsp-register-compat-gateway.service:11:EnvironmentFile=-/home/nawaf511/empire-core-new/backend/auth_api/.env
+/etc/systemd/system/ndsp-register-compat-gateway.service:13:ExecStart=/usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_register_compat_gateway.cjs
+/etc/systemd/system/ndsp-register-compat-gateway.service:8:WorkingDirectory=/home/nawaf511/empire-core-new/backend/auth_api
+/etc/systemd/system/ndsp-registration-consent-v42.service:9:ExecStart=/usr/bin/node /opt/ndsp/legal-v42/ndsp-registration-consent-gateway.cjs
+/etc/systemd/system/ndsp-registration-mailer-v12-1.service:10:ExecStart=/usr/bin/python3 /opt/ndsp-registration-mailer-v12-1/mailer.py
+/etc/systemd/system/ndsp-scenario-levels-adapter.service:13:ExecStart=/usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp_scenario_levels_adapter.cjs
+/etc/systemd/system/ndsp-scenario-levels-adapter.service:9:WorkingDirectory=/home/nawaf511/empire-core-new/backend
+/etc/systemd/system/ndsp-telegram-link-listener.service:10:ExecStart=/usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp-telegram-link-listener/server.js
+/etc/systemd/system/ndsp-telegram-link-listener.service:8:WorkingDirectory=/home/nawaf511/empire-core-new/backend/ndsp-telegram-link-listener
+/etc/systemd/system/ndsp-tradingview-calendar.service:7:ExecStart=/usr/bin/python3 /home/nawaf511/ndsp-portal-real-data-sync/tradingview_live_calendar.py
+/etc/systemd/system/ndsp-trial-fingerprint-guard.service:13:ExecStart=/usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_trial_fingerprint_guard_proxy.cjs
+/etc/systemd/system/ndsp-trial-fingerprint-guard.service:8:WorkingDirectory=/home/nawaf511/empire-core-new/backend/auth_api
+/etc/systemd/system/ndsp-trial-register-canonical-wrapper.service:11:ExecStart=/usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp-trial-register-canonical-wrapper/server.js
+/etc/systemd/system/ndsp-trial-register-canonical-wrapper.service:8:WorkingDirectory=/home/nawaf511/empire-core-new/backend/ndsp-trial-register-canonical-wrapper
+
+============================================================
+8. العمليات الفعلية ومجلدات تشغيلها
+============================================================
+PID=1054
+  CWD=/
+  CMD=/usr/bin/python3 /usr/bin/networkd-dispatcher --run-startup-triggers 
+PID=1062421
+  CWD=/home/nawaf511
+  CMD=PM2 v7.0.3: God Daemon (/root/.pm2)                           
+PID=2497887
+  CWD=/opt/ndsp16-api
+  CMD=/usr/bin/node /opt/ndsp16-api/server.js 
+PID=2497888
+  CWD=/home/nawaf511/empire-core-new/backend/ndsp-access-guard-9024
+  CMD=/usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp-access-guard-9024/server.js 
+PID=2497889
+  CWD=/home/nawaf511/empire-core-new/backend/ndsp-access-guard-final
+  CMD=/usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp-access-guard-final/server.js 
+PID=2497900
+  CWD=/home/nawaf511/empire-core-new/backend/auth_api
+  CMD=/usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_actions_gateway.cjs 
+PID=2497902
+  CWD=/home/nawaf511/empire-core-new/backend/auth_api
+  CMD=/usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_admin_ui_proxy.cjs 
+PID=2497937
+  CWD=/home/nawaf511/empire-core-new/backend/admin_users_official_api
+  CMD=/usr/bin/node /home/nawaf511/empire-core-new/backend/admin_users_official_api/server.js 
+PID=2497947
+  CWD=/home/nawaf511/empire-core-new/backend/auth_api
+  CMD=/usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_api_compat_gateway.cjs 
+PID=2497949
+  CWD=/home/nawaf511/empire-core-new/backend/services/bot_execution
+  CMD=/usr/bin/node /home/nawaf511/empire-core-new/backend/services/bot_execution/main.cjs 
+PID=2498024
+  CWD=/home/nawaf511/empire-core-new/backend/services/decision_governance_core
+  CMD=/usr/bin/node /home/nawaf511/empire-core-new/backend/services/decision_governance_core/main.cjs 
+PID=2498025
+  CWD=/home/nawaf511/empire-core-new/apps/ndsp-governance-bridge
+  CMD=/usr/bin/node /home/nawaf511/empire-core-new/apps/ndsp-governance-bridge/server.mjs 
+PID=2498028
+  CWD=/opt/ndsp-news-ticker
+  CMD=/usr/bin/node /opt/ndsp-news-ticker/server.js 
+PID=2498040
+  CWD=/home/nawaf511/empire-core-new/backend
+  CMD=/usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp_live_market_adapter.cjs 
+PID=2498041
+  CWD=/home/nawaf511/empire-core-new/backend/password_reset_gateway
+  CMD=/usr/bin/node /home/nawaf511/empire-core-new/backend/password_reset_gateway/server.js 
+PID=2498048
+  CWD=/home/nawaf511/empire-core-new/backend/auth_api
+  CMD=/usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_platform_gateway_9001.cjs 
+PID=2498093
+  CWD=/
+  CMD=/usr/bin/node /opt/ndsp/legal-v42/ndsp-registration-consent-gateway.cjs 
+PID=2498098
+  CWD=/home/nawaf511/empire-core-new/backend/services/ctl-001-workspace-identity
+  CMD=/usr/bin/node /home/nawaf511/empire-core-new/backend/services/ctl-001-workspace-identity/main.cjs 
+PID=2498120
+  CWD=/home/nawaf511/empire-core-new/backend/auth_api
+  CMD=/usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_register_compat_gateway.cjs 
+PID=2498121
+  CWD=/home/nawaf511/empire-core-new/backend
+  CMD=/usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp_scenario_levels_adapter.cjs 
+PID=2498136
+  CWD=/home/nawaf511/empire-core-new/backend/ndsp-trial-seats-api
+  CMD=/usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp-trial-seats-api/server.js 
+PID=2498152
+  CWD=/home/nawaf511/empire-core-new/backend/auth_api
+  CMD=/usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_trial_register_gateway.cjs 
+PID=2498154
+  CWD=/home/nawaf511/empire-core-new/backend/auth_api
+  CMD=/usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_trial_fingerprint_guard_proxy.cjs 
+PID=2498156
+  CWD=/home/nawaf511/empire-core-new/backend/ndsp-trial-register-canonical-wrapper
+  CMD=/usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp-trial-register-canonical-wrapper/server.js 
+PID=2498159
+  CWD=/home/nawaf511/empire-core-new/backend/ndsp-user-alert-channels
+  CMD=/usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp-user-alert-channels/server.js 
+PID=2498162
+  CWD=/home/nawaf511/empire-core-new/backend/auth_api
+  CMD=/usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_user_dashboard_gateway.cjs 
+PID=2498163
+  CWD=/home/nawaf511/empire-core-new/backend/auth_api
+  CMD=/usr/bin/node /home/nawaf511/empire-core-new/backend/auth_api/ndsp_user_login_gateway.cjs 
+PID=2499786
+  CWD=/home/nawaf511/empire-core-new/backend/ndsp-telegram-link-listener
+  CMD=/usr/bin/node /home/nawaf511/empire-core-new/backend/ndsp-telegram-link-listener/server.js 
+PID=2499820
+  CWD=/home/nawaf511/empire-core-new/backend/services/completed_decision
+  CMD=/usr/bin/node /home/nawaf511/empire-core-new/backend/services/completed_decision/main.cjs 
+PID=2978555
+  CWD=/
+  CMD=/usr/bin/python3 /usr/local/lib/ndsp-business-ops/app.py 
+PID=2978584
+  CWD=/opt/ndsp-market-data-bridge-v2
+  CMD=/usr/bin/python3 /opt/ndsp-market-data-bridge-v2/bridge.py 
+PID=2978585
+  CWD=/opt/ndsp-platform-gateway-9002
+  CMD=/usr/bin/python3 /opt/ndsp-platform-gateway-9002/app.py 
+PID=2978588
+  CWD=/opt/ndsp-change-password-gateway
+  CMD=/opt/ndsp-change-password-gateway/venv/bin/python3 /opt/ndsp-change-password-gateway/venv/bin/uvicorn app:app --host 127.0.0.1 --port 9069 
+PID=2978595
+  CWD=/home/nawaf511/empire-core-new/backend/ndsp-portal-real-data-api
+  CMD=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/ndsp-portal-real-data-api/server.py 
+PID=2978596
+  CWD=/opt/ndsp-public-summary-v548
+  CMD=/usr/bin/python3 /opt/ndsp-public-summary-v548/app.py 
+PID=2978601
+  CWD=/home/nawaf511/empire-core-new/apps/ndsp-layers-api
+  CMD=/home/nawaf511/empire-core-new/apps/ndsp-layers-api/.venv/bin/python3 /home/nawaf511/empire-core-new/apps/ndsp-layers-api/.venv/bin/uvicorn app:app --host 127.0.0.1 --port 9065 
+PID=2978608
+  CWD=/opt/ndsp-current-user-display
+  CMD=/opt/ndsp-current-user-display/.venv/bin/python3 /opt/ndsp-current-user-display/.venv/bin/uvicorn app:app --host 127.0.0.1 --port 9074 
+PID=2978609
+  CWD=/opt/ndsp-v3-portal-gateway
+  CMD=/usr/bin/python3 /opt/ndsp-v3-portal-gateway/app.py 
+PID=2978615
+  CWD=/opt/ndsp-decision-package-v1
+  CMD=/opt/ndsp-decision-package-v1/venv/bin/python3 /opt/ndsp-decision-package-v1/venv/bin/uvicorn app:app --host 127.0.0.1 --port 9061 
+PID=2978616
+  CWD=/
+  CMD=/usr/bin/python3 /opt/ndsp-v52-contract/app.py 
+PID=2978617
+  CWD=/
+  CMD=/usr/bin/python3 /opt/ndsp-v53-bridge/app.py 
+PID=2978620
+  CWD=/home/nawaf511/empire-core-new
+  CMD=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_quality_live_golden_wrapper.py 
+PID=2978622
+  CWD=/home/nawaf511/empire-core-new
+  CMD=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_quality_live_nmp_wrapper.py 
+PID=2978623
+  CWD=/home/nawaf511/empire-core-new
+  CMD=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_canonical_live_runtime_v30.py 
+PID=2978624
+  CWD=/home/nawaf511/empire-core-new
+  CMD=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_canonical_live_runtime_v33.py 
+PID=2978625
+  CWD=/home/nawaf511/empire-core-new
+  CMD=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_evidence_v35.py 
+PID=2978627
+  CWD=/home/nawaf511/empire-core-new
+  CMD=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/app/runtime/ndsp_completed_decisions_history_v36.py serve 
+PID=2978629
+  CWD=/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway
+  CMD=/home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/.venv/bin/python3 /home/nawaf511/empire-core-new/apps/ndsp-raw-cot-gateway/.venv/bin/uvicorn app:app --host 127.0.0.1 --port 9076 
+PID=2978652
+  CWD=/home/nawaf511/empire-core-new/backend/ndsp-live-decision-quality
+  CMD=/usr/bin/python3 /home/nawaf511/empire-core-new/backend/ndsp-live-decision-quality/server.py 
+PID=2978732
+  CWD=/
+  CMD=/usr/bin/python3 /usr/bin/fail2ban-server -xf start 
+PID=2978752
+  CWD=/opt/ndsp-admin-user-ops
+  CMD=/usr/bin/python3 -m uvicorn app:app --host 127.0.0.1 --port 9068 
+PID=2978766
+  CWD=/opt/ndsp-ui-bridge-api
+  CMD=/usr/bin/python3 -m uvicorn main:app --host 127.0.0.1 --port 9066 
+PID=2978924
+  CWD=/home/nawaf511
+  CMD=PM2 v7.0.3: God Daemon (/home/nawaf511/.pm2)                  
+PID=2978937
+  CWD=/home/nawaf511/empire-core-new/apps/user-portal
+  CMD=npm run start                                                                                                             
+PID=2978938
+  CWD=/home/nawaf511
+  CMD=python3 /home/nawaf511/empire-core-new/backend/services/ndsp-trial-clock-v164/server.py 
+PID=2978939
+  CWD=/home/nawaf511
+  CMD=python3 /home/nawaf511/empire-core-new/backend/services/ndsp-launch-control-v167/server.py 
+PID=2978945
+  CWD=/home/nawaf511
+  CMD=python3 /home/nawaf511/empire-core-new/backend/services/ndsp-telegram-notifications-v182/server.py 
+PID=2978997
+  CWD=/home/nawaf511/empire-core-new
+  CMD=sh -c node server.js 
+PID=2978998
+  CWD=/home/nawaf511/empire-core-new
+  CMD=node server.js 
+
+============================================================
+9. المنافذ المستمعة
+============================================================
+State  Recv-Q Send-Q Local Address:Port  Peer Address:PortProcess                                                                                                                                                                                                                                                    
+LISTEN 0      65535      127.0.0.1:631        0.0.0.0:*    users:(("cupsd",pid=2102587,fd=7))                                                                                                                                                                                                                        
+LISTEN 0      65535     127.0.0.54:53         0.0.0.0:*    users:(("systemd-resolve",pid=2978673,fd=17))                                                                                                                                                                                                             
+LISTEN 0      65535        0.0.0.0:5433       0.0.0.0:*    users:(("docker-proxy",pid=458752,fd=8))                                                                                                                                                                                                                  
+LISTEN 0      511        127.0.0.1:19091      0.0.0.0:*    users:(("nsolid",pid=2497988,fd=33))                                                                                                                                                                                                                      
+LISTEN 0      200        127.0.0.1:5432       0.0.0.0:*    users:(("postgres",pid=2978763,fd=7))                                                                                                                                                                                                                     
+LISTEN 0      65535  127.0.0.53%lo:53         0.0.0.0:*    users:(("systemd-resolve",pid=2978673,fd=15))                                                                                                                                                                                                             
+LISTEN 0      511          0.0.0.0:3000       0.0.0.0:*    users:(("node",pid=2978998,fd=34))                                                                                                                                                                                                                        
+LISTEN 0      511          0.0.0.0:443        0.0.0.0:*    users:(("nginx",pid=2978753,fd=7),("nginx",pid=2978750,fd=7),("nginx",pid=2978747,fd=7),("nginx",pid=2978745,fd=7),("nginx",pid=2978743,fd=7),("nginx",pid=2978742,fd=7),("nginx",pid=2978741,fd=7),("nginx",pid=2978740,fd=7),("nginx",pid=2978739,fd=7))
+LISTEN 0      65535        0.0.0.0:22         0.0.0.0:*    users:(("sshd",pid=2978658,fd=3),("systemd",pid=1,fd=383))                                                                                                                                                                                                
+LISTEN 0      100          0.0.0.0:25         0.0.0.0:*    users:(("master",pid=2499955,fd=13))                                                                                                                                                                                                                      
+LISTEN 0      511          0.0.0.0:80         0.0.0.0:*    users:(("nginx",pid=2978753,fd=5),("nginx",pid=2978750,fd=5),("nginx",pid=2978747,fd=5),("nginx",pid=2978745,fd=5),("nginx",pid=2978743,fd=5),("nginx",pid=2978742,fd=5),("nginx",pid=2978741,fd=5),("nginx",pid=2978740,fd=5),("nginx",pid=2978739,fd=5))
+LISTEN 0      511        127.0.0.1:8097       0.0.0.0:*    users:(("node",pid=2498028,fd=32))                                                                                                                                                                                                                        
+LISTEN 0      511        127.0.0.1:6379       0.0.0.0:*    users:(("redis-server",pid=2978668,fd=6))                                                                                                                                                                                                                 
+LISTEN 0      5          127.0.0.1:9089       0.0.0.0:*    users:(("python3",pid=2978938,fd=5))                                                                                                                                                                                                                      
+LISTEN 0      5          127.0.0.1:9088       0.0.0.0:*    users:(("python3",pid=2978627,fd=3))                                                                                                                                                                                                                      
+LISTEN 0      5          127.0.0.1:9091       0.0.0.0:*    users:(("python3",pid=2978945,fd=7))                                                                                                                                                                                                                      
+LISTEN 0      5          127.0.0.1:9090       0.0.0.0:*    users:(("python3",pid=2978939,fd=7))                                                                                                                                                                                                                      
+LISTEN 0      5          127.0.0.1:9093       0.0.0.0:*    users:(("python3",pid=2978609,fd=3))                                                                                                                                                                                                                      
+LISTEN 0      5          127.0.0.1:9092       0.0.0.0:*    users:(("python3",pid=2978596,fd=3))                                                                                                                                                                                                                      
+LISTEN 0      5          127.0.0.1:9095       0.0.0.0:*    users:(("python3",pid=2978584,fd=3))                                                                                                                                                                                                                      
+LISTEN 0      5          127.0.0.1:9094       0.0.0.0:*    users:(("python3",pid=2978555,fd=6))                                                                                                                                                                                                                      
+LISTEN 0      2048       127.0.0.1:9057       0.0.0.0:*    users:(("python3",pid=2978652,fd=13))                                                                                                                                                                                                                     
+LISTEN 0      2048       127.0.0.1:9061       0.0.0.0:*    users:(("uvicorn",pid=2978615,fd=6))                                                                                                                                                                                                                      
+LISTEN 0      511        127.0.0.1:9062       0.0.0.0:*    users:(("node",pid=2498159,fd=32))                                                                                                                                                                                                                        
+LISTEN 0      2048       127.0.0.1:9065       0.0.0.0:*    users:(("uvicorn",pid=2978601,fd=13))                                                                                                                                                                                                                     
+LISTEN 0      511        127.0.0.1:9064       0.0.0.0:*    users:(("node",pid=2498136,fd=32))                                                                                                                                                                                                                        
+LISTEN 0      5          127.0.0.1:9067       0.0.0.0:*    users:(("python3",pid=2978620,fd=3))                                                                                                                                                                                                                      
+LISTEN 0      2048       127.0.0.1:9066       0.0.0.0:*    users:(("python3",pid=2978766,fd=13))                                                                                                                                                                                                                     
+LISTEN 0      2048       127.0.0.1:9069       0.0.0.0:*    users:(("uvicorn",pid=2978588,fd=13))                                                                                                                                                                                                                     
+LISTEN 0      2048       127.0.0.1:9068       0.0.0.0:*    users:(("python3",pid=2978752,fd=13))                                                                                                                                                                                                                     
+LISTEN 0      511        127.0.0.1:9070       0.0.0.0:*    users:(("node",pid=2498154,fd=32))                                                                                                                                                                                                                        
+LISTEN 0      2048       127.0.0.1:9074       0.0.0.0:*    users:(("uvicorn",pid=2978608,fd=6))                                                                                                                                                                                                                      
+LISTEN 0      511        127.0.0.1:9077       0.0.0.0:*    users:(("node",pid=2497887,fd=32))                                                                                                                                                                                                                        
+LISTEN 0      2048       127.0.0.1:9076       0.0.0.0:*    users:(("uvicorn",pid=2978629,fd=13))                                                                                                                                                                                                                     
+LISTEN 0      511        127.0.0.1:9079       0.0.0.0:*    users:(("node",pid=2498024,fd=32))                                                                                                                                                                                                                        
+LISTEN 0      511        127.0.0.1:9078       0.0.0.0:*    users:(("node",pid=2499820,fd=33))                                                                                                                                                                                                                        
+LISTEN 0      511        127.0.0.1:9081       0.0.0.0:*    users:(("node",pid=2498098,fd=32))                                                                                                                                                                                                                        
+LISTEN 0      511        127.0.0.1:9080       0.0.0.0:*    users:(("node",pid=2497949,fd=32))                                                                                                                                                                                                                        
+LISTEN 0      5          127.0.0.1:9083       0.0.0.0:*    users:(("python3",pid=2978616,fd=3))                                                                                                                                                                                                                      
+LISTEN 0      5          127.0.0.1:9082       0.0.0.0:*    users:(("python3",pid=2978622,fd=3))                                                                                                                                                                                                                      
+LISTEN 0      5          127.0.0.1:9085       0.0.0.0:*    users:(("python3",pid=2978623,fd=3))                                                                                                                                                                                                                      
+LISTEN 0      5          127.0.0.1:9084       0.0.0.0:*    users:(("python3",pid=2978617,fd=3))                                                                                                                                                                                                                      
+LISTEN 0      5          127.0.0.1:9087       0.0.0.0:*    users:(("python3",pid=2978625,fd=3))                                                                                                                                                                                                                      
+LISTEN 0      5          127.0.0.1:9086       0.0.0.0:*    users:(("python3",pid=2978624,fd=3))                                                                                                                                                                                                                      
+LISTEN 0      511        127.0.0.1:9024       0.0.0.0:*    users:(("node",pid=2497888,fd=32))                                                                                                                                                                                                                        
+LISTEN 0      511        127.0.0.1:9027       0.0.0.0:*    users:(("node",pid=2498041,fd=32))                                                                                                                                                                                                                        
+LISTEN 0      511        127.0.0.1:9029       0.0.0.0:*    users:(("node",pid=2498093,fd=32))                                                                                                                                                                                                                        
+LISTEN 0      511        127.0.0.1:9028       0.0.0.0:*    users:(("node",pid=2498120,fd=32))                                                                                                                                                                                                                        
+LISTEN 0      511        127.0.0.1:9031       0.0.0.0:*    users:(("node",pid=2497937,fd=32))                                                                                                                                                                                                                        
+LISTEN 0      511        127.0.0.1:9030       0.0.0.0:*    users:(("node",pid=2497889,fd=32))                                                                                                                                                                                                                        
+LISTEN 0      511        127.0.0.1:9033       0.0.0.0:*    users:(("node",pid=2498040,fd=32))                                                                                                                                                                                                                        
+LISTEN 0      511        127.0.0.1:9034       0.0.0.0:*    users:(("node",pid=2498121,fd=32))                                                                                                                                                                                                                        
+LISTEN 0      511        127.0.0.1:9041       0.0.0.0:*    users:(("node",pid=2498156,fd=32))                                                                                                                                                                                                                        
+LISTEN 0      511        127.0.0.1:9044       0.0.0.0:*    users:(("node",pid=2498025,fd=32))                                                                                                                                                                                                                        
+LISTEN 0      5          127.0.0.1:9047       0.0.0.0:*    users:(("python3",pid=2978595,fd=3))                                                                                                                                                                                                                      
+LISTEN 0      511        127.0.0.1:9001       0.0.0.0:*    users:(("node",pid=2498048,fd=32))                                                                                                                                                                                                                        
+LISTEN 0      5          127.0.0.1:9002       0.0.0.0:*    users:(("python3",pid=2978585,fd=3))                                                                                                                                                                                                                      
+LISTEN 0      511        127.0.0.1:9017       0.0.0.0:*    users:(("node",pid=2497900,fd=32))                                                                                                                                                                                                                        
+LISTEN 0      511        127.0.0.1:9019       0.0.0.0:*    users:(("node",pid=2498152,fd=32))                                                                                                                                                                                                                        
+LISTEN 0      511        127.0.0.1:9021       0.0.0.0:*    users:(("node",pid=2498162,fd=32))                                                                                                                                                                                                                        
+LISTEN 0      511        127.0.0.1:9020       0.0.0.0:*    users:(("node",pid=2498163,fd=32))                                                                                                                                                                                                                        
+LISTEN 0      511        127.0.0.1:9023       0.0.0.0:*    users:(("node",pid=2497902,fd=32))                                                                                                                                                                                                                        
+LISTEN 0      511        127.0.0.1:9022       0.0.0.0:*    users:(("node",pid=2497947,fd=32))                                                                                                                                                                                                                        
+LISTEN 0      65535          [::1]:631           [::]:*    users:(("cupsd",pid=2102587,fd=6))                                                                                                                                                                                                                        
+LISTEN 0      2              [::1]:3350          [::]:*    users:(("xrdp-sesman",pid=2978704,fd=11))                                                                                                                                                                                                                 
+LISTEN 0      65535           [::]:5433          [::]:*    users:(("docker-proxy",pid=458763,fd=8))                                                                                                                                                                                                                  
+LISTEN 0      200            [::1]:5432          [::]:*    users:(("postgres",pid=2978763,fd=6))                                                                                                                                                                                                                     
+LISTEN 0      2                  *:3389             *:*    users:(("xrdp",pid=2978733,fd=11))                                                                                                                                                                                                                        
+LISTEN 0      511             [::]:443           [::]:*    users:(("nginx",pid=2978753,fd=8),("nginx",pid=2978750,fd=8),("nginx",pid=2978747,fd=8),("nginx",pid=2978745,fd=8),("nginx",pid=2978743,fd=8),("nginx",pid=2978742,fd=8),("nginx",pid=2978741,fd=8),("nginx",pid=2978740,fd=8),("nginx",pid=2978739,fd=8))
+LISTEN 0      65535           [::]:22            [::]:*    users:(("sshd",pid=2978658,fd=4),("systemd",pid=1,fd=384))                                                                                                                                                                                                
+LISTEN 0      100             [::]:25            [::]:*    users:(("master",pid=2499955,fd=14))                                                                                                                                                                                                                      
+LISTEN 0      511             [::]:80            [::]:*    users:(("nginx",pid=2978753,fd=6),("nginx",pid=2978750,fd=6),("nginx",pid=2978747,fd=6),("nginx",pid=2978745,fd=6),("nginx",pid=2978743,fd=6),("nginx",pid=2978742,fd=6),("nginx",pid=2978741,fd=6),("nginx",pid=2978740,fd=6),("nginx",pid=2978739,fd=6))
+LISTEN 0      511            [::1]:6379          [::]:*    users:(("redis-server",pid=2978668,fd=7))                                                                                                                                                                                                                 
+
+============================================================
+10. Docker
+============================================================
+الحاويات العاملة:

@@ -1,0 +1,254 @@
+{
+  "results": [
+    {
+      "viewport": "desktop",
+      "page": "home",
+      "status": 200,
+      "language": {
+        "first": false,
+        "second": true,
+        "error": null,
+        "initial": {
+          "values": {
+            "ndsp_lang_final": null,
+            "ndsp_final_lang": null,
+            "ndsp_lang": null
+          },
+          "lang": "ar",
+          "dir": "rtl",
+          "v20": true
+        },
+        "firstState": {
+          "values": {
+            "ndsp_lang_final": null,
+            "ndsp_final_lang": null,
+            "ndsp_lang": null
+          },
+          "lang": "ar",
+          "dir": "rtl",
+          "v20": true
+        },
+        "secondState": {
+          "values": {
+            "ndsp_lang_final": null,
+            "ndsp_final_lang": null,
+            "ndsp_lang": null
+          },
+          "lang": "ar",
+          "dir": "rtl",
+          "v20": true
+        }
+      },
+      "menu": null,
+      "pageErrors": [],
+      "screenshot": "desktop_home.png"
+    },
+    {
+      "viewport": "desktop",
+      "page": "decisions_ar",
+      "status": 200,
+      "count": 0,
+      "expected": 16,
+      "expectedLanguage": "ar",
+      "rootLanguage": "ar",
+      "apiError": 1,
+      "notFound": false,
+      "overflow": false,
+      "navigationError": "page.waitForSelector: Timeout 35000ms exceeded. Call log: \u001b[2m - waiting for locator('[data-ndsp-layer-card]') to be visible\u001b[22m at testRoute (/tmp/tmp.X4Q06T9AvH/verify-v23.js:151:16) at async /tmp/tmp.X4Q06T9AvH/verify-v23.js:218:18",
+      "pageErrors": [],
+      "consoleErrors": [
+        "Access to fetch at 'https://api.ndsp.app/api/decision/quality-live?symbol=ETHUSDT&timeframe=weekly&_ndsp_ui=1783916647271' from origin 'https://my.ndsp.app' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+        "Failed to load resource: net::ERR_FAILED",
+        "NDSP44_FETCH_ERROR TypeError: Failed to fetch at render (https://my.ndsp.app/assets/ndsp-governance-44-v23.js?v=20260713_062317:384:28) at boot (https://my.ndsp.app/assets/ndsp-governance-44-v23.js?v=20260713_062317:427:5)"
+      ],
+      "screenshot": "desktop_decisions_ar.png"
+    },
+    {
+      "viewport": "desktop",
+      "page": "governance_ar",
+      "status": 200,
+      "count": 0,
+      "expected": 28,
+      "expectedLanguage": "ar",
+      "rootLanguage": "ar",
+      "apiError": 1,
+      "notFound": false,
+      "overflow": false,
+      "navigationError": "page.waitForSelector: Timeout 35000ms exceeded. Call log: \u001b[2m - waiting for locator('[data-ndsp-capability-card]') to be visible\u001b[22m at testRoute (/tmp/tmp.X4Q06T9AvH/verify-v23.js:151:16) at async /tmp/tmp.X4Q06T9AvH/verify-v23.js:219:18",
+      "pageErrors": [],
+      "consoleErrors": [
+        "Access to fetch at 'https://api.ndsp.app/api/decision/quality-live?symbol=ETHUSDT&timeframe=weekly&_ndsp_ui=1783916682959' from origin 'https://my.ndsp.app' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+        "Failed to load resource: net::ERR_FAILED",
+        "NDSP44_FETCH_ERROR TypeError: Failed to fetch at render (https://my.ndsp.app/assets/ndsp-governance-44-v23.js?v=20260713_062317:384:28) at boot (https://my.ndsp.app/assets/ndsp-governance-44-v23.js?v=20260713_062317:427:5)"
+      ],
+      "screenshot": "desktop_governance_ar.png"
+    },
+    {
+      "viewport": "desktop",
+      "page": "decisions_en",
+      "status": 200,
+      "count": 0,
+      "expected": 16,
+      "expectedLanguage": "en",
+      "rootLanguage": "en",
+      "apiError": 1,
+      "notFound": false,
+      "overflow": false,
+      "navigationError": "page.waitForSelector: Timeout 35000ms exceeded. Call log: \u001b[2m - waiting for locator('[data-ndsp-layer-card]') to be visible\u001b[22m at testRoute (/tmp/tmp.X4Q06T9AvH/verify-v23.js:151:16) at async /tmp/tmp.X4Q06T9AvH/verify-v23.js:235:18",
+      "pageErrors": [],
+      "consoleErrors": [
+        "Access to fetch at 'https://api.ndsp.app/api/decision/quality-live?symbol=ETHUSDT&timeframe=weekly&_ndsp_ui=1783916719155' from origin 'https://my.ndsp.app' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+        "Failed to load resource: net::ERR_FAILED",
+        "NDSP44_FETCH_ERROR TypeError: Failed to fetch at render (https://my.ndsp.app/assets/ndsp-governance-44-v23.js?v=20260713_062317:384:28) at boot (https://my.ndsp.app/assets/ndsp-governance-44-v23.js?v=20260713_062317:427:5)"
+      ],
+      "screenshot": "desktop_decisions_en.png"
+    },
+    {
+      "viewport": "desktop",
+      "page": "governance_en",
+      "status": 200,
+      "count": 0,
+      "expected": 28,
+      "expectedLanguage": "en",
+      "rootLanguage": "en",
+      "apiError": 1,
+      "notFound": false,
+      "overflow": false,
+      "navigationError": "page.waitForSelector: Timeout 35000ms exceeded. Call log: \u001b[2m - waiting for locator('[data-ndsp-capability-card]') to be visible\u001b[22m at testRoute (/tmp/tmp.X4Q06T9AvH/verify-v23.js:151:16) at async /tmp/tmp.X4Q06T9AvH/verify-v23.js:236:18",
+      "pageErrors": [],
+      "consoleErrors": [
+        "Access to fetch at 'https://api.ndsp.app/api/decision/quality-live?symbol=ETHUSDT&timeframe=weekly&_ndsp_ui=1783916754811' from origin 'https://my.ndsp.app' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+        "Failed to load resource: net::ERR_FAILED",
+        "NDSP44_FETCH_ERROR TypeError: Failed to fetch at render (https://my.ndsp.app/assets/ndsp-governance-44-v23.js?v=20260713_062317:384:28) at boot (https://my.ndsp.app/assets/ndsp-governance-44-v23.js?v=20260713_062317:427:5)"
+      ],
+      "screenshot": "desktop_governance_en.png"
+    },
+    {
+      "viewport": "mobile",
+      "page": "home",
+      "status": 200,
+      "language": {
+        "first": false,
+        "second": true,
+        "error": null,
+        "initial": {
+          "values": {
+            "ndsp_lang_final": null,
+            "ndsp_final_lang": null,
+            "ndsp_lang": null
+          },
+          "lang": "ar",
+          "dir": "rtl",
+          "v20": true
+        },
+        "firstState": {
+          "values": {
+            "ndsp_lang_final": null,
+            "ndsp_final_lang": null,
+            "ndsp_lang": null
+          },
+          "lang": "ar",
+          "dir": "rtl",
+          "v20": true
+        },
+        "secondState": {
+          "values": {
+            "ndsp_lang_final": null,
+            "ndsp_final_lang": null,
+            "ndsp_lang": null
+          },
+          "lang": "ar",
+          "dir": "rtl",
+          "v20": true
+        }
+      },
+      "menu": {
+        "found": true,
+        "clicked": true,
+        "changed": true
+      },
+      "pageErrors": [],
+      "screenshot": "mobile_home.png"
+    },
+    {
+      "viewport": "mobile",
+      "page": "decisions_ar",
+      "status": 200,
+      "count": 0,
+      "expected": 16,
+      "expectedLanguage": "ar",
+      "rootLanguage": "ar",
+      "apiError": 1,
+      "notFound": false,
+      "overflow": false,
+      "navigationError": "page.waitForSelector: Timeout 35000ms exceeded. Call log: \u001b[2m - waiting for locator('[data-ndsp-layer-card]') to be visible\u001b[22m at testRoute (/tmp/tmp.X4Q06T9AvH/verify-v23.js:151:16) at async /tmp/tmp.X4Q06T9AvH/verify-v23.js:218:18",
+      "pageErrors": [],
+      "consoleErrors": [
+        "Access to fetch at 'https://api.ndsp.app/api/decision/quality-live?symbol=ETHUSDT&timeframe=weekly&_ndsp_ui=1783916810674' from origin 'https://my.ndsp.app' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+        "Failed to load resource: net::ERR_FAILED",
+        "NDSP44_FETCH_ERROR TypeError: Failed to fetch at render (https://my.ndsp.app/assets/ndsp-governance-44-v23.js?v=20260713_062317:384:28) at boot (https://my.ndsp.app/assets/ndsp-governance-44-v23.js?v=20260713_062317:427:5)"
+      ],
+      "screenshot": "mobile_decisions_ar.png"
+    },
+    {
+      "viewport": "mobile",
+      "page": "governance_ar",
+      "status": 200,
+      "count": 0,
+      "expected": 28,
+      "expectedLanguage": "ar",
+      "rootLanguage": "ar",
+      "apiError": 1,
+      "notFound": false,
+      "overflow": false,
+      "navigationError": "page.waitForSelector: Timeout 35000ms exceeded. Call log: \u001b[2m - waiting for locator('[data-ndsp-capability-card]') to be visible\u001b[22m at testRoute (/tmp/tmp.X4Q06T9AvH/verify-v23.js:151:16) at async /tmp/tmp.X4Q06T9AvH/verify-v23.js:219:18",
+      "pageErrors": [],
+      "consoleErrors": [
+        "Access to fetch at 'https://api.ndsp.app/api/decision/quality-live?symbol=ETHUSDT&timeframe=weekly&_ndsp_ui=1783916846238' from origin 'https://my.ndsp.app' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+        "Failed to load resource: net::ERR_FAILED",
+        "NDSP44_FETCH_ERROR TypeError: Failed to fetch at render (https://my.ndsp.app/assets/ndsp-governance-44-v23.js?v=20260713_062317:384:28) at boot (https://my.ndsp.app/assets/ndsp-governance-44-v23.js?v=20260713_062317:427:5)"
+      ],
+      "screenshot": "mobile_governance_ar.png"
+    },
+    {
+      "viewport": "mobile",
+      "page": "decisions_en",
+      "status": 200,
+      "count": 0,
+      "expected": 16,
+      "expectedLanguage": "en",
+      "rootLanguage": "en",
+      "apiError": 1,
+      "notFound": false,
+      "overflow": false,
+      "navigationError": "page.waitForSelector: Timeout 35000ms exceeded. Call log: \u001b[2m - waiting for locator('[data-ndsp-layer-card]') to be visible\u001b[22m at testRoute (/tmp/tmp.X4Q06T9AvH/verify-v23.js:151:16) at async /tmp/tmp.X4Q06T9AvH/verify-v23.js:235:18",
+      "pageErrors": [],
+      "consoleErrors": [
+        "Access to fetch at 'https://api.ndsp.app/api/decision/quality-live?symbol=ETHUSDT&timeframe=weekly&_ndsp_ui=1783916881981' from origin 'https://my.ndsp.app' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+        "Failed to load resource: net::ERR_FAILED",
+        "NDSP44_FETCH_ERROR TypeError: Failed to fetch at render (https://my.ndsp.app/assets/ndsp-governance-44-v23.js?v=20260713_062317:384:28) at boot (https://my.ndsp.app/assets/ndsp-governance-44-v23.js?v=20260713_062317:427:5)"
+      ],
+      "screenshot": "mobile_decisions_en.png"
+    },
+    {
+      "viewport": "mobile",
+      "page": "governance_en",
+      "status": 200,
+      "count": 0,
+      "expected": 28,
+      "expectedLanguage": "en",
+      "rootLanguage": "en",
+      "apiError": 1,
+      "notFound": false,
+      "overflow": false,
+      "navigationError": "page.waitForSelector: Timeout 35000ms exceeded. Call log: \u001b[2m - waiting for locator('[data-ndsp-capability-card]') to be visible\u001b[22m at testRoute (/tmp/tmp.X4Q06T9AvH/verify-v23.js:151:16) at async /tmp/tmp.X4Q06T9AvH/verify-v23.js:236:18",
+      "pageErrors": [],
+      "consoleErrors": [
+        "Access to fetch at 'https://api.ndsp.app/api/decision/quality-live?symbol=ETHUSDT&timeframe=weekly&_ndsp_ui=1783916917537' from origin 'https://my.ndsp.app' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+        "Failed to load resource: net::ERR_FAILED",
+        "NDSP44_FETCH_ERROR TypeError: Failed to fetch at render (https://my.ndsp.app/assets/ndsp-governance-44-v23.js?v=20260713_062317:384:28) at boot (https://my.ndsp.app/assets/ndsp-governance-44-v23.js?v=20260713_062317:427:5)"
+      ],
+      "screenshot": "mobile_governance_en.png"
+    }
+  ]
+}

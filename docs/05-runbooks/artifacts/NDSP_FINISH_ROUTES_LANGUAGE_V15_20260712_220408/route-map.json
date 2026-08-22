@@ -1,0 +1,10 @@
+{
+  "version": "15",
+  "aliases": {
+    "/NDSP_Asset_View.html": "/markets",
+    "/NDSP_Command_Center.html": "/decisions",
+    "/NDSP_Daily_Brief.html": "/daily-brief.html",
+    "/NDSP_Settings_Alerts.html": "/settings",
+    "/decision-support.html": "/support-center.html"
+  }
+}

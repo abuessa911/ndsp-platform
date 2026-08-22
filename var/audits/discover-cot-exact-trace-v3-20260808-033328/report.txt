@@ -1,0 +1,231 @@
+=== NDSP DISCOVER_COT EXACT TRACE V3 ===
+MODE=READ_ONLY
+
+=== DISCOVER_COT FUNCTION ===
+LOCATION=backend/app/runtime/ndsp_canonical_live_runtime_v30.py:200-260
+STRING_KEYS_USED_BY_DISCOVER_COT=
+  ''
+  '*cot*.json'
+  'CANONICAL_COT_NOT_VERIFIED'
+  'CURRENT_VERIFIED'
+  'INPUTS_INCOMPLETE'
+  'age_hours'
+  'as_of_date'
+  'backend/runtime'
+  'bearish'
+  'bullish'
+  'cftc_cot_canonical.json'
+  'cot_canonical.json'
+  'cot_report_date'
+  'decision_use_allowed'
+  'directions'
+  'fetched_at'
+  'files_used'
+  'generated_at'
+  'monitoring_use_allowed'
+  'reason_code'
+  'received_at'
+  'report_as_of_date'
+  'report_date'
+  'status'
+  'tdl_active_direction.json'
+  'tdl_ml_direction.json'
+  'updated_at'
+
+=== GOVERNING_INPUTS EXACT ===
+TYPE=dict
+{
+  "analysis_mode": "investment",
+  "analysis_timeframe": "weekly",
+  "contract_version": "NDSP_GOVERNING_INPUTS_V201",
+  "directions": {
+    "asset_managers_overall": "bearish",
+    "asset_managers_weekly": null,
+    "leveraged_funds_weekly": null
+  },
+  "fresh": false,
+  "max_age_days": 10,
+  "missing_inputs": [
+    "asset_managers_weekly",
+    "leveraged_funds_weekly"
+  ],
+  "not_recommendation": true,
+  "raw_cot_connected": true,
+  "raw_cot_status": "CONNECTED_MATCHED",
+  "report_age_days": null,
+  "report_date": "2026-07-21",
+  "source": "CFTC_TFF_FUTURES_ONLY",
+  "source_family": "TFF",
+  "source_market": "ETHER CASH SETTLED - CHICAGO MERCANTILE EXCHANGE",
+  "source_timeframe": "weekly",
+  "status": "INCOMPLETE",
+  "symbol": "ETHUSDT"
+}
+
+=== UPSTREAM COT CANDIDATE OBJECTS ===
+PATH=$.governing_inputs TYPE=dict VALUE={'contract_version': 'NDSP_GOVERNING_INPUTS_V201', 'status': 'INCOMPLETE', 'source': 'CFTC_TFF_FUTURES_ONLY', 'source_family': 'TFF', 'source_market': 'ETHER CASH SETTLED - CHICAGO MERCANTILE EXCHANGE', 'report_date': '2026-07-21', 'report_age_days': None, 'max_age_days': 10, 'fresh': False, 'symbol': 'ETHUSDT', 'source_timeframe': 'weekly', 'analysis_timeframe': 'weekly', 'analysis_mode': 'investment', 'directions': {'asset_managers_overall': 'bearish', 'asset_managers_weekly': None, 'leveraged_funds_weekly': None}, 'missing_inputs': ['asset_managers_weekly', 'leveraged_funds_weekly'], 'raw_cot_connected': True, 'raw_cot_status': 'CONNECTED_MATCHED', 'not_recommendation': True}
+PATH=$.governing_inputs.directions TYPE=dict VALUE={'asset_managers_overall': 'bearish', 'asset_managers_weekly': None, 'leveraged_funds_weekly': None}
+PATH=$.governing_inputs.raw_cot_connected TYPE=bool VALUE=True
+PATH=$.governing_inputs.raw_cot_status TYPE=str VALUE='CONNECTED_MATCHED'
+CANDIDATE_COUNT=4
+
+=== EXPECTED KEY PRESENCE IN 9082 ===
+*cot*.json=NOT_PRESENT
+CANONICAL_COT_NOT_VERIFIED=NOT_PRESENT
+cftc_cot_canonical.json=NOT_PRESENT
+cot_canonical.json=NOT_PRESENT
+cot_report_date=NOT_PRESENT
+directions=PRESENT
+files_used=NOT_PRESENT
+generated_at=PRESENT
+report_as_of_date=NOT_PRESENT
+report_date=PRESENT
+tdl_active_direction.json=NOT_PRESENT
+tdl_ml_direction.json=NOT_PRESENT
+
+=== _FETCH_RAW_COT FUNCTION ===
+LOCATION=backend/app/runtime/ndsp_v201_launch_completion.py:82-98
+RAW_COT_REFERENCES=
+  ''
+  '?'
+  'RAW_COT_FETCH_FAILED:'
+  'RAW_COT_INVALID_PAYLOAD'
+  'asset'
+  'error'
+  'ok'
+  'raw_cot_connected'
+  'raw_cot_governing_inputs_complete'
+
+=== RAW COT SOURCE TRACE ===
+HIT_COUNT=118
+backend/app/support_layers/cot/test_cot_v6_1_storage.py:5 TAGS=cftc TEXT=from app.support_layers.cot.cftc_auto_provider import CftcAutoProvider
+backend/app/support_layers/cot/test_cot_v6_1_storage.py:7 TAGS=CotStorage TEXT=from app.support_layers.cot.cot_storage import CotStorage
+backend/app/support_layers/cot/test_cot_v6_1_storage.py:14 TAGS=CotStorage TEXT=self.storage = CotStorage(self.path)
+backend/app/support_layers/cot/test_cot_v6_1_storage.py:20 TAGS=cftc TEXT=CftcAutoProvider(self.storage).seed_auto_demo("EURUSD")
+backend/app/support_layers/cot/test_cot_v6_1_storage.py:21 TAGS=get_latest TEXT=record = self.storage.get_latest_record("EURUSD")
+backend/app/support_layers/cot/test_cot_v6_1_storage.py:24 TAGS=cftc TEXT=self.assertEqual(record["active_source"], "AUTO_CFTC")
+backend/app/support_layers/cot/test_cot_v6_1_storage.py:29 TAGS=cftc TEXT=CftcAutoProvider(self.storage).seed_auto_demo("EURUSD")
+backend/app/support_layers/cot/test_cot_v6_1_storage.py:33 TAGS=report_date TEXT=report_date="2026-05-12",
+backend/app/support_layers/cot/test_cot_v6_1_storage.py:44 TAGS=get_latest TEXT=record = self.storage.get_latest_record("EURUSD")
+backend/app/support_layers/cot/test_cot_v6_1_storage.py:51 TAGS=cftc TEXT=CftcAutoProvider(self.storage).seed_auto_demo("EURUSD")
+backend/app/support_layers/cot/test_cot_v6_1_storage.py:55 TAGS=report_date TEXT=report_date="2026-05-12",
+backend/app/support_layers/cot/test_cot_v6_1_storage.py:64 TAGS=get_latest TEXT=self.assertEqual(self.storage.get_latest_record("EURUSD")["active_source"], "MANUAL_OVERRIDE")
+backend/app/support_layers/cot/test_cot_v6_1_storage.py:69 TAGS=get_latest,cftc TEXT=self.assertEqual(self.storage.get_latest_record("EURUSD")["active_source"], "AUTO_CFTC")
+backend/app/support_layers/cot/test_cot_v6_1_storage.py:72 TAGS=cftc TEXT=CftcAutoProvider(self.storage).seed_auto_demo("XAUUSD")
+backend/app/support_layers/cot/test_cot_v6_1_storage.py:73 TAGS=get_latest TEXT=snapshot = self.storage.get_latest_snapshot("XAUUSD")
+backend/app/support_layers/cot/manual_cot_provider.py:15 TAGS=report_date TEXT=report_date: str,
+backend/app/support_layers/cot/manual_cot_provider.py:24 TAGS=report_date TEXT=report_date=report_date,
+backend/app/support_layers/cot/manual_cot_provider.py:54 TAGS=report_date TEXT=report_date="2026-05-12",
+backend/app/support_layers/cot/manual_cot_provider.py:65 TAGS=report_date TEXT=report_date="2026-05-12",
+backend/app/support_layers/cot/manual_cot_provider.py:76 TAGS=report_date TEXT=report_date="2026-05-12",
+backend/app/support_layers/cot/manual_cot_provider.py:87 TAGS=report_date TEXT=report_date="2026-05-12",
+backend/app/support_layers/cot/cftc_auto_provider.py:2 TAGS=cftc TEXT=NDSP V6.1 CFTC Auto Provider Placeholder
+backend/app/support_layers/cot/cftc_auto_provider.py:5 TAGS=cftc TEXT=- Provide a controlled extension point for official CFTC ingestion.
+backend/app/support_layers/cot/cftc_auto_provider.py:15 TAGS=CotStorage TEXT=from app.support_layers.cot.cot_storage import CotStorage
+backend/app/support_layers/cot/cftc_auto_provider.py:18 TAGS=cftc TEXT=class CftcAutoProvider:
+backend/app/support_layers/cot/cftc_auto_provider.py:19 TAGS=CotStorage TEXT=def __init__(self, storage: CotStorage | None = None) -> None:
+backend/app/support_layers/cot/cftc_auto_provider.py:20 TAGS=CotStorage TEXT=self.storage = storage or CotStorage()
+backend/app/support_layers/cot/cftc_auto_provider.py:47 TAGS=report_date TEXT=report_date="2026-05-12",
+backend/app/support_layers/cot/cftc_auto_provider.py:49 TAGS=cftc TEXT=source="auto_demo_cftc_placeholder",
+backend/app/support_layers/cot/cftc_auto_provider.py:50 TAGS=cftc TEXT=source_type="auto_cftc",
+backend/app/support_layers/cot/cot_engine.py:69 TAGS=report_date TEXT=report_date=snapshot.report_date,
+backend/app/support_layers/cot/cot_contracts.py:54 TAGS=report_date TEXT=report_date: str
+backend/app/support_layers/cot/cot_contracts.py:72 TAGS=report_date TEXT=report_date: str
+backend/app/support_layers/cot/test_cot_spine.py:6 TAGS=manual_cot TEXT=from app.support_layers.cot.manual_cot_provider import seed_demo_provider
+backend/app/support_layers/cot/cot_storage.py:25 TAGS=CotStorage TEXT=class CotStorage:
+backend/app/support_layers/cot/cot_storage.py:37 TAGS=cftc TEXT="auto_cftc": {},
+backend/app/support_layers/cot/cot_storage.py:60 TAGS=report_date TEXT=report_date: str,
+backend/app/support_layers/cot/cot_storage.py:65 TAGS=cftc TEXT=if source_type not in {"manual_override", "auto_cftc"}:
+backend/app/support_layers/cot/cot_storage.py:66 TAGS=cftc TEXT=raise ValueError("source_type must be manual_override or auto_cftc")
+backend/app/support_layers/cot/cot_storage.py:83 TAGS=report_date TEXT="report_date": report_date,
+backend/app/support_layers/cot/cot_storage.py:101 TAGS=get_latest TEXT=def get_latest_record(self, symbol: str) -> dict[str, Any] | None:
+backend/app/support_layers/cot/cot_storage.py:111 TAGS=cftc TEXT=auto = data.get("auto_cftc", {}).get(normalized)
+backend/app/support_layers/cot/cot_storage.py:114 TAGS=cftc TEXT=auto["active_source"] = "AUTO_CFTC"
+backend/app/support_layers/cot/cot_storage.py:119 TAGS=get_latest TEXT=def get_latest_snapshot(self, symbol: str) -> CotSnapshot | None:
+backend/app/support_layers/cot/cot_storage.py:120 TAGS=get_latest TEXT=record = self.get_latest_record(symbol)
+backend/app/support_layers/cot/cot_storage.py:150 TAGS=report_date TEXT=report_date=record["report_date"],
+backend/app/support_layers/cot/cot_storage.py:166 TAGS=snapshot_to_dict TEXT=def snapshot_to_dict(snapshot: CotSnapshot) -> dict[str, Any]:
+backend/app/support_layers/cot/cot_storage.py:169 TAGS=report_date TEXT="report_date": snapshot.report_date,
+backend/app/runtime/ndsp_canonical_live_runtime_v30.py:168 TAGS=asset_managers TEXT="asset_managers_overall": {
+backend/app/runtime/ndsp_canonical_live_runtime_v30.py:169 TAGS=asset_managers TEXT="asset_managers_overall", "asset_managers_overall_direction",
+backend/app/runtime/ndsp_canonical_live_runtime_v30.py:173 TAGS=asset_managers TEXT="asset_managers_weekly": {
+backend/app/runtime/ndsp_canonical_live_runtime_v30.py:174 TAGS=asset_managers TEXT="asset_managers_weekly", "asset_managers_weekly_direction",
+backend/app/runtime/ndsp_canonical_live_runtime_v30.py:177 TAGS=leveraged_funds TEXT="leveraged_funds_weekly": {
+backend/app/runtime/ndsp_canonical_live_runtime_v30.py:178 TAGS=leveraged_funds TEXT="leveraged_funds_weekly", "leveraged_funds_weekly_direction",
+backend/app/runtime/ndsp_canonical_live_runtime_v30.py:206 TAGS=cftc TEXT=runtime / "cftc_cot_canonical.json",
+backend/app/runtime/ndsp_canonical_live_runtime_v30.py:226 TAGS=report_date TEXT=report_date = None
+backend/app/runtime/ndsp_canonical_live_runtime_v30.py:230 TAGS=report_date TEXT=if report_date is None and low in {
+backend/app/runtime/ndsp_canonical_live_runtime_v30.py:231 TAGS=report_date TEXT="report_as_of_date", "report_date", "as_of_date", "cot_report_date"
+backend/app/runtime/ndsp_canonical_live_runtime_v30.py:233 TAGS=report_date TEXT=report_date = str(value or "").strip() or None
+backend/app/runtime/ndsp_canonical_live_runtime_v30.py:249 TAGS=report_date TEXT=verified = bool(complete and report_date and timestamp and age_hours is not None and age_hours <= 168)
+backend/app/runtime/ndsp_canonical_live_runtime_v30.py:255 TAGS=report_date TEXT="report_as_of_date": report_date,
+backend/app/runtime/ndsp_canonical_live_runtime_v30.py:486 TAGS=asset_managers TEXT="asset_managers_overall": cot_directions.get("asset_managers_overall"),
+backend/app/runtime/ndsp_canonical_live_runtime_v30.py:487 TAGS=asset_managers TEXT="asset_managers_weekly": cot_directions.get("asset_managers_weekly"),
+backend/app/runtime/ndsp_canonical_live_runtime_v30.py:488 TAGS=leveraged_funds TEXT="leveraged_funds_overall": cot_directions.get("leveraged_funds_overall"),
+backend/app/runtime/ndsp_canonical_live_runtime_v30.py:489 TAGS=leveraged_funds TEXT="leveraged_funds_weekly": cot_directions.get("leveraged_funds_weekly"),
+backend/app/runtime/ndsp_canonical_live_runtime_v30.py:513 TAGS=cftc TEXT="L01": {"state": "LIVE" if cot["decision_use_allowed"] else "BLOCKED", "source": "CFTC_COT"},
+backend/app/runtime/ndsp_v201_launch_completion.py:19 TAGS=raw_cot TEXT=RAW_COT_URL = "http://127.0.0.1:9076/api/admin/raw-cot/status"
+backend/app/runtime/ndsp_v201_launch_completion.py:82 TAGS=raw_cot TEXT=def _fetch_raw_cot(symbol: str) -> dict[str, Any]:
+backend/app/runtime/ndsp_v201_launch_completion.py:85 TAGS=raw_cot TEXT=payload = _http_json(f"{RAW_COT_URL}?{query}", timeout=10)
+backend/app/runtime/ndsp_v201_launch_completion.py:89 TAGS=raw_cot TEXT="raw_cot_connected": False,
+backend/app/runtime/ndsp_v201_launch_completion.py:90 TAGS=raw_cot TEXT="raw_cot_governing_inputs_complete": False,
+backend/app/runtime/ndsp_v201_launch_completion.py:91 TAGS=raw_cot TEXT="error": f"RAW_COT_FETCH_FAILED:{type(exc).__name__}",
+backend/app/runtime/ndsp_v201_launch_completion.py:95 TAGS=raw_cot TEXT="raw_cot_connected": False,
+backend/app/runtime/ndsp_v201_launch_completion.py:96 TAGS=raw_cot TEXT="raw_cot_governing_inputs_complete": False,
+backend/app/runtime/ndsp_v201_launch_completion.py:97 TAGS=raw_cot TEXT="error": "RAW_COT_INVALID_PAYLOAD",
+backend/app/runtime/ndsp_v201_launch_completion.py:112 TAGS=asset_managers TEXT=overall = directions.get("asset_managers_overall")
+backend/app/runtime/ndsp_v201_launch_completion.py:113 TAGS=asset_managers TEXT=am_weekly = directions.get("asset_managers_weekly")
+backend/app/runtime/ndsp_v201_launch_completion.py:114 TAGS=leveraged_funds TEXT=lf_weekly = directions.get("leveraged_funds_weekly")
+backend/app/runtime/ndsp_v201_launch_completion.py:117 TAGS=asset_managers TEXT=asset_managers_overall=overall,
+backend/app/runtime/ndsp_v201_launch_completion.py:118 TAGS=asset_managers TEXT=asset_managers_weekly=am_weekly,
+backend/app/runtime/ndsp_v201_launch_completion.py:119 TAGS=leveraged_funds TEXT=leveraged_funds_weekly=lf_weekly,
+backend/app/runtime/ndsp_v201_launch_completion.py:122 TAGS=asset_managers TEXT=asset_managers_overall=overall,
+backend/app/runtime/ndsp_v201_launch_completion.py:123 TAGS=asset_managers TEXT=asset_managers_weekly=am_weekly,
+backend/app/runtime/ndsp_v201_launch_completion.py:124 TAGS=leveraged_funds TEXT=leveraged_funds_weekly=lf_weekly,
+backend/app/runtime/ndsp_v201_launch_completion.py:135 TAGS=asset_managers TEXT=f"governing={overall}; asset_managers_weekly={am_weekly}; "
+backend/app/runtime/ndsp_v201_launch_completion.py:136 TAGS=leveraged_funds TEXT=f"leveraged_funds_weekly={lf_weekly}; correction={investment['correction_state']}"
+backend/app/runtime/ndsp_v201_launch_completion.py:147 TAGS=asset_managers TEXT=allowed = bool(investment["asset_managers_weekly_alignment"])
+backend/app/runtime/ndsp_v201_launch_completion.py:165 TAGS=cftc TEXT="evidence": "AM_WEEKLY_EQUALS_LF_WEEKLY evaluated from current CFTC TFF inputs",
+backend/app/runtime/ndsp_v201_launch_completion.py:177 TAGS=cftc TEXT="evidence": "AM_OVERALL_EQUALS_AM_WEEKLY_EQUALS_LF_WEEKLY evaluated from current CFTC TFF inputs",
+backend/app/runtime/ndsp_v201_launch_completion.py:207 TAGS=cftc TEXT={"label": "حالة التقييم", "value": "تم التقييم من بيانات CFTC TFF الفعلية"},
+backend/app/runtime/ndsp_v201_launch_completion.py:265 TAGS=raw_cot TEXT=raw_cot_override: Mapping[str, Any] | None = None,
+backend/app/runtime/ndsp_v201_launch_completion.py:275 TAGS=raw_cot TEXT=raw = dict(raw_cot_override) if isinstance(raw_cot_override, Mapping) else _fetch_raw_cot(normalized_symbol)
+backend/app/runtime/ndsp_v201_launch_completion.py:278 TAGS=asset_managers TEXT="asset_managers_overall": _normalize_direction(
+backend/app/runtime/ndsp_v201_launch_completion.py:279 TAGS=asset_managers TEXT=raw.get("asset_managers_overall_direction") or raw.get("asset_managers_bias")
+backend/app/runtime/ndsp_v201_launch_completion.py:281 TAGS=asset_managers TEXT="asset_managers_weekly": _normalize_direction(raw.get("asset_managers_weekly_direction")),
+backend/app/runtime/ndsp_v201_launch_completion.py:282 TAGS=leveraged_funds TEXT="leveraged_funds_overall": _normalize_direction(
+backend/app/runtime/ndsp_v201_launch_completion.py:283 TAGS=leveraged_funds TEXT=raw.get("leveraged_funds_overall_direction")
+backend/app/runtime/ndsp_v201_launch_completion.py:284 TAGS=leveraged_funds TEXT=or raw.get("leveraged_funds_bias")
+backend/app/runtime/ndsp_v201_launch_completion.py:286 TAGS=leveraged_funds TEXT="leveraged_funds_weekly": _normalize_direction(raw.get("leveraged_funds_weekly_direction")),
+backend/app/runtime/ndsp_v201_launch_completion.py:292 TAGS=report_date TEXT=# report_age_days may be derived only from a real report_date.
+backend/app/runtime/ndsp_v201_launch_completion.py:293 TAGS=report_date TEXT=# Missing report_date remains missing; no synthetic freshness.
+backend/app/runtime/ndsp_v201_launch_completion.py:295 TAGS=report_date TEXT=report_date_value = raw.get("report_date")
+backend/app/runtime/ndsp_v201_launch_completion.py:296 TAGS=report_date TEXT=if report_date_value:
+backend/app/runtime/ndsp_v201_launch_completion.py:300 TAGS=report_date TEXT=text = str(report_date_value).strip()
+backend/app/runtime/ndsp_v201_launch_completion.py:314 TAGS=report_date TEXT=str(report_date_value).strip()[:10]
+backend/app/runtime/ndsp_v201_launch_completion.py:324 TAGS=raw_cot TEXT=raw.get("raw_cot_connected") is True
+backend/app/runtime/ndsp_v201_launch_completion.py:325 TAGS=raw_cot TEXT=and raw.get("raw_cot_governing_inputs_complete") is True
+backend/app/runtime/ndsp_v201_launch_completion.py:333 TAGS=cftc TEXT="source": "CFTC_TFF_FUTURES_ONLY",
+backend/app/runtime/ndsp_v201_launch_completion.py:336 TAGS=report_date TEXT="report_date": raw.get("report_date"),
+backend/app/runtime/ndsp_v201_launch_completion.py:346 TAGS=raw_cot TEXT="raw_cot_connected": raw.get("raw_cot_connected") is True,
+backend/app/runtime/ndsp_v201_launch_completion.py:347 TAGS=raw_cot TEXT="raw_cot_status": raw.get("raw_cot_status"),
+backend/app/runtime/ndsp_v201_launch_completion.py:359 TAGS=asset_managers TEXT=data["asset_managers_overall_direction"] = directions["asset_managers_overall"]
+backend/app/runtime/ndsp_v201_launch_completion.py:360 TAGS=asset_managers TEXT=data["asset_managers_weekly_direction"] = directions["asset_managers_weekly"]
+backend/app/runtime/ndsp_v201_launch_completion.py:361 TAGS=leveraged_funds TEXT=data["leveraged_funds_overall_direction"] = directions["leveraged_funds_overall"]
+backend/app/runtime/ndsp_v201_launch_completion.py:362 TAGS=leveraged_funds TEXT=data["leveraged_funds_weekly_direction"] = directions["leveraged_funds_weekly"]
+backend/app/runtime/ndsp_v201_launch_completion.py:371 TAGS=report_date TEXT="source_report_date": raw.get("report_date"),
+backend/app/runtime/ndsp_v201_launch_completion.py:467 TAGS=asset_managers TEXT=directions.get("asset_managers_overall")
+backend/app/runtime/ndsp_v201_launch_completion.py:469 TAGS=leveraged_funds TEXT=else directions.get("leveraged_funds_weekly")
+
+=== CLASSIFICATION ===
+GOVERNING_INPUTS_AM_OVERALL=AVAILABLE
+GOVERNING_INPUTS_REPORT_DATE=AVAILABLE
+RAW_COT_CONNECTED=True
+RAW_COT_STATUS='CONNECTED_MATCHED'
+V30_DISCOVERY_REQUIRED_ACTION=VERIFY_DISCOVER_COT_ACCEPTS_GOVERNING_INPUTS_STRUCTURE
+
+PATCH_ALLOWED=NO
+FILES_MODIFIED=0
+SERVICES_RESTARTED=0
+RUNTIME_LOGIC_MODIFIED=0
+FINAL_RESULT=PASS

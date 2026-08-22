@@ -1,0 +1,387 @@
+"""
+NDSP Backend Layer 6: Dominant Timed Direction
+
+Arabic name:
+    سلطة الاتجاه الزمني
+
+Purpose:
+    Combines direction bias and timing authority into the dominant timed direction.
+
+This file was restored as executable backend code because the previous file
+was empty, documentation-only, or contained citation markers instead of code.
+
+Public API:
+    - evaluate(payload)
+    - run(payload)
+    - compute_layer(payload)
+"""
+
+from __future__ import annotations
+
+from dataclasses import asdict, dataclass
+from datetime import datetime, timezone
+from typing import Any, Mapping
+
+
+LAYER_ID = 6
+LAYER_NAME = 'Dominant Timed Direction'
+LAYER_SHORT_NAME = 'DIRECTION_AUTHORITY'
+LAYER_ARABIC_NAME = 'سلطة الاتجاه الزمني'
+PRIMARY_OUTPUT = 'dominant_timed_direction'
+LAYER_LOGIC = 'Combines direction bias and timing authority into the dominant timed direction.'
+
+
+@dataclass(frozen=True)
+class LayerResult:
+    layer_id: int
+    layer_name: str
+    short_name: str
+    arabic_name: str
+    status: str
+    score: float
+    confidence: int
+    primary_output: str
+    output: dict[str, Any]
+    signals: list[str]
+    warnings: list[str]
+    evidence: dict[str, Any]
+    generated_at: str
+
+
+def _as_float(value: Any, default: float = 0.0) -> float:
+    try:
+        if value is None:
+            return default
+        return float(value)
+    except Exception:
+        return default
+
+
+def _as_int(value: Any, default: int = 0) -> int:
+    try:
+        if value is None:
+            return default
+        return int(float(value))
+    except Exception:
+        return default
+
+
+def _norm(value: Any, default: str = "neutral") -> str:
+    if value is None:
+        return default
+    text = str(value).strip().lower()
+    return text or default
+
+
+def _get(payload: Mapping[str, Any], *keys: str, default: Any = None) -> Any:
+    for key in keys:
+        if key in payload and payload.get(key) is not None:
+            return payload.get(key)
+    return default
+
+
+def _base_confidence(payload: Mapping[str, Any]) -> int:
+    quality = _as_int(_get(payload, "decision_quality_score", "quality", "confidence", default=70), 70)
+    freshness = _as_int(_get(payload, "data_freshness", "freshness", default=85), 85)
+    risk = _as_int(_get(payload, "risk_pressure_score", "risk", default=45), 45)
+    raw = int((quality * 0.45) + (freshness * 0.30) + ((100 - min(100, risk)) * 0.25))
+    return max(0, min(100, raw))
+
+
+def _direction_text(value: str) -> str:
+    bullish = {"bullish", "up", "long", "صاعد", "داعم", "supportive", "positive"}
+    bearish = {"bearish", "down", "short", "هابط", "سلبي", "negative", "pressure"}
+    if value in bullish:
+        return "BULLISH"
+    if value in bearish:
+        return "BEARISH"
+    return "NEUTRAL"
+
+
+def _timing_group(day: str, is_crypto: bool) -> tuple[str, str, bool]:
+    day = day.lower()
+    if day in {"monday", "mon", "الاثنين", "الإثنين", "friday", "fri", "الجمعة"}:
+        return "ASSET_MANAGERS", "INSTITUTIONAL_LONG_HORIZON", True
+    if day in {"tuesday", "tue", "الثلاثاء", "wednesday", "wed", "الأربعاء", "الاربعاء", "thursday", "thu", "الخميس"}:
+        return "LEVERAGED_FUNDS", "SPECULATIVE_WEEKLY_HORIZON", True
+    if day in {"saturday", "sat", "السبت", "sunday", "sun", "الأحد", "الاحد"} and is_crypto:
+        return "LEVERAGED_FUNDS", "CRYPTO_WEEKEND_SPECULATIVE_HORIZON", True
+    return "NO_PRIMARY_TIMING_AUTHORITY", "LOW_AUTHORITY", False
+
+
+def _evaluate_by_layer(payload: Mapping[str, Any]) -> tuple[float, dict[str, Any], list[str], list[str]]:
+    signals: list[str] = []
+    warnings: list[str] = []
+    output: dict[str, Any] = {}
+
+    confidence = _base_confidence(payload)
+    price = _as_float(_get(payload, "live_price", "price", "current_price", default=0), 0)
+    direction = _direction_text(_norm(_get(payload, "direction_bias", "tdl_bias", "trend", "bias", default="neutral")))
+    risk = _as_int(_get(payload, "risk_pressure_score", "risk", default=45), 45)
+    quality = _as_int(_get(payload, "decision_quality_score", "quality", default=confidence), confidence)
+    macro = _norm(_get(payload, "macro_pressure", "dollar_pressure", "usd_state", default="neutral"))
+    asset = str(_get(payload, "asset", "symbol", default="GOLD"))
+    asset_class = _norm(_get(payload, "asset_class", default="commodity"))
+    is_crypto = bool(_get(payload, "is_crypto", default=False)) or "crypto" in asset_class or asset.upper() in {"BTC", "ETH", "SOL", "BNB"}
+
+    score = float(confidence)
+
+    if LAYER_ID == 1:
+        output = {
+            "governing_bias": direction,
+            "horizon": _get(payload, "horizon", default="medium"),
+            "state": "SUPPORTIVE" if direction != "NEUTRAL" else "WAITING_FOR_ALIGNMENT"
+        }
+        score = quality
+        signals.append(f"TDL bias resolved as {direction}")
+
+    elif LAYER_ID == 2:
+        upper = _as_float(_get(payload, "upper_level", "resistance", default=price * 1.017 if price else 0), 0)
+        pivot = _as_float(_get(payload, "pivot_level", "pivot", default=price if price else 0), 0)
+        lower = _as_float(_get(payload, "lower_level", "support", default=price * 0.981 if price else 0), 0)
+        output = {
+            "asset": asset,
+            "current_price": price,
+            "upper_level": round(upper, 6),
+            "pivot_level": round(pivot, 6),
+            "lower_level": round(lower, 6),
+            "distance_from_pivot": round(price - pivot, 6) if price else 0
+        }
+        score = confidence
+        signals.append("Reference levels calculated.")
+
+    elif LAYER_ID == 3:
+        day = str(_get(payload, "weekday", "day", default=datetime.now(timezone.utc).strftime("%A"))).lower()
+        group, timing_bias, allowed = _timing_group(day, is_crypto)
+        output = {
+            "weekday": day,
+            "controlling_group": group,
+            "timing_bias": timing_bias,
+            "allowed": allowed
+        }
+        score = 86 if allowed else 42
+        if allowed:
+            signals.append(f"Timing authority belongs to {group}.")
+        else:
+            warnings.append("No primary timing authority for current day/asset combination.")
+
+    elif LAYER_ID == 4:
+        aligned_inputs = 0
+        for key in ["tdl_aligned", "nmp_confirmed", "quality_confirmed", "macro_confirmed"]:
+            if bool(payload.get(key, False)):
+                aligned_inputs += 1
+        alignment_score = _as_int(_get(payload, "golden_alignment_score", default=aligned_inputs * 25), aligned_inputs * 25)
+        output = {
+            "golden_alignment_score": min(100, alignment_score),
+            "alignment_state": "HIGH_ALIGNMENT" if alignment_score >= 75 else "PARTIAL_ALIGNMENT"
+        }
+        score = min(100, alignment_score)
+        signals.append("Golden alignment evaluated.")
+
+    elif LAYER_ID == 5:
+        fresh = bool(_get(payload, "data_is_fresh", "fresh", default=True))
+        sources_connected = bool(_get(payload, "sources_connected", default=True))
+        output = {
+            "data_is_fresh": fresh,
+            "sources_connected": sources_connected,
+            "integrity_state": "CONNECTED" if fresh and sources_connected else "DEGRADED"
+        }
+        score = 90 if fresh and sources_connected else 55
+        if not fresh or not sources_connected:
+            warnings.append("Data freshness/source integrity is degraded.")
+
+    elif LAYER_ID == 6:
+        timing = _get(payload, "timing", "l3_timing", default={})
+        if not isinstance(timing, Mapping):
+            timing = {}
+        timing_allowed = bool(timing.get("allowed", _get(payload, "timing_allowed", default=True)))
+        dominant_direction = direction if timing_allowed and direction != "NEUTRAL" else "NEUTRAL"
+        output = {
+            "dominant_direction": dominant_direction,
+            "timing_allowed": timing_allowed,
+            "direction_authority": "ACTIVE" if dominant_direction != "NEUTRAL" else "LOW_OR_BLOCKED"
+        }
+        score = quality + (10 if timing_allowed else -20) - (risk * 0.15)
+        signals.append(f"Dominant timed direction={dominant_direction}")
+
+    elif LAYER_ID == 7:
+        inst = _norm(_get(payload, "institutional_context", "cot_bias", "positioning", default=direction))
+        output = {
+            "institutional_context": _direction_text(inst),
+            "positioning_state": "SUPPORTIVE" if _direction_text(inst) == direction and direction != "NEUTRAL" else "MIXED"
+        }
+        score = quality
+        signals.append("Institutional positioning context evaluated.")
+
+    elif LAYER_ID == 8:
+        macro_state = "SUPPORTIVE" if macro in {"supportive", "positive", "weak_usd", "داعم"} else "PRESSURE" if macro in {"negative", "strong_usd", "pressure", "سلبي"} else "NEUTRAL"
+        output = {
+            "macro_state": macro_state,
+            "dollar_pressure": macro,
+            "asset": asset
+        }
+        score = 78 if macro_state != "PRESSURE" else 58
+        if macro_state == "PRESSURE":
+            warnings.append("Macro/USD pressure is conflicting or negative.")
+
+    elif LAYER_ID == 9:
+        output = {
+            "risk_pressure_score": risk,
+            "volatility_state": "LOW" if risk <= 35 else "ELEVATED" if risk >= 70 else "MEDIUM"
+        }
+        score = max(0, 100 - risk)
+        if risk >= 70:
+            warnings.append("Risk pressure is elevated.")
+
+    elif LAYER_ID == 10:
+        liquidity = _norm(_get(payload, "liquidity", "liquidity_state", default="good"))
+        output = {
+            "market_state": "STABLE" if liquidity in {"good", "high", "جيدة"} and risk < 70 else "UNSTABLE",
+            "liquidity": liquidity,
+            "risk_pressure_score": risk
+        }
+        score = 82 if output["market_state"] == "STABLE" else 52
+        signals.append("Market state evaluated.")
+
+    elif LAYER_ID == 11:
+        base = _as_int(_get(payload, "base_scenario_probability", default=62), 62)
+        optimistic = _as_int(_get(payload, "optimistic_scenario_probability", default=24), 24)
+        conservative = max(0, 100 - base - optimistic)
+        output = {
+            "base_scenario": base,
+            "optimistic_scenario": optimistic,
+            "conservative_scenario": conservative,
+            "dominant_scenario": "BASE" if base >= optimistic and base >= conservative else "ALTERNATIVE"
+        }
+        score = base
+        signals.append("Scenario distribution generated.")
+
+    elif LAYER_ID == 12:
+        upper = _as_float(_get(payload, "upper_level", default=price * 1.017 if price else 0), 0)
+        pivot = _as_float(_get(payload, "pivot_level", default=price if price else 0), 0)
+        lower = _as_float(_get(payload, "lower_level", default=price * 0.981 if price else 0), 0)
+        output = {
+            "current_price": price,
+            "upper": round(upper, 6),
+            "pivot": round(pivot, 6),
+            "lower": round(lower, 6),
+            "range_width": round(upper - lower, 6) if upper and lower else 0
+        }
+        score = confidence
+        signals.append("Reference level map generated.")
+
+    elif LAYER_ID == 13:
+        short = _as_int(_get(payload, "short_horizon_strength", default=82), 82)
+        medium = _as_int(_get(payload, "medium_horizon_strength", default=67), 67)
+        long = _as_int(_get(payload, "long_horizon_strength", default=49), 49)
+        output = {
+            "short_horizon": short,
+            "medium_horizon": medium,
+            "long_horizon": long,
+            "dominant_horizon": "SHORT" if short >= medium and short >= long else "MEDIUM" if medium >= long else "LONG"
+        }
+        score = max(short, medium, long)
+        signals.append("Horizon strength scored.")
+
+    elif LAYER_ID == 14:
+        data_clarity = _as_int(_get(payload, "data_clarity", default=quality), quality)
+        model_quality = _as_int(_get(payload, "model_quality", default=quality), quality)
+        source_reliability = _as_int(_get(payload, "source_reliability", default=quality), quality)
+        scenario_consistency = _as_int(_get(payload, "scenario_consistency", default=82), 82)
+        final = int((data_clarity + model_quality + source_reliability + scenario_consistency) / 4)
+        output = {
+            "data_clarity": data_clarity,
+            "model_quality": model_quality,
+            "source_reliability": source_reliability,
+            "scenario_consistency": scenario_consistency,
+            "decision_quality_score": final
+        }
+        score = final
+        signals.append("Decision quality scored.")
+
+    elif LAYER_ID == 15:
+        alerts_enabled = bool(_get(payload, "alerts_enabled", default=True))
+        output = {
+            "alerts_enabled": alerts_enabled,
+            "settings_state": "ACTIVE" if alerts_enabled else "DISABLED",
+            "notification_channel": _get(payload, "notification_channel", default="in_app")
+        }
+        score = 80 if alerts_enabled else 45
+        if not alerts_enabled:
+            warnings.append("Alerts are disabled.")
+
+    elif LAYER_ID == 16:
+        plan = str(_get(payload, "plan", "package", default="Elite"))
+        trial_days = _as_int(_get(payload, "trial_days_remaining", default=0), 0)
+        output = {
+            "plan": plan,
+            "trial_days_remaining": trial_days,
+            "entitlement_state": "ACTIVE" if plan or trial_days > 0 else "NO_ENTITLEMENT"
+        }
+        score = 85 if output["entitlement_state"] == "ACTIVE" else 30
+        if output["entitlement_state"] != "ACTIVE":
+            warnings.append("No active entitlement was detected.")
+
+    else:
+        output = {
+            "layer": LAYER_NAME,
+            "primary_output": PRIMARY_OUTPUT,
+            "state": "EXECUTABLE_GENERIC_LAYER"
+        }
+        score = confidence
+        signals.append("Generic executable layer evaluated.")
+
+    return float(max(0, min(100, score))), output, signals, warnings
+
+
+def evaluate(payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+    payload = dict(payload or {})
+    score, output, signals, warnings = _evaluate_by_layer(payload)
+
+    confidence = max(0, min(100, int(score)))
+    status = "ACTIVE" if confidence >= 70 else "CAUTION" if confidence >= 45 else "LOW_CONFIDENCE"
+
+    evidence = {
+        "input_keys": sorted(payload.keys()),
+        "logic": LAYER_LOGIC,
+        "source": "restored_executable_layer"
+    }
+
+    result = LayerResult(
+        layer_id=LAYER_ID,
+        layer_name=LAYER_NAME,
+        short_name=LAYER_SHORT_NAME,
+        arabic_name=LAYER_ARABIC_NAME,
+        status=status,
+        score=round(score, 4),
+        confidence=confidence,
+        primary_output=PRIMARY_OUTPUT,
+        output=output,
+        signals=signals,
+        warnings=warnings,
+        evidence=evidence,
+        generated_at=datetime.now(timezone.utc).isoformat(),
+    )
+
+    return asdict(result)
+
+
+def run(payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+    return evaluate(payload)
+
+
+def compute_layer(payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+    return evaluate(payload)
+
+
+def compute(payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+    return evaluate(payload)
+
+
+if __name__ == "__main__":
+    import json
+    import sys
+
+    raw = sys.stdin.read().strip()
+    payload = json.loads(raw) if raw else {}
+    print(json.dumps(evaluate(payload), ensure_ascii=False, indent=2))

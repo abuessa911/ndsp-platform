@@ -1,0 +1,12 @@
+screen,feature_count,capability_count,blocked_capability_count,features,recommended_components,roles,screen_status
+ADMIN_USERS,1,8,8,Admin user management,EntitlementPanel|RoleBadge|UserDetailDrawer|UsersTable,ADMIN,TRACEABILITY_REMEDIATION_REQUIRED
+ALERTS_AND_CHANNELS,1,17,17,Alerts and delivery channels,AlertCenter|ChannelSettings|RoutingStatus|TestDelivery,ADMIN|USER,TRACEABILITY_REMEDIATION_REQUIRED
+AUTHENTICATION,1,21,21,Authentication and account access,AuthForm|RecoveryFlow|SessionStatus|TwoFactorStep,AUTHENTICATED_USER|PUBLIC,TRACEABILITY_REMEDIATION_REQUIRED
+CAPABILITY_REVIEW,1,9,9,Unclassified platform capability,CapabilityInspector|EvidencePanel,ADMIN,TRACEABILITY_REMEDIATION_REQUIRED
+DECISION_ROOM,1,3,3,Decision intelligence workspace,DecisionSummary|NarrativeCard|ScenarioMatrix|SignalPanel,ADMIN|USER,TRACEABILITY_REMEDIATION_REQUIRED
+LANDING,1,4,4,Public platform presentation,CapabilityProof|LiveMetric|PlatformTimeline,PUBLIC,TRACEABILITY_REMEDIATION_REQUIRED
+MARKET_INTELLIGENCE,1,1,1,Market and economic intelligence,COTPanel|ForecastChart|IndicatorGrid|MarketOverview,ADMIN|USER,TRACEABILITY_REMEDIATION_REQUIRED
+PLATFORM_OPERATIONS,1,37,37,Platform operations and service health,BackupPanel|GatewayMonitor|RuntimeStatus|ServiceHealthGrid,ADMIN,TRACEABILITY_REMEDIATION_REQUIRED
+QUALITY_AND_RISK,1,11,11,Decision quality and risk controls,ConfidenceGauge|GovernanceStatus|QualityScore|RiskPanel,ADMIN|USER,TRACEABILITY_REMEDIATION_REQUIRED
+REPORTS_AND_ANALYTICS,1,4,4,"Reports, analytics, and evidence",AnalyticsChart|EvidenceDrawer|HistoryTable|ReportLibrary,ADMIN|USER,TRACEABILITY_REMEDIATION_REQUIRED
+TRIAL_AND_BILLING,1,24,24,"Trial, plans, and billing",BillingStatus|PlanComparison|TrialCountdown|UsageMeter,ADMIN|USER,TRACEABILITY_REMEDIATION_REQUIRED

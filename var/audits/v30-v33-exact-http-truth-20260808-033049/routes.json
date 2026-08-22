@@ -1,0 +1,74 @@
+{
+  "v30": {
+    "file": "/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_canonical_live_runtime_v30.py",
+    "do_get": [
+      {
+        "line_start": 718,
+        "line_end": 754,
+        "routes": [
+          "/api/decision/canonical-live",
+          "/api/health",
+          "/health"
+        ]
+      }
+    ],
+    "candidate_routes": [
+      {
+        "route": "/health",
+        "line": 720,
+        "source": "if parsed.path in {\"/health\", \"/api/health\"}:\n            status, payload = health()\n            self.write_json(status, payload)\n            return"
+      },
+      {
+        "route": "/api/health",
+        "line": 720,
+        "source": "if parsed.path in {\"/health\", \"/api/health\"}:\n            status, payload = health()\n            self.write_json(status, payload)\n            return"
+      },
+      {
+        "route": "/api/decision/canonical-live",
+        "line": 724,
+        "source": "if parsed.path != \"/api/decision/canonical-live\":\n            self.write_json(404, {\"ok\": False, \"error\": \"NOT_FOUND\"})\n            return"
+      },
+      {
+        "route": "/api/decision/canonical-live",
+        "line": 718,
+        "source": "do_GET literal"
+      },
+      {
+        "route": "/api/health",
+        "line": 718,
+        "source": "do_GET literal"
+      },
+      {
+        "route": "/health",
+        "line": 718,
+        "source": "do_GET literal"
+      }
+    ],
+    "upstream_urls": [
+      "http://127.0.0.1:9082"
+    ],
+    "ports": [
+      9082
+    ],
+    "http_handler_classes": [
+      {
+        "class": "Handler",
+        "line": 700,
+        "bases": [
+          "BaseHTTPRequestHandler"
+        ]
+      }
+    ]
+  },
+  "v33": {
+    "file": "/home/nawaf511/empire-core-new/backend/app/runtime/ndsp_canonical_live_runtime_v33.py",
+    "do_get": [],
+    "candidate_routes": [],
+    "upstream_urls": [
+      "https://api.binance.com",
+      "https://query1.finance.yahoo.com/v8/finance/chart"
+    ],
+    "ports": [],
+    "http_handler_classes": []
+  }
+}

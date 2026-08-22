@@ -1,0 +1,100 @@
+$ systemctl list-units --type=service --state=running --no-pager --plain 2>/dev/null || true
+
+UNIT                                          LOAD   ACTIVE SUB     DESCRIPTION
+accounts-daemon.service                       loaded active running Accounts Service
+avahi-daemon.service                          loaded active running Avahi mDNS/DNS-SD Stack
+containerd.service                            loaded active running containerd container runtime
+cron.service                                  loaded active running Regular background program processing daemon
+cups-browsed.service                          loaded active running Make remote CUPS printers available locally
+cups.service                                  loaded active running CUPS Scheduler
+dbus.service                                  loaded active running D-Bus System Message Bus
+docker.service                                loaded active running Docker Application Container Engine
+fail2ban.service                              loaded active running Fail2Ban Service
+fwupd.service                                 loaded active running Firmware update daemon
+ndsp-16-layers.service                        loaded active running NDSP 16 Analytical Layers API
+ndsp-access-guard-9024.service                loaded active running NDSP Access Guard 9024
+ndsp-access-guard-final.service               loaded active running NDSP Access Guard Final
+ndsp-admin-actions.service                    loaded active running NDSP Admin Actions Gateway
+ndsp-admin-ui-proxy.service                   loaded active running NDSP Admin UI Server-Side Proxy
+ndsp-admin-user-ops.service                   loaded active running NDSP Admin User Ops
+ndsp-admin-users-official.service             loaded active running NDSP Admin Official Users API
+ndsp-api-compat.service                       loaded active running NDSP API Compatibility Gateway
+ndsp-auth-core-clean.service                  loaded active running NDSP Clean Authentication Core
+ndsp-bot_execution.service                    loaded active running NDSP BOT-001 NDSP Bot Execution Service
+ndsp-business-ops.service                     loaded active running NDSP Business Operations V205
+ndsp-canonical-live-runtime-v30.service       loaded active running NDSP Real Canonical 16-Layer Runtime Sidecar V30
+ndsp-canonical-live-runtime-v33.service       loaded active running NDSP Canonical Live Evidence Binding Sidecar V33
+ndsp-change-password-gateway.service          loaded active running NDSP Change Password Gateway
+ndsp-commercial-auth-payment-staging.service  loaded active running NDSP Commercial Auth Payment Staging V1.13
+ndsp-completed-decisions-evidence-v35.service loaded active running NDSP Completed Decisions Evidence Registry V35
+ndsp-completed-decisions-history-v36.service  loaded active running NDSP Completed Decisions Append-Only History API V36
+ndsp-completed_decision.service               loaded active running NDSP CDS-001 Completed Decision Service
+ndsp-ctl-001-workspace-identity.service       loaded active running NDSP CTL-001 Workspace Identity
+ndsp-current-user-display.service             loaded active running NDSP Current User Display API
+ndsp-decision-package-v1.service              loaded active running NDSP Decision Package API v1
+ndsp-decision_governance_core.service         loaded active running NDSP DGC-001 Decision Governance Core
+ndsp-governance-bridge.service                loaded active running NDSP Governance Bridge 9044
+ndsp-layers-api.service                       loaded active running NDSP Layers API
+ndsp-live-decision-quality.service            loaded active running NDSP Live Decision Quality Bridge
+ndsp-live-market-adapter.service              loaded active running NDSP Live Market Adapter
+ndsp-market-data-bridge-v2.service            loaded active running NDSP Market Data and News Bridge V2
+ndsp-news-ticker.service                      loaded active running NDSP Live News Ticker Service
+ndsp-password-reset.service                   loaded active running NDSP Password Reset Gateway
+ndsp-platform-gateway-9002.service            loaded active running NDSP Platform Gateway 9002 Recovery Service
+ndsp-platform-gateway.service                 loaded active running NDSP Platform Unified Backend Gateway 9001
+ndsp-portal-real-data-api.service             loaded active running NDSP Portal Real Data API
+ndsp-public-summary-v548.service              loaded active running NDSP Public Summary V5.4.8
+ndsp-quality-live-golden-wrapper.service      loaded active running NDSP quality-live golden explainability API wrapper
+ndsp-quality-live-nmp-wrapper.service         loaded active running NDSP quality-live NMP wrapper 9082
+ndsp-raw-cot-gateway.service                  loaded active running NDSP Raw COT Gateway
+ndsp-register-compat-gateway.service          loaded active running NDSP Register Compatibility Gateway
+ndsp-registration-consent-v42.service         loaded active running NDSP registration legal-consent gateway V42
+ndsp-scenario-levels-adapter.service          loaded active running NDSP Scenario Levels Adapter
+ndsp-telegram-link-listener.service           loaded active running NDSP Telegram Link Listener
+ndsp-trial-fingerprint-guard.service          loaded active running NDSP Trial Fingerprint Guard Proxy
+ndsp-trial-register-canonical-wrapper.service loaded active running NDSP Trial Register Canonical Wrapper
+ndsp-trial-register.service                   loaded active running NDSP Trial Registration Gateway
+ndsp-trial-seats-api.service                  loaded active running NDSP Trial Seats API
+ndsp-ui-bridge-api.service                    loaded active running NDSP UI Bridge API
+ndsp-user-alert-channels.service              loaded active running NDSP User Alert Channels API
+ndsp-user-dashboard.service                   loaded active running NDSP User Dashboard Data Gateway
+ndsp-user-login.service                       loaded active running NDSP User Login Gateway
+ndsp-v3-portal-gateway.service                loaded active running NDSP V3 Portal Gateway
+ndsp-v52-contract.service                     loaded active running NDSP V5.2 Backend NMP TDL Contract
+ndsp-v53-bridge.service                       loaded active running NDSP V53/V543 TDL Devil Radar Nodes Bridge
+networkd-dispatcher.service                   loaded active running Dispatcher daemon for systemd-networkd
+NetworkManager.service                        loaded active running Network Manager
+nginx.service                                 loaded active running A high performance web server and a reverse proxy server
+polkit.service                                loaded active running Authorization Manager
+postfix@-.service                             loaded active running Postfix Mail Transport Agent (instance -)
+postgresql@16-main.service                    loaded active running PostgreSQL Cluster 16-main
+power-profiles-daemon.service                 loaded active running Power Profiles daemon
+preload.service                               loaded active running LSB: Adaptive readahead daemon
+redis-server.service                          loaded active running Advanced key-value store
+rsyslog.service                               loaded active running System Logging Service
+rtkit-daemon.service                          loaded active running RealtimeKit Scheduling Policy Service
+sddm.service                                  loaded active running Simple Desktop Display Manager
+serial-getty@ttyS0.service                    loaded active running Serial Getty on ttyS0
+snap.cups.cups-browsed.service                loaded active running Service for snap application cups.cups-browsed
+snap.cups.cupsd.service                       loaded active running Service for snap application cups.cupsd
+snapd.service                                 loaded active running Snap Daemon
+ssh.service                                   loaded active running OpenBSD Secure Shell server
+switcheroo-control.service                    loaded active running Switcheroo Control Proxy service
+systemd-journald.service                      loaded active running Journal Service
+systemd-logind.service                        loaded active running User Login Management
+systemd-networkd.service                      loaded active running Network Configuration
+systemd-resolved.service                      loaded active running Network Name Resolution
+systemd-timesyncd.service                     loaded active running Network Time Synchronization
+systemd-udevd.service                         loaded active running Rule-based Manager for Device Events and Files
+udisks2.service                               loaded active running Disk Manager
+upower.service                                loaded active running Daemon for power management
+user@1000.service                             loaded active running User Manager for UID 1000
+warp-svc.service                              loaded active running Cloudflare Zero Trust Client Daemon
+xrdp-sesman.service                           loaded active running xrdp session manager
+xrdp.service                                  loaded active running xrdp daemon
+
+Legend: LOAD   → Reflects whether the unit definition was properly loaded.
+        ACTIVE → The high-level unit activation state, i.e. generalization of SUB.
+        SUB    → The low-level unit activation state, values depend on unit type.
+
+91 loaded units listed.

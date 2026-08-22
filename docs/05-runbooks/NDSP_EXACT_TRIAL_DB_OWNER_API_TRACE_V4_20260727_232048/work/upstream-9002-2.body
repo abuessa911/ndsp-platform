@@ -1,0 +1,1 @@
+{"ok": true, "source_mode": "ndsp_platform_gateway_9002_recovery", "trial": {"enabled": true, "duration_days": 16, "status": "ACTIVE", "registration_endpoint": "/api/trial/register/ordinary"}, "message": "NDSP trial gateway is reachable.", "updated_at": "2026-07-27T21:20:56Z"}

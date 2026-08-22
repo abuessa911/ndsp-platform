@@ -1,0 +1,14 @@
+{
+  "version": "7.0.0",
+  "generated_at": "2026-07-27T20:06:31+02:00",
+  "forgot_page_source": "/var/www/ndsp-my/forgot-password.html",
+  "reset_page_source": "/var/www/ndsp-my/reset-password.html",
+  "public_forgot_route": "/forgot-password/",
+  "public_reset_route": "/reset-password/",
+  "forgot_api": "/api/auth/forgot-password",
+  "reset_api": "/api/auth/reset-password",
+  "password_reset_service": "ndsp-password-reset.service",
+  "password_reset_port": 9027,
+  "database_schema_change": false,
+  "database_direct_edit": false
+}

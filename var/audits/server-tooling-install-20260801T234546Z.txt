@@ -1,0 +1,786 @@
+
+============================================================
+معلومات النظام
+============================================================
+وقت التنفيذ UTC:     2026-08-01T23:45:46Z
+النظام:              Ubuntu 24.04.4 LTS
+المعمارية:           amd64
+Kernel:               6.8.0-136-generic
+جذر المشروع:         /home/nawaf511/empire-core-new
+مالك المشروع:        nawaf511:nawaf511
+تقرير التنفيذ:        /home/nawaf511/empire-core-new/var/audits/server-tooling-install-20260801T234546Z.txt
+
+============================================================
+تحديث فهرس APT
+============================================================
+Hit:1 https://download.docker.com/linux/ubuntu noble InRelease
+Hit:2 http://archive.ubuntu.com/ubuntu noble InRelease
+Hit:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease
+Hit:4 https://deb.nodesource.com/node_22.x nodistro InRelease
+Hit:5 https://downloads.metasploit.com/data/releases/metasploit-framework/apt lucid InRelease
+جلب:6 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+Hit:7 http://security.ubuntu.com/ubuntu noble-security InRelease
+Hit:8 https://packages.microsoft.com/repos/code stable InRelease
+Hit:9 https://us-central1-apt.pkg.dev/projects/antigravity-auto-updater-dev antigravity-debian InRelease
+Hit:10 https://pkg.cloudflareclient.com noble InRelease
+Hit:11 https://brave-browser-apt-release.s3.brave.com stable InRelease
+جلب:12 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [31.0 kB]
+جلب 157 kب في 3s (58.6 kب/ث)
+قراءة قوائم الحزم...
+تم تجاوز apt upgrade.
+لتفعيله استخدم RUN_UPGRADE=1.
+
+============================================================
+أدوات النظام الأساسية
+============================================================
+موجود مسبقاً: ca-certificates
+موجود مسبقاً: curl
+موجود مسبقاً: wget
+موجود مسبقاً: git
+موجود مسبقاً: gnupg
+موجود مسبقاً: gpg
+موجود مسبقاً: lsb-release
+موجود مسبقاً: apt-transport-https
+موجود مسبقاً: software-properties-common
+موجود مسبقاً: unzip
+موجود مسبقاً: zip
+موجود مسبقاً: tar
+موجود مسبقاً: gzip
+موجود مسبقاً: bzip2
+موجود مسبقاً: xz-utils
+موجود مسبقاً: rsync
+موجود مسبقاً: jq
+موجود مسبقاً: yq
+موجود مسبقاً: tree
+موجود مسبقاً: less
+موجود مسبقاً: nano
+موجود مسبقاً: vim
+موجود مسبقاً: tmux
+موجود مسبقاً: screen
+موجود مسبقاً: htop
+موجود مسبقاً: ripgrep
+موجود مسبقاً: file
+موجود مسبقاً: locales
+موجود مسبقاً: tzdata
+
+سيتم تثبيت:
+  git-lfs
+  btop
+  ncdu
+  fd-find
+  fzf
+قراءة قوائم الحزم...
+Building dependency tree...
+Reading state information...
+سيتم تثبيت الحزم الجديدة التالية:
+  btop fd-find fzf git-lfs ncdu
+0 سيتم ترقيتها، 5 مثبتة حديثاً،  0 لإزالتها و 11 لم يتم ترقيتها.
+بحاجة إلى جلب 7215 kب من الأرشيف.
+After this operation, 20.7 MB of additional disk space will be used.
+جلب:1 http://archive.ubuntu.com/ubuntu noble/universe amd64 btop amd64 1.3.0-1 [566 kB]
+جلب:2 http://archive.ubuntu.com/ubuntu noble/universe amd64 fd-find amd64 9.0.0-1 [1356 kB]
+جلب:3 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 fzf amd64 0.44.1-1ubuntu0.3 [1334 kB]
+جلب:4 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 git-lfs amd64 3.4.1-1ubuntu0.4 [3908 kB]
+جلب:5 http://archive.ubuntu.com/ubuntu noble/universe amd64 ncdu amd64 1.19-0.1 [50.7 kB]
+جلب 7215 kب في 0s (14.7 Mب/ث)
+Selecting previously unselected package btop.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 380083 files and directories currently installed.)
+Preparing to unpack .../btop_1.3.0-1_amd64.deb ...
+Unpacking btop (1.3.0-1) ...
+Selecting previously unselected package fd-find.
+Preparing to unpack .../fd-find_9.0.0-1_amd64.deb ...
+Unpacking fd-find (9.0.0-1) ...
+Selecting previously unselected package fzf.
+Preparing to unpack .../fzf_0.44.1-1ubuntu0.3_amd64.deb ...
+Unpacking fzf (0.44.1-1ubuntu0.3) ...
+Selecting previously unselected package git-lfs.
+Preparing to unpack .../git-lfs_3.4.1-1ubuntu0.4_amd64.deb ...
+Unpacking git-lfs (3.4.1-1ubuntu0.4) ...
+Selecting previously unselected package ncdu.
+Preparing to unpack .../ncdu_1.19-0.1_amd64.deb ...
+Unpacking ncdu (1.19-0.1) ...
+Setting up ncdu (1.19-0.1) ...
+Setting up fd-find (9.0.0-1) ...
+Setting up btop (1.3.0-1) ...
+Setting up fzf (0.44.1-1ubuntu0.3) ...
+Setting up git-lfs (3.4.1-1ubuntu0.4) ...
+Processing triggers for desktop-file-utils (0.27-2build1) ...
+Processing triggers for hicolor-icon-theme (0.17-2) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+Processing triggers for mailcap (3.70+nmu1ubuntu1.24.04.1) ...
+
+Running kernel seems to be up-to-date.
+
+Restarting services...
+
+Service restarts being deferred:
+ systemctl restart NetworkManager.service
+ /etc/needrestart/restart.d/dbus.service
+ systemctl restart docker.service
+ systemctl restart networkd-dispatcher.service
+ systemctl restart sddm.service
+ systemctl restart serial-getty@ttyS0.service
+ systemctl restart systemd-logind.service
+
+No containers need to be restarted.
+
+User sessions running outdated binaries:
+ nawaf511 @ session #6019: PM2 v7.0.3: God[1062421]
+ nawaf511 @ user manager service: systemd[718203]
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+
+============================================================
+أدوات البناء والتطوير
+============================================================
+موجود مسبقاً: build-essential
+موجود مسبقاً: make
+موجود مسبقاً: gcc
+موجود مسبقاً: g++
+موجود مسبقاً: pkg-config
+موجود مسبقاً: patch
+
+سيتم تثبيت:
+  cmake
+  autoconf
+  automake
+  libtool
+  shellcheck
+  shfmt
+قراءة قوائم الحزم...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  autotools-dev cmake-data libjsoncpp25 librhash0 m4
+الحزم المقترحة:
+  autoconf-archive gnu-standards autoconf-doc cmake-doc cmake-format
+  elpa-cmake-mode ninja-build libtool-doc gfortran | fortran95-compiler
+  gcj-jdk m4-doc
+الحزم المستحسنة:
+  libltdl-dev
+سيتم تثبيت الحزم الجديدة التالية:
+  autoconf automake autotools-dev cmake cmake-data libjsoncpp25 librhash0
+  libtool m4 shellcheck shfmt
+0 سيتم ترقيتها، 11 مثبتة حديثاً،  0 لإزالتها و 11 لم يتم ترقيتها.
+بحاجة إلى جلب 18.9 Mب من الأرشيف.
+After this operation, 77.3 MB of additional disk space will be used.
+جلب:1 http://archive.ubuntu.com/ubuntu noble/main amd64 m4 amd64 1.4.19-4build1 [244 kB]
+جلب:2 http://archive.ubuntu.com/ubuntu noble/main amd64 autoconf all 2.71-3 [339 kB]
+جلب:3 http://archive.ubuntu.com/ubuntu noble/main amd64 autotools-dev all 20220109.1 [44.9 kB]
+جلب:4 http://archive.ubuntu.com/ubuntu noble/main amd64 automake all 1:1.16.5-1.3ubuntu1 [558 kB]
+جلب:5 http://archive.ubuntu.com/ubuntu noble/main amd64 libjsoncpp25 amd64 1.9.5-6build1 [82.8 kB]
+جلب:6 http://archive.ubuntu.com/ubuntu noble/main amd64 librhash0 amd64 1.4.3-3build1 [129 kB]
+جلب:7 http://archive.ubuntu.com/ubuntu noble/main amd64 cmake-data all 3.28.3-1build7 [2155 kB]
+جلب:8 http://archive.ubuntu.com/ubuntu noble/main amd64 cmake amd64 3.28.3-1build7 [11.2 MB]
+جلب:9 http://archive.ubuntu.com/ubuntu noble/main amd64 libtool all 2.4.7-7build1 [166 kB]
+جلب:10 http://archive.ubuntu.com/ubuntu noble/universe amd64 shfmt amd64 3.8.0-1 [1131 kB]
+جلب:11 http://archive.ubuntu.com/ubuntu noble/universe amd64 shellcheck amd64 0.9.0-1 [2845 kB]
+جلب 18.9 Mب في 1s (29.5 Mب/ث)
+Selecting previously unselected package m4.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 380208 files and directories currently installed.)
+Preparing to unpack .../00-m4_1.4.19-4build1_amd64.deb ...
+Unpacking m4 (1.4.19-4build1) ...
+Selecting previously unselected package autoconf.
+Preparing to unpack .../01-autoconf_2.71-3_all.deb ...
+Unpacking autoconf (2.71-3) ...
+Selecting previously unselected package autotools-dev.
+Preparing to unpack .../02-autotools-dev_20220109.1_all.deb ...
+Unpacking autotools-dev (20220109.1) ...
+Selecting previously unselected package automake.
+Preparing to unpack .../03-automake_1%3a1.16.5-1.3ubuntu1_all.deb ...
+Unpacking automake (1:1.16.5-1.3ubuntu1) ...
+Selecting previously unselected package libjsoncpp25:amd64.
+Preparing to unpack .../04-libjsoncpp25_1.9.5-6build1_amd64.deb ...
+Unpacking libjsoncpp25:amd64 (1.9.5-6build1) ...
+Selecting previously unselected package librhash0:amd64.
+Preparing to unpack .../05-librhash0_1.4.3-3build1_amd64.deb ...
+Unpacking librhash0:amd64 (1.4.3-3build1) ...
+Selecting previously unselected package cmake-data.
+Preparing to unpack .../06-cmake-data_3.28.3-1build7_all.deb ...
+Unpacking cmake-data (3.28.3-1build7) ...
+Selecting previously unselected package cmake.
+Preparing to unpack .../07-cmake_3.28.3-1build7_amd64.deb ...
+Unpacking cmake (3.28.3-1build7) ...
+Selecting previously unselected package libtool.
+Preparing to unpack .../08-libtool_2.4.7-7build1_all.deb ...
+Unpacking libtool (2.4.7-7build1) ...
+Selecting previously unselected package shfmt.
+Preparing to unpack .../09-shfmt_3.8.0-1_amd64.deb ...
+Unpacking shfmt (3.8.0-1) ...
+Selecting previously unselected package shellcheck.
+Preparing to unpack .../10-shellcheck_0.9.0-1_amd64.deb ...
+Unpacking shellcheck (0.9.0-1) ...
+Setting up m4 (1.4.19-4build1) ...
+Setting up shellcheck (0.9.0-1) ...
+Setting up shfmt (3.8.0-1) ...
+Setting up autotools-dev (20220109.1) ...
+Setting up libjsoncpp25:amd64 (1.9.5-6build1) ...
+Setting up autoconf (2.71-3) ...
+Setting up librhash0:amd64 (1.4.3-3build1) ...
+Setting up cmake-data (3.28.3-1build7) ...
+Setting up automake (1:1.16.5-1.3ubuntu1) ...
+update-alternatives: using /usr/bin/automake-1.16 to provide /usr/bin/automake (automake) in auto mode
+Setting up libtool (2.4.7-7build1) ...
+Setting up cmake (3.28.3-1build7) ...
+Processing triggers for libc-bin (2.39-0ubuntu8.8) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+Processing triggers for install-info (7.1-3build2) ...
+
+Running kernel seems to be up-to-date.
+
+Restarting services...
+
+Service restarts being deferred:
+ systemctl restart NetworkManager.service
+ /etc/needrestart/restart.d/dbus.service
+ systemctl restart docker.service
+ systemctl restart networkd-dispatcher.service
+ systemctl restart sddm.service
+ systemctl restart serial-getty@ttyS0.service
+ systemctl restart systemd-logind.service
+
+No containers need to be restarted.
+
+User sessions running outdated binaries:
+ nawaf511 @ session #6019: PM2 v7.0.3: God[1062421]
+ nawaf511 @ user manager service: systemd[718203]
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+
+============================================================
+Node.js وnpm
+============================================================
+Node.js وnpm موجودان مسبقاً.
+Corepack موجود.
+
+============================================================
+Python وأدوات البيئات الافتراضية
+============================================================
+موجود مسبقاً: python3
+موجود مسبقاً: python3-venv
+موجود مسبقاً: python3-pip
+موجود مسبقاً: python3-dev
+موجود مسبقاً: python3-setuptools
+موجود مسبقاً: python3-wheel
+موجود مسبقاً: python3-yaml
+موجود مسبقاً: python3-jsonschema
+موجود مسبقاً: python3-pytest
+موجود مسبقاً: pipx
+لا توجد حزم جديدة في هذه المجموعة.
+
+============================================================
+أدوات الويب وNginx
+============================================================
+موجود مسبقاً: nginx
+موجود مسبقاً: openssl
+موجود مسبقاً: apache2-utils
+موجود مسبقاً: acl
+موجود مسبقاً: libcap2-bin
+موجود مسبقاً: logrotate
+
+سيتم تثبيت:
+  inotify-tools
+قراءة قوائم الحزم...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  libinotifytools0
+سيتم تثبيت الحزم الجديدة التالية:
+  inotify-tools libinotifytools0
+0 سيتم ترقيتها، 2 مثبتة حديثاً،  0 لإزالتها و 11 لم يتم ترقيتها.
+بحاجة إلى جلب 54.5 kب من الأرشيف.
+After this operation, 229 kB of additional disk space will be used.
+جلب:1 http://archive.ubuntu.com/ubuntu noble/universe amd64 libinotifytools0 amd64 3.22.6.0-4 [22.4 kB]
+جلب:2 http://archive.ubuntu.com/ubuntu noble/universe amd64 inotify-tools amd64 3.22.6.0-4 [32.1 kB]
+جلب 54.5 kب في 0s (296 kب/ث)
+Selecting previously unselected package libinotifytools0:amd64.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 383934 files and directories currently installed.)
+Preparing to unpack .../libinotifytools0_3.22.6.0-4_amd64.deb ...
+Unpacking libinotifytools0:amd64 (3.22.6.0-4) ...
+Selecting previously unselected package inotify-tools.
+Preparing to unpack .../inotify-tools_3.22.6.0-4_amd64.deb ...
+Unpacking inotify-tools (3.22.6.0-4) ...
+Setting up libinotifytools0:amd64 (3.22.6.0-4) ...
+Setting up inotify-tools (3.22.6.0-4) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+Processing triggers for libc-bin (2.39-0ubuntu8.8) ...
+
+Running kernel seems to be up-to-date.
+
+Restarting services...
+
+Service restarts being deferred:
+ systemctl restart NetworkManager.service
+ /etc/needrestart/restart.d/dbus.service
+ systemctl restart docker.service
+ systemctl restart networkd-dispatcher.service
+ systemctl restart sddm.service
+ systemctl restart serial-getty@ttyS0.service
+ systemctl restart systemd-logind.service
+
+No containers need to be restarted.
+
+User sessions running outdated binaries:
+ nawaf511 @ session #6019: PM2 v7.0.3: God[1062421]
+ nawaf511 @ user manager service: systemd[718203]
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+
+============================================================
+أدوات الشبكة والتشخيص
+============================================================
+موجود مسبقاً: iproute2
+موجود مسبقاً: iputils-ping
+موجود مسبقاً: net-tools
+موجود مسبقاً: dnsutils
+موجود مسبقاً: whois
+موجود مسبقاً: lsof
+موجود مسبقاً: strace
+موجود مسبقاً: tcpdump
+موجود مسبقاً: socat
+موجود مسبقاً: netcat-openbsd
+موجود مسبقاً: mtr-tiny
+موجود مسبقاً: curl
+
+سيتم تثبيت:
+  traceroute
+  nmap
+قراءة قوائم الحزم...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  liblinear4 liblua5.4-0 nmap-common
+الحزم المقترحة:
+  liblinear-tools liblinear-dev ncat ndiff zenmap
+سيتم تثبيت الحزم الجديدة التالية:
+  liblinear4 liblua5.4-0 nmap nmap-common traceroute
+0 سيتم ترقيتها، 5 مثبتة حديثاً،  0 لإزالتها و 11 لم يتم ترقيتها.
+بحاجة إلى جلب 6155 kب من الأرشيف.
+After this operation, 27.0 MB of additional disk space will be used.
+جلب:1 http://archive.ubuntu.com/ubuntu noble/universe amd64 liblinear4 amd64 2.3.0+dfsg-5build1 [42.3 kB]
+جلب:2 http://archive.ubuntu.com/ubuntu noble/main amd64 liblua5.4-0 amd64 5.4.6-3build2 [166 kB]
+جلب:3 http://archive.ubuntu.com/ubuntu noble/universe amd64 nmap-common all 7.94+git20230807.3be01efb1+dfsg-3build2 [4192 kB]
+جلب:4 http://archive.ubuntu.com/ubuntu noble/universe amd64 traceroute amd64 1:2.1.5-1 [60.5 kB]
+جلب:5 http://archive.ubuntu.com/ubuntu noble/universe amd64 nmap amd64 7.94+git20230807.3be01efb1+dfsg-3build2 [1694 kB]
+جلب 6155 kب في 1s (12.1 Mب/ث)
+Selecting previously unselected package liblinear4:amd64.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 383951 files and directories currently installed.)
+Preparing to unpack .../liblinear4_2.3.0+dfsg-5build1_amd64.deb ...
+Unpacking liblinear4:amd64 (2.3.0+dfsg-5build1) ...
+Selecting previously unselected package liblua5.4-0:amd64.
+Preparing to unpack .../liblua5.4-0_5.4.6-3build2_amd64.deb ...
+Unpacking liblua5.4-0:amd64 (5.4.6-3build2) ...
+Selecting previously unselected package nmap-common.
+Preparing to unpack .../nmap-common_7.94+git20230807.3be01efb1+dfsg-3build2_all.deb ...
+Unpacking nmap-common (7.94+git20230807.3be01efb1+dfsg-3build2) ...
+Selecting previously unselected package traceroute.
+Preparing to unpack .../traceroute_1%3a2.1.5-1_amd64.deb ...
+Unpacking traceroute (1:2.1.5-1) ...
+Selecting previously unselected package nmap.
+Preparing to unpack .../nmap_7.94+git20230807.3be01efb1+dfsg-3build2_amd64.deb ...
+Unpacking nmap (7.94+git20230807.3be01efb1+dfsg-3build2) ...
+Setting up traceroute (1:2.1.5-1) ...
+update-alternatives: using /usr/bin/traceroute.db to provide /usr/bin/traceroute (traceroute) in auto mode
+update-alternatives: using /usr/bin/traceroute6.db to provide /usr/bin/traceroute6 (traceroute6) in auto mode
+update-alternatives: using /usr/bin/lft.db to provide /usr/bin/lft (lft) in auto mode
+update-alternatives: using /usr/bin/traceproto.db to provide /usr/bin/traceproto (traceproto) in auto mode
+update-alternatives: using /usr/sbin/tcptraceroute.db to provide /usr/sbin/tcptraceroute (tcptraceroute) in auto mode
+Setting up liblinear4:amd64 (2.3.0+dfsg-5build1) ...
+Setting up nmap-common (7.94+git20230807.3be01efb1+dfsg-3build2) ...
+Setting up liblua5.4-0:amd64 (5.4.6-3build2) ...
+Setting up nmap (7.94+git20230807.3be01efb1+dfsg-3build2) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+Processing triggers for libc-bin (2.39-0ubuntu8.8) ...
+
+Running kernel seems to be up-to-date.
+
+Restarting services...
+
+Service restarts being deferred:
+ systemctl restart NetworkManager.service
+ /etc/needrestart/restart.d/dbus.service
+ systemctl restart docker.service
+ systemctl restart networkd-dispatcher.service
+ systemctl restart sddm.service
+ systemctl restart serial-getty@ttyS0.service
+ systemctl restart systemd-logind.service
+
+No containers need to be restarted.
+
+User sessions running outdated binaries:
+ nawaf511 @ session #6019: PM2 v7.0.3: God[1062421]
+ nawaf511 @ user manager service: systemd[718203]
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+
+============================================================
+أدوات التدقيق والمراقبة
+============================================================
+موجود مسبقاً: procps
+موجود مسبقاً: psmisc
+موجود مسبقاً: sysstat
+موجود مسبقاً: time
+
+سيتم تثبيت:
+  iotop
+  iftop
+  dstat
+  ltrace
+  parallel
+  pv
+  watchman
+قراءة قوائم الحزم...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  libpcp-archive1t64 libpcp-gui2t64 libpcp-import1t64 libpcp-mmv1t64
+  libpcp-pmda3t64 libpcp-trace2t64 libpcp-web1t64 libpcp3t64 libpfm4 pcp-conf
+  python3-pcp
+الحزم المقترحة:
+  csh fish ksh tcsh zsh pcp-gui libpcp-import-perl doc-base python3-pywatchman
+الحزم المستحسنة:
+  libpcp-pmda-perl
+سيتم تثبيت الحزم الجديدة التالية:
+  iftop iotop libpcp-archive1t64 libpcp-gui2t64 libpcp-import1t64
+  libpcp-mmv1t64 libpcp-pmda3t64 libpcp-trace2t64 libpcp-web1t64 libpcp3t64
+  libpfm4 ltrace parallel pcp pcp-conf pv python3-pcp watchman
+0 سيتم ترقيتها، 18 مثبتة حديثاً،  0 لإزالتها و 11 لم يتم ترقيتها.
+بحاجة إلى جلب 6633 kب من الأرشيف.
+After this operation, 25.0 MB of additional disk space will be used.
+جلب:1 http://archive.ubuntu.com/ubuntu noble/universe amd64 iftop amd64 1.0~pre4-9build2 [33.5 kB]
+جلب:2 http://archive.ubuntu.com/ubuntu noble/main amd64 iotop amd64 0.6-42-ga14256a-0.2build1 [24.4 kB]
+جلب:3 http://archive.ubuntu.com/ubuntu noble/universe amd64 ltrace amd64 0.7.3-6.4ubuntu3 [134 kB]
+جلب:4 http://archive.ubuntu.com/ubuntu noble/main amd64 pv amd64 1.8.5-2build1 [73.9 kB]
+جلب:5 http://archive.ubuntu.com/ubuntu noble/universe amd64 watchman amd64 4.9.0-7build4 [323 kB]
+جلب:6 http://archive.ubuntu.com/ubuntu noble/universe amd64 pcp-conf amd64 6.2.0-1.1build4 [20.6 kB]
+جلب:7 http://archive.ubuntu.com/ubuntu noble/universe amd64 libpcp3t64 amd64 6.2.0-1.1build4 [313 kB]
+جلب:8 http://archive.ubuntu.com/ubuntu noble/universe amd64 libpcp-archive1t64 amd64 6.2.0-1.1build4 [10.6 kB]
+جلب:9 http://archive.ubuntu.com/ubuntu noble/universe amd64 libpcp-gui2t64 amd64 6.2.0-1.1build4 [12.4 kB]
+جلب:10 http://archive.ubuntu.com/ubuntu noble/universe amd64 libpcp-import1t64 amd64 6.2.0-1.1build4 [17.3 kB]
+جلب:11 http://archive.ubuntu.com/ubuntu noble/universe amd64 libpcp-mmv1t64 amd64 6.2.0-1.1build4 [13.8 kB]
+جلب:12 http://archive.ubuntu.com/ubuntu noble/universe amd64 libpcp-pmda3t64 amd64 6.2.0-1.1build4 [45.4 kB]
+جلب:13 http://archive.ubuntu.com/ubuntu noble/universe amd64 libpcp-trace2t64 amd64 6.2.0-1.1build4 [16.9 kB]
+جلب:14 http://archive.ubuntu.com/ubuntu noble/universe amd64 libpcp-web1t64 amd64 6.2.0-1.1build4 [213 kB]
+جلب:15 http://archive.ubuntu.com/ubuntu noble/universe amd64 libpfm4 amd64 4.13.0+git32-g0d4ed0e-1 [414 kB]
+جلب:16 http://archive.ubuntu.com/ubuntu noble/universe amd64 parallel all 20231122+ds-1 [1944 kB]
+جلب:17 http://archive.ubuntu.com/ubuntu noble/universe amd64 python3-pcp amd64 6.2.0-1.1build4 [76.5 kB]
+جلب:18 http://archive.ubuntu.com/ubuntu noble/universe amd64 pcp amd64 6.2.0-1.1build4 [2946 kB]
+جلب 6633 kب في 1s (12.8 Mب/ث)
+Selecting previously unselected package iftop.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 384834 files and directories currently installed.)
+Preparing to unpack .../00-iftop_1.0~pre4-9build2_amd64.deb ...
+Unpacking iftop (1.0~pre4-9build2) ...
+Selecting previously unselected package iotop.
+Preparing to unpack .../01-iotop_0.6-42-ga14256a-0.2build1_amd64.deb ...
+Unpacking iotop (0.6-42-ga14256a-0.2build1) ...
+Selecting previously unselected package ltrace.
+Preparing to unpack .../02-ltrace_0.7.3-6.4ubuntu3_amd64.deb ...
+Unpacking ltrace (0.7.3-6.4ubuntu3) ...
+Selecting previously unselected package pv.
+Preparing to unpack .../03-pv_1.8.5-2build1_amd64.deb ...
+Unpacking pv (1.8.5-2build1) ...
+Selecting previously unselected package watchman.
+Preparing to unpack .../04-watchman_4.9.0-7build4_amd64.deb ...
+Unpacking watchman (4.9.0-7build4) ...
+Selecting previously unselected package pcp-conf.
+Preparing to unpack .../05-pcp-conf_6.2.0-1.1build4_amd64.deb ...
+Unpacking pcp-conf (6.2.0-1.1build4) ...
+Selecting previously unselected package libpcp3t64.
+Preparing to unpack .../06-libpcp3t64_6.2.0-1.1build4_amd64.deb ...
+Unpacking libpcp3t64 (6.2.0-1.1build4) ...
+Selecting previously unselected package libpcp-archive1t64.
+Preparing to unpack .../07-libpcp-archive1t64_6.2.0-1.1build4_amd64.deb ...
+Unpacking libpcp-archive1t64 (6.2.0-1.1build4) ...
+Selecting previously unselected package libpcp-gui2t64.
+Preparing to unpack .../08-libpcp-gui2t64_6.2.0-1.1build4_amd64.deb ...
+Unpacking libpcp-gui2t64 (6.2.0-1.1build4) ...
+Selecting previously unselected package libpcp-import1t64.
+Preparing to unpack .../09-libpcp-import1t64_6.2.0-1.1build4_amd64.deb ...
+Unpacking libpcp-import1t64 (6.2.0-1.1build4) ...
+Selecting previously unselected package libpcp-mmv1t64.
+Preparing to unpack .../10-libpcp-mmv1t64_6.2.0-1.1build4_amd64.deb ...
+Unpacking libpcp-mmv1t64 (6.2.0-1.1build4) ...
+Selecting previously unselected package libpcp-pmda3t64.
+Preparing to unpack .../11-libpcp-pmda3t64_6.2.0-1.1build4_amd64.deb ...
+Unpacking libpcp-pmda3t64 (6.2.0-1.1build4) ...
+Selecting previously unselected package libpcp-trace2t64.
+Preparing to unpack .../12-libpcp-trace2t64_6.2.0-1.1build4_amd64.deb ...
+Unpacking libpcp-trace2t64 (6.2.0-1.1build4) ...
+Selecting previously unselected package libpcp-web1t64.
+Preparing to unpack .../13-libpcp-web1t64_6.2.0-1.1build4_amd64.deb ...
+Unpacking libpcp-web1t64 (6.2.0-1.1build4) ...
+Selecting previously unselected package libpfm4:amd64.
+Preparing to unpack .../14-libpfm4_4.13.0+git32-g0d4ed0e-1_amd64.deb ...
+Unpacking libpfm4:amd64 (4.13.0+git32-g0d4ed0e-1) ...
+Selecting previously unselected package parallel.
+Preparing to unpack .../15-parallel_20231122+ds-1_all.deb ...
+Adding 'diversion of /usr/bin/parallel to /usr/bin/parallel.moreutils by parallel'
+Adding 'diversion of /usr/share/man/man1/parallel.1.gz to /usr/share/man/man1/parallel.moreutils.1.gz by parallel'
+Unpacking parallel (20231122+ds-1) ...
+Selecting previously unselected package python3-pcp.
+Preparing to unpack .../16-python3-pcp_6.2.0-1.1build4_amd64.deb ...
+Unpacking python3-pcp (6.2.0-1.1build4) ...
+Selecting previously unselected package pcp.
+Preparing to unpack .../17-pcp_6.2.0-1.1build4_amd64.deb ...
+Unpacking pcp (6.2.0-1.1build4) ...
+Setting up iftop (1.0~pre4-9build2) ...
+Setting up ltrace (0.7.3-6.4ubuntu3) ...
+Setting up watchman (4.9.0-7build4) ...
+Setting up iotop (0.6-42-ga14256a-0.2build1) ...
+update-alternatives: using /usr/sbin/iotop-py to provide /usr/sbin/iotop (iotop) in auto mode
+Setting up libpfm4:amd64 (4.13.0+git32-g0d4ed0e-1) ...
+Setting up parallel (20231122+ds-1) ...
+Setting up pv (1.8.5-2build1) ...
+Setting up pcp-conf (6.2.0-1.1build4) ...
+Setting up libpcp3t64 (6.2.0-1.1build4) ...
+Setting up libpcp-gui2t64 (6.2.0-1.1build4) ...
+Setting up libpcp-pmda3t64 (6.2.0-1.1build4) ...
+Setting up libpcp-archive1t64 (6.2.0-1.1build4) ...
+Setting up libpcp-import1t64 (6.2.0-1.1build4) ...
+Setting up libpcp-mmv1t64 (6.2.0-1.1build4) ...
+Setting up libpcp-trace2t64 (6.2.0-1.1build4) ...
+Setting up libpcp-web1t64 (6.2.0-1.1build4) ...
+Setting up python3-pcp (6.2.0-1.1build4) ...
+Setting up pcp (6.2.0-1.1build4) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/pmcd.service → /usr/lib/systemd/system/pmcd.service.
+Created symlink /etc/systemd/system/multi-user.target.wants/pmlogger.service → /usr/lib/systemd/system/pmlogger.service.
+Created symlink /etc/systemd/system/multi-user.target.wants/pmie.service → /usr/lib/systemd/system/pmie.service.
+Created symlink /etc/systemd/system/multi-user.target.wants/pmproxy.service → /usr/lib/systemd/system/pmproxy.service.
+Processing triggers for man-db (2.12.0-4build2) ...
+Processing triggers for mailcap (3.70+nmu1ubuntu1.24.04.1) ...
+Processing triggers for desktop-file-utils (0.27-2build1) ...
+Processing triggers for libc-bin (2.39-0ubuntu8.8) ...
+
+Running kernel seems to be up-to-date.
+
+Restarting services...
+
+Service restarts being deferred:
+ systemctl restart NetworkManager.service
+ /etc/needrestart/restart.d/dbus.service
+ systemctl restart docker.service
+ systemctl restart networkd-dispatcher.service
+ systemctl restart sddm.service
+ systemctl restart serial-getty@ttyS0.service
+ systemctl restart systemd-logind.service
+
+No containers need to be restarted.
+
+User sessions running outdated binaries:
+ nawaf511 @ session #6019: PM2 v7.0.3: God[1062421]
+ nawaf511 @ user manager service: systemd[718203]
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+
+============================================================
+أدوات التقارير وPDF
+============================================================
+موجود مسبقاً: ghostscript
+موجود مسبقاً: poppler-utils
+موجود مسبقاً: imagemagick
+موجود مسبقاً: graphviz
+
+سيتم تثبيت:
+  pandoc
+  wkhtmltopdf
+قراءة قوائم الحزم...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  pandoc-data
+الحزم المقترحة:
+  texlive-latex-recommended texlive-xetex texlive-luatex pandoc-citeproc
+  texlive-latex-extra context librsvg2-bin groff php python ruby r-base-core
+  libjs-katex citation-style-language-styles
+سيتم تثبيت الحزم الجديدة التالية:
+  pandoc pandoc-data wkhtmltopdf
+0 سيتم ترقيتها، 3 مثبتة حديثاً،  0 لإزالتها و 11 لم يتم ترقيتها.
+بحاجة إلى جلب 27.1 Mب من الأرشيف.
+After this operation, 200 MB of additional disk space will be used.
+جلب:1 http://archive.ubuntu.com/ubuntu noble/universe amd64 pandoc-data all 3.1.3-1 [92.4 kB]
+جلب:2 http://archive.ubuntu.com/ubuntu noble/universe amd64 pandoc amd64 3.1.3+ds-2 [26.9 MB]
+جلب:3 http://archive.ubuntu.com/ubuntu noble/universe amd64 wkhtmltopdf amd64 0.12.6-2build2 [173 kB]
+جلب 27.1 Mب في 1s (32.0 Mب/ث)
+Selecting previously unselected package pandoc-data.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 387819 files and directories currently installed.)
+Preparing to unpack .../pandoc-data_3.1.3-1_all.deb ...
+Unpacking pandoc-data (3.1.3-1) ...
+Selecting previously unselected package pandoc.
+Preparing to unpack .../pandoc_3.1.3+ds-2_amd64.deb ...
+Unpacking pandoc (3.1.3+ds-2) ...
+Selecting previously unselected package wkhtmltopdf.
+Preparing to unpack .../wkhtmltopdf_0.12.6-2build2_amd64.deb ...
+Unpacking wkhtmltopdf (0.12.6-2build2) ...
+Setting up pandoc-data (3.1.3-1) ...
+Setting up wkhtmltopdf (0.12.6-2build2) ...
+Setting up pandoc (3.1.3+ds-2) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+
+Running kernel seems to be up-to-date.
+
+Restarting services...
+
+Service restarts being deferred:
+ systemctl restart NetworkManager.service
+ /etc/needrestart/restart.d/dbus.service
+ systemctl restart docker.service
+ systemctl restart networkd-dispatcher.service
+ systemctl restart sddm.service
+ systemctl restart serial-getty@ttyS0.service
+ systemctl restart systemd-logind.service
+
+No containers need to be restarted.
+
+User sessions running outdated binaries:
+ nawaf511 @ session #6019: PM2 v7.0.3: God[1062421]
+ nawaf511 @ user manager service: systemd[718203]
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+
+============================================================
+حزم الخطوط ودعم العربية
+============================================================
+موجود مسبقاً: fontconfig
+موجود مسبقاً: fonts-noto-core
+موجود مسبقاً: fonts-noto-color-emoji
+موجود مسبقاً: fonts-dejavu-core
+موجود مسبقاً: fonts-liberation
+موجود مسبقاً: fonts-freefont-ttf
+
+سيتم تثبيت:
+  fonts-noto-extra
+  fonts-dejavu-extra
+قراءة قوائم الحزم...
+Building dependency tree...
+Reading state information...
+سيتم تثبيت الحزم الجديدة التالية:
+  fonts-dejavu-extra fonts-noto-extra
+0 سيتم ترقيتها، 2 مثبتة حديثاً،  0 لإزالتها و 11 لم يتم ترقيتها.
+بحاجة إلى جلب 80.5 Mب من الأرشيف.
+After this operation, 349 MB of additional disk space will be used.
+جلب:1 http://archive.ubuntu.com/ubuntu noble/main amd64 fonts-dejavu-extra all 2.37-8 [1947 kB]
+جلب:2 http://archive.ubuntu.com/ubuntu noble/universe amd64 fonts-noto-extra all 20201225-2 [78.5 MB]
+جلب 80.5 Mب في 1s (54.0 Mب/ث)
+Selecting previously unselected package fonts-dejavu-extra.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 388047 files and directories currently installed.)
+Preparing to unpack .../fonts-dejavu-extra_2.37-8_all.deb ...
+Unpacking fonts-dejavu-extra (2.37-8) ...
+Selecting previously unselected package fonts-noto-extra.
+Preparing to unpack .../fonts-noto-extra_20201225-2_all.deb ...
+Unpacking fonts-noto-extra (20201225-2) ...
+Setting up fonts-noto-extra (20201225-2) ...
+Setting up fonts-dejavu-extra (2.37-8) ...
+Processing triggers for fontconfig (2.15.0-1.1ubuntu2) ...
+
+Running kernel seems to be up-to-date.
+
+Restarting services...
+
+Service restarts being deferred:
+ systemctl restart NetworkManager.service
+ /etc/needrestart/restart.d/dbus.service
+ systemctl restart docker.service
+ systemctl restart networkd-dispatcher.service
+ systemctl restart sddm.service
+ systemctl restart serial-getty@ttyS0.service
+ systemctl restart systemd-logind.service
+
+No containers need to be restarted.
+
+User sessions running outdated binaries:
+ nawaf511 @ session #6019: PM2 v7.0.3: God[1062421]
+ nawaf511 @ user manager service: systemd[718203]
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+
+============================================================
+المرجع الزمني
+============================================================
+توقيت نظام التشغيل الحالي: Europe/Berlin
+لم يتم تغيير توقيت نظام التشغيل.
+منطق المشروع والعقود يجب أن يستخدم UTC بصورة مستقلة.
+
+============================================================
+مجلدات المشروع المساندة
+============================================================
+تم التأكد من وجود مجلدات var المساندة.
+
+============================================================
+الإصدارات المكتشفة
+============================================================
+Git                     git version 2.43.0
+Curl                    curl 8.5.0 (x86_64-pc-linux-gnu) libcurl/8.5.0 OpenSSL/3.0.13 zlib/1.3 brotli/1.1.0 zstd/1.5.5 libidn2/2.3.7 libpsl/0.21.2 (+libidn2/2.3.7) libssh/0.10.6/openssl/zlib nghttp2/1.59.0 librtmp/2.3 OpenLDAP/2.6.10
+Wget                    GNU Wget 1.21.4 built on linux-gnu.
+Node.js                 v22.23.1
+npm                     10.9.8
+Python                  Python 3.12.3
+pip                     pip 24.0 from /usr/lib/python3/dist-packages/pip (python 3.12)
+Nginx                   OpenSSL                 OpenSSL 3.0.13 30 Jan 2024 (Library: OpenSSL 3.0.13 30 Jan 2024)
+Pandoc                  pandoc 3.1.3
+wkhtmltopdf             wkhtmltopdf 0.12.6
+Chromium                Chromium 150.0.7871.128 snap
+Chromium browser        Chromium 150.0.7871.128 snap
+jq                      jq-1.7
+yq                      yq 0.0.0
+ripgrep                 ripgrep 14.1.0
+ShellCheck              ShellCheck - shell script analysis tool
+Docker                  Docker version 29.6.2, build dfc4efb
+
+============================================================
+فحص Node.js المطلوب للمحرك المرجعي
+============================================================
+الإصدار الرئيسي المكتشف: 22
+Node.js مناسب لتشغيل الاختبارات المرجعية.
+
+============================================================
+فحص Python
+============================================================
+Python version: 3.12.3
+Python مناسب للخدمات الحديثة.
+
+============================================================
+حالة الخدمات المستخدمة
+============================================================
+nginx                   ACTIVE
+ssh                     ACTIVE
+systemd-journald        ACTIVE
+
+============================================================
+اختبار Nginx بدون إعادة تحميل
+============================================================
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+إعدادات Nginx سليمة.
+
+============================================================
+الخطوات التالية
+============================================================
+1. راجع تقرير التثبيت:
+   /home/nawaf511/empire-core-new/var/audits/server-tooling-install-20260801T234546Z.txt
+
+2. لا تشغّل apt autoremove قبل مراجعة الخدمات.
+
+3. لا تفعّل UFW قبل التأكد من السماح لمنفذ SSH.
+
+4. لا تعدّل Nginx أو systemd جماعياً.
+
+5. اختبر حزمة COT بعد إنشائها بالأمر:
+   cd /home/nawaf511/empire-core-new/var/handoff/COT-GOV-1.0.0-HANDOFF
+   npm test
+
+6. شغّل تدقيق COT:
+   sudo /home/nawaf511/empire-core-new/var/handoff/COT-GOV-1.0.0-HANDOFF/deploy/path-migration/audit-cot-logic.sh /home/nawaf511/empire-core-new
+
+7. شغّل جرد المسارات القديمة:
+   sudo /home/nawaf511/empire-core-new/var/handoff/COT-GOV-1.0.0-HANDOFF/deploy/path-migration/inventory-legacy-paths.sh /home/nawaf511/empire-core-new
+
+============================================================
+اكتمل التثبيت
+============================================================
+انتهى التنفيذ UTC:   2026-08-01T23:49:18Z
+التقرير:            /home/nawaf511/empire-core-new/var/audits/server-tooling-install-20260801T234546Z.txt
+
+لم يتم تعديل كود المشروع.
+لم يتم تعديل Nginx.
+لم يتم تعديل systemd.
+لم يتم حذف أي مسار قديم.

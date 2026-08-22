@@ -1,0 +1,302 @@
+server {
+
+
+    include /etc/nginx/snippets/ndsp-security-headers.conf;
+    listen 80;
+    listen [::]:80;
+    server_name my.ndsp.app;
+
+
+    # NDSP V548 public result only route START
+    location = /api/decision/public-summary {
+        proxy_pass http://127.0.0.1:9092;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    location = /api/decision/public-contract-v548 {
+        proxy_pass http://127.0.0.1:9092;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+    # NDSP V548 public result only route END
+
+    include /etc/nginx/snippets/ndsp-sensitive-paths-lock.conf;
+return 301 https://$host$request_uri;
+
+
+    # NDSP_REGISTER_COMPAT_V480_START
+    location = /api/register {
+        if ($request_method = OPTIONS) { return 204; }
+        proxy_pass http://127.0.0.1:9028/api/register;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        add_header Access-Control-Allow-Origin "*" always;
+        add_header Access-Control-Allow-Methods "POST, OPTIONS" always;
+        add_header Access-Control-Allow-Headers "Content-Type, Authorization" always;
+    }
+
+    location = /api/auth/register {
+        if ($request_method = OPTIONS) { return 204; }
+        proxy_pass http://127.0.0.1:9028/api/auth/register;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        add_header Access-Control-Allow-Origin "*" always;
+        add_header Access-Control-Allow-Methods "POST, OPTIONS" always;
+        add_header Access-Control-Allow-Headers "Content-Type, Authorization" always;
+    }
+    # NDSP_REGISTER_COMPAT_V480_END
+
+}
+
+server {
+
+
+    include /etc/nginx/snippets/ndsp-security-headers.conf;
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name my.ndsp.app;
+
+
+    # NDSP V548 public result only route START
+    location = /api/decision/public-summary {
+        proxy_pass http://127.0.0.1:9092;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    location = /api/decision/public-contract-v548 {
+        proxy_pass http://127.0.0.1:9092;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+    # NDSP V548 public result only route END
+
+    include /etc/nginx/snippets/ndsp-sensitive-paths-lock.conf;
+root /var/www/ndsp-my;
+index index.html;
+
+    ssl_certificate /etc/letsencrypt/live/my.ndsp.app/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/my.ndsp.app/privkey.pem;
+
+    charset utf-8;
+
+    add_header Cache-Control "no-store" always;
+
+    location = /login {
+        include /etc/nginx/snippets/ndsp-security-headers.conf;
+        try_files /login.html /login/index.html =404;
+    }
+    location = /register {
+        include /etc/nginx/snippets/ndsp-security-headers.conf;
+        try_files /register.html /register/index.html =404;
+    }
+    location = /forgot-password {
+        include /etc/nginx/snippets/ndsp-security-headers.conf;
+        try_files /forgot-password.html /forgot-password/index.html =404;
+    }
+    location = /reset-password {
+        include /etc/nginx/snippets/ndsp-security-headers.conf;
+        try_files /reset-password.html /reset-password/index.html =404;
+    }
+    location = /platform {
+        include /etc/nginx/snippets/ndsp-security-headers.conf;
+        try_files /platform.html /platform/index.html =404;
+    }
+    location = /decision-center {
+        include /etc/nginx/snippets/ndsp-security-headers.conf;
+        try_files /decision-center.html /decision-center/index.html =404;
+    }
+    location = /asset {
+        include /etc/nginx/snippets/ndsp-security-headers.conf;
+        try_files /asset.html /asset/index.html =404;
+    }
+    location = /daily-brief {
+        include /etc/nginx/snippets/ndsp-security-headers.conf;
+        try_files /daily-brief.html /daily-brief/index.html =404;
+    }
+    location = /completed-decisions {
+        include /etc/nginx/snippets/ndsp-security-headers.conf;
+        try_files /completed-decisions.html /completed-decisions/index.html =404;
+    }
+    location = /settings {
+        include /etc/nginx/snippets/ndsp-security-headers.conf;
+        try_files /settings.html /settings/index.html =404;
+    }
+
+
+    # NDSP V5.2 public contract routes - inserted before generic /api gateway
+    location = /api/decision/v52/health {
+        proxy_pass http://127.0.0.1:9083/health;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    location = /api/decision/nmp-timeframes-live {
+        proxy_pass http://127.0.0.1:9083/api/decision/nmp-timeframes-live$is_args$args;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    location = /api/decision/quality-contract-v52 {
+        proxy_pass http://127.0.0.1:9083/api/decision/quality-contract-v52$is_args$args;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    
+    location = /api/decision/quality-contract-v53 {
+        proxy_pass http://127.0.0.1:9084/api/decision/quality-contract-v53$is_args$args;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+location /api/ {
+        include /etc/nginx/snippets/ndsp-security-headers.conf;
+        proxy_pass https://api.ndsp.app/api/;
+        proxy_ssl_server_name on;
+        proxy_set_header Host api.ndsp.app;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto https;
+    }
+
+    location / {
+        include /etc/nginx/snippets/ndsp-security-headers.conf;
+        try_files $uri $uri.html $uri/ /index.html;
+    }
+
+    # NDSP_V3_PORTAL_GATEWAY_BEGIN
+    location ^~ /api/v3/portal/ {
+        include /etc/nginx/snippets/ndsp-security-headers.conf;
+        proxy_pass http://127.0.0.1:9093/api/v3/portal/;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        add_header Cache-Control "no-store, no-cache, max-age=0, must-revalidate" always;
+        add_header Pragma "no-cache" always;
+        add_header Expires "0" always;
+    }
+    # NDSP_V3_PORTAL_GATEWAY_END
+
+
+    # NDSP_V3_PREVIEW_PAGE_BEGIN
+    location = /v3-preview {
+        include /etc/nginx/snippets/ndsp-security-headers.conf;
+        try_files /v3-preview.html =404;
+        add_header Cache-Control "no-store, no-cache, max-age=0, must-revalidate" always;
+        add_header Pragma "no-cache" always;
+        add_header Expires "0" always;
+    }
+
+    location ^~ /v3-preview/ {
+        include /etc/nginx/snippets/ndsp-security-headers.conf;
+        try_files /v3-preview/index.html =404;
+        add_header Cache-Control "no-store, no-cache, max-age=0, must-revalidate" always;
+        add_header Pragma "no-cache" always;
+        add_header Expires "0" always;
+    }
+    # NDSP_V3_PREVIEW_PAGE_END
+
+
+
+    # NDSP_REGISTER_COMPAT_V480_START
+    location = /api/register {
+        if ($request_method = OPTIONS) { return 204; }
+        proxy_pass http://127.0.0.1:9028/api/register;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        add_header Access-Control-Allow-Origin "*" always;
+        add_header Access-Control-Allow-Methods "POST, OPTIONS" always;
+        add_header Access-Control-Allow-Headers "Content-Type, Authorization" always;
+    }
+
+    location = /api/auth/register {
+        if ($request_method = OPTIONS) { return 204; }
+        proxy_pass http://127.0.0.1:9028/api/auth/register;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        add_header Access-Control-Allow-Origin "*" always;
+        add_header Access-Control-Allow-Methods "POST, OPTIONS" always;
+        add_header Access-Control-Allow-Headers "Content-Type, Authorization" always;
+    }
+    # NDSP_REGISTER_COMPAT_V480_END
+
+
+    # NDSP_V15_COMPLETED_DECISIONS_API_BRIDGE_START
+    location = /api/completed-decisions {
+        default_type application/json;
+        add_header X-NDSP-Bridge "v15-d2-static-readonly" always;
+        add_header Cache-Control "no-store" always;
+        root /var/www/ndsp-my;
+        try_files /data/completed-decisions-v15-api.json =404;
+    }
+
+    location = /api/completed-decisions/latest {
+        default_type application/json;
+        add_header X-NDSP-Bridge "v15-d2-static-readonly" always;
+        add_header Cache-Control "no-store" always;
+        root /var/www/ndsp-my;
+        try_files /data/completed-decisions-v15-api.json =404;
+    }
+
+    location = /api/v15/completed-decisions {
+        default_type application/json;
+        add_header X-NDSP-Bridge "v15-d2-static-readonly" always;
+        add_header Cache-Control "no-store" always;
+        root /var/www/ndsp-my;
+        try_files /data/completed-decisions-v15-api.json =404;
+    }
+    # NDSP_V15_COMPLETED_DECISIONS_API_BRIDGE_END
+
+
+    # NDSP_V16_COMPLETED_DECISIONS_LIVE_ADAPTER_START
+    location = /api/v16/completed-decisions {
+        default_type application/json;
+        add_header X-NDSP-Bridge "v16-live-readonly" always;
+        add_header Cache-Control "no-store" always;
+        root /var/www/ndsp-my;
+        try_files /data/completed-decisions-v16-live-adapter.json =404;
+    }
+
+    location = /api/completed-decisions-live {
+        default_type application/json;
+        add_header X-NDSP-Bridge "v16-live-readonly" always;
+        add_header Cache-Control "no-store" always;
+        root /var/www/ndsp-my;
+        try_files /data/completed-decisions-v16-live-adapter.json =404;
+    }
+
+    location = /api/completed-decisions-live/latest {
+        default_type application/json;
+        add_header X-NDSP-Bridge "v16-live-readonly" always;
+        add_header Cache-Control "no-store" always;
+        root /var/www/ndsp-my;
+        try_files /data/completed-decisions-v16-live-adapter.json =404;
+    }
+    # NDSP_V16_COMPLETED_DECISIONS_LIVE_ADAPTER_END
+
+}

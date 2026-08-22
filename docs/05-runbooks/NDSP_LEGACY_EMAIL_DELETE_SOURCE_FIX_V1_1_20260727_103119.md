@@ -1,0 +1,72 @@
+============================================================
+NDSP — LEGACY MALFORMED EMAIL DELETE SOURCE FIX V1.1
+DATE=2026-07-27T10:31:19+02:00
+MODE=SOURCE_ONLY_SERVER_BUILD_ATOMIC_AUTH_RELEASE
+AUTH_CURRENT=/opt/ndsp-auth-core-clean/current
+AUTH_SERVICE=ndsp-auth-core-clean
+============================================================
+
+== 0) Explicit confirmation and privileges ==
+EXPLICIT_CONFIRMATION=YES
+SUDO_GATE=PASS
+
+== 1) Preconditions ==
+PRECONDITION_GATE=PASS
+AUTH_OLD_TARGET=/opt/ndsp-auth-core-clean/releases/20260727_100613-integrated-auth-controls-v2
+AUTH_NODE_MODULES=/opt/ndsp-auth-core-clean/releases/20260724_050053-final-ux-v31/node_modules
+
+== 2) Read-only database verification ==
+PSQL_VARIABLE_BINDING_MODE=STDIN_CLIENT_INTERPOLATION
+DATABASE_READ_ONLY_GATE=PASS
+TARGET_LEGACY_USER_COUNT=1
+TARGET_USER_ID=207af7a3-2d8a-44fe-bba7-4da041cc6da3
+TARGET_STORED_EMAIL=she20232030.@gmail.com
+EXPECTED_CONFIRM_EMAIL=she20232030@gmail.com
+DATABASE_SCHEMA_CHANGED=NO
+DATABASE_DATA_CHANGED=NO
+
+== 3) Secure source backup ==
+BACKUP_GATE=PASS
+BACKUP=/home/nawaf511/empire-core-new/backups/legacy-email-delete-source-fix-v1-1/20260727_103119
+
+== 4) Create clean source release ==
+CLEAN_SOURCE_RELEASE_CREATED=YES
+
+== 5) Apply deterministic server-source correction ==
+SERVER_SOURCE_PATCH_GATE=PASS
+
+== 6) Source-level normalization test ==
+
+== 7) Build auth server from source ==
+TYPESCRIPT_VERSION=Version 5.9.3
+BUILD_POLICY=DIRECT_NODE_VERSION_LOCKED_TYPESCRIPT
+AUTH_SERVER_SOURCE_BUILD_GATE=PASS
+AUTH_UI_CHANGED=NO
+AUTH_SERVER_SOURCE_CHANGED=YES
+
+== 8) Atomic auth release cutover ==
+AUTH_RELEASE_ATOMIC_CUTOVER=PASS
+AUTH_SERVICE_RESTARTED=YES
+AUTH_LOCAL_HEALTH_HTTP=200
+AUTH_ACTIVE_RELEASE=/opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1
+
+== 9) Public authorization gate ==
+UNAUTHENTICATED_DELETE_HTTP=401
+ADMIN_DELETE_AUTHORIZATION_GATE=PASS
+TARGET_USER_DATABASE_ROW_CHANGED=NO
+
+FINAL_STATUS=NDSP_LEGACY_MALFORMED_EMAIL_DELETE_SOURCE_FIX_V1_1_DEPLOYED_AND_VERIFIED
+DELETE_TARGET=IMMUTABLE_USER_ID
+DELETE_CONFIRMATION=EXPLICIT_DELETE_PLUS_NORMALIZED_EMAIL
+LEGACY_STORED_EMAIL=she20232030.@gmail.com
+ACCEPTED_CONFIRM_EMAIL=she20232030@gmail.com
+CURRENT_ADMIN_PROTECTION=PRESERVED
+ADMIN_ACCOUNT_PROTECTION=PRESERVED
+TRANSACTIONAL_SESSION_AND_USER_DELETE=PRESERVED
+AUTH_UI_CHANGED=NO
+DATABASE_CHANGED=NO
+NGINX_CHANGED=NO
+DECISION_BACKEND_CHANGED=NO
+AUTH_SOURCE_RELEASE=/opt/ndsp-auth-core-clean/releases/20260727_103119-legacy-email-delete-source-fix-v1-1
+BACKUP=/home/nawaf511/empire-core-new/backups/legacy-email-delete-source-fix-v1-1/20260727_103119
+REPORT=/home/nawaf511/empire-core-new/docs/05-runbooks/NDSP_LEGACY_EMAIL_DELETE_SOURCE_FIX_V1_1_20260727_103119.md

@@ -1,0 +1,26 @@
+[
+  {
+    "capability_id": "CAP-4FF90CCC6DFE",
+    "capability_name": "Tdl V2 Policy Admin",
+    "data_source": "UNKNOWN",
+    "data_state": "UNKNOWN",
+    "accepted_probe_url": "",
+    "connector_candidate_count": 20,
+    "top_connector_source": "backend/tests/pr028-quick-wins-contracts.test.cjs",
+    "top_connector_terms": "market",
+    "source_explicit": "false",
+    "state_explicit": "false"
+  },
+  {
+    "capability_id": "CAP-8A9DD9B6E7D5",
+    "capability_name": "Tdl V2 Policy Admin",
+    "data_source": "UNKNOWN",
+    "data_state": "UNKNOWN",
+    "accepted_probe_url": "",
+    "connector_candidate_count": 20,
+    "top_connector_source": "backend/tests/pr028-quick-wins-contracts.test.cjs",
+    "top_connector_terms": "market",
+    "source_explicit": "false",
+    "state_explicit": "false"
+  }
+]

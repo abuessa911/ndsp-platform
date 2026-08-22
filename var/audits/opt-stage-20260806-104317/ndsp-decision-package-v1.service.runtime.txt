@@ -1,0 +1,6 @@
+MainPID=1354
+ExecStart={ path=/opt/ndsp-decision-package-v1/venv/bin/uvicorn ; argv[]=/opt/ndsp-decision-package-v1/venv/bin/uvicorn app:app --host 127.0.0.1 --port 9061 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }
+Environment=
+WorkingDirectory=/opt/ndsp-decision-package-v1
+ActiveState=active
+SubState=running

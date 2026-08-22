@@ -1,0 +1,119 @@
+=== NDSP UI FOUNDATION V1 ===
+MODE=READ_ONLY_DISCOVERY
+DATE=2026-08-08T06:01:46+02:00
+PROJECT=/home/nawaf511/empire-core-new/frontend/user-portal-vite
+PRODUCTION=/var/www/ndsp-my/portal
+PUBLIC_PATH=/portal/
+AUDIT=/home/nawaf511/empire-core-new/var/audits/ui-foundation-v1-20260808-060146
+
+=== 1. PROJECT PRECHECK ===
+PROJECT_PRECHECK=PASS
+
+=== 2. CURRENT PRODUCTION SAFETY ===
+PUBLIC_PORTAL_HTTP=200
+PUBLIC_PORTAL=PASS
+PUBLIC_PORTAL_BASE=PASS
+
+=== 3. V37 RUNTIME SAFETY ===
+PUBLIC_JS=/portal/assets/index-CfJbdoKo.js
+PUBLIC_JS_HTTP=200
+V37_COMPLETED_ROUTE_MARKER=PASS
+
+=== 4. PACKAGE INVENTORY ===
+PACKAGE_NAME=ndsp-user-portal-vite
+PACKAGE_VERSION=1.0.0
+DEPENDENCIES={"react":"^18.3.1","react-dom":"^18.3.1"}
+DEV_DEPENDENCIES={"vite":"^6.0.7","@vitejs/plugin-react":"^4.3.4"}
+
+=== 5. FOUNDATION LIBRARY MATRIX ===
+PKG=typescript STATUS=MISSING
+PKG=@types/react STATUS=MISSING
+PKG=@types/react-dom STATUS=MISSING
+PKG=lucide-react STATUS=MISSING
+PKG=@radix-ui/react-dialog STATUS=MISSING
+PKG=@tanstack/react-query STATUS=MISSING
+PKG=react-hook-form STATUS=MISSING
+PKG=zod STATUS=MISSING
+PKG=@hookform/resolvers STATUS=MISSING
+PKG=react-router-dom STATUS=MISSING
+PKG=i18next STATUS=MISSING
+PKG=react-i18next STATUS=MISSING
+PKG=date-fns STATUS=MISSING
+
+=== 6. TYPESCRIPT STATE ===
+FILE=tsconfig.json STATUS=MISSING
+FILE=tsconfig.app.json STATUS=MISSING
+FILE=tsconfig.node.json STATUS=MISSING
+FILE=src/main.tsx STATUS=MISSING
+FILE=src/App.tsx STATUS=MISSING
+
+=== 7. SOURCE STRUCTURE ===
+components/CompletedDecisionsPanelV37.jsx
+config/env.js
+core/api/apiClient.js
+core/services/marketService.js
+core/services/scenarioService.js
+hooks/useCanonicalDecision.js
+hooks/useCompletedDecisionsV37.js
+hooks/useMarket.js
+main.jsx
+main.jsx.before_visible_layers_v2_20260627_201907
+main.jsx.before_watchlist_20260629_145613
+pages/AssetPage.jsx
+pages/BriefPage.jsx
+pages/CommandPage.jsx
+pages/Home.jsx
+pages/SettingsPage.jsx
+styles.css
+
+=== 8. CURRENT VITE BASE ===
+1:import { defineConfig } from "vite";
+4:export default defineConfig({
+5:  base: "/portal/",
+6:  plugins: [react()],
+VITE_BASE=/portal/
+VITE_BASE_STATUS=PASS
+
+=== 9. EXISTING UI / RTL / DATA ACCESS ===
+--- RTL/LTR ---
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/components/CompletedDecisionsPanelV37.jsx:47:    direction: "الاتجاه الحاكم",
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/components/CompletedDecisionsPanelV37.jsx:130:    direction: "Governing Direction",
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/components/CompletedDecisionsPanelV37.jsx:608:              lang={lang}
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/main.jsx.before_watchlist_20260629_145613:52:    document.documentElement.dir = "rtl";
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/main.jsx.before_visible_layers_v2_20260627_201907:38:    document.documentElement.dir = "rtl";
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/main.jsx:53:    document.documentElement.dir = "rtl";
+--- DATA ACCESS ---
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/hooks/useCompletedDecisionsV37.js:4:  current: "/api/completed-decisions",
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/hooks/useCompletedDecisionsV37.js:5:  history: "/api/completed-decisions/history?limit=100",
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/hooks/useCompletedDecisionsV37.js:6:  integrity: "/api/completed-decisions/history/integrity"
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/hooks/useCompletedDecisionsV37.js:14:    const response = await fetch(url, {
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/hooks/useCanonicalDecision.js:11:    const response = await fetch(url, {
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/hooks/useCanonicalDecision.js:45:          const endpoint = `${BASE_URL}/api/decision/canonical-live?symbol=${encodeURIComponent(normalizedSymbol)}&timeframe=${encodeURIComponent(normalizedTimeframe)}&mode=${mode}`;
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/hooks/useMarket.js:6:  /api/...  --->  https://api.ndsp.app/api/...
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/hooks/useMarket.js:22:      const res = await fetch(url, {
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/hooks/useMarket.js:46:      const url = `${BASE_URL}/api/market/prices?symbol=${encodeURIComponent(normalizedSymbol)}`;
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/hooks/useMarket.js:76:      const url = `${BASE_URL}/api/scenario/levels?symbol=${encodeURIComponent(normalizedSymbol)}`;
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/core/services/marketService.js:1:import request from "../api/apiClient";
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/core/services/marketService.js:4:  const data = await request(`/api/market/prices?symbol=${symbol}`);
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/core/services/scenarioService.js:1:import request from "../api/apiClient";
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/core/services/scenarioService.js:4:  const data = await request(`/api/scenario/levels?symbol=${symbol}`);
+/home/nawaf511/empire-core-new/frontend/user-portal-vite/src/core/api/apiClient.js:6:  const res = await fetch(url, {
+--- ROUTING ---
+
+=== 10. PRODUCTION HASH ===
+2a9dd08b3e4cfe78556d0ca85b0b4fdf153886aee1fb92ce22884b9df76aa1c3  /var/www/ndsp-my/portal/index.html
+
+=== FINAL ===
+FOUNDATION_TARGET=frontend/user-portal-vite
+CANONICAL_PORTAL=/portal/
+PRODUCTION_TARGET=/var/www/ndsp-my/portal
+DISCOVERY=PASS
+FILES_MODIFIED=0
+SERVICES_RESTARTED=0
+NGINX_MODIFIED=0
+BUILD_EXECUTED=0
+DEPLOY_EXECUTED=0
+NEXT_ACTION=BUILD_UI_FOUNDATION_V1
+FINAL_RESULT=PASS_READ_ONLY
+AUDIT=/home/nawaf511/empire-core-new/var/audits/ui-foundation-v1-20260808-060146
+REPORT=/home/nawaf511/empire-core-new/var/audits/ui-foundation-v1-20260808-060146/report.txt
