@@ -1,9 +1,11 @@
-name: NAW-27→30 M2 Certification
+name: NAW-27→31 M2 Certification
 
 on:
   push:
     branches:
       - feature/naw-18-m2-governed-execution
+      - feature/naw-31-runtime-parity-fix
+      - feature/ndsp-sovereign-meridian-ui
   workflow_dispatch:
 
 permissions:
@@ -58,11 +60,19 @@ jobs:
       - name: Governed source invariants
         run: |
           grep -q 'credentials: "include"' frontend/ndsp-sovereign-meridian-ui/src/api/decision.ts
+          grep -q '/api/ui-bridge/analysis' frontend/ndsp-sovereign-meridian-ui/src/api/decision.ts
+          ! grep -q 'https://api.ndsp.app' frontend/ndsp-sovereign-meridian-ui/src/api/decision.ts
           grep -q 'market: selection.market' frontend/ndsp-sovereign-meridian-ui/src/api/decision.ts
           grep -q 'symbol: selection.symbol' frontend/ndsp-sovereign-meridian-ui/src/api/decision.ts
           grep -q 'timeframe: selection.timeframe' frontend/ndsp-sovereign-meridian-ui/src/api/decision.ts
           grep -q 'analysis_mode: selection.analysisMode' frontend/ndsp-sovereign-meridian-ui/src/api/decision.ts
           grep -q 'presentation_mode: selection.presentationMode' frontend/ndsp-sovereign-meridian-ui/src/api/decision.ts
+          grep -q '127.0.0.1:19091/api/auth/session' apps/ndsp-ui-bridge-api/main_governed.py
+          ! grep -q '127.0.0.1:9020/api/auth/session' apps/ndsp-ui-bridge-api/main_governed.py
+          grep -q 'with_name("capability_registry.json")' apps/ndsp-ui-bridge-api/main_governed.py
+          grep -q 'venv/bin/uvicorn main_governed:app' infrastructure/systemd/ndsp-ui-bridge-api-m2-governed.conf
+          grep -q 'zz-ndsp-m2-governed.conf' scripts/NDSP_M2_GOVERNED_MASTER_IMPLEMENT.sh
+          grep -q 'NDSP_M2_UI_BRIDGE_BEGIN' scripts/NDSP_M2_GOVERNED_MASTER_IMPLEMENT.sh
           ! grep -Eq 'from ["'"'']\.\./data["'"'']' frontend/ndsp-sovereign-meridian-ui/src/pages/AnalysisPage.tsx
           grep -q 'frontend_recomputes_protected_logic' apps/ndsp-ui-bridge-api/main.py
           grep -q 'protected_formulas_exposed' apps/ndsp-ui-bridge-api/main.py

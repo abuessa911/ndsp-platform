@@ -14,12 +14,13 @@ from main import app as base_app
 
 AUTH_SESSION_URL = os.getenv(
     "NDSP_AUTH_SESSION_URL",
-    "http://127.0.0.1:9020/api/auth/session",
+    "http://127.0.0.1:19091/api/auth/session",
 ).strip()
+DEFAULT_CAPABILITY_REGISTRY_PATH = Path(__file__).resolve().with_name("capability_registry.json")
 CAPABILITY_REGISTRY_PATH = Path(
     os.getenv(
         "NDSP_CAPABILITY_REGISTRY_PATH",
-        "/opt/ndsp-ui-bridge-api/capability_registry.json",
+        str(DEFAULT_CAPABILITY_REGISTRY_PATH),
     )
 ).resolve()
 ANALYSIS_PREFIX = "/api/ui-bridge/analysis/"

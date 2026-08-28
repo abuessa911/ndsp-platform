@@ -7,7 +7,7 @@ import type {
   PresentationMode,
 } from "../analysis/types";
 
-const API_ORIGIN = (import.meta.env.VITE_NDSP_DECISION_API_ORIGIN as string | undefined)?.replace(/\/$/, "") ?? "https://api.ndsp.app";
+const API_ORIGIN = (import.meta.env.VITE_NDSP_DECISION_API_ORIGIN as string | undefined)?.replace(/\/$/, "") ?? "";
 const BASE = `${API_ORIGIN}/api/ui-bridge/analysis`;
 
 type Option = { id: string; label_ar: string; label_en: string };
