@@ -1,4 +1,4 @@
-name: NAW-27 M2 Certification
+name: NAW-27→30 M2 Certification
 
 on:
   push:
@@ -55,6 +55,21 @@ jobs:
           print('NAW27_CAPABILITY_REGISTRY=PASS')
           PY
 
+      - name: Governed source invariants
+        run: |
+          grep -q 'credentials: "include"' frontend/ndsp-sovereign-meridian-ui/src/api/decision.ts
+          grep -q 'market: selection.market' frontend/ndsp-sovereign-meridian-ui/src/api/decision.ts
+          grep -q 'symbol: selection.symbol' frontend/ndsp-sovereign-meridian-ui/src/api/decision.ts
+          grep -q 'timeframe: selection.timeframe' frontend/ndsp-sovereign-meridian-ui/src/api/decision.ts
+          grep -q 'analysis_mode: selection.analysisMode' frontend/ndsp-sovereign-meridian-ui/src/api/decision.ts
+          grep -q 'presentation_mode: selection.presentationMode' frontend/ndsp-sovereign-meridian-ui/src/api/decision.ts
+          ! grep -Eq 'from ["'"'']\.\./data["'"'']' frontend/ndsp-sovereign-meridian-ui/src/pages/AnalysisPage.tsx
+          grep -q 'frontend_recomputes_protected_logic' apps/ndsp-ui-bridge-api/main.py
+          grep -q 'protected_formulas_exposed' apps/ndsp-ui-bridge-api/main.py
+          grep -q 'AbortController' frontend/ndsp-sovereign-meridian-ui/src/pages/AnalysisPage.tsx
+          grep -q 'AbortController' frontend/ndsp-sovereign-meridian-ui/src/pages/AnalysisSetupPage.tsx
+          grep -q 'item.freshness' frontend/ndsp-sovereign-meridian-ui/src/pages/AnalysisPage.tsx
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -65,6 +80,10 @@ jobs:
       - name: Frontend install
         working-directory: frontend/ndsp-sovereign-meridian-ui
         run: npm ci --ignore-scripts --no-audit --no-fund
+
+      - name: Deterministic governed state tests
+        working-directory: frontend/ndsp-sovereign-meridian-ui
+        run: node --test tests/governed-analysis-state-machine.test.cjs
 
       - name: Frontend typecheck
         working-directory: frontend/ndsp-sovereign-meridian-ui
