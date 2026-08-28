@@ -34,6 +34,13 @@ export function AnalysisSetupPage() {
   const [presentationMode, setPresentationMode] = useState("");
 
   useEffect(() => {
+    // Entering setup means the previous calculation context is no longer authoritative.
+    // This prevents browser-back navigation from reviving a stale decision while a new
+    // symbol/timeframe/mode selection is being prepared.
+    analysisContext.clearContext();
+  }, [analysisContext.clearContext]);
+
+  useEffect(() => {
     const controller = new AbortController();
     setLoading(true);
     setError(null);
@@ -115,7 +122,7 @@ export function AnalysisSetupPage() {
           <ShieldCheck size={22} />
           <div>
             <strong>لا توجد قيم حسابية افتراضية مخفية</strong>
-            <span>كل اختيار سيُرسل كما هو إلى عقد الباك إند، وتغيير سياق الحساب يبطل النتائج السابقة.</span>
+            <span>كل اختيار سيُرسل كما هو إلى عقد الباك إند، والدخول إلى الإعداد يبطل سياق النتيجة السابقة.</span>
           </div>
         </div>
 
