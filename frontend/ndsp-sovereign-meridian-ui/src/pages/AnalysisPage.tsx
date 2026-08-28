@@ -9,15 +9,14 @@ import { useEffect, useMemo, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { useAnalysisContext } from "../analysis/AnalysisContext";
 import type { CapabilityState } from "../analysis/types";
-import { getCapabilityCoverage } from "../api/decision";
-import type { CapabilityCoverage } from "../api/decision";
-
-const AUTHORITATIVE_CAPABILITY_CONTRACT_COUNT = 311;
-// NAW-22 proved 311 CAP contract records exist, but those records mix inferred source,
-// documentation-only, and historical references. Until NAW-27 reconciles which records
-// are true user-relevant runtime capabilities and maps them to governed public families,
-// the UI must not claim global capability completeness.
-const GLOBAL_CAPABILITY_MAPPING_RECONCILED = false;
+import {
+  getCapabilityCoverage,
+  getCapabilityRegistrySummary,
+} from "../api/decision";
+import type {
+  CapabilityCoverage,
+  CapabilityRegistrySummary,
+} from "../api/decision";
 
 const STATE_LABELS: Record<CapabilityState, string> = {
   CONTRIBUTED: "ساهمت",
@@ -32,6 +31,7 @@ const STATE_LABELS: Record<CapabilityState, string> = {
 export function AnalysisPage() {
   const analysisContext = useAnalysisContext();
   const [coverage, setCoverage] = useState<CapabilityCoverage | null>(null);
+  const [registry, setRegistry] = useState<CapabilityRegistrySummary | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -45,13 +45,19 @@ export function AnalysisPage() {
 
     const controller = new AbortController();
     setCoverage(null);
+    setRegistry(null);
     setError(null);
     setLoading(true);
 
-    void getCapabilityCoverage(context, controller.signal)
-      .then((payload) => {
-        if (!payload.ok) throw new Error("CAPABILITY_COVERAGE_UNAVAILABLE");
-        setCoverage(payload);
+    void Promise.all([
+      getCapabilityCoverage(context, controller.signal),
+      getCapabilityRegistrySummary(controller.signal),
+    ])
+      .then(([coveragePayload, registryPayload]) => {
+        if (!coveragePayload.ok) throw new Error("CAPABILITY_COVERAGE_UNAVAILABLE");
+        if (!registryPayload.ok) throw new Error("CAPABILITY_REGISTRY_UNAVAILABLE");
+        setCoverage(coveragePayload);
+        setRegistry(registryPayload);
       })
       .catch((requestError) => {
         if (controller.signal.aborted) return;
@@ -72,8 +78,16 @@ export function AnalysisPage() {
 
   const summary = coverage?.decision_summary;
   const professional = context.presentationMode === "professional";
+  const globalRegistryReconciled = Boolean(
+    registry?.global_reconciled &&
+      registry.record_count === registry.expected_record_count &&
+      registry.silent_omission_count === 0 &&
+      registry.parse_error_count === 0 &&
+      registry.runtime_capability_count_claimed === false &&
+      registry.activation_claim === false,
+  );
   const effectiveDecisionReady = Boolean(
-    coverage?.decision_ready && GLOBAL_CAPABILITY_MAPPING_RECONCILED,
+    coverage?.decision_ready && globalRegistryReconciled,
   );
 
   return (
@@ -96,20 +110,22 @@ export function AnalysisPage() {
           <Link className="button button--outline" to="/analysis/setup"><ArrowCounterClockwise size={16} /> تغيير السياق</Link>
         </div>
 
-        <div className="governed-state governed-state--danger">
-          <ShieldCheck size={20} />
-          <div>
-            <strong>بوابة التغطية الشاملة ما زالت Fail-Closed</strong>
+        {registry ? (
+          <div className={`governed-state ${globalRegistryReconciled ? "" : "governed-state--danger"}`}>
+            <ShieldCheck size={20} />
             <div>
-              السجل الحاكم يحتوي {AUTHORITATIVE_CAPABILITY_CONTRACT_COUNT} سجل CAP مكتشفًا، بينما هذه الصفحة تعرض حاليًا عائلات القدرات المربوطة بعقد المستخدم. لا نعتبر ذلك إثباتًا بأن كل سجل تاريخي يمثل قدرة Runtime مستقلة، ولا ندّعي اكتمال القوة حتى تنتهي مصالحة NAW-27.
+              <strong>{globalRegistryReconciled ? "مصالحة سجل القدرات مكتملة" : "بوابة التغطية الشاملة Fail-Closed"}</strong>
+              <div>
+                تم احتساب {registry.record_count} من {registry.expected_record_count} سجل CAP. هذه السجلات هي سجلات اكتشاف/أدلة وليست عددًا للقدرات الحية، ولا تمنح أي سجل صفة Runtime أو ACTIVE تلقائيًا.
+              </div>
             </div>
           </div>
-        </div>
+        ) : null}
 
         {loading ? <div className="governed-state">جارٍ جلب عقد القرار وتغطية القدرات…</div> : null}
         {error ? <div className="governed-state governed-state--danger"><WarningCircle size={20} /> {error}</div> : null}
 
-        {coverage ? (
+        {coverage && registry ? (
           <>
             <article className={`governed-decision-state governed-decision-state--${effectiveDecisionReady ? "ready" : "blocked"}`}>
               <div className="governed-decision-state__icon">
@@ -121,13 +137,14 @@ export function AnalysisPage() {
                 <p>
                   {effectiveDecisionReady
                     ? summary?.sanitized_summary ?? "اكتملت بوابات التغطية الحاكمة."
-                    : "المنظومة تعمل Fail-Closed: تظهر الأدلة المتاحة والفجوات، لكن لا تُرفع القراءة إلى نتيجة رسمية ما دامت قدرة حرجة ناقصة أو مصفوفة القدرات الشاملة غير مصالحة."}
+                    : "المنظومة تعمل Fail-Closed: تظهر الأدلة المتاحة والفجوات، لكن لا تُرفع القراءة إلى نتيجة رسمية ما دامت قدرة حرجة ناقصة أو مصالحة السجل غير مكتملة."}
                 </p>
               </div>
             </article>
 
             <div className="coverage-metrics">
-              <article><span>سجلات CAP الحاكمة</span><strong>{AUTHORITATIVE_CAPABILITY_CONTRACT_COUNT}</strong></article>
+              <article><span>سجلات CAP المحاسبة</span><strong>{registry.record_count}</strong></article>
+              <article><span>حذف صامت بالسجل</span><strong>{registry.silent_omission_count}</strong></article>
               <article><span>عائلات التغطية الحالية</span><strong>{coverage.capabilities.length}</strong></article>
               <article><span>ساهمت</span><strong>{counts.CONTRIBUTED ?? 0}</strong></article>
               <article><span>محمية</span><strong>{counts.GOVERNANCE_PROTECTED ?? 0}</strong></article>
@@ -200,7 +217,8 @@ export function AnalysisPage() {
               <span>Frontend recomputation: {coverage.governance.frontend_recomputes_protected_logic ? "مرفوض" : "لا"}</span>
               <span>Protected formulas exposed: {coverage.governance.protected_formulas_exposed ? "نعم" : "لا"}</span>
               <span>Current-family omission check: {coverage.governance.no_silent_omission ? "PASS" : "FAIL"}</span>
-              <span>Global registry reconciliation: {GLOBAL_CAPABILITY_MAPPING_RECONCILED ? "PASS" : "PENDING"}</span>
+              <span>Global registry reconciliation: {globalRegistryReconciled ? "PASS" : "FAIL"}</span>
+              <span>CAP count treated as runtime count: {registry.runtime_capability_count_claimed ? "FAIL" : "NO"}</span>
               <span>Fail closed: {coverage.governance.fail_closed ? "PASS" : "FAIL"}</span>
             </div>
           </>
