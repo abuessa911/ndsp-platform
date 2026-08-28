@@ -14,6 +14,7 @@ execFileSync(
   process.platform === 'win32' ? 'npx.cmd' : 'npx',
   [
     'tsc',
+    '--ignoreConfig',
     'src/analysis/stateMachine.ts',
     '--target', 'ES2022',
     '--module', 'commonjs',
