@@ -46,6 +46,20 @@ export type ContextValidation = {
   governance_note: string;
 };
 
+export type CapabilityRegistrySummary = {
+  ok: boolean;
+  contract: string;
+  global_reconciled: boolean;
+  record_count: number;
+  expected_record_count: number;
+  silent_omission_count: number;
+  parse_error_count: number;
+  governed_state_counts: Record<string, number>;
+  contract_status_counts: Record<string, number>;
+  runtime_capability_count_claimed: boolean;
+  activation_claim: boolean;
+};
+
 export type CapabilityCoverage = {
   ok: boolean;
   contract: string;
@@ -129,4 +143,8 @@ export function validateAnalysisContext(selection: AnalysisSelection, signal?: A
 
 export function getCapabilityCoverage(selection: AnalysisSelection, signal?: AbortSignal): Promise<CapabilityCoverage> {
   return readJson<CapabilityCoverage>(`${BASE}/capability-coverage?${contextQuery(selection)}`, signal);
+}
+
+export function getCapabilityRegistrySummary(signal?: AbortSignal): Promise<CapabilityRegistrySummary> {
+  return readJson<CapabilityRegistrySummary>(`${BASE}/capability-registry`, signal);
 }
