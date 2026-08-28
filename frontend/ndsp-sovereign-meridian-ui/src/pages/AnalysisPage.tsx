@@ -8,6 +8,8 @@ import {
 import { useEffect, useMemo, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { useAnalysisContext } from "../analysis/AnalysisContext";
+import { deriveResultLifecycleState } from "../analysis/stateMachine";
+import type { ResultLifecycleState } from "../analysis/stateMachine";
 import type { CapabilityState } from "../analysis/types";
 import {
   getCapabilityCoverage,
@@ -26,6 +28,15 @@ const STATE_LABELS: Record<CapabilityState, string> = {
   STALE: "بيانات قديمة",
   PARTIAL: "جزئية",
   GOVERNANCE_PROTECTED: "محمية حوكميًا",
+};
+
+const LIFECYCLE_LABELS: Record<ResultLifecycleState, string> = {
+  loading: "جارٍ التحقق",
+  unavailable: "النتيجة غير متاحة",
+  stale: "النتيجة قديمة",
+  blocked: "النتيجة محظورة حوكميًا",
+  partial: "النتيجة جزئية",
+  ready: "القراءة الرسمية جاهزة",
 };
 
 export function AnalysisPage() {
@@ -86,9 +97,16 @@ export function AnalysisPage() {
       registry.runtime_capability_count_claimed === false &&
       registry.activation_claim === false,
   );
-  const effectiveDecisionReady = Boolean(
-    coverage?.decision_ready && globalRegistryReconciled,
-  );
+  const lifecycle = deriveResultLifecycleState({
+    loading,
+    hasError: Boolean(error),
+    hasCoverage: Boolean(coverage && registry),
+    globalRegistryReconciled,
+    decisionReady: Boolean(coverage?.decision_ready),
+    officialState: coverage?.official_state,
+    capabilityStates: coverage?.capabilities.map((item) => item.state) ?? [],
+  });
+  const effectiveDecisionReady = lifecycle === "ready";
 
   return (
     <div className="page-surface analysis-page governed-analysis" dir="rtl">
@@ -127,17 +145,17 @@ export function AnalysisPage() {
 
         {coverage && registry ? (
           <>
-            <article className={`governed-decision-state governed-decision-state--${effectiveDecisionReady ? "ready" : "blocked"}`}>
+            <article className={`governed-decision-state governed-decision-state--${effectiveDecisionReady ? "ready" : "blocked"}`} data-lifecycle={lifecycle}>
               <div className="governed-decision-state__icon">
                 {effectiveDecisionReady ? <CheckCircle size={30} /> : <ShieldCheck size={30} />}
               </div>
               <div>
-                <span className="eyebrow">OFFICIAL STATE</span>
-                <h2>{effectiveDecisionReady ? "القراءة الرسمية جاهزة" : "لا توجد نتيجة رسمية مكتملة"}</h2>
+                <span className="eyebrow">OFFICIAL STATE · {lifecycle.toUpperCase()}</span>
+                <h2>{LIFECYCLE_LABELS[lifecycle]}</h2>
                 <p>
                   {effectiveDecisionReady
                     ? summary?.sanitized_summary ?? "اكتملت بوابات التغطية الحاكمة."
-                    : "المنظومة تعمل Fail-Closed: تظهر الأدلة المتاحة والفجوات، لكن لا تُرفع القراءة إلى نتيجة رسمية ما دامت قدرة حرجة ناقصة أو مصالحة السجل غير مكتملة."}
+                    : "المنظومة تعمل Fail-Closed: تظهر الأدلة المتاحة والفجوات، لكن لا تُرفع القراءة إلى نتيجة رسمية ما دامت قدرة حرجة ناقصة أو حالة stale/partial/blocked أو مصالحة السجل غير مكتملة."}
                 </p>
               </div>
             </article>
@@ -188,6 +206,7 @@ export function AnalysisPage() {
                       {STATE_LABELS[item.state] ?? item.state}
                     </span>
                     <small>الأثر: {item.effect}</small>
+                    {item.freshness ? <small>as-of: {item.freshness}</small> : <small>as-of: غير متاح</small>}
                     {professional ? <p>{item.safe_detail}</p> : null}
                   </article>
                 ))}
@@ -214,6 +233,7 @@ export function AnalysisPage() {
 
             <div className="governance-proof">
               <ShieldCheck size={20} />
+              <span>Lifecycle: {lifecycle.toUpperCase()}</span>
               <span>Frontend recomputation: {coverage.governance.frontend_recomputes_protected_logic ? "مرفوض" : "لا"}</span>
               <span>Protected formulas exposed: {coverage.governance.protected_formulas_exposed ? "نعم" : "لا"}</span>
               <span>Current-family omission check: {coverage.governance.no_silent_omission ? "PASS" : "FAIL"}</span>
