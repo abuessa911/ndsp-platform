@@ -87,7 +87,7 @@ test('result lifecycle is deterministic and fail-closed', () => {
     hasCoverage: true,
     globalRegistryReconciled: true,
     decisionReady: false,
-    officialState: 'BLOCKED',
+    officialState: null,
     capabilityStates: [],
   };
 
@@ -97,8 +97,34 @@ test('result lifecycle is deterministic and fail-closed', () => {
   assert.equal(deriveResultLifecycleState({ ...common, capabilityStates: ['STALE'] }), 'stale');
   assert.equal(deriveResultLifecycleState({ ...common, globalRegistryReconciled: false }), 'blocked');
   assert.equal(deriveResultLifecycleState({ ...common, decisionReady: true, officialState: 'READY' }), 'ready');
+  assert.equal(deriveResultLifecycleState({ ...common, officialState: 'BLOCKED' }), 'blocked');
   assert.equal(deriveResultLifecycleState({ ...common, capabilityStates: ['BLOCKED'] }), 'blocked');
   assert.equal(deriveResultLifecycleState({ ...common, capabilityStates: ['PARTIAL'] }), 'partial');
   assert.equal(deriveResultLifecycleState({ ...common, capabilityStates: ['UNAVAILABLE'] }), 'partial');
   assert.equal(deriveResultLifecycleState(common), 'blocked');
+});
+
+test('contradictory READY evidence never overrides blocking evidence', () => {
+  const readyBase = {
+    loading: false,
+    hasError: false,
+    hasCoverage: true,
+    globalRegistryReconciled: true,
+    decisionReady: true,
+    officialState: 'READY',
+    capabilityStates: [],
+  };
+
+  assert.equal(
+    deriveResultLifecycleState({ ...readyBase, capabilityStates: ['BLOCKED'] }),
+    'blocked',
+  );
+  assert.equal(
+    deriveResultLifecycleState({ ...readyBase, officialState: 'BLOCKED' }),
+    'blocked',
+  );
+  assert.equal(
+    deriveResultLifecycleState({ ...readyBase, capabilityStates: ['STALE'] }),
+    'stale',
+  );
 });
