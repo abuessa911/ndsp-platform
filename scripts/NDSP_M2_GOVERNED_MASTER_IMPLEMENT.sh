@@ -266,7 +266,7 @@ for rel in "${TARGETS[@]}"; do mkdir -p "$ROOT/$(dirname "$rel")"; cp -a "$CANDI
 cp -a "$REGISTRY_BUILD" "$RUNTIME_REGISTRY"
 sudo mkdir -p "$DROPIN_DIR"
 sudo install -m 0644 "$CANDIDATE/infrastructure/systemd/ndsp-ui-bridge-api-m2-governed.conf" "$DROPIN_PATH"
-sudo cp -a "$NGINX_PATCHED" "$MY_SITE_REAL"
+sudo install -o root -g root -m 0644 "$NGINX_PATCHED" "$MY_SITE_REAL"
 if ! sudo nginx -t; then rollback; die NGINX_CONFIG_TEST_FAILED; fi
 if ! sudo systemctl reload nginx; then rollback; die NGINX_RELOAD_FAILED; fi
 sudo systemctl daemon-reload
