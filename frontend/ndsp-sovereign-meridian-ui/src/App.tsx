@@ -1,9 +1,11 @@
 import { ArrowRight } from "@phosphor-icons/react";
 import { Link, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { RequireAdmin } from "./auth/RequireAdmin";
+import { RequireUser } from "./auth/RequireUser";
 import { AdminLayout } from "./components/AdminLayout";
 import { PublicLayout } from "./components/PublicLayout";
 import { AnalysisPage } from "./pages/AnalysisPage";
+import { AnalysisSetupPage } from "./pages/AnalysisSetupPage";
 import { DocumentationPage } from "./pages/DocumentationPage";
 import { HomePage } from "./pages/HomePage";
 import { MethodologyPage } from "./pages/MethodologyPage";
@@ -47,8 +49,11 @@ export function App() {
       <Route element={<PublicLayout />}>
         <Route index element={<DomainRootPage />} />
         <Route path="methodology" element={<MethodologyPage />} />
-        <Route path="analysis" element={<AnalysisPage />} />
         <Route path="documentation" element={<DocumentationPage />} />
+        <Route element={<RequireUser />}>
+          <Route path="analysis/setup" element={<AnalysisSetupPage />} />
+          <Route path="analysis" element={<AnalysisPage />} />
+        </Route>
       </Route>
 
       <Route path="login" element={<SignInPage />} />

@@ -1,0 +1,291 @@
+.route-state,
+.governed-state {
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+  padding: 1rem 1.15rem;
+  border: 1px solid rgba(194, 155, 70, .25);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, .035);
+}
+
+.route-state {
+  max-width: 760px;
+  margin: 4rem auto;
+}
+
+.route-state--danger,
+.governed-state--danger {
+  border-color: rgba(220, 82, 82, .35);
+}
+
+.governed-setup,
+.governed-analysis__workspace {
+  display: grid;
+  gap: 1.25rem;
+  padding-block: 2rem 4rem;
+}
+
+.governed-setup__notice,
+.governance-proof {
+  display: flex;
+  gap: .85rem;
+  align-items: flex-start;
+  padding: 1rem 1.15rem;
+  border: 1px solid rgba(194, 155, 70, .28);
+  border-radius: 16px;
+  background: rgba(194, 155, 70, .06);
+}
+
+.governed-setup__notice div {
+  display: grid;
+  gap: .25rem;
+}
+
+.governed-setup__notice span,
+.governed-setup__source,
+.capability-card small,
+.capability-card p,
+.governance-proof span {
+  opacity: .78;
+}
+
+.governed-setup__form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.governed-setup__form label {
+  display: grid;
+  gap: .5rem;
+}
+
+.governed-setup__form label > span {
+  font-weight: 600;
+}
+
+.governed-setup__form select {
+  width: 100%;
+  min-height: 48px;
+  padding: .7rem .85rem;
+  color: inherit;
+  background: rgba(10, 10, 12, .92);
+  border: 1px solid rgba(255, 255, 255, .14);
+  border-radius: 12px;
+  font: inherit;
+}
+
+.governed-setup__form select:focus {
+  outline: 2px solid rgba(194, 155, 70, .55);
+  outline-offset: 1px;
+}
+
+.governed-setup__form select:disabled {
+  opacity: .45;
+}
+
+.governed-setup__full {
+  grid-column: 1 / -1;
+}
+
+.governed-setup__actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.governed-setup__source {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  font-size: .86rem;
+}
+
+.analysis-context-strip {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr)) auto;
+  gap: .65rem;
+  align-items: stretch;
+}
+
+.analysis-context-strip > span,
+.coverage-metrics article,
+.governed-summary__grid article,
+.capability-card,
+.layer-ledger article {
+  border: 1px solid rgba(255, 255, 255, .09);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, .025);
+}
+
+.analysis-context-strip > span {
+  display: grid;
+  gap: .15rem;
+  padding: .7rem .8rem;
+}
+
+.analysis-context-strip small {
+  opacity: .62;
+}
+
+.governed-decision-state {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1.3rem;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, .1);
+}
+
+.governed-decision-state--blocked {
+  border-color: rgba(213, 168, 71, .35);
+  background: rgba(213, 168, 71, .055);
+}
+
+.governed-decision-state--ready {
+  border-color: rgba(75, 187, 128, .35);
+  background: rgba(75, 187, 128, .055);
+}
+
+.governed-decision-state h2 {
+  margin: .2rem 0 .45rem;
+}
+
+.coverage-metrics,
+.governed-summary__grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: .75rem;
+}
+
+.coverage-metrics article,
+.governed-summary__grid article {
+  display: grid;
+  gap: .2rem;
+  padding: .9rem;
+}
+
+.coverage-metrics span,
+.governed-summary__grid span {
+  opacity: .66;
+  font-size: .84rem;
+}
+
+.coverage-metrics strong {
+  font-size: 1.35rem;
+}
+
+.governed-summary,
+.capability-coverage-section,
+.layer-coverage-section {
+  display: grid;
+  gap: 1rem;
+}
+
+.capability-coverage-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .8rem;
+}
+
+.capability-card {
+  display: grid;
+  gap: .65rem;
+  padding: 1rem;
+  min-width: 0;
+}
+
+.capability-card__head {
+  display: flex;
+  justify-content: space-between;
+  gap: .75rem;
+  align-items: center;
+}
+
+.capability-state {
+  width: fit-content;
+  padding: .24rem .55rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, .12);
+  font-size: .78rem;
+}
+
+.capability-state--contributed {
+  border-color: rgba(75, 187, 128, .38);
+}
+
+.capability-state--governance_protected {
+  border-color: rgba(194, 155, 70, .42);
+}
+
+.capability-state--blocked,
+.capability-state--unavailable,
+.capability-state--stale {
+  border-color: rgba(220, 82, 82, .34);
+}
+
+.capability-state--partial {
+  border-color: rgba(219, 160, 62, .38);
+}
+
+.layer-ledger {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .65rem;
+}
+
+.layer-ledger article {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  gap: .65rem;
+  padding: .8rem .9rem;
+}
+
+.layer-ledger article > span,
+.layer-ledger article > em {
+  opacity: .66;
+  font-style: normal;
+  font-size: .82rem;
+}
+
+.governance-proof {
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+@media (max-width: 1080px) {
+  .analysis-context-strip {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .coverage-metrics,
+  .governed-summary__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .capability-coverage-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .governed-setup__form,
+  .analysis-context-strip,
+  .coverage-metrics,
+  .governed-summary__grid,
+  .capability-coverage-grid,
+  .layer-ledger {
+    grid-template-columns: 1fr;
+  }
+
+  .layer-ledger article {
+    grid-template-columns: auto 1fr auto;
+  }
+
+  .layer-ledger article svg {
+    display: none;
+  }
+}

@@ -1,0 +1,100 @@
+name: NAW-27→30 M2 Certification
+
+on:
+  push:
+    branches:
+      - feature/naw-18-m2-governed-execution
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: naw27-m2-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Python and shell syntax
+        run: |
+          python -m py_compile \
+            apps/ndsp-ui-bridge-api/main.py \
+            apps/ndsp-ui-bridge-api/main_governed.py \
+            scripts/NDSP_NAW27_CAPABILITY_RECONCILE.py
+          bash -n scripts/NDSP_M2_FINAL_READONLY_CERTIFIER.sh
+          bash -n scripts/NDSP_M2_GOVERNED_MASTER_IMPLEMENT.sh
+
+      - name: Reconcile all CAP discovery records
+        run: |
+          python scripts/NDSP_NAW27_CAPABILITY_RECONCILE.py \
+            --root "$GITHUB_WORKSPACE" \
+            --output /tmp/capability_registry.json \
+            --expected-count 311
+          python - <<'PY'
+          import json
+          p=json.load(open('/tmp/capability_registry.json',encoding='utf-8'))
+          assert p['global_reconciled'] is True
+          assert p['record_count'] == 311
+          assert p['parsed_record_count'] == 311
+          assert p['silent_omission_count'] == 0
+          assert p['parse_error_count'] == 0
+          assert p['semantics']['record_count_is_runtime_capability_count'] is False
+          assert p['semantics']['activation_claim'] is False
+          assert len(p['entries']) == 311
+          print('NAW27_CAPABILITY_REGISTRY=PASS')
+          PY
+
+      - name: Governed source invariants
+        run: |
+          grep -q 'credentials: "include"' frontend/ndsp-sovereign-meridian-ui/src/api/decision.ts
+          grep -q 'market: selection.market' frontend/ndsp-sovereign-meridian-ui/src/api/decision.ts
+          grep -q 'symbol: selection.symbol' frontend/ndsp-sovereign-meridian-ui/src/api/decision.ts
+          grep -q 'timeframe: selection.timeframe' frontend/ndsp-sovereign-meridian-ui/src/api/decision.ts
+          grep -q 'analysis_mode: selection.analysisMode' frontend/ndsp-sovereign-meridian-ui/src/api/decision.ts
+          grep -q 'presentation_mode: selection.presentationMode' frontend/ndsp-sovereign-meridian-ui/src/api/decision.ts
+          ! grep -Eq 'from ["'"'']\.\./data["'"'']' frontend/ndsp-sovereign-meridian-ui/src/pages/AnalysisPage.tsx
+          grep -q 'frontend_recomputes_protected_logic' apps/ndsp-ui-bridge-api/main.py
+          grep -q 'protected_formulas_exposed' apps/ndsp-ui-bridge-api/main.py
+          grep -q 'AbortController' frontend/ndsp-sovereign-meridian-ui/src/pages/AnalysisPage.tsx
+          grep -q 'AbortController' frontend/ndsp-sovereign-meridian-ui/src/pages/AnalysisSetupPage.tsx
+          grep -q 'item.freshness' frontend/ndsp-sovereign-meridian-ui/src/pages/AnalysisPage.tsx
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: frontend/ndsp-sovereign-meridian-ui/package-lock.json
+
+      - name: Frontend install
+        working-directory: frontend/ndsp-sovereign-meridian-ui
+        run: npm ci --ignore-scripts --no-audit --no-fund
+
+      - name: Deterministic governed state tests
+        working-directory: frontend/ndsp-sovereign-meridian-ui
+        run: node --test tests/governed-analysis-state-machine.test.mjs
+
+      - name: Frontend typecheck
+        working-directory: frontend/ndsp-sovereign-meridian-ui
+        run: npm run typecheck
+
+      - name: Frontend build
+        working-directory: frontend/ndsp-sovereign-meridian-ui
+        run: npm run build
+
+      - name: Verify build artifact
+        run: test -f frontend/ndsp-sovereign-meridian-ui/dist/client/index.html
+
+      - name: Independent M2 read-only certifier
+        run: bash scripts/NDSP_M2_FINAL_READONLY_CERTIFIER.sh "$GITHUB_WORKSPACE"
