@@ -12,6 +12,13 @@ import type { CapabilityState } from "../analysis/types";
 import { getCapabilityCoverage } from "../api/decision";
 import type { CapabilityCoverage } from "../api/decision";
 
+const AUTHORITATIVE_CAPABILITY_CONTRACT_COUNT = 311;
+// NAW-22 proved 311 CAP contract records exist, but those records mix inferred source,
+// documentation-only, and historical references. Until NAW-27 reconciles which records
+// are true user-relevant runtime capabilities and maps them to governed public families,
+// the UI must not claim global capability completeness.
+const GLOBAL_CAPABILITY_MAPPING_RECONCILED = false;
+
 const STATE_LABELS: Record<CapabilityState, string> = {
   CONTRIBUTED: "ساهمت",
   BLOCKED: "محظورة",
@@ -65,6 +72,9 @@ export function AnalysisPage() {
 
   const summary = coverage?.decision_summary;
   const professional = context.presentationMode === "professional";
+  const effectiveDecisionReady = Boolean(
+    coverage?.decision_ready && GLOBAL_CAPABILITY_MAPPING_RECONCILED,
+  );
 
   return (
     <div className="page-surface analysis-page governed-analysis" dir="rtl">
@@ -86,33 +96,43 @@ export function AnalysisPage() {
           <Link className="button button--outline" to="/analysis/setup"><ArrowCounterClockwise size={16} /> تغيير السياق</Link>
         </div>
 
+        <div className="governed-state governed-state--danger">
+          <ShieldCheck size={20} />
+          <div>
+            <strong>بوابة التغطية الشاملة ما زالت Fail-Closed</strong>
+            <div>
+              السجل الحاكم يحتوي {AUTHORITATIVE_CAPABILITY_CONTRACT_COUNT} سجل CAP مكتشفًا، بينما هذه الصفحة تعرض حاليًا عائلات القدرات المربوطة بعقد المستخدم. لا نعتبر ذلك إثباتًا بأن كل سجل تاريخي يمثل قدرة Runtime مستقلة، ولا ندّعي اكتمال القوة حتى تنتهي مصالحة NAW-27.
+            </div>
+          </div>
+        </div>
+
         {loading ? <div className="governed-state">جارٍ جلب عقد القرار وتغطية القدرات…</div> : null}
         {error ? <div className="governed-state governed-state--danger"><WarningCircle size={20} /> {error}</div> : null}
 
         {coverage ? (
           <>
-            <article className={`governed-decision-state governed-decision-state--${coverage.decision_ready ? "ready" : "blocked"}`}>
+            <article className={`governed-decision-state governed-decision-state--${effectiveDecisionReady ? "ready" : "blocked"}`}>
               <div className="governed-decision-state__icon">
-                {coverage.decision_ready ? <CheckCircle size={30} /> : <ShieldCheck size={30} />}
+                {effectiveDecisionReady ? <CheckCircle size={30} /> : <ShieldCheck size={30} />}
               </div>
               <div>
                 <span className="eyebrow">OFFICIAL STATE</span>
-                <h2>{coverage.decision_ready ? "القراءة الرسمية جاهزة" : "لا توجد نتيجة رسمية مكتملة"}</h2>
+                <h2>{effectiveDecisionReady ? "القراءة الرسمية جاهزة" : "لا توجد نتيجة رسمية مكتملة"}</h2>
                 <p>
-                  {coverage.decision_ready
+                  {effectiveDecisionReady
                     ? summary?.sanitized_summary ?? "اكتملت بوابات التغطية الحاكمة."
-                    : "المنظومة تعمل Fail-Closed: تظهر الأدلة المتاحة والفجوات، لكن لا تُرفع القراءة إلى نتيجة رسمية ما دامت قدرة حرجة ناقصة أو جزئية."}
+                    : "المنظومة تعمل Fail-Closed: تظهر الأدلة المتاحة والفجوات، لكن لا تُرفع القراءة إلى نتيجة رسمية ما دامت قدرة حرجة ناقصة أو مصفوفة القدرات الشاملة غير مصالحة."}
                 </p>
               </div>
             </article>
 
             <div className="coverage-metrics">
-              <article><span>القدرات المحاسبة</span><strong>{coverage.capabilities.length}</strong></article>
+              <article><span>سجلات CAP الحاكمة</span><strong>{AUTHORITATIVE_CAPABILITY_CONTRACT_COUNT}</strong></article>
+              <article><span>عائلات التغطية الحالية</span><strong>{coverage.capabilities.length}</strong></article>
               <article><span>ساهمت</span><strong>{counts.CONTRIBUTED ?? 0}</strong></article>
               <article><span>محمية</span><strong>{counts.GOVERNANCE_PROTECTED ?? 0}</strong></article>
               <article><span>جزئية</span><strong>{counts.PARTIAL ?? 0}</strong></article>
               <article><span>غير متاحة</span><strong>{counts.UNAVAILABLE ?? 0}</strong></article>
-              <article><span>حذف صامت</span><strong>{coverage.silent_omission_count}</strong></article>
             </div>
 
             <section className="governed-summary">
@@ -138,7 +158,7 @@ export function AnalysisPage() {
               <div className="section-heading">
                 <span className="eyebrow">CAPABILITY COVERAGE GATE</span>
                 <h2>قوة المنظومة — بدون إخفاء صامت</h2>
-                <p>كل عائلة قدرة تظهر حتى عندما تكون غير متاحة أو محمية. نمط المحترف يضيف شرحًا آمنًا فقط ولا يغيّر الحساب.</p>
+                <p>كل عائلة قدرة في عقد التغطية الحالي تظهر حتى عندما تكون غير متاحة أو محمية. نمط المحترف يضيف شرحًا آمنًا فقط ولا يغيّر الحساب.</p>
               </div>
               <div className="capability-coverage-grid">
                 {coverage.capabilities.map((item) => (
@@ -179,7 +199,8 @@ export function AnalysisPage() {
               <ShieldCheck size={20} />
               <span>Frontend recomputation: {coverage.governance.frontend_recomputes_protected_logic ? "مرفوض" : "لا"}</span>
               <span>Protected formulas exposed: {coverage.governance.protected_formulas_exposed ? "نعم" : "لا"}</span>
-              <span>No silent omission: {coverage.governance.no_silent_omission ? "PASS" : "FAIL"}</span>
+              <span>Current-family omission check: {coverage.governance.no_silent_omission ? "PASS" : "FAIL"}</span>
+              <span>Global registry reconciliation: {GLOBAL_CAPABILITY_MAPPING_RECONCILED ? "PASS" : "PENDING"}</span>
               <span>Fail closed: {coverage.governance.fail_closed ? "PASS" : "FAIL"}</span>
             </div>
           </>
