@@ -95,3 +95,6 @@ jobs:
 
       - name: Verify build artifact
         run: test -f frontend/ndsp-sovereign-meridian-ui/dist/client/index.html
+
+      - name: Independent M2 read-only certifier
+        run: bash scripts/NDSP_M2_FINAL_READONLY_CERTIFIER.sh "$GITHUB_WORKSPACE"
