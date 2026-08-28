@@ -94,6 +94,7 @@ FE="$CANDIDATE/frontend/ndsp-sovereign-meridian-ui"
 (
   cd "$FE"
   npm ci --ignore-scripts --no-audit --no-fund
+  node --test tests/governed-analysis-state-machine.test.mjs
   npm run typecheck
   npm run build
 ) 2>&1 | tee "$EVIDENCE_ROOT/candidate-build.txt"
@@ -138,12 +139,15 @@ TARGETS=(
   "frontend/ndsp-sovereign-meridian-ui/src/App.tsx"
   "frontend/ndsp-sovereign-meridian-ui/src/analysis-governance.css"
   "frontend/ndsp-sovereign-meridian-ui/src/analysis/AnalysisContext.tsx"
+  "frontend/ndsp-sovereign-meridian-ui/src/analysis/stateMachine.ts"
   "frontend/ndsp-sovereign-meridian-ui/src/analysis/types.ts"
   "frontend/ndsp-sovereign-meridian-ui/src/api/decision.ts"
   "frontend/ndsp-sovereign-meridian-ui/src/auth/RequireUser.tsx"
   "frontend/ndsp-sovereign-meridian-ui/src/main.tsx"
   "frontend/ndsp-sovereign-meridian-ui/src/pages/AnalysisPage.tsx"
   "frontend/ndsp-sovereign-meridian-ui/src/pages/AnalysisSetupPage.tsx"
+  "frontend/ndsp-sovereign-meridian-ui/tests/governed-analysis-state-machine.test.mjs"
+  ".github/workflows/naw27-m2-certify.yml"
   "scripts/NDSP_NAW27_CAPABILITY_RECONCILE.py"
   "scripts/NDSP_M2_GOVERNED_MASTER_IMPLEMENT.sh"
   "scripts/NDSP_M2_FINAL_READONLY_CERTIFIER.sh"
