@@ -24,6 +24,7 @@ LIVE_ROOT="/var/www/ndsp-my-portal"
 LIVE_LINK="$LIVE_ROOT/current"
 UI_SERVICE="ndsp-ui-bridge-api.service"
 UI_RUNTIME="/opt/ndsp-ui-bridge-api"
+RUNTIME_REGISTRY="$UI_RUNTIME/capability_registry.json"
 DROPIN_DIR="/etc/systemd/system/${UI_SERVICE}.d"
 DROPIN_PATH="$DROPIN_DIR/20-ndsp-m2-governed.conf"
 
@@ -67,7 +68,9 @@ CANDIDATE_SHA="$(git -C "$CANDIDATE" rev-parse HEAD)"
 kv CANDIDATE_SHA "$CANDIDATE_SHA"
 
 CERTIFIER="$CANDIDATE/scripts/NDSP_M2_FINAL_READONLY_CERTIFIER.sh"
+RECONCILER="$CANDIDATE/scripts/NDSP_NAW27_CAPABILITY_RECONCILE.py"
 [[ -f "$CERTIFIER" ]] || die CERTIFIER_NOT_FOUND
+[[ -f "$RECONCILER" ]] || die RECONCILER_NOT_FOUND
 
 section "3/6 — INDEPENDENT CERTIFICATION GATE"
 set +e
@@ -86,7 +89,7 @@ if [[ "$CERT_RC" -eq 2 ]]; then
 fi
 [[ "$CERT_RC" -eq 0 ]] || die CERTIFIER_FAILED
 
-section "4/6 — CANDIDATE BUILD ARTIFACT"
+section "4/6 — CANDIDATE BUILD + CAPABILITY REGISTRY ARTIFACT"
 FE="$CANDIDATE/frontend/ndsp-sovereign-meridian-ui"
 (
   cd "$FE"
@@ -96,7 +99,27 @@ FE="$CANDIDATE/frontend/ndsp-sovereign-meridian-ui"
 ) 2>&1 | tee "$EVIDENCE_ROOT/candidate-build.txt"
 [[ -f "$FE/dist/client/index.html" ]] || die CANDIDATE_BUILD_OUTPUT_MISSING
 
+REGISTRY_BUILD="$EVIDENCE_ROOT/capability_registry.json"
+python3 "$RECONCILER" \
+  --root "$CANDIDATE" \
+  --output "$REGISTRY_BUILD" \
+  --expected-count 311 \
+  2>&1 | tee "$EVIDENCE_ROOT/capability-reconcile.txt"
+python3 - "$REGISTRY_BUILD" <<'PY' || exit 1
+import json, sys
+p=json.load(open(sys.argv[1],encoding='utf-8'))
+assert p['global_reconciled'] is True
+assert p['record_count']==311
+assert p['parsed_record_count']==311
+assert p['silent_omission_count']==0
+assert p['parse_error_count']==0
+assert p['semantics']['record_count_is_runtime_capability_count'] is False
+assert p['semantics']['activation_claim'] is False
+print('CAPABILITY_REGISTRY_ARTIFACT=PASS')
+PY
+
 if [[ "$APPLY" != "YES" ]]; then
+  kv CAPABILITY_REGISTRY "$REGISTRY_BUILD"
   kv PROJECT_FILES_MODIFIED 0
   kv PRODUCTION_FILES_MODIFIED 0
   kv SERVICES_RESTARTED 0
@@ -121,6 +144,7 @@ TARGETS=(
   "frontend/ndsp-sovereign-meridian-ui/src/main.tsx"
   "frontend/ndsp-sovereign-meridian-ui/src/pages/AnalysisPage.tsx"
   "frontend/ndsp-sovereign-meridian-ui/src/pages/AnalysisSetupPage.tsx"
+  "scripts/NDSP_NAW27_CAPABILITY_RECONCILE.py"
   "scripts/NDSP_M2_GOVERNED_MASTER_IMPLEMENT.sh"
   "scripts/NDSP_M2_FINAL_READONLY_CERTIFIER.sh"
 )
@@ -156,6 +180,12 @@ if sudo test -f "$UI_RUNTIME/main_governed.py"; then
 else
   printf 'NO\n' > "$CHECKPOINT/runtime/main-governed-existed.txt"
 fi
+if sudo test -f "$RUNTIME_REGISTRY"; then
+  sudo cp -a "$RUNTIME_REGISTRY" "$CHECKPOINT/runtime/capability_registry.json"
+  printf 'YES\n' > "$CHECKPOINT/runtime/registry-existed.txt"
+else
+  printf 'NO\n' > "$CHECKPOINT/runtime/registry-existed.txt"
+fi
 if sudo test -f "$DROPIN_PATH"; then
   sudo cp -a "$DROPIN_PATH" "$CHECKPOINT/runtime/dropin.conf"
   printf 'YES\n' > "$CHECKPOINT/runtime/dropin-existed.txt"
@@ -183,6 +213,11 @@ rollback(){
   else
     sudo rm -f "$UI_RUNTIME/main_governed.py" 2>/dev/null || true
   fi
+  if [[ "$(cat "$CHECKPOINT/runtime/registry-existed.txt" 2>/dev/null)" == "YES" ]]; then
+    sudo cp -a "$CHECKPOINT/runtime/capability_registry.json" "$RUNTIME_REGISTRY" 2>/dev/null || true
+  else
+    sudo rm -f "$RUNTIME_REGISTRY" 2>/dev/null || true
+  fi
   if [[ "$(cat "$CHECKPOINT/runtime/dropin-existed.txt" 2>/dev/null)" == "YES" ]]; then
     sudo mkdir -p "$DROPIN_DIR"
     sudo cp -a "$CHECKPOINT/runtime/dropin.conf" "$DROPIN_PATH" 2>/dev/null || true
@@ -208,6 +243,7 @@ done
 # Deploy the UI Bridge to the runtime the service actually uses.
 sudo install -m 0644 "$CANDIDATE/apps/ndsp-ui-bridge-api/main.py" "$UI_RUNTIME/main.py"
 sudo install -m 0644 "$CANDIDATE/apps/ndsp-ui-bridge-api/main_governed.py" "$UI_RUNTIME/main_governed.py"
+sudo install -m 0644 "$REGISTRY_BUILD" "$RUNTIME_REGISTRY"
 sudo mkdir -p "$DROPIN_DIR"
 sudo install -m 0644 "$CANDIDATE/infrastructure/systemd/ndsp-ui-bridge-api-m2-governed.conf" "$DROPIN_PATH"
 sudo systemctl daemon-reload
@@ -223,6 +259,7 @@ sleep 2
 if ! systemctl is-active --quiet "$UI_SERVICE"; then rollback; die UI_BRIDGE_NOT_ACTIVE_AFTER_RESTART; fi
 systemctl show "$UI_SERVICE" -p ExecStart -p WorkingDirectory > "$EVIDENCE_ROOT/ui-service-show-after.txt" 2>&1 || true
 if ! grep -q 'main_governed:app' "$EVIDENCE_ROOT/ui-service-show-after.txt"; then rollback; die GOVERNED_ENTRYPOINT_NOT_ACTIVE; fi
+cmp -s "$REGISTRY_BUILD" "$RUNTIME_REGISTRY" || { rollback; die RUNTIME_REGISTRY_PARITY_FAILED; }
 if ! curl -fsS "http://127.0.0.1:9066/api/ui-bridge/health" > "$EVIDENCE_ROOT/ui-bridge-health.json"; then rollback; die UI_BRIDGE_HEALTH_FAILED; fi
 if ! curl -fsS "https://my.ndsp.app/analysis/setup" > /dev/null; then rollback; die LIVE_ANALYSIS_SETUP_ROUTE_FAILED; fi
 
@@ -237,8 +274,9 @@ if [[ "$POST_RC" -ne 0 ]]; then rollback; die POST_APPLY_CERTIFIER_FAILED; fi
 
 kv CHECKPOINT "$CHECKPOINT"
 kv RELEASE "$RELEASE"
+kv CAPABILITY_REGISTRY "$RUNTIME_REGISTRY"
 kv PROJECT_FILES_MODIFIED "${#TARGETS[@]}"
-kv PRODUCTION_FILES_MODIFIED 4
+kv PRODUCTION_FILES_MODIFIED 5
 kv SERVICES_RESTARTED 1
 kv DATABASE_MODIFIED 0
 kv NGINX_MODIFIED 0
