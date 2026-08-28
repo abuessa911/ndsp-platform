@@ -83,7 +83,7 @@ jobs:
 
       - name: Deterministic governed state tests
         working-directory: frontend/ndsp-sovereign-meridian-ui
-        run: node --test tests/governed-analysis-state-machine.test.cjs
+        run: node --test tests/governed-analysis-state-machine.test.mjs
 
       - name: Frontend typecheck
         working-directory: frontend/ndsp-sovereign-meridian-ui
