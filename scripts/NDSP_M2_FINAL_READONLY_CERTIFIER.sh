@@ -9,6 +9,7 @@ BRIDGE="$ROOT/apps/ndsp-ui-bridge-api/main.py"
 BRIDGE_GOV="$ROOT/apps/ndsp-ui-bridge-api/main_governed.py"
 AUTH_CORE="$ROOT/apps/ndsp-auth-core-clean/server/src/server.ts"
 DROPIN_SOURCE="$ROOT/infrastructure/systemd/ndsp-ui-bridge-api-m2-governed.conf"
+RECONCILER="$ROOT/scripts/NDSP_NAW27_CAPABILITY_RECONCILE.py"
 UI_SERVICE="ndsp-ui-bridge-api.service"
 TMP="$(mktemp -d /tmp/ndsp-m2-cert.XXXXXX)"
 trap 'rm -rf "$TMP"' EXIT
@@ -29,17 +30,22 @@ printf 'MODE=SOURCE_AND_OPTIONAL_RUNTIME_READ_ONLY\nROOT=%s\nUTC=%s\n' "$ROOT" "
 
 section "1/8 — SOURCE IDENTITY"
 [[ -d "$ROOT/.git" ]] && pass GIT_ROOT || fail NOT_GIT_ROOT
-require_file "$FE/package.json"
-require_file "$FE/package-lock.json"
-require_file "$FE/src/analysis/AnalysisContext.tsx"
-require_file "$FE/src/pages/AnalysisSetupPage.tsx"
-require_file "$FE/src/pages/AnalysisPage.tsx"
-require_file "$FE/src/api/decision.ts"
-require_file "$FE/src/auth/RequireUser.tsx"
-require_file "$BRIDGE"
-require_file "$BRIDGE_GOV"
-require_file "$AUTH_CORE"
-require_file "$DROPIN_SOURCE"
+for file in \
+  "$FE/package.json" \
+  "$FE/package-lock.json" \
+  "$FE/src/analysis/AnalysisContext.tsx" \
+  "$FE/src/pages/AnalysisSetupPage.tsx" \
+  "$FE/src/pages/AnalysisPage.tsx" \
+  "$FE/src/api/decision.ts" \
+  "$FE/src/auth/RequireUser.tsx" \
+  "$BRIDGE" \
+  "$BRIDGE_GOV" \
+  "$AUTH_CORE" \
+  "$DROPIN_SOURCE" \
+  "$RECONCILER"
+do
+  require_file "$file"
+done
 
 section "2/8 — GOVERNED JOURNEY INVARIANTS"
 require_grep 'path="analysis/setup"' "$FE/src/App.tsx" ANALYSIS_SETUP_ROUTE
@@ -49,10 +55,43 @@ require_grep 'analysisContext\.clearContext\(\)' "$FE/src/pages/AnalysisSetupPag
 for key in market symbol timeframe analysisMode presentationMode; do
   require_grep "$key" "$FE/src/api/decision.ts" "CONTEXT_FIELD_${key}"
 done
+require_grep 'getCapabilityRegistrySummary' "$FE/src/api/decision.ts" FRONTEND_REGISTRY_CLIENT_PRESENT
+require_grep 'globalRegistryReconciled' "$FE/src/pages/AnalysisPage.tsx" FRONTEND_RUNTIME_REGISTRY_GATE_PRESENT
+require_grep 'runtime_capability_count_claimed' "$FE/src/pages/AnalysisPage.tsx" FRONTEND_REJECTS_311_RUNTIME_COUNT_CLAIM
 forbid_grep 'from "\.\./data"|from '\''\.\./data'\''' "$FE/src/pages/AnalysisPage.tsx" LOCAL_ANALYSES_NOT_DECISION_AUTHORITY
-require_grep 'GLOBAL_CAPABILITY_MAPPING_RECONCILED = false' "$FE/src/pages/AnalysisPage.tsx" GLOBAL_REGISTRY_FAIL_CLOSED_MARKER
+forbid_grep 'GLOBAL_CAPABILITY_MAPPING_RECONCILED = false' "$FE/src/pages/AnalysisPage.tsx" MANUAL_GLOBAL_GATE_REMOVED
 
-section "3/8 — CAPABILITY / SECRET GOVERNANCE"
+section "3/8 — AUTHORITATIVE CAP DISCOVERY-RECORD RECONCILIATION"
+REGISTRY="$TMP/capability-registry.json"
+set +e
+python3 "$RECONCILER" --root "$ROOT" --output "$REGISTRY" --expected-count 311 2>&1 | tee "$TMP/reconcile.txt"
+RECON_RC=${PIPESTATUS[0]}
+set -e
+if [[ "$RECON_RC" -eq 0 ]]; then
+  pass CAP_311_RECORD_RECONCILIATION
+elif [[ "$RECON_RC" -eq 2 ]]; then
+  block CAP_311_RECORD_RECONCILIATION
+else
+  fail CAP_311_RECORD_RECONCILIATION
+fi
+python3 - "$REGISTRY" <<'PY' || fail CAP_REGISTRY_SEMANTICS
+import json, sys
+p=json.load(open(sys.argv[1],encoding='utf-8'))
+assert p['contract']=='NDSP_CAPABILITY_DISCOVERY_RECONCILIATION_V1'
+assert p['expected_record_count']==311
+assert p['record_count']==311
+assert p['parsed_record_count']==311
+assert p['silent_omission_count']==0
+assert p['parse_error_count']==0
+assert p['global_reconciled'] is True
+assert p['semantics']['record_count_is_runtime_capability_count'] is False
+assert p['semantics']['activation_claim'] is False
+assert len(p['entries'])==311
+assert all(x['governed_state'] in {'CONTRIBUTED','BLOCKED','NOT_APPLICABLE','UNAVAILABLE','STALE','PARTIAL','GOVERNANCE_PROTECTED'} for x in p['entries'])
+print('PASS|CAP_REGISTRY_SEMANTICS')
+PY
+
+section "4/8 — CAPABILITY / SECRET GOVERNANCE"
 for state in CONTRIBUTED BLOCKED NOT_APPLICABLE UNAVAILABLE STALE PARTIAL GOVERNANCE_PROTECTED; do
   require_grep "${state}" "$FE/src/analysis/types.ts" "CAPABILITY_STATE_${state}"
 done
@@ -61,16 +100,7 @@ require_grep 'LAYER_REGISTRY' "$BRIDGE" SIXTEEN_LAYER_REGISTRY_PRESENT
 require_grep 'frontend_recomputes_protected_logic' "$BRIDGE" NO_FRONTEND_PROTECTED_RECOMPUTE_CONTRACT
 require_grep 'protected_formulas_exposed' "$BRIDGE" PROTECTED_FORMULA_EXPOSURE_CONTRACT
 
-# The 311 CAP records proven by NAW-22 are discovered contract records, not 311
-# automatically independent runtime capabilities. Final READY stays blocked until
-# NAW-27 produces an evidence-backed reconciliation and flips the explicit UI gate.
-if grep -q 'GLOBAL_CAPABILITY_MAPPING_RECONCILED = false' "$FE/src/pages/AnalysisPage.tsx"; then
-  block AUTHORITATIVE_311_CAPABILITY_RECONCILIATION_PENDING
-else
-  pass AUTHORITATIVE_311_CAPABILITY_RECONCILIATION_COMPLETE
-fi
-
-section "4/8 — SERVER-SIDE AUTH SOURCE GATE"
+section "5/8 — SERVER-SIDE AUTH + SAFE REGISTRY SOURCE GATE"
 require_grep '/api/auth/session' "$AUTH_CORE" AUTH_SESSION_PROVIDER_EXISTS
 require_grep 'authenticated: true' "$AUTH_CORE" AUTH_SESSION_POSITIVE_CONTRACT
 require_grep 'AUTH_SESSION_URL' "$BRIDGE_GOV" UI_BRIDGE_AUTH_PROVIDER_BOUND
@@ -80,20 +110,20 @@ require_grep 'Cookie' "$BRIDGE_GOV" UI_BRIDGE_FORWARDS_SESSION_COOKIE
 require_grep 'payload\.get\("authenticated"\) is not True' "$BRIDGE_GOV" UI_BRIDGE_REQUIRES_AUTHENTICATED_TRUE
 require_grep 'AUTH_SESSION_UNAVAILABLE' "$BRIDGE_GOV" UI_BRIDGE_AUTH_UPSTREAM_FAIL_CLOSED
 require_grep 'AUTHENTICATION_REQUIRED' "$BRIDGE_GOV" UI_BRIDGE_UNAUTHENTICATED_FAIL_CLOSED
+require_grep 'capability-registry' "$BRIDGE_GOV" SAFE_REGISTRY_ENDPOINT_PRESENT
+require_grep 'runtime_capability_count_claimed' "$BRIDGE_GOV" SAFE_REGISTRY_REFUSES_RUNTIME_COUNT_CLAIM
 require_grep 'main_governed:app' "$DROPIN_SOURCE" GOVERNED_SYSTEMD_ENTRYPOINT_DECLARED
+require_grep 'NDSP_CAPABILITY_REGISTRY_PATH' "$DROPIN_SOURCE" GOVERNED_REGISTRY_PATH_DECLARED
 
-section "5/8 — PYTHON SYNTAX"
+section "6/8 — PYTHON + FRONTEND BUILD"
 if command -v python3 >/dev/null 2>&1; then
-  if PYTHONPYCACHEPREFIX="$TMP/pycache" python3 -m py_compile "$BRIDGE" "$BRIDGE_GOV"; then
-    pass UI_BRIDGE_PYTHON_COMPILE
-  else
-    fail UI_BRIDGE_PYTHON_COMPILE
-  fi
+  PYTHONPYCACHEPREFIX="$TMP/pycache" python3 -m py_compile "$BRIDGE" "$BRIDGE_GOV" "$RECONCILER" \
+    && pass PYTHON_COMPILE \
+    || fail PYTHON_COMPILE
 else
   fail PYTHON3_NOT_AVAILABLE
 fi
 
-section "6/8 — ISOLATED FRONTEND TYPECHECK / BUILD"
 if ! command -v npm >/dev/null 2>&1; then
   fail NPM_NOT_AVAILABLE
 else
@@ -121,7 +151,8 @@ if [[ -n "$LIVE_BASE" ]]; then
     for path in \
       /api/ui-bridge/analysis/setup/options \
       /api/ui-bridge/analysis/context/validate \
-      /api/ui-bridge/analysis/capability-coverage
+      /api/ui-bridge/analysis/capability-coverage \
+      /api/ui-bridge/analysis/capability-registry
     do
       code="$(curl -ksS -o "$TMP/unauth.json" -w '%{http_code}' "$LIVE_BASE$path" || true)"
       printf 'UNAUTH_HTTP|PATH=%s|CODE=%s\n' "$path" "$code"
@@ -143,11 +174,9 @@ if [[ "${NDSP_M2_EXPECT_RUNTIME_GOVERNED:-NO}" == "YES" ]]; then
   else
     exec_line="$(systemctl show "$UI_SERVICE" -p ExecStart --value 2>/dev/null || true)"
     printf 'RUNTIME_EXECSTART=%s\n' "$exec_line"
-    if grep -q 'main_governed:app' <<<"$exec_line"; then
-      pass GOVERNED_RUNTIME_ENTRYPOINT_ACTIVE
-    else
-      block GOVERNED_RUNTIME_ENTRYPOINT_NOT_ACTIVE
-    fi
+    grep -q 'main_governed:app' <<<"$exec_line" \
+      && pass GOVERNED_RUNTIME_ENTRYPOINT_ACTIVE \
+      || block GOVERNED_RUNTIME_ENTRYPOINT_NOT_ACTIVE
   fi
 else
   printf 'RUNTIME_ENTRYPOINT_PROOF=SKIPPED_NOT_REQUESTED\n'
