@@ -7,6 +7,7 @@ import {
 } from "react";
 import type { ReactNode } from "react";
 import type { AnalysisSelection, GovernedAnalysisContext } from "./types";
+import { buildNextGovernedContext } from "./stateMachine";
 
 const STORAGE_KEY = "ndsp.governed-analysis-context.v1";
 
@@ -63,19 +64,7 @@ export function AnalysisProvider({ children }: { children: ReactNode }) {
   const setValidatedContext = useCallback(
     (selection: AnalysisSelection, asOf: string | null) => {
       setContext((previous) => {
-        const sameCalculationContext =
-          previous?.market === selection.market &&
-          previous?.symbol === selection.symbol &&
-          previous?.timeframe === selection.timeframe &&
-          previous?.analysisMode === selection.analysisMode;
-
-        const next: GovernedAnalysisContext = {
-          ...selection,
-          asOf,
-          generation: sameCalculationContext
-            ? previous?.generation ?? 1
-            : (previous?.generation ?? 0) + 1,
-        };
+        const next = buildNextGovernedContext(previous, selection, asOf);
         persist(next);
         return next;
       });
