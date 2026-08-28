@@ -60,6 +60,15 @@ export function deriveResultLifecycleState(
 
   if (!input.globalRegistryReconciled) return "blocked";
 
+  // Contradictory upstream evidence must fail closed. A READY boolean may never
+  // override an explicit BLOCKED official state or capability contribution.
+  if (
+    String(input.officialState || "").toUpperCase() === "BLOCKED" ||
+    input.capabilityStates.includes("BLOCKED")
+  ) {
+    return "blocked";
+  }
+
   if (input.decisionReady) return "ready";
 
   if (
@@ -67,13 +76,6 @@ export function deriveResultLifecycleState(
     input.capabilityStates.includes("UNAVAILABLE")
   ) {
     return "partial";
-  }
-
-  if (
-    String(input.officialState || "").toUpperCase() === "BLOCKED" ||
-    input.capabilityStates.includes("BLOCKED")
-  ) {
-    return "blocked";
   }
 
   return "blocked";
