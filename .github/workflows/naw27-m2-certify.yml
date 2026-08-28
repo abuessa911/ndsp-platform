@@ -5,6 +5,7 @@ on:
     branches:
       - feature/naw-18-m2-governed-execution
       - feature/naw-31-runtime-parity-fix
+      - feature/naw-31-nginx-metadata-hardening
       - feature/ndsp-sovereign-meridian-ui
   workflow_dispatch:
 
@@ -73,6 +74,7 @@ jobs:
           grep -q 'venv/bin/uvicorn main_governed:app' infrastructure/systemd/ndsp-ui-bridge-api-m2-governed.conf
           grep -q 'zz-ndsp-m2-governed.conf' scripts/NDSP_M2_GOVERNED_MASTER_IMPLEMENT.sh
           grep -q 'NDSP_M2_UI_BRIDGE_BEGIN' scripts/NDSP_M2_GOVERNED_MASTER_IMPLEMENT.sh
+          grep -q 'install -o root -g root -m 0644 "$NGINX_PATCHED" "$MY_SITE_REAL"' scripts/NDSP_M2_GOVERNED_MASTER_IMPLEMENT.sh
           ! grep -Eq 'from ["'"'']\.\./data["'"'']' frontend/ndsp-sovereign-meridian-ui/src/pages/AnalysisPage.tsx
           grep -q 'frontend_recomputes_protected_logic' apps/ndsp-ui-bridge-api/main.py
           grep -q 'protected_formulas_exposed' apps/ndsp-ui-bridge-api/main.py
