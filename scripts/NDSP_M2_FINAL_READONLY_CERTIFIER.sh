@@ -29,7 +29,11 @@ section "NDSP M2 — FINAL READ-ONLY CERTIFIER"
 printf 'MODE=SOURCE_AND_OPTIONAL_RUNTIME_READ_ONLY\nROOT=%s\nUTC=%s\n' "$ROOT" "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 
 section "1/8 — SOURCE IDENTITY"
-[[ -d "$ROOT/.git" ]] && pass GIT_ROOT || fail NOT_GIT_ROOT
+if git -C "$ROOT" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  pass GIT_ROOT
+else
+  fail NOT_GIT_ROOT
+fi
 for file in \
   "$FE/package.json" \
   "$FE/package-lock.json" \
@@ -55,6 +59,9 @@ require_grep 'analysisContext\.clearContext\(\)' "$FE/src/pages/AnalysisSetupPag
 for key in market symbol timeframe analysisMode presentationMode; do
   require_grep "$key" "$FE/src/api/decision.ts" "CONTEXT_FIELD_${key}"
 done
+require_grep '/api/ui-bridge/analysis' "$FE/src/api/decision.ts" FRONTEND_UI_BRIDGE_CONTRACT_PRESENT
+require_grep 'credentials: "include"' "$FE/src/api/decision.ts" FRONTEND_CREDENTIALS_INCLUDED
+forbid_grep 'https://api\.ndsp\.app' "$FE/src/api/decision.ts" FRONTEND_AUTHENTICATED_ANALYSIS_SAME_ORIGIN
 require_grep 'getCapabilityRegistrySummary' "$FE/src/api/decision.ts" FRONTEND_REGISTRY_CLIENT_PRESENT
 require_grep 'globalRegistryReconciled' "$FE/src/pages/AnalysisPage.tsx" FRONTEND_RUNTIME_REGISTRY_GATE_PRESENT
 require_grep 'runtime_capability_count_claimed' "$FE/src/pages/AnalysisPage.tsx" FRONTEND_REJECTS_311_RUNTIME_COUNT_CLAIM
@@ -104,7 +111,9 @@ section "5/8 — SERVER-SIDE AUTH + SAFE REGISTRY SOURCE GATE"
 require_grep '/api/auth/session' "$AUTH_CORE" AUTH_SESSION_PROVIDER_EXISTS
 require_grep 'authenticated: true' "$AUTH_CORE" AUTH_SESSION_POSITIVE_CONTRACT
 require_grep 'AUTH_SESSION_URL' "$BRIDGE_GOV" UI_BRIDGE_AUTH_PROVIDER_BOUND
-require_grep '127\.0\.0\.1:9020/api/auth/session' "$BRIDGE_GOV" UI_BRIDGE_AUTH_CANONICAL_LOCAL_DEFAULT
+require_grep '127\.0\.0\.1:19091/api/auth/session' "$BRIDGE_GOV" UI_BRIDGE_AUTH_CANONICAL_LOCAL_DEFAULT
+forbid_grep '127\.0\.0\.1:9020/api/auth/session' "$BRIDGE_GOV" UI_BRIDGE_STALE_AUTH_DEFAULT_REMOVED
+require_grep 'with_name\("capability_registry\.json"\)' "$BRIDGE_GOV" UI_BRIDGE_PORTABLE_REGISTRY_DEFAULT
 require_grep 'ANALYSIS_PREFIX' "$BRIDGE_GOV" UI_BRIDGE_ANALYSIS_SCOPE_ONLY
 require_grep 'Cookie' "$BRIDGE_GOV" UI_BRIDGE_FORWARDS_SESSION_COOKIE
 require_grep 'payload\.get\("authenticated"\) is not True' "$BRIDGE_GOV" UI_BRIDGE_REQUIRES_AUTHENTICATED_TRUE
@@ -112,8 +121,10 @@ require_grep 'AUTH_SESSION_UNAVAILABLE' "$BRIDGE_GOV" UI_BRIDGE_AUTH_UPSTREAM_FA
 require_grep 'AUTHENTICATION_REQUIRED' "$BRIDGE_GOV" UI_BRIDGE_UNAUTHENTICATED_FAIL_CLOSED
 require_grep 'capability-registry' "$BRIDGE_GOV" SAFE_REGISTRY_ENDPOINT_PRESENT
 require_grep 'runtime_capability_count_claimed' "$BRIDGE_GOV" SAFE_REGISTRY_REFUSES_RUNTIME_COUNT_CLAIM
-require_grep 'main_governed:app' "$DROPIN_SOURCE" GOVERNED_SYSTEMD_ENTRYPOINT_DECLARED
+require_grep '19091/api/auth/session' "$DROPIN_SOURCE" GOVERNED_SYSTEMD_AUTH_ENDPOINT_DECLARED
+require_grep 'venv/bin/uvicorn main_governed:app' "$DROPIN_SOURCE" GOVERNED_SYSTEMD_ENTRYPOINT_DECLARED
 require_grep 'NDSP_CAPABILITY_REGISTRY_PATH' "$DROPIN_SOURCE" GOVERNED_REGISTRY_PATH_DECLARED
+forbid_grep '/opt/ndsp-ui-bridge-api' "$DROPIN_SOURCE" STALE_UI_RUNTIME_PATH_REMOVED
 
 section "6/8 — PYTHON + FRONTEND BUILD"
 if command -v python3 >/dev/null 2>&1; then
@@ -137,6 +148,7 @@ else
   (
     cd "$TMP/frontend"
     npm ci --ignore-scripts --no-audit --no-fund
+    node --test tests/governed-analysis-state-machine.test.mjs
     npm run typecheck
     npm run build
   ) && pass FRONTEND_TYPECHECK_AND_BUILD || fail FRONTEND_TYPECHECK_AND_BUILD
@@ -148,6 +160,14 @@ if [[ -n "$LIVE_BASE" ]]; then
   if ! command -v curl >/dev/null 2>&1; then
     fail CURL_NOT_AVAILABLE_FOR_LIVE_PROBE
   else
+    auth_code="$(curl -ksS -o "$TMP/auth.json" -w '%{http_code}' "$LIVE_BASE/api/auth/session" || true)"
+    printf 'AUTH_UNAUTH_HTTP|CODE=%s\n' "$auth_code"
+    if [[ "$auth_code" == "200" || "$auth_code" == "401" || "$auth_code" == "403" ]]; then
+      pass AUTH_ROUTE_REACHABLE
+    else
+      block AUTH_ROUTE_NOT_REACHABLE
+    fi
+
     for path in \
       /api/ui-bridge/analysis/setup/options \
       /api/ui-bridge/analysis/context/validate \
